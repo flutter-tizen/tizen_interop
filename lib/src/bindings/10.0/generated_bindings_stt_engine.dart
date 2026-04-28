@@ -1,3 +1,6 @@
+/// {@category 10.0/tizen}
+library tizen_interop_10_0.stt_engine;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen stt_engine APIs.
+/// {@category 10.0/tizen}
 class Tizen100SttEngine {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,24 +28,41 @@ class Tizen100SttEngine {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Main function for Speech-To-Text (STT) engine.
-  /// @details This function is the main function for operating STT engine.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @remarks The service_app_main() should be used for working the engine after this function.
-  /// @param[in] argc The argument count(original)
-  /// @param[in] argv The argument(original)
-  /// @param[in] callback The structure of engine request callback function
-  /// @return This function returns @c zero on success,
-  /// or negative with error code on failure
-  /// @retval #STTE_ERROR_NONE Successful
-  /// @retval #STTE_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STTE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #STTE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STTE_ERROR_OPERATION_FAILED Operation failure
-  /// @see stte_request_callback_s
-  /// @code
+  /// Main function for Speech-To-Text (STT) engine.
+  ///
+  /// This function is the main function for operating STT engine.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Remarks:**
+  /// - The service_app_main() should be used for working the engine after this function.
+  ///
+  /// **Parameters:**
+  /// - `argc` (in): The argument count(original)
+  /// - `argv` (in): The argument(original)
+  /// - `callback` (in): The structure of engine request callback function
+  ///
+  /// **Returns:**
+  /// - This function returns `zero` on success, or negative with error code on failure
+  ///
+  /// **Return values:**
+  /// - `STTE_ERROR_NONE`: Successful
+  /// - `STTE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STTE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `STTE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STTE_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **See also:**
+  /// - `stte_request_callback_s`
+  ///
+  /// ```
   /// #include <stte.h>
   ///
   /// // Required callback functions - MUST BE IMPLEMENTED
@@ -121,7 +142,7 @@ class Tizen100SttEngine {
   /// return service_app_main(argc, argv, &event_callback, ad);
   /// }
   ///
-  /// @endcode
+  /// ```
   int stte_main(
     int argc,
     ffi.Pointer<ffi.Pointer<ffi.Char>> argv,
@@ -142,32 +163,46 @@ class Tizen100SttEngine {
       int Function(int, ffi.Pointer<ffi.Pointer<ffi.Char>>,
           ffi.Pointer<stte_request_callback_s>)>();
 
-  /// @brief Sends the recognition result to the engine service user.
-  /// @since_tizen 3.0
-  /// @remarks This function is used in stte_set_recording_data_cb() and stte_stop_cb(), when STT engine sends the recognition result to the engine service user.
-  /// This function is called in the following situations; 1) after stte_stop_cb() is called, 2) the end point of speech is detected from recording, or 3) partial result is occurred.
-  /// The recognition result and @a user_data must be transferred to the engine service user through this function.
-  /// Also, @a time_info must be transferred to stte_foreach_result_time_cb(). The type of @a time_info is up to the STT engine developer.
-  /// @param[in] event The result event
-  /// @param[in] type The recognition type (e.g. #STTE_RECOGNITION_TYPE_FREE, #STTE_RECOGNITION_TYPE_FREE_PARTIAL)
-  /// @param[in] result Result texts
-  /// @param[in] result_count Result text count
-  /// @param[in] msg Engine message (e.g. #STTE_RESULT_MESSAGE_NONE, #STTE_RESULT_MESSAGE_ERROR_TOO_SHORT)
-  /// @param[in] time_info The time information
-  /// @param[in] user_data The user data passed from stte_start_cb()
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STTE_ERROR_NONE Successful
-  /// @retval #STTE_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STTE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STTE_ERROR_OPERATION_FAILED Operation failure
-  /// @pre The stte_main() function should be invoked before this function is called.
-  /// stte_stop_cb() will invoke this function.
-  /// @post This function invokes stte_foreach_result_time_cb().
-  /// @see stte_start_cb()
-  /// @see stte_set_recording_data_cb()
-  /// @see stte_stop_cb()
-  /// @see stte_foreach_result_time_cb()
+  /// Sends the recognition result to the engine service user.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - This function is used in stte_set_recording_data_cb() and stte_stop_cb(), when STT engine sends the recognition result to the engine service user.
+  /// - This function is called in the following situations; 1) after stte_stop_cb() is called, 2) the end point of speech is detected from recording, or 3) partial result is occurred.
+  /// - The recognition result and `user_data` must be transferred to the engine service user through this function.
+  /// - Also, `time_info` must be transferred to stte_foreach_result_time_cb(). The type of `time_info` is up to the STT engine developer.
+  ///
+  /// **Parameters:**
+  /// - `event` (in): The result event
+  /// - `type` (in): The recognition type (e.g. `STTE_RECOGNITION_TYPE_FREE`, `STTE_RECOGNITION_TYPE_FREE_PARTIAL`)
+  /// - `result` (in): Result texts
+  /// - `result_count` (in): Result text count
+  /// - `msg` (in): Engine message (e.g. `STTE_RESULT_MESSAGE_NONE`, `STTE_RESULT_MESSAGE_ERROR_TOO_SHORT`)
+  /// - `time_info` (in): The time information
+  /// - `user_data` (in): The user data passed from stte_start_cb()
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STTE_ERROR_NONE`: Successful
+  /// - `STTE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STTE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STTE_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **Preconditions:**
+  /// - The stte_main() function should be invoked before this function is called. stte_stop_cb() will invoke this function.
+  ///
+  /// **Postconditions:**
+  /// - This function invokes stte_foreach_result_time_cb().
+  ///
+  /// **See also:**
+  /// - `stte_start_cb()`
+  /// - `stte_set_recording_data_cb()`
+  /// - `stte_stop_cb()`
+  /// - `stte_foreach_result_time_cb()`
   int stte_send_result(
     int event,
     ffi.Pointer<ffi.Char> type,
@@ -208,30 +243,28 @@ class Tizen100SttEngine {
           ffi.Pointer<ffi.Void>,
           ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sends the error to the engine service user.
-  /// @details The following error codes can be delivered.
-  /// #STTE_ERROR_NONE,
-  /// #STTE_ERROR_OUT_OF_MEMORY,
-  /// #STTE_ERROR_IO_ERROR,
-  /// #STTE_ERROR_INVALID_PARAMETER,
-  /// #STTE_ERROR_NETWORK_DOWN,
-  /// #STTE_ERROR_INVALID_STATE,
-  /// #STTE_ERROR_INVALID_LANGUAGE,
-  /// #STTE_ERROR_OPERATION_FAILED,
-  /// #STTE_ERROR_NOT_SUPPORTED_FEATURE,
-  /// #STTE_ERROR_NOT_SUPPORTED,
-  /// #STTE_ERROR_PERMISSION_DENIED,
-  /// #STTE_ERROR_RECORDING_TIMED_OUT.
-  /// @since_tizen 3.0
-  /// @param[in] error The error reason
-  /// @param[in] msg The error message
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STTE_ERROR_NONE Successful
-  /// @retval #STTE_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STTE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STTE_ERROR_OPERATION_FAILED Operation failure
-  /// @pre The stte_main() function should be invoked before this function is called.
+  /// Sends the error to the engine service user.
+  ///
+  /// The following error codes can be delivered. `STTE_ERROR_NONE`, `STTE_ERROR_OUT_OF_MEMORY`, `STTE_ERROR_IO_ERROR`, `STTE_ERROR_INVALID_PARAMETER`, `STTE_ERROR_NETWORK_DOWN`, `STTE_ERROR_INVALID_STATE`, `STTE_ERROR_INVALID_LANGUAGE`, `STTE_ERROR_OPERATION_FAILED`, `STTE_ERROR_NOT_SUPPORTED_FEATURE`, `STTE_ERROR_NOT_SUPPORTED`, `STTE_ERROR_PERMISSION_DENIED`, `STTE_ERROR_RECORDING_TIMED_OUT`.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `error` (in): The error reason
+  /// - `msg` (in): The error message
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STTE_ERROR_NONE`: Successful
+  /// - `STTE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STTE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STTE_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **Preconditions:**
+  /// - The stte_main() function should be invoked before this function is called.
   int stte_send_error(
     int error,
     ffi.Pointer<ffi.Char> msg,
@@ -249,22 +282,34 @@ class Tizen100SttEngine {
   late final _stte_send_error = _stte_send_errorPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sends the speech status to the engine service user when STT engine notifies the change of the speech status.
-  /// @since_tizen 3.0
-  /// @remarks This function is invoked when STT engine wants to notify the change of the speech status anytime.
-  /// NOTE that this function can be invoked for recognizing the speech.
-  /// @param[in] status The status of speech (e.g. #STTE_SPEECH_STATUS_BEGINNING_POINT_DETECTED or #STTE_SPEECH_STATUS_END_POINT_DETECTED)
-  /// @param[in] user_data The user data passed from the start function.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STTE_ERROR_NONE Successful
-  /// @retval #STTE_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STTE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STTE_ERROR_OPERATION_FAILED Operation failure
-  /// @pre The stte_main() function should be invoked before this function is called.
-  /// stte_start_cb() and stte_set_recording_data_cb() will invoke this function.
-  /// @see stte_start_cb()
-  /// @see stte_set_recording_data_cb()
+  /// Sends the speech status to the engine service user when STT engine notifies the change of the speech status.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - This function is invoked when STT engine wants to notify the change of the speech status anytime.
+  /// - NOTE that this function can be invoked for recognizing the speech.
+  ///
+  /// **Parameters:**
+  /// - `status` (in): The status of speech (e.g. `STTE_SPEECH_STATUS_BEGINNING_POINT_DETECTED` or `STTE_SPEECH_STATUS_END_POINT_DETECTED`)
+  /// - `user_data` (in): The user data passed from the start function.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STTE_ERROR_NONE`: Successful
+  /// - `STTE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STTE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STTE_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **Preconditions:**
+  /// - The stte_main() function should be invoked before this function is called. stte_start_cb() and stte_set_recording_data_cb() will invoke this function.
+  ///
+  /// **See also:**
+  /// - `stte_start_cb()`
+  /// - `stte_set_recording_data_cb()`
   int stte_send_speech_status(
     int status,
     ffi.Pointer<ffi.Void> user_data,
@@ -282,21 +327,38 @@ class Tizen100SttEngine {
   late final _stte_send_speech_status = _stte_send_speech_statusPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets a callback function for setting the private data.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @remarks The stte_private_data_set_cb() function is called when the engine service user sends the private data.
-  /// @param[in] callback_func stte_private_data_set event callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STTE_ERROR_NONE Successful
-  /// @retval #STTE_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STTE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #STTE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STTE_ERROR_OPERATION_FAILED Operation failure
-  /// @pre The stte_main() function should be invoked before this function is called.
-  /// @see stte_private_data_set_cb()
+  /// Sets a callback function for setting the private data.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Remarks:**
+  /// - The stte_private_data_set_cb() function is called when the engine service user sends the private data.
+  ///
+  /// **Parameters:**
+  /// - `callback_func` (in): stte_private_data_set event callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STTE_ERROR_NONE`: Successful
+  /// - `STTE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STTE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `STTE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STTE_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **Preconditions:**
+  /// - The stte_main() function should be invoked before this function is called.
+  ///
+  /// **See also:**
+  /// - `stte_private_data_set_cb()`
   int stte_set_private_data_set_cb(
     stte_private_data_set_cb callback_func,
   ) {
@@ -311,21 +373,38 @@ class Tizen100SttEngine {
   late final _stte_set_private_data_set_cb = _stte_set_private_data_set_cbPtr
       .asFunction<int Function(stte_private_data_set_cb)>();
 
-  /// @brief Sets a callback function for requesting the private data.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @remarks The stte_private_data_requested_cb() function is called when the engine service user gets the private data from STT engine.
-  /// @param[in] callback_func stte_private_data_requested event callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STTE_ERROR_NONE Successful
-  /// @retval #STTE_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STTE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #STTE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STTE_ERROR_OPERATION_FAILED Operation failure
-  /// @pre The stte_main() function should be invoked before this function is called.
-  /// @see stte_private_data_requested_cb()
+  /// Sets a callback function for requesting the private data.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Remarks:**
+  /// - The stte_private_data_requested_cb() function is called when the engine service user gets the private data from STT engine.
+  ///
+  /// **Parameters:**
+  /// - `callback_func` (in): stte_private_data_requested event callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STTE_ERROR_NONE`: Successful
+  /// - `STTE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STTE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `STTE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STTE_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **Preconditions:**
+  /// - The stte_main() function should be invoked before this function is called.
+  ///
+  /// **See also:**
+  /// - `stte_private_data_requested_cb()`
   int stte_set_private_data_requested_cb(
     stte_private_data_requested_cb callback_func,
   ) {
@@ -341,20 +420,33 @@ class Tizen100SttEngine {
       _stte_set_private_data_requested_cbPtr
           .asFunction<int Function(stte_private_data_requested_cb)>();
 
-  /// @brief Sets a callback function for setting the audio type.
-  /// @since_tizen 5.5
-  /// @remarks The stte_audio_type_cb() function is called when STT framework sets audio type to the STT engine.
-  /// @param[in] callback_func stte_audio_type_set event callback function
-  /// @param[in] user_data The user data passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STTE_ERROR_NONE Successful
-  /// @retval #STTE_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STTE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STTE_ERROR_OPERATION_FAILED Operation failure
-  /// @pre The stte_main() function should be invoked before this function is called.
-  /// @see stte_audio_type_cb()
-  /// @see stte_unset_audio_type_set_cb()
+  /// Sets a callback function for setting the audio type.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - The stte_audio_type_cb() function is called when STT framework sets audio type to the STT engine.
+  ///
+  /// **Parameters:**
+  /// - `callback_func` (in): stte_audio_type_set event callback function
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STTE_ERROR_NONE`: Successful
+  /// - `STTE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STTE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STTE_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **Preconditions:**
+  /// - The stte_main() function should be invoked before this function is called.
+  ///
+  /// **See also:**
+  /// - `stte_audio_type_cb()`
+  /// - `stte_unset_audio_type_set_cb()`
   int stte_set_audio_type_set_cb(
     stte_audio_type_cb callback_func,
     ffi.Pointer<ffi.Void> user_data,
@@ -372,15 +464,24 @@ class Tizen100SttEngine {
   late final _stte_set_audio_type_set_cb = _stte_set_audio_type_set_cbPtr
       .asFunction<int Function(stte_audio_type_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets a callback function for setting the audio type.
-  /// @since_tizen 5.5
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STTE_ERROR_NONE Successful
-  /// @retval #STTE_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STTE_ERROR_OPERATION_FAILED Operation failure
-  /// @pre The stte_main() function should be invoked before this function is called.
-  /// @see stte_set_audio_type_set_cb()
+  /// Unsets a callback function for setting the audio type.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STTE_ERROR_NONE`: Successful
+  /// - `STTE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STTE_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **Preconditions:**
+  /// - The stte_main() function should be invoked before this function is called.
+  ///
+  /// **See also:**
+  /// - `stte_set_audio_type_set_cb()`
   int stte_unset_audio_type_set_cb() {
     return _stte_unset_audio_type_set_cb();
   }
@@ -392,8 +493,11 @@ class Tizen100SttEngine {
       _stte_unset_audio_type_set_cbPtr.asFunction<int Function()>();
 }
 
-/// @brief Enumeration for error codes.
-/// @since_tizen 3.0
+/// Enumeration for error codes.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class stte_error_e {
   /// < Successful
   static const int STTE_ERROR_NONE = 0;
@@ -432,8 +536,11 @@ abstract class stte_error_e {
   static const int STTE_ERROR_RECORDING_TIMED_OUT = -49283066;
 }
 
-/// @brief Enumeration for audio type.
-/// @since_tizen 3.0
+/// Enumeration for audio type.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class stte_audio_type_e {
   /// < Signed 16bit audio type, Little endian
   static const int STTE_AUDIO_TYPE_PCM_S16_LE = 0;
@@ -442,8 +549,11 @@ abstract class stte_audio_type_e {
   static const int STTE_AUDIO_TYPE_PCM_U8 = 1;
 }
 
-/// @brief Enumeration for callback event.
-/// @since_tizen 3.0
+/// Enumeration for callback event.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class stte_result_event_e {
   /// < Event when either the full matched or the final result is delivered
   static const int STTE_RESULT_EVENT_FINAL_RESULT = 0;
@@ -455,8 +565,11 @@ abstract class stte_result_event_e {
   static const int STTE_RESULT_EVENT_ERROR = 2;
 }
 
-/// @brief Enumeration for result time callback event.
-/// @since_tizen 3.0
+/// Enumeration for result time callback event.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class stte_result_time_event_e {
   /// < Event when the token is beginning type
   static const int STTE_RESULT_TIME_EVENT_BEGINNING = 0;
@@ -468,8 +581,11 @@ abstract class stte_result_time_event_e {
   static const int STTE_RESULT_TIME_EVENT_END = 2;
 }
 
-/// @brief Enumeration for speech status.
-/// @since_tizen 3.0
+/// Enumeration for speech status.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class stte_speech_status_e {
   /// < Beginning point of speech is detected
   static const int STTE_SPEECH_STATUS_BEGINNING_POINT_DETECTED = 0;
@@ -478,10 +594,16 @@ abstract class stte_speech_status_e {
   static const int STTE_SPEECH_STATUS_END_POINT_DETECTED = 1;
 }
 
-/// @brief A structure for the STT engine functions.
-/// @details This structure contains essential callback functions for operating STT engine.
-/// @since_tizen 3.0
-/// @remarks These functions are mandatory for operating STT engine. Therefore, all functions MUST be implemented.
+/// A structure for the STT engine functions.
+///
+/// This structure contains essential callback functions for operating STT engine.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - These functions are mandatory for operating STT engine. Therefore, all functions MUST be implemented.
+/// @nodoc
 final class stte_request_callback_s extends ffi.Struct {
   /// < The version of the structure 'stte_request_callback_s'
   @ffi.Int()
@@ -536,225 +658,366 @@ final class stte_request_callback_s extends ffi.Struct {
   external stte_need_app_credential_cb need_app_credential;
 }
 
-/// @brief Called when the engine service user requests the basic information of STT engine.
-/// @since_tizen 3.0
-/// @remarks This callback function is mandatory and must be registered using stte_main().
-/// The allocated @a engine_uuid, @a engine_name, and @a engine_setting will be released internally.
-/// In order to upload the engine at Tizen Appstore, both a service app and a ui app are necessary.
-/// Therefore, @a engine_setting must be transferred to the engine service user.
-/// @param[out] engine_uuid UUID of engine
-/// @param[out] engine_name Name of engine
-/// @param[out] engine_setting The engine setting application(ui app)'s app ID
-/// @param[out] use_network A variable for checking whether the network is used or not
-/// @return @c 0 on success,
-/// otherwise a negative error code on failure
-/// @retval #STTE_ERROR_NONE Successful
-/// @retval #STTE_ERROR_INVALID_PARAMETER Invalid parameter
-/// @retval #STTE_ERROR_OPERATION_FAILED Operation failure
+/// Called when the engine service user requests the basic information of STT engine.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - This callback function is mandatory and must be registered using stte_main().
+/// - The allocated `engine_uuid`, `engine_name`, and `engine_setting` will be released internally.
+/// - In order to upload the engine at Tizen Appstore, both a service app and a ui app are necessary.
+/// - Therefore, `engine_setting` must be transferred to the engine service user.
+///
+/// **Parameters:**
+/// - `engine_uuid` (out): UUID of engine
+/// - `engine_name` (out): Name of engine
+/// - `engine_setting` (out): The engine setting application(ui app)'s app ID
+/// - `use_network` (out): A variable for checking whether the network is used or not
+///
+/// **Returns:**
+/// - `0` on success, otherwise a negative error code on failure
+///
+/// **Return values:**
+/// - `STTE_ERROR_NONE`: Successful
+/// - `STTE_ERROR_INVALID_PARAMETER`: Invalid parameter
+/// - `STTE_ERROR_OPERATION_FAILED`: Operation failure
+/// @nodoc
 typedef stte_get_info_cb
     = ffi.Pointer<ffi.NativeFunction<stte_get_info_cbFunction>>;
+/// @nodoc
 typedef stte_get_info_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Pointer<ffi.Char>> engine_uuid,
     ffi.Pointer<ffi.Pointer<ffi.Char>> engine_name,
     ffi.Pointer<ffi.Pointer<ffi.Char>> engine_setting,
     ffi.Pointer<ffi.Bool> use_network);
+/// @nodoc
 typedef Dartstte_get_info_cbFunction = int Function(
     ffi.Pointer<ffi.Pointer<ffi.Char>> engine_uuid,
     ffi.Pointer<ffi.Pointer<ffi.Char>> engine_name,
     ffi.Pointer<ffi.Pointer<ffi.Char>> engine_setting,
     ffi.Pointer<ffi.Bool> use_network);
 
-/// @brief Called when the engine service user initializes STT engine.
-/// @details This callback function is called by the engine service user to request for STT engine to be started.
-/// @since_tizen 3.0
-/// @remarks This callback function is mandatory and must be registered using stte_main().
-/// @return @c 0 on success,
-/// otherwise a negative error value
-/// @retval #STTE_ERROR_NONE Successful
-/// @retval #STTE_ERROR_INVALID_PARAMETER Invalid parameter
-/// @retval #STTE_ERROR_INVALID_STATE Already initialized
-/// @retval #STTE_ERROR_OPERATION_FAILED Operation failure
-/// @see stte_deinitialize_cb()
+/// Called when the engine service user initializes STT engine.
+///
+/// This callback function is called by the engine service user to request for STT engine to be started.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - This callback function is mandatory and must be registered using stte_main().
+///
+/// **Returns:**
+/// - `0` on success, otherwise a negative error value
+///
+/// **Return values:**
+/// - `STTE_ERROR_NONE`: Successful
+/// - `STTE_ERROR_INVALID_PARAMETER`: Invalid parameter
+/// - `STTE_ERROR_INVALID_STATE`: Already initialized
+/// - `STTE_ERROR_OPERATION_FAILED`: Operation failure
+///
+/// **See also:**
+/// - `stte_deinitialize_cb()`
+/// @nodoc
 typedef stte_initialize_cb
     = ffi.Pointer<ffi.NativeFunction<stte_initialize_cbFunction>>;
+/// @nodoc
 typedef stte_initialize_cbFunction = ffi.Int Function();
+/// @nodoc
 typedef Dartstte_initialize_cbFunction = int Function();
 
-/// @brief Called when the engine service user deinitializes STT engine
-/// @details This callback function is called by the engine service user to request for STT engine to be deinitialized.
-/// @since_tizen 3.0
-/// @remarks This callback function is mandatory and must be registered using stte_main().
-/// NOTE that the engine may be terminated automatically.
-/// When this callback function is invoked, the release of resources is necessary.
-/// @return @c 0 on success,
-/// otherwise a negative error value
-/// @retval #STTE_ERROR_NONE Successful
-/// @retval #STTE_ERROR_INVALID_STATE Not initialized
-/// @see stte_initialize_cb()
+/// Called when the engine service user deinitializes STT engine
+///
+/// This callback function is called by the engine service user to request for STT engine to be deinitialized.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - This callback function is mandatory and must be registered using stte_main().
+/// - NOTE that the engine may be terminated automatically.
+/// - When this callback function is invoked, the release of resources is necessary.
+///
+/// **Returns:**
+/// - `0` on success, otherwise a negative error value
+///
+/// **Return values:**
+/// - `STTE_ERROR_NONE`: Successful
+/// - `STTE_ERROR_INVALID_STATE`: Not initialized
+///
+/// **See also:**
+/// - `stte_initialize_cb()`
+/// @nodoc
 typedef stte_deinitialize_cb
     = ffi.Pointer<ffi.NativeFunction<stte_deinitialize_cbFunction>>;
+/// @nodoc
 typedef stte_deinitialize_cbFunction = ffi.Int Function();
+/// @nodoc
 typedef Dartstte_deinitialize_cbFunction = int Function();
 
-/// @brief Called when the engine service user gets the whole supported language list.
-/// @since_tizen 3.0
-/// @remarks This callback function is mandatory and must be registered using stte_main().
-/// In this function, the engine service user's callback function 'stte_supported_language_cb()' is invoked repeatedly for getting all supported languages, and @a user_data must be transferred to 'stte_supported_language_cb()'.
-/// If 'stte_supported_language_cb()' returns @c false, it should be stopped to call 'stte_supported_language_cb()'.
-/// @param[in] callback The callback function
-/// @param[in] user_data The user data which must be passed to the callback function 'stte_supported_language_cb()'
-/// @return @c 0 on success,
-/// otherwise a negative error value
-/// @retval #STTE_ERROR_NONE Successful
-/// @retval #STTE_ERROR_INVALID_PARAMETER Invalid parameter
-/// @retval #STTE_ERROR_INVALID_STATE Not initialized
-/// @post This callback function invokes stte_supported_language_cb() repeatedly for getting supported languages.
-/// @see stte_supported_language_cb()
+/// Called when the engine service user gets the whole supported language list.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - This callback function is mandatory and must be registered using stte_main().
+/// - In this function, the engine service user's callback function 'stte_supported_language_cb()' is invoked repeatedly for getting all supported languages, and `user_data` must be transferred to 'stte_supported_language_cb()'.
+/// - If 'stte_supported_language_cb()' returns `false`, it should be stopped to call 'stte_supported_language_cb()'.
+///
+/// **Parameters:**
+/// - `callback` (in): The callback function
+/// - `user_data` (in): The user data which must be passed to the callback function 'stte_supported_language_cb()'
+///
+/// **Returns:**
+/// - `0` on success, otherwise a negative error value
+///
+/// **Return values:**
+/// - `STTE_ERROR_NONE`: Successful
+/// - `STTE_ERROR_INVALID_PARAMETER`: Invalid parameter
+/// - `STTE_ERROR_INVALID_STATE`: Not initialized
+///
+/// **Postconditions:**
+/// - This callback function invokes stte_supported_language_cb() repeatedly for getting supported languages.
+///
+/// **See also:**
+/// - `stte_supported_language_cb()`
+/// @nodoc
 typedef stte_foreach_supported_langs_cb
     = ffi.Pointer<ffi.NativeFunction<stte_foreach_supported_langs_cbFunction>>;
+/// @nodoc
 typedef stte_foreach_supported_langs_cbFunction = ffi.Int Function(
     stte_supported_language_cb callback, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartstte_foreach_supported_langs_cbFunction = int Function(
     stte_supported_language_cb callback, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when STT engine informs the engine service user about whole supported language list.
-/// @details This callback function is implemented by the engine service user. Therefore, the engine developer does NOT have to implement this callback function.
-/// @since_tizen 3.0
-/// @remarks This callback function is called in stte_foreach_supported_langs_cb() to inform the whole supported language list.
-/// @a user_data must be transferred from stte_foreach_supported_langs_cb().
-/// @param[in] language The language is specified as an ISO 3166 alpha-2 two letter country-code
-/// followed by ISO 639-1 for the two-letter language code
-/// For example, "ko_KR" for Korean, "en_US" for American English
-/// @param[in] user_data The user data passed from stte_foreach_supported_langs_cb()
-/// @return @c true to continue with the next iteration of the loop
-/// @c false to break out of the loop
-/// @pre stte_foreach_supported_langs_cb() will invoke this callback function.
-/// @see stte_foreach_supported_langs_cb()
+/// Called when STT engine informs the engine service user about whole supported language list.
+///
+/// This callback function is implemented by the engine service user. Therefore, the engine developer does NOT have to implement this callback function.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - This callback function is called in stte_foreach_supported_langs_cb() to inform the whole supported language list.
+/// - `user_data` must be transferred from stte_foreach_supported_langs_cb().
+///
+/// **Parameters:**
+/// - `language` (in): The language is specified as an ISO 3166 alpha-2 two letter country-code followed by ISO 639-1 for the two-letter language code For example, "ko_KR" for Korean, "en_US" for American English
+/// - `user_data` (in): The user data passed from stte_foreach_supported_langs_cb()
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - stte_foreach_supported_langs_cb() will invoke this callback function.
+///
+/// **See also:**
+/// - `stte_foreach_supported_langs_cb()`
+/// @nodoc
 typedef stte_supported_language_cb
     = ffi.Pointer<ffi.NativeFunction<stte_supported_language_cbFunction>>;
+/// @nodoc
 typedef stte_supported_language_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> language, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartstte_supported_language_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> language, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the engine service user checks whether the corresponding language is valid or not in STT engine.
-/// @since_tizen 3.0
-/// @remarks This callback function is mandatory and must be registered using stte_main().
-/// @param[in] language The language is specified as an ISO 3166 alpha-2 two letter country-code
-/// followed by ISO 639-1 for the two-letter language code
-/// For example, "ko_KR" for Korean, "en_US" for American English
-/// @param[out] is_valid A variable for checking whether the corresponding language is valid or not.
-/// @c true to be valid,
-/// @c false to be invalid
-/// @return @c 0 on success,
-/// otherwise a negative error value
-/// @retval #STTE_ERROR_NONE Successful
-/// @retval #STTE_ERROR_INVALID_PARAMETER Invalid parameter
-/// @see stte_foreach_supported_langs_cb()
+/// Called when the engine service user checks whether the corresponding language is valid or not in STT engine.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - This callback function is mandatory and must be registered using stte_main().
+///
+/// **Parameters:**
+/// - `language` (in): The language is specified as an ISO 3166 alpha-2 two letter country-code followed by ISO 639-1 for the two-letter language code For example, "ko_KR" for Korean, "en_US" for American English
+/// - `is_valid` (out): A variable for checking whether the corresponding language is valid or not. `true` to be valid, `false` to be invalid
+///
+/// **Returns:**
+/// - `0` on success, otherwise a negative error value
+///
+/// **Return values:**
+/// - `STTE_ERROR_NONE`: Successful
+/// - `STTE_ERROR_INVALID_PARAMETER`: Invalid parameter
+///
+/// **See also:**
+/// - `stte_foreach_supported_langs_cb()`
+/// @nodoc
 typedef stte_is_valid_language_cb
     = ffi.Pointer<ffi.NativeFunction<stte_is_valid_language_cbFunction>>;
+/// @nodoc
 typedef stte_is_valid_language_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Char> language, ffi.Pointer<ffi.Bool> is_valid);
+/// @nodoc
 typedef Dartstte_is_valid_language_cbFunction = int Function(
     ffi.Pointer<ffi.Char> language, ffi.Pointer<ffi.Bool> is_valid);
 
-/// @brief Called when the engine service user checks whether STT engine supports silence detection.
-/// @since_tizen 3.0
-/// @remarks This callback function is mandatory and must be registered using stte_main().
-/// @return @c true to support silence detection,
-/// @c false not to support silence detection
-/// @see stte_set_silence_detection_cb()
+/// Called when the engine service user checks whether STT engine supports silence detection.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - This callback function is mandatory and must be registered using stte_main().
+///
+/// **Returns:**
+/// - `true` to support silence detection, `false` not to support silence detection
+///
+/// **See also:**
+/// - `stte_set_silence_detection_cb()`
+/// @nodoc
 typedef stte_support_silence_detection_cb = ffi
     .Pointer<ffi.NativeFunction<stte_support_silence_detection_cbFunction>>;
+/// @nodoc
 typedef stte_support_silence_detection_cbFunction = ffi.Bool Function();
+/// @nodoc
 typedef Dartstte_support_silence_detection_cbFunction = bool Function();
 
-/// @brief Called when the engine service user checks whether STT engine supports the corresponding recognition type.
-/// @since_tizen 3.0
-/// @remarks This callback function is mandatory and must be registered using stte_main().
-/// @param[in] type The type for recognition (e.g. #STTE_RECOGNITION_TYPE_FREE)
-/// @param[out] is_supported A variable for checking whether STT engine supports the corresponding recognition type.
-/// @c true to support recognition type,
-/// @c false not to support recognition type
-/// @return @c 0 on success,
-/// otherwise a negative error value
-/// @retval #STTE_ERROR_NONE Successful
-/// @retval #STTE_ERROR_INVALID_PARAMETER Invalid parameter
+/// Called when the engine service user checks whether STT engine supports the corresponding recognition type.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - This callback function is mandatory and must be registered using stte_main().
+///
+/// **Parameters:**
+/// - `type` (in): The type for recognition (e.g. `STTE_RECOGNITION_TYPE_FREE`)
+/// - `is_supported` (out): A variable for checking whether STT engine supports the corresponding recognition type. `true` to support recognition type, `false` not to support recognition type
+///
+/// **Returns:**
+/// - `0` on success, otherwise a negative error value
+///
+/// **Return values:**
+/// - `STTE_ERROR_NONE`: Successful
+/// - `STTE_ERROR_INVALID_PARAMETER`: Invalid parameter
+/// @nodoc
 typedef stte_support_recognition_type_cb
     = ffi.Pointer<ffi.NativeFunction<stte_support_recognition_type_cbFunction>>;
+/// @nodoc
 typedef stte_support_recognition_type_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Char> type, ffi.Pointer<ffi.Bool> is_supported);
+/// @nodoc
 typedef Dartstte_support_recognition_type_cbFunction = int Function(
     ffi.Pointer<ffi.Char> type, ffi.Pointer<ffi.Bool> is_supported);
 
-/// @brief Called when the engine service user gets the proper recording format of STT engine.
-/// @since_tizen 3.0
-/// @remarks This callback function is mandatory and must be registered using stte_main().
-/// The recording format is used for creating the recorder.
-/// @param[out] types The format used by the recorder
-/// @param[out] rate The sample rate used by the recorder
-/// @param[out] channels The number of channels used by the recorder
-/// @return @c 0 on success,
-/// otherwise a negative error value
-/// @retval #STTE_ERROR_NONE Successful
-/// @retval #STTE_ERROR_INVALID_STATE Not initialized
+/// Called when the engine service user gets the proper recording format of STT engine.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - This callback function is mandatory and must be registered using stte_main().
+/// - The recording format is used for creating the recorder.
+///
+/// **Parameters:**
+/// - `types` (out): The format used by the recorder
+/// - `rate` (out): The sample rate used by the recorder
+/// - `channels` (out): The number of channels used by the recorder
+///
+/// **Returns:**
+/// - `0` on success, otherwise a negative error value
+///
+/// **Return values:**
+/// - `STTE_ERROR_NONE`: Successful
+/// - `STTE_ERROR_INVALID_STATE`: Not initialized
+/// @nodoc
 typedef stte_get_recording_format_cb
     = ffi.Pointer<ffi.NativeFunction<stte_get_recording_format_cbFunction>>;
+/// @nodoc
 typedef stte_get_recording_format_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Int32> types,
     ffi.Pointer<ffi.Int> rate,
     ffi.Pointer<ffi.Int> channels);
+/// @nodoc
 typedef Dartstte_get_recording_format_cbFunction = int Function(
     ffi.Pointer<ffi.Int32> types,
     ffi.Pointer<ffi.Int> rate,
     ffi.Pointer<ffi.Int> channels);
 
-/// @brief Called when the engine service user gets the result time information(stamp).
-/// @since_tizen 3.0
-/// @remarks This callback function is mandatory and must be registered using stte_main().
-/// In this function, the engine service user's callback function 'stte_result_time_cb()' is invoked repeatedly for sending the time information to the engine service user, and @a user_data must be transferred to 'stte_result_time_cb()'.
-/// If 'stte_result_time_cb()' returns @c false, it should be stopped to call 'stte_result_time_cb()'.
-/// @a time_info is transferred from stte_send_result(). The type of @a time_info is up to the STT engine developer.
-/// @param[in] time_info The time information
-/// @param[in] callback The callback function
-/// @param[in] user_data The user data which must be passed to the callback function 'stte_result_time_cb()'
-/// @return @c 0 on success,
-/// otherwise a negative error value
-/// @retval #STTE_ERROR_NONE Successful
-/// @retval #STTE_ERROR_INVALID_PARAMETER Invalid parameter
-/// @retval #STTE_ERROR_INVALID_STATE Not initialized
-/// @pre stte_send_result() will invoke this function.
-/// @post This function invokes stte_result_time_cb() repeatedly for getting result time information.
-/// @see stte_result_time_cb()
+/// Called when the engine service user gets the result time information(stamp).
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - This callback function is mandatory and must be registered using stte_main().
+/// - In this function, the engine service user's callback function 'stte_result_time_cb()' is invoked repeatedly for sending the time information to the engine service user, and `user_data` must be transferred to 'stte_result_time_cb()'.
+/// - If 'stte_result_time_cb()' returns `false`, it should be stopped to call 'stte_result_time_cb()'.
+/// - `time_info` is transferred from stte_send_result(). The type of `time_info` is up to the STT engine developer.
+///
+/// **Parameters:**
+/// - `time_info` (in): The time information
+/// - `callback` (in): The callback function
+/// - `user_data` (in): The user data which must be passed to the callback function 'stte_result_time_cb()'
+///
+/// **Returns:**
+/// - `0` on success, otherwise a negative error value
+///
+/// **Return values:**
+/// - `STTE_ERROR_NONE`: Successful
+/// - `STTE_ERROR_INVALID_PARAMETER`: Invalid parameter
+/// - `STTE_ERROR_INVALID_STATE`: Not initialized
+///
+/// **Preconditions:**
+/// - stte_send_result() will invoke this function.
+///
+/// **Postconditions:**
+/// - This function invokes stte_result_time_cb() repeatedly for getting result time information.
+///
+/// **See also:**
+/// - `stte_result_time_cb()`
+/// @nodoc
 typedef stte_foreach_result_time_cb
     = ffi.Pointer<ffi.NativeFunction<stte_foreach_result_time_cbFunction>>;
+/// @nodoc
 typedef stte_foreach_result_time_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Void> time_info,
     stte_result_time_cb callback,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartstte_foreach_result_time_cbFunction = int Function(
     ffi.Pointer<ffi.Void> time_info,
     stte_result_time_cb callback,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when STT engine provides the time stamp of result to the engine service user.
-/// @details This callback function is implemented by the engine service user. Therefore, the engine developer does NOT have to implement this callback function.
-/// @since_tizen 3.0
-/// @remarks This callback function is called in stte_foreach_result_time_cb() for adding time information.
-/// @a user_data must be transferred from stte_foreach_result_time_cb().
-/// @param[in] index The result index
-/// @param[in] event The token event
-/// @param[in] text The result text
-/// @param[in] start_time The time started speaking the result text
-/// @param[in] end_time The time finished speaking the result text
-/// @param[in] user_data The user data passed from stte_foreach_result_time_cb()
-/// @return @c true to continue with the next iteration of the loop
-/// @c false to break out of the loop
-/// @pre stte_send_result() should be called.
-/// @see stte_send_result()
-/// @see stte_foreach_result_time_cb()
+/// Called when STT engine provides the time stamp of result to the engine service user.
+///
+/// This callback function is implemented by the engine service user. Therefore, the engine developer does NOT have to implement this callback function.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - This callback function is called in stte_foreach_result_time_cb() for adding time information.
+/// - `user_data` must be transferred from stte_foreach_result_time_cb().
+///
+/// **Parameters:**
+/// - `index` (in): The result index
+/// - `event` (in): The token event
+/// - `text` (in): The result text
+/// - `start_time` (in): The time started speaking the result text
+/// - `end_time` (in): The time finished speaking the result text
+/// - `user_data` (in): The user data passed from stte_foreach_result_time_cb()
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - stte_send_result() should be called.
+///
+/// **See also:**
+/// - `stte_send_result()`
+/// - `stte_foreach_result_time_cb()`
+/// @nodoc
 typedef stte_result_time_cb
     = ffi.Pointer<ffi.NativeFunction<stte_result_time_cbFunction>>;
+/// @nodoc
 typedef stte_result_time_cbFunction = ffi.Bool Function(
     ffi.Int index,
     ffi.Int32 event,
@@ -762,6 +1025,7 @@ typedef stte_result_time_cbFunction = ffi.Bool Function(
     ffi.Long start_time,
     ffi.Long end_time,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartstte_result_time_cbFunction = bool Function(
     int index,
     int event,
@@ -770,56 +1034,80 @@ typedef Dartstte_result_time_cbFunction = bool Function(
     int end_time,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the engine service user sets the silence detection.
-/// @since_tizen 3.0
-/// @remarks This callback function is mandatory and must be registered using stte_main().
-/// If the engine service user sets this option as 'TRUE', STT engine will detect the silence (EPD) and send the callback event about it.
-/// @param[in] is_set A variable for setting the silence detection.
-/// @c true to detect the silence,
-/// @c false not to detect the silence
-/// @return @c 0 on success,
-/// otherwise a negative error value
-/// @retval #STTE_ERROR_NONE Successful
-/// @retval #STTE_ERROR_INVALID_STATE Not initialized
-/// @retval #STTE_ERROR_NOT_SUPPORTED_FEATURE Not supported feature
+/// Called when the engine service user sets the silence detection.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - This callback function is mandatory and must be registered using stte_main().
+/// - If the engine service user sets this option as 'TRUE', STT engine will detect the silence (EPD) and send the callback event about it.
+///
+/// **Parameters:**
+/// - `is_set` (in): A variable for setting the silence detection. `true` to detect the silence, `false` not to detect the silence
+///
+/// **Returns:**
+/// - `0` on success, otherwise a negative error value
+///
+/// **Return values:**
+/// - `STTE_ERROR_NONE`: Successful
+/// - `STTE_ERROR_INVALID_STATE`: Not initialized
+/// - `STTE_ERROR_NOT_SUPPORTED_FEATURE`: Not supported feature
+/// @nodoc
 typedef stte_set_silence_detection_cb
     = ffi.Pointer<ffi.NativeFunction<stte_set_silence_detection_cbFunction>>;
+/// @nodoc
 typedef stte_set_silence_detection_cbFunction = ffi.Int Function(
     ffi.Bool is_set);
+/// @nodoc
 typedef Dartstte_set_silence_detection_cbFunction = int Function(bool is_set);
 
-/// @brief Called when the engine service user starts to recognize the recording data.
-/// @since_tizen 3.0
-/// @remarks This callback function is mandatory and must be registered using stte_main().
-/// In this callback function, STT engine must transfer the recognition result and @a user_data to the engine service user using stte_send_result().
-/// Also, if STT engine needs the application's credential, it sets the credential granted to the application.
-/// @param[in] language The language is specified as an ISO 3166 alpha-2 two letter country-code
-/// followed by ISO 639-1 for the two-letter language code
-/// For example, "ko_KR" for Korean, "en_US" for American English
-/// @param[in] type The recognition type. (e.g. #STTE_RECOGNITION_TYPE_FREE)
-/// @param[in] appid The Application ID
-/// @param[in] credential The credential granted to the application
-/// @param[in] user_data The user data to be passed to the callback function
-/// @return @c 0 on success,
-/// otherwise a negative error value
-/// @retval #STTE_ERROR_NONE Successful
-/// @retval #STTE_ERROR_INVALID_PARAMETER Invalid parameter
-/// @retval #STTE_ERROR_INVALID_STATE Invalid state
-/// @retval #STTE_ERROR_INVALID_LANGUAGE Invalid language
-/// @retval #STTE_ERROR_OPERATION_FAILED Operation failure
-/// @retval #STTE_ERROR_NETWORK_DOWN Out of network
-/// @pre The engine is not in recognition processing.
-/// @see stte_set_recording_data_cb()
-/// @see stte_stop_cb()
-/// @see stte_cancel_cb()
-/// @see stte_need_app_credential_cb()
+/// Called when the engine service user starts to recognize the recording data.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - This callback function is mandatory and must be registered using stte_main().
+/// - In this callback function, STT engine must transfer the recognition result and `user_data` to the engine service user using stte_send_result().
+/// - Also, if STT engine needs the application's credential, it sets the credential granted to the application.
+///
+/// **Parameters:**
+/// - `language` (in): The language is specified as an ISO 3166 alpha-2 two letter country-code followed by ISO 639-1 for the two-letter language code For example, "ko_KR" for Korean, "en_US" for American English
+/// - `type` (in): The recognition type. (e.g. `STTE_RECOGNITION_TYPE_FREE`)
+/// - `appid` (in): The Application ID
+/// - `credential` (in): The credential granted to the application
+/// - `user_data` (in): The user data to be passed to the callback function
+///
+/// **Returns:**
+/// - `0` on success, otherwise a negative error value
+///
+/// **Return values:**
+/// - `STTE_ERROR_NONE`: Successful
+/// - `STTE_ERROR_INVALID_PARAMETER`: Invalid parameter
+/// - `STTE_ERROR_INVALID_STATE`: Invalid state
+/// - `STTE_ERROR_INVALID_LANGUAGE`: Invalid language
+/// - `STTE_ERROR_OPERATION_FAILED`: Operation failure
+/// - `STTE_ERROR_NETWORK_DOWN`: Out of network
+///
+/// **Preconditions:**
+/// - The engine is not in recognition processing.
+///
+/// **See also:**
+/// - `stte_set_recording_data_cb()`
+/// - `stte_stop_cb()`
+/// - `stte_cancel_cb()`
+/// - `stte_need_app_credential_cb()`
+/// @nodoc
 typedef stte_start_cb = ffi.Pointer<ffi.NativeFunction<stte_start_cbFunction>>;
+/// @nodoc
 typedef stte_start_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Char> language,
     ffi.Pointer<ffi.Char> type,
     ffi.Pointer<ffi.Char> appid,
     ffi.Pointer<ffi.Char> credential,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartstte_start_cbFunction = int Function(
     ffi.Pointer<ffi.Char> language,
     ffi.Pointer<ffi.Char> type,
@@ -827,183 +1115,304 @@ typedef Dartstte_start_cbFunction = int Function(
     ffi.Pointer<ffi.Char> credential,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the engine service user sets and sends the recording data for speech recognition.
-/// @details This callback function is called by the engine service user to send the recording data to STT engine.
-/// The engine receives the recording data and uses for speech recognition.
-/// @since_tizen 3.0
-/// @remarks This callback function is mandatory and must be registered using stte_main().
-/// Also, this function should be returned immediately after recording data copy.
-/// @param[in] data The recording data
-/// @param[in] length The length of recording data
-/// @return @c 0 on success,
-/// otherwise a negative error value
-/// @retval #STTE_ERROR_NONE Successful
-/// @retval #STTE_ERROR_INVALID_PARAMETER Invalid parameter
-/// @retval #STTE_ERROR_INVALID_STATE Invalid state
-/// @retval #STTE_ERROR_OPERATION_FAILED Operation failure
-/// @pre stte_start_cb() should succeed.
-/// @post If the engine supports partial result, stte_send_result() should be invoked.
-/// @see stte_start_cb()
-/// @see stte_cancel_cb()
-/// @see stte_stop_cb()
+/// Called when the engine service user sets and sends the recording data for speech recognition.
+///
+/// This callback function is called by the engine service user to send the recording data to STT engine. The engine receives the recording data and uses for speech recognition.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - This callback function is mandatory and must be registered using stte_main().
+/// - Also, this function should be returned immediately after recording data copy.
+///
+/// **Parameters:**
+/// - `data` (in): The recording data
+/// - `length` (in): The length of recording data
+///
+/// **Returns:**
+/// - `0` on success, otherwise a negative error value
+///
+/// **Return values:**
+/// - `STTE_ERROR_NONE`: Successful
+/// - `STTE_ERROR_INVALID_PARAMETER`: Invalid parameter
+/// - `STTE_ERROR_INVALID_STATE`: Invalid state
+/// - `STTE_ERROR_OPERATION_FAILED`: Operation failure
+///
+/// **Preconditions:**
+/// - stte_start_cb() should succeed.
+///
+/// **Postconditions:**
+/// - If the engine supports partial result, stte_send_result() should be invoked.
+///
+/// **See also:**
+/// - `stte_start_cb()`
+/// - `stte_cancel_cb()`
+/// - `stte_stop_cb()`
+/// @nodoc
 typedef stte_set_recording_data_cb
     = ffi.Pointer<ffi.NativeFunction<stte_set_recording_data_cbFunction>>;
+/// @nodoc
 typedef stte_set_recording_data_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Void> data, ffi.UnsignedInt length);
+/// @nodoc
 typedef Dartstte_set_recording_data_cbFunction = int Function(
     ffi.Pointer<ffi.Void> data, int length);
 
-/// @brief Called when the engine service user stops to recognize the recording data.
-/// @details This callback function is called by the engine service user to stop recording and to get the recognition result.
-/// @since_tizen 3.0
-/// @remarks This callback function is mandatory and must be registered using stte_main().
-/// @return @c 0 on success,
-/// otherwise a negative error value
-/// @retval #STTE_ERROR_NONE Successful
-/// @retval #STTE_ERROR_INVALID_STATE Invalid state
-/// @retval #STTE_ERROR_OPERATION_FAILED Operation failure
-/// @retval #STTE_ERROR_NETWORK_DOWN Out of network
-/// @pre stte_start_cb() should succeed.
-/// @post After processing of the engine, stte_send_result() must be called.
-/// @see stte_start_cb()
-/// @see stte_set_recording_data_cb()
-/// @see stte_cancel_cb()
-/// @see stte_send_result()
+/// Called when the engine service user stops to recognize the recording data.
+///
+/// This callback function is called by the engine service user to stop recording and to get the recognition result.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - This callback function is mandatory and must be registered using stte_main().
+///
+/// **Returns:**
+/// - `0` on success, otherwise a negative error value
+///
+/// **Return values:**
+/// - `STTE_ERROR_NONE`: Successful
+/// - `STTE_ERROR_INVALID_STATE`: Invalid state
+/// - `STTE_ERROR_OPERATION_FAILED`: Operation failure
+/// - `STTE_ERROR_NETWORK_DOWN`: Out of network
+///
+/// **Preconditions:**
+/// - stte_start_cb() should succeed.
+///
+/// **Postconditions:**
+/// - After processing of the engine, stte_send_result() must be called.
+///
+/// **See also:**
+/// - `stte_start_cb()`
+/// - `stte_set_recording_data_cb()`
+/// - `stte_cancel_cb()`
+/// - `stte_send_result()`
+/// @nodoc
 typedef stte_stop_cb = ffi.Pointer<ffi.NativeFunction<stte_stop_cbFunction>>;
+/// @nodoc
 typedef stte_stop_cbFunction = ffi.Int Function();
+/// @nodoc
 typedef Dartstte_stop_cbFunction = int Function();
 
-/// @brief Called when the engine service user cancels to recognize the recording data.
-/// @details This callback function is called by the engine service user to cancel to recognize the recording data.
-/// Also, when starting the recorder is failed, this function is called.
-/// @since_tizen 3.0
-/// @remarks This callback function is mandatory and must be registered using stte_main().
-/// @return @c 0 on success,
-/// otherwise a negative error value
-/// @retval #STTE_ERROR_NONE Successful.
-/// @retval #STTE_ERROR_INVALID_STATE Invalid state.
-/// @pre STT engine is in recognition processing or recording.
-/// @see stte_start_cb()
-/// @see stte_stop_cb()
+/// Called when the engine service user cancels to recognize the recording data.
+///
+/// This callback function is called by the engine service user to cancel to recognize the recording data. Also, when starting the recorder is failed, this function is called.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - This callback function is mandatory and must be registered using stte_main().
+///
+/// **Returns:**
+/// - `0` on success, otherwise a negative error value
+///
+/// **Return values:**
+/// - `STTE_ERROR_NONE`: Successful.
+/// - `STTE_ERROR_INVALID_STATE`: Invalid state.
+///
+/// **Preconditions:**
+/// - STT engine is in recognition processing or recording.
+///
+/// **See also:**
+/// - `stte_start_cb()`
+/// - `stte_stop_cb()`
+/// @nodoc
 typedef stte_cancel_cb
     = ffi.Pointer<ffi.NativeFunction<stte_cancel_cbFunction>>;
+/// @nodoc
 typedef stte_cancel_cbFunction = ffi.Int Function();
+/// @nodoc
 typedef Dartstte_cancel_cbFunction = int Function();
 
-/// @brief Called when the engine service user requests for STT engine to check whether the application agreed the usage of STT engine.
-/// @details This callback function is called when the engine service user requests for STT engine to check the application's agreement about using the engine.
-/// According to the need, the engine developer can provide some user interfaces to check the agreement.
-/// @since_tizen 3.0
-/// @remarks This callback function is mandatory and must be registered using stte_main().
-/// If the STT engine developer wants not to check the agreement, the developer has need to return proper values as @a is_agreed in accordance with the intention. @c true if the developer regards that every application agreed the usage of the engine, @c false if the developer regards that every application disagreed.
-/// NOTE that, however, there may be any legal issue unless the developer checks the agreement. Therefore, we suggest that the engine developers should provide a function to check the agreement.
-/// @param[in] appid The Application ID
-/// @param[out] is_agreed A variable for checking whether the application agreed to use STT engine or not.
-/// @c true to agree,
-/// @c false to disagree
-/// @return @c 0 on success,
-/// otherwise a negative error value
-/// @retval #STTE_ERROR_NONE Successful
-/// @retval #STTE_ERROR_INVALID_STATE Not initialized
-/// @retval #STTE_ERROR_NOT_SUPPORTED_FEATURE Not supported feature
+/// Called when the engine service user requests for STT engine to check whether the application agreed the usage of STT engine.
+///
+/// This callback function is called when the engine service user requests for STT engine to check the application's agreement about using the engine. According to the need, the engine developer can provide some user interfaces to check the agreement.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - This callback function is mandatory and must be registered using stte_main().
+/// - If the STT engine developer wants not to check the agreement, the developer has need to return proper values as `is_agreed` in accordance with the intention. `true` if the developer regards that every application agreed the usage of the engine, `false` if the developer regards that every application disagreed.
+/// - NOTE that, however, there may be any legal issue unless the developer checks the agreement. Therefore, we suggest that the engine developers should provide a function to check the agreement.
+///
+/// **Parameters:**
+/// - `appid` (in): The Application ID
+/// - `is_agreed` (out): A variable for checking whether the application agreed to use STT engine or not. `true` to agree, `false` to disagree
+///
+/// **Returns:**
+/// - `0` on success, otherwise a negative error value
+///
+/// **Return values:**
+/// - `STTE_ERROR_NONE`: Successful
+/// - `STTE_ERROR_INVALID_STATE`: Not initialized
+/// - `STTE_ERROR_NOT_SUPPORTED_FEATURE`: Not supported feature
+/// @nodoc
 typedef stte_check_app_agreed_cb
     = ffi.Pointer<ffi.NativeFunction<stte_check_app_agreed_cbFunction>>;
+/// @nodoc
 typedef stte_check_app_agreed_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Char> appid, ffi.Pointer<ffi.Bool> is_agreed);
+/// @nodoc
 typedef Dartstte_check_app_agreed_cbFunction = int Function(
     ffi.Pointer<ffi.Char> appid, ffi.Pointer<ffi.Bool> is_agreed);
 
-/// @brief Called when the engine service user checks whether STT engine needs the application's credential.
-/// @since_tizen 3.0
-/// @remarks This callback function is mandatory and must be registered using stte_main().
-/// @return @c true if STT engine needs the application's credential,
-/// otherwise @c false
+/// Called when the engine service user checks whether STT engine needs the application's credential.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - This callback function is mandatory and must be registered using stte_main().
+///
+/// **Returns:**
+/// - `true` if STT engine needs the application's credential, otherwise `false`
+/// @nodoc
 typedef stte_need_app_credential_cb
     = ffi.Pointer<ffi.NativeFunction<stte_need_app_credential_cbFunction>>;
+/// @nodoc
 typedef stte_need_app_credential_cbFunction = ffi.Bool Function();
+/// @nodoc
 typedef Dartstte_need_app_credential_cbFunction = bool Function();
 
-/// @brief Called when STT engine receives the private data from the engine service user.
-/// @details This callback function is called when the engine service user sends the private data to STT engine.
-/// @since_tizen 3.0
-/// @remarks This callback function is optional and is registered using stte_set_private_data_set_cb().
-/// @param[in] key The key field of private data
-/// @param[in] data The data field of private data
-/// @return @c 0 on success,
-/// otherwise a negative error value
-/// @retval #STTE_ERROR_NONE Successful
-/// @retval #STTE_ERROR_INVALID_PARAMETER Invalid parameter
-/// @retval #STTE_ERROR_OPERATION_FAILED Operation failure
-/// @see stte_private_data_requested_cb()
-/// @see stte_set_private_data_set_cb()
+/// Called when STT engine receives the private data from the engine service user.
+///
+/// This callback function is called when the engine service user sends the private data to STT engine.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - This callback function is optional and is registered using stte_set_private_data_set_cb().
+///
+/// **Parameters:**
+/// - `key` (in): The key field of private data
+/// - `data` (in): The data field of private data
+///
+/// **Returns:**
+/// - `0` on success, otherwise a negative error value
+///
+/// **Return values:**
+/// - `STTE_ERROR_NONE`: Successful
+/// - `STTE_ERROR_INVALID_PARAMETER`: Invalid parameter
+/// - `STTE_ERROR_OPERATION_FAILED`: Operation failure
+///
+/// **See also:**
+/// - `stte_private_data_requested_cb()`
+/// - `stte_set_private_data_set_cb()`
+/// @nodoc
 typedef stte_private_data_set_cb
     = ffi.Pointer<ffi.NativeFunction<stte_private_data_set_cbFunction>>;
+/// @nodoc
 typedef stte_private_data_set_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Char> key, ffi.Pointer<ffi.Char> data);
+/// @nodoc
 typedef Dartstte_private_data_set_cbFunction = int Function(
     ffi.Pointer<ffi.Char> key, ffi.Pointer<ffi.Char> data);
 
-/// @brief Called when STT engine provides the engine service user with the private data.
-/// @details This callback function is called when the engine service user gets the private data from STT engine.
-/// @since_tizen 3.0
-/// @remarks This callback function is optional and is registered using stte_set_private_data_requested_cb().
-/// @param[out] key The key field of private data
-/// @param[out] data The data field of private data
-/// @return @c 0 on success,
-/// otherwise a negative error value
-/// @retval #STTE_ERROR_NONE Successful
-/// @retval #STTE_ERROR_INVALID_PARAMETER Invalid parameter
-/// @retval #STTE_ERROR_OPERATION_FAILED Operation failure
-/// @see stte_private_data_set_cb()
-/// @see stte_set_private_data_requested_cb()
+/// Called when STT engine provides the engine service user with the private data.
+///
+/// This callback function is called when the engine service user gets the private data from STT engine.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - This callback function is optional and is registered using stte_set_private_data_requested_cb().
+///
+/// **Parameters:**
+/// - `key` (out): The key field of private data
+/// - `data` (out): The data field of private data
+///
+/// **Returns:**
+/// - `0` on success, otherwise a negative error value
+///
+/// **Return values:**
+/// - `STTE_ERROR_NONE`: Successful
+/// - `STTE_ERROR_INVALID_PARAMETER`: Invalid parameter
+/// - `STTE_ERROR_OPERATION_FAILED`: Operation failure
+///
+/// **See also:**
+/// - `stte_private_data_set_cb()`
+/// - `stte_set_private_data_requested_cb()`
+/// @nodoc
 typedef stte_private_data_requested_cb
     = ffi.Pointer<ffi.NativeFunction<stte_private_data_requested_cbFunction>>;
+/// @nodoc
 typedef stte_private_data_requested_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Char> key, ffi.Pointer<ffi.Pointer<ffi.Char>> data);
+/// @nodoc
 typedef Dartstte_private_data_requested_cbFunction = int Function(
     ffi.Pointer<ffi.Char> key, ffi.Pointer<ffi.Pointer<ffi.Char>> data);
 
-/// @brief Called when the engine service user sets audio recording type.
-/// @since_tizen 5.5
-/// @remarks The @a audio_type can be used only in the callback. To use outside, make a copy.
-/// @param[in] audio_type Current audio type (e.g. #STTE_AUDIO_ID_BLUETOOTH or #STTE_AUDIO_ID_WIFI)
-/// @param[in] user_data user_data The user data to be passed to the callback function
-/// @return 0 on success, otherwise a negative error value.
-/// @retval #VCE_ERROR_NONE Successful.
-/// @retval #STTE_ERROR_INVALID_PARAMETER Invalid parameter
-/// @retval #STTE_ERROR_OPERATION_FAILED Operation failure
+/// Called when the engine service user sets audio recording type.
+///
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **Remarks:**
+/// - The `audio_type` can be used only in the callback. To use outside, make a copy.
+///
+/// **Parameters:**
+/// - `audio_type` (in): Current audio type (e.g. `STTE_AUDIO_ID_BLUETOOTH` or `STTE_AUDIO_ID_WIFI`)
+/// - `user_data` (in): user_data The user data to be passed to the callback function
+///
+/// **Returns:**
+/// - 0 on success, otherwise a negative error value.
+///
+/// **Return values:**
+/// - `VCE_ERROR_NONE`: Successful.
+/// - `STTE_ERROR_INVALID_PARAMETER`: Invalid parameter
+/// - `STTE_ERROR_OPERATION_FAILED`: Operation failure
+/// @nodoc
 typedef stte_audio_type_cb
     = ffi.Pointer<ffi.NativeFunction<stte_audio_type_cbFunction>>;
+/// @nodoc
 typedef stte_audio_type_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Char> audio_type, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartstte_audio_type_cbFunction = int Function(
     ffi.Pointer<ffi.Char> audio_type, ffi.Pointer<ffi.Void> user_data);
 
+/// @nodoc
 const String STTE_RECOGNITION_TYPE_FREE = 'stt.recognition.type.FREE';
 
+/// @nodoc
 const String STTE_RECOGNITION_TYPE_FREE_PARTIAL =
     'stt.recognition.type.FREE.PARTIAL';
 
+/// @nodoc
 const String STTE_RESULT_MESSAGE_NONE = 'stt.result.message.none';
 
+/// @nodoc
 const String STTE_RESULT_MESSAGE_ERROR_TOO_SOON =
     'stt.result.message.error.too.soon';
 
+/// @nodoc
 const String STTE_RESULT_MESSAGE_ERROR_TOO_SHORT =
     'stt.result.message.error.too.short';
 
+/// @nodoc
 const String STTE_RESULT_MESSAGE_ERROR_TOO_LONG =
     'stt.result.message.error.too.long';
 
+/// @nodoc
 const String STTE_RESULT_MESSAGE_ERROR_TOO_QUIET =
     'stt.result.message.error.too.quiet';
 
+/// @nodoc
 const String STTE_RESULT_MESSAGE_ERROR_TOO_LOUD =
     'stt.result.message.error.too.loud';
 
+/// @nodoc
 const String STTE_RESULT_MESSAGE_ERROR_TOO_FAST =
     'stt.result.message.error.too.fast';
 
+/// @nodoc
 const String STTE_AUDIO_ID_BLUETOOTH = 'STT_AUDIO_ID_BLUETOOTH';
 
+/// @nodoc
 const String STTE_AUDIO_ID_WIFI = 'STT_AUDIO_ID_WIFI';

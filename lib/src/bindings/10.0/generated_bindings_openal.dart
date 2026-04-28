@@ -1,3 +1,6 @@
+/// {@category 10.0/tizen}
+library tizen_interop_10_0.openal;
+
 // Copyright 2026 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'generated_bindings_capi_media_sound_manager.dart' as sound_manager;
 
 /// Dart bindings for Tizen openal APIs.
+/// {@category 10.0/tizen}
 class Tizen100Openal {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -2793,1588 +2797,2382 @@ class Tizen100Openal {
 }
 
 /// 32-bit IEEE754 floating-point
+/// @nodoc
 typedef ALfloat = ffi.Float;
+/// @nodoc
 typedef DartALfloat = double;
 
 /// enumerated 32-bit value
+/// @nodoc
 typedef ALenum = ffi.Int;
+/// @nodoc
 typedef DartALenum = int;
 
 /// 8-bit boolean
+/// @nodoc
 typedef ALboolean = ffi.Char;
+/// @nodoc
 typedef DartALboolean = int;
 
 /// character
+/// @nodoc
 typedef ALchar = ffi.Char;
+/// @nodoc
 typedef DartALchar = int;
 
 /// signed 32-bit 2's complement integer
+/// @nodoc
 typedef ALint = ffi.Int;
+/// @nodoc
 typedef DartALint = int;
 
 /// 64-bit IEEE754 floating-point
+/// @nodoc
 typedef ALdouble = ffi.Double;
+/// @nodoc
 typedef DartALdouble = double;
 
 /// non-negative 32-bit binary integer size
+/// @nodoc
 typedef ALsizei = ffi.Int;
+/// @nodoc
 typedef DartALsizei = int;
 
 /// unsigned 32-bit integer
+/// @nodoc
 typedef ALuint = ffi.UnsignedInt;
+/// @nodoc
 typedef DartALuint = int;
 
 /// void type (for opaque pointers only)
+/// @nodoc
 typedef ALvoid = ffi.Void;
+/// @nodoc
 typedef DartALvoid = void;
 
+/// @nodoc
 final class ALCdevice_struct extends ffi.Opaque {}
 
+/// @nodoc
 final class ALCcontext_struct extends ffi.Opaque {}
 
 /// Opaque context handle
+/// @nodoc
 typedef ALCcontext = ALCcontext_struct;
 
 /// Opaque device handle
+/// @nodoc
 typedef ALCdevice = ALCdevice_struct;
 
 /// signed 32-bit 2's complement integer
+/// @nodoc
 typedef ALCint = ffi.Int;
+/// @nodoc
 typedef DartALCint = int;
 
 /// 8-bit boolean
+/// @nodoc
 typedef ALCboolean = ffi.Char;
+/// @nodoc
 typedef DartALCboolean = int;
 
 /// character
+/// @nodoc
 typedef ALCchar = ffi.Char;
+/// @nodoc
 typedef DartALCchar = int;
 
 /// enumerated 32-bit value
+/// @nodoc
 typedef ALCenum = ffi.Int;
+/// @nodoc
 typedef DartALCenum = int;
 
 /// non-negative 32-bit binary integer size
+/// @nodoc
 typedef ALCsizei = ffi.Int;
+/// @nodoc
 typedef DartALCsizei = int;
 
 /// unsigned 32-bit integer
+/// @nodoc
 typedef ALCuint = ffi.UnsignedInt;
+/// @nodoc
 typedef DartALCuint = int;
 
 /// void type (for opaque pointers only)
+/// @nodoc
 typedef ALCvoid = ffi.Void;
+/// @nodoc
 typedef DartALCvoid = void;
+/// @nodoc
 typedef LPALFOLDBACKCALLBACK
     = ffi.Pointer<ffi.NativeFunction<LPALFOLDBACKCALLBACKFunction>>;
+/// @nodoc
 typedef LPALFOLDBACKCALLBACKFunction = ffi.Void Function(ALenum, ALsizei);
+/// @nodoc
 typedef DartLPALFOLDBACKCALLBACKFunction = void Function(
     DartALenum, DartALsizei);
+/// @nodoc
 typedef ALint64SOFT = ffi.Int64;
+/// @nodoc
 typedef DartALint64SOFT = int;
 
+/// @nodoc
 const int AL_INVALID = -1;
 
+/// @nodoc
 const int AL_ILLEGAL_ENUM = 40962;
 
+/// @nodoc
 const int AL_ILLEGAL_COMMAND = 40964;
 
+/// @nodoc
 const int AL_NONE = 0;
 
+/// @nodoc
 const int AL_FALSE = 0;
 
+/// @nodoc
 const int AL_TRUE = 1;
 
+/// @nodoc
 const int AL_SOURCE_RELATIVE = 514;
 
+/// @nodoc
 const int AL_CONE_INNER_ANGLE = 4097;
 
+/// @nodoc
 const int AL_CONE_OUTER_ANGLE = 4098;
 
+/// @nodoc
 const int AL_PITCH = 4099;
 
+/// @nodoc
 const int AL_POSITION = 4100;
 
+/// @nodoc
 const int AL_DIRECTION = 4101;
 
+/// @nodoc
 const int AL_VELOCITY = 4102;
 
+/// @nodoc
 const int AL_LOOPING = 4103;
 
+/// @nodoc
 const int AL_BUFFER = 4105;
 
+/// @nodoc
 const int AL_GAIN = 4106;
 
+/// @nodoc
 const int AL_MIN_GAIN = 4109;
 
+/// @nodoc
 const int AL_MAX_GAIN = 4110;
 
+/// @nodoc
 const int AL_ORIENTATION = 4111;
 
+/// @nodoc
 const int AL_SOURCE_STATE = 4112;
 
+/// @nodoc
 const int AL_INITIAL = 4113;
 
+/// @nodoc
 const int AL_PLAYING = 4114;
 
+/// @nodoc
 const int AL_PAUSED = 4115;
 
+/// @nodoc
 const int AL_STOPPED = 4116;
 
+/// @nodoc
 const int AL_BUFFERS_QUEUED = 4117;
 
+/// @nodoc
 const int AL_BUFFERS_PROCESSED = 4118;
 
+/// @nodoc
 const int AL_REFERENCE_DISTANCE = 4128;
 
+/// @nodoc
 const int AL_ROLLOFF_FACTOR = 4129;
 
+/// @nodoc
 const int AL_CONE_OUTER_GAIN = 4130;
 
+/// @nodoc
 const int AL_MAX_DISTANCE = 4131;
 
+/// @nodoc
 const int AL_SEC_OFFSET = 4132;
 
+/// @nodoc
 const int AL_SAMPLE_OFFSET = 4133;
 
+/// @nodoc
 const int AL_BYTE_OFFSET = 4134;
 
+/// @nodoc
 const int AL_SOURCE_TYPE = 4135;
 
+/// @nodoc
 const int AL_STATIC = 4136;
 
+/// @nodoc
 const int AL_STREAMING = 4137;
 
+/// @nodoc
 const int AL_UNDETERMINED = 4144;
 
+/// @nodoc
 const int AL_FORMAT_MONO8 = 4352;
 
+/// @nodoc
 const int AL_FORMAT_MONO16 = 4353;
 
+/// @nodoc
 const int AL_FORMAT_STEREO8 = 4354;
 
+/// @nodoc
 const int AL_FORMAT_STEREO16 = 4355;
 
+/// @nodoc
 const int AL_FREQUENCY = 8193;
 
+/// @nodoc
 const int AL_BITS = 8194;
 
+/// @nodoc
 const int AL_CHANNELS = 8195;
 
+/// @nodoc
 const int AL_SIZE = 8196;
 
+/// @nodoc
 const int AL_UNUSED = 8208;
 
+/// @nodoc
 const int AL_PENDING = 8209;
 
+/// @nodoc
 const int AL_PROCESSED = 8210;
 
+/// @nodoc
 const int AL_NO_ERROR = 0;
 
+/// @nodoc
 const int AL_INVALID_NAME = 40961;
 
+/// @nodoc
 const int AL_INVALID_ENUM = 40962;
 
+/// @nodoc
 const int AL_INVALID_VALUE = 40963;
 
+/// @nodoc
 const int AL_INVALID_OPERATION = 40964;
 
+/// @nodoc
 const int AL_OUT_OF_MEMORY = 40965;
 
+/// @nodoc
 const int AL_VENDOR = 45057;
 
+/// @nodoc
 const int AL_VERSION = 45058;
 
+/// @nodoc
 const int AL_RENDERER = 45059;
 
+/// @nodoc
 const int AL_EXTENSIONS = 45060;
 
+/// @nodoc
 const int AL_DOPPLER_FACTOR = 49152;
 
+/// @nodoc
 const int AL_DOPPLER_VELOCITY = 49153;
 
+/// @nodoc
 const int AL_SPEED_OF_SOUND = 49155;
 
+/// @nodoc
 const int AL_DISTANCE_MODEL = 53248;
 
+/// @nodoc
 const int AL_INVERSE_DISTANCE = 53249;
 
+/// @nodoc
 const int AL_INVERSE_DISTANCE_CLAMPED = 53250;
 
+/// @nodoc
 const int AL_LINEAR_DISTANCE = 53251;
 
+/// @nodoc
 const int AL_LINEAR_DISTANCE_CLAMPED = 53252;
 
+/// @nodoc
 const int AL_EXPONENT_DISTANCE = 53253;
 
+/// @nodoc
 const int AL_EXPONENT_DISTANCE_CLAMPED = 53254;
 
+/// @nodoc
 const int ALC_INVALID = 0;
 
+/// @nodoc
 const int ALC_VERSION_0_1 = 1;
 
+/// @nodoc
 const int ALC_FALSE = 0;
 
+/// @nodoc
 const int ALC_TRUE = 1;
 
+/// @nodoc
 const int ALC_FREQUENCY = 4103;
 
+/// @nodoc
 const int ALC_REFRESH = 4104;
 
+/// @nodoc
 const int ALC_SYNC = 4105;
 
+/// @nodoc
 const int ALC_MONO_SOURCES = 4112;
 
+/// @nodoc
 const int ALC_STEREO_SOURCES = 4113;
 
+/// @nodoc
 const int ALC_NO_ERROR = 0;
 
+/// @nodoc
 const int ALC_INVALID_DEVICE = 40961;
 
+/// @nodoc
 const int ALC_INVALID_CONTEXT = 40962;
 
+/// @nodoc
 const int ALC_INVALID_ENUM = 40963;
 
+/// @nodoc
 const int ALC_INVALID_VALUE = 40964;
 
+/// @nodoc
 const int ALC_OUT_OF_MEMORY = 40965;
 
+/// @nodoc
 const int ALC_MAJOR_VERSION = 4096;
 
+/// @nodoc
 const int ALC_MINOR_VERSION = 4097;
 
+/// @nodoc
 const int ALC_ATTRIBUTES_SIZE = 4098;
 
+/// @nodoc
 const int ALC_ALL_ATTRIBUTES = 4099;
 
+/// @nodoc
 const int ALC_DEFAULT_DEVICE_SPECIFIER = 4100;
 
+/// @nodoc
 const int ALC_DEVICE_SPECIFIER = 4101;
 
+/// @nodoc
 const int ALC_EXTENSIONS = 4102;
 
+/// @nodoc
 const int ALC_EXT_CAPTURE = 1;
 
+/// @nodoc
 const int ALC_CAPTURE_DEVICE_SPECIFIER = 784;
 
+/// @nodoc
 const int ALC_CAPTURE_DEFAULT_DEVICE_SPECIFIER = 785;
 
+/// @nodoc
 const int ALC_CAPTURE_SAMPLES = 786;
 
+/// @nodoc
 const int ALC_ENUMERATE_ALL_EXT = 1;
 
+/// @nodoc
 const int ALC_DEFAULT_ALL_DEVICES_SPECIFIER = 4114;
 
+/// @nodoc
 const int ALC_ALL_DEVICES_SPECIFIER = 4115;
 
+/// @nodoc
 const int AL_LOKI_IMA_ADPCM_format = 1;
 
+/// @nodoc
 const int AL_FORMAT_IMA_ADPCM_MONO16_EXT = 65536;
 
+/// @nodoc
 const int AL_FORMAT_IMA_ADPCM_STEREO16_EXT = 65537;
 
+/// @nodoc
 const int AL_LOKI_WAVE_format = 1;
 
+/// @nodoc
 const int AL_FORMAT_WAVE_EXT = 65538;
 
+/// @nodoc
 const int AL_EXT_vorbis = 1;
 
+/// @nodoc
 const int AL_FORMAT_VORBIS_EXT = 65539;
 
+/// @nodoc
 const int AL_LOKI_quadriphonic = 1;
 
+/// @nodoc
 const int AL_FORMAT_QUAD8_LOKI = 65540;
 
+/// @nodoc
 const int AL_FORMAT_QUAD16_LOKI = 65541;
 
+/// @nodoc
 const int AL_EXT_float32 = 1;
 
+/// @nodoc
 const int AL_FORMAT_MONO_FLOAT32 = 65552;
 
+/// @nodoc
 const int AL_FORMAT_STEREO_FLOAT32 = 65553;
 
+/// @nodoc
 const int AL_EXT_double = 1;
 
+/// @nodoc
 const int AL_FORMAT_MONO_DOUBLE_EXT = 65554;
 
+/// @nodoc
 const int AL_FORMAT_STEREO_DOUBLE_EXT = 65555;
 
+/// @nodoc
 const int AL_EXT_MULAW = 1;
 
+/// @nodoc
 const int AL_FORMAT_MONO_MULAW_EXT = 65556;
 
+/// @nodoc
 const int AL_FORMAT_STEREO_MULAW_EXT = 65557;
 
+/// @nodoc
 const int AL_EXT_ALAW = 1;
 
+/// @nodoc
 const int AL_FORMAT_MONO_ALAW_EXT = 65558;
 
+/// @nodoc
 const int AL_FORMAT_STEREO_ALAW_EXT = 65559;
 
+/// @nodoc
 const int ALC_LOKI_audio_channel = 1;
 
+/// @nodoc
 const int ALC_CHAN_MAIN_LOKI = 5242881;
 
+/// @nodoc
 const int ALC_CHAN_PCM_LOKI = 5242882;
 
+/// @nodoc
 const int ALC_CHAN_CD_LOKI = 5242883;
 
+/// @nodoc
 const int AL_EXT_MCFORMATS = 1;
 
+/// @nodoc
 const int AL_FORMAT_QUAD8 = 4612;
 
+/// @nodoc
 const int AL_FORMAT_QUAD16 = 4613;
 
+/// @nodoc
 const int AL_FORMAT_QUAD32 = 4614;
 
+/// @nodoc
 const int AL_FORMAT_REAR8 = 4615;
 
+/// @nodoc
 const int AL_FORMAT_REAR16 = 4616;
 
+/// @nodoc
 const int AL_FORMAT_REAR32 = 4617;
 
+/// @nodoc
 const int AL_FORMAT_51CHN8 = 4618;
 
+/// @nodoc
 const int AL_FORMAT_51CHN16 = 4619;
 
+/// @nodoc
 const int AL_FORMAT_51CHN32 = 4620;
 
+/// @nodoc
 const int AL_FORMAT_61CHN8 = 4621;
 
+/// @nodoc
 const int AL_FORMAT_61CHN16 = 4622;
 
+/// @nodoc
 const int AL_FORMAT_61CHN32 = 4623;
 
+/// @nodoc
 const int AL_FORMAT_71CHN8 = 4624;
 
+/// @nodoc
 const int AL_FORMAT_71CHN16 = 4625;
 
+/// @nodoc
 const int AL_FORMAT_71CHN32 = 4626;
 
+/// @nodoc
 const int AL_EXT_MULAW_MCFORMATS = 1;
 
+/// @nodoc
 const int AL_FORMAT_MONO_MULAW = 65556;
 
+/// @nodoc
 const int AL_FORMAT_STEREO_MULAW = 65557;
 
+/// @nodoc
 const int AL_FORMAT_QUAD_MULAW = 65569;
 
+/// @nodoc
 const int AL_FORMAT_REAR_MULAW = 65570;
 
+/// @nodoc
 const int AL_FORMAT_51CHN_MULAW = 65571;
 
+/// @nodoc
 const int AL_FORMAT_61CHN_MULAW = 65572;
 
+/// @nodoc
 const int AL_FORMAT_71CHN_MULAW = 65573;
 
+/// @nodoc
 const int AL_EXT_IMA4 = 1;
 
+/// @nodoc
 const int AL_FORMAT_MONO_IMA4 = 4864;
 
+/// @nodoc
 const int AL_FORMAT_STEREO_IMA4 = 4865;
 
+/// @nodoc
 const int AL_EXT_STATIC_BUFFER = 1;
 
+/// @nodoc
 const int ALC_EXT_EFX = 1;
 
+/// @nodoc
 const String ALC_EXT_EFX_NAME = 'ALC_EXT_EFX';
 
+/// @nodoc
 const int ALC_EFX_MAJOR_VERSION = 131073;
 
+/// @nodoc
 const int ALC_EFX_MINOR_VERSION = 131074;
 
+/// @nodoc
 const int ALC_MAX_AUXILIARY_SENDS = 131075;
 
+/// @nodoc
 const int AL_METERS_PER_UNIT = 131076;
 
+/// @nodoc
 const int AL_DIRECT_FILTER = 131077;
 
+/// @nodoc
 const int AL_AUXILIARY_SEND_FILTER = 131078;
 
+/// @nodoc
 const int AL_AIR_ABSORPTION_FACTOR = 131079;
 
+/// @nodoc
 const int AL_ROOM_ROLLOFF_FACTOR = 131080;
 
+/// @nodoc
 const int AL_CONE_OUTER_GAINHF = 131081;
 
+/// @nodoc
 const int AL_DIRECT_FILTER_GAINHF_AUTO = 131082;
 
+/// @nodoc
 const int AL_AUXILIARY_SEND_FILTER_GAIN_AUTO = 131083;
 
+/// @nodoc
 const int AL_AUXILIARY_SEND_FILTER_GAINHF_AUTO = 131084;
 
+/// @nodoc
 const int AL_REVERB_DENSITY = 1;
 
+/// @nodoc
 const int AL_REVERB_DIFFUSION = 2;
 
+/// @nodoc
 const int AL_REVERB_GAIN = 3;
 
+/// @nodoc
 const int AL_REVERB_GAINHF = 4;
 
+/// @nodoc
 const int AL_REVERB_DECAY_TIME = 5;
 
+/// @nodoc
 const int AL_REVERB_DECAY_HFRATIO = 6;
 
+/// @nodoc
 const int AL_REVERB_REFLECTIONS_GAIN = 7;
 
+/// @nodoc
 const int AL_REVERB_REFLECTIONS_DELAY = 8;
 
+/// @nodoc
 const int AL_REVERB_LATE_REVERB_GAIN = 9;
 
+/// @nodoc
 const int AL_REVERB_LATE_REVERB_DELAY = 10;
 
+/// @nodoc
 const int AL_REVERB_AIR_ABSORPTION_GAINHF = 11;
 
+/// @nodoc
 const int AL_REVERB_ROOM_ROLLOFF_FACTOR = 12;
 
+/// @nodoc
 const int AL_REVERB_DECAY_HFLIMIT = 13;
 
+/// @nodoc
 const int AL_EAXREVERB_DENSITY = 1;
 
+/// @nodoc
 const int AL_EAXREVERB_DIFFUSION = 2;
 
+/// @nodoc
 const int AL_EAXREVERB_GAIN = 3;
 
+/// @nodoc
 const int AL_EAXREVERB_GAINHF = 4;
 
+/// @nodoc
 const int AL_EAXREVERB_GAINLF = 5;
 
+/// @nodoc
 const int AL_EAXREVERB_DECAY_TIME = 6;
 
+/// @nodoc
 const int AL_EAXREVERB_DECAY_HFRATIO = 7;
 
+/// @nodoc
 const int AL_EAXREVERB_DECAY_LFRATIO = 8;
 
+/// @nodoc
 const int AL_EAXREVERB_REFLECTIONS_GAIN = 9;
 
+/// @nodoc
 const int AL_EAXREVERB_REFLECTIONS_DELAY = 10;
 
+/// @nodoc
 const int AL_EAXREVERB_REFLECTIONS_PAN = 11;
 
+/// @nodoc
 const int AL_EAXREVERB_LATE_REVERB_GAIN = 12;
 
+/// @nodoc
 const int AL_EAXREVERB_LATE_REVERB_DELAY = 13;
 
+/// @nodoc
 const int AL_EAXREVERB_LATE_REVERB_PAN = 14;
 
+/// @nodoc
 const int AL_EAXREVERB_ECHO_TIME = 15;
 
+/// @nodoc
 const int AL_EAXREVERB_ECHO_DEPTH = 16;
 
+/// @nodoc
 const int AL_EAXREVERB_MODULATION_TIME = 17;
 
+/// @nodoc
 const int AL_EAXREVERB_MODULATION_DEPTH = 18;
 
+/// @nodoc
 const int AL_EAXREVERB_AIR_ABSORPTION_GAINHF = 19;
 
+/// @nodoc
 const int AL_EAXREVERB_HFREFERENCE = 20;
 
+/// @nodoc
 const int AL_EAXREVERB_LFREFERENCE = 21;
 
+/// @nodoc
 const int AL_EAXREVERB_ROOM_ROLLOFF_FACTOR = 22;
 
+/// @nodoc
 const int AL_EAXREVERB_DECAY_HFLIMIT = 23;
 
+/// @nodoc
 const int AL_CHORUS_WAVEFORM = 1;
 
+/// @nodoc
 const int AL_CHORUS_PHASE = 2;
 
+/// @nodoc
 const int AL_CHORUS_RATE = 3;
 
+/// @nodoc
 const int AL_CHORUS_DEPTH = 4;
 
+/// @nodoc
 const int AL_CHORUS_FEEDBACK = 5;
 
+/// @nodoc
 const int AL_CHORUS_DELAY = 6;
 
+/// @nodoc
 const int AL_DISTORTION_EDGE = 1;
 
+/// @nodoc
 const int AL_DISTORTION_GAIN = 2;
 
+/// @nodoc
 const int AL_DISTORTION_LOWPASS_CUTOFF = 3;
 
+/// @nodoc
 const int AL_DISTORTION_EQCENTER = 4;
 
+/// @nodoc
 const int AL_DISTORTION_EQBANDWIDTH = 5;
 
+/// @nodoc
 const int AL_ECHO_DELAY = 1;
 
+/// @nodoc
 const int AL_ECHO_LRDELAY = 2;
 
+/// @nodoc
 const int AL_ECHO_DAMPING = 3;
 
+/// @nodoc
 const int AL_ECHO_FEEDBACK = 4;
 
+/// @nodoc
 const int AL_ECHO_SPREAD = 5;
 
+/// @nodoc
 const int AL_FLANGER_WAVEFORM = 1;
 
+/// @nodoc
 const int AL_FLANGER_PHASE = 2;
 
+/// @nodoc
 const int AL_FLANGER_RATE = 3;
 
+/// @nodoc
 const int AL_FLANGER_DEPTH = 4;
 
+/// @nodoc
 const int AL_FLANGER_FEEDBACK = 5;
 
+/// @nodoc
 const int AL_FLANGER_DELAY = 6;
 
+/// @nodoc
 const int AL_FREQUENCY_SHIFTER_FREQUENCY = 1;
 
+/// @nodoc
 const int AL_FREQUENCY_SHIFTER_LEFT_DIRECTION = 2;
 
+/// @nodoc
 const int AL_FREQUENCY_SHIFTER_RIGHT_DIRECTION = 3;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_PHONEMEA = 1;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_PHONEMEA_COARSE_TUNING = 2;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_PHONEMEB = 3;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_PHONEMEB_COARSE_TUNING = 4;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_WAVEFORM = 5;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_RATE = 6;
 
+/// @nodoc
 const int AL_PITCH_SHIFTER_COARSE_TUNE = 1;
 
+/// @nodoc
 const int AL_PITCH_SHIFTER_FINE_TUNE = 2;
 
+/// @nodoc
 const int AL_RING_MODULATOR_FREQUENCY = 1;
 
+/// @nodoc
 const int AL_RING_MODULATOR_HIGHPASS_CUTOFF = 2;
 
+/// @nodoc
 const int AL_RING_MODULATOR_WAVEFORM = 3;
 
+/// @nodoc
 const int AL_AUTOWAH_ATTACK_TIME = 1;
 
+/// @nodoc
 const int AL_AUTOWAH_RELEASE_TIME = 2;
 
+/// @nodoc
 const int AL_AUTOWAH_RESONANCE = 3;
 
+/// @nodoc
 const int AL_AUTOWAH_PEAK_GAIN = 4;
 
+/// @nodoc
 const int AL_COMPRESSOR_ONOFF = 1;
 
+/// @nodoc
 const int AL_EQUALIZER_LOW_GAIN = 1;
 
+/// @nodoc
 const int AL_EQUALIZER_LOW_CUTOFF = 2;
 
+/// @nodoc
 const int AL_EQUALIZER_MID1_GAIN = 3;
 
+/// @nodoc
 const int AL_EQUALIZER_MID1_CENTER = 4;
 
+/// @nodoc
 const int AL_EQUALIZER_MID1_WIDTH = 5;
 
+/// @nodoc
 const int AL_EQUALIZER_MID2_GAIN = 6;
 
+/// @nodoc
 const int AL_EQUALIZER_MID2_CENTER = 7;
 
+/// @nodoc
 const int AL_EQUALIZER_MID2_WIDTH = 8;
 
+/// @nodoc
 const int AL_EQUALIZER_HIGH_GAIN = 9;
 
+/// @nodoc
 const int AL_EQUALIZER_HIGH_CUTOFF = 10;
 
+/// @nodoc
 const int AL_EFFECT_FIRST_PARAMETER = 0;
 
+/// @nodoc
 const int AL_EFFECT_LAST_PARAMETER = 32768;
 
+/// @nodoc
 const int AL_EFFECT_TYPE = 32769;
 
+/// @nodoc
 const int AL_EFFECT_NULL = 0;
 
+/// @nodoc
 const int AL_EFFECT_REVERB = 1;
 
+/// @nodoc
 const int AL_EFFECT_CHORUS = 2;
 
+/// @nodoc
 const int AL_EFFECT_DISTORTION = 3;
 
+/// @nodoc
 const int AL_EFFECT_ECHO = 4;
 
+/// @nodoc
 const int AL_EFFECT_FLANGER = 5;
 
+/// @nodoc
 const int AL_EFFECT_FREQUENCY_SHIFTER = 6;
 
+/// @nodoc
 const int AL_EFFECT_VOCAL_MORPHER = 7;
 
+/// @nodoc
 const int AL_EFFECT_PITCH_SHIFTER = 8;
 
+/// @nodoc
 const int AL_EFFECT_RING_MODULATOR = 9;
 
+/// @nodoc
 const int AL_EFFECT_AUTOWAH = 10;
 
+/// @nodoc
 const int AL_EFFECT_COMPRESSOR = 11;
 
+/// @nodoc
 const int AL_EFFECT_EQUALIZER = 12;
 
+/// @nodoc
 const int AL_EFFECT_EAXREVERB = 32768;
 
+/// @nodoc
 const int AL_EFFECTSLOT_EFFECT = 1;
 
+/// @nodoc
 const int AL_EFFECTSLOT_GAIN = 2;
 
+/// @nodoc
 const int AL_EFFECTSLOT_AUXILIARY_SEND_AUTO = 3;
 
+/// @nodoc
 const int AL_EFFECTSLOT_NULL = 0;
 
+/// @nodoc
 const int AL_LOWPASS_GAIN = 1;
 
+/// @nodoc
 const int AL_LOWPASS_GAINHF = 2;
 
+/// @nodoc
 const int AL_HIGHPASS_GAIN = 1;
 
+/// @nodoc
 const int AL_HIGHPASS_GAINLF = 2;
 
+/// @nodoc
 const int AL_BANDPASS_GAIN = 1;
 
+/// @nodoc
 const int AL_BANDPASS_GAINLF = 2;
 
+/// @nodoc
 const int AL_BANDPASS_GAINHF = 3;
 
+/// @nodoc
 const int AL_FILTER_FIRST_PARAMETER = 0;
 
+/// @nodoc
 const int AL_FILTER_LAST_PARAMETER = 32768;
 
+/// @nodoc
 const int AL_FILTER_TYPE = 32769;
 
+/// @nodoc
 const int AL_FILTER_NULL = 0;
 
+/// @nodoc
 const int AL_FILTER_LOWPASS = 1;
 
+/// @nodoc
 const int AL_FILTER_HIGHPASS = 2;
 
+/// @nodoc
 const int AL_FILTER_BANDPASS = 3;
 
+/// @nodoc
 const double AL_LOWPASS_MIN_GAIN = 0.0;
 
+/// @nodoc
 const double AL_LOWPASS_MAX_GAIN = 1.0;
 
+/// @nodoc
 const double AL_LOWPASS_DEFAULT_GAIN = 1.0;
 
+/// @nodoc
 const double AL_LOWPASS_MIN_GAINHF = 0.0;
 
+/// @nodoc
 const double AL_LOWPASS_MAX_GAINHF = 1.0;
 
+/// @nodoc
 const double AL_LOWPASS_DEFAULT_GAINHF = 1.0;
 
+/// @nodoc
 const double AL_HIGHPASS_MIN_GAIN = 0.0;
 
+/// @nodoc
 const double AL_HIGHPASS_MAX_GAIN = 1.0;
 
+/// @nodoc
 const double AL_HIGHPASS_DEFAULT_GAIN = 1.0;
 
+/// @nodoc
 const double AL_HIGHPASS_MIN_GAINLF = 0.0;
 
+/// @nodoc
 const double AL_HIGHPASS_MAX_GAINLF = 1.0;
 
+/// @nodoc
 const double AL_HIGHPASS_DEFAULT_GAINLF = 1.0;
 
+/// @nodoc
 const double AL_BANDPASS_MIN_GAIN = 0.0;
 
+/// @nodoc
 const double AL_BANDPASS_MAX_GAIN = 1.0;
 
+/// @nodoc
 const double AL_BANDPASS_DEFAULT_GAIN = 1.0;
 
+/// @nodoc
 const double AL_BANDPASS_MIN_GAINHF = 0.0;
 
+/// @nodoc
 const double AL_BANDPASS_MAX_GAINHF = 1.0;
 
+/// @nodoc
 const double AL_BANDPASS_DEFAULT_GAINHF = 1.0;
 
+/// @nodoc
 const double AL_BANDPASS_MIN_GAINLF = 0.0;
 
+/// @nodoc
 const double AL_BANDPASS_MAX_GAINLF = 1.0;
 
+/// @nodoc
 const double AL_BANDPASS_DEFAULT_GAINLF = 1.0;
 
+/// @nodoc
 const double AL_REVERB_MIN_DENSITY = 0.0;
 
+/// @nodoc
 const double AL_REVERB_MAX_DENSITY = 1.0;
 
+/// @nodoc
 const double AL_REVERB_DEFAULT_DENSITY = 1.0;
 
+/// @nodoc
 const double AL_REVERB_MIN_DIFFUSION = 0.0;
 
+/// @nodoc
 const double AL_REVERB_MAX_DIFFUSION = 1.0;
 
+/// @nodoc
 const double AL_REVERB_DEFAULT_DIFFUSION = 1.0;
 
+/// @nodoc
 const double AL_REVERB_MIN_GAIN = 0.0;
 
+/// @nodoc
 const double AL_REVERB_MAX_GAIN = 1.0;
 
+/// @nodoc
 const double AL_REVERB_DEFAULT_GAIN = 0.3199999928474426;
 
+/// @nodoc
 const double AL_REVERB_MIN_GAINHF = 0.0;
 
+/// @nodoc
 const double AL_REVERB_MAX_GAINHF = 1.0;
 
+/// @nodoc
 const double AL_REVERB_DEFAULT_GAINHF = 0.8899999856948853;
 
+/// @nodoc
 const double AL_REVERB_MIN_DECAY_TIME = 0.10000000149011612;
 
+/// @nodoc
 const double AL_REVERB_MAX_DECAY_TIME = 20.0;
 
+/// @nodoc
 const double AL_REVERB_DEFAULT_DECAY_TIME = 1.4900000095367432;
 
+/// @nodoc
 const double AL_REVERB_MIN_DECAY_HFRATIO = 0.10000000149011612;
 
+/// @nodoc
 const double AL_REVERB_MAX_DECAY_HFRATIO = 2.0;
 
+/// @nodoc
 const double AL_REVERB_DEFAULT_DECAY_HFRATIO = 0.8299999833106995;
 
+/// @nodoc
 const double AL_REVERB_MIN_REFLECTIONS_GAIN = 0.0;
 
+/// @nodoc
 const double AL_REVERB_MAX_REFLECTIONS_GAIN = 3.1600000858306885;
 
+/// @nodoc
 const double AL_REVERB_DEFAULT_REFLECTIONS_GAIN = 0.05000000074505806;
 
+/// @nodoc
 const double AL_REVERB_MIN_REFLECTIONS_DELAY = 0.0;
 
+/// @nodoc
 const double AL_REVERB_MAX_REFLECTIONS_DELAY = 0.30000001192092896;
 
+/// @nodoc
 const double AL_REVERB_DEFAULT_REFLECTIONS_DELAY = 0.007000000216066837;
 
+/// @nodoc
 const double AL_REVERB_MIN_LATE_REVERB_GAIN = 0.0;
 
+/// @nodoc
 const double AL_REVERB_MAX_LATE_REVERB_GAIN = 10.0;
 
+/// @nodoc
 const double AL_REVERB_DEFAULT_LATE_REVERB_GAIN = 1.2599999904632568;
 
+/// @nodoc
 const double AL_REVERB_MIN_LATE_REVERB_DELAY = 0.0;
 
+/// @nodoc
 const double AL_REVERB_MAX_LATE_REVERB_DELAY = 0.10000000149011612;
 
+/// @nodoc
 const double AL_REVERB_DEFAULT_LATE_REVERB_DELAY = 0.010999999940395355;
 
+/// @nodoc
 const double AL_REVERB_MIN_AIR_ABSORPTION_GAINHF = 0.8920000195503235;
 
+/// @nodoc
 const double AL_REVERB_MAX_AIR_ABSORPTION_GAINHF = 1.0;
 
+/// @nodoc
 const double AL_REVERB_DEFAULT_AIR_ABSORPTION_GAINHF = 0.9940000176429749;
 
+/// @nodoc
 const double AL_REVERB_MIN_ROOM_ROLLOFF_FACTOR = 0.0;
 
+/// @nodoc
 const double AL_REVERB_MAX_ROOM_ROLLOFF_FACTOR = 10.0;
 
+/// @nodoc
 const double AL_REVERB_DEFAULT_ROOM_ROLLOFF_FACTOR = 0.0;
 
+/// @nodoc
 const int AL_REVERB_MIN_DECAY_HFLIMIT = 0;
 
+/// @nodoc
 const int AL_REVERB_MAX_DECAY_HFLIMIT = 1;
 
+/// @nodoc
 const int AL_REVERB_DEFAULT_DECAY_HFLIMIT = 1;
 
+/// @nodoc
 const double AL_EAXREVERB_MIN_DENSITY = 0.0;
 
+/// @nodoc
 const double AL_EAXREVERB_MAX_DENSITY = 1.0;
 
+/// @nodoc
 const double AL_EAXREVERB_DEFAULT_DENSITY = 1.0;
 
+/// @nodoc
 const double AL_EAXREVERB_MIN_DIFFUSION = 0.0;
 
+/// @nodoc
 const double AL_EAXREVERB_MAX_DIFFUSION = 1.0;
 
+/// @nodoc
 const double AL_EAXREVERB_DEFAULT_DIFFUSION = 1.0;
 
+/// @nodoc
 const double AL_EAXREVERB_MIN_GAIN = 0.0;
 
+/// @nodoc
 const double AL_EAXREVERB_MAX_GAIN = 1.0;
 
+/// @nodoc
 const double AL_EAXREVERB_DEFAULT_GAIN = 0.3199999928474426;
 
+/// @nodoc
 const double AL_EAXREVERB_MIN_GAINHF = 0.0;
 
+/// @nodoc
 const double AL_EAXREVERB_MAX_GAINHF = 1.0;
 
+/// @nodoc
 const double AL_EAXREVERB_DEFAULT_GAINHF = 0.8899999856948853;
 
+/// @nodoc
 const double AL_EAXREVERB_MIN_GAINLF = 0.0;
 
+/// @nodoc
 const double AL_EAXREVERB_MAX_GAINLF = 1.0;
 
+/// @nodoc
 const double AL_EAXREVERB_DEFAULT_GAINLF = 1.0;
 
+/// @nodoc
 const double AL_EAXREVERB_MIN_DECAY_TIME = 0.10000000149011612;
 
+/// @nodoc
 const double AL_EAXREVERB_MAX_DECAY_TIME = 20.0;
 
+/// @nodoc
 const double AL_EAXREVERB_DEFAULT_DECAY_TIME = 1.4900000095367432;
 
+/// @nodoc
 const double AL_EAXREVERB_MIN_DECAY_HFRATIO = 0.10000000149011612;
 
+/// @nodoc
 const double AL_EAXREVERB_MAX_DECAY_HFRATIO = 2.0;
 
+/// @nodoc
 const double AL_EAXREVERB_DEFAULT_DECAY_HFRATIO = 0.8299999833106995;
 
+/// @nodoc
 const double AL_EAXREVERB_MIN_DECAY_LFRATIO = 0.10000000149011612;
 
+/// @nodoc
 const double AL_EAXREVERB_MAX_DECAY_LFRATIO = 2.0;
 
+/// @nodoc
 const double AL_EAXREVERB_DEFAULT_DECAY_LFRATIO = 1.0;
 
+/// @nodoc
 const double AL_EAXREVERB_MIN_REFLECTIONS_GAIN = 0.0;
 
+/// @nodoc
 const double AL_EAXREVERB_MAX_REFLECTIONS_GAIN = 3.1600000858306885;
 
+/// @nodoc
 const double AL_EAXREVERB_DEFAULT_REFLECTIONS_GAIN = 0.05000000074505806;
 
+/// @nodoc
 const double AL_EAXREVERB_MIN_REFLECTIONS_DELAY = 0.0;
 
+/// @nodoc
 const double AL_EAXREVERB_MAX_REFLECTIONS_DELAY = 0.30000001192092896;
 
+/// @nodoc
 const double AL_EAXREVERB_DEFAULT_REFLECTIONS_DELAY = 0.007000000216066837;
 
+/// @nodoc
 const double AL_EAXREVERB_DEFAULT_REFLECTIONS_PAN_XYZ = 0.0;
 
+/// @nodoc
 const double AL_EAXREVERB_MIN_LATE_REVERB_GAIN = 0.0;
 
+/// @nodoc
 const double AL_EAXREVERB_MAX_LATE_REVERB_GAIN = 10.0;
 
+/// @nodoc
 const double AL_EAXREVERB_DEFAULT_LATE_REVERB_GAIN = 1.2599999904632568;
 
+/// @nodoc
 const double AL_EAXREVERB_MIN_LATE_REVERB_DELAY = 0.0;
 
+/// @nodoc
 const double AL_EAXREVERB_MAX_LATE_REVERB_DELAY = 0.10000000149011612;
 
+/// @nodoc
 const double AL_EAXREVERB_DEFAULT_LATE_REVERB_DELAY = 0.010999999940395355;
 
+/// @nodoc
 const double AL_EAXREVERB_DEFAULT_LATE_REVERB_PAN_XYZ = 0.0;
 
+/// @nodoc
 const double AL_EAXREVERB_MIN_ECHO_TIME = 0.07500000298023224;
 
+/// @nodoc
 const double AL_EAXREVERB_MAX_ECHO_TIME = 0.25;
 
+/// @nodoc
 const double AL_EAXREVERB_DEFAULT_ECHO_TIME = 0.25;
 
+/// @nodoc
 const double AL_EAXREVERB_MIN_ECHO_DEPTH = 0.0;
 
+/// @nodoc
 const double AL_EAXREVERB_MAX_ECHO_DEPTH = 1.0;
 
+/// @nodoc
 const double AL_EAXREVERB_DEFAULT_ECHO_DEPTH = 0.0;
 
+/// @nodoc
 const double AL_EAXREVERB_MIN_MODULATION_TIME = 0.03999999910593033;
 
+/// @nodoc
 const double AL_EAXREVERB_MAX_MODULATION_TIME = 4.0;
 
+/// @nodoc
 const double AL_EAXREVERB_DEFAULT_MODULATION_TIME = 0.25;
 
+/// @nodoc
 const double AL_EAXREVERB_MIN_MODULATION_DEPTH = 0.0;
 
+/// @nodoc
 const double AL_EAXREVERB_MAX_MODULATION_DEPTH = 1.0;
 
+/// @nodoc
 const double AL_EAXREVERB_DEFAULT_MODULATION_DEPTH = 0.0;
 
+/// @nodoc
 const double AL_EAXREVERB_MIN_AIR_ABSORPTION_GAINHF = 0.8920000195503235;
 
+/// @nodoc
 const double AL_EAXREVERB_MAX_AIR_ABSORPTION_GAINHF = 1.0;
 
+/// @nodoc
 const double AL_EAXREVERB_DEFAULT_AIR_ABSORPTION_GAINHF = 0.9940000176429749;
 
+/// @nodoc
 const double AL_EAXREVERB_MIN_HFREFERENCE = 1000.0;
 
+/// @nodoc
 const double AL_EAXREVERB_MAX_HFREFERENCE = 20000.0;
 
+/// @nodoc
 const double AL_EAXREVERB_DEFAULT_HFREFERENCE = 5000.0;
 
+/// @nodoc
 const double AL_EAXREVERB_MIN_LFREFERENCE = 20.0;
 
+/// @nodoc
 const double AL_EAXREVERB_MAX_LFREFERENCE = 1000.0;
 
+/// @nodoc
 const double AL_EAXREVERB_DEFAULT_LFREFERENCE = 250.0;
 
+/// @nodoc
 const double AL_EAXREVERB_MIN_ROOM_ROLLOFF_FACTOR = 0.0;
 
+/// @nodoc
 const double AL_EAXREVERB_MAX_ROOM_ROLLOFF_FACTOR = 10.0;
 
+/// @nodoc
 const double AL_EAXREVERB_DEFAULT_ROOM_ROLLOFF_FACTOR = 0.0;
 
+/// @nodoc
 const int AL_EAXREVERB_MIN_DECAY_HFLIMIT = 0;
 
+/// @nodoc
 const int AL_EAXREVERB_MAX_DECAY_HFLIMIT = 1;
 
+/// @nodoc
 const int AL_EAXREVERB_DEFAULT_DECAY_HFLIMIT = 1;
 
+/// @nodoc
 const int AL_CHORUS_WAVEFORM_SINUSOID = 0;
 
+/// @nodoc
 const int AL_CHORUS_WAVEFORM_TRIANGLE = 1;
 
+/// @nodoc
 const int AL_CHORUS_MIN_WAVEFORM = 0;
 
+/// @nodoc
 const int AL_CHORUS_MAX_WAVEFORM = 1;
 
+/// @nodoc
 const int AL_CHORUS_DEFAULT_WAVEFORM = 1;
 
+/// @nodoc
 const int AL_CHORUS_MIN_PHASE = -180;
 
+/// @nodoc
 const int AL_CHORUS_MAX_PHASE = 180;
 
+/// @nodoc
 const int AL_CHORUS_DEFAULT_PHASE = 90;
 
+/// @nodoc
 const double AL_CHORUS_MIN_RATE = 0.0;
 
+/// @nodoc
 const double AL_CHORUS_MAX_RATE = 10.0;
 
+/// @nodoc
 const double AL_CHORUS_DEFAULT_RATE = 1.100000023841858;
 
+/// @nodoc
 const double AL_CHORUS_MIN_DEPTH = 0.0;
 
+/// @nodoc
 const double AL_CHORUS_MAX_DEPTH = 1.0;
 
+/// @nodoc
 const double AL_CHORUS_DEFAULT_DEPTH = 0.10000000149011612;
 
+/// @nodoc
 const double AL_CHORUS_MIN_FEEDBACK = -1.0;
 
+/// @nodoc
 const double AL_CHORUS_MAX_FEEDBACK = 1.0;
 
+/// @nodoc
 const double AL_CHORUS_DEFAULT_FEEDBACK = 0.25;
 
+/// @nodoc
 const double AL_CHORUS_MIN_DELAY = 0.0;
 
+/// @nodoc
 const double AL_CHORUS_MAX_DELAY = 0.01600000075995922;
 
+/// @nodoc
 const double AL_CHORUS_DEFAULT_DELAY = 0.01600000075995922;
 
+/// @nodoc
 const double AL_DISTORTION_MIN_EDGE = 0.0;
 
+/// @nodoc
 const double AL_DISTORTION_MAX_EDGE = 1.0;
 
+/// @nodoc
 const double AL_DISTORTION_DEFAULT_EDGE = 0.20000000298023224;
 
+/// @nodoc
 const double AL_DISTORTION_MIN_GAIN = 0.009999999776482582;
 
+/// @nodoc
 const double AL_DISTORTION_MAX_GAIN = 1.0;
 
+/// @nodoc
 const double AL_DISTORTION_DEFAULT_GAIN = 0.05000000074505806;
 
+/// @nodoc
 const double AL_DISTORTION_MIN_LOWPASS_CUTOFF = 80.0;
 
+/// @nodoc
 const double AL_DISTORTION_MAX_LOWPASS_CUTOFF = 24000.0;
 
+/// @nodoc
 const double AL_DISTORTION_DEFAULT_LOWPASS_CUTOFF = 8000.0;
 
+/// @nodoc
 const double AL_DISTORTION_MIN_EQCENTER = 80.0;
 
+/// @nodoc
 const double AL_DISTORTION_MAX_EQCENTER = 24000.0;
 
+/// @nodoc
 const double AL_DISTORTION_DEFAULT_EQCENTER = 3600.0;
 
+/// @nodoc
 const double AL_DISTORTION_MIN_EQBANDWIDTH = 80.0;
 
+/// @nodoc
 const double AL_DISTORTION_MAX_EQBANDWIDTH = 24000.0;
 
+/// @nodoc
 const double AL_DISTORTION_DEFAULT_EQBANDWIDTH = 3600.0;
 
+/// @nodoc
 const double AL_ECHO_MIN_DELAY = 0.0;
 
+/// @nodoc
 const double AL_ECHO_MAX_DELAY = 0.2070000022649765;
 
+/// @nodoc
 const double AL_ECHO_DEFAULT_DELAY = 0.10000000149011612;
 
+/// @nodoc
 const double AL_ECHO_MIN_LRDELAY = 0.0;
 
+/// @nodoc
 const double AL_ECHO_MAX_LRDELAY = 0.40400001406669617;
 
+/// @nodoc
 const double AL_ECHO_DEFAULT_LRDELAY = 0.10000000149011612;
 
+/// @nodoc
 const double AL_ECHO_MIN_DAMPING = 0.0;
 
+/// @nodoc
 const double AL_ECHO_MAX_DAMPING = 0.9900000095367432;
 
+/// @nodoc
 const double AL_ECHO_DEFAULT_DAMPING = 0.5;
 
+/// @nodoc
 const double AL_ECHO_MIN_FEEDBACK = 0.0;
 
+/// @nodoc
 const double AL_ECHO_MAX_FEEDBACK = 1.0;
 
+/// @nodoc
 const double AL_ECHO_DEFAULT_FEEDBACK = 0.5;
 
+/// @nodoc
 const double AL_ECHO_MIN_SPREAD = -1.0;
 
+/// @nodoc
 const double AL_ECHO_MAX_SPREAD = 1.0;
 
+/// @nodoc
 const double AL_ECHO_DEFAULT_SPREAD = -1.0;
 
+/// @nodoc
 const int AL_FLANGER_WAVEFORM_SINUSOID = 0;
 
+/// @nodoc
 const int AL_FLANGER_WAVEFORM_TRIANGLE = 1;
 
+/// @nodoc
 const int AL_FLANGER_MIN_WAVEFORM = 0;
 
+/// @nodoc
 const int AL_FLANGER_MAX_WAVEFORM = 1;
 
+/// @nodoc
 const int AL_FLANGER_DEFAULT_WAVEFORM = 1;
 
+/// @nodoc
 const int AL_FLANGER_MIN_PHASE = -180;
 
+/// @nodoc
 const int AL_FLANGER_MAX_PHASE = 180;
 
+/// @nodoc
 const int AL_FLANGER_DEFAULT_PHASE = 0;
 
+/// @nodoc
 const double AL_FLANGER_MIN_RATE = 0.0;
 
+/// @nodoc
 const double AL_FLANGER_MAX_RATE = 10.0;
 
+/// @nodoc
 const double AL_FLANGER_DEFAULT_RATE = 0.27000001072883606;
 
+/// @nodoc
 const double AL_FLANGER_MIN_DEPTH = 0.0;
 
+/// @nodoc
 const double AL_FLANGER_MAX_DEPTH = 1.0;
 
+/// @nodoc
 const double AL_FLANGER_DEFAULT_DEPTH = 1.0;
 
+/// @nodoc
 const double AL_FLANGER_MIN_FEEDBACK = -1.0;
 
+/// @nodoc
 const double AL_FLANGER_MAX_FEEDBACK = 1.0;
 
+/// @nodoc
 const double AL_FLANGER_DEFAULT_FEEDBACK = -0.5;
 
+/// @nodoc
 const double AL_FLANGER_MIN_DELAY = 0.0;
 
+/// @nodoc
 const double AL_FLANGER_MAX_DELAY = 0.004000000189989805;
 
+/// @nodoc
 const double AL_FLANGER_DEFAULT_DELAY = 0.0020000000949949026;
 
+/// @nodoc
 const double AL_FREQUENCY_SHIFTER_MIN_FREQUENCY = 0.0;
 
+/// @nodoc
 const double AL_FREQUENCY_SHIFTER_MAX_FREQUENCY = 24000.0;
 
+/// @nodoc
 const double AL_FREQUENCY_SHIFTER_DEFAULT_FREQUENCY = 0.0;
 
+/// @nodoc
 const int AL_FREQUENCY_SHIFTER_MIN_LEFT_DIRECTION = 0;
 
+/// @nodoc
 const int AL_FREQUENCY_SHIFTER_MAX_LEFT_DIRECTION = 2;
 
+/// @nodoc
 const int AL_FREQUENCY_SHIFTER_DEFAULT_LEFT_DIRECTION = 0;
 
+/// @nodoc
 const int AL_FREQUENCY_SHIFTER_DIRECTION_DOWN = 0;
 
+/// @nodoc
 const int AL_FREQUENCY_SHIFTER_DIRECTION_UP = 1;
 
+/// @nodoc
 const int AL_FREQUENCY_SHIFTER_DIRECTION_OFF = 2;
 
+/// @nodoc
 const int AL_FREQUENCY_SHIFTER_MIN_RIGHT_DIRECTION = 0;
 
+/// @nodoc
 const int AL_FREQUENCY_SHIFTER_MAX_RIGHT_DIRECTION = 2;
 
+/// @nodoc
 const int AL_FREQUENCY_SHIFTER_DEFAULT_RIGHT_DIRECTION = 0;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_MIN_PHONEMEA = 0;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_MAX_PHONEMEA = 29;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_DEFAULT_PHONEMEA = 0;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_MIN_PHONEMEA_COARSE_TUNING = -24;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_MAX_PHONEMEA_COARSE_TUNING = 24;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_DEFAULT_PHONEMEA_COARSE_TUNING = 0;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_MIN_PHONEMEB = 0;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_MAX_PHONEMEB = 29;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_DEFAULT_PHONEMEB = 10;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_MIN_PHONEMEB_COARSE_TUNING = -24;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_MAX_PHONEMEB_COARSE_TUNING = 24;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_DEFAULT_PHONEMEB_COARSE_TUNING = 0;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_PHONEME_A = 0;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_PHONEME_E = 1;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_PHONEME_I = 2;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_PHONEME_O = 3;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_PHONEME_U = 4;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_PHONEME_AA = 5;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_PHONEME_AE = 6;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_PHONEME_AH = 7;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_PHONEME_AO = 8;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_PHONEME_EH = 9;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_PHONEME_ER = 10;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_PHONEME_IH = 11;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_PHONEME_IY = 12;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_PHONEME_UH = 13;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_PHONEME_UW = 14;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_PHONEME_B = 15;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_PHONEME_D = 16;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_PHONEME_F = 17;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_PHONEME_G = 18;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_PHONEME_J = 19;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_PHONEME_K = 20;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_PHONEME_L = 21;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_PHONEME_M = 22;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_PHONEME_N = 23;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_PHONEME_P = 24;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_PHONEME_R = 25;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_PHONEME_S = 26;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_PHONEME_T = 27;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_PHONEME_V = 28;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_PHONEME_Z = 29;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_WAVEFORM_SINUSOID = 0;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_WAVEFORM_TRIANGLE = 1;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_WAVEFORM_SAWTOOTH = 2;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_MIN_WAVEFORM = 0;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_MAX_WAVEFORM = 2;
 
+/// @nodoc
 const int AL_VOCAL_MORPHER_DEFAULT_WAVEFORM = 0;
 
+/// @nodoc
 const double AL_VOCAL_MORPHER_MIN_RATE = 0.0;
 
+/// @nodoc
 const double AL_VOCAL_MORPHER_MAX_RATE = 10.0;
 
+/// @nodoc
 const double AL_VOCAL_MORPHER_DEFAULT_RATE = 1.409999966621399;
 
+/// @nodoc
 const int AL_PITCH_SHIFTER_MIN_COARSE_TUNE = -12;
 
+/// @nodoc
 const int AL_PITCH_SHIFTER_MAX_COARSE_TUNE = 12;
 
+/// @nodoc
 const int AL_PITCH_SHIFTER_DEFAULT_COARSE_TUNE = 12;
 
+/// @nodoc
 const int AL_PITCH_SHIFTER_MIN_FINE_TUNE = -50;
 
+/// @nodoc
 const int AL_PITCH_SHIFTER_MAX_FINE_TUNE = 50;
 
+/// @nodoc
 const int AL_PITCH_SHIFTER_DEFAULT_FINE_TUNE = 0;
 
+/// @nodoc
 const double AL_RING_MODULATOR_MIN_FREQUENCY = 0.0;
 
+/// @nodoc
 const double AL_RING_MODULATOR_MAX_FREQUENCY = 8000.0;
 
+/// @nodoc
 const double AL_RING_MODULATOR_DEFAULT_FREQUENCY = 440.0;
 
+/// @nodoc
 const double AL_RING_MODULATOR_MIN_HIGHPASS_CUTOFF = 0.0;
 
+/// @nodoc
 const double AL_RING_MODULATOR_MAX_HIGHPASS_CUTOFF = 24000.0;
 
+/// @nodoc
 const double AL_RING_MODULATOR_DEFAULT_HIGHPASS_CUTOFF = 800.0;
 
+/// @nodoc
 const int AL_RING_MODULATOR_SINUSOID = 0;
 
+/// @nodoc
 const int AL_RING_MODULATOR_SAWTOOTH = 1;
 
+/// @nodoc
 const int AL_RING_MODULATOR_SQUARE = 2;
 
+/// @nodoc
 const int AL_RING_MODULATOR_MIN_WAVEFORM = 0;
 
+/// @nodoc
 const int AL_RING_MODULATOR_MAX_WAVEFORM = 2;
 
+/// @nodoc
 const int AL_RING_MODULATOR_DEFAULT_WAVEFORM = 0;
 
+/// @nodoc
 const double AL_AUTOWAH_MIN_ATTACK_TIME = 0.00009999999747378752;
 
+/// @nodoc
 const double AL_AUTOWAH_MAX_ATTACK_TIME = 1.0;
 
+/// @nodoc
 const double AL_AUTOWAH_DEFAULT_ATTACK_TIME = 0.05999999865889549;
 
+/// @nodoc
 const double AL_AUTOWAH_MIN_RELEASE_TIME = 0.00009999999747378752;
 
+/// @nodoc
 const double AL_AUTOWAH_MAX_RELEASE_TIME = 1.0;
 
+/// @nodoc
 const double AL_AUTOWAH_DEFAULT_RELEASE_TIME = 0.05999999865889549;
 
+/// @nodoc
 const double AL_AUTOWAH_MIN_RESONANCE = 2.0;
 
+/// @nodoc
 const double AL_AUTOWAH_MAX_RESONANCE = 1000.0;
 
+/// @nodoc
 const double AL_AUTOWAH_DEFAULT_RESONANCE = 1000.0;
 
+/// @nodoc
 const double AL_AUTOWAH_MIN_PEAK_GAIN = 0.000029999999242136255;
 
+/// @nodoc
 const double AL_AUTOWAH_MAX_PEAK_GAIN = 31621.0;
 
+/// @nodoc
 const double AL_AUTOWAH_DEFAULT_PEAK_GAIN = 11.220000267028809;
 
+/// @nodoc
 const int AL_COMPRESSOR_MIN_ONOFF = 0;
 
+/// @nodoc
 const int AL_COMPRESSOR_MAX_ONOFF = 1;
 
+/// @nodoc
 const int AL_COMPRESSOR_DEFAULT_ONOFF = 1;
 
+/// @nodoc
 const double AL_EQUALIZER_MIN_LOW_GAIN = 0.12600000202655792;
 
+/// @nodoc
 const double AL_EQUALIZER_MAX_LOW_GAIN = 7.942999839782715;
 
+/// @nodoc
 const double AL_EQUALIZER_DEFAULT_LOW_GAIN = 1.0;
 
+/// @nodoc
 const double AL_EQUALIZER_MIN_LOW_CUTOFF = 50.0;
 
+/// @nodoc
 const double AL_EQUALIZER_MAX_LOW_CUTOFF = 800.0;
 
+/// @nodoc
 const double AL_EQUALIZER_DEFAULT_LOW_CUTOFF = 200.0;
 
+/// @nodoc
 const double AL_EQUALIZER_MIN_MID1_GAIN = 0.12600000202655792;
 
+/// @nodoc
 const double AL_EQUALIZER_MAX_MID1_GAIN = 7.942999839782715;
 
+/// @nodoc
 const double AL_EQUALIZER_DEFAULT_MID1_GAIN = 1.0;
 
+/// @nodoc
 const double AL_EQUALIZER_MIN_MID1_CENTER = 200.0;
 
+/// @nodoc
 const double AL_EQUALIZER_MAX_MID1_CENTER = 3000.0;
 
+/// @nodoc
 const double AL_EQUALIZER_DEFAULT_MID1_CENTER = 500.0;
 
+/// @nodoc
 const double AL_EQUALIZER_MIN_MID1_WIDTH = 0.009999999776482582;
 
+/// @nodoc
 const double AL_EQUALIZER_MAX_MID1_WIDTH = 1.0;
 
+/// @nodoc
 const double AL_EQUALIZER_DEFAULT_MID1_WIDTH = 1.0;
 
+/// @nodoc
 const double AL_EQUALIZER_MIN_MID2_GAIN = 0.12600000202655792;
 
+/// @nodoc
 const double AL_EQUALIZER_MAX_MID2_GAIN = 7.942999839782715;
 
+/// @nodoc
 const double AL_EQUALIZER_DEFAULT_MID2_GAIN = 1.0;
 
+/// @nodoc
 const double AL_EQUALIZER_MIN_MID2_CENTER = 1000.0;
 
+/// @nodoc
 const double AL_EQUALIZER_MAX_MID2_CENTER = 8000.0;
 
+/// @nodoc
 const double AL_EQUALIZER_DEFAULT_MID2_CENTER = 3000.0;
 
+/// @nodoc
 const double AL_EQUALIZER_MIN_MID2_WIDTH = 0.009999999776482582;
 
+/// @nodoc
 const double AL_EQUALIZER_MAX_MID2_WIDTH = 1.0;
 
+/// @nodoc
 const double AL_EQUALIZER_DEFAULT_MID2_WIDTH = 1.0;
 
+/// @nodoc
 const double AL_EQUALIZER_MIN_HIGH_GAIN = 0.12600000202655792;
 
+/// @nodoc
 const double AL_EQUALIZER_MAX_HIGH_GAIN = 7.942999839782715;
 
+/// @nodoc
 const double AL_EQUALIZER_DEFAULT_HIGH_GAIN = 1.0;
 
+/// @nodoc
 const double AL_EQUALIZER_MIN_HIGH_CUTOFF = 4000.0;
 
+/// @nodoc
 const double AL_EQUALIZER_MAX_HIGH_CUTOFF = 16000.0;
 
+/// @nodoc
 const double AL_EQUALIZER_DEFAULT_HIGH_CUTOFF = 6000.0;
 
+/// @nodoc
 const double AL_MIN_AIR_ABSORPTION_FACTOR = 0.0;
 
+/// @nodoc
 const double AL_MAX_AIR_ABSORPTION_FACTOR = 10.0;
 
+/// @nodoc
 const double AL_DEFAULT_AIR_ABSORPTION_FACTOR = 0.0;
 
+/// @nodoc
 const double AL_MIN_ROOM_ROLLOFF_FACTOR = 0.0;
 
+/// @nodoc
 const double AL_MAX_ROOM_ROLLOFF_FACTOR = 10.0;
 
+/// @nodoc
 const double AL_DEFAULT_ROOM_ROLLOFF_FACTOR = 0.0;
 
+/// @nodoc
 const double AL_MIN_CONE_OUTER_GAINHF = 0.0;
 
+/// @nodoc
 const double AL_MAX_CONE_OUTER_GAINHF = 1.0;
 
+/// @nodoc
 const double AL_DEFAULT_CONE_OUTER_GAINHF = 1.0;
 
+/// @nodoc
 const int AL_MIN_DIRECT_FILTER_GAINHF_AUTO = 0;
 
+/// @nodoc
 const int AL_MAX_DIRECT_FILTER_GAINHF_AUTO = 1;
 
+/// @nodoc
 const int AL_DEFAULT_DIRECT_FILTER_GAINHF_AUTO = 1;
 
+/// @nodoc
 const int AL_MIN_AUXILIARY_SEND_FILTER_GAIN_AUTO = 0;
 
+/// @nodoc
 const int AL_MAX_AUXILIARY_SEND_FILTER_GAIN_AUTO = 1;
 
+/// @nodoc
 const int AL_DEFAULT_AUXILIARY_SEND_FILTER_GAIN_AUTO = 1;
 
+/// @nodoc
 const int AL_MIN_AUXILIARY_SEND_FILTER_GAINHF_AUTO = 0;
 
+/// @nodoc
 const int AL_MAX_AUXILIARY_SEND_FILTER_GAINHF_AUTO = 1;
 
+/// @nodoc
 const int AL_DEFAULT_AUXILIARY_SEND_FILTER_GAINHF_AUTO = 1;
 
+/// @nodoc
 const double AL_MIN_METERS_PER_UNIT = 1.1754943508222875e-38;
 
+/// @nodoc
 const double AL_MAX_METERS_PER_UNIT = 3.4028234663852886e+38;
 
+/// @nodoc
 const double AL_DEFAULT_METERS_PER_UNIT = 1.0;
 
+/// @nodoc
 const int ALC_EXT_disconnect = 1;
 
+/// @nodoc
 const int ALC_CONNECTED = 787;
 
+/// @nodoc
 const int ALC_EXT_thread_local_context = 1;
 
+/// @nodoc
 const int AL_EXT_source_distance_model = 1;
 
+/// @nodoc
 const int AL_SOURCE_DISTANCE_MODEL = 512;
 
+/// @nodoc
 const int AL_SOFT_buffer_sub_data = 1;
 
+/// @nodoc
 const int AL_BYTE_RW_OFFSETS_SOFT = 4145;
 
+/// @nodoc
 const int AL_SAMPLE_RW_OFFSETS_SOFT = 4146;
 
+/// @nodoc
 const int AL_SOFT_loop_points = 1;
 
+/// @nodoc
 const int AL_LOOP_POINTS_SOFT = 8213;
 
+/// @nodoc
 const int AL_EXT_FOLDBACK = 1;
 
+/// @nodoc
 const String AL_EXT_FOLDBACK_NAME = 'AL_EXT_FOLDBACK';
 
+/// @nodoc
 const int AL_FOLDBACK_EVENT_BLOCK = 16658;
 
+/// @nodoc
 const int AL_FOLDBACK_EVENT_START = 16657;
 
+/// @nodoc
 const int AL_FOLDBACK_EVENT_STOP = 16659;
 
+/// @nodoc
 const int AL_FOLDBACK_MODE_MONO = 16641;
 
+/// @nodoc
 const int AL_FOLDBACK_MODE_STEREO = 16642;
 
+/// @nodoc
 const int ALC_EXT_DEDICATED = 1;
 
+/// @nodoc
 const int AL_DEDICATED_GAIN = 1;
 
+/// @nodoc
 const int AL_EFFECT_DEDICATED_DIALOGUE = 36865;
 
+/// @nodoc
 const int AL_EFFECT_DEDICATED_LOW_FREQUENCY_EFFECT = 36864;
 
+/// @nodoc
 const int AL_SOFT_buffer_samples = 1;
 
+/// @nodoc
 const int AL_MONO_SOFT = 5376;
 
+/// @nodoc
 const int AL_STEREO_SOFT = 5377;
 
+/// @nodoc
 const int AL_REAR_SOFT = 5378;
 
+/// @nodoc
 const int AL_QUAD_SOFT = 5379;
 
+/// @nodoc
 const int AL_5POINT1_SOFT = 5380;
 
+/// @nodoc
 const int AL_6POINT1_SOFT = 5381;
 
+/// @nodoc
 const int AL_7POINT1_SOFT = 5382;
 
+/// @nodoc
 const int AL_BYTE_SOFT = 5120;
 
+/// @nodoc
 const int AL_UNSIGNED_BYTE_SOFT = 5121;
 
+/// @nodoc
 const int AL_SHORT_SOFT = 5122;
 
+/// @nodoc
 const int AL_UNSIGNED_SHORT_SOFT = 5123;
 
+/// @nodoc
 const int AL_INT_SOFT = 5124;
 
+/// @nodoc
 const int AL_UNSIGNED_INT_SOFT = 5125;
 
+/// @nodoc
 const int AL_FLOAT_SOFT = 5126;
 
+/// @nodoc
 const int AL_DOUBLE_SOFT = 5127;
 
+/// @nodoc
 const int AL_BYTE3_SOFT = 5128;
 
+/// @nodoc
 const int AL_UNSIGNED_BYTE3_SOFT = 5129;
 
+/// @nodoc
 const int AL_MONO8_SOFT = 4352;
 
+/// @nodoc
 const int AL_MONO16_SOFT = 4353;
 
+/// @nodoc
 const int AL_MONO32F_SOFT = 65552;
 
+/// @nodoc
 const int AL_STEREO8_SOFT = 4354;
 
+/// @nodoc
 const int AL_STEREO16_SOFT = 4355;
 
+/// @nodoc
 const int AL_STEREO32F_SOFT = 65553;
 
+/// @nodoc
 const int AL_QUAD8_SOFT = 4612;
 
+/// @nodoc
 const int AL_QUAD16_SOFT = 4613;
 
+/// @nodoc
 const int AL_QUAD32F_SOFT = 4614;
 
+/// @nodoc
 const int AL_REAR8_SOFT = 4615;
 
+/// @nodoc
 const int AL_REAR16_SOFT = 4616;
 
+/// @nodoc
 const int AL_REAR32F_SOFT = 4617;
 
+/// @nodoc
 const int AL_5POINT1_8_SOFT = 4618;
 
+/// @nodoc
 const int AL_5POINT1_16_SOFT = 4619;
 
+/// @nodoc
 const int AL_5POINT1_32F_SOFT = 4620;
 
+/// @nodoc
 const int AL_6POINT1_8_SOFT = 4621;
 
+/// @nodoc
 const int AL_6POINT1_16_SOFT = 4622;
 
+/// @nodoc
 const int AL_6POINT1_32F_SOFT = 4623;
 
+/// @nodoc
 const int AL_7POINT1_8_SOFT = 4624;
 
+/// @nodoc
 const int AL_7POINT1_16_SOFT = 4625;
 
+/// @nodoc
 const int AL_7POINT1_32F_SOFT = 4626;
 
+/// @nodoc
 const int AL_INTERNAL_FORMAT_SOFT = 8200;
 
+/// @nodoc
 const int AL_BYTE_LENGTH_SOFT = 8201;
 
+/// @nodoc
 const int AL_SAMPLE_LENGTH_SOFT = 8202;
 
+/// @nodoc
 const int AL_SEC_LENGTH_SOFT = 8203;
 
+/// @nodoc
 const int AL_SOFT_direct_channels = 1;
 
+/// @nodoc
 const int AL_DIRECT_CHANNELS_SOFT = 4147;
 
+/// @nodoc
 const int ALC_SOFT_loopback = 1;
 
+/// @nodoc
 const int ALC_FORMAT_CHANNELS_SOFT = 6544;
 
+/// @nodoc
 const int ALC_FORMAT_TYPE_SOFT = 6545;
 
+/// @nodoc
 const int ALC_BYTE_SOFT = 5120;
 
+/// @nodoc
 const int ALC_UNSIGNED_BYTE_SOFT = 5121;
 
+/// @nodoc
 const int ALC_SHORT_SOFT = 5122;
 
+/// @nodoc
 const int ALC_UNSIGNED_SHORT_SOFT = 5123;
 
+/// @nodoc
 const int ALC_INT_SOFT = 5124;
 
+/// @nodoc
 const int ALC_UNSIGNED_INT_SOFT = 5125;
 
+/// @nodoc
 const int ALC_FLOAT_SOFT = 5126;
 
+/// @nodoc
 const int ALC_MONO_SOFT = 5376;
 
+/// @nodoc
 const int ALC_STEREO_SOFT = 5377;
 
+/// @nodoc
 const int ALC_QUAD_SOFT = 5379;
 
+/// @nodoc
 const int ALC_5POINT1_SOFT = 5380;
 
+/// @nodoc
 const int ALC_6POINT1_SOFT = 5381;
 
+/// @nodoc
 const int ALC_7POINT1_SOFT = 5382;
 
+/// @nodoc
 const int AL_EXT_STEREO_ANGLES = 1;
 
+/// @nodoc
 const int AL_STEREO_ANGLES = 4144;
 
+/// @nodoc
 const int AL_EXT_SOURCE_RADIUS = 1;
 
+/// @nodoc
 const int AL_SOURCE_RADIUS = 4145;
 
+/// @nodoc
 const int AL_SOFT_source_latency = 1;
 
+/// @nodoc
 const int AL_SAMPLE_OFFSET_LATENCY_SOFT = 4608;
 
+/// @nodoc
 const int AL_SEC_OFFSET_LATENCY_SOFT = 4609;
 
+/// @nodoc
 const int ALC_EXT_DEFAULT_FILTER_ORDER = 1;
 
+/// @nodoc
 const int ALC_DEFAULT_FILTER_ORDER = 4352;
 
+/// @nodoc
 const int AL_SOFT_deferred_updates = 1;
 
+/// @nodoc
 const int AL_DEFERRED_UPDATES_SOFT = 49154;
 
+/// @nodoc
 const int AL_SOFT_block_alignment = 1;
 
+/// @nodoc
 const int AL_UNPACK_BLOCK_ALIGNMENT_SOFT = 8204;
 
+/// @nodoc
 const int AL_PACK_BLOCK_ALIGNMENT_SOFT = 8205;
 
+/// @nodoc
 const int AL_SOFT_MSADPCM = 1;
 
+/// @nodoc
 const int AL_FORMAT_MONO_MSADPCM_SOFT = 4866;
 
+/// @nodoc
 const int AL_FORMAT_STEREO_MSADPCM_SOFT = 4867;
 
+/// @nodoc
 const int AL_SOFT_source_length = 1;
 
+/// @nodoc
 const int ALC_SOFT_pause_device = 1;
 
+/// @nodoc
 const int AL_EXT_BFORMAT = 1;
 
+/// @nodoc
 const int AL_FORMAT_BFORMAT2D_8 = 131105;
 
+/// @nodoc
 const int AL_FORMAT_BFORMAT2D_16 = 131106;
 
+/// @nodoc
 const int AL_FORMAT_BFORMAT2D_FLOAT32 = 131107;
 
+/// @nodoc
 const int AL_FORMAT_BFORMAT3D_8 = 131121;
 
+/// @nodoc
 const int AL_FORMAT_BFORMAT3D_16 = 131122;
 
+/// @nodoc
 const int AL_FORMAT_BFORMAT3D_FLOAT32 = 131123;
 
+/// @nodoc
 const int AL_EXT_MULAW_BFORMAT = 1;
 
+/// @nodoc
 const int AL_FORMAT_BFORMAT2D_MULAW = 65585;
 
+/// @nodoc
 const int AL_FORMAT_BFORMAT3D_MULAW = 65586;
 
+/// @nodoc
 const int ALC_SOFT_HRTF = 1;
 
+/// @nodoc
 const int ALC_HRTF_SOFT = 6546;
 
+/// @nodoc
 const int ALC_DONT_CARE_SOFT = 2;
 
+/// @nodoc
 const int ALC_HRTF_STATUS_SOFT = 6547;
 
+/// @nodoc
 const int ALC_HRTF_DISABLED_SOFT = 0;
 
+/// @nodoc
 const int ALC_HRTF_ENABLED_SOFT = 1;
 
+/// @nodoc
 const int ALC_HRTF_DENIED_SOFT = 2;
 
+/// @nodoc
 const int ALC_HRTF_REQUIRED_SOFT = 3;
 
+/// @nodoc
 const int ALC_HRTF_HEADPHONES_DETECTED_SOFT = 4;
 
+/// @nodoc
 const int ALC_HRTF_UNSUPPORTED_FORMAT_SOFT = 5;
 
+/// @nodoc
 const int ALC_NUM_HRTF_SPECIFIERS_SOFT = 6548;
 
+/// @nodoc
 const int ALC_HRTF_SPECIFIER_SOFT = 6549;
 
+/// @nodoc
 const int ALC_HRTF_ID_SOFT = 6550;

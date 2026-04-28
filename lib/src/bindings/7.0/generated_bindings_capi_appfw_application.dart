@@ -1,3 +1,6 @@
+/// {@category 7.0/tizen}
+library tizen_interop_7_0.capi_appfw_application;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -11,6 +14,7 @@ import 'generated_bindings_capi_appfw_app_common.dart' as app_common;
 import 'generated_bindings_capi_appfw_app_control.dart' as app_control;
 
 /// Dart bindings for Tizen capi-appfw-application APIs.
+/// {@category 7.0/tizen}
 class Tizen70CapiAppfwApplication {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -26,16 +30,21 @@ class Tizen70CapiAppfwApplication {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Gets the localized translation for the specified string.
+  /// Gets the localized translation for the specified string.
   ///
-  /// @details If a translation is not found in the localization file(.po file), @a message is returned.
+  /// If a translation is not found in the localization file(.po file), `message` is returned.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks Do not free the returned value.
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in] message The string to be translated
-  /// @return The localized translation for the given @a message on success,
-  /// otherwise the given @a message
+  /// **Remarks:**
+  /// - Do not free the returned value.
+  ///
+  /// **Parameters:**
+  /// - `message` (in): The string to be translated
+  ///
+  /// **Returns:**
+  /// - The localized translation for the given `message` on success, otherwise the given `message`
   ffi.Pointer<ffi.Char> i18n_get_text(
     ffi.Pointer<ffi.Char> message,
   ) {
@@ -51,9 +60,13 @@ class Tizen70CapiAppfwApplication {
   late final _i18n_get_text = _i18n_get_textPtr
       .asFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the current device orientation.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @return The current device orientation
+  /// Gets the current device orientation.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Returns:**
+  /// - The current device orientation
   int app_get_device_orientation() {
     return _app_get_device_orientation();
   }
@@ -64,30 +77,36 @@ class Tizen70CapiAppfwApplication {
   late final _app_get_device_orientation =
       _app_get_device_orientationPtr.asFunction<int Function()>();
 
-  /// @brief Runs the application's main loop until ui_app_exit() is called.
-  /// @details This function is the main entry point of the Tizen application.
-  /// The app_create_cb() callback function is called to initialize the application before the main loop of application starts up.
-  /// After the app_create_cb() callback function returns true, the main loop starts up and the app_control_cb() callback function is subsequently called.
-  /// If the app_create_cb() callback function returns false, the main loop doesn't start up and app_terminate_cb() callback function is called.
-  /// This main loop supports event handling for the Ecore Main Loop.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] argc The argument count
-  /// @param[in] argv The argument vector
-  /// @param[in] callback The set of callback functions to handle application lifecycle events
-  /// @param[in] user_data The user data to be passed to the callback functions
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_ERROR_NONE Successful
-  /// @retval #APP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_ERROR_INVALID_CONTEXT The application is launched illegally, not launched by the launch system
-  /// @retval #APP_ERROR_ALREADY_RUNNING The main loop already started
-  /// @see app_create_cb()
-  /// @see app_terminate_cb()
-  /// @see app_pause_cb()
-  /// @see app_resume_cb()
-  /// @see app_control_cb()
-  /// @see ui_app_exit()
-  /// @see #ui_app_lifecycle_callback_s
+  /// Runs the application's main loop until ui_app_exit() is called.
+  ///
+  /// This function is the main entry point of the Tizen application. The app_create_cb() callback function is called to initialize the application before the main loop of application starts up. After the app_create_cb() callback function returns true, the main loop starts up and the app_control_cb() callback function is subsequently called. If the app_create_cb() callback function returns false, the main loop doesn't start up and app_terminate_cb() callback function is called. This main loop supports event handling for the Ecore Main Loop.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `argc` (in): The argument count
+  /// - `argv` (in): The argument vector
+  /// - `callback` (in): The set of callback functions to handle application lifecycle events
+  /// - `user_data` (in): The user data to be passed to the callback functions
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_ERROR_NONE`: Successful
+  /// - `APP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_ERROR_INVALID_CONTEXT`: The application is launched illegally, not launched by the launch system
+  /// - `APP_ERROR_ALREADY_RUNNING`: The main loop already started
+  ///
+  /// **See also:**
+  /// - `app_create_cb()`
+  /// - `app_terminate_cb()`
+  /// - `app_pause_cb()`
+  /// - `app_resume_cb()`
+  /// - `app_control_cb()`
+  /// - `ui_app_exit()`
+  /// - `ui_app_lifecycle_callback_s`
   int ui_app_main(
     int argc,
     ffi.Pointer<ffi.Pointer<ffi.Char>> argv,
@@ -113,11 +132,16 @@ class Tizen70CapiAppfwApplication {
       int Function(int, ffi.Pointer<ffi.Pointer<ffi.Char>>,
           ffi.Pointer<ui_app_lifecycle_callback_s>, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Exits the main loop of application.
-  /// @details The main loop of application stops and app_terminate_cb() is invoked.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @see ui_app_main()
-  /// @see app_terminate_cb()
+  /// Exits the main loop of application.
+  ///
+  /// The main loop of application stops and app_terminate_cb() is invoked.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **See also:**
+  /// - `ui_app_main()`
+  /// - `app_terminate_cb()`
   void ui_app_exit() {
     return _ui_app_exit();
   }
@@ -126,20 +150,29 @@ class Tizen70CapiAppfwApplication {
       _lookup<ffi.NativeFunction<ffi.Void Function()>>('ui_app_exit');
   late final _ui_app_exit = _ui_app_exitPtr.asFunction<void Function()>();
 
-  /// @brief Adds the system event handler.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[out] event_handler The event handler
-  /// @param[in] event_type The system event type
-  /// @param[in] callback The callback function
-  /// @param[in] user_data The user data to be passed to the callback functions
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_ERROR_NONE Successful
-  /// @retval #APP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see app_event_type_e
-  /// @see app_event_cb
-  /// @see ui_app_remove_event_handler()
+  /// Adds the system event handler.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `event_handler` (out): The event handler
+  /// - `event_type` (in): The system event type
+  /// - `callback` (in): The callback function
+  /// - `user_data` (in): The user data to be passed to the callback functions
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_ERROR_NONE`: Successful
+  /// - `APP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `app_event_type_e`
+  /// - `app_event_cb`
+  /// - `ui_app_remove_event_handler()`
   int ui_app_add_event_handler(
     ffi.Pointer<app_common.app_event_handler_h> event_handler,
     int event_type,
@@ -166,14 +199,23 @@ class Tizen70CapiAppfwApplication {
           int Function(ffi.Pointer<app_common.app_event_handler_h>, int,
               app_common.app_event_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Removes registered event handler.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] event_handler The event handler
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_ERROR_NONE Successful
-  /// @retval #APP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see ui_app_add_event_handler()
+  /// Removes registered event handler.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `event_handler` (in): The event handler
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_ERROR_NONE`: Successful
+  /// - `APP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `ui_app_add_event_handler()`
   int ui_app_remove_event_handler(
     app_common.app_event_handler_h event_handler,
   ) {
@@ -189,15 +231,21 @@ class Tizen70CapiAppfwApplication {
       .asFunction<int Function(app_common.app_event_handler_h)>();
 }
 
-/// @brief The structure type containing the set of callback functions for handling application lifecycle events.
-/// @details It is one of the input parameters of the ui_app_main() function.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @see ui_app_main()
-/// @see app_create_cb()
-/// @see app_pause_cb()
-/// @see app_resume_cb()
-/// @see app_terminate_cb()
-/// @see app_control_cb()
+/// The structure type containing the set of callback functions for handling application lifecycle events.
+///
+/// It is one of the input parameters of the ui_app_main() function.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **See also:**
+/// - `ui_app_main()`
+/// - `app_create_cb()`
+/// - `app_pause_cb()`
+/// - `app_resume_cb()`
+/// - `app_terminate_cb()`
+/// - `app_control_cb()`
+/// @nodoc
 final class ui_app_lifecycle_callback_s extends ffi.Struct {
   /// < This callback function is called at the start of the application.
   external app_create_cb create;
@@ -215,88 +263,133 @@ final class ui_app_lifecycle_callback_s extends ffi.Struct {
   external app_control_cb app_control;
 }
 
-/// @brief Called when the application starts.
-/// @details The callback function is called before the main loop of the application starts.
-/// In this callback, you can initialize application resources like window creation, data structure, and so on.
-/// After this callback function returns @c true, the main loop starts up and app_control_cb() is subsequently called.
-/// If this callback function returns @c false, the main loop doesn't start and app_terminate_cb() is subsequently called.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] user_data The user data passed from the callback registration function
-/// @return @c true on success,
-/// otherwise @c false
-/// @pre	ui_app_main() will invoke this callback function.
-/// @see ui_app_main()
-/// @see #ui_app_lifecycle_callback_s
+/// Called when the application starts.
+///
+/// The callback function is called before the main loop of the application starts. In this callback, you can initialize application resources like window creation, data structure, and so on. After this callback function returns `true`, the main loop starts up and app_control_cb() is subsequently called. If this callback function returns `false`, the main loop doesn't start and app_terminate_cb() is subsequently called.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Returns:**
+/// - `true` on success, otherwise `false`
+///
+/// **Preconditions:**
+/// - ui_app_main() will invoke this callback function.
+///
+/// **See also:**
+/// - `ui_app_main()`
+/// - `ui_app_lifecycle_callback_s`
+/// @nodoc
 typedef app_create_cb = ffi.Pointer<ffi.NativeFunction<app_create_cbFunction>>;
+/// @nodoc
 typedef app_create_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartapp_create_cbFunction = bool Function(
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the application's main loop exits.
-/// @details You should release the application's resources in this function.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] user_data	The user data passed from the callback registration function
-/// @see ui_app_main()
-/// @see #ui_app_lifecycle_callback_s
+/// Called when the application's main loop exits.
+///
+/// You should release the application's resources in this function.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `ui_app_main()`
+/// - `ui_app_lifecycle_callback_s`
+/// @nodoc
 typedef app_terminate_cb
     = ffi.Pointer<ffi.NativeFunction<app_terminate_cbFunction>>;
+/// @nodoc
 typedef app_terminate_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartapp_terminate_cbFunction = void Function(
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the application is completely obscured by another application and becomes invisible.
-/// @details The application is not terminated and still running in the paused state.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] user_data	The user data passed from the callback registration function
-/// @see ui_app_main()
-/// @see #ui_app_lifecycle_callback_s
+/// Called when the application is completely obscured by another application and becomes invisible.
+///
+/// The application is not terminated and still running in the paused state.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `ui_app_main()`
+/// - `ui_app_lifecycle_callback_s`
+/// @nodoc
 typedef app_pause_cb = ffi.Pointer<ffi.NativeFunction<app_pause_cbFunction>>;
+/// @nodoc
 typedef app_pause_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartapp_pause_cbFunction = void Function(
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the application becomes visible.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] user_data	The user data passed from the callback registration function
-/// @see ui_app_main()
-/// @see #ui_app_lifecycle_callback_s
+/// Called when the application becomes visible.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `ui_app_main()`
+/// - `ui_app_lifecycle_callback_s`
+/// @nodoc
 typedef app_resume_cb = ffi.Pointer<ffi.NativeFunction<app_resume_cbFunction>>;
+/// @nodoc
 typedef app_resume_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartapp_resume_cbFunction = void Function(
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when another application sends a launch request to the application.
-/// @details When the application is launched, this callback function is called after the main loop of the application starts up.
-/// The passed app_control handle describes the launch request and contains the information about why the application is launched.
-/// If the launch request is sent to the application in the running or pause state,
-/// this callback function can be called again to notify that the application has been asked to launch.
-/// The application could be explicitly launched by the user from the application launcher or be launched to perform the specific operation by another application.
-/// The application is responsible for handling each launch request and responding appropriately.
-/// Using the App Control API, the application can get information about what is to be performed.
-/// If the application is launched from the application launcher or explicitly launched by another application,
-/// the passed app_control handle may include only the default operation (#APP_CONTROL_OPERATION_DEFAULT) without any data.
-/// For more information, see The @ref CAPI_APP_CONTROL_MODULE API description.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @remarks After this callback returns, the handle of the app_control is freed.
-/// Therefore, if you want to use the handle after returning this callback, you MUST copy it by using app_control_clone() API.
-/// @param[in] app_control The handle to the app_control
-/// @param[in] user_data	The user data passed from the callback registration function
-/// @see ui_app_main()
-/// @see #ui_app_lifecycle_callback_s
-/// @see @ref CAPI_APP_CONTROL_MODULE API
+/// Called when another application sends a launch request to the application.
+///
+/// When the application is launched, this callback function is called after the main loop of the application starts up. The passed app_control handle describes the launch request and contains the information about why the application is launched. If the launch request is sent to the application in the running or pause state, this callback function can be called again to notify that the application has been asked to launch. The application could be explicitly launched by the user from the application launcher or be launched to perform the specific operation by another application. The application is responsible for handling each launch request and responding appropriately. Using the App Control API, the application can get information about what is to be performed. If the application is launched from the application launcher or explicitly launched by another application, the passed app_control handle may include only the default operation (`APP_CONTROL_OPERATION_DEFAULT`) without any data. For more information, see The `CAPI_APP_CONTROL_MODULE` API description.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Remarks:**
+/// - After this callback returns, the handle of the app_control is freed.
+/// - Therefore, if you want to use the handle after returning this callback, you MUST copy it by using app_control_clone() API.
+///
+/// **Parameters:**
+/// - `app_control` (in): The handle to the app_control
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `ui_app_main()`
+/// - `ui_app_lifecycle_callback_s`
+/// - `CAPI_APP_CONTROL_MODULE` API
+/// @nodoc
 typedef app_control_cb
     = ffi.Pointer<ffi.NativeFunction<app_control_cbFunction>>;
+/// @nodoc
 typedef app_control_cbFunction = ffi.Void Function(
     app_control.app_control_h app_control, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartapp_control_cbFunction = void Function(
     app_control.app_control_h app_control, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumeration for device orientation.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for device orientation.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class _app_device_orientation_e {
   /// < The device is oriented in a natural position
   static const int APP_DEVICE_ORIENTATION_0 = 0;
@@ -311,8 +404,11 @@ abstract class _app_device_orientation_e {
   static const int APP_DEVICE_ORIENTATION_270 = 270;
 }
 
-/// @brief Enumeration for system events.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for system events.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class _app_event_type_e {
   /// < The low memory event
   static const int APP_EVENT_LOW_MEMORY = 0;
@@ -330,7 +426,9 @@ abstract class _app_event_type_e {
   static const int APP_EVENT_REGION_FORMAT_CHANGED = 4;
 
   /// < The suspended state changed event of the application (since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
-  /// @see app_event_get_suspended_state()
+  ///
+  /// **See also:**
+  /// - `app_event_get_suspended_state()`
   static const int APP_EVENT_SUSPENDED_STATE_CHANGED = 5;
 
   /// < The update requested event (Since 3.0)

@@ -1,3 +1,6 @@
+/// {@category 6.5/tizen}
+library tizen_interop_6_5.capi_media_thumbnail_util;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-media-thumbnail-util APIs.
+/// {@category 6.5/tizen}
 class Tizen65CapiMediaThumbnailUtil {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,20 +28,29 @@ class Tizen65CapiMediaThumbnailUtil {
           lookup)
       : _lookup = lookup;
 
-  /// @deprecated Deprecated since 5.0.
-  /// @brief Creates thumbnail info handle.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks The @a thumb info should be released using thumbnail_util_destroy().
+  /// **Deprecated:** Deprecated since 5.0.
   ///
-  /// @param[in] thumb The handle to thumbnail info
+  /// Creates thumbnail info handle.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @retval #THUMBNAIL_UTIL_ERROR_NONE Successful
-  /// @retval #THUMBNAIL_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #THUMBNAIL_UTIL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Remarks:**
+  /// - The `thumb` info should be released using thumbnail_util_destroy().
   ///
-  /// @see thumbnail_util_destroy()
+  /// **Parameters:**
+  /// - `thumb` (in): The handle to thumbnail info
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `THUMBNAIL_UTIL_ERROR_NONE`: Successful
+  /// - `THUMBNAIL_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `THUMBNAIL_UTIL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `thumbnail_util_destroy()`
   int thumbnail_util_create(
     ffi.Pointer<thumbnail_h> thumb,
   ) {
@@ -52,42 +65,50 @@ class Tizen65CapiMediaThumbnailUtil {
   late final _thumbnail_util_create = _thumbnail_util_createPtr
       .asFunction<int Function(ffi.Pointer<thumbnail_h>)>();
 
-  /// @deprecated Deprecated since 5.0. Use thumbnail_util_extract_to_file() or thumbnail_util_extract_to_buffer() instead.
-  /// @brief Extracts the thumbnail for the given media, asynchronously.
-  /// @details This function extracts the thumbnail for given media item and calls registered
-  /// callback function for completion of extracting the thumbnail.\n
-  /// You can distinguish generated thumbnails by @a request_id. Therefore, the @a request_id must be maintained until the request is completed. \n
-  /// And the @a request_id is also used to cancel the request.
+  /// **Deprecated:** Deprecated since 5.0. Use thumbnail_util_extract_to_file() or thumbnail_util_extract_to_buffer() instead.
   ///
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// Extracts the thumbnail for the given media, asynchronously.
   ///
-  /// @remarks The @a request_id should be released using free(). \n
-  /// %http://tizen.org/privilege/mediastorage is needed if input or output path are relevant to media storage. \n
-  /// %http://tizen.org/privilege/externalstorage is needed if input or output path are relevant to external storage. \n
-  /// If you don't set the size, the thumbnail size will be set default size. Default size is 320x240. \n
-  /// Color space of the generated thumbnail is BGRA. \n
-  /// Since 3.0, %http://tizen.org/privilege/content.write privilege is not required. \n
+  /// This function extracts the thumbnail for given media item and calls registered callback function for completion of extracting the thumbnail. You can distinguish generated thumbnails by `request_id`. Therefore, the `request_id` must be maintained until the request is completed. And the `request_id` is also used to cancel the request.
   ///
-  /// @param[in] thumb     The thumbnail info handle
-  /// @param[in] callback  The callback function to be invoked
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @param[out] request_id The request id for the thumbnail extraction request
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @return @c 0 on success, otherwise a negative error value
+  /// **Remarks:**
+  /// - The `request_id` should be released using free().
+  /// - <http://tizen.org/privilege/mediastorage is needed if input or output path are relevant to media storage.>
+  /// - <http://tizen.org/privilege/externalstorage is needed if input or output path are relevant to external storage.>
+  /// - If you don't set the size, the thumbnail size will be set default size. Default size is 320x240.
+  /// - Color space of the generated thumbnail is BGRA.
+  /// - Since 3.0, http://tizen.org/privilege/content.write privilege is not required.
   ///
-  /// @retval #THUMBNAIL_UTIL_ERROR_NONE              Successful
-  /// @retval #THUMBNAIL_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #THUMBNAIL_UTIL_ERROR_PERMISSION_DENIED Permission denied
+  /// **Parameters:**
+  /// - `thumb` (in): The thumbnail info handle
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  /// - `request_id` (out): The request id for the thumbnail extraction request
   ///
-  /// @pre Create a thumbnail info handle by calling thumbnail_util_create(). \n
-  /// The content path that you want to generate thumbnail must be set by calling thumbnail_util_set_path().
-  /// @post Thumbnail extraction result except canceled is provided by thumbnail_extracted_cb().
-  /// @see thumbnail_util_create()
-  /// @see thumbnail_util_set_path()
-  /// @see thumbnail_util_set_size()
-  /// @see thumbnail_extracted_cb()
-  /// @see thumbnail_util_cancel()
-  /// @see thumbnail_util_destroy()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `THUMBNAIL_UTIL_ERROR_NONE`: Successful
+  /// - `THUMBNAIL_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `THUMBNAIL_UTIL_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - Create a thumbnail info handle by calling thumbnail_util_create(). The content path that you want to generate thumbnail must be set by calling thumbnail_util_set_path().
+  ///
+  /// **Postconditions:**
+  /// - Thumbnail extraction result except canceled is provided by thumbnail_extracted_cb().
+  ///
+  /// **See also:**
+  /// - `thumbnail_util_create()`
+  /// - `thumbnail_util_set_path()`
+  /// - `thumbnail_util_set_size()`
+  /// - `thumbnail_extracted_cb()`
+  /// - `thumbnail_util_cancel()`
+  /// - `thumbnail_util_destroy()`
   int thumbnail_util_extract(
     thumbnail_h thumb,
     thumbnail_extracted_cb callback,
@@ -113,22 +134,31 @@ class Tizen65CapiMediaThumbnailUtil {
       int Function(thumbnail_h, thumbnail_extracted_cb, ffi.Pointer<ffi.Void>,
           ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @deprecated Deprecated since 5.0.
-  /// @brief Sets the path of original media file.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// **Deprecated:** Deprecated since 5.0.
   ///
-  /// @param[in] thumb     The thumbnail info handle
-  /// @param[in] path        The path of the original media file
+  /// Sets the path of original media file.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @retval #THUMBNAIL_UTIL_ERROR_NONE              Successful
-  /// @retval #THUMBNAIL_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `thumb` (in): The thumbnail info handle
+  /// - `path` (in): The path of the original media file
   ///
-  /// @pre Create a thumbnail info handle by calling thumbnail_util_create().
-  /// @see thumbnail_util_create()
-  /// @see thumbnail_util_set_size()
-  /// @see thumbnail_util_destroy()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `THUMBNAIL_UTIL_ERROR_NONE`: Successful
+  /// - `THUMBNAIL_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a thumbnail info handle by calling thumbnail_util_create().
+  ///
+  /// **See also:**
+  /// - `thumbnail_util_create()`
+  /// - `thumbnail_util_set_size()`
+  /// - `thumbnail_util_destroy()`
   int thumbnail_util_set_path(
     thumbnail_h thumb,
     ffi.Pointer<ffi.Char> path,
@@ -146,25 +176,36 @@ class Tizen65CapiMediaThumbnailUtil {
   late final _thumbnail_util_set_path = _thumbnail_util_set_pathPtr
       .asFunction<int Function(thumbnail_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @deprecated Deprecated since 5.0.
-  /// @brief Sets the size of thumbnail to be extracted.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks If you don't set the size, the thumbnail size will be set default size. Default size is 320x240. \n
-  /// If the set width is not a multiple of 8, it can be changed by inner process. the width will be a multiple of 8 greater than the set value.
+  /// **Deprecated:** Deprecated since 5.0.
   ///
-  /// @param[in] thumb    The thumbnail info handle
-  /// @param[in] width      The width of the thumbnail
-  /// @param[in] height     The height of the thumbnail
+  /// Sets the size of thumbnail to be extracted.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @retval #THUMBNAIL_UTIL_ERROR_NONE              Successful
-  /// @retval #THUMBNAIL_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Remarks:**
+  /// - If you don't set the size, the thumbnail size will be set default size. Default size is 320x240.
+  /// - If the set width is not a multiple of 8, it can be changed by inner process. the width will be a multiple of 8 greater than the set value.
   ///
-  /// @pre Create a thumbnail info handle by calling thumbnail_util_create().
-  /// @see thumbnail_util_create()
-  /// @see thumbnail_util_set_path()
-  /// @see thumbnail_util_destroy()
+  /// **Parameters:**
+  /// - `thumb` (in): The thumbnail info handle
+  /// - `width` (in): The width of the thumbnail
+  /// - `height` (in): The height of the thumbnail
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `THUMBNAIL_UTIL_ERROR_NONE`: Successful
+  /// - `THUMBNAIL_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a thumbnail info handle by calling thumbnail_util_create().
+  ///
+  /// **See also:**
+  /// - `thumbnail_util_create()`
+  /// - `thumbnail_util_set_path()`
+  /// - `thumbnail_util_destroy()`
   int thumbnail_util_set_size(
     thumbnail_h thumb,
     int width,
@@ -183,21 +224,32 @@ class Tizen65CapiMediaThumbnailUtil {
   late final _thumbnail_util_set_size = _thumbnail_util_set_sizePtr
       .asFunction<int Function(thumbnail_h, int, int)>();
 
-  /// @deprecated Deprecated since 5.0.
-  /// @brief Cancels the thumbnail extraction request for the given media.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks If there is no request to be canceled, this function returns #THUMBNAIL_UTIL_ERROR_INVALID_OPERATION
+  /// **Deprecated:** Deprecated since 5.0.
   ///
-  /// @param[in] thumb         The media thumbnail info handle
-  /// @param[in] request_id   The generated request id by thumbnail extraction request
+  /// Cancels the thumbnail extraction request for the given media.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @retval #THUMBNAIL_UTIL_ERROR_NONE              Successful
-  /// @retval #THUMBNAIL_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Remarks:**
+  /// - If there is no request to be canceled, this function returns `THUMBNAIL_UTIL_ERROR_INVALID_OPERATION`
   ///
-  /// @pre It is available before thumbnail_extracted_cb() is called.
-  /// @see thumbnail_util_extract()
+  /// **Parameters:**
+  /// - `thumb` (in): The media thumbnail info handle
+  /// - `request_id` (in): The generated request id by thumbnail extraction request
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `THUMBNAIL_UTIL_ERROR_NONE`: Successful
+  /// - `THUMBNAIL_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - It is available before thumbnail_extracted_cb() is called.
+  ///
+  /// **See also:**
+  /// - `thumbnail_util_extract()`
   int thumbnail_util_cancel(
     thumbnail_h thumb,
     ffi.Pointer<ffi.Char> request_id,
@@ -215,23 +267,30 @@ class Tizen65CapiMediaThumbnailUtil {
   late final _thumbnail_util_cancel = _thumbnail_util_cancelPtr
       .asFunction<int Function(thumbnail_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @deprecated Deprecated since 5.0.
-  /// @brief Destroys thumbnail info handle.
-  /// @details The function frees all resources related to the thumbnail info handle. This handle
-  /// can no longer be used to perform any operations. New thumbnail info handle has to
-  /// be created before the next usage.
+  /// **Deprecated:** Deprecated since 5.0.
   ///
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// Destroys thumbnail info handle.
   ///
-  /// @param[in]  thumb  The thumbnail info handle
+  /// The function frees all resources related to the thumbnail info handle. This handle can no longer be used to perform any operations. New thumbnail info handle has to be created before the next usage.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @retval #THUMBNAIL_UTIL_ERROR_NONE              Successful
-  /// @retval #THUMBNAIL_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `thumb` (in): The thumbnail info handle
   ///
-  /// @pre Create a thumbnail info handle by calling thumbnail_util_create().
-  /// @see thumbnail_util_create()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `THUMBNAIL_UTIL_ERROR_NONE`: Successful
+  /// - `THUMBNAIL_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a thumbnail info handle by calling thumbnail_util_create().
+  ///
+  /// **See also:**
+  /// - `thumbnail_util_create()`
   int thumbnail_util_destroy(
     thumbnail_h thumb,
   ) {
@@ -246,39 +305,38 @@ class Tizen65CapiMediaThumbnailUtil {
   late final _thumbnail_util_destroy =
       _thumbnail_util_destroyPtr.asFunction<int Function(thumbnail_h)>();
 
-  /// @brief Extracts the thumbnail for the given media into a file, synchronously.
-  /// @details This function creates thumbnail from a given media file. \n
-  /// The generated thumbnail is saved in the given thumbnail path. \n
-  /// The format of the thumbnail file is determined by the extension of the thumbnail path
-  /// (e.g. path is input.jpg and thumbnail_path is thumbnail.png then thumbnail.png is encoded in the PNG format). \n
-  /// If the extension is missing or the format is not supported, the thumbnail is encoded in the same format as the given media
-  /// (e.g. path is input.jpg and thumbnail_path is thumbnail.out then thumbnail.out is encoded in the JPEG format). \n
-  /// Supported image formats are as follows: \n
-  /// - GIF, JPEG, PNG, BMP, WBMP \n
-  /// Video files only support JPEG format thumbnail.
+  /// Extracts the thumbnail for the given media into a file, synchronously.
   ///
-  /// @since_tizen 5.0
+  /// This function creates thumbnail from a given media file. The generated thumbnail is saved in the given thumbnail path. The format of the thumbnail file is determined by the extension of the thumbnail path (e.g. path is input.jpg and thumbnail_path is thumbnail.png then thumbnail.png is encoded in the PNG format). If the extension is missing or the format is not supported, the thumbnail is encoded in the same format as the given media (e.g. path is input.jpg and thumbnail_path is thumbnail.out then thumbnail.out is encoded in the JPEG format). Supported image formats are as follows:
+  /// - GIF, JPEG, PNG, BMP, WBMP Video files only support JPEG format thumbnail.
   ///
-  /// @remarks %http://tizen.org/privilege/mediastorage is needed if input or output path points to media storage. \n
-  /// %http://tizen.org/privilege/externalstorage is needed if input or output path points to external storage. \n
-  /// The width and height of the thumbnail to be generated cannot exceed 2000. \n
-  /// The width and height of the thumbnail to be generated cannot exceed the original resolution. \n
-  /// Since 5.5, if the width and height of the thumbnail to be generated exceeds the original resolution, the value changes to the original resolution. \n
-  /// In order to maintain the ratio, the requested size and generated size may be different. (Modify based on short axis) \n
-  /// If the parent directory of the thumbnail path to be generated does not exist, an error is returned.
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] path       The path of the original media file
-  /// @param[in] width      The width of the thumbnail
-  /// @param[in] height     The height of the thumbnail
-  /// @param[in] thumbnail_path   The path to save the generated thumbnail
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/mediastorage is needed if input or output path points to media storage.>
+  /// - <http://tizen.org/privilege/externalstorage is needed if input or output path points to external storage.>
+  /// - The width and height of the thumbnail to be generated cannot exceed 2000.
+  /// - The width and height of the thumbnail to be generated cannot exceed the original resolution.
+  /// - Since 5.5, if the width and height of the thumbnail to be generated exceeds the original resolution, the value changes to the original resolution.
+  /// - In order to maintain the ratio, the requested size and generated size may be different. (Modify based on short axis)
+  /// - If the parent directory of the thumbnail path to be generated does not exist, an error is returned.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
+  /// **Parameters:**
+  /// - `path` (in): The path of the original media file
+  /// - `width` (in): The width of the thumbnail
+  /// - `height` (in): The height of the thumbnail
+  /// - `thumbnail_path` (in): The path to save the generated thumbnail
   ///
-  /// @retval #THUMBNAIL_UTIL_ERROR_NONE              Successful
-  /// @retval #THUMBNAIL_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #THUMBNAIL_UTIL_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #THUMBNAIL_UTIL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #THUMBNAIL_UTIL_ERROR_PERMISSION_DENIED Permission denied
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `THUMBNAIL_UTIL_ERROR_NONE`: Successful
+  /// - `THUMBNAIL_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `THUMBNAIL_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `THUMBNAIL_UTIL_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `THUMBNAIL_UTIL_ERROR_PERMISSION_DENIED`: Permission denied
   int thumbnail_util_extract_to_file(
     ffi.Pointer<ffi.Char> path,
     int width,
@@ -305,37 +363,42 @@ class Tizen65CapiMediaThumbnailUtil {
           int Function(
               ffi.Pointer<ffi.Char>, int, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Extracts the thumbnail for the given media into a buffer, synchronously.
-  /// @details This function creates thumbnails from a given media file. \n
-  /// The generated thumbnail is returned as a raw data stream.
+  /// Extracts the thumbnail for the given media into a buffer, synchronously.
   ///
-  /// @since_tizen 5.0
+  /// This function creates thumbnails from a given media file. The generated thumbnail is returned as a raw data stream.
   ///
-  /// @remarks %http://tizen.org/privilege/mediastorage is needed if input or output path points to media storage. \n
-  /// %http://tizen.org/privilege/externalstorage is needed if input or output path points to external storage. \n
-  /// The width and height of the thumbnail to be generated cannot exceed 2000. \n
-  /// The width and height of the thumbnail to be generated cannot exceed the original resolution. \n
-  /// In the case of video file, color space of the generated thumbnail is RGB. \n
-  /// In the case of image file, color space of the generated thumbnail is BGRA. \n
-  /// The @a thumb_buffer should be released using free().
-  /// Since 5.5, if the width and height of the thumbnail to be generated exceeds the original resolution, the value changes to the original resolution. \n
-  /// In order to maintain the ratio, the requested size and generated size may be different. (Modify based on short axis)
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] path       The path of the original media file
-  /// @param[in] width      The width of the thumbnail
-  /// @param[in] height     The height of the thumbnail
-  /// @param[out] thumb_buffer   The raw data of the thumbnail which is generated
-  /// @param[out] thumb_size     The size of the thumbnail which is generated
-  /// @param[out] thumb_width    The width of the thumbnail which is generated
-  /// @param[out] thumb_height   The height of the thumbnail which is generated
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/mediastorage is needed if input or output path points to media storage.>
+  /// - <http://tizen.org/privilege/externalstorage is needed if input or output path points to external storage.>
+  /// - The width and height of the thumbnail to be generated cannot exceed 2000.
+  /// - The width and height of the thumbnail to be generated cannot exceed the original resolution.
+  /// - In the case of video file, color space of the generated thumbnail is RGB.
+  /// - In the case of image file, color space of the generated thumbnail is BGRA.
+  /// - The `thumb_buffer` should be released using free().
+  /// - Since 5.5, if the width and height of the thumbnail to be generated exceeds the original resolution, the value changes to the original resolution.
+  /// - In order to maintain the ratio, the requested size and generated size may be different. (Modify based on short axis)
   ///
-  /// @return @c 0 on success, otherwise a negative error value
+  /// **Parameters:**
+  /// - `path` (in): The path of the original media file
+  /// - `width` (in): The width of the thumbnail
+  /// - `height` (in): The height of the thumbnail
+  /// - `thumb_buffer` (out): The raw data of the thumbnail which is generated
+  /// - `thumb_size` (out): The size of the thumbnail which is generated
+  /// - `thumb_width` (out): The width of the thumbnail which is generated
+  /// - `thumb_height` (out): The height of the thumbnail which is generated
   ///
-  /// @retval #THUMBNAIL_UTIL_ERROR_NONE              Successful
-  /// @retval #THUMBNAIL_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #THUMBNAIL_UTIL_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #THUMBNAIL_UTIL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #THUMBNAIL_UTIL_ERROR_PERMISSION_DENIED Permission denied
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `THUMBNAIL_UTIL_ERROR_NONE`: Successful
+  /// - `THUMBNAIL_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `THUMBNAIL_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `THUMBNAIL_UTIL_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `THUMBNAIL_UTIL_ERROR_PERMISSION_DENIED`: Permission denied
   int thumbnail_util_extract_to_buffer(
     ffi.Pointer<ffi.Char> path,
     int width,
@@ -379,9 +442,14 @@ class Tizen65CapiMediaThumbnailUtil {
               ffi.Pointer<ffi.UnsignedInt>)>();
 }
 
-/// @ingroup CAPI_MEDIA_THUMBNAIL_UTIL_MODULE
-/// @brief Enumeration for a thumbnail util error.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// Enumeration for a thumbnail util error.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+///
+/// **Group:**
+/// - CAPI_MEDIA_THUMBNAIL_UTIL_MODULE
+/// @nodoc
 abstract class thumbnail_util_error_e {
   /// < Successful
   static const int THUMBNAIL_UTIL_ERROR_NONE = 0;
@@ -405,41 +473,56 @@ abstract class thumbnail_util_error_e {
   static const int THUMBNAIL_UTIL_ERROR_UNSUPPORTED_CONTENT = -49872895;
 }
 
+/// @nodoc
 final class thumbnail_s extends ffi.Opaque {}
 
-/// @ingroup CAPI_MEDIA_THUMBNAIL_UTIL_MODULE
-/// @deprecated Deprecated since 5.0.
-/// @brief The structure type for the thumbnail info handle.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// **Deprecated:** Deprecated since 5.0.
+///
+/// The structure type for the thumbnail info handle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+///
+/// **Group:**
+/// - CAPI_MEDIA_THUMBNAIL_UTIL_MODULE
+/// @nodoc
 typedef thumbnail_h = ffi.Pointer<thumbnail_s>;
 
-/// @ingroup CAPI_MEDIA_THUMBNAIL_UTIL_MODULE
-/// @deprecated Deprecated since 5.0.
-/// @brief Called when creating the thumbnail.
-/// @details This callback is called for completion of generating the thumbnail.
-/// The following error codes can be received: \n
-/// #THUMBNAIL_UTIL_ERROR_NONE : Successful
-/// #THUMBNAIL_UTIL_ERROR_INVALID_PARAMETER : Invalid parameter
-/// #THUMBNAIL_UTIL_ERROR_PERMISSION_DENIED : Permission denied
+/// **Deprecated:** Deprecated since 5.0.
 ///
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// Called when creating the thumbnail.
 ///
-/// @remarks Color space of the generated thumbnail is BGRA. \n
-/// The callback is called in a separate thread(not in the main loop). \n
-/// The @a thumb_data should be released using free().
+/// This callback is called for completion of generating the thumbnail. The following error codes can be received: `THUMBNAIL_UTIL_ERROR_NONE` : Successful `THUMBNAIL_UTIL_ERROR_INVALID_PARAMETER` : Invalid parameter `THUMBNAIL_UTIL_ERROR_PERMISSION_DENIED` : Permission denied
 ///
-/// @param[in] error     The error code
-/// @param[in] request_id       The generated request id by thumbnail extraction request
-/// @param[in] thumb_width    The width of the thumbnail which is generated
-/// @param[in] thumb_height   The height of the thumbnail which is generated
-/// @param[in] thumb_data     The raw data of the thumbnail which is generated
-/// @param[in] thumb_size      The size of the thumbnail which is generated
-/// @param[in] user_data        The user data passed from the thumbnail_util_extract() function
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
 ///
-/// @pre thumbnail_util_extract() calls this callback.
-/// @see thumbnail_util_extract()
+/// **Remarks:**
+/// - Color space of the generated thumbnail is BGRA.
+/// - The callback is called in a separate thread(not in the main loop).
+/// - The `thumb_data` should be released using free().
+///
+/// **Parameters:**
+/// - `error` (in): The error code
+/// - `request_id` (in): The generated request id by thumbnail extraction request
+/// - `thumb_width` (in): The width of the thumbnail which is generated
+/// - `thumb_height` (in): The height of the thumbnail which is generated
+/// - `thumb_data` (in): The raw data of the thumbnail which is generated
+/// - `thumb_size` (in): The size of the thumbnail which is generated
+/// - `user_data` (in): The user data passed from the thumbnail_util_extract() function
+///
+/// **Preconditions:**
+/// - thumbnail_util_extract() calls this callback.
+///
+/// **See also:**
+/// - `thumbnail_util_extract()`
+///
+/// **Group:**
+/// - CAPI_MEDIA_THUMBNAIL_UTIL_MODULE
+/// @nodoc
 typedef thumbnail_extracted_cb
     = ffi.Pointer<ffi.NativeFunction<thumbnail_extracted_cbFunction>>;
+/// @nodoc
 typedef thumbnail_extracted_cbFunction = ffi.Void Function(
     ffi.Int32 error,
     ffi.Pointer<ffi.Char> request_id,
@@ -448,6 +531,7 @@ typedef thumbnail_extracted_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.UnsignedChar> thumb_data,
     ffi.Int thumb_size,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartthumbnail_extracted_cbFunction = void Function(
     int error,
     ffi.Pointer<ffi.Char> request_id,
@@ -457,4 +541,5 @@ typedef Dartthumbnail_extracted_cbFunction = void Function(
     int thumb_size,
     ffi.Pointer<ffi.Void> user_data);
 
+/// @nodoc
 const int THUMBNAIL_UTIL_ERROR_CLASS = -49872896;

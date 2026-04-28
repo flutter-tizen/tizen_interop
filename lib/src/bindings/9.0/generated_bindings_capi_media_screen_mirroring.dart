@@ -1,3 +1,6 @@
+/// {@category 9.0/tizen}
+library tizen_interop_9_0.capi_media_screen_mirroring;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-media-screen-mirroring APIs.
+/// {@category 9.0/tizen}
 class Tizen90CapiMediaScreenMirroring {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,24 +28,33 @@ class Tizen90CapiMediaScreenMirroring {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates a new screen mirroring sink handle.
-  /// @since_tizen 2.4
+  /// Creates a new screen mirroring sink handle.
   ///
-  /// @remarks You must release @a scmirroring_sink using scmirroring_sink_destroy().
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @param[out] scmirroring_sink	A newly returned handle to the screen mirroring sink
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SCMIRRORING_ERROR_NONE Successful
-  /// @retval #SCMIRRORING_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SCMIRRORING_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #SCMIRRORING_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SCMIRRORING_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #SCMIRRORING_ERROR_UNKNOWN Unknown Error
+  /// **Remarks:**
+  /// - You must release `scmirroring_sink` using scmirroring_sink_destroy().
   ///
-  /// @post The screen mirroring state will be #SCMIRRORING_SINK_STATE_NULL
+  /// **Parameters:**
+  /// - `scmirroring_sink` (out): A newly returned handle to the screen mirroring sink
   ///
-  /// @see scmirroring_sink_destroy()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SCMIRRORING_ERROR_NONE`: Successful
+  /// - `SCMIRRORING_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SCMIRRORING_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SCMIRRORING_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SCMIRRORING_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SCMIRRORING_ERROR_UNKNOWN`: Unknown Error
+  ///
+  /// **Postconditions:**
+  /// - The screen mirroring state will be `SCMIRRORING_SINK_STATE_NULL`
+  ///
+  /// **See also:**
+  /// - `scmirroring_sink_destroy()`
   int scmirroring_sink_create(
     ffi.Pointer<scmirroring_sink_h> scmirroring_sink,
   ) {
@@ -57,27 +70,35 @@ class Tizen90CapiMediaScreenMirroring {
   late final _scmirroring_sink_create = _scmirroring_sink_createPtr
       .asFunction<int Function(ffi.Pointer<scmirroring_sink_h>)>();
 
-  /// @brief Registers a callback function to be called when state change happens.
-  /// @details This function registers user callback and this callback is called when each status is changed.
+  /// Registers a callback function to be called when state change happens.
   ///
-  /// @since_tizen 2.4
+  /// This function registers user callback and this callback is called when each status is changed.
   ///
-  /// @param[in] scmirroring_sink The handle to the screen mirroring sink
-  /// @param[in] callback The callback function to invoke
-  /// @param[in] user_data The user data passed to the callback registration function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SCMIRRORING_ERROR_NONE Successful
-  /// @retval #SCMIRRORING_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SCMIRRORING_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #SCMIRRORING_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SCMIRRORING_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #SCMIRRORING_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #SCMIRRORING_ERROR_UNKNOWN Unknown Error
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @pre Create a screen mirroring sink handle by calling scmirroring_sink_create().
+  /// **Parameters:**
+  /// - `scmirroring_sink` (in): The handle to the screen mirroring sink
+  /// - `callback` (in): The callback function to invoke
+  /// - `user_data` (in): The user data passed to the callback registration function
   ///
-  /// @see scmirroring_sink_create()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SCMIRRORING_ERROR_NONE`: Successful
+  /// - `SCMIRRORING_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SCMIRRORING_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SCMIRRORING_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SCMIRRORING_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `SCMIRRORING_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SCMIRRORING_ERROR_UNKNOWN`: Unknown Error
+  ///
+  /// **Preconditions:**
+  /// - Create a screen mirroring sink handle by calling scmirroring_sink_create().
+  ///
+  /// **See also:**
+  /// - `scmirroring_sink_create()`
   int scmirroring_sink_set_state_changed_cb(
     scmirroring_sink_h scmirroring_sink,
     scmirroring_sink_state_cb callback,
@@ -99,27 +120,35 @@ class Tizen90CapiMediaScreenMirroring {
           int Function(scmirroring_sink_h, scmirroring_sink_state_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets server IP address and port that mirroring sink will connect to.
-  /// @details This function sets IP and port to be used for connecting with the server when executing @c scmirroring_sink_connect().
+  /// Sets server IP address and port that mirroring sink will connect to.
   ///
-  /// @since_tizen 2.4
+  /// This function sets IP and port to be used for connecting with the server when executing `scmirroring_sink_connect(`).
   ///
-  /// @param[in] scmirroring_sink The handle to the screen mirroring sink
-  /// @param[in] ip The server IP address to connect to (IPv4 such as 127.0.0.1)
-  /// @param[in] port The server port to connect to
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SCMIRRORING_ERROR_NONE Successful
-  /// @retval #SCMIRRORING_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SCMIRRORING_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #SCMIRRORING_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SCMIRRORING_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #SCMIRRORING_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #SCMIRRORING_ERROR_UNKNOWN Unknown Error
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @pre Create a screen mirroring sink handle by calling scmirroring_sink_create().
+  /// **Parameters:**
+  /// - `scmirroring_sink` (in): The handle to the screen mirroring sink
+  /// - `ip` (in): The server IP address to connect to (IPv4 such as 127.0.0.1)
+  /// - `port` (in): The server port to connect to
   ///
-  /// @see scmirroring_sink_create()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SCMIRRORING_ERROR_NONE`: Successful
+  /// - `SCMIRRORING_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SCMIRRORING_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SCMIRRORING_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SCMIRRORING_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `SCMIRRORING_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SCMIRRORING_ERROR_UNKNOWN`: Unknown Error
+  ///
+  /// **Preconditions:**
+  /// - Create a screen mirroring sink handle by calling scmirroring_sink_create().
+  ///
+  /// **See also:**
+  /// - `scmirroring_sink_create()`
   int scmirroring_sink_set_ip_and_port(
     scmirroring_sink_h scmirroring_sink,
     ffi.Pointer<ffi.Char> ip,
@@ -141,31 +170,39 @@ class Tizen90CapiMediaScreenMirroring {
           int Function(scmirroring_sink_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Pass window handle created by application and surface type(x11/evas).
-  /// @details This function will use handle created by the application to set the overlay &
-  /// display on the surface passed by the application
+  /// Pass window handle created by application and surface type(x11/evas).
   ///
-  /// @since_tizen 2.4
+  /// This function will use handle created by the application to set the overlay & display on the surface passed by the application
   ///
-  /// @remark This function must be called in main thread of application.
-  /// Otherwise, it will return #SCMIRRORING_ERROR_INVALID_OPERATION by internal restriction. (since tizen 5.0)
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @param[in] scmirroring_sink The handle to the screen mirroring sink
-  /// @param[in] type Surface type(x11/evas)
-  /// @param[in] display_surface The display_surface created by application to force sink to display content over it
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SCMIRRORING_ERROR_NONE Successful
-  /// @retval #SCMIRRORING_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SCMIRRORING_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #SCMIRRORING_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SCMIRRORING_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #SCMIRRORING_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #SCMIRRORING_ERROR_UNKNOWN Unknown Error
+  /// **Remarks:**
+  /// - This function must be called in main thread of application.
+  /// - Otherwise, it will return `SCMIRRORING_ERROR_INVALID_OPERATION` by internal restriction. (since tizen 5.0)
   ///
-  /// @pre Create a screen mirroring sink handle by calling scmirroring_sink_create().
+  /// **Parameters:**
+  /// - `scmirroring_sink` (in): The handle to the screen mirroring sink
+  /// - `type` (in): Surface type(x11/evas)
+  /// - `display_surface` (in): The display_surface created by application to force sink to display content over it
   ///
-  /// @see scmirroring_sink_create()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SCMIRRORING_ERROR_NONE`: Successful
+  /// - `SCMIRRORING_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SCMIRRORING_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SCMIRRORING_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SCMIRRORING_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `SCMIRRORING_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SCMIRRORING_ERROR_UNKNOWN`: Unknown Error
+  ///
+  /// **Preconditions:**
+  /// - Create a screen mirroring sink handle by calling scmirroring_sink_create().
+  ///
+  /// **See also:**
+  /// - `scmirroring_sink_create()`
   int scmirroring_sink_set_display(
     scmirroring_sink_h scmirroring_sink,
     int type,
@@ -186,29 +223,34 @@ class Tizen90CapiMediaScreenMirroring {
       _scmirroring_sink_set_displayPtr.asFunction<
           int Function(scmirroring_sink_h, int, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets resolutions of screen mirroring sink.
-  /// @details This function sets resolutions of screen mirroring sink using scmirroring_resolution_e as following.
-  /// (ex. SCMIRRORING_RESOLUTION_1920x1080_P30 | SCMIRRORING_RESOLUTION_1280x720_P30)
-  /// Use it only when you want to set specific resolutions but if screen mirroring source does not support
-  /// the resolutions which you set, the screen mirroring sink will be disconnected.
+  /// Sets resolutions of screen mirroring sink.
   ///
-  /// @since_tizen 2.4
+  /// This function sets resolutions of screen mirroring sink using scmirroring_resolution_e as following. (ex. SCMIRRORING_RESOLUTION_1920x1080_P30 | SCMIRRORING_RESOLUTION_1280x720_P30) Use it only when you want to set specific resolutions but if screen mirroring source does not support the resolutions which you set, the screen mirroring sink will be disconnected.
   ///
-  /// @param[in] scmirroring_sink The handle to the screen mirroring sink
-  /// @param[in] resolution Resolution of screen mirroring sink
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SCMIRRORING_ERROR_NONE Successful
-  /// @retval #SCMIRRORING_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SCMIRRORING_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #SCMIRRORING_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SCMIRRORING_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #SCMIRRORING_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #SCMIRRORING_ERROR_UNKNOWN Unknown Error
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @pre Create a screen mirroring sink handle by calling scmirroring_sink_create().
+  /// **Parameters:**
+  /// - `scmirroring_sink` (in): The handle to the screen mirroring sink
+  /// - `resolution` (in): Resolution of screen mirroring sink
   ///
-  /// @see scmirroring_sink_create()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SCMIRRORING_ERROR_NONE`: Successful
+  /// - `SCMIRRORING_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SCMIRRORING_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SCMIRRORING_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SCMIRRORING_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `SCMIRRORING_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SCMIRRORING_ERROR_UNKNOWN`: Unknown Error
+  ///
+  /// **Preconditions:**
+  /// - Create a screen mirroring sink handle by calling scmirroring_sink_create().
+  ///
+  /// **See also:**
+  /// - `scmirroring_sink_create()`
   int scmirroring_sink_set_resolution(
     scmirroring_sink_h scmirroring_sink,
     int resolution,
@@ -226,30 +268,40 @@ class Tizen90CapiMediaScreenMirroring {
       _scmirroring_sink_set_resolutionPtr
           .asFunction<int Function(scmirroring_sink_h, int)>();
 
-  /// @brief Prepares the screen mirroring sink handle and allocates specific resources.
-  /// @details This function constructs pipeline to prepare playing media
+  /// Prepares the screen mirroring sink handle and allocates specific resources.
   ///
-  /// @since_tizen 2.4
+  /// This function constructs pipeline to prepare playing media
   ///
-  /// @param[in] scmirroring_sink The handle to the screen mirroring sink
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SCMIRRORING_ERROR_NONE Successful
-  /// @retval #SCMIRRORING_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SCMIRRORING_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #SCMIRRORING_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SCMIRRORING_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #SCMIRRORING_ERROR_UNKNOWN Unknown Error
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @pre Create a screen mirroring sink handle by calling scmirroring_sink_create().
-  /// @pre Register user callback by calling scmirroring_sink_set_state_changed_cb().
-  /// @pre Set display to mirroring sink handle by calling scmirroring_sink_set_display().
-  /// @pre The screen mirroring state should be #SCMIRRORING_SINK_STATE_NULL
-  /// @post The screen mirroring state will be #SCMIRRORING_SINK_STATE_PREPARED
+  /// **Parameters:**
+  /// - `scmirroring_sink` (in): The handle to the screen mirroring sink
   ///
-  /// @see scmirroring_sink_create()
-  /// @see scmirroring_sink_set_state_changed_cb()
-  /// @see scmirroring_sink_set_display()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SCMIRRORING_ERROR_NONE`: Successful
+  /// - `SCMIRRORING_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SCMIRRORING_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SCMIRRORING_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SCMIRRORING_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SCMIRRORING_ERROR_UNKNOWN`: Unknown Error
+  ///
+  /// **Preconditions:**
+  /// - Create a screen mirroring sink handle by calling scmirroring_sink_create().
+  /// - Register user callback by calling scmirroring_sink_set_state_changed_cb().
+  /// - Set display to mirroring sink handle by calling scmirroring_sink_set_display().
+  /// - The screen mirroring state should be `SCMIRRORING_SINK_STATE_NULL`
+  ///
+  /// **Postconditions:**
+  /// - The screen mirroring state will be `SCMIRRORING_SINK_STATE_PREPARED`
+  ///
+  /// **See also:**
+  /// - `scmirroring_sink_create()`
+  /// - `scmirroring_sink_set_state_changed_cb()`
+  /// - `scmirroring_sink_set_display()`
   int scmirroring_sink_prepare(
     scmirroring_sink_h scmirroring_sink,
   ) {
@@ -264,32 +316,45 @@ class Tizen90CapiMediaScreenMirroring {
   late final _scmirroring_sink_prepare = _scmirroring_sink_preparePtr
       .asFunction<int Function(scmirroring_sink_h)>();
 
-  /// @brief Creates connection and prepare for receiving data from SCMIRRORING source.
+  /// Creates connection and prepare for receiving data from SCMIRRORING source.
   ///
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @param[in] scmirroring_sink The handle to the screen mirroring sink
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SCMIRRORING_ERROR_NONE Successful
-  /// @retval #SCMIRRORING_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SCMIRRORING_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #SCMIRRORING_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SCMIRRORING_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #SCMIRRORING_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #SCMIRRORING_ERROR_UNKNOWN Unknown Error
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a screen mirroring sink handle by calling scmirroring_sink_create().
-  /// @pre Register user callback by calling scmirroring_sink_set_state_changed_cb().
-  /// @pre Call scmirroring_sink_prepare()
-  /// @pre The screen mirroring state should be #SCMIRRORING_SINK_STATE_PREPARED
-  /// @post The screen mirroring state will be #SCMIRRORING_SINK_STATE_CONNECTED
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
   ///
-  /// @see scmirroring_sink_create()
-  /// @see scmirroring_sink_set_state_changed_cb()
-  /// @see scmirroring_sink_prepare()
+  /// **Parameters:**
+  /// - `scmirroring_sink` (in): The handle to the screen mirroring sink
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SCMIRRORING_ERROR_NONE`: Successful
+  /// - `SCMIRRORING_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SCMIRRORING_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SCMIRRORING_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SCMIRRORING_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `SCMIRRORING_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SCMIRRORING_ERROR_UNKNOWN`: Unknown Error
+  ///
+  /// **Preconditions:**
+  /// - Create a screen mirroring sink handle by calling scmirroring_sink_create().
+  /// - Register user callback by calling scmirroring_sink_set_state_changed_cb().
+  /// - Call scmirroring_sink_prepare()
+  /// - The screen mirroring state should be `SCMIRRORING_SINK_STATE_PREPARED`
+  ///
+  /// **Postconditions:**
+  /// - The screen mirroring state will be `SCMIRRORING_SINK_STATE_CONNECTED`
+  ///
+  /// **See also:**
+  /// - `scmirroring_sink_create()`
+  /// - `scmirroring_sink_set_state_changed_cb()`
+  /// - `scmirroring_sink_prepare()`
   int scmirroring_sink_connect(
     scmirroring_sink_h scmirroring_sink,
   ) {
@@ -304,34 +369,47 @@ class Tizen90CapiMediaScreenMirroring {
   late final _scmirroring_sink_connect = _scmirroring_sink_connectPtr
       .asFunction<int Function(scmirroring_sink_h)>();
 
-  /// @brief Starts receiving data from the SCMIRRORING source and display it(mirror).
+  /// Starts receiving data from the SCMIRRORING source and display it(mirror).
   ///
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @param[in] scmirroring_sink The handle to the screen mirroring sink
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SCMIRRORING_ERROR_NONE Successful
-  /// @retval #SCMIRRORING_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SCMIRRORING_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #SCMIRRORING_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SCMIRRORING_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #SCMIRRORING_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #SCMIRRORING_ERROR_UNKNOWN Unknown Error
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a screen mirroring sink handle by calling scmirroring_sink_create().
-  /// @pre Register user callback by calling scmirroring_sink_set_state_changed_cb().
-  /// @pre Call scmirroring_sink_prepare()
-  /// @pre Call scmirroring_sink_connect()
-  /// @pre The screen mirroring state should be #SCMIRRORING_SINK_STATE_CONNECTED
-  /// @post The screen mirroring state will be #SCMIRRORING_SINK_STATE_PLAYING
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
   ///
-  /// @see scmirroring_sink_create()
-  /// @see scmirroring_sink_set_state_changed_cb()
-  /// @see scmirroring_sink_prepare()
-  /// @see scmirroring_sink_connect()
+  /// **Parameters:**
+  /// - `scmirroring_sink` (in): The handle to the screen mirroring sink
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SCMIRRORING_ERROR_NONE`: Successful
+  /// - `SCMIRRORING_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SCMIRRORING_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SCMIRRORING_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SCMIRRORING_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `SCMIRRORING_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SCMIRRORING_ERROR_UNKNOWN`: Unknown Error
+  ///
+  /// **Preconditions:**
+  /// - Create a screen mirroring sink handle by calling scmirroring_sink_create().
+  /// - Register user callback by calling scmirroring_sink_set_state_changed_cb().
+  /// - Call scmirroring_sink_prepare()
+  /// - Call scmirroring_sink_connect()
+  /// - The screen mirroring state should be `SCMIRRORING_SINK_STATE_CONNECTED`
+  ///
+  /// **Postconditions:**
+  /// - The screen mirroring state will be `SCMIRRORING_SINK_STATE_PLAYING`
+  ///
+  /// **See also:**
+  /// - `scmirroring_sink_create()`
+  /// - `scmirroring_sink_set_state_changed_cb()`
+  /// - `scmirroring_sink_prepare()`
+  /// - `scmirroring_sink_connect()`
   int scmirroring_sink_start(
     scmirroring_sink_h scmirroring_sink,
   ) {
@@ -346,33 +424,46 @@ class Tizen90CapiMediaScreenMirroring {
   late final _scmirroring_sink_start =
       _scmirroring_sink_startPtr.asFunction<int Function(scmirroring_sink_h)>();
 
-  /// @brief Pauses receiving data from the SCMIRRORING source.
-  /// @details This function pauses receiving data from the SCMIRRORING source,
-  /// which means it sends RTSP PAUSE message to source.
+  /// Pauses receiving data from the SCMIRRORING source.
   ///
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
+  /// This function pauses receiving data from the SCMIRRORING source, which means it sends RTSP PAUSE message to source.
   ///
-  /// @param[in] scmirroring_sink The handle to the screen mirroring sink
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SCMIRRORING_ERROR_NONE Successful
-  /// @retval #SCMIRRORING_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SCMIRRORING_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #SCMIRRORING_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SCMIRRORING_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #SCMIRRORING_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #SCMIRRORING_ERROR_UNKNOWN Unknown Error
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @pre The screen mirroring state should be #SCMIRRORING_SINK_STATE_PLAYING
-  /// @post The screen mirroring state will be #SCMIRRORING_SINK_STATE_PAUSED
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @see scmirroring_sink_create()
-  /// @see scmirroring_sink_set_state_changed_cb()
-  /// @see scmirroring_sink_prepare()
-  /// @see scmirroring_sink_connect()
-  /// @see scmirroring_sink_start()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Parameters:**
+  /// - `scmirroring_sink` (in): The handle to the screen mirroring sink
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SCMIRRORING_ERROR_NONE`: Successful
+  /// - `SCMIRRORING_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SCMIRRORING_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SCMIRRORING_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SCMIRRORING_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `SCMIRRORING_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SCMIRRORING_ERROR_UNKNOWN`: Unknown Error
+  ///
+  /// **Preconditions:**
+  /// - The screen mirroring state should be `SCMIRRORING_SINK_STATE_PLAYING`
+  ///
+  /// **Postconditions:**
+  /// - The screen mirroring state will be `SCMIRRORING_SINK_STATE_PAUSED`
+  ///
+  /// **See also:**
+  /// - `scmirroring_sink_create()`
+  /// - `scmirroring_sink_set_state_changed_cb()`
+  /// - `scmirroring_sink_prepare()`
+  /// - `scmirroring_sink_connect()`
+  /// - `scmirroring_sink_start()`
   int scmirroring_sink_pause(
     scmirroring_sink_h scmirroring_sink,
   ) {
@@ -387,28 +478,42 @@ class Tizen90CapiMediaScreenMirroring {
   late final _scmirroring_sink_pause =
       _scmirroring_sink_pausePtr.asFunction<int Function(scmirroring_sink_h)>();
 
-  /// @brief Resumes receiving data from the SCMIRRORING source.
-  /// @details This function pauses receiving data from the SCMIRRORING source, which means it sends RTSP PLAY message to source.
+  /// Resumes receiving data from the SCMIRRORING source.
   ///
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
+  /// This function pauses receiving data from the SCMIRRORING source, which means it sends RTSP PLAY message to source.
   ///
-  /// @param[in] scmirroring_sink The handle to the screen mirroring sink
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SCMIRRORING_ERROR_NONE Successful
-  /// @retval #SCMIRRORING_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SCMIRRORING_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #SCMIRRORING_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SCMIRRORING_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #SCMIRRORING_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #SCMIRRORING_ERROR_UNKNOWN Unknown Error
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @pre The screen mirroring state should be #SCMIRRORING_SINK_STATE_PAUSED
-  /// @post The screen mirroring state will be #SCMIRRORING_SINK_STATE_PLAYING
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @see scmirroring_sink_pause()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Parameters:**
+  /// - `scmirroring_sink` (in): The handle to the screen mirroring sink
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SCMIRRORING_ERROR_NONE`: Successful
+  /// - `SCMIRRORING_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SCMIRRORING_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SCMIRRORING_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SCMIRRORING_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `SCMIRRORING_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SCMIRRORING_ERROR_UNKNOWN`: Unknown Error
+  ///
+  /// **Preconditions:**
+  /// - The screen mirroring state should be `SCMIRRORING_SINK_STATE_PAUSED`
+  ///
+  /// **Postconditions:**
+  /// - The screen mirroring state will be `SCMIRRORING_SINK_STATE_PLAYING`
+  ///
+  /// **See also:**
+  /// - `scmirroring_sink_pause()`
   int scmirroring_sink_resume(
     scmirroring_sink_h scmirroring_sink,
   ) {
@@ -423,32 +528,44 @@ class Tizen90CapiMediaScreenMirroring {
   late final _scmirroring_sink_resume = _scmirroring_sink_resumePtr
       .asFunction<int Function(scmirroring_sink_h)>();
 
-  /// @brief Disconnects and stops receiving data from the SCMIRRORING source.
+  /// Disconnects and stops receiving data from the SCMIRRORING source.
   ///
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @param[in] scmirroring_sink The handle to the screen mirroring sink
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SCMIRRORING_ERROR_NONE Successful
-  /// @retval #SCMIRRORING_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SCMIRRORING_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #SCMIRRORING_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SCMIRRORING_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #SCMIRRORING_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #SCMIRRORING_ERROR_UNKNOWN Unknown Error
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre The screen mirroring state should be #SCMIRRORING_SINK_STATE_CONNECTED
-  /// or #SCMIRRORING_SINK_STATE_PLAYING or #SCMIRRORING_SINK_STATE_PAUSED
-  /// @post The screen mirroring state will be #SCMIRRORING_SINK_STATE_DISCONNECTED
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
   ///
-  /// @see scmirroring_sink_create()
-  /// @see scmirroring_sink_set_state_changed_cb()
-  /// @see scmirroring_sink_prepare()
-  /// @see scmirroring_sink_connect()
-  /// @see scmirroring_sink_start()
+  /// **Parameters:**
+  /// - `scmirroring_sink` (in): The handle to the screen mirroring sink
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SCMIRRORING_ERROR_NONE`: Successful
+  /// - `SCMIRRORING_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SCMIRRORING_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SCMIRRORING_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SCMIRRORING_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `SCMIRRORING_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SCMIRRORING_ERROR_UNKNOWN`: Unknown Error
+  ///
+  /// **Preconditions:**
+  /// - The screen mirroring state should be `SCMIRRORING_SINK_STATE_CONNECTED` or `SCMIRRORING_SINK_STATE_PLAYING` or `SCMIRRORING_SINK_STATE_PAUSED`
+  ///
+  /// **Postconditions:**
+  /// - The screen mirroring state will be `SCMIRRORING_SINK_STATE_DISCONNECTED`
+  ///
+  /// **See also:**
+  /// - `scmirroring_sink_create()`
+  /// - `scmirroring_sink_set_state_changed_cb()`
+  /// - `scmirroring_sink_prepare()`
+  /// - `scmirroring_sink_connect()`
+  /// - `scmirroring_sink_start()`
   int scmirroring_sink_disconnect(
     scmirroring_sink_h scmirroring_sink,
   ) {
@@ -463,29 +580,39 @@ class Tizen90CapiMediaScreenMirroring {
   late final _scmirroring_sink_disconnect = _scmirroring_sink_disconnectPtr
       .asFunction<int Function(scmirroring_sink_h)>();
 
-  /// @brief Unprepares the screen mirroring sink handle and closes specific resources.
-  /// @details This function releases and destroys pipeline and resources.
+  /// Unprepares the screen mirroring sink handle and closes specific resources.
   ///
-  /// @since_tizen 2.4
+  /// This function releases and destroys pipeline and resources.
   ///
-  /// @param[in] scmirroring_sink The handle to the screen mirroring sink
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SCMIRRORING_ERROR_NONE Successful
-  /// @retval #SCMIRRORING_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SCMIRRORING_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #SCMIRRORING_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SCMIRRORING_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #SCMIRRORING_ERROR_UNKNOWN Unknown Error
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @pre Create a screen mirroring sink handle by calling scmirroring_sink_create().
-  /// @pre Register user callback by calling scmirroring_sink_set_state_changed_cb().
-  /// @pre Call scmirroring_sink_prepare()
-  /// @post The screen mirroring state will be #SCMIRRORING_SINK_STATE_NULL
+  /// **Parameters:**
+  /// - `scmirroring_sink` (in): The handle to the screen mirroring sink
   ///
-  /// @see scmirroring_sink_create()
-  /// @see scmirroring_sink_set_state_changed_cb()
-  /// @see scmirroring_sink_prepare()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SCMIRRORING_ERROR_NONE`: Successful
+  /// - `SCMIRRORING_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SCMIRRORING_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SCMIRRORING_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SCMIRRORING_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SCMIRRORING_ERROR_UNKNOWN`: Unknown Error
+  ///
+  /// **Preconditions:**
+  /// - Create a screen mirroring sink handle by calling scmirroring_sink_create().
+  /// - Register user callback by calling scmirroring_sink_set_state_changed_cb().
+  /// - Call scmirroring_sink_prepare()
+  ///
+  /// **Postconditions:**
+  /// - The screen mirroring state will be `SCMIRRORING_SINK_STATE_NULL`
+  ///
+  /// **See also:**
+  /// - `scmirroring_sink_create()`
+  /// - `scmirroring_sink_set_state_changed_cb()`
+  /// - `scmirroring_sink_prepare()`
   int scmirroring_sink_unprepare(
     scmirroring_sink_h scmirroring_sink,
   ) {
@@ -500,26 +627,34 @@ class Tizen90CapiMediaScreenMirroring {
   late final _scmirroring_sink_unprepare = _scmirroring_sink_unpreparePtr
       .asFunction<int Function(scmirroring_sink_h)>();
 
-  /// @brief Unregisters the state changed callback function that user registered.
-  /// @details This function unregisters user callback and the state changed callback will not be called.
+  /// Unregisters the state changed callback function that user registered.
   ///
-  /// @since_tizen 2.4
+  /// This function unregisters user callback and the state changed callback will not be called.
   ///
-  /// @param[in] scmirroring_sink The handle to the screen mirroring sink
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SCMIRRORING_ERROR_NONE Successful
-  /// @retval #SCMIRRORING_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SCMIRRORING_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SCMIRRORING_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #SCMIRRORING_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #SCMIRRORING_ERROR_UNKNOWN Unknown Error
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @pre Create a screen mirroring sink handle by calling scmirroring_sink_create().
-  /// @pre Register user callback by calling scmirroring_sink_set_state_changed_cb().
+  /// **Parameters:**
+  /// - `scmirroring_sink` (in): The handle to the screen mirroring sink
   ///
-  /// @see scmirroring_sink_create()
-  /// @see scmirroring_sink_set_state_changed_cb()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SCMIRRORING_ERROR_NONE`: Successful
+  /// - `SCMIRRORING_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SCMIRRORING_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SCMIRRORING_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `SCMIRRORING_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SCMIRRORING_ERROR_UNKNOWN`: Unknown Error
+  ///
+  /// **Preconditions:**
+  /// - Create a screen mirroring sink handle by calling scmirroring_sink_create().
+  /// - Register user callback by calling scmirroring_sink_set_state_changed_cb().
+  ///
+  /// **See also:**
+  /// - `scmirroring_sink_create()`
+  /// - `scmirroring_sink_set_state_changed_cb()`
   int scmirroring_sink_unset_state_changed_cb(
     scmirroring_sink_h scmirroring_sink,
   ) {
@@ -535,24 +670,31 @@ class Tizen90CapiMediaScreenMirroring {
       _scmirroring_sink_unset_state_changed_cbPtr
           .asFunction<int Function(scmirroring_sink_h)>();
 
-  /// @brief Destroys screen mirroring sink handle.
+  /// Destroys screen mirroring sink handle.
   ///
-  /// @since_tizen 2.4
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @param[in] scmirroring_sink The handle to the screen mirroring sink
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SCMIRRORING_ERROR_NONE Successful
-  /// @retval #SCMIRRORING_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SCMIRRORING_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SCMIRRORING_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #SCMIRRORING_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #SCMIRRORING_ERROR_UNKNOWN Unknown Error
+  /// **Parameters:**
+  /// - `scmirroring_sink` (in): The handle to the screen mirroring sink
   ///
-  /// @pre Create a screen mirroring sink handle by calling scmirroring_sink_create().
-  /// @pre The screen mirroring state should be #SCMIRRORING_SINK_STATE_NULL
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see scmirroring_sink_create()
+  /// **Return values:**
+  /// - `SCMIRRORING_ERROR_NONE`: Successful
+  /// - `SCMIRRORING_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SCMIRRORING_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SCMIRRORING_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `SCMIRRORING_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SCMIRRORING_ERROR_UNKNOWN`: Unknown Error
+  ///
+  /// **Preconditions:**
+  /// - Create a screen mirroring sink handle by calling scmirroring_sink_create().
+  /// - The screen mirroring state should be `SCMIRRORING_SINK_STATE_NULL`
+  ///
+  /// **See also:**
+  /// - `scmirroring_sink_create()`
   int scmirroring_sink_destroy(
     scmirroring_sink_h scmirroring_sink,
   ) {
@@ -567,26 +709,33 @@ class Tizen90CapiMediaScreenMirroring {
   late final _scmirroring_sink_destroy = _scmirroring_sink_destroyPtr
       .asFunction<int Function(scmirroring_sink_h)>();
 
-  /// @brief Gets negotiated video codec of screen mirroring sink.
-  /// @details The video codec is negotiated by screen mirroring source.
+  /// Gets negotiated video codec of screen mirroring sink.
   ///
-  /// @since_tizen 2.4
+  /// The video codec is negotiated by screen mirroring source.
   ///
-  /// @param[in] scmirroring_sink The handle to the screen mirroring sink
-  /// @param[out] codec Codec of video
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SCMIRRORING_ERROR_NONE Successful
-  /// @retval #SCMIRRORING_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SCMIRRORING_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SCMIRRORING_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #SCMIRRORING_ERROR_UNKNOWN Unknown Error
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @pre Create a screen mirroring sink handle by calling scmirroring_sink_create().
-  /// @pre Register user callback by calling scmirroring_sink_set_state_changed_cb().
-  /// @pre Call scmirroring_sink_prepare()
-  /// @pre Call scmirroring_sink_connect()
-  /// @pre The screen mirroring state must be #SCMIRRORING_SINK_STATE_CONNECTED or #SCMIRRORING_SINK_STATE_PLAYING
+  /// **Parameters:**
+  /// - `scmirroring_sink` (in): The handle to the screen mirroring sink
+  /// - `codec` (out): Codec of video
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SCMIRRORING_ERROR_NONE`: Successful
+  /// - `SCMIRRORING_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SCMIRRORING_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SCMIRRORING_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SCMIRRORING_ERROR_UNKNOWN`: Unknown Error
+  ///
+  /// **Preconditions:**
+  /// - Create a screen mirroring sink handle by calling scmirroring_sink_create().
+  /// - Register user callback by calling scmirroring_sink_set_state_changed_cb().
+  /// - Call scmirroring_sink_prepare()
+  /// - Call scmirroring_sink_connect()
+  /// - The screen mirroring state must be `SCMIRRORING_SINK_STATE_CONNECTED` or `SCMIRRORING_SINK_STATE_PLAYING`
   int scmirroring_sink_get_negotiated_video_codec(
     ffi.Pointer<scmirroring_sink_h> scmirroring_sink,
     ffi.Pointer<ffi.Int32> codec,
@@ -607,27 +756,34 @@ class Tizen90CapiMediaScreenMirroring {
           int Function(
               ffi.Pointer<scmirroring_sink_h>, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets negotiated video resolution of screen mirroring sink.
-  /// @details The video resolution is negotiated by screen mirroring source.
+  /// Gets negotiated video resolution of screen mirroring sink.
   ///
-  /// @since_tizen 2.4
+  /// The video resolution is negotiated by screen mirroring source.
   ///
-  /// @param[in] scmirroring_sink The handle to the screen mirroring sink
-  /// @param[out] width Width of video
-  /// @param[out] height Height of video
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SCMIRRORING_ERROR_NONE Successful
-  /// @retval #SCMIRRORING_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SCMIRRORING_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SCMIRRORING_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #SCMIRRORING_ERROR_UNKNOWN Unknown Error
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @pre Create a screen mirroring sink handle by calling scmirroring_sink_create().
-  /// @pre Register user callback by calling scmirroring_sink_set_state_changed_cb().
-  /// @pre Call scmirroring_sink_prepare()
-  /// @pre Call scmirroring_sink_connect()
-  /// @pre The screen mirroring state must be #SCMIRRORING_SINK_STATE_CONNECTED or #SCMIRRORING_SINK_STATE_PLAYING
+  /// **Parameters:**
+  /// - `scmirroring_sink` (in): The handle to the screen mirroring sink
+  /// - `width` (out): Width of video
+  /// - `height` (out): Height of video
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SCMIRRORING_ERROR_NONE`: Successful
+  /// - `SCMIRRORING_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SCMIRRORING_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SCMIRRORING_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SCMIRRORING_ERROR_UNKNOWN`: Unknown Error
+  ///
+  /// **Preconditions:**
+  /// - Create a screen mirroring sink handle by calling scmirroring_sink_create().
+  /// - Register user callback by calling scmirroring_sink_set_state_changed_cb().
+  /// - Call scmirroring_sink_prepare()
+  /// - Call scmirroring_sink_connect()
+  /// - The screen mirroring state must be `SCMIRRORING_SINK_STATE_CONNECTED` or `SCMIRRORING_SINK_STATE_PLAYING`
   int scmirroring_sink_get_negotiated_video_resolution(
     ffi.Pointer<scmirroring_sink_h> scmirroring_sink,
     ffi.Pointer<ffi.Int> width,
@@ -650,26 +806,33 @@ class Tizen90CapiMediaScreenMirroring {
           int Function(ffi.Pointer<scmirroring_sink_h>, ffi.Pointer<ffi.Int>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets negotiated frame rate of screen mirroring sink.
-  /// @details The video frame rate is negotiated by screen mirroring source.
+  /// Gets negotiated frame rate of screen mirroring sink.
   ///
-  /// @since_tizen 2.4
+  /// The video frame rate is negotiated by screen mirroring source.
   ///
-  /// @param[in] scmirroring_sink The handle to the screen mirroring sink
-  /// @param[out] frame_rate Frame rate of video
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SCMIRRORING_ERROR_NONE Successful
-  /// @retval #SCMIRRORING_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SCMIRRORING_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SCMIRRORING_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #SCMIRRORING_ERROR_UNKNOWN Unknown Error
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @pre Create a screen mirroring sink handle by calling scmirroring_sink_create().
-  /// @pre Register user callback by calling scmirroring_sink_set_state_changed_cb().
-  /// @pre Call scmirroring_sink_prepare()
-  /// @pre Call scmirroring_sink_connect()
-  /// @pre The screen mirroring state must be #SCMIRRORING_SINK_STATE_CONNECTED or #SCMIRRORING_SINK_STATE_PLAYING
+  /// **Parameters:**
+  /// - `scmirroring_sink` (in): The handle to the screen mirroring sink
+  /// - `frame_rate` (out): Frame rate of video
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SCMIRRORING_ERROR_NONE`: Successful
+  /// - `SCMIRRORING_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SCMIRRORING_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SCMIRRORING_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SCMIRRORING_ERROR_UNKNOWN`: Unknown Error
+  ///
+  /// **Preconditions:**
+  /// - Create a screen mirroring sink handle by calling scmirroring_sink_create().
+  /// - Register user callback by calling scmirroring_sink_set_state_changed_cb().
+  /// - Call scmirroring_sink_prepare()
+  /// - Call scmirroring_sink_connect()
+  /// - The screen mirroring state must be `SCMIRRORING_SINK_STATE_CONNECTED` or `SCMIRRORING_SINK_STATE_PLAYING`
   int scmirroring_sink_get_negotiated_video_frame_rate(
     ffi.Pointer<scmirroring_sink_h> scmirroring_sink,
     ffi.Pointer<ffi.Int> frame_rate,
@@ -690,26 +853,33 @@ class Tizen90CapiMediaScreenMirroring {
           int Function(
               ffi.Pointer<scmirroring_sink_h>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets negotiated audio codec of screen mirroring sink.
-  /// @details The audio codec is negotiated by screen mirroring source.
+  /// Gets negotiated audio codec of screen mirroring sink.
   ///
-  /// @since_tizen 2.4
+  /// The audio codec is negotiated by screen mirroring source.
   ///
-  /// @param[in] scmirroring_sink The handle to the screen mirroring sink
-  /// @param[out] codec Codec of audio
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SCMIRRORING_ERROR_NONE Successful
-  /// @retval #SCMIRRORING_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SCMIRRORING_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SCMIRRORING_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #SCMIRRORING_ERROR_UNKNOWN Unknown Error
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @pre Create a screen mirroring sink handle by calling scmirroring_sink_create().
-  /// @pre Register user callback by calling scmirroring_sink_set_state_changed_cb().
-  /// @pre Call scmirroring_sink_prepare()
-  /// @pre Call scmirroring_sink_connect()
-  /// @pre The screen mirroring state must be #SCMIRRORING_SINK_STATE_CONNECTED or #SCMIRRORING_SINK_STATE_PLAYING
+  /// **Parameters:**
+  /// - `scmirroring_sink` (in): The handle to the screen mirroring sink
+  /// - `codec` (out): Codec of audio
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SCMIRRORING_ERROR_NONE`: Successful
+  /// - `SCMIRRORING_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SCMIRRORING_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SCMIRRORING_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SCMIRRORING_ERROR_UNKNOWN`: Unknown Error
+  ///
+  /// **Preconditions:**
+  /// - Create a screen mirroring sink handle by calling scmirroring_sink_create().
+  /// - Register user callback by calling scmirroring_sink_set_state_changed_cb().
+  /// - Call scmirroring_sink_prepare()
+  /// - Call scmirroring_sink_connect()
+  /// - The screen mirroring state must be `SCMIRRORING_SINK_STATE_CONNECTED` or `SCMIRRORING_SINK_STATE_PLAYING`
   int scmirroring_sink_get_negotiated_audio_codec(
     ffi.Pointer<scmirroring_sink_h> scmirroring_sink,
     ffi.Pointer<ffi.Int32> codec,
@@ -730,26 +900,33 @@ class Tizen90CapiMediaScreenMirroring {
           int Function(
               ffi.Pointer<scmirroring_sink_h>, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets negotiated audio channel of screen mirroring sink.
-  /// @details The audio channel is negotiated by screen mirroring source.
+  /// Gets negotiated audio channel of screen mirroring sink.
   ///
-  /// @since_tizen 2.4
+  /// The audio channel is negotiated by screen mirroring source.
   ///
-  /// @param[in] scmirroring_sink The handle to the screen mirroring sink
-  /// @param[out] channel Channel of audio
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SCMIRRORING_ERROR_NONE Successful
-  /// @retval #SCMIRRORING_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SCMIRRORING_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SCMIRRORING_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #SCMIRRORING_ERROR_UNKNOWN Unknown Error
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @pre Create a screen mirroring sink handle by calling scmirroring_sink_create().
-  /// @pre Register user callback by calling scmirroring_sink_set_state_changed_cb().
-  /// @pre Call scmirroring_sink_prepare()
-  /// @pre Call scmirroring_sink_connect()
-  /// @pre The screen mirroring state must be #SCMIRRORING_SINK_STATE_CONNECTED or #SCMIRRORING_SINK_STATE_PLAYING
+  /// **Parameters:**
+  /// - `scmirroring_sink` (in): The handle to the screen mirroring sink
+  /// - `channel` (out): Channel of audio
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SCMIRRORING_ERROR_NONE`: Successful
+  /// - `SCMIRRORING_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SCMIRRORING_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SCMIRRORING_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SCMIRRORING_ERROR_UNKNOWN`: Unknown Error
+  ///
+  /// **Preconditions:**
+  /// - Create a screen mirroring sink handle by calling scmirroring_sink_create().
+  /// - Register user callback by calling scmirroring_sink_set_state_changed_cb().
+  /// - Call scmirroring_sink_prepare()
+  /// - Call scmirroring_sink_connect()
+  /// - The screen mirroring state must be `SCMIRRORING_SINK_STATE_CONNECTED` or `SCMIRRORING_SINK_STATE_PLAYING`
   int scmirroring_sink_get_negotiated_audio_channel(
     ffi.Pointer<scmirroring_sink_h> scmirroring_sink,
     ffi.Pointer<ffi.Int> channel,
@@ -770,26 +947,33 @@ class Tizen90CapiMediaScreenMirroring {
           int Function(
               ffi.Pointer<scmirroring_sink_h>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets negotiated audio sample rate of screen mirroring sink.
-  /// @details The audio sample rate is negotiated by screen mirroring source.
+  /// Gets negotiated audio sample rate of screen mirroring sink.
   ///
-  /// @since_tizen 2.4
+  /// The audio sample rate is negotiated by screen mirroring source.
   ///
-  /// @param[in] scmirroring_sink The handle to the screen mirroring sink
-  /// @param[out] sample_rate Sample rate of audio
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SCMIRRORING_ERROR_NONE Successful
-  /// @retval #SCMIRRORING_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SCMIRRORING_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SCMIRRORING_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #SCMIRRORING_ERROR_UNKNOWN Unknown Error
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @pre Create a screen mirroring sink handle by calling scmirroring_sink_create().
-  /// @pre Register user callback by calling scmirroring_sink_set_state_changed_cb().
-  /// @pre Call scmirroring_sink_prepare()
-  /// @pre Call scmirroring_sink_connect()
-  /// @pre The screen mirroring state must be #SCMIRRORING_SINK_STATE_CONNECTED or #SCMIRRORING_SINK_STATE_PLAYING
+  /// **Parameters:**
+  /// - `scmirroring_sink` (in): The handle to the screen mirroring sink
+  /// - `sample_rate` (out): Sample rate of audio
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SCMIRRORING_ERROR_NONE`: Successful
+  /// - `SCMIRRORING_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SCMIRRORING_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SCMIRRORING_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SCMIRRORING_ERROR_UNKNOWN`: Unknown Error
+  ///
+  /// **Preconditions:**
+  /// - Create a screen mirroring sink handle by calling scmirroring_sink_create().
+  /// - Register user callback by calling scmirroring_sink_set_state_changed_cb().
+  /// - Call scmirroring_sink_prepare()
+  /// - Call scmirroring_sink_connect()
+  /// - The screen mirroring state must be `SCMIRRORING_SINK_STATE_CONNECTED` or `SCMIRRORING_SINK_STATE_PLAYING`
   int scmirroring_sink_get_negotiated_audio_sample_rate(
     ffi.Pointer<scmirroring_sink_h> scmirroring_sink,
     ffi.Pointer<ffi.Int> sample_rate,
@@ -810,26 +994,33 @@ class Tizen90CapiMediaScreenMirroring {
           int Function(
               ffi.Pointer<scmirroring_sink_h>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets negotiated audio bitwidth of screen mirroring sink.
-  /// @details The audio bitwidth is negotiated by screen mirroring source.
+  /// Gets negotiated audio bitwidth of screen mirroring sink.
   ///
-  /// @since_tizen 2.4
+  /// The audio bitwidth is negotiated by screen mirroring source.
   ///
-  /// @param[in] scmirroring_sink The handle to the screen mirroring sink
-  /// @param[out] bitwidth Bitwidth of audio
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SCMIRRORING_ERROR_NONE Successful
-  /// @retval #SCMIRRORING_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SCMIRRORING_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SCMIRRORING_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #SCMIRRORING_ERROR_UNKNOWN Unknown Error
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @pre Create a screen mirroring sink handle by calling scmirroring_sink_create().
-  /// @pre Register user callback by calling scmirroring_sink_set_state_changed_cb().
-  /// @pre Call scmirroring_sink_prepare()
-  /// @pre Call scmirroring_sink_connect()
-  /// @pre The screen mirroring state must be #SCMIRRORING_SINK_STATE_CONNECTED or #SCMIRRORING_SINK_STATE_PLAYING
+  /// **Parameters:**
+  /// - `scmirroring_sink` (in): The handle to the screen mirroring sink
+  /// - `bitwidth` (out): Bitwidth of audio
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SCMIRRORING_ERROR_NONE`: Successful
+  /// - `SCMIRRORING_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SCMIRRORING_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SCMIRRORING_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SCMIRRORING_ERROR_UNKNOWN`: Unknown Error
+  ///
+  /// **Preconditions:**
+  /// - Create a screen mirroring sink handle by calling scmirroring_sink_create().
+  /// - Register user callback by calling scmirroring_sink_set_state_changed_cb().
+  /// - Call scmirroring_sink_prepare()
+  /// - Call scmirroring_sink_connect()
+  /// - The screen mirroring state must be `SCMIRRORING_SINK_STATE_CONNECTED` or `SCMIRRORING_SINK_STATE_PLAYING`
   int scmirroring_sink_get_negotiated_audio_bitwidth(
     ffi.Pointer<scmirroring_sink_h> scmirroring_sink,
     ffi.Pointer<ffi.Int> bitwidth,
@@ -850,23 +1041,29 @@ class Tizen90CapiMediaScreenMirroring {
           int Function(
               ffi.Pointer<scmirroring_sink_h>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the current state of screen mirroring sink.
-  /// @details The current state of screen mirroring sink is changed by calling CAPIs. And it provides the state of screen mirroring sink the time this api is called.
+  /// Gets the current state of screen mirroring sink.
   ///
-  /// @since_tizen 5.0
+  /// The current state of screen mirroring sink is changed by calling CAPIs. And it provides the state of screen mirroring sink the time this api is called.
   ///
-  /// @param[in] scmirroring_sink The handle to the screen mirroring sink
-  /// @param[out] state The current state of screen mirroring sink
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SCMIRRORING_ERROR_NONE Successful
-  /// @retval #SCMIRRORING_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SCMIRRORING_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SCMIRRORING_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #SCMIRRORING_ERROR_UNKNOWN Unknown Error
+  /// **Parameters:**
+  /// - `scmirroring_sink` (in): The handle to the screen mirroring sink
+  /// - `state` (out): The current state of screen mirroring sink
   ///
-  /// @pre Create a screen mirroring sink handle by calling scmirroring_sink_create().
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SCMIRRORING_ERROR_NONE`: Successful
+  /// - `SCMIRRORING_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SCMIRRORING_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SCMIRRORING_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SCMIRRORING_ERROR_UNKNOWN`: Unknown Error
+  ///
+  /// **Preconditions:**
+  /// - Create a screen mirroring sink handle by calling scmirroring_sink_create().
   int scmirroring_sink_get_current_state(
     scmirroring_sink_h scmirroring_sink,
     ffi.Pointer<ffi.Int32> state,
@@ -886,8 +1083,11 @@ class Tizen90CapiMediaScreenMirroring {
           int Function(scmirroring_sink_h, ffi.Pointer<ffi.Int32>)>();
 }
 
-/// @brief Enumeration to provide screen mirroring error information.
-/// @since_tizen 2.4
+/// Enumeration to provide screen mirroring error information.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class scmirroring_error_e {
   /// < Successful
   static const int SCMIRRORING_ERROR_NONE = 0;
@@ -914,8 +1114,11 @@ abstract class scmirroring_error_e {
   static const int SCMIRRORING_ERROR_UNKNOWN = -1073741824;
 }
 
-/// @brief Enumeration for screen mirroring sink state.
-/// @since_tizen 2.4
+/// Enumeration for screen mirroring sink state.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class scmirroring_sink_state_e {
   /// < Screen mirroring is not created yet
   static const int SCMIRRORING_SINK_STATE_NONE = 0;
@@ -940,8 +1143,11 @@ abstract class scmirroring_sink_state_e {
   static const int SCMIRRORING_SINK_STATE_MAX = 7;
 }
 
-/// @brief Enumeration for screen mirroring resolution.
-/// @since_tizen 2.4
+/// Enumeration for screen mirroring resolution.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class scmirroring_resolution_e {
   static const int SCMIRRORING_RESOLUTION_UNKNOWN = 0;
 
@@ -968,15 +1174,21 @@ abstract class scmirroring_resolution_e {
   static const int SCMIRRORING_RESOLUTION_MAX = 128;
 }
 
-/// @brief Ability to send to multisink.
-/// @since_tizen 3.0
+/// Ability to send to multisink.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class scmirroring_multisink_e {
   static const int SCMIRRORING_MULTISINK_DISABLE = 0;
   static const int SCMIRRORING_MULTISINK_ENABLE = 1;
 }
 
-/// @brief Enumeration for screen mirroring display surface type.
-/// @since_tizen 2.4
+/// Enumeration for screen mirroring display surface type.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class scmirroring_display_type_e {
   /// < Use overlay surface to display streaming multimedia data
   static const int SCMIRRORING_DISPLAY_TYPE_OVERLAY = 0;
@@ -986,8 +1198,11 @@ abstract class scmirroring_display_type_e {
   static const int SCMIRRORING_DISPLAY_TYPE_MAX = 2;
 }
 
-/// @brief Enumeration for screen mirroring audio codec.
-/// @since_tizen 2.4
+/// Enumeration for screen mirroring audio codec.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class scmirroring_audio_codec_e {
   /// < Screen mirroring is not negotiated yet
   static const int SCMIRRORING_AUDIO_CODEC_NONE = 0;
@@ -1002,8 +1217,11 @@ abstract class scmirroring_audio_codec_e {
   static const int SCMIRRORING_AUDIO_CODEC_LPCM = 3;
 }
 
-/// @brief Enumeration for screen mirroring video codec.
-/// @since_tizen 2.4
+/// Enumeration for screen mirroring video codec.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class scmirroring_video_codec_e {
   /// < Screen mirroring is not negotiated yet
   static const int SCMIRRORING_VIDEO_CODEC_NONE = 0;
@@ -1012,8 +1230,11 @@ abstract class scmirroring_video_codec_e {
   static const int SCMIRRORING_VIDEO_CODEC_H264 = 1;
 }
 
-/// @brief Enumeration for screen mirroring direct streaming mode.
-/// @since_tizen 3.0
+/// Enumeration for screen mirroring direct streaming mode.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class scmirroring_direct_streaming_e {
   /// < Disable screen mirroring direct streaming mode
   static const int SCMIRRORING_DIRECT_STREAMING_DISABLED = 0;
@@ -1022,8 +1243,11 @@ abstract class scmirroring_direct_streaming_e {
   static const int SCMIRRORING_DIRECT_STREAMING_ENABLED = 1;
 }
 
-/// @brief Enumeration for screen mirroring AV streaming transport.
-/// @since_tizen 3.0
+/// Enumeration for screen mirroring AV streaming transport.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class scmirroring_av_transport_e {
   /// < UDP transport for AV streaming data
   static const int SCMIRRORING_AV_TRANSPORT_UDP = 0;
@@ -1032,26 +1256,36 @@ abstract class scmirroring_av_transport_e {
   static const int SCMIRRORING_AV_TRANSPORT_TCP = 1;
 }
 
-/// @brief	The handle to the screen mirroring sink.
-/// @since_tizen 2.4
+/// The handle to the screen mirroring sink.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 typedef scmirroring_sink_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when state of screen mirroring sink handle is changed.
-/// @since_tizen 2.4
+/// Called when state of screen mirroring sink handle is changed.
 ///
-/// @details This callback is called for state and error of screen mirroring sink will be delivered together.
-/// Error can be handled by return value of CAPIs. so there is no need to handle it here.
+/// This callback is called for state and error of screen mirroring sink will be delivered together. Error can be handled by return value of CAPIs. so there is no need to handle it here.
 ///
-/// @param[in] error     The error code
-/// @param[in] state     The screen mirroring sink state
-/// @param[in] user_data The user data passed from the scmirroring_sink_set_state_cb() function
+/// **Since Tizen:**
+/// - 2.4
 ///
-/// @pre scmirroring_sink_create()
+/// **Parameters:**
+/// - `error` (in): The error code
+/// - `state` (in): The screen mirroring sink state
+/// - `user_data` (in): The user data passed from the scmirroring_sink_set_state_cb() function
 ///
-/// @see scmirroring_sink_create()
+/// **Preconditions:**
+/// - scmirroring_sink_create()
+///
+/// **See also:**
+/// - `scmirroring_sink_create()`
+/// @nodoc
 typedef scmirroring_sink_state_cb
     = ffi.Pointer<ffi.NativeFunction<scmirroring_sink_state_cbFunction>>;
+/// @nodoc
 typedef scmirroring_sink_state_cbFunction = ffi.Void Function(
     ffi.Int32 error, ffi.Int32 state, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartscmirroring_sink_state_cbFunction = void Function(
     int error, int state, ffi.Pointer<ffi.Void> user_data);

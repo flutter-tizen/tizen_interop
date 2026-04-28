@@ -1,3 +1,6 @@
+/// {@category 10.0/tizen}
+library tizen_interop_10_0.capi_appfw_app_common;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-appfw-app-common APIs.
+/// {@category 10.0/tizen}
 class Tizen100CapiAppfwAppCommon {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,17 +28,26 @@ class Tizen100CapiAppfwAppCommon {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Gets the low memory status from the given event info.
-  /// @since_tizen 2.3
-  /// @param[in] event_info The system event info
-  /// @param[out] status The low memory status
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_ERROR_NONE Successful
-  /// @retval #APP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_ERROR_INVALID_CONTEXT Invalid event context
-  /// @see app_event_info_h
-  /// @see app_event_low_memory_status_e
+  /// Gets the low memory status from the given event info.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `event_info` (in): The system event info
+  /// - `status` (out): The low memory status
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_ERROR_NONE`: Successful
+  /// - `APP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_ERROR_INVALID_CONTEXT`: Invalid event context
+  ///
+  /// **See also:**
+  /// - `app_event_info_h`
+  /// - `app_event_low_memory_status_e`
   int app_event_get_low_memory_status(
     app_event_info_h event_info,
     ffi.Pointer<ffi.Int32> status,
@@ -53,17 +66,26 @@ class Tizen100CapiAppfwAppCommon {
       _app_event_get_low_memory_statusPtr
           .asFunction<int Function(app_event_info_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the low battery status from given event info.
-  /// @since_tizen 2.3
-  /// @param[in] event_info The system event info
-  /// @param[out] status The low battery status
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_ERROR_NONE Successful
-  /// @retval #APP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_ERROR_INVALID_CONTEXT Invalid event context
-  /// @see app_event_info_h
-  /// @see app_event_low_battery_status_e
+  /// Gets the low battery status from given event info.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `event_info` (in): The system event info
+  /// - `status` (out): The low battery status
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_ERROR_NONE`: Successful
+  /// - `APP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_ERROR_INVALID_CONTEXT`: Invalid event context
+  ///
+  /// **See also:**
+  /// - `app_event_info_h`
+  /// - `app_event_low_battery_status_e`
   int app_event_get_low_battery_status(
     app_event_info_h event_info,
     ffi.Pointer<ffi.Int32> status,
@@ -82,17 +104,28 @@ class Tizen100CapiAppfwAppCommon {
       _app_event_get_low_battery_statusPtr
           .asFunction<int Function(app_event_info_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the language from the given event info.
-  /// @since_tizen 2.3
-  /// @remarks @a lang must be released using free().
-  /// @param[in] event_info The system event info
-  /// @param[out] lang The language changed
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_ERROR_NONE Successful
-  /// @retval #APP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_ERROR_INVALID_CONTEXT Invalid event context
-  /// @see app_event_info_h
+  /// Gets the language from the given event info.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - `lang` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `event_info` (in): The system event info
+  /// - `lang` (out): The language changed
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_ERROR_NONE`: Successful
+  /// - `APP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_ERROR_INVALID_CONTEXT`: Invalid event context
+  ///
+  /// **See also:**
+  /// - `app_event_info_h`
   int app_event_get_language(
     app_event_info_h event_info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> lang,
@@ -110,17 +143,28 @@ class Tizen100CapiAppfwAppCommon {
   late final _app_event_get_language = _app_event_get_languagePtr.asFunction<
       int Function(app_event_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the region format from the given event info.
-  /// @since_tizen 2.3
-  /// @remarks @a region must be released using free().
-  /// @param[in] event_info The system event info
-  /// @param[out] region The region format changed
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_ERROR_NONE Successful
-  /// @retval #APP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_ERROR_INVALID_CONTEXT Invalid event context
-  /// @see app_event_info_h
+  /// Gets the region format from the given event info.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - `region` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `event_info` (in): The system event info
+  /// - `region` (out): The region format changed
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_ERROR_NONE`: Successful
+  /// - `APP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_ERROR_INVALID_CONTEXT`: Invalid event context
+  ///
+  /// **See also:**
+  /// - `app_event_info_h`
   int app_event_get_region_format(
     app_event_info_h event_info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> region,
@@ -140,17 +184,26 @@ class Tizen100CapiAppfwAppCommon {
       _app_event_get_region_formatPtr.asFunction<
           int Function(app_event_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the device orientation from the given event info.
-  /// @since_tizen 2.3
-  /// @param[in] event_info The system event info
-  /// @param[out] orientation The device orientation changed
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_ERROR_NONE Successful
-  /// @retval #APP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_ERROR_INVALID_CONTEXT Invalid event context
-  /// @see app_event_info_h
-  /// @see app_device_orientation_e
+  /// Gets the device orientation from the given event info.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `event_info` (in): The system event info
+  /// - `orientation` (out): The device orientation changed
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_ERROR_NONE`: Successful
+  /// - `APP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_ERROR_INVALID_CONTEXT`: Invalid event context
+  ///
+  /// **See also:**
+  /// - `app_event_info_h`
+  /// - `app_device_orientation_e`
   int app_event_get_device_orientation(
     app_event_info_h event_info,
     ffi.Pointer<ffi.Int32> orientation,
@@ -169,17 +222,26 @@ class Tizen100CapiAppfwAppCommon {
       _app_event_get_device_orientationPtr
           .asFunction<int Function(app_event_info_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the suspended state of the application from the given event info.
-  /// @since_tizen 2.4
-  /// @remarks The application should not use any asynchronous operations in #APP_SUSPENDED_STATE_WILL_ENTER event.
-  /// Because applications will be changed to suspended state just after #APP_SUSPENDED_STATE_WILL_ENTER, asynchronous calls are not guaranteed to work properly.
-  /// @param[in] event_info The handle for getting the suspended state
-  /// @param[out] state The suspended state of the application
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_ERROR_NONE Successful
-  /// @retval #APP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_ERROR_INVALID_CONTEXT Invalid event context
+  /// Gets the suspended state of the application from the given event info.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Remarks:**
+  /// - The application should not use any asynchronous operations in `APP_SUSPENDED_STATE_WILL_ENTER` event.
+  /// - Because applications will be changed to suspended state just after `APP_SUSPENDED_STATE_WILL_ENTER`, asynchronous calls are not guaranteed to work properly.
+  ///
+  /// **Parameters:**
+  /// - `event_info` (in): The handle for getting the suspended state
+  /// - `state` (out): The suspended state of the application
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_ERROR_NONE`: Successful
+  /// - `APP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_ERROR_INVALID_CONTEXT`: Invalid event context
   int app_event_get_suspended_state(
     app_event_info_h event_info,
     ffi.Pointer<ffi.Int32> state,
@@ -197,20 +259,32 @@ class Tizen100CapiAppfwAppCommon {
   late final _app_event_get_suspended_state = _app_event_get_suspended_statePtr
       .asFunction<int Function(app_event_info_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the time zone from the given event info.
-  /// @details An application can obtain a changed time zone (e.g., "+9:00") and a time zone id (e.g., "Asia/Seoul").
-  /// @since_tizen 8.0
-  /// @remarks @a time_zone and @a time_zone_id must be released using free().
-  /// @param[in] event_info The system event info
-  /// @param[out] time_zone The time zone changed
-  /// @param[out] time_zone_id The time zone id changed
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_ERROR_NONE Successful
-  /// @retval #APP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_ERROR_INVALID_CONTEXT Invalid event context
-  /// @retval #APP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see app_event_info_h
+  /// Gets the time zone from the given event info.
+  ///
+  /// An application can obtain a changed time zone (e.g., "+9:00") and a time zone id (e.g., "Asia/Seoul").
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Remarks:**
+  /// - `time_zone` and `time_zone_id` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `event_info` (in): The system event info
+  /// - `time_zone` (out): The time zone changed
+  /// - `time_zone_id` (out): The time zone id changed
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_ERROR_NONE`: Successful
+  /// - `APP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_ERROR_INVALID_CONTEXT`: Invalid event context
+  /// - `APP_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `app_event_info_h`
   int app_event_get_time_zone(
     app_event_info_h event_info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> time_zone,
@@ -231,16 +305,25 @@ class Tizen100CapiAppfwAppCommon {
       int Function(app_event_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>,
           ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the ID of the application.
-  /// @since_tizen 2.3
-  /// @remarks @a id must be released using free().
-  /// @param[out] id The ID of the application
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_ERROR_NONE Successful
-  /// @retval #APP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_ERROR_INVALID_CONTEXT The application is launched illegally, not launched by the launch system
-  /// @retval #APP_ERROR_OUT_OF_MEMORY Out of memory
+  /// Gets the ID of the application.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - `id` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `id` (out): The ID of the application
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_ERROR_NONE`: Successful
+  /// - `APP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_ERROR_INVALID_CONTEXT`: The application is launched illegally, not launched by the launch system
+  /// - `APP_ERROR_OUT_OF_MEMORY`: Out of memory
   int app_get_id(
     ffi.Pointer<ffi.Pointer<ffi.Char>> id,
   ) {
@@ -255,16 +338,25 @@ class Tizen100CapiAppfwAppCommon {
   late final _app_get_id = _app_get_idPtr
       .asFunction<int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the localized name of the application.
-  /// @since_tizen 2.3
-  /// @remarks @a name must be released using free().
-  /// @param[out] name The name of the application
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_ERROR_NONE Successful
-  /// @retval #APP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_ERROR_INVALID_CONTEXT The application is launched illegally, not launched by the launch system
-  /// @retval #APP_ERROR_OUT_OF_MEMORY Out of memory
+  /// Gets the localized name of the application.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - `name` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `name` (out): The name of the application
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_ERROR_NONE`: Successful
+  /// - `APP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_ERROR_INVALID_CONTEXT`: The application is launched illegally, not launched by the launch system
+  /// - `APP_ERROR_OUT_OF_MEMORY`: Out of memory
   int app_get_name(
     ffi.Pointer<ffi.Pointer<ffi.Char>> name,
   ) {
@@ -280,16 +372,25 @@ class Tizen100CapiAppfwAppCommon {
   late final _app_get_name = _app_get_namePtr
       .asFunction<int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the version of the application package.
-  /// @since_tizen 2.3
-  /// @remarks @a version must be released using free().
-  /// @param[out] version The version of the application
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_ERROR_NONE Successful
-  /// @retval #APP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_ERROR_INVALID_CONTEXT The application is launched illegally, not launched by the launch system
-  /// @retval #APP_ERROR_OUT_OF_MEMORY Out of memory
+  /// Gets the version of the application package.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - `version` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `version` (out): The version of the application
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_ERROR_NONE`: Successful
+  /// - `APP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_ERROR_INVALID_CONTEXT`: The application is launched illegally, not launched by the launch system
+  /// - `APP_ERROR_OUT_OF_MEMORY`: Out of memory
   int app_get_version(
     ffi.Pointer<ffi.Pointer<ffi.Char>> version,
   ) {
@@ -305,12 +406,18 @@ class Tizen100CapiAppfwAppCommon {
   late final _app_get_version = _app_get_versionPtr
       .asFunction<int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the absolute path to the application's data directory which is used to store private data of the application.
-  /// @details An application can read and write its own files in the application's data directory.
-  /// @since_tizen 2.3
-  /// @remarks The returned value should be released using free().
-  /// @return The absolute path to the application's data directory, @n
-  /// otherwise a null pointer if the memory is insufficient
+  /// Gets the absolute path to the application's data directory which is used to store private data of the application.
+  ///
+  /// An application can read and write its own files in the application's data directory.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - The returned value should be released using free().
+  ///
+  /// **Returns:**
+  /// - The absolute path to the application's data directory, otherwise a null pointer if the memory is insufficient
   ffi.Pointer<ffi.Char> app_get_data_path() {
     return _app_get_data_path();
   }
@@ -321,13 +428,19 @@ class Tizen100CapiAppfwAppCommon {
   late final _app_get_data_path =
       _app_get_data_pathPtr.asFunction<ffi.Pointer<ffi.Char> Function()>();
 
-  /// @brief Gets the absolute path to the application's cache directory which is used to store temporary data of the application.
-  /// @details An application can read and write its own files in the application's cache directory.
-  /// @since_tizen 2.3
-  /// @remarks The returned value should be released using free(). @n
-  /// The files stored in the application's cache directory can be removed by setting application or platform while the application is running.
-  /// @return The absolute path to the application's cache directory, @n
-  /// otherwise a null pointer if the memory is insufficient
+  /// Gets the absolute path to the application's cache directory which is used to store temporary data of the application.
+  ///
+  /// An application can read and write its own files in the application's cache directory.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - The returned value should be released using free().
+  /// - The files stored in the application's cache directory can be removed by setting application or platform while the application is running.
+  ///
+  /// **Returns:**
+  /// - The absolute path to the application's cache directory, otherwise a null pointer if the memory is insufficient
   ffi.Pointer<ffi.Char> app_get_cache_path() {
     return _app_get_cache_path();
   }
@@ -338,12 +451,18 @@ class Tizen100CapiAppfwAppCommon {
   late final _app_get_cache_path =
       _app_get_cache_pathPtr.asFunction<ffi.Pointer<ffi.Char> Function()>();
 
-  /// @brief Gets the absolute path to the application resource directory. The resource files are delivered with the application package.
-  /// @details An application can only read its own files in the application's resource directory.
-  /// @since_tizen 2.3
-  /// @remarks The returned value should be released using free().
-  /// @return The absolute path to the application's resource directory, @n
-  /// otherwise a null pointer if the memory is insufficient
+  /// Gets the absolute path to the application resource directory. The resource files are delivered with the application package.
+  ///
+  /// An application can only read its own files in the application's resource directory.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - The returned value should be released using free().
+  ///
+  /// **Returns:**
+  /// - The absolute path to the application's resource directory, otherwise a null pointer if the memory is insufficient
   ffi.Pointer<ffi.Char> app_get_resource_path() {
     return _app_get_resource_path();
   }
@@ -354,23 +473,34 @@ class Tizen100CapiAppfwAppCommon {
   late final _app_get_resource_path =
       _app_get_resource_pathPtr.asFunction<ffi.Pointer<ffi.Char> Function()>();
 
-  /// @brief Gets the absolute path to the application's shared data directory which is used to share data with other applications.
-  /// @details An application can read and write its own files in the application's shared data directory and others can only read the files.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/appdir.shareddata
-  /// @remarks The returned value should be released using free(). @n
-  /// Since Tizen 3.0, an application that want to use shared/data directory must declare %http://tizen.org/privilege/appdir.shareddata privilege. If the application doesn't declare the privilege, the framework will not create shared/data directory for the application.
-  /// Carefully consider the privacy implications when deciding whether to use the shared/data directory, since the application cannot control access to this directory by other applications.
-  /// If you want to share files with other applications, consider passing path via @ref CAPI_APP_CONTROL_MODULE API.
-  /// The @ref CAPI_APP_CONTROL_MODULE API supports giving permission to other applications by passing path via app_control. @n
-  /// The specific error code can be obtained using the get_last_result(). Error codes are described in Exception section.
+  /// Gets the absolute path to the application's shared data directory which is used to share data with other applications.
   ///
-  /// @return The absolute path to the application's shared data directory, @n
-  /// otherwise a null pointer if the memory is insufficient. It will return NULL for applications with api-version 3.0 or later, and set #APP_ERROR_PERMISSION_DENIED if the application does not declare the shareddata privilege.
-  /// @exception #APP_ERROR_NONE Success
-  /// @exception #APP_ERROR_PERMISSION_DENIED Permission denied
-  /// @exception #APP_ERROR_OUT_OF_MEMORY Out of memory
+  /// An application can read and write its own files in the application's shared data directory and others can only read the files.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/appdir.shareddata>
+  ///
+  /// **Remarks:**
+  /// - The returned value should be released using free().
+  /// - Since Tizen 3.0, an application that want to use shared/data directory must declare http://tizen.org/privilege/appdir.shareddata privilege. If the application doesn't declare the privilege, the framework will not create shared/data directory for the application.
+  /// - Carefully consider the privacy implications when deciding whether to use the shared/data directory, since the application cannot control access to this directory by other applications.
+  /// - If you want to share files with other applications, consider passing path via `CAPI_APP_CONTROL_MODULE` API.
+  /// - The `CAPI_APP_CONTROL_MODULE` API supports giving permission to other applications by passing path via app_control.
+  /// - The specific error code can be obtained using the get_last_result(). Error codes are described in Exception section.
+  ///
+  /// **Returns:**
+  /// - The absolute path to the application's shared data directory, otherwise a null pointer if the memory is insufficient. It will return NULL for applications with api-version 3.0 or later, and set `APP_ERROR_PERMISSION_DENIED` if the application does not declare the shareddata privilege.
+  ///
+  /// **Exceptions:**
+  /// - `APP_ERROR_NONE`: Success
+  /// - `APP_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `APP_ERROR_OUT_OF_MEMORY`: Out of memory
   ffi.Pointer<ffi.Char> app_get_shared_data_path() {
     return _app_get_shared_data_path();
   }
@@ -381,12 +511,18 @@ class Tizen100CapiAppfwAppCommon {
   late final _app_get_shared_data_path = _app_get_shared_data_pathPtr
       .asFunction<ffi.Pointer<ffi.Char> Function()>();
 
-  /// @brief Gets the absolute path to the application's shared resource directory which is used to share resources with other applications.
-  /// @details An application can read its own files in the application's shared resource directory, and others can only read the files.
-  /// @since_tizen 2.3
-  /// @remarks The returned value should be released using free().
-  /// @return The absolute path to the application's shared resource directory, @n
-  /// otherwise a null pointer if the memory is insufficient
+  /// Gets the absolute path to the application's shared resource directory which is used to share resources with other applications.
+  ///
+  /// An application can read its own files in the application's shared resource directory, and others can only read the files.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - The returned value should be released using free().
+  ///
+  /// **Returns:**
+  /// - The absolute path to the application's shared resource directory, otherwise a null pointer if the memory is insufficient
   ffi.Pointer<ffi.Char> app_get_shared_resource_path() {
     return _app_get_shared_resource_path();
   }
@@ -397,13 +533,18 @@ class Tizen100CapiAppfwAppCommon {
   late final _app_get_shared_resource_path = _app_get_shared_resource_pathPtr
       .asFunction<ffi.Pointer<ffi.Char> Function()>();
 
-  /// @brief Gets the absolute path to the application's shared trusted directory which is used to share data with a family of trusted applications.
-  /// @details An application can read and write its own files in the application's shared trusted directory
-  /// and the family applications signed with the same certificate can read and write the files in the shared trusted directory.
-  /// @since_tizen 2.3
-  /// @remarks The returned value should be released using free().
-  /// @return The absolute path to the application's shared trusted directory, @n
-  /// otherwise a null pointer if the memory is insufficient
+  /// Gets the absolute path to the application's shared trusted directory which is used to share data with a family of trusted applications.
+  ///
+  /// An application can read and write its own files in the application's shared trusted directory and the family applications signed with the same certificate can read and write the files in the shared trusted directory.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - The returned value should be released using free().
+  ///
+  /// **Returns:**
+  /// - The absolute path to the application's shared trusted directory, otherwise a null pointer if the memory is insufficient
   ffi.Pointer<ffi.Char> app_get_shared_trusted_path() {
     return _app_get_shared_trusted_path();
   }
@@ -414,15 +555,21 @@ class Tizen100CapiAppfwAppCommon {
   late final _app_get_shared_trusted_path = _app_get_shared_trusted_pathPtr
       .asFunction<ffi.Pointer<ffi.Char> Function()>();
 
-  /// @brief Gets the absolute path to the application's external data directory which is used to store data of the application.
-  /// @details An application can read and write its own files in the application's external data directory.
-  /// @since_tizen 2.3
-  /// @remarks The returned value should be released using free(). @n
-  /// The important files stored in the application's external data directory should be encrypted because they can be exported via the external sdcard.
-  /// To access the path returned by this function requires the privilege
-  /// that is "http://tizen.org/privilege/externalstorage.appdata".
-  /// @return The absolute path to the application's external data directory, @n
-  /// otherwise a null pointer if the memory is insufficient
+  /// Gets the absolute path to the application's external data directory which is used to store data of the application.
+  ///
+  /// An application can read and write its own files in the application's external data directory.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - The returned value should be released using free().
+  /// - The important files stored in the application's external data directory should be encrypted because they can be exported via the external sdcard.
+  /// - To access the path returned by this function requires the privilege
+  /// - that is "http://tizen.org/privilege/externalstorage.appdata".
+  ///
+  /// **Returns:**
+  /// - The absolute path to the application's external data directory, otherwise a null pointer if the memory is insufficient
   ffi.Pointer<ffi.Char> app_get_external_data_path() {
     return _app_get_external_data_path();
   }
@@ -433,18 +580,24 @@ class Tizen100CapiAppfwAppCommon {
   late final _app_get_external_data_path = _app_get_external_data_pathPtr
       .asFunction<ffi.Pointer<ffi.Char> Function()>();
 
-  /// @brief Gets the absolute path to the application's external cache directory which is used to store temporary data of the application.
-  /// @details An application can read and write its own files in the application's external cache directory.
-  /// @since_tizen 2.3
-  /// @remarks The returned value should be released using free(). @n
-  /// The files stored in the application's external cache directory can be removed by
-  /// setting application while the application is running. @n
-  /// The important files stored in the application's external cache directory should be
-  /// encrypted because they can be exported via the external sdcard.
-  /// To access the path returned by this function requires the privilege
-  /// that is "http://tizen.org/privilege/externalstorage.appdata".
-  /// @return The absolute path to the application's external cache directory, @n
-  /// otherwise a null pointer if the memory is insufficient
+  /// Gets the absolute path to the application's external cache directory which is used to store temporary data of the application.
+  ///
+  /// An application can read and write its own files in the application's external cache directory.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - The returned value should be released using free().
+  /// - The files stored in the application's external cache directory can be removed by
+  /// - setting application while the application is running.
+  /// - The important files stored in the application's external cache directory should be
+  /// - encrypted because they can be exported via the external sdcard.
+  /// - To access the path returned by this function requires the privilege
+  /// - that is "http://tizen.org/privilege/externalstorage.appdata".
+  ///
+  /// **Returns:**
+  /// - The absolute path to the application's external cache directory, otherwise a null pointer if the memory is insufficient
   ffi.Pointer<ffi.Char> app_get_external_cache_path() {
     return _app_get_external_cache_path();
   }
@@ -455,16 +608,23 @@ class Tizen100CapiAppfwAppCommon {
   late final _app_get_external_cache_path = _app_get_external_cache_pathPtr
       .asFunction<ffi.Pointer<ffi.Char> Function()>();
 
-  /// @deprecated Deprecated since 2.4.
-  /// @brief Gets the absolute path to the application's external shared data directory which is used to share data with other applications.
-  /// @details An application can read and write its own files in the application's external shared data directory, and others can only read the files.
-  /// @since_tizen 2.3
-  /// @remarks The returned value should be released using free().
-  /// To access the path returned by this function requires the privilege
-  /// that is "http://tizen.org/privilege/externalstorage.appdata".
-  /// The function may not work as intended in certain devices due to some implementation issues.
-  /// @return The absolute path to the application's external shared data directory, @n
-  /// otherwise a null pointer if the memory is insufficient
+  /// **Deprecated:** Deprecated since 2.4.
+  ///
+  /// Gets the absolute path to the application's external shared data directory which is used to share data with other applications.
+  ///
+  /// An application can read and write its own files in the application's external shared data directory, and others can only read the files.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - The returned value should be released using free().
+  /// - To access the path returned by this function requires the privilege
+  /// - that is "http://tizen.org/privilege/externalstorage.appdata".
+  /// - The function may not work as intended in certain devices due to some implementation issues.
+  ///
+  /// **Returns:**
+  /// - The absolute path to the application's external shared data directory, otherwise a null pointer if the memory is insufficient
   ffi.Pointer<ffi.Char> app_get_external_shared_data_path() {
     return _app_get_external_shared_data_path();
   }
@@ -476,12 +636,18 @@ class Tizen100CapiAppfwAppCommon {
       _app_get_external_shared_data_pathPtr
           .asFunction<ffi.Pointer<ffi.Char> Function()>();
 
-  /// @brief Gets the absolute path to the application's TEP (Tizen Expansion Package) directory. The resource files are delivered with the expansion package.
-  /// @details An application can only read its own files in the application's TEP (Tizen Expansion Package) directory.
-  /// @since_tizen 2.4
-  /// @remarks The returned value should be released using free().
-  /// @return The absolute path to the application's TEP (Tizen Expansion Package) directory, @n
-  /// otherwise a null pointer if the memory is insufficient
+  /// Gets the absolute path to the application's TEP (Tizen Expansion Package) directory. The resource files are delivered with the expansion package.
+  ///
+  /// An application can only read its own files in the application's TEP (Tizen Expansion Package) directory.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Remarks:**
+  /// - The returned value should be released using free().
+  ///
+  /// **Returns:**
+  /// - The absolute path to the application's TEP (Tizen Expansion Package) directory, otherwise a null pointer if the memory is insufficient
   ffi.Pointer<ffi.Char> app_get_tep_resource_path() {
     return _app_get_tep_resource_path();
   }
@@ -492,17 +658,26 @@ class Tizen100CapiAppfwAppCommon {
   late final _app_get_tep_resource_path = _app_get_tep_resource_pathPtr
       .asFunction<ffi.Pointer<ffi.Char> Function()>();
 
-  /// @brief Gets the display state.
-  /// @since_tizen 5.5
-  /// @remarks If the application is service-application, this function returns #APP_ERROR_INVALID_CONTEXT.
-  /// In the headless device, this function returns #APP_ERROR_NOT_SUPPORTED.
-  /// @param[out] display_state The display state
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_ERROR_NONE Successful
-  /// @retval #APP_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #APP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_ERROR_INVALID_CONTEXT The display is in an unknown state.
+  /// Gets the display state.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - If the application is service-application, this function returns `APP_ERROR_INVALID_CONTEXT`.
+  /// - In the headless device, this function returns `APP_ERROR_NOT_SUPPORTED`.
+  ///
+  /// **Parameters:**
+  /// - `display_state` (out): The display state
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_ERROR_NONE`: Successful
+  /// - `APP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `APP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_ERROR_INVALID_CONTEXT`: The display is in an unknown state.
   int app_get_display_state(
     ffi.Pointer<ffi.Int32> display_state,
   ) {
@@ -517,17 +692,26 @@ class Tizen100CapiAppfwAppCommon {
   late final _app_get_display_state = _app_get_display_statePtr
       .asFunction<int Function(ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sends the enable request to activate the watchdog timer.
-  /// @since_tizen 5.5
-  /// @remarks After this function is called, the system detects a timeout error.
-  /// If, due to a program error as ANR (Application Not Responding), the system fails to reset the watchdog, the timer will elapse and generate a signal to terminate the running application.
-  /// If the running application has to process a lot of operations, the application should disable or reset the watchdog timer.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_ERROR_NONE Successful
-  /// @retval #APP_ERROR_INVALID_CONTEXT Invalid context
-  /// @see app_watchdog_timer_disable()
-  /// @see app_watchdog_timer_kick()
+  /// Sends the enable request to activate the watchdog timer.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - After this function is called, the system detects a timeout error.
+  /// - If, due to a program error as ANR (Application Not Responding), the system fails to reset the watchdog, the timer will elapse and generate a signal to terminate the running application.
+  /// - If the running application has to process a lot of operations, the application should disable or reset the watchdog timer.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_ERROR_NONE`: Successful
+  /// - `APP_ERROR_INVALID_CONTEXT`: Invalid context
+  ///
+  /// **See also:**
+  /// - `app_watchdog_timer_disable()`
+  /// - `app_watchdog_timer_kick()`
   int app_watchdog_timer_enable() {
     return _app_watchdog_timer_enable();
   }
@@ -538,13 +722,20 @@ class Tizen100CapiAppfwAppCommon {
   late final _app_watchdog_timer_enable =
       _app_watchdog_timer_enablePtr.asFunction<int Function()>();
 
-  /// @brief Sends the disable request to deactivate the watchdog timer.
-  /// @since_tizen 5.5
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_ERROR_NONE Successful
-  /// @retval #APP_ERROR_INVALID_CONTEXT Invalid context
-  /// @see app_watchdog_timer_enable()
+  /// Sends the disable request to deactivate the watchdog timer.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_ERROR_NONE`: Successful
+  /// - `APP_ERROR_INVALID_CONTEXT`: Invalid context
+  ///
+  /// **See also:**
+  /// - `app_watchdog_timer_enable()`
   int app_watchdog_timer_disable() {
     return _app_watchdog_timer_disable();
   }
@@ -555,13 +746,20 @@ class Tizen100CapiAppfwAppCommon {
   late final _app_watchdog_timer_disable =
       _app_watchdog_timer_disablePtr.asFunction<int Function()>();
 
-  /// @brief Sends the kick request to reset the watchdog timer.
-  /// @since_tizen 5.5
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_ERROR_NONE Successful
-  /// @retval #APP_ERROR_INVALID_CONTEXT Invalid context
-  /// @see app_watchdog_timer_enable()
+  /// Sends the kick request to reset the watchdog timer.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_ERROR_NONE`: Successful
+  /// - `APP_ERROR_INVALID_CONTEXT`: Invalid context
+  ///
+  /// **See also:**
+  /// - `app_watchdog_timer_enable()`
   int app_watchdog_timer_kick() {
     return _app_watchdog_timer_kick();
   }
@@ -572,19 +770,29 @@ class Tizen100CapiAppfwAppCommon {
   late final _app_watchdog_timer_kick =
       _app_watchdog_timer_kickPtr.asFunction<int Function()>();
 
-  /// @brief Gets the absolute path to the application's resource control directory used to share the allowed resources of the available resource packages.
-  /// @details An application can read the resource of the resource package.
-  /// @since_tizen 8.0
-  /// @remarks @a path must be released using free().
-  /// @param[in] res_type The resource type of resource package
-  /// @param[out] path The absolute path to the application's resource control directory of the allowed resource of available resource package
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_ERROR_NONE Successful
-  /// @retval #APP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_ERROR_INVALID_CONTEXT Invalid context
-  /// @retval #APP_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #APP_ERROR_OUT_OF_MEMORY Out of memory
+  /// Gets the absolute path to the application's resource control directory used to share the allowed resources of the available resource packages.
+  ///
+  /// An application can read the resource of the resource package.
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Remarks:**
+  /// - `path` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `res_type` (in): The resource type of resource package
+  /// - `path` (out): The absolute path to the application's resource control directory of the allowed resource of available resource package
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_ERROR_NONE`: Successful
+  /// - `APP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_ERROR_INVALID_CONTEXT`: Invalid context
+  /// - `APP_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `APP_ERROR_OUT_OF_MEMORY`: Out of memory
   int app_get_res_control_allowed_resource_path(
     ffi.Pointer<ffi.Char> res_type,
     ffi.Pointer<ffi.Pointer<ffi.Char>> path,
@@ -605,19 +813,29 @@ class Tizen100CapiAppfwAppCommon {
           int Function(
               ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the absolute path to the application's resource control directory used to share the global resources of the available resource packages.
-  /// @details An application can read the resource of the resource package.
-  /// @since_tizen 8.0
-  /// @remarks @a path must be released using free().
-  /// @param[in] res_type The resource type of resource package
-  /// @param[out] path The absolute path to the application's resource control directory of the global resource of available resource package
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_ERROR_NONE Successful
-  /// @retval #APP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_ERROR_INVALID_CONTEXT Invalid context
-  /// @retval #APP_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #APP_ERROR_OUT_OF_MEMORY Out of memory
+  /// Gets the absolute path to the application's resource control directory used to share the global resources of the available resource packages.
+  ///
+  /// An application can read the resource of the resource package.
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Remarks:**
+  /// - `path` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `res_type` (in): The resource type of resource package
+  /// - `path` (out): The absolute path to the application's resource control directory of the global resource of available resource package
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_ERROR_NONE`: Successful
+  /// - `APP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_ERROR_INVALID_CONTEXT`: Invalid context
+  /// - `APP_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `APP_ERROR_OUT_OF_MEMORY`: Out of memory
   int app_get_res_control_global_resource_path(
     ffi.Pointer<ffi.Char> res_type,
     ffi.Pointer<ffi.Pointer<ffi.Char>> path,
@@ -638,17 +856,25 @@ class Tizen100CapiAppfwAppCommon {
           int Function(
               ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Creates resource manager and get from db.
+  /// Creates resource manager and get from db.
   ///
-  /// @since_tizen 2.4
-  /// @remarks If resource manager already exists,
-  /// It will just return #APP_RESOURCE_ERROR_NONE
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_RESOURCE_ERROR_NONE Successful
-  /// @retval #APP_RESOURCE_ERROR_IO_ERROR IO Internal I/O Error
-  /// @retval #APP_RESOURCE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see app_resource_manager_release()
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Remarks:**
+  /// - If resource manager already exists,
+  /// - It will just return `APP_RESOURCE_ERROR_NONE`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_RESOURCE_ERROR_NONE`: Successful
+  /// - `APP_RESOURCE_ERROR_IO_ERROR`: IO Internal I/O Error
+  /// - `APP_RESOURCE_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `app_resource_manager_release()`
   int app_resource_manager_init() {
     return _app_resource_manager_init();
   }
@@ -659,22 +885,32 @@ class Tizen100CapiAppfwAppCommon {
   late final _app_resource_manager_init =
       _app_resource_manager_initPtr.asFunction<int Function()>();
 
-  /// @brief Converts resource ID to path name.
+  /// Converts resource ID to path name.
   ///
-  /// @since_tizen 2.4
-  /// @remarks If resource manager is not created yet,
-  /// app_resource_manager_init() will be invoked automatically.
-  /// The @a path should be released using free().
-  /// @param[in] type Resource type @see #app_resource_e
-  /// @param[in] id Resource ID
-  /// @param[out] path The name of requested resource on success, otherwise NULL
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_RESOURCE_ERROR_NONE Successful
-  /// @retval #APP_RESOURCE_ERROR_INVALID_PARAMETER Invalid Parameter
-  /// @retval #APP_RESOURCE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #APP_RESOURCE_ERROR_IO_ERROR Internal I/O Error or failed to find valid resource
-  /// @see app_resource_manager_init()
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Remarks:**
+  /// - If resource manager is not created yet,
+  /// - app_resource_manager_init() will be invoked automatically.
+  /// - The `path` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `type` (in): Resource type @see `app_resource_e`
+  /// - `id` (in): Resource ID
+  /// - `path` (out): The name of requested resource on success, otherwise NULL
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_RESOURCE_ERROR_NONE`: Successful
+  /// - `APP_RESOURCE_ERROR_INVALID_PARAMETER`: Invalid Parameter
+  /// - `APP_RESOURCE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `APP_RESOURCE_ERROR_IO_ERROR`: Internal I/O Error or failed to find valid resource
+  ///
+  /// **See also:**
+  /// - `app_resource_manager_init()`
   int app_resource_manager_get(
     int type,
     ffi.Pointer<ffi.Char> id,
@@ -696,15 +932,23 @@ class Tizen100CapiAppfwAppCommon {
           int Function(int, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Destroys resource manager.
+  /// Destroys resource manager.
   ///
-  /// @since_tizen 2.4
-  /// @remarks Please note that the instance of resource manager should only be released when the application is closing.
-  /// It is a highly recommended way to improve run-time performance.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_RESOURCE_ERROR_NONE Successful
-  /// @see	app_resource_manager_init()
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Remarks:**
+  /// - Please note that the instance of resource manager should only be released when the application is closing.
+  /// - It is a highly recommended way to improve run-time performance.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_RESOURCE_ERROR_NONE`: Successful
+  ///
+  /// **See also:**
+  /// - `app_resource_manager_init()`
   int app_resource_manager_release() {
     return _app_resource_manager_release();
   }
@@ -745,8 +989,11 @@ class Tizen100CapiAppfwAppCommon {
       .asFunction<void Function(app_event_cb)>();
 }
 
-/// @brief Enumeration for system events.
-/// @since_tizen 2.3
+/// Enumeration for system events.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class app_event_type_e {
   /// < The low memory event
   static const int APP_EVENT_LOW_MEMORY = 0;
@@ -764,7 +1011,9 @@ abstract class app_event_type_e {
   static const int APP_EVENT_REGION_FORMAT_CHANGED = 4;
 
   /// < The suspended state changed event of the application (since 2.4)
-  /// @see app_event_get_suspended_state()
+  ///
+  /// **See also:**
+  /// - `app_event_get_suspended_state()`
   static const int APP_EVENT_SUSPENDED_STATE_CHANGED = 5;
 
   /// < The update requested event (Since 3.0)
@@ -776,8 +1025,11 @@ abstract class app_event_type_e {
   static const int APP_EVENT_TIME_ZONE_CHANGED = 7;
 }
 
-/// @brief Enumeration for device orientation.
-/// @since_tizen 2.3
+/// Enumeration for device orientation.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class app_device_orientation_e {
   /// < The device is oriented in a natural position
   static const int APP_DEVICE_ORIENTATION_0 = 0;
@@ -792,8 +1044,11 @@ abstract class app_device_orientation_e {
   static const int APP_DEVICE_ORIENTATION_270 = 270;
 }
 
-/// @brief Enumeration for low memory status.
-/// @since_tizen 2.3
+/// Enumeration for low memory status.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class app_event_low_memory_status_e {
   /// < Normal status
   static const int APP_EVENT_LOW_MEMORY_NORMAL = 1;
@@ -805,8 +1060,11 @@ abstract class app_event_low_memory_status_e {
   static const int APP_EVENT_LOW_MEMORY_HARD_WARNING = 4;
 }
 
-/// @brief Enumeration for battery status.
-/// @since_tizen 2.3
+/// Enumeration for battery status.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class app_event_low_battery_status_e {
   /// < The battery status is under 1%
   static const int APP_EVENT_LOW_BATTERY_POWER_OFF = 1;
@@ -815,8 +1073,11 @@ abstract class app_event_low_battery_status_e {
   static const int APP_EVENT_LOW_BATTERY_CRITICAL_LOW = 2;
 }
 
-/// @brief Enumeration for suspended state.
-/// @since_tizen 2.4
+/// Enumeration for suspended state.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class app_suspended_state_e {
   /// < Application will enter the suspended state
   static const int APP_SUSPENDED_STATE_WILL_ENTER = 0;
@@ -825,8 +1086,11 @@ abstract class app_suspended_state_e {
   static const int APP_SUSPENDED_STATE_DID_EXIT = 1;
 }
 
-/// @brief Enumeration for display state.
-/// @since_tizen 5.5
+/// Enumeration for display state.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class app_display_state_e {
   /// < Display state is on
   static const int APP_DISPLAY_STATE_ON = 0;
@@ -835,22 +1099,32 @@ abstract class app_display_state_e {
   static const int APP_DISPLAY_STATE_OFF = 1;
 }
 
+/// @nodoc
 final class app_event_handler extends ffi.Opaque {}
 
+/// @nodoc
 final class app_event_info extends ffi.Opaque {}
 
-/// @brief The system event information handle.
-/// @since_tizen 2.3
-/// @see app_event_get_low_memory_status()
-/// @see app_event_get_low_battery_status()
-/// @see app_event_get_language()
-/// @see app_event_get_region_format()
-/// @see app_event_get_device_orientation()
-/// @see app_event_get_suspended_state()
+/// The system event information handle.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **See also:**
+/// - `app_event_get_low_memory_status()`
+/// - `app_event_get_low_battery_status()`
+/// - `app_event_get_language()`
+/// - `app_event_get_region_format()`
+/// - `app_event_get_device_orientation()`
+/// - `app_event_get_suspended_state()`
+/// @nodoc
 typedef app_event_info_h = ffi.Pointer<app_event_info>;
 
-/// @brief Enumeration for Resource Types.
-/// @since_tizen 2.4
+/// Enumeration for Resource Types.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class app_resource_e {
   /// <Image
   static const int APP_RESOURCE_TYPE_IMAGE = 0;
@@ -867,8 +1141,11 @@ abstract class app_resource_e {
   static const int APP_RESOURCE_TYPE_MAX = 3;
 }
 
-/// @brief Enumeration for App Resource Manager Error.
-/// @since_tizen 2.4
+/// Enumeration for App Resource Manager Error.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class app_resource_error_e {
   /// < Successful
   static const int APP_RESOURCE_ERROR_NONE = 0;
@@ -883,26 +1160,42 @@ abstract class app_resource_error_e {
   static const int APP_RESOURCE_ERROR_IO_ERROR = -5;
 }
 
-/// @brief The event handler that returned from add event handler function to handle.
-/// @since_tizen 2.3
-/// @see app_event_type_e
-/// @see ui_app_add_event_handler
-/// @see ui_app_remove_event_handler
-/// @see app_event_info_h
+/// The event handler that returned from add event handler function to handle.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **See also:**
+/// - `app_event_type_e`
+/// - `ui_app_add_event_handler`
+/// - `ui_app_remove_event_handler`
+/// - `app_event_info_h`
+/// @nodoc
 typedef app_event_handler_h = ffi.Pointer<app_event_handler>;
 
-/// @brief The system event callback function.
-/// @since_tizen 2.3
-/// @remarks If the given @a event_info has #APP_SUSPENDED_STATE_WILL_ENTER value,
-/// the application should not call any asynchronous operations in this callback.
-/// After the callback returns, process of the application will be changed to suspended
-/// state immediately. Thus, asynchronous operations may work incorrectly. (since 2.4)
-/// @param[in] event_info The system event information
-/// @param[in] user_data The user data passed from the add event handler function
-/// @see ui_app_add_event_handler
-/// @see app_event_info_h
+/// The system event callback function.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Remarks:**
+/// - If the given `event_info` has `APP_SUSPENDED_STATE_WILL_ENTER` value,
+/// - the application should not call any asynchronous operations in this callback.
+/// - After the callback returns, process of the application will be changed to suspended
+/// - state immediately. Thus, asynchronous operations may work incorrectly. (since 2.4)
+///
+/// **Parameters:**
+/// - `event_info` (in): The system event information
+/// - `user_data` (in): The user data passed from the add event handler function
+///
+/// **See also:**
+/// - `ui_app_add_event_handler`
+/// - `app_event_info_h`
+/// @nodoc
 typedef app_event_cb = ffi.Pointer<ffi.NativeFunction<app_event_cbFunction>>;
+/// @nodoc
 typedef app_event_cbFunction = ffi.Void Function(
     app_event_info_h event_info, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartapp_event_cbFunction = void Function(
     app_event_info_h event_info, ffi.Pointer<ffi.Void> user_data);

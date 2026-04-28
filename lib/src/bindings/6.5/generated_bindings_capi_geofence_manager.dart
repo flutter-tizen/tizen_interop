@@ -1,3 +1,6 @@
+/// {@category 6.5/tizen}
+library tizen_interop_6_5.capi_geofence_manager;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-geofence-manager APIs.
+/// {@category 6.5/tizen}
 class Tizen65CapiGeofenceManager {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,15 +28,23 @@ class Tizen65CapiGeofenceManager {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Checks whether the geofence manager is available or not.
-  /// @since_tizen 2.4
-  /// @param[out] supported @c true if geofence service is supported,
-  /// otherwise @c false
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #GEOFENCE_MANAGER_ERROR_NONE Successful
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED Not supported
-  /// @see geofence_manager_create()
+  /// Checks whether the geofence manager is available or not.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Parameters:**
+  /// - `supported` (out): `true` if geofence service is supported, otherwise `false`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GEOFENCE_MANAGER_ERROR_NONE`: Successful
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `geofence_manager_create()`
   int geofence_manager_is_supported(
     ffi.Pointer<ffi.Bool> supported,
   ) {
@@ -47,21 +59,32 @@ class Tizen65CapiGeofenceManager {
   late final _geofence_manager_is_supported = _geofence_manager_is_supportedPtr
       .asFunction<int Function(ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Creates a new geofence manager.
-  /// @since_tizen 2.4
-  /// @remarks The manager must be released using geofence_manager_destroy().\n
-  /// Since 3.0, http://tizen.org/privilege/location privilege is not required.
-  /// @param[out] manager A geofence manager handle to be newly created on success
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #GEOFENCE_MANAGER_ERROR_NONE Successful
-  /// @retval #GEOFENCE_MANAGER_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER Illegal argument
-  /// @retval #GEOFENCE_MANAGER_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_INITIALIZED Not initialized
-  /// @retval #GEOFENCE_MANAGER_ERROR_EXCEPTION Exception occurred
-  /// @see geofence_manager_destroy()
+  /// Creates a new geofence manager.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Remarks:**
+  /// - The manager must be released using geofence_manager_destroy().
+  /// - Since 3.0, http://tizen.org/privilege/location privilege is not required.
+  ///
+  /// **Parameters:**
+  /// - `manager` (out): A geofence manager handle to be newly created on success
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GEOFENCE_MANAGER_ERROR_NONE`: Successful
+  /// - `GEOFENCE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER`: Illegal argument
+  /// - `GEOFENCE_MANAGER_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `GEOFENCE_MANAGER_ERROR_EXCEPTION`: Exception occurred
+  ///
+  /// **See also:**
+  /// - `geofence_manager_destroy()`
   int geofence_manager_create(
     ffi.Pointer<geofence_manager_h> manager,
   ) {
@@ -77,20 +100,33 @@ class Tizen65CapiGeofenceManager {
   late final _geofence_manager_create = _geofence_manager_createPtr
       .asFunction<int Function(ffi.Pointer<geofence_manager_h>)>();
 
-  /// @brief Releases the geofence manager.
-  /// @since_tizen 2.4
-  /// @remarks Since 3.0, http://tizen.org/privilege/location privilege is not required.
-  /// @param[in] manager The geofence manager handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #GEOFENCE_MANAGER_ERROR_NONE Successful
-  /// @retval #GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER Illegal argument
-  /// @retval #GEOFENCE_MANAGER_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #GEOFENCE_MANAGER_ERROR_EXCEPTION Exception occurred
-  /// @pre geofence_manager_stop() is called before.
-  /// @see geofence_manager_create()
-  /// @see geofence_manager_stop()
+  /// Releases the geofence manager.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Remarks:**
+  /// - Since 3.0, http://tizen.org/privilege/location privilege is not required.
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The geofence manager handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GEOFENCE_MANAGER_ERROR_NONE`: Successful
+  /// - `GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER`: Illegal argument
+  /// - `GEOFENCE_MANAGER_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `GEOFENCE_MANAGER_ERROR_EXCEPTION`: Exception occurred
+  ///
+  /// **Preconditions:**
+  /// - geofence_manager_stop() is called before.
+  ///
+  /// **See also:**
+  /// - `geofence_manager_create()`
+  /// - `geofence_manager_stop()`
   int geofence_manager_destroy(
     geofence_manager_h manager,
   ) {
@@ -105,27 +141,42 @@ class Tizen65CapiGeofenceManager {
   late final _geofence_manager_destroy = _geofence_manager_destroyPtr
       .asFunction<int Function(geofence_manager_h)>();
 
-  /// @brief Starts the geofencing service.
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/location
-  /// @remarks There is no limit on number of geofence managers for which this function called
-  /// Calling this function invokes a location service event. When the location service is enabled, the service state change callback
-  /// (set using #geofence_manager_set_geofence_state_changed_cb()) notifies the user with geofence ID as the 1st argument,
-  /// geofence zone state(#GEOFENCE_STATE_IN and #GEOFENCE_STATE_OUT) as the 2nd argument, and the service starts.
-  /// @param[in] manager The geofence manager handle
-  /// @param[in] geofence_id The specified geofence ID
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #GEOFENCE_MANAGER_ERROR_NONE Successful
-  /// @retval #GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER Illegal argument
-  /// @retval #GEOFENCE_MANAGER_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #GEOFENCE_MANAGER_ERROR_EXCEPTION Exception occurred
-  /// @retval #GEOFENCE_MANAGER_ERROR_GEOFENCE_ACCESS_DENIED Access to specified geofence is denied
-  /// @see geofence_manager_stop()
-  /// @see geofence_manager_add_fence()
-  /// @see geofence_manager_set_geofence_state_changed_cb()
+  /// Starts the geofencing service.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/location>
+  ///
+  /// **Remarks:**
+  /// - There is no limit on number of geofence managers for which this function called
+  /// - Calling this function invokes a location service event. When the location service is enabled, the service state change callback
+  /// - (set using `geofence_manager_set_geofence_state_changed_cb()`) notifies the user with geofence ID as the 1st argument,
+  /// - geofence zone state(`GEOFENCE_STATE_IN` and `GEOFENCE_STATE_OUT`) as the 2nd argument, and the service starts.
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The geofence manager handle
+  /// - `geofence_id` (in): The specified geofence ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GEOFENCE_MANAGER_ERROR_NONE`: Successful
+  /// - `GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER`: Illegal argument
+  /// - `GEOFENCE_MANAGER_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `GEOFENCE_MANAGER_ERROR_EXCEPTION`: Exception occurred
+  /// - `GEOFENCE_MANAGER_ERROR_GEOFENCE_ACCESS_DENIED`: Access to specified geofence is denied
+  ///
+  /// **See also:**
+  /// - `geofence_manager_stop()`
+  /// - `geofence_manager_add_fence()`
+  /// - `geofence_manager_set_geofence_state_changed_cb()`
   int geofence_manager_start(
     geofence_manager_h manager,
     int geofence_id,
@@ -142,24 +193,39 @@ class Tizen65CapiGeofenceManager {
   late final _geofence_manager_start = _geofence_manager_startPtr
       .asFunction<int Function(geofence_manager_h, int)>();
 
-  /// @brief Stops the geofencing service.
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/location
-  /// @remarks This function initiates the process of stopping the service.
-  /// You can stop and start the geofence manager as needed.
-  /// @param[in] manager The geofence manager handle
-  /// @param[in] geofence_id The specified geofence ID
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #GEOFENCE_MANAGER_ERROR_NONE Successful
-  /// @retval #GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER Illegal argument
-  /// @retval #GEOFENCE_MANAGER_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_INITIALIZED Not initialized
-  /// @retval #GEOFENCE_MANAGER_ERROR_EXCEPTION Exception occurred
-  /// @retval #GEOFENCE_MANAGER_ERROR_GEOFENCE_ACCESS_DENIED Access to specified geofence is denied
-  /// @see geofence_manager_start()
+  /// Stops the geofencing service.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/location>
+  ///
+  /// **Remarks:**
+  /// - This function initiates the process of stopping the service.
+  /// - You can stop and start the geofence manager as needed.
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The geofence manager handle
+  /// - `geofence_id` (in): The specified geofence ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GEOFENCE_MANAGER_ERROR_NONE`: Successful
+  /// - `GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER`: Illegal argument
+  /// - `GEOFENCE_MANAGER_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `GEOFENCE_MANAGER_ERROR_EXCEPTION`: Exception occurred
+  /// - `GEOFENCE_MANAGER_ERROR_GEOFENCE_ACCESS_DENIED`: Access to specified geofence is denied
+  ///
+  /// **See also:**
+  /// - `geofence_manager_start()`
   int geofence_manager_stop(
     geofence_manager_h manager,
     int geofence_id,
@@ -176,21 +242,33 @@ class Tizen65CapiGeofenceManager {
   late final _geofence_manager_stop = _geofence_manager_stopPtr
       .asFunction<int Function(geofence_manager_h, int)>();
 
-  /// @brief Creates a new place for geofencing service.
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/location
-  /// @param[in] manager The geofence manager handle
-  /// @param[in] place_name A place name to be created
-  /// @param[out] place_id The place ID to be newly created on success
-  /// @retval #GEOFENCE_MANAGER_ERROR_NONE Successful
-  /// @retval #GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER Illegal argument
-  /// @retval #GEOFENCE_MANAGER_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_INITIALIZED Not initialized
-  /// @retval #GEOFENCE_MANAGER_ERROR_EXCEPTION Exception occurred
-  /// @see geofence_manager_update_place()
-  /// @see geofence_manager_remove_place()
+  /// Creates a new place for geofencing service.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/location>
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The geofence manager handle
+  /// - `place_name` (in): A place name to be created
+  /// - `place_id` (out): The place ID to be newly created on success
+  ///
+  /// **Return values:**
+  /// - `GEOFENCE_MANAGER_ERROR_NONE`: Successful
+  /// - `GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER`: Illegal argument
+  /// - `GEOFENCE_MANAGER_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `GEOFENCE_MANAGER_ERROR_EXCEPTION`: Exception occurred
+  ///
+  /// **See also:**
+  /// - `geofence_manager_update_place()`
+  /// - `geofence_manager_remove_place()`
   int geofence_manager_add_place(
     geofence_manager_h manager,
     ffi.Pointer<ffi.Char> place_name,
@@ -212,22 +290,34 @@ class Tizen65CapiGeofenceManager {
           int Function(geofence_manager_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Updates the place name of a given place ID.
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/location
-  /// @param[in] manager The geofence manager handle
-  /// @param[in] place_id The specified place ID
-  /// @param[in] place_name A new place name of the place ID
-  /// @retval #GEOFENCE_MANAGER_ERROR_NONE Successful
-  /// @retval #GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER Illegal argument
-  /// @retval #GEOFENCE_MANAGER_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_INITIALIZED Not initialized
-  /// @retval #GEOFENCE_MANAGER_ERROR_EXCEPTION Exception occurred
-  /// @retval #GEOFENCE_MANAGER_ERROR_PLACE_ACCESS_DENIED Access to specified place is denied
-  /// @see geofence_manager_add_place()
-  /// @see geofence_manager_remove_place()
+  /// Updates the place name of a given place ID.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/location>
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The geofence manager handle
+  /// - `place_id` (in): The specified place ID
+  /// - `place_name` (in): A new place name of the place ID
+  ///
+  /// **Return values:**
+  /// - `GEOFENCE_MANAGER_ERROR_NONE`: Successful
+  /// - `GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER`: Illegal argument
+  /// - `GEOFENCE_MANAGER_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `GEOFENCE_MANAGER_ERROR_EXCEPTION`: Exception occurred
+  /// - `GEOFENCE_MANAGER_ERROR_PLACE_ACCESS_DENIED`: Access to specified place is denied
+  ///
+  /// **See also:**
+  /// - `geofence_manager_add_place()`
+  /// - `geofence_manager_remove_place()`
   int geofence_manager_update_place(
     geofence_manager_h manager,
     int place_id,
@@ -248,23 +338,39 @@ class Tizen65CapiGeofenceManager {
       _geofence_manager_update_placePtr.asFunction<
           int Function(geofence_manager_h, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Removes the specific place for geofencing service.
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/location
-  /// @remarks The place must have no geofences.
-  /// @param[in] manager The geofence manager handle
-  /// @param[in] place_id The specified place ID
-  /// @retval #GEOFENCE_MANAGER_ERROR_NONE Successful
-  /// @retval #GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER Illegal argument
-  /// @retval #GEOFENCE_MANAGER_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_INITIALIZED Not initialized
-  /// @retval #GEOFENCE_MANAGER_ERROR_EXCEPTION Exception occurred
-  /// @retval #GEOFENCE_MANAGER_ERROR_PLACE_ACCESS_DENIED Access to specified place is denied
-  /// @pre geofence_manager_remove_fence() in all geofence is called before.
-  /// @see geofence_manager_add_place()
-  /// @see geofence_manager_update_place()
+  /// Removes the specific place for geofencing service.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/location>
+  ///
+  /// **Remarks:**
+  /// - The place must have no geofences.
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The geofence manager handle
+  /// - `place_id` (in): The specified place ID
+  ///
+  /// **Return values:**
+  /// - `GEOFENCE_MANAGER_ERROR_NONE`: Successful
+  /// - `GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER`: Illegal argument
+  /// - `GEOFENCE_MANAGER_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `GEOFENCE_MANAGER_ERROR_EXCEPTION`: Exception occurred
+  /// - `GEOFENCE_MANAGER_ERROR_PLACE_ACCESS_DENIED`: Access to specified place is denied
+  ///
+  /// **Preconditions:**
+  /// - geofence_manager_remove_fence() in all geofence is called before.
+  ///
+  /// **See also:**
+  /// - `geofence_manager_add_place()`
+  /// - `geofence_manager_update_place()`
   int geofence_manager_remove_place(
     geofence_manager_h manager,
     int place_id,
@@ -281,26 +387,39 @@ class Tizen65CapiGeofenceManager {
   late final _geofence_manager_remove_place = _geofence_manager_remove_placePtr
       .asFunction<int Function(geofence_manager_h, int)>();
 
-  /// @brief Adds a geofence for a given geofence manager.
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/location
-  /// @param[in] manager The geofence manager handle
-  /// @param[in] fence The geofence handle
-  /// @param[out] geofence_id The geofence ID handle to be newly created on success
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #GEOFENCE_MANAGER_ERROR_NONE Successful
-  /// @retval #GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER Illegal argument
-  /// @retval #GEOFENCE_MANAGER_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_INITIALIZED Not initialized
-  /// @retval #GEOFENCE_MANAGER_ERROR_EXCEPTION Exception occurred
-  /// @see geofence_manager_remove_fence()
-  /// @see geofence_create_geopoint()
-  /// @see geofence_create_bluetooth()
-  /// @see geofence_create_wifi()
-  /// @see geofence_manager_start()
+  /// Adds a geofence for a given geofence manager.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/location>
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The geofence manager handle
+  /// - `fence` (in): The geofence handle
+  /// - `geofence_id` (out): The geofence ID handle to be newly created on success
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GEOFENCE_MANAGER_ERROR_NONE`: Successful
+  /// - `GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER`: Illegal argument
+  /// - `GEOFENCE_MANAGER_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `GEOFENCE_MANAGER_ERROR_EXCEPTION`: Exception occurred
+  ///
+  /// **See also:**
+  /// - `geofence_manager_remove_fence()`
+  /// - `geofence_create_geopoint()`
+  /// - `geofence_create_bluetooth()`
+  /// - `geofence_create_wifi()`
+  /// - `geofence_manager_start()`
   int geofence_manager_add_fence(
     geofence_manager_h manager,
     geofence_h fence,
@@ -321,23 +440,38 @@ class Tizen65CapiGeofenceManager {
       _geofence_manager_add_fencePtr.asFunction<
           int Function(geofence_manager_h, geofence_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Removes a geofence with a given geofence ID
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/location
-  /// @param[in] manager The geofence manager handle
-  /// @param[in] geofence_id The specified geofence ID
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #GEOFENCE_MANAGER_ERROR_NONE Successful
-  /// @retval #GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER Illegal argument
-  /// @retval #GEOFENCE_MANAGER_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_INITIALIZED Not initialized
-  /// @retval #GEOFENCE_MANAGER_ERROR_EXCEPTION Exception occurred
-  /// @retval #GEOFENCE_MANAGER_ERROR_GEOFENCE_ACCESS_DENIED Access to specified geofence is denied
-  /// @pre geofence_manager_stop() is called before.
-  /// @see geofence_manager_add_fence()
+  /// Removes a geofence with a given geofence ID
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/location>
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The geofence manager handle
+  /// - `geofence_id` (in): The specified geofence ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GEOFENCE_MANAGER_ERROR_NONE`: Successful
+  /// - `GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER`: Illegal argument
+  /// - `GEOFENCE_MANAGER_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `GEOFENCE_MANAGER_ERROR_EXCEPTION`: Exception occurred
+  /// - `GEOFENCE_MANAGER_ERROR_GEOFENCE_ACCESS_DENIED`: Access to specified geofence is denied
+  ///
+  /// **Preconditions:**
+  /// - geofence_manager_stop() is called before.
+  ///
+  /// **See also:**
+  /// - `geofence_manager_add_fence()`
   int geofence_manager_remove_fence(
     geofence_manager_h manager,
     int geofence_id,
@@ -354,19 +488,30 @@ class Tizen65CapiGeofenceManager {
   late final _geofence_manager_remove_fence = _geofence_manager_remove_fencePtr
       .asFunction<int Function(geofence_manager_h, int)>();
 
-  /// @brief Registers a callback function to be invoked when a device enters or exits the specific geofence.
-  /// @since_tizen 2.4
-  /// @param[in] manager The geofence manager handle
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #GEOFENCE_MANAGER_ERROR_NONE Successful
-  /// @retval #GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER Illegal argument
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED Not supported
-  /// @post This function invokes geofence_state_changed_cb().
-  /// @see geofence_manager_unset_geofence_state_changed_cb()
-  /// @see geofence_state_changed_cb()
+  /// Registers a callback function to be invoked when a device enters or exits the specific geofence.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The geofence manager handle
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GEOFENCE_MANAGER_ERROR_NONE`: Successful
+  /// - `GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER`: Illegal argument
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - This function invokes geofence_state_changed_cb().
+  ///
+  /// **See also:**
+  /// - `geofence_manager_unset_geofence_state_changed_cb()`
+  /// - `geofence_state_changed_cb()`
   int geofence_manager_set_geofence_state_changed_cb(
     geofence_manager_h manager,
     geofence_state_changed_cb callback,
@@ -389,15 +534,24 @@ class Tizen65CapiGeofenceManager {
           int Function(geofence_manager_h, geofence_state_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback function.
-  /// @since_tizen 2.4
-  /// @param[in] manager The geofence manager handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #GEOFENCE_MANAGER_ERROR_NONE Successful
-  /// @retval #GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER Illegal argument
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED Not supported
-  /// @see geofence_state_changed_cb()
+  /// Unregisters the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The geofence manager handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GEOFENCE_MANAGER_ERROR_NONE`: Successful
+  /// - `GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER`: Illegal argument
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `geofence_state_changed_cb()`
   int geofence_manager_unset_geofence_state_changed_cb(
     geofence_manager_h manager,
   ) {
@@ -413,18 +567,29 @@ class Tizen65CapiGeofenceManager {
       _geofence_manager_unset_geofence_state_changed_cbPtr
           .asFunction<int Function(geofence_manager_h)>();
 
-  /// @brief Registers a callback function to be invoked when a response comes.
-  /// @since_tizen 2.4
-  /// @param[in] manager The geofence manager handle
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #GEOFENCE_MANAGER_ERROR_NONE Successful
-  /// @retval #GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER Illegal argument
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED Not supported
-  /// @post This function invokes geofence_event_cb().
-  /// @see geofence_manager_unset_geofence_event_cb()
+  /// Registers a callback function to be invoked when a response comes.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The geofence manager handle
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GEOFENCE_MANAGER_ERROR_NONE`: Successful
+  /// - `GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER`: Illegal argument
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - This function invokes geofence_event_cb().
+  ///
+  /// **See also:**
+  /// - `geofence_manager_unset_geofence_event_cb()`
   int geofence_manager_set_geofence_event_cb(
     geofence_manager_h manager,
     geofence_event_cb callback,
@@ -447,15 +612,24 @@ class Tizen65CapiGeofenceManager {
           int Function(
               geofence_manager_h, geofence_event_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback function.
-  /// @since_tizen 2.4
-  /// @param[in] manager The geofence manager handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #GEOFENCE_MANAGER_ERROR_NONE Successful
-  /// @retval #GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER Illegal argument
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED Not supported
-  /// @see geofence_event_cb()
+  /// Unregisters the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The geofence manager handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GEOFENCE_MANAGER_ERROR_NONE`: Successful
+  /// - `GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER`: Illegal argument
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `geofence_event_cb()`
   int geofence_manager_unset_geofence_event_cb(
     geofence_manager_h manager,
   ) {
@@ -471,19 +645,31 @@ class Tizen65CapiGeofenceManager {
       _geofence_manager_unset_geofence_event_cbPtr
           .asFunction<int Function(geofence_manager_h)>();
 
-  /// @brief Registers a callback function to be invoked when a proximity state of device is changed.
-  /// @details The proximity state is measured from registered position regardless of the geofence boundary.
-  /// @since_tizen 3.0
-  /// @param[in] manager The geofence manager handle
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #GEOFENCE_MANAGER_ERROR_NONE Successful
-  /// @retval #GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER Illegal argument
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED Not supported
-  /// @post This function invokes geofence_proximity_state_changed_cb().
-  /// @see geofence_manager_unset_geofence_proximity_state_changed_cb()
+  /// Registers a callback function to be invoked when a proximity state of device is changed.
+  ///
+  /// The proximity state is measured from registered position regardless of the geofence boundary.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The geofence manager handle
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GEOFENCE_MANAGER_ERROR_NONE`: Successful
+  /// - `GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER`: Illegal argument
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - This function invokes geofence_proximity_state_changed_cb().
+  ///
+  /// **See also:**
+  /// - `geofence_manager_unset_geofence_proximity_state_changed_cb()`
   int geofence_manager_set_geofence_proximity_state_changed_cb(
     geofence_manager_h manager,
     geofence_proximity_state_changed_cb callback,
@@ -509,15 +695,24 @@ class Tizen65CapiGeofenceManager {
           int Function(geofence_manager_h, geofence_proximity_state_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback function.
-  /// @since_tizen 3.0
-  /// @param[in] manager The geofence manager handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #GEOFENCE_MANAGER_ERROR_NONE Successful
-  /// @retval #GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER Illegal argument
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED Not supported
-  /// @see geofence_manager_set_geofence_proximity_state_changed_cb()
+  /// Unregisters the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The geofence manager handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GEOFENCE_MANAGER_ERROR_NONE`: Successful
+  /// - `GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER`: Illegal argument
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `geofence_manager_set_geofence_proximity_state_changed_cb()`
   int geofence_manager_unset_geofence_proximity_state_changed_cb(
     geofence_manager_h manager,
   ) {
@@ -533,23 +728,38 @@ class Tizen65CapiGeofenceManager {
       _geofence_manager_unset_geofence_proximity_state_changed_cbPtr
           .asFunction<int Function(geofence_manager_h)>();
 
-  /// @brief Retrieves a list of fences registered in the specified geofence manager.
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/location
-  /// @param[in] manager The geofence manager handle
-  /// @param[in] callback The callback function to deliver each fence
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #GEOFENCE_MANAGER_ERROR_NONE Successful
-  /// @retval #GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER Illegal argument
-  /// @retval #GEOFENCE_MANAGER_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #GEOFENCE_MANAGER_ERROR_DATABASE Database error
-  /// @post This function invokes geofence_manager_fence_cb().
-  /// @see geofence_manager_fence_cb()
-  /// @see geofence_manager_add_fence()
+  /// Retrieves a list of fences registered in the specified geofence manager.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/location>
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The geofence manager handle
+  /// - `callback` (in): The callback function to deliver each fence
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GEOFENCE_MANAGER_ERROR_NONE`: Successful
+  /// - `GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER`: Illegal argument
+  /// - `GEOFENCE_MANAGER_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `GEOFENCE_MANAGER_ERROR_DATABASE`: Database error
+  ///
+  /// **Postconditions:**
+  /// - This function invokes geofence_manager_fence_cb().
+  ///
+  /// **See also:**
+  /// - `geofence_manager_fence_cb()`
+  /// - `geofence_manager_add_fence()`
   int geofence_manager_foreach_geofence_list(
     geofence_manager_h manager,
     geofence_manager_fence_cb callback,
@@ -572,25 +782,40 @@ class Tizen65CapiGeofenceManager {
           int Function(geofence_manager_h, geofence_manager_fence_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Retrieves a list of fences registered in the specified place.
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/location
-  /// @param[in] manager The geofence manager handle
-  /// @param[in] place_id The place ID
-  /// @param[in] callback The callback function to deliver each fence of the specified place
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #GEOFENCE_MANAGER_ERROR_NONE Successful
-  /// @retval #GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER Illegal argument
-  /// @retval #GEOFENCE_MANAGER_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #GEOFENCE_MANAGER_ERROR_DATABASE Database error
-  /// @retval #GEOFENCE_MANAGER_ERROR_PLACE_ACCESS_DENIED Access to specified place is denied
-  /// @post This function invokes geofence_manager_fence_cb().
-  /// @see geofence_manager_fence_cb()
-  /// @see geofence_manager_add_place()
+  /// Retrieves a list of fences registered in the specified place.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/location>
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The geofence manager handle
+  /// - `place_id` (in): The place ID
+  /// - `callback` (in): The callback function to deliver each fence of the specified place
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GEOFENCE_MANAGER_ERROR_NONE`: Successful
+  /// - `GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER`: Illegal argument
+  /// - `GEOFENCE_MANAGER_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `GEOFENCE_MANAGER_ERROR_DATABASE`: Database error
+  /// - `GEOFENCE_MANAGER_ERROR_PLACE_ACCESS_DENIED`: Access to specified place is denied
+  ///
+  /// **Postconditions:**
+  /// - This function invokes geofence_manager_fence_cb().
+  ///
+  /// **See also:**
+  /// - `geofence_manager_fence_cb()`
+  /// - `geofence_manager_add_place()`
   int geofence_manager_foreach_place_geofence_list(
     geofence_manager_h manager,
     int place_id,
@@ -615,23 +840,38 @@ class Tizen65CapiGeofenceManager {
           int Function(geofence_manager_h, int, geofence_manager_fence_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Retrieves a list of places registered in the specified geofence manager.
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/location
-  /// @param[in] manager The geofence manager handle
-  /// @param[in] callback The callback function to deliver each place of the specified geofence manager
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #GEOFENCE_MANAGER_ERROR_NONE Successful
-  /// @retval #GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER Illegal argument
-  /// @retval #GEOFENCE_MANAGER_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #GEOFENCE_MANAGER_ERROR_DATABASE Database error
-  /// @post This function invokes geofence_manager_place_cb().
-  /// @see geofence_manager_place_cb()
-  /// @see geofence_manager_add_place()
+  /// Retrieves a list of places registered in the specified geofence manager.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/location>
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The geofence manager handle
+  /// - `callback` (in): The callback function to deliver each place of the specified geofence manager
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GEOFENCE_MANAGER_ERROR_NONE`: Successful
+  /// - `GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER`: Illegal argument
+  /// - `GEOFENCE_MANAGER_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `GEOFENCE_MANAGER_ERROR_DATABASE`: Database error
+  ///
+  /// **Postconditions:**
+  /// - This function invokes geofence_manager_place_cb().
+  ///
+  /// **See also:**
+  /// - `geofence_manager_place_cb()`
+  /// - `geofence_manager_add_place()`
   int geofence_manager_foreach_place_list(
     geofence_manager_h manager,
     geofence_manager_place_cb callback,
@@ -653,25 +893,40 @@ class Tizen65CapiGeofenceManager {
           int Function(geofence_manager_h, geofence_manager_place_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the name of place.
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/location
-  /// @remarks The place_name must be released using free().
-  /// @param[in] manager The geofence manager handle
-  /// @param[in] place_id The place ID
-  /// @param[out] place_name The name of the place
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #GEOFENCE_MANAGER_ERROR_NONE Successful
-  /// @retval #GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER Illegal argument
-  /// @retval #GEOFENCE_MANAGER_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #GEOFENCE_MANAGER_ERROR_INVALID_ID Invalid geofence ID
-  /// @retval #GEOFENCE_MANAGER_ERROR_DATABASE Database error
-  /// @retval #GEOFENCE_MANAGER_ERROR_PLACE_ACCESS_DENIED Access to specified place is denied
-  /// @see geofence_manager_add_place()
-  /// @see geofence_manager_update_place()
+  /// Gets the name of place.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/location>
+  ///
+  /// **Remarks:**
+  /// - The place_name must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The geofence manager handle
+  /// - `place_id` (in): The place ID
+  /// - `place_name` (out): The name of the place
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GEOFENCE_MANAGER_ERROR_NONE`: Successful
+  /// - `GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER`: Illegal argument
+  /// - `GEOFENCE_MANAGER_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `GEOFENCE_MANAGER_ERROR_INVALID_ID`: Invalid geofence ID
+  /// - `GEOFENCE_MANAGER_ERROR_DATABASE`: Database error
+  /// - `GEOFENCE_MANAGER_ERROR_PLACE_ACCESS_DENIED`: Access to specified place is denied
+  ///
+  /// **See also:**
+  /// - `geofence_manager_add_place()`
+  /// - `geofence_manager_update_place()`
   int geofence_manager_get_place_name(
     geofence_manager_h manager,
     int place_id,
@@ -694,27 +949,38 @@ class Tizen65CapiGeofenceManager {
           int Function(
               geofence_manager_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Creates a geopoint type of new geofence.
-  /// @since_tizen 2.4
-  /// @remarks The fence must be released using geofence_destroy().\n
-  /// Since 3.0, http://tizen.org/privilege/location privilege is not required.
-  /// @param[in] place_id The current place ID
-  /// @param[in] latitude Specifies the value of latitude of geofence [-90.0 ~ 90.0] (degrees)
-  /// @param[in] longitude Specifies the value of longitude of geofence [-180.0 ~ 180.0] (degrees)
-  /// @param[in] radius Specifies the value of radius of geofence [100 ~ 500](meter)
-  /// @param[in] address Specifies the value of address
-  /// @param[out] fence A geofence handle to be newly created on success
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #GEOFENCE_MANAGER_ERROR_NONE Successful
-  /// @retval #GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER Illegal argument
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #GEOFENCE_MANAGER_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function
-  /// @retval #GEOFENCE_MANAGER_ERROR_EXCEPTION Exception occurred
-  /// @retval #GEOFENCE_MANAGER_ERROR_PLACE_ACCESS_DENIED Access to specified place is denied
-  /// @see geofence_create_bluetooth()
-  /// @see geofence_create_wifi()
-  /// @see geofence_destroy()
+  /// Creates a geopoint type of new geofence.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Remarks:**
+  /// - The fence must be released using geofence_destroy().
+  /// - Since 3.0, http://tizen.org/privilege/location privilege is not required.
+  ///
+  /// **Parameters:**
+  /// - `place_id` (in): The current place ID
+  /// - `latitude` (in): Specifies the value of latitude of geofence `[-90.0 ~ 90.0]` (degrees)
+  /// - `longitude` (in): Specifies the value of longitude of geofence `[-180.0 ~ 180.0]` (degrees)
+  /// - `radius` (in): Specifies the value of radius of geofence `[100 ~ 500]`(meter)
+  /// - `address` (in): Specifies the value of address
+  /// - `fence` (out): A geofence handle to be newly created on success
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GEOFENCE_MANAGER_ERROR_NONE`: Successful
+  /// - `GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER`: Illegal argument
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `GEOFENCE_MANAGER_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function
+  /// - `GEOFENCE_MANAGER_ERROR_EXCEPTION`: Exception occurred
+  /// - `GEOFENCE_MANAGER_ERROR_PLACE_ACCESS_DENIED`: Access to specified place is denied
+  ///
+  /// **See also:**
+  /// - `geofence_create_bluetooth()`
+  /// - `geofence_create_wifi()`
+  /// - `geofence_destroy()`
   int geofence_create_geopoint(
     int place_id,
     double latitude,
@@ -747,25 +1013,36 @@ class Tizen65CapiGeofenceManager {
           int Function(int, double, double, int, ffi.Pointer<ffi.Char>,
               ffi.Pointer<geofence_h>)>();
 
-  /// @brief Creates a bluetooth type of new geofence.
-  /// @since_tizen 2.4
-  /// @remarks The fence must be released using geofence_destroy().\n
-  /// Since 3.0, http://tizen.org/privilege/location privilege is not required.
-  /// @param[in] place_id The current place ID
-  /// @param[in] bssid Specifies the value of BSSID of BT MAC address
-  /// @param[in] ssid Specifies the value of SSID of BT Device
-  /// @param[out] fence A geofence handle to be newly created on success
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #GEOFENCE_MANAGER_ERROR_NONE Successful
-  /// @retval #GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER Illegal argument
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #GEOFENCE_MANAGER_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function
-  /// @retval #GEOFENCE_MANAGER_ERROR_EXCEPTION Exception occurred
-  /// @retval #GEOFENCE_MANAGER_ERROR_PLACE_ACCESS_DENIED Access to specified place is denied
-  /// @see geofence_create_geopoint()
-  /// @see geofence_create_wifi()
-  /// @see geofence_destroy()
+  /// Creates a bluetooth type of new geofence.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Remarks:**
+  /// - The fence must be released using geofence_destroy().
+  /// - Since 3.0, http://tizen.org/privilege/location privilege is not required.
+  ///
+  /// **Parameters:**
+  /// - `place_id` (in): The current place ID
+  /// - `bssid` (in): Specifies the value of BSSID of BT MAC address
+  /// - `ssid` (in): Specifies the value of SSID of BT Device
+  /// - `fence` (out): A geofence handle to be newly created on success
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GEOFENCE_MANAGER_ERROR_NONE`: Successful
+  /// - `GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER`: Illegal argument
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `GEOFENCE_MANAGER_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function
+  /// - `GEOFENCE_MANAGER_ERROR_EXCEPTION`: Exception occurred
+  /// - `GEOFENCE_MANAGER_ERROR_PLACE_ACCESS_DENIED`: Access to specified place is denied
+  ///
+  /// **See also:**
+  /// - `geofence_create_geopoint()`
+  /// - `geofence_create_wifi()`
+  /// - `geofence_destroy()`
   int geofence_create_bluetooth(
     int place_id,
     ffi.Pointer<ffi.Char> bssid,
@@ -792,25 +1069,36 @@ class Tizen65CapiGeofenceManager {
           int Function(int, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
               ffi.Pointer<geofence_h>)>();
 
-  /// @brief Creates a Wi-Fi type of new geofence.
-  /// @since_tizen 2.4
-  /// @remarks The fence must be released using geofence_destroy().\n
-  /// Since 3.0, http://tizen.org/privilege/location privilege is not required.
-  /// @param[in] place_id The current place ID
-  /// @param[in] bssid Specifies the value of BSSID of Wi-Fi MAC address
-  /// @param[in] ssid Specifies the value of SSID of Wi-Fi Device
-  /// @param[out] fence A geofence handle to be newly created on success
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #GEOFENCE_MANAGER_ERROR_NONE Successful
-  /// @retval #GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER Illegal argument
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #GEOFENCE_MANAGER_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function
-  /// @retval #GEOFENCE_MANAGER_ERROR_EXCEPTION Exception occurred
-  /// @retval #GEOFENCE_MANAGER_ERROR_PLACE_ACCESS_DENIED Access to specified place is denied
-  /// @see geofence_create_geopoint()
-  /// @see geofence_create_bluetooth()
-  /// @see geofence_destroy()
+  /// Creates a Wi-Fi type of new geofence.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Remarks:**
+  /// - The fence must be released using geofence_destroy().
+  /// - Since 3.0, http://tizen.org/privilege/location privilege is not required.
+  ///
+  /// **Parameters:**
+  /// - `place_id` (in): The current place ID
+  /// - `bssid` (in): Specifies the value of BSSID of Wi-Fi MAC address
+  /// - `ssid` (in): Specifies the value of SSID of Wi-Fi Device
+  /// - `fence` (out): A geofence handle to be newly created on success
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GEOFENCE_MANAGER_ERROR_NONE`: Successful
+  /// - `GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER`: Illegal argument
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `GEOFENCE_MANAGER_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function
+  /// - `GEOFENCE_MANAGER_ERROR_EXCEPTION`: Exception occurred
+  /// - `GEOFENCE_MANAGER_ERROR_PLACE_ACCESS_DENIED`: Access to specified place is denied
+  ///
+  /// **See also:**
+  /// - `geofence_create_geopoint()`
+  /// - `geofence_create_bluetooth()`
+  /// - `geofence_destroy()`
   int geofence_create_wifi(
     int place_id,
     ffi.Pointer<ffi.Char> bssid,
@@ -836,19 +1124,30 @@ class Tizen65CapiGeofenceManager {
       int Function(int, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
           ffi.Pointer<geofence_h>)>();
 
-  /// @brief Releases the geofence.
-  /// @since_tizen 2.4
-  /// @remarks Since 3.0, http://tizen.org/privilege/location privilege is not required.
-  /// @param[in] fence The geofence handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #GEOFENCE_MANAGER_ERROR_NONE Successful
-  /// @retval #GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER Illegal argument
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #GEOFENCE_MANAGER_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function
-  /// @see geofence_create_geopoint()
-  /// @see geofence_create_bluetooth()
-  /// @see geofence_create_wifi()
+  /// Releases the geofence.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Remarks:**
+  /// - Since 3.0, http://tizen.org/privilege/location privilege is not required.
+  ///
+  /// **Parameters:**
+  /// - `fence` (in): The geofence handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GEOFENCE_MANAGER_ERROR_NONE`: Successful
+  /// - `GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER`: Illegal argument
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `GEOFENCE_MANAGER_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function
+  ///
+  /// **See also:**
+  /// - `geofence_create_geopoint()`
+  /// - `geofence_create_bluetooth()`
+  /// - `geofence_create_wifi()`
   int geofence_destroy(
     geofence_h fence,
   ) {
@@ -863,18 +1162,27 @@ class Tizen65CapiGeofenceManager {
   late final _geofence_destroy =
       _geofence_destroyPtr.asFunction<int Function(geofence_h)>();
 
-  /// @brief Gets the type of geofence.
-  /// @since_tizen 2.4
-  /// @param[in] fence The geofence handle
-  /// @param[out] type The type of geofence
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #GEOFENCE_MANAGER_ERROR_NONE Successful
-  /// @retval #GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER Illegal argument
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED Not supported
-  /// @see geofence_get_geopoint()
-  /// @see geofence_get_radius()
-  /// @see geofence_get_bssid()
+  /// Gets the type of geofence.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Parameters:**
+  /// - `fence` (in): The geofence handle
+  /// - `type` (out): The type of geofence
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GEOFENCE_MANAGER_ERROR_NONE`: Successful
+  /// - `GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER`: Illegal argument
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `geofence_get_geopoint()`
+  /// - `geofence_get_radius()`
+  /// - `geofence_get_bssid()`
   int geofence_get_type(
     geofence_h fence,
     ffi.Pointer<ffi.Int32> type,
@@ -892,18 +1200,27 @@ class Tizen65CapiGeofenceManager {
   late final _geofence_get_type = _geofence_get_typePtr
       .asFunction<int Function(geofence_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the ID of place.
-  /// @since_tizen 2.4
-  /// @param[in] fence The geofence handle
-  /// @param[out] place_id The ID of the place
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #GEOFENCE_MANAGER_ERROR_NONE Successful
-  /// @retval #GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER Illegal argument
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED Not supported
-  /// @see geofence_create_geopoint()
-  /// @see geofence_create_bluetooth()
-  /// @see geofence_create_wifi()
+  /// Gets the ID of place.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Parameters:**
+  /// - `fence` (in): The geofence handle
+  /// - `place_id` (out): The ID of the place
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GEOFENCE_MANAGER_ERROR_NONE`: Successful
+  /// - `GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER`: Illegal argument
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `geofence_create_geopoint()`
+  /// - `geofence_create_bluetooth()`
+  /// - `geofence_create_wifi()`
   int geofence_get_place_id(
     geofence_h fence,
     ffi.Pointer<ffi.Int> place_id,
@@ -921,21 +1238,32 @@ class Tizen65CapiGeofenceManager {
   late final _geofence_get_place_id = _geofence_get_place_idPtr
       .asFunction<int Function(geofence_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the latitude of geofence.
-  /// @since_tizen 2.4
-  /// @remarks The geofence has latitude only when geofence_type_e is GEOFENCE_TYPE_GEOPOINT.
-  /// @param[in] fence The geofence handle
-  /// @param[out] latitude The latitude of geofence
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #GEOFENCE_MANAGER_ERROR_NONE Successful
-  /// @retval #GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER Illegal argument.
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED Not supported
-  /// @see geofence_get_longitude()
-  /// @see geofence_get_radius()
-  /// @see geofence_get_address()
-  /// @see geofence_get_type()
-  /// @see geofence_create_geopoint()
+  /// Gets the latitude of geofence.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Remarks:**
+  /// - The geofence has latitude only when geofence_type_e is GEOFENCE_TYPE_GEOPOINT.
+  ///
+  /// **Parameters:**
+  /// - `fence` (in): The geofence handle
+  /// - `latitude` (out): The latitude of geofence
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GEOFENCE_MANAGER_ERROR_NONE`: Successful
+  /// - `GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER`: Illegal argument.
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `geofence_get_longitude()`
+  /// - `geofence_get_radius()`
+  /// - `geofence_get_address()`
+  /// - `geofence_get_type()`
+  /// - `geofence_create_geopoint()`
   int geofence_get_latitude(
     geofence_h fence,
     ffi.Pointer<ffi.Double> latitude,
@@ -953,21 +1281,32 @@ class Tizen65CapiGeofenceManager {
   late final _geofence_get_latitude = _geofence_get_latitudePtr
       .asFunction<int Function(geofence_h, ffi.Pointer<ffi.Double>)>();
 
-  /// @brief Gets the longitude of geofence.
-  /// @since_tizen 2.4
-  /// @remarks The geofence has longitude only when geofence_type_e is GEOFENCE_TYPE_GEOPOINT.
-  /// @param[in] fence The geofence handle
-  /// @param[out] longitude The longitude of geofence
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #GEOFENCE_MANAGER_ERROR_NONE Successful
-  /// @retval #GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER Illegal argument
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED Not supported
-  /// @see geofence_get_latitude()
-  /// @see geofence_get_radius()
-  /// @see geofence_get_address()
-  /// @see geofence_get_type()
-  /// @see geofence_create_geopoint()
+  /// Gets the longitude of geofence.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Remarks:**
+  /// - The geofence has longitude only when geofence_type_e is GEOFENCE_TYPE_GEOPOINT.
+  ///
+  /// **Parameters:**
+  /// - `fence` (in): The geofence handle
+  /// - `longitude` (out): The longitude of geofence
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GEOFENCE_MANAGER_ERROR_NONE`: Successful
+  /// - `GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER`: Illegal argument
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `geofence_get_latitude()`
+  /// - `geofence_get_radius()`
+  /// - `geofence_get_address()`
+  /// - `geofence_get_type()`
+  /// - `geofence_create_geopoint()`
   int geofence_get_longitude(
     geofence_h fence,
     ffi.Pointer<ffi.Double> longitude,
@@ -985,21 +1324,32 @@ class Tizen65CapiGeofenceManager {
   late final _geofence_get_longitude = _geofence_get_longitudePtr
       .asFunction<int Function(geofence_h, ffi.Pointer<ffi.Double>)>();
 
-  /// @brief Gets the radius of geofence.
-  /// @since_tizen 2.4
-  /// @remarks The geofence has radius only when geofence_type_e is GEOFENCE_TYPE_GEOPOINT.
-  /// @param[in] fence The geofence handle
-  /// @param[out] radius The radius of geofence
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #GEOFENCE_MANAGER_ERROR_NONE Successful
-  /// @retval #GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER Illegal argument
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED Not supported
-  /// @see geofence_get_latitude()
-  /// @see geofence_get_longitude()
-  /// @see geofence_get_address()
-  /// @see geofence_get_type()
-  /// @see geofence_create_geopoint()
+  /// Gets the radius of geofence.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Remarks:**
+  /// - The geofence has radius only when geofence_type_e is GEOFENCE_TYPE_GEOPOINT.
+  ///
+  /// **Parameters:**
+  /// - `fence` (in): The geofence handle
+  /// - `radius` (out): The radius of geofence
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GEOFENCE_MANAGER_ERROR_NONE`: Successful
+  /// - `GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER`: Illegal argument
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `geofence_get_latitude()`
+  /// - `geofence_get_longitude()`
+  /// - `geofence_get_address()`
+  /// - `geofence_get_type()`
+  /// - `geofence_create_geopoint()`
   int geofence_get_radius(
     geofence_h fence,
     ffi.Pointer<ffi.Int> radius,
@@ -1017,21 +1367,32 @@ class Tizen65CapiGeofenceManager {
   late final _geofence_get_radius = _geofence_get_radiusPtr
       .asFunction<int Function(geofence_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the address of geofence
-  /// @since_tizen 2.4
-  /// @remarks The geofence has address only when geofence_type_e is GEOFENCE_TYPE_GEOPOINT. The address must be released using free().
-  /// @param[in] fence The geofence handle
-  /// @param[out] address Specifies the value of address
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #GEOFENCE_MANAGER_ERROR_NONE Successful
-  /// @retval #GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER Illegal argument
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED Not supported
-  /// @see geofence_get_latitude()
-  /// @see geofence_get_longitude()
-  /// @see geofence_get_radius()
-  /// @see geofence_get_type()
-  /// @see geofence_create_geopoint()
+  /// Gets the address of geofence
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Remarks:**
+  /// - The geofence has address only when geofence_type_e is GEOFENCE_TYPE_GEOPOINT. The address must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `fence` (in): The geofence handle
+  /// - `address` (out): Specifies the value of address
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GEOFENCE_MANAGER_ERROR_NONE`: Successful
+  /// - `GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER`: Illegal argument
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `geofence_get_latitude()`
+  /// - `geofence_get_longitude()`
+  /// - `geofence_get_radius()`
+  /// - `geofence_get_type()`
+  /// - `geofence_create_geopoint()`
   int geofence_get_address(
     geofence_h fence,
     ffi.Pointer<ffi.Pointer<ffi.Char>> address,
@@ -1049,20 +1410,31 @@ class Tizen65CapiGeofenceManager {
   late final _geofence_get_address = _geofence_get_addressPtr.asFunction<
       int Function(geofence_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the bssid of geofence
-  /// @since_tizen 2.4
-  /// @remarks The geofence has bssid only when geofence_type_e is GEOFENCE_TYPE_BLUETOOTH or GEOFENCE_TYPE_WIFI. The bssid must be released using free().
-  /// @param[in] fence The geofence handle
-  /// @param[out] bssid The bssid of geofence
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #GEOFENCE_MANAGER_ERROR_NONE Successful
-  /// @retval #GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER Illegal argument
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED Not supported
-  /// @see geofence_get_type()
-  /// @see geofence_create_bluetooth()
-  /// @see geofence_create_wifi()
-  /// @see geofence_get_ssid()
+  /// Gets the bssid of geofence
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Remarks:**
+  /// - The geofence has bssid only when geofence_type_e is GEOFENCE_TYPE_BLUETOOTH or GEOFENCE_TYPE_WIFI. The bssid must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `fence` (in): The geofence handle
+  /// - `bssid` (out): The bssid of geofence
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GEOFENCE_MANAGER_ERROR_NONE`: Successful
+  /// - `GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER`: Illegal argument
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `geofence_get_type()`
+  /// - `geofence_create_bluetooth()`
+  /// - `geofence_create_wifi()`
+  /// - `geofence_get_ssid()`
   int geofence_get_bssid(
     geofence_h fence,
     ffi.Pointer<ffi.Pointer<ffi.Char>> bssid,
@@ -1080,20 +1452,31 @@ class Tizen65CapiGeofenceManager {
   late final _geofence_get_bssid = _geofence_get_bssidPtr.asFunction<
       int Function(geofence_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the ssid of geofence
-  /// @since_tizen 2.4
-  /// @remarks The geofence has ssid only when geofence_type_e is GEOFENCE_TYPE_BLUETOOTH or GEOFENCE_TYPE_WIFI. The ssid must be released using free().
-  /// @param[in] fence The geofence handle
-  /// @param[out] ssid The ssid of geofence
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #GEOFENCE_MANAGER_ERROR_NONE Successful
-  /// @retval #GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER Illegal argument
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED Not supported
-  /// @see geofence_get_type()
-  /// @see geofence_create_bluetooth()
-  /// @see geofence_create_wifi()
-  /// @see geofence_get_bssid()
+  /// Gets the ssid of geofence
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Remarks:**
+  /// - The geofence has ssid only when geofence_type_e is GEOFENCE_TYPE_BLUETOOTH or GEOFENCE_TYPE_WIFI. The ssid must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `fence` (in): The geofence handle
+  /// - `ssid` (out): The ssid of geofence
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GEOFENCE_MANAGER_ERROR_NONE`: Successful
+  /// - `GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER`: Illegal argument
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `geofence_get_type()`
+  /// - `geofence_create_bluetooth()`
+  /// - `geofence_create_wifi()`
+  /// - `geofence_get_bssid()`
   int geofence_get_ssid(
     geofence_h fence,
     ffi.Pointer<ffi.Pointer<ffi.Char>> ssid,
@@ -1111,21 +1494,32 @@ class Tizen65CapiGeofenceManager {
   late final _geofence_get_ssid = _geofence_get_ssidPtr.asFunction<
       int Function(geofence_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Returns The geofence status of specified geofence.
-  /// @since_tizen 2.4
-  /// @remarks A status must be released using geofence_status_destroy()
-  /// @param[in] geofence_id The geofence ID
-  /// @param[out] status The status handle of a specified geofence
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #GEOFENCE_MANAGER_ERROR_NONE Successful
-  /// @retval #GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER Illegal argument
-  /// @retval #GEOFENCE_MANAGER_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #GEOFENCE_MANAGER_ERROR_GEOFENCE_ACCESS_DENIED Access to specified geofence is denied
-  /// @see geofence_status_destroy()
-  /// @see geofence_manager_start()
-  /// @see geofence_manager_stop()
+  /// Returns The geofence status of specified geofence.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Remarks:**
+  /// - A status must be released using geofence_status_destroy()
+  ///
+  /// **Parameters:**
+  /// - `geofence_id` (in): The geofence ID
+  /// - `status` (out): The status handle of a specified geofence
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GEOFENCE_MANAGER_ERROR_NONE`: Successful
+  /// - `GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER`: Illegal argument
+  /// - `GEOFENCE_MANAGER_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `GEOFENCE_MANAGER_ERROR_GEOFENCE_ACCESS_DENIED`: Access to specified geofence is denied
+  ///
+  /// **See also:**
+  /// - `geofence_status_destroy()`
+  /// - `geofence_manager_start()`
+  /// - `geofence_manager_stop()`
   int geofence_status_create(
     int geofence_id,
     ffi.Pointer<geofence_status_h> status,
@@ -1143,17 +1537,26 @@ class Tizen65CapiGeofenceManager {
   late final _geofence_status_create = _geofence_status_createPtr
       .asFunction<int Function(int, ffi.Pointer<geofence_status_h>)>();
 
-  /// @brief Releases the memory, used by the status data.
-  /// @since_tizen 2.4
-  /// @param[in] status The status handle of a specified geofence
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #GEOFENCE_MANAGER_ERROR_NONE Successful
-  /// @retval #GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER Illegal argument
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED Not supported
-  /// @see geofence_status_create()
-  /// @see geofence_status_get_state()
-  /// @see geofence_status_get_duration()
+  /// Releases the memory, used by the status data.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Parameters:**
+  /// - `status` (in): The status handle of a specified geofence
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GEOFENCE_MANAGER_ERROR_NONE`: Successful
+  /// - `GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER`: Illegal argument
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `geofence_status_create()`
+  /// - `geofence_status_get_state()`
+  /// - `geofence_status_get_duration()`
   int geofence_status_destroy(
     geofence_status_h status,
   ) {
@@ -1168,16 +1571,25 @@ class Tizen65CapiGeofenceManager {
   late final _geofence_status_destroy =
       _geofence_status_destroyPtr.asFunction<int Function(geofence_status_h)>();
 
-  /// @brief Gets the state of geofence.
-  /// @since_tizen 2.4
-  /// @param[in] status The geofence status handle
-  /// @param[out] state The state of geofence
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #GEOFENCE_MANAGER_ERROR_NONE Successful
-  /// @retval #GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER Illegal argument
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED Not supported
-  /// @see geofence_status_get_duration()
+  /// Gets the state of geofence.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Parameters:**
+  /// - `status` (in): The geofence status handle
+  /// - `state` (out): The state of geofence
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GEOFENCE_MANAGER_ERROR_NONE`: Successful
+  /// - `GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER`: Illegal argument
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `geofence_status_get_duration()`
   int geofence_status_get_state(
     geofence_status_h status,
     ffi.Pointer<ffi.Int32> state,
@@ -1195,16 +1607,25 @@ class Tizen65CapiGeofenceManager {
   late final _geofence_status_get_state = _geofence_status_get_statePtr
       .asFunction<int Function(geofence_status_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the amount of seconds geofence is in the current state.
-  /// @since_tizen 2.4
-  /// @param[in] status The geofence status handle
-  /// @param[out] seconds The amount of seconds geofence is in the current state
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #GEOFENCE_MANAGER_ERROR_NONE Successful
-  /// @retval #GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER Illegal argument
-  /// @retval #GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED Not supported
-  /// @see geofence_status_get_state()
+  /// Gets the amount of seconds geofence is in the current state.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Parameters:**
+  /// - `status` (in): The geofence status handle
+  /// - `seconds` (out): The amount of seconds geofence is in the current state
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GEOFENCE_MANAGER_ERROR_NONE`: Successful
+  /// - `GEOFENCE_MANAGER_ERROR_INVALID_PARAMETER`: Illegal argument
+  /// - `GEOFENCE_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `geofence_status_get_state()`
   int geofence_status_get_duration(
     geofence_status_h status,
     ffi.Pointer<ffi.Int> seconds,
@@ -1223,8 +1644,11 @@ class Tizen65CapiGeofenceManager {
       .asFunction<int Function(geofence_status_h, ffi.Pointer<ffi.Int>)>();
 }
 
-/// @brief Enumeration for Geofence manager of error code.
-/// @since_tizen 2.4
+/// Enumeration for Geofence manager of error code.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class geofence_manager_error_e {
   /// < Success
   static const int GEOFENCE_MANAGER_ERROR_NONE = 0;
@@ -1269,8 +1693,11 @@ abstract class geofence_manager_error_e {
   static const int GEOFENCE_MANAGER_ERROR_GEOFENCE_ACCESS_DENIED = -46202871;
 }
 
-/// @brief Enumeration for the state of geofence manager.
-/// @since_tizen 2.4
+/// Enumeration for the state of geofence manager.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class geofence_state_e {
   /// < Uncertain state of geofence
   static const int GEOFENCE_STATE_UNCERTAIN = 0;
@@ -1282,8 +1709,11 @@ abstract class geofence_state_e {
   static const int GEOFENCE_STATE_OUT = 2;
 }
 
-/// @brief Enumeration for the state of proximity.
-/// @since_tizen 3.0
+/// Enumeration for the state of proximity.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class geofence_proximity_state_e {
   /// < Uncertain state of proximity
   static const int GEOFENCE_PROXIMITY_STATE_UNCERTAIN = 0;
@@ -1298,8 +1728,11 @@ abstract class geofence_proximity_state_e {
   static const int GEOFENCE_PROXIMITY_STATE_IMMEDIATE = 3;
 }
 
-/// @brief Enumeration for the provider of proximity.
-/// @since_tizen 3.0
+/// Enumeration for the provider of proximity.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class geofence_proximity_provider_e {
   /// < Proximity is specified by geospatial coordinate
   static const int GEOFENCE_PROXIMITY_PROVIDER_LOCATION = 0;
@@ -1317,8 +1750,11 @@ abstract class geofence_proximity_provider_e {
   static const int GEOFENCE_PROXIMITY_PROVIDER_SENSOR = 4;
 }
 
-/// @brief Enumeration for geofence type.
-/// @since_tizen 2.4
+/// Enumeration for geofence type.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class geofence_type_e {
   /// < Geofence is specified by geospatial coordinate
   static const int GEOFENCE_TYPE_GEOPOINT = 1;
@@ -1330,8 +1766,11 @@ abstract class geofence_type_e {
   static const int GEOFENCE_TYPE_BT = 3;
 }
 
-/// @brief Enumeration for geofence management events.
-/// @since_tizen 2.4
+/// Enumeration for geofence management events.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class geofence_manage_e {
   /// < Geofence is added
   static const int GEOFENCE_MANAGE_FENCE_ADDED = 0;
@@ -1361,102 +1800,159 @@ abstract class geofence_manage_e {
   static const int GEOFENCE_MANAGE_SETTING_DISABLED = 33;
 }
 
+/// @nodoc
 final class geofence_manager_s extends ffi.Opaque {}
 
+/// @nodoc
 final class geofence_s extends ffi.Opaque {}
 
+/// @nodoc
 final class geofence_status_s extends ffi.Opaque {}
 
-/// @brief The geofence manager handle.
-/// @since_tizen 2.4
+/// The geofence manager handle.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 typedef geofence_manager_h = ffi.Pointer<geofence_manager_s>;
 
-/// @brief The geofence handle.
-/// @since_tizen 2.4
+/// The geofence handle.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 typedef geofence_h = ffi.Pointer<geofence_s>;
 
-/// @brief Called when a device enters or exits the given geofence.
-/// @since_tizen 2.4
-/// @param[in] geofence_id The specified geofence ID
-/// @param[in] state The geofence state
-/// @param[in] user_data The user data passed from callback registration function
-/// @pre geofence_manager_start() will invoke this callback if you register this callback using geofence_manager_set_geofence_state_changed_cb().
-/// @see geofence_state_e
-/// @see geofence_manager_start()
-/// @see geofence_manager_set_geofence_state_changed_cb()
+/// Called when a device enters or exits the given geofence.
+///
+/// **Since Tizen:**
+/// - 2.4
+///
+/// **Parameters:**
+/// - `geofence_id` (in): The specified geofence ID
+/// - `state` (in): The geofence state
+/// - `user_data` (in): The user data passed from callback registration function
+///
+/// **Preconditions:**
+/// - geofence_manager_start() will invoke this callback if you register this callback using geofence_manager_set_geofence_state_changed_cb().
+///
+/// **See also:**
+/// - `geofence_state_e`
+/// - `geofence_manager_start()`
+/// - `geofence_manager_set_geofence_state_changed_cb()`
+/// @nodoc
 typedef geofence_state_changed_cb
     = ffi.Pointer<ffi.NativeFunction<geofence_state_changed_cbFunction>>;
+/// @nodoc
 typedef geofence_state_changed_cbFunction = ffi.Void Function(
     ffi.Int geofence_id, ffi.Int32 state, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartgeofence_state_changed_cbFunction = void Function(
     int geofence_id, int state, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the some event occurs in geofence and place such as add, update, etc..
-/// @details The events of public geofence is also received if there are public geofences.
-/// @since_tizen 2.4
-/// @remarks The value of place_id or geofence_id is -1 when the place ID or geofence ID is not assigned.
-/// @param[in] place_id The place ID
-/// @param[in] geofence_id The specified geofence ID
-/// @param[in] error The error code for the particular action
-/// @param[in] manage The result code for the particular place and geofence management
-/// @param[in] user_data The user data passed from callback registration function
-/// @pre geofence_manager_start() will invoke this callback if you register this callback using geofence_manager_set_geofence_event_cb()
-/// @see geofence_manage_e
-/// @see geofence_manager_start()
-/// @see geofence_manager_set_geofence_event_cb()
+/// Called when the some event occurs in geofence and place such as add, update, etc..
+///
+/// The events of public geofence is also received if there are public geofences.
+///
+/// **Since Tizen:**
+/// - 2.4
+///
+/// **Remarks:**
+/// - The value of place_id or geofence_id is -1 when the place ID or geofence ID is not assigned.
+///
+/// **Parameters:**
+/// - `place_id` (in): The place ID
+/// - `geofence_id` (in): The specified geofence ID
+/// - `error` (in): The error code for the particular action
+/// - `manage` (in): The result code for the particular place and geofence management
+/// - `user_data` (in): The user data passed from callback registration function
+///
+/// **Preconditions:**
+/// - geofence_manager_start() will invoke this callback if you register this callback using geofence_manager_set_geofence_event_cb()
+///
+/// **See also:**
+/// - `geofence_manage_e`
+/// - `geofence_manager_start()`
+/// - `geofence_manager_set_geofence_event_cb()`
+/// @nodoc
 typedef geofence_event_cb
     = ffi.Pointer<ffi.NativeFunction<geofence_event_cbFunction>>;
+/// @nodoc
 typedef geofence_event_cbFunction = ffi.Void Function(
     ffi.Int place_id,
     ffi.Int geofence_id,
     ffi.Int32 error,
     ffi.Int32 manage,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartgeofence_event_cbFunction = void Function(int place_id,
     int geofence_id, int error, int manage, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when a proximity state of device is changed.
-/// @since_tizen 3.0
-/// @param[in] geofence_id The specified geofence ID
-/// @param[in] state The proximity state
-/// @param[in] provider The proximity provider
-/// @param[in] user_data The user data passed from callback registration function
-/// @pre geofence_manager_start() will invoke this callback if you register this callback using geofence_manager_set_geofence_proximity_state_changed_cb().
-/// @see geofence_proximity_state_e
-/// @see geofence_proximity_provider_e
-/// @see geofence_manager_start()
-/// @see geofence_manager_set_geofence_proximity_state_changed_cb()
+/// Called when a proximity state of device is changed.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `geofence_id` (in): The specified geofence ID
+/// - `state` (in): The proximity state
+/// - `provider` (in): The proximity provider
+/// - `user_data` (in): The user data passed from callback registration function
+///
+/// **Preconditions:**
+/// - geofence_manager_start() will invoke this callback if you register this callback using geofence_manager_set_geofence_proximity_state_changed_cb().
+///
+/// **See also:**
+/// - `geofence_proximity_state_e`
+/// - `geofence_proximity_provider_e`
+/// - `geofence_manager_start()`
+/// - `geofence_manager_set_geofence_proximity_state_changed_cb()`
+/// @nodoc
 typedef geofence_proximity_state_changed_cb = ffi
     .Pointer<ffi.NativeFunction<geofence_proximity_state_changed_cbFunction>>;
+/// @nodoc
 typedef geofence_proximity_state_changed_cbFunction = ffi.Void Function(
     ffi.Int geofence_id,
     ffi.Int32 state,
     ffi.Int32 provider,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartgeofence_proximity_state_changed_cbFunction = void Function(
     int geofence_id, int state, int provider, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the fence list is requested.
-/// @since_tizen 2.4
-/// @param[in] geofence_id The geofence ID
-/// @param[in] fence The fence handle
-/// @param[in] fence_index The index number of the fences in the list
-/// @param[in] fence_cnt The total number of fences that exists for the requester
-/// @param[in] user_data The user data passed from callback registration function
-/// @return @c true to continue iterating,
-/// otherwise @c false
-/// @pre geofence_manager_foreach_geofence_list() and geofence_manager_foreach_place_geofence_list() will invoke this callback if you specify this callback using geofence_manager_foreach_geofence_list().
-/// @see geofence_manager_foreach_geofence_list()
-/// @see geofence_manager_foreach_place_geofence_list()
-/// @see geofence_manager_add_fence()
+/// Called when the fence list is requested.
+///
+/// **Since Tizen:**
+/// - 2.4
+///
+/// **Parameters:**
+/// - `geofence_id` (in): The geofence ID
+/// - `fence` (in): The fence handle
+/// - `fence_index` (in): The index number of the fences in the list
+/// - `fence_cnt` (in): The total number of fences that exists for the requester
+/// - `user_data` (in): The user data passed from callback registration function
+///
+/// **Returns:**
+/// - `true` to continue iterating, otherwise `false`
+///
+/// **Preconditions:**
+/// - geofence_manager_foreach_geofence_list() and geofence_manager_foreach_place_geofence_list() will invoke this callback if you specify this callback using geofence_manager_foreach_geofence_list().
+///
+/// **See also:**
+/// - `geofence_manager_foreach_geofence_list()`
+/// - `geofence_manager_foreach_place_geofence_list()`
+/// - `geofence_manager_add_fence()`
+/// @nodoc
 typedef geofence_manager_fence_cb
     = ffi.Pointer<ffi.NativeFunction<geofence_manager_fence_cbFunction>>;
+/// @nodoc
 typedef geofence_manager_fence_cbFunction = ffi.Bool Function(
     ffi.Int geofence_id,
     geofence_h fence,
     ffi.Int fence_index,
     ffi.Int fence_cnt,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartgeofence_manager_fence_cbFunction = bool Function(
     int geofence_id,
     geofence_h fence,
@@ -1464,26 +1960,38 @@ typedef Dartgeofence_manager_fence_cbFunction = bool Function(
     int fence_cnt,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the place list is requested.
-/// @since_tizen 2.4
-/// @param[in] place_id The current place ID
-/// @param[in] place_name The current place name
-/// @param[in] place_index The index number of the places in the list
-/// @param[in] place_cnt The total number of places that exists for the requester
-/// @param[in] user_data The user data passed from callback registration function
-/// @return @c true to continue iterating,
-/// otherwise @c false
-/// @pre geofence_manager_foreach_place_list() will invoke this callback if you specify this callback using geofence_manager_foreach_place_list().
-/// @see geofence_manager_foreach_place_list()
-/// @see geofence_manager_add_place()
+/// Called when the place list is requested.
+///
+/// **Since Tizen:**
+/// - 2.4
+///
+/// **Parameters:**
+/// - `place_id` (in): The current place ID
+/// - `place_name` (in): The current place name
+/// - `place_index` (in): The index number of the places in the list
+/// - `place_cnt` (in): The total number of places that exists for the requester
+/// - `user_data` (in): The user data passed from callback registration function
+///
+/// **Returns:**
+/// - `true` to continue iterating, otherwise `false`
+///
+/// **Preconditions:**
+/// - geofence_manager_foreach_place_list() will invoke this callback if you specify this callback using geofence_manager_foreach_place_list().
+///
+/// **See also:**
+/// - `geofence_manager_foreach_place_list()`
+/// - `geofence_manager_add_place()`
+/// @nodoc
 typedef geofence_manager_place_cb
     = ffi.Pointer<ffi.NativeFunction<geofence_manager_place_cbFunction>>;
+/// @nodoc
 typedef geofence_manager_place_cbFunction = ffi.Bool Function(
     ffi.Int place_id,
     ffi.Pointer<ffi.Char> place_name,
     ffi.Int place_index,
     ffi.Int place_cnt,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartgeofence_manager_place_cbFunction = bool Function(
     int place_id,
     ffi.Pointer<ffi.Char> place_name,
@@ -1491,6 +1999,9 @@ typedef Dartgeofence_manager_place_cbFunction = bool Function(
     int place_cnt,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The geofence status handle.
-/// @since_tizen 2.4
+/// The geofence status handle.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 typedef geofence_status_h = ffi.Pointer<geofence_status_s>;

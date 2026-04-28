@@ -1,3 +1,6 @@
+/// {@category 7.0/tizen}
+library tizen_interop_7_0.capi_content_mime_type;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-content-mime-type APIs.
+/// {@category 7.0/tizen}
 class Tizen70CapiContentMimeType {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,19 +28,29 @@ class Tizen70CapiContentMimeType {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Gets the MIME type for the given file extension.
+  /// Gets the MIME type for the given file extension.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks The @a mime_type must be released with free() by you.
-  /// @param[in] file_extension The file extension without the leading dot ('.')
-  /// @param[out] mime_type The MIME type for the given file extension \n
-  /// The MIME type is 'application/octet-stream' if the given file extension is not associated with specific file formats
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MIME_TYPE_ERROR_NONE Successful
-  /// @retval #MIME_TYPE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MIME_TYPE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MIME_TYPE_ERROR_IO_ERROR Internal I/O error
-  /// @see mime_type_get_file_extension()
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - The `mime_type` must be released with free() by you.
+  ///
+  /// **Parameters:**
+  /// - `file_extension` (in): The file extension without the leading dot ('.')
+  /// - `mime_type` (out): The MIME type for the given file extension The MIME type is 'application/octet-stream' if the given file extension is not associated with specific file formats
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MIME_TYPE_ERROR_NONE`: Successful
+  /// - `MIME_TYPE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MIME_TYPE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MIME_TYPE_ERROR_IO_ERROR`: Internal I/O error
+  ///
+  /// **See also:**
+  /// - `mime_type_get_file_extension()`
   int mime_type_get_mime_type(
     ffi.Pointer<ffi.Char> file_extension,
     ffi.Pointer<ffi.Pointer<ffi.Char>> mime_type,
@@ -55,19 +69,30 @@ class Tizen70CapiContentMimeType {
       int Function(
           ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the file extensions for the given MIME type.
+  /// Gets the file extensions for the given MIME type.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks The @a file_extension must be released with free() by you.
-  /// @param[in] mime_type The MIME type
-  /// @param[out] file_extension The array of file extension without the leading dot ('.')
-  /// @param[out] length The length of the array of file extension or zero if there is none
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MIME_TYPE_ERROR_NONE Successful
-  /// @retval #MIME_TYPE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MIME_TYPE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MIME_TYPE_ERROR_IO_ERROR Internal I/O error
-  /// @see mime_type_get_mime_type()
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - The `file_extension` must be released with free() by you.
+  ///
+  /// **Parameters:**
+  /// - `mime_type` (in): The MIME type
+  /// - `file_extension` (out): The array of file extension without the leading dot ('.')
+  /// - `length` (out): The length of the array of file extension or zero if there is none
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MIME_TYPE_ERROR_NONE`: Successful
+  /// - `MIME_TYPE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MIME_TYPE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MIME_TYPE_ERROR_IO_ERROR`: Internal I/O error
+  ///
+  /// **See also:**
+  /// - `mime_type_get_mime_type()`
   int mime_type_get_file_extension(
     ffi.Pointer<ffi.Char> mime_type,
     ffi.Pointer<ffi.Pointer<ffi.Pointer<ffi.Char>>> file_extension,
@@ -93,19 +118,27 @@ class Tizen70CapiContentMimeType {
               ffi.Pointer<ffi.Pointer<ffi.Pointer<ffi.Char>>>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the MIME type for the given data.
+  /// Gets the MIME type for the given data.
   ///
-  /// @since_tizen 4.0
-  /// @remarks The @a mime_type must be released with free() by you.
-  /// @param[in] data The stream of file data
-  /// @param[in] len The length of data
-  /// @param[out] mime_type The MIME type for the given file extension \n
-  /// The MIME type is 'application/octet-stream' if the given file extension is not associated with specific file formats
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MIME_TYPE_ERROR_NONE Successful
-  /// @retval #MIME_TYPE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MIME_TYPE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MIME_TYPE_ERROR_IO_ERROR Internal I/O error
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - The `mime_type` must be released with free() by you.
+  ///
+  /// **Parameters:**
+  /// - `data` (in): The stream of file data
+  /// - `len` (in): The length of data
+  /// - `mime_type` (out): The MIME type for the given file extension The MIME type is 'application/octet-stream' if the given file extension is not associated with specific file formats
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MIME_TYPE_ERROR_NONE`: Successful
+  /// - `MIME_TYPE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MIME_TYPE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MIME_TYPE_ERROR_IO_ERROR`: Internal I/O error
   int mime_type_get_mime_type_for_data(
     ffi.Pointer<ffi.Void> data,
     int len,
@@ -128,21 +161,29 @@ class Tizen70CapiContentMimeType {
           int Function(ffi.Pointer<ffi.Void>, int,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the MIME type for the given file path.
+  /// Gets the MIME type for the given file path.
   ///
-  /// @since_tizen 4.0
-  /// @remarks The @a mime_type must be released with free() by you.
-  /// @remarks %http://tizen.org/privilege/mediastorage is needed if input or output path are relevant to media storage.
-  /// @remarks %http://tizen.org/privilege/externalstorage is needed if input or output path are relevant to external storage.
-  /// @param[in] file_path The path of target file
-  /// @param[out] mime_type The MIME type for the given file extension \n
-  /// The MIME type is 'application/octet-stream' if the given file extension is not associated with specific file formats
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MIME_TYPE_ERROR_NONE Successful
-  /// @retval #MIME_TYPE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MIME_TYPE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MIME_TYPE_ERROR_IO_ERROR Internal I/O error
-  /// @retval #MIME_TYPE_ERROR_PERMISSION_DENIED Permission denied
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - The `mime_type` must be released with free() by you.
+  /// - <http://tizen.org/privilege/mediastorage is needed if input or output path are relevant to media storage.>
+  /// - <http://tizen.org/privilege/externalstorage is needed if input or output path are relevant to external storage.>
+  ///
+  /// **Parameters:**
+  /// - `file_path` (in): The path of target file
+  /// - `mime_type` (out): The MIME type for the given file extension The MIME type is 'application/octet-stream' if the given file extension is not associated with specific file formats
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MIME_TYPE_ERROR_NONE`: Successful
+  /// - `MIME_TYPE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MIME_TYPE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MIME_TYPE_ERROR_IO_ERROR`: Internal I/O error
+  /// - `MIME_TYPE_ERROR_PERMISSION_DENIED`: Permission denied
   int mime_type_get_mime_type_for_file(
     ffi.Pointer<ffi.Char> file_path,
     ffi.Pointer<ffi.Pointer<ffi.Char>> mime_type,
@@ -164,8 +205,11 @@ class Tizen70CapiContentMimeType {
               ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 }
 
-/// @brief Enumeration of error code.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration of error code.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class mime_type_error_e {
   /// < Successful
   static const int MIME_TYPE_ERROR_NONE = 0;

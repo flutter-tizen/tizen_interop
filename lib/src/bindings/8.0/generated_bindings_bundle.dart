@@ -1,3 +1,6 @@
+/// {@category 8.0/tizen}
+library tizen_interop_8_0.bundle;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen bundle APIs.
+/// {@category 8.0/tizen}
 class Tizen80Bundle {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,20 +28,29 @@ class Tizen80Bundle {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates a bundle object.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
-  /// @return The bundle object,
-  /// @c NULL - Failure
-  /// @exception #BUNDLE_ERROR_NONE Success
-  /// @exception #BUNDLE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see bundle_free()
+  /// Creates a bundle object.
   ///
-  /// @code
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
+  ///
+  /// **Returns:**
+  /// - The bundle object, `NULL` - Failure
+  ///
+  /// **Exceptions:**
+  /// - `BUNDLE_ERROR_NONE`: Success
+  /// - `BUNDLE_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `bundle_free()`
+  ///
+  /// ```
   /// #include <bundle.h>
   /// bundle *b = bundle_create(); // Create a new bundle object
   /// bundle_free(b); // Free the bundle
-  /// @endcode
+  /// ```
   ffi.Pointer<bundle> bundle_create() {
     return _bundle_create();
   }
@@ -48,20 +61,32 @@ class Tizen80Bundle {
   late final _bundle_create =
       _bundle_createPtr.asFunction<ffi.Pointer<bundle> Function()>();
 
-  /// @brief Frees the given bundle object with key-value pairs in it.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] b The bundle object to be freed
-  /// @return The operation result
-  /// @retval #BUNDLE_ERROR_NONE Success
-  /// @retval #BUNDLE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre @a b must be a valid bundle object.
-  /// @see bundle_create()
+  /// Frees the given bundle object with key-value pairs in it.
   ///
-  /// @code
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `b` (in): The bundle object to be freed
+  ///
+  /// **Returns:**
+  /// - The operation result
+  ///
+  /// **Return values:**
+  /// - `BUNDLE_ERROR_NONE`: Success
+  /// - `BUNDLE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - `b` must be a valid bundle object.
+  ///
+  /// **See also:**
+  /// - `bundle_create()`
+  ///
+  /// ```
   /// #include <bundle.h>
   /// bundle *b = bundle_create(); // Create a new bundle object
   /// bundle_free(b); // Free the bundle
-  /// @endcode
+  /// ```
   int bundle_free(
     ffi.Pointer<bundle> b,
   ) {
@@ -76,27 +101,39 @@ class Tizen80Bundle {
   late final _bundle_free =
       _bundle_freePtr.asFunction<int Function(ffi.Pointer<bundle>)>();
 
-  /// @brief Adds a strings array type key-value pair into a given bundle.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] b The bundle object
-  /// @param[in] key The key
-  /// @param[in] str_array The string type value; if @c NULL, an empty array is created; you can change an item with
-  /// @param[in] len The length of the array
-  /// @return The operation result
-  /// @retval #BUNDLE_ERROR_NONE Success
-  /// @retval #BUNDLE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #BUNDLE_ERROR_KEY_EXISTS Key already exists
-  /// @retval #BUNDLE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @pre @a b must be a valid bundle object.
-  /// @see bundle_get_str_array()
+  /// Adds a strings array type key-value pair into a given bundle.
   ///
-  /// @code
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `b` (in): The bundle object
+  /// - `key` (in): The key
+  /// - `str_array` (in): The string type value; if `NULL`, an empty array is created; you can change an item with
+  /// - `len` (in): The length of the array
+  ///
+  /// **Returns:**
+  /// - The operation result
+  ///
+  /// **Return values:**
+  /// - `BUNDLE_ERROR_NONE`: Success
+  /// - `BUNDLE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BUNDLE_ERROR_KEY_EXISTS`: Key already exists
+  /// - `BUNDLE_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - `b` must be a valid bundle object.
+  ///
+  /// **See also:**
+  /// - `bundle_get_str_array()`
+  ///
+  /// ```
   /// #include <bundle.h>
   /// char *sa = {"aaa", "bbb", "ccc"}; // String array of length 3
   /// bundle *b = bundle_create();
   /// bundle_add_str_array(b, "foo", sa, 3); // Add a key-value pair
   /// bundle_free(b);
-  /// @endcode
+  /// ```
   int bundle_add_str_array(
     ffi.Pointer<bundle> b,
     ffi.Pointer<ffi.Char> key,
@@ -122,24 +159,34 @@ class Tizen80Bundle {
       int Function(ffi.Pointer<bundle>, ffi.Pointer<ffi.Char>,
           ffi.Pointer<ffi.Pointer<ffi.Char>>, int)>();
 
-  /// @brief Deletes a key-value object with the given key.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] b The bundle object
-  /// @param[in] key The given key
-  /// @return The operation result
-  /// @retval #BUNDLE_ERROR_NONE Success
-  /// @retval #BUNDLE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #BUNDLE_ERROR_KEY_NOT_AVAILABLE Key not available
-  /// @pre @a b must be a valid bundle object.
+  /// Deletes a key-value object with the given key.
   ///
-  /// @code
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `b` (in): The bundle object
+  /// - `key` (in): The given key
+  ///
+  /// **Returns:**
+  /// - The operation result
+  ///
+  /// **Return values:**
+  /// - `BUNDLE_ERROR_NONE`: Success
+  /// - `BUNDLE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BUNDLE_ERROR_KEY_NOT_AVAILABLE`: Key not available
+  ///
+  /// **Preconditions:**
+  /// - `b` must be a valid bundle object.
+  ///
+  /// ```
   /// #include <bundle.h>
   /// bundle *b = bundle_create(); // Create a new bundle object
   /// bundle_add_str(b, "foo_key", "bar_val"); // Add a key-value pair
   /// bundle_del(b, "foo_key"); // Delete "foo_key" from b
   ///
   /// bundle_free(b);
-  /// @endcode
+  /// ```
   int bundle_del(
     ffi.Pointer<bundle> b,
     ffi.Pointer<ffi.Char> key,
@@ -157,22 +204,35 @@ class Tizen80Bundle {
   late final _bundle_del = _bundle_delPtr
       .asFunction<int Function(ffi.Pointer<bundle>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets a string array from a given key.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks You MUST NOT free or modify the returned string. \n
-  /// The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
-  /// @param[in] b The bundle object
-  /// @param[in] key The key
-  /// @param[out] len The array length
-  /// @return The pointer to the array of strings,
-  /// @c NULL - Key not found
-  /// @exception #BUNDLE_ERROR_NONE Success
-  /// @exception #BUNDLE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @exception #BUNDLE_ERROR_KEY_NOT_AVAILABLE Key not available
-  /// @pre @a b must be a valid bundle object.
-  /// @see bundle_add_str_array()
+  /// Gets a string array from a given key.
   ///
-  /// @code
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You MUST NOT free or modify the returned string.
+  /// - The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
+  ///
+  /// **Parameters:**
+  /// - `b` (in): The bundle object
+  /// - `key` (in): The key
+  /// - `len` (out): The array length
+  ///
+  /// **Returns:**
+  /// - The pointer to the array of strings, `NULL` - Key not found
+  ///
+  /// **Exceptions:**
+  /// - `BUNDLE_ERROR_NONE`: Success
+  /// - `BUNDLE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BUNDLE_ERROR_KEY_NOT_AVAILABLE`: Key not available
+  ///
+  /// **Preconditions:**
+  /// - `b` must be a valid bundle object.
+  ///
+  /// **See also:**
+  /// - `bundle_add_str_array()`
+  ///
+  /// ```
   /// #include <bundle.h>
   /// bundle *b = bundle_create();
   /// char *sa = {"aaa", "bbb", "ccc"}; // String array of length 3
@@ -185,7 +245,7 @@ class Tizen80Bundle {
   /// // str_array = {"aaa", "bbb", "ccc"}, and len_str_array = 3
   ///
   /// bundle_free(b);
-  /// @endcode
+  /// ```
   ffi.Pointer<ffi.Pointer<ffi.Char>> bundle_get_str_array(
     ffi.Pointer<bundle> b,
     ffi.Pointer<ffi.Char> key,
@@ -208,13 +268,21 @@ class Tizen80Bundle {
       ffi.Pointer<ffi.Pointer<ffi.Char>> Function(
           ffi.Pointer<bundle>, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the number of bundle items.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] b The bundle object
-  /// @return The number of bundle items
-  /// @pre @a b must be a valid bundle object.
+  /// Gets the number of bundle items.
   ///
-  /// @code
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `b` (in): The bundle object
+  ///
+  /// **Returns:**
+  /// - The number of bundle items
+  ///
+  /// **Preconditions:**
+  /// - `b` must be a valid bundle object.
+  ///
+  /// ```
   /// #include <bundle.h>
   /// bundle *b = bundle_create(); // Create a new bundle object
   /// bundle_add_str(b, "key1", "val1"); // Add a key-value pair
@@ -223,7 +291,7 @@ class Tizen80Bundle {
   /// count = bundle_get_count(b); // count = 2
   ///
   /// bundle_free(b);
-  /// @endcode
+  /// ```
   int bundle_get_count(
     ffi.Pointer<bundle> b,
   ) {
@@ -238,17 +306,31 @@ class Tizen80Bundle {
   late final _bundle_get_count =
       _bundle_get_countPtr.asFunction<int Function(ffi.Pointer<bundle>)>();
 
-  /// @brief Gets the type of the value with a given key.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
-  /// @param[in] b A bundle
-  /// @param[in] key A key in the bundle
-  /// @return The type of a key in @a b
-  /// @exception #BUNDLE_ERROR_NONE Success
-  /// @exception #BUNDLE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @exception #BUNDLE_ERROR_KEY_NOT_AVAILABLE Key not available
-  /// @pre @a b must be a valid bundle object.
-  /// @see bundle_type
+  /// Gets the type of the value with a given key.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
+  ///
+  /// **Parameters:**
+  /// - `b` (in): A bundle
+  /// - `key` (in): A key in the bundle
+  ///
+  /// **Returns:**
+  /// - The type of a key in `b`
+  ///
+  /// **Exceptions:**
+  /// - `BUNDLE_ERROR_NONE`: Success
+  /// - `BUNDLE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BUNDLE_ERROR_KEY_NOT_AVAILABLE`: Key not available
+  ///
+  /// **Preconditions:**
+  /// - `b` must be a valid bundle object.
+  ///
+  /// **See also:**
+  /// - `bundle_type`
   int bundle_get_type(
     ffi.Pointer<bundle> b,
     ffi.Pointer<ffi.Char> key,
@@ -266,18 +348,29 @@ class Tizen80Bundle {
   late final _bundle_get_type = _bundle_get_typePtr
       .asFunction<int Function(ffi.Pointer<bundle>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Duplicates a given bundle object.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
-  /// The returned value should be released using bundle_free().
-  /// @param[in] b_from The bundle object to be duplicated
-  /// @return The new bundle object,
-  /// @c NULL - Failure
-  /// @exception #BUNDLE_ERROR_NONE Success
-  /// @exception #BUNDLE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre @a b_from must be a valid bundle object.
+  /// Duplicates a given bundle object.
   ///
-  /// @code
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
+  /// - The returned value should be released using bundle_free().
+  ///
+  /// **Parameters:**
+  /// - `b_from` (in): The bundle object to be duplicated
+  ///
+  /// **Returns:**
+  /// - The new bundle object, `NULL` - Failure
+  ///
+  /// **Exceptions:**
+  /// - `BUNDLE_ERROR_NONE`: Success
+  /// - `BUNDLE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - `b_from` must be a valid bundle object.
+  ///
+  /// ```
   /// #include <bundle.h>
   /// bundle *b = bundle_create(); // Create a new bundle object
   /// bundle_add_str(b, "foo_key", "bar_val"); // Add a key-value pair
@@ -285,7 +378,7 @@ class Tizen80Bundle {
   ///
   /// bundle_free(b);
   /// bundle_free(b_dup);
-  /// @endcode
+  /// ```
   ffi.Pointer<bundle> bundle_dup(
     ffi.Pointer<bundle> b_from,
   ) {
@@ -300,23 +393,36 @@ class Tizen80Bundle {
   late final _bundle_dup = _bundle_dupPtr
       .asFunction<ffi.Pointer<bundle> Function(ffi.Pointer<bundle>)>();
 
-  /// @brief Iterates a callback function for each key-value pair in a given bundle.
-  /// @details Supports all types of values.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section. \n
-  /// This function supports all types.
-  /// @param[in] b The bundle object
-  /// @param[in] iter The iteration callback function
-  /// @param[in] user_data The data for the callback function
-  /// @exception #BUNDLE_ERROR_NONE Success
-  /// @exception #BUNDLE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre @a b must be a valid bundle object.
-  /// @see bundle_keyval_get_type()
-  /// @see bundle_keyval_type_is_array()
-  /// @see bundle_keyval_get_basic_val()
-  /// @see bundle_keyval_get_array_val()
+  /// Iterates a callback function for each key-value pair in a given bundle.
   ///
-  /// @code
+  /// Supports all types of values.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
+  /// - This function supports all types.
+  ///
+  /// **Parameters:**
+  /// - `b` (in): The bundle object
+  /// - `iter` (in): The iteration callback function
+  /// - `user_data` (in): The data for the callback function
+  ///
+  /// **Exceptions:**
+  /// - `BUNDLE_ERROR_NONE`: Success
+  /// - `BUNDLE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - `b` must be a valid bundle object.
+  ///
+  /// **See also:**
+  /// - `bundle_keyval_get_type()`
+  /// - `bundle_keyval_type_is_array()`
+  /// - `bundle_keyval_get_basic_val()`
+  /// - `bundle_keyval_get_array_val()`
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <bundle.h>
   /// void
@@ -350,7 +456,7 @@ class Tizen80Bundle {
   ///
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   void bundle_foreach(
     ffi.Pointer<bundle> b,
     bundle_iterator_t iter,
@@ -371,16 +477,29 @@ class Tizen80Bundle {
       void Function(
           ffi.Pointer<bundle>, bundle_iterator_t, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the type of a key-value pair.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
-  /// @param[in] kv A bundle_keyval_t object
-  /// @return The type of @a kv,
-  /// @c -1 - Failure
-  /// @exception #BUNDLE_ERROR_NONE Success
-  /// @exception #BUNDLE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre @a kv must be a valid bundle_keyval_t object.
-  /// @see bundle_foreach()
+  /// Gets the type of a key-value pair.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
+  ///
+  /// **Parameters:**
+  /// - `kv` (in): A bundle_keyval_t object
+  ///
+  /// **Returns:**
+  /// - The type of `kv`, `-1` - Failure
+  ///
+  /// **Exceptions:**
+  /// - `BUNDLE_ERROR_NONE`: Success
+  /// - `BUNDLE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - `kv` must be a valid bundle_keyval_t object.
+  ///
+  /// **See also:**
+  /// - `bundle_foreach()`
   int bundle_keyval_get_type(
     ffi.Pointer<bundle_keyval_t> kv,
   ) {
@@ -395,17 +514,29 @@ class Tizen80Bundle {
   late final _bundle_keyval_get_type = _bundle_keyval_get_typePtr
       .asFunction<int Function(ffi.Pointer<bundle_keyval_t>)>();
 
-  /// @brief Determines whether the type of a key-value pair is an array.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
-  /// @param[in] kv A bundle_keyval_t object
-  /// @return The operation result
-  /// @c 1 - @a kv is an array
-  /// @c 0 - @a kv is not an array
-  /// @exception #BUNDLE_ERROR_NONE Success
-  /// @exception #BUNDLE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre @a kv must be a valid bundle_keyval_t object.
-  /// @see bundle_foreach()
+  /// Determines whether the type of a key-value pair is an array.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
+  ///
+  /// **Parameters:**
+  /// - `kv` (in): A bundle_keyval_t object
+  ///
+  /// **Returns:**
+  /// - The operation result `1` - `kv` is an array `0` - `kv` is not an array
+  ///
+  /// **Exceptions:**
+  /// - `BUNDLE_ERROR_NONE`: Success
+  /// - `BUNDLE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - `kv` must be a valid bundle_keyval_t object.
+  ///
+  /// **See also:**
+  /// - `bundle_foreach()`
   int bundle_keyval_type_is_array(
     ffi.Pointer<bundle_keyval_t> kv,
   ) {
@@ -420,18 +551,34 @@ class Tizen80Bundle {
   late final _bundle_keyval_type_is_array = _bundle_keyval_type_is_arrayPtr
       .asFunction<int Function(ffi.Pointer<bundle_keyval_t>)>();
 
-  /// @brief Gets the value and size of the value from a key-value pair of basic type.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks You must not free @a val.
-  /// @param[in] kv A bundle_keyval_t object
-  /// @param[out] val The value
-  /// @param[out] size The size of @a val
-  /// @return The operation result
-  /// @retval #BUNDLE_ERROR_NONE Success
-  /// @retval #BUNDLE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre @a kv must be a valid bundle_keyval_t object.
-  /// @post @a val and @a size are set.
-  /// @see bundle_foreach()
+  /// Gets the value and size of the value from a key-value pair of basic type.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must not free `val`.
+  ///
+  /// **Parameters:**
+  /// - `kv` (in): A bundle_keyval_t object
+  /// - `val` (out): The value
+  /// - `size` (out): The size of `val`
+  ///
+  /// **Returns:**
+  /// - The operation result
+  ///
+  /// **Return values:**
+  /// - `BUNDLE_ERROR_NONE`: Success
+  /// - `BUNDLE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - `kv` must be a valid bundle_keyval_t object.
+  ///
+  /// **Postconditions:**
+  /// - `val` and `size` are set.
+  ///
+  /// **See also:**
+  /// - `bundle_foreach()`
   int bundle_keyval_get_basic_val(
     ffi.Pointer<bundle_keyval_t> kv,
     ffi.Pointer<ffi.Pointer<ffi.Void>> val,
@@ -455,18 +602,32 @@ class Tizen80Bundle {
           int Function(ffi.Pointer<bundle_keyval_t>,
               ffi.Pointer<ffi.Pointer<ffi.Void>>, ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Gets the value array, length of the array, and size of each array item.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] kv A bundle_keyval_t object
-  /// @param[out] array_val The array pointer of values
-  /// @param[out] array_len The length of @a array_val
-  /// @param[out] array_element_size The array of size of each array element
-  /// @return The operation result
-  /// @retval #BUNDLE_ERROR_NONE Success
-  /// @retval #BUNDLE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre @a kv must be a valid bundle_keyval_t object.
-  /// @post @a array_val, @a array_len, @a array_element_size are set.
-  /// @see bundle_foreach()
+  /// Gets the value array, length of the array, and size of each array item.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `kv` (in): A bundle_keyval_t object
+  /// - `array_val` (out): The array pointer of values
+  /// - `array_len` (out): The length of `array_val`
+  /// - `array_element_size` (out): The array of size of each array element
+  ///
+  /// **Returns:**
+  /// - The operation result
+  ///
+  /// **Return values:**
+  /// - `BUNDLE_ERROR_NONE`: Success
+  /// - `BUNDLE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - `kv` must be a valid bundle_keyval_t object.
+  ///
+  /// **Postconditions:**
+  /// - `array_val`, `array_len`, `array_element_size` are set.
+  ///
+  /// **See also:**
+  /// - `bundle_foreach()`
   int bundle_keyval_get_array_val(
     ffi.Pointer<bundle_keyval_t> kv,
     ffi.Pointer<ffi.Pointer<ffi.Pointer<ffi.Void>>> array_val,
@@ -497,18 +658,27 @@ class Tizen80Bundle {
               ffi.Pointer<ffi.UnsignedInt>,
               ffi.Pointer<ffi.Pointer<ffi.Size>>)>();
 
-  /// @brief Encodes a bundle to the bundle_raw format (uses base64 format).
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] b The bundle object
-  /// @param[out] r The returned bundle_raw data(byte data)
-  /// @a r MUST BE FREED by free(r)
-  /// @param[out] len The size of @a r (in bytes)
-  /// @return The size of the raw data
-  /// @retval #BUNDLE_ERROR_NONE Success
-  /// @retval #BUNDLE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre @a b must be a valid bundle object.
+  /// Encodes a bundle to the bundle_raw format (uses base64 format).
   ///
-  /// @code
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `b` (in): The bundle object
+  /// - `r` (out): The returned bundle_raw data(byte data) `r` MUST BE FREED by free(r)
+  /// - `len` (out): The size of `r` (in bytes)
+  ///
+  /// **Returns:**
+  /// - The size of the raw data
+  ///
+  /// **Return values:**
+  /// - `BUNDLE_ERROR_NONE`: Success
+  /// - `BUNDLE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - `b` must be a valid bundle object.
+  ///
+  /// ```
   /// #include <bundle.h>
   /// bundle *b = bundle_create(); // Create a new bundle object
   /// bundle_add_str(b, "foo_key", "bar_val"); // Add a key-value pair
@@ -517,7 +687,7 @@ class Tizen80Bundle {
   /// bundle_encode(b, &r, &len); // Encode b
   ///
   /// bundle_free(b);
-  /// @endcode
+  /// ```
   int bundle_encode(
     ffi.Pointer<bundle> b,
     ffi.Pointer<ffi.Pointer<bundle_raw>> r,
@@ -540,19 +710,30 @@ class Tizen80Bundle {
       int Function(ffi.Pointer<bundle>, ffi.Pointer<ffi.Pointer<bundle_raw>>,
           ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Deserializes bundle_raw and gets the bundle object.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
-  /// The returned value should be released using bundle_free().
-  /// @param[in] r The bundle_raw data to be converted to bundle object
-  /// @param[in] len The size of @a r
-  /// @return The bundle object,
-  /// @c NULL - Failure
-  /// @exception #BUNDLE_ERROR_NONE Success
-  /// @exception #BUNDLE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre @a r must be a valid bundle object.
+  /// Deserializes bundle_raw and gets the bundle object.
   ///
-  /// @code
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
+  /// - The returned value should be released using bundle_free().
+  ///
+  /// **Parameters:**
+  /// - `r` (in): The bundle_raw data to be converted to bundle object
+  /// - `len` (in): The size of `r`
+  ///
+  /// **Returns:**
+  /// - The bundle object, `NULL` - Failure
+  ///
+  /// **Exceptions:**
+  /// - `BUNDLE_ERROR_NONE`: Success
+  /// - `BUNDLE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - `r` must be a valid bundle object.
+  ///
+  /// ```
   /// #include <bundle.h>
   /// bundle *b = bundle_create(); // Create a new bundle object
   /// bundle_add_str(b, "foo_key", "bar_val"); // Add a key-value pair
@@ -567,7 +748,7 @@ class Tizen80Bundle {
   /// bundle_free(b);
   /// free(encoded_b);
   /// bundle_free(b_dup);
-  /// @endcode
+  /// ```
   ffi.Pointer<bundle> bundle_decode(
     ffi.Pointer<bundle_raw> r,
     int len,
@@ -585,25 +766,38 @@ class Tizen80Bundle {
   late final _bundle_decode = _bundle_decodePtr
       .asFunction<ffi.Pointer<bundle> Function(ffi.Pointer<bundle_raw>, int)>();
 
-  /// @brief Adds a string type key-value pair into a bundle.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] b The bundle object
-  /// @param[in] key The key
-  /// @param[in] str The string type value
-  /// @return The operation result
-  /// @retval #BUNDLE_ERROR_NONE Success
-  /// @retval #BUNDLE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #BUNDLE_ERROR_KEY_EXISTS Key already exists
-  /// @retval #BUNDLE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @pre @a b must be a valid bundle object.
-  /// @see bundle_get_str()
-  /// @code
+  /// Adds a string type key-value pair into a bundle.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `b` (in): The bundle object
+  /// - `key` (in): The key
+  /// - `str` (in): The string type value
+  ///
+  /// **Returns:**
+  /// - The operation result
+  ///
+  /// **Return values:**
+  /// - `BUNDLE_ERROR_NONE`: Success
+  /// - `BUNDLE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BUNDLE_ERROR_KEY_EXISTS`: Key already exists
+  /// - `BUNDLE_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - `b` must be a valid bundle object.
+  ///
+  /// **See also:**
+  /// - `bundle_get_str()`
+  ///
+  /// ```
   /// #include <bundle.h>
   /// bundle *b = bundle_create(); // Create a new bundle object
   /// bundle_add_str(b, "foo", "bar"); // Add a key-value pair
   ///
   /// bundle_free(b);
-  /// @endcode
+  /// ```
   int bundle_add_str(
     ffi.Pointer<bundle> b,
     ffi.Pointer<ffi.Char> key,
@@ -624,22 +818,35 @@ class Tizen80Bundle {
       int Function(
           ffi.Pointer<bundle>, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Adds a byte sequence type key-value pair into a bundle.
-  /// @details The bundle will contain a copy of the added byte sequence.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] b The bundle object
-  /// @param[in] key The key
-  /// @param[in] bytes The byte sequence
-  /// @param[in] size The byte sequence size in bytes
-  /// @return The operation result
-  /// @retval #BUNDLE_ERROR_NONE Success
-  /// @retval #BUNDLE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #BUNDLE_ERROR_KEY_EXISTS Key already exists
-  /// @retval #BUNDLE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @pre @a b must be a valid bundle object.
-  /// @see bundle_get_byte()
+  /// Adds a byte sequence type key-value pair into a bundle.
   ///
-  /// @code
+  /// The bundle will contain a copy of the added byte sequence.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `b` (in): The bundle object
+  /// - `key` (in): The key
+  /// - `bytes` (in): The byte sequence
+  /// - `size` (in): The byte sequence size in bytes
+  ///
+  /// **Returns:**
+  /// - The operation result
+  ///
+  /// **Return values:**
+  /// - `BUNDLE_ERROR_NONE`: Success
+  /// - `BUNDLE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BUNDLE_ERROR_KEY_EXISTS`: Key already exists
+  /// - `BUNDLE_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - `b` must be a valid bundle object.
+  ///
+  /// **See also:**
+  /// - `bundle_get_byte()`
+  ///
+  /// ```
   /// #include <bundle.h>
   /// bundle *b = bundle_create(); // Create a new bundle object
   /// bundle_add_byte(b, "foo", "bar\0", 4); // Add a key-value pair
@@ -648,7 +855,7 @@ class Tizen80Bundle {
   /// bundle_add_byte(b, "number", &number, sizeof(int));
   ///
   /// bundle_free(b);
-  /// @endcode
+  /// ```
   int bundle_add_byte(
     ffi.Pointer<bundle> b,
     ffi.Pointer<ffi.Char> key,
@@ -671,20 +878,34 @@ class Tizen80Bundle {
       int Function(ffi.Pointer<bundle>, ffi.Pointer<ffi.Char>,
           ffi.Pointer<ffi.Void>, int)>();
 
-  /// @brief Gets the string value with the given key.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks You must not free str.
-  /// @param[in] b The bundle object
-  /// @param[in] key The key
-  /// @param[out] str The returned value
-  /// @return The operation result
-  /// @retval #BUNDLE_ERROR_NONE Success
-  /// @retval #BUNDLE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #BUNDLE_ERROR_KEY_NOT_AVAILABLE Key not available
-  /// @pre @a b must be a valid bundle object.
-  /// @see bundle_add_str()
+  /// Gets the string value with the given key.
   ///
-  /// @code
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must not free str.
+  ///
+  /// **Parameters:**
+  /// - `b` (in): The bundle object
+  /// - `key` (in): The key
+  /// - `str` (out): The returned value
+  ///
+  /// **Returns:**
+  /// - The operation result
+  ///
+  /// **Return values:**
+  /// - `BUNDLE_ERROR_NONE`: Success
+  /// - `BUNDLE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BUNDLE_ERROR_KEY_NOT_AVAILABLE`: Key not available
+  ///
+  /// **Preconditions:**
+  /// - `b` must be a valid bundle object.
+  ///
+  /// **See also:**
+  /// - `bundle_add_str()`
+  ///
+  /// ```
   /// #include <bundle.h>
   /// bundle *b = bundle_create(); // Create a new bundle object
   /// bundle_add_str(b, "foo_key", "bar_val"); // Add a key-value pair
@@ -694,7 +915,7 @@ class Tizen80Bundle {
   ///
   /// bundle_free(b); // After freeing b, v becomes a dangling pointer
   /// v = NULL;
-  /// @endcode
+  /// ```
   int bundle_get_str(
     ffi.Pointer<bundle> b,
     ffi.Pointer<ffi.Char> key,
@@ -715,21 +936,35 @@ class Tizen80Bundle {
       int Function(ffi.Pointer<bundle>, ffi.Pointer<ffi.Char>,
           ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the byte sequence with the given key.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks You must not free @a bytes.
-  /// @param[in] b The bundle object
-  /// @param[in] key The key
-  /// @param[out] bytes The byte sequence
-  /// @param[out] size The byte sequence size in bytes
-  /// @return The operation result
-  /// @retval #BUNDLE_ERROR_NONE Success
-  /// @retval #BUNDLE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #BUNDLE_ERROR_KEY_NOT_AVAILABLE Key not available
-  /// @pre @a b must be a valid bundle object.
-  /// @see bundle_add_byte()
+  /// Gets the byte sequence with the given key.
   ///
-  /// @code
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must not free `bytes`.
+  ///
+  /// **Parameters:**
+  /// - `b` (in): The bundle object
+  /// - `key` (in): The key
+  /// - `bytes` (out): The byte sequence
+  /// - `size` (out): The byte sequence size in bytes
+  ///
+  /// **Returns:**
+  /// - The operation result
+  ///
+  /// **Return values:**
+  /// - `BUNDLE_ERROR_NONE`: Success
+  /// - `BUNDLE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BUNDLE_ERROR_KEY_NOT_AVAILABLE`: Key not available
+  ///
+  /// **Preconditions:**
+  /// - `b` must be a valid bundle object.
+  ///
+  /// **See also:**
+  /// - `bundle_add_byte()`
+  ///
+  /// ```
   /// #include <bundle.h>
   /// bundle *b = bundle_create(); // Create a new bundle object
   /// bundle_add_byte(b, "foo", "bar\0", 4); // Add a string to the bundle
@@ -744,7 +979,7 @@ class Tizen80Bundle {
   /// bundle_get_byte(b, "number", (void**)&n, &n_size); // number = 12345
   ///
   /// bundle_free(b); // After freeing b, v and n become a dangling pointer
-  /// @endcode
+  /// ```
   int bundle_get_byte(
     ffi.Pointer<bundle> b,
     ffi.Pointer<ffi.Char> key,
@@ -770,23 +1005,32 @@ class Tizen80Bundle {
       int Function(ffi.Pointer<bundle>, ffi.Pointer<ffi.Char>,
           ffi.Pointer<ffi.Pointer<ffi.Void>>, ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Adds an 'array of byte sequences' type key-value pair into a bundle.
-  /// @since_tizen 5.5
-  /// @remarks To set the value of the byte array element, you should use bundle_set_byte_array_element().
-  /// This function is only for creating a buffer of the byte array.
+  /// Adds an 'array of byte sequences' type key-value pair into a bundle.
   ///
-  /// @param[in]   b                       The bundle object
-  /// @param[in]   key                     The key
-  /// @param[in]   len                     The length of the array to be created
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #BUNDLE_ERROR_NONE Successful
-  /// @retval #BUNDLE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #BUNDLE_ERROR_KEY_EXISTS Key already exists
-  /// @retval #BUNDLE_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @see bundle_get_byte_array()
-  /// @see bundle_set_byte_array_element()
+  /// **Remarks:**
+  /// - To set the value of the byte array element, you should use bundle_set_byte_array_element().
+  /// - This function is only for creating a buffer of the byte array.
+  ///
+  /// **Parameters:**
+  /// - `b` (in): The bundle object
+  /// - `key` (in): The key
+  /// - `len` (in): The length of the array to be created
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BUNDLE_ERROR_NONE`: Successful
+  /// - `BUNDLE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BUNDLE_ERROR_KEY_EXISTS`: Key already exists
+  /// - `BUNDLE_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `bundle_get_byte_array()`
+  /// - `bundle_set_byte_array_element()`
   int bundle_add_byte_array(
     ffi.Pointer<bundle> b,
     ffi.Pointer<ffi.Char> key,
@@ -806,25 +1050,33 @@ class Tizen80Bundle {
   late final _bundle_add_byte_array = _bundle_add_byte_arrayPtr.asFunction<
       int Function(ffi.Pointer<bundle>, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @brief Sets an element of an array of byte sequences.
-  /// @details The array will contain its own copy of the added value.
-  /// @since_tizen 5.5
+  /// Sets an element of an array of byte sequences.
   ///
-  /// @param[in]   b                       The bundle object
-  /// @param[in]   key                     The key
-  /// @param[in]   idx                     The index of the array element to be changed
-  /// @param[in]   bytes                   The byte sequence
-  /// @param[in]   size                    The byte sequence size in bytes
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #BUNDLE_ERROR_NONE Successful
-  /// @retval #BUNDLE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #BUNDLE_ERROR_KEY_NOT_AVAILABLE Key not available
-  /// @retval #BUNDLE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #BUNDLE_ERROR_ARRAY_INDEX_OUT_OF_BOUNDS The index is out of bounds of the array
+  /// The array will contain its own copy of the added value.
   ///
-  /// @see bundle_add_byte_array()
-  /// @see bundle_get_byte_array()
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `b` (in): The bundle object
+  /// - `key` (in): The key
+  /// - `idx` (in): The index of the array element to be changed
+  /// - `bytes` (in): The byte sequence
+  /// - `size` (in): The byte sequence size in bytes
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BUNDLE_ERROR_NONE`: Successful
+  /// - `BUNDLE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BUNDLE_ERROR_KEY_NOT_AVAILABLE`: Key not available
+  /// - `BUNDLE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `BUNDLE_ERROR_ARRAY_INDEX_OUT_OF_BOUNDS`: The index is out of bounds of the array
+  ///
+  /// **See also:**
+  /// - `bundle_add_byte_array()`
+  /// - `bundle_get_byte_array()`
   int bundle_set_byte_array_element(
     ffi.Pointer<bundle> b,
     ffi.Pointer<ffi.Char> key,
@@ -854,24 +1106,33 @@ class Tizen80Bundle {
           int Function(ffi.Pointer<bundle>, ffi.Pointer<ffi.Char>, int,
               ffi.Pointer<ffi.Void>, int)>();
 
-  /// @brief Gets the array of byte sequences with the given key.
-  /// @since_tizen 5.5
-  /// @remarks You should not release @a byte_array, @a len and @a array_element_size.
-  /// @a byte_array, @a len and @a array_element_size will be released when the bundle containing them is released with bundle_free().
+  /// Gets the array of byte sequences with the given key.
   ///
-  /// @param[in]   b                       The bundle object
-  /// @param[in]   key                     The key
-  /// @param[out]  byte_array              The array pointer of the byte value
-  /// @param[out]  len                     The array length
-  /// @param[out]  array_element_size      An array of sizes of each @a byte_array element
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #BUNDLE_ERROR_NONE Successful
-  /// @retval #BUNDLE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #BUNDLE_ERROR_KEY_NOT_AVAILABLE Key not available
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @see bundle_add_byte_array()
-  /// @see bundle_set_byte_array_element()
+  /// **Remarks:**
+  /// - You should not release `byte_array`, `len` and `array_element_size`.
+  /// - `byte_array`, `len` and `array_element_size` will be released when the bundle containing them is released with bundle_free().
+  ///
+  /// **Parameters:**
+  /// - `b` (in): The bundle object
+  /// - `key` (in): The key
+  /// - `byte_array` (out): The array pointer of the byte value
+  /// - `len` (out): The array length
+  /// - `array_element_size` (out): An array of sizes of each `byte_array` element
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BUNDLE_ERROR_NONE`: Successful
+  /// - `BUNDLE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BUNDLE_ERROR_KEY_NOT_AVAILABLE`: Key not available
+  ///
+  /// **See also:**
+  /// - `bundle_add_byte_array()`
+  /// - `bundle_set_byte_array_element()`
   int bundle_get_byte_array(
     ffi.Pointer<bundle> b,
     ffi.Pointer<ffi.Char> key,
@@ -906,8 +1167,11 @@ class Tizen80Bundle {
           ffi.Pointer<ffi.Pointer<ffi.UnsignedInt>>)>();
 }
 
-/// @brief Enumeration for error codes of Bundle.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for error codes of Bundle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class bundle_error_e {
   /// < Successful
   static const int BUNDLE_ERROR_NONE = 0;
@@ -928,10 +1192,14 @@ abstract class bundle_error_e {
   static const int BUNDLE_ERROR_ARRAY_INDEX_OUT_OF_BOUNDS = -18350078;
 }
 
+/// @nodoc
 final class _bundle_t extends ffi.Opaque {}
 
-/// @brief Enumeration for key-value pair types.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for key-value pair types.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class bundle_type_property {
   /// < Array type
   static const int BUNDLE_TYPE_ARRAY = 256;
@@ -943,8 +1211,11 @@ abstract class bundle_type_property {
   static const int BUNDLE_TYPE_MEASURABLE = 1024;
 }
 
-/// @brief Enumeration for bundle types.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for bundle types.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class bundle_type {
   /// < None
   static const int BUNDLE_TYPE_NONE = -1;
@@ -965,37 +1236,61 @@ abstract class bundle_type {
   static const int BUNDLE_TYPE_BYTE_ARRAY = 258;
 }
 
+/// @nodoc
 final class keyval_t extends ffi.Opaque {}
 
-/// @brief The bundle handle.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// The bundle handle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 typedef bundle = _bundle_t;
 
-/// @brief Called for every key-value pair.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] key The key of key-value pair
-/// @param[in] type The type of bundle
-/// @param[in] kv The handle of key-value pair
-/// @param[in] user_data The user data
-/// @see bundle_foreach()
+/// Called for every key-value pair.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `key` (in): The key of key-value pair
+/// - `type` (in): The type of bundle
+/// - `kv` (in): The handle of key-value pair
+/// - `user_data` (in): The user data
+///
+/// **See also:**
+/// - `bundle_foreach()`
+/// @nodoc
 typedef bundle_iterator_t
     = ffi.Pointer<ffi.NativeFunction<bundle_iterator_tFunction>>;
+/// @nodoc
 typedef bundle_iterator_tFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> key,
     ffi.Int type,
     ffi.Pointer<bundle_keyval_t> kv,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbundle_iterator_tFunction = void Function(ffi.Pointer<ffi.Char> key,
     int type, ffi.Pointer<bundle_keyval_t> kv, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The key-value pair handle.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @see bundle_iterator_t
+/// The key-value pair handle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **See also:**
+/// - `bundle_iterator_t`
+/// @nodoc
 typedef bundle_keyval_t = keyval_t;
 
-/// @brief The encoded data type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @see bundle_encode()
-/// @see bundle_decode()
+/// The encoded data type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **See also:**
+/// - `bundle_encode()`
+/// - `bundle_decode()`
+/// @nodoc
 typedef bundle_raw = ffi.UnsignedChar;
+/// @nodoc
 typedef Dartbundle_raw = int;

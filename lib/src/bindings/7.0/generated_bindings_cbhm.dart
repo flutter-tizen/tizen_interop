@@ -1,3 +1,6 @@
+/// {@category 7.0/tizen}
+library tizen_interop_7_0.cbhm;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen cbhm APIs.
+/// {@category 7.0/tizen}
 class Tizen70Cbhm {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,15 +28,24 @@ class Tizen70Cbhm {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates and initializes clipboard handle.
-  /// @since_tizen 3.0
-  /// @param[out] cbhm_handle Clipboard handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CBHM_ERROR_NONE Successful
-  /// @retval #CBHM_ERROR_INVALID_PARAMETER Invalid function parameters
-  /// @retval #CBHM_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see cbhm_close_service()
+  /// Creates and initializes clipboard handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `cbhm_handle` (out): Clipboard handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CBHM_ERROR_NONE`: Successful
+  /// - `CBHM_ERROR_INVALID_PARAMETER`: Invalid function parameters
+  /// - `CBHM_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `cbhm_close_service()`
   int cbhm_open_service(
     ffi.Pointer<cbhm_h> cbhm_handle,
   ) {
@@ -47,14 +60,23 @@ class Tizen70Cbhm {
   late final _cbhm_open_service =
       _cbhm_open_servicePtr.asFunction<int Function(ffi.Pointer<cbhm_h>)>();
 
-  /// @brief Closes clipboard handle.
-  /// @since_tizen 3.0
-  /// @param[in] cbhm_handle Clipboard handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CBHM_ERROR_NONE Successful
-  /// @retval #CBHM_ERROR_INVALID_PARAMETER Invalid function parameters
-  /// @see cbhm_open_service()
+  /// Closes clipboard handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `cbhm_handle` (in): Clipboard handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CBHM_ERROR_NONE`: Successful
+  /// - `CBHM_ERROR_INVALID_PARAMETER`: Invalid function parameters
+  ///
+  /// **See also:**
+  /// - `cbhm_open_service()`
   int cbhm_close_service(
     cbhm_h cbhm_handle,
   ) {
@@ -69,14 +91,23 @@ class Tizen70Cbhm {
   late final _cbhm_close_service =
       _cbhm_close_servicePtr.asFunction<int Function(cbhm_h)>();
 
-  /// @brief Shows clipboard.
-  /// @since_tizen 3.0
-  /// @param[in] cbhm_handle Clipboard handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CBHM_ERROR_NONE Successful
-  /// @retval #CBHM_ERROR_INVALID_PARAMETER Invalid function parameters
-  /// @see cbhm_hide()
+  /// Shows clipboard.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `cbhm_handle` (in): Clipboard handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CBHM_ERROR_NONE`: Successful
+  /// - `CBHM_ERROR_INVALID_PARAMETER`: Invalid function parameters
+  ///
+  /// **See also:**
+  /// - `cbhm_hide()`
   int cbhm_show(
     cbhm_h cbhm_handle,
   ) {
@@ -89,14 +120,23 @@ class Tizen70Cbhm {
       _lookup<ffi.NativeFunction<ffi.Int Function(cbhm_h)>>('cbhm_show');
   late final _cbhm_show = _cbhm_showPtr.asFunction<int Function(cbhm_h)>();
 
-  /// @brief Hides clipboard.
-  /// @since_tizen 3.0
-  /// @param[in] cbhm_handle Clipboard handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CBHM_ERROR_NONE Successful
-  /// @retval #CBHM_ERROR_INVALID_PARAMETER Invalid function parameters
-  /// @see cbhm_show()
+  /// Hides clipboard.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `cbhm_handle` (in): Clipboard handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CBHM_ERROR_NONE`: Successful
+  /// - `CBHM_ERROR_INVALID_PARAMETER`: Invalid function parameters
+  ///
+  /// **See also:**
+  /// - `cbhm_show()`
   int cbhm_hide(
     cbhm_h cbhm_handle,
   ) {
@@ -109,15 +149,24 @@ class Tizen70Cbhm {
       _lookup<ffi.NativeFunction<ffi.Int Function(cbhm_h)>>('cbhm_hide');
   late final _cbhm_hide = _cbhm_hidePtr.asFunction<int Function(cbhm_h)>();
 
-  /// @brief Sets clipboard selection type.
-  /// @since_tizen 3.0
-  /// @param[in] cbhm_handle Clipboard handle
-  /// @param[in] type Selection type
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CBHM_ERROR_NONE Successful
-  /// @retval #CBHM_ERROR_INVALID_PARAMETER Invalid function parameters
-  /// @see cbhm_selection_type_get()
+  /// Sets clipboard selection type.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `cbhm_handle` (in): Clipboard handle
+  /// - `type` (in): Selection type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CBHM_ERROR_NONE`: Successful
+  /// - `CBHM_ERROR_INVALID_PARAMETER`: Invalid function parameters
+  ///
+  /// **See also:**
+  /// - `cbhm_selection_type_get()`
   int cbhm_selection_type_set(
     cbhm_h cbhm_handle,
     int type,
@@ -134,15 +183,24 @@ class Tizen70Cbhm {
   late final _cbhm_selection_type_set =
       _cbhm_selection_type_setPtr.asFunction<int Function(cbhm_h, int)>();
 
-  /// @brief Gets clipboard selection type.
-  /// @since_tizen 3.0
-  /// @param[in] cbhm_handle Clipboard handle
-  /// @param[out] type Selection type
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CBHM_ERROR_NONE Successful
-  /// @retval #CBHM_ERROR_INVALID_PARAMETER Invalid function parameters
-  /// @see cbhm_selection_type_set()
+  /// Gets clipboard selection type.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `cbhm_handle` (in): Clipboard handle
+  /// - `type` (out): Selection type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CBHM_ERROR_NONE`: Successful
+  /// - `CBHM_ERROR_INVALID_PARAMETER`: Invalid function parameters
+  ///
+  /// **See also:**
+  /// - `cbhm_selection_type_set()`
   int cbhm_selection_type_get(
     cbhm_h cbhm_handle,
     ffi.Pointer<ffi.Int32> type,
@@ -159,16 +217,23 @@ class Tizen70Cbhm {
   late final _cbhm_selection_type_get = _cbhm_selection_type_getPtr
       .asFunction<int Function(cbhm_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Adds event callback function of selecting a clipboard item.
-  /// @since_tizen 3.0
-  /// @param[in] cbhm_handle Clipboard handle
-  /// @param[in] callback Callback function called when a clipboard item is selected
-  /// @param[in] user_data User data to be passed to the given event callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CBHM_ERROR_NONE Successful
-  /// @retval #CBHM_ERROR_INVALID_PARAMETER Invalid function parameters
-  /// @retval #CBHM_ERROR_OUT_OF_MEMORY Out of memory
+  /// Adds event callback function of selecting a clipboard item.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `cbhm_handle` (in): Clipboard handle
+  /// - `callback` (in): Callback function called when a clipboard item is selected
+  /// - `user_data` (in): User data to be passed to the given event callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CBHM_ERROR_NONE`: Successful
+  /// - `CBHM_ERROR_INVALID_PARAMETER`: Invalid function parameters
+  /// - `CBHM_ERROR_OUT_OF_MEMORY`: Out of memory
   int cbhm_item_selected_callback_add(
     cbhm_h cbhm_handle,
     cbhm_selected_cb callback,
@@ -189,15 +254,22 @@ class Tizen70Cbhm {
       _cbhm_item_selected_callback_addPtr.asFunction<
           int Function(cbhm_h, cbhm_selected_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Removes event callback function for selecting a clipboard item.
-  /// @since_tizen 4.0
-  /// @param[in] cbhm_handle The clipboard handle
-  /// @param[in] callback The callback function to be deleted
-  /// @param[in] user_data User data to be passed to the given event callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CBHM_ERROR_NONE Successful
-  /// @retval #CBHM_ERROR_INVALID_PARAMETER Invalid function parameters
+  /// Removes event callback function for selecting a clipboard item.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `cbhm_handle` (in): The clipboard handle
+  /// - `callback` (in): The callback function to be deleted
+  /// - `user_data` (in): User data to be passed to the given event callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CBHM_ERROR_NONE`: Successful
+  /// - `CBHM_ERROR_INVALID_PARAMETER`: Invalid function parameters
   int cbhm_item_selected_callback_remove(
     cbhm_h cbhm_handle,
     cbhm_selected_cb callback,
@@ -218,18 +290,27 @@ class Tizen70Cbhm {
       _cbhm_item_selected_callback_removePtr.asFunction<
           int Function(cbhm_h, cbhm_selected_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sends data to clipboard.
-  /// @since_tizen 3.0
-  /// @param[in] cbhm_handle Clipboard handle
-  /// @param[in] type Selection type
-  /// @param[in] data Data to be sent
-  /// @param[in] len The length of data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CBHM_ERROR_NONE Successful
-  /// @retval #CBHM_ERROR_INVALID_PARAMETER Invalid function parameters
-  /// @retval #CBHM_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see cbhm_selection_get()
+  /// Sends data to clipboard.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `cbhm_handle` (in): Clipboard handle
+  /// - `type` (in): Selection type
+  /// - `data` (in): Data to be sent
+  /// - `len` (in): The length of data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CBHM_ERROR_NONE`: Successful
+  /// - `CBHM_ERROR_INVALID_PARAMETER`: Invalid function parameters
+  /// - `CBHM_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `cbhm_selection_get()`
   int cbhm_selection_set(
     cbhm_h cbhm_handle,
     int type,
@@ -251,18 +332,27 @@ class Tizen70Cbhm {
   late final _cbhm_selection_set = _cbhm_selection_setPtr
       .asFunction<int Function(cbhm_h, int, ffi.Pointer<ffi.Void>, int)>();
 
-  /// @brief Receives data from clipboard.
-  /// @since_tizen 3.0
-  /// @param[in] cbhm_handle Clipboard handle
-  /// @param[in] type Selection type
-  /// @param[in] callback Callback function receiving data from clipboard
-  /// @param[in] user_data User data to be passed to the given event callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CBHM_ERROR_NONE Successful
-  /// @retval #CBHM_ERROR_INVALID_PARAMETER Invalid function parameters
-  /// @retval #CBHM_ERROR_NO_DATA No data available
-  /// @see cbhm_selection_set()
+  /// Receives data from clipboard.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `cbhm_handle` (in): Clipboard handle
+  /// - `type` (in): Selection type
+  /// - `callback` (in): Callback function receiving data from clipboard
+  /// - `user_data` (in): User data to be passed to the given event callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CBHM_ERROR_NONE`: Successful
+  /// - `CBHM_ERROR_INVALID_PARAMETER`: Invalid function parameters
+  /// - `CBHM_ERROR_NO_DATA`: No data available
+  ///
+  /// **See also:**
+  /// - `cbhm_selection_set()`
   int cbhm_selection_get(
     cbhm_h cbhm_handle,
     int type,
@@ -285,11 +375,19 @@ class Tizen70Cbhm {
       int Function(
           cbhm_h, int, cbhm_selection_data_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the count of clipboard items.
-  /// @since_tizen 3.0
-  /// @param[in] cbhm_handle Clipboard handle
-  /// @return The count of clipboard items
-  /// @retval #CBHM_ERROR_INVALID_PARAMETER Invalid function parameters
+  /// Gets the count of clipboard items.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `cbhm_handle` (in): Clipboard handle
+  ///
+  /// **Returns:**
+  /// - The count of clipboard items
+  ///
+  /// **Return values:**
+  /// - `CBHM_ERROR_INVALID_PARAMETER`: Invalid function parameters
   int cbhm_item_count_get(
     cbhm_h cbhm_handle,
   ) {
@@ -304,15 +402,24 @@ class Tizen70Cbhm {
   late final _cbhm_item_count_get =
       _cbhm_item_count_getPtr.asFunction<int Function(cbhm_h)>();
 
-  /// @brief Gets the type of the latest item in clipboard.
-  /// @since_tizen 4.0
-  /// @param[in] cbhm_handle The clipboard handle
-  /// @param[out] type The type of the latest item
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CBHM_ERROR_NONE Successful
-  /// @retval #CBHM_ERROR_INVALID_PARAMETER Invalid function parameters
-  /// @see cbhm_selection_type_set()
+  /// Gets the type of the latest item in clipboard.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `cbhm_handle` (in): The clipboard handle
+  /// - `type` (out): The type of the latest item
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CBHM_ERROR_NONE`: Successful
+  /// - `CBHM_ERROR_INVALID_PARAMETER`: Invalid function parameters
+  ///
+  /// **See also:**
+  /// - `cbhm_selection_type_set()`
   int cbhm_latest_item_type_get(
     cbhm_h cbhm_handle,
     ffi.Pointer<ffi.Int32> type,
@@ -329,16 +436,23 @@ class Tizen70Cbhm {
   late final _cbhm_latest_item_type_get = _cbhm_latest_item_type_getPtr
       .asFunction<int Function(cbhm_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Adds event callback function for receiving changed event of clipboard items.
-  /// @since_tizen 4.0
-  /// @param[in] cbhm_handle The clipboard handle
-  /// @param[in] callback The callback function called when a clipboard item is changed
-  /// @param[in] user_data User data to be passed to the given event callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CBHM_ERROR_NONE Successful
-  /// @retval #CBHM_ERROR_INVALID_PARAMETER Invalid function parameters
-  /// @retval #CBHM_ERROR_OUT_OF_MEMORY Out of memory
+  /// Adds event callback function for receiving changed event of clipboard items.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `cbhm_handle` (in): The clipboard handle
+  /// - `callback` (in): The callback function called when a clipboard item is changed
+  /// - `user_data` (in): User data to be passed to the given event callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CBHM_ERROR_NONE`: Successful
+  /// - `CBHM_ERROR_INVALID_PARAMETER`: Invalid function parameters
+  /// - `CBHM_ERROR_OUT_OF_MEMORY`: Out of memory
   int cbhm_item_changed_callback_add(
     cbhm_h cbhm_handle,
     cbhm_item_changed_cb callback,
@@ -359,15 +473,22 @@ class Tizen70Cbhm {
       _cbhm_item_changed_callback_addPtr.asFunction<
           int Function(cbhm_h, cbhm_item_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Removes event callback function for receiving changed event of clipboard items.
-  /// @since_tizen 4.0
-  /// @param[in] cbhm_handle The clipboard handle
-  /// @param[in] callback The callback function to be removed
-  /// @param[in] user_data User data to be passed to the given event callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CBHM_ERROR_NONE Successful
-  /// @retval #CBHM_ERROR_INVALID_PARAMETER Invalid function parameters
+  /// Removes event callback function for receiving changed event of clipboard items.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `cbhm_handle` (in): The clipboard handle
+  /// - `callback` (in): The callback function to be removed
+  /// - `user_data` (in): User data to be passed to the given event callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CBHM_ERROR_NONE`: Successful
+  /// - `CBHM_ERROR_INVALID_PARAMETER`: Invalid function parameters
   int cbhm_item_changed_callback_remove(
     cbhm_h cbhm_handle,
     cbhm_item_changed_cb callback,
@@ -388,14 +509,21 @@ class Tizen70Cbhm {
       _cbhm_item_changed_callback_removePtr.asFunction<
           int Function(cbhm_h, cbhm_item_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the clipboard state.
-  /// @since_tizen 4.0
-  /// @param[in] cbhm_handle Clipboard handle
-  /// @param[out] type State type
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CBHM_ERROR_NONE Successful
-  /// @retval #CBHM_ERROR_INVALID_PARAMETER Invalid function parameters
+  /// Gets the clipboard state.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `cbhm_handle` (in): Clipboard handle
+  /// - `type` (out): State type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CBHM_ERROR_NONE`: Successful
+  /// - `CBHM_ERROR_INVALID_PARAMETER`: Invalid function parameters
   int cbhm_state_get(
     cbhm_h cbhm_handle,
     ffi.Pointer<ffi.Int32> type,
@@ -412,17 +540,26 @@ class Tizen70Cbhm {
   late final _cbhm_state_get = _cbhm_state_getPtr
       .asFunction<int Function(cbhm_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Adds event callback function of receiving monitored event of clipboard.
-  /// @since_tizen 4.0
-  /// @param[in] cbhm_handle Clipboard handle
-  /// @param[in] callback Callback function called when clipboard becomes active or inactive
-  /// @param[in] user_data User data to be passed to the given event callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CBHM_ERROR_NONE Successful
-  /// @retval #CBHM_ERROR_INVALID_PARAMETER Invalid function parameters
-  /// @retval #CBHM_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see cbhm_monitor_callback_remove()
+  /// Adds event callback function of receiving monitored event of clipboard.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `cbhm_handle` (in): Clipboard handle
+  /// - `callback` (in): Callback function called when clipboard becomes active or inactive
+  /// - `user_data` (in): User data to be passed to the given event callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CBHM_ERROR_NONE`: Successful
+  /// - `CBHM_ERROR_INVALID_PARAMETER`: Invalid function parameters
+  /// - `CBHM_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `cbhm_monitor_callback_remove()`
   int cbhm_monitor_callback_add(
     cbhm_h cbhm_handle,
     cbhm_monitor_cb callback,
@@ -443,16 +580,25 @@ class Tizen70Cbhm {
       _cbhm_monitor_callback_addPtr.asFunction<
           int Function(cbhm_h, cbhm_monitor_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Deletes event callback function of receiving monitored event of clipboard.
-  /// @since_tizen 4.0
-  /// @param[in] cbhm_handle Clipboard handle
-  /// @param[in] callback Callback function to be deleted
-  /// @param[in] user_data User data to be passed to the given event callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CBHM_ERROR_NONE Successful
-  /// @retval #CBHM_ERROR_INVALID_PARAMETER Invalid function parameters
-  /// @see cbhm_monitor_callback_add()
+  /// Deletes event callback function of receiving monitored event of clipboard.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `cbhm_handle` (in): Clipboard handle
+  /// - `callback` (in): Callback function to be deleted
+  /// - `user_data` (in): User data to be passed to the given event callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CBHM_ERROR_NONE`: Successful
+  /// - `CBHM_ERROR_INVALID_PARAMETER`: Invalid function parameters
+  ///
+  /// **See also:**
+  /// - `cbhm_monitor_callback_add()`
   int cbhm_monitor_callback_remove(
     cbhm_h cbhm_handle,
     cbhm_monitor_cb callback,
@@ -474,14 +620,21 @@ class Tizen70Cbhm {
           int Function(cbhm_h, cbhm_monitor_cb, ffi.Pointer<ffi.Void>)>();
 }
 
+/// @nodoc
 final class cbhm extends ffi.Opaque {}
 
-/// @brief Clipboard handle.
-/// @since_tizen 3.0
+/// Clipboard handle.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef cbhm_h = ffi.Pointer<cbhm>;
 
-/// @brief Enumeration for Clipboard Data Type.
-/// @since_tizen 3.0
+/// Enumeration for Clipboard Data Type.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class cbhm_sel_type_e {
   /// < Content is from outside of Elementary
   static const int CBHM_SEL_TYPE_NONE = 0;
@@ -499,53 +652,92 @@ abstract class cbhm_sel_type_e {
   static const int CBHM_SEL_TYPE_HTML = 8;
 }
 
-/// @brief Event callback signature of selecting a clipboard item.
-/// @since_tizen 3.0
-/// @param[in] cbhm_handle Clipboard handle
-/// @param[in] user_data User data to be passed to the given event callback function
-/// @return This is reserved
-/// @see cbhm_item_selected_callback_add()
+/// Event callback signature of selecting a clipboard item.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `cbhm_handle` (in): Clipboard handle
+/// - `user_data` (in): User data to be passed to the given event callback function
+///
+/// **Returns:**
+/// - This is reserved
+///
+/// **See also:**
+/// - `cbhm_item_selected_callback_add()`
+/// @nodoc
 typedef cbhm_selected_cb
     = ffi.Pointer<ffi.NativeFunction<cbhm_selected_cbFunction>>;
+/// @nodoc
 typedef cbhm_selected_cbFunction = ffi.Int Function(
     cbhm_h cbhm_handle, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcbhm_selected_cbFunction = int Function(
     cbhm_h cbhm_handle, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Event callback signature of receiving data from clipboard.
-/// @since_tizen 3.0
-/// @param[in] Clipboard handle
-/// @param[out] buf Buffer for receiving data
-/// @param[in] len The length of buffer
-/// @param[in] user_data User data to be passed to the given event callback function
-/// @return This is reserved
-/// @see cbhm_item_selected_callback_add()
+/// Event callback signature of receiving data from clipboard.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `Clipboard` (in): handle
+/// - `buf` (out): Buffer for receiving data
+/// - `len` (in): The length of buffer
+/// - `user_data` (in): User data to be passed to the given event callback function
+///
+/// **Returns:**
+/// - This is reserved
+///
+/// **See also:**
+/// - `cbhm_item_selected_callback_add()`
+/// @nodoc
 typedef cbhm_selection_data_cb
     = ffi.Pointer<ffi.NativeFunction<cbhm_selection_data_cbFunction>>;
+/// @nodoc
 typedef cbhm_selection_data_cbFunction = ffi.Int Function(cbhm_h cbhm_handle,
     ffi.Pointer<ffi.Char> buf, ffi.Size len, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcbhm_selection_data_cbFunction = int Function(cbhm_h cbhm_handle,
     ffi.Pointer<ffi.Char> buf, int len, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Event callback signature for receiving changed event of clipboard items.
-/// @since_tizen 4.0
-/// @param[in] cbhm_handle The clipboard handle
-/// @remarks @a cbhm_handle is the same handle as the one used in the cbhm_item_changed_callback_add() call with which the callback was added
-/// @param[in] item_count The number of clipboard items
-/// @param[in] user_data User data to be passed to the given event callback function
-/// @return #CBHM_ERROR_NONE on success,
-/// otherwise a negative error value
-/// @retval #CBHM_ERROR_NONE Successful
-/// @see cbhm_item_selected_callback_add()
+/// Event callback signature for receiving changed event of clipboard items.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Remarks:**
+/// - `cbhm_handle` is the same handle as the one used in the cbhm_item_changed_callback_add() call with which the callback was added
+///
+/// **Parameters:**
+/// - `cbhm_handle` (in): The clipboard handle
+/// - `item_count` (in): The number of clipboard items
+/// - `user_data` (in): User data to be passed to the given event callback function
+///
+/// **Returns:**
+/// - `CBHM_ERROR_NONE` on success, otherwise a negative error value
+///
+/// **Return values:**
+/// - `CBHM_ERROR_NONE`: Successful
+///
+/// **See also:**
+/// - `cbhm_item_selected_callback_add()`
+/// @nodoc
 typedef cbhm_item_changed_cb
     = ffi.Pointer<ffi.NativeFunction<cbhm_item_changed_cbFunction>>;
+/// @nodoc
 typedef cbhm_item_changed_cbFunction = ffi.Void Function(
     cbhm_h cbhm_handle, ffi.Int item_count, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcbhm_item_changed_cbFunction = void Function(
     cbhm_h cbhm_handle, int item_count, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumeration for Clipboard State Type.
-/// @since_tizen 3.0
+/// Enumeration for Clipboard State Type.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class cbhm_state_type_e {
   /// < Default State of Clipboard History Manager
   static const int CBHM_STATE_NONE = 0;
@@ -557,16 +749,25 @@ abstract class cbhm_state_type_e {
   static const int CBHM_STATE_HIDE = 2;
 }
 
-/// @brief Event callback signature of receiving monitored event of clipboard.
-/// @since_tizen 4.0
-/// @param[in] cbhm_handle Clipboard handle
-/// @param[in] active_state Clipboard is active if @c true, inactive otherwise
-/// @param[in] user_data User data to be passed to the given event callback function
-/// @see cbhm_monitor_callback_add()
-/// @see cbhm_monitor_callback_remove()
+/// Event callback signature of receiving monitored event of clipboard.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Parameters:**
+/// - `cbhm_handle` (in): Clipboard handle
+/// - `active_state` (in): Clipboard is active if `true`, inactive otherwise
+/// - `user_data` (in): User data to be passed to the given event callback function
+///
+/// **See also:**
+/// - `cbhm_monitor_callback_add()`
+/// - `cbhm_monitor_callback_remove()`
+/// @nodoc
 typedef cbhm_monitor_cb
     = ffi.Pointer<ffi.NativeFunction<cbhm_monitor_cbFunction>>;
+/// @nodoc
 typedef cbhm_monitor_cbFunction = ffi.Void Function(
     cbhm_h cbhm_handle, ffi.Bool active_state, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcbhm_monitor_cbFunction = void Function(
     cbhm_h cbhm_handle, bool active_state, ffi.Pointer<ffi.Void> user_data);

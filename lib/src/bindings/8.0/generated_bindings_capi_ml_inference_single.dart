@@ -1,3 +1,6 @@
+/// {@category 8.0/tizen}
+library tizen_interop_8_0.capi_ml_inference_single;
+
 // Copyright 2026 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -11,6 +14,7 @@ import 'generated_bindings_capi_nnstreamer.dart' as nnstreamer;
 import 'generated_bindings_capi_ml_common.dart' as ml_common;
 
 /// Dart bindings for Tizen capi-ml-inference-single APIs.
+/// {@category 8.0/tizen}
 class Tizen80CapiMlInferenceSingle {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -26,31 +30,44 @@ class Tizen80CapiMlInferenceSingle {
           lookup)
       : _lookup = lookup;
 
-  /// NNStreamer Pipeline Construction (gst-parse)   **
-  /// /
-  /// /**
-  /// @brief Constructs the pipeline (GStreamer + NNStreamer).
-  /// @details Use this function to create gst_parse_launch compatible NNStreamer pipelines.
-  /// @since_tizen 5.5
-  /// @remarks If the function succeeds, @a pipe handle must be released using ml_pipeline_destroy().
-  /// @remarks %http://tizen.org/privilege/mediastorage is needed if @a pipeline_description is relevant to media storage.
-  /// @remarks %http://tizen.org/privilege/externalstorage is needed if @a pipeline_description is relevant to external storage.
-  /// @remarks %http://tizen.org/privilege/camera is needed if @a pipeline_description accesses the camera device.
-  /// @remarks %http://tizen.org/privilege/recorder is needed if @a pipeline_description accesses the recorder device.
-  /// @param[in] pipeline_description The pipeline description compatible with GStreamer gst_parse_launch(). Refer to GStreamer manual or NNStreamer (https://github.com/nnstreamer/nnstreamer) documentation for examples and the grammar.
-  /// @param[in] cb The function to be called when the pipeline state is changed. You may set NULL if it's not required.
-  /// @param[in] user_data Private data for the callback. This value is passed to the callback when it's invoked.
-  /// @param[out] pipe The NNStreamer pipeline handler from the given description.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_PERMISSION_DENIED The application does not have the required privilege to access to the media storage, external storage, microphone, or camera.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid. (Pipeline is not negotiated yet.)
-  /// @retval #ML_ERROR_STREAMS_PIPE Pipeline construction is failed because of wrong parameter or initialization failure.
-  /// @retval #ML_ERROR_OUT_OF_MEMORY Failed to allocate required memory to construct the pipeline.
+  /// NNStreamer Pipeline Construction (gst-parse) ** / /**
   ///
-  /// @pre The pipeline state should be #ML_PIPELINE_STATE_UNKNOWN or #ML_PIPELINE_STATE_NULL.
-  /// @post The pipeline state will be #ML_PIPELINE_STATE_PAUSED in the same thread.
+  /// Constructs the pipeline (GStreamer + NNStreamer).
+  ///
+  /// Use this function to create gst_parse_launch compatible NNStreamer pipelines.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, `pipe` handle must be released using ml_pipeline_destroy().
+  /// - <http://tizen.org/privilege/mediastorage is needed if `pipeline_description` is relevant to media storage.>
+  /// - <http://tizen.org/privilege/externalstorage is needed if `pipeline_description` is relevant to external storage.>
+  /// - <http://tizen.org/privilege/camera is needed if `pipeline_description` accesses the camera device.>
+  /// - <http://tizen.org/privilege/recorder is needed if `pipeline_description` accesses the recorder device.>
+  ///
+  /// **Parameters:**
+  /// - `pipeline_description` (in): The pipeline description compatible with GStreamer gst_parse_launch(). Refer to GStreamer manual or NNStreamer (https://github.com/nnstreamer/nnstreamer) documentation for examples and the grammar.
+  /// - `cb` (in): The function to be called when the pipeline state is changed. You may set NULL if it's not required.
+  /// - `user_data` (in): Private data for the callback. This value is passed to the callback when it's invoked.
+  /// - `pipe` (out): The NNStreamer pipeline handler from the given description.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_PERMISSION_DENIED`: The application does not have the required privilege to access to the media storage, external storage, microphone, or camera.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid. (Pipeline is not negotiated yet.)
+  /// - `ML_ERROR_STREAMS_PIPE`: Pipeline construction is failed because of wrong parameter or initialization failure.
+  /// - `ML_ERROR_OUT_OF_MEMORY`: Failed to allocate required memory to construct the pipeline.
+  ///
+  /// **Preconditions:**
+  /// - The pipeline state should be `ML_PIPELINE_STATE_UNKNOWN` or `ML_PIPELINE_STATE_NULL`.
+  ///
+  /// **Postconditions:**
+  /// - The pipeline state will be `ML_PIPELINE_STATE_PAUSED` in the same thread.
   int ml_pipeline_construct(
     ffi.Pointer<ffi.Char> pipeline_description,
     nnstreamer.ml_pipeline_state_cb cb,
@@ -76,18 +93,30 @@ class Tizen80CapiMlInferenceSingle {
       int Function(ffi.Pointer<ffi.Char>, nnstreamer.ml_pipeline_state_cb,
           ffi.Pointer<ffi.Void>, ffi.Pointer<nnstreamer.ml_pipeline_h>)>();
 
-  /// @brief Destroys the pipeline.
-  /// @details Use this function to destroy the pipeline constructed with ml_pipeline_construct().
-  /// @since_tizen 5.5
-  /// @param[in] pipe The pipeline to be destroyed.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER The parameter is invalid. (Pipeline is not negotiated yet.)
-  /// @retval #ML_ERROR_STREAMS_PIPE Failed to access the pipeline state.
+  /// Destroys the pipeline.
   ///
-  /// @pre The pipeline state should be #ML_PIPELINE_STATE_PLAYING or #ML_PIPELINE_STATE_PAUSED.
-  /// @post The pipeline state will be #ML_PIPELINE_STATE_NULL.
+  /// Use this function to destroy the pipeline constructed with ml_pipeline_construct().
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `pipe` (in): The pipeline to be destroyed.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: The parameter is invalid. (Pipeline is not negotiated yet.)
+  /// - `ML_ERROR_STREAMS_PIPE`: Failed to access the pipeline state.
+  ///
+  /// **Preconditions:**
+  /// - The pipeline state should be `ML_PIPELINE_STATE_PLAYING` or `ML_PIPELINE_STATE_PAUSED`.
+  ///
+  /// **Postconditions:**
+  /// - The pipeline state will be `ML_PIPELINE_STATE_NULL`.
   int ml_pipeline_destroy(
     nnstreamer.ml_pipeline_h pipe,
   ) {
@@ -102,16 +131,25 @@ class Tizen80CapiMlInferenceSingle {
   late final _ml_pipeline_destroy = _ml_pipeline_destroyPtr
       .asFunction<int Function(nnstreamer.ml_pipeline_h)>();
 
-  /// @brief Gets the state of pipeline.
-  /// @details Gets the state of the pipeline handle returned by ml_pipeline_construct().
-  /// @since_tizen 5.5
-  /// @param[in] pipe The pipeline handle.
-  /// @param[out] state The pipeline state.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid. (Pipeline is not negotiated yet.)
-  /// @retval #ML_ERROR_STREAMS_PIPE Failed to get state from the pipeline.
+  /// Gets the state of pipeline.
+  ///
+  /// Gets the state of the pipeline handle returned by ml_pipeline_construct().
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `pipe` (in): The pipeline handle.
+  /// - `state` (out): The pipeline state.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid. (Pipeline is not negotiated yet.)
+  /// - `ML_ERROR_STREAMS_PIPE`: Failed to get state from the pipeline.
   int ml_pipeline_get_state(
     nnstreamer.ml_pipeline_h pipe,
     ffi.Pointer<ffi.Int32> state,
@@ -129,23 +167,32 @@ class Tizen80CapiMlInferenceSingle {
   late final _ml_pipeline_get_state = _ml_pipeline_get_statePtr.asFunction<
       int Function(nnstreamer.ml_pipeline_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// NNStreamer Pipeline Start/Stop Control         **
-  /// /
-  /// /**
-  /// @brief Starts the pipeline, asynchronously.
-  /// @details The pipeline handle returned by ml_pipeline_construct() is started.
-  /// Note that this is asynchronous function. State might be "pending".
-  /// If you need to get the changed state, add a callback while constructing a pipeline with ml_pipeline_construct().
-  /// @since_tizen 5.5
-  /// @param[in] pipe The pipeline handle.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid. (Pipeline is not negotiated yet.)
-  /// @retval #ML_ERROR_STREAMS_PIPE Failed to start the pipeline.
+  /// NNStreamer Pipeline Start/Stop Control ** / /**
   ///
-  /// @pre The pipeline state should be #ML_PIPELINE_STATE_PAUSED.
-  /// @post The pipeline state will be #ML_PIPELINE_STATE_PLAYING.
+  /// Starts the pipeline, asynchronously.
+  ///
+  /// The pipeline handle returned by ml_pipeline_construct() is started. Note that this is asynchronous function. State might be "pending". If you need to get the changed state, add a callback while constructing a pipeline with ml_pipeline_construct().
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `pipe` (in): The pipeline handle.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid. (Pipeline is not negotiated yet.)
+  /// - `ML_ERROR_STREAMS_PIPE`: Failed to start the pipeline.
+  ///
+  /// **Preconditions:**
+  /// - The pipeline state should be `ML_PIPELINE_STATE_PAUSED`.
+  ///
+  /// **Postconditions:**
+  /// - The pipeline state will be `ML_PIPELINE_STATE_PLAYING`.
   int ml_pipeline_start(
     nnstreamer.ml_pipeline_h pipe,
   ) {
@@ -160,20 +207,30 @@ class Tizen80CapiMlInferenceSingle {
   late final _ml_pipeline_start = _ml_pipeline_startPtr
       .asFunction<int Function(nnstreamer.ml_pipeline_h)>();
 
-  /// @brief Stops the pipeline, asynchronously.
-  /// @details The pipeline handle returned by ml_pipeline_construct() is stopped.
-  /// Note that this is asynchronous function. State might be "pending".
-  /// If you need to get the changed state, add a callback while constructing a pipeline with ml_pipeline_construct().
-  /// @since_tizen 5.5
-  /// @param[in] pipe The pipeline to be stopped.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid. (Pipeline is not negotiated yet.)
-  /// @retval #ML_ERROR_STREAMS_PIPE Failed to stop the pipeline.
+  /// Stops the pipeline, asynchronously.
   ///
-  /// @pre The pipeline state should be #ML_PIPELINE_STATE_PLAYING.
-  /// @post The pipeline state will be #ML_PIPELINE_STATE_PAUSED.
+  /// The pipeline handle returned by ml_pipeline_construct() is stopped. Note that this is asynchronous function. State might be "pending". If you need to get the changed state, add a callback while constructing a pipeline with ml_pipeline_construct().
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `pipe` (in): The pipeline to be stopped.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid. (Pipeline is not negotiated yet.)
+  /// - `ML_ERROR_STREAMS_PIPE`: Failed to stop the pipeline.
+  ///
+  /// **Preconditions:**
+  /// - The pipeline state should be `ML_PIPELINE_STATE_PLAYING`.
+  ///
+  /// **Postconditions:**
+  /// - The pipeline state will be `ML_PIPELINE_STATE_PAUSED`.
   int ml_pipeline_stop(
     nnstreamer.ml_pipeline_h pipe,
   ) {
@@ -188,16 +245,25 @@ class Tizen80CapiMlInferenceSingle {
   late final _ml_pipeline_stop =
       _ml_pipeline_stopPtr.asFunction<int Function(nnstreamer.ml_pipeline_h)>();
 
-  /// @brief Clears all data and resets the pipeline.
-  /// @details During the flush operation, the pipeline is stopped and after the operation is done, the pipeline is resumed and ready to start the data flow.
-  /// @since_tizen 6.5
-  /// @param[in] pipe The pipeline to be flushed.
-  /// @param[in] start @c true to start the pipeline after the flush operation is done.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
-  /// @retval #ML_ERROR_STREAMS_PIPE Failed to flush the pipeline.
+  /// Clears all data and resets the pipeline.
+  ///
+  /// During the flush operation, the pipeline is stopped and after the operation is done, the pipeline is resumed and ready to start the data flow.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `pipe` (in): The pipeline to be flushed.
+  /// - `start` (in): `true` to start the pipeline after the flush operation is done.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
+  /// - `ML_ERROR_STREAMS_PIPE`: Failed to flush the pipeline.
   int ml_pipeline_flush(
     nnstreamer.ml_pipeline_h pipe,
     bool start,
@@ -215,25 +281,35 @@ class Tizen80CapiMlInferenceSingle {
   late final _ml_pipeline_flush = _ml_pipeline_flushPtr
       .asFunction<int Function(nnstreamer.ml_pipeline_h, bool)>();
 
-  /// NNStreamer Pipeline Sink/Src Control           **
-  /// /
-  /// /**
-  /// @brief Registers a callback for sink node of NNStreamer pipelines.
-  /// @since_tizen 5.5
-  /// @remarks If the function succeeds, @a sink_handle handle must be unregistered using ml_pipeline_sink_unregister().
-  /// @param[in] pipe The pipeline to be attached with a sink node.
-  /// @param[in] sink_name The name of sink node, described with ml_pipeline_construct().
-  /// @param[in] cb The function to be called by the sink node.
-  /// @param[in] user_data Private data for the callback. This value is passed to the callback when it's invoked.
-  /// @param[out] sink_handle The sink handle.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid. (Not negotiated, @a sink_name is not found, or @a sink_name has an invalid type.)
-  /// @retval #ML_ERROR_STREAMS_PIPE Failed to connect a signal to sink element.
-  /// @retval #ML_ERROR_OUT_OF_MEMORY Failed to allocate required memory.
+  /// NNStreamer Pipeline Sink/Src Control ** / /**
   ///
-  /// @pre The pipeline state should be #ML_PIPELINE_STATE_PAUSED.
+  /// Registers a callback for sink node of NNStreamer pipelines.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, `sink_handle` handle must be unregistered using ml_pipeline_sink_unregister().
+  ///
+  /// **Parameters:**
+  /// - `pipe` (in): The pipeline to be attached with a sink node.
+  /// - `sink_name` (in): The name of sink node, described with ml_pipeline_construct().
+  /// - `cb` (in): The function to be called by the sink node.
+  /// - `user_data` (in): Private data for the callback. This value is passed to the callback when it's invoked.
+  /// - `sink_handle` (out): The sink handle.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid. (Not negotiated, `sink_name` is not found, or `sink_name` has an invalid type.)
+  /// - `ML_ERROR_STREAMS_PIPE`: Failed to connect a signal to sink element.
+  /// - `ML_ERROR_OUT_OF_MEMORY`: Failed to allocate required memory.
+  ///
+  /// **Preconditions:**
+  /// - The pipeline state should be `ML_PIPELINE_STATE_PAUSED`.
   int ml_pipeline_sink_register(
     nnstreamer.ml_pipeline_h pipe,
     ffi.Pointer<ffi.Char> sink_name,
@@ -268,15 +344,24 @@ class Tizen80CapiMlInferenceSingle {
               ffi.Pointer<ffi.Void>,
               ffi.Pointer<nnstreamer.ml_pipeline_sink_h>)>();
 
-  /// @brief Unregisters a callback for sink node of NNStreamer pipelines.
-  /// @since_tizen 5.5
-  /// @param[in] sink_handle The sink handle to be unregistered.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
+  /// Unregisters a callback for sink node of NNStreamer pipelines.
   ///
-  /// @pre The pipeline state should be #ML_PIPELINE_STATE_PAUSED.
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `sink_handle` (in): The sink handle to be unregistered.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
+  ///
+  /// **Preconditions:**
+  /// - The pipeline state should be `ML_PIPELINE_STATE_PAUSED`.
   int ml_pipeline_sink_unregister(
     nnstreamer.ml_pipeline_sink_h sink_handle,
   ) {
@@ -291,19 +376,29 @@ class Tizen80CapiMlInferenceSingle {
   late final _ml_pipeline_sink_unregister = _ml_pipeline_sink_unregisterPtr
       .asFunction<int Function(nnstreamer.ml_pipeline_sink_h)>();
 
-  /// @brief Gets a handle to operate as a src node of NNStreamer pipelines.
-  /// @since_tizen 5.5
-  /// @remarks If the function succeeds, @a src_handle handle must be released using ml_pipeline_src_release_handle().
-  /// @param[in] pipe The pipeline to be attached with a src node.
-  /// @param[in] src_name The name of src node, described with ml_pipeline_construct().
-  /// @param[out] src_handle The src handle.
-  /// @return 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
-  /// @retval #ML_ERROR_STREAMS_PIPE Failed to get src element.
-  /// @retval #ML_ERROR_TRY_AGAIN The pipeline is not ready yet.
-  /// @retval #ML_ERROR_OUT_OF_MEMORY Failed to allocate required memory.
+  /// Gets a handle to operate as a src node of NNStreamer pipelines.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, `src_handle` handle must be released using ml_pipeline_src_release_handle().
+  ///
+  /// **Parameters:**
+  /// - `pipe` (in): The pipeline to be attached with a src node.
+  /// - `src_name` (in): The name of src node, described with ml_pipeline_construct().
+  /// - `src_handle` (out): The src handle.
+  ///
+  /// **Returns:**
+  /// - 0 on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
+  /// - `ML_ERROR_STREAMS_PIPE`: Failed to get src element.
+  /// - `ML_ERROR_TRY_AGAIN`: The pipeline is not ready yet.
+  /// - `ML_ERROR_OUT_OF_MEMORY`: Failed to allocate required memory.
   int ml_pipeline_src_get_handle(
     nnstreamer.ml_pipeline_h pipe,
     ffi.Pointer<ffi.Char> src_name,
@@ -326,13 +421,21 @@ class Tizen80CapiMlInferenceSingle {
           int Function(nnstreamer.ml_pipeline_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<nnstreamer.ml_pipeline_src_h>)>();
 
-  /// @brief Releases the given src handle.
-  /// @since_tizen 5.5
-  /// @param[in] src_handle The src handle to be released.
-  /// @return 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
+  /// Releases the given src handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `src_handle` (in): The src handle to be released.
+  ///
+  /// **Returns:**
+  /// - 0 on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
   int ml_pipeline_src_release_handle(
     nnstreamer.ml_pipeline_src_h src_handle,
   ) {
@@ -348,18 +451,25 @@ class Tizen80CapiMlInferenceSingle {
       _ml_pipeline_src_release_handlePtr
           .asFunction<int Function(nnstreamer.ml_pipeline_src_h)>();
 
-  /// @brief Adds an input data frame.
-  /// @since_tizen 5.5
-  /// @param[in] src_handle The source handle returned by ml_pipeline_src_get_handle().
-  /// @param[in] data The handle of input tensors, in the format of tensors info given by ml_pipeline_src_get_tensors_info().
-  /// This function takes ownership of the data if @a policy is #ML_PIPELINE_BUF_POLICY_AUTO_FREE.
-  /// @param[in] policy The policy of buffer deallocation. The policy value may include buffer deallocation mechanisms or event triggers for appsrc elements. If event triggers are provided, these functions will not give input data to the appsrc element, but will trigger the given event only.
-  /// @return 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
-  /// @retval #ML_ERROR_STREAMS_PIPE The pipeline has inconsistent pad caps. (Pipeline is not negotiated yet.)
-  /// @retval #ML_ERROR_TRY_AGAIN The pipeline is not ready yet.
+  /// Adds an input data frame.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `src_handle` (in): The source handle returned by ml_pipeline_src_get_handle().
+  /// - `data` (in): The handle of input tensors, in the format of tensors info given by ml_pipeline_src_get_tensors_info(). This function takes ownership of the data if `policy` is `ML_PIPELINE_BUF_POLICY_AUTO_FREE`.
+  /// - `policy` (in): The policy of buffer deallocation. The policy value may include buffer deallocation mechanisms or event triggers for appsrc elements. If event triggers are provided, these functions will not give input data to the appsrc element, but will trigger the given event only.
+  ///
+  /// **Returns:**
+  /// - 0 on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
+  /// - `ML_ERROR_STREAMS_PIPE`: The pipeline has inconsistent pad caps. (Pipeline is not negotiated yet.)
+  /// - `ML_ERROR_TRY_AGAIN`: The pipeline is not ready yet.
   int ml_pipeline_src_input_data(
     nnstreamer.ml_pipeline_src_h src_handle,
     ml_common.ml_tensors_data_h data,
@@ -383,17 +493,26 @@ class Tizen80CapiMlInferenceSingle {
           int Function(nnstreamer.ml_pipeline_src_h,
               ml_common.ml_tensors_data_h, int)>();
 
-  /// @brief Sets the callbacks which will be invoked when a new input frame may be accepted.
-  /// @details Note that, the last installed callbacks on appsrc are available in the pipeline. If developer sets new callbacks, old callbacks will be replaced with new one.
-  /// @since_tizen 6.5
-  /// @param[in] src_handle The source handle returned by ml_pipeline_src_get_handle().
-  /// @param[in] cb The app-src callbacks for event handling.
-  /// @param[in] user_data The user's custom data given to callbacks.
-  /// @return 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
-  /// @retval #ML_ERROR_OUT_OF_MEMORY Failed to allocate required memory.
+  /// Sets the callbacks which will be invoked when a new input frame may be accepted.
+  ///
+  /// Note that, the last installed callbacks on appsrc are available in the pipeline. If developer sets new callbacks, old callbacks will be replaced with new one.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `src_handle` (in): The source handle returned by ml_pipeline_src_get_handle().
+  /// - `cb` (in): The app-src callbacks for event handling.
+  /// - `user_data` (in): The user's custom data given to callbacks.
+  ///
+  /// **Returns:**
+  /// - 0 on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
+  /// - `ML_ERROR_OUT_OF_MEMORY`: Failed to allocate required memory.
   int ml_pipeline_src_set_event_cb(
     nnstreamer.ml_pipeline_src_h src_handle,
     ffi.Pointer<nnstreamer.ml_pipeline_src_callbacks_s> cb,
@@ -419,18 +538,29 @@ class Tizen80CapiMlInferenceSingle {
               ffi.Pointer<nnstreamer.ml_pipeline_src_callbacks_s>,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets a handle for the tensors information of given src node.
-  /// @details If the media type is not other/tensor or other/tensors, @a info handle may not be correct. If want to use other media types, you MUST set the correct properties.
-  /// @since_tizen 5.5
-  /// @remarks If the function succeeds, @a info handle must be released using ml_tensors_info_destroy().
-  /// @param[in] src_handle The source handle returned by ml_pipeline_src_get_handle().
-  /// @param[out] info The handle of tensors information.
-  /// @return 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
-  /// @retval #ML_ERROR_STREAMS_PIPE The pipeline has inconsistent pad caps. (Pipeline is not negotiated yet.)
-  /// @retval #ML_ERROR_TRY_AGAIN The pipeline is not ready yet.
+  /// Gets a handle for the tensors information of given src node.
+  ///
+  /// If the media type is not other/tensor or other/tensors, `info` handle may not be correct. If want to use other media types, you MUST set the correct properties.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, `info` handle must be released using ml_tensors_info_destroy().
+  ///
+  /// **Parameters:**
+  /// - `src_handle` (in): The source handle returned by ml_pipeline_src_get_handle().
+  /// - `info` (out): The handle of tensors information.
+  ///
+  /// **Returns:**
+  /// - 0 on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
+  /// - `ML_ERROR_STREAMS_PIPE`: The pipeline has inconsistent pad caps. (Pipeline is not negotiated yet.)
+  /// - `ML_ERROR_TRY_AGAIN`: The pipeline is not ready yet.
   int ml_pipeline_src_get_tensors_info(
     nnstreamer.ml_pipeline_src_h src_handle,
     ffi.Pointer<ml_common.ml_tensors_info_h> info,
@@ -451,20 +581,30 @@ class Tizen80CapiMlInferenceSingle {
           int Function(nnstreamer.ml_pipeline_src_h,
               ffi.Pointer<ml_common.ml_tensors_info_h>)>();
 
-  /// @brief Gets a handle to operate a "GstInputSelector"/"GstOutputSelector" node of NNStreamer pipelines.
-  /// @details Refer to https://gstreamer.freedesktop.org/data/doc/gstreamer/head/gstreamer-plugins/html/gstreamer-plugins-input-selector.html for input selectors.
-  /// Refer to https://gstreamer.freedesktop.org/data/doc/gstreamer/head/gstreamer-plugins/html/gstreamer-plugins-output-selector.html for output selectors.
-  /// @since_tizen 5.5
-  /// @remarks If the function succeeds, @a switch_handle handle must be released using ml_pipeline_switch_release_handle().
-  /// @param[in] pipe The pipeline to be managed.
-  /// @param[in] switch_name The name of switch (InputSelector/OutputSelector).
-  /// @param[out] switch_type The type of the switch. If NULL, it is ignored.
-  /// @param[out] switch_handle The switch handle.
-  /// @return 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
-  /// @retval #ML_ERROR_OUT_OF_MEMORY Failed to allocate required memory.
+  /// Gets a handle to operate a "GstInputSelector"/"GstOutputSelector" node of NNStreamer pipelines.
+  ///
+  /// Refer to https://gstreamer.freedesktop.org/data/doc/gstreamer/head/gstreamer-plugins/html/gstreamer-plugins-input-selector.html for input selectors. Refer to https://gstreamer.freedesktop.org/data/doc/gstreamer/head/gstreamer-plugins/html/gstreamer-plugins-output-selector.html for output selectors.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, `switch_handle` handle must be released using ml_pipeline_switch_release_handle().
+  ///
+  /// **Parameters:**
+  /// - `pipe` (in): The pipeline to be managed.
+  /// - `switch_name` (in): The name of switch (InputSelector/OutputSelector).
+  /// - `switch_type` (out): The type of the switch. If NULL, it is ignored.
+  /// - `switch_handle` (out): The switch handle.
+  ///
+  /// **Returns:**
+  /// - 0 on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
+  /// - `ML_ERROR_OUT_OF_MEMORY`: Failed to allocate required memory.
   int ml_pipeline_switch_get_handle(
     nnstreamer.ml_pipeline_h pipe,
     ffi.Pointer<ffi.Char> switch_name,
@@ -495,13 +635,21 @@ class Tizen80CapiMlInferenceSingle {
               ffi.Pointer<ffi.Int32>,
               ffi.Pointer<nnstreamer.ml_pipeline_switch_h>)>();
 
-  /// @brief Releases the given switch handle.
-  /// @since_tizen 5.5
-  /// @param[in] switch_handle The handle to be released.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
+  /// Releases the given switch handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `switch_handle` (in): The handle to be released.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
   int ml_pipeline_switch_release_handle(
     nnstreamer.ml_pipeline_switch_h switch_handle,
   ) {
@@ -518,14 +666,22 @@ class Tizen80CapiMlInferenceSingle {
       _ml_pipeline_switch_release_handlePtr
           .asFunction<int Function(nnstreamer.ml_pipeline_switch_h)>();
 
-  /// @brief Controls the switch with the given handle to select input/output nodes(pads).
-  /// @since_tizen 5.5
-  /// @param[in] switch_handle The switch handle returned by ml_pipeline_switch_get_handle().
-  /// @param[in] pad_name The name of the chosen pad to be activated. Use ml_pipeline_switch_get_pad_list() to list the available pad names.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
+  /// Controls the switch with the given handle to select input/output nodes(pads).
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `switch_handle` (in): The switch handle returned by ml_pipeline_switch_get_handle().
+  /// - `pad_name` (in): The name of the chosen pad to be activated. Use ml_pipeline_switch_get_pad_list() to list the available pad names.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
   int ml_pipeline_switch_select(
     nnstreamer.ml_pipeline_switch_h switch_handle,
     ffi.Pointer<ffi.Char> pad_name,
@@ -545,20 +701,29 @@ class Tizen80CapiMlInferenceSingle {
           int Function(
               nnstreamer.ml_pipeline_switch_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the pad names of a switch.
-  /// @since_tizen 5.5
-  /// @remarks If the function succeeds, @a list and its contents should be released using g_free(). Refer the below sample code.
-  /// @param[in] switch_handle The switch handle returned by ml_pipeline_switch_get_handle().
-  /// @param[out] list NULL terminated array of char*. The caller must free each string (char*) in the list and free the list itself.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
-  /// @retval #ML_ERROR_STREAMS_PIPE The element is not both input and output switch (Internal data inconsistency).
-  /// @retval #ML_ERROR_OUT_OF_MEMORY Failed to allocate required memory.
+  /// Gets the pad names of a switch.
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, `list` and its contents should be released using g_free(). Refer the below sample code.
+  ///
+  /// **Parameters:**
+  /// - `switch_handle` (in): The switch handle returned by ml_pipeline_switch_get_handle().
+  /// - `list` (out): NULL terminated array of char*. The caller must free each string (char*) in the list and free the list itself.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
+  /// - `ML_ERROR_STREAMS_PIPE`: The element is not both input and output switch (Internal data inconsistency).
+  /// - `ML_ERROR_OUT_OF_MEMORY`: Failed to allocate required memory. Here is an example of the usage:
+  ///
+  /// ```
   /// int status;
   /// gchar *pipeline;
   /// ml_pipeline_h handle;
@@ -607,7 +772,7 @@ class Tizen80CapiMlInferenceSingle {
   /// ml_pipeline_switch_release_handle (switch_handle);
   /// ml_pipeline_destroy (handle);
   /// g_free (pipeline);
-  /// @endcode
+  /// ```
   int ml_pipeline_switch_get_pad_list(
     nnstreamer.ml_pipeline_switch_h switch_handle,
     ffi.Pointer<ffi.Pointer<ffi.Pointer<ffi.Char>>> list,
@@ -628,18 +793,29 @@ class Tizen80CapiMlInferenceSingle {
           int Function(nnstreamer.ml_pipeline_switch_h,
               ffi.Pointer<ffi.Pointer<ffi.Pointer<ffi.Char>>>)>();
 
-  /// @brief Gets a handle to operate a "GstValve" node of NNStreamer pipelines.
-  /// @details Refer to https://gstreamer.freedesktop.org/data/doc/gstreamer/head/gstreamer-plugins/html/gstreamer-plugins-valve.html for more information.
-  /// @since_tizen 5.5
-  /// @remarks If the function succeeds, @a valve_handle handle must be released using ml_pipeline_valve_release_handle().
-  /// @param[in] pipe The pipeline to be managed.
-  /// @param[in] valve_name The name of valve (Valve).
-  /// @param[out] valve_handle The valve handle.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
-  /// @retval #ML_ERROR_OUT_OF_MEMORY Failed to allocate required memory.
+  /// Gets a handle to operate a "GstValve" node of NNStreamer pipelines.
+  ///
+  /// Refer to https://gstreamer.freedesktop.org/data/doc/gstreamer/head/gstreamer-plugins/html/gstreamer-plugins-valve.html for more information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, `valve_handle` handle must be released using ml_pipeline_valve_release_handle().
+  ///
+  /// **Parameters:**
+  /// - `pipe` (in): The pipeline to be managed.
+  /// - `valve_name` (in): The name of valve (Valve).
+  /// - `valve_handle` (out): The valve handle.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
+  /// - `ML_ERROR_OUT_OF_MEMORY`: Failed to allocate required memory.
   int ml_pipeline_valve_get_handle(
     nnstreamer.ml_pipeline_h pipe,
     ffi.Pointer<ffi.Char> valve_name,
@@ -662,13 +838,21 @@ class Tizen80CapiMlInferenceSingle {
           int Function(nnstreamer.ml_pipeline_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<nnstreamer.ml_pipeline_valve_h>)>();
 
-  /// @brief Releases the given valve handle.
-  /// @since_tizen 5.5
-  /// @param[in] valve_handle The handle to be released.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
+  /// Releases the given valve handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `valve_handle` (in): The handle to be released.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
   int ml_pipeline_valve_release_handle(
     nnstreamer.ml_pipeline_valve_h valve_handle,
   ) {
@@ -684,14 +868,22 @@ class Tizen80CapiMlInferenceSingle {
       _ml_pipeline_valve_release_handlePtr
           .asFunction<int Function(nnstreamer.ml_pipeline_valve_h)>();
 
-  /// @brief Controls the valve with the given handle.
-  /// @since_tizen 5.5
-  /// @param[in] valve_handle The valve handle returned by ml_pipeline_valve_get_handle().
-  /// @param[in] open @c true to open(let the flow pass), @c false to close (drop & stop the flow).
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
+  /// Controls the valve with the given handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `valve_handle` (in): The valve handle returned by ml_pipeline_valve_get_handle().
+  /// - `open` (in): `true` to open(let the flow pass), `false` to close (drop & stop the flow).
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
   int ml_pipeline_valve_set_open(
     nnstreamer.ml_pipeline_valve_h valve_handle,
     bool open,
@@ -709,20 +901,29 @@ class Tizen80CapiMlInferenceSingle {
   late final _ml_pipeline_valve_set_open = _ml_pipeline_valve_set_openPtr
       .asFunction<int Function(nnstreamer.ml_pipeline_valve_h, bool)>();
 
-  /// @brief Gets an element handle in NNStreamer pipelines to control its properties.
-  /// @since_tizen 6.0
-  /// @remarks If the function succeeds, @a elem_h handle must be released using ml_pipeline_element_release_handle().
-  /// @param[in] pipe The pipeline to be managed.
-  /// @param[in] element_name The name of element to control.
-  /// @param[out] elem_h The element handle.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
-  /// @retval #ML_ERROR_OUT_OF_MEMORY Failed to allocate required memory.
+  /// Gets an element handle in NNStreamer pipelines to control its properties.
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, `elem_h` handle must be released using ml_pipeline_element_release_handle().
+  ///
+  /// **Parameters:**
+  /// - `pipe` (in): The pipeline to be managed.
+  /// - `element_name` (in): The name of element to control.
+  /// - `elem_h` (out): The element handle.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
+  /// - `ML_ERROR_OUT_OF_MEMORY`: Failed to allocate required memory. Here is an example of the usage:
+  ///
+  /// ```
   /// ml_pipeline_h handle = nullptr;
   /// ml_pipeline_element_h demux_h = nullptr;
   /// gchar *pipeline;
@@ -769,7 +970,7 @@ class Tizen80CapiMlInferenceSingle {
   /// ml_pipeline_element_release_handle (demux_h);
   /// ml_pipeline_destroy (handle);
   /// g_free(pipeline);
-  /// @endcode
+  /// ```
   int ml_pipeline_element_get_handle(
     nnstreamer.ml_pipeline_h pipe,
     ffi.Pointer<ffi.Char> element_name,
@@ -792,13 +993,21 @@ class Tizen80CapiMlInferenceSingle {
           int Function(nnstreamer.ml_pipeline_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<nnstreamer.ml_pipeline_element_h>)>();
 
-  /// @brief Releases the given element handle.
-  /// @since_tizen 6.0
-  /// @param[in] elem_h The handle to be released.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
+  /// Releases the given element handle.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Parameters:**
+  /// - `elem_h` (in): The handle to be released.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
   int ml_pipeline_element_release_handle(
     nnstreamer.ml_pipeline_element_h elem_h,
   ) {
@@ -815,15 +1024,23 @@ class Tizen80CapiMlInferenceSingle {
       _ml_pipeline_element_release_handlePtr
           .asFunction<int Function(nnstreamer.ml_pipeline_element_h)>();
 
-  /// @brief Sets the boolean value of element's property in NNStreamer pipelines.
-  /// @since_tizen 6.0
-  /// @param[in] elem_h The target element handle.
-  /// @param[in] property_name The name of the property.
-  /// @param[in] value The boolean value to be set.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given property name does not exist or the type is not boolean.
+  /// Sets the boolean value of element's property in NNStreamer pipelines.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Parameters:**
+  /// - `elem_h` (in): The target element handle.
+  /// - `property_name` (in): The name of the property.
+  /// - `value` (in): The boolean value to be set.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given property name does not exist or the type is not boolean.
   int ml_pipeline_element_set_property_bool(
     nnstreamer.ml_pipeline_element_h elem_h,
     ffi.Pointer<ffi.Char> property_name,
@@ -847,15 +1064,23 @@ class Tizen80CapiMlInferenceSingle {
           int Function(
               nnstreamer.ml_pipeline_element_h, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @brief Sets the string value of element's property in NNStreamer pipelines.
-  /// @since_tizen 6.0
-  /// @param[in] elem_h The target element handle.
-  /// @param[in] property_name The name of the property.
-  /// @param[in] value The string value to be set.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given property name does not exist or the type is not string.
+  /// Sets the string value of element's property in NNStreamer pipelines.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Parameters:**
+  /// - `elem_h` (in): The target element handle.
+  /// - `property_name` (in): The name of the property.
+  /// - `value` (in): The string value to be set.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given property name does not exist or the type is not string.
   int ml_pipeline_element_set_property_string(
     nnstreamer.ml_pipeline_element_h elem_h,
     ffi.Pointer<ffi.Char> property_name,
@@ -878,15 +1103,23 @@ class Tizen80CapiMlInferenceSingle {
           int Function(nnstreamer.ml_pipeline_element_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the integer value of element's property in NNStreamer pipelines.
-  /// @since_tizen 6.0
-  /// @param[in] elem_h The target element handle.
-  /// @param[in] property_name The name of the property.
-  /// @param[in] value The integer value to be set.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given property name does not exist or the type is not integer.
+  /// Sets the integer value of element's property in NNStreamer pipelines.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Parameters:**
+  /// - `elem_h` (in): The target element handle.
+  /// - `property_name` (in): The name of the property.
+  /// - `value` (in): The integer value to be set.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given property name does not exist or the type is not integer.
   int ml_pipeline_element_set_property_int32(
     nnstreamer.ml_pipeline_element_h elem_h,
     ffi.Pointer<ffi.Char> property_name,
@@ -910,15 +1143,23 @@ class Tizen80CapiMlInferenceSingle {
           int Function(
               nnstreamer.ml_pipeline_element_h, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @brief Sets the integer 64bit value of element's property in NNStreamer pipelines.
-  /// @since_tizen 6.0
-  /// @param[in] elem_h The target element handle.
-  /// @param[in] property_name The name of the property.
-  /// @param[in] value The integer value to be set.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given property name does not exist or the type is not integer.
+  /// Sets the integer 64bit value of element's property in NNStreamer pipelines.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Parameters:**
+  /// - `elem_h` (in): The target element handle.
+  /// - `property_name` (in): The name of the property.
+  /// - `value` (in): The integer value to be set.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given property name does not exist or the type is not integer.
   int ml_pipeline_element_set_property_int64(
     nnstreamer.ml_pipeline_element_h elem_h,
     ffi.Pointer<ffi.Char> property_name,
@@ -942,15 +1183,23 @@ class Tizen80CapiMlInferenceSingle {
           int Function(
               nnstreamer.ml_pipeline_element_h, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @brief Sets the unsigned integer value of element's property in NNStreamer pipelines.
-  /// @since_tizen 6.0
-  /// @param[in] elem_h The target element handle.
-  /// @param[in] property_name The name of the property.
-  /// @param[in] value The unsigned integer value to be set.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given property name does not exist or the type is not unsigned integer.
+  /// Sets the unsigned integer value of element's property in NNStreamer pipelines.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Parameters:**
+  /// - `elem_h` (in): The target element handle.
+  /// - `property_name` (in): The name of the property.
+  /// - `value` (in): The unsigned integer value to be set.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given property name does not exist or the type is not unsigned integer.
   int ml_pipeline_element_set_property_uint32(
     nnstreamer.ml_pipeline_element_h elem_h,
     ffi.Pointer<ffi.Char> property_name,
@@ -974,15 +1223,23 @@ class Tizen80CapiMlInferenceSingle {
           int Function(
               nnstreamer.ml_pipeline_element_h, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @brief Sets the unsigned integer 64bit value of element's property in NNStreamer pipelines.
-  /// @since_tizen 6.0
-  /// @param[in] elem_h The target element handle.
-  /// @param[in] property_name The name of the property.
-  /// @param[in] value The unsigned integer 64bit value to be set.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given property name does not exist or the type is not unsigned integer.
+  /// Sets the unsigned integer 64bit value of element's property in NNStreamer pipelines.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Parameters:**
+  /// - `elem_h` (in): The target element handle.
+  /// - `property_name` (in): The name of the property.
+  /// - `value` (in): The unsigned integer 64bit value to be set.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given property name does not exist or the type is not unsigned integer.
   int ml_pipeline_element_set_property_uint64(
     nnstreamer.ml_pipeline_element_h elem_h,
     ffi.Pointer<ffi.Char> property_name,
@@ -1006,16 +1263,26 @@ class Tizen80CapiMlInferenceSingle {
           int Function(
               nnstreamer.ml_pipeline_element_h, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @brief Sets the floating point value of element's property in NNStreamer pipelines.
-  /// @since_tizen 6.0
-  /// @remarks This function supports all types of floating point values such as Double and Float.
-  /// @param[in] elem_h The target element handle.
-  /// @param[in] property_name The name of the property.
-  /// @param[in] value The floating point integer value to be set.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given property name does not exist or the type is not floating point number.
+  /// Sets the floating point value of element's property in NNStreamer pipelines.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Remarks:**
+  /// - This function supports all types of floating point values such as Double and Float.
+  ///
+  /// **Parameters:**
+  /// - `elem_h` (in): The target element handle.
+  /// - `property_name` (in): The name of the property.
+  /// - `value` (in): The floating point integer value to be set.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given property name does not exist or the type is not floating point number.
   int ml_pipeline_element_set_property_double(
     nnstreamer.ml_pipeline_element_h elem_h,
     ffi.Pointer<ffi.Char> property_name,
@@ -1039,16 +1306,26 @@ class Tizen80CapiMlInferenceSingle {
           int Function(nnstreamer.ml_pipeline_element_h, ffi.Pointer<ffi.Char>,
               double)>();
 
-  /// @brief Sets the enumeration value of element's property in NNStreamer pipelines.
-  /// @since_tizen 6.0
-  /// @remarks Enumeration value is set as an unsigned integer value and developers can get this information using gst-inspect tool.
-  /// @param[in] elem_h The target element handle.
-  /// @param[in] property_name The name of the property.
-  /// @param[in] value The unsigned integer value to be set, which is corresponding to Enumeration value.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given property name does not exist or the type is not unsigned integer.
+  /// Sets the enumeration value of element's property in NNStreamer pipelines.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Remarks:**
+  /// - Enumeration value is set as an unsigned integer value and developers can get this information using gst-inspect tool.
+  ///
+  /// **Parameters:**
+  /// - `elem_h` (in): The target element handle.
+  /// - `property_name` (in): The name of the property.
+  /// - `value` (in): The unsigned integer value to be set, which is corresponding to Enumeration value.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given property name does not exist or the type is not unsigned integer.
   int ml_pipeline_element_set_property_enum(
     nnstreamer.ml_pipeline_element_h elem_h,
     ffi.Pointer<ffi.Char> property_name,
@@ -1072,15 +1349,23 @@ class Tizen80CapiMlInferenceSingle {
           int Function(
               nnstreamer.ml_pipeline_element_h, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @brief Gets the boolean value of element's property in NNStreamer pipelines.
-  /// @since_tizen 6.0
-  /// @param[in] elem_h The target element handle.
-  /// @param[in] property_name The name of the property.
-  /// @param[out] value The boolean value of given property.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given property name does not exist or the third parameter is NULL.
+  /// Gets the boolean value of element's property in NNStreamer pipelines.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Parameters:**
+  /// - `elem_h` (in): The target element handle.
+  /// - `property_name` (in): The name of the property.
+  /// - `value` (out): The boolean value of given property.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given property name does not exist or the third parameter is NULL.
   int ml_pipeline_element_get_property_bool(
     nnstreamer.ml_pipeline_element_h elem_h,
     ffi.Pointer<ffi.Char> property_name,
@@ -1103,15 +1388,23 @@ class Tizen80CapiMlInferenceSingle {
           int Function(nnstreamer.ml_pipeline_element_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the string value of element's property in NNStreamer pipelines.
-  /// @since_tizen 6.0
-  /// @param[in] elem_h The target element handle.
-  /// @param[in] property_name The name of the property.
-  /// @param[out] value The string value of given property. The caller is responsible for freeing the value using g_free().
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given property name does not exist or the third parameter is NULL.
+  /// Gets the string value of element's property in NNStreamer pipelines.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Parameters:**
+  /// - `elem_h` (in): The target element handle.
+  /// - `property_name` (in): The name of the property.
+  /// - `value` (out): The string value of given property. The caller is responsible for freeing the value using g_free().
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given property name does not exist or the third parameter is NULL.
   int ml_pipeline_element_get_property_string(
     nnstreamer.ml_pipeline_element_h elem_h,
     ffi.Pointer<ffi.Char> property_name,
@@ -1134,15 +1427,23 @@ class Tizen80CapiMlInferenceSingle {
           int Function(nnstreamer.ml_pipeline_element_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the integer value of element's property in NNStreamer pipelines.
-  /// @since_tizen 6.0
-  /// @param[in] elem_h The target element handle.
-  /// @param[in] property_name The name of the property.
-  /// @param[out] value The integer value of given property.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given property name does not exist or the third parameter is NULL.
+  /// Gets the integer value of element's property in NNStreamer pipelines.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Parameters:**
+  /// - `elem_h` (in): The target element handle.
+  /// - `property_name` (in): The name of the property.
+  /// - `value` (out): The integer value of given property.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given property name does not exist or the third parameter is NULL.
   int ml_pipeline_element_get_property_int32(
     nnstreamer.ml_pipeline_element_h elem_h,
     ffi.Pointer<ffi.Char> property_name,
@@ -1165,15 +1466,23 @@ class Tizen80CapiMlInferenceSingle {
           int Function(nnstreamer.ml_pipeline_element_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the integer 64bit value of element's property in NNStreamer pipelines.
-  /// @since_tizen 6.0
-  /// @param[in] elem_h The target element handle.
-  /// @param[in] property_name The name of the property.
-  /// @param[out] value The integer 64bit value of given property.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given property name does not exist or the third parameter is NULL.
+  /// Gets the integer 64bit value of element's property in NNStreamer pipelines.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Parameters:**
+  /// - `elem_h` (in): The target element handle.
+  /// - `property_name` (in): The name of the property.
+  /// - `value` (out): The integer 64bit value of given property.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given property name does not exist or the third parameter is NULL.
   int ml_pipeline_element_get_property_int64(
     nnstreamer.ml_pipeline_element_h elem_h,
     ffi.Pointer<ffi.Char> property_name,
@@ -1196,15 +1505,23 @@ class Tizen80CapiMlInferenceSingle {
           int Function(nnstreamer.ml_pipeline_element_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Int64>)>();
 
-  /// @brief Gets the unsigned integer value of element's property in NNStreamer pipelines.
-  /// @since_tizen 6.0
-  /// @param[in] elem_h The target element handle.
-  /// @param[in] property_name The name of the property.
-  /// @param[out] value The unsigned integer value of given property.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given property name does not exist or the third parameter is NULL.
+  /// Gets the unsigned integer value of element's property in NNStreamer pipelines.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Parameters:**
+  /// - `elem_h` (in): The target element handle.
+  /// - `property_name` (in): The name of the property.
+  /// - `value` (out): The unsigned integer value of given property.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given property name does not exist or the third parameter is NULL.
   int ml_pipeline_element_get_property_uint32(
     nnstreamer.ml_pipeline_element_h elem_h,
     ffi.Pointer<ffi.Char> property_name,
@@ -1227,15 +1544,23 @@ class Tizen80CapiMlInferenceSingle {
           int Function(nnstreamer.ml_pipeline_element_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Uint32>)>();
 
-  /// @brief Gets the unsigned integer 64bit value of element's property in NNStreamer pipelines.
-  /// @since_tizen 6.0
-  /// @param[in] elem_h The target element handle.
-  /// @param[in] property_name The name of the property.
-  /// @param[out] value The unsigned integer 64bit value of given property.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given property name does not exist or the third parameter is NULL.
+  /// Gets the unsigned integer 64bit value of element's property in NNStreamer pipelines.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Parameters:**
+  /// - `elem_h` (in): The target element handle.
+  /// - `property_name` (in): The name of the property.
+  /// - `value` (out): The unsigned integer 64bit value of given property.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given property name does not exist or the third parameter is NULL.
   int ml_pipeline_element_get_property_uint64(
     nnstreamer.ml_pipeline_element_h elem_h,
     ffi.Pointer<ffi.Char> property_name,
@@ -1258,16 +1583,26 @@ class Tizen80CapiMlInferenceSingle {
           int Function(nnstreamer.ml_pipeline_element_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Uint64>)>();
 
-  /// @brief Gets the floating point value of element's property in NNStreamer pipelines.
-  /// @since_tizen 6.0
-  /// @remarks This function supports all types of floating point values such as Double and Float.
-  /// @param[in] elem_h The target element handle.
-  /// @param[in] property_name The name of the property.
-  /// @param[out] value The floating point value of given property.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given property name does not exist or the third parameter is NULL.
+  /// Gets the floating point value of element's property in NNStreamer pipelines.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Remarks:**
+  /// - This function supports all types of floating point values such as Double and Float.
+  ///
+  /// **Parameters:**
+  /// - `elem_h` (in): The target element handle.
+  /// - `property_name` (in): The name of the property.
+  /// - `value` (out): The floating point value of given property.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given property name does not exist or the third parameter is NULL.
   int ml_pipeline_element_get_property_double(
     nnstreamer.ml_pipeline_element_h elem_h,
     ffi.Pointer<ffi.Char> property_name,
@@ -1290,16 +1625,26 @@ class Tizen80CapiMlInferenceSingle {
           int Function(nnstreamer.ml_pipeline_element_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Double>)>();
 
-  /// @brief Gets the enumeration value of element's property in NNStreamer pipelines.
-  /// @since_tizen 6.0
-  /// @remarks Enumeration value is get as an unsigned integer value and developers can get this information using gst-inspect tool.
-  /// @param[in] elem_h The target element handle.
-  /// @param[in] property_name The name of the property.
-  /// @param[out] value The unsigned integer value of given property, which is corresponding to Enumeration value.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given property name does not exist or the third parameter is NULL.
+  /// Gets the enumeration value of element's property in NNStreamer pipelines.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Remarks:**
+  /// - Enumeration value is get as an unsigned integer value and developers can get this information using gst-inspect tool.
+  ///
+  /// **Parameters:**
+  /// - `elem_h` (in): The target element handle.
+  /// - `property_name` (in): The name of the property.
+  /// - `value` (out): The unsigned integer value of given property, which is corresponding to Enumeration value.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given property name does not exist or the third parameter is NULL.
   int ml_pipeline_element_get_property_enum(
     nnstreamer.ml_pipeline_element_h elem_h,
     ffi.Pointer<ffi.Char> property_name,
@@ -1322,29 +1667,38 @@ class Tizen80CapiMlInferenceSingle {
           int Function(nnstreamer.ml_pipeline_element_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Uint32>)>();
 
-  /// NNStreamer Pipeline tensor_if Control          **
-  /// /
-  /// /**
-  /// @brief Registers a tensor_if custom callback.
-  /// @details If the if-condition is complex and cannot be expressed with tensor_if expressions, you can define custom condition.
-  /// @since_tizen 6.5
-  /// @remarks If the function succeeds, @a if_custom handle must be released using ml_pipeline_tensor_if_custom_unregister().
-  /// @param[in] name The name of custom condition
-  /// @param[in] cb The function to be called when the pipeline runs.
-  /// @param[in] user_data Private data for the callback. This value is passed to the callback when it's invoked.
-  /// @param[out] if_custom The tensor_if handler.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER The parameter is invalid.
-  /// @retval #ML_ERROR_OUT_OF_MEMORY Failed to allocate required memory to register the custom callback.
-  /// @retval #ML_ERROR_STREAMS_PIPE Failed to register the custom callback.
-  /// @warning A custom condition of the tensor_if is registered to the process globally.
-  /// If the custom condition "X" is registered, this "X" may be referred in any pipelines of the current process.
-  /// So, be careful not to use the same condition name when using multiple pipelines.
+  /// NNStreamer Pipeline tensor_if Control ** / /**
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// Registers a tensor_if custom callback.
+  ///
+  /// If the if-condition is complex and cannot be expressed with tensor_if expressions, you can define custom condition.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, `if_custom` handle must be released using ml_pipeline_tensor_if_custom_unregister().
+  ///
+  /// **Parameters:**
+  /// - `name` (in): The name of custom condition
+  /// - `cb` (in): The function to be called when the pipeline runs.
+  /// - `user_data` (in): Private data for the callback. This value is passed to the callback when it's invoked.
+  /// - `if_custom` (out): The tensor_if handler.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: The parameter is invalid.
+  /// - `ML_ERROR_OUT_OF_MEMORY`: Failed to allocate required memory to register the custom callback.
+  /// - `ML_ERROR_STREAMS_PIPE`: Failed to register the custom callback.
+  ///
+  /// **Warnings:**
+  /// - A custom condition of the tensor_if is registered to the process globally. If the custom condition "X" is registered, this "X" may be referred in any pipelines of the current process. So, be careful not to use the same condition name when using multiple pipelines. Here is an example of the usage:
+  ///
+  /// ```
   /// // Define callback for tensor_if custom condition.
   /// static int tensor_if_custom_cb (const ml_tensors_data_h data, const ml_tensors_info_h info, int *result, void *user_data)
   /// {
@@ -1384,7 +1738,7 @@ class Tizen80CapiMlInferenceSingle {
   /// ml_pipeline_destroy (pipe);
   /// ml_pipeline_tensor_if_custom_unregister (custom);
   ///
-  /// @endcode
+  /// ```
   int ml_pipeline_tensor_if_custom_register(
     ffi.Pointer<ffi.Char> name,
     nnstreamer.ml_pipeline_if_custom_cb cb,
@@ -1415,15 +1769,24 @@ class Tizen80CapiMlInferenceSingle {
               ffi.Pointer<ffi.Void>,
               ffi.Pointer<nnstreamer.ml_pipeline_if_h>)>();
 
-  /// @brief Unregisters the tensor_if custom callback.
-  /// @details Use this function to release and unregister the tensor_if custom callback.
-  /// @since_tizen 6.5
-  /// @param[in] if_custom The tensor_if handle to be unregistered.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER The parameter is invalid.
-  /// @retval #ML_ERROR_STREAMS_PIPE Failed to unregister the custom callback.
+  /// Unregisters the tensor_if custom callback.
+  ///
+  /// Use this function to release and unregister the tensor_if custom callback.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `if_custom` (in): The tensor_if handle to be unregistered.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: The parameter is invalid.
+  /// - `ML_ERROR_STREAMS_PIPE`: Failed to unregister the custom callback.
   int ml_pipeline_tensor_if_custom_unregister(
     nnstreamer.ml_pipeline_if_h if_custom,
   ) {
@@ -1439,18 +1802,25 @@ class Tizen80CapiMlInferenceSingle {
       _ml_pipeline_tensor_if_custom_unregisterPtr
           .asFunction<int Function(nnstreamer.ml_pipeline_if_h)>();
 
-  /// @brief Checks the availability of the given execution environments.
-  /// @details If the function returns an error, @a available may not be changed.
-  /// @since_tizen 5.5
-  /// @param[in] nnfw Check if the nnfw is available in the system.
-  /// Set #ML_NNFW_TYPE_ANY to skip checking nnfw.
-  /// @param[in] hw Check if the hardware is available in the system.
-  /// Set #ML_NNFW_HW_ANY to skip checking hardware.
-  /// @param[out] available @c true if it's available, @c false if it's not available.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful and the environments are available.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
+  /// Checks the availability of the given execution environments.
+  ///
+  /// If the function returns an error, `available` may not be changed.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `nnfw` (in): Check if the nnfw is available in the system. Set `ML_NNFW_TYPE_ANY` to skip checking nnfw.
+  /// - `hw` (in): Check if the hardware is available in the system. Set `ML_NNFW_HW_ANY` to skip checking hardware.
+  /// - `available` (out): `true` if it's available, `false` if it's not available.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful and the environments are available.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
   int ml_check_nnfw_availability(
     int nnfw,
     int hw,
@@ -1470,20 +1840,26 @@ class Tizen80CapiMlInferenceSingle {
   late final _ml_check_nnfw_availability = _ml_check_nnfw_availabilityPtr
       .asFunction<int Function(int, int, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Checks the availability of the given execution environments with custom option.
-  /// @details If the function returns an error, @a available may not be changed.
-  /// @since_tizen 6.5
-  /// @param[in] nnfw Check if the nnfw is available in the system.
-  /// Set #ML_NNFW_TYPE_ANY to skip checking nnfw.
-  /// @param[in] hw Check if the hardware is available in the system.
-  /// Set #ML_NNFW_HW_ANY to skip checking hardware.
-  /// @param[in] custom_option Custom option string to check framework and hardware.
-  /// If an nnstreamer filter plugin needs to handle detailed option for hardware detection, use this parameter.
-  /// @param[out] available @c true if it's available, @c false if it's not available.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful and the environments are available.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
+  /// Checks the availability of the given execution environments with custom option.
+  ///
+  /// If the function returns an error, `available` may not be changed.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `nnfw` (in): Check if the nnfw is available in the system. Set `ML_NNFW_TYPE_ANY` to skip checking nnfw.
+  /// - `hw` (in): Check if the hardware is available in the system. Set `ML_NNFW_HW_ANY` to skip checking hardware.
+  /// - `custom_option` (in): Custom option string to check framework and hardware. If an nnstreamer filter plugin needs to handle detailed option for hardware detection, use this parameter.
+  /// - `available` (out): `true` if it's available, `false` if it's not available.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful and the environments are available.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
   int ml_check_nnfw_availability_full(
     int nnfw,
     int hw,
@@ -1507,15 +1883,24 @@ class Tizen80CapiMlInferenceSingle {
           int Function(
               int, int, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Checks if the element is registered and available on the pipeline.
-  /// @details If the function returns an error, @a available may not be changed.
-  /// @since_tizen 6.5
-  /// @param[in] element_name The name of element.
-  /// @param[out] available @c true if it's available, @c false if it's not available.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful and the environments are available.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
+  /// Checks if the element is registered and available on the pipeline.
+  ///
+  /// If the function returns an error, `available` may not be changed.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `element_name` (in): The name of element.
+  /// - `available` (out): `true` if it's available, `false` if it's not available.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful and the environments are available.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
   int ml_check_element_availability(
     ffi.Pointer<ffi.Char> element_name,
     ffi.Pointer<ffi.Bool> available,
@@ -1533,28 +1918,34 @@ class Tizen80CapiMlInferenceSingle {
   late final _ml_check_element_availability = _ml_check_element_availabilityPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Registers a custom filter.
-  /// @details NNStreamer provides an interface for processing the tensors with 'custom-easy' framework which can execute without independent shared object.
-  /// Using this function, the application can easily register and execute the processing code.
-  /// If a custom filter with same name exists, this will be failed and return the error code #ML_ERROR_INVALID_PARAMETER.
-  /// Note that if ml_custom_easy_invoke_cb() returns negative error values, the constructed pipeline does not work properly anymore.
-  /// So developers should release the pipeline handle and recreate it again.
-  /// @since_tizen 6.0
-  /// @remarks If the function succeeds, @a custom handle must be released using ml_pipeline_custom_easy_filter_unregister().
-  /// @param[in] name The name of custom filter.
-  /// @param[in] in The handle of input tensors information.
-  /// @param[in] out The handle of output tensors information.
-  /// @param[in] cb The function to be called when the pipeline runs.
-  /// @param[in] user_data Private data for the callback. This value is passed to the callback when it's invoked.
-  /// @param[out] custom The custom filter handler.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER The parameter is invalid, or duplicated name exists.
-  /// @retval #ML_ERROR_OUT_OF_MEMORY Failed to allocate required memory to register the custom filter.
+  /// Registers a custom filter.
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// NNStreamer provides an interface for processing the tensors with 'custom-easy' framework which can execute without independent shared object. Using this function, the application can easily register and execute the processing code. If a custom filter with same name exists, this will be failed and return the error code `ML_ERROR_INVALID_PARAMETER`. Note that if ml_custom_easy_invoke_cb() returns negative error values, the constructed pipeline does not work properly anymore. So developers should release the pipeline handle and recreate it again.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, `custom` handle must be released using ml_pipeline_custom_easy_filter_unregister().
+  ///
+  /// **Parameters:**
+  /// - `name` (in): The name of custom filter.
+  /// - `in` (in): The handle of input tensors information.
+  /// - `out` (in): The handle of output tensors information.
+  /// - `cb` (in): The function to be called when the pipeline runs.
+  /// - `user_data` (in): Private data for the callback. This value is passed to the callback when it's invoked.
+  /// - `custom` (out): The custom filter handler.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: The parameter is invalid, or duplicated name exists.
+  /// - `ML_ERROR_OUT_OF_MEMORY`: Failed to allocate required memory to register the custom filter. Here is an example of the usage:
+  ///
+  /// ```
   /// // Define invoke callback.
   /// static int custom_filter_invoke_cb (const ml_tensors_data_h in, ml_tensors_data_h out, void *user_data)
   /// {
@@ -1602,7 +1993,7 @@ class Tizen80CapiMlInferenceSingle {
   /// ml_pipeline_stop (pipe);
   /// ml_pipeline_destroy (pipe);
   /// ml_pipeline_custom_easy_filter_unregister (custom);
-  /// @endcode
+  /// ```
   int ml_pipeline_custom_easy_filter_register(
     ffi.Pointer<ffi.Char> name,
     ml_common.ml_tensors_info_h in1,
@@ -1641,14 +2032,23 @@ class Tizen80CapiMlInferenceSingle {
               ffi.Pointer<ffi.Void>,
               ffi.Pointer<nnstreamer.ml_custom_easy_filter_h>)>();
 
-  /// @brief Unregisters the custom filter.
-  /// @details Use this function to release and unregister the custom filter.
-  /// @since_tizen 6.0
-  /// @param[in] custom The custom filter to be unregistered.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER The parameter is invalid.
+  /// Unregisters the custom filter.
+  ///
+  /// Use this function to release and unregister the custom filter.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Parameters:**
+  /// - `custom` (in): The custom filter to be unregistered.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: The parameter is invalid.
   int ml_pipeline_custom_easy_filter_unregister(
     nnstreamer.ml_custom_easy_filter_h custom,
   ) {
@@ -1665,35 +2065,37 @@ class Tizen80CapiMlInferenceSingle {
       _ml_pipeline_custom_easy_filter_unregisterPtr
           .asFunction<int Function(nnstreamer.ml_custom_easy_filter_h)>();
 
-  /// MAIN FUNC *
-  /// /
-  /// /**
-  /// @brief Opens an ML model and returns the instance as a handle.
-  /// @details Even if the model has flexible input data dimensions,
-  /// input data frames of an instance of a model should share the same dimension.
-  /// @since_tizen 5.5
-  /// @remarks %http://tizen.org/privilege/mediastorage is needed if @a model is relevant to media storage.
-  /// @remarks %http://tizen.org/privilege/externalstorage is needed if @a model is relevant to external storage.
-  /// @param[out] single This is the model handle opened. Users are required to close
-  /// the given instance with ml_single_close().
-  /// @param[in] model This is the path to the neural network model file.
-  /// @param[in] input_info This is required if the given model has flexible input
-  /// dimension, where the input dimension MUST be given
-  /// before executing the model.
-  /// It is required by some custom filters of NNStreamer.
-  /// You may set NULL if it's not required.
-  /// @param[in] output_info This is required if the given model has flexible output dimension.
-  /// @param[in] nnfw The neural network framework used to open the given @a model.
-  /// Set #ML_NNFW_TYPE_ANY to let it auto-detect.
-  /// @param[in] hw Tell the corresponding @a nnfw to use a specific hardware.
-  /// Set #ML_NNFW_HW_ANY if it does not matter.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_PERMISSION_DENIED The application does not have the privilege to access to the media storage or external storage.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Fail. The parameter is invalid.
-  /// @retval #ML_ERROR_STREAMS_PIPE Failed to start the pipeline.
-  /// @retval #ML_ERROR_OUT_OF_MEMORY Failed to allocate required memory.
+  /// MAIN FUNC * / /**
+  ///
+  /// Opens an ML model and returns the instance as a handle.
+  ///
+  /// Even if the model has flexible input data dimensions, input data frames of an instance of a model should share the same dimension.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/mediastorage is needed if `model` is relevant to media storage.>
+  /// - <http://tizen.org/privilege/externalstorage is needed if `model` is relevant to external storage.>
+  ///
+  /// **Parameters:**
+  /// - `single` (out): This is the model handle opened. Users are required to close the given instance with ml_single_close().
+  /// - `model` (in): This is the path to the neural network model file.
+  /// - `input_info` (in): This is required if the given model has flexible input dimension, where the input dimension MUST be given before executing the model. It is required by some custom filters of NNStreamer. You may set NULL if it's not required.
+  /// - `output_info` (in): This is required if the given model has flexible output dimension.
+  /// - `nnfw` (in): The neural network framework used to open the given `model`. Set `ML_NNFW_TYPE_ANY` to let it auto-detect.
+  /// - `hw` (in): Tell the corresponding `nnfw` to use a specific hardware. Set `ML_NNFW_HW_ANY` if it does not matter.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_PERMISSION_DENIED`: The application does not have the privilege to access to the media storage or external storage.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Fail. The parameter is invalid.
+  /// - `ML_ERROR_STREAMS_PIPE`: Failed to start the pipeline.
+  /// - `ML_ERROR_OUT_OF_MEMORY`: Failed to allocate required memory.
   int ml_single_open(
     ffi.Pointer<ml_single_h> single,
     ffi.Pointer<ffi.Char> model,
@@ -1730,36 +2132,36 @@ class Tizen80CapiMlInferenceSingle {
           int,
           int)>();
 
-  /// @brief Opens an ML model and returns the instance as a handle with custom options.
-  /// @details Even if the model has flexible input data dimensions,
-  /// input data frames of an instance of a model should share the same dimension.
-  /// @since_tizen 6.5
-  /// @remarks %http://tizen.org/privilege/mediastorage is needed if @a model is relevant to media storage.
-  /// @remarks %http://tizen.org/privilege/externalstorage is needed if @a model is relevant to external storage.
-  /// @param[out] single This is the model handle opened. Users are required to close
-  /// the given instance with ml_single_close().
-  /// @param[in] model This is the path to the neural network model file.
-  /// @param[in] input_info This is required if the given model has flexible input
-  /// dimension, where the input dimension MUST be given
-  /// before executing the model.
-  /// It is required by some custom filters of NNStreamer.
-  /// You may set NULL if it's not required.
-  /// @param[in] output_info This is required if the given model has flexible output dimension.
-  /// @param[in] nnfw The neural network framework used to open the given @a model.
-  /// Set #ML_NNFW_TYPE_ANY to let it auto-detect.
-  /// @param[in] hw Tell the corresponding @a nnfw to use a specific hardware.
-  /// Set #ML_NNFW_HW_ANY if it does not matter.
-  /// @param[in] custom_option Comma separated list of options.
-  /// Use this parameter to fine-tune and optimize specific neural network framework. (e.g. NumThreads:N to set the number of threads in TensorFlow-Lite)
-  /// You may set NULL if it's not required.
-  /// See NNStreamer documentation (https://nnstreamer.github.io/gst/nnstreamer/tensor_filter/README.html) for the details.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_PERMISSION_DENIED The application does not have the privilege to access to the media storage or external storage.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Fail. The parameter is invalid.
-  /// @retval #ML_ERROR_STREAMS_PIPE Failed to start the pipeline.
-  /// @retval #ML_ERROR_OUT_OF_MEMORY Failed to allocate required memory.
+  /// Opens an ML model and returns the instance as a handle with custom options.
+  ///
+  /// Even if the model has flexible input data dimensions, input data frames of an instance of a model should share the same dimension.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/mediastorage is needed if `model` is relevant to media storage.>
+  /// - <http://tizen.org/privilege/externalstorage is needed if `model` is relevant to external storage.>
+  ///
+  /// **Parameters:**
+  /// - `single` (out): This is the model handle opened. Users are required to close the given instance with ml_single_close().
+  /// - `model` (in): This is the path to the neural network model file.
+  /// - `input_info` (in): This is required if the given model has flexible input dimension, where the input dimension MUST be given before executing the model. It is required by some custom filters of NNStreamer. You may set NULL if it's not required.
+  /// - `output_info` (in): This is required if the given model has flexible output dimension.
+  /// - `nnfw` (in): The neural network framework used to open the given `model`. Set `ML_NNFW_TYPE_ANY` to let it auto-detect.
+  /// - `hw` (in): Tell the corresponding `nnfw` to use a specific hardware. Set `ML_NNFW_HW_ANY` if it does not matter.
+  /// - `custom_option` (in): Comma separated list of options. Use this parameter to fine-tune and optimize specific neural network framework. (e.g. NumThreads:N to set the number of threads in TensorFlow-Lite) You may set NULL if it's not required. See NNStreamer documentation (https://nnstreamer.github.io/gst/nnstreamer/tensor_filter/README.html) for the details.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_PERMISSION_DENIED`: The application does not have the privilege to access to the media storage or external storage.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Fail. The parameter is invalid.
+  /// - `ML_ERROR_STREAMS_PIPE`: Failed to start the pipeline.
+  /// - `ML_ERROR_OUT_OF_MEMORY`: Failed to allocate required memory.
   int ml_single_open_full(
     ffi.Pointer<ml_single_h> single,
     ffi.Pointer<ffi.Char> model,
@@ -1800,16 +2202,23 @@ class Tizen80CapiMlInferenceSingle {
           int,
           ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Closes the opened model handle.
-  /// @details Note that this should be called before destroying the inference data by ml_tensors_data_destroy().
-  /// If not, the inference engine might try to access the data that is already freed.
-  /// And it causes the segmentation fault.
-  /// @since_tizen 5.5
-  /// @param[in] single The model handle to be closed.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Fail. The parameter is invalid (Pipeline is not negotiated yet.)
+  /// Closes the opened model handle.
+  ///
+  /// Note that this should be called before destroying the inference data by ml_tensors_data_destroy(). If not, the inference engine might try to access the data that is already freed. And it causes the segmentation fault.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `single` (in): The model handle to be closed.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Fail. The parameter is invalid (Pipeline is not negotiated yet.)
   int ml_single_close(
     ml_single_h single,
   ) {
@@ -1824,24 +2233,31 @@ class Tizen80CapiMlInferenceSingle {
   late final _ml_single_close =
       _ml_single_closePtr.asFunction<int Function(ml_single_h)>();
 
-  /// @brief Invokes the model with the given input data.
-  /// @details Even if the model has flexible input data dimensions,
-  /// input data frames of an instance of a model should share the same dimension.
-  /// Note that this will wait for the result until the invoke process is done. If an application wants to change the time to wait for an output, set the timeout using ml_single_set_timeout().
-  /// @since_tizen 5.5
-  /// @param[in] single The model handle to be inferred.
-  /// @param[in] input The input data to be inferred.
-  /// @param[out] output The allocated output buffer. The caller is responsible for freeing the output buffer with ml_tensors_data_destroy().
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @note If the data for the output buffer is allocated by the neural network framework (ML_NNFW_TYPE_CUSTOM_FILTER supports this),
-  /// then this buffer will be freed when closing the @a single automatically by the neural network framework, and will not available for use later.
-  /// It is recommended to copy the output buffer from @a output if it is required to use it after the @a single handle is closed.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Fail. The parameter is invalid.
-  /// @retval #ML_ERROR_STREAMS_PIPE Failed to push a buffer into source element.
-  /// @retval #ML_ERROR_TIMED_OUT Failed to get the result from sink element.
-  /// @retval #ML_ERROR_OUT_OF_MEMORY Failed to allocate required memory.
+  /// Invokes the model with the given input data.
+  ///
+  /// Even if the model has flexible input data dimensions, input data frames of an instance of a model should share the same dimension. Note that this will wait for the result until the invoke process is done. If an application wants to change the time to wait for an output, set the timeout using ml_single_set_timeout().
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `single` (in): The model handle to be inferred.
+  /// - `input` (in): The input data to be inferred.
+  /// - `output` (out): The allocated output buffer. The caller is responsible for freeing the output buffer with ml_tensors_data_destroy().
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Fail. The parameter is invalid.
+  /// - `ML_ERROR_STREAMS_PIPE`: Failed to push a buffer into source element.
+  /// - `ML_ERROR_TIMED_OUT`: Failed to get the result from sink element.
+  /// - `ML_ERROR_OUT_OF_MEMORY`: Failed to allocate required memory.
+  ///
+  /// **Notes:**
+  /// - If the data for the output buffer is allocated by the neural network framework (ML_NNFW_TYPE_CUSTOM_FILTER supports this), then this buffer will be freed when closing the `single` automatically by the neural network framework, and will not available for use later. It is recommended to copy the output buffer from `output` if it is required to use it after the `single` handle is closed.
   int ml_single_invoke(
     ml_single_h single,
     ml_common.ml_tensors_data_h input,
@@ -1862,20 +2278,28 @@ class Tizen80CapiMlInferenceSingle {
       int Function(ml_single_h, ml_common.ml_tensors_data_h,
           ffi.Pointer<ml_common.ml_tensors_data_h>)>();
 
-  /// @brief Invokes the model with the given input data and fills the @a output data handle. This is generally faster than ml_single_invoke().
-  /// @details The caller should preallocate memory buffers of the given output handle before calling the API.
-  /// Note that ml_single_invoke() allocates memory buffers of the output handle in the API, which may incur memcpy.
-  /// @since_tizen 6.5
-  /// @param[in] single The model handle to be inferred.
-  /// @param[in] input The input data to be inferred.
-  /// @param[in,out] output The output data to be filled by the API. Output should be preallocated before calling the API.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Fail. The parameter is invalid.
-  /// @retval #ML_ERROR_STREAMS_PIPE Failed to push a buffer into source element.
-  /// @retval #ML_ERROR_TIMED_OUT Failed to get the result from sink element.
-  /// @retval #ML_ERROR_OUT_OF_MEMORY Failed to allocate required memory.
+  /// Invokes the model with the given input data and fills the `output` data handle. This is generally faster than ml_single_invoke().
+  ///
+  /// The caller should preallocate memory buffers of the given output handle before calling the API. Note that ml_single_invoke() allocates memory buffers of the output handle in the API, which may incur memcpy.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `single` (in): The model handle to be inferred.
+  /// - `input` (in): The input data to be inferred.
+  /// - `output` (in,out): The output data to be filled by the API. Output should be preallocated before calling the API.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Fail. The parameter is invalid.
+  /// - `ML_ERROR_STREAMS_PIPE`: Failed to push a buffer into source element.
+  /// - `ML_ERROR_TIMED_OUT`: Failed to get the result from sink element.
+  /// - `ML_ERROR_OUT_OF_MEMORY`: Failed to allocate required memory.
   int ml_single_invoke_fast(
     ml_single_h single,
     ml_common.ml_tensors_data_h input,
@@ -1896,23 +2320,30 @@ class Tizen80CapiMlInferenceSingle {
       int Function(ml_single_h, ml_common.ml_tensors_data_h,
           ml_common.ml_tensors_data_h)>();
 
-  /// @brief Invokes the model with the given input data with the given tensors information.
-  /// @details This function changes the input tensors information for the model, and returns the corresponding output data.
-  /// A model/framework may not support changing the information.
-  /// Note that this will wait for the result until the invoke process is done. If an application wants to change the time to wait for an output, set the timeout using ml_single_set_timeout().
-  /// @since_tizen 6.0
-  /// @param[in] single The model handle to be inferred.
-  /// @param[in] input The input data to be inferred.
-  /// @param[in] in_info The handle of input tensors information.
-  /// @param[out] output The allocated output buffer. The caller is responsible for freeing the output buffer with ml_tensors_data_destroy().
-  /// @param[out] out_info The handle of output tensors information. The caller is responsible for freeing the information with ml_tensors_info_destroy().
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Fail. The parameter is invalid.
-  /// @retval #ML_ERROR_STREAMS_PIPE Failed to push a buffer into source element.
-  /// @retval #ML_ERROR_TIMED_OUT Failed to get the result from sink element.
-  /// @retval #ML_ERROR_OUT_OF_MEMORY Failed to allocate required memory.
+  /// Invokes the model with the given input data with the given tensors information.
+  ///
+  /// This function changes the input tensors information for the model, and returns the corresponding output data. A model/framework may not support changing the information. Note that this will wait for the result until the invoke process is done. If an application wants to change the time to wait for an output, set the timeout using ml_single_set_timeout().
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Parameters:**
+  /// - `single` (in): The model handle to be inferred.
+  /// - `input` (in): The input data to be inferred.
+  /// - `in_info` (in): The handle of input tensors information.
+  /// - `output` (out): The allocated output buffer. The caller is responsible for freeing the output buffer with ml_tensors_data_destroy().
+  /// - `out_info` (out): The handle of output tensors information. The caller is responsible for freeing the information with ml_tensors_info_destroy().
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Fail. The parameter is invalid.
+  /// - `ML_ERROR_STREAMS_PIPE`: Failed to push a buffer into source element.
+  /// - `ML_ERROR_TIMED_OUT`: Failed to get the result from sink element.
+  /// - `ML_ERROR_OUT_OF_MEMORY`: Failed to allocate required memory.
   int ml_single_invoke_dynamic(
     ml_single_h single,
     ml_common.ml_tensors_data_h input,
@@ -1947,16 +2378,24 @@ class Tizen80CapiMlInferenceSingle {
               ffi.Pointer<ml_common.ml_tensors_data_h>,
               ffi.Pointer<ml_common.ml_tensors_info_h>)>();
 
-  /// @brief Gets the information (tensor dimension, type, name and so on) of required input data for the given model.
-  /// @details Note that a model may not have such information if its input type is flexible.
-  /// The names of tensors are sometimes unavailable (optional), while its dimensions and types are always available.
-  /// @since_tizen 5.5
-  /// @param[in] single The model handle.
-  /// @param[out] info The handle of input tensors information. The caller is responsible for freeing the information with ml_tensors_info_destroy().
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Fail. The parameter is invalid.
+  /// Gets the information (tensor dimension, type, name and so on) of required input data for the given model.
+  ///
+  /// Note that a model may not have such information if its input type is flexible. The names of tensors are sometimes unavailable (optional), while its dimensions and types are always available.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `single` (in): The model handle.
+  /// - `info` (out): The handle of input tensors information. The caller is responsible for freeing the information with ml_tensors_info_destroy().
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Fail. The parameter is invalid.
   int ml_single_get_input_info(
     ml_single_h single,
     ffi.Pointer<ml_common.ml_tensors_info_h> info,
@@ -1977,16 +2416,24 @@ class Tizen80CapiMlInferenceSingle {
           int Function(
               ml_single_h, ffi.Pointer<ml_common.ml_tensors_info_h>)>();
 
-  /// @brief Gets the information (tensor dimension, type, name and so on) of output data for the given model.
-  /// @details Note that a model may not have such information if its output type is flexible and output type is not determined statically.
-  /// The names of tensors are sometimes unavailable (optional), while its dimensions and types are always available.
-  /// @since_tizen 5.5
-  /// @param[in] single The model handle.
-  /// @param[out] info The handle of output tensors information. The caller is responsible for freeing the information with ml_tensors_info_destroy().
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Fail. The parameter is invalid.
+  /// Gets the information (tensor dimension, type, name and so on) of output data for the given model.
+  ///
+  /// Note that a model may not have such information if its output type is flexible and output type is not determined statically. The names of tensors are sometimes unavailable (optional), while its dimensions and types are always available.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `single` (in): The model handle.
+  /// - `info` (out): The handle of output tensors information. The caller is responsible for freeing the information with ml_tensors_info_destroy().
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Fail. The parameter is invalid.
   int ml_single_get_output_info(
     ml_single_h single,
     ffi.Pointer<ml_common.ml_tensors_info_h> info,
@@ -2007,16 +2454,24 @@ class Tizen80CapiMlInferenceSingle {
           int Function(
               ml_single_h, ffi.Pointer<ml_common.ml_tensors_info_h>)>();
 
-  /// @brief Sets the information (tensor dimension, type, name and so on) of required input data for the given model.
-  /// @details Note that a model/framework may not support changing the information.
-  /// Use ml_single_get_input_info() and ml_single_get_output_info() instead for this framework.
-  /// @since_tizen 6.0
-  /// @param[in] single The model handle.
-  /// @param[in] info The handle of input tensors information.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Fail. The parameter is invalid.
+  /// Sets the information (tensor dimension, type, name and so on) of required input data for the given model.
+  ///
+  /// Note that a model/framework may not support changing the information. Use ml_single_get_input_info() and ml_single_get_output_info() instead for this framework.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Parameters:**
+  /// - `single` (in): The model handle.
+  /// - `info` (in): The handle of input tensors information.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Fail. The parameter is invalid.
   int ml_single_set_input_info(
     ml_single_h single,
     ml_common.ml_tensors_info_h info,
@@ -2034,14 +2489,22 @@ class Tizen80CapiMlInferenceSingle {
   late final _ml_single_set_input_info = _ml_single_set_input_infoPtr
       .asFunction<int Function(ml_single_h, ml_common.ml_tensors_info_h)>();
 
-  /// @brief Sets the maximum amount of time to wait for an output, in milliseconds.
-  /// @since_tizen 5.5
-  /// @param[in] single The model handle.
-  /// @param[in] timeout The time to wait for an output.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Fail. The parameter is invalid.
+  /// Sets the maximum amount of time to wait for an output, in milliseconds.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `single` (in): The model handle.
+  /// - `timeout` (in): The time to wait for an output.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Fail. The parameter is invalid.
   int ml_single_set_timeout(
     ml_single_h single,
     int timeout,
@@ -2058,16 +2521,25 @@ class Tizen80CapiMlInferenceSingle {
   late final _ml_single_set_timeout =
       _ml_single_set_timeoutPtr.asFunction<int Function(ml_single_h, int)>();
 
-  /// @brief Sets the property value for the given model.
-  /// @details Note that a model/framework may not support changing the property after opening the model.
-  /// @since_tizen 6.0
-  /// @param[in] single The model handle.
-  /// @param[in] name The property name.
-  /// @param[in] value The property value.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Fail. The parameter is invalid.
+  /// Sets the property value for the given model.
+  ///
+  /// Note that a model/framework may not support changing the property after opening the model.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Parameters:**
+  /// - `single` (in): The model handle.
+  /// - `name` (in): The property name.
+  /// - `value` (in): The property value.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Fail. The parameter is invalid.
   int ml_single_set_property(
     ml_single_h single,
     ffi.Pointer<ffi.Char> name,
@@ -2088,15 +2560,23 @@ class Tizen80CapiMlInferenceSingle {
       int Function(
           ml_single_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the property value for the given model.
-  /// @since_tizen 6.0
-  /// @param[in] single The model handle.
-  /// @param[in] name The property name.
-  /// @param[out] value The property value. The caller is responsible for freeing the value using g_free().
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Fail. The parameter is invalid.
+  /// Gets the property value for the given model.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Parameters:**
+  /// - `single` (in): The model handle.
+  /// - `name` (in): The property name.
+  /// - `value` (out): The property value. The caller is responsible for freeing the value using g_free().
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Fail. The parameter is invalid.
   int ml_single_get_property(
     ml_single_h single,
     ffi.Pointer<ffi.Char> name,
@@ -2117,20 +2597,29 @@ class Tizen80CapiMlInferenceSingle {
       int Function(ml_single_h, ffi.Pointer<ffi.Char>,
           ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Makes a single instance with given ml-option.
-  /// @since_tizen 7.0
-  /// @remarks %http://tizen.org/privilege/mediastorage is needed if @a option is relevant to media storage.
-  /// @remarks %http://tizen.org/privilege/externalstorage is needed if @a option is relevant to external storage.
-  /// @param[out] single This is the model handle opened. Users are required to close
-  /// the given instance with ml_single_close().
-  /// @param[in] option The handle of ml-option.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_PERMISSION_DENIED The application does not have the privilege to access to the media storage or external storage.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Fail. The parameter is invalid.
-  /// @retval #ML_ERROR_STREAMS_PIPE Failed to start the pipeline.
-  /// @retval #ML_ERROR_OUT_OF_MEMORY Failed to allocate required memory.
+  /// Makes a single instance with given ml-option.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/mediastorage is needed if `option` is relevant to media storage.>
+  /// - <http://tizen.org/privilege/externalstorage is needed if `option` is relevant to external storage.>
+  ///
+  /// **Parameters:**
+  /// - `single` (out): This is the model handle opened. Users are required to close the given instance with ml_single_close().
+  /// - `option` (in): The handle of ml-option.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_PERMISSION_DENIED`: The application does not have the privilege to access to the media storage or external storage.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Fail. The parameter is invalid.
+  /// - `ML_ERROR_STREAMS_PIPE`: Failed to start the pipeline.
+  /// - `ML_ERROR_OUT_OF_MEMORY`: Failed to allocate required memory.
   int ml_single_open_with_option(
     ffi.Pointer<ml_single_h> single,
     ml_common.ml_option_h option,
@@ -2150,8 +2639,11 @@ class Tizen80CapiMlInferenceSingle {
           int Function(ffi.Pointer<ml_single_h>, ml_common.ml_option_h)>();
 }
 
-/// @brief Enumeration for buffer deallocation policies.
-/// @since_tizen 5.5
+/// Enumeration for buffer deallocation policies.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class ml_pipeline_buf_policy_e {
   /// < Default. Application should not deallocate this buffer. NNStreamer will deallocate when the buffer is no more needed.
   static const int ML_PIPELINE_BUF_POLICY_AUTO_FREE = 0;
@@ -2166,10 +2658,13 @@ abstract class ml_pipeline_buf_policy_e {
   static const int ML_PIPELINE_BUF_SRC_EVENT_EOS = 65536;
 }
 
-/// @brief Enumeration for pipeline state.
-/// @details The pipeline state is described on @ref CAPI_ML_NNSTREAMER_PIPELINE_STATE_DIAGRAM.
-/// Refer to https://gstreamer.freedesktop.org/documentation/plugin-development/basics/states.html.
-/// @since_tizen 5.5
+/// Enumeration for pipeline state.
+///
+/// The pipeline state is described on `CAPI_ML_NNSTREAMER_PIPELINE_STATE_DIAGRAM.` Refer to https://gstreamer.freedesktop.org/documentation/plugin-development/basics/states.html.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class ml_pipeline_state_e {
   /// < Unknown state. Maybe not constructed?
   static const int ML_PIPELINE_STATE_UNKNOWN = 0;
@@ -2187,9 +2682,13 @@ abstract class ml_pipeline_state_e {
   static const int ML_PIPELINE_STATE_PLAYING = 4;
 }
 
-/// @brief Enumeration for switch types.
-/// @details This designates different GStreamer filters, "GstInputSelector"/"GstOutputSelector".
-/// @since_tizen 5.5
+/// Enumeration for switch types.
+///
+/// This designates different GStreamer filters, "GstInputSelector"/"GstOutputSelector".
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class ml_pipeline_switch_e {
   /// < GstOutputSelector
   static const int ML_PIPELINE_SWITCH_OUTPUT_SELECTOR = 0;
@@ -2198,9 +2697,13 @@ abstract class ml_pipeline_switch_e {
   static const int ML_PIPELINE_SWITCH_INPUT_SELECTOR = 1;
 }
 
-/// @brief Types of NNFWs.
-/// @details To check if a nnfw-type is supported in a system, an application may call the API, ml_check_nnfw_availability().
-/// @since_tizen 5.5
+/// Types of NNFWs.
+///
+/// To check if a nnfw-type is supported in a system, an application may call the API, ml_check_nnfw_availability().
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class _ml_nnfw_type_e {
   /// < NNFW is not specified (Try to determine the NNFW with file extension).
   static const int ML_NNFW_TYPE_ANY = 0;
@@ -2257,8 +2760,11 @@ abstract class _ml_nnfw_type_e {
   static const int ML_NNFW_TYPE_SNAP = 8193;
 }
 
-/// @brief Types of hardware resources to be used for NNFWs. Note that if the affinity (nnn) is not supported by the driver or hardware, it is ignored.
-/// @since_tizen 5.5
+/// Types of hardware resources to be used for NNFWs. Note that if the affinity (nnn) is not supported by the driver or hardware, it is ignored.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class _ml_nnfw_hw_e {
   /// < Hardware resource is not specified.
   static const int ML_NNFW_HW_ANY = 0;
@@ -2297,6 +2803,9 @@ abstract class _ml_nnfw_hw_e {
   static const int ML_NNFW_HW_NPU_SR = 77824;
 }
 
-/// @brief A handle of a single-shot instance.
-/// @since_tizen 5.5
+/// A handle of a single-shot instance.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 typedef ml_single_h = ffi.Pointer<ffi.Void>;

@@ -1,3 +1,6 @@
+/// {@category 10.0/tizen}
+library tizen_interop_10_0.mv_barcode_generator;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'generated_bindings_mv_common.dart' as mv_common;
 
 /// Dart bindings for Tizen mv_barcode_generator APIs.
+/// {@category 10.0/tizen}
 class Tizen100MvBarcodeGenerator {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,45 +29,45 @@ class Tizen100MvBarcodeGenerator {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Generates #mv_source_h with barcode image.
-  /// @details Pay attention that for EAN-8 and EAN-13 barcode types the barcode
-  /// type may be selected automatically and this selection depends on the input
-  /// message length. Also for QR codes the version may be selected as minimum
-  /// required to generate QR code with the input message length.
+  /// Generates `mv_source_h` with barcode image.
   ///
-  /// @since_tizen 2.4
-  /// @remarks If the text attribute of engine configuration is set to
-  /// #MV_BARCODE_GENERATE_ATTR_TEXT_VISIBLE,
-  /// #MEDIA_VISION_ERROR_INVALID_OPERATION will be returned
-  /// when @a type is #MV_BARCODE_QR
+  /// Pay attention that for EAN-8 and EAN-13 barcode types the barcode type may be selected automatically and this selection depends on the input message length. Also for QR codes the version may be selected as minimum required to generate QR code with the input message length.
   ///
-  /// @param [in]  engine_cfg      The handle to the configuration of the engine
-  /// @param [in]  message         The message to be encoded in the barcode
-  /// @param [in]  type            Type of the barcode to be generated
-  /// @param [in]  qr_enc_mode     Encoding mode for the message (only for QR codes;
-  /// for 1D barcodes set this parameter to
-  /// #MV_BARCODE_QR_MODE_UNAVAILABLE)
-  /// @param [in]  qr_ecc          Error correction level (only for QR codes; for
-  /// 1D barcodes set this parameter to
-  /// #MV_BARCODE_QR_ECC_UNAVAILABLE)
-  /// @param [in]  qr_version      QR code version (for 1D barcodes set this parameter to 0) can be increased up to 40.
-  /// In case of #MEDIA_VISION_ERROR_MSG_TOO_LONG, it can usually be resolved by increasing the version.
-  /// However, as the version increases, the size of the QR code becomes larger and its complexity increases.
-  /// @param [in,out] image        The media source handle which will be used to
-  /// fill by the buffer with generated image
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_MSG_TOO_LONG Too long or short message
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_DATA Invalid data
-  /// @retval #MEDIA_VISION_ERROR_INTERNAL Internal error
-  /// @retval #MEDIA_VISION_ERROR_INVALID_OPERATION Invalid operation
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @pre Create an engine configuration handle by calling
-  /// mv_create_engine_config(), otherwise use NULL
+  /// **Remarks:**
+  /// - If the text attribute of engine configuration is set to
+  /// - `MV_BARCODE_GENERATE_ATTR_TEXT_VISIBLE`,
+  /// - `MEDIA_VISION_ERROR_INVALID_OPERATION` will be returned
+  /// - when `type` is `MV_BARCODE_QR`
   ///
-  /// @see mv_barcode_generate_image()
+  /// **Parameters:**
+  /// - `[in]`: engine_cfg The handle to the configuration of the engine
+  /// - `[in]`: message The message to be encoded in the barcode
+  /// - `[in]`: type Type of the barcode to be generated
+  /// - `[in]`: qr_enc_mode Encoding mode for the message (only for QR codes; for 1D barcodes set this parameter to `MV_BARCODE_QR_MODE_UNAVAILABLE`)
+  /// - `[in]`: qr_ecc Error correction level (only for QR codes; for 1D barcodes set this parameter to `MV_BARCODE_QR_ECC_UNAVAILABLE`)
+  /// - `[in]`: qr_version QR code version (for 1D barcodes set this parameter to 0) can be increased up to 40. In case of `MEDIA_VISION_ERROR_MSG_TOO_LONG`, it can usually be resolved by increasing the version. However, as the version increases, the size of the QR code becomes larger and its complexity increases.
+  /// - `[in,out]`: image The media source handle which will be used to fill by the buffer with generated image
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_MSG_TOO_LONG`: Too long or short message
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_DATA`: Invalid data
+  /// - `MEDIA_VISION_ERROR_INTERNAL`: Internal error
+  /// - `MEDIA_VISION_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create an engine configuration handle by calling mv_create_engine_config(), otherwise use NULL
+  ///
+  /// **See also:**
+  /// - `mv_barcode_generate_image()`
   int mv_barcode_generate_source(
     mv_common.mv_engine_config_h engine_cfg,
     ffi.Pointer<ffi.Char> message,
@@ -99,53 +103,54 @@ class Tizen100MvBarcodeGenerator {
           int Function(mv_common.mv_engine_config_h, ffi.Pointer<ffi.Char>, int,
               int, int, int, mv_common.mv_source_h)>();
 
-  /// @brief Generates image file with barcode.
-  /// @details Pay attention that for EAN-8 and EAN-13 barcode types the barcode
-  /// type may be selected automatically and this selection depends on the input
-  /// message length. Also for QR codes the version may be selected as minimum
-  /// required to generate QR code with the input message length.
+  /// Generates image file with barcode.
   ///
-  /// @since_tizen 2.4
-  /// @remarks If the text attribute of engine configuration is set to
-  /// #MV_BARCODE_GENERATE_ATTR_TEXT_VISIBLE,
-  /// #MEDIA_VISION_ERROR_INVALID_OPERATION will be returned
-  /// when @a type is #MV_BARCODE_QR
+  /// Pay attention that for EAN-8 and EAN-13 barcode types the barcode type may be selected automatically and this selection depends on the input message length. Also for QR codes the version may be selected as minimum required to generate QR code with the input message length.
   ///
-  /// @remarks The mediastorage privilege %http://tizen.org/privilege/mediastorage is needed \n
-  /// if @a image_path is relevant to media storage.\n
-  /// The externalstorage privilege %http://tizen.org/privilege/externalstorage is needed \n
-  /// if @a image_path is relevant to external storage.
-  /// @param [in] engine_cfg      The handle to the configuration of the engine
-  /// @param [in] message         The message to be encoded in the barcode
-  /// @param [in] image_width     The width of the generated image
-  /// @param [in] image_height    The height of the generated image
-  /// @param [in] type            Type of the barcode to be generated
-  /// @param [in] qr_enc_mode     Encoding mode for the message (only for QR codes;
-  /// for 1D barcodes set this parameter to
-  /// #MV_BARCODE_QR_MODE_UNAVAILABLE)
-  /// @param [in] qr_ecc          Error correction level (only for QR codes; for
-  /// 1D barcodes set this parameter to
-  /// #MV_BARCODE_QR_ECC_UNAVAILABLE)
-  /// @param [in] qr_version      QR code version (for 1D barcodes set this parameter to 0) can be increased up to 40.
-  /// In case of #MEDIA_VISION_ERROR_MSG_TOO_LONG, it can usually be resolved by increasing the version.
-  /// However, as the version increases, the size of the QR code becomes larger and its complexity increases.
-  /// @param [in] image_path      The path to the file that has to be generated
-  /// @param [in] image_format    The format of the output image
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_MSG_TOO_LONG Too long or short message
-  /// @retval #MEDIA_VISION_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_DATA Invalid data
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PATH Invalid path
-  /// @retval #MEDIA_VISION_ERROR_INTERNAL Internal error
-  /// @retval #MEDIA_VISION_ERROR_INVALID_OPERATION Invalid operation
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @pre Create an engine configuration handle by calling
-  /// mv_create_engine_config(), otherwise use NULL
+  /// **Remarks:**
+  /// - If the text attribute of engine configuration is set to
+  /// - `MV_BARCODE_GENERATE_ATTR_TEXT_VISIBLE`,
+  /// - `MEDIA_VISION_ERROR_INVALID_OPERATION` will be returned
+  /// - when `type` is `MV_BARCODE_QR`
+  /// - The mediastorage privilege http://tizen.org/privilege/mediastorage is needed
+  /// - if `image_path` is relevant to media storage.
+  /// - The externalstorage privilege http://tizen.org/privilege/externalstorage is needed
+  /// - if `image_path` is relevant to external storage.
   ///
-  /// @see mv_barcode_generate_source()
+  /// **Parameters:**
+  /// - `[in]`: engine_cfg The handle to the configuration of the engine
+  /// - `[in]`: message The message to be encoded in the barcode
+  /// - `[in]`: image_width The width of the generated image
+  /// - `[in]`: image_height The height of the generated image
+  /// - `[in]`: type Type of the barcode to be generated
+  /// - `[in]`: qr_enc_mode Encoding mode for the message (only for QR codes; for 1D barcodes set this parameter to `MV_BARCODE_QR_MODE_UNAVAILABLE`)
+  /// - `[in]`: qr_ecc Error correction level (only for QR codes; for 1D barcodes set this parameter to `MV_BARCODE_QR_ECC_UNAVAILABLE`)
+  /// - `[in]`: qr_version QR code version (for 1D barcodes set this parameter to 0) can be increased up to 40. In case of `MEDIA_VISION_ERROR_MSG_TOO_LONG`, it can usually be resolved by increasing the version. However, as the version increases, the size of the QR code becomes larger and its complexity increases.
+  /// - `[in]`: image_path The path to the file that has to be generated
+  /// - `[in]`: image_format The format of the output image
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_MSG_TOO_LONG`: Too long or short message
+  /// - `MEDIA_VISION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_DATA`: Invalid data
+  /// - `MEDIA_VISION_ERROR_INVALID_PATH`: Invalid path
+  /// - `MEDIA_VISION_ERROR_INTERNAL`: Internal error
+  /// - `MEDIA_VISION_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create an engine configuration handle by calling mv_create_engine_config(), otherwise use NULL
+  ///
+  /// **See also:**
+  /// - `mv_barcode_generate_source()`
   int mv_barcode_generate_image(
     mv_common.mv_engine_config_h engine_cfg,
     ffi.Pointer<ffi.Char> message,
@@ -191,13 +196,16 @@ class Tizen100MvBarcodeGenerator {
               int, int, int, int, int, ffi.Pointer<ffi.Char>, int)>();
 }
 
-/// @brief Enumeration to shape attribute.
-/// @details Using this enumeration, various data or finder patterns can be set in
-/// mv_engine_config_set_int_attribute. If the pattern is not supported, it will
-/// be simply ignored.
+/// Enumeration to shape attribute.
 ///
-/// @see mv_engine_config_set_int_attribute
-/// @since_tizen 8.0
+/// Using this enumeration, various data or finder patterns can be set in mv_engine_config_set_int_attribute. If the pattern is not supported, it will be simply ignored.
+///
+/// **Since Tizen:**
+/// - 8.0
+///
+/// **See also:**
+/// - `mv_engine_config_set_int_attribute`
+/// @nodoc
 abstract class mv_barcode_generate_attr_shape_e {
   /// < Rectangular
   static const int MV_BARCODE_GENERATE_ATTR_SHAPE_RECT = 0;
@@ -209,9 +217,11 @@ abstract class mv_barcode_generate_attr_shape_e {
   static const int MV_BARCODE_GENERATE_ATTR_SHAPE_CIRCLE = 2;
 }
 
-/// @brief Enumeration to text attribute.
+/// Enumeration to text attribute.
 ///
-/// @since_tizen 2.4
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class mv_barcode_generate_attr_text_e {
   /// < Invisible
   static const int MV_BARCODE_GENERATE_ATTR_TEXT_INVISIBLE = 0;
@@ -220,11 +230,16 @@ abstract class mv_barcode_generate_attr_text_e {
   static const int MV_BARCODE_GENERATE_ATTR_TEXT_VISIBLE = 1;
 }
 
-/// @brief Enumeration for supported barcode types.
-/// @details QR codes (versions 1 to 40) and set of 1D barcodes are supported
+/// Enumeration for supported barcode types.
 ///
-/// @since_tizen 2.4
-/// @remarks #MV_BARCODE_UNDEFINED is deprecated. Use #MV_BARCODE_UNKNOWN instead
+/// QR codes (versions 1 to 40) and set of 1D barcodes are supported
+///
+/// **Since Tizen:**
+/// - 2.4
+///
+/// **Remarks:**
+/// - `MV_BARCODE_UNDEFINED` is deprecated. Use `MV_BARCODE_UNKNOWN` instead
+/// @nodoc
 abstract class _mv_barcode_type_e {
   /// < 2D barcode - Quick Response code
   static const int MV_BARCODE_QR = 0;
@@ -275,10 +290,14 @@ abstract class _mv_barcode_type_e {
   static const int MV_BARCODE_UNKNOWN = 100;
 }
 
-/// @brief Enumeration for supported QR code encoding mode.
+/// Enumeration for supported QR code encoding mode.
 ///
-/// @since_tizen 2.4
-/// @remarks This is unavailable for 1D barcodes
+/// **Since Tizen:**
+/// - 2.4
+///
+/// **Remarks:**
+/// - This is unavailable for 1D barcodes
+/// @nodoc
 abstract class _mv_barcode_qr_mode_e {
   /// < Numeric digits
   static const int MV_BARCODE_QR_MODE_NUMERIC = 0;
@@ -296,10 +315,14 @@ abstract class _mv_barcode_qr_mode_e {
   static const int MV_BARCODE_QR_MODE_UNAVAILABLE = 4;
 }
 
-/// @brief Enumeration for supported QR code error correction level.
+/// Enumeration for supported QR code error correction level.
 ///
-/// @since_tizen 2.4
-/// @remarks This is unavailable for 1D barcodes
+/// **Since Tizen:**
+/// - 2.4
+///
+/// **Remarks:**
+/// - This is unavailable for 1D barcodes
+/// @nodoc
 abstract class _mv_barcode_qr_ecc_e {
   /// < Recovery up to  7% losses
   static const int MV_BARCODE_QR_ECC_LOW = 0;
@@ -317,9 +340,11 @@ abstract class _mv_barcode_qr_ecc_e {
   static const int MV_BARCODE_QR_ECC_UNAVAILABLE = 4;
 }
 
-/// @brief Enumeration for supported image formats for the barcode generating.
+/// Enumeration for supported image formats for the barcode generating.
 ///
-/// @since_tizen 2.4
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class _mv_barcode_image_format_e {
   /// < Unavailable image format
   static const int MV_BARCODE_IMAGE_FORMAT_UNAVAILABLE = -1;
@@ -337,19 +362,25 @@ abstract class _mv_barcode_image_format_e {
   static const int MV_BARCODE_IMAGE_FORMAT_NUM = 3;
 }
 
+/// @nodoc
 const String MV_BARCODE_GENERATE_ATTR_TEXT = 'MV_BARCODE_GENERATE_ATTR_TEXT';
 
+/// @nodoc
 const String MV_BARCODE_GENERATE_ATTR_COLOR_FRONT =
     'MV_BARCODE_GENERATE_ATTR_COLOR_FRONT';
 
+/// @nodoc
 const String MV_BARCODE_GENERATE_ATTR_COLOR_BACK =
     'MV_BARCODE_GENERATE_ATTR_COLOR_BACK';
 
+/// @nodoc
 const String MV_BARCODE_GENERATE_ATTR_EMBED_IMG_PATH =
     'MV_BARCODE_GENERATE_ATTR_EMBED_IMG_PATH';
 
+/// @nodoc
 const String MV_BARCODE_GENERATE_ATTR_DATA_SHAPE =
     'MV_BARCODE_GENERATE_ATTR_DATA_SHAPE';
 
+/// @nodoc
 const String MV_BARCODE_GENERATE_ATTR_FINDER_SHAPE =
     'MV_BARCODE_GENERATE_ATTR_FINDER_SHAPE';

@@ -1,3 +1,6 @@
+/// {@category 9.0/tizen}
+library tizen_interop_9_0.badge;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen badge APIs.
+/// {@category 9.0/tizen}
 class Tizen90Badge {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,23 +28,41 @@ class Tizen90Badge {
           lookup)
       : _lookup = lookup;
 
-  /// @deprecated Deprecated since 2.4. Use badge_add() instead.
-  /// @brief Creates a badge for the application itself.
-  /// @details Creates new badge to display.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/notification
-  /// @param[in] writable_app_id The id of application which is authorized to change the badge
-  /// @return #BADGE_ERROR_NONE if success, other value if failure
-  /// @retval #BADGE_ERROR_NONE Success
-  /// @retval #BADGE_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #BADGE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #BADGE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #BADGE_ERROR_IO_ERROR Error from I/O
-  /// @retval #BADGE_ERROR_SERVICE_NOT_READY Service is not ready
-  /// @see #badge_error_e
-  /// @par Sample code:
-  /// @code
+  /// **Deprecated:** Deprecated since 2.4. Use badge_add() instead.
+  ///
+  /// Creates a badge for the application itself.
+  ///
+  /// Creates new badge to display.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/notification>
+  ///
+  /// **Parameters:**
+  /// - `writable_app_id` (in): The id of application which is authorized to change the badge
+  ///
+  /// **Returns:**
+  /// - `BADGE_ERROR_NONE` if success, other value if failure
+  ///
+  /// **Return values:**
+  /// - `BADGE_ERROR_NONE`: Success
+  /// - `BADGE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `BADGE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BADGE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BADGE_ERROR_IO_ERROR`: Error from I/O
+  /// - `BADGE_ERROR_SERVICE_NOT_READY`: Service is not ready
+  ///
+  /// **See also:**
+  /// - `badge_error_e`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <badge.h>
   ///
   /// {
@@ -51,7 +73,7 @@ class Tizen90Badge {
   /// return;
   ///
   /// }
-  /// @endcode
+  /// ```
   int badge_new(
     ffi.Pointer<ffi.Char> writable_app_id,
   ) {
@@ -66,26 +88,45 @@ class Tizen90Badge {
   late final _badge_new =
       _badge_newPtr.asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @deprecated Deprecated since 9.0
-  /// @brief Creates a badge for the application specified by the badge_app_id.
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/notification
-  /// @remarks Creating and updating a badge of the other application is allowed only when both applications are signed with the same certificate.
-  /// @param[in] badge_app_id The id of the application for which the badge will be created. This parameter can be null when creating a badge for itself.
-  /// @return #BADGE_ERROR_NONE If success, other value if failure
-  /// @retval #BADGE_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #BADGE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #BADGE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #BADGE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #BADGE_ERROR_IO_ERROR Error from I/O
-  /// @retval #BADGE_ERROR_FROM_DB Error from DB
-  /// @retval #BADGE_ERROR_ALREADY_EXIST Already exist
-  /// @retval #BADGE_ERROR_SERVICE_NOT_READY Service is not ready
-  /// @retval #BADGE_ERROR_INVALID_PACKAGE The caller application is not signed with the certificate of the badge_app_id
-  /// @see #badge_error_e
-  /// @par Sample code:
-  /// @code
+  /// **Deprecated:** Deprecated since 9.0
+  ///
+  /// Creates a badge for the application specified by the badge_app_id.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/notification>
+  ///
+  /// **Remarks:**
+  /// - Creating and updating a badge of the other application is allowed only when both applications are signed with the same certificate.
+  ///
+  /// **Parameters:**
+  /// - `badge_app_id` (in): The id of the application for which the badge will be created. This parameter can be null when creating a badge for itself.
+  ///
+  /// **Returns:**
+  /// - `BADGE_ERROR_NONE` If success, other value if failure
+  ///
+  /// **Return values:**
+  /// - `BADGE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `BADGE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BADGE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BADGE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `BADGE_ERROR_IO_ERROR`: Error from I/O
+  /// - `BADGE_ERROR_FROM_DB`: Error from DB
+  /// - `BADGE_ERROR_ALREADY_EXIST`: Already exist
+  /// - `BADGE_ERROR_SERVICE_NOT_READY`: Service is not ready
+  /// - `BADGE_ERROR_INVALID_PACKAGE`: The caller application is not signed with the certificate of the badge_app_id
+  ///
+  /// **See also:**
+  /// - `badge_error_e`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <badge.h>
   ///
   /// {
@@ -95,7 +136,7 @@ class Tizen90Badge {
   /// if (err != BADGE_ERROR_NONE)
   /// return;
   /// }
-  /// @endcode
+  /// ```
   int badge_add(
     ffi.Pointer<ffi.Char> badge_app_id,
   ) {
@@ -110,25 +151,42 @@ class Tizen90Badge {
   late final _badge_add =
       _badge_addPtr.asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @deprecated Deprecated since 9.0
-  /// @brief Removes the badge for the designated application.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/notification
-  /// @param[in] app_id The name of the designated application
-  /// @return #BADGE_ERROR_NONE if success, other value if failure
-  /// @retval #BADGE_ERROR_NONE Success
-  /// @retval #BADGE_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #BADGE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #BADGE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #BADGE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #BADGE_ERROR_IO_ERROR Error from I/O
-  /// @retval #BADGE_ERROR_FROM_DB Error from DB
-  /// @retval #BADGE_ERROR_NOT_EXIST Not exist
-  /// @retval #BADGE_ERROR_SERVICE_NOT_READY Service is not ready
-  /// @see #badge_error_e
-  /// @par Sample code:
-  /// @code
+  /// **Deprecated:** Deprecated since 9.0
+  ///
+  /// Removes the badge for the designated application.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/notification>
+  ///
+  /// **Parameters:**
+  /// - `app_id` (in): The name of the designated application
+  ///
+  /// **Returns:**
+  /// - `BADGE_ERROR_NONE` if success, other value if failure
+  ///
+  /// **Return values:**
+  /// - `BADGE_ERROR_NONE`: Success
+  /// - `BADGE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `BADGE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BADGE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BADGE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `BADGE_ERROR_IO_ERROR`: Error from I/O
+  /// - `BADGE_ERROR_FROM_DB`: Error from DB
+  /// - `BADGE_ERROR_NOT_EXIST`: Not exist
+  /// - `BADGE_ERROR_SERVICE_NOT_READY`: Service is not ready
+  ///
+  /// **See also:**
+  /// - `badge_error_e`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <badge.h>
   ///
   /// {
@@ -139,7 +197,7 @@ class Tizen90Badge {
   /// return;
   ///
   /// }
-  /// @endcode
+  /// ```
   int badge_remove(
     ffi.Pointer<ffi.Char> app_id,
   ) {
@@ -154,27 +212,44 @@ class Tizen90Badge {
   late final _badge_remove =
       _badge_removePtr.asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @deprecated Deprecated since 9.0
-  /// @brief Sets badge count for the designated application.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/notification
-  /// @param[in] app_id The name of the designated application
-  /// @param[in] count The count of the badge
-  /// @return #BADGE_ERROR_NONE if success, other value if failure
-  /// @retval #BADGE_ERROR_NONE Success
-  /// @retval #BADGE_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #BADGE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #BADGE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #BADGE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #BADGE_ERROR_IO_ERROR Error from I/O
-  /// @retval #BADGE_ERROR_FROM_DB Error from DB
-  /// @retval #BADGE_ERROR_NOT_EXIST Not exist
-  /// @retval #BADGE_ERROR_SERVICE_NOT_READY Service is not ready
-  /// @see #badge_error_e
-  /// @see badge_add()
-  /// @par Sample code:
-  /// @code
+  /// **Deprecated:** Deprecated since 9.0
+  ///
+  /// Sets badge count for the designated application.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/notification>
+  ///
+  /// **Parameters:**
+  /// - `app_id` (in): The name of the designated application
+  /// - `count` (in): The count of the badge
+  ///
+  /// **Returns:**
+  /// - `BADGE_ERROR_NONE` if success, other value if failure
+  ///
+  /// **Return values:**
+  /// - `BADGE_ERROR_NONE`: Success
+  /// - `BADGE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `BADGE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BADGE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BADGE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `BADGE_ERROR_IO_ERROR`: Error from I/O
+  /// - `BADGE_ERROR_FROM_DB`: Error from DB
+  /// - `BADGE_ERROR_NOT_EXIST`: Not exist
+  /// - `BADGE_ERROR_SERVICE_NOT_READY`: Service is not ready
+  ///
+  /// **See also:**
+  /// - `badge_error_e`
+  /// - `badge_add()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <badge.h>
   ///
   /// {
@@ -185,7 +260,7 @@ class Tizen90Badge {
   /// return;
   ///
   /// }
-  /// @endcode
+  /// ```
   int badge_set_count(
     ffi.Pointer<ffi.Char> app_id,
     int count,
@@ -203,28 +278,45 @@ class Tizen90Badge {
   late final _badge_set_count = _badge_set_countPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, int)>();
 
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets badge count for the designated application.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/notification
-  /// @param[in] app_id The name of the designated application
-  /// @param[out] count The count of the badge
-  /// @return #BADGE_ERROR_NONE if success, other value if failure
-  /// @retval #BADGE_ERROR_NONE Success
-  /// @retval #BADGE_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #BADGE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #BADGE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #BADGE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #BADGE_ERROR_IO_ERROR Error from I/O
-  /// @retval #BADGE_ERROR_FROM_DB Error from DB
-  /// @retval #BADGE_ERROR_NOT_EXIST Not exist
-  /// @retval #BADGE_ERROR_SERVICE_NOT_READY Service is not ready
-  /// @see #badge_error_e
-  /// @see badge_add()
-  /// @see badge_set_count()
-  /// @par Sample code:
-  /// @code
+  /// **Deprecated:** Deprecated since 9.0
+  ///
+  /// Gets badge count for the designated application.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/notification>
+  ///
+  /// **Parameters:**
+  /// - `app_id` (in): The name of the designated application
+  /// - `count` (out): The count of the badge
+  ///
+  /// **Returns:**
+  /// - `BADGE_ERROR_NONE` if success, other value if failure
+  ///
+  /// **Return values:**
+  /// - `BADGE_ERROR_NONE`: Success
+  /// - `BADGE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `BADGE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BADGE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BADGE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `BADGE_ERROR_IO_ERROR`: Error from I/O
+  /// - `BADGE_ERROR_FROM_DB`: Error from DB
+  /// - `BADGE_ERROR_NOT_EXIST`: Not exist
+  /// - `BADGE_ERROR_SERVICE_NOT_READY`: Service is not ready
+  ///
+  /// **See also:**
+  /// - `badge_error_e`
+  /// - `badge_add()`
+  /// - `badge_set_count()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <badge.h>
   ///
   /// {
@@ -236,7 +328,7 @@ class Tizen90Badge {
   /// return;
   ///
   /// }
-  /// @endcode
+  /// ```
   int badge_get_count(
     ffi.Pointer<ffi.Char> app_id,
     ffi.Pointer<ffi.UnsignedInt> count,
@@ -254,27 +346,44 @@ class Tizen90Badge {
   late final _badge_get_count = _badge_get_countPtr.asFunction<
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @deprecated Deprecated since 9.0
-  /// @brief Sets the display option for the designated application.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/notification
-  /// @param[in] app_id The name of the designated application
-  /// @param[in] is_display The display option (1 = display, 0 = not display)
-  /// @return #BADGE_ERROR_NONE if success, other value if failure
-  /// @retval #BADGE_ERROR_NONE Success
-  /// @retval #BADGE_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #BADGE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #BADGE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #BADGE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #BADGE_ERROR_IO_ERROR Error from I/O
-  /// @retval #BADGE_ERROR_FROM_DB Error from DB
-  /// @retval #BADGE_ERROR_NOT_EXIST Not exist
-  /// @retval #BADGE_ERROR_SERVICE_NOT_READY Service is not ready
-  /// @see #badge_error_e
-  /// @see badge_add()
-  /// @par Sample code:
-  /// @code
+  /// **Deprecated:** Deprecated since 9.0
+  ///
+  /// Sets the display option for the designated application.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/notification>
+  ///
+  /// **Parameters:**
+  /// - `app_id` (in): The name of the designated application
+  /// - `is_display` (in): The display option (1 = display, 0 = not display)
+  ///
+  /// **Returns:**
+  /// - `BADGE_ERROR_NONE` if success, other value if failure
+  ///
+  /// **Return values:**
+  /// - `BADGE_ERROR_NONE`: Success
+  /// - `BADGE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `BADGE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BADGE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BADGE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `BADGE_ERROR_IO_ERROR`: Error from I/O
+  /// - `BADGE_ERROR_FROM_DB`: Error from DB
+  /// - `BADGE_ERROR_NOT_EXIST`: Not exist
+  /// - `BADGE_ERROR_SERVICE_NOT_READY`: Service is not ready
+  ///
+  /// **See also:**
+  /// - `badge_error_e`
+  /// - `badge_add()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <badge.h>
   ///
   /// {
@@ -285,7 +394,7 @@ class Tizen90Badge {
   /// return;
   ///
   /// }
-  /// @endcode
+  /// ```
   int badge_set_display(
     ffi.Pointer<ffi.Char> app_id,
     int is_display,
@@ -303,28 +412,45 @@ class Tizen90Badge {
   late final _badge_set_display = _badge_set_displayPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, int)>();
 
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets the display option for the designated application.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/notification
-  /// @param[in] app_id The name of the designated application
-  /// @param[out]  is_display The display option (1 = display, 0 = not display)
-  /// @return #BADGE_ERROR_NONE if success, other value if failure
-  /// @retval #BADGE_ERROR_NONE Success
-  /// @retval #BADGE_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #BADGE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #BADGE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #BADGE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #BADGE_ERROR_IO_ERROR Error from I/O
-  /// @retval #BADGE_ERROR_FROM_DB Error from DB
-  /// @retval #BADGE_ERROR_NOT_EXIST Not exist
-  /// @retval #BADGE_ERROR_SERVICE_NOT_READY Service is not ready
-  /// @see #badge_error_e
-  /// @see badge_add()
-  /// @see badge_set_count()
-  /// @par Sample code:
-  /// @code
+  /// **Deprecated:** Deprecated since 9.0
+  ///
+  /// Gets the display option for the designated application.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/notification>
+  ///
+  /// **Parameters:**
+  /// - `app_id` (in): The name of the designated application
+  /// - `is_display` (out): The display option (1 = display, 0 = not display)
+  ///
+  /// **Returns:**
+  /// - `BADGE_ERROR_NONE` if success, other value if failure
+  ///
+  /// **Return values:**
+  /// - `BADGE_ERROR_NONE`: Success
+  /// - `BADGE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `BADGE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BADGE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BADGE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `BADGE_ERROR_IO_ERROR`: Error from I/O
+  /// - `BADGE_ERROR_FROM_DB`: Error from DB
+  /// - `BADGE_ERROR_NOT_EXIST`: Not exist
+  /// - `BADGE_ERROR_SERVICE_NOT_READY`: Service is not ready
+  ///
+  /// **See also:**
+  /// - `badge_error_e`
+  /// - `badge_add()`
+  /// - `badge_set_count()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <badge.h>
   ///
   /// {
@@ -335,7 +461,7 @@ class Tizen90Badge {
   /// if (err != BADGE_ERROR_NONE)
   /// return;
   /// }
-  /// @endcode
+  /// ```
   int badge_get_display(
     ffi.Pointer<ffi.Char> app_id,
     ffi.Pointer<ffi.UnsignedInt> is_display,
@@ -353,25 +479,40 @@ class Tizen90Badge {
   late final _badge_get_display = _badge_get_displayPtr.asFunction<
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @deprecated Deprecated since 9.0
-  /// @brief Retrieves all existing badges.
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/notification
-  /// @param[in] callback The callback function
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return #BADGE_ERROR_NONE if success, other value if failure
-  /// @retval #BADGE_ERROR_NONE Success
-  /// @retval #BADGE_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #BADGE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #BADGE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #BADGE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #BADGE_ERROR_IO_ERROR Error from I/O
-  /// @retval #BADGE_ERROR_FROM_DB Error form DB
-  /// @retval #BADGE_ERROR_NOT_EXIST Not exist
-  /// @retval #BADGE_ERROR_SERVICE_NOT_READY Service is not ready
-  /// @see #badge_error_e
-  /// @see badge_foreach_cb()
+  /// **Deprecated:** Deprecated since 9.0
+  ///
+  /// Retrieves all existing badges.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/notification>
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `BADGE_ERROR_NONE` if success, other value if failure
+  ///
+  /// **Return values:**
+  /// - `BADGE_ERROR_NONE`: Success
+  /// - `BADGE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `BADGE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BADGE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BADGE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `BADGE_ERROR_IO_ERROR`: Error from I/O
+  /// - `BADGE_ERROR_FROM_DB`: Error form DB
+  /// - `BADGE_ERROR_NOT_EXIST`: Not exist
+  /// - `BADGE_ERROR_SERVICE_NOT_READY`: Service is not ready
+  ///
+  /// **See also:**
+  /// - `badge_error_e`
+  /// - `badge_foreach_cb()`
   int badge_foreach(
     badge_foreach_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -389,27 +530,44 @@ class Tizen90Badge {
   late final _badge_foreach = _badge_foreachPtr
       .asFunction<int Function(badge_foreach_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @deprecated Deprecated since 9.0
-  /// @brief Registers a callback function to receive badge change event.
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/notification
-  /// @remarks Should be used in the homescreen.\n
-  /// Prospective Clients : Homescreen.
-  /// @param[in] callback The callback function
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return #BADGE_ERROR_NONE if success, other value if failure
-  /// @retval #BADGE_ERROR_NONE Success
-  /// @retval #BADGE_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #BADGE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #BADGE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #BADGE_ERROR_IO_ERROR Error from I/O
-  /// @retval #BADGE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #BADGE_ERROR_SERVICE_NOT_READY Service is not ready
-  /// @see #badge_error_e
-  /// @see badge_add()
-  /// @see badge_remove()
-  /// @see badge_set_count()
+  /// **Deprecated:** Deprecated since 9.0
+  ///
+  /// Registers a callback function to receive badge change event.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/notification>
+  ///
+  /// **Remarks:**
+  /// - Should be used in the homescreen.
+  /// - Prospective Clients : Homescreen.
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `BADGE_ERROR_NONE` if success, other value if failure
+  ///
+  /// **Return values:**
+  /// - `BADGE_ERROR_NONE`: Success
+  /// - `BADGE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `BADGE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BADGE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BADGE_ERROR_IO_ERROR`: Error from I/O
+  /// - `BADGE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `BADGE_ERROR_SERVICE_NOT_READY`: Service is not ready
+  ///
+  /// **See also:**
+  /// - `badge_error_e`
+  /// - `badge_add()`
+  /// - `badge_remove()`
+  /// - `badge_set_count()`
   int badge_register_changed_cb(
     badge_change_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -427,20 +585,35 @@ class Tizen90Badge {
   late final _badge_register_changed_cb = _badge_register_changed_cbPtr
       .asFunction<int Function(badge_change_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @deprecated Deprecated since 9.0
-  /// @brief Unregisters a callback function to receive badge change event.
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/notification
-  /// @param[in] callback The callback function
-  /// @return #BADGE_ERROR_NONE if success, other value if failure
-  /// @retval #BADGE_ERROR_NONE Success
-  /// @retval #BADGE_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #BADGE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #BADGE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #BADGE_ERROR_NOT_EXIST Not exist
-  /// @see #badge_error_e
-  /// @see badge_register_changed_cb()
+  /// **Deprecated:** Deprecated since 9.0
+  ///
+  /// Unregisters a callback function to receive badge change event.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/notification>
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function
+  ///
+  /// **Returns:**
+  /// - `BADGE_ERROR_NONE` if success, other value if failure
+  ///
+  /// **Return values:**
+  /// - `BADGE_ERROR_NONE`: Success
+  /// - `BADGE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `BADGE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BADGE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BADGE_ERROR_NOT_EXIST`: Not exist
+  ///
+  /// **See also:**
+  /// - `badge_error_e`
+  /// - `badge_register_changed_cb()`
   int badge_unregister_changed_cb(
     badge_change_cb callback,
   ) {
@@ -456,9 +629,13 @@ class Tizen90Badge {
       .asFunction<int Function(badge_change_cb)>();
 }
 
-/// @deprecated Deprecated since 9.0
-/// @brief Enumeration for Badge Action.
-/// @since_tizen 2.4
+/// **Deprecated:** Deprecated since 9.0
+///
+/// Enumeration for Badge Action.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class badge_action {
   /// < Badge created
   static const int BADGE_ACTION_CREATE = 0;
@@ -476,39 +653,65 @@ abstract class badge_action {
   static const int BADGE_ACTION_SERVICE_READY = 4;
 }
 
-/// @deprecated Deprecated since 9.0
-/// @brief Callback function for getting result of badge_foreach().
-/// @since_tizen 2.4
-/// @param[in] app_id The id of the application
-/// @param[in] count The count of the badge
-/// @param[in] user_data The user data passed from the badge_foreach()
-/// @return true to continue with the next iteration of the loop, false to break out of the loop
-/// @pre badge_foreach() will invoke this callback.
-/// @see badge_foreach()
+/// **Deprecated:** Deprecated since 9.0
+///
+/// Callback function for getting result of badge_foreach().
+///
+/// **Since Tizen:**
+/// - 2.4
+///
+/// **Parameters:**
+/// - `app_id` (in): The id of the application
+/// - `count` (in): The count of the badge
+/// - `user_data` (in): The user data passed from the badge_foreach()
+///
+/// **Returns:**
+/// - true to continue with the next iteration of the loop, false to break out of the loop
+///
+/// **Preconditions:**
+/// - badge_foreach() will invoke this callback.
+///
+/// **See also:**
+/// - `badge_foreach()`
+/// @nodoc
 typedef badge_foreach_cb
     = ffi.Pointer<ffi.NativeFunction<badge_foreach_cbFunction>>;
+/// @nodoc
 typedef badge_foreach_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> app_id,
     ffi.UnsignedInt count,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbadge_foreach_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> app_id, int count, ffi.Pointer<ffi.Void> user_data);
 
-/// @deprecated Deprecated since 9.0
-/// @brief Called when the badge information is changed.
-/// @since_tizen 2.4
-/// @param[in] action The type of the change. Refer #badge_action
-/// @param[in] app_id The name of the application
-/// @param[in] count The count of the badge
-/// @param[in] user_data The user data passed from the callback register function
-/// @pre badge_register_changed_cb() will invoke this callback.
-/// @see badge_unregister_changed_cb()
+/// **Deprecated:** Deprecated since 9.0
+///
+/// Called when the badge information is changed.
+///
+/// **Since Tizen:**
+/// - 2.4
+///
+/// **Parameters:**
+/// - `action` (in): The type of the change. Refer `badge_action`
+/// - `app_id` (in): The name of the application
+/// - `count` (in): The count of the badge
+/// - `user_data` (in): The user data passed from the callback register function
+///
+/// **Preconditions:**
+/// - badge_register_changed_cb() will invoke this callback.
+///
+/// **See also:**
+/// - `badge_unregister_changed_cb()`
+/// @nodoc
 typedef badge_change_cb
     = ffi.Pointer<ffi.NativeFunction<badge_change_cbFunction>>;
+/// @nodoc
 typedef badge_change_cbFunction = ffi.Void Function(
     ffi.UnsignedInt action,
     ffi.Pointer<ffi.Char> app_id,
     ffi.UnsignedInt count,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbadge_change_cbFunction = void Function(int action,
     ffi.Pointer<ffi.Char> app_id, int count, ffi.Pointer<ffi.Void> user_data);

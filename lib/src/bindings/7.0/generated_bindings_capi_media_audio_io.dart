@@ -1,3 +1,6 @@
+/// {@category 7.0/tizen}
+library tizen_interop_7_0.capi_media_audio_io;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'generated_bindings_capi_media_sound_manager.dart' as sound_manager;
 
 /// Dart bindings for Tizen capi-media-audio-io APIs.
+/// {@category 7.0/tizen}
 class Tizen70CapiMediaAudioIo {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,41 +29,46 @@ class Tizen70CapiMediaAudioIo {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates an audio device instance and returns an input handle to record PCM (pulse-code modulation) data.
+  /// Creates an audio device instance and returns an input handle to record PCM (pulse-code modulation) data.
   ///
-  /// @details This function is used for audio input initialization.
+  /// This function is used for audio input initialization.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @remarks @a input must be released using audio_in_destroy().
-  /// If the channel count of the requested @a channel is different from the system's supported channel count, then channel remapping will be processed internally.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] sample_rate The audio sample rate \n
-  /// Before 5.0: 8000[Hz] ~ 48000[Hz] \n
-  /// Since 5.0: 8000[Hz] ~ 192000[Hz]
-  /// @param[in] channel The audio channel type \n
-  /// Before 5.5: Mono or stereo \n
-  /// Since 5.5: Mono, stereo or multi-channels
-  /// @param[in] type The type of audio sample \n
-  /// Before 5.0: 8 or 16-bit \n
-  /// Since 5.0: 8, 16 or 24-bit \n
-  /// Since 5.5: 8, 16, 24 or 32-bit
-  /// @param[out] input An audio input handle is created on success
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #AUDIO_IO_ERROR_NONE Successful
-  /// @retval #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUDIO_IO_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #AUDIO_IO_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #AUDIO_IO_ERROR_DEVICE_NOT_OPENED Device not opened
-  /// @retval #AUDIO_IO_ERROR_SOUND_POLICY Sound policy error
-  /// @retval #AUDIO_IO_ERROR_NOT_SUPPORTED Not supported
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
   ///
-  /// @post The state will be #AUDIO_IO_STATE_IDLE.\n
-  /// audio_in_set_sound_stream_info() is recommended to be called after this API.
-  /// @see audio_in_destroy()
+  /// **Remarks:**
+  /// - `input` must be released using audio_in_destroy().
+  /// - If the channel count of the requested `channel` is different from the system's supported channel count, then channel remapping will be processed internally.
+  ///
+  /// **Parameters:**
+  /// - `sample_rate` (in): The audio sample rate Before 5.0: 8000`[Hz]` ~ 48000`[Hz]` Since 5.0: 8000`[Hz]` ~ 192000`[Hz]`
+  /// - `channel` (in): The audio channel type Before 5.5: Mono or stereo Since 5.5: Mono, stereo or multi-channels
+  /// - `type` (in): The type of audio sample Before 5.0: 8 or 16-bit Since 5.0: 8, 16 or 24-bit Since 5.5: 8, 16, 24 or 32-bit
+  /// - `input` (out): An audio input handle is created on success
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_NONE`: Successful
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUDIO_IO_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `AUDIO_IO_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `AUDIO_IO_ERROR_DEVICE_NOT_OPENED`: Device not opened
+  /// - `AUDIO_IO_ERROR_SOUND_POLICY`: Sound policy error
+  /// - `AUDIO_IO_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - The state will be `AUDIO_IO_STATE_IDLE`. audio_in_set_sound_stream_info() is recommended to be called after this API.
+  ///
+  /// **See also:**
+  /// - `audio_in_destroy()`
   int audio_in_create(
     int sample_rate,
     int channel,
@@ -81,19 +90,25 @@ class Tizen70CapiMediaAudioIo {
   late final _audio_in_create = _audio_in_createPtr
       .asFunction<int Function(int, int, int, ffi.Pointer<audio_in_h>)>();
 
-  /// @brief Releases the audio input handle and all its resources associated with an audio stream.
+  /// Releases the audio input handle and all its resources associated with an audio stream.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in] input The handle to the audio input to destroy
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #AUDIO_IO_ERROR_NONE Successful
-  /// @retval #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUDIO_IO_ERROR_DEVICE_NOT_CLOSED Device not closed
-  /// @retval #AUDIO_IO_ERROR_NOT_SUPPORTED Not supported
+  /// **Parameters:**
+  /// - `input` (in): The handle to the audio input to destroy
   ///
-  /// @see audio_in_create()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_NONE`: Successful
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUDIO_IO_ERROR_DEVICE_NOT_CLOSED`: Device not closed
+  /// - `AUDIO_IO_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `audio_in_create()`
   int audio_in_destroy(
     audio_in_h input,
   ) {
@@ -108,29 +123,39 @@ class Tizen70CapiMediaAudioIo {
   late final _audio_in_destroy =
       _audio_in_destroyPtr.asFunction<int Function(audio_in_h)>();
 
-  /// @brief Sets the sound stream information to the audio input.
+  /// Sets the sound stream information to the audio input.
   ///
-  /// @since_tizen 3.0
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @remarks The sound stream information includes audio routing and volume type.
-  /// For more details, you can refer to @ref CAPI_MEDIA_SOUND_MANAGER_MODULE
-  /// System, Alarm, Notification, Emergency, Voice Information, Ringtone VOIP and Ringtone Call stream types are not supported in this API.
+  /// **Remarks:**
+  /// - The sound stream information includes audio routing and volume type.
+  /// - For more details, you can refer to `CAPI_MEDIA_SOUND_MANAGER_MODULE`
+  /// - System, Alarm, Notification, Emergency, Voice Information, Ringtone VOIP and Ringtone Call stream types are not supported in this API.
   ///
-  /// @param[in] input The handle to the audio input
-  /// @param[in] stream_info The handle of stream information
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #AUDIO_IO_ERROR_NONE Successful
-  /// @retval #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUDIO_IO_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #AUDIO_IO_ERROR_INVALID_STATE Invalid state
-  /// @retval #AUDIO_IO_ERROR_NOT_SUPPORTED_TYPE Not supported stream type
+  /// **Parameters:**
+  /// - `input` (in): The handle to the audio input
+  /// - `stream_info` (in): The handle of stream information
   ///
-  /// @pre The state should be #AUDIO_IO_STATE_IDLE.\n
-  /// Call audio_in_create() before calling this function.
-  /// @post Call audio_in_prepare() after calling this function.
-  /// @see sound_manager_create_stream_information()
-  /// @see sound_manager_destroy_stream_information()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_NONE`: Successful
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUDIO_IO_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `AUDIO_IO_ERROR_INVALID_STATE`: Invalid state
+  /// - `AUDIO_IO_ERROR_NOT_SUPPORTED_TYPE`: Not supported stream type
+  ///
+  /// **Preconditions:**
+  /// - The state should be `AUDIO_IO_STATE_IDLE`. Call audio_in_create() before calling this function.
+  ///
+  /// **Postconditions:**
+  /// - Call audio_in_prepare() after calling this function.
+  ///
+  /// **See also:**
+  /// - `sound_manager_create_stream_information()`
+  /// - `sound_manager_destroy_stream_information()`
   int audio_in_set_sound_stream_info(
     audio_in_h input,
     sound_manager.sound_stream_info_h stream_info,
@@ -149,21 +174,29 @@ class Tizen70CapiMediaAudioIo {
       _audio_in_set_sound_stream_infoPtr.asFunction<
           int Function(audio_in_h, sound_manager.sound_stream_info_h)>();
 
-  /// @brief Prepares the audio input for reading audio data by starting buffering of audio data from the device.
+  /// Prepares the audio input for reading audio data by starting buffering of audio data from the device.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in] input The handle to the audio input
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #AUDIO_IO_ERROR_NONE Successful
-  /// @retval #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUDIO_IO_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #AUDIO_IO_ERROR_DEVICE_POLICY_RESTRICTION Device policy restriction
-  /// @retval #AUDIO_IO_ERROR_INVALID_STATE Invalid state
+  /// **Parameters:**
+  /// - `input` (in): The handle to the audio input
   ///
-  /// @post The state will be #AUDIO_IO_STATE_RUNNING.
-  /// @see audio_in_unprepare()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_NONE`: Successful
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUDIO_IO_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `AUDIO_IO_ERROR_DEVICE_POLICY_RESTRICTION`: Device policy restriction
+  /// - `AUDIO_IO_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Postconditions:**
+  /// - The state will be `AUDIO_IO_STATE_RUNNING`.
+  ///
+  /// **See also:**
+  /// - `audio_in_unprepare()`
   int audio_in_prepare(
     audio_in_h input,
   ) {
@@ -178,20 +211,28 @@ class Tizen70CapiMediaAudioIo {
   late final _audio_in_prepare =
       _audio_in_preparePtr.asFunction<int Function(audio_in_h)>();
 
-  /// @brief Unprepares the audio input.
+  /// Unprepares the audio input.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in] input The handle to the audio input
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #AUDIO_IO_ERROR_NONE Successful
-  /// @retval #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUDIO_IO_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #AUDIO_IO_ERROR_INVALID_STATE Invalid state
+  /// **Parameters:**
+  /// - `input` (in): The handle to the audio input
   ///
-  /// @post The state will be #AUDIO_IO_STATE_IDLE.
-  /// @see audio_in_prepare()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_NONE`: Successful
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUDIO_IO_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `AUDIO_IO_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Postconditions:**
+  /// - The state will be `AUDIO_IO_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `audio_in_prepare()`
   int audio_in_unprepare(
     audio_in_h input,
   ) {
@@ -206,21 +247,31 @@ class Tizen70CapiMediaAudioIo {
   late final _audio_in_unprepare =
       _audio_in_unpreparePtr.asFunction<int Function(audio_in_h)>();
 
-  /// @brief Pauses buffering of audio data from the device.
+  /// Pauses buffering of audio data from the device.
   ///
-  /// @since_tizen 3.0
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in] input The handle to the audio input
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #AUDIO_IO_ERROR_NONE Successful
-  /// @retval #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUDIO_IO_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #AUDIO_IO_ERROR_INVALID_STATE Invalid state
+  /// **Parameters:**
+  /// - `input` (in): The handle to the audio input
   ///
-  /// @pre The state should be #AUDIO_IO_STATE_RUNNING.
-  /// @post The state will be #AUDIO_IO_STATE_PAUSED.
-  /// @see audio_in_resume()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_NONE`: Successful
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUDIO_IO_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `AUDIO_IO_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `AUDIO_IO_STATE_RUNNING`.
+  ///
+  /// **Postconditions:**
+  /// - The state will be `AUDIO_IO_STATE_PAUSED`.
+  ///
+  /// **See also:**
+  /// - `audio_in_resume()`
   int audio_in_pause(
     audio_in_h input,
   ) {
@@ -235,21 +286,31 @@ class Tizen70CapiMediaAudioIo {
   late final _audio_in_pause =
       _audio_in_pausePtr.asFunction<int Function(audio_in_h)>();
 
-  /// @brief Resumes buffering audio data from the device.
+  /// Resumes buffering audio data from the device.
   ///
-  /// @since_tizen 3.0
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in] input The handle to the audio input
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #AUDIO_IO_ERROR_NONE Successful
-  /// @retval #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUDIO_IO_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #AUDIO_IO_ERROR_INVALID_STATE Invalid state
+  /// **Parameters:**
+  /// - `input` (in): The handle to the audio input
   ///
-  /// @pre The state should be #AUDIO_IO_STATE_PAUSED.
-  /// @post The state will be #AUDIO_IO_STATE_RUNNING.
-  /// @see audio_in_pause()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_NONE`: Successful
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUDIO_IO_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `AUDIO_IO_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `AUDIO_IO_STATE_PAUSED`.
+  ///
+  /// **Postconditions:**
+  /// - The state will be `AUDIO_IO_STATE_RUNNING`.
+  ///
+  /// **See also:**
+  /// - `audio_in_pause()`
   int audio_in_resume(
     audio_in_h input,
   ) {
@@ -264,19 +325,25 @@ class Tizen70CapiMediaAudioIo {
   late final _audio_in_resume =
       _audio_in_resumePtr.asFunction<int Function(audio_in_h)>();
 
-  /// @brief Flushes and discards buffered audio data from the input stream.
+  /// Flushes and discards buffered audio data from the input stream.
   ///
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @param[in] input The handle to the audio input
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #AUDIO_IO_ERROR_NONE Successful
-  /// @retval #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUDIO_IO_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #AUDIO_IO_ERROR_INVALID_STATE Invalid state
+  /// **Parameters:**
+  /// - `input` (in): The handle to the audio input
   ///
-  /// @pre The state should be #AUDIO_IO_STATE_RUNNING or #AUDIO_IO_STATE_PAUSED.
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_NONE`: Successful
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUDIO_IO_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `AUDIO_IO_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `AUDIO_IO_STATE_RUNNING` or `AUDIO_IO_STATE_PAUSED`.
   int audio_in_flush(
     audio_in_h input,
   ) {
@@ -291,22 +358,28 @@ class Tizen70CapiMediaAudioIo {
   late final _audio_in_flush =
       _audio_in_flushPtr.asFunction<int Function(audio_in_h)>();
 
-  /// @brief Reads audio data from the audio input buffer.
+  /// Reads audio data from the audio input buffer.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in] input The handle to the audio input
-  /// @param[out] buffer The PCM buffer address
-  /// @param[in] length The length of the PCM data buffer (in bytes)
-  /// @return The number of read bytes on success,
-  /// otherwise a negative error value
-  /// @retval #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUDIO_IO_ERROR_INVALID_BUFFER Invalid buffer pointer
-  /// @retval #AUDIO_IO_ERROR_SOUND_POLICY Sound policy error
-  /// @retval #AUDIO_IO_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #AUDIO_IO_ERROR_NOT_SUPPORTED Not supported
+  /// **Parameters:**
+  /// - `input` (in): The handle to the audio input
+  /// - `buffer` (out): The PCM buffer address
+  /// - `length` (in): The length of the PCM data buffer (in bytes)
   ///
-  /// @pre The state should be #AUDIO_IO_STATE_RUNNING.
+  /// **Returns:**
+  /// - The number of read bytes on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUDIO_IO_ERROR_INVALID_BUFFER`: Invalid buffer pointer
+  /// - `AUDIO_IO_ERROR_SOUND_POLICY`: Sound policy error
+  /// - `AUDIO_IO_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `AUDIO_IO_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state should be `AUDIO_IO_STATE_RUNNING`.
   int audio_in_read(
     audio_in_h input,
     ffi.Pointer<ffi.Void> buffer,
@@ -326,18 +399,25 @@ class Tizen70CapiMediaAudioIo {
   late final _audio_in_read = _audio_in_readPtr
       .asFunction<int Function(audio_in_h, ffi.Pointer<ffi.Void>, int)>();
 
-  /// @brief Gets the size to be allocated for the audio input buffer.
+  /// Gets the size to be allocated for the audio input buffer.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in] input The handle to the audio input
-  /// @param[out] size The buffer size (in bytes, the maximum size is 1 MB)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #AUDIO_IO_ERROR_NONE Successful
-  /// @retval #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUDIO_IO_ERROR_NOT_SUPPORTED Not supported
-  /// @see audio_in_read()
+  /// **Parameters:**
+  /// - `input` (in): The handle to the audio input
+  /// - `size` (out): The buffer size (in bytes, the maximum size is 1 MB)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_NONE`: Successful
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUDIO_IO_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `audio_in_read()`
   int audio_in_get_buffer_size(
     audio_in_h input,
     ffi.Pointer<ffi.Int> size,
@@ -355,19 +435,22 @@ class Tizen70CapiMediaAudioIo {
   late final _audio_in_get_buffer_size = _audio_in_get_buffer_sizePtr
       .asFunction<int Function(audio_in_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the sample rate of the audio input data stream.
+  /// Gets the sample rate of the audio input data stream.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in] input The handle to the audio input
-  /// @param[out] sample_rate The audio sample rate \n
-  /// Before 5.0: 8000[Hz] ~ 48000[Hz] \n
-  /// Since 5.0: 8000[Hz] ~ 192000[Hz]
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #AUDIO_IO_ERROR_NONE Successful
-  /// @retval #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUDIO_IO_ERROR_NOT_SUPPORTED Not supported
+  /// **Parameters:**
+  /// - `input` (in): The handle to the audio input
+  /// - `sample_rate` (out): The audio sample rate Before 5.0: 8000`[Hz]` ~ 48000`[Hz]` Since 5.0: 8000`[Hz]` ~ 192000`[Hz]`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_NONE`: Successful
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUDIO_IO_ERROR_NOT_SUPPORTED`: Not supported
   int audio_in_get_sample_rate(
     audio_in_h input,
     ffi.Pointer<ffi.Int> sample_rate,
@@ -385,19 +468,22 @@ class Tizen70CapiMediaAudioIo {
   late final _audio_in_get_sample_rate = _audio_in_get_sample_ratePtr
       .asFunction<int Function(audio_in_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the channel type of the audio input data stream.
+  /// Gets the channel type of the audio input data stream.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in] input The handle to the audio input
-  /// @param[out] channel The audio channel type \n
-  /// Before 5.5: Mono or stereo \n
-  /// Since 5.5: Mono, stereo or multi-channels
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #AUDIO_IO_ERROR_NONE Successful
-  /// @retval #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUDIO_IO_ERROR_NOT_SUPPORTED Not supported
+  /// **Parameters:**
+  /// - `input` (in): The handle to the audio input
+  /// - `channel` (out): The audio channel type Before 5.5: Mono or stereo Since 5.5: Mono, stereo or multi-channels
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_NONE`: Successful
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUDIO_IO_ERROR_NOT_SUPPORTED`: Not supported
   int audio_in_get_channel(
     audio_in_h input,
     ffi.Pointer<ffi.Int32> channel,
@@ -415,20 +501,22 @@ class Tizen70CapiMediaAudioIo {
   late final _audio_in_get_channel = _audio_in_get_channelPtr
       .asFunction<int Function(audio_in_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the sample audio format of the audio input data stream.
+  /// Gets the sample audio format of the audio input data stream.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in] input The handle to the audio input
-  /// @param[out] type The type of audio sample \n
-  /// Before 5.0: 8 or 16-bit \n
-  /// Since 5.0: 8, 16 or 24-bit \n
-  /// Since 5.5: 8, 16, 24 or 32-bit
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #AUDIO_IO_ERROR_NONE Successful
-  /// @retval #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUDIO_IO_ERROR_NOT_SUPPORTED Not supported
+  /// **Parameters:**
+  /// - `input` (in): The handle to the audio input
+  /// - `type` (out): The type of audio sample Before 5.0: 8 or 16-bit Since 5.0: 8, 16 or 24-bit Since 5.5: 8, 16, 24 or 32-bit
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_NONE`: Successful
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUDIO_IO_ERROR_NOT_SUPPORTED`: Not supported
   int audio_in_get_sample_type(
     audio_in_h input,
     ffi.Pointer<ffi.Int32> type,
@@ -446,31 +534,34 @@ class Tizen70CapiMediaAudioIo {
   late final _audio_in_get_sample_type = _audio_in_get_sample_typePtr
       .asFunction<int Function(audio_in_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets an asynchronous (event) callback function to handle recording PCM (pulse-code modulation) data.
+  /// Sets an asynchronous (event) callback function to handle recording PCM (pulse-code modulation) data.
   ///
-  /// @details @a callback will be called when you can read a PCM data.
-  /// It might cause dead lock if change the state of audio handle in callback.
-  /// (ex: audio_in_destroy(), audio_in_prepare(), audio_in_unprepare())
-  /// Recommend to use as a VOIP only.
-  /// Recommend not to hold callback too long.(it affects latency)
+  /// `callback` will be called when you can read a PCM data. It might cause dead lock if change the state of audio handle in callback. (ex: audio_in_destroy(), audio_in_prepare(), audio_in_unprepare()) Recommend to use as a VOIP only. Recommend not to hold callback too long.(it affects latency)
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @remarks @a input must be created using audio_in_create().
+  /// **Remarks:**
+  /// - `input` must be created using audio_in_create().
   ///
-  /// @param[in] input    An audio input handle
-  /// @param[in] callback notify stream callback when user can read data (#audio_in_stream_cb)
-  /// @param[in] user_data user data to be retrieved when callback is called
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #AUDIO_IO_ERROR_NONE Successful
-  /// @retval #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUDIO_IO_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #AUDIO_IO_ERROR_DEVICE_NOT_OPENED Device not opened
-  /// @retval #AUDIO_IO_ERROR_SOUND_POLICY Sound policy error
-  /// @retval #AUDIO_IO_ERROR_NOT_SUPPORTED Not supported
+  /// **Parameters:**
+  /// - `input` (in): An audio input handle
+  /// - `callback` (in): notify stream callback when user can read data (`audio_in_stream_cb`)
+  /// - `user_data` (in): user data to be retrieved when callback is called
   ///
-  /// @see audio_in_unset_stream_cb()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_NONE`: Successful
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUDIO_IO_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `AUDIO_IO_ERROR_DEVICE_NOT_OPENED`: Device not opened
+  /// - `AUDIO_IO_ERROR_SOUND_POLICY`: Sound policy error
+  /// - `AUDIO_IO_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `audio_in_unset_stream_cb()`
   int audio_in_set_stream_cb(
     audio_in_h input,
     audio_in_stream_cb callback,
@@ -490,19 +581,25 @@ class Tizen70CapiMediaAudioIo {
   late final _audio_in_set_stream_cb = _audio_in_set_stream_cbPtr.asFunction<
       int Function(audio_in_h, audio_in_stream_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback function.
+  /// Unregisters the callback function.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in] input The handle to the audio input
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #AUDIO_IO_ERROR_NONE Successful
-  /// @retval #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUDIO_IO_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #AUDIO_IO_ERROR_NOT_SUPPORTED Not supported
+  /// **Parameters:**
+  /// - `input` (in): The handle to the audio input
   ///
-  /// @see audio_in_set_stream_cb()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_NONE`: Successful
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUDIO_IO_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `AUDIO_IO_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `audio_in_set_stream_cb()`
   int audio_in_unset_stream_cb(
     audio_in_h input,
   ) {
@@ -517,29 +614,38 @@ class Tizen70CapiMediaAudioIo {
   late final _audio_in_unset_stream_cb =
       _audio_in_unset_stream_cbPtr.asFunction<int Function(audio_in_h)>();
 
-  /// @brief Peeks into the 'audio in' buffer.
+  /// Peeks into the 'audio in' buffer.
   ///
-  /// @details This function works correctly only with read callback. Otherwise it won't operate as intended.
+  /// This function works correctly only with read callback. Otherwise it won't operate as intended.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @remarks Works only in asynchronous (event) mode.
-  /// This function provides the pointer to the 'audio in' buffer. The pointed memory is owned by the platform, therefore the @a buffer should not be released by the application.
-  /// When the data in the @a buffer is not needed anymore, use audio_in_drop() with the @a input for which audio_in_peek() was called.
+  /// **Remarks:**
+  /// - Works only in asynchronous (event) mode.
+  /// - This function provides the pointer to the 'audio in' buffer. The pointed memory is owned by the platform, therefore the `buffer` should not be released by the application.
+  /// - When the data in the `buffer` is not needed anymore, use audio_in_drop() with the `input` for which audio_in_peek() was called.
   ///
-  /// @param[in] input The handle to the audio input
-  /// @param[out] buffer start buffer pointer of peeked 'audio in' data
-  /// @param[out] length amount of 'audio in' data to be peeked
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #AUDIO_IO_ERROR_NONE Successful
-  /// @retval #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUDIO_IO_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #AUDIO_IO_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #AUDIO_IO_ERROR_INVALID_STATE Invalid state
+  /// **Parameters:**
+  /// - `input` (in): The handle to the audio input
+  /// - `buffer` (out): start buffer pointer of peeked 'audio in' data
+  /// - `length` (out): amount of 'audio in' data to be peeked
   ///
-  /// @pre The state should be #AUDIO_IO_STATE_RUNNING.
-  /// @see audio_in_drop()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_NONE`: Successful
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUDIO_IO_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `AUDIO_IO_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `AUDIO_IO_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `AUDIO_IO_STATE_RUNNING`.
+  ///
+  /// **See also:**
+  /// - `audio_in_drop()`
   int audio_in_peek(
     audio_in_h input,
     ffi.Pointer<ffi.Pointer<ffi.Void>> buffer,
@@ -560,24 +666,34 @@ class Tizen70CapiMediaAudioIo {
       int Function(audio_in_h, ffi.Pointer<ffi.Pointer<ffi.Void>>,
           ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Drops the 'audio in' buffer that was peeked into.
+  /// Drops the 'audio in' buffer that was peeked into.
   ///
-  /// @details This function works correctly only with read callback. Otherwise it won't operate as intended.
+  /// This function works correctly only with read callback. Otherwise it won't operate as intended.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @remarks Works only in asynchronous (event) mode. This will remove 'audio in' data from the actual stream buffer. Use this if peeked data is not needed anymore.
+  /// **Remarks:**
+  /// - Works only in asynchronous (event) mode. This will remove 'audio in' data from the actual stream buffer. Use this if peeked data is not needed anymore.
   ///
-  /// @param[in] input The handle to the audio input
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUDIO_IO_ERROR_NONE Successful
-  /// @retval #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUDIO_IO_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #AUDIO_IO_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #AUDIO_IO_ERROR_INVALID_STATE Invalid state
+  /// **Parameters:**
+  /// - `input` (in): The handle to the audio input
   ///
-  /// @pre The state should be #AUDIO_IO_STATE_RUNNING.
-  /// @see audio_in_peek()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_NONE`: Successful
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUDIO_IO_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `AUDIO_IO_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `AUDIO_IO_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `AUDIO_IO_STATE_RUNNING`.
+  ///
+  /// **See also:**
+  /// - `audio_in_peek()`
   int audio_in_drop(
     audio_in_h input,
   ) {
@@ -592,22 +708,29 @@ class Tizen70CapiMediaAudioIo {
   late final _audio_in_drop =
       _audio_in_dropPtr.asFunction<int Function(audio_in_h)>();
 
-  /// @brief Sets the state changed callback function to the audio input handle.
+  /// Sets the state changed callback function to the audio input handle.
   ///
-  /// @since_tizen 3.0
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @remarks @a input must be created using audio_in_create().
+  /// **Remarks:**
+  /// - `input` must be created using audio_in_create().
   ///
-  /// @param[in] input    The audio input handle
-  /// @param[in] callback the state changed callback called when the state of the handle is changed (#audio_in_state_changed_cb)
-  /// @param[in] user_data user data to be retrieved when callback is called
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #AUDIO_IO_ERROR_NONE Successful
-  /// @retval #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUDIO_IO_ERROR_NOT_SUPPORTED Not supported
+  /// **Parameters:**
+  /// - `input` (in): The audio input handle
+  /// - `callback` (in): the state changed callback called when the state of the handle is changed (`audio_in_state_changed_cb`)
+  /// - `user_data` (in): user data to be retrieved when callback is called
   ///
-  /// @see audio_in_unset_state_changed_cb()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_NONE`: Successful
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUDIO_IO_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `audio_in_unset_state_changed_cb()`
   int audio_in_set_state_changed_cb(
     audio_in_h input,
     audio_in_state_changed_cb callback,
@@ -629,18 +752,24 @@ class Tizen70CapiMediaAudioIo {
           int Function(
               audio_in_h, audio_in_state_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the state changed callback function of the audio input handle.
+  /// Unregisters the state changed callback function of the audio input handle.
   ///
-  /// @since_tizen 3.0
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in] input The handle to the audio input
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #AUDIO_IO_ERROR_NONE Successful
-  /// @retval #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUDIO_IO_ERROR_NOT_SUPPORTED Not supported
+  /// **Parameters:**
+  /// - `input` (in): The handle to the audio input
   ///
-  /// @see audio_in_set_state_changed_cb()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_NONE`: Successful
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUDIO_IO_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `audio_in_set_state_changed_cb()`
   int audio_in_unset_state_changed_cb(
     audio_in_h input,
   ) {
@@ -656,21 +785,28 @@ class Tizen70CapiMediaAudioIo {
       _audio_in_unset_state_changed_cbPtr
           .asFunction<int Function(audio_in_h)>();
 
-  /// @brief Gets the volume of the audio input data stream.
+  /// Gets the volume of the audio input data stream.
   ///
-  /// @since_tizen 6.0
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @remarks The default @a volume of the audio input stream is 1.0.
+  /// **Remarks:**
+  /// - The default `volume` of the audio input stream is 1.0.
   ///
-  /// @param[in] input The handle to the audio input
-  /// @param[out] volume The current volume value of the audio input stream
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #AUDIO_IO_ERROR_NONE Successful
-  /// @retval #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUDIO_IO_ERROR_NOT_SUPPORTED Not supported
+  /// **Parameters:**
+  /// - `input` (in): The handle to the audio input
+  /// - `volume` (out): The current volume value of the audio input stream
   ///
-  /// @see audio_in_set_volume()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_NONE`: Successful
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUDIO_IO_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `audio_in_set_volume()`
   int audio_in_get_volume(
     audio_in_h input,
     ffi.Pointer<ffi.Double> volume,
@@ -688,25 +824,32 @@ class Tizen70CapiMediaAudioIo {
   late final _audio_in_get_volume = _audio_in_get_volumePtr
       .asFunction<int Function(audio_in_h, ffi.Pointer<ffi.Double>)>();
 
-  /// @brief Sets the volume of the audio input data stream.
+  /// Sets the volume of the audio input data stream.
   ///
-  /// @since_tizen 6.0
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @remarks The default @a volume of the audio input stream is 1.0.
-  /// If the @a volume is less than 1.0, the loudness of recorded data will be decreased.
-  /// If the @a volume is greater than 1.0, the loudness of recorded data will be increased,
-  /// which can be useful when the loudness of original recorded data is too low in certain environments.
-  /// Note that the volume can be clipped if the @a volume is greater than 1.0 and the loudness of original recorded data is high enough.
+  /// **Remarks:**
+  /// - The default `volume` of the audio input stream is 1.0.
+  /// - If the `volume` is less than 1.0, the loudness of recorded data will be decreased.
+  /// - If the `volume` is greater than 1.0, the loudness of recorded data will be increased,
+  /// - which can be useful when the loudness of original recorded data is too low in certain environments.
+  /// - Note that the volume can be clipped if the `volume` is greater than 1.0 and the loudness of original recorded data is high enough.
   ///
-  /// @param[in] input The handle to the audio input
-  /// @param[in] volume The volume value to be set (0.0 <= volume <= 2.0)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #AUDIO_IO_ERROR_NONE Successful
-  /// @retval #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUDIO_IO_ERROR_NOT_SUPPORTED Not supported
+  /// **Parameters:**
+  /// - `input` (in): The handle to the audio input
+  /// - `volume` (in): The volume value to be set (0.0 <= volume <= 2.0)
   ///
-  /// @see audio_in_get_volume()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_NONE`: Successful
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUDIO_IO_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `audio_in_get_volume()`
   int audio_in_set_volume(
     audio_in_h input,
     double volume,
@@ -723,36 +866,39 @@ class Tizen70CapiMediaAudioIo {
   late final _audio_in_set_volume =
       _audio_in_set_volumePtr.asFunction<int Function(audio_in_h, double)>();
 
-  /// @brief Creates an audio device instance and returns an output handle to play PCM (pulse-code modulation) data.
+  /// Creates an audio device instance and returns an output handle to play PCM (pulse-code modulation) data.
   ///
-  /// @details This function is used for audio output initialization.
+  /// This function is used for audio output initialization.
   ///
-  /// @since_tizen 3.0
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @remarks @a output must be released by audio_out_destroy().
-  /// It is recommended to call audio_out_set_sound_stream_info() after this API.
-  /// Multi-channel playback is not supported.
+  /// **Remarks:**
+  /// - `output` must be released by audio_out_destroy().
+  /// - It is recommended to call audio_out_set_sound_stream_info() after this API.
+  /// - Multi-channel playback is not supported.
   ///
-  /// @param[in] sample_rate The audio sample rate \n
-  /// Before 5.0: 8000[Hz] ~ 48000[Hz] \n
-  /// Since 5.0: 8000[Hz] ~ 192000[Hz]
-  /// @param[in] channel The audio channel type (mono or stereo)
-  /// @param[in] type The type of audio sample \n
-  /// Before 5.0: 8 or 16-bit \n
-  /// Since 5.0: 8, 16 or 24-bit \n
-  /// Since 5.5: 8, 16, 24 or 32-bit
-  /// @param[out] output An audio output handle is created on success
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #AUDIO_IO_ERROR_NONE Successful
-  /// @retval #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUDIO_IO_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #AUDIO_IO_ERROR_DEVICE_NOT_OPENED Device not opened
-  /// @retval #AUDIO_IO_ERROR_SOUND_POLICY Sound policy error
+  /// **Parameters:**
+  /// - `sample_rate` (in): The audio sample rate Before 5.0: 8000`[Hz]` ~ 48000`[Hz]` Since 5.0: 8000`[Hz]` ~ 192000`[Hz]`
+  /// - `channel` (in): The audio channel type (mono or stereo)
+  /// - `type` (in): The type of audio sample Before 5.0: 8 or 16-bit Since 5.0: 8, 16 or 24-bit Since 5.5: 8, 16, 24 or 32-bit
+  /// - `output` (out): An audio output handle is created on success
   ///
-  /// @post The state will be #AUDIO_IO_STATE_IDLE.\n
-  /// audio_out_set_sound_stream_info() is recommended to be called after this API.
-  /// @see audio_out_destroy()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_NONE`: Successful
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUDIO_IO_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `AUDIO_IO_ERROR_DEVICE_NOT_OPENED`: Device not opened
+  /// - `AUDIO_IO_ERROR_SOUND_POLICY`: Sound policy error
+  ///
+  /// **Postconditions:**
+  /// - The state will be `AUDIO_IO_STATE_IDLE`. audio_out_set_sound_stream_info() is recommended to be called after this API.
+  ///
+  /// **See also:**
+  /// - `audio_out_destroy()`
   int audio_out_create_new(
     int sample_rate,
     int channel,
@@ -774,19 +920,25 @@ class Tizen70CapiMediaAudioIo {
   late final _audio_out_create_new = _audio_out_create_newPtr
       .asFunction<int Function(int, int, int, ffi.Pointer<audio_out_h>)>();
 
-  /// @brief Releases the audio output handle, along with all its resources.
+  /// Releases the audio output handle, along with all its resources.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in] output The handle to the audio output to destroy
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #AUDIO_IO_ERROR_NONE Successful
-  /// @retval #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUDIO_IO_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #AUDIO_IO_ERROR_DEVICE_NOT_CLOSED Device not closed
+  /// **Parameters:**
+  /// - `output` (in): The handle to the audio output to destroy
   ///
-  /// @see audio_out_create_new()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_NONE`: Successful
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUDIO_IO_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `AUDIO_IO_ERROR_DEVICE_NOT_CLOSED`: Device not closed
+  ///
+  /// **See also:**
+  /// - `audio_out_create_new()`
   int audio_out_destroy(
     audio_out_h output,
   ) {
@@ -801,29 +953,39 @@ class Tizen70CapiMediaAudioIo {
   late final _audio_out_destroy =
       _audio_out_destroyPtr.asFunction<int Function(audio_out_h)>();
 
-  /// @brief Sets the sound stream information to the audio output.
+  /// Sets the sound stream information to the audio output.
   ///
-  /// @since_tizen 3.0
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @remarks The sound stream information includes audio routing and volume type.
-  /// For more details, you can refer to @ref CAPI_MEDIA_SOUND_MANAGER_MODULE
-  /// Voice Recognition and Loopback stream types are not supported in this API.
+  /// **Remarks:**
+  /// - The sound stream information includes audio routing and volume type.
+  /// - For more details, you can refer to `CAPI_MEDIA_SOUND_MANAGER_MODULE`
+  /// - Voice Recognition and Loopback stream types are not supported in this API.
   ///
-  /// @param[in] output The handle to the audio output
-  /// @param[in] stream_info The handle of stream information
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #AUDIO_IO_ERROR_NONE Successful
-  /// @retval #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUDIO_IO_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #AUDIO_IO_ERROR_INVALID_STATE Invalid state
-  /// @retval #AUDIO_IO_ERROR_NOT_SUPPORTED_TYPE Not supported stream type
+  /// **Parameters:**
+  /// - `output` (in): The handle to the audio output
+  /// - `stream_info` (in): The handle of stream information
   ///
-  /// @pre The state should be #AUDIO_IO_STATE_IDLE.\n
-  /// Call audio_out_create_new() before calling this function.
-  /// @post Call audio_out_prepare() after calling this function.
-  /// @see sound_manager_create_stream_information()
-  /// @see sound_manager_destroy_stream_information()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_NONE`: Successful
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUDIO_IO_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `AUDIO_IO_ERROR_INVALID_STATE`: Invalid state
+  /// - `AUDIO_IO_ERROR_NOT_SUPPORTED_TYPE`: Not supported stream type
+  ///
+  /// **Preconditions:**
+  /// - The state should be `AUDIO_IO_STATE_IDLE`. Call audio_out_create_new() before calling this function.
+  ///
+  /// **Postconditions:**
+  /// - Call audio_out_prepare() after calling this function.
+  ///
+  /// **See also:**
+  /// - `sound_manager_create_stream_information()`
+  /// - `sound_manager_destroy_stream_information()`
   int audio_out_set_sound_stream_info(
     audio_out_h output,
     sound_manager.sound_stream_info_h stream_info,
@@ -843,19 +1005,27 @@ class Tizen70CapiMediaAudioIo {
       _audio_out_set_sound_stream_infoPtr.asFunction<
           int Function(audio_out_h, sound_manager.sound_stream_info_h)>();
 
-  /// @brief Prepares the audio output for playback, this must be called before audio_out_write().
+  /// Prepares the audio output for playback, this must be called before audio_out_write().
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in] output The handle to the audio output
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #AUDIO_IO_ERROR_NONE Successful
-  /// @retval #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUDIO_IO_ERROR_INVALID_STATE Invalid state
+  /// **Parameters:**
+  /// - `output` (in): The handle to the audio output
   ///
-  /// @post The state will be #AUDIO_IO_STATE_RUNNING.
-  /// @see audio_out_unprepare()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_NONE`: Successful
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUDIO_IO_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Postconditions:**
+  /// - The state will be `AUDIO_IO_STATE_RUNNING`.
+  ///
+  /// **See also:**
+  /// - `audio_out_unprepare()`
   int audio_out_prepare(
     audio_out_h output,
   ) {
@@ -870,19 +1040,27 @@ class Tizen70CapiMediaAudioIo {
   late final _audio_out_prepare =
       _audio_out_preparePtr.asFunction<int Function(audio_out_h)>();
 
-  /// @brief Unprepares the audio output.
+  /// Unprepares the audio output.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in] output The handle to the audio output
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #AUDIO_IO_ERROR_NONE Successful
-  /// @retval #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUDIO_IO_ERROR_INVALID_STATE Invalid state
+  /// **Parameters:**
+  /// - `output` (in): The handle to the audio output
   ///
-  /// @post The state will be #AUDIO_IO_STATE_IDLE.
-  /// @see audio_out_prepare()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_NONE`: Successful
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUDIO_IO_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Postconditions:**
+  /// - The state will be `AUDIO_IO_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `audio_out_prepare()`
   int audio_out_unprepare(
     audio_out_h output,
   ) {
@@ -897,20 +1075,30 @@ class Tizen70CapiMediaAudioIo {
   late final _audio_out_unprepare =
       _audio_out_unpreparePtr.asFunction<int Function(audio_out_h)>();
 
-  /// @brief Pauses feeding of audio data to the device.
+  /// Pauses feeding of audio data to the device.
   ///
-  /// @since_tizen 3.0
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in] output The handle to the audio output
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #AUDIO_IO_ERROR_NONE Successful
-  /// @retval #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUDIO_IO_ERROR_INVALID_STATE Invalid state
+  /// **Parameters:**
+  /// - `output` (in): The handle to the audio output
   ///
-  /// @pre The state should be #AUDIO_IO_STATE_RUNNING.
-  /// @post The state will be #AUDIO_IO_STATE_PAUSED.
-  /// @see audio_out_resume()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_NONE`: Successful
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUDIO_IO_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `AUDIO_IO_STATE_RUNNING`.
+  ///
+  /// **Postconditions:**
+  /// - The state will be `AUDIO_IO_STATE_PAUSED`.
+  ///
+  /// **See also:**
+  /// - `audio_out_resume()`
   int audio_out_pause(
     audio_out_h output,
   ) {
@@ -925,20 +1113,30 @@ class Tizen70CapiMediaAudioIo {
   late final _audio_out_pause =
       _audio_out_pausePtr.asFunction<int Function(audio_out_h)>();
 
-  /// @brief Resumes feeding of audio data to the device.
+  /// Resumes feeding of audio data to the device.
   ///
-  /// @since_tizen 3.0
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in] output The handle to the audio output
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #AUDIO_IO_ERROR_NONE Successful
-  /// @retval #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUDIO_IO_ERROR_INVALID_STATE Invalid state
+  /// **Parameters:**
+  /// - `output` (in): The handle to the audio output
   ///
-  /// @pre The state should be #AUDIO_IO_STATE_PAUSED.
-  /// @post The state will be #AUDIO_IO_STATE_RUNNING.
-  /// @see audio_out_pause()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_NONE`: Successful
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUDIO_IO_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `AUDIO_IO_STATE_PAUSED`.
+  ///
+  /// **Postconditions:**
+  /// - The state will be `AUDIO_IO_STATE_RUNNING`.
+  ///
+  /// **See also:**
+  /// - `audio_out_pause()`
   int audio_out_resume(
     audio_out_h output,
   ) {
@@ -953,21 +1151,29 @@ class Tizen70CapiMediaAudioIo {
   late final _audio_out_resume =
       _audio_out_resumePtr.asFunction<int Function(audio_out_h)>();
 
-  /// @brief Drains buffered audio data from the output stream.
+  /// Drains buffered audio data from the output stream.
   ///
-  /// @details This function waits until drains stream buffer completely. (e.g end of playback)
+  /// This function waits until drains stream buffer completely. (e.g end of playback)
   ///
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @param[in] output The handle to the audio output
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #AUDIO_IO_ERROR_NONE Successful
-  /// @retval #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUDIO_IO_ERROR_INVALID_STATE Invalid state
+  /// **Parameters:**
+  /// - `output` (in): The handle to the audio output
   ///
-  /// @pre The state should be #AUDIO_IO_STATE_RUNNING or #AUDIO_IO_STATE_PAUSED.
-  /// @see audio_out_flush()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_NONE`: Successful
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUDIO_IO_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `AUDIO_IO_STATE_RUNNING` or `AUDIO_IO_STATE_PAUSED`.
+  ///
+  /// **See also:**
+  /// - `audio_out_flush()`
   int audio_out_drain(
     audio_out_h output,
   ) {
@@ -982,19 +1188,27 @@ class Tizen70CapiMediaAudioIo {
   late final _audio_out_drain =
       _audio_out_drainPtr.asFunction<int Function(audio_out_h)>();
 
-  /// @brief Flushes and discards buffered audio data from the output stream.
+  /// Flushes and discards buffered audio data from the output stream.
   ///
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @param[in] output The handle to the audio output
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #AUDIO_IO_ERROR_NONE Successful
-  /// @retval #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUDIO_IO_ERROR_INVALID_STATE Invalid state
+  /// **Parameters:**
+  /// - `output` (in): The handle to the audio output
   ///
-  /// @pre The state should be #AUDIO_IO_STATE_RUNNING or #AUDIO_IO_STATE_PAUSED.
-  /// @see audio_out_drain()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_NONE`: Successful
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUDIO_IO_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `AUDIO_IO_STATE_RUNNING` or `AUDIO_IO_STATE_PAUSED`.
+  ///
+  /// **See also:**
+  /// - `audio_out_drain()`
   int audio_out_flush(
     audio_out_h output,
   ) {
@@ -1009,21 +1223,27 @@ class Tizen70CapiMediaAudioIo {
   late final _audio_out_flush =
       _audio_out_flushPtr.asFunction<int Function(audio_out_h)>();
 
-  /// @brief Starts writing the audio data to the device.
+  /// Starts writing the audio data to the device.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in] output The handle to the audio output
-  /// @param[in,out] buffer The PCM buffer address
-  /// @param[in] length The length of the PCM buffer (in bytes)
-  /// @return The written data size on success,
-  /// otherwise a negative error value
-  /// @retval #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUDIO_IO_ERROR_INVALID_BUFFER Invalid buffer pointer
-  /// @retval #AUDIO_IO_ERROR_SOUND_POLICY Sound policy error
-  /// @retval #AUDIO_IO_ERROR_INVALID_STATE Invalid state
+  /// **Parameters:**
+  /// - `output` (in): The handle to the audio output
+  /// - `buffer` (in,out): The PCM buffer address
+  /// - `length` (in): The length of the PCM buffer (in bytes)
   ///
-  /// @pre The state should be #AUDIO_IO_STATE_RUNNING.
+  /// **Returns:**
+  /// - The written data size on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUDIO_IO_ERROR_INVALID_BUFFER`: Invalid buffer pointer
+  /// - `AUDIO_IO_ERROR_SOUND_POLICY`: Sound policy error
+  /// - `AUDIO_IO_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `AUDIO_IO_STATE_RUNNING`.
   int audio_out_write(
     audio_out_h output,
     ffi.Pointer<ffi.Void> buffer,
@@ -1043,18 +1263,24 @@ class Tizen70CapiMediaAudioIo {
   late final _audio_out_write = _audio_out_writePtr
       .asFunction<int Function(audio_out_h, ffi.Pointer<ffi.Void>, int)>();
 
-  /// @brief Gets the size to be allocated for the audio output buffer.
+  /// Gets the size to be allocated for the audio output buffer.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in] output The handle to the audio output
-  /// @param[out] size The suggested buffer size (in bytes, the maximum size is 1 MB)
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #AUDIO_IO_ERROR_NONE Successful
-  /// @retval  #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `output` (in): The handle to the audio output
+  /// - `size` (out): The suggested buffer size (in bytes, the maximum size is 1 MB)
   ///
-  /// @see audio_out_write()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_NONE`: Successful
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `audio_out_write()`
   int audio_out_get_buffer_size(
     audio_out_h output,
     ffi.Pointer<ffi.Int> size,
@@ -1072,18 +1298,21 @@ class Tizen70CapiMediaAudioIo {
   late final _audio_out_get_buffer_size = _audio_out_get_buffer_sizePtr
       .asFunction<int Function(audio_out_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the sample rate of the audio output data stream.
+  /// Gets the sample rate of the audio output data stream.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in] output The handle to the audio output
-  /// @param[out] sample_rate The audio sample rate \n
-  /// Before 5.0: 8000[Hz] ~ 48000[Hz] \n
-  /// Since 5.0: 8000[Hz] ~ 192000[Hz]
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #AUDIO_IO_ERROR_NONE Successful
-  /// @retval  #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `output` (in): The handle to the audio output
+  /// - `sample_rate` (out): The audio sample rate Before 5.0: 8000`[Hz]` ~ 48000`[Hz]` Since 5.0: 8000`[Hz]` ~ 192000`[Hz]`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_NONE`: Successful
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
   int audio_out_get_sample_rate(
     audio_out_h output,
     ffi.Pointer<ffi.Int> sample_rate,
@@ -1101,16 +1330,21 @@ class Tizen70CapiMediaAudioIo {
   late final _audio_out_get_sample_rate = _audio_out_get_sample_ratePtr
       .asFunction<int Function(audio_out_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the channel type of the audio output data stream.
+  /// Gets the channel type of the audio output data stream.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in] output The handle to the audio output
-  /// @param[out] channel The audio channel type (mono or stereo)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #AUDIO_IO_ERROR_NONE Successful
-  /// @retval #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `output` (in): The handle to the audio output
+  /// - `channel` (out): The audio channel type (mono or stereo)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_NONE`: Successful
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
   int audio_out_get_channel(
     audio_out_h output,
     ffi.Pointer<ffi.Int32> channel,
@@ -1128,19 +1362,21 @@ class Tizen70CapiMediaAudioIo {
   late final _audio_out_get_channel = _audio_out_get_channelPtr
       .asFunction<int Function(audio_out_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the sample audio format of the audio output data stream.
+  /// Gets the sample audio format of the audio output data stream.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in] output The handle to the audio output
-  /// @param[out] type The type of audio sample \n
-  /// Before 5.0: 8 or 16-bit \n
-  /// Since 5.0: 8, 16 or 24-bit \n
-  /// Since 5.5: 8, 16, 24 or 32-bit
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #AUDIO_IO_ERROR_NONE Successful
-  /// @retval #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `output` (in): The handle to the audio output
+  /// - `type` (out): The type of audio sample Before 5.0: 8 or 16-bit Since 5.0: 8, 16 or 24-bit Since 5.5: 8, 16, 24 or 32-bit
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_NONE`: Successful
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
   int audio_out_get_sample_type(
     audio_out_h output,
     ffi.Pointer<ffi.Int32> type,
@@ -1158,16 +1394,21 @@ class Tizen70CapiMediaAudioIo {
   late final _audio_out_get_sample_type = _audio_out_get_sample_typePtr
       .asFunction<int Function(audio_out_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the sound type supported by the audio output device.
+  /// Gets the sound type supported by the audio output device.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in] output The handle to the audio output
-  /// @param[out] type The sound type
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #AUDIO_IO_ERROR_NONE Successful
-  /// @retval #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `output` (in): The handle to the audio output
+  /// - `type` (out): The sound type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_NONE`: Successful
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
   int audio_out_get_sound_type(
     audio_out_h output,
     ffi.Pointer<ffi.Int32> type,
@@ -1185,29 +1426,33 @@ class Tizen70CapiMediaAudioIo {
   late final _audio_out_get_sound_type = _audio_out_get_sound_typePtr
       .asFunction<int Function(audio_out_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets an asynchronous (event) callback function to handle playing PCM (pulse-code modulation) data.
+  /// Sets an asynchronous (event) callback function to handle playing PCM (pulse-code modulation) data.
   ///
-  /// @details @a callback will be called when you can write a PCM data.
-  /// It might cause dead lock if change the state of audio handle in callback.
-  /// (ex: audio_out_destroy(), audio_out_prepare(), audio_out_unprepare())
-  /// Recommend to use as a VOIP only.
-  /// Recommend not to hold callback too long.(it affects latency)
+  /// `callback` will be called when you can write a PCM data. It might cause dead lock if change the state of audio handle in callback. (ex: audio_out_destroy(), audio_out_prepare(), audio_out_unprepare()) Recommend to use as a VOIP only. Recommend not to hold callback too long.(it affects latency)
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @remarks @a output must be created using audio_out_create_new().
+  /// **Remarks:**
+  /// - `output` must be created using audio_out_create_new().
   ///
-  /// @param[in] output   An audio output handle
-  /// @param[in] callback notify stream callback when user can write data (#audio_out_stream_cb)
-  /// @param[in] user_data user data to be retrieved when callback is called
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUDIO_IO_ERROR_NONE Successful
-  /// @retval #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUDIO_IO_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #AUDIO_IO_ERROR_DEVICE_NOT_OPENED Device not opened
-  /// @retval #AUDIO_IO_ERROR_SOUND_POLICY Sound policy error
+  /// **Parameters:**
+  /// - `output` (in): An audio output handle
+  /// - `callback` (in): notify stream callback when user can write data (`audio_out_stream_cb`)
+  /// - `user_data` (in): user data to be retrieved when callback is called
   ///
-  /// @see audio_out_unset_stream_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_NONE`: Successful
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUDIO_IO_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `AUDIO_IO_ERROR_DEVICE_NOT_OPENED`: Device not opened
+  /// - `AUDIO_IO_ERROR_SOUND_POLICY`: Sound policy error
+  ///
+  /// **See also:**
+  /// - `audio_out_unset_stream_cb()`
   int audio_out_set_stream_cb(
     audio_out_h output,
     audio_out_stream_cb callback,
@@ -1227,17 +1472,24 @@ class Tizen70CapiMediaAudioIo {
   late final _audio_out_set_stream_cb = _audio_out_set_stream_cbPtr.asFunction<
       int Function(audio_out_h, audio_out_stream_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback function.
+  /// Unregisters the callback function.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in] output The handle to the audio output
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUDIO_IO_ERROR_NONE Successful
-  /// @retval #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUDIO_IO_ERROR_INVALID_OPERATION Invalid operation
+  /// **Parameters:**
+  /// - `output` (in): The handle to the audio output
   ///
-  /// @see audio_out_set_stream_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_NONE`: Successful
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUDIO_IO_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `audio_out_set_stream_cb()`
   int audio_out_unset_stream_cb(
     audio_out_h output,
   ) {
@@ -1252,21 +1504,28 @@ class Tizen70CapiMediaAudioIo {
   late final _audio_out_unset_stream_cb =
       _audio_out_unset_stream_cbPtr.asFunction<int Function(audio_out_h)>();
 
-  /// @brief Sets the state changed callback function to the audio output handle.
+  /// Sets the state changed callback function to the audio output handle.
   ///
-  /// @since_tizen 3.0
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @remarks @a input must be created using audio_out_create_new().
+  /// **Remarks:**
+  /// - `input` must be created using audio_out_create_new().
   ///
-  /// @param[in] output    The audio output handle
-  /// @param[in] callback the state changed callback called when the state of the handle is changed (#audio_out_state_changed_cb)
-  /// @param[in] user_data user data to be retrieved when callback is called
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #AUDIO_IO_ERROR_NONE Successful
-  /// @retval #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `output` (in): The audio output handle
+  /// - `callback` (in): the state changed callback called when the state of the handle is changed (`audio_out_state_changed_cb`)
+  /// - `user_data` (in): user data to be retrieved when callback is called
   ///
-  /// @see audio_out_unset_state_changed_cb()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_NONE`: Successful
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `audio_out_unset_state_changed_cb()`
   int audio_out_set_state_changed_cb(
     audio_out_h output,
     audio_out_state_changed_cb callback,
@@ -1288,17 +1547,23 @@ class Tizen70CapiMediaAudioIo {
           int Function(audio_out_h, audio_out_state_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the state changed callback function of the audio output handle.
+  /// Unregisters the state changed callback function of the audio output handle.
   ///
-  /// @since_tizen 3.0
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in] output The handle to the audio output
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #AUDIO_IO_ERROR_NONE Successful
-  /// @retval #AUDIO_IO_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `output` (in): The handle to the audio output
   ///
-  /// @see audio_out_set_state_changed_cb()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUDIO_IO_ERROR_NONE`: Successful
+  /// - `AUDIO_IO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `audio_out_set_state_changed_cb()`
   int audio_out_unset_state_changed_cb(
     audio_out_h output,
   ) {
@@ -1315,10 +1580,14 @@ class Tizen70CapiMediaAudioIo {
           .asFunction<int Function(audio_out_h)>();
 }
 
+/// @nodoc
 final class audio_io_s extends ffi.Opaque {}
 
-/// @brief Enumeration for audio sample type with bit depth.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for audio sample type with bit depth.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class audio_sample_type_e {
   /// < Unsigned 8-bit audio samples
   static const int AUDIO_SAMPLE_TYPE_U8 = 112;
@@ -1336,8 +1605,11 @@ abstract class audio_sample_type_e {
   static const int AUDIO_SAMPLE_TYPE_S32_LE = 116;
 }
 
-/// @brief Enumeration for audio channel.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for audio channel.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class audio_channel_e {
   /// < 1 channel, mono
   static const int AUDIO_CHANNEL_MONO = 128;
@@ -1388,8 +1660,11 @@ abstract class audio_channel_e {
   static const int AUDIO_CHANNEL_MULTI_16 = 143;
 }
 
-/// @brief Enumeration for audio input and output state.
-/// @since_tizen 3.0
+/// Enumeration for audio input and output state.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class audio_io_state_e {
   /// < Audio-io handle is created, but not prepared
   static const int AUDIO_IO_STATE_IDLE = 0;
@@ -1401,8 +1676,11 @@ abstract class audio_io_state_e {
   static const int AUDIO_IO_STATE_PAUSED = 2;
 }
 
-/// @brief Enumeration for audio input and output error.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for audio input and output error.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class audio_io_error_e {
   /// < Successful
   static const int AUDIO_IO_ERROR_NONE = 0;
@@ -1444,57 +1722,79 @@ abstract class audio_io_error_e {
   static const int AUDIO_IO_ERROR_NOT_SUPPORTED_TYPE = -26214394;
 }
 
-/// @brief The audio input handle.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// The audio input handle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 typedef audio_in_h = ffi.Pointer<audio_io_s>;
 
-/// @brief Called when audio input data is available in asynchronous (event) mode.
+/// Called when audio input data is available in asynchronous (event) mode.
 ///
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
 ///
-/// @remarks Use audio_in_peek() to get 'audio in' data inside callback, use audio_in_drop() after use of peeked data.
+/// **Remarks:**
+/// - Use audio_in_peek() to get 'audio in' data inside callback, use audio_in_drop() after use of peeked data.
 ///
-/// @param[in] handle The handle to the audio input
-/// @param[in] nbytes The amount of available 'audio in' data which can be peeked.
-/// @param[in] user_data The user data passed from the callback registration function
+/// **Parameters:**
+/// - `handle` (in): The handle to the audio input
+/// - `nbytes` (in): The amount of available 'audio in' data which can be peeked.
+/// - `user_data` (in): The user data passed from the callback registration function
 ///
-/// @see audio_in_set_stream_cb()
+/// **See also:**
+/// - `audio_in_set_stream_cb()`
+/// @nodoc
 typedef audio_in_stream_cb
     = ffi.Pointer<ffi.NativeFunction<audio_in_stream_cbFunction>>;
+/// @nodoc
 typedef audio_in_stream_cbFunction = ffi.Void Function(
     audio_in_h handle, ffi.Size nbytes, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartaudio_in_stream_cbFunction = void Function(
     audio_in_h handle, int nbytes, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the state of audio input is changed.
+/// Called when the state of audio input is changed.
 ///
-/// @since_tizen 3.0
+/// **Since Tizen:**
+/// - 3.0
 ///
-/// @param[in] handle The handle of the audio input
-/// @param[in] previous The previous state of the audio input
-/// @param[in] current The current state of the audio input
-/// @param[in] by_policy @c true if the state is changed by policy, otherwise @c false if the state is not changed by policy
-/// @param[in] user_data The user data passed from the callback registration function
+/// **Parameters:**
+/// - `handle` (in): The handle of the audio input
+/// - `previous` (in): The previous state of the audio input
+/// - `current` (in): The current state of the audio input
+/// - `by_policy` (in): `true` if the state is changed by policy, otherwise `false` if the state is not changed by policy
+/// - `user_data` (in): The user data passed from the callback registration function
 ///
-/// @see audio_in_set_state_changed_cb()
-/// @see audio_in_unset_state_changed_cb()
+/// **See also:**
+/// - `audio_in_set_state_changed_cb()`
+/// - `audio_in_unset_state_changed_cb()`
+/// @nodoc
 typedef audio_in_state_changed_cb
     = ffi.Pointer<ffi.NativeFunction<audio_in_state_changed_cbFunction>>;
+/// @nodoc
 typedef audio_in_state_changed_cbFunction = ffi.Void Function(
     audio_in_h handle,
     ffi.Int32 previous,
     ffi.Int32 current,
     ffi.Bool by_policy,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartaudio_in_state_changed_cbFunction = void Function(audio_in_h handle,
     int previous, int current, bool by_policy, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The audio output handle.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// The audio output handle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 typedef audio_out_h = ffi.Pointer<audio_io_s>;
 
-/// @brief Enumeration for sound type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for sound type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class _sound_type_e {
   /// < Sound type for system
   static const int SOUND_TYPE_SYSTEM = 0;
@@ -1521,43 +1821,57 @@ abstract class _sound_type_e {
   static const int SOUND_TYPE_VOICE = 7;
 }
 
-/// @brief Called when 'audio out' data can be written in asynchronous (event) mode.
+/// Called when 'audio out' data can be written in asynchronous (event) mode.
 ///
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
 ///
-/// @remarks Use audio_out_write() to write pcm data inside this callback.
-/// @param[in] handle The handle to the audio output
-/// @param[in] nbytes The amount of 'audio in' data which can be written.
-/// @param[in] user_data The user data passed from the callback registration function
+/// **Remarks:**
+/// - Use audio_out_write() to write pcm data inside this callback.
 ///
-/// @see audio_out_set_stream_cb()
+/// **Parameters:**
+/// - `handle` (in): The handle to the audio output
+/// - `nbytes` (in): The amount of 'audio in' data which can be written.
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `audio_out_set_stream_cb()`
+/// @nodoc
 typedef audio_out_stream_cb
     = ffi.Pointer<ffi.NativeFunction<audio_out_stream_cbFunction>>;
+/// @nodoc
 typedef audio_out_stream_cbFunction = ffi.Void Function(
     audio_out_h handle, ffi.Size nbytes, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartaudio_out_stream_cbFunction = void Function(
     audio_out_h handle, int nbytes, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the state of audio output is changed.
+/// Called when the state of audio output is changed.
 ///
-/// @since_tizen 3.0
+/// **Since Tizen:**
+/// - 3.0
 ///
-/// @param[in] handle The handle of the audio output
-/// @param[in] previous The previous state of the audio output
-/// @param[in] current The current state of the audio output
-/// @param[in] by_policy @c true if the state is changed by policy, otherwise @c false if the state is not changed by policy
-/// @param[in] user_data The user data passed from the callback registration function
+/// **Parameters:**
+/// - `handle` (in): The handle of the audio output
+/// - `previous` (in): The previous state of the audio output
+/// - `current` (in): The current state of the audio output
+/// - `by_policy` (in): `true` if the state is changed by policy, otherwise `false` if the state is not changed by policy
+/// - `user_data` (in): The user data passed from the callback registration function
 ///
-/// @see audio_out_set_state_changed_cb()
-/// @see audio_out_unset_state_changed_cb()
+/// **See also:**
+/// - `audio_out_set_state_changed_cb()`
+/// - `audio_out_unset_state_changed_cb()`
+/// @nodoc
 typedef audio_out_state_changed_cb
     = ffi.Pointer<ffi.NativeFunction<audio_out_state_changed_cbFunction>>;
+/// @nodoc
 typedef audio_out_state_changed_cbFunction = ffi.Void Function(
     audio_out_h handle,
     ffi.Int32 previous,
     ffi.Int32 current,
     ffi.Bool by_policy,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartaudio_out_state_changed_cbFunction = void Function(
     audio_out_h handle,
     int previous,

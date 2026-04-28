@@ -1,3 +1,6 @@
+/// {@category 10.0/tizen}
+library tizen_interop_10_0.mv_landmark_detection;
+
 // Copyright 2026 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'generated_bindings_mv_common.dart' as mv_common;
 
 /// Dart bindings for Tizen mv_landmark_detection APIs.
+/// {@category 10.0/tizen}
 class Tizen100MvLandmarkDetection {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,35 +29,40 @@ class Tizen100MvLandmarkDetection {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates a inference handle for facial landmark object.
-  /// @details Use this function to create a inference handle. After the creation
-  /// the facial landmark task has to be prepared with
-  /// mv_facial_landmark_prepare() function to prepare a network
-  /// for the inference.
+  /// Creates a inference handle for facial landmark object.
   ///
-  /// @since_tizen 9.0
+  /// Use this function to create a inference handle. After the creation the facial landmark task has to be prepared with mv_facial_landmark_prepare() function to prepare a network for the inference.
   ///
-  /// @remarks The @a handle should be released using mv_facial_landmark_destroy().
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @param[out] handle    The handle to the inference to be created.
+  /// **Remarks:**
+  /// - The `handle` should be released using mv_facial_landmark_destroy().
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_INTERNAL Internal Error
+  /// **Parameters:**
+  /// - `handle` (out): The handle to the inference to be created.
   ///
-  /// @code
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_INTERNAL`: Internal Error
+  ///
+  /// **See also:**
+  /// - `mv_facial_landmark_destroy()`
+  /// - `mv_facial_landmark_prepare()`
+  ///
+  /// ```
   /// #include <mv_facial_landmark.h>
   /// ...
   /// mv_facial_landmark_h handle = NULL;
   /// mv_facial_landmark_create(&handle);
   /// ...
   /// mv_facial_landmark_destroy(handle);
-  /// @endcode
-  ///
-  /// @see mv_facial_landmark_destroy()
-  /// @see mv_facial_landmark_prepare()
+  /// ```
   int mv_facial_landmark_create(
     ffi.Pointer<mv_facial_landmark_h> handle,
   ) {
@@ -69,20 +78,27 @@ class Tizen100MvLandmarkDetection {
   late final _mv_facial_landmark_create = _mv_facial_landmark_createPtr
       .asFunction<int Function(ffi.Pointer<mv_facial_landmark_h>)>();
 
-  /// @brief Destroys inference handle and releases all its resources.
+  /// Destroys inference handle and releases all its resources.
   ///
-  /// @since_tizen 9.0
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @param[in] handle    The handle to the inference to be destroyed.
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the inference to be destroyed.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre Create inference handle by using mv_facial_landmark_create()
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
   ///
-  /// @see mv_facial_landmark_create()
+  /// **Preconditions:**
+  /// - Create inference handle by using mv_facial_landmark_create()
+  ///
+  /// **See also:**
+  /// - `mv_facial_landmark_create()`
   int mv_facial_landmark_destroy(
     mv_facial_landmark_h handle,
   ) {
@@ -97,18 +113,23 @@ class Tizen100MvLandmarkDetection {
   late final _mv_facial_landmark_destroy = _mv_facial_landmark_destroyPtr
       .asFunction<int Function(mv_facial_landmark_h)>();
 
-  /// @brief Configures the backend for the facial landmark inference.
+  /// Configures the backend for the facial landmark inference.
   ///
-  /// @since_tizen 9.0
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @param[in] handle         The handle to the inference
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the inference
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_VISION_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_VISION_ERROR_OUT_OF_MEMORY`: Out of memory
   int mv_facial_landmark_configure(
     mv_facial_landmark_h handle,
   ) {
@@ -123,22 +144,27 @@ class Tizen100MvLandmarkDetection {
   late final _mv_facial_landmark_configure = _mv_facial_landmark_configurePtr
       .asFunction<int Function(mv_facial_landmark_h)>();
 
-  /// @brief Prepares the facial landmark inference.
-  /// @details Use this function to prepare the facial landmark inference based on
-  /// the configured network.
+  /// Prepares the facial landmark inference.
   ///
-  /// @since_tizen 9.0
+  /// Use this function to prepare the facial landmark inference based on the configured network.
   ///
-  /// @param[in] handle         The handle to the inference.
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_INVALID_DATA Invalid model data
-  /// @retval #MEDIA_VISION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIA_VISION_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT Not supported format
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the inference.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_INVALID_DATA`: Invalid model data
+  /// - `MEDIA_VISION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_VISION_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT`: Not supported format
   int mv_facial_landmark_prepare(
     mv_facial_landmark_h handle,
   ) {
@@ -153,28 +179,35 @@ class Tizen100MvLandmarkDetection {
   late final _mv_facial_landmark_prepare = _mv_facial_landmark_preparePtr
       .asFunction<int Function(mv_facial_landmark_h)>();
 
-  /// @brief Performs the facial landmark inference on the @a source.
+  /// Performs the facial landmark inference on the `source`.
   ///
-  /// @since_tizen 9.0
-  /// @remarks This function is synchronous and may take considerable time to run.
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @param[in] handle          The handle to the inference
-  /// @param[in] source         The handle to the source of the media
+  /// **Remarks:**
+  /// - This function is synchronous and may take considerable time to run.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT Source colorspace
-  /// isn't supported
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the inference
+  /// - `source` (in): The handle to the source of the media
   ///
-  /// @pre Create a source handle by calling mv_create_source()
-  /// @pre Create an inference handle by calling mv_facial_landmark_create()
-  /// @pre Prepare an inference by calling mv_facial_landmark_configure()
-  /// @pre Prepare an inference by calling mv_facial_landmark_prepare()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @par Inference Example
-  /// @snippet facial_landmark_sync.c FLD sync
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT`: Source colorspace isn't supported
+  ///
+  /// **Preconditions:**
+  /// - Create a source handle by calling mv_create_source()
+  /// - Create an inference handle by calling mv_facial_landmark_create()
+  /// - Prepare an inference by calling mv_facial_landmark_configure()
+  /// - Prepare an inference by calling mv_facial_landmark_prepare()
+  ///
+  /// **Inference Example:**
+  /// - @snippet facial_landmark_sync.c FLD sync
   int mv_facial_landmark_inference(
     mv_facial_landmark_h handle,
     mv_common.mv_source_h source,
@@ -192,30 +225,37 @@ class Tizen100MvLandmarkDetection {
   late final _mv_facial_landmark_inference = _mv_facial_landmark_inferencePtr
       .asFunction<int Function(mv_facial_landmark_h, mv_common.mv_source_h)>();
 
-  /// @brief Performs asynchronously the facial landmark inference on the @a source.
+  /// Performs asynchronously the facial landmark inference on the `source`.
   ///
-  /// @since_tizen 9.0
-  /// @remarks This function operates asynchronously, so it returns immediately upon invocation.
-  /// The inference results are inserted into the outgoing queue within the framework
-  /// in the order of processing, and the results can be obtained through mv_facial_landmark_get_position().
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @param[in] handle         The handle to the inference
-  /// @param[in] source         The handle to the source of the media
+  /// **Remarks:**
+  /// - This function operates asynchronously, so it returns immediately upon invocation.
+  /// - The inference results are inserted into the outgoing queue within the framework
+  /// - in the order of processing, and the results can be obtained through mv_facial_landmark_get_position().
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT Source colorspace
-  /// isn't supported
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the inference
+  /// - `source` (in): The handle to the source of the media
   ///
-  /// @pre Create a source handle by calling mv_create_source()
-  /// @pre Create an inference handle by calling mv_facial_landmark_create()
-  /// @pre Prepare an inference by calling mv_facial_landmark_configure()
-  /// @pre Prepare an inference by calling mv_facial_landmark_prepare()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @par Async Inference Example
-  /// @snippet facial_landmark_async.c FLD async
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT`: Source colorspace isn't supported
+  ///
+  /// **Preconditions:**
+  /// - Create a source handle by calling mv_create_source()
+  /// - Create an inference handle by calling mv_facial_landmark_create()
+  /// - Prepare an inference by calling mv_facial_landmark_configure()
+  /// - Prepare an inference by calling mv_facial_landmark_prepare()
+  ///
+  /// **Async Inference Example:**
+  /// - @snippet facial_landmark_async.c FLD async
   int mv_facial_landmark_inference_async(
     mv_facial_landmark_h handle,
     mv_common.mv_source_h source,
@@ -234,24 +274,30 @@ class Tizen100MvLandmarkDetection {
       _mv_facial_landmark_inference_asyncPtr.asFunction<
           int Function(mv_facial_landmark_h, mv_common.mv_source_h)>();
 
-  /// @brief Gets the result count to objects.
+  /// Gets the result count to objects.
   ///
-  /// @since_tizen 9.0
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @param[in] handle         The handle to the inference
-  /// @param[out] frame_number  A frame number inferenced.
-  /// @param[out] result_cnt    A number of results.
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the inference
+  /// - `frame_number` (out): A frame number inferenced.
+  /// - `result_cnt` (out): A number of results.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre Create a source handle by calling mv_create_source()
-  /// @pre Create an inference handle by calling mv_facial_landmark_create()
-  /// @pre Prepare an inference by calling mv_facial_landmark_configure()
-  /// @pre Prepare an inference by calling mv_facial_landmark_prepare()
-  /// @pre Request an inference by calling mv_facial_landmark_inference()
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a source handle by calling mv_create_source()
+  /// - Create an inference handle by calling mv_facial_landmark_create()
+  /// - Prepare an inference by calling mv_facial_landmark_configure()
+  /// - Prepare an inference by calling mv_facial_landmark_prepare()
+  /// - Request an inference by calling mv_facial_landmark_inference()
   int mv_facial_landmark_get_result_count(
     mv_facial_landmark_h handle,
     ffi.Pointer<ffi.UnsignedLong> frame_number,
@@ -276,38 +322,44 @@ class Tizen100MvLandmarkDetection {
           int Function(mv_facial_landmark_h, ffi.Pointer<ffi.UnsignedLong>,
               ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Gets the facial landmark position values to a given index.
+  /// Gets the facial landmark position values to a given index.
   ///
-  /// @since_tizen 9.0
-  /// @remarks pos_x and pos_y arrays are allocated internally by the framework and will remain valid
-  /// until the handle is released.
-  /// Please do not deallocate them directly, and if you want to use them after the handle is released,
-  /// please copy them to user memory and use the copy.
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// This function operates differently depending on the inference request method.
-  /// - After mv_facial_landmark_inference() calls, this function returns facial landmark positions immediately.
-  /// - After mv_facial_landmark_inference_async() calls, this function can be blocked until the asynchronous inference request is completed
-  /// or the timeout occurs if no result within 3 seconds.
+  /// **Remarks:**
+  /// - pos_x and pos_y arrays are allocated internally by the framework and will remain valid
+  /// - until the handle is released.
+  /// - Please do not deallocate them directly, and if you want to use them after the handle is released,
+  /// - please copy them to user memory and use the copy.
+  /// - This function operates differently depending on the inference request method.
+  /// - - After mv_facial_landmark_inference() calls, this function returns facial landmark positions immediately.
+  /// - - After mv_facial_landmark_inference_async() calls, this function can be blocked until the asynchronous inference request is completed
+  /// - or the timeout occurs if no result within 3 seconds.
+  /// - Additionally, after calling the mv_facial_landmark_inference_async() function, the function operates
+  /// - in asynchronous mode until the handle is released.
   ///
-  /// Additionally, after calling the mv_facial_landmark_inference_async() function, the function operates
-  /// in asynchronous mode until the handle is released.
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the inference
+  /// - `index` (in): A result index.
+  /// - `pos_x` (out): An array containing x-coordinate values.
+  /// - `pos_y` (out): An array containing y-coordinate values.
   ///
-  /// @param[in] handle               The handle to the inference
-  /// @param[in] index                A result index.
-  /// @param[out] pos_x               An array containing x-coordinate values.
-  /// @param[out] pos_y               An array containing y-coordinate values.
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
   ///
-  /// @pre Create a source handle by calling mv_create_source()
-  /// @pre Create an inference handle by calling mv_facial_landmark_create()
-  /// @pre Prepare an inference by calling mv_facial_landmark_configure()
-  /// @pre Prepare an inference by calling mv_facial_landmark_prepare()
-  /// @pre Prepare an inference by calling mv_facial_landmark_inference()
-  /// @pre Get result count by calling mv_facial_landmark_get_result_count()
+  /// **Preconditions:**
+  /// - Create a source handle by calling mv_create_source()
+  /// - Create an inference handle by calling mv_facial_landmark_create()
+  /// - Prepare an inference by calling mv_facial_landmark_configure()
+  /// - Prepare an inference by calling mv_facial_landmark_prepare()
+  /// - Prepare an inference by calling mv_facial_landmark_inference()
+  /// - Get result count by calling mv_facial_landmark_get_result_count()
   int mv_facial_landmark_get_position(
     mv_facial_landmark_h handle,
     int index,
@@ -332,35 +384,38 @@ class Tizen100MvLandmarkDetection {
           int Function(mv_facial_landmark_h, int, ffi.Pointer<ffi.UnsignedInt>,
               ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Creates pose landmark object handle.
-  /// @details Use this function to create an pose landmark object handle.
-  /// After creation the handle has to be prepared with
-  /// mv_pose_landmark_prepare() function to prepare
-  /// a pose landmark object.
+  /// Creates pose landmark object handle.
   ///
-  /// @since_tizen 9.0
+  /// Use this function to create an pose landmark object handle. After creation the handle has to be prepared with mv_pose_landmark_prepare() function to prepare a pose landmark object.
   ///
-  /// @param[out] handle    The handle to the pose landmark object to be created
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_INTERNAL Internal Error
+  /// **Parameters:**
+  /// - `handle` (out): The handle to the pose landmark object to be created
   ///
-  /// @post Release @a handle by using
-  /// mv_pose_landmark_destroy() function when it is not needed
-  /// anymore
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @code
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_INTERNAL`: Internal Error
+  ///
+  /// **Postconditions:**
+  /// - Release `handle` by using mv_pose_landmark_destroy() function when it is not needed anymore
+  ///
+  /// **See also:**
+  /// - `mv_pose_landmark_destroy()`
+  ///
+  /// ```
   /// #include <mv_pose_landmark.h>
   /// ...
   /// mv_pose_landmark_h handle = NULL;
   /// mv_pose_landmark_create(&handle);
   /// ...
   /// mv_pose_landmark_destroy(handle);
-  /// @endcode
-  ///
-  /// @see mv_pose_landmark_destroy()
+  /// ```
   int mv_pose_landmark_create(
     ffi.Pointer<mv_pose_landmark_h> handle,
   ) {
@@ -376,19 +431,26 @@ class Tizen100MvLandmarkDetection {
   late final _mv_pose_landmark_create = _mv_pose_landmark_createPtr
       .asFunction<int Function(ffi.Pointer<mv_pose_landmark_h>)>();
 
-  /// @brief Destroys pose landmark handle and releases all its resources.
+  /// Destroys pose landmark handle and releases all its resources.
   ///
-  /// @since_tizen 9.0
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @param[in] handle    The handle to the pose landmark object to be destroyed.
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the pose landmark object to be destroyed.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre Create an pose landmark handle by using mv_pose_landmark_create()
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
   ///
-  /// @see mv_pose_landmark_create()
+  /// **Preconditions:**
+  /// - Create an pose landmark handle by using mv_pose_landmark_create()
+  ///
+  /// **See also:**
+  /// - `mv_pose_landmark_create()`
   int mv_pose_landmark_destroy(
     mv_pose_landmark_h handle,
   ) {
@@ -403,17 +465,22 @@ class Tizen100MvLandmarkDetection {
   late final _mv_pose_landmark_destroy = _mv_pose_landmark_destroyPtr
       .asFunction<int Function(mv_pose_landmark_h)>();
 
-  /// @brief Configures the backend to the inference handle.
+  /// Configures the backend to the inference handle.
   ///
-  /// @since_tizen 9.0
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @param[in] handle         The handle to the inference
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the inference
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_OUT_OF_MEMORY`: Out of memory
   int mv_pose_landmark_configure(
     mv_pose_landmark_h handle,
   ) {
@@ -428,19 +495,24 @@ class Tizen100MvLandmarkDetection {
   late final _mv_pose_landmark_configure = _mv_pose_landmark_configurePtr
       .asFunction<int Function(mv_pose_landmark_h)>();
 
-  /// @brief Prepares inference.
-  /// @details Use this function to prepare inference based on
-  /// the configured network.
+  /// Prepares inference.
   ///
-  /// @since_tizen 9.0
+  /// Use this function to prepare inference based on the configured network.
   ///
-  /// @param[in] handle         The handle to the inference
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_INVALID_DATA Invalid model data
-  /// @retval #MEDIA_VISION_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the inference
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_INVALID_DATA`: Invalid model data
+  /// - `MEDIA_VISION_ERROR_OUT_OF_MEMORY`: Out of memory
   int mv_pose_landmark_prepare(
     mv_pose_landmark_h handle,
   ) {
@@ -455,29 +527,34 @@ class Tizen100MvLandmarkDetection {
   late final _mv_pose_landmark_prepare = _mv_pose_landmark_preparePtr
       .asFunction<int Function(mv_pose_landmark_h)>();
 
-  /// @brief Inferences with a given facial on the @a source.
-  /// @details Use this function to inference with a given source.
+  /// Inferences with a given facial on the `source`.
   ///
+  /// Use this function to inference with a given source.
   ///
-  /// @since_tizen 9.0
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @param[in] handle         The handle to the pose landmark object.
-  /// @param[in] source         The handle to the source of the media.
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the pose landmark object.
+  /// - `source` (in): The handle to the source of the media.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT Source colorspace
-  /// isn't supported
-  /// @retval #MEDIA_VISION_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre Create a source handle by calling mv_create_source()
-  /// @pre Create an pose landmark handle by calling mv_pose_landmark_create()
-  /// @pre Prepare an inference by calling mv_pose_landmark_configure()
-  /// @pre Prepare an pose landmark by calling mv_pose_landmark_prepare()
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT`: Source colorspace isn't supported
+  /// - `MEDIA_VISION_ERROR_OUT_OF_MEMORY`: Out of memory
   ///
-  /// @par Inference Example
-  /// @snippet pose_landmark_sync.c PLD sync
+  /// **Preconditions:**
+  /// - Create a source handle by calling mv_create_source()
+  /// - Create an pose landmark handle by calling mv_pose_landmark_create()
+  /// - Prepare an inference by calling mv_pose_landmark_configure()
+  /// - Prepare an pose landmark by calling mv_pose_landmark_prepare()
+  ///
+  /// **Inference Example:**
+  /// - @snippet pose_landmark_sync.c PLD sync
   int mv_pose_landmark_inference(
     mv_pose_landmark_h handle,
     mv_common.mv_source_h source,
@@ -495,31 +572,38 @@ class Tizen100MvLandmarkDetection {
   late final _mv_pose_landmark_inference = _mv_pose_landmark_inferencePtr
       .asFunction<int Function(mv_pose_landmark_h, mv_common.mv_source_h)>();
 
-  /// @brief Performs asynchronously the pose landmark inference on the @a source.
+  /// Performs asynchronously the pose landmark inference on the `source`.
   ///
-  /// @since_tizen 9.0
-  /// @remarks This function operates asynchronously, so it returns immediately upon invocation.
-  /// The inference results are inserted into the outgoing queue within the framework
-  /// in the order of processing, and the results can be obtained through mv_pose_landmark_get_result_count()
-  /// and mv_pose_landmark_get_position().
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @param[in] handle         The handle to the inference
-  /// @param[in] source         The handle to the source of the media
+  /// **Remarks:**
+  /// - This function operates asynchronously, so it returns immediately upon invocation.
+  /// - The inference results are inserted into the outgoing queue within the framework
+  /// - in the order of processing, and the results can be obtained through mv_pose_landmark_get_result_count()
+  /// - and mv_pose_landmark_get_position().
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT Source colorspace
-  /// isn't supported
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the inference
+  /// - `source` (in): The handle to the source of the media
   ///
-  /// @pre Create a source handle by calling mv_create_source()
-  /// @pre Create an inference handle by calling mv_pose_landmark_create()
-  /// @pre Prepare an inference by calling mv_pose_landmark_configure()
-  /// @pre Prepare an inference by calling mv_pose_landmark_prepare()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @par Async Inference Example
-  /// @snippet pose_landmark_async.c PLD async
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT`: Source colorspace isn't supported
+  ///
+  /// **Preconditions:**
+  /// - Create a source handle by calling mv_create_source()
+  /// - Create an inference handle by calling mv_pose_landmark_create()
+  /// - Prepare an inference by calling mv_pose_landmark_configure()
+  /// - Prepare an inference by calling mv_pose_landmark_prepare()
+  ///
+  /// **Async Inference Example:**
+  /// - @snippet pose_landmark_async.c PLD async
   int mv_pose_landmark_inference_async(
     mv_pose_landmark_h handle,
     mv_common.mv_source_h source,
@@ -538,24 +622,30 @@ class Tizen100MvLandmarkDetection {
       _mv_pose_landmark_inference_asyncPtr.asFunction<
           int Function(mv_pose_landmark_h, mv_common.mv_source_h)>();
 
-  /// @brief Gets the result count to objects.
+  /// Gets the result count to objects.
   ///
-  /// @since_tizen 9.0
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @param[in] handle         The handle to the inference
-  /// @param[out] frame_number  A frame number inferenced.
-  /// @param[out] result_cnt    A number of results.
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the inference
+  /// - `frame_number` (out): A frame number inferenced.
+  /// - `result_cnt` (out): A number of results.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre Create a source handle by calling mv_create_source()
-  /// @pre Create an inference handle by calling mv_pose_landmark_create()
-  /// @pre Prepare an inference by calling mv_pose_landmark_configure()
-  /// @pre Prepare an inference by calling mv_pose_landmark_prepare()
-  /// @pre Request an inference by calling mv_pose_landmark_inference()
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a source handle by calling mv_create_source()
+  /// - Create an inference handle by calling mv_pose_landmark_create()
+  /// - Prepare an inference by calling mv_pose_landmark_configure()
+  /// - Prepare an inference by calling mv_pose_landmark_prepare()
+  /// - Request an inference by calling mv_pose_landmark_inference()
   int mv_pose_landmark_get_result_count(
     mv_pose_landmark_h handle,
     ffi.Pointer<ffi.UnsignedLong> frame_number,
@@ -580,38 +670,44 @@ class Tizen100MvLandmarkDetection {
           int Function(mv_pose_landmark_h, ffi.Pointer<ffi.UnsignedLong>,
               ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Gets the pose landmark position values to a given index.
+  /// Gets the pose landmark position values to a given index.
   ///
-  /// @since_tizen 9.0
-  /// @remarks pos_x and pos_y arrays are allocated internally by the framework and will remain valid
-  /// until the handle is released.
-  /// Please do not deallocate them directly, and if you want to use them after the handle is released,
-  /// please copy them to user memory and use the copy.
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// This function operates differently depending on the inference request method.
-  /// - After mv_facial_landmark_inference() calls, this function returns facial landmark positions immediately.
-  /// - After mv_facial_landmark_inference_async() calls, this function can be blocked until the asynchronous inference request is completed
-  /// or the timeout occurs if no result within 3 seconds.
+  /// **Remarks:**
+  /// - pos_x and pos_y arrays are allocated internally by the framework and will remain valid
+  /// - until the handle is released.
+  /// - Please do not deallocate them directly, and if you want to use them after the handle is released,
+  /// - please copy them to user memory and use the copy.
+  /// - This function operates differently depending on the inference request method.
+  /// - - After mv_facial_landmark_inference() calls, this function returns facial landmark positions immediately.
+  /// - - After mv_facial_landmark_inference_async() calls, this function can be blocked until the asynchronous inference request is completed
+  /// - or the timeout occurs if no result within 3 seconds.
+  /// - Additionally, after calling the mv_facial_landmark_inference_async function, the function operates
+  /// - in asynchronous mode until the handle is released.
   ///
-  /// Additionally, after calling the mv_facial_landmark_inference_async function, the function operates
-  /// in asynchronous mode until the handle is released.
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the inference
+  /// - `index` (in): A result index.
+  /// - `pos_x` (out): An array containing x-coordinate values.
+  /// - `pos_y` (out): An array containing y-coordinate values.
   ///
-  /// @param[in] handle               The handle to the inference
-  /// @param[in] index                A result index.
-  /// @param[out] pos_x               An array containing x-coordinate values.
-  /// @param[out] pos_y               An array containing y-coordinate values.
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
   ///
-  /// @pre Create a source handle by calling mv_create_source()
-  /// @pre Create an inference handle by calling mv_pose_landmark_create()
-  /// @pre Prepare an inference by calling mv_pose_landmark_configure()
-  /// @pre Prepare an inference by calling mv_pose_landmark_prepare()
-  /// @pre Prepare an inference by calling mv_pose_landmark_inference()
-  /// @pre Get result count by calling mv_pose_landmark_get_result_count()
+  /// **Preconditions:**
+  /// - Create a source handle by calling mv_create_source()
+  /// - Create an inference handle by calling mv_pose_landmark_create()
+  /// - Prepare an inference by calling mv_pose_landmark_configure()
+  /// - Prepare an inference by calling mv_pose_landmark_prepare()
+  /// - Prepare an inference by calling mv_pose_landmark_inference()
+  /// - Get result count by calling mv_pose_landmark_get_result_count()
   int mv_pose_landmark_get_position(
     mv_pose_landmark_h handle,
     int index,
@@ -639,12 +735,16 @@ class Tizen100MvLandmarkDetection {
               ffi.Pointer<ffi.UnsignedInt>)>();
 }
 
-/// @brief The facial landmark object handle.
+/// The facial landmark object handle.
 ///
-/// @since_tizen 9.0
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 typedef mv_facial_landmark_h = ffi.Pointer<ffi.Void>;
 
-/// @brief The pose landmark object handle.
+/// The pose landmark object handle.
 ///
-/// @since_tizen 9.0
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 typedef mv_pose_landmark_h = ffi.Pointer<ffi.Void>;

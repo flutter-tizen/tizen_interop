@@ -1,3 +1,6 @@
+/// {@category 9.0/tizen}
+library tizen_interop_9_0.ma;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen ma APIs.
+/// {@category 9.0/tizen}
 class Tizen90Ma {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,20 +28,32 @@ class Tizen90Ma {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Initializes multi-assistant client.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
+  /// Initializes multi-assistant client.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MA_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #MA_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @post If this function is called, the state will be #MA_STATE_INITIALIZED.
-  /// @see ma_deinitialize()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MA_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `MA_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Postconditions:**
+  /// - If this function is called, the state will be `MA_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `ma_deinitialize()`
   int ma_initialize() {
     return _ma_initialize();
   }
@@ -46,19 +62,31 @@ class Tizen90Ma {
       _lookup<ffi.NativeFunction<ffi.Int Function()>>('ma_initialize');
   late final _ma_initialize = _ma_initializePtr.asFunction<int Function()>();
 
-  /// @brief Deinitializes multi-assistant client.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
+  /// Deinitializes multi-assistant client.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MA_ERROR_INVALID_STATE Invalid state
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @post If this function is called, the state will be #MA_STATE_NONE.
-  /// @see ma_initialize()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MA_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Postconditions:**
+  /// - If this function is called, the state will be `MA_STATE_NONE`.
+  ///
+  /// **See also:**
+  /// - `ma_initialize()`
   int ma_deinitialize() {
     return _ma_deinitialize();
   }
@@ -68,20 +96,34 @@ class Tizen90Ma {
   late final _ma_deinitialize =
       _ma_deinitializePtr.asFunction<int Function()>();
 
-  /// @brief Prepares multi-assistant client.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
+  /// Prepares multi-assistant client.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MA_ERROR_INVALID_STATE Invalid state
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @pre The state should be #MA_STATE_INITIALIZED.
-  /// @post If this function is called, the state will be #MA_STATE_READY.
-  /// @see ma_unprepare()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MA_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `MA_STATE_INITIALIZED`.
+  ///
+  /// **Postconditions:**
+  /// - If this function is called, the state will be `MA_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `ma_unprepare()`
   int ma_prepare() {
     return _ma_prepare();
   }
@@ -90,20 +132,34 @@ class Tizen90Ma {
       _lookup<ffi.NativeFunction<ffi.Int Function()>>('ma_prepare');
   late final _ma_prepare = _ma_preparePtr.asFunction<int Function()>();
 
-  /// @brief Unprepares multi-assistant client.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
+  /// Unprepares multi-assistant client.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MA_ERROR_INVALID_STATE Invalid state
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @pre The state should be #MA_STATE_READY.
-  /// @post If this function is called, the state will be #MA_STATE_INITIALIZED.
-  /// @see ma_prepare()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MA_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `MA_STATE_READY`.
+  ///
+  /// **Postconditions:**
+  /// - If this function is called, the state will be `MA_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `ma_prepare()`
   int ma_unprepare() {
     return _ma_unprepare();
   }
@@ -112,19 +168,29 @@ class Tizen90Ma {
       _lookup<ffi.NativeFunction<ffi.Int Function()>>('ma_unprepare');
   late final _ma_unprepare = _ma_unpreparePtr.asFunction<int Function()>();
 
-  /// @brief Gets the current state of the multi-assistant client.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
+  /// Gets the current state of the multi-assistant client.
   ///
-  /// @param[out] state The current state
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MA_ERROR_INVALID_STATE Invalid state
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `state` (out): The current state
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MA_ERROR_INVALID_STATE`: Invalid state
   int ma_get_state(
     ffi.Pointer<ffi.Int32> state,
   ) {
@@ -139,19 +205,31 @@ class Tizen90Ma {
   late final _ma_get_state =
       _ma_get_statePtr.asFunction<int Function(ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the current language of multi-assistant client.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
+  /// Gets the current language of multi-assistant client.
   ///
-  /// @remarks The @a language should be released using free().
-  /// @param[out] language The current language
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MA_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Remarks:**
+  /// - The `language` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `language` (out): The current language
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MA_ERROR_INVALID_PARAMETER`: Invalid parameter
   int ma_get_current_language(
     ffi.Pointer<ffi.Pointer<ffi.Char>> language,
   ) {
@@ -167,24 +245,35 @@ class Tizen90Ma {
   late final _ma_get_current_language = _ma_get_current_languagePtr
       .asFunction<int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the recording audio format.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
+  /// Gets the recording audio format.
   ///
-  /// @param[out] rate The audio sampling rate
-  /// @param[out] channel The audio channel
-  /// @param[out] audio_type The audio type
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MA_ERROR_INVALID_STATE Invalid state
-  /// @retval #MA_ERROR_OPERATION_FAILED Operation failed
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre The state should be #MA_STATE_READY.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `rate` (out): The audio sampling rate
+  /// - `channel` (out): The audio channel
+  /// - `audio_type` (out): The audio type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MA_ERROR_INVALID_STATE`: Invalid state
+  /// - `MA_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **Preconditions:**
+  /// - The state should be `MA_STATE_READY`.
   int ma_get_recording_audio_format(
     ffi.Pointer<ffi.Int> rate,
     ffi.Pointer<ffi.Int32> channel,
@@ -206,21 +295,30 @@ class Tizen90Ma {
           int Function(ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int32>,
               ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets a state changed callback.
-  /// @since_tizen 5.0
+  /// Sets a state changed callback.
   ///
-  /// @param[in] callback The callback
-  /// @param[in] user_data The user data passed to the callback function
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MA_ERROR_INVALID_STATE Invalid state
+  /// **Parameters:**
+  /// - `callback` (in): The callback
+  /// - `user_data` (in): The user data passed to the callback function
   ///
-  /// @pre The state should be #MA_STATE_INITIALIZED.
-  /// @see ma_state_changed_cb()
-  /// @see ma_unset_state_changed_cb()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MA_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `MA_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `ma_state_changed_cb()`
+  /// - `ma_unset_state_changed_cb()`
   int ma_set_state_changed_cb(
     ma_state_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -238,17 +336,25 @@ class Tizen90Ma {
   late final _ma_set_state_changed_cb = _ma_set_state_changed_cbPtr
       .asFunction<int Function(ma_state_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets a state changed callback.
-  /// @since_tizen 5.0
+  /// Unsets a state changed callback.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_INVALID_STATE Invalid state
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @pre The state should be #MA_STATE_INITIALIZED.
-  /// @see ma_state_changed_cb()
-  /// @see ma_set_state_changed_cb()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `MA_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `ma_state_changed_cb()`
+  /// - `ma_set_state_changed_cb()`
   int ma_unset_state_changed_cb() {
     return _ma_unset_state_changed_cb();
   }
@@ -259,21 +365,30 @@ class Tizen90Ma {
   late final _ma_unset_state_changed_cb =
       _ma_unset_state_changed_cbPtr.asFunction<int Function()>();
 
-  /// @brief Sets an error callback.
-  /// @since_tizen 5.0
+  /// Sets an error callback.
   ///
-  /// @param[in] callback The callback
-  /// @param[in] user_data The user data passed to the callback function
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MA_ERROR_INVALID_STATE Invalid state
+  /// **Parameters:**
+  /// - `callback` (in): The callback
+  /// - `user_data` (in): The user data passed to the callback function
   ///
-  /// @pre The state should be #MA_STATE_INITIALIZED.
-  /// @see ma_error_cb()
-  /// @see ma_unset_error_cb()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MA_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `MA_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `ma_error_cb()`
+  /// - `ma_unset_error_cb()`
   int ma_set_error_cb(
     ma_error_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -291,17 +406,25 @@ class Tizen90Ma {
   late final _ma_set_error_cb = _ma_set_error_cbPtr
       .asFunction<int Function(ma_error_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets an error callback.
-  /// @since_tizen 5.0
+  /// Unsets an error callback.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_INVALID_STATE Invalid state
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @pre The state should be #MA_STATE_INITIALIZED.
-  /// @see ma_error_cb()
-  /// @see ma_set_error_cb()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `MA_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `ma_error_cb()`
+  /// - `ma_set_error_cb()`
   int ma_unset_error_cb() {
     return _ma_unset_error_cb();
   }
@@ -311,21 +434,30 @@ class Tizen90Ma {
   late final _ma_unset_error_cb =
       _ma_unset_error_cbPtr.asFunction<int Function()>();
 
-  /// @brief Sets a language changed callback.
-  /// @since_tizen 5.0
+  /// Sets a language changed callback.
   ///
-  /// @param[in] callback The callback
-  /// @param[in] user_data The user data passed to the callback function
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MA_ERROR_INVALID_STATE Invalid state
+  /// **Parameters:**
+  /// - `callback` (in): The callback
+  /// - `user_data` (in): The user data passed to the callback function
   ///
-  /// @pre The state should be #MA_STATE_INITIALIZED.
-  /// @see ma_language_changed_cb()
-  /// @see ma_unset_language_changed_cb()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MA_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `MA_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `ma_language_changed_cb()`
+  /// - `ma_unset_language_changed_cb()`
   int ma_set_language_changed_cb(
     ma_language_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -344,17 +476,25 @@ class Tizen90Ma {
       _ma_set_language_changed_cbPtr.asFunction<
           int Function(ma_language_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets a language changed callback.
-  /// @since_tizen 5.0
+  /// Unsets a language changed callback.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_INVALID_STATE Invalid state
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @pre The state should be #MA_STATE_INITIALIZED.
-  /// @see ma_language_changed_cb()
-  /// @see ma_set_language_changed_cb()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `MA_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `ma_language_changed_cb()`
+  /// - `ma_set_language_changed_cb()`
   int ma_unset_language_changed_cb() {
     return _ma_unset_language_changed_cb();
   }
@@ -365,21 +505,30 @@ class Tizen90Ma {
   late final _ma_unset_language_changed_cb =
       _ma_unset_language_changed_cbPtr.asFunction<int Function()>();
 
-  /// @brief Sets an audio streaming callback.
-  /// @since_tizen 5.0
+  /// Sets an audio streaming callback.
   ///
-  /// @param[in] callback The callback
-  /// @param[in] user_data The user data passed to the callback function
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MA_ERROR_INVALID_STATE Invalid state
+  /// **Parameters:**
+  /// - `callback` (in): The callback
+  /// - `user_data` (in): The user data passed to the callback function
   ///
-  /// @pre The state should be #MA_STATE_INITIALIZED.
-  /// @see ma_audio_streaming_cb()
-  /// @see ma_unset_audio_streaming_cb()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MA_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `MA_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `ma_audio_streaming_cb()`
+  /// - `ma_unset_audio_streaming_cb()`
   int ma_set_audio_streaming_cb(
     ma_audio_streaming_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -397,17 +546,25 @@ class Tizen90Ma {
   late final _ma_set_audio_streaming_cb = _ma_set_audio_streaming_cbPtr
       .asFunction<int Function(ma_audio_streaming_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets an audio streaming callback.
-  /// @since_tizen 5.0
+  /// Unsets an audio streaming callback.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_INVALID_STATE Invalid state
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @pre The state should be #MA_STATE_INITIALIZED.
-  /// @see ma_audio_streaming_cb()
-  /// @see ma_set_audio_streaming_cb()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `MA_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `ma_audio_streaming_cb()`
+  /// - `ma_set_audio_streaming_cb()`
   int ma_unset_audio_streaming_cb() {
     return _ma_unset_audio_streaming_cb();
   }
@@ -418,19 +575,29 @@ class Tizen90Ma {
   late final _ma_unset_audio_streaming_cb =
       _ma_unset_audio_streaming_cbPtr.asFunction<int Function()>();
 
-  /// @brief Sends ASR(auto speech recognition) results to the multi-assistant service.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
+  /// Sends ASR(auto speech recognition) results to the multi-assistant service.
   ///
-  /// @param[in] event The ASR result event (e.g. #MA_ASR_RESULT_EVENT_FINAL_RESULT)
-  /// @param[in] asr_result The ASR result text
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MA_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `event` (in): The ASR result event (e.g. `MA_ASR_RESULT_EVENT_FINAL_RESULT`)
+  /// - `asr_result` (in): The ASR result text
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MA_ERROR_INVALID_PARAMETER`: Invalid parameter
   int ma_send_asr_result(
     int event,
     ffi.Pointer<ffi.Char> asr_result,
@@ -448,20 +615,30 @@ class Tizen90Ma {
   late final _ma_send_asr_result = _ma_send_asr_resultPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sends results to the multi-assistant service.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
+  /// Sends results to the multi-assistant service.
   ///
-  /// @param[in] display_text The text shown on the display
-  /// @param[in] utterance_text The utterance text
-  /// @param[in] result_json The result data (JSON format)
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MA_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `display_text` (in): The text shown on the display
+  /// - `utterance_text` (in): The utterance text
+  /// - `result_json` (in): The result data (JSON format)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MA_ERROR_INVALID_PARAMETER`: Invalid parameter
   int ma_send_result(
     ffi.Pointer<ffi.Char> display_text,
     ffi.Pointer<ffi.Char> utterance_text,
@@ -482,18 +659,28 @@ class Tizen90Ma {
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
           ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sends recognition result to the multi-assistant service.
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
+  /// Sends recognition result to the multi-assistant service.
   ///
-  /// @param[in] result The recognition result
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MA_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `result` (in): The recognition result
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MA_ERROR_INVALID_PARAMETER`: Invalid parameter
   int ma_send_recognition_result(
     int result,
   ) {
@@ -508,21 +695,30 @@ class Tizen90Ma {
   late final _ma_send_recognition_result =
       _ma_send_recognition_resultPtr.asFunction<int Function(int)>();
 
-  /// @brief Sets the active state changed callback.
-  /// @since_tizen 5.5
+  /// Sets the active state changed callback.
   ///
-  /// @param[in] callback The callback
-  /// @param[in] user_data The user data passed to the callback function
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MA_ERROR_INVALID_STATE Invalid state
+  /// **Parameters:**
+  /// - `callback` (in): The callback
+  /// - `user_data` (in): The user data passed to the callback function
   ///
-  /// @pre The state should be #MA_STATE_INITIALIZED.
-  /// @see ma_active_state_changed_cb()
-  /// @see ma_unset_active_state_changed_cb()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MA_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `MA_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `ma_active_state_changed_cb()`
+  /// - `ma_unset_active_state_changed_cb()`
   int ma_set_active_state_changed_cb(
     ma_active_state_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -541,17 +737,25 @@ class Tizen90Ma {
       _ma_set_active_state_changed_cbPtr.asFunction<
           int Function(ma_active_state_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the active state changed callback.
-  /// @since_tizen 5.5
+  /// Unsets the active state changed callback.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_INVALID_STATE Invalid state
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @pre The state should be #MA_STATE_INITIALIZED.
-  /// @see ma_active_state_changed_cb()
-  /// @see ma_set_active_state_changed_cb()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `MA_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `ma_active_state_changed_cb()`
+  /// - `ma_set_active_state_changed_cb()`
   int ma_unset_active_state_changed_cb() {
     return _ma_unset_active_state_changed_cb();
   }
@@ -562,18 +766,28 @@ class Tizen90Ma {
   late final _ma_unset_active_state_changed_cb =
       _ma_unset_active_state_changed_cbPtr.asFunction<int Function()>();
 
-  /// @brief Starts receiving audio streaming data.
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
+  /// Starts receiving audio streaming data.
   ///
-  /// @param[in] type The type of audio data to start streaming
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MA_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `type` (in): The type of audio data to start streaming
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MA_ERROR_INVALID_PARAMETER`: Invalid parameter
   int ma_start_receiving_audio_streaming_data(
     int type,
   ) {
@@ -589,18 +803,28 @@ class Tizen90Ma {
       _ma_start_receiving_audio_streaming_dataPtr
           .asFunction<int Function(int)>();
 
-  /// @brief Stops receiving audio streaming data.
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
+  /// Stops receiving audio streaming data.
   ///
-  /// @param[in] type The type of audio data to stop streaming
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MA_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `type` (in): The type of audio data to stop streaming
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MA_ERROR_INVALID_PARAMETER`: Invalid parameter
   int ma_stop_receiving_audio_streaming_data(
     int type,
   ) {
@@ -616,18 +840,28 @@ class Tizen90Ma {
       _ma_stop_receiving_audio_streaming_dataPtr
           .asFunction<int Function(int)>();
 
-  /// @brief Updates the state of client's voice feedback to the server.
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
+  /// Updates the state of client's voice feedback to the server.
   ///
-  /// @param[in] state The current state of voice feedback
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MA_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `state` (in): The current state of voice feedback
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MA_ERROR_INVALID_PARAMETER`: Invalid parameter
   int ma_update_voice_feedback_state(
     int state,
   ) {
@@ -642,18 +876,28 @@ class Tizen90Ma {
   late final _ma_update_voice_feedback_state =
       _ma_update_voice_feedback_statePtr.asFunction<int Function(int)>();
 
-  /// @brief Sends an assistant-specific command to the server.
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
+  /// Sends an assistant-specific command to the server.
   ///
-  /// @param[in] command The command to be sent to the server
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MA_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `command` (in): The command to be sent to the server
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MA_ERROR_INVALID_PARAMETER`: Invalid parameter
   int ma_send_assistant_specific_command(
     ffi.Pointer<ffi.Char> command,
   ) {
@@ -669,25 +913,32 @@ class Tizen90Ma {
       _ma_send_assistant_specific_commandPtr
           .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the wakeup engine command callback.
-  /// @details The wakeup engine command callback will be called when the wakeup engine
-  /// sends wakeup engine specific command to the voice assistant.
-  /// The command MUST be defined by both wakeup engine and voice assistant.
+  /// Sets the wakeup engine command callback.
   ///
-  /// @since_tizen 5.5
+  /// The wakeup engine command callback will be called when the wakeup engine sends wakeup engine specific command to the voice assistant. The command MUST be defined by both wakeup engine and voice assistant.
   ///
-  /// @param[in] callback The callback
-  /// @param[in] user_data The user data passed to the callback function
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MA_ERROR_INVALID_STATE Invalid state
+  /// **Parameters:**
+  /// - `callback` (in): The callback
+  /// - `user_data` (in): The user data passed to the callback function
   ///
-  /// @pre The state should be #MA_STATE_INITIALIZED.
-  /// @see ma_wakeup_engine_command_cb()
-  /// @see ma_unset_wakeup_engine_command_cb()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MA_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `MA_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `ma_wakeup_engine_command_cb()`
+  /// - `ma_unset_wakeup_engine_command_cb()`
   int ma_set_wakeup_engine_command_cb(
     ma_wakeup_engine_command_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -706,17 +957,25 @@ class Tizen90Ma {
       _ma_set_wakeup_engine_command_cbPtr.asFunction<
           int Function(ma_wakeup_engine_command_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback.
-  /// @since_tizen 5.5
+  /// Unsets the callback.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_INVALID_STATE Invalid state
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @pre The state should be #MA_STATE_INITIALIZED.
-  /// @see ma_wakeup_engine_command_cb()
-  /// @see ma_set_wakeup_engine_command_cb()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `MA_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `ma_wakeup_engine_command_cb()`
+  /// - `ma_set_wakeup_engine_command_cb()`
   int ma_unset_wakeup_engine_command_cb() {
     return _ma_unset_wakeup_engine_command_cb();
   }
@@ -727,19 +986,26 @@ class Tizen90Ma {
   late final _ma_unset_wakeup_engine_command_cb =
       _ma_unset_wakeup_engine_command_cbPtr.asFunction<int Function()>();
 
-  /// @brief Retrieves the information about all installed voice assistant applications.
-  /// @since_tizen 5.5
+  /// Retrieves the information about all installed voice assistant applications.
   ///
-  /// @param[in] callback The callback for getting the information of installed assistants.
-  /// @param[in] user_data The user data passed to the callback function
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MA_ERROR_INVALID_STATE Invalid state
+  /// **Parameters:**
+  /// - `callback` (in): The callback for getting the information of installed assistants.
+  /// - `user_data` (in): The user data passed to the callback function
   ///
-  /// @see ma_assistant_info_list_cb()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MA_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **See also:**
+  /// - `ma_assistant_info_list_cb()`
   int ma_assistant_info_foreach_assistants(
     ma_assistant_info_list_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -758,17 +1024,25 @@ class Tizen90Ma {
       _ma_assistant_info_foreach_assistantsPtr.asFunction<
           int Function(ma_assistant_info_list_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the app id of the specified handle.
-  /// @since_tizen 5.5
+  /// Gets the app id of the specified handle.
   ///
-  /// @remarks You must not release @a app_id using free().
-  /// @param[in] handle The handle to the assistant's information
-  /// @param[out] app_id The application ID of the given assistant handle
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Remarks:**
+  /// - You must not release `app_id` using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the assistant's information
+  /// - `app_id` (out): The application ID of the given assistant handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_INVALID_PARAMETER`: Invalid parameter
   int ma_assistant_info_get_app_id(
     ma_assistant_info_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> app_id,
@@ -789,16 +1063,22 @@ class Tizen90Ma {
           int Function(
               ma_assistant_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the enabled status of the specified handle.
-  /// @since_tizen 5.5
+  /// Gets the enabled status of the specified handle.
   ///
-  /// @param[in] handle The handle to the assistant's information
-  /// @param[out] status The enable status of the given assistant handle
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the assistant's information
+  /// - `status` (out): The enable status of the given assistant handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_INVALID_PARAMETER`: Invalid parameter
   int ma_assistant_info_get_enabled_status(
     ma_assistant_info_h handle,
     ffi.Pointer<ffi.Bool> status,
@@ -817,20 +1097,29 @@ class Tizen90Ma {
       _ma_assistant_info_get_enabled_statusPtr.asFunction<
           int Function(ma_assistant_info_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets the recording audio source type.
-  /// @since_tizen 5.5
+  /// Gets the recording audio source type.
   ///
-  /// @remarks You must release @a type using free().
-  /// @param[out] type The audio source type
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MA_ERROR_INVALID_STATE Invalid state
-  /// @retval #MA_ERROR_OPERATION_FAILED Operation failed
+  /// **Remarks:**
+  /// - You must release `type` using free().
   ///
-  /// @pre The state should be #MA_STATE_READY.
+  /// **Parameters:**
+  /// - `type` (out): The audio source type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MA_ERROR_INVALID_STATE`: Invalid state
+  /// - `MA_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **Preconditions:**
+  /// - The state should be `MA_STATE_READY`.
   int ma_get_recording_audio_source_type(
     ffi.Pointer<ffi.Pointer<ffi.Char>> type,
   ) {
@@ -847,23 +1136,36 @@ class Tizen90Ma {
       _ma_get_recording_audio_source_typePtr
           .asFunction<int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the background volume.
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/volume.set
+  /// Sets the background volume.
   ///
-  /// @remarks The @a ratio must be a value between 0.0 and 1.0 (inclusive).
-  /// @param[in] ratio The volume ratio to be set
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MA_ERROR_INVALID_STATE Invalid state
-  /// @retval #MA_ERROR_OPERATION_FAILED Operation failed
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre The state should be #MA_STATE_READY.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/volume.set>
+  ///
+  /// **Remarks:**
+  /// - The `ratio` must be a value between 0.0 and 1.0 (inclusive).
+  ///
+  /// **Parameters:**
+  /// - `ratio` (in): The volume ratio to be set
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MA_ERROR_INVALID_STATE`: Invalid state
+  /// - `MA_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **Preconditions:**
+  /// - The state should be `MA_STATE_READY`.
   int ma_set_background_volume(
     double ratio,
   ) {
@@ -878,23 +1180,36 @@ class Tizen90Ma {
   late final _ma_set_background_volume =
       _ma_set_background_volumePtr.asFunction<int Function(double)>();
 
-  /// @brief Sets the preprocessing allow mode.
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
+  /// Sets the preprocessing allow mode.
   ///
-  /// @remarks If the @a app_id is NULL, allow mode will be applied regardless of app_id.
-  /// @param[in] mode The preprocessing allow mode to be set
-  /// @param[in] app_id The application ID of the assistant to perform preprocessing
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MA_ERROR_INVALID_STATE Invalid state
-  /// @retval #MA_ERROR_OPERATION_FAILED Operation failed
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre The state should be #MA_STATE_READY.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Remarks:**
+  /// - If the `app_id` is NULL, allow mode will be applied regardless of app_id.
+  ///
+  /// **Parameters:**
+  /// - `mode` (in): The preprocessing allow mode to be set
+  /// - `app_id` (in): The application ID of the assistant to perform preprocessing
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MA_ERROR_INVALID_STATE`: Invalid state
+  /// - `MA_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **Preconditions:**
+  /// - The state should be `MA_STATE_READY`.
   int ma_set_preprocessing_allow_mode(
     int mode,
     ffi.Pointer<ffi.Char> app_id,
@@ -913,21 +1228,30 @@ class Tizen90Ma {
       _ma_set_preprocessing_allow_modePtr
           .asFunction<int Function(int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the preprocessing information changed callback.
-  /// @since_tizen 5.5
+  /// Sets the preprocessing information changed callback.
   ///
-  /// @param[in] callback The callback
-  /// @param[in] user_data The user data passed to the callback function
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MA_ERROR_INVALID_STATE Invalid state
+  /// **Parameters:**
+  /// - `callback` (in): The callback
+  /// - `user_data` (in): The user data passed to the callback function
   ///
-  /// @pre The state should be #MA_STATE_INITIALIZED.
-  /// @see ma_preprocessing_information_changed_cb()
-  /// @see ma_unset_preprocessing_information_changed_cb()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MA_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `MA_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `ma_preprocessing_information_changed_cb()`
+  /// - `ma_unset_preprocessing_information_changed_cb()`
   int ma_set_preprocessing_information_changed_cb(
     ma_preprocessing_information_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -948,17 +1272,25 @@ class Tizen90Ma {
           int Function(ma_preprocessing_information_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the preprocessing information changed callback.
-  /// @since_tizen 5.5
+  /// Unsets the preprocessing information changed callback.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_INVALID_STATE Invalid state
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @pre The state should be #MA_STATE_INITIALIZED.
-  /// @see ma_preprocessing_information_changed_cb()
-  /// @see ma_set_preprocessing_information_changed_cb()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `MA_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `ma_preprocessing_information_changed_cb()`
+  /// - `ma_set_preprocessing_information_changed_cb()`
   int ma_unset_preprocessing_information_changed_cb() {
     return _ma_unset_preprocessing_information_changed_cb();
   }
@@ -970,21 +1302,32 @@ class Tizen90Ma {
       _ma_unset_preprocessing_information_changed_cbPtr
           .asFunction<int Function()>();
 
-  /// @brief Sends the preprocessing result.
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
+  /// Sends the preprocessing result.
   ///
-  /// @param[in] is_success The result value to be sent, indicating whether the preprocessing succeeded or not
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MA_ERROR_INVALID_STATE Invalid state
-  /// @retval #MA_ERROR_OPERATION_FAILED Operation failed
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre The state should be #MA_STATE_READY.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `is_success` (in): The result value to be sent, indicating whether the preprocessing succeeded or not
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MA_ERROR_INVALID_STATE`: Invalid state
+  /// - `MA_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **Preconditions:**
+  /// - The state should be `MA_STATE_READY`.
   int ma_send_preprocessing_result(
     bool is_success,
   ) {
@@ -999,23 +1342,27 @@ class Tizen90Ma {
   late final _ma_send_preprocessing_result =
       _ma_send_preprocessing_resultPtr.asFunction<int Function(bool)>();
 
-  /// @brief Sets whether multi-assistant service should send wake word audio data.
-  /// @details If set to true, wake word audio data will be included in audio streaming data.<br/>
-  /// The wake word is the way you initiate a conversation with your vocal assistant.
-  /// It is a predefined keyword automatically detected from continuously streaming audio.<br/>
-  /// Use ma_set_audio_streaming_data_section_changed_cb() to be informed about
-  /// switching between wake word and regular audio data.
-  /// @since_tizen 5.5
+  /// Sets whether multi-assistant service should send wake word audio data.
   ///
-  /// @param[in] require The require value to be set
+  /// If set to true, wake word audio data will be included in audio streaming data.<br/> The wake word is the way you initiate a conversation with your vocal assistant. It is a predefined keyword automatically detected from continuously streaming audio.<br/> Use ma_set_audio_streaming_data_section_changed_cb() to be informed about switching between wake word and regular audio data.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_INVALID_STATE Invalid state
-  /// @retval #MA_ERROR_OPERATION_FAILED Operation failed
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @pre The state should be #MA_STATE_READY.
+  /// **Parameters:**
+  /// - `require` (in): The require value to be set
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_INVALID_STATE`: Invalid state
+  /// - `MA_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **Preconditions:**
+  /// - The state should be `MA_STATE_READY`.
   int ma_set_wake_word_audio_require_flag(
     bool require,
   ) {
@@ -1030,21 +1377,30 @@ class Tizen90Ma {
   late final _ma_set_wake_word_audio_require_flag =
       _ma_set_wake_word_audio_require_flagPtr.asFunction<int Function(bool)>();
 
-  /// @brief Sets the section changed callback for audio streaming data.
-  /// @since_tizen 5.5
+  /// Sets the section changed callback for audio streaming data.
   ///
-  /// @param[in] callback The callback
-  /// @param[in] user_data The user data passed to the callback function
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MA_ERROR_INVALID_STATE Invalid state
+  /// **Parameters:**
+  /// - `callback` (in): The callback
+  /// - `user_data` (in): The user data passed to the callback function
   ///
-  /// @pre The state should be #MA_STATE_INITIALIZED.
-  /// @see ma_audio_streaming_data_section_changed_cb()
-  /// @see ma_unset_audio_streaming_data_section_changed_cb()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MA_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `MA_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `ma_audio_streaming_data_section_changed_cb()`
+  /// - `ma_unset_audio_streaming_data_section_changed_cb()`
   int ma_set_audio_streaming_data_section_changed_cb(
     ma_audio_streaming_data_section_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -1065,17 +1421,25 @@ class Tizen90Ma {
           int Function(ma_audio_streaming_data_section_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the section changed callback for audio streaming data.
-  /// @since_tizen 5.5
+  /// Unsets the section changed callback for audio streaming data.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_INVALID_STATE Invalid state
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @pre The state should be #MA_STATE_INITIALIZED.
-  /// @see ma_audio_streaming_data_section_changed_cb()
-  /// @see ma_set_audio_streaming_data_section_changed_cb()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `MA_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `ma_audio_streaming_data_section_changed_cb()`
+  /// - `ma_set_audio_streaming_data_section_changed_cb()`
   int ma_unset_audio_streaming_data_section_changed_cb() {
     return _ma_unset_audio_streaming_data_section_changed_cb();
   }
@@ -1087,24 +1451,27 @@ class Tizen90Ma {
       _ma_unset_audio_streaming_data_section_changed_cbPtr
           .asFunction<int Function()>();
 
-  /// @brief Sets the language configuration for wake word detection.
-  /// @details The language configuration of the assistant that invoked
-  /// this function will be changed and language configurations
-  /// of other assistants will remain unchanged.
-  /// @since_tizen 6.0
+  /// Sets the language configuration for wake word detection.
   ///
-  /// @param[in] language The language configuration that will be used for wake word detection.
-  /// It should be denoted by two-letter code defined by ISO 639-1,
-  /// optionally combined with two-letter code defined by ISO 3166.
-  /// For example, "ko_KR" for Korean, "en_US" for American English.
+  /// The language configuration of the assistant that invoked this function will be changed and language configurations of other assistants will remain unchanged.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MA_ERROR_INVALID_STATE Invalid state
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @pre The state should be #MA_STATE_READY.
+  /// **Parameters:**
+  /// - `language` (in): The language configuration that will be used for wake word detection. It should be denoted by two-letter code defined by ISO 639-1, optionally combined with two-letter code defined by ISO 3166. For example, "ko_KR" for Korean, "en_US" for American English.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MA_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `MA_STATE_READY`.
   int ma_set_assistant_wakeup_language(
     ffi.Pointer<ffi.Char> language,
   ) {
@@ -1120,21 +1487,30 @@ class Tizen90Ma {
       _ma_set_assistant_wakeup_languagePtr
           .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the service state changed callback.
-  /// @since_tizen 6.0
+  /// Sets the service state changed callback.
   ///
-  /// @param[in] callback The callback
-  /// @param[in] user_data The user data passed to the callback function
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MA_ERROR_INVALID_STATE Invalid state
+  /// **Parameters:**
+  /// - `callback` (in): The callback
+  /// - `user_data` (in): The user data passed to the callback function
   ///
-  /// @pre The state should be #MA_STATE_INITIALIZED.
-  /// @see ma_service_state_changed_cb()
-  /// @see ma_unset_service_state_changed_cb()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MA_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `MA_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `ma_service_state_changed_cb()`
+  /// - `ma_unset_service_state_changed_cb()`
   int ma_set_service_state_changed_cb(
     ma_service_state_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -1153,17 +1529,25 @@ class Tizen90Ma {
       _ma_set_service_state_changed_cbPtr.asFunction<
           int Function(ma_service_state_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the service state changed callback.
-  /// @since_tizen 6.0
+  /// Unsets the service state changed callback.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_INVALID_STATE Invalid state
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @pre The state should be #MA_STATE_INITIALIZED.
-  /// @see ma_service_state_changed_cb()
-  /// @see ma_set_service_state_changed_cb()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `MA_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `ma_service_state_changed_cb()`
+  /// - `ma_set_service_state_changed_cb()`
   int ma_unset_service_state_changed_cb() {
     return _ma_unset_service_state_changed_cb();
   }
@@ -1174,21 +1558,30 @@ class Tizen90Ma {
   late final _ma_unset_service_state_changed_cb =
       _ma_unset_service_state_changed_cbPtr.asFunction<int Function()>();
 
-  /// @brief Sets a voice key status changed callback.
-  /// @since_tizen 6.0
+  /// Sets a voice key status changed callback.
   ///
-  /// @param[in] callback The callback
-  /// @param[in] user_data The user data passed to the callback function
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MA_ERROR_INVALID_STATE Invalid state
+  /// **Parameters:**
+  /// - `callback` (in): The callback
+  /// - `user_data` (in): The user data passed to the callback function
   ///
-  /// @pre The state should be #MA_STATE_INITIALIZED.
-  /// @see ma_voice_key_status_changed_cb()
-  /// @see ma_unset_voice_key_status_changed_cb()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MA_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `MA_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `ma_voice_key_status_changed_cb()`
+  /// - `ma_unset_voice_key_status_changed_cb()`
   int ma_set_voice_key_status_changed_cb(
     ma_voice_key_status_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -1208,17 +1601,25 @@ class Tizen90Ma {
           int Function(
               ma_voice_key_status_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets a voice key status changed callback.
-  /// @since_tizen 6.0
+  /// Unsets a voice key status changed callback.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_INVALID_STATE Invalid state
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @pre The state should be #MA_STATE_INITIALIZED.
-  /// @see ma_set_voice_key_status_changed_cb()
-  /// @see ma_voice_key_status_changed_cb()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `MA_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `ma_set_voice_key_status_changed_cb()`
+  /// - `ma_voice_key_status_changed_cb()`
   int ma_unset_voice_key_status_changed_cb() {
     return _ma_unset_voice_key_status_changed_cb();
   }
@@ -1229,29 +1630,29 @@ class Tizen90Ma {
   late final _ma_unset_voice_key_status_changed_cb =
       _ma_unset_voice_key_status_changed_cbPtr.asFunction<int Function()>();
 
-  /// @brief Adds a group of wake words for activating assistant.
-  /// @details A <word, language> pair with the same word and the different language
-  /// identifies a different operation.
-  /// For example, <"Hi Tizen", "en_US"> and <"Hi Tizen", "en_GB">
-  /// will operate differently. When the wake up language is set to "en_GB",
-  /// although  <"Hi Tizen", "en_US"> is added, then
-  /// "Hi Tizen" won't wake up the Tizen voice assistant.
-  /// <"Hi Tizen", "en_GB"> have to be added for this use case.\n
-  /// Adding the same word twice does not return any errors.
-  /// @since_tizen 6.0
+  /// Adds a group of wake words for activating assistant.
   ///
-  /// @param[in] wake_word The wake word to be added to the list of wake words
-  /// @param[in] language The language code for which the word will be added.
-  /// The language is identified by its code (e.g. "en_US").
+  /// A <word, language> pair with the same word and the different language identifies a different operation. For example, <"Hi Tizen", "en_US"> and <"Hi Tizen", "en_GB"> will operate differently. When the wake up language is set to "en_GB", although <"Hi Tizen", "en_US"> is added, then "Hi Tizen" won't wake up the Tizen voice assistant. <"Hi Tizen", "en_GB"> have to be added for this use case. Adding the same word twice does not return any errors.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MA_ERROR_INVALID_STATE Invalid state
-  /// @retval #MA_ERROR_OPERATION_FAILED Operation failed
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @pre The state should be #MA_STATE_READY.
+  /// **Parameters:**
+  /// - `wake_word` (in): The wake word to be added to the list of wake words
+  /// - `language` (in): The language code for which the word will be added. The language is identified by its code (e.g. "en_US").
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MA_ERROR_INVALID_STATE`: Invalid state
+  /// - `MA_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **Preconditions:**
+  /// - The state should be `MA_STATE_READY`.
   int ma_add_wake_word(
     ffi.Pointer<ffi.Char> wake_word,
     ffi.Pointer<ffi.Char> language,
@@ -1269,26 +1670,29 @@ class Tizen90Ma {
   late final _ma_add_wake_word = _ma_add_wake_wordPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Removes a group of wake words for activating assistant.
-  /// @details A <word, language> pair with the same word and the different language
-  /// identifies a different operation.
-  /// For example, <"Hi Tizen", "en_US"> and <"Hi Tizen", "en_GB">
-  /// will operate differently.
-  /// Removing an unregistered word doesn't return any errors.
-  /// @since_tizen 6.0
+  /// Removes a group of wake words for activating assistant.
   ///
-  /// @param[in] wake_word The wake word to be removed from the list of wake words
-  /// @param[in] language The language code for which the word will be removed.
-  /// The language is identified by its code (e.g. "en_US").
+  /// A <word, language> pair with the same word and the different language identifies a different operation. For example, <"Hi Tizen", "en_US"> and <"Hi Tizen", "en_GB"> will operate differently. Removing an unregistered word doesn't return any errors.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MA_ERROR_INVALID_STATE Invalid state
-  /// @retval #MA_ERROR_OPERATION_FAILED Operation failed
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @pre The state should be #MA_STATE_READY.
+  /// **Parameters:**
+  /// - `wake_word` (in): The wake word to be removed from the list of wake words
+  /// - `language` (in): The language code for which the word will be removed. The language is identified by its code (e.g. "en_US").
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MA_ERROR_INVALID_STATE`: Invalid state
+  /// - `MA_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **Preconditions:**
+  /// - The state should be `MA_STATE_READY`.
   int ma_remove_wake_word(
     ffi.Pointer<ffi.Char> wake_word,
     ffi.Pointer<ffi.Char> language,
@@ -1306,22 +1710,33 @@ class Tizen90Ma {
   late final _ma_remove_wake_word = _ma_remove_wake_wordPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Retrieves wake word information of the last wakeup event.
-  /// @since_tizen 7.0
+  /// Retrieves wake word information of the last wakeup event.
   ///
-  /// @remarks You must release @a wake_word using free().
-  /// @a wake_word can be changed whenever ma_active_state_changed_cb() is called.
-  /// @param[out] wake_word The wake word information, if exists.
+  /// **Since Tizen:**
+  /// - 7.0
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MA_ERROR_INVALID_STATE Invalid state
-  /// @retval #MA_ERROR_OPERATION_FAILED Operation failed
+  /// **Remarks:**
+  /// - You must release `wake_word` using free().
+  /// - `wake_word` can be changed whenever ma_active_state_changed_cb() is called.
   ///
-  /// @pre The state should be #MA_STATE_READY.
-  /// @see ma_active_state_changed_cb()
+  /// **Parameters:**
+  /// - `wake_word` (out): The wake word information, if exists.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MA_ERROR_INVALID_STATE`: Invalid state
+  /// - `MA_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **Preconditions:**
+  /// - The state should be `MA_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `ma_active_state_changed_cb()`
   int ma_get_wakeup_info_wake_word(
     ffi.Pointer<ffi.Pointer<ffi.Char>> wake_word,
   ) {
@@ -1337,27 +1752,37 @@ class Tizen90Ma {
   late final _ma_get_wakeup_info_wake_word = _ma_get_wakeup_info_wake_wordPtr
       .asFunction<int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Retrieves extra data information of the last wakeup event.
-  /// @details When required, wakeup engine adds extra data information
-  /// that can be processed by the voice assistant.
-  /// The information MUST be defined by both wakeup engine and voice assistant.
-  /// @since_tizen 7.0
+  /// Retrieves extra data information of the last wakeup event.
   ///
-  /// @remarks You must release @a extra_data and @a extra_data_desc using free().
-  /// @a extra_data can be changed whenever ma_active_state_changed_cb() is called.
-  /// @param[out] extra_data The extra data information, if exists.
-  /// @param[out] extra_data_length The length of extra data.
-  /// @param[out] extra_data_desc The string value describing the type of extra data.
+  /// When required, wakeup engine adds extra data information that can be processed by the voice assistant. The information MUST be defined by both wakeup engine and voice assistant.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MA_ERROR_NONE Successful
-  /// @retval #MA_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MA_ERROR_INVALID_STATE Invalid state
-  /// @retval #MA_ERROR_OPERATION_FAILED Operation failed
+  /// **Since Tizen:**
+  /// - 7.0
   ///
-  /// @pre The state should be #MA_STATE_READY.
-  /// @see ma_active_state_changed_cb()
+  /// **Remarks:**
+  /// - You must release `extra_data` and `extra_data_desc` using free().
+  /// - `extra_data` can be changed whenever ma_active_state_changed_cb() is called.
+  ///
+  /// **Parameters:**
+  /// - `extra_data` (out): The extra data information, if exists.
+  /// - `extra_data_length` (out): The length of extra data.
+  /// - `extra_data_desc` (out): The string value describing the type of extra data.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MA_ERROR_NONE`: Successful
+  /// - `MA_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MA_ERROR_INVALID_STATE`: Invalid state
+  /// - `MA_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **Preconditions:**
+  /// - The state should be `MA_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `ma_active_state_changed_cb()`
   int ma_get_wakeup_info_extra_data(
     ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>> extra_data,
     ffi.Pointer<ffi.Int> extra_data_length,
@@ -1381,8 +1806,11 @@ class Tizen90Ma {
               ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 }
 
-/// @brief Enumerations for multi-assistant client state.
-/// @since_tizen 5.0
+/// Enumerations for multi-assistant client state.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class ma_state_e {
   /// < 'None' state
   static const int MA_STATE_NONE = 0;
@@ -1394,8 +1822,11 @@ abstract class ma_state_e {
   static const int MA_STATE_READY = 2;
 }
 
-/// @brief Enumerations for audio channels.
-/// @since_tizen 5.0
+/// Enumerations for audio channels.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class ma_audio_channel_e {
   /// < 1 channel, mono
   static const int MA_AUDIO_CHANNEL_MONO = 0;
@@ -1404,8 +1835,11 @@ abstract class ma_audio_channel_e {
   static const int MA_AUDIO_CHANNEL_STEREO = 1;
 }
 
-/// @brief Enumerations for audio types.
-/// @since_tizen 5.0
+/// Enumerations for audio types.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class ma_audio_type_e {
   /// < Signed 16bit audio type, Little endian
   static const int MA_AUDIO_TYPE_PCM_S16_LE = 0;
@@ -1414,47 +1848,49 @@ abstract class ma_audio_type_e {
   static const int MA_AUDIO_TYPE_PCM_U8 = 1;
 }
 
-/// @brief Called when the client state is changed.
-/// @since_tizen 5.0
+/// Called when the client state is changed.
 ///
-/// @param[in] previous The previous state
-/// @param[in] current The current state
-/// @param[in] user_data The user data passed from the callback registration function
+/// **Since Tizen:**
+/// - 5.0
+///
+/// **Parameters:**
+/// - `previous` (in): The previous state
+/// - `current` (in): The current state
+/// - `user_data` (in): The user data passed from the callback registration function
+/// @nodoc
 typedef ma_state_changed_cb
     = ffi.Pointer<ffi.NativeFunction<ma_state_changed_cbFunction>>;
+/// @nodoc
 typedef ma_state_changed_cbFunction = ffi.Void Function(
     ffi.Int32 previous, ffi.Int32 current, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartma_state_changed_cbFunction = void Function(
     int previous, int current, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the error is occurred.
-/// @details The following error codes can be received: \n
-/// #MA_ERROR_NONE:                         Success \n
-/// #MA_ERROR_OUT_OF_MEMORY:                Out of Memory \n
-/// #MA_ERROR_IO_ERROR:                     I/O error \n
-/// #MA_ERROR_INVALID_PARAMETER:            Invalid parameter \n
-/// #MA_ERROR_TIMED_OUT:                    No answer from service \n
-/// #MA_ERROR_RECORDER_BUSY:                Busy recorder \n
-/// #MA_ERROR_PERMISSION_DENIED:            Permission denied \n
-/// #MA_ERROR_NOT_SUPPORTED:                Multi-assistant NOT supported \n
-/// #MA_ERROR_INVALID_STATE:                Invalid state \n
-/// #MA_ERROR_INVALID_LANGUAGE:             Invalid language \n
-/// #MA_ERROR_ENGINE_NOT_FOUND:             No available engine \n
-/// #MA_ERROR_OPERATION_FAILED:             Operation failed \n
-/// #MA_ERROR_SERVICE_RESET:                Service daemon reset \n
-/// #MA_ERROR_NOT_SUPPORTED_FEATURE:        Not supported feature of current engine \n
-/// @since_tizen 5.0
+/// Called when the error is occurred.
 ///
-/// @param[in] reason The error reason
-/// @param[in] user_data The user data passed from the callback registration function
+/// The following error codes can be received: `MA_ERROR_NONE`: Success `MA_ERROR_OUT_OF_MEMORY`: Out of Memory `MA_ERROR_IO_ERROR`: I/O error `MA_ERROR_INVALID_PARAMETER`: Invalid parameter `MA_ERROR_TIMED_OUT`: No answer from service `MA_ERROR_RECORDER_BUSY`: Busy recorder `MA_ERROR_PERMISSION_DENIED`: Permission denied `MA_ERROR_NOT_SUPPORTED`: Multi-assistant NOT supported `MA_ERROR_INVALID_STATE`: Invalid state `MA_ERROR_INVALID_LANGUAGE`: Invalid language `MA_ERROR_ENGINE_NOT_FOUND`: No available engine `MA_ERROR_OPERATION_FAILED`: Operation failed `MA_ERROR_SERVICE_RESET`: Service daemon reset `MA_ERROR_NOT_SUPPORTED_FEATURE`: Not supported feature of current engine
+///
+/// **Since Tizen:**
+/// - 5.0
+///
+/// **Parameters:**
+/// - `reason` (in): The error reason
+/// - `user_data` (in): The user data passed from the callback registration function
+/// @nodoc
 typedef ma_error_cb = ffi.Pointer<ffi.NativeFunction<ma_error_cbFunction>>;
+/// @nodoc
 typedef ma_error_cbFunction = ffi.Void Function(
     ffi.Int32 reason, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartma_error_cbFunction = void Function(
     int reason, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumerations for multi-assistant error codes.
-/// @since_tizen 5.0
+/// Enumerations for multi-assistant error codes.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class ma_error_e {
   /// < Successful
   static const int MA_ERROR_NONE = 0;
@@ -1499,48 +1935,69 @@ abstract class ma_error_e {
   static const int MA_ERROR_NOT_SUPPORTED_FEATURE = -50331626;
 }
 
-/// @brief Called when the default language is changed.
-/// @since_tizen 5.0
-/// @remarks The @a previous can be used only in the callback. To use outside, make a copy.
-/// The @a current can be used only in the callback. To use outside, make a copy.
+/// Called when the default language is changed.
 ///
-/// @param[in] previous The previous language
-/// @param[in] current The current language
-/// @param[in] user_data The user data passed from the callback registration function
+/// **Since Tizen:**
+/// - 5.0
 ///
-/// @see ma_set_language_changed_cb()
-/// @see ma_unset_language_changed_cb()
+/// **Remarks:**
+/// - The `previous` can be used only in the callback. To use outside, make a copy.
+/// - The `current` can be used only in the callback. To use outside, make a copy.
+///
+/// **Parameters:**
+/// - `previous` (in): The previous language
+/// - `current` (in): The current language
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `ma_set_language_changed_cb()`
+/// - `ma_unset_language_changed_cb()`
+/// @nodoc
 typedef ma_language_changed_cb
     = ffi.Pointer<ffi.NativeFunction<ma_language_changed_cbFunction>>;
+/// @nodoc
 typedef ma_language_changed_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> previous,
     ffi.Pointer<ffi.Char> current,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartma_language_changed_cbFunction = void Function(
     ffi.Pointer<ffi.Char> previous,
     ffi.Pointer<ffi.Char> current,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the multi-assistant service sends audio streaming.
-/// @since_tizen 5.0
-/// @remarks The @a buffer should not be released and can be used only in the callback. To use outside, make a copy.
+/// Called when the multi-assistant service sends audio streaming.
 ///
-/// @param[in] event The audio streaming event
-/// @param[in] buffer The audio streaming data
-/// @param[in] len The length of the audio streaming data
-/// @param[in] user_data The user data passed from the callback registration function
+/// **Since Tizen:**
+/// - 5.0
 ///
-/// @see ma_set_audio_streaming_cb()
-/// @see ma_unset_audio_streaming_cb()
+/// **Remarks:**
+/// - The `buffer` should not be released and can be used only in the callback. To use outside, make a copy.
+///
+/// **Parameters:**
+/// - `event` (in): The audio streaming event
+/// - `buffer` (in): The audio streaming data
+/// - `len` (in): The length of the audio streaming data
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `ma_set_audio_streaming_cb()`
+/// - `ma_unset_audio_streaming_cb()`
+/// @nodoc
 typedef ma_audio_streaming_cb
     = ffi.Pointer<ffi.NativeFunction<ma_audio_streaming_cbFunction>>;
+/// @nodoc
 typedef ma_audio_streaming_cbFunction = ffi.Void Function(ffi.Int32 event,
     ffi.Pointer<ffi.Char> buffer, ffi.Int len, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartma_audio_streaming_cbFunction = void Function(int event,
     ffi.Pointer<ffi.Char> buffer, int len, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumerations for multi-assistant audio streaming events.
-/// @since_tizen 5.0
+/// Enumerations for multi-assistant audio streaming events.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class ma_audio_streaming_event_e {
   /// < Failed
   static const int MA_AUDIO_STREAMING_EVENT_FAIL = -1;
@@ -1555,8 +2012,11 @@ abstract class ma_audio_streaming_event_e {
   static const int MA_AUDIO_STREAMING_EVENT_FINISH = 3;
 }
 
-/// @brief Enumerations for ASR result events.
-/// @since_tizen 5.0
+/// Enumerations for ASR result events.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class ma_asr_result_event_e {
   /// < ASR result event for partial result
   static const int MA_ASR_RESULT_EVENT_PARTIAL_RESULT = 0;
@@ -1568,8 +2028,11 @@ abstract class ma_asr_result_event_e {
   static const int MA_ASR_RESULT_EVENT_ERROR = 2;
 }
 
-/// @brief Enumerations for recognition result events.
-/// @since_tizen 5.5
+/// Enumerations for recognition result events.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class ma_recognition_result_event_e {
   /// < Recognition succeeded
   static const int MA_RECOGNITION_RESULT_EVENT_SUCCESS = 0;
@@ -1584,21 +2047,30 @@ abstract class ma_recognition_result_event_e {
   static const int MA_RECOGNITION_RESULT_EVENT_FALSE_TRIGGER = 3;
 }
 
-/// @brief Called when the active state is changed.
-/// @since_tizen 5.5
+/// Called when the active state is changed.
 ///
-/// @param[in] previous The previous active state
-/// @param[in] current The current active state
-/// @param[in] user_data The user data passed from the callback registration function
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **Parameters:**
+/// - `previous` (in): The previous active state
+/// - `current` (in): The current active state
+/// - `user_data` (in): The user data passed from the callback registration function
+/// @nodoc
 typedef ma_active_state_changed_cb
     = ffi.Pointer<ffi.NativeFunction<ma_active_state_changed_cbFunction>>;
+/// @nodoc
 typedef ma_active_state_changed_cbFunction = ffi.Void Function(
     ffi.Int32 previous, ffi.Int32 current, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartma_active_state_changed_cbFunction = void Function(
     int previous, int current, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumerations for multi-assistant active state.
-/// @since_tizen 5.5
+/// Enumerations for multi-assistant active state.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class ma_active_state_e {
   /// < 'Inactive' state
   static const int MA_ACTIVE_STATE_INACTIVE = 0;
@@ -1610,8 +2082,11 @@ abstract class ma_active_state_e {
   static const int MA_ACTIVE_STATE_PREPROCESSING = 2;
 }
 
-/// @brief Enumerations for speech data types.
-/// @since_tizen 5.5
+/// Enumerations for speech data types.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class ma_audio_streaming_data_type_e {
   /// < Current utterance
   static const int MA_AUDIO_STREAMING_DATA_TYPE_CURRENT_UTTERANCE = 0;
@@ -1623,8 +2098,11 @@ abstract class ma_audio_streaming_data_type_e {
   static const int MA_AUDIO_STREAMING_DATA_TYPE_FOLLOW_UP_SPEECH = 2;
 }
 
-/// @brief Enumerations for individual assistant's voice feedback state.
-/// @since_tizen 5.5
+/// Enumerations for individual assistant's voice feedback state.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class ma_voice_feedback_state_e {
   /// < No voice feedback being provided
   static const int MA_VOICE_FEEDBACK_STATE_NONE = 0;
@@ -1633,39 +2111,61 @@ abstract class ma_voice_feedback_state_e {
   static const int MA_VOICE_FEEDBACK_STATE_STARTED = 1;
 }
 
-/// @brief Called when a wakeup engine specific command is retrieved.
-/// @since_tizen 5.5
-/// @remarks The @a command should not be released and can be used only in the callback. To use outside, make a copy.
+/// Called when a wakeup engine specific command is retrieved.
 ///
-/// @param[in] command The wakeup engine specific command
-/// @param[in] user_data The user data passed from the callback registration function
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **Remarks:**
+/// - The `command` should not be released and can be used only in the callback. To use outside, make a copy.
+///
+/// **Parameters:**
+/// - `command` (in): The wakeup engine specific command
+/// - `user_data` (in): The user data passed from the callback registration function
+/// @nodoc
 typedef ma_wakeup_engine_command_cb
     = ffi.Pointer<ffi.NativeFunction<ma_wakeup_engine_command_cbFunction>>;
+/// @nodoc
 typedef ma_wakeup_engine_command_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> command, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartma_wakeup_engine_command_cbFunction = void Function(
     ffi.Pointer<ffi.Char> command, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called whenever to get the assistant information of each installed assistant.
-/// @since_tizen 5.5
+/// Called whenever to get the assistant information of each installed assistant.
 ///
-/// @remarks The @a handle should not be released.
-/// @remarks The @a handle is managed by the platform and will be released when application exits.
-/// @param[in] handle The handle of the assistant
-/// @param[in] user_data The user data passed from the callback registration function
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **Remarks:**
+/// - The `handle` should not be released.
+/// - The `handle` is managed by the platform and will be released when application exits.
+///
+/// **Parameters:**
+/// - `handle` (in): The handle of the assistant
+/// - `user_data` (in): The user data passed from the callback registration function
+/// @nodoc
 typedef ma_assistant_info_list_cb
     = ffi.Pointer<ffi.NativeFunction<ma_assistant_info_list_cbFunction>>;
+/// @nodoc
 typedef ma_assistant_info_list_cbFunction = ffi.Int Function(
     ma_assistant_info_h handle, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartma_assistant_info_list_cbFunction = int Function(
     ma_assistant_info_h handle, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief A handle to get assistant information.
-/// @since_tizen 5.5
+/// A handle to get assistant information.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 typedef ma_assistant_info_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Enumerations for allowing preprocessing by other voice assistants.
-/// @since_tizen 5.5
+/// Enumerations for allowing preprocessing by other voice assistants.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class ma_preprocessing_allow_mode_e {
   /// < No preprocessing allowed
   static const int MA_PREPROCESSING_ALLOW_NONE = 0;
@@ -1680,34 +2180,51 @@ abstract class ma_preprocessing_allow_mode_e {
   static const int MA_PREPROCESSING_ALLOW_ALL = 3;
 }
 
-/// @brief Called when the preprocessing information is changed.
-/// @since_tizen 5.5
+/// Called when the preprocessing information is changed.
 ///
-/// @remarks The @a app_id should not be released and can be used only in the callback. To use outside, make a copy.
-/// @remarks If the @a app_id is NULL, it means there is no preprocessing voice assistant available.
-/// @param[in] app_id The application id of current preprocessing voice assistant
-/// @param[in] user_data The user data passed from the callback registration function
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **Remarks:**
+/// - The `app_id` should not be released and can be used only in the callback. To use outside, make a copy.
+/// - If the `app_id` is NULL, it means there is no preprocessing voice assistant available.
+///
+/// **Parameters:**
+/// - `app_id` (in): The application id of current preprocessing voice assistant
+/// - `user_data` (in): The user data passed from the callback registration function
+/// @nodoc
 typedef ma_preprocessing_information_changed_cb = ffi.Pointer<
     ffi.NativeFunction<ma_preprocessing_information_changed_cbFunction>>;
+/// @nodoc
 typedef ma_preprocessing_information_changed_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> app_id, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartma_preprocessing_information_changed_cbFunction = void Function(
     ffi.Pointer<ffi.Char> app_id, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the section of audio streaming data is changed.
-/// @since_tizen 5.5
+/// Called when the section of audio streaming data is changed.
 ///
-/// @param[in] section The current section information of audio streaming data
-/// @param[in] user_data The user data passed from the callback registration function
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **Parameters:**
+/// - `section` (in): The current section information of audio streaming data
+/// - `user_data` (in): The user data passed from the callback registration function
+/// @nodoc
 typedef ma_audio_streaming_data_section_changed_cb = ffi.Pointer<
     ffi.NativeFunction<ma_audio_streaming_data_section_changed_cbFunction>>;
+/// @nodoc
 typedef ma_audio_streaming_data_section_changed_cbFunction = ffi.Void Function(
     ffi.Int32 section, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartma_audio_streaming_data_section_changed_cbFunction = void Function(
     int section, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumerations for section information of audio streaming data.
-/// @since_tizen 5.5
+/// Enumerations for section information of audio streaming data.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class ma_audio_streaming_data_section_e {
   /// < Utterance section started
   static const int MA_AUDIO_STREAMING_DATA_SECTION_UTTERANCE = 0;
@@ -1716,21 +2233,30 @@ abstract class ma_audio_streaming_data_section_e {
   static const int MA_AUDIO_STREAMING_DATA_SECTION_WAKE_WORD = 1;
 }
 
-/// @brief Called when the service state is changed.
-/// @since_tizen 6.0
+/// Called when the service state is changed.
 ///
-/// @param[in] previous The previous service state
-/// @param[in] current The new service state
-/// @param[in] user_data The user data passed from the callback registration function
+/// **Since Tizen:**
+/// - 6.0
+///
+/// **Parameters:**
+/// - `previous` (in): The previous service state
+/// - `current` (in): The new service state
+/// - `user_data` (in): The user data passed from the callback registration function
+/// @nodoc
 typedef ma_service_state_changed_cb
     = ffi.Pointer<ffi.NativeFunction<ma_service_state_changed_cbFunction>>;
+/// @nodoc
 typedef ma_service_state_changed_cbFunction = ffi.Void Function(
     ffi.Int32 previous, ffi.Int32 current, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartma_service_state_changed_cbFunction = void Function(
     int previous, int current, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumerations for multi-assistant service state.
-/// @since_tizen 6.0
+/// Enumerations for multi-assistant service state.
+///
+/// **Since Tizen:**
+/// - 6.0
+/// @nodoc
 abstract class ma_service_state_e {
   /// < 'Inactive' state
   static const int MA_SERVICE_STATE_INACTIVE = 0;
@@ -1748,27 +2274,35 @@ abstract class ma_service_state_e {
   static const int MA_SERVICE_STATE_VOICE_FEEDBACK = 4;
 }
 
-/// @brief Called when the multi-assistant service sends voice key status change event.
-/// @since_tizen 6.0
+/// Called when the multi-assistant service sends voice key status change event.
 ///
-/// @param[in] status The change of voice key status
-/// @param[in] user_data The user data passed from the callback registration function
+/// **Since Tizen:**
+/// - 6.0
 ///
-/// @see ma_set_voice_key_status_changed_cb()
-/// @see ma_unset_voice_key_status_changed_cb()
+/// **Parameters:**
+/// - `status` (in): The change of voice key status
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `ma_set_voice_key_status_changed_cb()`
+/// - `ma_unset_voice_key_status_changed_cb()`
+/// @nodoc
 typedef ma_voice_key_status_changed_cb
     = ffi.Pointer<ffi.NativeFunction<ma_voice_key_status_changed_cbFunction>>;
+/// @nodoc
 typedef ma_voice_key_status_changed_cbFunction = ffi.Void Function(
     ffi.Int32 status, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartma_voice_key_status_changed_cbFunction = void Function(
     int status, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumerations for voice key status change.
-/// @details When the voice key is pressed, the "pressed" state is reported.
-/// If the voice key gets released within the timeout value for tap events,
-/// the voice key status value will be reported as "released after tap".
-/// Otherwise, "released after push" will be reported.
-/// @since_tizen 6.0
+/// Enumerations for voice key status change.
+///
+/// When the voice key is pressed, the "pressed" state is reported. If the voice key gets released within the timeout value for tap events, the voice key status value will be reported as "released after tap". Otherwise, "released after push" will be reported.
+///
+/// **Since Tizen:**
+/// - 6.0
+/// @nodoc
 abstract class ma_voice_key_status_e {
   /// < 'Pressed' state
   static const int MA_VOICE_KEY_STATUS_PRESSED = 0;

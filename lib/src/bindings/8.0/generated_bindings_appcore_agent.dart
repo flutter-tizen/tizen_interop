@@ -1,3 +1,6 @@
+/// {@category 8.0/tizen}
+library tizen_interop_8_0.appcore_agent;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -11,6 +14,7 @@ import 'generated_bindings_capi_appfw_app_common.dart' as app_common;
 import 'generated_bindings_capi_appfw_app_control.dart' as app_control;
 
 /// Dart bindings for Tizen appcore-agent APIs.
+/// {@category 8.0/tizen}
 class Tizen80AppcoreAgent {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -26,21 +30,32 @@ class Tizen80AppcoreAgent {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Adds the system event handler.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks The service application can handle low memory event, low battery event, language setting changed event and region format changed event.
-  /// @param[out] handler The event handler
-  /// @param[in] event_type The system event type
-  /// @param[in] callback The callback function
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_ERROR_NONE Successful
-  /// @retval #APP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see app_event_type_e
-  /// @see app_event_cb()
-  /// @see service_app_remove_event_handler()
+  /// Adds the system event handler.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - The service application can handle low memory event, low battery event, language setting changed event and region format changed event.
+  ///
+  /// **Parameters:**
+  /// - `handler` (out): The event handler
+  /// - `event_type` (in): The system event type
+  /// - `callback` (in): The callback function
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_ERROR_NONE`: Successful
+  /// - `APP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `app_event_type_e`
+  /// - `app_event_cb()`
+  /// - `service_app_remove_event_handler()`
   int service_app_add_event_handler(
     ffi.Pointer<app_common.app_event_handler_h> handler,
     int event_type,
@@ -67,14 +82,23 @@ class Tizen80AppcoreAgent {
           int Function(ffi.Pointer<app_common.app_event_handler_h>, int,
               app_common.app_event_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Removes registered event handler.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] event_handler The event handler
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_ERROR_NONE Successful
-  /// @retval #APP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see service_app_add_event_handler()
+  /// Removes registered event handler.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `event_handler` (in): The event handler
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_ERROR_NONE`: Successful
+  /// - `APP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `service_app_add_event_handler()`
   int service_app_remove_event_handler(
     app_common.app_event_handler_h event_handler,
   ) {
@@ -90,25 +114,34 @@ class Tizen80AppcoreAgent {
       _service_app_remove_event_handlerPtr
           .asFunction<int Function(app_common.app_event_handler_h)>();
 
-  /// @brief Runs the main loop of the application until service_app_exit() is called.
-  /// @details This function is the main entry point of the Tizen service application.
-  /// This main loop supports event handling for the GMainLoop and the Ecore Main Loop.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] argc The argument count
-  /// @param[in] argv The argument vector
-  /// @param[in] callback The set of callback functions to handle application events
-  /// @param[in] user_data The user data to be passed to the callback functions
-  /// @return @c 0 on success,
-  /// otherwise a negative error value.
-  /// @retval #APP_ERROR_NONE Successful
-  /// @retval #APP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_ERROR_INVALID_CONTEXT The application is launched illegally, not launched by the launch system.
-  /// @retval #APP_ERROR_ALREADY_RUNNING The main loop has already started
-  /// @see service_app_create_cb()
-  /// @see service_app_terminate_cb()
-  /// @see service_app_control_cb()
-  /// @see service_app_exit()
-  /// @see #service_app_lifecycle_callback_s
+  /// Runs the main loop of the application until service_app_exit() is called.
+  ///
+  /// This function is the main entry point of the Tizen service application. This main loop supports event handling for the GMainLoop and the Ecore Main Loop.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `argc` (in): The argument count
+  /// - `argv` (in): The argument vector
+  /// - `callback` (in): The set of callback functions to handle application events
+  /// - `user_data` (in): The user data to be passed to the callback functions
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `APP_ERROR_NONE`: Successful
+  /// - `APP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_ERROR_INVALID_CONTEXT`: The application is launched illegally, not launched by the launch system.
+  /// - `APP_ERROR_ALREADY_RUNNING`: The main loop has already started
+  ///
+  /// **See also:**
+  /// - `service_app_create_cb()`
+  /// - `service_app_terminate_cb()`
+  /// - `service_app_control_cb()`
+  /// - `service_app_exit()`
+  /// - `service_app_lifecycle_callback_s`
   int service_app_main(
     int argc,
     ffi.Pointer<ffi.Pointer<ffi.Char>> argv,
@@ -137,11 +170,16 @@ class Tizen80AppcoreAgent {
           ffi.Pointer<service_app_lifecycle_callback_s>,
           ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Exits the main loop of the application.
-  /// @details The main loop of the application stops and service_app_terminate_cb() is invoked.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @see service_app_main()
-  /// @see service_app_terminate_cb()
+  /// Exits the main loop of the application.
+  ///
+  /// The main loop of the application stops and service_app_terminate_cb() is invoked.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **See also:**
+  /// - `service_app_main()`
+  /// - `service_app_terminate_cb()`
   void service_app_exit() {
     return _service_app_exit();
   }
@@ -152,13 +190,19 @@ class Tizen80AppcoreAgent {
       _service_app_exitPtr.asFunction<void Function()>();
 }
 
-/// @brief The structure type containing the set of callback functions for handling application events.
-/// @details It is one of the input parameters of the service_app_efl_main() function.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @see service_app_main()
-/// @see service_app_create_cb()
-/// @see service_app_terminate_cb()
-/// @see service_app_control_cb()
+/// The structure type containing the set of callback functions for handling application events.
+///
+/// It is one of the input parameters of the service_app_efl_main() function.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **See also:**
+/// - `service_app_main()`
+/// - `service_app_create_cb()`
+/// - `service_app_terminate_cb()`
+/// - `service_app_control_cb()`
+/// @nodoc
 final class service_app_lifecycle_callback_s extends ffi.Struct {
   /// < This callback function is called at the start of the application.
   external service_app_create_cb create;
@@ -170,49 +214,82 @@ final class service_app_lifecycle_callback_s extends ffi.Struct {
   external service_app_control_cb app_control;
 }
 
-/// @brief Called at the start of the agent application.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] user_data	The user data passed from the callback registration function
-/// @return @c true on success,
-/// otherwise @c false
-/// @pre	service_app_main() will invoke this callback function.
-/// @see service_app_main()
-/// @see #service_app_lifecycle_callback_s
+/// Called at the start of the agent application.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Returns:**
+/// - `true` on success, otherwise `false`
+///
+/// **Preconditions:**
+/// - service_app_main() will invoke this callback function.
+///
+/// **See also:**
+/// - `service_app_main()`
+/// - `service_app_lifecycle_callback_s`
+/// @nodoc
 typedef service_app_create_cb
     = ffi.Pointer<ffi.NativeFunction<service_app_create_cbFunction>>;
+/// @nodoc
 typedef service_app_create_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartservice_app_create_cbFunction = bool Function(
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called once after the main loop of the agent application exits.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] user_data	The user data passed from the callback registration function
-/// @see	service_app_main()
-/// @see #service_app_lifecycle_callback_s
+/// Called once after the main loop of the agent application exits.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `service_app_main()`
+/// - `service_app_lifecycle_callback_s`
+/// @nodoc
 typedef service_app_terminate_cb
     = ffi.Pointer<ffi.NativeFunction<service_app_terminate_cbFunction>>;
+/// @nodoc
 typedef service_app_terminate_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartservice_app_terminate_cbFunction = void Function(
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when another application sends the launch request to the agent application.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] app_control The handle to the app_control
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see service_app_main()
-/// @see #service_app_lifecycle_callback_s
-/// @see @ref CAPI_APP_CONTROL_MODULE API
+/// Called when another application sends the launch request to the agent application.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `app_control` (in): The handle to the app_control
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `service_app_main()`
+/// - `service_app_lifecycle_callback_s`
+/// - `CAPI_APP_CONTROL_MODULE` API
+/// @nodoc
 typedef service_app_control_cb
     = ffi.Pointer<ffi.NativeFunction<service_app_control_cbFunction>>;
+/// @nodoc
 typedef service_app_control_cbFunction = ffi.Void Function(
     app_control.app_control_h app_control, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartservice_app_control_cbFunction = void Function(
     app_control.app_control_h app_control, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumeration for system events.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for system events.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class _app_event_type_e {
   /// < The low memory event
   static const int APP_EVENT_LOW_MEMORY = 0;
@@ -230,7 +307,9 @@ abstract class _app_event_type_e {
   static const int APP_EVENT_REGION_FORMAT_CHANGED = 4;
 
   /// < The suspended state changed event of the application (since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
-  /// @see app_event_get_suspended_state()
+  ///
+  /// **See also:**
+  /// - `app_event_get_suspended_state()`
   static const int APP_EVENT_SUSPENDED_STATE_CHANGED = 5;
 
   /// < The update requested event (Since 3.0)

@@ -1,3 +1,6 @@
+/// {@category 10.0/tizen}
+library tizen_interop_10_0.capi_appfw_event;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'generated_bindings_bundle.dart' as bundle;
 
 /// Dart bindings for Tizen capi-appfw-event APIs.
+/// {@category 10.0/tizen}
 class Tizen100CapiAppfwEvent {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,24 +29,37 @@ class Tizen100CapiAppfwEvent {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Adds the event handler for receiving event-data of interested events.
+  /// Adds the event handler for receiving event-data of interested events.
   ///
-  /// @since_tizen 2.4
-  /// @remarks If you want to add the privileged event, you MUST declare right privilege first. Unless that, this function returns #EVENT_ERROR_PERMISSION_DENIED. The privileged events are commented on remarks of it's definitions.
-  /// @remarks The @a event_handler should be released using event_remove_event_handler().
-  /// @param[in] event_name The interested event name
-  /// @param[in] callback The event callback called when the event occurs
-  /// @param[in] user_data The user data for passing to callback
-  /// @param[out] event_handler The event handler
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #EVENT_ERROR_NONE Successful
-  /// @retval #EVENT_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #EVENT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #EVENT_ERROR_IO_ERROR Adding handler failed
-  /// @retval #EVENT_ERROR_OUT_OF_MEMORY Out of memory
-  /// @par Example
-  /// @code
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Remarks:**
+  /// - If you want to add the privileged event, you MUST declare right privilege first. Unless that, this function returns `EVENT_ERROR_PERMISSION_DENIED`. The privileged events are commented on remarks of it's definitions.
+  /// - The `event_handler` should be released using event_remove_event_handler().
+  ///
+  /// **Parameters:**
+  /// - `event_name` (in): The interested event name
+  /// - `callback` (in): The event callback called when the event occurs
+  /// - `user_data` (in): The user data for passing to callback
+  /// - `event_handler` (out): The event handler
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `EVENT_ERROR_NONE`: Successful
+  /// - `EVENT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `EVENT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `EVENT_ERROR_IO_ERROR`: Adding handler failed
+  /// - `EVENT_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `event_remove_event_handler()`
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <app_event.h>
   /// static void low_battery_cb(const char *event_name, bundle *event_data, void *user_data)
   /// {
@@ -59,8 +76,7 @@ class Tizen100CapiAppfwEvent {
   ///
   /// return 0;
   /// }
-  /// @endcode
-  /// @see event_remove_event_handler()
+  /// ```
   int event_add_event_handler(
     ffi.Pointer<ffi.Char> event_name,
     event_cb callback,
@@ -86,14 +102,20 @@ class Tizen100CapiAppfwEvent {
       int Function(ffi.Pointer<ffi.Char>, event_cb, ffi.Pointer<ffi.Void>,
           ffi.Pointer<event_handler_h>)>();
 
-  /// @brief Removes the registered event handler.
+  /// Removes the registered event handler.
   ///
-  /// @since_tizen 2.4
-  /// @param[in] event_handler The event handler
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #EVENT_ERROR_NONE Successful
-  /// @retval #EVENT_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Parameters:**
+  /// - `event_handler` (in): The event handler
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `EVENT_ERROR_NONE`: Successful
+  /// - `EVENT_ERROR_INVALID_PARAMETER`: Invalid parameter
   int event_remove_event_handler(
     event_handler_h event_handler,
   ) {
@@ -108,17 +130,25 @@ class Tizen100CapiAppfwEvent {
   late final _event_remove_event_handler = _event_remove_event_handlerPtr
       .asFunction<int Function(event_handler_h)>();
 
-  /// @brief Sends the User-Event to receiver applications.
+  /// Sends the User-Event to receiver applications.
   ///
-  /// @since_tizen 2.4
-  /// @remarks The format of User-Event's name MUST be "event.{sender's appid}.{user-defined name}", refer to 'The name-format of User-Event' section, If the event_name is invalid, the function returns #EVENT_ERROR_IO_ERROR.
-  /// @param[in] event_name The event's name to send
-  /// @param[in] event_data The event's data to send
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #EVENT_ERROR_NONE Successful
-  /// @retval #EVENT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #EVENT_ERROR_IO_ERROR Sending operation failed
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Remarks:**
+  /// - The format of User-Event's name MUST be "event.{sender's appid}.{user-defined name}", refer to 'The name-format of User-Event' section, If the event_name is invalid, the function returns `EVENT_ERROR_IO_ERROR`.
+  ///
+  /// **Parameters:**
+  /// - `event_name` (in): The event's name to send
+  /// - `event_data` (in): The event's data to send
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `EVENT_ERROR_NONE`: Successful
+  /// - `EVENT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `EVENT_ERROR_IO_ERROR`: Sending operation failed
   int event_publish_app_event(
     ffi.Pointer<ffi.Char> event_name,
     ffi.Pointer<bundle.bundle> event_data,
@@ -136,18 +166,26 @@ class Tizen100CapiAppfwEvent {
   late final _event_publish_app_event = _event_publish_app_eventPtr.asFunction<
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<bundle.bundle>)>();
 
-  /// @brief Sends the User-Event to trusted receiver-applications.
+  /// Sends the User-Event to trusted receiver-applications.
   ///
-  /// @since_tizen 2.4
-  /// @remarks The application which has same certification with sender can receive the event.
-  /// @remarks The format of User-Event's name MUST be "event.{sender's appid}.{user-defined name}", refer to 'The name-format of User-Event' section,  If the event_name is invalid, the function returns #EVENT_ERROR_IO_ERROR.
-  /// @param[in] event_name The event's name to send
-  /// @param[in] event_data The event's data to send
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #EVENT_ERROR_NONE Successful
-  /// @retval #EVENT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #EVENT_ERROR_IO_ERROR Sending operation failed
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Remarks:**
+  /// - The application which has same certification with sender can receive the event.
+  /// - The format of User-Event's name MUST be "event.{sender's appid}.{user-defined name}", refer to 'The name-format of User-Event' section, If the event_name is invalid, the function returns `EVENT_ERROR_IO_ERROR`.
+  ///
+  /// **Parameters:**
+  /// - `event_name` (in): The event's name to send
+  /// - `event_data` (in): The event's data to send
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `EVENT_ERROR_NONE`: Successful
+  /// - `EVENT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `EVENT_ERROR_IO_ERROR`: Sending operation failed
   int event_publish_trusted_app_event(
     ffi.Pointer<ffi.Char> event_name,
     ffi.Pointer<bundle.bundle> event_data,
@@ -166,19 +204,27 @@ class Tizen100CapiAppfwEvent {
       _event_publish_trusted_app_eventPtr.asFunction<
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<bundle.bundle>)>();
 
-  /// @brief Keeps last User-Event data for receiver applications.
+  /// Keeps last User-Event data for receiver applications.
   ///
-  /// @since_tizen 3.0
-  /// @remarks The receiver applications will receive this last event data after adding their new handlers via event_add_event_handler() since the sender application called this function.
-  /// @remarks If a sender application sends same event via trusted API and non-trusted API, then a trusted receiver will get latest data regardless of trusted or non-trusted, but non-trusted receiver will get the last data only from non-trusted API.
-  /// @remarks The effect of this function continues during runtime. That means when the sender application process restarts, the sender application needs to call this function again to make the event to keep the last event.
-  /// @param[in] event_name The event's name to keep last event data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #EVENT_ERROR_NONE Successful
-  /// @retval #EVENT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #EVENT_ERROR_IO_ERROR Sending operation failed
-  /// @retval #EVENT_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The receiver applications will receive this last event data after adding their new handlers via event_add_event_handler() since the sender application called this function.
+  /// - If a sender application sends same event via trusted API and non-trusted API, then a trusted receiver will get latest data regardless of trusted or non-trusted, but non-trusted receiver will get the last data only from non-trusted API.
+  /// - The effect of this function continues during runtime. That means when the sender application process restarts, the sender application needs to call this function again to make the event to keep the last event.
+  ///
+  /// **Parameters:**
+  /// - `event_name` (in): The event's name to keep last event data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `EVENT_ERROR_NONE`: Successful
+  /// - `EVENT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `EVENT_ERROR_IO_ERROR`: Sending operation failed
+  /// - `EVENT_ERROR_OUT_OF_MEMORY`: Out of memory
   int event_keep_last_event_data(
     ffi.Pointer<ffi.Char> event_name,
   ) {
@@ -194,10 +240,14 @@ class Tizen100CapiAppfwEvent {
       .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 }
 
+/// @nodoc
 final class event_handler extends ffi.Opaque {}
 
-/// @brief Enumeration for Event Error.
-/// @since_tizen 2.4
+/// Enumeration for Event Error.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class event_error_e {
   /// < Successful
   static const int EVENT_ERROR_NONE = 0;
@@ -218,257 +268,382 @@ abstract class event_error_e {
   static const int EVENT_ERROR_PERMISSION_DENIED = -13;
 }
 
-/// @brief Event callback.
+/// Event callback.
 ///
-/// @since_tizen 2.4
-/// @param[in] event_name The interested event name
-/// @param[in] event_data The data of interested event
-/// @param[in] user_data The user data set by event_add_event_handler()
-/// @see event_add_event_handler()
+/// **Since Tizen:**
+/// - 2.4
+///
+/// **Parameters:**
+/// - `event_name` (in): The interested event name
+/// - `event_data` (in): The data of interested event
+/// - `user_data` (in): The user data set by event_add_event_handler()
+///
+/// **See also:**
+/// - `event_add_event_handler()`
+/// @nodoc
 typedef event_cb = ffi.Pointer<ffi.NativeFunction<event_cbFunction>>;
+/// @nodoc
 typedef event_cbFunction = ffi.Void Function(ffi.Pointer<ffi.Char> event_name,
     ffi.Pointer<bundle.bundle> event_data, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartevent_cbFunction = void Function(ffi.Pointer<ffi.Char> event_name,
     ffi.Pointer<bundle.bundle> event_data, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Event handle.
-/// @since_tizen 2.4
+/// Event handle.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 typedef event_handler_h = ffi.Pointer<event_handler>;
 
+/// @nodoc
 const String SYSTEM_EVENT_BATTERY_CHARGER_STATUS =
     'tizen.system.event.battery_charger_status';
 
+/// @nodoc
 const String EVENT_KEY_BATTERY_CHARGER_STATUS = 'battery_charger_status';
 
+/// @nodoc
 const String EVENT_VAL_BATTERY_CHARGER_DISCONNECTED = 'disconnected';
 
+/// @nodoc
 const String EVENT_VAL_BATTERY_CHARGER_CONNECTED = 'connected';
 
+/// @nodoc
 const String EVENT_VAL_BATTERY_CHARGER_CHARGING = 'charging';
 
+/// @nodoc
 const String EVENT_VAL_BATTERY_CHARGER_DISCHARGING = 'discharging';
 
+/// @nodoc
 const String SYSTEM_EVENT_BATTERY_LEVEL_STATUS =
     'tizen.system.event.battery_level_status';
 
+/// @nodoc
 const String EVENT_KEY_BATTERY_LEVEL_STATUS = 'battery_level_status';
 
+/// @nodoc
 const String EVENT_VAL_BATTERY_LEVEL_EMPTY = 'empty';
 
+/// @nodoc
 const String EVENT_VAL_BATTERY_LEVEL_CRITICAL = 'critical';
 
+/// @nodoc
 const String EVENT_VAL_BATTERY_LEVEL_LOW = 'low';
 
+/// @nodoc
 const String EVENT_VAL_BATTERY_LEVEL_HIGH = 'high';
 
+/// @nodoc
 const String EVENT_VAL_BATTERY_LEVEL_FULL = 'full';
 
+/// @nodoc
 const String SYSTEM_EVENT_USB_STATUS = 'tizen.system.event.usb_status';
 
+/// @nodoc
 const String EVENT_KEY_USB_STATUS = 'usb_status';
 
+/// @nodoc
 const String EVENT_VAL_USB_DISCONNECTED = 'disconnected';
 
+/// @nodoc
 const String EVENT_VAL_USB_CONNECTED = 'connected';
 
+/// @nodoc
 const String EVENT_VAL_USB_AVAILABLE = 'available';
 
+/// @nodoc
 const String SYSTEM_EVENT_EARJACK_STATUS = 'tizen.system.event.earjack_status';
 
+/// @nodoc
 const String EVENT_KEY_EARJACK_STATUS = 'earjack_status';
 
+/// @nodoc
 const String EVENT_VAL_EARJACK_DISCONNECTED = 'disconnected';
 
+/// @nodoc
 const String EVENT_VAL_EARJACK_CONNECTED = 'connected';
 
+/// @nodoc
 const String SYSTEM_EVENT_DISPLAY_STATE = 'tizen.system.event.display_state';
 
+/// @nodoc
 const String EVENT_KEY_DISPLAY_STATE = 'display_state';
 
+/// @nodoc
 const String EVENT_VAL_DISPLAY_NORMAL = 'normal';
 
+/// @nodoc
 const String EVENT_VAL_DISPLAY_DIM = 'dim';
 
+/// @nodoc
 const String EVENT_VAL_DISPLAY_OFF = 'off';
 
+/// @nodoc
 const String SYSTEM_EVENT_BOOT_COMPLETED = 'tizen.system.event.boot_completed';
 
+/// @nodoc
 const String SYSTEM_EVENT_SYSTEM_SHUTDOWN =
     'tizen.system.event.system_shutdown';
 
+/// @nodoc
 const String SYSTEM_EVENT_LOW_MEMORY = 'tizen.system.event.low_memory';
 
+/// @nodoc
 const String EVENT_KEY_LOW_MEMORY = 'low_memory';
 
+/// @nodoc
 const String EVENT_VAL_MEMORY_NORMAL = 'normal';
 
+/// @nodoc
 const String EVENT_VAL_MEMORY_SOFT_WARNING = 'soft_warning';
 
+/// @nodoc
 const String EVENT_VAL_MEMORY_HARD_WARNING = 'hard_warning';
 
+/// @nodoc
 const String SYSTEM_EVENT_WIFI_STATE = 'tizen.system.event.wifi_state';
 
+/// @nodoc
 const String EVENT_KEY_WIFI_STATE = 'wifi_state';
 
+/// @nodoc
 const String EVENT_VAL_WIFI_OFF = 'off';
 
+/// @nodoc
 const String EVENT_VAL_WIFI_ON = 'on';
 
+/// @nodoc
 const String EVENT_VAL_WIFI_CONNECTED = 'connected';
 
+/// @nodoc
 const String SYSTEM_EVENT_BT_STATE = 'tizen.system.event.bt_state';
 
+/// @nodoc
 const String EVENT_KEY_BT_STATE = 'bt_state';
 
+/// @nodoc
 const String EVENT_VAL_BT_OFF = 'off';
 
+/// @nodoc
 const String EVENT_VAL_BT_ON = 'on';
 
+/// @nodoc
 const String EVENT_KEY_BT_LE_STATE = 'bt_le_state';
 
+/// @nodoc
 const String EVENT_VAL_BT_LE_OFF = 'off';
 
+/// @nodoc
 const String EVENT_VAL_BT_LE_ON = 'on';
 
+/// @nodoc
 const String EVENT_KEY_BT_TRANSFERING_STATE = 'bt_transfering_state';
 
+/// @nodoc
 const String EVENT_VAL_BT_NON_TRANSFERING = 'non_transfering';
 
+/// @nodoc
 const String EVENT_VAL_BT_TRANSFERING = 'transfering';
 
+/// @nodoc
 const String SYSTEM_EVENT_LOCATION_ENABLE_STATE =
     'tizen.system.event.location_enable_state';
 
+/// @nodoc
 const String EVENT_KEY_LOCATION_ENABLE_STATE = 'location_enable_state';
 
+/// @nodoc
 const String EVENT_VAL_LOCATION_DISABLED = 'disabled';
 
+/// @nodoc
 const String EVENT_VAL_LOCATION_ENABLED = 'enabled';
 
+/// @nodoc
 const String SYSTEM_EVENT_GPS_ENABLE_STATE =
     'tizen.system.event.gps_enable_state';
 
+/// @nodoc
 const String EVENT_KEY_GPS_ENABLE_STATE = 'gps_enable_state';
 
+/// @nodoc
 const String EVENT_VAL_GPS_DISABLED = 'disabled';
 
+/// @nodoc
 const String EVENT_VAL_GPS_ENABLED = 'enabled';
 
+/// @nodoc
 const String SYSTEM_EVENT_NPS_ENABLE_STATE =
     'tizen.system.event.nps_enable_state';
 
+/// @nodoc
 const String EVENT_KEY_NPS_ENABLE_STATE = 'nps_enable_state';
 
+/// @nodoc
 const String EVENT_VAL_NPS_DISABLED = 'disabled';
 
+/// @nodoc
 const String EVENT_VAL_NPS_ENABLED = 'enabled';
 
+/// @nodoc
 const String SYSTEM_EVENT_INCOMING_MSG = 'tizen.system.event.incoming_msg';
 
+/// @nodoc
 const String EVENT_KEY_MSG_TYPE = 'msg_type';
 
+/// @nodoc
 const String EVENT_VAL_SMS = 'sms';
 
+/// @nodoc
 const String EVENT_VAL_MMS = 'mms';
 
+/// @nodoc
 const String EVENT_VAL_PUSH = 'push';
 
+/// @nodoc
 const String EVENT_VAL_CB = 'cb';
 
+/// @nodoc
 const String EVENT_KEY_MSG_ID = 'msg_id';
 
+/// @nodoc
 const String SYSTEM_EVENT_OUTGOING_MSG = 'tizen.system.event.outgoing_msg';
 
+/// @nodoc
 const String EVENT_KEY_OUT_MSG_TYPE = 'msg_type';
 
+/// @nodoc
 const String EVENT_VAL_OUT_MSG_SMS = 'sms';
 
+/// @nodoc
 const String EVENT_VAL_OUT_MSG_MMS = 'mms';
 
+/// @nodoc
 const String EVENT_KEY_OUT_MSG_ID = 'msg_id';
 
+/// @nodoc
 const String SYSTEM_EVENT_TIME_CHANGED = 'tizen.system.event.time_changed';
 
+/// @nodoc
 const String SYSTEM_EVENT_TIME_ZONE = 'tizen.system.event.time_zone';
 
+/// @nodoc
 const String EVENT_KEY_TIME_ZONE = 'time_zone';
 
+/// @nodoc
 const String SYSTEM_EVENT_HOUR_FORMAT = 'tizen.system.event.hour_format';
 
+/// @nodoc
 const String EVENT_KEY_HOUR_FORMAT = 'hour_format';
 
+/// @nodoc
 const String EVENT_VAL_HOURFORMAT_12 = '12';
 
+/// @nodoc
 const String EVENT_VAL_HOURFORMAT_24 = '24';
 
+/// @nodoc
 const String SYSTEM_EVENT_LANGUAGE_SET = 'tizen.system.event.language_set';
 
+/// @nodoc
 const String EVENT_KEY_LANGUAGE_SET = 'language_set';
 
+/// @nodoc
 const String SYSTEM_EVENT_REGION_FORMAT = 'tizen.system.event.region_format';
 
+/// @nodoc
 const String EVENT_KEY_REGION_FORMAT = 'region_format';
 
+/// @nodoc
 const String SYSTEM_EVENT_SILENT_MODE = 'tizen.system.event.silent_mode';
 
+/// @nodoc
 const String EVENT_KEY_SILENT_MODE = 'silent_mode';
 
+/// @nodoc
 const String EVENT_VAL_SILENTMODE_ON = 'on';
 
+/// @nodoc
 const String EVENT_VAL_SILENTMODE_OFF = 'off';
 
+/// @nodoc
 const String SYSTEM_EVENT_VIBRATION_STATE =
     'tizen.system.event.vibration_state';
 
+/// @nodoc
 const String EVENT_KEY_VIBRATION_STATE = 'vibration_state';
 
+/// @nodoc
 const String EVENT_VAL_VIBRATION_ON = 'on';
 
+/// @nodoc
 const String EVENT_VAL_VIBRATION_OFF = 'off';
 
+/// @nodoc
 const String SYSTEM_EVENT_SCREEN_AUTOROTATE_STATE =
     'tizen.system.event.screen_autorotate_state';
 
+/// @nodoc
 const String EVENT_KEY_SCREEN_AUTOROTATE_STATE = 'screen_autorotate_state';
 
+/// @nodoc
 const String EVENT_VAL_SCREEN_AUTOROTATE_ON = 'on';
 
+/// @nodoc
 const String EVENT_VAL_SCREEN_AUTOROTATE_OFF = 'off';
 
+/// @nodoc
 const String SYSTEM_EVENT_MOBILE_DATA_STATE =
     'tizen.system.event.mobile_data_state';
 
+/// @nodoc
 const String EVENT_KEY_MOBILE_DATA_STATE = 'mobile_data_state';
 
+/// @nodoc
 const String EVENT_VAL_MOBILE_DATA_OFF = 'off';
 
+/// @nodoc
 const String EVENT_VAL_MOBILE_DATA_ON = 'on';
 
+/// @nodoc
 const String SYSTEM_EVENT_DATA_ROAMING_STATE =
     'tizen.system.event.data_roaming_state';
 
+/// @nodoc
 const String EVENT_KEY_DATA_ROAMING_STATE = 'data_roaming_state';
 
+/// @nodoc
 const String EVENT_VAL_DATA_ROAMING_OFF = 'off';
 
+/// @nodoc
 const String EVENT_VAL_DATA_ROAMING_ON = 'on';
 
+/// @nodoc
 const String SYSTEM_EVENT_FONT_SET = 'tizen.system.event.font_set';
 
+/// @nodoc
 const String EVENT_KEY_FONT_SET = 'font_set';
 
+/// @nodoc
 const String SYSTEM_EVENT_NETWORK_STATUS = 'tizen.system.event.network_status';
 
+/// @nodoc
 const String EVENT_KEY_NETWORK_STATUS = 'network_status';
 
+/// @nodoc
 const String EVENT_VAL_NETWORK_DISCONNECTED = 'disconnected';
 
+/// @nodoc
 const String EVENT_VAL_NETWORK_WIFI = 'wifi';
 
+/// @nodoc
 const String EVENT_VAL_NETWORK_CELLULAR = 'cellular';
 
+/// @nodoc
 const String EVENT_VAL_NETWORK_ETHERNET = 'ethernet';
 
+/// @nodoc
 const String EVENT_VAL_NETWORK_BT = 'bt';
 
+/// @nodoc
 const String EVENT_VAL_NETWORK_NET_PROXY = 'net_proxy';

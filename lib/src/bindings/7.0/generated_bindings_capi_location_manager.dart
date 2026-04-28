@@ -1,3 +1,6 @@
+/// {@category 7.0/tizen}
+library tizen_interop_7_0.capi_location_manager;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'dart:ffi' as ffi_lib;
 
 /// Dart bindings for Tizen capi-location-manager APIs.
+/// {@category 7.0/tizen}
 class Tizen70CapiLocationManager {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,20 +29,31 @@ class Tizen70CapiLocationManager {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates a rect type of new location bounds.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks You must release @a bounds using location_bounds_destroy().
-  /// @param[in] top_left The top left position
-  /// @param[in] bottom_right The bottom right position
-  /// @param[out] bounds The location bounds handle that is newly created
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATION_BOUNDS_ERROR_NONE Successful
-  /// @retval #LOCATION_BOUNDS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #LOCATION_BOUNDS_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval #LOCATION_BOUNDS_ERROR_NOT_SUPPORTED	Not supported
-  /// @see location_bounds_get_rect_coords()
-  /// @see location_bounds_destroy()
+  /// Creates a rect type of new location bounds.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release `bounds` using location_bounds_destroy().
+  ///
+  /// **Parameters:**
+  /// - `top_left` (in): The top left position
+  /// - `bottom_right` (in): The bottom right position
+  /// - `bounds` (out): The location bounds handle that is newly created
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATION_BOUNDS_ERROR_NONE`: Successful
+  /// - `LOCATION_BOUNDS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `LOCATION_BOUNDS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATION_BOUNDS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `location_bounds_get_rect_coords()`
+  /// - `location_bounds_destroy()`
   int location_bounds_create_rect(
     location_coords_s top_left,
     location_coords_s bottom_right,
@@ -60,20 +75,31 @@ class Tizen70CapiLocationManager {
           int Function(location_coords_s, location_coords_s,
               ffi.Pointer<location_bounds_h>)>();
 
-  /// @brief Creates a circle type of new location bounds.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks You must release @a bounds using location_bounds_destroy().
-  /// @param[in] center The center position
-  /// @param[in] radius The radius of a circle (meters)
-  /// @param[out] bounds The location bounds handle that is newly created
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATION_BOUNDS_ERROR_NONE Successful
-  /// @retval #LOCATION_BOUNDS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #LOCATION_BOUNDS_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval #LOCATION_BOUNDS_ERROR_NOT_SUPPORTED	Not supported
-  /// @see location_bounds_get_circle_coords()
-  /// @see location_bounds_destroy()
+  /// Creates a circle type of new location bounds.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release `bounds` using location_bounds_destroy().
+  ///
+  /// **Parameters:**
+  /// - `center` (in): The center position
+  /// - `radius` (in): The radius of a circle (meters)
+  /// - `bounds` (out): The location bounds handle that is newly created
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATION_BOUNDS_ERROR_NONE`: Successful
+  /// - `LOCATION_BOUNDS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `LOCATION_BOUNDS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATION_BOUNDS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `location_bounds_get_circle_coords()`
+  /// - `location_bounds_destroy()`
   int location_bounds_create_circle(
     location_coords_s center,
     double radius,
@@ -96,21 +122,32 @@ class Tizen70CapiLocationManager {
           int Function(
               location_coords_s, double, ffi.Pointer<location_bounds_h>)>();
 
-  /// @brief Creates a polygon type of new location bounds.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks You must release @a bounds using location_bounds_destroy().
-  /// @remarks @a length should be more than @c 3 to represent polygon.
-  /// @param[in] coords_list The list of coordinates
-  /// @param[in] length The length of the coordinates list
-  /// @param[out] bounds The location bounds handle that is newly created on success
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATION_BOUNDS_ERROR_NONE Successful
-  /// @retval #LOCATION_BOUNDS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #LOCATION_BOUNDS_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval #LOCATION_BOUNDS_ERROR_NOT_SUPPORTED	Not supported
-  /// @see location_bounds_foreach_polygon_coords()
-  /// @see location_bounds_destroy()
+  /// Creates a polygon type of new location bounds.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release `bounds` using location_bounds_destroy().
+  /// - `length` should be more than `3` to represent polygon.
+  ///
+  /// **Parameters:**
+  /// - `coords_list` (in): The list of coordinates
+  /// - `length` (in): The length of the coordinates list
+  /// - `bounds` (out): The location bounds handle that is newly created on success
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATION_BOUNDS_ERROR_NONE`: Successful
+  /// - `LOCATION_BOUNDS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `LOCATION_BOUNDS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATION_BOUNDS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `location_bounds_foreach_polygon_coords()`
+  /// - `location_bounds_destroy()`
   int location_bounds_create_polygon(
     ffi.Pointer<location_coords_s> coords_list,
     int length,
@@ -133,20 +170,31 @@ class Tizen70CapiLocationManager {
           int Function(ffi.Pointer<location_coords_s>, int,
               ffi.Pointer<location_bounds_h>)>();
 
-  /// @brief Checks whether the bounds contains the specified coordinates.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
-  /// @param[in] bounds The location bounds handle
-  /// @param[in] coords The coordinates
-  /// @return @c true if the bounds contains the specified coordinates,
-  /// otherwise else @c false
-  /// @exception #LOCATION_BOUNDS_ERROR_NONE Successful
-  /// @exception #LOCATION_BOUNDS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @exception #LOCATION_BOUNDS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @exception #LOCATION_BOUNDS_ERROR_NOT_SUPPORTED Not supported
-  /// @see location_bounds_create_rect()
-  /// @see location_bounds_create_circle()
-  /// @see location_bounds_create_polygon()
+  /// Checks whether the bounds contains the specified coordinates.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
+  ///
+  /// **Parameters:**
+  /// - `bounds` (in): The location bounds handle
+  /// - `coords` (in): The coordinates
+  ///
+  /// **Returns:**
+  /// - `true` if the bounds contains the specified coordinates, otherwise else `false`
+  ///
+  /// **Exceptions:**
+  /// - `LOCATION_BOUNDS_ERROR_NONE`: Successful
+  /// - `LOCATION_BOUNDS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `LOCATION_BOUNDS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATION_BOUNDS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `location_bounds_create_rect()`
+  /// - `location_bounds_create_circle()`
+  /// - `location_bounds_create_polygon()`
   bool location_bounds_contains_coordinates(
     location_bounds_h bounds,
     location_coords_s coords,
@@ -165,20 +213,29 @@ class Tizen70CapiLocationManager {
       _location_bounds_contains_coordinatesPtr
           .asFunction<bool Function(location_bounds_h, location_coords_s)>();
 
-  /// @brief Checks whether the edges of the bounds contain the specified coordinates within tolerance.
-  /// @since_tizen 6.0
-  /// @param[in] bounds The location bounds handle
-  /// @param[in] coords The coordinates
-  /// @param[in] tolerance tolerance in metres
-  /// @return @c true if the distance between edges of @a bounds and point at @a coords are not farther than @a tolerance
-  /// otherwise @c false
-  /// @exception #LOCATION_BOUNDS_ERROR_NONE Successful
-  /// @exception #LOCATION_BOUNDS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @exception #LOCATION_BOUNDS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @exception #LOCATION_BOUNDS_ERROR_NOT_SUPPORTED Not supported
-  /// @see location_bounds_create_rect()
-  /// @see location_bounds_create_circle()
-  /// @see location_bounds_create_polygon()
+  /// Checks whether the edges of the bounds contain the specified coordinates within tolerance.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Parameters:**
+  /// - `bounds` (in): The location bounds handle
+  /// - `coords` (in): The coordinates
+  /// - `tolerance` (in): tolerance in metres
+  ///
+  /// **Returns:**
+  /// - `true` if the distance between edges of `bounds` and point at `coords` are not farther than `tolerance` otherwise `false`
+  ///
+  /// **Exceptions:**
+  /// - `LOCATION_BOUNDS_ERROR_NONE`: Successful
+  /// - `LOCATION_BOUNDS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `LOCATION_BOUNDS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATION_BOUNDS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `location_bounds_create_rect()`
+  /// - `location_bounds_create_circle()`
+  /// - `location_bounds_create_polygon()`
   bool location_bounds_contains_coordinates_on_edge(
     location_bounds_h bounds,
     location_coords_s coords,
@@ -199,18 +256,27 @@ class Tizen70CapiLocationManager {
       _location_bounds_contains_coordinates_on_edgePtr.asFunction<
           bool Function(location_bounds_h, location_coords_s, double)>();
 
-  /// @brief Gets the type of location bounds.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] bounds The location bounds handle
-  /// @param[out] type The type of location bounds
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATION_BOUNDS_ERROR_NONE Successful
-  /// @retval #LOCATION_BOUNDS_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval #LOCATION_BOUNDS_ERROR_NOT_SUPPORTED	Not supported
-  /// @see location_bounds_create_rect()
-  /// @see location_bounds_create_circle()
-  /// @see location_bounds_create_polygon()
+  /// Gets the type of location bounds.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `bounds` (in): The location bounds handle
+  /// - `type` (out): The type of location bounds
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATION_BOUNDS_ERROR_NONE`: Successful
+  /// - `LOCATION_BOUNDS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATION_BOUNDS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `location_bounds_create_rect()`
+  /// - `location_bounds_create_circle()`
+  /// - `location_bounds_create_polygon()`
   int location_bounds_get_type(
     location_bounds_h bounds,
     ffi.Pointer<ffi.Int32> type,
@@ -228,18 +294,27 @@ class Tizen70CapiLocationManager {
   late final _location_bounds_get_type = _location_bounds_get_typePtr
       .asFunction<int Function(location_bounds_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the center position and radius of circle bounds.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] bounds The location bounds handle
-  /// @param[out] top_left The top left position
-  /// @param[out] bottom_right The bottom right position
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATION_BOUNDS_ERROR_NONE Successful
-  /// @retval #LOCATION_BOUNDS_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval #LOCATION_BOUNDS_ERROR_NOT_SUPPORTED	Not supported
-  /// @retval #LOCATION_BOUNDS_ERROR_INCORRECT_TYPE Incorrect bounds type
-  /// @see location_bounds_create_rect()
+  /// Gets the center position and radius of circle bounds.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `bounds` (in): The location bounds handle
+  /// - `top_left` (out): The top left position
+  /// - `bottom_right` (out): The bottom right position
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATION_BOUNDS_ERROR_NONE`: Successful
+  /// - `LOCATION_BOUNDS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATION_BOUNDS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `LOCATION_BOUNDS_ERROR_INCORRECT_TYPE`: Incorrect bounds type
+  ///
+  /// **See also:**
+  /// - `location_bounds_create_rect()`
   int location_bounds_get_rect_coords(
     location_bounds_h bounds,
     ffi.Pointer<location_coords_s> top_left,
@@ -264,18 +339,27 @@ class Tizen70CapiLocationManager {
           int Function(location_bounds_h, ffi.Pointer<location_coords_s>,
               ffi.Pointer<location_coords_s>)>();
 
-  /// @brief Gets the center position and radius of circle bounds.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] bounds The location bounds handle
-  /// @param[out] center The center position of the circle
-  /// @param[out] radius The radius of the circle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATION_BOUNDS_ERROR_NONE Successful
-  /// @retval #LOCATION_BOUNDS_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval #LOCATION_BOUNDS_ERROR_NOT_SUPPORTED	Not supported
-  /// @retval #LOCATION_BOUNDS_ERROR_INCORRECT_TYPE Incorrect bounds type
-  /// @see location_bounds_create_circle()
+  /// Gets the center position and radius of circle bounds.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `bounds` (in): The location bounds handle
+  /// - `center` (out): The center position of the circle
+  /// - `radius` (out): The radius of the circle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATION_BOUNDS_ERROR_NONE`: Successful
+  /// - `LOCATION_BOUNDS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATION_BOUNDS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `LOCATION_BOUNDS_ERROR_INCORRECT_TYPE`: Incorrect bounds type
+  ///
+  /// **See also:**
+  /// - `location_bounds_create_circle()`
   int location_bounds_get_circle_coords(
     location_bounds_h bounds,
     ffi.Pointer<location_coords_s> center,
@@ -297,20 +381,31 @@ class Tizen70CapiLocationManager {
           int Function(location_bounds_h, ffi.Pointer<location_coords_s>,
               ffi.Pointer<ffi.Double>)>();
 
-  /// @brief Get the coordinates of a polygon.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] bounds The location bounds handle
-  /// @param[in] callback The iteration callback
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATION_BOUNDS_ERROR_NONE Successful
-  /// @retval #LOCATION_BOUNDS_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval #LOCATION_BOUNDS_ERROR_NOT_SUPPORTED	Not supported
-  /// @retval #LOCATION_BOUNDS_ERROR_INCORRECT_TYPE Incorrect bounds type
-  /// @post It invokes polygon_coords_cb() to get coordinates of polygon.
-  /// @see polygon_coords_cb()
-  /// @see location_bounds_create_polygon()
+  /// Get the coordinates of a polygon.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `bounds` (in): The location bounds handle
+  /// - `callback` (in): The iteration callback
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATION_BOUNDS_ERROR_NONE`: Successful
+  /// - `LOCATION_BOUNDS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATION_BOUNDS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `LOCATION_BOUNDS_ERROR_INCORRECT_TYPE`: Incorrect bounds type
+  ///
+  /// **Postconditions:**
+  /// - It invokes polygon_coords_cb() to get coordinates of polygon.
+  ///
+  /// **See also:**
+  /// - `polygon_coords_cb()`
+  /// - `location_bounds_create_polygon()`
   int location_bounds_foreach_polygon_coords(
     location_bounds_h bounds,
     polygon_coords_cb callback,
@@ -333,17 +428,26 @@ class Tizen70CapiLocationManager {
           int Function(
               location_bounds_h, polygon_coords_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Releases the location bounds.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] bounds The location bounds handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATION_BOUNDS_ERROR_NONE Successful
-  /// @retval #LOCATION_BOUNDS_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval #LOCATION_BOUNDS_ERROR_NOT_SUPPORTED	Not supported
-  /// @see location_bounds_create_rect()
-  /// @see location_bounds_create_circle()
-  /// @see location_bounds_create_polygon()
+  /// Releases the location bounds.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `bounds` (in): The location bounds handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATION_BOUNDS_ERROR_NONE`: Successful
+  /// - `LOCATION_BOUNDS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATION_BOUNDS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `location_bounds_create_rect()`
+  /// - `location_bounds_create_circle()`
+  /// - `location_bounds_create_polygon()`
   int location_bounds_destroy(
     location_bounds_h bounds,
   ) {
@@ -358,19 +462,30 @@ class Tizen70CapiLocationManager {
   late final _location_bounds_destroy =
       _location_bounds_destroyPtr.asFunction<int Function(location_bounds_h)>();
 
-  /// @brief Registers a callback function to be invoked when the boundary area is entered or exited.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] bounds The location bounds handle
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATION_BOUNDS_ERROR_NONE Successful
-  /// @retval #LOCATION_BOUNDS_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval #LOCATION_BOUNDS_ERROR_NOT_SUPPORTED	Not supported
-  /// @post location_bounds_state_changed_cb() will be invoked.
-  /// @see location_bounds_unset_state_changed_cb()
-  /// @see location_bounds_state_changed_cb()
+  /// Registers a callback function to be invoked when the boundary area is entered or exited.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `bounds` (in): The location bounds handle
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATION_BOUNDS_ERROR_NONE`: Successful
+  /// - `LOCATION_BOUNDS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATION_BOUNDS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - location_bounds_state_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `location_bounds_unset_state_changed_cb()`
+  /// - `location_bounds_state_changed_cb()`
   int location_bounds_set_state_changed_cb(
     location_bounds_h bounds,
     location_bounds_state_changed_cb callback,
@@ -392,15 +507,24 @@ class Tizen70CapiLocationManager {
           int Function(location_bounds_h, location_bounds_state_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback function.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] bounds The location bounds handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATION_BOUNDS_ERROR_NONE Successful
-  /// @retval #LOCATION_BOUNDS_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval #LOCATION_BOUNDS_ERROR_NOT_SUPPORTED	Not supported
-  /// @see location_bounds_set_state_changed_cb()
+  /// Unregisters the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `bounds` (in): The location bounds handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATION_BOUNDS_ERROR_NONE`: Successful
+  /// - `LOCATION_BOUNDS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATION_BOUNDS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `location_bounds_set_state_changed_cb()`
   int location_bounds_unset_state_changed_cb(
     location_bounds_h bounds,
   ) {
@@ -416,17 +540,28 @@ class Tizen70CapiLocationManager {
       _location_bounds_unset_state_changed_cbPtr
           .asFunction<int Function(location_bounds_h)>();
 
-  /// @brief Checks whether the given location method is available.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remark The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
-  /// @param[in] method The location method to be checked
-  /// @return @c true if the specified location method is supported,
-  /// otherwise @c false if it is not available
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #LOCATIONS_ERROR_INCORRECT_METHOD Incorrect method
-  /// @see	location_manager_create()
-  /// @see location_manager_get_method()
+  /// Checks whether the given location method is available.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
+  ///
+  /// **Parameters:**
+  /// - `method` (in): The location method to be checked
+  ///
+  /// **Returns:**
+  /// - `true` if the specified location method is supported, otherwise `false` if it is not available
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `LOCATIONS_ERROR_INCORRECT_METHOD`: Incorrect method
+  ///
+  /// **See also:**
+  /// - `location_manager_create()`
+  /// - `location_manager_get_method()`
   bool location_manager_is_supported_method(
     int method,
   ) {
@@ -441,19 +576,28 @@ class Tizen70CapiLocationManager {
   late final _location_manager_is_supported_method =
       _location_manager_is_supported_methodPtr.asFunction<bool Function(int)>();
 
-  /// @brief Checks whether the given location method is enabled or not on setting.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] method The location method to be checked
-  /// @param[out] enable The result value of checking the given location method
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INCORRECT_METHOD Incorrect method
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @see location_manager_create()
-  /// @see location_manager_set_setting_changed_cb()
-  /// @see location_manager_unset_setting_changed_cb()
+  /// Checks whether the given location method is enabled or not on setting.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `method` (in): The location method to be checked
+  /// - `enable` (out): The result value of checking the given location method
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INCORRECT_METHOD`: Incorrect method
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `location_manager_create()`
+  /// - `location_manager_set_setting_changed_cb()`
+  /// - `location_manager_unset_setting_changed_cb()`
   int location_manager_is_enabled_method(
     int method,
     ffi.Pointer<ffi.Bool> enable,
@@ -472,21 +616,36 @@ class Tizen70CapiLocationManager {
       _location_manager_is_enabled_methodPtr
           .asFunction<int Function(int, ffi.Pointer<ffi.Bool>)>();
 
-  /// @platform
-  /// @brief Enables the given location method.
-  /// @since_tizen 2.3.1
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/location.enable
-  /// @param[in] method The location method to be checked
-  /// @param[in] enable The value to set
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INCORRECT_METHOD Incorrect method
-  /// @retval #LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED Permission denied
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @see location_manager_is_enabled_method()
-  /// @see location_manager_create()
+  /// Enables the given location method.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/location.enable>
+  ///
+  /// **Parameters:**
+  /// - `method` (in): The location method to be checked
+  /// - `enable` (in): The value to set
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INCORRECT_METHOD`: Incorrect method
+  /// - `LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED`: Permission denied
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `location_manager_is_enabled_method()`
+  /// - `location_manager_create()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int location_manager_enable_method(
     int method,
     bool enable,
@@ -503,19 +662,30 @@ class Tizen70CapiLocationManager {
   late final _location_manager_enable_method =
       _location_manager_enable_methodPtr.asFunction<int Function(int, bool)>();
 
-  /// @brief Creates a new location manager.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks You must release @a manager using location_manager_destroy().
-  /// @param[in] method The location method
-  /// @param[out] manager The location manager handle that is newly created
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE Service not available
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @see location_manager_destroy()
+  /// Creates a new location manager.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release `manager` using location_manager_destroy().
+  ///
+  /// **Parameters:**
+  /// - `method` (in): The location method
+  /// - `manager` (out): The location manager handle that is newly created
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE`: Service not available
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `location_manager_destroy()`
   int location_manager_create(
     int method,
     ffi.Pointer<location_manager_h> manager,
@@ -533,15 +703,24 @@ class Tizen70CapiLocationManager {
   late final _location_manager_create = _location_manager_createPtr
       .asFunction<int Function(int, ffi.Pointer<location_manager_h>)>();
 
-  /// @brief Releases the location manager.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] manager The location manager handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @see location_manager_create()
+  /// Releases the location manager.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `location_manager_create()`
   int location_manager_destroy(
     location_manager_h manager,
   ) {
@@ -556,25 +735,39 @@ class Tizen70CapiLocationManager {
   late final _location_manager_destroy = _location_manager_destroyPtr
       .asFunction<int Function(location_manager_h)>();
 
-  /// @brief Requests to update current location once.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/location
-  /// @remarks Do not request to start the location service using the same manager handler.
-  /// Calling this function invokes a location service event. When the location service is updated, location_updated_cb.
-  /// @param[in] manager The location manager handle
-  /// @param[in] timeout Timeout to stop requesting single location after
-  /// @param[in] callback The location callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #LOCATIONS_ERROR_INCORRECT_METHOD Incorrect method
-  /// @retval #LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE Service not available
-  /// @retval #LOCATIONS_ERROR_NETWORK_FAILED Network failed
-  /// @retval #LOCATIONS_ERROR_GPS_SETTING_OFF GPS is not enabled
-  /// @retval #LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED The application does not have the privilege to call this method
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @post It invokes location_updated_cb().
+  /// Requests to update current location once.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/location>
+  ///
+  /// **Remarks:**
+  /// - Do not request to start the location service using the same manager handler.
+  /// - Calling this function invokes a location service event. When the location service is updated, location_updated_cb.
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  /// - `timeout` (in): Timeout to stop requesting single location after
+  /// - `callback` (in): The location callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATIONS_ERROR_INCORRECT_METHOD`: Incorrect method
+  /// - `LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE`: Service not available
+  /// - `LOCATIONS_ERROR_NETWORK_FAILED`: Network failed
+  /// - `LOCATIONS_ERROR_GPS_SETTING_OFF`: GPS is not enabled
+  /// - `LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED`: The application does not have the privilege to call this method
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - It invokes location_updated_cb().
   int location_manager_request_single_location(
     location_manager_h manager,
     int timeout,
@@ -599,42 +792,59 @@ class Tizen70CapiLocationManager {
           int Function(location_manager_h, int, location_updated_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Starts the location service.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/location
-  /// @remarks There is no limit on number of location managers for which this function was called.
-  /// @remarks Calling this function invokes a location service event. When the location service is enabled, the service state change callback
-  /// (set using location_manager_set_service_state_changed_cb()) notifies the user with #LOCATIONS_SERVICE_ENABLED as
-  /// the first argument, and the service starts.
-  /// @remarks The started service is a requirement for calling these functions:
-  /// location_manager_get_position(), location_manager_get_velocity(), location_manager_get_accuracy(),
-  /// gps_status_get_nmea(), gps_status_get_satellite(), gps_status_foreach_satellites_in_view().
-  /// @remarks Once you stop the service using location_manager_stop(), you can no longer call the functions listed above.
-  /// @remarks Starting and stopping the service is in the scope of the given location manager only (if there is more than one manager,
-  /// starting and stopping should be executed for each of them separately).
-  /// @param[in] manager The location manager handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE Service not available
-  /// @retval #LOCATIONS_ERROR_NETWORK_FAILED Network failed
-  /// @retval #LOCATIONS_ERROR_GPS_SETTING_OFF GPS is not enabled
-  /// @retval #LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED The application does not have the privilege to call this method
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @post It invokes location_position_updated_cb(), location_velocity_updated_cb(), location_zone_changed_cb(), and location_service_state_changed_cb().
-  /// @see location_manager_stop()
-  /// @see location_manager_get_position()
-  /// @see location_manager_get_velocity()
-  /// @see location_manager_get_accuracy()
-  /// @see location_manager_set_service_state_changed_cb()
-  /// @see location_manager_set_position_updated_cb()
-  /// @see location_position_updated_cb()
-  /// @see location_manager_set_velocity_updated_cb()
-  /// @see location_velocity_updated_cb()
-  /// @see location_manager_set_zone_changed_cb()
-  /// @see location_zone_changed_cb()
+  /// Starts the location service.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/location>
+  ///
+  /// **Remarks:**
+  /// - There is no limit on number of location managers for which this function was called.
+  /// - Calling this function invokes a location service event. When the location service is enabled, the service state change callback
+  /// - (set using location_manager_set_service_state_changed_cb()) notifies the user with `LOCATIONS_SERVICE_ENABLED` as
+  /// - the first argument, and the service starts.
+  /// - The started service is a requirement for calling these functions:
+  /// - location_manager_get_position(), location_manager_get_velocity(), location_manager_get_accuracy(),
+  /// - gps_status_get_nmea(), gps_status_get_satellite(), gps_status_foreach_satellites_in_view().
+  /// - Once you stop the service using location_manager_stop(), you can no longer call the functions listed above.
+  /// - Starting and stopping the service is in the scope of the given location manager only (if there is more than one manager,
+  /// - starting and stopping should be executed for each of them separately).
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE`: Service not available
+  /// - `LOCATIONS_ERROR_NETWORK_FAILED`: Network failed
+  /// - `LOCATIONS_ERROR_GPS_SETTING_OFF`: GPS is not enabled
+  /// - `LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED`: The application does not have the privilege to call this method
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - It invokes location_position_updated_cb(), location_velocity_updated_cb(), location_zone_changed_cb(), and location_service_state_changed_cb().
+  ///
+  /// **See also:**
+  /// - `location_manager_stop()`
+  /// - `location_manager_get_position()`
+  /// - `location_manager_get_velocity()`
+  /// - `location_manager_get_accuracy()`
+  /// - `location_manager_set_service_state_changed_cb()`
+  /// - `location_manager_set_position_updated_cb()`
+  /// - `location_position_updated_cb()`
+  /// - `location_manager_set_velocity_updated_cb()`
+  /// - `location_velocity_updated_cb()`
+  /// - `location_manager_set_zone_changed_cb()`
+  /// - `location_zone_changed_cb()`
   int location_manager_start(
     location_manager_h manager,
   ) {
@@ -649,23 +859,34 @@ class Tizen70CapiLocationManager {
   late final _location_manager_start =
       _location_manager_startPtr.asFunction<int Function(location_manager_h)>();
 
-  /// @brief Stops the location service.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks This function initiates the process of stopping the service. When the process is finished, callback set using
-  /// #location_manager_set_service_state_changed_cb() will be called, with #LOCATIONS_SERVICE_DISABLED as first argument.
-  /// When that happens, the service is stopped and the user is notified.
-  /// @remarks You can stop and start the location manager as needed.
-  /// @param[in] manager The location manager handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE Service not available
-  /// @retval #LOCATIONS_ERROR_NETWORK_FAILED Network failed
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @see location_manager_start()
-  /// @see location_manager_set_service_state_changed_cb()
-  /// @see location_service_state_changed_cb()
+  /// Stops the location service.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - This function initiates the process of stopping the service. When the process is finished, callback set using
+  /// - `location_manager_set_service_state_changed_cb()` will be called, with `LOCATIONS_SERVICE_DISABLED` as first argument.
+  /// - When that happens, the service is stopped and the user is notified.
+  /// - You can stop and start the location manager as needed.
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE`: Service not available
+  /// - `LOCATIONS_ERROR_NETWORK_FAILED`: Network failed
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `location_manager_start()`
+  /// - `location_manager_set_service_state_changed_cb()`
+  /// - `location_service_state_changed_cb()`
   int location_manager_stop(
     location_manager_h manager,
   ) {
@@ -680,19 +901,30 @@ class Tizen70CapiLocationManager {
   late final _location_manager_stop =
       _location_manager_stopPtr.asFunction<int Function(location_manager_h)>();
 
-  /// @brief Adds bounds for a given location manager.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] manager The location manager handle
-  /// @param[in] bounds The location bounds handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #LOCATIONS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @post It invokes location_manager_set_zone_changed_cb() when a boundary is entered or exited, if you set a callback with location_manager_set_zone_changed_cb().
-  /// @see location_manager_remove_boundary()
-  /// @see location_manager_set_zone_changed_cb()
+  /// Adds bounds for a given location manager.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  /// - `bounds` (in): The location bounds handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATIONS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - It invokes location_manager_set_zone_changed_cb() when a boundary is entered or exited, if you set a callback with location_manager_set_zone_changed_cb().
+  ///
+  /// **See also:**
+  /// - `location_manager_remove_boundary()`
+  /// - `location_manager_set_zone_changed_cb()`
   int location_manager_add_boundary(
     location_manager_h manager,
     location_bounds_h bounds,
@@ -710,17 +942,26 @@ class Tizen70CapiLocationManager {
   late final _location_manager_add_boundary = _location_manager_add_boundaryPtr
       .asFunction<int Function(location_manager_h, location_bounds_h)>();
 
-  /// @brief Deletes bounds for a given location manager.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] manager The location manager handle
-  /// @param[in] bounds The location bounds handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #LOCATIONS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @see location_manager_add_boundary()
+  /// Deletes bounds for a given location manager.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  /// - `bounds` (in): The location bounds handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATIONS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `location_manager_add_boundary()`
   int location_manager_remove_boundary(
     location_manager_h manager,
     location_bounds_h bounds,
@@ -739,20 +980,31 @@ class Tizen70CapiLocationManager {
       _location_manager_remove_boundaryPtr
           .asFunction<int Function(location_manager_h, location_bounds_h)>();
 
-  /// @brief Retrieves all location bounds by invoking a specific callback for each location bounds
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] manager The location manager handle
-  /// @param[in] callback The iteration callback
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @post location_bounds_cb() will be invoked.
-  /// @see location_manager_add_boundary()
-  /// @see location_manager_remove_boundary()
-  /// @see location_bounds_cb()
+  /// Retrieves all location bounds by invoking a specific callback for each location bounds
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  /// - `callback` (in): The iteration callback
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - location_bounds_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `location_manager_add_boundary()`
+  /// - `location_manager_remove_boundary()`
+  /// - `location_bounds_cb()`
   int location_manager_foreach_boundary(
     location_manager_h manager,
     location_bounds_cb callback,
@@ -774,16 +1026,25 @@ class Tizen70CapiLocationManager {
           int Function(
               location_manager_h, location_bounds_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the given location manager's method.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] manager The location manager handle
-  /// @param[out] method The location method
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @see location_manager_create()
+  /// Gets the given location manager's method.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  /// - `method` (out): The location method
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `location_manager_create()`
   int location_manager_get_method(
     location_manager_h manager,
     ffi.Pointer<ffi.Int32> method,
@@ -801,25 +1062,39 @@ class Tizen70CapiLocationManager {
   late final _location_manager_get_method = _location_manager_get_methodPtr
       .asFunction<int Function(location_manager_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the current position information.
-  /// @details The result contains the current altitude, latitude, and longitude with a measurement timestamp.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/location
-  /// @param[in] manager The location manager handle
-  /// @param[out] altitude The current altitude (meters)
-  /// @param[out] latitude The current latitude [-90.0 ~ 90.0] (degrees)
-  /// @param[out] longitude The current longitude [-180.0 ~ 180.0] (degrees)
-  /// @param[out] timestamp The timestamp (time when measurement took place or @c 0 if valid)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid argument
-  /// @retval #LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE Service not available
-  /// @retval #LOCATIONS_ERROR_GPS_SETTING_OFF GPS is not enabled
-  /// @retval #LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED The application does not have the privilege to call this method
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The location service state must be #LOCATIONS_SERVICE_ENABLED with location_manager_start().
+  /// Gets the current position information.
+  ///
+  /// The result contains the current altitude, latitude, and longitude with a measurement timestamp.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/location>
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  /// - `altitude` (out): The current altitude (meters)
+  /// - `latitude` (out): The current latitude `[-90.0 ~ 90.0]` (degrees)
+  /// - `longitude` (out): The current longitude `[-180.0 ~ 180.0]` (degrees)
+  /// - `timestamp` (out): The timestamp (time when measurement took place or `0` if valid)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid argument
+  /// - `LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE`: Service not available
+  /// - `LOCATIONS_ERROR_GPS_SETTING_OFF`: GPS is not enabled
+  /// - `LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED`: The application does not have the privilege to call this method
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The location service state must be `LOCATIONS_SERVICE_ENABLED` with location_manager_start().
   int location_manager_get_position(
     location_manager_h manager,
     ffi.Pointer<ffi.Double> altitude,
@@ -853,31 +1128,45 @@ class Tizen70CapiLocationManager {
               ffi.Pointer<ffi.Double>,
               ffi.Pointer<ffi_lib.Long>)>();
 
-  /// @brief Gets the current position information.
-  /// @details The result contains the current altitude, latitude, longitude, climb, direction, speed, level, horizontal, and vertical with a measurement timestamp.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/location
-  /// @param[in] manager The location manager handle
-  /// @param[out] altitude The current altitude (meters)
-  /// @param[out] latitude The current latitude [-90.0 ~ 90.0] (degrees)
-  /// @param[out] longitude The current longitude [-180.0 ~ 180.0] (degrees)
-  /// @param[out] climb The climb (km/h)
-  /// @param[out] direction The direction, degrees from the north
-  /// @param[out] speed The speed (km/h)
-  /// @param[out] level The accuracy level
-  /// @param[out] horizontal The horizontal accuracy (meters)
-  /// @param[out] vertical The vertical accuracy (meters)
-  /// @param[out] timestamp The timestamp (time when measurement took place or @c 0 if valid)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid argument
-  /// @retval #LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE Service not available
-  /// @retval #LOCATIONS_ERROR_GPS_SETTING_OFF GPS is not enabled
-  /// @retval #LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED The application does not have the privilege to call this method
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The location service state must be #LOCATIONS_SERVICE_ENABLED with location_manager_start().
+  /// Gets the current position information.
+  ///
+  /// The result contains the current altitude, latitude, longitude, climb, direction, speed, level, horizontal, and vertical with a measurement timestamp.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/location>
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  /// - `altitude` (out): The current altitude (meters)
+  /// - `latitude` (out): The current latitude `[-90.0 ~ 90.0]` (degrees)
+  /// - `longitude` (out): The current longitude `[-180.0 ~ 180.0]` (degrees)
+  /// - `climb` (out): The climb (km/h)
+  /// - `direction` (out): The direction, degrees from the north
+  /// - `speed` (out): The speed (km/h)
+  /// - `level` (out): The accuracy level
+  /// - `horizontal` (out): The horizontal accuracy (meters)
+  /// - `vertical` (out): The vertical accuracy (meters)
+  /// - `timestamp` (out): The timestamp (time when measurement took place or `0` if valid)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid argument
+  /// - `LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE`: Service not available
+  /// - `LOCATIONS_ERROR_GPS_SETTING_OFF`: GPS is not enabled
+  /// - `LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED`: The application does not have the privilege to call this method
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The location service state must be `LOCATIONS_SERVICE_ENABLED` with location_manager_start().
   int location_manager_get_location(
     location_manager_h manager,
     ffi.Pointer<ffi.Double> altitude,
@@ -935,25 +1224,39 @@ class Tizen70CapiLocationManager {
               ffi.Pointer<ffi.Double>,
               ffi.Pointer<ffi_lib.Long>)>();
 
-  /// @brief Gets the current velocity information.
-  /// @details The result contains the current climb, direction, and speed with a measurement timestamp.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/location
-  /// @param[in] manager The location manager handle
-  /// @param[out] climb The climb (km/h)
-  /// @param[out] direction The direction, degrees from the north
-  /// @param[out] speed The speed (km/h)
-  /// @param[out] timestamp The timestamp (time when measurement took place or @c 0 if valid)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid argument
-  /// @retval #LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE Service not available
-  /// @retval #LOCATIONS_ERROR_GPS_SETTING_OFF GPS is not enabled
-  /// @retval #LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED The application does not have the privilege to call this method
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The location service state must be #LOCATIONS_SERVICE_ENABLED with location_manager_start().
+  /// Gets the current velocity information.
+  ///
+  /// The result contains the current climb, direction, and speed with a measurement timestamp.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/location>
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  /// - `climb` (out): The climb (km/h)
+  /// - `direction` (out): The direction, degrees from the north
+  /// - `speed` (out): The speed (km/h)
+  /// - `timestamp` (out): The timestamp (time when measurement took place or `0` if valid)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid argument
+  /// - `LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE`: Service not available
+  /// - `LOCATIONS_ERROR_GPS_SETTING_OFF`: GPS is not enabled
+  /// - `LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED`: The application does not have the privilege to call this method
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The location service state must be `LOCATIONS_SERVICE_ENABLED` with location_manager_start().
   int location_manager_get_velocity(
     location_manager_h manager,
     ffi.Pointer<ffi.Double> climb,
@@ -987,23 +1290,36 @@ class Tizen70CapiLocationManager {
               ffi.Pointer<ffi.Double>,
               ffi.Pointer<ffi_lib.Long>)>();
 
-  /// @brief Gets the current accuracy information.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/location
-  /// @param[in] manager The location manager handle
-  /// @param[out] level The accuracy level
-  /// @param[out] horizontal The horizontal accuracy (meters)
-  /// @param[out] vertical The vertical accuracy (meters)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid argument
-  /// @retval #LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE Service not available
-  /// @retval #LOCATIONS_ERROR_GPS_SETTING_OFF GPS is not enabled
-  /// @retval #LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED The application does not have the privilege to call this method
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The location service state must be #LOCATIONS_SERVICE_ENABLED with location_manager_start().
+  /// Gets the current accuracy information.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/location>
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  /// - `level` (out): The accuracy level
+  /// - `horizontal` (out): The horizontal accuracy (meters)
+  /// - `vertical` (out): The vertical accuracy (meters)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid argument
+  /// - `LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE`: Service not available
+  /// - `LOCATIONS_ERROR_GPS_SETTING_OFF`: GPS is not enabled
+  /// - `LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED`: The application does not have the privilege to call this method
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The location service state must be `LOCATIONS_SERVICE_ENABLED` with location_manager_start().
   int location_manager_get_accuracy(
     location_manager_h manager,
     ffi.Pointer<ffi.Int32> level,
@@ -1030,21 +1346,34 @@ class Tizen70CapiLocationManager {
           int Function(location_manager_h, ffi.Pointer<ffi.Int32>,
               ffi.Pointer<ffi.Double>, ffi.Pointer<ffi.Double>)>();
 
-  /// @brief Gets the current velocity accuracy information.
-  /// @since_tizen @6.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/location
-  /// @param[in] manager The location manager handle
-  /// @param[out] velocity_accuracy The velocity accuracy (m/s)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid argument
-  /// @retval #LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE Service not available
-  /// @retval #LOCATIONS_ERROR_GPS_SETTING_OFF GPS is not enabled
-  /// @retval #LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED The application does not have the privilege to call this method
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The location service state must be #LOCATIONS_SERVICE_ENABLED with location_manager_start().
+  /// Gets the current velocity accuracy information.
+  ///
+  /// **Since Tizen:**
+  /// - @6.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/location>
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  /// - `velocity_accuracy` (out): The velocity accuracy (m/s)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid argument
+  /// - `LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE`: Service not available
+  /// - `LOCATIONS_ERROR_GPS_SETTING_OFF`: GPS is not enabled
+  /// - `LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED`: The application does not have the privilege to call this method
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The location service state must be `LOCATIONS_SERVICE_ENABLED` with location_manager_start().
   int location_manager_get_velocity_accuracy(
     location_manager_h manager,
     ffi.Pointer<ffi.Double> velocity_accuracy,
@@ -1063,23 +1392,37 @@ class Tizen70CapiLocationManager {
       _location_manager_get_velocity_accuracyPtr.asFunction<
           int Function(location_manager_h, ffi.Pointer<ffi.Double>)>();
 
-  /// @brief Gets the last position information which is recorded.
-  /// @details The @a altitude, @a latitude, @a longitude, and @c timestamp values should be 0, if there is no record of any previous position information.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/location
-  /// @param[in] manager The location manager handle
-  /// @param[out] altitude The last altitude (meters)
-  /// @param[out] latitude The last latitude [-90.0 ~ 90.0] (degrees)
-  /// @param[out] longitude The last longitude [-180.0 ~ 180.0] (degrees)
-  /// @param[out] timestamp The timestamp (time when measurement took place or @c 0 if valid)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid argument
-  /// @retval #LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED The application does not have the privilege to call this method
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The location manager handle must be created by location_manager_create().
+  /// Gets the last position information which is recorded.
+  ///
+  /// The `altitude`, `latitude`, `longitude`, and `timestamp` values should be 0, if there is no record of any previous position information.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/location>
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  /// - `altitude` (out): The last altitude (meters)
+  /// - `latitude` (out): The last latitude `[-90.0 ~ 90.0]` (degrees)
+  /// - `longitude` (out): The last longitude `[-180.0 ~ 180.0]` (degrees)
+  /// - `timestamp` (out): The timestamp (time when measurement took place or `0` if valid)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid argument
+  /// - `LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED`: The application does not have the privilege to call this method
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The location manager handle must be created by location_manager_create().
   int location_manager_get_last_position(
     location_manager_h manager,
     ffi.Pointer<ffi.Double> altitude,
@@ -1114,29 +1457,43 @@ class Tizen70CapiLocationManager {
               ffi.Pointer<ffi.Double>,
               ffi.Pointer<ffi_lib.Long>)>();
 
-  /// @brief Gets the last location information.
-  /// @details The @a altitude, @a latitude, @a longitude, @a climb, @a direction, @a speed, and @c timestamp values should be 0, if there is no record of any previous position information.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/location
-  /// @param[in] manager The location manager handle
-  /// @param[out] altitude The current altitude (meters)
-  /// @param[out] latitude The current latitude [-90.0 ~ 90.0] (degrees)
-  /// @param[out] longitude The current longitude [-180.0 ~ 180.0] (degrees)
-  /// @param[out] climb The climb (km/h)
-  /// @param[out] direction The direction, degrees from the north
-  /// @param[out] speed The speed (km/h)
-  /// @param[out] level The accuracy level
-  /// @param[out] horizontal The horizontal accuracy (meters)
-  /// @param[out] vertical The vertical accuracy (meters)
-  /// @param[out] timestamp The timestamp (time when measurement took place or @c 0 if valid)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid argument
-  /// @retval #LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED The application does not have the privilege to call this method
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The location manager handle must be created by location_manager_create().
+  /// Gets the last location information.
+  ///
+  /// The `altitude`, `latitude`, `longitude`, `climb`, `direction`, `speed`, and `timestamp` values should be 0, if there is no record of any previous position information.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/location>
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  /// - `altitude` (out): The current altitude (meters)
+  /// - `latitude` (out): The current latitude `[-90.0 ~ 90.0]` (degrees)
+  /// - `longitude` (out): The current longitude `[-180.0 ~ 180.0]` (degrees)
+  /// - `climb` (out): The climb (km/h)
+  /// - `direction` (out): The direction, degrees from the north
+  /// - `speed` (out): The speed (km/h)
+  /// - `level` (out): The accuracy level
+  /// - `horizontal` (out): The horizontal accuracy (meters)
+  /// - `vertical` (out): The vertical accuracy (meters)
+  /// - `timestamp` (out): The timestamp (time when measurement took place or `0` if valid)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid argument
+  /// - `LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED`: The application does not have the privilege to call this method
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The location manager handle must be created by location_manager_create().
   int location_manager_get_last_location(
     location_manager_h manager,
     ffi.Pointer<ffi.Double> altitude,
@@ -1195,23 +1552,37 @@ class Tizen70CapiLocationManager {
               ffi.Pointer<ffi.Double>,
               ffi.Pointer<ffi_lib.Long>)>();
 
-  /// @brief Gets the last velocity information which is recorded.
-  /// @details The @a climb, @a direction, and @a speed values should be @c 0, if there is no record of any previous velocity information.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/location
-  /// @param[in] manager The location manager handle
-  /// @param[out] climb The last climb (km/h)
-  /// @param[out] direction The last direction, degrees from the north
-  /// @param[out] speed The last speed (km/h)
-  /// @param[out] timestamp The timestamp (time when measurement took place or @c 0 if valid)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid argument
-  /// @retval #LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED The application does not have the privilege to call this method
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The location manager handle must be created by location_manager_create().
+  /// Gets the last velocity information which is recorded.
+  ///
+  /// The `climb`, `direction`, and `speed` values should be `0`, if there is no record of any previous velocity information.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/location>
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  /// - `climb` (out): The last climb (km/h)
+  /// - `direction` (out): The last direction, degrees from the north
+  /// - `speed` (out): The last speed (km/h)
+  /// - `timestamp` (out): The timestamp (time when measurement took place or `0` if valid)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid argument
+  /// - `LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED`: The application does not have the privilege to call this method
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The location manager handle must be created by location_manager_create().
   int location_manager_get_last_velocity(
     location_manager_h manager,
     ffi.Pointer<ffi.Double> climb,
@@ -1246,21 +1617,34 @@ class Tizen70CapiLocationManager {
               ffi.Pointer<ffi.Double>,
               ffi.Pointer<ffi_lib.Long>)>();
 
-  /// @brief Gets the last accuracy information which is recorded.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/location
-  /// @param[in] manager The location manager handle
-  /// @param[out] level The last accuracy level
-  /// @param[out] horizontal The last horizontal accuracy (meters)
-  /// @param[out] vertical The last vertical accuracy (meters)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid argument
-  /// @retval #LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED The application does not have the privilege to call this method
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The location manager handle must be created by location_manager_create().
+  /// Gets the last accuracy information which is recorded.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/location>
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  /// - `level` (out): The last accuracy level
+  /// - `horizontal` (out): The last horizontal accuracy (meters)
+  /// - `vertical` (out): The last vertical accuracy (meters)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid argument
+  /// - `LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED`: The application does not have the privilege to call this method
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The location manager handle must be created by location_manager_create().
   int location_manager_get_last_accuracy(
     location_manager_h manager,
     ffi.Pointer<ffi.Int32> level,
@@ -1287,16 +1671,24 @@ class Tizen70CapiLocationManager {
           int Function(location_manager_h, ffi.Pointer<ffi.Int32>,
               ffi.Pointer<ffi.Double>, ffi.Pointer<ffi.Double>)>();
 
-  /// @deprecated Deprecated since 3.0
-  /// @brief Gets the current application's location accessibility status.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[out] state The current location service accessibility status
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE Service not available
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid argument
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
+  /// **Deprecated:** Deprecated since 3.0
+  ///
+  /// Gets the current application's location accessibility status.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `state` (out): The current location service accessibility status
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE`: Service not available
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid argument
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
   int location_manager_get_accessibility_state(
     ffi.Pointer<ffi.Int32> state,
   ) {
@@ -1312,20 +1704,31 @@ class Tizen70CapiLocationManager {
       _location_manager_get_accessibility_statePtr
           .asFunction<int Function(ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Registers a callback function to be invoked at defined interval with updated position information.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] manager The location manager handle
-  /// @param[in] callback The callback function to register
-  /// @param[in] interval The interval [1 ~ 120] (seconds)
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @post location_position_updated_cb() will be invoked.
-  /// @see location_manager_unset_position_updated_cb()
-  /// @see location_position_updated_cb()
+  /// Registers a callback function to be invoked at defined interval with updated position information.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  /// - `callback` (in): The callback function to register
+  /// - `interval` (in): The interval `[1 ~ 120]` (seconds)
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - location_position_updated_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `location_manager_unset_position_updated_cb()`
+  /// - `location_position_updated_cb()`
   int location_manager_set_position_updated_cb(
     location_manager_h manager,
     location_position_updated_cb callback,
@@ -1350,15 +1753,24 @@ class Tizen70CapiLocationManager {
           int Function(location_manager_h, location_position_updated_cb, int,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback function.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] manager The location manager handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @see location_manager_set_position_updated_cb()
+  /// Unregisters the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `location_manager_set_position_updated_cb()`
   int location_manager_unset_position_updated_cb(
     location_manager_h manager,
   ) {
@@ -1374,20 +1786,31 @@ class Tizen70CapiLocationManager {
       _location_manager_unset_position_updated_cbPtr
           .asFunction<int Function(location_manager_h)>();
 
-  /// @brief Registers a callback function to be invoked at defined interval with updated velocity information.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] manager The location manager handle
-  /// @param[in] callback The callback function to register
-  /// @param[in] interval The interval [1 ~ 120] (seconds)
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @post location_velocity_updated_cb() will be invoked.
-  /// @see location_manager_unset_velocity_updated_cb()
-  /// @see location_velocity_updated_cb()
+  /// Registers a callback function to be invoked at defined interval with updated velocity information.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  /// - `callback` (in): The callback function to register
+  /// - `interval` (in): The interval `[1 ~ 120]` (seconds)
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - location_velocity_updated_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `location_manager_unset_velocity_updated_cb()`
+  /// - `location_velocity_updated_cb()`
   int location_manager_set_velocity_updated_cb(
     location_manager_h manager,
     location_velocity_updated_cb callback,
@@ -1412,15 +1835,24 @@ class Tizen70CapiLocationManager {
           int Function(location_manager_h, location_velocity_updated_cb, int,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback function.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] manager The location manager handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @see location_manager_set_velocity_updated_cb()
+  /// Unregisters the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `location_manager_set_velocity_updated_cb()`
   int location_manager_unset_velocity_updated_cb(
     location_manager_h manager,
   ) {
@@ -1436,22 +1868,33 @@ class Tizen70CapiLocationManager {
       _location_manager_unset_velocity_updated_cbPtr
           .asFunction<int Function(location_manager_h)>();
 
-  /// @brief Registers a callback function to be invoked when the location service state is changed.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] manager The location manager handle
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @post location_service_state_changed_cb() will be invoked.
-  /// @see location_manager_unset_service_state_changed_cb()
-  /// @see location_service_state_changed_cb()
-  /// @see location_manager_start()
-  /// @see location_manager_stop()
-  /// @see #location_service_state_e
+  /// Registers a callback function to be invoked when the location service state is changed.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - location_service_state_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `location_manager_unset_service_state_changed_cb()`
+  /// - `location_service_state_changed_cb()`
+  /// - `location_manager_start()`
+  /// - `location_manager_stop()`
+  /// - `location_service_state_e`
   int location_manager_set_service_state_changed_cb(
     location_manager_h manager,
     location_service_state_changed_cb callback,
@@ -1474,15 +1917,24 @@ class Tizen70CapiLocationManager {
           int Function(location_manager_h, location_service_state_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback function.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] manager The location manager handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @see location_manager_set_service_state_changed_cb()
+  /// Unregisters the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `location_manager_set_service_state_changed_cb()`
   int location_manager_unset_service_state_changed_cb(
     location_manager_h manager,
   ) {
@@ -1498,20 +1950,33 @@ class Tizen70CapiLocationManager {
       _location_manager_unset_service_state_changed_cbPtr
           .asFunction<int Function(location_manager_h)>();
 
-  /// @brief Registers a callback function to be invoked when the previously set boundary area is entered or left.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] manager The location manager handle
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @pre location_manager_add_boundary() is called before.
-  /// @post location_zone_changed_cb() will be invoked.
-  /// @see location_manager_unset_zone_changed_cb()
-  /// @see location_zone_changed_cb()
+  /// Registers a callback function to be invoked when the previously set boundary area is entered or left.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - location_manager_add_boundary() is called before.
+  ///
+  /// **Postconditions:**
+  /// - location_zone_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `location_manager_unset_zone_changed_cb()`
+  /// - `location_zone_changed_cb()`
   int location_manager_set_zone_changed_cb(
     location_manager_h manager,
     location_zone_changed_cb callback,
@@ -1533,15 +1998,24 @@ class Tizen70CapiLocationManager {
           int Function(location_manager_h, location_zone_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback function.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] manager The location manager handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @see location_manager_set_zone_changed_cb()
+  /// Unregisters the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `location_manager_set_zone_changed_cb()`
   int location_manager_unset_zone_changed_cb(
     location_manager_h manager,
   ) {
@@ -1557,20 +2031,31 @@ class Tizen70CapiLocationManager {
       _location_manager_unset_zone_changed_cbPtr
           .asFunction<int Function(location_manager_h)>();
 
-  /// @brief Registers a callback function to be invoked when the location setting is changed.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] method The method to observe
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #LOCATIONS_ERROR_INCORRECT_METHOD Incorrect method
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @post location_setting_changed_cb() will be invoked.
-  /// @see location_manager_unset_setting_changed_cb()
-  /// @see location_setting_changed_cb()
+  /// Registers a callback function to be invoked when the location setting is changed.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `method` (in): The method to observe
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATIONS_ERROR_INCORRECT_METHOD`: Incorrect method
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - location_setting_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `location_manager_unset_setting_changed_cb()`
+  /// - `location_setting_changed_cb()`
   int location_manager_set_setting_changed_cb(
     int method,
     location_setting_changed_cb callback,
@@ -1593,16 +2078,25 @@ class Tizen70CapiLocationManager {
           int Function(
               int, location_setting_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback function.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] method The method to observe
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #LOCATIONS_ERROR_INCORRECT_METHOD Incorrect method
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @see location_manager_set_setting_changed_cb()
+  /// Unregisters the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `method` (in): The method to observe
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATIONS_ERROR_INCORRECT_METHOD`: Incorrect method
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `location_manager_set_setting_changed_cb()`
   int location_manager_unset_setting_changed_cb(
     int method,
   ) {
@@ -1618,18 +2112,25 @@ class Tizen70CapiLocationManager {
       _location_manager_unset_setting_changed_cbPtr
           .asFunction<int Function(int)>();
 
-  /// @brief Gets the distance in meters between two locations.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] start_latitude The starting latitude [-90.0 ~ 90.0] (degrees)
-  /// @param[in] start_longitude The starting longitude [-180.0 ~ 180.0] (degrees)
-  /// @param[in] end_latitude The ending latitude [-90.0 ~ 90.0] (degrees)
-  /// @param[in] end_longitude The ending longitude [-180.0 ~ 180.0] (degrees)
-  /// @param[out] distance The distance between two locations (meters)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid argument
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
+  /// Gets the distance in meters between two locations.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `start_latitude` (in): The starting latitude `[-90.0 ~ 90.0]` (degrees)
+  /// - `start_longitude` (in): The starting longitude `[-180.0 ~ 180.0]` (degrees)
+  /// - `end_latitude` (in): The ending latitude `[-90.0 ~ 90.0]` (degrees)
+  /// - `end_longitude` (in): The ending longitude `[-180.0 ~ 180.0]` (degrees)
+  /// - `distance` (out): The distance between two locations (meters)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid argument
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
   int location_manager_get_distance(
     double start_latitude,
     double start_longitude,
@@ -1655,21 +2156,32 @@ class Tizen70CapiLocationManager {
           int Function(
               double, double, double, double, ffi.Pointer<ffi.Double>)>();
 
-  /// @brief Registers a callback function to be invoked at minimum interval or minimum distance with updated position information.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in] manager The location manager handle
-  /// @param[in] callback The callback function to register
-  /// @param[in] interval The minimum interval between position updates [1 ~ 120] (seconds)
-  /// @param[in] distance The minimum distance between position updates [1 ~ 120] (meters)
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @post location_changed_cb() will be invoked.
-  /// @see location_manager_unset_distance_based_location_changed_cb()
-  /// @see location_changed_cb()
+  /// Registers a callback function to be invoked at minimum interval or minimum distance with updated position information.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  /// - `callback` (in): The callback function to register
+  /// - `interval` (in): The minimum interval between position updates `[1 ~ 120]` (seconds)
+  /// - `distance` (in): The minimum distance between position updates `[1 ~ 120]` (meters)
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - location_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `location_manager_unset_distance_based_location_changed_cb()`
+  /// - `location_changed_cb()`
   int location_manager_set_distance_based_location_changed_cb(
     location_manager_h manager,
     location_changed_cb callback,
@@ -1697,15 +2209,24 @@ class Tizen70CapiLocationManager {
           int Function(location_manager_h, location_changed_cb, int, double,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback function.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in] manager The location manager handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @see location_manager_set_distance_based_location_changed_cb()
+  /// Unregisters the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `location_manager_set_distance_based_location_changed_cb()`
   int location_manager_unset_distance_based_location_changed_cb(
     location_manager_h manager,
   ) {
@@ -1721,20 +2242,31 @@ class Tizen70CapiLocationManager {
       _location_manager_unset_distance_based_location_changed_cbPtr
           .asFunction<int Function(location_manager_h)>();
 
-  /// @brief Registers a callback function to be invoked at defined interval with updated location information.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in] manager The location manager handle
-  /// @param[in] callback The callback function to register
-  /// @param[in] interval The interval [1 ~ 120] (seconds)
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @post location_changed_cb() will be invoked.
-  /// @see location_manager_unset_location_changed_cb()
-  /// @see location_changed_cb()
+  /// Registers a callback function to be invoked at defined interval with updated location information.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  /// - `callback` (in): The callback function to register
+  /// - `interval` (in): The interval `[1 ~ 120]` (seconds)
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - location_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `location_manager_unset_location_changed_cb()`
+  /// - `location_changed_cb()`
   int location_manager_set_location_changed_cb(
     location_manager_h manager,
     location_changed_cb callback,
@@ -1759,15 +2291,24 @@ class Tizen70CapiLocationManager {
           int Function(location_manager_h, location_changed_cb, int,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback function.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in] manager The location manager handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @see location_manager_set_location_changed_cb()
+  /// Unregisters the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `location_manager_set_location_changed_cb()`
   int location_manager_unset_location_changed_cb(
     location_manager_h manager,
   ) {
@@ -1783,24 +2324,37 @@ class Tizen70CapiLocationManager {
       _location_manager_unset_location_changed_cbPtr
           .asFunction<int Function(location_manager_h)>();
 
-  /// @brief Registers a callback function to be invoked when batch_period is expired.
-  /// @since_tizen @if MOBILE 3.0 @elseif WEARABLE 2.3.2 @endif
-  /// @remarks The batch_period should be greater than or equal to the batch_interval.
-  /// In addition, sometimes the period may not work as you intended, the maximum permissible value for batch_period is device specific.
-  /// @param[in] manager The location manager handle
-  /// @param[in] callback The callback function to register
-  /// @param[in] batch_interval The batch sampling interval [1 ~ 255] (seconds)
-  /// @param[in] batch_period The batch period [1 ~ 60000] (seconds)
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @post location_batch_cb() will be invoked.
-  /// @see location_manager_start_batch()
-  /// @see location_batch_cb()
-  /// @see location_manager_unset_location_batch_cb()
+  /// Registers a callback function to be invoked when batch_period is expired.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 3.0; Wearable 2.3.2
+  ///
+  /// **Remarks:**
+  /// - The batch_period should be greater than or equal to the batch_interval.
+  /// - In addition, sometimes the period may not work as you intended, the maximum permissible value for batch_period is device specific.
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  /// - `callback` (in): The callback function to register
+  /// - `batch_interval` (in): The batch sampling interval `[1 ~ 255]` (seconds)
+  /// - `batch_period` (in): The batch period `[1 ~ 60000]` (seconds)
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - location_batch_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `location_manager_start_batch()`
+  /// - `location_batch_cb()`
+  /// - `location_manager_unset_location_batch_cb()`
   int location_manager_set_location_batch_cb(
     location_manager_h manager,
     location_batch_cb callback,
@@ -1827,15 +2381,24 @@ class Tizen70CapiLocationManager {
           int Function(location_manager_h, location_batch_cb, int, int,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback function.
-  /// @since_tizen @if MOBILE 3.0 @elseif WEARABLE 2.3.2 @endif
-  /// @param[in] manager The location manager handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @see location_manager_set_location_batch_cb()
+  /// Unregisters the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 3.0; Wearable 2.3.2
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `location_manager_set_location_batch_cb()`
   int location_manager_unset_location_batch_cb(
     location_manager_h manager,
   ) {
@@ -1851,30 +2414,47 @@ class Tizen70CapiLocationManager {
       _location_manager_unset_location_batch_cbPtr
           .asFunction<int Function(location_manager_h)>();
 
-  /// @brief Starts the location batch service.
-  /// @details Calling this function starts location batch service, location_batch_cb() will be invoked every @a batch_period seconds.
-  /// After that, you can obtain all locations with location_manager_foreach_location_batch().
-  /// @since_tizen @if MOBILE 3.0 @elseif WEARABLE 2.3.2 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/location
-  /// @remarks Calling this function invokes a location service event. When the location service is enabled, the service state change callback
-  /// (set using location_manager_set_service_state_changed_cb()) notifies the user with #LOCATIONS_SERVICE_ENABLED as the first argument, and the service starts.
-  /// @param[in] manager The location manager handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #LOCATIONS_ERROR_INCORRECT_METHOD Incorrect method
-  /// @retval #LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE Service not available
-  /// @retval #LOCATIONS_ERROR_NETWORK_FAILED Network failed
-  /// @retval #LOCATIONS_ERROR_GPS_SETTING_OFF GPS is not enabled
-  /// @retval #LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED The application does not have the privilege to call this method
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @pre location_manager_set_location_batch_cb()
-  /// @see location_manager_set_service_state_changed_cb()
-  /// @see location_service_state_changed_cb()
-  /// @see location_manager_foreach_location_batch()
-  /// @see location_manager_stop_batch()
+  /// Starts the location batch service.
+  ///
+  /// Calling this function starts location batch service, location_batch_cb() will be invoked every `batch_period` seconds. After that, you can obtain all locations with location_manager_foreach_location_batch().
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 3.0; Wearable 2.3.2
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/location>
+  ///
+  /// **Remarks:**
+  /// - Calling this function invokes a location service event. When the location service is enabled, the service state change callback
+  /// - (set using location_manager_set_service_state_changed_cb()) notifies the user with `LOCATIONS_SERVICE_ENABLED` as the first argument, and the service starts.
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATIONS_ERROR_INCORRECT_METHOD`: Incorrect method
+  /// - `LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE`: Service not available
+  /// - `LOCATIONS_ERROR_NETWORK_FAILED`: Network failed
+  /// - `LOCATIONS_ERROR_GPS_SETTING_OFF`: GPS is not enabled
+  /// - `LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED`: The application does not have the privilege to call this method
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - location_manager_set_location_batch_cb()
+  ///
+  /// **See also:**
+  /// - `location_manager_set_service_state_changed_cb()`
+  /// - `location_service_state_changed_cb()`
+  /// - `location_manager_foreach_location_batch()`
+  /// - `location_manager_stop_batch()`
   int location_manager_start_batch(
     location_manager_h manager,
   ) {
@@ -1889,21 +2469,32 @@ class Tizen70CapiLocationManager {
   late final _location_manager_start_batch = _location_manager_start_batchPtr
       .asFunction<int Function(location_manager_h)>();
 
-  /// @brief Stops the location batch service.
-  /// @since_tizen @if MOBILE 3.0 @elseif WEARABLE 2.3.2 @endif
-  /// @remarks This function initiates the process of stopping the service. When the process is finished, callback set using
-  /// #location_manager_set_service_state_changed_cb() will be called, with #LOCATIONS_SERVICE_DISABLED as the first argument.
-  /// @param[in] manager The location manager handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE Service not available
-  /// @retval #LOCATIONS_ERROR_NETWORK_FAILED Network failed
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @see location_manager_start_batch()
-  /// @see location_manager_set_service_state_changed_cb()
-  /// @see location_service_state_changed_cb()
+  /// Stops the location batch service.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 3.0; Wearable 2.3.2
+  ///
+  /// **Remarks:**
+  /// - This function initiates the process of stopping the service. When the process is finished, callback set using
+  /// - `location_manager_set_service_state_changed_cb()` will be called, with `LOCATIONS_SERVICE_DISABLED` as the first argument.
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE`: Service not available
+  /// - `LOCATIONS_ERROR_NETWORK_FAILED`: Network failed
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `location_manager_start_batch()`
+  /// - `location_manager_set_service_state_changed_cb()`
+  /// - `location_service_state_changed_cb()`
   int location_manager_stop_batch(
     location_manager_h manager,
   ) {
@@ -1918,24 +2509,41 @@ class Tizen70CapiLocationManager {
   late final _location_manager_stop_batch = _location_manager_stop_batchPtr
       .asFunction<int Function(location_manager_h)>();
 
-  /// @brief Retrieves all location information by invoking a specific callback for each location data.
-  /// @since_tizen @if MOBILE 3.0 @elseif WEARABLE 2.3.2 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/location
-  /// @param[in] manager The location manager handle
-  /// @param[in] callback The iteration callback function
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED The application does not have the privilege to call this method
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @pre location_manager_foreach_location_batch() is available after location_batch_cb() is invoked.
-  /// @post location_batch_get_location_cb() will be invoked.
-  /// @see location_manager_start_batch()
-  /// @see location_batch_cb()
-  /// @see location_batch_get_location_cb()
+  /// Retrieves all location information by invoking a specific callback for each location data.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 3.0; Wearable 2.3.2
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/location>
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  /// - `callback` (in): The iteration callback function
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED`: The application does not have the privilege to call this method
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - location_manager_foreach_location_batch() is available after location_batch_cb() is invoked.
+  ///
+  /// **Postconditions:**
+  /// - location_batch_get_location_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `location_manager_start_batch()`
+  /// - `location_batch_cb()`
+  /// - `location_batch_get_location_cb()`
   int location_manager_foreach_location_batch(
     location_manager_h manager,
     location_batch_get_location_cb callback,
@@ -1958,17 +2566,26 @@ class Tizen70CapiLocationManager {
           int Function(location_manager_h, location_batch_get_location_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Checks whether the mock location is enabled.
-  /// @since_tizen 3.0
-  /// @param[out] enabled Indicates whether the mock location is enabled
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @see location_manager_enable_mock_location()
-  /// @see location_manager_set_mock_location()
-  /// @see location_manager_clear_mock_location()
+  /// Checks whether the mock location is enabled.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `enabled` (out): Indicates whether the mock location is enabled
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `location_manager_enable_mock_location()`
+  /// - `location_manager_set_mock_location()`
+  /// - `location_manager_clear_mock_location()`
   int location_manager_is_enabled_mock_location(
     ffi.Pointer<ffi.Bool> enabled,
   ) {
@@ -1984,23 +2601,38 @@ class Tizen70CapiLocationManager {
       _location_manager_is_enabled_mock_locationPtr
           .asFunction<int Function(ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Enables mock location.
-  /// @details The mock location is a testing function to make location API and callback deliver a mock location
-  /// set by location_manager_set_mock_location() instead of real positioning data even in the other applications.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/location
-  /// @remarks The mock location can only be enabled if developer mode is enabled.
-  /// @param[in] enable The value to set
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_SETTING_OFF	MOCK location is not enabled
-  /// @retval #LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED Permission denied
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @see location_manager_is_enabled_mock_location()
-  /// @see location_manager_set_mock_location()
-  /// @see location_manager_clear_mock_location()
+  /// Enables mock location.
+  ///
+  /// The mock location is a testing function to make location API and callback deliver a mock location set by location_manager_set_mock_location() instead of real positioning data even in the other applications.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/location>
+  ///
+  /// **Remarks:**
+  /// - The mock location can only be enabled if developer mode is enabled.
+  ///
+  /// **Parameters:**
+  /// - `enable` (in): The value to set
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_SETTING_OFF`: MOCK location is not enabled
+  /// - `LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED`: Permission denied
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `location_manager_is_enabled_mock_location()`
+  /// - `location_manager_set_mock_location()`
+  /// - `location_manager_clear_mock_location()`
   int location_manager_enable_mock_location(
     bool enable,
   ) {
@@ -2016,30 +2648,44 @@ class Tizen70CapiLocationManager {
       _location_manager_enable_mock_locationPtr
           .asFunction<int Function(bool)>();
 
-  /// @brief Sets a mock location for the given location method.
-  /// @details The location sets the given altitude, latitude, longitude, climb, direction, speed, level, horizontal, and vertical accuracy.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/location
-  /// @param[in] manager The location manager handle
-  /// @param[in] latitude The current latitude [-90.0 ~ 90.0] (degrees)
-  /// @param[in] longitude The current longitude [-180.0 ~ 180.0] (degrees)
-  /// @param[in] altitude The current altitude (meters)
-  /// @param[in] speed The speed (km/h)
-  /// @param[in] direction The direction, degrees from the north [0.0 ~ 360.0]
-  /// @param[in] accuracy The horizontal accuracy (meters)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid argument
-  /// @retval #LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE Service not available
-  /// @retval #LOCATIONS_ERROR_SETTING_OFF MOCK location is not enabled
-  /// @retval #LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED The application does not have the privilege to call this method
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @see location_manager_create()
-  /// @see location_manager_is_enabled_mock_location()
-  /// @see location_manager_enable_mock_location()
-  /// @see location_manager_clear_mock_location()
+  /// Sets a mock location for the given location method.
+  ///
+  /// The location sets the given altitude, latitude, longitude, climb, direction, speed, level, horizontal, and vertical accuracy.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/location>
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  /// - `latitude` (in): The current latitude `[-90.0 ~ 90.0]` (degrees)
+  /// - `longitude` (in): The current longitude `[-180.0 ~ 180.0]` (degrees)
+  /// - `altitude` (in): The current altitude (meters)
+  /// - `speed` (in): The speed (km/h)
+  /// - `direction` (in): The direction, degrees from the north `[0.0 ~ 360.0]`
+  /// - `accuracy` (in): The horizontal accuracy (meters)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid argument
+  /// - `LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE`: Service not available
+  /// - `LOCATIONS_ERROR_SETTING_OFF`: MOCK location is not enabled
+  /// - `LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED`: The application does not have the privilege to call this method
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `location_manager_create()`
+  /// - `location_manager_is_enabled_mock_location()`
+  /// - `location_manager_enable_mock_location()`
+  /// - `location_manager_clear_mock_location()`
   int location_manager_set_mock_location(
     location_manager_h manager,
     double latitude,
@@ -2075,23 +2721,36 @@ class Tizen70CapiLocationManager {
           int Function(location_manager_h, double, double, double, double,
               double, double)>();
 
-  /// @brief Clears a mock location.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/location
-  /// @param[in] manager The location manager handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid argument
-  /// @retval #LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE Service not available
-  /// @retval #LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED The application does not have the privilege to call this method
-  /// @retval #LOCATIONS_ERROR_SETTING_OFF MOCK location is not enabled
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @see location_manager_create()
-  /// @see location_manager_is_enabled_mock_location()
-  /// @see location_manager_enable_mock_location()
-  /// @see location_manager_set_mock_location()
+  /// Clears a mock location.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/location>
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid argument
+  /// - `LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE`: Service not available
+  /// - `LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED`: The application does not have the privilege to call this method
+  /// - `LOCATIONS_ERROR_SETTING_OFF`: MOCK location is not enabled
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `location_manager_create()`
+  /// - `location_manager_is_enabled_mock_location()`
+  /// - `location_manager_enable_mock_location()`
+  /// - `location_manager_set_mock_location()`
   int location_manager_clear_mock_location(
     location_manager_h manager,
   ) {
@@ -2107,17 +2766,27 @@ class Tizen70CapiLocationManager {
       _location_manager_clear_mock_locationPtr
           .asFunction<int Function(location_manager_h)>();
 
-  /// @brief	Changes behavior of the location source selection in the fused location method.
-  /// @since_tizen 4.0
-  /// @param[in] manager		The location manager handle
-  /// @param[in] mode			The fused mode.
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE					Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER		Invalid parameter
-  /// @retval #LOCATIONS_ERROR_INCORRECT_METHOD		Incorrect method
-  /// @retval #LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE	The service is not available
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED			Not supported
-  /// @see location_manager_create()
+  /// Changes behavior of the location source selection in the fused location method.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  /// - `mode` (in): The fused mode.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATIONS_ERROR_INCORRECT_METHOD`: Incorrect method
+  /// - `LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE`: The service is not available
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `location_manager_create()`
   int location_manager_set_fused_mode(
     location_manager_h manager,
     int mode,
@@ -2135,21 +2804,34 @@ class Tizen70CapiLocationManager {
       _location_manager_set_fused_modePtr
           .asFunction<int Function(location_manager_h, int)>();
 
-  /// @brief Gets the GPS NMEA data.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks This call is valid only for location managers with #LOCATIONS_METHOD_GPS method.
-  /// You must release @a nmea using @c free().
-  /// @param[in] manager The location manager handle
-  /// @param[out] nmea The NMEA data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid argument
-  /// @retval #LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE Service not available
-  /// @retval #LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED The application does not have the privilege to call this method
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The location service state must be #LOCATIONS_SERVICE_ENABLED with location_manager_start().
-  /// @see location_manager_start()
+  /// Gets the GPS NMEA data.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - This call is valid only for location managers with `LOCATIONS_METHOD_GPS` method.
+  /// - You must release `nmea` using `free(`).
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  /// - `nmea` (out): The NMEA data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid argument
+  /// - `LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE`: Service not available
+  /// - `LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED`: The application does not have the privilege to call this method
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The location service state must be `LOCATIONS_SERVICE_ENABLED` with location_manager_start().
+  ///
+  /// **See also:**
+  /// - `location_manager_start()`
   int gps_status_get_nmea(
     location_manager_h manager,
     ffi.Pointer<ffi.Pointer<ffi.Char>> nmea,
@@ -2167,25 +2849,42 @@ class Tizen70CapiLocationManager {
   late final _gps_status_get_nmea = _gps_status_get_nmeaPtr.asFunction<
       int Function(location_manager_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the information of satellites.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/location
-  /// @remarks This call is valid only for location managers with #LOCATIONS_METHOD_GPS method.
-  /// @param[in] manager The location manager handle
-  /// @param[out] num_of_active The number of active satellites
-  /// @param[out] num_of_inview The number of satellites in view
-  /// @param[out] timestamp The timestamp (time when measurement took place or @c 0 if valid)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid argument
-  /// @retval #LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE Service not available
-  /// @retval #LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED The application does not have the privilege to call this method
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The location service state must be #LOCATIONS_SERVICE_ENABLED with location_manager_start().
-  /// @pre The gps_status_satellite_updated_cb must be set with gps_status_set_satellite_updated_cb().
-  /// @see gps_status_foreach_satellites_in_view()
+  /// Gets the information of satellites.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/location>
+  ///
+  /// **Remarks:**
+  /// - This call is valid only for location managers with `LOCATIONS_METHOD_GPS` method.
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  /// - `num_of_active` (out): The number of active satellites
+  /// - `num_of_inview` (out): The number of satellites in view
+  /// - `timestamp` (out): The timestamp (time when measurement took place or `0` if valid)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid argument
+  /// - `LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE`: Service not available
+  /// - `LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED`: The application does not have the privilege to call this method
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The location service state must be `LOCATIONS_SERVICE_ENABLED` with location_manager_start().
+  /// - The gps_status_satellite_updated_cb must be set with gps_status_set_satellite_updated_cb().
+  ///
+  /// **See also:**
+  /// - `gps_status_foreach_satellites_in_view()`
   int gps_status_get_satellite(
     location_manager_h manager,
     ffi.Pointer<ffi.Int> num_of_active,
@@ -2212,27 +2911,42 @@ class Tizen70CapiLocationManager {
           int Function(location_manager_h, ffi.Pointer<ffi.Int>,
               ffi.Pointer<ffi.Int>, ffi.Pointer<ffi_lib.Long>)>();
 
-  /// @brief Registers a callback function to be invoked at defined interval with updated satellite information.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/location
-  /// @param[in] manager The location manager handle
-  /// @param[in] callback The callback function to register
-  /// @param[in] interval The interval [1 ~ 120] (seconds)
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED The application does not have the privilege to call this method
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @post gps_status_satellite_updated_cb() will be invoked.
-  /// @see gps_status_unset_satellite_updated_cb()
-  /// @see gps_status_satellite_updated_cb()
-  /// @see gps_status_get_satellite()
-  /// @see gps_status_foreach_satellites_in_view()
-  /// @see gps_status_get_last_satellite()
-  /// @see gps_status_foreach_last_satellites_in_view()
+  /// Registers a callback function to be invoked at defined interval with updated satellite information.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/location>
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  /// - `callback` (in): The callback function to register
+  /// - `interval` (in): The interval `[1 ~ 120]` (seconds)
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED`: The application does not have the privilege to call this method
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - gps_status_satellite_updated_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `gps_status_unset_satellite_updated_cb()`
+  /// - `gps_status_satellite_updated_cb()`
+  /// - `gps_status_get_satellite()`
+  /// - `gps_status_foreach_satellites_in_view()`
+  /// - `gps_status_get_last_satellite()`
+  /// - `gps_status_foreach_last_satellites_in_view()`
   int gps_status_set_satellite_updated_cb(
     location_manager_h manager,
     gps_status_satellite_updated_cb callback,
@@ -2259,15 +2973,24 @@ class Tizen70CapiLocationManager {
           int Function(location_manager_h, gps_status_satellite_updated_cb, int,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback function.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] manager The location manager handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @see gps_status_set_satellite_updated_cb()
+  /// Unregisters the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `gps_status_set_satellite_updated_cb()`
   int gps_status_unset_satellite_updated_cb(
     location_manager_h manager,
   ) {
@@ -2283,27 +3006,46 @@ class Tizen70CapiLocationManager {
       _gps_status_unset_satellite_updated_cbPtr
           .asFunction<int Function(location_manager_h)>();
 
-  /// @brief Invokes the callback function for each satellite.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/location
-  /// @remarks This function is valid only for location managers with the #LOCATIONS_METHOD_GPS method.
-  /// @param[in] manager The location manager handle
-  /// @param[in] callback The iteration callback function
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid argument
-  /// @retval #LOCATIONS_ERROR_INCORRECT_METHOD Incorrect method
-  /// @retval #LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE Service not available
-  /// @retval #LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED The application does not have the privilege to call this method
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The location service state must be #LOCATIONS_SERVICE_ENABLED with location_manager_start().
-  /// @pre The gps_status_satellite_updated_cb must be set with gps_status_set_satellite_updated_cb().
-  /// @post It invokes gps_status_get_satellites_cb().
-  /// @see gps_status_get_satellite()
-  /// @see gps_status_get_satellites_cb()
+  /// Invokes the callback function for each satellite.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/location>
+  ///
+  /// **Remarks:**
+  /// - This function is valid only for location managers with the `LOCATIONS_METHOD_GPS` method.
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  /// - `callback` (in): The iteration callback function
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid argument
+  /// - `LOCATIONS_ERROR_INCORRECT_METHOD`: Incorrect method
+  /// - `LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE`: Service not available
+  /// - `LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED`: The application does not have the privilege to call this method
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The location service state must be `LOCATIONS_SERVICE_ENABLED` with location_manager_start().
+  /// - The gps_status_satellite_updated_cb must be set with gps_status_set_satellite_updated_cb().
+  ///
+  /// **Postconditions:**
+  /// - It invokes gps_status_get_satellites_cb().
+  ///
+  /// **See also:**
+  /// - `gps_status_get_satellite()`
+  /// - `gps_status_get_satellites_cb()`
   int gps_status_foreach_satellites_in_view(
     location_manager_h manager,
     gps_status_get_satellites_cb callback,
@@ -2325,26 +3067,43 @@ class Tizen70CapiLocationManager {
           int Function(location_manager_h, gps_status_get_satellites_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the last information of satellites.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/location
-  /// @remarks This call is valid only for location managers with #LOCATIONS_METHOD_GPS method.
-  /// @param[in] manager The location manager handle
-  /// @param[out] num_of_active The last number of active satellites
-  /// @param[out] num_of_inview The last number of satellites in view
-  /// @param[out] timestamp The last timestamp (time when last measurement took place or @c 0 if valid)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid argument
-  /// @retval #LOCATIONS_ERROR_INCORRECT_METHOD Incorrect method
-  /// @retval #LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE Service not available
-  /// @retval #LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED The application does not have the privilege to call this method
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The location service state must be #LOCATIONS_SERVICE_ENABLED with location_manager_start().
-  /// @pre The gps_status_satellite_updated_cb must be set with gps_status_set_satellite_updated_cb().
-  /// @see gps_status_foreach_satellites_in_view()
+  /// Gets the last information of satellites.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/location>
+  ///
+  /// **Remarks:**
+  /// - This call is valid only for location managers with `LOCATIONS_METHOD_GPS` method.
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  /// - `num_of_active` (out): The last number of active satellites
+  /// - `num_of_inview` (out): The last number of satellites in view
+  /// - `timestamp` (out): The last timestamp (time when last measurement took place or `0` if valid)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid argument
+  /// - `LOCATIONS_ERROR_INCORRECT_METHOD`: Incorrect method
+  /// - `LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE`: Service not available
+  /// - `LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED`: The application does not have the privilege to call this method
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The location service state must be `LOCATIONS_SERVICE_ENABLED` with location_manager_start().
+  /// - The gps_status_satellite_updated_cb must be set with gps_status_set_satellite_updated_cb().
+  ///
+  /// **See also:**
+  /// - `gps_status_foreach_satellites_in_view()`
   int gps_status_get_last_satellite(
     location_manager_h manager,
     ffi.Pointer<ffi.Int> num_of_active,
@@ -2371,27 +3130,46 @@ class Tizen70CapiLocationManager {
           int Function(location_manager_h, ffi.Pointer<ffi.Int>,
               ffi.Pointer<ffi.Int>, ffi.Pointer<ffi_lib.Long>)>();
 
-  /// @brief Invokes the callback function for each last satellite which is recorded.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/location
-  /// @remarks This function is valid only for location managers with the #LOCATIONS_METHOD_GPS method.
-  /// @param[in] manager The location manager handle
-  /// @param[in] callback The iteration callback function
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #LOCATIONS_ERROR_NONE Successful
-  /// @retval #LOCATIONS_ERROR_INVALID_PARAMETER Invalid argument
-  /// @retval #LOCATIONS_ERROR_INCORRECT_METHOD Incorrect method
-  /// @retval #LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE Service not available
-  /// @retval #LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED The application does not have the privilege to call this method
-  /// @retval #LOCATIONS_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The location service state must be #LOCATIONS_SERVICE_ENABLED with location_manager_start().
-  /// @pre The gps_status_satellite_updated_cb must be set with gps_status_set_satellite_updated_cb().
-  /// @post It invokes gps_status_get_satellites_cb().
-  /// @see gps_status_get_last_satellite()
-  /// @see gps_status_get_satellites_cb()
+  /// Invokes the callback function for each last satellite which is recorded.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/location>
+  ///
+  /// **Remarks:**
+  /// - This function is valid only for location managers with the `LOCATIONS_METHOD_GPS` method.
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The location manager handle
+  /// - `callback` (in): The iteration callback function
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `LOCATIONS_ERROR_NONE`: Successful
+  /// - `LOCATIONS_ERROR_INVALID_PARAMETER`: Invalid argument
+  /// - `LOCATIONS_ERROR_INCORRECT_METHOD`: Incorrect method
+  /// - `LOCATIONS_ERROR_SERVICE_NOT_AVAILABLE`: Service not available
+  /// - `LOCATIONS_ERROR_ACCESSIBILITY_NOT_ALLOWED`: The application does not have the privilege to call this method
+  /// - `LOCATIONS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The location service state must be `LOCATIONS_SERVICE_ENABLED` with location_manager_start().
+  /// - The gps_status_satellite_updated_cb must be set with gps_status_set_satellite_updated_cb().
+  ///
+  /// **Postconditions:**
+  /// - It invokes gps_status_get_satellites_cb().
+  ///
+  /// **See also:**
+  /// - `gps_status_get_last_satellite()`
+  /// - `gps_status_get_satellites_cb()`
   int gps_status_foreach_last_satellites_in_view(
     location_manager_h manager,
     gps_status_get_satellites_cb callback,
@@ -2415,8 +3193,11 @@ class Tizen70CapiLocationManager {
               ffi.Pointer<ffi.Void>)>();
 }
 
-/// @brief The structure type to represent coordinates with latitude and longitude.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// The structure type to represent coordinates with latitude and longitude.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 final class location_coords_s extends ffi.Struct {
   /// < The latitude [-90.0 ~ 90.0] (degrees)
   @ffi.Double()
@@ -2427,8 +3208,11 @@ final class location_coords_s extends ffi.Struct {
   external double longitude;
 }
 
-/// @brief Enumeration for error code for Location manager.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for error code for Location manager.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class location_bound_error_e {
   /// < Successful
   static const int LOCATION_BOUNDS_ERROR_NONE = 0;
@@ -2449,8 +3233,11 @@ abstract class location_bound_error_e {
   static const int LOCATION_BOUNDS_ERROR_IS_ADDED = -46137310;
 }
 
-/// @brief Enumeration for Location boundary type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for Location boundary type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class location_bounds_type_e {
   /// < Rectangular geographical area type.
   static const int LOCATION_BOUNDS_RECT = 1;
@@ -2462,8 +3249,11 @@ abstract class location_bounds_type_e {
   static const int LOCATION_BOUNDS_POLYGON = 3;
 }
 
-/// @brief Enumeration for the boundary state.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for the boundary state.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class location_boundary_state_e {
   /// < Boundary In (Zone In)
   static const int LOCATIONS_BOUNDARY_IN = 0;
@@ -2472,44 +3262,74 @@ abstract class location_boundary_state_e {
   static const int LOCATIONS_BOUNDARY_OUT = 1;
 }
 
+/// @nodoc
 final class location_bounds_s extends ffi.Opaque {}
 
-/// @brief The location boundary handle.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// The location boundary handle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 typedef location_bounds_h = ffi.Pointer<location_bounds_s>;
 
-/// @brief Gets called iteratively to notify you of coordinates of a polygon.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] coords The coordinates
-/// @param[in] user_data The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop, \n
-/// @c false to break out of the loop
-/// @pre location_bounds_foreach_polygon_coords() will invoke this callback.
-/// @see location_bounds_foreach_polygon_coords()
+/// Gets called iteratively to notify you of coordinates of a polygon.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `coords` (in): The coordinates
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - location_bounds_foreach_polygon_coords() will invoke this callback.
+///
+/// **See also:**
+/// - `location_bounds_foreach_polygon_coords()`
+/// @nodoc
 typedef polygon_coords_cb
     = ffi.Pointer<ffi.NativeFunction<polygon_coords_cbFunction>>;
+/// @nodoc
 typedef polygon_coords_cbFunction = ffi.Bool Function(
     location_coords_s coords, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartpolygon_coords_cbFunction = bool Function(
     location_coords_s coords, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the given boundary is entered or exited.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] state The boundary state
-/// @param[in] user_data The user data passed from the start function
-/// @pre location_manager_start() will invoke this callback if you register this callback using location_bounds_set_state_changed_cb().
-/// @see #location_boundary_state_e
-/// @see location_manager_start()
-/// @see location_bounds_set_state_changed_cb()
+/// Called when the given boundary is entered or exited.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `state` (in): The boundary state
+/// - `user_data` (in): The user data passed from the start function
+///
+/// **Preconditions:**
+/// - location_manager_start() will invoke this callback if you register this callback using location_bounds_set_state_changed_cb().
+///
+/// **See also:**
+/// - `location_boundary_state_e`
+/// - `location_manager_start()`
+/// - `location_bounds_set_state_changed_cb()`
+/// @nodoc
 typedef location_bounds_state_changed_cb
     = ffi.Pointer<ffi.NativeFunction<location_bounds_state_changed_cbFunction>>;
+/// @nodoc
 typedef location_bounds_state_changed_cbFunction = ffi.Void Function(
     ffi.Int32 state, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartlocation_bounds_state_changed_cbFunction = void Function(
     int state, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumeration for error code for Location manager.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for error code for Location manager.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class location_error_e {
   /// < Successful
   static const int LOCATIONS_ERROR_NONE = 0;
@@ -2545,8 +3365,11 @@ abstract class location_error_e {
   static const int LOCATIONS_ERROR_SETTING_OFF = -46137340;
 }
 
-/// @brief Enumeration for Location method type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for Location method type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class location_method_e {
   /// < Undefined method
   static const int LOCATIONS_METHOD_NONE = -1;
@@ -2567,8 +3390,11 @@ abstract class location_method_e {
   static const int LOCATIONS_METHOD_FUSED = 4;
 }
 
-/// @brief Enumeration for Approximate accuracy level of given information.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for Approximate accuracy level of given information.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class location_accuracy_level_e {
   /// < Invalid data
   static const int LOCATIONS_ACCURACY_NONE = 0;
@@ -2592,8 +3418,11 @@ abstract class location_accuracy_level_e {
   static const int LOCATIONS_ACCURACY_DETAILED = 6;
 }
 
-/// @brief Enumeration for the state of the location service.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for the state of the location service.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class location_service_state_e {
   /// < Service is disabled
   static const int LOCATIONS_SERVICE_DISABLED = 0;
@@ -2602,9 +3431,13 @@ abstract class location_service_state_e {
   static const int LOCATIONS_SERVICE_ENABLED = 1;
 }
 
-/// @deprecated Deprecated since 3.0
-/// @brief Enumeration for the location service accessibility state.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// **Deprecated:** Deprecated since 3.0
+///
+/// Enumeration for the location service accessibility state.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class location_accessibility_state_e {
   /// < Access state is not determined
   static const int LOCATIONS_ACCESS_STATE_NONE = 0;
@@ -2616,8 +3449,11 @@ abstract class location_accessibility_state_e {
   static const int LOCATIONS_ACCESS_STATE_ALLOWED = 2;
 }
 
-/// @brief Enumeration for the fused location service.
-/// @since_tizen 4.0
+/// Enumeration for the fused location service.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class location_fused_mode_e {
   /// < High accuracy
   static const int LOCATIONS_FUSED_HIGH_ACCURACY = 0;
@@ -2626,27 +3462,41 @@ abstract class location_fused_mode_e {
   static const int LOCATIONS_FUSED_BALANCED_POWER = 1;
 }
 
+/// @nodoc
 final class location_manager_s extends ffi.Opaque {}
 
-/// @brief The location manager handle.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// The location manager handle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 typedef location_manager_h = ffi.Pointer<location_manager_s>;
 
-/// @brief Called at defined interval with updated location information.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] error #LOCATIONS_ERROR_NONE Successful
-/// @param[in] latitude The updated latitude [-90.0 ~ 90.0] (degrees)
-/// @param[in] longitude The updated longitude [-180.0 ~ 180.0] (degrees)
-/// @param[in] altitude The updated altitude (meters)
-/// @param[in] timestamp The timestamp (time when measurement took place or @c 0 if valid)
-/// @param[in] speed The updated speed (km/h)
-/// @param[in] direction The updated direction (in degrees from the north)
-/// @param[in] climb The updated climb (km/h)
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre location_manager_request_single_location() will invoke this callback.
-/// @see location_manager_request_single_location()
+/// Called at defined interval with updated location information.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `error` (in): `LOCATIONS_ERROR_NONE` Successful
+/// - `latitude` (in): The updated latitude `[-90.0 ~ 90.0]` (degrees)
+/// - `longitude` (in): The updated longitude `[-180.0 ~ 180.0]` (degrees)
+/// - `altitude` (in): The updated altitude (meters)
+/// - `timestamp` (in): The timestamp (time when measurement took place or `0` if valid)
+/// - `speed` (in): The updated speed (km/h)
+/// - `direction` (in): The updated direction (in degrees from the north)
+/// - `climb` (in): The updated climb (km/h)
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - location_manager_request_single_location() will invoke this callback.
+///
+/// **See also:**
+/// - `location_manager_request_single_location()`
+/// @nodoc
 typedef location_updated_cb
     = ffi.Pointer<ffi.NativeFunction<location_updated_cbFunction>>;
+/// @nodoc
 typedef location_updated_cbFunction = ffi.Void Function(
     ffi.Int32 error,
     ffi.Double latitude,
@@ -2657,6 +3507,7 @@ typedef location_updated_cbFunction = ffi.Void Function(
     ffi.Double direction,
     ffi.Double climb,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartlocation_updated_cbFunction = void Function(
     int error,
     double latitude,
@@ -2668,39 +3519,62 @@ typedef Dartlocation_updated_cbFunction = void Function(
     double climb,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called once for each location bound.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] bounds The location bounds handle
-/// @param[in] user_data The user data passed from the callback registration function
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
-/// @pre location_manager_foreach_boundary() will invoke this callback.
-/// @see location_manager_foreach_boundary()
+/// Called once for each location bound.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `bounds` (in): The location bounds handle
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - location_manager_foreach_boundary() will invoke this callback.
+///
+/// **See also:**
+/// - `location_manager_foreach_boundary()`
+/// @nodoc
 typedef location_bounds_cb
     = ffi.Pointer<ffi.NativeFunction<location_bounds_cbFunction>>;
+/// @nodoc
 typedef location_bounds_cbFunction = ffi.Bool Function(
     location_bounds_h bounds, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartlocation_bounds_cbFunction = bool Function(
     location_bounds_h bounds, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called at defined interval with updated position information.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] latitude The updated latitude [-90.0 ~ 90.0] (degrees)
-/// @param[in] longitude The updated longitude [-180.0 ~ 180.0] (degrees)
-/// @param[in] altitude The updated altitude (meters)
-/// @param[in] timestamp The timestamp (time when measurement took place or @c 0 if valid)
-/// @param[in] user_data The user data passed from the call registration function
-/// @pre location_manager_start() will invoke this callback if you register this callback using location_manager_set_position_updated_cb().
-/// @see location_manager_start()
-/// @see location_manager_set_position_updated_cb()
+/// Called at defined interval with updated position information.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `latitude` (in): The updated latitude `[-90.0 ~ 90.0]` (degrees)
+/// - `longitude` (in): The updated longitude `[-180.0 ~ 180.0]` (degrees)
+/// - `altitude` (in): The updated altitude (meters)
+/// - `timestamp` (in): The timestamp (time when measurement took place or `0` if valid)
+/// - `user_data` (in): The user data passed from the call registration function
+///
+/// **Preconditions:**
+/// - location_manager_start() will invoke this callback if you register this callback using location_manager_set_position_updated_cb().
+///
+/// **See also:**
+/// - `location_manager_start()`
+/// - `location_manager_set_position_updated_cb()`
+/// @nodoc
 typedef location_position_updated_cb
     = ffi.Pointer<ffi.NativeFunction<location_position_updated_cbFunction>>;
+/// @nodoc
 typedef location_position_updated_cbFunction = ffi.Void Function(
     ffi.Double latitude,
     ffi.Double longitude,
     ffi.Double altitude,
     ffi_lib.Long timestamp,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartlocation_position_updated_cbFunction = void Function(
     double latitude,
     double longitude,
@@ -2708,24 +3582,35 @@ typedef Dartlocation_position_updated_cbFunction = void Function(
     int timestamp,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called at defined interval with updated velocity information.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] speed The updated speed (km/h)
-/// @param[in] direction The updated direction (in degrees from the north)
-/// @param[in] climb The updated climb (km/h)
-/// @param[in] timestamp The timestamp (time when measurement took place or @c 0 if valid)
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre location_manager_start() will invoke this callback if you register this callback using location_manager_set_velocity_updated_cb().
-/// @see location_manager_start()
-/// @see location_manager_set_velocity_updated_cb()
+/// Called at defined interval with updated velocity information.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `speed` (in): The updated speed (km/h)
+/// - `direction` (in): The updated direction (in degrees from the north)
+/// - `climb` (in): The updated climb (km/h)
+/// - `timestamp` (in): The timestamp (time when measurement took place or `0` if valid)
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - location_manager_start() will invoke this callback if you register this callback using location_manager_set_velocity_updated_cb().
+///
+/// **See also:**
+/// - `location_manager_start()`
+/// - `location_manager_set_velocity_updated_cb()`
+/// @nodoc
 typedef location_velocity_updated_cb
     = ffi.Pointer<ffi.NativeFunction<location_velocity_updated_cbFunction>>;
+/// @nodoc
 typedef location_velocity_updated_cbFunction = ffi.Void Function(
     ffi.Double speed,
     ffi.Double direction,
     ffi.Double climb,
     ffi_lib.Long timestamp,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartlocation_velocity_updated_cbFunction = void Function(
     double speed,
     double direction,
@@ -2733,36 +3618,57 @@ typedef Dartlocation_velocity_updated_cbFunction = void Function(
     int timestamp,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the state of location service is changed from enabled to disabled or vice versa.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] state The service state
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre Either location_manager_start() or location_manager_stop() will invoke this callback if you register this callback using location_manager_set_service_state_changed_cb().
-/// @see location_manager_start()
-/// @see location_manager_stop()
-/// @see location_manager_set_service_state_changed_cb()
-/// @see #location_service_state_e
+/// Called when the state of location service is changed from enabled to disabled or vice versa.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `state` (in): The service state
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - Either location_manager_start() or location_manager_stop() will invoke this callback if you register this callback using location_manager_set_service_state_changed_cb().
+///
+/// **See also:**
+/// - `location_manager_start()`
+/// - `location_manager_stop()`
+/// - `location_manager_set_service_state_changed_cb()`
+/// - `location_service_state_e`
+/// @nodoc
 typedef location_service_state_changed_cb = ffi
     .Pointer<ffi.NativeFunction<location_service_state_changed_cbFunction>>;
+/// @nodoc
 typedef location_service_state_changed_cbFunction = ffi.Void Function(
     ffi.Int32 state, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartlocation_service_state_changed_cbFunction = void Function(
     int state, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the user-defined zones are entered or exited.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] state The boundary state
-/// @param[in] latitude The updated latitude [-90.0 ~ 90.0] (degrees)
-/// @param[in] longitude The updated longitude [-180.0 ~ 180.0] (degrees)
-/// @param[in] altitude The updated altitude (meters)
-/// @param[in] timestamp The timestamp (time when measurement took place or @c 0 if valid)
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre location_manager_start() will invoke this callback if you register this callback using location_manager_set_zone_changed_cb().
-/// @see #location_boundary_state_e
-/// @see location_manager_start()
-/// @see location_manager_set_zone_changed_cb()
+/// Called when the user-defined zones are entered or exited.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `state` (in): The boundary state
+/// - `latitude` (in): The updated latitude `[-90.0 ~ 90.0]` (degrees)
+/// - `longitude` (in): The updated longitude `[-180.0 ~ 180.0]` (degrees)
+/// - `altitude` (in): The updated altitude (meters)
+/// - `timestamp` (in): The timestamp (time when measurement took place or `0` if valid)
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - location_manager_start() will invoke this callback if you register this callback using location_manager_set_zone_changed_cb().
+///
+/// **See also:**
+/// - `location_boundary_state_e`
+/// - `location_manager_start()`
+/// - `location_manager_set_zone_changed_cb()`
+/// @nodoc
 typedef location_zone_changed_cb
     = ffi.Pointer<ffi.NativeFunction<location_zone_changed_cbFunction>>;
+/// @nodoc
 typedef location_zone_changed_cbFunction = ffi.Void Function(
     ffi.Int32 state,
     ffi.Double latitude,
@@ -2770,6 +3676,7 @@ typedef location_zone_changed_cbFunction = ffi.Void Function(
     ffi.Double altitude,
     ffi_lib.Long timestamp,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartlocation_zone_changed_cbFunction = void Function(
     int state,
     double latitude,
@@ -2778,37 +3685,58 @@ typedef Dartlocation_zone_changed_cbFunction = void Function(
     int timestamp,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the state of location method is changed.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] method The method changed on setting
-/// @param[in] enable The setting value changed
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre location_setting_changed_cb() will invoke this callback if you register this callback using location_manager_set_setting_changed_cb().
-/// @see location_manager_set_setting_changed_cb()
-/// @see location_manager_unset_setting_changed_cb()
+/// Called when the state of location method is changed.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `method` (in): The method changed on setting
+/// - `enable` (in): The setting value changed
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - location_setting_changed_cb() will invoke this callback if you register this callback using location_manager_set_setting_changed_cb().
+///
+/// **See also:**
+/// - `location_manager_set_setting_changed_cb()`
+/// - `location_manager_unset_setting_changed_cb()`
+/// @nodoc
 typedef location_setting_changed_cb
     = ffi.Pointer<ffi.NativeFunction<location_setting_changed_cbFunction>>;
+/// @nodoc
 typedef location_setting_changed_cbFunction = ffi.Void Function(
     ffi.Int32 method, ffi.Bool enable, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartlocation_setting_changed_cbFunction = void Function(
     int method, bool enable, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called at defined interval with updated location information.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-/// @param[in] latitude The updated latitude [-90.0 ~ 90.0] (degrees)
-/// @param[in] longitude The updated longitude [-180.0 ~ 180.0] (degrees)
-/// @param[in] altitude The updated altitude (meters)
-/// @param[in] speed The updated speed (km/h)
-/// @param[in] direction The updated direction (in degrees from the north)
-/// @param[in] horizontal_accuracy The horizontal accuracy (meters)
-/// @param[in] timestamp The timestamp (time when measurement took place or @c 0 if valid)
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre location_manager_start() will invoke this callback if you register this callback using location_manager_set_position_updated_cb().
-/// @see location_manager_start()
-/// @see location_manager_set_distance_based_location_changed_cb()
-/// @see location_manager_set_location_changed_cb()
+/// Called at defined interval with updated location information.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+///
+/// **Parameters:**
+/// - `latitude` (in): The updated latitude `[-90.0 ~ 90.0]` (degrees)
+/// - `longitude` (in): The updated longitude `[-180.0 ~ 180.0]` (degrees)
+/// - `altitude` (in): The updated altitude (meters)
+/// - `speed` (in): The updated speed (km/h)
+/// - `direction` (in): The updated direction (in degrees from the north)
+/// - `horizontal_accuracy` (in): The horizontal accuracy (meters)
+/// - `timestamp` (in): The timestamp (time when measurement took place or `0` if valid)
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - location_manager_start() will invoke this callback if you register this callback using location_manager_set_position_updated_cb().
+///
+/// **See also:**
+/// - `location_manager_start()`
+/// - `location_manager_set_distance_based_location_changed_cb()`
+/// - `location_manager_set_location_changed_cb()`
+/// @nodoc
 typedef location_changed_cb
     = ffi.Pointer<ffi.NativeFunction<location_changed_cbFunction>>;
+/// @nodoc
 typedef location_changed_cbFunction = ffi.Void Function(
     ffi.Double latitude,
     ffi.Double longitude,
@@ -2818,6 +3746,7 @@ typedef location_changed_cbFunction = ffi.Void Function(
     ffi.Double horizontal_accuracy,
     ffi_lib.Long timestamp,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartlocation_changed_cbFunction = void Function(
     double latitude,
     double longitude,
@@ -2828,37 +3757,59 @@ typedef Dartlocation_changed_cbFunction = void Function(
     int timestamp,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the batch interval is expired.
-/// @since_tizen @if MOBILE 3.0 @elseif WEARABLE 2.3.2 @endif
-/// @param[in] num_of_location The number of location batch data
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre location_manager_start_batch() will invoke this callback if you register this callback using location_manager_set_location_batch_cb().
-/// @see location_manager_start_batch()
-/// @see location_manager_set_location_batch_cb()
+/// Called when the batch interval is expired.
+///
+/// **Since Tizen:**
+/// - Mobile 3.0; Wearable 2.3.2
+///
+/// **Parameters:**
+/// - `num_of_location` (in): The number of location batch data
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - location_manager_start_batch() will invoke this callback if you register this callback using location_manager_set_location_batch_cb().
+///
+/// **See also:**
+/// - `location_manager_start_batch()`
+/// - `location_manager_set_location_batch_cb()`
+/// @nodoc
 typedef location_batch_cb
     = ffi.Pointer<ffi.NativeFunction<location_batch_cbFunction>>;
+/// @nodoc
 typedef location_batch_cbFunction = ffi.Void Function(
     ffi.Int num_of_location, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartlocation_batch_cbFunction = void Function(
     int num_of_location, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Gets iteratively to receive location batch data.
-/// @since_tizen @if MOBILE 3.0 @elseif WEARABLE 2.3.2 @endif
-/// @param[in] latitude The updated latitude [-90.0 ~ 90.0] (degrees)
-/// @param[in] longitude The updated longitude [-180.0 ~ 180.0] (degrees)
-/// @param[in] altitude The updated altitude (meters)
-/// @param[in] speed The updated speed (km/h)
-/// @param[in] direction The updated direction (in degrees from the north)
-/// @param[in] horizontal The horizontal accuracy (meters)
-/// @param[in] vertical The vertical accuracy (meters)
-/// @param[in] timestamp The timestamp (time when measurement took place or @c 0 if valid)
-/// @param[in] user_data The user data passed from the callback registration function
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
-/// @pre location_manager_foreach_location_batch() will invoke this callback.
-/// @see location_manager_foreach_location_batch()
+/// Gets iteratively to receive location batch data.
+///
+/// **Since Tizen:**
+/// - Mobile 3.0; Wearable 2.3.2
+///
+/// **Parameters:**
+/// - `latitude` (in): The updated latitude `[-90.0 ~ 90.0]` (degrees)
+/// - `longitude` (in): The updated longitude `[-180.0 ~ 180.0]` (degrees)
+/// - `altitude` (in): The updated altitude (meters)
+/// - `speed` (in): The updated speed (km/h)
+/// - `direction` (in): The updated direction (in degrees from the north)
+/// - `horizontal` (in): The horizontal accuracy (meters)
+/// - `vertical` (in): The vertical accuracy (meters)
+/// - `timestamp` (in): The timestamp (time when measurement took place or `0` if valid)
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - location_manager_foreach_location_batch() will invoke this callback.
+///
+/// **See also:**
+/// - `location_manager_foreach_location_batch()`
+/// @nodoc
 typedef location_batch_get_location_cb
     = ffi.Pointer<ffi.NativeFunction<location_batch_get_location_cbFunction>>;
+/// @nodoc
 typedef location_batch_get_location_cbFunction = ffi.Bool Function(
     ffi.Double latitude,
     ffi.Double longitude,
@@ -2869,6 +3820,7 @@ typedef location_batch_get_location_cbFunction = ffi.Bool Function(
     ffi.Double vertical,
     ffi_lib.Long timestamp,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartlocation_batch_get_location_cbFunction = bool Function(
     double latitude,
     double longitude,
@@ -2880,43 +3832,65 @@ typedef Dartlocation_batch_get_location_cbFunction = bool Function(
     int timestamp,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called at defined interval with updated satellite information.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[out] num_of_active The last number of active satellites
-/// @param[out] num_of_inview The last number of satellites in view
-/// @param[out] timestamp The last timestamp (time when measurement took place or @c 0 if valid)
-/// @param[in] user_data The user data passed from the call registration function
-/// @pre location_manager_start() will invoke this callback if you register this callback using location_manager_set_position_updated_cb().
-/// @see location_manager_start()
-/// @see location_manager_set_position_updated_cb()
+/// Called at defined interval with updated satellite information.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `num_of_active` (out): The last number of active satellites
+/// - `num_of_inview` (out): The last number of satellites in view
+/// - `timestamp` (out): The last timestamp (time when measurement took place or `0` if valid)
+/// - `user_data` (in): The user data passed from the call registration function
+///
+/// **Preconditions:**
+/// - location_manager_start() will invoke this callback if you register this callback using location_manager_set_position_updated_cb().
+///
+/// **See also:**
+/// - `location_manager_start()`
+/// - `location_manager_set_position_updated_cb()`
+/// @nodoc
 typedef gps_status_satellite_updated_cb
     = ffi.Pointer<ffi.NativeFunction<gps_status_satellite_updated_cbFunction>>;
+/// @nodoc
 typedef gps_status_satellite_updated_cbFunction = ffi.Void Function(
     ffi.Int num_of_active,
     ffi.Int num_of_inview,
     ffi_lib.Long timestamp,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartgps_status_satellite_updated_cbFunction = void Function(
     int num_of_active,
     int num_of_inview,
     int timestamp,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called once for each satellite in range.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] azimuth The azimuth of the satellite (degrees)
-/// @param[in] elevation The elevation of the satellite (meters)
-/// @param[in] prn The PRN of the satellite
-/// @param[in] snr The SNR of the satellite [dB]
-/// @param[in] is_active The flag signaling if satellite is in use
-/// @param[in] user_data The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop, \n
-/// @c false to break out of the loop
-/// @pre gps_status_foreach_satellites_in_view() will invoke this callback.
-/// @pre gps_status_foreach_last_satellites_in_view() will invoke this callback.
-/// @see gps_status_foreach_satellites_in_view()
+/// Called once for each satellite in range.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `azimuth` (in): The azimuth of the satellite (degrees)
+/// - `elevation` (in): The elevation of the satellite (meters)
+/// - `prn` (in): The PRN of the satellite
+/// - `snr` (in): The SNR of the satellite `[dB]`
+/// - `is_active` (in): The flag signaling if satellite is in use
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - gps_status_foreach_satellites_in_view() will invoke this callback.
+/// - gps_status_foreach_last_satellites_in_view() will invoke this callback.
+///
+/// **See also:**
+/// - `gps_status_foreach_satellites_in_view()`
+/// @nodoc
 typedef gps_status_get_satellites_cb
     = ffi.Pointer<ffi.NativeFunction<gps_status_get_satellites_cbFunction>>;
+/// @nodoc
 typedef gps_status_get_satellites_cbFunction = ffi.Bool Function(
     ffi.UnsignedInt azimuth,
     ffi.UnsignedInt elevation,
@@ -2924,6 +3898,7 @@ typedef gps_status_get_satellites_cbFunction = ffi.Bool Function(
     ffi.Int snr,
     ffi.Bool is_active,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartgps_status_get_satellites_cbFunction = bool Function(
     int azimuth,
     int elevation,
@@ -2932,4 +3907,5 @@ typedef Dartgps_status_get_satellites_cbFunction = bool Function(
     bool is_active,
     ffi.Pointer<ffi.Void> user_data);
 
+/// @nodoc
 const int LOCATION_BOUNDS_ERROR_CLASS = -46137312;

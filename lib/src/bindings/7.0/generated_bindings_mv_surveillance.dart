@@ -1,3 +1,6 @@
+/// {@category 7.0/tizen}
+library tizen_interop_7_0.mv_surveillance;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'generated_bindings_mv_common.dart' as mv_common;
 
 /// Dart bindings for Tizen mv_surveillance APIs.
+/// {@category 7.0/tizen}
 class Tizen70MvSurveillance {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,24 +29,33 @@ class Tizen70MvSurveillance {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates surveillance event trigger handle.
+  /// Creates surveillance event trigger handle.
   ///
-  /// @since_tizen 3.0
-  /// @remarks List of supported event types can be obtained by
-  /// mv_surveillance_foreach_supported_event_type() function
-  /// @remarks You must release @a trigger by using
-  /// mv_surveillance_event_trigger_destroy()
-  /// @param [in]  event_type    Name of the event type to be supported by the
-  /// @a trigger
-  /// @param [out] trigger       A new handle to the event trigger
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @see mv_surveillance_event_trigger_destroy()
-  /// @see mv_surveillance_foreach_supported_event_type()
+  /// **Remarks:**
+  /// - List of supported event types can be obtained by
+  /// - mv_surveillance_foreach_supported_event_type() function
+  /// - You must release `trigger` by using
+  /// - mv_surveillance_event_trigger_destroy()
+  ///
+  /// **Parameters:**
+  /// - `[in]`: event_type Name of the event type to be supported by the `trigger`
+  /// - `[out]`: trigger A new handle to the event trigger
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `mv_surveillance_event_trigger_destroy()`
+  /// - `mv_surveillance_foreach_supported_event_type()`
   int mv_surveillance_event_trigger_create(
     ffi.Pointer<ffi.Char> event_type,
     ffi.Pointer<mv_surveillance_event_trigger_h> trigger,
@@ -63,17 +76,24 @@ class Tizen70MvSurveillance {
           int Function(ffi.Pointer<ffi.Char>,
               ffi.Pointer<mv_surveillance_event_trigger_h>)>();
 
-  /// @brief Destroys the surveillance event trigger handle and releases all its
-  /// resources.
+  /// Destroys the surveillance event trigger handle and releases all its resources.
   ///
-  /// @since_tizen 3.0
-  /// @param [in] trigger    The handle to the event trigger to be destroyed
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @see mv_surveillance_event_trigger_create()
+  /// **Parameters:**
+  /// - `[in]`: trigger The handle to the event trigger to be destroyed
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `mv_surveillance_event_trigger_create()`
   int mv_surveillance_event_trigger_destroy(
     mv_surveillance_event_trigger_h trigger,
   ) {
@@ -90,20 +110,28 @@ class Tizen70MvSurveillance {
       _mv_surveillance_event_trigger_destroyPtr
           .asFunction<int Function(mv_surveillance_event_trigger_h)>();
 
-  /// @brief Gets the surveillance event trigger type as character string.
+  /// Gets the surveillance event trigger type as character string.
   ///
-  /// @since_tizen 3.0
-  /// @remarks The @a event_type should be freed using free()
-  /// @param [in]  trigger       The handle to the event trigger
-  /// @param [out] event_type    The pointer to the character string which will be
-  /// filled by textual name of the event type
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @pre Event trigger has to be created by
-  /// mv_surveillance_event_trigger_create() function
+  /// **Remarks:**
+  /// - The `event_type` should be freed using free()
+  ///
+  /// **Parameters:**
+  /// - `[in]`: trigger The handle to the event trigger
+  /// - `[out]`: event_type The pointer to the character string which will be filled by textual name of the event type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Event trigger has to be created by mv_surveillance_event_trigger_create() function
   int mv_surveillance_get_event_trigger_type(
     mv_surveillance_event_trigger_h trigger,
     ffi.Pointer<ffi.Pointer<ffi.Char>> event_type,
@@ -124,30 +152,32 @@ class Tizen70MvSurveillance {
           int Function(mv_surveillance_event_trigger_h,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets ROI (Region Of Interest) to the event trigger.
-  /// @details When ROI is set for the event trigger, then event check for this
-  /// @a trigger will be performed only inside the polygonal region
-  /// determined by @a roi parameter.
-  /// If this method has been never called for the @a trigger, then event
-  /// will be checked for the whole input frame (event check is performed
-  /// for each mv_surveillance_push_source() function call).
-  /// It is possible to change the ROI between
-  /// mv_surveillance_push_source() calls.
+  /// Sets ROI (Region Of Interest) to the event trigger.
   ///
-  /// @since_tizen 3.0
-  /// @param [in] trigger             The handle to the event trigger
-  /// @param [in] number_of_points    The number of ROI points
-  /// @param [in] roi                 The input array with ROI points
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// When ROI is set for the event trigger, then event check for this `trigger` will be performed only inside the polygonal region determined by `roi` parameter. If this method has been never called for the `trigger`, then event will be checked for the whole input frame (event check is performed for each mv_surveillance_push_source() function call). It is possible to change the ROI between mv_surveillance_push_source() calls.
   ///
-  /// @pre Event trigger has to be created by
-  /// mv_surveillance_event_trigger_create() function
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @see mv_surveillance_event_trigger_h
-  /// @see mv_surveillance_get_event_trigger_roi()
+  /// **Parameters:**
+  /// - `[in]`: trigger The handle to the event trigger
+  /// - `[in]`: number_of_points The number of ROI points
+  /// - `[in]`: roi The input array with ROI points
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Event trigger has to be created by mv_surveillance_event_trigger_create() function
+  ///
+  /// **See also:**
+  /// - `mv_surveillance_event_trigger_h`
+  /// - `mv_surveillance_get_event_trigger_roi()`
   int mv_surveillance_set_event_trigger_roi(
     mv_surveillance_event_trigger_h trigger,
     int number_of_points,
@@ -170,27 +200,38 @@ class Tizen70MvSurveillance {
           int Function(mv_surveillance_event_trigger_h, int,
               ffi.Pointer<mv_common.mv_point_s>)>();
 
-  /// @brief Gets ROI (Region Of Interest) from the event trigger.
+  /// Gets ROI (Region Of Interest) from the event trigger.
   ///
-  /// @since_tizen 3.0
-  /// @remarks If mv_surveillance_set_event_trigger_roi() has been never
-  /// called for @a trigger, then @a number_of_points output value will be
-  /// zero and @a roi pointer will be not changed.
-  /// @param [in]  trigger             The handle to the event trigger
-  /// @param [out] number_of_points    The number of ROI points
-  /// @param [out] roi                 The output array with ROI points
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @pre Event trigger has to be created by
-  /// mv_surveillance_event_trigger_create() function
+  /// **Remarks:**
+  /// - If mv_surveillance_set_event_trigger_roi() has been never
+  /// - called for `trigger`, then `number_of_points` output value will be
+  /// - zero and `roi` pointer will be not changed.
   ///
-  /// @post Memory for @a roi array must be released
+  /// **Parameters:**
+  /// - `[in]`: trigger The handle to the event trigger
+  /// - `[out]`: number_of_points The number of ROI points
+  /// - `[out]`: roi The output array with ROI points
   ///
-  /// @see mv_surveillance_event_trigger_h
-  /// @see mv_surveillance_set_event_trigger_roi()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Event trigger has to be created by mv_surveillance_event_trigger_create() function
+  ///
+  /// **Postconditions:**
+  /// - Memory for `roi` array must be released
+  ///
+  /// **See also:**
+  /// - `mv_surveillance_event_trigger_h`
+  /// - `mv_surveillance_set_event_trigger_roi()`
   int mv_surveillance_get_event_trigger_roi(
     mv_surveillance_event_trigger_h trigger,
     ffi.Pointer<ffi.Int> number_of_points,
@@ -215,38 +256,40 @@ class Tizen70MvSurveillance {
           int Function(mv_surveillance_event_trigger_h, ffi.Pointer<ffi.Int>,
               ffi.Pointer<ffi.Pointer<mv_common.mv_point_s>>)>();
 
-  /// @brief Subscribes @a trigger to process sources pushed from video identified
-  /// by @a video_stream_id.
-  /// @details When @a trigger is subscribed, then each time when function
-  /// mv_surveillance_push_source() is called for @a video_stream_id,
-  /// event occurrence is checked. If this check is successful,
-  /// @a callback is invoked. Details on occurred event can be obtained
-  /// using #mv_surveillance_result_h handle from @a callback.
+  /// Subscribes `trigger` to process sources pushed from video identified by `video_stream_id`.
   ///
-  /// @since_tizen 3.0
-  /// @remarks Use mv_surveillance_unsubscribe_event_trigger() function for
-  /// the same @a trigger and @a video_stream_id parameters to stop
-  /// subscription.
-  /// @param [in] trigger            The handle to the event trigger activating
-  /// calls of the @a callback function
-  /// @param [in] video_stream_id    The identifier of the video stream for which
-  /// event trigger activation will be checked
-  /// @param [in] engine_cfg         The engine configuration of the event
-  /// @param [in] callback           Callback to be called each time when event
-  /// occurrence is detected
-  /// @param [in] user_data          The user data to be passed to the @a callback
-  /// function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// When `trigger` is subscribed, then each time when function mv_surveillance_push_source() is called for `video_stream_id`, event occurrence is checked. If this check is successful, `callback` is invoked. Details on occurred event can be obtained using `mv_surveillance_result_h` handle from `callback`.
   ///
-  /// @post mv_surveillance_event_occurred_cb() will be called each time
-  /// @a trigger is activated after mv_surveillance_push_source() call
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @see mv_surveillance_event_trigger_h
-  /// @see mv_surveillance_unsubscribe_event_trigger()
-  /// @see mv_surveillance_push_source()
+  /// **Remarks:**
+  /// - Use mv_surveillance_unsubscribe_event_trigger() function for
+  /// - the same `trigger` and `video_stream_id` parameters to stop
+  /// - subscription.
+  ///
+  /// **Parameters:**
+  /// - `[in]`: trigger The handle to the event trigger activating calls of the `callback` function
+  /// - `[in]`: video_stream_id The identifier of the video stream for which event trigger activation will be checked
+  /// - `[in]`: engine_cfg The engine configuration of the event
+  /// - `[in]`: callback Callback to be called each time when event occurrence is detected
+  /// - `[in]`: user_data The user data to be passed to the `callback` function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - mv_surveillance_event_occurred_cb() will be called each time `trigger` is activated after mv_surveillance_push_source() call
+  ///
+  /// **See also:**
+  /// - `mv_surveillance_event_trigger_h`
+  /// - `mv_surveillance_unsubscribe_event_trigger()`
+  /// - `mv_surveillance_push_source()`
   int mv_surveillance_subscribe_event_trigger(
     mv_surveillance_event_trigger_h trigger,
     int video_stream_id,
@@ -281,25 +324,33 @@ class Tizen70MvSurveillance {
               mv_surveillance_event_occurred_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsubscribes @a trigger from the event and stop calling @a video_stream_id.
+  /// Unsubscribes `trigger` from the event and stop calling `video_stream_id`.
   ///
-  /// @since_tizen 3.0
-  /// @remarks To start handling trigger activation use
-  /// mv_surveillance_subscribe_event_trigger().
-  /// @param [in] trigger            The handle to the event trigger for which
-  /// subscription will be stopped
-  /// @param [in] video_stream_id    The identifier of the video source for which
-  /// subscription will be stopped
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @pre To stop subscription it has to be created earlier with
-  /// mv_surveillance_subscribe_event_trigger() function
+  /// **Remarks:**
+  /// - To start handling trigger activation use
+  /// - mv_surveillance_subscribe_event_trigger().
   ///
-  /// @see mv_surveillance_event_trigger_h
-  /// @see mv_surveillance_subscribe_event_trigger()
+  /// **Parameters:**
+  /// - `[in]`: trigger The handle to the event trigger for which subscription will be stopped
+  /// - `[in]`: video_stream_id The identifier of the video source for which subscription will be stopped
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - To stop subscription it has to be created earlier with mv_surveillance_subscribe_event_trigger() function
+  ///
+  /// **See also:**
+  /// - `mv_surveillance_event_trigger_h`
+  /// - `mv_surveillance_subscribe_event_trigger()`
   int mv_surveillance_unsubscribe_event_trigger(
     mv_surveillance_event_trigger_h trigger,
     int video_stream_id,
@@ -318,32 +369,38 @@ class Tizen70MvSurveillance {
       _mv_surveillance_unsubscribe_event_triggerPtr
           .asFunction<int Function(mv_surveillance_event_trigger_h, int)>();
 
-  /// @brief Pushes source to the surveillance system to detect events.
-  /// @details mv_surveillance_event_occurred_cb() will be called when any
-  /// subscribing event detected.
+  /// Pushes source to the surveillance system to detect events.
   ///
-  /// @since_tizen 3.0
-  /// @remarks mv_surveillance_set_event_trigger_roi() function can be used
-  /// to specify the polygon region where event can be detected only
-  /// @param [in] source             The handle to the media source
-  /// @param [in] video_stream_id    The identifier of video stream from which
-  /// @a source is coming
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// mv_surveillance_event_occurred_cb() will be called when any subscribing event detected.
   ///
-  /// @pre To receive surveillance results, some event triggers has to be
-  /// subscribed by mv_surveillance_subscribe_event_trigger() function
-  /// before mv_surveillance_push_source() calls
-  /// @pre Before calling of this method @a source has to be correctly filled.
-  /// mv_source_fill_by_media_packet(), mv_source_fill_by_buffer()
-  /// functions can be used to fill @a source
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @see #mv_surveillance_event_trigger_h
-  /// @see mv_surveillance_event_occurred_cb()
-  /// @see mv_surveillance_subscribe_event_trigger()
-  /// @see mv_surveillance_unsubscribe_event_trigger()
+  /// **Remarks:**
+  /// - mv_surveillance_set_event_trigger_roi() function can be used
+  /// - to specify the polygon region where event can be detected only
+  ///
+  /// **Parameters:**
+  /// - `[in]`: source The handle to the media source
+  /// - `[in]`: video_stream_id The identifier of video stream from which `source` is coming
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - To receive surveillance results, some event triggers has to be subscribed by mv_surveillance_subscribe_event_trigger() function before mv_surveillance_push_source() calls
+  /// - Before calling of this method `source` has to be correctly filled. mv_source_fill_by_media_packet(), mv_source_fill_by_buffer() functions can be used to fill `source`
+  ///
+  /// **See also:**
+  /// - `mv_surveillance_event_trigger_h`
+  /// - `mv_surveillance_event_occurred_cb()`
+  /// - `mv_surveillance_subscribe_event_trigger()`
+  /// - `mv_surveillance_unsubscribe_event_trigger()`
   int mv_surveillance_push_source(
     mv_common.mv_source_h source,
     int video_stream_id,
@@ -360,23 +417,31 @@ class Tizen70MvSurveillance {
   late final _mv_surveillance_push_source = _mv_surveillance_push_sourcePtr
       .asFunction<int Function(mv_common.mv_source_h, int)>();
 
-  /// @brief Starts traversing through list of supported event types.
+  /// Starts traversing through list of supported event types.
   ///
-  /// @since_tizen 3.0
-  /// @remarks Supported event types and their descriptions can be found in
-  /// @ref CAPI_MEDIA_VISION_SURVEILLANCE_EVENT_TYPES documentation
-  /// section
-  /// @param [in] callback     The callback function to be called for each
-  /// supported event type
-  /// @param [in] user_data    The user data to be passed to the @a callback
-  /// function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @see mv_surveillance_event_type_cb()
-  /// @see mv_surveillance_foreach_event_result_name()
+  /// **Remarks:**
+  /// - Supported event types and their descriptions can be found in
+  /// - `CAPI_MEDIA_VISION_SURVEILLANCE_EVENT_TYPES` documentation
+  /// - section
+  ///
+  /// **Parameters:**
+  /// - `[in]`: callback The callback function to be called for each supported event type
+  /// - `[in]`: user_data The user data to be passed to the `callback` function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `mv_surveillance_event_type_cb()`
+  /// - `mv_surveillance_foreach_event_result_name()`
   int mv_surveillance_foreach_supported_event_type(
     mv_surveillance_event_type_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -396,29 +461,34 @@ class Tizen70MvSurveillance {
       _mv_surveillance_foreach_supported_event_typePtr.asFunction<
           int Function(mv_surveillance_event_type_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Starts traversing through list of supported event result value names.
+  /// Starts traversing through list of supported event result value names.
   ///
-  /// @since_tizen 3.0
-  /// @remarks Supported event types, event result value names and their
-  /// descriptions can be found in
-  /// @ref CAPI_MEDIA_VISION_SURVEILLANCE_EVENT_TYPES documentation
-  /// section
-  /// @param [in] event_type    The name of the event type for which result value
-  /// names will be passed to the @a callback. Can be
-  /// set @c NULL. If set @c NULL then all supported
-  /// event result value names will be traversed
-  /// @param [in] callback      The callback function to be called for each
-  /// supported event result value name
-  /// @param [in] user_data     The user data to be passed to the @a callback
-  /// function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @see mv_surveillance_event_result_name_cb()
-  /// @see mv_surveillance_foreach_supported_event_type()
-  /// @see mv_surveillance_get_result_value()
+  /// **Remarks:**
+  /// - Supported event types, event result value names and their
+  /// - descriptions can be found in
+  /// - `CAPI_MEDIA_VISION_SURVEILLANCE_EVENT_TYPES` documentation
+  /// - section
+  ///
+  /// **Parameters:**
+  /// - `[in]`: event_type The name of the event type for which result value names will be passed to the `callback`. Can be set `NULL`. If set `NULL` then all supported event result value names will be traversed
+  /// - `[in]`: callback The callback function to be called for each supported event result value name
+  /// - `[in]`: user_data The user data to be passed to the `callback` function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `mv_surveillance_event_result_name_cb()`
+  /// - `mv_surveillance_foreach_supported_event_type()`
+  /// - `mv_surveillance_get_result_value()`
   int mv_surveillance_foreach_event_result_name(
     ffi.Pointer<ffi.Char> event_type,
     mv_surveillance_event_result_name_cb callback,
@@ -443,34 +513,40 @@ class Tizen70MvSurveillance {
           int Function(ffi.Pointer<ffi.Char>,
               mv_surveillance_event_result_name_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets result value.
-  /// @details See the output values names in the event types descriptions located
-  /// in @ref CAPI_MEDIA_VISION_SURVEILLANCE_EVENT_TYPES documentation
-  /// section.
+  /// Gets result value.
   ///
-  /// @since_tizen 3.0
-  /// @remarks The name can be obtained by
-  /// mv_surveillance_foreach_event_result_name() function
-  /// @param [in] result        The handle to the event result
-  /// @param [in] name          The name of the value to be gotten
-  /// @param [in, out] value    The pointer to variable which will be filled
-  /// by result value. To find the type of @a value
-  /// please refer to the
-  /// @ref CAPI_MEDIA_VISION_SURVEILLANCE_EVENT_TYPES
-  /// documentation section
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// See the output values names in the event types descriptions located in `CAPI_MEDIA_VISION_SURVEILLANCE_EVENT_TYPES` documentation section.
   ///
-  /// @pre Memory for value has to be allocated
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @see #mv_surveillance_event_trigger_h
-  /// @see mv_surveillance_event_occurred_cb()
-  /// @see mv_surveillance_subscribe_event_trigger()
-  /// @see mv_surveillance_unsubscribe_event_trigger()
-  /// @see mv_surveillance_foreach_supported_event_type()
-  /// @see mv_surveillance_foreach_event_result_name()
+  /// **Remarks:**
+  /// - The name can be obtained by
+  /// - mv_surveillance_foreach_event_result_name() function
+  ///
+  /// **Parameters:**
+  /// - `[in]`: result The handle to the event result
+  /// - `[in]`: name The name of the value to be gotten
+  /// - `[in,`: out] value The pointer to variable which will be filled by result value. To find the type of `value` please refer to the `CAPI_MEDIA_VISION_SURVEILLANCE_EVENT_TYPES` documentation section
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Memory for value has to be allocated
+  ///
+  /// **See also:**
+  /// - `mv_surveillance_event_trigger_h`
+  /// - `mv_surveillance_event_occurred_cb()`
+  /// - `mv_surveillance_subscribe_event_trigger()`
+  /// - `mv_surveillance_unsubscribe_event_trigger()`
+  /// - `mv_surveillance_foreach_supported_event_type()`
+  /// - `mv_surveillance_foreach_event_result_name()`
   int mv_surveillance_get_result_value(
     mv_surveillance_result_h result,
     ffi.Pointer<ffi.Char> name,
@@ -493,44 +569,52 @@ class Tizen70MvSurveillance {
               ffi.Pointer<ffi.Void>)>();
 }
 
-/// @brief The handle to event trigger.
+/// The handle to event trigger.
 ///
-/// @since_tizen 3.0
-/// @remarks See supported event types and their descriptions in
-/// @ref CAPI_MEDIA_VISION_SURVEILLANCE_EVENT_TYPES documentation
-/// section.
-/// Also the list of supported events can be obtained using
-/// mv_surveillance_foreach_supported_event_type() function
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - See supported event types and their descriptions in
+/// - `CAPI_MEDIA_VISION_SURVEILLANCE_EVENT_TYPES` documentation
+/// - section.
+/// - Also the list of supported events can be obtained using
+/// - mv_surveillance_foreach_supported_event_type() function
+/// @nodoc
 typedef mv_surveillance_event_trigger_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when event trigger activation has been detected.
+/// Called when event trigger activation has been detected.
 ///
-/// @since_tizen 3.0
-/// @remarks Handle @a event_result is valid only inside callback
-/// @param [in] trigger            The event trigger handle
-/// @param [in] source             The handle to the media source
-/// @param [in] video_stream_id    The identifier of the video source where event
-/// has been detected
-/// @param [in] event_result       The event result passed from the
-/// mv_surveillance_subscribe_event_trigger()
-/// @param [in] user_data          The user data passed from the
-/// mv_surveillance_subscribe_event_trigger()
-/// function
+/// **Since Tizen:**
+/// - 3.0
 ///
-/// @pre Callback can be invoked only after
-/// mv_surveillance_subscribe_event_trigger()
-/// was called for particular event trigger.
+/// **Remarks:**
+/// - Handle `event_result` is valid only inside callback
 ///
-/// @see mv_surveillance_subscribe_event_trigger()
-/// @see mv_surveillance_unsubscribe_event_trigger()
+/// **Parameters:**
+/// - `[in]`: trigger The event trigger handle
+/// - `[in]`: source The handle to the media source
+/// - `[in]`: video_stream_id The identifier of the video source where event has been detected
+/// - `[in]`: event_result The event result passed from the mv_surveillance_subscribe_event_trigger()
+/// - `[in]`: user_data The user data passed from the mv_surveillance_subscribe_event_trigger() function
+///
+/// **Preconditions:**
+/// - Callback can be invoked only after mv_surveillance_subscribe_event_trigger() was called for particular event trigger.
+///
+/// **See also:**
+/// - `mv_surveillance_subscribe_event_trigger()`
+/// - `mv_surveillance_unsubscribe_event_trigger()`
+/// @nodoc
 typedef mv_surveillance_event_occurred_cb = ffi
     .Pointer<ffi.NativeFunction<mv_surveillance_event_occurred_cbFunction>>;
+/// @nodoc
 typedef mv_surveillance_event_occurred_cbFunction = ffi.Void Function(
     mv_surveillance_event_trigger_h trigger,
     mv_common.mv_source_h source,
     ffi.Int video_stream_id,
     mv_surveillance_result_h event_result,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmv_surveillance_event_occurred_cbFunction = void Function(
     mv_surveillance_event_trigger_h trigger,
     mv_common.mv_source_h source,
@@ -538,111 +622,139 @@ typedef Dartmv_surveillance_event_occurred_cbFunction = void Function(
     mv_surveillance_result_h event_result,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The handle to event trigger activation result.
-/// @details Result is a handle to the output values which are specific for each event.
-/// See the output values names in the event types descriptions located
-/// in @ref CAPI_MEDIA_VISION_SURVEILLANCE_EVENT_TYPES documentation
-/// section.
-/// Result values can be gotten by mv_surveillance_get_result_value()
-/// function one by one in order specified in the event description (
-/// the same order of event value names is supported by
-/// mv_surveillance_foreach_event_result_name() function).
-/// This pointer will be destroyed when
-/// mv_surveillance_event_occurred_cb() passed.
+/// The handle to event trigger activation result.
 ///
-/// @since_tizen 3.0
+/// Result is a handle to the output values which are specific for each event. See the output values names in the event types descriptions located in `CAPI_MEDIA_VISION_SURVEILLANCE_EVENT_TYPES` documentation section. Result values can be gotten by mv_surveillance_get_result_value() function one by one in order specified in the event description ( the same order of event value names is supported by mv_surveillance_foreach_event_result_name() function). This pointer will be destroyed when mv_surveillance_event_occurred_cb() passed.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef mv_surveillance_result_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called to get the information once for each supported event type.
+/// Called to get the information once for each supported event type.
 ///
-/// @since_tizen 3.0
-/// @remarks Don't release memory of @a event_type
-/// @param [in] event_type    Character string containing name of the event type
-/// @param [in] user_data     The user data passed from the
-/// mv_surveillance_foreach_supported_event_type()
-/// function
-/// @return @c true to continue with the next iteration of the loop, \n
-/// otherwise @c false to break out of the loop
+/// **Since Tizen:**
+/// - 3.0
 ///
-/// @pre mv_surveillance_foreach_supported_event_type() will invoke this callback
-/// @see mv_surveillance_foreach_supported_event_type()
+/// **Remarks:**
+/// - Don't release memory of `event_type`
+///
+/// **Parameters:**
+/// - `[in]`: event_type Character string containing name of the event type
+/// - `[in]`: user_data The user data passed from the mv_surveillance_foreach_supported_event_type() function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - mv_surveillance_foreach_supported_event_type() will invoke this callback
+///
+/// **See also:**
+/// - `mv_surveillance_foreach_supported_event_type()`
+/// @nodoc
 typedef mv_surveillance_event_type_cb
     = ffi.Pointer<ffi.NativeFunction<mv_surveillance_event_type_cbFunction>>;
+/// @nodoc
 typedef mv_surveillance_event_type_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> event_type, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmv_surveillance_event_type_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> event_type, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called to get the result name from the triggered event.
+/// Called to get the result name from the triggered event.
 ///
-/// @since_tizen 3.0
-/// @remarks The @a name should not be released.
-/// @param [in] name         Character string containing the name of value that
-/// can be obtained from #mv_surveillance_result_h
-/// handle by mv_surveillance_get_result_value()
-/// function
-/// @param [in] user_data    The user data passed from the
-/// mv_surveillance_foreach_event_result_name()
-/// function
-/// @return @c true to continue with the next iteration of the loop, \n
-/// otherwise @c false to break out of the loop
+/// **Since Tizen:**
+/// - 3.0
 ///
-/// @pre mv_surveillance_foreach_event_result_name() will invoke this
-/// callback
-/// @see mv_surveillance_foreach_event_result_name()
+/// **Remarks:**
+/// - The `name` should not be released.
+///
+/// **Parameters:**
+/// - `[in]`: name Character string containing the name of value that can be obtained from `mv_surveillance_result_h` handle by mv_surveillance_get_result_value() function
+/// - `[in]`: user_data The user data passed from the mv_surveillance_foreach_event_result_name() function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - mv_surveillance_foreach_event_result_name() will invoke this callback
+///
+/// **See also:**
+/// - `mv_surveillance_foreach_event_result_name()`
+/// @nodoc
 typedef mv_surveillance_event_result_name_cb = ffi
     .Pointer<ffi.NativeFunction<mv_surveillance_event_result_name_cbFunction>>;
+/// @nodoc
 typedef mv_surveillance_event_result_name_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> name, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmv_surveillance_event_result_name_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> name, ffi.Pointer<ffi.Void> user_data);
 
+/// @nodoc
 const String MV_SURVEILLANCE_EVENT_TYPE_MOVEMENT_DETECTED =
     'MV_SURVEILLANCE_EVENT_MOVEMENT_DETECTED';
 
+/// @nodoc
 const String MV_SURVEILLANCE_MOVEMENT_NUMBER_OF_REGIONS =
     'NUMBER_OF_MOVEMENT_REGIONS';
 
+/// @nodoc
 const String MV_SURVEILLANCE_MOVEMENT_REGIONS = 'MOVEMENT_REGIONS';
 
+/// @nodoc
 const String MV_SURVEILLANCE_EVENT_TYPE_PERSON_APPEARED_DISAPPEARED =
     'MV_SURVEILLANCE_EVENT_PERSON_APPEARED_DISAPEARED';
 
+/// @nodoc
 const String MV_SURVEILLANCE_PERSONS_APPEARED_NUMBER =
     'NUMBER_OF_APPEARED_PERSONS';
 
+/// @nodoc
 const String MV_SURVEILLANCE_PERSONS_DISAPPEARED_NUMBER =
     'NUMBER_OF_DISAPPEARED_PERSONS';
 
+/// @nodoc
 const String MV_SURVEILLANCE_PERSONS_TRACKED_NUMBER =
     'NUMBER_OF_TRACKED_PERSONS';
 
+/// @nodoc
 const String MV_SURVEILLANCE_PERSONS_APPEARED_LOCATIONS =
     'APPEARED_PERSONS_LOCATIONS';
 
+/// @nodoc
 const String MV_SURVEILLANCE_PERSONS_DISAPPEARED_LOCATIONS =
     'DISAPPEARED_PERSONS_LOCATIONS';
 
+/// @nodoc
 const String MV_SURVEILLANCE_PERSONS_TRACKED_LOCATIONS =
     'TRACKED_PERSONS_LOCATIONS';
 
+/// @nodoc
 const String MV_SURVEILLANCE_EVENT_TYPE_PERSON_RECOGNIZED =
     'MV_SURVEILLANCE_EVENT_PERSON_RECOGNIZED';
 
+/// @nodoc
 const String MV_SURVEILLANCE_PERSONS_RECOGNIZED_NUMBER = 'NUMBER_OF_PERSONS';
 
+/// @nodoc
 const String MV_SURVEILLANCE_PERSONS_RECOGNIZED_LOCATIONS = 'PERSONS_LOCATIONS';
 
+/// @nodoc
 const String MV_SURVEILLANCE_PERSONS_RECOGNIZED_LABELS = 'PERSONS_LABELS';
 
+/// @nodoc
 const String MV_SURVEILLANCE_PERSONS_RECOGNIZED_CONFIDENCES =
     'PERSONS_CONFIDENCES';
 
+/// @nodoc
 const String MV_SURVEILLANCE_FACE_RECOGNITION_MODEL_FILE_PATH =
     'MV_SURVEILLANCE_FACE_RECOGNITION_MODEL_FILE_PATH';
 
+/// @nodoc
 const String MV_SURVEILLANCE_MOVEMENT_DETECTION_THRESHOLD =
     'MV_SURVEILLANCE_MOVEMENT_DETECTION_THRESHOLD';
 
+/// @nodoc
 const String MV_SURVEILLANCE_SKIP_FRAMES_COUNT =
     'MV_SURVEILLANCE_SKIP_FRAMES_COUNT';

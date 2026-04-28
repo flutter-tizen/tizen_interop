@@ -1,3 +1,6 @@
+/// {@category 9.0/tizen}
+library tizen_interop_9_0.capi_network_mtp;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-network-mtp APIs.
+/// {@category 9.0/tizen}
 class Tizen90CapiNetworkMtp {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,22 +28,29 @@ class Tizen90CapiNetworkMtp {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Initializes for using MTP.
-  /// @details This function sets up the necessary environment for utilizing the Media Transfer Protocol (MTP).
-  /// It must be called before performing any other MTP operations. By invoking this API, you enable
-  /// your application to communicate with MTP devices such as digital cameras, smartphones, and tablets.
-  /// @since_tizen 3.0
-  /// @remarks This function must be called before proceeding any other mtp functions.
-  /// @remarks http://tizen.org/privilege/mediastorage is needed if input or output path are relevant to media storage.\n
-  /// http://tizen.org/privilege/externalstorage is needed if input or output path are relevant to external storage. \n
+  /// Initializes for using MTP.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MTP_ERROR_NONE Successful
-  /// @retval #MTP_ERROR_NOT_SUPPORTED MTP is not supported
-  /// @retval #MTP_ERROR_PERMISSION_DENIED Permission Denied
-  /// @retval #MTP_ERROR_NOT_COMM_INITIALIZED MTP communication is not initialized
+  /// This function sets up the necessary environment for utilizing the Media Transfer Protocol (MTP). It must be called before performing any other MTP operations. By invoking this API, you enable your application to communicate with MTP devices such as digital cameras, smartphones, and tablets.
   ///
-  /// @see mtp_deinitialize()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - This function must be called before proceeding any other mtp functions.
+  /// - <http://tizen.org/privilege/mediastorage is needed if input or output path are relevant to media storage.>
+  /// - <http://tizen.org/privilege/externalstorage is needed if input or output path are relevant to external storage.>
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MTP_ERROR_NONE`: Successful
+  /// - `MTP_ERROR_NOT_SUPPORTED`: MTP is not supported
+  /// - `MTP_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `MTP_ERROR_NOT_COMM_INITIALIZED`: MTP communication is not initialized
+  ///
+  /// **See also:**
+  /// - `mtp_deinitialize()`
   int mtp_initialize() {
     return _mtp_initialize();
   }
@@ -48,27 +59,34 @@ class Tizen90CapiNetworkMtp {
       _lookup<ffi.NativeFunction<ffi.Int Function()>>('mtp_initialize');
   late final _mtp_initialize = _mtp_initializePtr.asFunction<int Function()>();
 
-  /// @brief Gets the mtp devices.
-  /// @since_tizen 3.0
+  /// Gets the mtp devices.
   ///
-  /// @remarks The @a mtp_devices should be released using free().
-  /// @details This function retrieves the list of available MTP (Media Transfer Protocol) devices connected to
-  /// your system. By calling this API, you can explore the variety of MTP-enabled gadgets such as
-  /// digital cameras, smartphones, and tablets accessible through your application.
+  /// This function retrieves the list of available MTP (Media Transfer Protocol) devices connected to your system. By calling this API, you can explore the variety of MTP-enabled gadgets such as digital cameras, smartphones, and tablets accessible through your application.
   ///
-  /// @param[out] mtp_devices The MTP device list
-  /// @param[out] device_count Length of device list
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MTP_ERROR_NONE Successful
-  /// @retval #MTP_ERROR_NOT_SUPPORTED MTP is not supported
-  /// @retval #MTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MTP_ERROR_NOT_INITIALIZED MTP is not initialized
-  /// @retval #MTP_ERROR_NOT_ACTIVATED MTP is not activated
-  /// @retval #MTP_ERROR_NOT_COMM_INITIALIZED MTP communication is not initialized
-  /// @retval #MTP_ERROR_COMM_ERROR MTP communication error
+  /// **Remarks:**
+  /// - The `mtp_devices` should be released using free().
   ///
-  /// @see mtp_initialize()
+  /// **Parameters:**
+  /// - `mtp_devices` (out): The MTP device list
+  /// - `device_count` (out): Length of device list
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MTP_ERROR_NONE`: Successful
+  /// - `MTP_ERROR_NOT_SUPPORTED`: MTP is not supported
+  /// - `MTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MTP_ERROR_NOT_INITIALIZED`: MTP is not initialized
+  /// - `MTP_ERROR_NOT_ACTIVATED`: MTP is not activated
+  /// - `MTP_ERROR_NOT_COMM_INITIALIZED`: MTP communication is not initialized
+  /// - `MTP_ERROR_COMM_ERROR`: MTP communication error
+  ///
+  /// **See also:**
+  /// - `mtp_initialize()`
   int mtp_get_devices(
     ffi.Pointer<ffi.Pointer<mtp_device_h>> mtp_devices,
     ffi.Pointer<ffi.Int> device_count,
@@ -87,29 +105,35 @@ class Tizen90CapiNetworkMtp {
       int Function(
           ffi.Pointer<ffi.Pointer<mtp_device_h>>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets mtp storages from the given device.
-  /// @details This function fetches the list of available MTP (Media Transfer Protocol) storages present in
-  /// a specified MTP device. By invoking this API, you can explore the various storage options within
-  /// the selected gadget, enabling seamless data transfer between your application and the device's
-  /// internal or external storage compartments.
+  /// Gets mtp storages from the given device.
   ///
-  /// @since_tizen 3.0
-  /// @remarks The @a mtp_storages should be freed using free().
+  /// This function fetches the list of available MTP (Media Transfer Protocol) storages present in a specified MTP device. By invoking this API, you can explore the various storage options within the selected gadget, enabling seamless data transfer between your application and the device's internal or external storage compartments.
   ///
-  /// @param[in] mtp_device The MTP device
-  /// @param[out] mtp_storages Current mtp storage list
-  /// @param[out] storage_count Length of storage list
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MTP_ERROR_NONE Successful
-  /// @retval #MTP_ERROR_NOT_SUPPORTED MTP is not supported
-  /// @retval #MTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MTP_ERROR_NOT_INITIALIZED MTP is not initialized
-  /// @retval #MTP_ERROR_NOT_ACTIVATED MTP is not activated
-  /// @retval #MTP_ERROR_NOT_COMM_INITIALIZED MTP communication is not initialized
-  /// @retval #MTP_ERROR_COMM_ERROR MTP communication error
+  /// **Remarks:**
+  /// - The `mtp_storages` should be freed using free().
   ///
-  /// @see mtp_get_devices()
+  /// **Parameters:**
+  /// - `mtp_device` (in): The MTP device
+  /// - `mtp_storages` (out): Current mtp storage list
+  /// - `storage_count` (out): Length of storage list
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MTP_ERROR_NONE`: Successful
+  /// - `MTP_ERROR_NOT_SUPPORTED`: MTP is not supported
+  /// - `MTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MTP_ERROR_NOT_INITIALIZED`: MTP is not initialized
+  /// - `MTP_ERROR_NOT_ACTIVATED`: MTP is not activated
+  /// - `MTP_ERROR_NOT_COMM_INITIALIZED`: MTP communication is not initialized
+  /// - `MTP_ERROR_COMM_ERROR`: MTP communication error
+  ///
+  /// **See also:**
+  /// - `mtp_get_devices()`
   int mtp_get_storages(
     int mtp_device,
     ffi.Pointer<ffi.Pointer<mtp_storage_h>> mtp_storages,
@@ -132,33 +156,40 @@ class Tizen90CapiNetworkMtp {
       int Function(int, ffi.Pointer<ffi.Pointer<mtp_storage_h>>,
           ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets object handles from the given device and storage.
-  /// @details This function retrieves the list of object handles associated with a specified MTP device and storage.
-  /// By specifying the desired file type and parent object handle, you can navigate through the hierarchical
-  /// structure of objects within the chosen storage compartment.
+  /// Gets object handles from the given device and storage.
   ///
-  /// @since_tizen 3.0
-  /// @remarks The @a object_handles should be freed using free().
-  /// @remarks If the @a parent is 0, it means "root folder" of mtp storage.
+  /// This function retrieves the list of object handles associated with a specified MTP device and storage. By specifying the desired file type and parent object handle, you can navigate through the hierarchical structure of objects within the chosen storage compartment.
   ///
-  /// @param[in] mtp_device The MTP device
-  /// @param[in] mtp_storage The MTP storage
-  /// @param[in] file_type The file type what you want
-  /// @param[in] parent The parent object handle
-  /// @param[out] object_handles The object handle list
-  /// @param[out] object_count Length of object handle list
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MTP_ERROR_NONE Successful
-  /// @retval #MTP_ERROR_NOT_SUPPORTED MTP is not supported
-  /// @retval #MTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MTP_ERROR_NOT_INITIALIZED MTP is not initialized
-  /// @retval #MTP_ERROR_NOT_ACTIVATED MTP is not activated
-  /// @retval #MTP_ERROR_NOT_COMM_INITIALIZED MTP communication is not initialized
-  /// @retval #MTP_ERROR_COMM_ERROR MTP communication error
+  /// **Remarks:**
+  /// - The `object_handles` should be freed using free().
+  /// - If the `parent` is 0, it means "root folder" of mtp storage.
   ///
-  /// @see mtp_get_devices()
-  /// @see mtp_get_storages()
+  /// **Parameters:**
+  /// - `mtp_device` (in): The MTP device
+  /// - `mtp_storage` (in): The MTP storage
+  /// - `file_type` (in): The file type what you want
+  /// - `parent` (in): The parent object handle
+  /// - `object_handles` (out): The object handle list
+  /// - `object_count` (out): Length of object handle list
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MTP_ERROR_NONE`: Successful
+  /// - `MTP_ERROR_NOT_SUPPORTED`: MTP is not supported
+  /// - `MTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MTP_ERROR_NOT_INITIALIZED`: MTP is not initialized
+  /// - `MTP_ERROR_NOT_ACTIVATED`: MTP is not activated
+  /// - `MTP_ERROR_NOT_COMM_INITIALIZED`: MTP communication is not initialized
+  /// - `MTP_ERROR_COMM_ERROR`: MTP communication error
+  ///
+  /// **See also:**
+  /// - `mtp_get_devices()`
+  /// - `mtp_get_storages()`
   int mtp_get_object_handles(
     int mtp_device,
     int mtp_storage,
@@ -190,33 +221,40 @@ class Tizen90CapiNetworkMtp {
       int Function(int, int, int, int, ffi.Pointer<ffi.Pointer<mtp_object_h>>,
           ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets object for a given path from object handle.
-  /// @details This function extracts an object from a specified MTP device based on its object handle and transfers
-  /// it to a destination path on the host storage. By providing the MTP device, object handle, and destination
-  /// path as inputs, you can seamlessly move files and directories between the MTP device's internal or external
-  /// storage and your application's local storage.
-  /// @since_tizen 3.0
-  /// @remarks The @a dest_path is host storage path.
-  /// @remarks http://tizen.org/privilege/mediastorage is needed if input or output path are relevant to media storage.\n
-  /// http://tizen.org/privilege/externalstorage is needed if input or output path are relevant to external storage. \n
+  /// Gets object for a given path from object handle.
   ///
-  /// @param[in] mtp_device The MTP device
-  /// @param[in] object_handle The object handle
-  /// @param[in] dest_path The dest path
+  /// This function extracts an object from a specified MTP device based on its object handle and transfers it to a destination path on the host storage. By providing the MTP device, object handle, and destination path as inputs, you can seamlessly move files and directories between the MTP device's internal or external storage and your application's local storage.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MTP_ERROR_NONE Successful
-  /// @retval #MTP_ERROR_NOT_SUPPORTED MTP is not supported
-  /// @retval #MTP_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MTP_ERROR_NOT_INITIALIZED MTP is not initialized
-  /// @retval #MTP_ERROR_NOT_ACTIVATED MTP is not activated
-  /// @retval #MTP_ERROR_NOT_COMM_INITIALIZED MTP communication is not initialized
-  /// @retval #MTP_ERROR_COMM_ERROR MTP communication error
-  /// @retval #MTP_ERROR_IO_ERROR I/O error
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @see mtp_get_devices()
-  /// @see mtp_get_object_handles()
+  /// **Remarks:**
+  /// - The `dest_path` is host storage path.
+  /// - <http://tizen.org/privilege/mediastorage is needed if input or output path are relevant to media storage.>
+  /// - <http://tizen.org/privilege/externalstorage is needed if input or output path are relevant to external storage.>
+  ///
+  /// **Parameters:**
+  /// - `mtp_device` (in): The MTP device
+  /// - `object_handle` (in): The object handle
+  /// - `dest_path` (in): The dest path
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MTP_ERROR_NONE`: Successful
+  /// - `MTP_ERROR_NOT_SUPPORTED`: MTP is not supported
+  /// - `MTP_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MTP_ERROR_NOT_INITIALIZED`: MTP is not initialized
+  /// - `MTP_ERROR_NOT_ACTIVATED`: MTP is not activated
+  /// - `MTP_ERROR_NOT_COMM_INITIALIZED`: MTP communication is not initialized
+  /// - `MTP_ERROR_COMM_ERROR`: MTP communication error
+  /// - `MTP_ERROR_IO_ERROR`: I/O error
+  ///
+  /// **See also:**
+  /// - `mtp_get_devices()`
+  /// - `mtp_get_object_handles()`
   int mtp_get_object(
     int mtp_device,
     int object_handle,
@@ -236,33 +274,40 @@ class Tizen90CapiNetworkMtp {
   late final _mtp_get_object = _mtp_get_objectPtr
       .asFunction<int Function(int, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets thumbnail from the given object handle.
-  /// @details This function extracts a thumbnail image from a specified object handle in a MTP device and saves
-  /// it to a designated location on the host storage. By providing the MTP device, object handle, and
-  /// destination path as inputs, you can easily obtain thumbnails of images and videos stored within
-  /// the MTP device's internal or external storage.
-  /// @since_tizen 3.0
-  /// @remarks The @a dest_path is host storage path.
-  /// @remarks http://tizen.org/privilege/mediastorage is needed if input or output path are relevant to media storage.\n
-  /// http://tizen.org/privilege/externalstorage is needed if input or output path are relevant to external storage.
+  /// Gets thumbnail from the given object handle.
   ///
-  /// @param[in] mtp_device The MTP device
-  /// @param[in] object_handle The object handle
-  /// @param[in] dest_path The dest path
+  /// This function extracts a thumbnail image from a specified object handle in a MTP device and saves it to a designated location on the host storage. By providing the MTP device, object handle, and destination path as inputs, you can easily obtain thumbnails of images and videos stored within the MTP device's internal or external storage.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MTP_ERROR_NONE Successful
-  /// @retval #MTP_ERROR_NOT_SUPPORTED MTP is not supported
-  /// @retval #MTP_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MTP_ERROR_NOT_INITIALIZED MTP is not initialized
-  /// @retval #MTP_ERROR_NOT_ACTIVATED MTP is not activated
-  /// @retval #MTP_ERROR_NOT_COMM_INITIALIZED MTP communication is not initialized
-  /// @retval #MTP_ERROR_COMM_ERROR MTP communication error
-  /// @retval #MTP_ERROR_IO_ERROR I/O error
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @see mtp_get_devices()
-  /// @see mtp_get_object_handles()
+  /// **Remarks:**
+  /// - The `dest_path` is host storage path.
+  /// - <http://tizen.org/privilege/mediastorage is needed if input or output path are relevant to media storage.>
+  /// - <http://tizen.org/privilege/externalstorage is needed if input or output path are relevant to external storage.>
+  ///
+  /// **Parameters:**
+  /// - `mtp_device` (in): The MTP device
+  /// - `object_handle` (in): The object handle
+  /// - `dest_path` (in): The dest path
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MTP_ERROR_NONE`: Successful
+  /// - `MTP_ERROR_NOT_SUPPORTED`: MTP is not supported
+  /// - `MTP_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MTP_ERROR_NOT_INITIALIZED`: MTP is not initialized
+  /// - `MTP_ERROR_NOT_ACTIVATED`: MTP is not activated
+  /// - `MTP_ERROR_NOT_COMM_INITIALIZED`: MTP communication is not initialized
+  /// - `MTP_ERROR_COMM_ERROR`: MTP communication error
+  /// - `MTP_ERROR_IO_ERROR`: I/O error
+  ///
+  /// **See also:**
+  /// - `mtp_get_devices()`
+  /// - `mtp_get_object_handles()`
   int mtp_get_thumbnail(
     int mtp_device,
     int object_handle,
@@ -282,29 +327,36 @@ class Tizen90CapiNetworkMtp {
   late final _mtp_get_thumbnail = _mtp_get_thumbnailPtr
       .asFunction<int Function(int, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Adds a callback function for receiving MTP event.
-  /// @details This function registers a callback function that will be invoked whenever an MTP event occurs.
-  /// By providing the callback function and optional user data as arguments, you can receive notifications
-  /// regarding changes in device, storage, or object states, as well as the turning off of the MTP service.
+  /// Adds a callback function for receiving MTP event.
   ///
-  /// @since_tizen 3.0
-  /// @remarks You can register multiple callback. \n
-  /// If you don't want to receive the event, then using the mtp_remove_mtp_event_cb() function to unregister a callback.
-  /// @remarks If device state is changed, #MTP_EVENT_DEVICE_ADDED or #MTP_EVENT_DEVICE_REMOVED event is occur. \n
-  /// If storage state is changed, #MTP_EVENT_STORAGE_ADDED or #MTP_EVENT_STORAGE_REMOVED event is occur. \n
-  /// If object state is changed, #MTP_EVENT_OBJECT_ADDED or #MTP_EVENT_OBJECT_REMOVED event is occur. \n
-  /// If mtp service is turned off, #MTP_EVENT_TURNED_OFF event is occur. \n
+  /// This function registers a callback function that will be invoked whenever an MTP event occurs. By providing the callback function and optional user data as arguments, you can receive notifications regarding changes in device, storage, or object states, as well as the turning off of the MTP service.
   ///
-  /// @param[in] event_cb The callback
-  /// @param[in] user_data The user data
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MTP_ERROR_NONE Successful
-  /// @retval #MTP_ERROR_NOT_SUPPORTED MTP is not supported
-  /// @retval #MTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MTP_ERROR_NOT_INITIALIZED MTP is not initialized
+  /// **Remarks:**
+  /// - You can register multiple callback.
+  /// - If you don't want to receive the event, then using the mtp_remove_mtp_event_cb() function to unregister a callback.
+  /// - If device state is changed, `MTP_EVENT_DEVICE_ADDED` or `MTP_EVENT_DEVICE_REMOVED` event is occur.
+  /// - If storage state is changed, `MTP_EVENT_STORAGE_ADDED` or `MTP_EVENT_STORAGE_REMOVED` event is occur.
+  /// - If object state is changed, `MTP_EVENT_OBJECT_ADDED` or `MTP_EVENT_OBJECT_REMOVED` event is occur.
+  /// - If mtp service is turned off, `MTP_EVENT_TURNED_OFF` event is occur.
   ///
-  /// @see mtp_remove_mtp_event_cb()
+  /// **Parameters:**
+  /// - `event_cb` (in): The callback
+  /// - `user_data` (in): The user data
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MTP_ERROR_NONE`: Successful
+  /// - `MTP_ERROR_NOT_SUPPORTED`: MTP is not supported
+  /// - `MTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MTP_ERROR_NOT_INITIALIZED`: MTP is not initialized
+  ///
+  /// **See also:**
+  /// - `mtp_remove_mtp_event_cb()`
   int mtp_add_mtp_event_cb(
     mtp_event_cb event_cb,
     ffi.Pointer<ffi.Void> user_data,
@@ -322,22 +374,27 @@ class Tizen90CapiNetworkMtp {
   late final _mtp_add_mtp_event_cb = _mtp_add_mtp_event_cbPtr
       .asFunction<int Function(mtp_event_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Removes the callback function.
-  /// @details This function unregisters a previously added callback function for receiving MTP events.
-  /// By providing the callback function as an argument, you can stop receiving notifications
-  /// regarding changes in device, storage, or object states, as well as the turning off of the MTP service.
+  /// Removes the callback function.
   ///
-  /// @since_tizen 3.0
+  /// This function unregisters a previously added callback function for receiving MTP events. By providing the callback function as an argument, you can stop receiving notifications regarding changes in device, storage, or object states, as well as the turning off of the MTP service.
   ///
-  /// @param[in] event_cb The callback
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MTP_ERROR_NONE Successful
-  /// @retval #MTP_ERROR_NOT_SUPPORTED MTP is not supported
-  /// @retval #MTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MTP_ERROR_NOT_INITIALIZED MTP is not initialized
+  /// **Parameters:**
+  /// - `event_cb` (in): The callback
   ///
-  /// @see mtp_add_mtp_event_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MTP_ERROR_NONE`: Successful
+  /// - `MTP_ERROR_NOT_SUPPORTED`: MTP is not supported
+  /// - `MTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MTP_ERROR_NOT_INITIALIZED`: MTP is not initialized
+  ///
+  /// **See also:**
+  /// - `mtp_add_mtp_event_cb()`
   int mtp_remove_mtp_event_cb(
     mtp_event_cb event_cb,
   ) {
@@ -352,20 +409,27 @@ class Tizen90CapiNetworkMtp {
   late final _mtp_remove_mtp_event_cb =
       _mtp_remove_mtp_event_cbPtr.asFunction<int Function(mtp_event_cb)>();
 
-  /// @brief Deinitializes MTP operation.
-  /// @details This function terminates the usage of the Media Transfer Protocol (MTP) and frees up any associated resources.
-  /// It is essential to call this API once you have completed all MTP operations and no longer require access to MTP devices
+  /// Deinitializes MTP operation.
   ///
-  /// @since_tizen 3.0
-  /// @remarks http://tizen.org/privilege/mediastorage is needed if input or output path are relevant to media storage.\n
-  /// http://tizen.org/privilege/externalstorage is needed if input or output path are relevant to external storage. \n
+  /// This function terminates the usage of the Media Transfer Protocol (MTP) and frees up any associated resources. It is essential to call this API once you have completed all MTP operations and no longer require access to MTP devices
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MTP_ERROR_NONE Successful
-  /// @retval #MTP_ERROR_NOT_SUPPORTED MTP is not supported
-  /// @retval #MTP_ERROR_PERMISSION_DENIED Permission Denied
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @see mtp_initialize()
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/mediastorage is needed if input or output path are relevant to media storage.>
+  /// - <http://tizen.org/privilege/externalstorage is needed if input or output path are relevant to external storage.>
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MTP_ERROR_NONE`: Successful
+  /// - `MTP_ERROR_NOT_SUPPORTED`: MTP is not supported
+  /// - `MTP_ERROR_PERMISSION_DENIED`: Permission Denied
+  ///
+  /// **See also:**
+  /// - `mtp_initialize()`
   int mtp_deinitialize() {
     return _mtp_deinitialize();
   }
@@ -375,26 +439,35 @@ class Tizen90CapiNetworkMtp {
   late final _mtp_deinitialize =
       _mtp_deinitializePtr.asFunction<int Function()>();
 
-  /// @brief Gets the manufacturer name of the device information.
-  /// @since_tizen 3.0
-  /// @remarks The @a manufacturer_name should be freed using free().
+  /// Gets the manufacturer name of the device information.
   ///
-  /// @param[in] mtp_device The MTP device
-  /// @param[out] manufacturer_name The manufacturer name of Device information
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MTP_ERROR_NONE Successful
-  /// @retval #MTP_ERROR_NOT_SUPPORTED MTP is not supported
-  /// @retval #MTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MTP_ERROR_NOT_INITIALIZED MTP is not initialized
-  /// @retval #MTP_ERROR_NOT_ACTIVATED MTP is not activated
-  /// @retval #MTP_ERROR_NOT_COMM_INITIALIZED MTP communication is not initialized
-  /// @retval #MTP_ERROR_COMM_ERROR MTP communication error
-  /// @retval #MTP_ERROR_CONTROLLER MTP controller error
-  /// @retval #MTP_ERROR_OUT_OF_MEMORY Memory Allocation failed
-  /// @retval #MTP_ERROR_NO_DEVICE MTP have not any device
+  /// **Remarks:**
+  /// - The `manufacturer_name` should be freed using free().
   ///
-  /// @see mtp_get_devices()
+  /// **Parameters:**
+  /// - `mtp_device` (in): The MTP device
+  /// - `manufacturer_name` (out): The manufacturer name of Device information
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MTP_ERROR_NONE`: Successful
+  /// - `MTP_ERROR_NOT_SUPPORTED`: MTP is not supported
+  /// - `MTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MTP_ERROR_NOT_INITIALIZED`: MTP is not initialized
+  /// - `MTP_ERROR_NOT_ACTIVATED`: MTP is not activated
+  /// - `MTP_ERROR_NOT_COMM_INITIALIZED`: MTP communication is not initialized
+  /// - `MTP_ERROR_COMM_ERROR`: MTP communication error
+  /// - `MTP_ERROR_CONTROLLER`: MTP controller error
+  /// - `MTP_ERROR_OUT_OF_MEMORY`: Memory Allocation failed
+  /// - `MTP_ERROR_NO_DEVICE`: MTP have not any device
+  ///
+  /// **See also:**
+  /// - `mtp_get_devices()`
   int mtp_deviceinfo_get_manufacturer_name(
     int mtp_device,
     ffi.Pointer<ffi.Pointer<ffi.Char>> manufacturer_name,
@@ -414,26 +487,35 @@ class Tizen90CapiNetworkMtp {
       _mtp_deviceinfo_get_manufacturer_namePtr
           .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the model name of the device information.
-  /// @since_tizen 3.0
-  /// @remarks The @a model_name should be freed using free().
+  /// Gets the model name of the device information.
   ///
-  /// @param[in] mtp_device The MTP device
-  /// @param[out] model_name The model name of Device information
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MTP_ERROR_NONE Successful
-  /// @retval #MTP_ERROR_NOT_SUPPORTED MTP is not supported
-  /// @retval #MTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MTP_ERROR_NOT_INITIALIZED MTP is not initialized
-  /// @retval #MTP_ERROR_NOT_ACTIVATED MTP is not activated
-  /// @retval #MTP_ERROR_NOT_COMM_INITIALIZED MTP communication is not initialized
-  /// @retval #MTP_ERROR_COMM_ERROR MTP communication error
-  /// @retval #MTP_ERROR_CONTROLLER MTP controller error
-  /// @retval #MTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MTP_ERROR_NO_DEVICE MTP have not any device
+  /// **Remarks:**
+  /// - The `model_name` should be freed using free().
   ///
-  /// @see mtp_get_devices()
+  /// **Parameters:**
+  /// - `mtp_device` (in): The MTP device
+  /// - `model_name` (out): The model name of Device information
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MTP_ERROR_NONE`: Successful
+  /// - `MTP_ERROR_NOT_SUPPORTED`: MTP is not supported
+  /// - `MTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MTP_ERROR_NOT_INITIALIZED`: MTP is not initialized
+  /// - `MTP_ERROR_NOT_ACTIVATED`: MTP is not activated
+  /// - `MTP_ERROR_NOT_COMM_INITIALIZED`: MTP communication is not initialized
+  /// - `MTP_ERROR_COMM_ERROR`: MTP communication error
+  /// - `MTP_ERROR_CONTROLLER`: MTP controller error
+  /// - `MTP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MTP_ERROR_NO_DEVICE`: MTP have not any device
+  ///
+  /// **See also:**
+  /// - `mtp_get_devices()`
   int mtp_deviceinfo_get_model_name(
     int mtp_device,
     ffi.Pointer<ffi.Pointer<ffi.Char>> model_name,
@@ -452,26 +534,35 @@ class Tizen90CapiNetworkMtp {
   late final _mtp_deviceinfo_get_model_name = _mtp_deviceinfo_get_model_namePtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the serial number of the device information.
-  /// @since_tizen 3.0
-  /// @remarks The @a serial_number should be freed using free().
+  /// Gets the serial number of the device information.
   ///
-  /// @param[in] mtp_device The MTP device
-  /// @param[out] serial_number The serial number of Device information
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MTP_ERROR_NONE Successful
-  /// @retval #MTP_ERROR_NOT_SUPPORTED MTP is not supported
-  /// @retval #MTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MTP_ERROR_NOT_INITIALIZED MTP is not initialized
-  /// @retval #MTP_ERROR_NOT_ACTIVATED MTP is not activated
-  /// @retval #MTP_ERROR_NOT_COMM_INITIALIZED MTP communication is not initialized
-  /// @retval #MTP_ERROR_COMM_ERROR MTP communication error
-  /// @retval #MTP_ERROR_CONTROLLER MTP controller error
-  /// @retval #MTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MTP_ERROR_NO_DEVICE MTP have not any device
+  /// **Remarks:**
+  /// - The `serial_number` should be freed using free().
   ///
-  /// @see mtp_get_devices()
+  /// **Parameters:**
+  /// - `mtp_device` (in): The MTP device
+  /// - `serial_number` (out): The serial number of Device information
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MTP_ERROR_NONE`: Successful
+  /// - `MTP_ERROR_NOT_SUPPORTED`: MTP is not supported
+  /// - `MTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MTP_ERROR_NOT_INITIALIZED`: MTP is not initialized
+  /// - `MTP_ERROR_NOT_ACTIVATED`: MTP is not activated
+  /// - `MTP_ERROR_NOT_COMM_INITIALIZED`: MTP communication is not initialized
+  /// - `MTP_ERROR_COMM_ERROR`: MTP communication error
+  /// - `MTP_ERROR_CONTROLLER`: MTP controller error
+  /// - `MTP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MTP_ERROR_NO_DEVICE`: MTP have not any device
+  ///
+  /// **See also:**
+  /// - `mtp_get_devices()`
   int mtp_deviceinfo_get_serial_number(
     int mtp_device,
     ffi.Pointer<ffi.Pointer<ffi.Char>> serial_number,
@@ -491,26 +582,35 @@ class Tizen90CapiNetworkMtp {
       _mtp_deviceinfo_get_serial_numberPtr
           .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the device version of the device information.
-  /// @since_tizen 3.0
-  /// @remarks The @a device_version should be freed using free().
+  /// Gets the device version of the device information.
   ///
-  /// @param[in] mtp_device The MTP device
-  /// @param[out] device_version The device version of Device information
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MTP_ERROR_NONE Successful
-  /// @retval #MTP_ERROR_NOT_SUPPORTED MTP is not supported
-  /// @retval #MTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MTP_ERROR_NOT_INITIALIZED MTP is not initialized
-  /// @retval #MTP_ERROR_NOT_ACTIVATED MTP is not activated
-  /// @retval #MTP_ERROR_NOT_COMM_INITIALIZED MTP communication is not initialized
-  /// @retval #MTP_ERROR_COMM_ERROR MTP communication error
-  /// @retval #MTP_ERROR_CONTROLLER MTP controller error
-  /// @retval #MTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MTP_ERROR_NO_DEVICE MTP have not any device
+  /// **Remarks:**
+  /// - The `device_version` should be freed using free().
   ///
-  /// @see mtp_get_devices()
+  /// **Parameters:**
+  /// - `mtp_device` (in): The MTP device
+  /// - `device_version` (out): The device version of Device information
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MTP_ERROR_NONE`: Successful
+  /// - `MTP_ERROR_NOT_SUPPORTED`: MTP is not supported
+  /// - `MTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MTP_ERROR_NOT_INITIALIZED`: MTP is not initialized
+  /// - `MTP_ERROR_NOT_ACTIVATED`: MTP is not activated
+  /// - `MTP_ERROR_NOT_COMM_INITIALIZED`: MTP communication is not initialized
+  /// - `MTP_ERROR_COMM_ERROR`: MTP communication error
+  /// - `MTP_ERROR_CONTROLLER`: MTP controller error
+  /// - `MTP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MTP_ERROR_NO_DEVICE`: MTP have not any device
+  ///
+  /// **See also:**
+  /// - `mtp_get_devices()`
   int mtp_deviceinfo_get_device_version(
     int mtp_device,
     ffi.Pointer<ffi.Pointer<ffi.Char>> device_version,
@@ -530,27 +630,36 @@ class Tizen90CapiNetworkMtp {
       _mtp_deviceinfo_get_device_versionPtr
           .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the description of the storage information.
-  /// @since_tizen 3.0
-  /// @remarks The @a description should be freed using free().
+  /// Gets the description of the storage information.
   ///
-  /// @param[in] mtp_device The MTP device
-  /// @param[in] mtp_storage The MTP storage
-  /// @param[out] description The description of Storage information
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MTP_ERROR_NONE Successful
-  /// @retval #MTP_ERROR_NOT_SUPPORTED MTP is not supported
-  /// @retval #MTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MTP_ERROR_NOT_INITIALIZED MTP is not initialized
-  /// @retval #MTP_ERROR_NOT_ACTIVATED MTP is not activated
-  /// @retval #MTP_ERROR_NOT_COMM_INITIALIZED MTP communication is not initialized
-  /// @retval #MTP_ERROR_COMM_ERROR MTP communication error
-  /// @retval #MTP_ERROR_CONTROLLER MTP controller error
-  /// @retval #MTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MTP_ERROR_NO_DEVICE MTP have not any device
+  /// **Remarks:**
+  /// - The `description` should be freed using free().
   ///
-  /// @see mtp_get_storages()
+  /// **Parameters:**
+  /// - `mtp_device` (in): The MTP device
+  /// - `mtp_storage` (in): The MTP storage
+  /// - `description` (out): The description of Storage information
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MTP_ERROR_NONE`: Successful
+  /// - `MTP_ERROR_NOT_SUPPORTED`: MTP is not supported
+  /// - `MTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MTP_ERROR_NOT_INITIALIZED`: MTP is not initialized
+  /// - `MTP_ERROR_NOT_ACTIVATED`: MTP is not activated
+  /// - `MTP_ERROR_NOT_COMM_INITIALIZED`: MTP communication is not initialized
+  /// - `MTP_ERROR_COMM_ERROR`: MTP communication error
+  /// - `MTP_ERROR_CONTROLLER`: MTP controller error
+  /// - `MTP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MTP_ERROR_NO_DEVICE`: MTP have not any device
+  ///
+  /// **See also:**
+  /// - `mtp_get_storages()`
   int mtp_storageinfo_get_description(
     int mtp_device,
     int mtp_storage,
@@ -572,26 +681,33 @@ class Tizen90CapiNetworkMtp {
       _mtp_storageinfo_get_descriptionPtr.asFunction<
           int Function(int, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the free space of the storage information in bytes.
-  /// @since_tizen 3.0
+  /// Gets the free space of the storage information in bytes.
   ///
-  /// @param[in] mtp_device The MTP device
-  /// @param[in] mtp_storage The MTP storage
-  /// @param[out] free_space The free space of Storage information (bytes)
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MTP_ERROR_NONE Successful
-  /// @retval #MTP_ERROR_NOT_SUPPORTED MTP is not supported
-  /// @retval #MTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MTP_ERROR_NOT_INITIALIZED MTP is not initialized
-  /// @retval #MTP_ERROR_NOT_ACTIVATED MTP is not activated
-  /// @retval #MTP_ERROR_NOT_COMM_INITIALIZED MTP communication is not initialized
-  /// @retval #MTP_ERROR_COMM_ERROR MTP communication error
-  /// @retval #MTP_ERROR_CONTROLLER MTP controller error
-  /// @retval #MTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MTP_ERROR_NO_DEVICE MTP have not any device
+  /// **Parameters:**
+  /// - `mtp_device` (in): The MTP device
+  /// - `mtp_storage` (in): The MTP storage
+  /// - `free_space` (out): The free space of Storage information (bytes)
   ///
-  /// @see mtp_get_storages()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MTP_ERROR_NONE`: Successful
+  /// - `MTP_ERROR_NOT_SUPPORTED`: MTP is not supported
+  /// - `MTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MTP_ERROR_NOT_INITIALIZED`: MTP is not initialized
+  /// - `MTP_ERROR_NOT_ACTIVATED`: MTP is not activated
+  /// - `MTP_ERROR_NOT_COMM_INITIALIZED`: MTP communication is not initialized
+  /// - `MTP_ERROR_COMM_ERROR`: MTP communication error
+  /// - `MTP_ERROR_CONTROLLER`: MTP controller error
+  /// - `MTP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MTP_ERROR_NO_DEVICE`: MTP have not any device
+  ///
+  /// **See also:**
+  /// - `mtp_get_storages()`
   int mtp_storageinfo_get_free_space(
     int mtp_device,
     int mtp_storage,
@@ -613,26 +729,33 @@ class Tizen90CapiNetworkMtp {
       _mtp_storageinfo_get_free_spacePtr.asFunction<
           int Function(int, int, ffi.Pointer<ffi.UnsignedLongLong>)>();
 
-  /// @brief Gets the max capacity of the storage information in bytes.
-  /// @since_tizen 3.0
+  /// Gets the max capacity of the storage information in bytes.
   ///
-  /// @param[in] mtp_device The MTP device
-  /// @param[in] mtp_storage The MTP storage
-  /// @param[out] max_capacity The max capacity of Storage information (bytes)
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MTP_ERROR_NONE Successful
-  /// @retval #MTP_ERROR_NOT_SUPPORTED MTP is not supported
-  /// @retval #MTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MTP_ERROR_NOT_INITIALIZED MTP is not initialized
-  /// @retval #MTP_ERROR_NOT_ACTIVATED MTP is not activated
-  /// @retval #MTP_ERROR_NOT_COMM_INITIALIZED MTP communication is not initialized
-  /// @retval #MTP_ERROR_COMM_ERROR MTP communication error
-  /// @retval #MTP_ERROR_CONTROLLER MTP controller error
-  /// @retval #MTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MTP_ERROR_NO_DEVICE MTP have not any device
+  /// **Parameters:**
+  /// - `mtp_device` (in): The MTP device
+  /// - `mtp_storage` (in): The MTP storage
+  /// - `max_capacity` (out): The max capacity of Storage information (bytes)
   ///
-  /// @see mtp_get_storages()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MTP_ERROR_NONE`: Successful
+  /// - `MTP_ERROR_NOT_SUPPORTED`: MTP is not supported
+  /// - `MTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MTP_ERROR_NOT_INITIALIZED`: MTP is not initialized
+  /// - `MTP_ERROR_NOT_ACTIVATED`: MTP is not activated
+  /// - `MTP_ERROR_NOT_COMM_INITIALIZED`: MTP communication is not initialized
+  /// - `MTP_ERROR_COMM_ERROR`: MTP communication error
+  /// - `MTP_ERROR_CONTROLLER`: MTP controller error
+  /// - `MTP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MTP_ERROR_NO_DEVICE`: MTP have not any device
+  ///
+  /// **See also:**
+  /// - `mtp_get_storages()`
   int mtp_storageinfo_get_max_capacity(
     int mtp_device,
     int mtp_storage,
@@ -654,26 +777,33 @@ class Tizen90CapiNetworkMtp {
       _mtp_storageinfo_get_max_capacityPtr.asFunction<
           int Function(int, int, ffi.Pointer<ffi.UnsignedLongLong>)>();
 
-  /// @brief Gets the storage type of the storage information.
-  /// @since_tizen 3.0
+  /// Gets the storage type of the storage information.
   ///
-  /// @param[in] mtp_device The MTP device
-  /// @param[in] mtp_storage The MTP storage
-  /// @param[out] storage_type The storage type of Storage information
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MTP_ERROR_NONE Successful
-  /// @retval #MTP_ERROR_NOT_SUPPORTED MTP is not supported
-  /// @retval #MTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MTP_ERROR_NOT_INITIALIZED MTP is not initialized
-  /// @retval #MTP_ERROR_NOT_ACTIVATED MTP is not activated
-  /// @retval #MTP_ERROR_NOT_COMM_INITIALIZED MTP communication is not initialized
-  /// @retval #MTP_ERROR_COMM_ERROR MTP communication error
-  /// @retval #MTP_ERROR_CONTROLLER MTP controller error
-  /// @retval #MTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MTP_ERROR_NO_DEVICE MTP have not any device
+  /// **Parameters:**
+  /// - `mtp_device` (in): The MTP device
+  /// - `mtp_storage` (in): The MTP storage
+  /// - `storage_type` (out): The storage type of Storage information
   ///
-  /// @see mtp_get_storages()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MTP_ERROR_NONE`: Successful
+  /// - `MTP_ERROR_NOT_SUPPORTED`: MTP is not supported
+  /// - `MTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MTP_ERROR_NOT_INITIALIZED`: MTP is not initialized
+  /// - `MTP_ERROR_NOT_ACTIVATED`: MTP is not activated
+  /// - `MTP_ERROR_NOT_COMM_INITIALIZED`: MTP communication is not initialized
+  /// - `MTP_ERROR_COMM_ERROR`: MTP communication error
+  /// - `MTP_ERROR_CONTROLLER`: MTP controller error
+  /// - `MTP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MTP_ERROR_NO_DEVICE`: MTP have not any device
+  ///
+  /// **See also:**
+  /// - `mtp_get_storages()`
   int mtp_storageinfo_get_storage_type(
     int mtp_device,
     int mtp_storage,
@@ -694,27 +824,36 @@ class Tizen90CapiNetworkMtp {
       _mtp_storageinfo_get_storage_typePtr
           .asFunction<int Function(int, int, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the volume identifier of the storage information.
-  /// @since_tizen 3.0
-  /// @remarks The @a volume_identifier should be freed using free().
+  /// Gets the volume identifier of the storage information.
   ///
-  /// @param[in] mtp_device The MTP device
-  /// @param[in] mtp_storage The MTP storage
-  /// @param[out] volume_identifier The volume identifier of Storage information
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MTP_ERROR_NONE Successful
-  /// @retval #MTP_ERROR_NOT_SUPPORTED MTP is not supported
-  /// @retval #MTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MTP_ERROR_NOT_INITIALIZED MTP is not initialized
-  /// @retval #MTP_ERROR_NOT_ACTIVATED MTP is not activated
-  /// @retval #MTP_ERROR_NOT_COMM_INITIALIZED MTP communication is not initialized
-  /// @retval #MTP_ERROR_COMM_ERROR MTP communication error
-  /// @retval #MTP_ERROR_CONTROLLER MTP controller error
-  /// @retval #MTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MTP_ERROR_NO_DEVICE MTP have not any device
+  /// **Remarks:**
+  /// - The `volume_identifier` should be freed using free().
   ///
-  /// @see mtp_get_object_handles()
+  /// **Parameters:**
+  /// - `mtp_device` (in): The MTP device
+  /// - `mtp_storage` (in): The MTP storage
+  /// - `volume_identifier` (out): The volume identifier of Storage information
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MTP_ERROR_NONE`: Successful
+  /// - `MTP_ERROR_NOT_SUPPORTED`: MTP is not supported
+  /// - `MTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MTP_ERROR_NOT_INITIALIZED`: MTP is not initialized
+  /// - `MTP_ERROR_NOT_ACTIVATED`: MTP is not activated
+  /// - `MTP_ERROR_NOT_COMM_INITIALIZED`: MTP communication is not initialized
+  /// - `MTP_ERROR_COMM_ERROR`: MTP communication error
+  /// - `MTP_ERROR_CONTROLLER`: MTP controller error
+  /// - `MTP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MTP_ERROR_NO_DEVICE`: MTP have not any device
+  ///
+  /// **See also:**
+  /// - `mtp_get_object_handles()`
   int mtp_storageinfo_get_volume_identifier(
     int mtp_device,
     int mtp_storage,
@@ -736,28 +875,37 @@ class Tizen90CapiNetworkMtp {
       _mtp_storageinfo_get_volume_identifierPtr.asFunction<
           int Function(int, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the filename of the object information.
-  /// @since_tizen 3.0
-  /// @remarks The @a file_name should be freed using free().
+  /// Gets the filename of the object information.
   ///
-  /// @param[in] mtp_device The MTP device
-  /// @param[in] object_handle The object handle
-  /// @param[out] file_name The file name of Object information
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MTP_ERROR_NONE Successful
-  /// @retval #MTP_ERROR_NOT_SUPPORTED MTP is not supported
-  /// @retval #MTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MTP_ERROR_NOT_INITIALIZED MTP is not initialized
-  /// @retval #MTP_ERROR_NOT_ACTIVATED MTP is not activated
-  /// @retval #MTP_ERROR_NOT_COMM_INITIALIZED MTP communication is not initialized
-  /// @retval #MTP_ERROR_COMM_ERROR MTP communication error
-  /// @retval #MTP_ERROR_CONTROLLER MTP controller error
-  /// @retval #MTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MTP_ERROR_NO_DEVICE MTP have not any device
-  /// @retval #MTP_ERROR_PLUGIN_FAIL Plugin failed
+  /// **Remarks:**
+  /// - The `file_name` should be freed using free().
   ///
-  /// @see mtp_get_object_handles()
+  /// **Parameters:**
+  /// - `mtp_device` (in): The MTP device
+  /// - `object_handle` (in): The object handle
+  /// - `file_name` (out): The file name of Object information
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MTP_ERROR_NONE`: Successful
+  /// - `MTP_ERROR_NOT_SUPPORTED`: MTP is not supported
+  /// - `MTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MTP_ERROR_NOT_INITIALIZED`: MTP is not initialized
+  /// - `MTP_ERROR_NOT_ACTIVATED`: MTP is not activated
+  /// - `MTP_ERROR_NOT_COMM_INITIALIZED`: MTP communication is not initialized
+  /// - `MTP_ERROR_COMM_ERROR`: MTP communication error
+  /// - `MTP_ERROR_CONTROLLER`: MTP controller error
+  /// - `MTP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MTP_ERROR_NO_DEVICE`: MTP have not any device
+  /// - `MTP_ERROR_PLUGIN_FAIL`: Plugin failed
+  ///
+  /// **See also:**
+  /// - `mtp_get_object_handles()`
   int mtp_objectinfo_get_file_name(
     int mtp_device,
     int object_handle,
@@ -778,29 +926,38 @@ class Tizen90CapiNetworkMtp {
   late final _mtp_objectinfo_get_file_name = _mtp_objectinfo_get_file_namePtr
       .asFunction<int Function(int, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the keywords of the object information.
-  /// @since_tizen 3.0
-  /// @remarks The @a keywords should be freed using free().
-  /// @remarks The keywords are separated by comma.
+  /// Gets the keywords of the object information.
   ///
-  /// @param[in] mtp_device The MTP device
-  /// @param[in] object_handle The object handle
-  /// @param[out] keywords The keywords of Object information
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MTP_ERROR_NONE Successful
-  /// @retval #MTP_ERROR_NOT_SUPPORTED MTP is not supported
-  /// @retval #MTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MTP_ERROR_NOT_INITIALIZED MTP is not initialized
-  /// @retval #MTP_ERROR_NOT_ACTIVATED MTP is not activated
-  /// @retval #MTP_ERROR_NOT_COMM_INITIALIZED MTP communication is not initialized
-  /// @retval #MTP_ERROR_COMM_ERROR MTP communication error
-  /// @retval #MTP_ERROR_CONTROLLER MTP controller error
-  /// @retval #MTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MTP_ERROR_NO_DEVICE MTP have not any device
-  /// @retval #MTP_ERROR_PLUGIN_FAIL Plugin failed
+  /// **Remarks:**
+  /// - The `keywords` should be freed using free().
+  /// - The keywords are separated by comma.
   ///
-  /// @see mtp_get_object_handles()
+  /// **Parameters:**
+  /// - `mtp_device` (in): The MTP device
+  /// - `object_handle` (in): The object handle
+  /// - `keywords` (out): The keywords of Object information
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MTP_ERROR_NONE`: Successful
+  /// - `MTP_ERROR_NOT_SUPPORTED`: MTP is not supported
+  /// - `MTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MTP_ERROR_NOT_INITIALIZED`: MTP is not initialized
+  /// - `MTP_ERROR_NOT_ACTIVATED`: MTP is not activated
+  /// - `MTP_ERROR_NOT_COMM_INITIALIZED`: MTP communication is not initialized
+  /// - `MTP_ERROR_COMM_ERROR`: MTP communication error
+  /// - `MTP_ERROR_CONTROLLER`: MTP controller error
+  /// - `MTP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MTP_ERROR_NO_DEVICE`: MTP have not any device
+  /// - `MTP_ERROR_PLUGIN_FAIL`: Plugin failed
+  ///
+  /// **See also:**
+  /// - `mtp_get_object_handles()`
   int mtp_objectinfo_get_keywords(
     int mtp_device,
     int object_handle,
@@ -821,27 +978,34 @@ class Tizen90CapiNetworkMtp {
   late final _mtp_objectinfo_get_keywords = _mtp_objectinfo_get_keywordsPtr
       .asFunction<int Function(int, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the association desc of the object information.
-  /// @since_tizen 3.0
+  /// Gets the association desc of the object information.
   ///
-  /// @param[in] mtp_device The MTP device
-  /// @param[in] object_handle The object handle
-  /// @param[out] asso_desc The association description of Object information
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MTP_ERROR_NONE Successful
-  /// @retval #MTP_ERROR_NOT_SUPPORTED MTP is not supported
-  /// @retval #MTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MTP_ERROR_NOT_INITIALIZED MTP is not initialized
-  /// @retval #MTP_ERROR_NOT_ACTIVATED MTP is not activated
-  /// @retval #MTP_ERROR_NOT_COMM_INITIALIZED MTP communication is not initialized
-  /// @retval #MTP_ERROR_COMM_ERROR MTP communication error
-  /// @retval #MTP_ERROR_CONTROLLER MTP controller error
-  /// @retval #MTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MTP_ERROR_NO_DEVICE MTP have not any device
-  /// @retval #MTP_ERROR_PLUGIN_FAIL Plugin failed
+  /// **Parameters:**
+  /// - `mtp_device` (in): The MTP device
+  /// - `object_handle` (in): The object handle
+  /// - `asso_desc` (out): The association description of Object information
   ///
-  /// @see mtp_get_object_handles()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MTP_ERROR_NONE`: Successful
+  /// - `MTP_ERROR_NOT_SUPPORTED`: MTP is not supported
+  /// - `MTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MTP_ERROR_NOT_INITIALIZED`: MTP is not initialized
+  /// - `MTP_ERROR_NOT_ACTIVATED`: MTP is not activated
+  /// - `MTP_ERROR_NOT_COMM_INITIALIZED`: MTP communication is not initialized
+  /// - `MTP_ERROR_COMM_ERROR`: MTP communication error
+  /// - `MTP_ERROR_CONTROLLER`: MTP controller error
+  /// - `MTP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MTP_ERROR_NO_DEVICE`: MTP have not any device
+  /// - `MTP_ERROR_PLUGIN_FAIL`: Plugin failed
+  ///
+  /// **See also:**
+  /// - `mtp_get_object_handles()`
   int mtp_objectinfo_get_association_desc(
     int mtp_device,
     int object_handle,
@@ -862,27 +1026,34 @@ class Tizen90CapiNetworkMtp {
       _mtp_objectinfo_get_association_descPtr
           .asFunction<int Function(int, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the association type of the object information.
-  /// @since_tizen 3.0
+  /// Gets the association type of the object information.
   ///
-  /// @param[in] mtp_device The MTP device
-  /// @param[in] object_handle The object handle
-  /// @param[out] asso_type The association type of Object information
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MTP_ERROR_NONE Successful
-  /// @retval #MTP_ERROR_NOT_SUPPORTED MTP is not supported
-  /// @retval #MTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MTP_ERROR_NOT_INITIALIZED MTP is not initialized
-  /// @retval #MTP_ERROR_NOT_ACTIVATED MTP is not activated
-  /// @retval #MTP_ERROR_NOT_COMM_INITIALIZED MTP communication is not initialized
-  /// @retval #MTP_ERROR_COMM_ERROR MTP communication error
-  /// @retval #MTP_ERROR_CONTROLLER MTP controller error
-  /// @retval #MTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MTP_ERROR_NO_DEVICE MTP have not any device
-  /// @retval #MTP_ERROR_PLUGIN_FAIL Plugin failed
+  /// **Parameters:**
+  /// - `mtp_device` (in): The MTP device
+  /// - `object_handle` (in): The object handle
+  /// - `asso_type` (out): The association type of Object information
   ///
-  /// @see mtp_get_object_handles()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MTP_ERROR_NONE`: Successful
+  /// - `MTP_ERROR_NOT_SUPPORTED`: MTP is not supported
+  /// - `MTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MTP_ERROR_NOT_INITIALIZED`: MTP is not initialized
+  /// - `MTP_ERROR_NOT_ACTIVATED`: MTP is not activated
+  /// - `MTP_ERROR_NOT_COMM_INITIALIZED`: MTP communication is not initialized
+  /// - `MTP_ERROR_COMM_ERROR`: MTP communication error
+  /// - `MTP_ERROR_CONTROLLER`: MTP controller error
+  /// - `MTP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MTP_ERROR_NO_DEVICE`: MTP have not any device
+  /// - `MTP_ERROR_PLUGIN_FAIL`: Plugin failed
+  ///
+  /// **See also:**
+  /// - `mtp_get_object_handles()`
   int mtp_objectinfo_get_association_type(
     int mtp_device,
     int object_handle,
@@ -903,27 +1074,34 @@ class Tizen90CapiNetworkMtp {
       _mtp_objectinfo_get_association_typePtr
           .asFunction<int Function(int, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the size of the object information.
-  /// @since_tizen 3.0
+  /// Gets the size of the object information.
   ///
-  /// @param[in] mtp_device The MTP device
-  /// @param[in] object_handle The object handle
-  /// @param[out] size The size of Object information
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MTP_ERROR_NONE Successful
-  /// @retval #MTP_ERROR_NOT_SUPPORTED MTP is not supported
-  /// @retval #MTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MTP_ERROR_NOT_INITIALIZED MTP is not initialized
-  /// @retval #MTP_ERROR_NOT_ACTIVATED MTP is not activated
-  /// @retval #MTP_ERROR_NOT_COMM_INITIALIZED MTP communication is not initialized
-  /// @retval #MTP_ERROR_COMM_ERROR MTP communication error
-  /// @retval #MTP_ERROR_CONTROLLER MTP controller error
-  /// @retval #MTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MTP_ERROR_NO_DEVICE MTP have not any device
-  /// @retval #MTP_ERROR_PLUGIN_FAIL Plugin failed
+  /// **Parameters:**
+  /// - `mtp_device` (in): The MTP device
+  /// - `object_handle` (in): The object handle
+  /// - `size` (out): The size of Object information
   ///
-  /// @see mtp_get_object_handles()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MTP_ERROR_NONE`: Successful
+  /// - `MTP_ERROR_NOT_SUPPORTED`: MTP is not supported
+  /// - `MTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MTP_ERROR_NOT_INITIALIZED`: MTP is not initialized
+  /// - `MTP_ERROR_NOT_ACTIVATED`: MTP is not activated
+  /// - `MTP_ERROR_NOT_COMM_INITIALIZED`: MTP communication is not initialized
+  /// - `MTP_ERROR_COMM_ERROR`: MTP communication error
+  /// - `MTP_ERROR_CONTROLLER`: MTP controller error
+  /// - `MTP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MTP_ERROR_NO_DEVICE`: MTP have not any device
+  /// - `MTP_ERROR_PLUGIN_FAIL`: Plugin failed
+  ///
+  /// **See also:**
+  /// - `mtp_get_object_handles()`
   int mtp_objectinfo_get_size(
     int mtp_device,
     int object_handle,
@@ -943,31 +1121,39 @@ class Tizen90CapiNetworkMtp {
   late final _mtp_objectinfo_get_size = _mtp_objectinfo_get_sizePtr
       .asFunction<int Function(int, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the parent object handle of the object information.
-  /// @since_tizen 3.0
+  /// Gets the parent object handle of the object information.
   ///
-  /// @remarks The @a parent_object_handle should not be released.
-  /// @remarks The @a parent_object_handle can be used until the MTP service stops.
-  /// @remarks The @a parent_object_handle is managed by the platform when the MTP service stop.
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in] mtp_device The MTP device
-  /// @param[in] object_handle The object handle
-  /// @param[out] parent_object_handle The parent of Object information
+  /// **Remarks:**
+  /// - The `parent_object_handle` should not be released.
+  /// - The `parent_object_handle` can be used until the MTP service stops.
+  /// - The `parent_object_handle` is managed by the platform when the MTP service stop.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MTP_ERROR_NONE Successful
-  /// @retval #MTP_ERROR_NOT_SUPPORTED MTP is not supported
-  /// @retval #MTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MTP_ERROR_NOT_INITIALIZED MTP is not initialized
-  /// @retval #MTP_ERROR_NOT_ACTIVATED MTP is not activated
-  /// @retval #MTP_ERROR_NOT_COMM_INITIALIZED MTP communication is not initialized
-  /// @retval #MTP_ERROR_COMM_ERROR MTP communication error
-  /// @retval #MTP_ERROR_CONTROLLER MTP controller error
-  /// @retval #MTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MTP_ERROR_NO_DEVICE MTP have not any device
-  /// @retval #MTP_ERROR_PLUGIN_FAIL Plugin failed
+  /// **Parameters:**
+  /// - `mtp_device` (in): The MTP device
+  /// - `object_handle` (in): The object handle
+  /// - `parent_object_handle` (out): The parent of Object information
   ///
-  /// @see mtp_get_object_handles()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MTP_ERROR_NONE`: Successful
+  /// - `MTP_ERROR_NOT_SUPPORTED`: MTP is not supported
+  /// - `MTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MTP_ERROR_NOT_INITIALIZED`: MTP is not initialized
+  /// - `MTP_ERROR_NOT_ACTIVATED`: MTP is not activated
+  /// - `MTP_ERROR_NOT_COMM_INITIALIZED`: MTP communication is not initialized
+  /// - `MTP_ERROR_COMM_ERROR`: MTP communication error
+  /// - `MTP_ERROR_CONTROLLER`: MTP controller error
+  /// - `MTP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MTP_ERROR_NO_DEVICE`: MTP have not any device
+  /// - `MTP_ERROR_PLUGIN_FAIL`: Plugin failed
+  ///
+  /// **See also:**
+  /// - `mtp_get_object_handles()`
   int mtp_objectinfo_get_parent_object_handle(
     int mtp_device,
     int object_handle,
@@ -989,31 +1175,39 @@ class Tizen90CapiNetworkMtp {
       _mtp_objectinfo_get_parent_object_handlePtr
           .asFunction<int Function(int, int, ffi.Pointer<mtp_object_h>)>();
 
-  /// @brief Gets the mtp storage of the object information.
-  /// @since_tizen 3.0
+  /// Gets the mtp storage of the object information.
   ///
-  /// @remarks The @a mtp_storage should not be released.
-  /// @remarks The @a mtp_storage can be used until the MTP service stops.
-  /// @remarks The @a mtp_storage is managed by the platform when the MTP service stop.
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in] mtp_device The MTP device
-  /// @param[in] object_handle The object handle
-  /// @param[out] mtp_storage The MTP storage of Object information
+  /// **Remarks:**
+  /// - The `mtp_storage` should not be released.
+  /// - The `mtp_storage` can be used until the MTP service stops.
+  /// - The `mtp_storage` is managed by the platform when the MTP service stop.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MTP_ERROR_NONE Successful
-  /// @retval #MTP_ERROR_NOT_SUPPORTED MTP is not supported
-  /// @retval #MTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MTP_ERROR_NOT_INITIALIZED MTP is not initialized
-  /// @retval #MTP_ERROR_NOT_ACTIVATED MTP is not activated
-  /// @retval #MTP_ERROR_NOT_COMM_INITIALIZED MTP communication is not initialized
-  /// @retval #MTP_ERROR_COMM_ERROR MTP communication error
-  /// @retval #MTP_ERROR_CONTROLLER MTP controller error
-  /// @retval #MTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MTP_ERROR_NO_DEVICE MTP have not any device
-  /// @retval #MTP_ERROR_PLUGIN_FAIL Plugin failed
+  /// **Parameters:**
+  /// - `mtp_device` (in): The MTP device
+  /// - `object_handle` (in): The object handle
+  /// - `mtp_storage` (out): The MTP storage of Object information
   ///
-  /// @see mtp_get_object_handles()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MTP_ERROR_NONE`: Successful
+  /// - `MTP_ERROR_NOT_SUPPORTED`: MTP is not supported
+  /// - `MTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MTP_ERROR_NOT_INITIALIZED`: MTP is not initialized
+  /// - `MTP_ERROR_NOT_ACTIVATED`: MTP is not activated
+  /// - `MTP_ERROR_NOT_COMM_INITIALIZED`: MTP communication is not initialized
+  /// - `MTP_ERROR_COMM_ERROR`: MTP communication error
+  /// - `MTP_ERROR_CONTROLLER`: MTP controller error
+  /// - `MTP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MTP_ERROR_NO_DEVICE`: MTP have not any device
+  /// - `MTP_ERROR_PLUGIN_FAIL`: Plugin failed
+  ///
+  /// **See also:**
+  /// - `mtp_get_object_handles()`
   int mtp_objectinfo_get_storage(
     int mtp_device,
     int object_handle,
@@ -1033,29 +1227,38 @@ class Tizen90CapiNetworkMtp {
   late final _mtp_objectinfo_get_storage = _mtp_objectinfo_get_storagePtr
       .asFunction<int Function(int, int, ffi.Pointer<mtp_storage_h>)>();
 
-  /// @brief Gets the object created time of the object information.
-  /// @since_tizen 3.0
-  /// @remarks When interpreted as an absolute time value, \n
-  /// @a date_created represents the number of seconds elapsed since the Epoch, 1970-01-01 00:00:00 +0000 (UTC).
+  /// Gets the object created time of the object information.
   ///
-  /// @param[in] mtp_device The MTP device
-  /// @param[in] object_handle The object handle
-  /// @param[out] date_created The object created time of Object information
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MTP_ERROR_NONE Successful
-  /// @retval #MTP_ERROR_NOT_SUPPORTED MTP is not supported
-  /// @retval #MTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MTP_ERROR_NOT_INITIALIZED MTP is not initialized
-  /// @retval #MTP_ERROR_NOT_ACTIVATED MTP is not activated
-  /// @retval #MTP_ERROR_NOT_COMM_INITIALIZED MTP communication is not initialized
-  /// @retval #MTP_ERROR_COMM_ERROR MTP communication error
-  /// @retval #MTP_ERROR_CONTROLLER MTP controller error
-  /// @retval #MTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MTP_ERROR_NO_DEVICE MTP have not any device
-  /// @retval #MTP_ERROR_PLUGIN_FAIL Plugin failed
+  /// **Remarks:**
+  /// - When interpreted as an absolute time value,
+  /// - `date_created` represents the number of seconds elapsed since the Epoch, 1970-01-01 00:00:00 +0000 (UTC).
   ///
-  /// @see mtp_get_object_handles()
+  /// **Parameters:**
+  /// - `mtp_device` (in): The MTP device
+  /// - `object_handle` (in): The object handle
+  /// - `date_created` (out): The object created time of Object information
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MTP_ERROR_NONE`: Successful
+  /// - `MTP_ERROR_NOT_SUPPORTED`: MTP is not supported
+  /// - `MTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MTP_ERROR_NOT_INITIALIZED`: MTP is not initialized
+  /// - `MTP_ERROR_NOT_ACTIVATED`: MTP is not activated
+  /// - `MTP_ERROR_NOT_COMM_INITIALIZED`: MTP communication is not initialized
+  /// - `MTP_ERROR_COMM_ERROR`: MTP communication error
+  /// - `MTP_ERROR_CONTROLLER`: MTP controller error
+  /// - `MTP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MTP_ERROR_NO_DEVICE`: MTP have not any device
+  /// - `MTP_ERROR_PLUGIN_FAIL`: Plugin failed
+  ///
+  /// **See also:**
+  /// - `mtp_get_object_handles()`
   int mtp_objectinfo_get_date_created(
     int mtp_device,
     int object_handle,
@@ -1076,29 +1279,38 @@ class Tizen90CapiNetworkMtp {
       _mtp_objectinfo_get_date_createdPtr
           .asFunction<int Function(int, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the object modified time of the object information.
-  /// @since_tizen 3.0
-  /// @remarks When interpreted as an absolute time value, \n
-  /// @a date_modified represents the number of seconds elapsed since the Epoch, 1970-01-01 00:00:00 +0000 (UTC).
+  /// Gets the object modified time of the object information.
   ///
-  /// @param[in] mtp_device The MTP device
-  /// @param[in] object_handle The object handle
-  /// @param[out] date_modified The object modified time of Object information
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MTP_ERROR_NONE Successful
-  /// @retval #MTP_ERROR_NOT_SUPPORTED MTP is not supported
-  /// @retval #MTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MTP_ERROR_NOT_INITIALIZED MTP is not initialized
-  /// @retval #MTP_ERROR_NOT_ACTIVATED MTP is not activated
-  /// @retval #MTP_ERROR_NOT_COMM_INITIALIZED MTP communication is not initialized
-  /// @retval #MTP_ERROR_COMM_ERROR MTP communication error
-  /// @retval #MTP_ERROR_CONTROLLER MTP controller error
-  /// @retval #MTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MTP_ERROR_NO_DEVICE MTP have not any device
-  /// @retval #MTP_ERROR_PLUGIN_FAIL Plugin failed
+  /// **Remarks:**
+  /// - When interpreted as an absolute time value,
+  /// - `date_modified` represents the number of seconds elapsed since the Epoch, 1970-01-01 00:00:00 +0000 (UTC).
   ///
-  /// @see mtp_get_object_handles()
+  /// **Parameters:**
+  /// - `mtp_device` (in): The MTP device
+  /// - `object_handle` (in): The object handle
+  /// - `date_modified` (out): The object modified time of Object information
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MTP_ERROR_NONE`: Successful
+  /// - `MTP_ERROR_NOT_SUPPORTED`: MTP is not supported
+  /// - `MTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MTP_ERROR_NOT_INITIALIZED`: MTP is not initialized
+  /// - `MTP_ERROR_NOT_ACTIVATED`: MTP is not activated
+  /// - `MTP_ERROR_NOT_COMM_INITIALIZED`: MTP communication is not initialized
+  /// - `MTP_ERROR_COMM_ERROR`: MTP communication error
+  /// - `MTP_ERROR_CONTROLLER`: MTP controller error
+  /// - `MTP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MTP_ERROR_NO_DEVICE`: MTP have not any device
+  /// - `MTP_ERROR_PLUGIN_FAIL`: Plugin failed
+  ///
+  /// **See also:**
+  /// - `mtp_get_object_handles()`
   int mtp_objectinfo_get_date_modified(
     int mtp_device,
     int object_handle,
@@ -1119,27 +1331,34 @@ class Tizen90CapiNetworkMtp {
       _mtp_objectinfo_get_date_modifiedPtr
           .asFunction<int Function(int, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the file type of the object information.
-  /// @since_tizen 3.0
+  /// Gets the file type of the object information.
   ///
-  /// @param[in] mtp_device The MTP device
-  /// @param[in] object_handle The object handle
-  /// @param[out] file_type The file type of Object information
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MTP_ERROR_NONE Successful
-  /// @retval #MTP_ERROR_NOT_SUPPORTED MTP is not supported
-  /// @retval #MTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MTP_ERROR_NOT_INITIALIZED MTP is not initialized
-  /// @retval #MTP_ERROR_NOT_ACTIVATED MTP is not activated
-  /// @retval #MTP_ERROR_NOT_COMM_INITIALIZED MTP communication is not initialized
-  /// @retval #MTP_ERROR_COMM_ERROR MTP communication error
-  /// @retval #MTP_ERROR_CONTROLLER MTP controller error
-  /// @retval #MTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MTP_ERROR_NO_DEVICE MTP have not any device
-  /// @retval #MTP_ERROR_PLUGIN_FAIL Plugin failed
+  /// **Parameters:**
+  /// - `mtp_device` (in): The MTP device
+  /// - `object_handle` (in): The object handle
+  /// - `file_type` (out): The file type of Object information
   ///
-  /// @see mtp_get_object_handles()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MTP_ERROR_NONE`: Successful
+  /// - `MTP_ERROR_NOT_SUPPORTED`: MTP is not supported
+  /// - `MTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MTP_ERROR_NOT_INITIALIZED`: MTP is not initialized
+  /// - `MTP_ERROR_NOT_ACTIVATED`: MTP is not activated
+  /// - `MTP_ERROR_NOT_COMM_INITIALIZED`: MTP communication is not initialized
+  /// - `MTP_ERROR_COMM_ERROR`: MTP communication error
+  /// - `MTP_ERROR_CONTROLLER`: MTP controller error
+  /// - `MTP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MTP_ERROR_NO_DEVICE`: MTP have not any device
+  /// - `MTP_ERROR_PLUGIN_FAIL`: Plugin failed
+  ///
+  /// **See also:**
+  /// - `mtp_get_object_handles()`
   int mtp_objectinfo_get_file_type(
     int mtp_device,
     int object_handle,
@@ -1159,27 +1378,34 @@ class Tizen90CapiNetworkMtp {
   late final _mtp_objectinfo_get_file_type = _mtp_objectinfo_get_file_typePtr
       .asFunction<int Function(int, int, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the image bit depth of the object information.
-  /// @since_tizen 3.0
+  /// Gets the image bit depth of the object information.
   ///
-  /// @param[in] mtp_device The MTP device
-  /// @param[in] object_handle The object handle
-  /// @param[out] depth The image bit depth of Object information
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MTP_ERROR_NONE Successful
-  /// @retval #MTP_ERROR_NOT_SUPPORTED MTP is not supported
-  /// @retval #MTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MTP_ERROR_NOT_INITIALIZED MTP is not initialized
-  /// @retval #MTP_ERROR_NOT_ACTIVATED MTP is not activated
-  /// @retval #MTP_ERROR_NOT_COMM_INITIALIZED MTP communication is not initialized
-  /// @retval #MTP_ERROR_COMM_ERROR MTP communication error
-  /// @retval #MTP_ERROR_CONTROLLER MTP controller error
-  /// @retval #MTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MTP_ERROR_NO_DEVICE MTP have not any device
-  /// @retval #MTP_ERROR_PLUGIN_FAIL Plugin failed
+  /// **Parameters:**
+  /// - `mtp_device` (in): The MTP device
+  /// - `object_handle` (in): The object handle
+  /// - `depth` (out): The image bit depth of Object information
   ///
-  /// @see mtp_get_object_handles()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MTP_ERROR_NONE`: Successful
+  /// - `MTP_ERROR_NOT_SUPPORTED`: MTP is not supported
+  /// - `MTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MTP_ERROR_NOT_INITIALIZED`: MTP is not initialized
+  /// - `MTP_ERROR_NOT_ACTIVATED`: MTP is not activated
+  /// - `MTP_ERROR_NOT_COMM_INITIALIZED`: MTP communication is not initialized
+  /// - `MTP_ERROR_COMM_ERROR`: MTP communication error
+  /// - `MTP_ERROR_CONTROLLER`: MTP controller error
+  /// - `MTP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MTP_ERROR_NO_DEVICE`: MTP have not any device
+  /// - `MTP_ERROR_PLUGIN_FAIL`: Plugin failed
+  ///
+  /// **See also:**
+  /// - `mtp_get_object_handles()`
   int mtp_objectinfo_get_image_bit_depth(
     int mtp_device,
     int object_handle,
@@ -1200,27 +1426,34 @@ class Tizen90CapiNetworkMtp {
       _mtp_objectinfo_get_image_bit_depthPtr
           .asFunction<int Function(int, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the image pixel width of the object information.
-  /// @since_tizen 3.0
+  /// Gets the image pixel width of the object information.
   ///
-  /// @param[in] mtp_device The MTP device
-  /// @param[in] object_handle The object handle
-  /// @param[out] width The image pixel width of Object information
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MTP_ERROR_NONE Successful
-  /// @retval #MTP_ERROR_NOT_SUPPORTED MTP is not supported
-  /// @retval #MTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MTP_ERROR_NOT_INITIALIZED MTP is not initialized
-  /// @retval #MTP_ERROR_NOT_ACTIVATED MTP is not activated
-  /// @retval #MTP_ERROR_NOT_COMM_INITIALIZED MTP communication is not initialized
-  /// @retval #MTP_ERROR_COMM_ERROR MTP communication error
-  /// @retval #MTP_ERROR_CONTROLLER MTP controller error
-  /// @retval #MTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MTP_ERROR_NO_DEVICE MTP have not any device
-  /// @retval #MTP_ERROR_PLUGIN_FAIL Plugin failed
+  /// **Parameters:**
+  /// - `mtp_device` (in): The MTP device
+  /// - `object_handle` (in): The object handle
+  /// - `width` (out): The image pixel width of Object information
   ///
-  /// @see mtp_get_object_handles()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MTP_ERROR_NONE`: Successful
+  /// - `MTP_ERROR_NOT_SUPPORTED`: MTP is not supported
+  /// - `MTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MTP_ERROR_NOT_INITIALIZED`: MTP is not initialized
+  /// - `MTP_ERROR_NOT_ACTIVATED`: MTP is not activated
+  /// - `MTP_ERROR_NOT_COMM_INITIALIZED`: MTP communication is not initialized
+  /// - `MTP_ERROR_COMM_ERROR`: MTP communication error
+  /// - `MTP_ERROR_CONTROLLER`: MTP controller error
+  /// - `MTP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MTP_ERROR_NO_DEVICE`: MTP have not any device
+  /// - `MTP_ERROR_PLUGIN_FAIL`: Plugin failed
+  ///
+  /// **See also:**
+  /// - `mtp_get_object_handles()`
   int mtp_objectinfo_get_image_pix_width(
     int mtp_device,
     int object_handle,
@@ -1241,27 +1474,34 @@ class Tizen90CapiNetworkMtp {
       _mtp_objectinfo_get_image_pix_widthPtr
           .asFunction<int Function(int, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the image pixel height of the object information.
-  /// @since_tizen 3.0
+  /// Gets the image pixel height of the object information.
   ///
-  /// @param[in] mtp_device The MTP device
-  /// @param[in] object_handle The object handle
-  /// @param[out] height The image pixel height of Object information
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MTP_ERROR_NONE Successful
-  /// @retval #MTP_ERROR_NOT_SUPPORTED MTP is not supported
-  /// @retval #MTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MTP_ERROR_NOT_INITIALIZED MTP is not initialized
-  /// @retval #MTP_ERROR_NOT_ACTIVATED MTP is not activated
-  /// @retval #MTP_ERROR_NOT_COMM_INITIALIZED MTP communication is not initialized
-  /// @retval #MTP_ERROR_COMM_ERROR MTP communication error
-  /// @retval #MTP_ERROR_CONTROLLER MTP controller error
-  /// @retval #MTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MTP_ERROR_NO_DEVICE MTP have not any device
-  /// @retval #MTP_ERROR_PLUGIN_FAIL Plugin failed
+  /// **Parameters:**
+  /// - `mtp_device` (in): The MTP device
+  /// - `object_handle` (in): The object handle
+  /// - `height` (out): The image pixel height of Object information
   ///
-  /// @see mtp_get_object_handles()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MTP_ERROR_NONE`: Successful
+  /// - `MTP_ERROR_NOT_SUPPORTED`: MTP is not supported
+  /// - `MTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MTP_ERROR_NOT_INITIALIZED`: MTP is not initialized
+  /// - `MTP_ERROR_NOT_ACTIVATED`: MTP is not activated
+  /// - `MTP_ERROR_NOT_COMM_INITIALIZED`: MTP communication is not initialized
+  /// - `MTP_ERROR_COMM_ERROR`: MTP communication error
+  /// - `MTP_ERROR_CONTROLLER`: MTP controller error
+  /// - `MTP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MTP_ERROR_NO_DEVICE`: MTP have not any device
+  /// - `MTP_ERROR_PLUGIN_FAIL`: Plugin failed
+  ///
+  /// **See also:**
+  /// - `mtp_get_object_handles()`
   int mtp_objectinfo_get_image_pix_height(
     int mtp_device,
     int object_handle,
@@ -1282,27 +1522,34 @@ class Tizen90CapiNetworkMtp {
       _mtp_objectinfo_get_image_pix_heightPtr
           .asFunction<int Function(int, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the thumbnail size of the object information.
-  /// @since_tizen 3.0
+  /// Gets the thumbnail size of the object information.
   ///
-  /// @param[in] mtp_device The MTP device
-  /// @param[in] object_handle The object handle
-  /// @param[out] size The thumbnail size of Object information
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MTP_ERROR_NONE Successful
-  /// @retval #MTP_ERROR_NOT_SUPPORTED MTP is not supported
-  /// @retval #MTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MTP_ERROR_NOT_INITIALIZED MTP is not initialized
-  /// @retval #MTP_ERROR_NOT_ACTIVATED MTP is not activated
-  /// @retval #MTP_ERROR_NOT_COMM_INITIALIZED MTP communication is not initialized
-  /// @retval #MTP_ERROR_COMM_ERROR MTP communication error
-  /// @retval #MTP_ERROR_CONTROLLER MTP controller error
-  /// @retval #MTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MTP_ERROR_NO_DEVICE MTP have not any device
-  /// @retval #MTP_ERROR_PLUGIN_FAIL Plugin failed
+  /// **Parameters:**
+  /// - `mtp_device` (in): The MTP device
+  /// - `object_handle` (in): The object handle
+  /// - `size` (out): The thumbnail size of Object information
   ///
-  /// @see mtp_get_object_handles()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MTP_ERROR_NONE`: Successful
+  /// - `MTP_ERROR_NOT_SUPPORTED`: MTP is not supported
+  /// - `MTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MTP_ERROR_NOT_INITIALIZED`: MTP is not initialized
+  /// - `MTP_ERROR_NOT_ACTIVATED`: MTP is not activated
+  /// - `MTP_ERROR_NOT_COMM_INITIALIZED`: MTP communication is not initialized
+  /// - `MTP_ERROR_COMM_ERROR`: MTP communication error
+  /// - `MTP_ERROR_CONTROLLER`: MTP controller error
+  /// - `MTP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MTP_ERROR_NO_DEVICE`: MTP have not any device
+  /// - `MTP_ERROR_PLUGIN_FAIL`: Plugin failed
+  ///
+  /// **See also:**
+  /// - `mtp_get_object_handles()`
   int mtp_objectinfo_get_thumbnail_size(
     int mtp_device,
     int object_handle,
@@ -1323,27 +1570,34 @@ class Tizen90CapiNetworkMtp {
       _mtp_objectinfo_get_thumbnail_sizePtr
           .asFunction<int Function(int, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the thumbnail file type of the object information.
-  /// @since_tizen 3.0
+  /// Gets the thumbnail file type of the object information.
   ///
-  /// @param[in] mtp_device The MTP device
-  /// @param[in] object_handle The object handle
-  /// @param[out] file_type The file type of Object information
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MTP_ERROR_NONE Successful
-  /// @retval #MTP_ERROR_NOT_SUPPORTED MTP is not supported
-  /// @retval #MTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MTP_ERROR_NOT_INITIALIZED MTP is not initialized
-  /// @retval #MTP_ERROR_NOT_ACTIVATED MTP is not activated
-  /// @retval #MTP_ERROR_NOT_COMM_INITIALIZED MTP communication is not initialized
-  /// @retval #MTP_ERROR_COMM_ERROR MTP communication error
-  /// @retval #MTP_ERROR_CONTROLLER MTP controller error
-  /// @retval #MTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MTP_ERROR_NO_DEVICE MTP have not any device
-  /// @retval #MTP_ERROR_PLUGIN_FAIL Plugin failed
+  /// **Parameters:**
+  /// - `mtp_device` (in): The MTP device
+  /// - `object_handle` (in): The object handle
+  /// - `file_type` (out): The file type of Object information
   ///
-  /// @see mtp_get_object_handles()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MTP_ERROR_NONE`: Successful
+  /// - `MTP_ERROR_NOT_SUPPORTED`: MTP is not supported
+  /// - `MTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MTP_ERROR_NOT_INITIALIZED`: MTP is not initialized
+  /// - `MTP_ERROR_NOT_ACTIVATED`: MTP is not activated
+  /// - `MTP_ERROR_NOT_COMM_INITIALIZED`: MTP communication is not initialized
+  /// - `MTP_ERROR_COMM_ERROR`: MTP communication error
+  /// - `MTP_ERROR_CONTROLLER`: MTP controller error
+  /// - `MTP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MTP_ERROR_NO_DEVICE`: MTP have not any device
+  /// - `MTP_ERROR_PLUGIN_FAIL`: Plugin failed
+  ///
+  /// **See also:**
+  /// - `mtp_get_object_handles()`
   int mtp_objectinfo_get_thumbnail_file_type(
     int mtp_device,
     int object_handle,
@@ -1365,27 +1619,34 @@ class Tizen90CapiNetworkMtp {
       _mtp_objectinfo_get_thumbnail_file_typePtr
           .asFunction<int Function(int, int, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the thumbnail pixel height of the object information.
-  /// @since_tizen 3.0
+  /// Gets the thumbnail pixel height of the object information.
   ///
-  /// @param[in] mtp_device The MTP device
-  /// @param[in] object_handle The object handle
-  /// @param[out] height The thumbnail pixel height of Object information
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MTP_ERROR_NONE Successful
-  /// @retval #MTP_ERROR_NOT_SUPPORTED MTP is not supported
-  /// @retval #MTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MTP_ERROR_NOT_INITIALIZED MTP is not initialized
-  /// @retval #MTP_ERROR_NOT_ACTIVATED MTP is not activated
-  /// @retval #MTP_ERROR_NOT_COMM_INITIALIZED MTP communication is not initialized
-  /// @retval #MTP_ERROR_COMM_ERROR MTP communication error
-  /// @retval #MTP_ERROR_CONTROLLER MTP controller error
-  /// @retval #MTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MTP_ERROR_NO_DEVICE MTP have not any device
-  /// @retval #MTP_ERROR_PLUGIN_FAIL Plugin failed
+  /// **Parameters:**
+  /// - `mtp_device` (in): The MTP device
+  /// - `object_handle` (in): The object handle
+  /// - `height` (out): The thumbnail pixel height of Object information
   ///
-  /// @see mtp_get_object_handles()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MTP_ERROR_NONE`: Successful
+  /// - `MTP_ERROR_NOT_SUPPORTED`: MTP is not supported
+  /// - `MTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MTP_ERROR_NOT_INITIALIZED`: MTP is not initialized
+  /// - `MTP_ERROR_NOT_ACTIVATED`: MTP is not activated
+  /// - `MTP_ERROR_NOT_COMM_INITIALIZED`: MTP communication is not initialized
+  /// - `MTP_ERROR_COMM_ERROR`: MTP communication error
+  /// - `MTP_ERROR_CONTROLLER`: MTP controller error
+  /// - `MTP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MTP_ERROR_NO_DEVICE`: MTP have not any device
+  /// - `MTP_ERROR_PLUGIN_FAIL`: Plugin failed
+  ///
+  /// **See also:**
+  /// - `mtp_get_object_handles()`
   int mtp_objectinfo_get_thumbnail_pix_height(
     int mtp_device,
     int object_handle,
@@ -1407,27 +1668,34 @@ class Tizen90CapiNetworkMtp {
       _mtp_objectinfo_get_thumbnail_pix_heightPtr
           .asFunction<int Function(int, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the thumbnail pixel width of the object information.
-  /// @since_tizen 3.0
+  /// Gets the thumbnail pixel width of the object information.
   ///
-  /// @param[in] mtp_device The MTP device
-  /// @param[in] object_handle The object handle
-  /// @param[out] width The thumbnail pixel width of Object information
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MTP_ERROR_NONE Successful
-  /// @retval #MTP_ERROR_NOT_SUPPORTED MTP is not supported
-  /// @retval #MTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MTP_ERROR_NOT_INITIALIZED MTP is not initialized
-  /// @retval #MTP_ERROR_NOT_ACTIVATED MTP is not activated
-  /// @retval #MTP_ERROR_NOT_COMM_INITIALIZED MTP communication is not initialized
-  /// @retval #MTP_ERROR_COMM_ERROR MTP communication error
-  /// @retval #MTP_ERROR_CONTROLLER MTP controller error
-  /// @retval #MTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MTP_ERROR_NO_DEVICE MTP have not any device
-  /// @retval #MTP_ERROR_PLUGIN_FAIL Plugin failed
+  /// **Parameters:**
+  /// - `mtp_device` (in): The MTP device
+  /// - `object_handle` (in): The object handle
+  /// - `width` (out): The thumbnail pixel width of Object information
   ///
-  /// @see mtp_get_object_handles()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MTP_ERROR_NONE`: Successful
+  /// - `MTP_ERROR_NOT_SUPPORTED`: MTP is not supported
+  /// - `MTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MTP_ERROR_NOT_INITIALIZED`: MTP is not initialized
+  /// - `MTP_ERROR_NOT_ACTIVATED`: MTP is not activated
+  /// - `MTP_ERROR_NOT_COMM_INITIALIZED`: MTP communication is not initialized
+  /// - `MTP_ERROR_COMM_ERROR`: MTP communication error
+  /// - `MTP_ERROR_CONTROLLER`: MTP controller error
+  /// - `MTP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MTP_ERROR_NO_DEVICE`: MTP have not any device
+  /// - `MTP_ERROR_PLUGIN_FAIL`: Plugin failed
+  ///
+  /// **See also:**
+  /// - `mtp_get_object_handles()`
   int mtp_objectinfo_get_thumbnail_pix_width(
     int mtp_device,
     int object_handle,
@@ -1449,8 +1717,11 @@ class Tizen90CapiNetworkMtp {
           .asFunction<int Function(int, int, ffi.Pointer<ffi.Int>)>();
 }
 
-/// @brief Error codes reported by the MTP API.
-/// @since_tizen 3.0
+/// Error codes reported by the MTP API.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class mtp_error_e {
   /// < Successful
   static const int MTP_ERROR_NONE = 0;
@@ -1492,8 +1763,11 @@ abstract class mtp_error_e {
   static const int MTP_ERROR_PLUGIN_FAIL = -30146553;
 }
 
-/// @brief Enumerations for MTP Storage type.
-/// @since_tizen 3.0
+/// Enumerations for MTP Storage type.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class mtp_storage_type_e {
   /// < Storage type is undefined
   static const int MTP_STORAGE_TYPE_UNDEFINED = 0;
@@ -1511,8 +1785,11 @@ abstract class mtp_storage_type_e {
   static const int MTP_STORAGE_TYPE_REMOVABLE_RAM = 4;
 }
 
-/// @brief Enumerations for MTP file type.
-/// @since_tizen 3.0
+/// Enumerations for MTP file type.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class mtp_filetype_e {
   /// < FOLDER file type
   static const int MTP_FILETYPE_FOLDER = 0;
@@ -1659,8 +1936,11 @@ abstract class mtp_filetype_e {
   static const int MTP_FILETYPE_HEIF = 47;
 }
 
-/// @brief Enumerations for MTP event type.
-/// @since_tizen 3.0
+/// Enumerations for MTP event type.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class mtp_event_e {
   /// < Unknown event type
   static const int MTP_EVENT_UNKNOWN = 0;
@@ -1687,37 +1967,58 @@ abstract class mtp_event_e {
   static const int MTP_EVENT_TURNED_OFF = 7;
 }
 
-/// @brief The handle to the mtp device.
-/// @since_tizen 3.0
+/// The handle to the mtp device.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef mtp_device_h = ffi.Int;
+/// @nodoc
 typedef Dartmtp_device_h = int;
 
-/// @brief The handle to the mtp storage.
-/// @since_tizen 3.0
+/// The handle to the mtp storage.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef mtp_storage_h = ffi.Int;
+/// @nodoc
 typedef Dartmtp_storage_h = int;
 
-/// @brief The handle to the mtp object.
-/// @since_tizen 3.0
+/// The handle to the mtp object.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef mtp_object_h = ffi.Int;
+/// @nodoc
 typedef Dartmtp_object_h = int;
 
-/// @brief Called when mtp event is occured.
-/// @since_tizen 3.0
-/// @remarks Depending on the type of event, the meaning of event parameter is different.
-/// - If event is device event, then event_parameter type is #mtp_device_h.
-/// - If event is storage event, then event_parameter type is #mtp_storage_h.
-/// - If event is object event, then event_parameter type is #mtp_object_h.
-/// - If event is #MTP_EVENT_TURNED_OFF, then event_parameter is 0.
+/// Called when mtp event is occured.
 ///
-/// @param[in] event The event
-/// @param[in] event_parameter The event parameter
-/// @param[in] user_data The user data passed from the callback registration function
+/// **Since Tizen:**
+/// - 3.0
 ///
-/// @see mtp_add_mtp_event_cb()
-/// @see mtp_remove_mtp_event_cb()
+/// **Remarks:**
+/// - Depending on the type of event, the meaning of event parameter is different.
+/// - - If event is device event, then event_parameter type is `mtp_device_h`.
+/// - - If event is storage event, then event_parameter type is `mtp_storage_h`.
+/// - - If event is object event, then event_parameter type is `mtp_object_h`.
+/// - - If event is `MTP_EVENT_TURNED_OFF`, then event_parameter is 0.
+///
+/// **Parameters:**
+/// - `event` (in): The event
+/// - `event_parameter` (in): The event parameter
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `mtp_add_mtp_event_cb()`
+/// - `mtp_remove_mtp_event_cb()`
+/// @nodoc
 typedef mtp_event_cb = ffi.Pointer<ffi.NativeFunction<mtp_event_cbFunction>>;
+/// @nodoc
 typedef mtp_event_cbFunction = ffi.Void Function(
     ffi.Int32 event, ffi.Int event_parameter, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmtp_event_cbFunction = void Function(
     int event, int event_parameter, ffi.Pointer<ffi.Void> user_data);

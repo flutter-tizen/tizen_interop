@@ -1,3 +1,6 @@
+/// {@category 8.0/tizen}
+library tizen_interop_8_0.contacts_service2;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen contacts-service2 APIs.
+/// {@category 8.0/tizen}
 class Tizen80ContactsService2 {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,19 +28,28 @@ class Tizen80ContactsService2 {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Connects to the contacts service.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @remarks Connection opening is necessary to access the contacts server such as fetching, inserting, or updating records.\n
-  /// The execution of contacts_connect() and contacts_disconnect() could slow down your application. So it is not recommended to call them frequently.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM System error
-  /// @retval #CONTACTS_ERROR_INTERNAL Internal error
-  /// @see contacts_disconnect()
+  /// Connects to the contacts service.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - Connection opening is necessary to access the contacts server such as fetching, inserting, or updating records.
+  /// - The execution of contacts_connect() and contacts_disconnect() could slow down your application. So it is not recommended to call them frequently.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: System error
+  /// - `CONTACTS_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `contacts_disconnect()`
   int contacts_connect() {
     return _contacts_connect();
   }
@@ -46,18 +59,27 @@ class Tizen80ContactsService2 {
   late final _contacts_connect =
       _contacts_connectPtr.asFunction<int Function()>();
 
-  /// @brief Disconnects from the contacts service.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @remarks If there is no opened connection, this function returns #CONTACTS_ERROR_DB.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM System error
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @see contacts_connect()
+  /// Disconnects from the contacts service.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - If there is no opened connection, this function returns `CONTACTS_ERROR_DB`.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: System error
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
   int contacts_disconnect() {
     return _contacts_disconnect();
   }
@@ -67,20 +89,29 @@ class Tizen80ContactsService2 {
   late final _contacts_disconnect =
       _contacts_disconnectPtr.asFunction<int Function()>();
 
-  /// @brief Connects to the contacts service with a connection on another thread.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @remarks Opening connection is necessary to access the contact server and to perform operations such as fetching, inserting, or updating records.\n
-  /// On multiple thread environment with contacts_connect(), request can be failed in one thread, while another request is working by the connection in the other thread.
-  /// To prevent request fail, contacts_connect_on_thread() is recommended. Then new connection is set for the thread.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM System error
-  /// @retval #CONTACTS_ERROR_INTERNAL Internal error
-  /// @see contacts_disconnect_on_thread()
+  /// Connects to the contacts service with a connection on another thread.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - Opening connection is necessary to access the contact server and to perform operations such as fetching, inserting, or updating records.
+  /// - On multiple thread environment with contacts_connect(), request can be failed in one thread, while another request is working by the connection in the other thread.
+  /// - To prevent request fail, contacts_connect_on_thread() is recommended. Then new connection is set for the thread.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: System error
+  /// - `CONTACTS_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `contacts_disconnect_on_thread()`
   int contacts_connect_on_thread() {
     return _contacts_connect_on_thread();
   }
@@ -91,18 +122,27 @@ class Tizen80ContactsService2 {
   late final _contacts_connect_on_thread =
       _contacts_connect_on_threadPtr.asFunction<int Function()>();
 
-  /// @brief Disconnects from the contacts service.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @remarks If there is no opened connection, this function returns #CONTACTS_ERROR_DB.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM System error
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @see contacts_connect_on_thread()
+  /// Disconnects from the contacts service.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - If there is no opened connection, this function returns `CONTACTS_ERROR_DB`.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: System error
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  ///
+  /// **See also:**
+  /// - `contacts_connect_on_thread()`
   int contacts_disconnect_on_thread() {
     return _contacts_disconnect_on_thread();
   }
@@ -113,22 +153,33 @@ class Tizen80ContactsService2 {
   late final _contacts_disconnect_on_thread =
       _contacts_disconnect_on_threadPtr.asFunction<int Function()>();
 
-  /// @brief Connects to the contacts service.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] flags	Connection flag
-  /// @remarks Connection opening is necessary to access the contacts server such as fetching, inserting, or updating records.\n
-  /// Before contacts-service daemon is ready, if you call contacts_connect(), it will fail.
-  /// To prevent it, if you call this API with @ref CONTACTS_CONNECT_FLAG_RETRY flags, it will retry several time.\n
-  /// To close the connection, contacts_disconnect() should be called.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM System error
-  /// @retval #CONTACTS_ERROR_INTERNAL Internal error
-  /// @see contacts_disconnect()
+  /// Connects to the contacts service.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - Connection opening is necessary to access the contacts server such as fetching, inserting, or updating records.
+  /// - Before contacts-service daemon is ready, if you call contacts_connect(), it will fail.
+  /// - To prevent it, if you call this API with `CONTACTS_CONNECT_FLAG_RETRY` flags, it will retry several time.
+  /// - To close the connection, contacts_disconnect() should be called.
+  ///
+  /// **Parameters:**
+  /// - `flags` (in): Connection flag
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: System error
+  /// - `CONTACTS_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `contacts_disconnect()`
   int contacts_connect_with_flags(
     int flags,
   ) {
@@ -143,21 +194,11 @@ class Tizen80ContactsService2 {
   late final _contacts_connect_with_flags =
       _contacts_connect_with_flagsPtr.asFunction<int Function(int)>();
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address_book _contacts_address_book view
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Read, Write</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts addressbook view </td></tr>
-  /// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the addressbook </td></tr>
-  /// <tr><td>integer</td><td> account_id </td><td>read, write once</td><td> Account ID that the addressbook belongs to </td></tr>
-  /// <tr><td>string</td><td> name </td><td>read, write</td><td> It cannot be @c NULL. Duplicate names are not allowed. </td></tr>
-  /// <tr><td>integer</td><td> mode </td><td>read, write</td><td> Addressbook mode, refer to the @ref contacts_address_book_mode_e </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address_book _contacts_address_book view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts addressbook view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the addressbook </td></tr> <tr><td>integer</td><td> account_id </td><td>read, write once</td><td> Account ID that the addressbook belongs to </td></tr> <tr><td>string</td><td> name </td><td>read, write</td><td> It cannot be `NULL`. Duplicate names are not allowed. </td></tr> <tr><td>integer</td><td> mode </td><td>read, write</td><td> Addressbook mode, refer to the `contacts_address_book_mode_e` </td></tr> </table>
   late final ffi.Pointer<_contacts_address_book_property_ids>
       __contacts_address_book =
       _lookup<_contacts_address_book_property_ids>('_contacts_address_book');
@@ -165,89 +206,31 @@ class Tizen80ContactsService2 {
   _contacts_address_book_property_ids get _contacts_address_book =>
       __contacts_address_book.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group _contacts_group view
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Read, Write</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts group view </td></tr>
-  /// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the group </td></tr>
-  /// <tr><td>integer</td><td> address_book_id </td><td>read, write once</td><td> Addressbook ID that the group belongs to </td></tr>
-  /// <tr><td>string</td><td> name </td><td>read, write</td><td> Group name </td></tr>
-  /// <tr><td>string</td><td> ringtone_path </td><td>read, write</td><td> Ringtone path of the group </td></tr>
-  /// <tr><td>string</td><td> image_path </td><td>read, write</td><td> Image path of the group </td></tr>
-  /// <tr><td>string</td><td> vibration </td><td>read, write</td><td> Vibration path of the group </td></tr>
-  /// <tr><td>string</td><td> extra_data </td><td>read, write</td><td> Extra data for default group name </td></tr>
-  /// <tr><td>boolean</td><td> is_read_only </td><td>read, write once</td><td> The group is read only or not </td></tr>
-  /// <tr><td>string</td><td> message_alert </td><td>read, write</td><td> Message alert path of the group </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group _contacts_group view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts group view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the group </td></tr> <tr><td>integer</td><td> address_book_id </td><td>read, write once</td><td> Addressbook ID that the group belongs to </td></tr> <tr><td>string</td><td> name </td><td>read, write</td><td> Group name </td></tr> <tr><td>string</td><td> ringtone_path </td><td>read, write</td><td> Ringtone path of the group </td></tr> <tr><td>string</td><td> image_path </td><td>read, write</td><td> Image path of the group </td></tr> <tr><td>string</td><td> vibration </td><td>read, write</td><td> Vibration path of the group </td></tr> <tr><td>string</td><td> extra_data </td><td>read, write</td><td> Extra data for default group name </td></tr> <tr><td>boolean</td><td> is_read_only </td><td>read, write once</td><td> The group is read only or not </td></tr> <tr><td>string</td><td> message_alert </td><td>read, write</td><td> Message alert path of the group </td></tr> </table>
   late final ffi.Pointer<_contacts_group_property_ids> __contacts_group =
       _lookup<_contacts_group_property_ids>('_contacts_group');
 
   _contacts_group_property_ids get _contacts_group => __contacts_group.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person _contacts_person view
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Read, Write</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts person view </td></tr>
-  /// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the person </td></tr>
-  /// <tr><td>string</td><td> display_name </td><td>read only</td><td> Display name of the person </td></tr>
-  /// <tr><td>string</td><td> display_name_index </td><td>read only</td><td> The first character of first string for grouping. This is normalized using icu (projection) </td></tr>
-  /// <tr><td>integer</td><td> display_contact_id </td><td>read only</td><td> Display contact ID that the person belongs to </td></tr>
-  /// <tr><td>string</td><td> ringtone_path </td><td>read, write</td><td> Ringtone path of the person </td></tr>
-  /// <tr><td>string</td><td> image_thumbnail_path </td><td>read only</td><td> Image thumbnail path of the person </td></tr>
-  /// <tr><td>string</td><td> vibration </td><td>read, write</td><td> Vibration path of the person </td></tr>
-  /// <tr><td>string</td><td> message_alert </td><td>read, write</td><td> Message alert path of the person </td></tr>
-  /// <tr><td>string</td><td> status </td><td>read only</td><td> Status of social account </td></tr>
-  /// <tr><td>boolean</td><td> is_favorite </td><td>read, write</td><td> The person is favorite or not </td></tr>
-  /// <tr><td>double</td><td> favorite_priority </td><td> read only </td><td> The priority of favorite contacts. it can be used as sorting key, see the @ref contacts_query_set_sort </td></tr>
-  /// <tr><td>integer</td><td> link_count </td><td>read only</td><td> Link count of contact records (projection) </td></tr>
-  /// <tr><td>string</td><td> addressbook_ids </td><td>read only</td><td> Addressbook IDs that the person belongs to (projection) </td></tr>
-  /// <tr><td>boolean</td><td> has_phonenumber </td><td>read only</td><td> The person has phone number or not </td></tr>
-  /// <tr><td>boolean</td><td> has_email </td><td>read only</td><td> The person has email or not </td></tr>
-  /// <tr><td>integer</td><td> snippet_type </td><td>read only</td><td> keyword matched data type, refer to they @ref contacts_data_type_e (Since 3.0) </td></tr>
-  /// <tr><td>string</td><td> snippet_string </td><td>read only</td><td> keyword matched data string (Since 3.0) </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person _contacts_person view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts person view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the person </td></tr> <tr><td>string</td><td> display_name </td><td>read only</td><td> Display name of the person </td></tr> <tr><td>string</td><td> display_name_index </td><td>read only</td><td> The first character of first string for grouping. This is normalized using icu (projection) </td></tr> <tr><td>integer</td><td> display_contact_id </td><td>read only</td><td> Display contact ID that the person belongs to </td></tr> <tr><td>string</td><td> ringtone_path </td><td>read, write</td><td> Ringtone path of the person </td></tr> <tr><td>string</td><td> image_thumbnail_path </td><td>read only</td><td> Image thumbnail path of the person </td></tr> <tr><td>string</td><td> vibration </td><td>read, write</td><td> Vibration path of the person </td></tr> <tr><td>string</td><td> message_alert </td><td>read, write</td><td> Message alert path of the person </td></tr> <tr><td>string</td><td> status </td><td>read only</td><td> Status of social account </td></tr> <tr><td>boolean</td><td> is_favorite </td><td>read, write</td><td> The person is favorite or not </td></tr> <tr><td>double</td><td> favorite_priority </td><td> read only </td><td> The priority of favorite contacts. it can be used as sorting key, see the `contacts_query_set_sort` </td></tr> <tr><td>integer</td><td> link_count </td><td>read only</td><td> Link count of contact records (projection) </td></tr> <tr><td>string</td><td> addressbook_ids </td><td>read only</td><td> Addressbook IDs that the person belongs to (projection) </td></tr> <tr><td>boolean</td><td> has_phonenumber </td><td>read only</td><td> The person has phone number or not </td></tr> <tr><td>boolean</td><td> has_email </td><td>read only</td><td> The person has email or not </td></tr> <tr><td>integer</td><td> snippet_type </td><td>read only</td><td> keyword matched data type, refer to they `contacts_data_type_e` (Since 3.0) </td></tr> <tr><td>string</td><td> snippet_string </td><td>read only</td><td> keyword matched data string (Since 3.0) </td></tr> </table>
   late final ffi.Pointer<_contacts_person_property_ids> __contacts_person =
       _lookup<_contacts_person_property_ids>('_contacts_person');
 
   _contacts_person_property_ids get _contacts_person => __contacts_person.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_simple_contact _contacts_simple_contact view
-  /// You can only get simple contact using this view.
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td> Identifier of this simple contact view </td></tr>
-  /// <tr><td>integer</td><td>id</td><td> DB record ID of the contact </td></tr>
-  /// <tr><td>string</td><td>display_name</td><td> Display name of the contact </td></tr>
-  /// <tr><td>integer</td><td>display_source_id</td><td> The source type of display name, refer to the @ref contacts_display_name_source_type_e </td></tr>
-  /// <tr><td>integer</td><td>address_book_id</td><td> Addressbook that the contact belongs to </td></tr>
-  /// <tr><td>string</td><td>ringtone_path</td><td> Ringtone path of the contact </td></tr>
-  /// <tr><td>string</td><td>image_thumbnail_path</td><td> Image thumbnail path of the contact </td></tr>
-  /// <tr><td>boolean</td><td>is_favorite</td><td> The contact is favorite or not </td></tr>
-  /// <tr><td>boolean</td><td>has_phonenumber</td><td> The contact has phone number or not </td></tr>
-  /// <tr><td>boolean</td><td>has_email</td><td> The contact has email or not </td></tr>
-  /// <tr><td>integer</td><td>person_id</td><td> Person ID that the contact belongs to </td></tr>
-  /// <tr><td>string</td><td>uid</td><td> Unique identifier </td></tr>
-  /// <tr><td>string</td><td>vibration</td><td> Vibration path of the contact </td></tr>
-  /// <tr><td>string</td><td>message_alert</td><td> Message alert path of the contact </td></tr>
-  /// <tr><td>integer</td><td>changed_time</td><td> Last changed contact time </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_simple_contact _contacts_simple_contact view You can only get simple contact using this view. <table> <tr> <th>Type</th> <th>Property ID</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td> Identifier of this simple contact view </td></tr> <tr><td>integer</td><td>id</td><td> DB record ID of the contact </td></tr> <tr><td>string</td><td>display_name</td><td> Display name of the contact </td></tr> <tr><td>integer</td><td>display_source_id</td><td> The source type of display name, refer to the `contacts_display_name_source_type_e` </td></tr> <tr><td>integer</td><td>address_book_id</td><td> Addressbook that the contact belongs to </td></tr> <tr><td>string</td><td>ringtone_path</td><td> Ringtone path of the contact </td></tr> <tr><td>string</td><td>image_thumbnail_path</td><td> Image thumbnail path of the contact </td></tr> <tr><td>boolean</td><td>is_favorite</td><td> The contact is favorite or not </td></tr> <tr><td>boolean</td><td>has_phonenumber</td><td> The contact has phone number or not </td></tr> <tr><td>boolean</td><td>has_email</td><td> The contact has email or not </td></tr> <tr><td>integer</td><td>person_id</td><td> Person ID that the contact belongs to </td></tr> <tr><td>string</td><td>uid</td><td> Unique identifier </td></tr> <tr><td>string</td><td>vibration</td><td> Vibration path of the contact </td></tr> <tr><td>string</td><td>message_alert</td><td> Message alert path of the contact </td></tr> <tr><td>integer</td><td>changed_time</td><td> Last changed contact time </td></tr> </table>
   late final ffi.Pointer<_contacts_simple_contact_property_ids>
       __contacts_simple_contact =
       _lookup<_contacts_simple_contact_property_ids>(
@@ -256,84 +239,22 @@ class Tizen80ContactsService2 {
   _contacts_simple_contact_property_ids get _contacts_simple_contact =>
       __contacts_simple_contact.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact _contacts_contact view
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Read, Write</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contact view </td></tr>
-  /// <tr><td>integer</td><td>id</td><td>read only</td><td> DB record ID of the contact </td></tr>
-  /// <tr><td>string</td><td>display_name</td><td>read only</td><td> Display name of the contact </td></tr>
-  /// <tr><td>integer</td><td>display_source_id</td><td>read only</td><td> The source type of display name, refer to the @ref contacts_display_name_source_type_e </td></tr>
-  /// <tr><td>integer</td><td>address_book_id</td><td>read, write once</td><td> Addressbook ID that the contact belongs to </td></tr>
-  /// <tr><td>string</td><td>ringtone_path</td><td>read, write</td><td> Ringtone path of the contact </td></tr>
-  /// <tr><td>string</td><td>image_thumbnail_path</td><td>read only</td><td> Image thumbnail path of the contact </td></tr>
-  /// <tr><td>boolean</td><td>is_favorite</td><td>read, write</td><td> The contact is favorite or not </td></tr>
-  /// <tr><td>boolean</td><td>has_phonenumber</td><td>read only</td><td> The contact has phone number or not </td></tr>
-  /// <tr><td>boolean</td><td>has_email</td><td>read only</td><td> The contact has email or not </td></tr>
-  /// <tr><td>integer</td><td>person_id</td><td>read, write once</td><td> Person ID that the contact belongs to. If set when inserting, a contact will be linked to person </td></tr>
-  /// <tr><td>string</td><td>uid</td><td>read, write</td><td> Unique identifier </td></tr>
-  /// <tr><td>string</td><td>vibration</td><td>read, write</td><td> Vibration path of the contact </td></tr>
-  /// <tr><td>string</td><td>message_alert</td><td>read, write</td><td> Message alert path of the contact </td></tr>
-  /// <tr><td>integer</td><td>changed_time</td><td>read only</td><td> Last changed contact time </td></tr>
-  /// <tr><td>integer</td><td>link_mode</td><td>read, write once</td><td> The link mode, refer to the @ref contacts_contact_link_mode_e. If the person_id was set, this value will be ignored </td></tr>
-  /// <tr><td>record</td><td>name</td><td>read, write</td><td> _contacts_name child record (single) </td></tr>
-  /// <tr><td>record</td><td>company</td><td>read, write</td><td> _contacts_company child record (multiple) </td></tr>
-  /// <tr><td>record</td><td>note</td><td>read, write</td><td> _contacts_note child record (multiple) </td></tr>
-  /// <tr><td>record</td><td>number</td><td>read, write</td><td> _contacts_number child record (multiple) </td></tr>
-  /// <tr><td>record</td><td>email</td><td>read, write</td><td> _contacts_email child record (multiple) </td></tr>
-  /// <tr><td>record</td><td>event</td><td>read, write</td><td> _contacts_event child record (multiple) </td></tr>
-  /// <tr><td>record</td><td>messenger</td><td>read, write</td><td> _contacts_messenger child record (multiple) </td></tr>
-  /// <tr><td>record</td><td>address</td><td>read, write</td><td> _contacts_address child record (multiple) </td></tr>
-  /// <tr><td>record</td><td>url</td><td>read, write</td><td> _contacts_url child record (multiple) </td></tr>
-  /// <tr><td>record</td><td>nickname</td><td>read, write</td><td> _contacts_nickname child record (multiple) </td></tr>
-  /// <tr><td>record</td><td>profile</td><td>read, write</td><td>	 _contacts_profile child record (multiple) </td></tr>
-  /// <tr><td>record</td><td>relationship</td><td>read, write</td><td> _contacts_relationship child record (multiple)</td></tr>
-  /// <tr><td>record</td><td>image</td><td>read, write</td><td> _contacts_image child record (multiple)</td></tr>
-  /// <tr><td>record</td><td>group_relation</td><td>read, write</td><td> _contacts_group_relation child record (multiple)</td></tr>
-  /// <tr><td>record</td><td>sip</td><td>read, write</td><td> _contacts_sip child record (multiple) (Since 3.0)</td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact _contacts_contact view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contact view </td></tr> <tr><td>integer</td><td>id</td><td>read only</td><td> DB record ID of the contact </td></tr> <tr><td>string</td><td>display_name</td><td>read only</td><td> Display name of the contact </td></tr> <tr><td>integer</td><td>display_source_id</td><td>read only</td><td> The source type of display name, refer to the `contacts_display_name_source_type_e` </td></tr> <tr><td>integer</td><td>address_book_id</td><td>read, write once</td><td> Addressbook ID that the contact belongs to </td></tr> <tr><td>string</td><td>ringtone_path</td><td>read, write</td><td> Ringtone path of the contact </td></tr> <tr><td>string</td><td>image_thumbnail_path</td><td>read only</td><td> Image thumbnail path of the contact </td></tr> <tr><td>boolean</td><td>is_favorite</td><td>read, write</td><td> The contact is favorite or not </td></tr> <tr><td>boolean</td><td>has_phonenumber</td><td>read only</td><td> The contact has phone number or not </td></tr> <tr><td>boolean</td><td>has_email</td><td>read only</td><td> The contact has email or not </td></tr> <tr><td>integer</td><td>person_id</td><td>read, write once</td><td> Person ID that the contact belongs to. If set when inserting, a contact will be linked to person </td></tr> <tr><td>string</td><td>uid</td><td>read, write</td><td> Unique identifier </td></tr> <tr><td>string</td><td>vibration</td><td>read, write</td><td> Vibration path of the contact </td></tr> <tr><td>string</td><td>message_alert</td><td>read, write</td><td> Message alert path of the contact </td></tr> <tr><td>integer</td><td>changed_time</td><td>read only</td><td> Last changed contact time </td></tr> <tr><td>integer</td><td>link_mode</td><td>read, write once</td><td> The link mode, refer to the `contacts_contact_link_mode_e.` If the person_id was set, this value will be ignored </td></tr> <tr><td>record</td><td>name</td><td>read, write</td><td> _contacts_name child record (single) </td></tr> <tr><td>record</td><td>company</td><td>read, write</td><td> _contacts_company child record (multiple) </td></tr> <tr><td>record</td><td>note</td><td>read, write</td><td> _contacts_note child record (multiple) </td></tr> <tr><td>record</td><td>number</td><td>read, write</td><td> _contacts_number child record (multiple) </td></tr> <tr><td>record</td><td>email</td><td>read, write</td><td> _contacts_email child record (multiple) </td></tr> <tr><td>record</td><td>event</td><td>read, write</td><td> _contacts_event child record (multiple) </td></tr> <tr><td>record</td><td>messenger</td><td>read, write</td><td> _contacts_messenger child record (multiple) </td></tr> <tr><td>record</td><td>address</td><td>read, write</td><td> _contacts_address child record (multiple) </td></tr> <tr><td>record</td><td>url</td><td>read, write</td><td> _contacts_url child record (multiple) </td></tr> <tr><td>record</td><td>nickname</td><td>read, write</td><td> _contacts_nickname child record (multiple) </td></tr> <tr><td>record</td><td>profile</td><td>read, write</td><td> _contacts_profile child record (multiple) </td></tr> <tr><td>record</td><td>relationship</td><td>read, write</td><td> _contacts_relationship child record (multiple)</td></tr> <tr><td>record</td><td>image</td><td>read, write</td><td> _contacts_image child record (multiple)</td></tr> <tr><td>record</td><td>group_relation</td><td>read, write</td><td> _contacts_group_relation child record (multiple)</td></tr> <tr><td>record</td><td>sip</td><td>read, write</td><td> _contacts_sip child record (multiple) (Since 3.0)</td></tr> </table>
   late final ffi.Pointer<_contacts_contact_property_ids> __contacts_contact =
       _lookup<_contacts_contact_property_ids>('_contacts_contact');
 
   _contacts_contact_property_ids get _contacts_contact =>
       __contacts_contact.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_my_profile _contacts_my_profile view
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Read, Write</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this my profile view </td></tr>
-  /// <tr><td>integer</td><td>id</td><td>read only</td><td> DB record ID of the my profile </td></tr>
-  /// <tr><td>string</td><td>display_name</td><td>read only</td><td> Display name of the profile </td></tr>
-  /// <tr><td>integer</td><td>address_book_id</td><td>read, write once</td><td> Addressbook ID that the profile belongs to </td></tr>
-  /// <tr><td>string</td><td>image_thumbnail_path</td><td>read only</td><td> Image thumbnail path of the profile </td></tr>
-  /// <tr><td>string</td><td>uid</td><td>read, write</td><td> Unique identifier </td></tr>
-  /// <tr><td>integer</td><td>changed_time</td><td>read only</td><td> Last changed profile time </td></tr>
-  /// <tr><td>record</td><td>name</td><td>read, write</td><td> _contacts_name child record (single) </td></tr>
-  /// <tr><td>record</td><td>company</td><td>read, write</td><td> _contacts_company child record (multiple) </td></tr>
-  /// <tr><td>record</td><td>note</td><td>read, write</td><td> _contacts_note child record (multiple) </td></tr>
-  /// <tr><td>record</td><td>number</td><td>read, write</td><td> _contacts_number child record (multiple) </td></tr>
-  /// <tr><td>record</td><td>email</td><td>read, write</td><td> _contacts_email child record (multiple) </td></tr>
-  /// <tr><td>record</td><td>event</td><td>read, write</td><td> _contacts_event child record (multiple) </td></tr>
-  /// <tr><td>record</td><td>messenger</td><td>read, write</td><td> _contacts_messenger child record (multiple) </td></tr>
-  /// <tr><td>record</td><td>address</td><td>read, write</td><td> _contacts_address child record (multiple) </td></tr>
-  /// <tr><td>record</td><td>url</td><td>read, write</td><td> _contacts_url child record (multiple) </td></tr>
-  /// <tr><td>record</td><td>nickname</td><td>read, write</td><td> _contacts_nickname child record (multiple) </td></tr>
-  /// <tr><td>record</td><td>profile</td><td>read, write</td><td> _contacts_profile child record (multiple) </td></tr>
-  /// <tr><td>record</td><td>relationship</td><td>read, write</td><td> _contacts_relationship child record (multiple) </td></tr>
-  /// <tr><td>record</td><td>image</td><td>read, write</td><td> _contacts_image child record (multiple) </td></tr>
-  /// <tr><td>record</td><td>sip</td><td>read, write</td><td> _contacts_sip child record (multiple) (Since 3.0) </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_my_profile _contacts_my_profile view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this my profile view </td></tr> <tr><td>integer</td><td>id</td><td>read only</td><td> DB record ID of the my profile </td></tr> <tr><td>string</td><td>display_name</td><td>read only</td><td> Display name of the profile </td></tr> <tr><td>integer</td><td>address_book_id</td><td>read, write once</td><td> Addressbook ID that the profile belongs to </td></tr> <tr><td>string</td><td>image_thumbnail_path</td><td>read only</td><td> Image thumbnail path of the profile </td></tr> <tr><td>string</td><td>uid</td><td>read, write</td><td> Unique identifier </td></tr> <tr><td>integer</td><td>changed_time</td><td>read only</td><td> Last changed profile time </td></tr> <tr><td>record</td><td>name</td><td>read, write</td><td> _contacts_name child record (single) </td></tr> <tr><td>record</td><td>company</td><td>read, write</td><td> _contacts_company child record (multiple) </td></tr> <tr><td>record</td><td>note</td><td>read, write</td><td> _contacts_note child record (multiple) </td></tr> <tr><td>record</td><td>number</td><td>read, write</td><td> _contacts_number child record (multiple) </td></tr> <tr><td>record</td><td>email</td><td>read, write</td><td> _contacts_email child record (multiple) </td></tr> <tr><td>record</td><td>event</td><td>read, write</td><td> _contacts_event child record (multiple) </td></tr> <tr><td>record</td><td>messenger</td><td>read, write</td><td> _contacts_messenger child record (multiple) </td></tr> <tr><td>record</td><td>address</td><td>read, write</td><td> _contacts_address child record (multiple) </td></tr> <tr><td>record</td><td>url</td><td>read, write</td><td> _contacts_url child record (multiple) </td></tr> <tr><td>record</td><td>nickname</td><td>read, write</td><td> _contacts_nickname child record (multiple) </td></tr> <tr><td>record</td><td>profile</td><td>read, write</td><td> _contacts_profile child record (multiple) </td></tr> <tr><td>record</td><td>relationship</td><td>read, write</td><td> _contacts_relationship child record (multiple) </td></tr> <tr><td>record</td><td>image</td><td>read, write</td><td> _contacts_image child record (multiple) </td></tr> <tr><td>record</td><td>sip</td><td>read, write</td><td> _contacts_sip child record (multiple) (Since 3.0) </td></tr> </table>
   late final ffi.Pointer<_contacts_my_profile_property_ids>
       __contacts_my_profile =
       _lookup<_contacts_my_profile_property_ids>('_contacts_my_profile');
@@ -341,187 +262,82 @@ class Tizen80ContactsService2 {
   _contacts_my_profile_property_ids get _contacts_my_profile =>
       __contacts_my_profile.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_name _contacts_name view
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Read, Write</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts name view </td></tr>
-  /// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the name </td></tr>
-  /// <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contacts ID that the name record belongs to </td></tr>
-  /// <tr><td>string</td><td> first </td><td>read, write</td><td> First name </td></tr>
-  /// <tr><td>string</td><td> last </td><td>read, write</td><td> Last name </td></tr>
-  /// <tr><td>string</td><td> addition </td><td>read, write</td><td> Middle name </td></tr>
-  /// <tr><td>string</td><td> suffix </td><td>read, write</td><td> Suffix </td></tr>
-  /// <tr><td>string</td><td> prefix </td><td>read, write</td><td> Prefix </td></tr>
-  /// <tr><td>string</td><td> phonetic_first </td><td>read, write</td><td> Pronounce the first name </td></tr>
-  /// <tr><td>string</td><td> phonetic_middle </td><td>read, write</td><td> Pronounce the middle name </td></tr>
-  /// <tr><td>string</td><td> phonetic_last </td><td>read, write</td><td> Pronounce the last name </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_name _contacts_name view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts name view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the name </td></tr> <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contacts ID that the name record belongs to </td></tr> <tr><td>string</td><td> first </td><td>read, write</td><td> First name </td></tr> <tr><td>string</td><td> last </td><td>read, write</td><td> Last name </td></tr> <tr><td>string</td><td> addition </td><td>read, write</td><td> Middle name </td></tr> <tr><td>string</td><td> suffix </td><td>read, write</td><td> Suffix </td></tr> <tr><td>string</td><td> prefix </td><td>read, write</td><td> Prefix </td></tr> <tr><td>string</td><td> phonetic_first </td><td>read, write</td><td> Pronounce the first name </td></tr> <tr><td>string</td><td> phonetic_middle </td><td>read, write</td><td> Pronounce the middle name </td></tr> <tr><td>string</td><td> phonetic_last </td><td>read, write</td><td> Pronounce the last name </td></tr> </table>
   late final ffi.Pointer<_contacts_name_property_ids> __contacts_name =
       _lookup<_contacts_name_property_ids>('_contacts_name');
 
   _contacts_name_property_ids get _contacts_name => __contacts_name.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_number _contacts_number view
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Read, Write</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts number view </td></tr>
-  /// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the number </td></tr>
-  /// <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the number belongs to</td></tr>
-  /// <tr><td>integer</td><td> type </td><td>read, write</td><td> Number type, refer to the @ref contacts_number_type_e </td></tr>
-  /// <tr><td>string</td><td> label </td><td>read, write</td><td> Custom number type label, when the number type is #CONTACTS_NUMBER_TYPE_CUSTOM </td></tr>
-  /// <tr><td>boolean</td><td> is_default </td><td>read, write</td><td> The number is default number or not </td></tr>
-  /// <tr><td>string</td><td> number </td><td>read, write</td><td> Number </td></tr>
-  /// <tr><td>string</td><td> normalized_number </td><td> filter only </td><td> You can only use this property for search filter. </td></tr>
-  /// <tr><td>string</td><td> cleaned_number </td><td> filter only </td><td> You can only use this property for search filter. </td></tr>
-  /// <tr><td>string</td><td> number_filter </td><td> filter only </td><td> You can only use this property for search filter. </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_number _contacts_number view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts number view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the number </td></tr> <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the number belongs to</td></tr> <tr><td>integer</td><td> type </td><td>read, write</td><td> Number type, refer to the `contacts_number_type_e` </td></tr> <tr><td>string</td><td> label </td><td>read, write</td><td> Custom number type label, when the number type is `CONTACTS_NUMBER_TYPE_CUSTOM` </td></tr> <tr><td>boolean</td><td> is_default </td><td>read, write</td><td> The number is default number or not </td></tr> <tr><td>string</td><td> number </td><td>read, write</td><td> Number </td></tr> <tr><td>string</td><td> normalized_number </td><td> filter only </td><td> You can only use this property for search filter. </td></tr> <tr><td>string</td><td> cleaned_number </td><td> filter only </td><td> You can only use this property for search filter. </td></tr> <tr><td>string</td><td> number_filter </td><td> filter only </td><td> You can only use this property for search filter. </td></tr> </table>
   late final ffi.Pointer<_contacts_number_property_ids> __contacts_number =
       _lookup<_contacts_number_property_ids>('_contacts_number');
 
   _contacts_number_property_ids get _contacts_number => __contacts_number.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_email _contacts_email view
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Read, Write</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts email view </td></tr>
-  /// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the email </td></tr>
-  /// <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the email belongs to </td></tr>
-  /// <tr><td>integer</td><td> type </td><td>read, write</td><td> Email type, refer to the @ref contacts_email_type_e </td></tr>
-  /// <tr><td>string</td><td> label </td><td>read, write</td><td> Custom mail type label, when the email type is #CONTACTS_EMAIL_TYPE_CUSTOM </td></tr>
-  /// <tr><td>boolean</td><td> is_default </td><td>read, write</td><td> The email is default email or not </td></tr>
-  /// <tr><td>string</td><td> email </td><td>read, write</td><td> Email address</td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_email _contacts_email view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts email view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the email </td></tr> <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the email belongs to </td></tr> <tr><td>integer</td><td> type </td><td>read, write</td><td> Email type, refer to the `contacts_email_type_e` </td></tr> <tr><td>string</td><td> label </td><td>read, write</td><td> Custom mail type label, when the email type is `CONTACTS_EMAIL_TYPE_CUSTOM` </td></tr> <tr><td>boolean</td><td> is_default </td><td>read, write</td><td> The email is default email or not </td></tr> <tr><td>string</td><td> email </td><td>read, write</td><td> Email address</td></tr> </table>
   late final ffi.Pointer<_contacts_email_property_ids> __contacts_email =
       _lookup<_contacts_email_property_ids>('_contacts_email');
 
   _contacts_email_property_ids get _contacts_email => __contacts_email.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address _contacts_address view
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Read, Write</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts address view </td></tr>
-  /// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the address </td></tr>
-  /// <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the address belongs to </td></tr>
-  /// <tr><td>integer</td><td> type </td><td>read, write</td><td> Address type, refer to the @ref contacts_address_type_e </td></tr>
-  /// <tr><td>string</td><td> label </td><td>read, write</td><td> Address type label, when the address type is #CONTACTS_ADDRESS_TYPE_CUSTOM </td></tr>
-  /// <tr><td>string</td><td> postbox </td><td>read, write</td><td> Post office box </td></tr>
-  /// <tr><td>string</td><td> postal_code </td><td>read, write</td><td> Postal code </td></tr>
-  /// <tr><td>string</td><td> region </td><td>read, write</td><td> Region </td></tr>
-  /// <tr><td>string</td><td> locality </td><td>read, write</td><td> Locality </td></tr>
-  /// <tr><td>string</td><td> street </td><td>read, write</td><td> Street </td></tr>
-  /// <tr><td>string</td><td> country </td><td>read, write</td><td> Country </td></tr>
-  /// <tr><td>string</td><td> extended </td><td>read, write</td><td> Extended address </td></tr>
-  /// <tr><td>boolean</td><td> is_default </td><td>read, write</td><td> The address is default or not </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address _contacts_address view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts address view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the address </td></tr> <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the address belongs to </td></tr> <tr><td>integer</td><td> type </td><td>read, write</td><td> Address type, refer to the `contacts_address_type_e` </td></tr> <tr><td>string</td><td> label </td><td>read, write</td><td> Address type label, when the address type is `CONTACTS_ADDRESS_TYPE_CUSTOM` </td></tr> <tr><td>string</td><td> postbox </td><td>read, write</td><td> Post office box </td></tr> <tr><td>string</td><td> postal_code </td><td>read, write</td><td> Postal code </td></tr> <tr><td>string</td><td> region </td><td>read, write</td><td> Region </td></tr> <tr><td>string</td><td> locality </td><td>read, write</td><td> Locality </td></tr> <tr><td>string</td><td> street </td><td>read, write</td><td> Street </td></tr> <tr><td>string</td><td> country </td><td>read, write</td><td> Country </td></tr> <tr><td>string</td><td> extended </td><td>read, write</td><td> Extended address </td></tr> <tr><td>boolean</td><td> is_default </td><td>read, write</td><td> The address is default or not </td></tr> </table>
   late final ffi.Pointer<_contacts_address_property_ids> __contacts_address =
       _lookup<_contacts_address_property_ids>('_contacts_address');
 
   _contacts_address_property_ids get _contacts_address =>
       __contacts_address.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_note _contacts_note view
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Read, Write</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts note view </td></tr>
-  /// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the note </td></tr>
-  /// <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the note belongs to </td></tr>
-  /// <tr><td>string</td><td> note </td><td>read, write</td><td> Note contents </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_note _contacts_note view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts note view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the note </td></tr> <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the note belongs to </td></tr> <tr><td>string</td><td> note </td><td>read, write</td><td> Note contents </td></tr> </table>
   late final ffi.Pointer<_contacts_note_property_ids> __contacts_note =
       _lookup<_contacts_note_property_ids>('_contacts_note');
 
   _contacts_note_property_ids get _contacts_note => __contacts_note.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_url _contacts_url view
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Read, Write</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts URL view </td></tr>
-  /// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the URL </td></tr>
-  /// <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the URL belongs to </td></tr>
-  /// <tr><td>integer</td><td> type </td><td>read, write</td><td> URL type, refer to the @ref contacts_url_type_e </td></tr>
-  /// <tr><td>string</td><td> label </td><td>read, write</td><td> Custom URL type label, when the URL type is #CONTACTS_URL_TYPE_CUSTOM </td></tr>
-  /// <tr><td>string</td><td> url </td><td>read, write</td><td> URL </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_url _contacts_url view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts URL view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the URL </td></tr> <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the URL belongs to </td></tr> <tr><td>integer</td><td> type </td><td>read, write</td><td> URL type, refer to the `contacts_url_type_e` </td></tr> <tr><td>string</td><td> label </td><td>read, write</td><td> Custom URL type label, when the URL type is `CONTACTS_URL_TYPE_CUSTOM` </td></tr> <tr><td>string</td><td> url </td><td>read, write</td><td> URL </td></tr> </table>
   late final ffi.Pointer<_contacts_url_property_ids> __contacts_url =
       _lookup<_contacts_url_property_ids>('_contacts_url');
 
   _contacts_url_property_ids get _contacts_url => __contacts_url.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_event _contacts_event view
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Read, Write</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts event view </td></tr>
-  /// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the event </td></tr>
-  /// <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the event belongs to </td></tr>
-  /// <tr><td>integer</td><td> type </td><td>read, write</td><td> Event type, refer to the @ref contacts_event_type_e </td></tr>
-  /// <tr><td>string</td><td> label </td><td>read, write</td><td> Custom event type label, when the event type is #CONTACTS_EVENT_TYPE_CUSTOM </td></tr>
-  /// <tr><td>integer</td><td> date </td><td>read, write</td><td> Event date(YYYYMMDD). e.g. 2014/1/1 : 20140101. Even if the calendar_type is set as CONTACTS_EVENT_CALENDAR_TYPE_CHINESE, you SHOULD set Gregorian date </td></tr>
-  /// <tr><td>integer</td><td> calendar_type </td><td>read, write</td><td> Calendar type, refer to the @ref contacts_event_calendar_type_e </td></tr>
-  /// <tr><td>bool</td><td> is_leap_month (Deprecated) </td><td>read, write</td><td> The month is leap or not (valid on lunisolar calendar only) </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_event _contacts_event view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts event view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the event </td></tr> <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the event belongs to </td></tr> <tr><td>integer</td><td> type </td><td>read, write</td><td> Event type, refer to the `contacts_event_type_e` </td></tr> <tr><td>string</td><td> label </td><td>read, write</td><td> Custom event type label, when the event type is `CONTACTS_EVENT_TYPE_CUSTOM` </td></tr> <tr><td>integer</td><td> date </td><td>read, write</td><td> Event date(YYYYMMDD). e.g. 2014/1/1 : 20140101. Even if the calendar_type is set as CONTACTS_EVENT_CALENDAR_TYPE_CHINESE, you SHOULD set Gregorian date </td></tr> <tr><td>integer</td><td> calendar_type </td><td>read, write</td><td> Calendar type, refer to the `contacts_event_calendar_type_e` </td></tr> <tr><td>bool</td><td> is_leap_month (Deprecated) </td><td>read, write</td><td> The month is leap or not (valid on lunisolar calendar only) </td></tr> </table>
   late final ffi.Pointer<_contacts_event_property_ids> __contacts_event =
       _lookup<_contacts_event_property_ids>('_contacts_event');
 
   _contacts_event_property_ids get _contacts_event => __contacts_event.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group_relation _contacts_group_relation view
-  /// Refer @ref contacts_group_add_contact, @ref contacts_group_remove_contact
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Read, Write</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this relationship view </td></tr>
-  /// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the group (can not be used as filter) </td></tr>
-  /// <tr><td>integer</td><td> group_id </td><td>read, write once</td><td> DB record ID of the group </td></tr>
-  /// <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> DB record ID of the contact </td></tr>
-  /// <tr><td>string</td><td> name </td><td>read only</td><td> Group name </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group_relation _contacts_group_relation view Refer `contacts_group_add_contact,` `contacts_group_remove_contact` <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this relationship view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the group (can not be used as filter) </td></tr> <tr><td>integer</td><td> group_id </td><td>read, write once</td><td> DB record ID of the group </td></tr> <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> DB record ID of the contact </td></tr> <tr><td>string</td><td> name </td><td>read only</td><td> Group name </td></tr> </table>
   late final ffi.Pointer<_contacts_group_relation_property_ids>
       __contacts_group_relation =
       _lookup<_contacts_group_relation_property_ids>(
@@ -530,22 +346,11 @@ class Tizen80ContactsService2 {
   _contacts_group_relation_property_ids get _contacts_group_relation =>
       __contacts_group_relation.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_relationship _contacts_relationship view
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Read, Write</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this relationship view </td></tr>
-  /// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the relationship </td></tr>
-  /// <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the relationship belongs to </td></tr>
-  /// <tr><td>integer</td><td> type </td><td>read, write</td><td> Relationship type, refer to the @ref contacts_relationship_type_e </td></tr>
-  /// <tr><td>string</td><td> label </td><td>read, write</td><td> Custom relationship type label, when the relationship type is CONTACTS_RELATIONSHIP_TYPE_CUSTOM </td></tr>
-  /// <tr><td>string</td><td> name </td><td>read, write</td><td> Selected contact name that the relationship belongs to </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_relationship _contacts_relationship view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this relationship view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the relationship </td></tr> <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the relationship belongs to </td></tr> <tr><td>integer</td><td> type </td><td>read, write</td><td> Relationship type, refer to the `contacts_relationship_type_e` </td></tr> <tr><td>string</td><td> label </td><td>read, write</td><td> Custom relationship type label, when the relationship type is CONTACTS_RELATIONSHIP_TYPE_CUSTOM </td></tr> <tr><td>string</td><td> name </td><td>read, write</td><td> Selected contact name that the relationship belongs to </td></tr> </table>
   late final ffi.Pointer<_contacts_relationship_property_ids>
       __contacts_relationship =
       _lookup<_contacts_relationship_property_ids>('_contacts_relationship');
@@ -553,93 +358,43 @@ class Tizen80ContactsService2 {
   _contacts_relationship_property_ids get _contacts_relationship =>
       __contacts_relationship.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_image _contacts_image view
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Read, Write</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts image view </td></tr>
-  /// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the image </td></tr>
-  /// <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the image belongs to </td></tr>
-  /// <tr><td>integer</td><td> type </td><td>read, write</td><td> Image type, refer to the @ref contacts_image_type_e </td></tr>
-  /// <tr><td>string</td><td> label </td><td>read, write</td><td> Custom image type label, when the image type is #CONTACTS_IMAGE_TYPE_CUSTOM </td></tr>
-  /// <tr><td>string</td><td> path </td><td>read, write</td><td> Image thumbnail path </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_image _contacts_image view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts image view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the image </td></tr> <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the image belongs to </td></tr> <tr><td>integer</td><td> type </td><td>read, write</td><td> Image type, refer to the `contacts_image_type_e` </td></tr> <tr><td>string</td><td> label </td><td>read, write</td><td> Custom image type label, when the image type is `CONTACTS_IMAGE_TYPE_CUSTOM` </td></tr> <tr><td>string</td><td> path </td><td>read, write</td><td> Image thumbnail path </td></tr> </table>
   late final ffi.Pointer<_contacts_image_property_ids> __contacts_image =
       _lookup<_contacts_image_property_ids>('_contacts_image');
 
   _contacts_image_property_ids get _contacts_image => __contacts_image.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_company _contacts_company view
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Read, Write</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts company view </td></tr>
-  /// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the company </td></tr>
-  /// <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the company belongs to </td></tr>
-  /// <tr><td>integer</td><td> type </td><td>read, write</td><td> Company type, refer to the @ref contacts_company_type_e </td></tr>
-  /// <tr><td>string</td><td> label </td><td>read, write</td><td> Custom company type label, when the company type is #CONTACTS_COMPANY_TYPE_CUSTOM </td></tr>
-  /// <tr><td>string</td><td> name </td><td>read, write</td><td> Company name </td></tr>
-  /// <tr><td>string</td><td> department </td><td>read, write</td><td> Department </td></tr>
-  /// <tr><td>string</td><td> job_title </td><td>read, write</td><td> Job title </td></tr>
-  /// <tr><td>string</td><td> assistant_name </td><td>read, write</td><td> Assistant name </td></tr>
-  /// <tr><td>string</td><td> role </td><td>read, write</td><td> Role </td></tr>
-  /// <tr><td>string</td><td> logo </td><td>read, write</td><td> Company logo image file path </td></tr>
-  /// <tr><td>string</td><td> location </td><td>read, write</td><td> Company location </td></tr>
-  /// <tr><td>string</td><td> description </td><td>read, write</td><td> Description </td></tr>
-  /// <tr><td>string</td><td> phonetic_name </td><td>read, write</td><td> Pronounce the company name </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_company _contacts_company view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts company view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the company </td></tr> <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the company belongs to </td></tr> <tr><td>integer</td><td> type </td><td>read, write</td><td> Company type, refer to the `contacts_company_type_e` </td></tr> <tr><td>string</td><td> label </td><td>read, write</td><td> Custom company type label, when the company type is `CONTACTS_COMPANY_TYPE_CUSTOM` </td></tr> <tr><td>string</td><td> name </td><td>read, write</td><td> Company name </td></tr> <tr><td>string</td><td> department </td><td>read, write</td><td> Department </td></tr> <tr><td>string</td><td> job_title </td><td>read, write</td><td> Job title </td></tr> <tr><td>string</td><td> assistant_name </td><td>read, write</td><td> Assistant name </td></tr> <tr><td>string</td><td> role </td><td>read, write</td><td> Role </td></tr> <tr><td>string</td><td> logo </td><td>read, write</td><td> Company logo image file path </td></tr> <tr><td>string</td><td> location </td><td>read, write</td><td> Company location </td></tr> <tr><td>string</td><td> description </td><td>read, write</td><td> Description </td></tr> <tr><td>string</td><td> phonetic_name </td><td>read, write</td><td> Pronounce the company name </td></tr> </table>
   late final ffi.Pointer<_contacts_company_property_ids> __contacts_company =
       _lookup<_contacts_company_property_ids>('_contacts_company');
 
   _contacts_company_property_ids get _contacts_company =>
       __contacts_company.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_nickname _contacts_nickname view
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Read, Write</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts nickname view </td></tr>
-  /// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the nickname </td></tr>
-  /// <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the nickname belongs to </td></tr>
-  /// <tr><td>string</td><td> name </td><td>read, write</td><td> Nickname </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_nickname _contacts_nickname view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts nickname view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the nickname </td></tr> <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the nickname belongs to </td></tr> <tr><td>string</td><td> name </td><td>read, write</td><td> Nickname </td></tr> </table>
   late final ffi.Pointer<_contacts_nickname_property_ids> __contacts_nickname =
       _lookup<_contacts_nickname_property_ids>('_contacts_nickname');
 
   _contacts_nickname_property_ids get _contacts_nickname =>
       __contacts_nickname.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_messenger _contacts_messenger view
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Read, Write</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts messenger view </td></tr>
-  /// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the messenger </td></tr>
-  /// <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the messenger belongs to </td></tr>
-  /// <tr><td>integer</td><td> type </td><td>read, write</td><td> Messenger type, refer to the @ref contacts_messenger_type_e </td></tr>
-  /// <tr><td>string</td><td> label </td><td>read, write</td><td> Custom messenger type label, when the messenger type is #CONTACTS_MESSENGER_TYPE_CUSTOM </td></tr>
-  /// <tr><td>string</td><td> im_id </td><td>read, write</td><td> Messenger ID (email address or email ID...) </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_messenger _contacts_messenger view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts messenger view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the messenger </td></tr> <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the messenger belongs to </td></tr> <tr><td>integer</td><td> type </td><td>read, write</td><td> Messenger type, refer to the `contacts_messenger_type_e` </td></tr> <tr><td>string</td><td> label </td><td>read, write</td><td> Custom messenger type label, when the messenger type is `CONTACTS_MESSENGER_TYPE_CUSTOM` </td></tr> <tr><td>string</td><td> im_id </td><td>read, write</td><td> Messenger ID (email address or email ID...) </td></tr> </table>
   late final ffi.Pointer<_contacts_messenger_property_ids>
       __contacts_messenger =
       _lookup<_contacts_messenger_property_ids>('_contacts_messenger');
@@ -647,31 +402,11 @@ class Tizen80ContactsService2 {
   _contacts_messenger_property_ids get _contacts_messenger =>
       __contacts_messenger.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_extension _contacts_extension view
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Read, Write</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts extension view </td></tr>
-  /// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the contact extension </td></tr>
-  /// <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the contact extension belongs to </td></tr>
-  /// <tr><td>integer</td><td> data1 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr>
-  /// <tr><td>string</td><td> data2 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr>
-  /// <tr><td>string</td><td> data3 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr>
-  /// <tr><td>string</td><td> data4 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr>
-  /// <tr><td>string</td><td> data5 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr>
-  /// <tr><td>string</td><td> data6 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr>
-  /// <tr><td>string</td><td> data7 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr>
-  /// <tr><td>string</td><td> data8 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr>
-  /// <tr><td>string</td><td> data9 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr>
-  /// <tr><td>string</td><td> data10 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr>
-  /// <tr><td>string</td><td> data11 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr>
-  /// <tr><td>string</td><td> data12 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_extension _contacts_extension view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts extension view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the contact extension </td></tr> <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the contact extension belongs to </td></tr> <tr><td>integer</td><td> data1 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr> <tr><td>string</td><td> data2 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr> <tr><td>string</td><td> data3 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr> <tr><td>string</td><td> data4 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr> <tr><td>string</td><td> data5 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr> <tr><td>string</td><td> data6 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr> <tr><td>string</td><td> data7 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr> <tr><td>string</td><td> data8 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr> <tr><td>string</td><td> data9 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr> <tr><td>string</td><td> data10 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr> <tr><td>string</td><td> data11 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr> <tr><td>string</td><td> data12 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr> </table>
   late final ffi.Pointer<_contacts_extension_property_ids>
       __contacts_extension =
       _lookup<_contacts_extension_property_ids>('_contacts_extension');
@@ -679,69 +414,32 @@ class Tizen80ContactsService2 {
   _contacts_extension_property_ids get _contacts_extension =>
       __contacts_extension.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_sdn _contacts_sdn view
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Read, Write</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts sdn view </td></tr>
-  /// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the sdn </td></tr>
-  /// <tr><td>string</td><td> name </td><td>read only</td><td> Provided name of sdn </td></tr>
-  /// <tr><td>string</td><td> number </td><td>read only</td><td> Provided number of sdn </td></tr>
-  /// <tr><td>integer</td><td> sim_slot_no </td><td>read only</td><td>It is related to the SIM slot number. sim_slot_no 0 means first SIM card, sim_slot_no 1 means second SIM. It is same with handle index of telephony handle list. Refer to the telephony_init() </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_sdn _contacts_sdn view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts sdn view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the sdn </td></tr> <tr><td>string</td><td> name </td><td>read only</td><td> Provided name of sdn </td></tr> <tr><td>string</td><td> number </td><td>read only</td><td> Provided number of sdn </td></tr> <tr><td>integer</td><td> sim_slot_no </td><td>read only</td><td>It is related to the SIM slot number. sim_slot_no 0 means first SIM card, sim_slot_no 1 means second SIM. It is same with handle index of telephony handle list. Refer to the telephony_init() </td></tr> </table>
   late final ffi.Pointer<_contacts_sdn_property_ids> __contacts_sdn =
       _lookup<_contacts_sdn_property_ids>('_contacts_sdn');
 
   _contacts_sdn_property_ids get _contacts_sdn => __contacts_sdn.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_profile _contacts_profile view
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Read, Write</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts profile view </td></tr>
-  /// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of profile </td></tr>
-  /// <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contacts ID that the profile belongs to </td></tr>
-  /// <tr><td>string</td><td> uid </td><td>read, write</td><td> Unique identifier </td></tr>
-  /// <tr><td>string</td><td> text </td><td>read, write</td><td> Profile contents </td></tr>
-  /// <tr><td>integer</td><td> order </td><td>read, write</td><td> Priority to display the profile </td></tr>
-  /// <tr><td>string</td><td> service_operation </td><td>read, write</td><td> Data for app_control_set_operation </td></tr>
-  /// <tr><td>string</td><td> mime </td><td>read, write</td><td> Data for app_control_set_mime </td></tr>
-  /// <tr><td>string</td><td> app_id </td><td>read, write</td><td> Data for app_control_set_app_id </td></tr>
-  /// <tr><td>string</td><td> uri </td><td>read, write</td><td> Data for app_control_set_uri </td></tr>
-  /// <tr><td>string</td><td> category </td><td>read, write</td><td> Data for app_control_set_category </td></tr>
-  /// <tr><td>string</td><td> extra_data </td><td>read, write</td><td> It includes "key:value,key:value," pairs. You should parse it. And you must base64 encode each key and value</td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_profile _contacts_profile view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts profile view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of profile </td></tr> <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contacts ID that the profile belongs to </td></tr> <tr><td>string</td><td> uid </td><td>read, write</td><td> Unique identifier </td></tr> <tr><td>string</td><td> text </td><td>read, write</td><td> Profile contents </td></tr> <tr><td>integer</td><td> order </td><td>read, write</td><td> Priority to display the profile </td></tr> <tr><td>string</td><td> service_operation </td><td>read, write</td><td> Data for app_control_set_operation </td></tr> <tr><td>string</td><td> mime </td><td>read, write</td><td> Data for app_control_set_mime </td></tr> <tr><td>string</td><td> app_id </td><td>read, write</td><td> Data for app_control_set_app_id </td></tr> <tr><td>string</td><td> uri </td><td>read, write</td><td> Data for app_control_set_uri </td></tr> <tr><td>string</td><td> category </td><td>read, write</td><td> Data for app_control_set_category </td></tr> <tr><td>string</td><td> extra_data </td><td>read, write</td><td> It includes "key:value,key:value," pairs. You should parse it. And you must base64 encode each key and value</td></tr> </table>
   late final ffi.Pointer<_contacts_profile_property_ids> __contacts_profile =
       _lookup<_contacts_profile_property_ids>('_contacts_profile');
 
   _contacts_profile_property_ids get _contacts_profile =>
       __contacts_profile.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity_photo _contacts_activity_photo view
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Read, Write</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contact activity photo view </td></tr>
-  /// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of activity photo </td></tr>
-  /// <tr><td>integer</td><td> activity_id </td><td>read, write once</td><td> Activity ID that the activity photo belongs to </td></tr>
-  /// <tr><td>string</td><td> photo_url </td><td>read, write</td><td> Photo URL </td></tr>
-  /// <tr><td>integer</td><td> sort_index </td><td>read, write</td><td> Sorted photo index </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity_photo _contacts_activity_photo view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contact activity photo view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of activity photo </td></tr> <tr><td>integer</td><td> activity_id </td><td>read, write once</td><td> Activity ID that the activity photo belongs to </td></tr> <tr><td>string</td><td> photo_url </td><td>read, write</td><td> Photo URL </td></tr> <tr><td>integer</td><td> sort_index </td><td>read, write</td><td> Sorted photo index </td></tr> </table>
   late final ffi.Pointer<_contacts_activity_photo_property_ids>
       __contacts_activity_photo =
       _lookup<_contacts_activity_photo_property_ids>(
@@ -750,53 +448,22 @@ class Tizen80ContactsService2 {
   _contacts_activity_photo_property_ids get _contacts_activity_photo =>
       __contacts_activity_photo.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity _contacts_activity view
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Read, Write</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this activity view </td></tr>
-  /// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of activity </td></tr>
-  /// <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the activity belongs to </td></tr>
-  /// <tr><td>string</td><td> source_name </td><td>read, write</td><td> Account name that the activity belongs to </td></tr>
-  /// <tr><td>int</td><td> timestamp </td><td>read, write</td><td> Published time of activity </td></tr>
-  /// <tr><td>string</td><td> status </td><td>read, write</td><td> Activity status </td></tr>
-  /// <tr><td>string</td><td> service_operation </td><td>read, write</td><td> Data for app_control_set_operation </td></tr>
-  /// <tr><td>string</td><td> uri </td><td>read, write</td><td> Data for app_control_set_uri </td></tr>
-  /// <tr><td>record</td><td> photo </td><td>read, write</td><td> _contacts_activity_photo child record (multiple) </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity _contacts_activity view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this activity view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of activity </td></tr> <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the activity belongs to </td></tr> <tr><td>string</td><td> source_name </td><td>read, write</td><td> Account name that the activity belongs to </td></tr> <tr><td>int</td><td> timestamp </td><td>read, write</td><td> Published time of activity </td></tr> <tr><td>string</td><td> status </td><td>read, write</td><td> Activity status </td></tr> <tr><td>string</td><td> service_operation </td><td>read, write</td><td> Data for app_control_set_operation </td></tr> <tr><td>string</td><td> uri </td><td>read, write</td><td> Data for app_control_set_uri </td></tr> <tr><td>record</td><td> photo </td><td>read, write</td><td> _contacts_activity_photo child record (multiple) </td></tr> </table>
   late final ffi.Pointer<_contacts_activity_property_ids> __contacts_activity =
       _lookup<_contacts_activity_property_ids>('_contacts_activity');
 
   _contacts_activity_property_ids get _contacts_activity =>
       __contacts_activity.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_speeddial _contacts_speeddial view
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Read, Write</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contact speed dial view </td></tr>
-  /// <tr><td>integer</td><td> speeddial_number </td><td>read, write once</td><td> Stored speed dial number </td></tr>
-  /// <tr><td>integer</td><td> number_id </td><td>read, write</td><td> Number ID that the speed dial belongs to </td></tr>
-  /// <tr><td>string</td><td> number </td><td>read only</td><td> Contact number of specified speed dial </td></tr>
-  /// <tr><td>string</td><td> number_label </td><td>read only</td><td> Contact number label of specified speed dial, when the number type is CONTACTS_NUMBER_TYPE_CUSTOM </td></tr>
-  /// <tr><td>integer</td><td> number_type </td><td>read only</td><td> Contact number type, refer to the @ref contacts_number_type_e </td></tr>
-  /// <tr><td>integer</td><td> person_id </td><td>read only</td><td> Person ID that the speed dial belongs to </td></tr>
-  /// <tr><td>string</td><td> display_name </td><td>read only</td><td> Display name that the speed dial belongs to </td></tr>
-  /// <tr><td>string</td><td> image_thumbnail_path </td><td>read only</td><td> Image thumbnail path that the speed dial belongs to </td></tr>
-  /// <tr><td>string</td><td> normalized_number </td><td>filter only</td><td> You can only use this property for search filter </td></tr>
-  /// <tr><td>string</td><td> cleaned_number </td><td>filter only</td><td> You can only use this property for search filter </td></tr>
-  /// <tr><td>string</td><td> number_filter </td><td>filter only</td><td> If you add filter with this property, the string will be normalized as minmatch length internally and the match rule will be applied CONTACTS_MATCH_EXACTLY </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_speeddial _contacts_speeddial view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contact speed dial view </td></tr> <tr><td>integer</td><td> speeddial_number </td><td>read, write once</td><td> Stored speed dial number </td></tr> <tr><td>integer</td><td> number_id </td><td>read, write</td><td> Number ID that the speed dial belongs to </td></tr> <tr><td>string</td><td> number </td><td>read only</td><td> Contact number of specified speed dial </td></tr> <tr><td>string</td><td> number_label </td><td>read only</td><td> Contact number label of specified speed dial, when the number type is CONTACTS_NUMBER_TYPE_CUSTOM </td></tr> <tr><td>integer</td><td> number_type </td><td>read only</td><td> Contact number type, refer to the `contacts_number_type_e` </td></tr> <tr><td>integer</td><td> person_id </td><td>read only</td><td> Person ID that the speed dial belongs to </td></tr> <tr><td>string</td><td> display_name </td><td>read only</td><td> Display name that the speed dial belongs to </td></tr> <tr><td>string</td><td> image_thumbnail_path </td><td>read only</td><td> Image thumbnail path that the speed dial belongs to </td></tr> <tr><td>string</td><td> normalized_number </td><td>filter only</td><td> You can only use this property for search filter </td></tr> <tr><td>string</td><td> cleaned_number </td><td>filter only</td><td> You can only use this property for search filter </td></tr> <tr><td>string</td><td> number_filter </td><td>filter only</td><td> If you add filter with this property, the string will be normalized as minmatch length internally and the match rule will be applied CONTACTS_MATCH_EXACTLY </td></tr> </table>
   late final ffi.Pointer<_contacts_speeddial_property_ids>
       __contacts_speeddial =
       _lookup<_contacts_speeddial_property_ids>('_contacts_speeddial');
@@ -804,28 +471,11 @@ class Tizen80ContactsService2 {
   _contacts_speeddial_property_ids get _contacts_speeddial =>
       __contacts_speeddial.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log _contacts_phone_log view
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Read, Write</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this phone log view </td></tr>
-  /// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of phone log </td></tr>
-  /// <tr><td>integer</td><td> person_id </td><td>read, write once </td><td> Person ID that the phone log belongs to </td></tr>
-  /// <tr><td>string</td><td> address </td><td>read, write once </td><td> Number or Email that the phone log displays </td></tr>
-  /// <tr><td>integer</td><td> log_time </td><td>read, write once</td><td> Call end time. The value means number of seconds since 1970-01-01 00:00:00 (UTC) </td></tr>
-  /// <tr><td>integer</td><td> log_type </td><td>read, write</td><td> Log type, refer to the @ref contacts_phone_log_type_e </td></tr>
-  /// <tr><td>integer</td><td> extra_data1 </td><td>read, write once</td><td> You can set the related integer data (e.g. message_id, email_id or duration(seconds) of call) </td></tr>
-  /// <tr><td>string</td><td> extra_data2 </td><td>read, write once</td><td> You can set the related string data (e.g. short message, subject) </td></tr>
-  /// <tr><td>string</td><td> normalized_address </td><td> filter only</td><td> You can only use this property for search filter</td></tr>
-  /// <tr><td>string</td><td> cleaned_address </td><td> filter only</td><td> You can only use this property for search filter</td></tr>
-  /// <tr><td>string</td><td> address_filter </td><td> filter only</td><td> You can only use this property for search filter</td></tr>
-  /// <tr><td>integer</td><td> sim_slot_no </td><td>read, write once</td><td> You can set the related SIM slot number. sim_slot_no 0 means first SIM card, sim_slot_no 1 means second SIM. It is same with handle index of telephony handle list. Refer to the telephony_init() </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log _contacts_phone_log view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this phone log view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of phone log </td></tr> <tr><td>integer</td><td> person_id </td><td>read, write once </td><td> Person ID that the phone log belongs to </td></tr> <tr><td>string</td><td> address </td><td>read, write once </td><td> Number or Email that the phone log displays </td></tr> <tr><td>integer</td><td> log_time </td><td>read, write once</td><td> Call end time. The value means number of seconds since 1970-01-01 00:00:00 (UTC) </td></tr> <tr><td>integer</td><td> log_type </td><td>read, write</td><td> Log type, refer to the `contacts_phone_log_type_e` </td></tr> <tr><td>integer</td><td> extra_data1 </td><td>read, write once</td><td> You can set the related integer data (e.g. message_id, email_id or duration(seconds) of call) </td></tr> <tr><td>string</td><td> extra_data2 </td><td>read, write once</td><td> You can set the related string data (e.g. short message, subject) </td></tr> <tr><td>string</td><td> normalized_address </td><td> filter only</td><td> You can only use this property for search filter</td></tr> <tr><td>string</td><td> cleaned_address </td><td> filter only</td><td> You can only use this property for search filter</td></tr> <tr><td>string</td><td> address_filter </td><td> filter only</td><td> You can only use this property for search filter</td></tr> <tr><td>integer</td><td> sim_slot_no </td><td>read, write once</td><td> You can set the related SIM slot number. sim_slot_no 0 means first SIM card, sim_slot_no 1 means second SIM. It is same with handle index of telephony handle list. Refer to the telephony_init() </td></tr> </table>
   late final ffi.Pointer<_contacts_phone_log_property_ids>
       __contacts_phone_log =
       _lookup<_contacts_phone_log_property_ids>('_contacts_phone_log');
@@ -833,21 +483,11 @@ class Tizen80ContactsService2 {
   _contacts_phone_log_property_ids get _contacts_phone_log =>
       __contacts_phone_log.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact_updated_info _contacts_contact_updated_info view (read only)
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td> Identifier of this contact updated info view </td></tr>
-  /// <tr><td>integer</td><td> contact_id </td><td> Updated contact ID </td></tr>
-  /// <tr><td>integer</td><td> address_book_id </td><td> Addressbook ID that the updated contact belongs to </td></tr>
-  /// <tr><td>integer</td><td> type </td><td> Contact updated type, refer to the @ref contacts_changed_e </td></tr>
-  /// <tr><td>integer</td><td> version </td><td> Updated version </td></tr>
-  /// <tr><td>boolean</td><td> image_changed </td><td> Contact image is changed or not </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact_updated_info _contacts_contact_updated_info view (read only) <table> <tr> <th>Type</th> <th>Property ID</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td> Identifier of this contact updated info view </td></tr> <tr><td>integer</td><td> contact_id </td><td> Updated contact ID </td></tr> <tr><td>integer</td><td> address_book_id </td><td> Addressbook ID that the updated contact belongs to </td></tr> <tr><td>integer</td><td> type </td><td> Contact updated type, refer to the `contacts_changed_e` </td></tr> <tr><td>integer</td><td> version </td><td> Updated version </td></tr> <tr><td>boolean</td><td> image_changed </td><td> Contact image is changed or not </td></tr> </table>
   late final ffi.Pointer<_contacts_contact_updated_info_property_ids>
       __contacts_contact_updated_info =
       _lookup<_contacts_contact_updated_info_property_ids>(
@@ -856,19 +496,11 @@ class Tizen80ContactsService2 {
   _contacts_contact_updated_info_property_ids
       get _contacts_contact_updated_info => __contacts_contact_updated_info.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_my_profile_updated_info _contacts_my_profile_updated_info view (read only)
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td> Identifier of this my profile updated info view </td></tr>
-  /// <tr><td>integer</td><td> address_book_id </td><td> Address book ID that the updated my profile belongs to </td></tr>
-  /// <tr><td>integer</td><td> last_changed_type </td><td> Changed update type, refer to the @ref contacts_changed_e </td></tr>
-  /// <tr><td>integer</td><td> version </td><td> Updated version </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_my_profile_updated_info _contacts_my_profile_updated_info view (read only) <table> <tr> <th>Type</th> <th>Property ID</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td> Identifier of this my profile updated info view </td></tr> <tr><td>integer</td><td> address_book_id </td><td> Address book ID that the updated my profile belongs to </td></tr> <tr><td>integer</td><td> last_changed_type </td><td> Changed update type, refer to the `contacts_changed_e` </td></tr> <tr><td>integer</td><td> version </td><td> Updated version </td></tr> </table>
   late final ffi.Pointer<_contacts_my_profile_updated_info_property_ids>
       __contacts_my_profile_updated_info =
       _lookup<_contacts_my_profile_updated_info_property_ids>(
@@ -878,20 +510,11 @@ class Tizen80ContactsService2 {
       get _contacts_my_profile_updated_info =>
           __contacts_my_profile_updated_info.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group_updated_info _contacts_group_updated_info view (read only)
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td> Identifier of this group updated info view </td></tr>
-  /// <tr><td>integer</td><td> group_id </td><td> Updated group ID </td></tr>
-  /// <tr><td>integer</td><td> address_book_id </td><td> Address book ID that the updated group belongs to </td></tr>
-  /// <tr><td>integer</td><td> type </td><td> Changed update type, refer to the @ref contacts_changed_e </td></tr>
-  /// <tr><td>integer</td><td> version </td><td> Updated version </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group_updated_info _contacts_group_updated_info view (read only) <table> <tr> <th>Type</th> <th>Property ID</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td> Identifier of this group updated info view </td></tr> <tr><td>integer</td><td> group_id </td><td> Updated group ID </td></tr> <tr><td>integer</td><td> address_book_id </td><td> Address book ID that the updated group belongs to </td></tr> <tr><td>integer</td><td> type </td><td> Changed update type, refer to the `contacts_changed_e` </td></tr> <tr><td>integer</td><td> version </td><td> Updated version </td></tr> </table>
   late final ffi.Pointer<_contacts_group_updated_info_property_ids>
       __contacts_group_updated_info =
       _lookup<_contacts_group_updated_info_property_ids>(
@@ -900,19 +523,11 @@ class Tizen80ContactsService2 {
   _contacts_group_updated_info_property_ids get _contacts_group_updated_info =>
       __contacts_group_updated_info.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group_member_updated_info _contacts_group_member_updated_info view (read only)
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td> Identifier of this group member updated info view </td></tr>
-  /// <tr><td>integer</td><td> group_id </td><td> Updated group ID </td></tr>
-  /// <tr><td>integer</td><td> address_book_id </td><td> Address book ID that the updated group belongs to </td></tr>
-  /// <tr><td>integer</td><td> version </td><td> Updated version </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group_member_updated_info _contacts_group_member_updated_info view (read only) <table> <tr> <th>Type</th> <th>Property ID</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td> Identifier of this group member updated info view </td></tr> <tr><td>integer</td><td> group_id </td><td> Updated group ID </td></tr> <tr><td>integer</td><td> address_book_id </td><td> Address book ID that the updated group belongs to </td></tr> <tr><td>integer</td><td> version </td><td> Updated version </td></tr> </table>
   late final ffi.Pointer<_contacts_group_member_updated_info_property_ids>
       __contacts_group_member_updated_info =
       _lookup<_contacts_group_member_updated_info_property_ids>(
@@ -922,21 +537,11 @@ class Tizen80ContactsService2 {
       get _contacts_group_member_updated_info =>
           __contacts_group_member_updated_info.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_grouprel_updated_info _contacts_grouprel_updated_info view (read only)
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td> Identifier of this group relation updated info view </td></tr>
-  /// <tr><td>integer</td><td> group_id </td><td> Group ID of group relation </td></tr>
-  /// <tr><td>integer</td><td> contact_id </td><td> Contact ID of the updated group relation </td></tr>
-  /// <tr><td>integer</td><td> address_book_id </td><td> Address book ID of contact that the updated group relation </td></tr>
-  /// <tr><td>integer</td><td> type </td><td> Changed update type, refer to the @ref contacts_changed_e </td></tr>
-  /// <tr><td>integer</td><td> version </td><td> Updated version </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_grouprel_updated_info _contacts_grouprel_updated_info view (read only) <table> <tr> <th>Type</th> <th>Property ID</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td> Identifier of this group relation updated info view </td></tr> <tr><td>integer</td><td> group_id </td><td> Group ID of group relation </td></tr> <tr><td>integer</td><td> contact_id </td><td> Contact ID of the updated group relation </td></tr> <tr><td>integer</td><td> address_book_id </td><td> Address book ID of contact that the updated group relation </td></tr> <tr><td>integer</td><td> type </td><td> Changed update type, refer to the `contacts_changed_e` </td></tr> <tr><td>integer</td><td> version </td><td> Updated version </td></tr> </table>
   late final ffi.Pointer<_contacts_grouprel_updated_info_property_ids>
       __contacts_grouprel_updated_info =
       _lookup<_contacts_grouprel_updated_info_property_ids>(
@@ -946,36 +551,11 @@ class Tizen80ContactsService2 {
       get _contacts_grouprel_updated_info =>
           __contacts_grouprel_updated_info.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_contact _contacts_person_contact view (read only)
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td> Identifier of this person contact view </td></tr>
-  /// <tr><td>integer</td><td> person_id </td><td> DB record ID of the person </td></tr>
-  /// <tr><td>string</td><td> display_name </td><td> Display name of the person</td></tr>
-  /// <tr><td>string</td><td> display_name_index </td><td> The first character of first string for grouping. This is normalized using icu (projection) </td></tr>
-  /// <tr><td>integer</td><td> display_contact_id </td><td> Display contact ID that the person belongs to (projection) </td></tr>
-  /// <tr><td>string</td><td> ringtone_path </td><td> Ringtone path of the person (projection) </td></tr>
-  /// <tr><td>string</td><td> image_thumbnail_path </td><td> Image thumbnail path of the person (projection) </td></tr>
-  /// <tr><td>string</td><td> vibration </td><td> Vibration path of the person (projection) </td></tr>
-  /// <tr><td>string</td><td> message_alert </td><td> Message alert path of the person (projection) </td></tr>
-  /// <tr><td>string</td><td> status </td><td> Status of social account (projection) </td></tr>
-  /// <tr><td>boolean</td><td> is_favorite </td><td> The person is favorite or not </td></tr>
-  /// <tr><td>integer</td><td> link_count </td><td> Link count of contact records (projection) </td></tr>
-  /// <tr><td>integer</td><td> contact_id </td><td> Contact ID that the person belongs to </td></tr>
-  /// <tr><td>string</td><td> addressbook_ids </td><td> Addressbook IDs that the person belongs to (projection) </td></tr>
-  /// <tr><td>boolean</td><td> has_phonenumber </td><td> The person has phone number or not </td></tr>
-  /// <tr><td>boolean</td><td> has_email </td><td> The person has email or not </td></tr>
-  /// <tr><td>integer</td><td> address_book_id </td><td> Addressbook ID that the person belongs to </td></tr>
-  /// <tr><td>integer</td><td> address_book_mode </td><td> Addressbook mode, refer to the @ref contacts_address_book_mode_e </td></tr>
-  /// <tr><td>string</td><td> address_book_name </td><td> Addressbook name that the person belongs to </td></tr>
-  /// <tr><td>integer</td><td> snippet_type </td><td> keyword matched data type, refer to they @ref contacts_data_type_e (Since 3.0) </td></tr>
-  /// <tr><td>string</td><td> snippet_string </td><td> keyword matched data string (Since 3.0) </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_contact _contacts_person_contact view (read only) <table> <tr> <th>Type</th> <th>Property ID</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td> Identifier of this person contact view </td></tr> <tr><td>integer</td><td> person_id </td><td> DB record ID of the person </td></tr> <tr><td>string</td><td> display_name </td><td> Display name of the person</td></tr> <tr><td>string</td><td> display_name_index </td><td> The first character of first string for grouping. This is normalized using icu (projection) </td></tr> <tr><td>integer</td><td> display_contact_id </td><td> Display contact ID that the person belongs to (projection) </td></tr> <tr><td>string</td><td> ringtone_path </td><td> Ringtone path of the person (projection) </td></tr> <tr><td>string</td><td> image_thumbnail_path </td><td> Image thumbnail path of the person (projection) </td></tr> <tr><td>string</td><td> vibration </td><td> Vibration path of the person (projection) </td></tr> <tr><td>string</td><td> message_alert </td><td> Message alert path of the person (projection) </td></tr> <tr><td>string</td><td> status </td><td> Status of social account (projection) </td></tr> <tr><td>boolean</td><td> is_favorite </td><td> The person is favorite or not </td></tr> <tr><td>integer</td><td> link_count </td><td> Link count of contact records (projection) </td></tr> <tr><td>integer</td><td> contact_id </td><td> Contact ID that the person belongs to </td></tr> <tr><td>string</td><td> addressbook_ids </td><td> Addressbook IDs that the person belongs to (projection) </td></tr> <tr><td>boolean</td><td> has_phonenumber </td><td> The person has phone number or not </td></tr> <tr><td>boolean</td><td> has_email </td><td> The person has email or not </td></tr> <tr><td>integer</td><td> address_book_id </td><td> Addressbook ID that the person belongs to </td></tr> <tr><td>integer</td><td> address_book_mode </td><td> Addressbook mode, refer to the `contacts_address_book_mode_e` </td></tr> <tr><td>string</td><td> address_book_name </td><td> Addressbook name that the person belongs to </td></tr> <tr><td>integer</td><td> snippet_type </td><td> keyword matched data type, refer to they `contacts_data_type_e` (Since 3.0) </td></tr> <tr><td>string</td><td> snippet_string </td><td> keyword matched data string (Since 3.0) </td></tr> </table>
   late final ffi.Pointer<_contacts_person_contact_property_ids>
       __contacts_person_contact =
       _lookup<_contacts_person_contact_property_ids>(
@@ -984,37 +564,11 @@ class Tizen80ContactsService2 {
   _contacts_person_contact_property_ids get _contacts_person_contact =>
       __contacts_person_contact.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_number _contacts_person_number view (read only)
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td> Identifier of this person number view </td></tr>
-  /// <tr><td>integer</td><td> person_id </td><td> DB record ID of the person </td></tr>
-  /// <tr><td>string</td><td> display_name </td><td> Display name of the person</td></tr>
-  /// <tr><td>string</td><td> display_name_index </td><td> The first character of first string for grouping. This is normalized using icu (projection) </td></tr>
-  /// <tr><td>integer</td><td> display_contact_id </td><td> Display contact ID that the person belongs to (projection) </td></tr>
-  /// <tr><td>string</td><td> ringtone_path </td><td> Ringtone path of the person (projection) </td></tr>
-  /// <tr><td>string</td><td> image_thumbnail_path </td><td> Image thumbnail path of the person (projection) </td></tr>
-  /// <tr><td>string</td><td> vibration </td><td> Vibration path of the person (projection) </td></tr>
-  /// <tr><td>string</td><td> message_alert </td><td> Message alert path of the person (projection) </td></tr>
-  /// <tr><td>boolean</td><td> is_favorite </td><td> The person is favorite or not </td></tr>
-  /// <tr><td>boolean</td><td> has_phonenumber </td><td> The person has phone number or not </td></tr>
-  /// <tr><td>boolean</td><td> has_email </td><td> The person has email or not </td></tr>
-  /// <tr><td>integer</td><td> number_id </td><td> Number ID that the person belongs to </td></tr>
-  /// <tr><td>integer</td><td> type </td><td> Number type, refer to the @ref contacts_number_type_e (projection) </td></tr>
-  /// <tr><td>string</td><td> label </td><td> Custom number type label, when the number type is #CONTACTS_NUMBER_TYPE_CUSTOM (projection) </td></tr>
-  /// <tr><td>boolean</td><td> is_primary_default </td><td> The number is default number or not </td></tr>
-  /// <tr><td>string</td><td> number </td><td> Number </td></tr>
-  /// <tr><td>string</td><td> number_filter </td><td> If you add filter with this property, the string will be normalized as minmatch length internally and the match rule will be applied CONTACTS_MATCH_EXACTLY </td></tr>
-  /// <tr><td>string</td><td> normalized_number </td><td> You can only use this property for search filter</td></tr>
-  /// <tr><td>string</td><td> cleaned_number </td><td>You can only use this property for search filter </td></tr>
-  /// <tr><td>integer</td><td> snippet_type </td><td> keyword matched data type, refer to they @ref contacts_data_type_e (Since 3.0) </td></tr>
-  /// <tr><td>string</td><td> snippet_string </td><td> keyword matched data string (Since 3.0) </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_number _contacts_person_number view (read only) <table> <tr> <th>Type</th> <th>Property ID</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td> Identifier of this person number view </td></tr> <tr><td>integer</td><td> person_id </td><td> DB record ID of the person </td></tr> <tr><td>string</td><td> display_name </td><td> Display name of the person</td></tr> <tr><td>string</td><td> display_name_index </td><td> The first character of first string for grouping. This is normalized using icu (projection) </td></tr> <tr><td>integer</td><td> display_contact_id </td><td> Display contact ID that the person belongs to (projection) </td></tr> <tr><td>string</td><td> ringtone_path </td><td> Ringtone path of the person (projection) </td></tr> <tr><td>string</td><td> image_thumbnail_path </td><td> Image thumbnail path of the person (projection) </td></tr> <tr><td>string</td><td> vibration </td><td> Vibration path of the person (projection) </td></tr> <tr><td>string</td><td> message_alert </td><td> Message alert path of the person (projection) </td></tr> <tr><td>boolean</td><td> is_favorite </td><td> The person is favorite or not </td></tr> <tr><td>boolean</td><td> has_phonenumber </td><td> The person has phone number or not </td></tr> <tr><td>boolean</td><td> has_email </td><td> The person has email or not </td></tr> <tr><td>integer</td><td> number_id </td><td> Number ID that the person belongs to </td></tr> <tr><td>integer</td><td> type </td><td> Number type, refer to the `contacts_number_type_e` (projection) </td></tr> <tr><td>string</td><td> label </td><td> Custom number type label, when the number type is `CONTACTS_NUMBER_TYPE_CUSTOM` (projection) </td></tr> <tr><td>boolean</td><td> is_primary_default </td><td> The number is default number or not </td></tr> <tr><td>string</td><td> number </td><td> Number </td></tr> <tr><td>string</td><td> number_filter </td><td> If you add filter with this property, the string will be normalized as minmatch length internally and the match rule will be applied CONTACTS_MATCH_EXACTLY </td></tr> <tr><td>string</td><td> normalized_number </td><td> You can only use this property for search filter</td></tr> <tr><td>string</td><td> cleaned_number </td><td>You can only use this property for search filter </td></tr> <tr><td>integer</td><td> snippet_type </td><td> keyword matched data type, refer to they `contacts_data_type_e` (Since 3.0) </td></tr> <tr><td>string</td><td> snippet_string </td><td> keyword matched data string (Since 3.0) </td></tr> </table>
   late final ffi.Pointer<_contacts_person_number_property_ids>
       __contacts_person_number =
       _lookup<_contacts_person_number_property_ids>('_contacts_person_number');
@@ -1022,34 +576,11 @@ class Tizen80ContactsService2 {
   _contacts_person_number_property_ids get _contacts_person_number =>
       __contacts_person_number.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_email _contacts_person_email view (read only)
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td> Identifier of this person email view </td></tr>
-  /// <tr><td>integer</td><td> person_id </td><td> DB record ID of the person </td></tr>
-  /// <tr><td>string</td><td> display_name </td><td> Display name of the person </td></tr>
-  /// <tr><td>string</td><td> display_name_index </td><td> The first character of first string for grouping. This is normalized using icu (projection) </td></tr>
-  /// <tr><td>integer</td><td> display_contact_id </td><td> Display contact ID that the person belongs to (projection) </td></tr>
-  /// <tr><td>string</td><td> ringtone_path </td><td> Ringtone path of the person (projection) </td></tr>
-  /// <tr><td>string</td><td> image_thumbnail_path </td><td> Image thumbnail path of the person (projection) </td></tr>
-  /// <tr><td>string</td><td> vibration </td><td> Vibration path of the person (projection) </td></tr>
-  /// <tr><td>string</td><td> message_alert </td><td> Message alert path of the person (projection) </td></tr>
-  /// <tr><td>boolean</td><td> is_favorite </td><td> The person is favorite or not </td></tr>
-  /// <tr><td>boolean</td><td> has_phonenumber </td><td> The person has phone number or not </td></tr>
-  /// <tr><td>boolean</td><td> has_email </td><td> The person has email or not </td></tr>
-  /// <tr><td>integer</td><td> email_id </td><td> Email ID that the person belongs to </td></tr>
-  /// <tr><td>integer</td><td> type </td><td> Email type, refer to the @ref contacts_email_type_e (projection) </td></tr>
-  /// <tr><td>string</td><td> label </td><td> Custom mail type label, when the email type is #CONTACTS_EMAIL_TYPE_CUSTOM (projection) </td></tr>
-  /// <tr><td>boolean</td><td> is_primary_default </td><td> The email is default email or not </td></tr>
-  /// <tr><td>string</td><td> email </td><td> Email address</td></tr>
-  /// <tr><td>integer</td><td> snippet_type </td><td> keyword matched data type, refer to they @ref contacts_data_type_e (Since 3.0) </td></tr>
-  /// <tr><td>string</td><td> snippet_string </td><td> keyword matched data string (Since 3.0) </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_email _contacts_person_email view (read only) <table> <tr> <th>Type</th> <th>Property ID</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td> Identifier of this person email view </td></tr> <tr><td>integer</td><td> person_id </td><td> DB record ID of the person </td></tr> <tr><td>string</td><td> display_name </td><td> Display name of the person </td></tr> <tr><td>string</td><td> display_name_index </td><td> The first character of first string for grouping. This is normalized using icu (projection) </td></tr> <tr><td>integer</td><td> display_contact_id </td><td> Display contact ID that the person belongs to (projection) </td></tr> <tr><td>string</td><td> ringtone_path </td><td> Ringtone path of the person (projection) </td></tr> <tr><td>string</td><td> image_thumbnail_path </td><td> Image thumbnail path of the person (projection) </td></tr> <tr><td>string</td><td> vibration </td><td> Vibration path of the person (projection) </td></tr> <tr><td>string</td><td> message_alert </td><td> Message alert path of the person (projection) </td></tr> <tr><td>boolean</td><td> is_favorite </td><td> The person is favorite or not </td></tr> <tr><td>boolean</td><td> has_phonenumber </td><td> The person has phone number or not </td></tr> <tr><td>boolean</td><td> has_email </td><td> The person has email or not </td></tr> <tr><td>integer</td><td> email_id </td><td> Email ID that the person belongs to </td></tr> <tr><td>integer</td><td> type </td><td> Email type, refer to the `contacts_email_type_e` (projection) </td></tr> <tr><td>string</td><td> label </td><td> Custom mail type label, when the email type is `CONTACTS_EMAIL_TYPE_CUSTOM` (projection) </td></tr> <tr><td>boolean</td><td> is_primary_default </td><td> The email is default email or not </td></tr> <tr><td>string</td><td> email </td><td> Email address</td></tr> <tr><td>integer</td><td> snippet_type </td><td> keyword matched data type, refer to they `contacts_data_type_e` (Since 3.0) </td></tr> <tr><td>string</td><td> snippet_string </td><td> keyword matched data string (Since 3.0) </td></tr> </table>
   late final ffi.Pointer<_contacts_person_email_property_ids>
       __contacts_person_email =
       _lookup<_contacts_person_email_property_ids>('_contacts_person_email');
@@ -1057,37 +588,11 @@ class Tizen80ContactsService2 {
   _contacts_person_email_property_ids get _contacts_person_email =>
       __contacts_person_email.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_grouprel _contacts_person_grouprel view (read only)
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td> Identifier of this person group relation view </td></tr>
-  /// <tr><td>integer</td><td> person_id </td><td> DB record ID of the person </td></tr>
-  /// <tr><td>string</td><td> display_name </td><td> Display name of the person </td></tr>
-  /// <tr><td>string</td><td> display_name_index </td><td> The first character of first string for grouping. This is normalized using icu (projection) </td></tr>
-  /// <tr><td>integer</td><td> display_contact_id </td><td> Display contact ID that the person belongs to (projection) </td></tr>
-  /// <tr><td>string</td><td> ringtone_path </td><td> Ringtone path of the person (projection) </td></tr>
-  /// <tr><td>string</td><td> image_thumbnail_path </td><td> Image thumbnail path of the person (projection) </td></tr>
-  /// <tr><td>string</td><td> vibration </td><td> Vibration path of the person (projection) </td></tr>
-  /// <tr><td>string</td><td> message_alert </td><td> Message alert path of the person (projection) </td></tr>
-  /// <tr><td>string</td><td> status </td><td> Status of social account (projection) </td></tr>
-  /// <tr><td>boolean</td><td> is_favorite </td><td> The person is favorite or not </td></tr>
-  /// <tr><td>integer</td><td> link_count </td><td> Link count of contact records (projection) </td></tr>
-  /// <tr><td>string</td><td> addressbook_ids </td><td> Addressbook IDs that the person belongs to (projection) </td></tr>
-  /// <tr><td>boolean</td><td> has_phonenumber </td><td> The person has phone number or not </td></tr>
-  /// <tr><td>boolean</td><td> has_email </td><td> The person has email or not </td></tr>
-  /// <tr><td>integer</td><td> address_book_id </td><td> Addressbook ID that the person belongs to </td></tr>
-  /// <tr><td>integer</td><td> address_book_mode </td><td> Addressbook mode, refer to the @ref contacts_address_book_mode_e </td></tr>
-  /// <tr><td>string</td><td> address_book_name </td><td> Addressbook name that the person belongs to </td></tr>
-  /// <tr><td>integer</td><td> group_id </td><td> Group ID that the person belongs to </td></tr>
-  /// <tr><td>integer</td><td> contact_id </td><td> Contact ID that the person belongs to (projection) </td></tr>
-  /// <tr><td>integer</td><td> snippet_type </td><td> keyword matched data type, refer to they @ref contacts_data_type_e (Since 3.0) </td></tr>
-  /// <tr><td>string</td><td> snippet_string </td><td> keyword matched data string (Since 3.0) </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_grouprel _contacts_person_grouprel view (read only) <table> <tr> <th>Type</th> <th>Property ID</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td> Identifier of this person group relation view </td></tr> <tr><td>integer</td><td> person_id </td><td> DB record ID of the person </td></tr> <tr><td>string</td><td> display_name </td><td> Display name of the person </td></tr> <tr><td>string</td><td> display_name_index </td><td> The first character of first string for grouping. This is normalized using icu (projection) </td></tr> <tr><td>integer</td><td> display_contact_id </td><td> Display contact ID that the person belongs to (projection) </td></tr> <tr><td>string</td><td> ringtone_path </td><td> Ringtone path of the person (projection) </td></tr> <tr><td>string</td><td> image_thumbnail_path </td><td> Image thumbnail path of the person (projection) </td></tr> <tr><td>string</td><td> vibration </td><td> Vibration path of the person (projection) </td></tr> <tr><td>string</td><td> message_alert </td><td> Message alert path of the person (projection) </td></tr> <tr><td>string</td><td> status </td><td> Status of social account (projection) </td></tr> <tr><td>boolean</td><td> is_favorite </td><td> The person is favorite or not </td></tr> <tr><td>integer</td><td> link_count </td><td> Link count of contact records (projection) </td></tr> <tr><td>string</td><td> addressbook_ids </td><td> Addressbook IDs that the person belongs to (projection) </td></tr> <tr><td>boolean</td><td> has_phonenumber </td><td> The person has phone number or not </td></tr> <tr><td>boolean</td><td> has_email </td><td> The person has email or not </td></tr> <tr><td>integer</td><td> address_book_id </td><td> Addressbook ID that the person belongs to </td></tr> <tr><td>integer</td><td> address_book_mode </td><td> Addressbook mode, refer to the `contacts_address_book_mode_e` </td></tr> <tr><td>string</td><td> address_book_name </td><td> Addressbook name that the person belongs to </td></tr> <tr><td>integer</td><td> group_id </td><td> Group ID that the person belongs to </td></tr> <tr><td>integer</td><td> contact_id </td><td> Contact ID that the person belongs to (projection) </td></tr> <tr><td>integer</td><td> snippet_type </td><td> keyword matched data type, refer to they `contacts_data_type_e` (Since 3.0) </td></tr> <tr><td>string</td><td> snippet_string </td><td> keyword matched data string (Since 3.0) </td></tr> </table>
   late final ffi.Pointer<_contacts_person_grouprel_property_ids>
       __contacts_person_grouprel =
       _lookup<_contacts_person_grouprel_property_ids>(
@@ -1096,36 +601,11 @@ class Tizen80ContactsService2 {
   _contacts_person_grouprel_property_ids get _contacts_person_grouprel =>
       __contacts_person_grouprel.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_assigned _contacts_person_group_assigned view (read only)
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td> Identifier of this person group assigned view </td></tr>
-  /// <tr><td>integer</td><td> person_id </td><td> DB record ID of the person </td></tr>
-  /// <tr><td>string</td><td> display_name </td><td> Display name of the person </td></tr>
-  /// <tr><td>string</td><td> display_name_index </td><td> The first character of first string for grouping. This is normalized using icu (projection) </td></tr>
-  /// <tr><td>integer</td><td> display_contact_id </td><td> Display contact ID that the person belongs to (projection) </td></tr>
-  /// <tr><td>string</td><td> ringtone_path </td><td> Ringtone path of the person (projection) </td></tr>
-  /// <tr><td>string</td><td> image_thumbnail_path </td><td> Image thumbnail path of the person (projection) </td></tr>
-  /// <tr><td>string</td><td> vibration </td><td> Vibration path of the person (projection) </td></tr>
-  /// <tr><td>string</td><td> message_alert </td><td> Message alert path of the person (projection) </td></tr>
-  /// <tr><td>string</td><td> status </td><td> Status of social account (projection) </td></tr>
-  /// <tr><td>boolean</td><td> is_favorite </td><td> The person is favorite or not </td></tr>
-  /// <tr><td>integer</td><td> link_count </td><td> Link count of contact records (projection) </td></tr>
-  /// <tr><td>string</td><td> linked_address_book_ids </td><td> Addressbook IDs that the linked person belongs to (projection) </td></tr>
-  /// <tr><td>boolean</td><td> has_phonenumber </td><td> The person has phone number or not </td></tr>
-  /// <tr><td>boolean</td><td> has_email </td><td> The person has email or not </td></tr>
-  /// <tr><td>integer</td><td> address_book_id </td><td> Addressbook ID that the person belongs to </td></tr>
-  /// <tr><td>integer</td><td> address_book_mode </td><td> Addressbook mode, refer to the @ref contacts_address_book_mode_e </td></tr>
-  /// <tr><td>integer</td><td> group_id </td><td> Group ID that the person belongs to </td></tr>
-  /// <tr><td>integer<dtd><td> contact_id </td><td> Contact ID that the person belongs to (projection) </td></tr>
-  /// <tr><td>integer</td><td> snippet_type </td><td> keyword matched data type, refer to they @ref contacts_data_type_e (Since 3.0) </td></tr>
-  /// <tr><td>string</td><td> snippet_string </td><td> keyword matched data string (Since 3.0) </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_assigned _contacts_person_group_assigned view (read only) <table> <tr> <th>Type</th> <th>Property ID</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td> Identifier of this person group assigned view </td></tr> <tr><td>integer</td><td> person_id </td><td> DB record ID of the person </td></tr> <tr><td>string</td><td> display_name </td><td> Display name of the person </td></tr> <tr><td>string</td><td> display_name_index </td><td> The first character of first string for grouping. This is normalized using icu (projection) </td></tr> <tr><td>integer</td><td> display_contact_id </td><td> Display contact ID that the person belongs to (projection) </td></tr> <tr><td>string</td><td> ringtone_path </td><td> Ringtone path of the person (projection) </td></tr> <tr><td>string</td><td> image_thumbnail_path </td><td> Image thumbnail path of the person (projection) </td></tr> <tr><td>string</td><td> vibration </td><td> Vibration path of the person (projection) </td></tr> <tr><td>string</td><td> message_alert </td><td> Message alert path of the person (projection) </td></tr> <tr><td>string</td><td> status </td><td> Status of social account (projection) </td></tr> <tr><td>boolean</td><td> is_favorite </td><td> The person is favorite or not </td></tr> <tr><td>integer</td><td> link_count </td><td> Link count of contact records (projection) </td></tr> <tr><td>string</td><td> linked_address_book_ids </td><td> Addressbook IDs that the linked person belongs to (projection) </td></tr> <tr><td>boolean</td><td> has_phonenumber </td><td> The person has phone number or not </td></tr> <tr><td>boolean</td><td> has_email </td><td> The person has email or not </td></tr> <tr><td>integer</td><td> address_book_id </td><td> Addressbook ID that the person belongs to </td></tr> <tr><td>integer</td><td> address_book_mode </td><td> Addressbook mode, refer to the `contacts_address_book_mode_e` </td></tr> <tr><td>integer</td><td> group_id </td><td> Group ID that the person belongs to </td></tr> <tr><td>integer<dtd><td> contact_id </td><td> Contact ID that the person belongs to (projection) </td></tr> <tr><td>integer</td><td> snippet_type </td><td> keyword matched data type, refer to they `contacts_data_type_e` (Since 3.0) </td></tr> <tr><td>string</td><td> snippet_string </td><td> keyword matched data string (Since 3.0) </td></tr> </table>
   late final ffi.Pointer<_contacts_person_group_assigned_property_ids>
       __contacts_person_group_assigned =
       _lookup<_contacts_person_group_assigned_property_ids>(
@@ -1135,35 +615,11 @@ class Tizen80ContactsService2 {
       get _contacts_person_group_assigned =>
           __contacts_person_group_assigned.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_not_assigned _contacts_person_group_not_assigned view (read only)
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td> Identifier of this person group not assigned view </td></tr>
-  /// <tr><td>integer</td><td> person_id </td><td> DB record ID of the person </td></tr>
-  /// <tr><td>string</td><td> display_name </td><td> Display name of the person </td></tr>
-  /// <tr><td>string</td><td> display_name_index </td><td> The first character of first string for grouping. This is normalized using icu (projection) </td></tr>
-  /// <tr><td>integer</td><td> display_contact_id </td><td> Display contact ID that the person belongs to (projection) </td></tr>
-  /// <tr><td>string</td><td> ringtone_path </td><td> Ringtone path of the person (projection) </td></tr>
-  /// <tr><td>string</td><td> image_thumbnail_path </td><td> Image thumbnail path of the person (projection) </td></tr>
-  /// <tr><td>string</td><td> vibration </td><td> Vibration path of the person (projection) </td></tr>
-  /// <tr><td>string</td><td> message_alert </td><td> Message alert path of the person (projection) </td></tr>
-  /// <tr><td>string</td><td> status </td><td> Status of social account (projection) </td></tr>
-  /// <tr><td>boolean</td><td> is_favorite </td><td> The person is favorite or not </td></tr>
-  /// <tr><td>integer</td><td> link_count </td><td> Link count of contact records (projection) </td></tr>
-  /// <tr><td>string</td><td> linked_address_book_ids </td><td> Addressbook IDs that the linked person belongs to (projection) </td></tr>
-  /// <tr><td>boolean</td><td> has_phonenumber </td><td> The person has phone number or not </td></tr>
-  /// <tr><td>boolean</td><td> has_email </td><td> The person has email or not </td></tr>
-  /// <tr><td>integer</td><td> address_book_id </td><td> Addressbook ID that the person belongs to </td></tr>
-  /// <tr><td>integer</td><td> address_book_mode </td><td> Addressbook mode, refer to the @ref contacts_address_book_mode_e </td></tr>
-  /// <tr><td>integer</td><td> contact_id </td><td> Contact ID that the person belongs to (projection) </td></tr>
-  /// <tr><td>integer</td><td> snippet_type </td><td> keyword matched data type, refer to they @ref contacts_data_type_e (Since 3.0) </td></tr>
-  /// <tr><td>string</td><td> snippet_string </td><td> keyword matched data string (Since 3.0) </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_not_assigned _contacts_person_group_not_assigned view (read only) <table> <tr> <th>Type</th> <th>Property ID</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td> Identifier of this person group not assigned view </td></tr> <tr><td>integer</td><td> person_id </td><td> DB record ID of the person </td></tr> <tr><td>string</td><td> display_name </td><td> Display name of the person </td></tr> <tr><td>string</td><td> display_name_index </td><td> The first character of first string for grouping. This is normalized using icu (projection) </td></tr> <tr><td>integer</td><td> display_contact_id </td><td> Display contact ID that the person belongs to (projection) </td></tr> <tr><td>string</td><td> ringtone_path </td><td> Ringtone path of the person (projection) </td></tr> <tr><td>string</td><td> image_thumbnail_path </td><td> Image thumbnail path of the person (projection) </td></tr> <tr><td>string</td><td> vibration </td><td> Vibration path of the person (projection) </td></tr> <tr><td>string</td><td> message_alert </td><td> Message alert path of the person (projection) </td></tr> <tr><td>string</td><td> status </td><td> Status of social account (projection) </td></tr> <tr><td>boolean</td><td> is_favorite </td><td> The person is favorite or not </td></tr> <tr><td>integer</td><td> link_count </td><td> Link count of contact records (projection) </td></tr> <tr><td>string</td><td> linked_address_book_ids </td><td> Addressbook IDs that the linked person belongs to (projection) </td></tr> <tr><td>boolean</td><td> has_phonenumber </td><td> The person has phone number or not </td></tr> <tr><td>boolean</td><td> has_email </td><td> The person has email or not </td></tr> <tr><td>integer</td><td> address_book_id </td><td> Addressbook ID that the person belongs to </td></tr> <tr><td>integer</td><td> address_book_mode </td><td> Addressbook mode, refer to the `contacts_address_book_mode_e` </td></tr> <tr><td>integer</td><td> contact_id </td><td> Contact ID that the person belongs to (projection) </td></tr> <tr><td>integer</td><td> snippet_type </td><td> keyword matched data type, refer to they `contacts_data_type_e` (Since 3.0) </td></tr> <tr><td>string</td><td> snippet_string </td><td> keyword matched data string (Since 3.0) </td></tr> </table>
   late final ffi.Pointer<_contacts_person_group_not_assigned_property_ids>
       __contacts_person_group_not_assigned =
       _lookup<_contacts_person_group_not_assigned_property_ids>(
@@ -1173,30 +629,11 @@ class Tizen80ContactsService2 {
       get _contacts_person_group_not_assigned =>
           __contacts_person_group_not_assigned.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_phone_log _contacts_person_phone_log view (read only)
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td> Identifier of this phone log view </td></tr>
-  /// <tr><td>integer</td><td> person_id </td><td> DB record ID of person </td></tr>
-  /// <tr><td>string</td><td> display_name </td><td> Display name of the person </td></tr>
-  /// <tr><td>string</td><td> image_thumbnail_path </td><td> Image thumbnail path of the person (projection) </td></tr>
-  /// <tr><td>integer</td><td> log_id </td><td> DB record ID of phone log </td></tr>
-  /// <tr><td>string</td><td> address </td><td> Number or Email that the phone log displays </td></tr>
-  /// <tr><td>integer</td><td> address_type </td><td> Number or Email type (projection)</td></tr>
-  /// <tr><td>integer</td><td> log_time </td><td> Call end time. The value means number of seconds since 1970-01-01 00:00:00 (UTC) </td></tr>
-  /// <tr><td>integer</td><td> log_type </td><td> Log type, refer to the @ref contacts_phone_log_type_e </td></tr>
-  /// <tr><td>integer</td><td> extra_data1 </td><td> You can set the related integer data (e.g. message_id, email_id or duration(seconds) of call) (projection) </td></tr>
-  /// <tr><td>string</td><td> extra_data2 </td><td> You can set the related string data (e.g. short message, subject) (projection) </td></tr>
-  /// <tr><td>string</td><td> normalized_address </td><td> You can only use this property for search filter </td></tr>
-  /// <tr><td>string</td><td> cleaned_address </td><td> You can only use this property for search filter </td></tr>
-  /// <tr><td>string</td><td> address_filter </td><td> You can only use this property for search filter </td></tr>
-  /// <tr><td>integer</td><td> sim_slot_no </td><td>It is related to the SIM slot number. sim_slot_no 0 means first SIM card, sim_slot_no 1 means second SIM. It is same with handle index of telephony handle list. Refer to the telephony_init() </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_phone_log _contacts_person_phone_log view (read only) <table> <tr> <th>Type</th> <th>Property ID</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td> Identifier of this phone log view </td></tr> <tr><td>integer</td><td> person_id </td><td> DB record ID of person </td></tr> <tr><td>string</td><td> display_name </td><td> Display name of the person </td></tr> <tr><td>string</td><td> image_thumbnail_path </td><td> Image thumbnail path of the person (projection) </td></tr> <tr><td>integer</td><td> log_id </td><td> DB record ID of phone log </td></tr> <tr><td>string</td><td> address </td><td> Number or Email that the phone log displays </td></tr> <tr><td>integer</td><td> address_type </td><td> Number or Email type (projection)</td></tr> <tr><td>integer</td><td> log_time </td><td> Call end time. The value means number of seconds since 1970-01-01 00:00:00 (UTC) </td></tr> <tr><td>integer</td><td> log_type </td><td> Log type, refer to the `contacts_phone_log_type_e` </td></tr> <tr><td>integer</td><td> extra_data1 </td><td> You can set the related integer data (e.g. message_id, email_id or duration(seconds) of call) (projection) </td></tr> <tr><td>string</td><td> extra_data2 </td><td> You can set the related string data (e.g. short message, subject) (projection) </td></tr> <tr><td>string</td><td> normalized_address </td><td> You can only use this property for search filter </td></tr> <tr><td>string</td><td> cleaned_address </td><td> You can only use this property for search filter </td></tr> <tr><td>string</td><td> address_filter </td><td> You can only use this property for search filter </td></tr> <tr><td>integer</td><td> sim_slot_no </td><td>It is related to the SIM slot number. sim_slot_no 0 means first SIM card, sim_slot_no 1 means second SIM. It is same with handle index of telephony handle list. Refer to the telephony_init() </td></tr> </table>
   late final ffi.Pointer<_contacts_person_phone_log_property_ids>
       __contacts_person_phone_log =
       _lookup<_contacts_person_phone_log_property_ids>(
@@ -1205,29 +642,11 @@ class Tizen80ContactsService2 {
   _contacts_person_phone_log_property_ids get _contacts_person_phone_log =>
       __contacts_person_phone_log.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_usage _contacts_person_usage view (read only)
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td> Identifier of this person usage view </td></tr>
-  /// <tr><td>integer</td><td> person_id </td><td> DB record ID of the person </td></tr>
-  /// <tr><td>string</td><td> display_name </td><td> Display name of the person </td></tr>
-  /// <tr><td>string</td><td> display_name_index </td><td> The first character of first string for grouping. This is normalized using icu (projection) </td></tr>
-  /// <tr><td>integer</td><td> display_contact_id </td><td> Display contact ID that the person belongs to (projection) </td></tr>
-  /// <tr><td>string</td><td> ringtone_path </td><td> Ringtone path of the person (projection) </td></tr>
-  /// <tr><td>string</td><td> image_thumbnail_path </td><td> Image thumbnail path of the person (projection)</td></tr>
-  /// <tr><td>string</td><td> vibration </td><td> Vibration path of the person (projection) </td></tr>
-  /// <tr><td>string</td><td> message_alert </td><td> Message alert path of the person (projection) </td></tr>
-  /// <tr><td>boolean</td><td> is_favorite </td><td> The person is favorite or not </td></tr>
-  /// <tr><td>boolean</td><td> has_phonenumber </td><td> The person has phone number or not </td></tr>
-  /// <tr><td>boolean</td><td> has_email </td><td> The person has email or not </td></tr>
-  /// <tr><td>integer</td><td> usage_type </td><td> Usage type, refer to the @ref contacts_usage_type_e </td></tr>
-  /// <tr><td>integer</td><td> times_used </td><td> Usage number of person </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_usage _contacts_person_usage view (read only) <table> <tr> <th>Type</th> <th>Property ID</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td> Identifier of this person usage view </td></tr> <tr><td>integer</td><td> person_id </td><td> DB record ID of the person </td></tr> <tr><td>string</td><td> display_name </td><td> Display name of the person </td></tr> <tr><td>string</td><td> display_name_index </td><td> The first character of first string for grouping. This is normalized using icu (projection) </td></tr> <tr><td>integer</td><td> display_contact_id </td><td> Display contact ID that the person belongs to (projection) </td></tr> <tr><td>string</td><td> ringtone_path </td><td> Ringtone path of the person (projection) </td></tr> <tr><td>string</td><td> image_thumbnail_path </td><td> Image thumbnail path of the person (projection)</td></tr> <tr><td>string</td><td> vibration </td><td> Vibration path of the person (projection) </td></tr> <tr><td>string</td><td> message_alert </td><td> Message alert path of the person (projection) </td></tr> <tr><td>boolean</td><td> is_favorite </td><td> The person is favorite or not </td></tr> <tr><td>boolean</td><td> has_phonenumber </td><td> The person has phone number or not </td></tr> <tr><td>boolean</td><td> has_email </td><td> The person has email or not </td></tr> <tr><td>integer</td><td> usage_type </td><td> Usage type, refer to the `contacts_usage_type_e` </td></tr> <tr><td>integer</td><td> times_used </td><td> Usage number of person </td></tr> </table>
   late final ffi.Pointer<_contacts_person_usage_property_ids>
       __contacts_person_usage =
       _lookup<_contacts_person_usage_property_ids>('_contacts_person_usage');
@@ -1235,31 +654,11 @@ class Tizen80ContactsService2 {
   _contacts_person_usage_property_ids get _contacts_person_usage =>
       __contacts_person_usage.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact_number _contacts_contact_number view (read only)
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td> Identifier of this contacts number view </td></tr>
-  /// <tr><td>integer</td><td>contact_id</td><td> Contact ID that the number belongs to </td></tr>
-  /// <tr><td>string</td><td>display_name</td><td> Display name of contact that the number belongs to</td></tr>
-  /// <tr><td>integer</td><td>display_source_type</td><td> The source type of display name, refer to the @ref contacts_display_name_source_type_e (projection) </td></tr>
-  /// <tr><td>integer</td><td>address_book_id</td><td> Addressbook ID that the number belongs to </td></tr>
-  /// <tr><td>integer</td><td>person_id</td><td> Person ID that the number belongs to </td></tr>
-  /// <tr><td>string</td><td>ringtone_path</td><td> Ringtone path that the number belongs to (projection) </td></tr>
-  /// <tr><td>string</td><td>image_thumbnail_path</td><td> Image thumbnail path that the number belongs to (projection) </td></tr>
-  /// <tr><td>integer</td><td> number_id </td><td> DB record ID of the number </td></tr>
-  /// <tr><td>integer</td><td> type </td><td> Number type, refer to the @ref contacts_number_type_e (projection) </td></tr>
-  /// <tr><td>string</td><td> label </td><td> Custom number type label, when the number type is #CONTACTS_NUMBER_TYPE_CUSTOM (projection) </td></tr>
-  /// <tr><td>boolean</td><td> is_default </td><td> The number is default number or not </td></tr>
-  /// <tr><td>string</td><td> number </td><td> Number </td></tr>
-  /// <tr><td>string</td><td> number_filter </td><td> If you add filter with this property, the string will be normalized as minmatch length internally and the match rule will be applied CONTACTS_MATCH_EXACTLY </td></tr>
-  /// <tr><td>string</td><td> normalized_number </td><td>You can only use this property for search filter </td></tr>
-  /// <tr><td>string</td><td> cleaned_number </td><td>You can only use this property for search filter </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact_number _contacts_contact_number view (read only) <table> <tr> <th>Type</th> <th>Property ID</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td> Identifier of this contacts number view </td></tr> <tr><td>integer</td><td>contact_id</td><td> Contact ID that the number belongs to </td></tr> <tr><td>string</td><td>display_name</td><td> Display name of contact that the number belongs to</td></tr> <tr><td>integer</td><td>display_source_type</td><td> The source type of display name, refer to the `contacts_display_name_source_type_e` (projection) </td></tr> <tr><td>integer</td><td>address_book_id</td><td> Addressbook ID that the number belongs to </td></tr> <tr><td>integer</td><td>person_id</td><td> Person ID that the number belongs to </td></tr> <tr><td>string</td><td>ringtone_path</td><td> Ringtone path that the number belongs to (projection) </td></tr> <tr><td>string</td><td>image_thumbnail_path</td><td> Image thumbnail path that the number belongs to (projection) </td></tr> <tr><td>integer</td><td> number_id </td><td> DB record ID of the number </td></tr> <tr><td>integer</td><td> type </td><td> Number type, refer to the `contacts_number_type_e` (projection) </td></tr> <tr><td>string</td><td> label </td><td> Custom number type label, when the number type is `CONTACTS_NUMBER_TYPE_CUSTOM` (projection) </td></tr> <tr><td>boolean</td><td> is_default </td><td> The number is default number or not </td></tr> <tr><td>string</td><td> number </td><td> Number </td></tr> <tr><td>string</td><td> number_filter </td><td> If you add filter with this property, the string will be normalized as minmatch length internally and the match rule will be applied CONTACTS_MATCH_EXACTLY </td></tr> <tr><td>string</td><td> normalized_number </td><td>You can only use this property for search filter </td></tr> <tr><td>string</td><td> cleaned_number </td><td>You can only use this property for search filter </td></tr> </table>
   late final ffi.Pointer<_contacts_contact_number_property_ids>
       __contacts_contact_number =
       _lookup<_contacts_contact_number_property_ids>(
@@ -1268,28 +667,11 @@ class Tizen80ContactsService2 {
   _contacts_contact_number_property_ids get _contacts_contact_number =>
       __contacts_contact_number.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact_email _contacts_contact_email view (read only)
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td> Identifier of this contacts email view </td></tr>
-  /// <tr><td>integer</td><td>contact_id</td><td> Contact ID that the email belongs to </td></tr>
-  /// <tr><td>string</td><td>display_name</td><td> Display name that the email belongs to </td></tr>
-  /// <tr><td>integer</td><td>display_source_type</td><td> The source type of display name that the email belongs to (projection) </td></tr>
-  /// <tr><td>integer</td><td>address_book_id</td><td> Addressbook ID that the email belongs to </td></tr>
-  /// <tr><td>integer</td><td>person_id</td><td> Person ID that the email belongs to </td></tr>
-  /// <tr><td>string</td><td>ringtone_path</td><td> Ringtone path that the email belongs to (projection) </td></tr>
-  /// <tr><td>string</td><td>image_thumbnail_path</td><td> Image thumbnail path that the email belongs to (projection) </td></tr>
-  /// <tr><td>integer</td><td> email_id </td><td> DB record ID of the email </td></tr>
-  /// <tr><td>integer</td><td> type </td><td> Email type, refer to the @ref contacts_email_type_e (projection) </td></tr>
-  /// <tr><td>string</td><td> label </td><td> Custom mail type label, when the email type is #CONTACTS_EMAIL_TYPE_CUSTOM (projection) </td></tr>
-  /// <tr><td>boolean</td><td> is_default </td><td> Email is default email or not </td></tr>
-  /// <tr><td>string</td><td> email </td><td> Email address </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact_email _contacts_contact_email view (read only) <table> <tr> <th>Type</th> <th>Property ID</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td> Identifier of this contacts email view </td></tr> <tr><td>integer</td><td>contact_id</td><td> Contact ID that the email belongs to </td></tr> <tr><td>string</td><td>display_name</td><td> Display name that the email belongs to </td></tr> <tr><td>integer</td><td>display_source_type</td><td> The source type of display name that the email belongs to (projection) </td></tr> <tr><td>integer</td><td>address_book_id</td><td> Addressbook ID that the email belongs to </td></tr> <tr><td>integer</td><td>person_id</td><td> Person ID that the email belongs to </td></tr> <tr><td>string</td><td>ringtone_path</td><td> Ringtone path that the email belongs to (projection) </td></tr> <tr><td>string</td><td>image_thumbnail_path</td><td> Image thumbnail path that the email belongs to (projection) </td></tr> <tr><td>integer</td><td> email_id </td><td> DB record ID of the email </td></tr> <tr><td>integer</td><td> type </td><td> Email type, refer to the `contacts_email_type_e` (projection) </td></tr> <tr><td>string</td><td> label </td><td> Custom mail type label, when the email type is `CONTACTS_EMAIL_TYPE_CUSTOM` (projection) </td></tr> <tr><td>boolean</td><td> is_default </td><td> Email is default email or not </td></tr> <tr><td>string</td><td> email </td><td> Email address </td></tr> </table>
   late final ffi.Pointer<_contacts_contact_email_property_ids>
       __contacts_contact_email =
       _lookup<_contacts_contact_email_property_ids>('_contacts_contact_email');
@@ -1297,25 +679,11 @@ class Tizen80ContactsService2 {
   _contacts_contact_email_property_ids get _contacts_contact_email =>
       __contacts_contact_email.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact_grouprel _contacts_contact_grouprel view (read only)
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td> Identifier of this contact grouprel view </td></tr>
-  /// <tr><td>integer</td><td>contact_id</td><td> Contact ID that the contact group relation belongs to </td></tr>
-  /// <tr><td>string</td><td>display_name</td><td> Display name of the group relation </td></tr>
-  /// <tr><td>integer</td><td>display_source_type</td><td> The source type of display name (projection) </td></tr>
-  /// <tr><td>integer</td><td>address_book_id</td><td> Addressbook ID that the group relation belongs to </td></tr>
-  /// <tr><td>integer</td><td>person_id</td><td> Person ID that the group relation belongs to </td></tr>
-  /// <tr><td>string</td><td>ringtone_path</td><td> Ringtone path of the group relation (projection) </td></tr>
-  /// <tr><td>string</td><td>image_thumbnail_path</td><td> Image thumbnail path of the group relation (projection) </td></tr>
-  /// <tr><td>integer</td><td> group_id </td><td> DB record ID of the group relation </td></tr>
-  /// <tr><td>string</td><td> group_name </td><td> Group name (projection) </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact_grouprel _contacts_contact_grouprel view (read only) <table> <tr> <th>Type</th> <th>Property ID</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td> Identifier of this contact grouprel view </td></tr> <tr><td>integer</td><td>contact_id</td><td> Contact ID that the contact group relation belongs to </td></tr> <tr><td>string</td><td>display_name</td><td> Display name of the group relation </td></tr> <tr><td>integer</td><td>display_source_type</td><td> The source type of display name (projection) </td></tr> <tr><td>integer</td><td>address_book_id</td><td> Addressbook ID that the group relation belongs to </td></tr> <tr><td>integer</td><td>person_id</td><td> Person ID that the group relation belongs to </td></tr> <tr><td>string</td><td>ringtone_path</td><td> Ringtone path of the group relation (projection) </td></tr> <tr><td>string</td><td>image_thumbnail_path</td><td> Image thumbnail path of the group relation (projection) </td></tr> <tr><td>integer</td><td> group_id </td><td> DB record ID of the group relation </td></tr> <tr><td>string</td><td> group_name </td><td> Group name (projection) </td></tr> </table>
   late final ffi.Pointer<_contacts_contact_grouprel_property_ids>
       __contacts_contact_grouprel =
       _lookup<_contacts_contact_grouprel_property_ids>(
@@ -1324,29 +692,11 @@ class Tizen80ContactsService2 {
   _contacts_contact_grouprel_property_ids get _contacts_contact_grouprel =>
       __contacts_contact_grouprel.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact_activity _contacts_contact_activity view (read only)
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td> Identifier of this contact activity view </td></tr>
-  /// <tr><td>integer</td><td>contact_id</td><td> Contact ID that the activity belongs to</td></tr>
-  /// <tr><td>string</td><td>display_name</td><td> Display name of the contact that the activity belongs to </td></tr>
-  /// <tr><td>integer</td><td>display_source_type</td><td> The source type of display name that the activity belongs to </td></tr>
-  /// <tr><td>integer</td><td>address_book_id</td><td> Addressbook that the activity belongs to </td></tr>
-  /// <tr><td>integer</td><td>person_id</td><td> Person ID that the activity belongs to </td></tr>
-  /// <tr><td>string</td><td>ringtone_path</td><td> Ringtone path of the contact that the activity belongs to (projection) </td></tr>
-  /// <tr><td>string</td><td>image_thumbnail_path</td><td> Image thumbnail path of the contact that the activity belongs to (projection) </td></tr>
-  /// <tr><td>integer</td><td> activity_id </td><td> DB record ID of the activity </td></tr>
-  /// <tr><td>string</td><td> source_name </td><td> Account name that the activity belongs to </td></tr>
-  /// <tr><td>string</td><td> status </td><td> Activity status (projection) </td></tr>
-  /// <tr><td>integer</td><td> timestamp </td><td> Published time of activity </td></tr>
-  /// <tr><td>string</td><td> service_operation </td><td> Data for service_set_operation </td></tr>
-  /// <tr><td>string</td><td> uri </td><td> Data for service_set_uri </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact_activity _contacts_contact_activity view (read only) <table> <tr> <th>Type</th> <th>Property ID</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td> Identifier of this contact activity view </td></tr> <tr><td>integer</td><td>contact_id</td><td> Contact ID that the activity belongs to</td></tr> <tr><td>string</td><td>display_name</td><td> Display name of the contact that the activity belongs to </td></tr> <tr><td>integer</td><td>display_source_type</td><td> The source type of display name that the activity belongs to </td></tr> <tr><td>integer</td><td>address_book_id</td><td> Addressbook that the activity belongs to </td></tr> <tr><td>integer</td><td>person_id</td><td> Person ID that the activity belongs to </td></tr> <tr><td>string</td><td>ringtone_path</td><td> Ringtone path of the contact that the activity belongs to (projection) </td></tr> <tr><td>string</td><td>image_thumbnail_path</td><td> Image thumbnail path of the contact that the activity belongs to (projection) </td></tr> <tr><td>integer</td><td> activity_id </td><td> DB record ID of the activity </td></tr> <tr><td>string</td><td> source_name </td><td> Account name that the activity belongs to </td></tr> <tr><td>string</td><td> status </td><td> Activity status (projection) </td></tr> <tr><td>integer</td><td> timestamp </td><td> Published time of activity </td></tr> <tr><td>string</td><td> service_operation </td><td> Data for service_set_operation </td></tr> <tr><td>string</td><td> uri </td><td> Data for service_set_uri </td></tr> </table>
   late final ffi.Pointer<_contacts_contact_activity_property_ids>
       __contacts_contact_activity =
       _lookup<_contacts_contact_activity_property_ids>(
@@ -1355,19 +705,11 @@ class Tizen80ContactsService2 {
   _contacts_contact_activity_property_ids get _contacts_contact_activity =>
       __contacts_contact_activity.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log_stat _contacts_phone_log_stat view (read only)
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td> Identifier of this log stat view </td></tr>
-  /// <tr><td>integer</td><td> log_count </td><td>Log count (projection) </td></tr>
-  /// <tr><td>integer</td><td> log_type </td><td> Log type, see the @ref contacts_phone_log_type_e </td></tr>
-  /// <tr><td>integer</td><td> sim_slot_no </td><td>It is related to the SIM slot number. sim_slot_no 0 means first SIM card, sim_slot_no 1 means second SIM. It is same with handle index of telephony handle list. Refer to the telephony_init() (Since 3.0)</td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log_stat _contacts_phone_log_stat view (read only) <table> <tr> <th>Type</th> <th>Property ID</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td> Identifier of this log stat view </td></tr> <tr><td>integer</td><td> log_count </td><td>Log count (projection) </td></tr> <tr><td>integer</td><td> log_type </td><td> Log type, see the `contacts_phone_log_type_e` </td></tr> <tr><td>integer</td><td> sim_slot_no </td><td>It is related to the SIM slot number. sim_slot_no 0 means first SIM card, sim_slot_no 1 means second SIM. It is same with handle index of telephony handle list. Refer to the telephony_init() (Since 3.0)</td></tr> </table>
   late final ffi.Pointer<_contacts_phone_log_stat_property_ids>
       __contacts_phone_log_stat =
       _lookup<_contacts_phone_log_stat_property_ids>(
@@ -1376,41 +718,43 @@ class Tizen80ContactsService2 {
   _contacts_phone_log_stat_property_ids get _contacts_phone_log_stat =>
       __contacts_phone_log_stat.ref;
 
-  /// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_sip _contacts_sip view (Since 3.0)
-  /// <table>
-  /// <tr>
-  /// <th>Type</th>
-  /// <th>Property ID</th>
-  /// <th>Read, Write</th>
-  /// <th>Description</th>
-  /// </tr>
-  /// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts sip view </td></tr>
-  /// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the sip </td></tr>
-  /// <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the sip belongs to </td></tr>
-  /// <tr><td>string</td><td> address </td><td>read, write</td><td> SIP address </td></tr>
-  /// <tr><td>integer</td><td> type </td><td>read, write</td><td> sip type, refer to the @ref contacts_sip_type_e </td></tr>
-  /// <tr><td>string</td><td> label </td><td>read, write</td><td> Custom sip type label, when the sip type is #CONTACTS_SIP_TYPE_CUSTOM </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_sip _contacts_sip view (Since 3.0) <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts sip view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the sip </td></tr> <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the sip belongs to </td></tr> <tr><td>string</td><td> address </td><td>read, write</td><td> SIP address </td></tr> <tr><td>integer</td><td> type </td><td>read, write</td><td> sip type, refer to the `contacts_sip_type_e` </td></tr> <tr><td>string</td><td> label </td><td>read, write</td><td> Custom sip type label, when the sip type is `CONTACTS_SIP_TYPE_CUSTOM` </td></tr> </table>
   late final ffi.Pointer<_contacts_sip_property_ids> __contacts_sip =
       _lookup<_contacts_sip_property_ids>('_contacts_sip');
 
   _contacts_sip_property_ids get _contacts_sip => __contacts_sip.ref;
 
-  /// @brief Creates a record.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @remarks You must release @a record using contacts_record_destroy().
-  /// @param[in] view_uri The view URI
-  /// @param[out] record The record handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to initialize.
-  /// @see contacts_record_destroy()
+  /// Creates a record.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `record` using contacts_record_destroy().
+  ///
+  /// **Parameters:**
+  /// - `view_uri` (in): The view URI
+  /// - `record` (out): The record handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to initialize.
+  ///
+  /// **See also:**
+  /// - `contacts_record_destroy()`
   int contacts_record_create(
     ffi.Pointer<ffi.Char> view_uri,
     ffi.Pointer<contacts_record_h> record,
@@ -1428,18 +772,26 @@ class Tizen80ContactsService2 {
   late final _contacts_record_create = _contacts_record_createPtr.asFunction<
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<contacts_record_h>)>();
 
-  /// @brief Destroys a record and releases its all resources.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] record The record handle
-  /// @param[in] delete_child Set @c true to destroy child records automatically,
-  /// otherwise set @c false to not destroy child records automatically
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @see contacts_record_create()
+  /// Destroys a record and releases its all resources.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  /// - `delete_child` (in): Set `true` to destroy child records automatically, otherwise set `false` to not destroy child records automatically
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **See also:**
+  /// - `contacts_record_create()`
   int contacts_record_destroy(
     contacts_record_h record,
     bool delete_child,
@@ -1456,19 +808,30 @@ class Tizen80ContactsService2 {
   late final _contacts_record_destroy = _contacts_record_destroyPtr
       .asFunction<int Function(contacts_record_h, bool)>();
 
-  /// @brief Makes a clone of a record.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @remarks You must release @a cloned_record using contacts_record_destroy().
-  /// @param[in] record The record handle
-  /// @param[out] cloned_record The cloned record handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @see contacts_record_destroy()
+  /// Makes a clone of a record.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `cloned_record` using contacts_record_destroy().
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  /// - `cloned_record` (out): The cloned record handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **See also:**
+  /// - `contacts_record_destroy()`
   int contacts_record_clone(
     contacts_record_h record,
     ffi.Pointer<contacts_record_h> cloned_record,
@@ -1486,20 +849,31 @@ class Tizen80ContactsService2 {
   late final _contacts_record_clone = _contacts_record_clonePtr.asFunction<
       int Function(contacts_record_h, ffi.Pointer<contacts_record_h>)>();
 
-  /// @brief Gets a string from the record handle.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @remarks You must release @a value using free().
-  /// @param[in] record The record handle
-  /// @param[in] property_id The property ID
-  /// @param[out] value The value to be returned
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @see contacts_record_get_str_p()
-  /// @see contacts_record_set_str()
+  /// Gets a string from the record handle.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `value` using free().
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  /// - `property_id` (in): The property ID
+  /// - `value` (out): The value to be returned
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **See also:**
+  /// - `contacts_record_get_str_p()`
+  /// - `contacts_record_set_str()`
   int contacts_record_get_str(
     contacts_record_h record,
     int property_id,
@@ -1520,20 +894,31 @@ class Tizen80ContactsService2 {
       int Function(
           contacts_record_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets a string pointer from the record handle.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @remarks You MUST NOT release @a value.
-  /// @param[in] record The record handle
-  /// @param[in] property_id The property ID
-  /// @param[out] value The value to be returned
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @see contacts_record_get_str()
-  /// @see contacts_record_set_str()
+  /// Gets a string pointer from the record handle.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - You MUST NOT release `value`.
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  /// - `property_id` (in): The property ID
+  /// - `value` (out): The value to be returned
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **See also:**
+  /// - `contacts_record_get_str()`
+  /// - `contacts_record_set_str()`
   int contacts_record_get_str_p(
     contacts_record_h record,
     int property_id,
@@ -1556,19 +941,28 @@ class Tizen80ContactsService2 {
           int Function(
               contacts_record_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets a string to a record.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] record The record handle
-  /// @param[in] property_id The property ID
-  /// @param[in] value The value to set
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @see contacts_record_get_str()
-  /// @see contacts_record_get_str_p()
+  /// Sets a string to a record.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  /// - `property_id` (in): The property ID
+  /// - `value` (in): The value to set
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **See also:**
+  /// - `contacts_record_get_str()`
+  /// - `contacts_record_get_str_p()`
   int contacts_record_set_str(
     contacts_record_h record,
     int property_id,
@@ -1588,18 +982,27 @@ class Tizen80ContactsService2 {
   late final _contacts_record_set_str = _contacts_record_set_strPtr.asFunction<
       int Function(contacts_record_h, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets a record's integer value.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] record The record handle
-  /// @param[in] property_id The property ID
-  /// @param[out] value The value to be returned
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @see contacts_record_set_int()
+  /// Gets a record's integer value.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  /// - `property_id` (in): The property ID
+  /// - `value` (out): The value to be returned
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **See also:**
+  /// - `contacts_record_set_int()`
   int contacts_record_get_int(
     contacts_record_h record,
     int property_id,
@@ -1619,18 +1022,27 @@ class Tizen80ContactsService2 {
   late final _contacts_record_get_int = _contacts_record_get_intPtr
       .asFunction<int Function(contacts_record_h, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets an integer value to a record.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] record The record handle
-  /// @param[in] property_id The property ID
-  /// @param[in] value The value to set
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @see contacts_record_get_int()
+  /// Sets an integer value to a record.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  /// - `property_id` (in): The property ID
+  /// - `value` (in): The value to set
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **See also:**
+  /// - `contacts_record_get_int()`
   int contacts_record_set_int(
     contacts_record_h record,
     int property_id,
@@ -1650,18 +1062,27 @@ class Tizen80ContactsService2 {
   late final _contacts_record_set_int = _contacts_record_set_intPtr
       .asFunction<int Function(contacts_record_h, int, int)>();
 
-  /// @brief Gets a record's long integer value.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] record The record handle
-  /// @param[in] property_id The property ID
-  /// @param[out] value The value to be returned
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @see contacts_record_set_lli()
+  /// Gets a record's long integer value.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  /// - `property_id` (in): The property ID
+  /// - `value` (out): The value to be returned
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **See also:**
+  /// - `contacts_record_set_lli()`
   int contacts_record_get_lli(
     contacts_record_h record,
     int property_id,
@@ -1681,18 +1102,27 @@ class Tizen80ContactsService2 {
   late final _contacts_record_get_lli = _contacts_record_get_lliPtr.asFunction<
       int Function(contacts_record_h, int, ffi.Pointer<ffi.LongLong>)>();
 
-  /// @brief Sets a long long integer value to a record.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] record The record handle
-  /// @param[in] property_id The property ID
-  /// @param[in] value The value to set
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @see contacts_record_get_lli()
+  /// Sets a long long integer value to a record.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  /// - `property_id` (in): The property ID
+  /// - `value` (in): The value to set
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **See also:**
+  /// - `contacts_record_get_lli()`
   int contacts_record_set_lli(
     contacts_record_h record,
     int property_id,
@@ -1712,18 +1142,27 @@ class Tizen80ContactsService2 {
   late final _contacts_record_set_lli = _contacts_record_set_lliPtr
       .asFunction<int Function(contacts_record_h, int, int)>();
 
-  /// @brief Gets a record's boolean value.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] record The record handle
-  /// @param[in] property_id The property ID
-  /// @param[out] value The value to be returned
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @see contacts_record_set_bool()
+  /// Gets a record's boolean value.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  /// - `property_id` (in): The property ID
+  /// - `value` (out): The value to be returned
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **See also:**
+  /// - `contacts_record_set_bool()`
   int contacts_record_get_bool(
     contacts_record_h record,
     int property_id,
@@ -1744,18 +1183,27 @@ class Tizen80ContactsService2 {
       _contacts_record_get_boolPtr.asFunction<
           int Function(contacts_record_h, int, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Sets a boolean value to a record.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] record The record handle
-  /// @param[in] property_id The property ID
-  /// @param[in] value The value to set
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @see contacts_record_get_bool()
+  /// Sets a boolean value to a record.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  /// - `property_id` (in): The property ID
+  /// - `value` (in): The value to set
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **See also:**
+  /// - `contacts_record_get_bool()`
   int contacts_record_set_bool(
     contacts_record_h record,
     int property_id,
@@ -1775,18 +1223,27 @@ class Tizen80ContactsService2 {
   late final _contacts_record_set_bool = _contacts_record_set_boolPtr
       .asFunction<int Function(contacts_record_h, int, bool)>();
 
-  /// @brief Gets a record's double value.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] record The record handle
-  /// @param[in] property_id The property ID
-  /// @param[out] value The value to be returned
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @see contacts_record_set_double()
+  /// Gets a record's double value.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  /// - `property_id` (in): The property ID
+  /// - `value` (out): The value to be returned
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **See also:**
+  /// - `contacts_record_set_double()`
   int contacts_record_get_double(
     contacts_record_h record,
     int property_id,
@@ -1807,18 +1264,27 @@ class Tizen80ContactsService2 {
       _contacts_record_get_doublePtr.asFunction<
           int Function(contacts_record_h, int, ffi.Pointer<ffi.Double>)>();
 
-  /// @brief Sets a double value to a record.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] record The record handle
-  /// @param[in] property_id The property ID
-  /// @param[in] value The value to set
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @see contacts_record_get_double()
+  /// Sets a double value to a record.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  /// - `property_id` (in): The property ID
+  /// - `value` (in): The value to set
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **See also:**
+  /// - `contacts_record_get_double()`
   int contacts_record_set_double(
     contacts_record_h record,
     int property_id,
@@ -1838,18 +1304,27 @@ class Tizen80ContactsService2 {
   late final _contacts_record_set_double = _contacts_record_set_doublePtr
       .asFunction<int Function(contacts_record_h, int, double)>();
 
-  /// @brief Adds a child record to the parent record.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] record The parent record handle
-  /// @param[in] property_id The property ID
-  /// @param[in] child_record The child record handle to be added to parent record handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @see contacts_record_remove_child_record()
+  /// Adds a child record to the parent record.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The parent record handle
+  /// - `property_id` (in): The property ID
+  /// - `child_record` (in): The child record handle to be added to parent record handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **See also:**
+  /// - `contacts_record_remove_child_record()`
   int contacts_record_add_child_record(
     contacts_record_h record,
     int property_id,
@@ -1870,18 +1345,27 @@ class Tizen80ContactsService2 {
       _contacts_record_add_child_recordPtr.asFunction<
           int Function(contacts_record_h, int, contacts_record_h)>();
 
-  /// @brief Removes a child record from the parent record.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] record The parent record handle
-  /// @param[in] property_id The property ID
-  /// @param[in] child_record The child record handle to be removed from parent record handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @see contacts_record_add_child_record()
+  /// Removes a child record from the parent record.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The parent record handle
+  /// - `property_id` (in): The property ID
+  /// - `child_record` (in): The child record handle to be removed from parent record handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **See also:**
+  /// - `contacts_record_add_child_record()`
   int contacts_record_remove_child_record(
     contacts_record_h record,
     int property_id,
@@ -1902,19 +1386,28 @@ class Tizen80ContactsService2 {
       _contacts_record_remove_child_recordPtr.asFunction<
           int Function(contacts_record_h, int, contacts_record_h)>();
 
-  /// @brief Gets the number of child records of a parent record.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] record The parent record handle
-  /// @param[in] property_id The property ID
-  /// @param[out] count The child record count
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @see contacts_record_add_child_record()
-  /// @see contacts_record_remove_child_record()
+  /// Gets the number of child records of a parent record.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The parent record handle
+  /// - `property_id` (in): The property ID
+  /// - `count` (out): The child record count
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **See also:**
+  /// - `contacts_record_add_child_record()`
+  /// - `contacts_record_remove_child_record()`
   int contacts_record_get_child_record_count(
     contacts_record_h record,
     int property_id,
@@ -1935,23 +1428,33 @@ class Tizen80ContactsService2 {
       _contacts_record_get_child_record_countPtr.asFunction<
           int Function(contacts_record_h, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets a child record handle pointer from the parent record.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @remarks You MUST NOT release @a child_record. It is released when the parent record is destroyed.
-  /// @param[in] record The record handle
-  /// @param[in] property_id The property ID
-  /// @param[in] index The index of child record
-  /// @param[out] child_record The child record handle pointer
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NO_DATA
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @see contacts_record_add_child_record()
-  /// @see contacts_record_remove_child_record()
-  /// @see contacts_record_get_child_record_count()
+  /// Gets a child record handle pointer from the parent record.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - You MUST NOT release `child_record`. It is released when the parent record is destroyed.
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  /// - `property_id` (in): The property ID
+  /// - `index` (in): The index of child record
+  /// - `child_record` (out): The child record handle pointer
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **See also:**
+  /// - `contacts_record_add_child_record()`
+  /// - `contacts_record_remove_child_record()`
+  /// - `contacts_record_get_child_record_count()`
   int contacts_record_get_child_record_at_p(
     contacts_record_h record,
     int property_id,
@@ -1976,19 +1479,30 @@ class Tizen80ContactsService2 {
           int Function(
               contacts_record_h, int, int, ffi.Pointer<contacts_record_h>)>();
 
-  /// @brief Clones a child record list of the given parent record.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @remarks You must release @a cloned_list using contacts_list_destroy().
-  /// @param[in] record The record handle
-  /// @param[in] property_id The property ID
-  /// @param[out] cloned_list The cloned list handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @see contacts_list_destroy()
+  /// Clones a child record list of the given parent record.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `cloned_list` using contacts_list_destroy().
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  /// - `property_id` (in): The property ID
+  /// - `cloned_list` (out): The cloned list handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **See also:**
+  /// - `contacts_list_destroy()`
   int contacts_record_clone_child_record_list(
     contacts_record_h record,
     int property_id,
@@ -2010,16 +1524,23 @@ class Tizen80ContactsService2 {
       _contacts_record_clone_child_record_listPtr.asFunction<
           int Function(contacts_record_h, int, ffi.Pointer<contacts_list_h>)>();
 
-  /// @brief Gets URI string from a record.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] record The record handle
-  /// @param[out] view_uri The URI of record
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
+  /// Gets URI string from a record.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  /// - `view_uri` (out): The URI of record
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
   int contacts_record_get_uri_p(
     contacts_record_h record,
     ffi.Pointer<ffi.Pointer<ffi.Char>> view_uri,
@@ -2040,18 +1561,29 @@ class Tizen80ContactsService2 {
           int Function(
               contacts_record_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Creates a contacts list.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @remarks You must release @a contacts_list using contacts_list_destroy().
-  /// @param[out] contacts_list The contacts list handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @see contacts_list_destroy()
+  /// Creates a contacts list.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `contacts_list` using contacts_list_destroy().
+  ///
+  /// **Parameters:**
+  /// - `contacts_list` (out): The contacts list handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **See also:**
+  /// - `contacts_list_destroy()`
   int contacts_list_create(
     ffi.Pointer<contacts_list_h> contacts_list,
   ) {
@@ -2066,18 +1598,26 @@ class Tizen80ContactsService2 {
   late final _contacts_list_create = _contacts_list_createPtr
       .asFunction<int Function(ffi.Pointer<contacts_list_h>)>();
 
-  /// @brief Destroys a contacts list and releases its all resources.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] contacts_list The contacts list handle
-  /// @param[in] delete_child Set @c true to destroy child records automatically,
-  /// otherwise set @c false to not destroy child records automatically
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @see contacts_list_create()
+  /// Destroys a contacts list and releases its all resources.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `contacts_list` (in): The contacts list handle
+  /// - `delete_child` (in): Set `true` to destroy child records automatically, otherwise set `false` to not destroy child records automatically
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **See also:**
+  /// - `contacts_list_create()`
   int contacts_list_destroy(
     contacts_list_h contacts_list,
     bool delete_child,
@@ -2094,17 +1634,26 @@ class Tizen80ContactsService2 {
   late final _contacts_list_destroy = _contacts_list_destroyPtr
       .asFunction<int Function(contacts_list_h, bool)>();
 
-  /// @brief Retrieves the number of contact entities from a contacts list.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] contacts_list The contacts list handle
-  /// @param[out] count The count of contact entity
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @see contacts_list_add()
+  /// Retrieves the number of contact entities from a contacts list.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `contacts_list` (in): The contacts list handle
+  /// - `count` (out): The count of contact entity
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **See also:**
+  /// - `contacts_list_add()`
   int contacts_list_get_count(
     contacts_list_h contacts_list,
     ffi.Pointer<ffi.Int> count,
@@ -2122,18 +1671,29 @@ class Tizen80ContactsService2 {
   late final _contacts_list_get_count = _contacts_list_get_countPtr
       .asFunction<int Function(contacts_list_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Adds a record to a contacts list.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @remarks Same kind of record can be added.
-  /// @param[in] contacts_list The contacts list handle
-  /// @param[in] record The record handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @see contacts_list_remove()
+  /// Adds a record to a contacts list.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - Same kind of record can be added.
+  ///
+  /// **Parameters:**
+  /// - `contacts_list` (in): The contacts list handle
+  /// - `record` (in): The record handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **See also:**
+  /// - `contacts_list_remove()`
   int contacts_list_add(
     contacts_list_h contacts_list,
     contacts_record_h record,
@@ -2151,20 +1711,29 @@ class Tizen80ContactsService2 {
   late final _contacts_list_add = _contacts_list_addPtr
       .asFunction<int Function(contacts_list_h, contacts_record_h)>();
 
-  /// @brief Removes a record from the contacts list.
-  /// @details If the record is current record, then current record is changed the next record. \n
-  /// If the record is the last record, then current record will be @c NULL.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] contacts_list The contacts list handle
-  /// @param[in] record The record handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NO_DATA Requested data does not exist
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @see contacts_list_add()
+  /// Removes a record from the contacts list.
+  ///
+  /// If the record is current record, then current record is changed the next record. If the record is the last record, then current record will be `NULL`.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `contacts_list` (in): The contacts list handle
+  /// - `record` (in): The record handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NO_DATA`: Requested data does not exist
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **See also:**
+  /// - `contacts_list_add()`
   int contacts_list_remove(
     contacts_list_h contacts_list,
     contacts_record_h record,
@@ -2182,20 +1751,30 @@ class Tizen80ContactsService2 {
   late final _contacts_list_remove = _contacts_list_removePtr
       .asFunction<int Function(contacts_list_h, contacts_record_h)>();
 
-  /// @brief Retrieves a record from the contacts list.
-  /// @details The default current record is the first record.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @remarks You MUST NOT destroy the @a record.
-  /// It is destroyed automatically when the @a contacts_list is destroyed.
-  /// @param[in] contacts_list The contacts list handle
-  /// @param[out] record The record handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NO_DATA Requested data does not exist
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
+  /// Retrieves a record from the contacts list.
+  ///
+  /// The default current record is the first record.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - You MUST NOT destroy the `record`.
+  /// - It is destroyed automatically when the `contacts_list` is destroyed.
+  ///
+  /// **Parameters:**
+  /// - `contacts_list` (in): The contacts list handle
+  /// - `record` (out): The record handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NO_DATA`: Requested data does not exist
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
   int contacts_list_get_current_record_p(
     contacts_list_h contacts_list,
     ffi.Pointer<contacts_record_h> record,
@@ -2215,17 +1794,26 @@ class Tizen80ContactsService2 {
       _contacts_list_get_current_record_pPtr.asFunction<
           int Function(contacts_list_h, ffi.Pointer<contacts_record_h>)>();
 
-  /// @brief Moves a contacts list to the previous position.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] contacts_list The contacts list handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NO_DATA Requested data does not exist
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @see contacts_list_next()
+  /// Moves a contacts list to the previous position.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `contacts_list` (in): The contacts list handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NO_DATA`: Requested data does not exist
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **See also:**
+  /// - `contacts_list_next()`
   int contacts_list_prev(
     contacts_list_h contacts_list,
   ) {
@@ -2240,17 +1828,26 @@ class Tizen80ContactsService2 {
   late final _contacts_list_prev =
       _contacts_list_prevPtr.asFunction<int Function(contacts_list_h)>();
 
-  /// @brief Moves a contacts list to the next position.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] contacts_list The contacts list handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NO_DATA Requested data does not exist
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @see contacts_list_prev()
+  /// Moves a contacts list to the next position.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `contacts_list` (in): The contacts list handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NO_DATA`: Requested data does not exist
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **See also:**
+  /// - `contacts_list_prev()`
   int contacts_list_next(
     contacts_list_h contacts_list,
   ) {
@@ -2265,17 +1862,26 @@ class Tizen80ContactsService2 {
   late final _contacts_list_next =
       _contacts_list_nextPtr.asFunction<int Function(contacts_list_h)>();
 
-  /// @brief Moves a contacts list to the first position.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] contacts_list The contacts list handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NO_DATA Requested data does not exist
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @see contacts_list_last()
+  /// Moves a contacts list to the first position.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `contacts_list` (in): The contacts list handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NO_DATA`: Requested data does not exist
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **See also:**
+  /// - `contacts_list_last()`
   int contacts_list_first(
     contacts_list_h contacts_list,
   ) {
@@ -2290,17 +1896,26 @@ class Tizen80ContactsService2 {
   late final _contacts_list_first =
       _contacts_list_firstPtr.asFunction<int Function(contacts_list_h)>();
 
-  /// @brief Moves a contacts list to the last position.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] contacts_list The contacts list handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NO_DATA Requested data does not exist
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @see contacts_list_first()
+  /// Moves a contacts list to the last position.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `contacts_list` (in): The contacts list handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NO_DATA`: Requested data does not exist
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **See also:**
+  /// - `contacts_list_first()`
   int contacts_list_last(
     contacts_list_h contacts_list,
   ) {
@@ -2315,20 +1930,33 @@ class Tizen80ContactsService2 {
   late final _contacts_list_last =
       _contacts_list_lastPtr.asFunction<int Function(contacts_list_h)>();
 
-  /// @brief Creates a filter.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @remarks You must release @a filter using contacts_filter_destroy().
-  /// @param[in] view_uri The view URI of a filter
-  /// @param[out] filter The filter handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to initialize
-  /// @see contacts_filter_destroy()
+  /// Creates a filter.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `filter` using contacts_filter_destroy().
+  ///
+  /// **Parameters:**
+  /// - `view_uri` (in): The view URI of a filter
+  /// - `filter` (out): The filter handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to initialize
+  ///
+  /// **See also:**
+  /// - `contacts_filter_destroy()`
   int contacts_filter_create(
     ffi.Pointer<ffi.Char> view_uri,
     ffi.Pointer<contacts_filter_h> filter,
@@ -2346,16 +1974,25 @@ class Tizen80ContactsService2 {
   late final _contacts_filter_create = _contacts_filter_createPtr.asFunction<
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<contacts_filter_h>)>();
 
-  /// @brief Destroys a filter.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] filter The filter handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @see contacts_filter_create()
+  /// Destroys a filter.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `filter` (in): The filter handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **See also:**
+  /// - `contacts_filter_create()`
   int contacts_filter_destroy(
     contacts_filter_h filter,
   ) {
@@ -2370,19 +2007,28 @@ class Tizen80ContactsService2 {
   late final _contacts_filter_destroy =
       _contacts_filter_destroyPtr.asFunction<int Function(contacts_filter_h)>();
 
-  /// @brief Adds a condition for a string type property.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] filter The filter handle
-  /// @param[in] property_id The property ID to add a condition
-  /// @param[in] match The match flag
-  /// @param[in] match_value The match value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @see contacts_filter_add_operator()
+  /// Adds a condition for a string type property.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `filter` (in): The filter handle
+  /// - `property_id` (in): The property ID to add a condition
+  /// - `match` (in): The match flag
+  /// - `match_value` (in): The match value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **See also:**
+  /// - `contacts_filter_add_operator()`
   int contacts_filter_add_str(
     contacts_filter_h filter,
     int property_id,
@@ -2404,19 +2050,28 @@ class Tizen80ContactsService2 {
   late final _contacts_filter_add_str = _contacts_filter_add_strPtr.asFunction<
       int Function(contacts_filter_h, int, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Adds a condition for an integer type property.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] filter The filter handle
-  /// @param[in] property_id The property ID to add a condition
-  /// @param[in] match The match flag
-  /// @param[in] match_value The match value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @see contacts_filter_add_operator()
+  /// Adds a condition for an integer type property.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `filter` (in): The filter handle
+  /// - `property_id` (in): The property ID to add a condition
+  /// - `match` (in): The match flag
+  /// - `match_value` (in): The match value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **See also:**
+  /// - `contacts_filter_add_operator()`
   int contacts_filter_add_int(
     contacts_filter_h filter,
     int property_id,
@@ -2438,19 +2093,28 @@ class Tizen80ContactsService2 {
   late final _contacts_filter_add_int = _contacts_filter_add_intPtr
       .asFunction<int Function(contacts_filter_h, int, int, int)>();
 
-  /// @brief Adds a condition for a long int type property.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] filter The filter handle
-  /// @param[in] property_id The property ID to add a condition
-  /// @param[in] match The match flag
-  /// @param[in] match_value The match value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @see contacts_filter_add_operator()
+  /// Adds a condition for a long int type property.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `filter` (in): The filter handle
+  /// - `property_id` (in): The property ID to add a condition
+  /// - `match` (in): The match flag
+  /// - `match_value` (in): The match value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **See also:**
+  /// - `contacts_filter_add_operator()`
   int contacts_filter_add_lli(
     contacts_filter_h filter,
     int property_id,
@@ -2472,19 +2136,28 @@ class Tizen80ContactsService2 {
   late final _contacts_filter_add_lli = _contacts_filter_add_lliPtr
       .asFunction<int Function(contacts_filter_h, int, int, int)>();
 
-  /// @brief Adds a condition for a double type property.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] filter The filter handle
-  /// @param[in] property_id The property ID to add a condition
-  /// @param[in] match The match flag
-  /// @param[in] match_value The match value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @see contacts_filter_add_operator()
+  /// Adds a condition for a double type property.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `filter` (in): The filter handle
+  /// - `property_id` (in): The property ID to add a condition
+  /// - `match` (in): The match flag
+  /// - `match_value` (in): The match value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **See also:**
+  /// - `contacts_filter_add_operator()`
   int contacts_filter_add_double(
     contacts_filter_h filter,
     int property_id,
@@ -2506,18 +2179,27 @@ class Tizen80ContactsService2 {
   late final _contacts_filter_add_double = _contacts_filter_add_doublePtr
       .asFunction<int Function(contacts_filter_h, int, int, double)>();
 
-  /// @brief Adds a condition for a boolean type property.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] filter The filter handle
-  /// @param[in] property_id The property ID to add a condition
-  /// @param[in] match_value The match value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @see contacts_filter_add_operator()
+  /// Adds a condition for a boolean type property.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `filter` (in): The filter handle
+  /// - `property_id` (in): The property ID to add a condition
+  /// - `match_value` (in): The match value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **See also:**
+  /// - `contacts_filter_add_operator()`
   int contacts_filter_add_bool(
     contacts_filter_h filter,
     int property_id,
@@ -2537,19 +2219,28 @@ class Tizen80ContactsService2 {
   late final _contacts_filter_add_bool = _contacts_filter_add_boolPtr
       .asFunction<int Function(contacts_filter_h, int, bool)>();
 
-  /// @brief Adds an operator between conditions.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] filter The filter handle
-  /// @param[in] operator_type The operator type
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @see contacts_filter_add_str()
-  /// @see contacts_filter_add_int()
-  /// @see contacts_filter_add_bool()
+  /// Adds an operator between conditions.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `filter` (in): The filter handle
+  /// - `operator_type` (in): The operator type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **See also:**
+  /// - `contacts_filter_add_str()`
+  /// - `contacts_filter_add_int()`
+  /// - `contacts_filter_add_bool()`
   int contacts_filter_add_operator(
     contacts_filter_h filter,
     int operator_type,
@@ -2566,17 +2257,26 @@ class Tizen80ContactsService2 {
   late final _contacts_filter_add_operator = _contacts_filter_add_operatorPtr
       .asFunction<int Function(contacts_filter_h, int)>();
 
-  /// @brief Adds a filter to a given filter.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] parent_filter The parent filter handle
-  /// @param[in] child_filter The child filter handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @see contacts_filter_add_operator()
+  /// Adds a filter to a given filter.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `parent_filter` (in): The parent filter handle
+  /// - `child_filter` (in): The child filter handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **See also:**
+  /// - `contacts_filter_add_operator()`
   int contacts_filter_add_filter(
     contacts_filter_h parent_filter,
     contacts_filter_h child_filter,
@@ -2594,20 +2294,33 @@ class Tizen80ContactsService2 {
   late final _contacts_filter_add_filter = _contacts_filter_add_filterPtr
       .asFunction<int Function(contacts_filter_h, contacts_filter_h)>();
 
-  /// @brief Creates a query.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @remarks You must release @a query using contacts_query_destroy().
-  /// @param[in] view_uri The view URI of a query
-  /// @param[out] query The filter handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to initialize
-  /// @see contacts_query_destroy()
+  /// Creates a query.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `query` using contacts_query_destroy().
+  ///
+  /// **Parameters:**
+  /// - `view_uri` (in): The view URI of a query
+  /// - `query` (out): The filter handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to initialize
+  ///
+  /// **See also:**
+  /// - `contacts_query_destroy()`
   int contacts_query_create(
     ffi.Pointer<ffi.Char> view_uri,
     ffi.Pointer<contacts_query_h> query,
@@ -2625,16 +2338,25 @@ class Tizen80ContactsService2 {
   late final _contacts_query_create = _contacts_query_createPtr.asFunction<
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<contacts_query_h>)>();
 
-  /// @brief Destroys a query.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] query The query handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @see contacts_query_create()
+  /// Destroys a query.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `query` (in): The query handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **See also:**
+  /// - `contacts_query_create()`
   int contacts_query_destroy(
     contacts_query_h query,
   ) {
@@ -2649,17 +2371,24 @@ class Tizen80ContactsService2 {
   late final _contacts_query_destroy =
       _contacts_query_destroyPtr.asFunction<int Function(contacts_query_h)>();
 
-  /// @brief Adds property IDs for projection.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] query The query handle
-  /// @param[in] property_id_array The property ID array
-  /// @param[in] count The number of property IDs
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
+  /// Adds property IDs for projection.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `query` (in): The query handle
+  /// - `property_id_array` (in): The property ID array
+  /// - `count` (in): The number of property IDs
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
   int contacts_query_set_projection(
     contacts_query_h query,
     ffi.Pointer<ffi.UnsignedInt> property_id_array,
@@ -2680,17 +2409,23 @@ class Tizen80ContactsService2 {
       _contacts_query_set_projectionPtr.asFunction<
           int Function(contacts_query_h, ffi.Pointer<ffi.UnsignedInt>, int)>();
 
-  /// @brief Sets the "distinct" option for projection.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] query The query handle
-  /// @param[in] set Set @c true to set the distinct option for projection,
-  /// otherwise @c false to unset the distinct option
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
+  /// Sets the "distinct" option for projection.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `query` (in): The query handle
+  /// - `set` (in): Set `true` to set the distinct option for projection, otherwise `false` to unset the distinct option
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
   int contacts_query_set_distinct(
     contacts_query_h query,
     bool set1,
@@ -2707,17 +2442,26 @@ class Tizen80ContactsService2 {
   late final _contacts_query_set_distinct = _contacts_query_set_distinctPtr
       .asFunction<int Function(contacts_query_h, bool)>();
 
-  /// @brief Sets a filter for query.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] query The query handle
-  /// @param[in] filter The filter handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @see contacts_filter_create()
+  /// Sets a filter for query.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `query` (in): The query handle
+  /// - `filter` (in): The filter handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **See also:**
+  /// - `contacts_filter_create()`
   int contacts_query_set_filter(
     contacts_query_h query,
     contacts_filter_h filter,
@@ -2735,18 +2479,24 @@ class Tizen80ContactsService2 {
   late final _contacts_query_set_filter = _contacts_query_set_filterPtr
       .asFunction<int Function(contacts_query_h, contacts_filter_h)>();
 
-  /// @brief Sets a sort mode for query.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] query The query handle
-  /// @param[in] property_id The property ID to sort
-  /// @param[in] is_ascending Set @c true for ascending sort mode,
-  /// otherwise @c false for descending sort mode
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
+  /// Sets a sort mode for query.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `query` (in): The query handle
+  /// - `property_id` (in): The property ID to sort
+  /// - `is_ascending` (in): Set `true` for ascending sort mode, otherwise `false` for descending sort mode
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
   int contacts_query_set_sort(
     contacts_query_h query,
     int property_id,
@@ -2766,38 +2516,58 @@ class Tizen80ContactsService2 {
   late final _contacts_query_set_sort = _contacts_query_set_sortPtr
       .asFunction<int Function(contacts_query_h, int, bool)>();
 
-  /// @brief Inserts a record to the contacts database.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.write
-  /// @privilege %http://tizen.org/privilege/callhistory.write
-  /// @remarks %http://tizen.org/privilege/contact.write is needed for record which is created with @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address_book, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact, \n @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_my_profile,
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_name, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_number, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_email, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_note, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_url, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_event, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_image, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_company, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_nickname, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_messenger, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_extension, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_profile, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_relationship, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity_photo, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_speeddial. \n
-  /// %http://tizen.org/privilege/callhistory.write is needed for record which is created with @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log.
-  /// @param[in] record The record handle
-  /// @param[out] id The ID of inserted record
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_FILE_NO_SPACE FS Full
-  /// @retval #CONTACTS_ERROR_NO_DATA Requested data does not exist
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @post contacts_db_changed_cb() callback will be called upon success.
-  /// @see contacts_connect()
-  /// @see contacts_db_update_record()
-  /// @see contacts_db_delete_record()
-  /// @see contacts_db_get_record()
+  /// Inserts a record to the contacts database.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.write>
+  /// - <http://tizen.org/privilege/callhistory.write>
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/contact.write is needed for record which is created with `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address_book,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact,`>
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_my_profile,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_name,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_number,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_email,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_note,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_url,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_event,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_image,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_company,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_nickname,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_messenger,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_extension,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_profile,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_relationship,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity_photo,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_speeddial.`
+  /// - <http://tizen.org/privilege/callhistory.write is needed for record which is created with `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log.`>
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  /// - `id` (out): The ID of inserted record
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_FILE_NO_SPACE`: FS Full
+  /// - `CONTACTS_ERROR_NO_DATA`: Requested data does not exist
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **Postconditions:**
+  /// - contacts_db_changed_cb() callback will be called upon success.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
+  /// - `contacts_db_update_record()`
+  /// - `contacts_db_delete_record()`
+  /// - `contacts_db_get_record()`
   int contacts_db_insert_record(
     contacts_record_h record,
     ffi.Pointer<ffi.Int> id,
@@ -2815,40 +2585,57 @@ class Tizen80ContactsService2 {
   late final _contacts_db_insert_record = _contacts_db_insert_recordPtr
       .asFunction<int Function(contacts_record_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets a record from the contacts database.
-  /// @details This function creates a new contact handle from the contacts database by the given @a record_id. \n
-  /// @a record will be created, which is filled with contact information.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.read
-  /// @privilege %http://tizen.org/privilege/callhistory.read
-  /// @remarks %http://tizen.org/privilege/contact.read is needed for record which is related to @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address_book, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_simple_contact, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_my_profile, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_name, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_number, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_email, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_note, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_url, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_event, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_image, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_company, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_nickname, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_messenger, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_extension, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_profile, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_relationship, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity_photo, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_speeddial, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_sdn. \n
-  /// %http://tizen.org/privilege/callhistory.read is needed for record which is related to @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log.
-  /// @remarks You must release @a record using contacts_record_destroy().
-  /// @param[in] view_uri The view URI of a record
-  /// @param[in] record_id The record ID to get from database
-  /// @param[out] record The record handle associated with the record ID
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_FILE_NO_SPACE FS Full
-  /// @retval #CONTACTS_ERROR_NO_DATA Requested data does not exist
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
-  /// @see contacts_record_destroy()
+  /// Gets a record from the contacts database.
+  ///
+  /// This function creates a new contact handle from the contacts database by the given `record_id`. `record` will be created, which is filled with contact information.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.read>
+  /// - <http://tizen.org/privilege/callhistory.read>
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/contact.read is needed for record which is related to `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address_book,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person,`>
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_simple_contact,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_my_profile,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_name,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_number,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_email,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_note,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_url,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_event,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_image,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_company,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_nickname,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_messenger,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_extension,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_profile,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_relationship,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity_photo,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_speeddial,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_sdn.`
+  /// - <http://tizen.org/privilege/callhistory.read is needed for record which is related to `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log.`>
+  /// - You must release `record` using contacts_record_destroy().
+  ///
+  /// **Parameters:**
+  /// - `view_uri` (in): The view URI of a record
+  /// - `record_id` (in): The record ID to get from database
+  /// - `record` (out): The record handle associated with the record ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_FILE_NO_SPACE`: FS Full
+  /// - `CONTACTS_ERROR_NO_DATA`: Requested data does not exist
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
+  /// - `contacts_record_destroy()`
   int contacts_db_get_record(
     ffi.Pointer<ffi.Char> view_uri,
     int record_id,
@@ -2869,37 +2656,57 @@ class Tizen80ContactsService2 {
       int Function(
           ffi.Pointer<ffi.Char>, int, ffi.Pointer<contacts_record_h>)>();
 
-  /// @brief Updates a record in the contacts database.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.write
-  /// @privilege %http://tizen.org/privilege/callhistory.write
-  /// @remarks %http://tizen.org/privilege/contact.write is needed for record which is related to @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address_book, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact, \n @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_my_profile,
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_name, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_number, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_email, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_note, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_url, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_event, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_image, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_company, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_nickname, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_messenger, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_extension, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_profile, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_relationship, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity_photo, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_speeddial. \n
-  /// %http://tizen.org/privilege/callhistory.write is needed for record which is related to @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log.
-  /// @param[in] record The record handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_FILE_NO_SPACE FS Full
-  /// @retval #CONTACTS_ERROR_NO_DATA Requested data does not exist
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @post contacts_db_changed_cb() callback will be called upon success.
-  /// @see contacts_connect()
-  /// @see contacts_db_insert_record()
-  /// @see contacts_db_delete_record()
-  /// @see contacts_db_get_record()
+  /// Updates a record in the contacts database.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.write>
+  /// - <http://tizen.org/privilege/callhistory.write>
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/contact.write is needed for record which is related to `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address_book,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact,`>
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_my_profile,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_name,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_number,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_email,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_note,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_url,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_event,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_image,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_company,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_nickname,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_messenger,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_extension,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_profile,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_relationship,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity_photo,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_speeddial.`
+  /// - <http://tizen.org/privilege/callhistory.write is needed for record which is related to `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log.`>
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_FILE_NO_SPACE`: FS Full
+  /// - `CONTACTS_ERROR_NO_DATA`: Requested data does not exist
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **Postconditions:**
+  /// - contacts_db_changed_cb() callback will be called upon success.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
+  /// - `contacts_db_insert_record()`
+  /// - `contacts_db_delete_record()`
+  /// - `contacts_db_get_record()`
   int contacts_db_update_record(
     contacts_record_h record,
   ) {
@@ -2914,36 +2721,56 @@ class Tizen80ContactsService2 {
   late final _contacts_db_update_record = _contacts_db_update_recordPtr
       .asFunction<int Function(contacts_record_h)>();
 
-  /// @brief Deletes a record from the contacts database with related child records.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.write
-  /// @privilege %http://tizen.org/privilege/callhistory.write
-  /// @remarks %http://tizen.org/privilege/contact.write is needed for record which is related to @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address_book, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact, \n @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_my_profile,
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_name, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_number, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_email, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_note, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_url, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_event, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_image, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_company, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_nickname, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_messenger, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_extension, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_profile, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_relationship, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity_photo, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_speeddial. \n
-  /// %http://tizen.org/privilege/callhistory.write is needed for record which is related to @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log.
-  /// @param[in] view_uri The view URI of a record
-  /// @param[in] record_id The record ID to delete
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_FILE_NO_SPACE FS Full
-  /// @retval #CONTACTS_ERROR_NO_DATA Requested data does not exist
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @post contacts_db_changed_cb() callback will be called upon success.
-  /// @see contacts_connect()
-  /// @see contacts_db_insert_record()
+  /// Deletes a record from the contacts database with related child records.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.write>
+  /// - <http://tizen.org/privilege/callhistory.write>
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/contact.write is needed for record which is related to `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address_book,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact,`>
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_my_profile,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_name,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_number,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_email,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_note,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_url,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_event,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_image,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_company,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_nickname,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_messenger,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_extension,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_profile,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_relationship,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity_photo,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_speeddial.`
+  /// - <http://tizen.org/privilege/callhistory.write is needed for record which is related to `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log.`>
+  ///
+  /// **Parameters:**
+  /// - `view_uri` (in): The view URI of a record
+  /// - `record_id` (in): The record ID to delete
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_FILE_NO_SPACE`: FS Full
+  /// - `CONTACTS_ERROR_NO_DATA`: Requested data does not exist
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **Postconditions:**
+  /// - contacts_db_changed_cb() callback will be called upon success.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
+  /// - `contacts_db_insert_record()`
   int contacts_db_delete_record(
     ffi.Pointer<ffi.Char> view_uri,
     int record_id,
@@ -2960,33 +2787,53 @@ class Tizen80ContactsService2 {
   late final _contacts_db_delete_record = _contacts_db_delete_recordPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, int)>();
 
-  /// @brief Replaces an id-identified record with the given record.
-  /// @details Now, this API supports only _contacts_contact view_uri.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.write
-  /// @remarks The write-once value of @a record is not replaced. \n
-  /// This API works only for @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact.
-  /// @param[in] record The new record handle to replace
-  /// @param[in] id The DB record ID to be replaced
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_FILE_NO_SPACE FS Full
-  /// @retval #CONTACTS_ERROR_NO_DATA Requested data does not exist
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @post contacts_db_changed_cb() callback will be called upon success.
-  /// @see contacts_connect()
-  /// @see contacts_db_update_record()
-  /// @see contacts_db_delete_record()
-  /// @see contacts_db_get_record()
+  /// Replaces an id-identified record with the given record.
+  ///
+  /// Now, this API supports only _contacts_contact view_uri.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.write>
+  ///
+  /// **Remarks:**
+  /// - The write-once value of `record` is not replaced.
+  /// - This API works only for `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact.`
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The new record handle to replace
+  /// - `id` (in): The DB record ID to be replaced
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_FILE_NO_SPACE`: FS Full
+  /// - `CONTACTS_ERROR_NO_DATA`: Requested data does not exist
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **Postconditions:**
+  /// - contacts_db_changed_cb() callback will be called upon success.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
+  /// - `contacts_db_update_record()`
+  /// - `contacts_db_delete_record()`
+  /// - `contacts_db_get_record()`
   int contacts_db_replace_record(
     contacts_record_h record,
     int id,
@@ -3003,40 +2850,57 @@ class Tizen80ContactsService2 {
   late final _contacts_db_replace_record = _contacts_db_replace_recordPtr
       .asFunction<int Function(contacts_record_h, int)>();
 
-  /// @brief Retrieves all records and returns the results list.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.read
-  /// @privilege %http://tizen.org/privilege/callhistory.read
-  /// @remarks You must release @a record_list using contacts_list_destroy(). \n
-  /// %http://tizen.org/privilege/contact.read is needed for record which is related to @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address_book, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_simple_contact, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_my_profile, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_name, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_number, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_email, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_note, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_url, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_event, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_image, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_company, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_nickname, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_messenger, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_extension, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_profile, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_relationship, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity_photo, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_speeddial, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_sdn and all read-only views except views which are related to phone log. \n
-  /// %http://tizen.org/privilege/callhistory.read is needed for record which is related to @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log_stat. \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_phone_log view is needed both privileges.
-  /// @param[in] view_uri The view URI to get records
-  /// @param[in] offset The index from which to get results
-  /// @param[in] limit The number to limit results(value 0 is used for all records)
-  /// @param[out] record_list The record list
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_FILE_NO_SPACE FS Full
-  /// @retval #CONTACTS_ERROR_NO_DATA Requested data does not exist
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
-  /// @see contacts_list_destroy()
+  /// Retrieves all records and returns the results list.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.read>
+  /// - <http://tizen.org/privilege/callhistory.read>
+  ///
+  /// **Remarks:**
+  /// - You must release `record_list` using contacts_list_destroy().
+  /// - <http://tizen.org/privilege/contact.read is needed for record which is related to `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address_book,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person,`>
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_simple_contact,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_my_profile,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_name,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_number,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_email,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_note,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_url,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_event,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_image,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_company,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_nickname,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_messenger,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_extension,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_profile,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_relationship,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity_photo,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_speeddial,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_sdn` and all read-only views except views which are related to phone log.
+  /// - <http://tizen.org/privilege/callhistory.read is needed for record which is related to `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log_stat.`>
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_phone_log` view is needed both privileges.
+  ///
+  /// **Parameters:**
+  /// - `view_uri` (in): The view URI to get records
+  /// - `offset` (in): The index from which to get results
+  /// - `limit` (in): The number to limit results(value 0 is used for all records)
+  /// - `record_list` (out): The record list
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_FILE_NO_SPACE`: FS Full
+  /// - `CONTACTS_ERROR_NO_DATA`: Requested data does not exist
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
+  /// - `contacts_list_destroy()`
   int contacts_db_get_all_records(
     ffi.Pointer<ffi.Char> view_uri,
     int offset,
@@ -3060,40 +2924,57 @@ class Tizen80ContactsService2 {
           int Function(
               ffi.Pointer<ffi.Char>, int, int, ffi.Pointer<contacts_list_h>)>();
 
-  /// @brief Uses a query to find records.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.read
-  /// @privilege %http://tizen.org/privilege/callhistory.read
-  /// @remarks You must release @a record_list using contacts_list_destroy(). \n
-  /// %http://tizen.org/privilege/contact.read is needed for record which is related to @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address_book, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_simple_contact, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_my_profile, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_name, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_number, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_email, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_note, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_url, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_event, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_image, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_company, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_nickname, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_messenger, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_extension, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_profile, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_relationship, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity_photo, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_speeddial, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_sdn and all read-only views except views which are related to phone log. \n
-  /// %http://tizen.org/privilege/callhistory.read is needed for record which is related to @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log_stat. \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_phone_log view is needed both privileges.
-  /// @param[in] query The query to filter the results
-  /// @param[in] offset The index from which to get results
-  /// @param[in] limit The number to limit results(value 0 is used for get all records)
-  /// @param[out] record_list The record list
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_FILE_NO_SPACE FS Full
-  /// @retval #CONTACTS_ERROR_NO_DATA Requested data does not exist
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
-  /// @see contacts_list_destroy()
+  /// Uses a query to find records.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.read>
+  /// - <http://tizen.org/privilege/callhistory.read>
+  ///
+  /// **Remarks:**
+  /// - You must release `record_list` using contacts_list_destroy().
+  /// - <http://tizen.org/privilege/contact.read is needed for record which is related to `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address_book,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person,`>
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_simple_contact,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_my_profile,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_name,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_number,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_email,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_note,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_url,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_event,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_image,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_company,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_nickname,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_messenger,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_extension,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_profile,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_relationship,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity_photo,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_speeddial,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_sdn` and all read-only views except views which are related to phone log.
+  /// - <http://tizen.org/privilege/callhistory.read is needed for record which is related to `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log_stat.`>
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_phone_log` view is needed both privileges.
+  ///
+  /// **Parameters:**
+  /// - `query` (in): The query to filter the results
+  /// - `offset` (in): The index from which to get results
+  /// - `limit` (in): The number to limit results(value 0 is used for get all records)
+  /// - `record_list` (out): The record list
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_FILE_NO_SPACE`: FS Full
+  /// - `CONTACTS_ERROR_NO_DATA`: Requested data does not exist
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
+  /// - `contacts_list_destroy()`
   int contacts_db_get_records_with_query(
     contacts_query_h query,
     int offset,
@@ -3118,38 +2999,58 @@ class Tizen80ContactsService2 {
           int Function(
               contacts_query_h, int, int, ffi.Pointer<contacts_list_h>)>();
 
-  /// @brief Inserts multiple records to the contacts database.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.write
-  /// @privilege %http://tizen.org/privilege/callhistory.write
-  /// @remarks %http://tizen.org/privilege/contact.write is needed for record which is related to @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address_book, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact, \n @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_my_profile,
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_name, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_number, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_email, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_note, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_url, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_event, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_image, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_company, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_nickname, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_messenger, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_extension, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_profile, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_relationship, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity_photo, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_speeddial. \n
-  /// %http://tizen.org/privilege/callhistory.write is needed for record which is related to @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log.
-  /// @param[in] record_list The record list handle
-  /// @param[out] ids The IDs of inserted records
-  /// @param[out] count The number of IDs
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_FILE_NO_SPACE FS Full
-  /// @retval #CONTACTS_ERROR_NO_DATA Requested data does not exist
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @post contacts_db_changed_cb() callback will be called upon success.
-  /// @see contacts_connect()
-  /// @see contacts_db_update_records()
-  /// @see contacts_db_delete_records()
+  /// Inserts multiple records to the contacts database.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.write>
+  /// - <http://tizen.org/privilege/callhistory.write>
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/contact.write is needed for record which is related to `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address_book,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact,`>
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_my_profile,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_name,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_number,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_email,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_note,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_url,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_event,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_image,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_company,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_nickname,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_messenger,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_extension,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_profile,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_relationship,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity_photo,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_speeddial.`
+  /// - <http://tizen.org/privilege/callhistory.write is needed for record which is related to `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log.`>
+  ///
+  /// **Parameters:**
+  /// - `record_list` (in): The record list handle
+  /// - `ids` (out): The IDs of inserted records
+  /// - `count` (out): The number of IDs
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_FILE_NO_SPACE`: FS Full
+  /// - `CONTACTS_ERROR_NO_DATA`: Requested data does not exist
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **Postconditions:**
+  /// - contacts_db_changed_cb() callback will be called upon success.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
+  /// - `contacts_db_update_records()`
+  /// - `contacts_db_delete_records()`
   int contacts_db_insert_records(
     contacts_list_h record_list,
     ffi.Pointer<ffi.Pointer<ffi.Int>> ids,
@@ -3171,36 +3072,56 @@ class Tizen80ContactsService2 {
           int Function(contacts_list_h, ffi.Pointer<ffi.Pointer<ffi.Int>>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Updates multiple records in the contacts database.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.write
-  /// @privilege %http://tizen.org/privilege/callhistory.write
-  /// @remarks %http://tizen.org/privilege/contact.write is needed for record which is related to @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address_book, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact, \n @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_my_profile,
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_name, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_number, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_email, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_note, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_url, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_event, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_image, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_company, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_nickname, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_messenger, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_extension, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_profile, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_relationship, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity_photo, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_speeddial. \n
-  /// %http://tizen.org/privilege/callhistory.write is needed for record which is related to @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log.
-  /// @param[in] record_list The record list handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_FILE_NO_SPACE FS Full
-  /// @retval #CONTACTS_ERROR_NO_DATA Requested data does not exist
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @post contacts_db_changed_cb() callback will be called upon success.
-  /// @see contacts_connect()
-  /// @see contacts_db_insert_records()
-  /// @see contacts_db_delete_records()
+  /// Updates multiple records in the contacts database.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.write>
+  /// - <http://tizen.org/privilege/callhistory.write>
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/contact.write is needed for record which is related to `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address_book,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact,`>
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_my_profile,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_name,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_number,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_email,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_note,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_url,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_event,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_image,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_company,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_nickname,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_messenger,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_extension,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_profile,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_relationship,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity_photo,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_speeddial.`
+  /// - <http://tizen.org/privilege/callhistory.write is needed for record which is related to `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log.`>
+  ///
+  /// **Parameters:**
+  /// - `record_list` (in): The record list handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_FILE_NO_SPACE`: FS Full
+  /// - `CONTACTS_ERROR_NO_DATA`: Requested data does not exist
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **Postconditions:**
+  /// - contacts_db_changed_cb() callback will be called upon success.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
+  /// - `contacts_db_insert_records()`
+  /// - `contacts_db_delete_records()`
   int contacts_db_update_records(
     contacts_list_h record_list,
   ) {
@@ -3215,38 +3136,58 @@ class Tizen80ContactsService2 {
   late final _contacts_db_update_records = _contacts_db_update_recordsPtr
       .asFunction<int Function(contacts_list_h)>();
 
-  /// @brief Deletes multiple records in the contacts database with related child records.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.write
-  /// @privilege %http://tizen.org/privilege/callhistory.write
-  /// @remarks %http://tizen.org/privilege/contact.write is needed for record which is related to @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address_book, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact, \n @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_my_profile,
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_name, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_number, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_email, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_note, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_url, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_event, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_image, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_company, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_nickname, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_messenger, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_extension, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_profile, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_relationship, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity_photo, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_speeddial. \n
-  /// %http://tizen.org/privilege/callhistory.write is needed for record which is related to @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log.
-  /// @param[in] view_uri The view URI of records
-  /// @param[in] record_id_array The record IDs to delete
-  /// @param[in] count The size of record ID array
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_FILE_NO_SPACE FS Full
-  /// @retval #CONTACTS_ERROR_NO_DATA Requested data does not exist
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @post contacts_db_changed_cb() callback will be called upon success.
-  /// @see contacts_connect()
-  /// @see contacts_db_insert_records()
-  /// @see contacts_db_update_records()
+  /// Deletes multiple records in the contacts database with related child records.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.write>
+  /// - <http://tizen.org/privilege/callhistory.write>
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/contact.write is needed for record which is related to `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address_book,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact,`>
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_my_profile,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_name,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_number,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_email,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_note,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_url,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_event,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_image,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_company,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_nickname,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_messenger,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_extension,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_profile,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_relationship,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity_photo,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_speeddial.`
+  /// - <http://tizen.org/privilege/callhistory.write is needed for record which is related to `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log.`>
+  ///
+  /// **Parameters:**
+  /// - `view_uri` (in): The view URI of records
+  /// - `record_id_array` (in): The record IDs to delete
+  /// - `count` (in): The size of record ID array
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_FILE_NO_SPACE`: FS Full
+  /// - `CONTACTS_ERROR_NO_DATA`: Requested data does not exist
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **Postconditions:**
+  /// - contacts_db_changed_cb() callback will be called upon success.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
+  /// - `contacts_db_insert_records()`
+  /// - `contacts_db_update_records()`
   int contacts_db_delete_records(
     ffi.Pointer<ffi.Char> view_uri,
     ffi.Pointer<ffi.Int> record_id_array,
@@ -3267,33 +3208,52 @@ class Tizen80ContactsService2 {
       _contacts_db_delete_recordsPtr.asFunction<
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Int>, int)>();
 
-  /// @brief Replaces database records identified by given ids with a given record list.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.write
-  /// @remarks The write-once value of record is not replaced. \n
-  /// This API works only for @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact.
-  /// @param[in] list The new record list handle to replace
-  /// @param[in] record_id_array The record IDs to replace
-  /// @param[in] count The size of record ID array
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_FILE_NO_SPACE FS Full
-  /// @retval #CONTACTS_ERROR_NO_DATA Requested data does not exist
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @post contacts_db_changed_cb() callback will be called upon success.
-  /// @see contacts_connect()
-  /// @see contacts_db_update_record()
-  /// @see contacts_db_delete_record()
-  /// @see contacts_db_get_record()
+  /// Replaces database records identified by given ids with a given record list.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.write>
+  ///
+  /// **Remarks:**
+  /// - The write-once value of record is not replaced.
+  /// - This API works only for `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact.`
+  ///
+  /// **Parameters:**
+  /// - `list` (in): The new record list handle to replace
+  /// - `record_id_array` (in): The record IDs to replace
+  /// - `count` (in): The size of record ID array
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_FILE_NO_SPACE`: FS Full
+  /// - `CONTACTS_ERROR_NO_DATA`: Requested data does not exist
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **Postconditions:**
+  /// - contacts_db_changed_cb() callback will be called upon success.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
+  /// - `contacts_db_update_record()`
+  /// - `contacts_db_delete_record()`
+  /// - `contacts_db_get_record()`
   int contacts_db_replace_records(
     contacts_list_h list,
     ffi.Pointer<ffi.Int> record_id_array,
@@ -3313,26 +3273,41 @@ class Tizen80ContactsService2 {
   late final _contacts_db_replace_records = _contacts_db_replace_recordsPtr
       .asFunction<int Function(contacts_list_h, ffi.Pointer<ffi.Int>, int)>();
 
-  /// @brief Gets the current contacts database version.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.read
-  /// @privilege %http://tizen.org/privilege/callhistory.read
-  /// @param[out] contacts_db_version The contacts database version
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_NO_DATA Requested data does not exist
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
-  /// @see contacts_db_get_changes_by_version()
+  /// Gets the current contacts database version.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.read>
+  /// - <http://tizen.org/privilege/callhistory.read>
+  ///
+  /// **Parameters:**
+  /// - `contacts_db_version` (out): The contacts database version
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_NO_DATA`: Requested data does not exist
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
+  /// - `contacts_db_get_changes_by_version()`
   int contacts_db_get_current_version(
     ffi.Pointer<ffi.Int> contacts_db_version,
   ) {
@@ -3348,39 +3323,58 @@ class Tizen80ContactsService2 {
       _contacts_db_get_current_versionPtr
           .asFunction<int Function(ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Registers a callback function to be invoked when a record changes.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.read
-  /// @privilege %http://tizen.org/privilege/callhistory.read
-  /// @remarks %http://tizen.org/privilege/contact.read is needed for record which is related to @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address_book, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_simple_contact, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_my_profile, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_name, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_number, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_email, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_note, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_url, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_event, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_image, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_company, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_nickname, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_messenger, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_extension, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_profile, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_relationship, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity_photo, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_speeddial, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_sdn, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group_relation.\n
-  /// %http://tizen.org/privilege/callhistory.read is needed for record which is related to @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log.
-  /// If successive change notification produced on the view_uri are identical,
-  /// then they are coalesced into a single notification if the older notification has not yet been called
-  /// because default main loop is doing something.
-  /// But, it means that a callback function is not called to reliably count of change.
-  /// @param[in] view_uri The view URI of records whose changes are monitored
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM System error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @post contacts_db_changed_cb() will be invoked when the designated view changes.
-  /// @see contacts_connect()
-  /// @see contacts_db_changed_cb()
-  /// @see contacts_db_remove_changed_cb()
+  /// Registers a callback function to be invoked when a record changes.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.read>
+  /// - <http://tizen.org/privilege/callhistory.read>
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/contact.read is needed for record which is related to `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address_book,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person,`>
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_simple_contact,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_my_profile,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_name,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_number,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_email,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_note,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_url,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_event,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_image,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_company,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_nickname,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_messenger,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_extension,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_profile,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_relationship,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity_photo,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_speeddial,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_sdn,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group_relation.`
+  /// - <http://tizen.org/privilege/callhistory.read is needed for record which is related to `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log.`>
+  /// - If successive change notification produced on the view_uri are identical,
+  /// - then they are coalesced into a single notification if the older notification has not yet been called
+  /// - because default main loop is doing something.
+  /// - But, it means that a callback function is not called to reliably count of change.
+  ///
+  /// **Parameters:**
+  /// - `view_uri` (in): The view URI of records whose changes are monitored
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: System error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **Postconditions:**
+  /// - contacts_db_changed_cb() will be invoked when the designated view changes.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
+  /// - `contacts_db_changed_cb()`
+  /// - `contacts_db_remove_changed_cb()`
   int contacts_db_add_changed_cb(
     ffi.Pointer<ffi.Char> view_uri,
     contacts_db_changed_cb callback,
@@ -3402,23 +3396,34 @@ class Tizen80ContactsService2 {
           int Function(ffi.Pointer<ffi.Char>, contacts_db_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters a callback function.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] view_uri The view URI of records whose changes are monitored
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NO_DATA Requested data does not exist
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM System error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
-  /// @see contacts_db_changed_cb()
-  /// @see contacts_db_add_changed_cb()
+  /// Unregisters a callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `view_uri` (in): The view URI of records whose changes are monitored
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NO_DATA`: Requested data does not exist
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: System error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
+  /// - `contacts_db_changed_cb()`
+  /// - `contacts_db_add_changed_cb()`
   int contacts_db_remove_changed_cb(
     ffi.Pointer<ffi.Char> view_uri,
     contacts_db_changed_cb callback,
@@ -3440,34 +3445,50 @@ class Tizen80ContactsService2 {
           int Function(ffi.Pointer<ffi.Char>, contacts_db_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Retrieves records changes since the given database version.
-  /// @details This function will find all changed records since the given @a contacts_db_version. \n
-  /// Now, support @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact_updated_info, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group_updated_info \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_my_profile_updated_info and @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_grouprel_updated_info.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.read
-  /// @remarks You must release @a record_list using contacts_list_destroy().
-  /// @param[in] view_uri The view URI to get records
-  /// @param[in] address_book_id The address book ID to filter
-  /// @param[in] contacts_db_version The contacts database version
-  /// @param[out] change_record_list The record list
-  /// @param[out] current_contacts_db_version The current contacts database version
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_FILE_NO_SPACE FS Full
-  /// @retval #CONTACTS_ERROR_NO_DATA Requested data does not exist
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
-  /// @see contacts_list_destroy()
+  /// Retrieves records changes since the given database version.
+  ///
+  /// This function will find all changed records since the given `contacts_db_version`. Now, support `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact_updated_info,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group_updated_info` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_my_profile_updated_info` and `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_grouprel_updated_info.`
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.read>
+  ///
+  /// **Remarks:**
+  /// - You must release `record_list` using contacts_list_destroy().
+  ///
+  /// **Parameters:**
+  /// - `view_uri` (in): The view URI to get records
+  /// - `address_book_id` (in): The address book ID to filter
+  /// - `contacts_db_version` (in): The contacts database version
+  /// - `change_record_list` (out): The record list
+  /// - `current_contacts_db_version` (out): The current contacts database version
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_FILE_NO_SPACE`: FS Full
+  /// - `CONTACTS_ERROR_NO_DATA`: Requested data does not exist
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
+  /// - `contacts_list_destroy()`
   int contacts_db_get_changes_by_version(
     ffi.Pointer<ffi.Char> view_uri,
     int address_book_id,
@@ -3497,32 +3518,49 @@ class Tizen80ContactsService2 {
           int Function(ffi.Pointer<ffi.Char>, int, int,
               ffi.Pointer<contacts_list_h>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Finds records based on a given keyword.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.read
-  /// @remarks You must release @a record_list using contacts_list_destroy(). \n
-  /// This API works only for @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_contact, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_grouprel, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_assigned \n
-  /// and @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_not_assigned.
-  /// @param[in] view_uri The view URI to get records
-  /// @param[in] keyword The keyword
-  /// @param[in] offset The index from which to get results
-  /// @param[in] limit The number to limit results(value 0 is used for get all records)
-  /// @param[out] record_list The record list
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
-  /// @see contacts_list_destroy()
+  /// Finds records based on a given keyword.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.read>
+  ///
+  /// **Remarks:**
+  /// - You must release `record_list` using contacts_list_destroy().
+  /// - This API works only for `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_contact,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_grouprel,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_assigned`
+  /// - and `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_not_assigned.`
+  ///
+  /// **Parameters:**
+  /// - `view_uri` (in): The view URI to get records
+  /// - `keyword` (in): The keyword
+  /// - `offset` (in): The index from which to get results
+  /// - `limit` (in): The number to limit results(value 0 is used for get all records)
+  /// - `record_list` (out): The record list
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
+  /// - `contacts_list_destroy()`
   int contacts_db_search_records(
     ffi.Pointer<ffi.Char> view_uri,
     ffi.Pointer<ffi.Char> keyword,
@@ -3552,33 +3590,50 @@ class Tizen80ContactsService2 {
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, int, int,
               ffi.Pointer<contacts_list_h>)>();
 
-  /// @brief Finds records based on given query and keyword.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.read
-  /// @remarks You must release @a record_list using contacts_list_destroy(). \n
-  /// This API works only for @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_contact, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_grouprel, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_assigned \n
-  /// and @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_not_assigned.
-  /// @param[in] query The query handle to filter
-  /// @param[in] keyword The keyword
-  /// @param[in] offset The index from which to get results
-  /// @param[in] limit The number to limit results(value 0 used for get all records)
-  /// @param[out] record_list The record list
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_FILE_NO_SPACE FS Full
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
-  /// @see contacts_list_destroy()
+  /// Finds records based on given query and keyword.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.read>
+  ///
+  /// **Remarks:**
+  /// - You must release `record_list` using contacts_list_destroy().
+  /// - This API works only for `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_contact,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_grouprel,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_assigned`
+  /// - and `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_not_assigned.`
+  ///
+  /// **Parameters:**
+  /// - `query` (in): The query handle to filter
+  /// - `keyword` (in): The keyword
+  /// - `offset` (in): The index from which to get results
+  /// - `limit` (in): The number to limit results(value 0 used for get all records)
+  /// - `record_list` (out): The record list
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_FILE_NO_SPACE`: FS Full
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
+  /// - `contacts_list_destroy()`
   int contacts_db_search_records_with_query(
     contacts_query_h query,
     ffi.Pointer<ffi.Char> keyword,
@@ -3605,35 +3660,52 @@ class Tizen80ContactsService2 {
           int Function(contacts_query_h, ffi.Pointer<ffi.Char>, int, int,
               ffi.Pointer<contacts_list_h>)>();
 
-  /// @brief Finds records based on a keyword and range.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.read
-  /// @remarks You must release @a record_list using contacts_list_destroy(). \n
-  /// This API works only for @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_contact, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_grouprel, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_assigned, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_not_assigned. These views can search records with range @ref CONTACTS_SEARCH_RANGE_NAME, @ref CONTACTS_SEARCH_RANGE_NUMBER, @ref CONTACTS_SEARCH_RANGE_DATA. \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_number can search records with @ref CONTACTS_SEARCH_RANGE_NAME and @ref CONTACTS_SEARCH_RANGE_NUMBER.\n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_email can search records with @ref CONTACTS_SEARCH_RANGE_NAME and @ref CONTACTS_SEARCH_RANGE_EMAIL.
-  /// @param[in] view_uri The view URI
-  /// @param[in] keyword The keyword
-  /// @param[in] offset The index from which to get results
-  /// @param[in] limit The number to limit results(value 0 is used for get all records)
-  /// @param[in] range The search range
-  /// @param[out] record_list The record list
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
-  /// @see contacts_list_destroy()
+  /// Finds records based on a keyword and range.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.read>
+  ///
+  /// **Remarks:**
+  /// - You must release `record_list` using contacts_list_destroy().
+  /// - This API works only for `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_contact,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_grouprel,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_assigned,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_not_assigned.` These views can search records with range `CONTACTS_SEARCH_RANGE_NAME,` `CONTACTS_SEARCH_RANGE_NUMBER,` `CONTACTS_SEARCH_RANGE_DATA.`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_number` can search records with `CONTACTS_SEARCH_RANGE_NAME` and `CONTACTS_SEARCH_RANGE_NUMBER.`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_email` can search records with `CONTACTS_SEARCH_RANGE_NAME` and `CONTACTS_SEARCH_RANGE_EMAIL.`
+  ///
+  /// **Parameters:**
+  /// - `view_uri` (in): The view URI
+  /// - `keyword` (in): The keyword
+  /// - `offset` (in): The index from which to get results
+  /// - `limit` (in): The number to limit results(value 0 is used for get all records)
+  /// - `range` (in): The search range
+  /// - `record_list` (out): The record list
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
+  /// - `contacts_list_destroy()`
   int contacts_db_search_records_with_range(
     ffi.Pointer<ffi.Char> view_uri,
     ffi.Pointer<ffi.Char> keyword,
@@ -3662,36 +3734,53 @@ class Tizen80ContactsService2 {
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, int, int,
               int, ffi.Pointer<contacts_list_h>)>();
 
-  /// @brief Finds records based on a given keyword for snippet.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.read
-  /// @remarks You must release @a record_list using contacts_list_destroy(). \n
-  /// This API works only for @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_contact, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_grouprel, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_assigned \n
-  /// and @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_not_assigned. \n
-  /// Because start match and end match is needed to be composed with keyword, this API performance is lower than contacts_db_search_records().
-  /// @param[in] view_uri The view URI to get records
-  /// @param[in] keyword The keyword
-  /// @param[in] offset The index from which to get results
-  /// @param[in] limit The number to limit results(value 0 used for get all records)
-  /// @param[in] start_match The text which is inserted into the fragment before the keyword(If NULL, default is "[")
-  /// @param[in] end_match The text which is inserted into the fragment after the keyword(If NULL, default is "]")
-  /// @param[in] token_number The one side extra number of tokens near keyword(If negative value, full sentence is printed. e.g. if token number is 3 with 'abc' keyword, "my name is [abc]de and my home")
-  /// @param[out] record_list The record list
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
-  /// @see contacts_list_destroy()
+  /// Finds records based on a given keyword for snippet.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.read>
+  ///
+  /// **Remarks:**
+  /// - You must release `record_list` using contacts_list_destroy().
+  /// - This API works only for `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_contact,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_grouprel,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_assigned`
+  /// - and `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_not_assigned.`
+  /// - Because start match and end match is needed to be composed with keyword, this API performance is lower than contacts_db_search_records().
+  ///
+  /// **Parameters:**
+  /// - `view_uri` (in): The view URI to get records
+  /// - `keyword` (in): The keyword
+  /// - `offset` (in): The index from which to get results
+  /// - `limit` (in): The number to limit results(value 0 used for get all records)
+  /// - `start_match` (in): The text which is inserted into the fragment before the keyword(If NULL, default is "[")
+  /// - `end_match` (in): The text which is inserted into the fragment after the keyword(If NULL, default is "]")
+  /// - `token_number` (in): The one side extra number of tokens near keyword(If negative value, full sentence is printed. e.g. if token number is 3 with 'abc' keyword, "my name is `[abc]`de and my home")
+  /// - `record_list` (out): The record list
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
+  /// - `contacts_list_destroy()`
   int contacts_db_search_records_for_snippet(
     ffi.Pointer<ffi.Char> view_uri,
     ffi.Pointer<ffi.Char> keyword,
@@ -3738,37 +3827,54 @@ class Tizen80ContactsService2 {
               int,
               ffi.Pointer<contacts_list_h>)>();
 
-  /// @brief Finds records based on given query and keyword for snippet.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.read
-  /// @remarks You must release @a record_list using contacts_list_destroy(). \n
-  /// This API works only for @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_contact, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_grouprel, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_assigned \n
-  /// and @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_not_assigned. \n
-  /// Because start match and end match is needed to be composed with keyword, this API performance is lower than contacts_db_search_records_with_query().
-  /// @param[in] query The query handle to filter
-  /// @param[in] keyword The keyword
-  /// @param[in] offset The index from which to get results
-  /// @param[in] limit The number to limit results(value 0 used for get all records)
-  /// @param[in] start_match The text which is inserted into the fragment before the keyword(If NULL, default is "[")
-  /// @param[in] end_match The text which is inserted into the fragment after the keyword(If NULL, default is "]")
-  /// @param[in] token_number The one side extra number of tokens near keyword(If negative value, full sentence is printed. e.g. if token number is 3 with 'abc' keyword, "my name is [abc]de and my home")
-  /// @param[out] record_list The record list
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_FILE_NO_SPACE FS Full
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
-  /// @see contacts_list_destroy()
+  /// Finds records based on given query and keyword for snippet.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.read>
+  ///
+  /// **Remarks:**
+  /// - You must release `record_list` using contacts_list_destroy().
+  /// - This API works only for `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_contact,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_grouprel,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_assigned`
+  /// - and `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_not_assigned.`
+  /// - Because start match and end match is needed to be composed with keyword, this API performance is lower than contacts_db_search_records_with_query().
+  ///
+  /// **Parameters:**
+  /// - `query` (in): The query handle to filter
+  /// - `keyword` (in): The keyword
+  /// - `offset` (in): The index from which to get results
+  /// - `limit` (in): The number to limit results(value 0 used for get all records)
+  /// - `start_match` (in): The text which is inserted into the fragment before the keyword(If NULL, default is "[")
+  /// - `end_match` (in): The text which is inserted into the fragment after the keyword(If NULL, default is "]")
+  /// - `token_number` (in): The one side extra number of tokens near keyword(If negative value, full sentence is printed. e.g. if token number is 3 with 'abc' keyword, "my name is `[abc]`de and my home")
+  /// - `record_list` (out): The record list
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_FILE_NO_SPACE`: FS Full
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
+  /// - `contacts_list_destroy()`
   int contacts_db_search_records_with_query_for_snippet(
     contacts_query_h query,
     ffi.Pointer<ffi.Char> keyword,
@@ -3815,39 +3921,56 @@ class Tizen80ContactsService2 {
               int,
               ffi.Pointer<contacts_list_h>)>();
 
-  /// @brief Finds records based on a keyword and range for snippet.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.read
-  /// @remarks You must release @a record_list using contacts_list_destroy(). \n
-  /// This API works only for @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_contact, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_grouprel, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_assigned, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_not_assigned. These views can search records with range @ref CONTACTS_SEARCH_RANGE_NAME, @ref CONTACTS_SEARCH_RANGE_NUMBER, @ref CONTACTS_SEARCH_RANGE_DATA. \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_number can search records with @ref CONTACTS_SEARCH_RANGE_NAME and @ref CONTACTS_SEARCH_RANGE_NUMBER.\n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_email can search records with @ref CONTACTS_SEARCH_RANGE_NAME and @ref CONTACTS_SEARCH_RANGE_EMAIL. \n
-  /// Because start match and end match is needed to be composed with keyword, this API performance is lower than contacts_db_search_records_with_range().
-  /// @param[in] view_uri The view URI
-  /// @param[in] keyword The keyword
-  /// @param[in] offset The index from which to get results
-  /// @param[in] limit The number to limit results(value 0 is used for get all records)
-  /// @param[in] range The search range
-  /// @param[in] start_match The text which is inserted into the fragment before the keyword(If NULL, default is "[")
-  /// @param[in] end_match The text which is inserted into the fragment after the keyword(If NULL, default is "]")
-  /// @param[in] token_number The one side extra number of tokens near keyword(If negative value, full sentence is printed. e.g. if token number is 3 with 'abc' keyword, "my name is [abc]de and my home")
-  /// @param[out] record_list The record list
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
-  /// @see contacts_list_destroy()
+  /// Finds records based on a keyword and range for snippet.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.read>
+  ///
+  /// **Remarks:**
+  /// - You must release `record_list` using contacts_list_destroy().
+  /// - This API works only for `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_contact,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_grouprel,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_assigned,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_not_assigned.` These views can search records with range `CONTACTS_SEARCH_RANGE_NAME,` `CONTACTS_SEARCH_RANGE_NUMBER,` `CONTACTS_SEARCH_RANGE_DATA.`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_number` can search records with `CONTACTS_SEARCH_RANGE_NAME` and `CONTACTS_SEARCH_RANGE_NUMBER.`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_email` can search records with `CONTACTS_SEARCH_RANGE_NAME` and `CONTACTS_SEARCH_RANGE_EMAIL.`
+  /// - Because start match and end match is needed to be composed with keyword, this API performance is lower than contacts_db_search_records_with_range().
+  ///
+  /// **Parameters:**
+  /// - `view_uri` (in): The view URI
+  /// - `keyword` (in): The keyword
+  /// - `offset` (in): The index from which to get results
+  /// - `limit` (in): The number to limit results(value 0 is used for get all records)
+  /// - `range` (in): The search range
+  /// - `start_match` (in): The text which is inserted into the fragment before the keyword(If NULL, default is "[")
+  /// - `end_match` (in): The text which is inserted into the fragment after the keyword(If NULL, default is "]")
+  /// - `token_number` (in): The one side extra number of tokens near keyword(If negative value, full sentence is printed. e.g. if token number is 3 with 'abc' keyword, "my name is `[abc]`de and my home")
+  /// - `record_list` (out): The record list
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
+  /// - `contacts_list_destroy()`
   int contacts_db_search_records_with_range_for_snippet(
     ffi.Pointer<ffi.Char> view_uri,
     ffi.Pointer<ffi.Char> keyword,
@@ -3898,35 +4021,52 @@ class Tizen80ContactsService2 {
               int,
               ffi.Pointer<contacts_list_h>)>();
 
-  /// @brief Gets the number of records in a specific view.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.read
-  /// @privilege %http://tizen.org/privilege/callhistory.read
-  /// @remarks %http://tizen.org/privilege/contact.read is needed for record which is related to @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address_book, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_simple_contact, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_my_profile, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_name, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_number, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_email, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_note, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_url, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_event, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_image, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_company, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_nickname, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_messenger, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_extension, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_profile, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_relationship, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity_photo, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_speeddial, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_sdn and all read-only views except views which is related to phone log. \n
-  /// %http://tizen.org/privilege/callhistory.read is needed for record which is related to @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log_stat. \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_phone_log view is needed both privilege.
-  /// @param[in] view_uri The view URI
-  /// @param[out] count The count of records
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NO_DATA Requested data does not exist
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
+  /// Gets the number of records in a specific view.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.read>
+  /// - <http://tizen.org/privilege/callhistory.read>
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/contact.read is needed for record which is related to `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address_book,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person,`>
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_simple_contact,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_my_profile,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_name,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_number,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_email,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_note,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_url,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_event,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_image,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_company,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_nickname,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_messenger,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_extension,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_profile,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_relationship,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity_photo,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_speeddial,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_sdn` and all read-only views except views which is related to phone log.
+  /// - <http://tizen.org/privilege/callhistory.read is needed for record which is related to `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log_stat.`>
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_phone_log` view is needed both privilege.
+  ///
+  /// **Parameters:**
+  /// - `view_uri` (in): The view URI
+  /// - `count` (out): The count of records
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NO_DATA`: Requested data does not exist
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
   int contacts_db_get_count(
     ffi.Pointer<ffi.Char> view_uri,
     ffi.Pointer<ffi.Int> count,
@@ -3944,35 +4084,52 @@ class Tizen80ContactsService2 {
   late final _contacts_db_get_count = _contacts_db_get_countPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the number of records matching a query.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.read
-  /// @privilege %http://tizen.org/privilege/callhistory.read
-  /// @remarks %http://tizen.org/privilege/contact.read is needed for record which is related to @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address_book, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_simple_contact, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_my_profile, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_name, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_number, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_email, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_note, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_url, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_event, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_image, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_company, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_nickname, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_messenger, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_extension, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_profile, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_relationship, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity_photo, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_speeddial, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_sdn and all read-only views except views which is related to phone log. \n
-  /// %http://tizen.org/privilege/callhistory.read is needed for record which is related to @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log_stat. \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_phone_log view is needed both privilege.
-  /// @param[in] query The query handle
-  /// @param[out] count The count of records
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NO_DATA Requested data does not exist
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
+  /// Gets the number of records matching a query.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.read>
+  /// - <http://tizen.org/privilege/callhistory.read>
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/contact.read is needed for record which is related to `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address_book,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person,`>
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_simple_contact,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_my_profile,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_name,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_number,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_email,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_note,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_url,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_event,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_image,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_company,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_nickname,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_messenger,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_extension,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_profile,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_relationship,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity_photo,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_speeddial,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_sdn` and all read-only views except views which is related to phone log.
+  /// - <http://tizen.org/privilege/callhistory.read is needed for record which is related to `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log_stat.`>
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_phone_log` view is needed both privilege.
+  ///
+  /// **Parameters:**
+  /// - `query` (in): The query handle
+  /// - `count` (out): The count of records
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NO_DATA`: Requested data does not exist
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
   int contacts_db_get_count_with_query(
     contacts_query_h query,
     ffi.Pointer<ffi.Int> count,
@@ -3991,23 +4148,38 @@ class Tizen80ContactsService2 {
       _contacts_db_get_count_with_queryPtr
           .asFunction<int Function(contacts_query_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the last successful changed contacts database version on the current connection.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.read
-  /// @privilege %http://tizen.org/privilege/callhistory.read
-  /// @param[out] last_change_version The database version
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
-  /// @see contacts_db_get_current_version()
+  /// Gets the last successful changed contacts database version on the current connection.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.read>
+  /// - <http://tizen.org/privilege/callhistory.read>
+  ///
+  /// **Parameters:**
+  /// - `last_change_version` (out): The database version
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
+  /// - `contacts_db_get_current_version()`
   int contacts_db_get_last_change_version(
     ffi.Pointer<ffi.Int> last_change_version,
   ) {
@@ -4023,28 +4195,45 @@ class Tizen80ContactsService2 {
       _contacts_db_get_last_change_versionPtr
           .asFunction<int Function(ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the number of found records based on a given keyword.
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.read
-  /// @remarks This function works only for @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_contact, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_grouprel, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_assigned \n
-  /// and @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_not_assigned.
-  /// @param[in] view_uri The view URI
-  /// @param[in] keyword The keyword
-  /// @param[out] count The number of records
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
+  /// Gets the number of found records based on a given keyword.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.read>
+  ///
+  /// **Remarks:**
+  /// - This function works only for `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_contact,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_grouprel,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_assigned`
+  /// - and `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_not_assigned.`
+  ///
+  /// **Parameters:**
+  /// - `view_uri` (in): The view URI
+  /// - `keyword` (in): The keyword
+  /// - `count` (out): The number of records
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
   int contacts_db_get_count_for_search_records(
     ffi.Pointer<ffi.Char> view_uri,
     ffi.Pointer<ffi.Char> keyword,
@@ -4067,31 +4256,48 @@ class Tizen80ContactsService2 {
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Gets the number of found records based on a given keyword and range.
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.read
-  /// @remarks This function works only for @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_contact, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_grouprel, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_assigned, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_not_assigned. For these views the valid search ranges are: #CONTACTS_SEARCH_RANGE_NAME, #CONTACTS_SEARCH_RANGE_NUMBER, #CONTACTS_SEARCH_RANGE_DATA. \n
-  /// For @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_number the valid search ranges are #CONTACTS_SEARCH_RANGE_NAME and #CONTACTS_SEARCH_RANGE_NUMBER.\n
-  /// For @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_email the valid search ranges are #CONTACTS_SEARCH_RANGE_NAME and #CONTACTS_SEARCH_RANGE_EMAIL.
-  /// @param[in] view_uri The view URI
-  /// @param[in] keyword The keyword
-  /// @param[in] range The search range
-  /// @param[out] count The number of records
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
+  /// Gets the number of found records based on a given keyword and range.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.read>
+  ///
+  /// **Remarks:**
+  /// - This function works only for `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_contact,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_grouprel,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_assigned,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_not_assigned.` For these views the valid search ranges are: `CONTACTS_SEARCH_RANGE_NAME`, `CONTACTS_SEARCH_RANGE_NUMBER`, `CONTACTS_SEARCH_RANGE_DATA`.
+  /// - For `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_number` the valid search ranges are `CONTACTS_SEARCH_RANGE_NAME` and `CONTACTS_SEARCH_RANGE_NUMBER`.
+  /// - For `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_email` the valid search ranges are `CONTACTS_SEARCH_RANGE_NAME` and `CONTACTS_SEARCH_RANGE_EMAIL`.
+  ///
+  /// **Parameters:**
+  /// - `view_uri` (in): The view URI
+  /// - `keyword` (in): The keyword
+  /// - `range` (in): The search range
+  /// - `count` (out): The number of records
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
   int contacts_db_get_count_for_search_records_with_range(
     ffi.Pointer<ffi.Char> view_uri,
     ffi.Pointer<ffi.Char> keyword,
@@ -4116,28 +4322,45 @@ class Tizen80ContactsService2 {
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, int,
               ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Gets the number of found records based on a given keyword and query.
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.read
-  /// @remarks This function works only for @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_contact, \n
-  /// @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_grouprel, @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_assigned \n
-  /// and @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_not_assigned.
-  /// @param[in] query The query handle to filter
-  /// @param[in] keyword The keyword
-  /// @param[out] count The number of records
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
+  /// Gets the number of found records based on a given keyword and query.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.read>
+  ///
+  /// **Remarks:**
+  /// - This function works only for `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_contact,`
+  /// - `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_grouprel,` `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_assigned`
+  /// - and `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_not_assigned.`
+  ///
+  /// **Parameters:**
+  /// - `query` (in): The query handle to filter
+  /// - `keyword` (in): The keyword
+  /// - `count` (out): The number of records
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
   int contacts_db_get_count_for_search_records_with_query(
     contacts_query_h query,
     ffi.Pointer<ffi.Char> keyword,
@@ -4160,21 +4383,36 @@ class Tizen80ContactsService2 {
           int Function(contacts_query_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Gets the contacts name display order.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.read
-  /// @param[out] name_display_order The name display order
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_IPC Unknown IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
+  /// Gets the contacts name display order.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.read>
+  ///
+  /// **Parameters:**
+  /// - `name_display_order` (out): The name display order
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_IPC`: Unknown IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
   int contacts_setting_get_name_display_order(
     ffi.Pointer<ffi.Int32> name_display_order,
   ) {
@@ -4190,23 +4428,40 @@ class Tizen80ContactsService2 {
       _contacts_setting_get_name_display_orderPtr
           .asFunction<int Function(ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets the contacts name display order.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.write
-  /// @param[in] name_display_order The name display order
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_IPC Unknown IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @post contacts_setting_name_display_order_changed_cb() callback will be called upon success.
-  /// @see contacts_connect()
+  /// Sets the contacts name display order.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.write>
+  ///
+  /// **Parameters:**
+  /// - `name_display_order` (in): The name display order
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_IPC`: Unknown IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **Postconditions:**
+  /// - contacts_setting_name_display_order_changed_cb() callback will be called upon success.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
   int contacts_setting_set_name_display_order(
     int name_display_order,
   ) {
@@ -4222,21 +4477,36 @@ class Tizen80ContactsService2 {
       _contacts_setting_set_name_display_orderPtr
           .asFunction<int Function(int)>();
 
-  /// @brief Gets the contacts name sorting order in which contacts are returned.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.read
-  /// @param[out] name_sorting_order The name sorting order
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method.
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_IPC Unknown IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
+  /// Gets the contacts name sorting order in which contacts are returned.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.read>
+  ///
+  /// **Parameters:**
+  /// - `name_sorting_order` (out): The name sorting order
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method.
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_IPC`: Unknown IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
   int contacts_setting_get_name_sorting_order(
     ffi.Pointer<ffi.Int32> name_sorting_order,
   ) {
@@ -4252,23 +4522,40 @@ class Tizen80ContactsService2 {
       _contacts_setting_get_name_sorting_orderPtr
           .asFunction<int Function(ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets the contacts name sorting order in which contacts are returned.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.write
-  /// @param[in] name_sorting_order The name sorting order
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_IPC Unknown IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @post contacts_setting_name_sorting_order_changed_cb() callback will be called upon success.
-  /// @see contacts_connect()
+  /// Sets the contacts name sorting order in which contacts are returned.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.write>
+  ///
+  /// **Parameters:**
+  /// - `name_sorting_order` (in): The name sorting order
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_IPC`: Unknown IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **Postconditions:**
+  /// - contacts_setting_name_sorting_order_changed_cb() callback will be called upon success.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
   int contacts_setting_set_name_sorting_order(
     int name_sorting_order,
   ) {
@@ -4284,25 +4571,42 @@ class Tizen80ContactsService2 {
       _contacts_setting_set_name_sorting_orderPtr
           .asFunction<int Function(int)>();
 
-  /// @brief Registers a callback function.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.read
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_IPC Unknown IPC error
-  /// @retval #CONTACTS_ERROR_INTERNAL Implementation Error, Temporary Use
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @post contacts_setting_name_display_order_changed_cb() will be called under certain conditions, after calling contacts_setting_set_name_display_order().
-  /// @see contacts_connect()
-  /// @see contacts_setting_remove_name_display_order_changed_cb()
+  /// Registers a callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.read>
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_IPC`: Unknown IPC error
+  /// - `CONTACTS_ERROR_INTERNAL`: Implementation Error, Temporary Use
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **Postconditions:**
+  /// - contacts_setting_name_display_order_changed_cb() will be called under certain conditions, after calling contacts_setting_set_name_display_order().
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
+  /// - `contacts_setting_remove_name_display_order_changed_cb()`
   int contacts_setting_add_name_display_order_changed_cb(
     contacts_setting_name_display_order_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -4323,20 +4627,31 @@ class Tizen80ContactsService2 {
           int Function(contacts_setting_name_display_order_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters a callback function.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_INTERNAL Implementation Error, Temporary Use
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
-  /// @see contacts_setting_add_name_display_order_changed_cb()
+  /// Unregisters a callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_INTERNAL`: Implementation Error, Temporary Use
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
+  /// - `contacts_setting_add_name_display_order_changed_cb()`
   int contacts_setting_remove_name_display_order_changed_cb(
     contacts_setting_name_display_order_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -4359,25 +4674,42 @@ class Tizen80ContactsService2 {
           int Function(contacts_setting_name_display_order_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Registers a callback function.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.read
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_IPC Unknown IPC error
-  /// @retval #CONTACTS_ERROR_INTERNAL Implementation Error, Temporary Use
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @post contacts_setting_name_sorting_order_changed_cb() will be called under certain conditions, after calling contacts_setting_set_name_sorting_order().
-  /// @see contacts_connect()
-  /// @see contacts_setting_remove_name_sorting_order_changed_cb()
+  /// Registers a callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.read>
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_IPC`: Unknown IPC error
+  /// - `CONTACTS_ERROR_INTERNAL`: Implementation Error, Temporary Use
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **Postconditions:**
+  /// - contacts_setting_name_sorting_order_changed_cb() will be called under certain conditions, after calling contacts_setting_set_name_sorting_order().
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
+  /// - `contacts_setting_remove_name_sorting_order_changed_cb()`
   int contacts_setting_add_name_sorting_order_changed_cb(
     contacts_setting_name_sorting_order_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -4398,20 +4730,31 @@ class Tizen80ContactsService2 {
           int Function(contacts_setting_name_sorting_order_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters a callback function.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_INTERNAL Implementation Error, Temporary Use
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
-  /// @see contacts_setting_add_name_sorting_order_changed_cb()
+  /// Unregisters a callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_INTERNAL`: Implementation Error, Temporary Use
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
+  /// - `contacts_setting_add_name_sorting_order_changed_cb()`
   int contacts_setting_remove_name_sorting_order_changed_cb(
     contacts_setting_name_sorting_order_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -4434,25 +4777,40 @@ class Tizen80ContactsService2 {
           int Function(contacts_setting_name_sorting_order_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Links a person to another person.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.write
-  /// @param[in] base_person_id The base person ID
-  /// @param[in] person_id The person ID to link to
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_FILE_NO_SPACE FS Full
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
+  /// Links a person to another person.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.write>
+  ///
+  /// **Parameters:**
+  /// - `base_person_id` (in): The base person ID
+  /// - `person_id` (in): The person ID to link to
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_FILE_NO_SPACE`: FS Full
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
   int contacts_person_link_person(
     int base_person_id,
     int person_id,
@@ -4469,27 +4827,42 @@ class Tizen80ContactsService2 {
   late final _contacts_person_link_person =
       _contacts_person_link_personPtr.asFunction<int Function(int, int)>();
 
-  /// @brief Unlinks a contact from a person.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.write
-  /// @param[in] person_id The person ID
-  /// @param[in] contact_id The contact ID to unlink
-  /// @param[out] unlinked_person_id The person ID generated
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_FILE_NO_SPACE FS Full
-  /// @retval #CONTACTS_ERROR_NO_DATA Requested data does not exist
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
+  /// Unlinks a contact from a person.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.write>
+  ///
+  /// **Parameters:**
+  /// - `person_id` (in): The person ID
+  /// - `contact_id` (in): The contact ID to unlink
+  /// - `unlinked_person_id` (out): The person ID generated
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_FILE_NO_SPACE`: FS Full
+  /// - `CONTACTS_ERROR_NO_DATA`: Requested data does not exist
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
   int contacts_person_unlink_contact(
     int person_id,
     int contact_id,
@@ -4510,26 +4883,42 @@ class Tizen80ContactsService2 {
       _contacts_person_unlink_contactPtr
           .asFunction<int Function(int, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Resets a person's usage count.
-  /// @details The person is no longer in the most frequently contacted person list.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.write
-  /// @param[in] person_id The person ID
-  /// @param[in] type The type to reset
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_FILE_NO_SPACE FS Full
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
+  /// Resets a person's usage count.
+  ///
+  /// The person is no longer in the most frequently contacted person list.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.write>
+  ///
+  /// **Parameters:**
+  /// - `person_id` (in): The person ID
+  /// - `type` (in): The type to reset
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_FILE_NO_SPACE`: FS Full
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
   int contacts_person_reset_usage(
     int person_id,
     int type,
@@ -4546,26 +4935,41 @@ class Tizen80ContactsService2 {
   late final _contacts_person_reset_usage =
       _contacts_person_reset_usagePtr.asFunction<int Function(int, int)>();
 
-  /// @brief Sets the order of a (favorite) contact.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.write
-  /// @param[in] person_id The person ID to move
-  /// @param[in] previous_person_id The previous person ID
-  /// @param[in] next_person_id The back person ID
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_FILE_NO_SPACE FS Full
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
+  /// Sets the order of a (favorite) contact.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.write>
+  ///
+  /// **Parameters:**
+  /// - `person_id` (in): The person ID to move
+  /// - `previous_person_id` (in): The previous person ID
+  /// - `next_person_id` (in): The back person ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_FILE_NO_SPACE`: FS Full
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
   int contacts_person_set_favorite_order(
     int person_id,
     int previous_person_id,
@@ -4585,28 +4989,45 @@ class Tizen80ContactsService2 {
       _contacts_person_set_favorite_orderPtr
           .asFunction<int Function(int, int, int)>();
 
-  /// @brief Sets a record's default property.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.write
-  /// @remarks @a id can be contact_id, number_id, email_id, image_id.
-  /// @param[in] property #contacts_person_property_e
-  /// @param[in] person_id The person ID
-  /// @param[in] id The record ID
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_FILE_NO_SPACE FS Full
-  /// @retval #CONTACTS_ERROR_NO_DATA Requested data does not exist
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
+  /// Sets a record's default property.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.write>
+  ///
+  /// **Remarks:**
+  /// - `id` can be contact_id, number_id, email_id, image_id.
+  ///
+  /// **Parameters:**
+  /// - `property` (in): `contacts_person_property_e`
+  /// - `person_id` (in): The person ID
+  /// - `id` (in): The record ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_FILE_NO_SPACE`: FS Full
+  /// - `CONTACTS_ERROR_NO_DATA`: Requested data does not exist
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
   int contacts_person_set_default_property(
     int property,
     int person_id,
@@ -4626,27 +5047,44 @@ class Tizen80ContactsService2 {
       _contacts_person_set_default_propertyPtr
           .asFunction<int Function(int, int, int)>();
 
-  /// @brief Gets a default property for a record.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.read
-  /// @remarks @a id can be contact_id, number_id, email_id, image_id.
-  /// @param[in] property #contacts_person_property_e
-  /// @param[in] person_id The person ID
-  /// @param[out] id The record ID of the property to be set as default
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NO_DATA Requested data does not exist
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
+  /// Gets a default property for a record.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.read>
+  ///
+  /// **Remarks:**
+  /// - `id` can be contact_id, number_id, email_id, image_id.
+  ///
+  /// **Parameters:**
+  /// - `property` (in): `contacts_person_property_e`
+  /// - `person_id` (in): The person ID
+  /// - `id` (out): The record ID of the property to be set as default
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NO_DATA`: Requested data does not exist
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
   int contacts_person_get_default_property(
     int property,
     int person_id,
@@ -4667,29 +5105,46 @@ class Tizen80ContactsService2 {
       _contacts_person_get_default_propertyPtr
           .asFunction<int Function(int, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets aggregation suggestions.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.read
-  /// @remarks You must release @a record_list using contacts_list_destroy().
-  /// @remarks This may take a long time. If you need to use it in bulk, make sure the user experience is acceptable while running it.
-  /// @param[in] person_id The person ID
-  /// @param[in] limit The number to limit results(value 0 is used for get all records)
-  /// @param[out] record_list The list of person records
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_FILE_NO_SPACE FS Full
-  /// @retval #CONTACTS_ERROR_NO_DATA Requested data does not exist
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
+  /// Gets aggregation suggestions.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.read>
+  ///
+  /// **Remarks:**
+  /// - You must release `record_list` using contacts_list_destroy().
+  /// - This may take a long time. If you need to use it in bulk, make sure the user experience is acceptable while running it.
+  ///
+  /// **Parameters:**
+  /// - `person_id` (in): The person ID
+  /// - `limit` (in): The number to limit results(value 0 is used for get all records)
+  /// - `record_list` (out): The list of person records
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_FILE_NO_SPACE`: FS Full
+  /// - `CONTACTS_ERROR_NO_DATA`: Requested data does not exist
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
   int contacts_person_get_aggregation_suggestions(
     int person_id,
     int limit,
@@ -4711,25 +5166,40 @@ class Tizen80ContactsService2 {
       _contacts_person_get_aggregation_suggestionsPtr
           .asFunction<int Function(int, int, ffi.Pointer<contacts_list_h>)>();
 
-  /// @brief Adds a contact and a group relationship to the contacts database.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.write
-  /// @param[in] group_id The group ID
-  /// @param[in] contact_id The contact ID
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
-  /// @see contacts_group_remove_contact()
+  /// Adds a contact and a group relationship to the contacts database.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.write>
+  ///
+  /// **Parameters:**
+  /// - `group_id` (in): The group ID
+  /// - `contact_id` (in): The contact ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
+  /// - `contacts_group_remove_contact()`
   int contacts_group_add_contact(
     int group_id,
     int contact_id,
@@ -4746,25 +5216,40 @@ class Tizen80ContactsService2 {
   late final _contacts_group_add_contact =
       _contacts_group_add_contactPtr.asFunction<int Function(int, int)>();
 
-  /// @brief Removes a contact and a group relationship from the contacts database.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.write
-  /// @param[in] group_id The group ID
-  /// @param[in] contact_id The contact ID
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
-  /// @see contacts_group_add_contact()
+  /// Removes a contact and a group relationship from the contacts database.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.write>
+  ///
+  /// **Parameters:**
+  /// - `group_id` (in): The group ID
+  /// - `contact_id` (in): The contact ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
+  /// - `contacts_group_add_contact()`
   int contacts_group_remove_contact(
     int group_id,
     int contact_id,
@@ -4781,25 +5266,40 @@ class Tizen80ContactsService2 {
   late final _contacts_group_remove_contact =
       _contacts_group_remove_contactPtr.asFunction<int Function(int, int)>();
 
-  /// @brief Sets a group between the previous group and the next group.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.write
-  /// @param[in] group_id The group ID to move
-  /// @param[in] previous_group_id The previous group ID
-  /// @param[in] next_group_id The back group ID
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
+  /// Sets a group between the previous group and the next group.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.write>
+  ///
+  /// **Parameters:**
+  /// - `group_id` (in): The group ID to move
+  /// - `previous_group_id` (in): The previous group ID
+  /// - `next_group_id` (in): The back group ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
   int contacts_group_set_group_order(
     int group_id,
     int previous_group_id,
@@ -4819,23 +5319,37 @@ class Tizen80ContactsService2 {
       _contacts_group_set_group_orderPtr
           .asFunction<int Function(int, int, int)>();
 
-  /// @deprecated Deprecated since 3.0. Use contacts_sim_import_all_contacts_by_sim_slot_no() instead.
-  /// @brief Imports all contacts from first SIM to Contacts Database.
-  /// @since_tizen @if MOBILE 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.write
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NO_DATA Requested data does not exist
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method.
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_IPC Unknown IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @retval #CONTACTS_ERROR_INTERNAL Implementation Error, Temporary Use
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
+  /// **Deprecated:** Deprecated since 3.0. Use contacts_sim_import_all_contacts_by_sim_slot_no() instead.
+  ///
+  /// Imports all contacts from first SIM to Contacts Database.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.write>
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NO_DATA`: Requested data does not exist
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method.
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_IPC`: Unknown IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  /// - `CONTACTS_ERROR_INTERNAL`: Implementation Error, Temporary Use
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
   int contacts_sim_import_all_contacts() {
     return _contacts_sim_import_all_contacts();
   }
@@ -4846,23 +5360,38 @@ class Tizen80ContactsService2 {
   late final _contacts_sim_import_all_contacts =
       _contacts_sim_import_all_contactsPtr.asFunction<int Function()>();
 
-  /// @deprecated Deprecated since 3.0. Use contacts_sim_get_initialization_status_by_sim_slot_no() instead.
-  /// @brief Checks whether first SIM initialization is completed.
-  /// @since_tizen @if MOBILE 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.read
-  /// @param[out] completed @c true if SIM is initialized,
-  /// otherwise @c false if SIM is not initialized
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method.
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_IPC Unknown IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
+  /// **Deprecated:** Deprecated since 3.0. Use contacts_sim_get_initialization_status_by_sim_slot_no() instead.
+  ///
+  /// Checks whether first SIM initialization is completed.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.read>
+  ///
+  /// **Parameters:**
+  /// - `completed` (out): `true` if SIM is initialized, otherwise `false` if SIM is not initialized
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method.
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_IPC`: Unknown IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
   int contacts_sim_get_initialization_status(
     ffi.Pointer<ffi.Bool> completed,
   ) {
@@ -4878,26 +5407,42 @@ class Tizen80ContactsService2 {
       _contacts_sim_get_initialization_statusPtr
           .asFunction<int Function(ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Imports all contacts from SIM of the given SIM slot number to the Contacts Database.
-  /// @details This function invokes contacts_sim_import_progress_cb() to indicate the progress of imports whenever a contact is imported.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.write
-  /// @param[in] sim_slot_no The SIM slot number; 0 means first SIM, 1 means second SIM
-  /// @param[in] callback The callback function to invoke
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NO_DATA Requested data does not exist
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_IPC Unknown IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
-  /// @see contacts_sim_import_progress_cb()
+  /// Imports all contacts from SIM of the given SIM slot number to the Contacts Database.
+  ///
+  /// This function invokes contacts_sim_import_progress_cb() to indicate the progress of imports whenever a contact is imported.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.write>
+  ///
+  /// **Parameters:**
+  /// - `sim_slot_no` (in): The SIM slot number; 0 means first SIM, 1 means second SIM
+  /// - `callback` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NO_DATA`: Requested data does not exist
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_IPC`: Unknown IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
+  /// - `contacts_sim_import_progress_cb()`
   int contacts_sim_import_all_contacts_by_sim_slot_no(
     int sim_slot_no,
     contacts_sim_import_progress_cb callback,
@@ -4920,23 +5465,37 @@ class Tizen80ContactsService2 {
           int Function(
               int, contacts_sim_import_progress_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Checks whether SIM of the given SIM slot number is initialized.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.read
-  /// @param[in] sim_slot_no The SIM slot number; 0 means first SIM, 1 means second SIM
-  /// @param[out] completed @c true if SIM is initialized,
-  /// otherwise @c false if SIM is not initialized
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_IPC Unknown IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
+  /// Checks whether SIM of the given SIM slot number is initialized.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.read>
+  ///
+  /// **Parameters:**
+  /// - `sim_slot_no` (in): The SIM slot number; 0 means first SIM, 1 means second SIM
+  /// - `completed` (out): `true` if SIM is initialized, otherwise `false` if SIM is not initialized
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_IPC`: Unknown IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
   int contacts_sim_get_initialization_status_by_sim_slot_no(
     int sim_slot_no,
     ffi.Pointer<ffi.Bool> completed,
@@ -4956,22 +5515,35 @@ class Tizen80ContactsService2 {
       _contacts_sim_get_initialization_status_by_sim_slot_noPtr
           .asFunction<int Function(int, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Retrieves all contacts with a record handle (_contacts_contact) from a vCard file.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] vcard_file_path The file path of vCard stream file
-  /// @param[in] callback The callback function to invoke
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_NO_DATA Requested data does not exist
-  /// @retval #CONTACTS_ERROR_SYSTEM System error
-  /// @pre contacts_connect() should be called to initialize.
-  /// @post This function invokes contacts_vcard_parse_cb().
-  /// @see contacts_vcard_parse_cb()
+  /// Retrieves all contacts with a record handle (_contacts_contact) from a vCard file.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `vcard_file_path` (in): The file path of vCard stream file
+  /// - `callback` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_NO_DATA`: Requested data does not exist
+  /// - `CONTACTS_ERROR_SYSTEM`: System error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to initialize.
+  ///
+  /// **Postconditions:**
+  /// - This function invokes contacts_vcard_parse_cb().
+  ///
+  /// **See also:**
+  /// - `contacts_vcard_parse_cb()`
   int contacts_vcard_parse_to_contact_foreach(
     ffi.Pointer<ffi.Char> vcard_file_path,
     contacts_vcard_parse_cb callback,
@@ -4994,18 +5566,27 @@ class Tizen80ContactsService2 {
           int Function(ffi.Pointer<ffi.Char>, contacts_vcard_parse_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Retrieves all contacts with a contacts list from a vCard stream.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] vcard_stream The vCard stream
-  /// @param[out] contacts_list The contacts list handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to initialize.
+  /// Retrieves all contacts with a contacts list from a vCard stream.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `vcard_stream` (in): The vCard stream
+  /// - `contacts_list` (out): The contacts list handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to initialize.
   int contacts_vcard_parse_to_contacts(
     ffi.Pointer<ffi.Char> vcard_stream,
     ffi.Pointer<contacts_list_h> contacts_list,
@@ -5025,17 +5606,24 @@ class Tizen80ContactsService2 {
       _contacts_vcard_parse_to_contactsPtr.asFunction<
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<contacts_list_h>)>();
 
-  /// @brief Retrieves the vCard stream from a contact.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] contact The contact record handle
-  /// @param[out] vcard_stream The vCard stream
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
+  /// Retrieves the vCard stream from a contact.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `contact` (in): The contact record handle
+  /// - `vcard_stream` (out): The vCard stream
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
   int contacts_vcard_make_from_contact(
     contacts_record_h contact,
     ffi.Pointer<ffi.Pointer<ffi.Char>> vcard_stream,
@@ -5056,17 +5644,24 @@ class Tizen80ContactsService2 {
           int Function(
               contacts_record_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Retrieves the vCard stream from a contact.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] my_profile The my_profile record handle
-  /// @param[out] vcard_stream The vCard stream
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
+  /// Retrieves the vCard stream from a contact.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `my_profile` (in): The my_profile record handle
+  /// - `vcard_stream` (out): The vCard stream
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
   int contacts_vcard_make_from_my_profile(
     contacts_record_h my_profile,
     ffi.Pointer<ffi.Pointer<ffi.Char>> vcard_stream,
@@ -5087,24 +5682,37 @@ class Tizen80ContactsService2 {
           int Function(
               contacts_record_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Retrieves the vCard stream from a person.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.read
-  /// @param[in] person The person record handle
-  /// @param[out] vcard_stream The vCard stream
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_FILE_NO_SPACE FS Full
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_DB DB error
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to initialize.
+  /// Retrieves the vCard stream from a person.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.read>
+  ///
+  /// **Parameters:**
+  /// - `person` (in): The person record handle
+  /// - `vcard_stream` (out): The vCard stream
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_FILE_NO_SPACE`: FS Full
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_DB`: DB error
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to initialize.
   int contacts_vcard_make_from_person(
     contacts_record_h person,
     ffi.Pointer<ffi.Pointer<ffi.Char>> vcard_stream,
@@ -5125,16 +5733,23 @@ class Tizen80ContactsService2 {
           int Function(
               contacts_record_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Retrieves the count of contact entities from a vCard file.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] vcard_file_path The person record handle
-  /// @param[out] count The count of contact entity
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM System error
+  /// Retrieves the count of contact entities from a vCard file.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `vcard_file_path` (in): The person record handle
+  /// - `count` (out): The count of contact entity
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: System error
   int contacts_vcard_get_entity_count(
     ffi.Pointer<ffi.Char> vcard_file_path,
     ffi.Pointer<ffi.Int> count,
@@ -5153,18 +5768,29 @@ class Tizen80ContactsService2 {
       _contacts_vcard_get_entity_countPtr.asFunction<
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the limit size of width and height of photos to append in vCard streams.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.read
-  /// @param[out] limit_size The limit size of width and height of photos to append in vCard streams. It's in pixels
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
+  /// Gets the limit size of width and height of photos to append in vCard streams.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.read>
+  ///
+  /// **Parameters:**
+  /// - `limit_size` (out): The limit size of width and height of photos to append in vCard streams. It's in pixels
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
   int contacts_vcard_get_limit_size_of_photo(
     ffi.Pointer<ffi.UnsignedInt> limit_size,
   ) {
@@ -5180,23 +5806,34 @@ class Tizen80ContactsService2 {
       _contacts_vcard_get_limit_size_of_photoPtr
           .asFunction<int Function(ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Sets the limit size of width and height of photos to append to vCard streams.
-  /// @details This function can be used for getting reduced vCard stream. \n
-  /// When making vCard stream by using contacts_vcard_make_from_person(), contacts_vcard_make_from_my_profile(), contacts_vcard_make_from_contact(), \n
-  /// if width or height of the photo to append is bigger than the limit size, it is reduced to the limit size while maintaining original aspect ratio, \n
-  /// so that vCard stream size can be reduced.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.write
-  /// @remarks The limit_size should be bigger than or equal to 8 and smaller than 1080.
-  /// @param[in] limit_size The limit size of width and height of photos to append in vCard streams. It's in pixels
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
+  /// Sets the limit size of width and height of photos to append to vCard streams.
+  ///
+  /// This function can be used for getting reduced vCard stream. When making vCard stream by using contacts_vcard_make_from_person(), contacts_vcard_make_from_my_profile(), contacts_vcard_make_from_contact(), if width or height of the photo to append is bigger than the limit size, it is reduced to the limit size while maintaining original aspect ratio, so that vCard stream size can be reduced.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.write>
+  ///
+  /// **Remarks:**
+  /// - The limit_size should be bigger than or equal to 8 and smaller than 1080.
+  ///
+  /// **Parameters:**
+  /// - `limit_size` (in): The limit size of width and height of photos to append in vCard streams. It's in pixels
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
   int contacts_vcard_set_limit_size_of_photo(
     int limit_size,
   ) {
@@ -5212,24 +5849,39 @@ class Tizen80ContactsService2 {
       _contacts_vcard_set_limit_size_of_photoPtr
           .asFunction<int Function(int)>();
 
-  /// @brief Deletes an activity record from the contacts database by contact ID.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.write
-  /// @param[in] contact_id The contact ID to delete
-  /// @return @c 0 on success,
-  /// otherwise a negative error value (#contacts_error_e)
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_FILE_NO_SPACE FS Full
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
+  /// Deletes an activity record from the contacts database by contact ID.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.write>
+  ///
+  /// **Parameters:**
+  /// - `contact_id` (in): The contact ID to delete
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value (`contacts_error_e`)
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_FILE_NO_SPACE`: FS Full
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
   int contacts_activity_delete_by_contact_id(
     int contact_id,
   ) {
@@ -5245,24 +5897,39 @@ class Tizen80ContactsService2 {
       _contacts_activity_delete_by_contact_idPtr
           .asFunction<int Function(int)>();
 
-  /// @brief Deletes an activity record from the contacts database by account ID.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/contact.write
-  /// @param[in] account_id The account ID to delete
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_FILE_NO_SPACE FS Full
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
+  /// Deletes an activity record from the contacts database by account ID.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/contact.write>
+  ///
+  /// **Parameters:**
+  /// - `account_id` (in): The account ID to delete
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_FILE_NO_SPACE`: FS Full
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
   int contacts_activity_delete_by_account_id(
     int account_id,
   ) {
@@ -5278,23 +5945,37 @@ class Tizen80ContactsService2 {
       _contacts_activity_delete_by_account_idPtr
           .asFunction<int Function(int)>();
 
-  /// @brief Resets the phone log's count.
-  /// @details The number of all types in the phone log will be @c 0.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/callhistory.write
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_FILE_NO_SPACE FS Full
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
+  /// Resets the phone log's count.
+  ///
+  /// The number of all types in the phone log will be `0`.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/callhistory.write>
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_FILE_NO_SPACE`: FS Full
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
   int contacts_phone_log_reset_statistics() {
     return _contacts_phone_log_reset_statistics();
   }
@@ -5305,23 +5986,38 @@ class Tizen80ContactsService2 {
   late final _contacts_phone_log_reset_statistics =
       _contacts_phone_log_reset_statisticsPtr.asFunction<int Function()>();
 
-  /// @brief Resets the phone log's count by sim slot no.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/callhistory.write
-  /// @param[in] sim_slot_no It is related to the SIM slot number. sim_slot_no 0 means first SIM, sim_slot_no 1 means second SIM
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CONTACTS_ERROR_FILE_NO_SPACE FS Full
-  /// @retval #CONTACTS_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CONTACTS_ERROR_DB Database operation failure
-  /// @retval #CONTACTS_ERROR_IPC IPC error
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre contacts_connect() should be called to open a connection to the contacts service.
-  /// @see contacts_connect()
+  /// Resets the phone log's count by sim slot no.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/callhistory.write>
+  ///
+  /// **Parameters:**
+  /// - `sim_slot_no` (in): It is related to the SIM slot number. sim_slot_no 0 means first SIM, sim_slot_no 1 means second SIM
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTACTS_ERROR_FILE_NO_SPACE`: FS Full
+  /// - `CONTACTS_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_DB`: Database operation failure
+  /// - `CONTACTS_ERROR_IPC`: IPC error
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - contacts_connect() should be called to open a connection to the contacts service.
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
   int contacts_phone_log_reset_statistics_by_sim(
     int sim_slot_no,
   ) {
@@ -5337,17 +6033,28 @@ class Tizen80ContactsService2 {
       _contacts_phone_log_reset_statistics_by_simPtr
           .asFunction<int Function(int)>();
 
-  /// @brief Gets the current status of server.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] status The current status of server
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED       Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre This function requires an open connection to the contacts service by contacts_connect().
-  /// @see contacts_connect()
+  /// Gets the current status of server.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `status` (in): The current status of server
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - This function requires an open connection to the contacts service by contacts_connect().
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
   int contacts_db_get_status(
     ffi.Pointer<ffi.Int32> status,
   ) {
@@ -5362,19 +6069,30 @@ class Tizen80ContactsService2 {
   late final _contacts_db_get_status = _contacts_db_get_statusPtr
       .asFunction<int Function(ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Registers a callback function.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED       Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre This function requires an open connection to the contacts service by contacts_connect().
-  /// @see contacts_connect()
-  /// @see contacts_db_remove_status_changed_cb()
+  /// Registers a callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - This function requires an open connection to the contacts service by contacts_connect().
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
+  /// - `contacts_db_remove_status_changed_cb()`
   int contacts_db_add_status_changed_cb(
     contacts_db_status_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -5393,19 +6111,30 @@ class Tizen80ContactsService2 {
       _contacts_db_add_status_changed_cbPtr.asFunction<
           int Function(contacts_db_status_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters a callback function.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONTACTS_ERROR_NONE Successful
-  /// @retval #CONTACTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CONTACTS_ERROR_NOT_SUPPORTED       Not supported
-  /// @retval #CONTACTS_ERROR_SYSTEM Internal system module error
-  /// @pre This function requires an open connection to the contacts service by contacts_connect().
-  /// @see contacts_connect()
-  /// @see contacts_db_add_status_changed_cb()
+  /// Unregisters a callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTACTS_ERROR_NONE`: Successful
+  /// - `CONTACTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTACTS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTACTS_ERROR_SYSTEM`: Internal system module error
+  ///
+  /// **Preconditions:**
+  /// - This function requires an open connection to the contacts service by contacts_connect().
+  ///
+  /// **See also:**
+  /// - `contacts_connect()`
+  /// - `contacts_db_add_status_changed_cb()`
   int contacts_db_remove_status_changed_cb(
     contacts_db_status_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -5425,8 +6154,11 @@ class Tizen80ContactsService2 {
           int Function(contacts_db_status_changed_cb, ffi.Pointer<ffi.Void>)>();
 }
 
-/// @brief Enumeration for contacts errors.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
+/// Enumeration for contacts errors.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+/// @nodoc
 abstract class contacts_error_e {
   /// < Successful
   static const int CONTACTS_ERROR_NONE = 0;
@@ -5468,28 +6200,46 @@ abstract class contacts_error_e {
   static const int CONTACTS_ERROR_INTERNAL = -33619713;
 }
 
-/// @brief Handle for contacts record.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
+/// Handle for contacts record.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+/// @nodoc
 final class __contacts_record_h extends ffi.Opaque {}
 
-/// @brief Handle for contacts filter.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
+/// Handle for contacts filter.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+/// @nodoc
 final class __contacts_filter_h extends ffi.Opaque {}
 
-/// @brief Handle for contacts list.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
+/// Handle for contacts list.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+/// @nodoc
 final class __contacts_list_h extends ffi.Opaque {}
 
-/// @brief Handle for contacts query.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
+/// Handle for contacts query.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+/// @nodoc
 final class __contacts_query_h extends ffi.Opaque {}
 
-/// @brief The contacts handle.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
+/// The contacts handle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+/// @nodoc
 final class __contacts_h extends ffi.Opaque {}
 
-/// @brief Enumeration for contacts data type.
-/// @since_tizen 3.0
+/// Enumeration for contacts data type.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class contacts_data_type_e {
   static const int CONTACTS_DATA_TYPE_NAME = 1;
   static const int CONTACTS_DATA_TYPE_POSTAL = 2;
@@ -5508,11 +6258,13 @@ abstract class contacts_data_type_e {
   static const int CONTACTS_DATA_TYPE_EXTENSION = 100;
 }
 
-/// @brief Enumeration for contacts number type.
-/// @details The number can be made with a set of values by specifying one or more values.
-/// Example : CTS_NUM_TYPE_HOME|CTS_NUM_TYPE_VOICE
-/// Exceptionally, CTS_NUM_TYPE_CUSTOM is exclusive.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
+/// Enumeration for contacts number type.
+///
+/// The number can be made with a set of values by specifying one or more values. Example : CTS_NUM_TYPE_HOME|CTS_NUM_TYPE_VOICE Exceptionally, CTS_NUM_TYPE_CUSTOM is exclusive.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+/// @nodoc
 abstract class contacts_number_type_e {
   /// < Other number type
   static const int CONTACTS_NUMBER_TYPE_OTHER = 0;
@@ -5572,8 +6324,11 @@ abstract class contacts_number_type_e {
   static const int CONTACTS_NUMBER_TYPE_ASSISTANT = 1073741824;
 }
 
-/// @brief Enumeration for Contact email type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
+/// Enumeration for Contact email type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+/// @nodoc
 abstract class contacts_email_type_e {
   /// < Other email type
   static const int CONTACTS_EMAIL_TYPE_OTHER = 0;
@@ -5591,8 +6346,11 @@ abstract class contacts_email_type_e {
   static const int CONTACTS_EMAIL_TYPE_MOBILE = 8;
 }
 
-/// @brief Enumeration for Contact company type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
+/// Enumeration for Contact company type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+/// @nodoc
 abstract class contacts_company_type_e {
   /// < Other company type
   static const int CONTACTS_COMPANY_TYPE_OTHER = 0;
@@ -5604,8 +6362,11 @@ abstract class contacts_company_type_e {
   static const int CONTACTS_COMPANY_TYPE_WORK = 2;
 }
 
-/// @brief Enumeration for Contact address type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
+/// Enumeration for Contact address type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+/// @nodoc
 abstract class contacts_address_type_e {
   /// < Other address type
   static const int CONTACTS_ADDRESS_TYPE_OTHER = 0;
@@ -5632,8 +6393,11 @@ abstract class contacts_address_type_e {
   static const int CONTACTS_ADDRESS_TYPE_PARCEL = 64;
 }
 
-/// @brief Enumeration for Contact URL type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
+/// Enumeration for Contact URL type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+/// @nodoc
 abstract class contacts_url_type_e {
   /// < Other URL type
   static const int CONTACTS_URL_TYPE_OTHER = 0;
@@ -5648,8 +6412,11 @@ abstract class contacts_url_type_e {
   static const int CONTACTS_URL_TYPE_WORK = 3;
 }
 
-/// @brief Enumeration for Contact messenger type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
+/// Enumeration for Contact messenger type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+/// @nodoc
 abstract class contacts_messenger_type_e {
   /// < Other messenger type
   static const int CONTACTS_MESSENGER_TYPE_OTHER = 0;
@@ -5688,8 +6455,11 @@ abstract class contacts_messenger_type_e {
   static const int CONTACTS_MESSENGER_TYPE_IRC = 11;
 }
 
-/// @brief Enumeration for Call history type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
+/// Enumeration for Call history type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+/// @nodoc
 abstract class contacts_phone_log_type_e {
   /// < None
   static const int CONTACTS_PLOG_TYPE_NONE = 0;
@@ -5755,8 +6525,11 @@ abstract class contacts_phone_log_type_e {
   static const int CONTACTS_PLOG_TYPE_EMAIL_SENT = 202;
 }
 
-/// @brief Enumeration for Contact event type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
+/// Enumeration for Contact event type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+/// @nodoc
 abstract class contacts_event_type_e {
   /// < Other event type
   static const int CONTACTS_EVENT_TYPE_OTHER = 0;
@@ -5771,8 +6544,11 @@ abstract class contacts_event_type_e {
   static const int CONTACTS_EVENT_TYPE_ANNIVERSARY = 3;
 }
 
-/// @brief Enumeration for Contact event calendar type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
+/// Enumeration for Contact event calendar type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+/// @nodoc
 abstract class contacts_event_calendar_type_e {
   /// < Gregorian calendar
   static const int CONTACTS_EVENT_CALENDAR_TYPE_GREGORIAN = 0;
@@ -5781,8 +6557,11 @@ abstract class contacts_event_calendar_type_e {
   static const int CONTACTS_EVENT_CALENDAR_TYPE_CHINESE = 1;
 }
 
-/// @brief Enumeration for Contact image type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
+/// Enumeration for Contact image type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+/// @nodoc
 abstract class contacts_image_type_e {
   /// < Other type
   static const int CONTACTS_IMAGE_TYPE_OTHER = 0;
@@ -5791,8 +6570,11 @@ abstract class contacts_image_type_e {
   static const int CONTACTS_IMAGE_TYPE_CUSTOM = 1;
 }
 
-/// @brief Enumeration for usage type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
+/// Enumeration for usage type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+/// @nodoc
 abstract class contacts_usage_type_e {
   /// < None
   static const int CONTACTS_USAGE_STAT_TYPE_NONE = 0;
@@ -5828,8 +6610,11 @@ abstract class contacts_usage_type_e {
   static const int CONTACTS_USAGE_STAT_TYPE_BLOCKED_MSG = 10;
 }
 
-/// @brief Enumeration for Contact display name source type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
+/// Enumeration for Contact display name source type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+/// @nodoc
 abstract class contacts_display_name_source_type_e {
   /// < Invalid source of display name
   static const int CONTACTS_DISPLAY_NAME_SOURCE_TYPE_INVALID = 0;
@@ -5850,8 +6635,11 @@ abstract class contacts_display_name_source_type_e {
   static const int CONTACTS_DISPLAY_NAME_SOURCE_TYPE_NAME = 5;
 }
 
-/// @brief Enumeration for Address book mode.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
+/// Enumeration for Address book mode.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+/// @nodoc
 abstract class contacts_address_book_mode_e {
   /// < All module can read and write contacts of this address_book
   static const int CONTACTS_ADDRESS_BOOK_MODE_NONE = 0;
@@ -5860,8 +6648,11 @@ abstract class contacts_address_book_mode_e {
   static const int CONTACTS_ADDRESS_BOOK_MODE_READONLY = 1;
 }
 
-/// @brief Enumeration for link mode when inserting contact.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
+/// Enumeration for link mode when inserting contact.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+/// @nodoc
 abstract class contacts_contact_link_mode_e {
   /// < Auto link immediately
   static const int CONTACTS_CONTACT_LINK_MODE_NONE = 0;
@@ -5870,8 +6661,11 @@ abstract class contacts_contact_link_mode_e {
   static const int CONTACTS_CONTACT_LINK_MODE_IGNORE_ONCE = 1;
 }
 
-/// @brief Enumeration for Contact relationship type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
+/// Enumeration for Contact relationship type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+/// @nodoc
 abstract class contacts_relationship_type_e {
   /// < Other relationship type
   static const int CONTACTS_RELATIONSHIP_TYPE_OTHER = 0;
@@ -5922,8 +6716,11 @@ abstract class contacts_relationship_type_e {
   static const int CONTACTS_RELATIONSHIP_TYPE_CUSTOM = 15;
 }
 
-/// @brief Enumeration for Contact search range.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
+/// Enumeration for Contact search range.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+/// @nodoc
 abstract class contacts_search_range_e {
   /// < Search record from name
   static const int CONTACTS_SEARCH_RANGE_NAME = 1;
@@ -5938,8 +6735,11 @@ abstract class contacts_search_range_e {
   static const int CONTACTS_SEARCH_RANGE_EMAIL = 8;
 }
 
-/// @brief Enumeration for SIP(Session Initiation Protocol) type range.
-/// @since_tizen 3.0
+/// Enumeration for SIP(Session Initiation Protocol) type range.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class contacts_sip_type_e {
   /// < Other sip type
   static const int CONTACTS_SIP_TYPE_OTHER = 0;
@@ -5954,21 +6754,12 @@ abstract class contacts_sip_type_e {
   static const int CONTACTS_SIP_TYPE_WORK = 3;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address_book _contacts_address_book view
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Read, Write</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts addressbook view </td></tr>
-/// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the addressbook </td></tr>
-/// <tr><td>integer</td><td> account_id </td><td>read, write once</td><td> Account ID that the addressbook belongs to </td></tr>
-/// <tr><td>string</td><td> name </td><td>read, write</td><td> It cannot be @c NULL. Duplicate names are not allowed. </td></tr>
-/// <tr><td>integer</td><td> mode </td><td>read, write</td><td> Addressbook mode, refer to the @ref contacts_address_book_mode_e </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address_book _contacts_address_book view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts addressbook view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the addressbook </td></tr> <tr><td>integer</td><td> account_id </td><td>read, write once</td><td> Account ID that the addressbook belongs to </td></tr> <tr><td>string</td><td> name </td><td>read, write</td><td> It cannot be `NULL`. Duplicate names are not allowed. </td></tr> <tr><td>integer</td><td> mode </td><td>read, write</td><td> Addressbook mode, refer to the `contacts_address_book_mode_e` </td></tr> </table>
+/// @nodoc
 final class _contacts_address_book_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -5985,26 +6776,12 @@ final class _contacts_address_book_property_ids extends ffi.Struct {
   external int mode;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group _contacts_group view
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Read, Write</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts group view </td></tr>
-/// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the group </td></tr>
-/// <tr><td>integer</td><td> address_book_id </td><td>read, write once</td><td> Addressbook ID that the group belongs to </td></tr>
-/// <tr><td>string</td><td> name </td><td>read, write</td><td> Group name </td></tr>
-/// <tr><td>string</td><td> ringtone_path </td><td>read, write</td><td> Ringtone path of the group </td></tr>
-/// <tr><td>string</td><td> image_path </td><td>read, write</td><td> Image path of the group </td></tr>
-/// <tr><td>string</td><td> vibration </td><td>read, write</td><td> Vibration path of the group </td></tr>
-/// <tr><td>string</td><td> extra_data </td><td>read, write</td><td> Extra data for default group name </td></tr>
-/// <tr><td>boolean</td><td> is_read_only </td><td>read, write once</td><td> The group is read only or not </td></tr>
-/// <tr><td>string</td><td> message_alert </td><td>read, write</td><td> Message alert path of the group </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group _contacts_group view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts group view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the group </td></tr> <tr><td>integer</td><td> address_book_id </td><td>read, write once</td><td> Addressbook ID that the group belongs to </td></tr> <tr><td>string</td><td> name </td><td>read, write</td><td> Group name </td></tr> <tr><td>string</td><td> ringtone_path </td><td>read, write</td><td> Ringtone path of the group </td></tr> <tr><td>string</td><td> image_path </td><td>read, write</td><td> Image path of the group </td></tr> <tr><td>string</td><td> vibration </td><td>read, write</td><td> Vibration path of the group </td></tr> <tr><td>string</td><td> extra_data </td><td>read, write</td><td> Extra data for default group name </td></tr> <tr><td>boolean</td><td> is_read_only </td><td>read, write once</td><td> The group is read only or not </td></tr> <tr><td>string</td><td> message_alert </td><td>read, write</td><td> Message alert path of the group </td></tr> </table>
+/// @nodoc
 final class _contacts_group_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -6036,34 +6813,12 @@ final class _contacts_group_property_ids extends ffi.Struct {
   external int message_alert;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person _contacts_person view
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Read, Write</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts person view </td></tr>
-/// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the person </td></tr>
-/// <tr><td>string</td><td> display_name </td><td>read only</td><td> Display name of the person </td></tr>
-/// <tr><td>string</td><td> display_name_index </td><td>read only</td><td> The first character of first string for grouping. This is normalized using icu (projection) </td></tr>
-/// <tr><td>integer</td><td> display_contact_id </td><td>read only</td><td> Display contact ID that the person belongs to </td></tr>
-/// <tr><td>string</td><td> ringtone_path </td><td>read, write</td><td> Ringtone path of the person </td></tr>
-/// <tr><td>string</td><td> image_thumbnail_path </td><td>read only</td><td> Image thumbnail path of the person </td></tr>
-/// <tr><td>string</td><td> vibration </td><td>read, write</td><td> Vibration path of the person </td></tr>
-/// <tr><td>string</td><td> message_alert </td><td>read, write</td><td> Message alert path of the person </td></tr>
-/// <tr><td>string</td><td> status </td><td>read only</td><td> Status of social account </td></tr>
-/// <tr><td>boolean</td><td> is_favorite </td><td>read, write</td><td> The person is favorite or not </td></tr>
-/// <tr><td>double</td><td> favorite_priority </td><td> read only </td><td> The priority of favorite contacts. it can be used as sorting key, see the @ref contacts_query_set_sort </td></tr>
-/// <tr><td>integer</td><td> link_count </td><td>read only</td><td> Link count of contact records (projection) </td></tr>
-/// <tr><td>string</td><td> addressbook_ids </td><td>read only</td><td> Addressbook IDs that the person belongs to (projection) </td></tr>
-/// <tr><td>boolean</td><td> has_phonenumber </td><td>read only</td><td> The person has phone number or not </td></tr>
-/// <tr><td>boolean</td><td> has_email </td><td>read only</td><td> The person has email or not </td></tr>
-/// <tr><td>integer</td><td> snippet_type </td><td>read only</td><td> keyword matched data type, refer to they @ref contacts_data_type_e (Since 3.0) </td></tr>
-/// <tr><td>string</td><td> snippet_string </td><td>read only</td><td> keyword matched data string (Since 3.0) </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person _contacts_person view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts person view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the person </td></tr> <tr><td>string</td><td> display_name </td><td>read only</td><td> Display name of the person </td></tr> <tr><td>string</td><td> display_name_index </td><td>read only</td><td> The first character of first string for grouping. This is normalized using icu (projection) </td></tr> <tr><td>integer</td><td> display_contact_id </td><td>read only</td><td> Display contact ID that the person belongs to </td></tr> <tr><td>string</td><td> ringtone_path </td><td>read, write</td><td> Ringtone path of the person </td></tr> <tr><td>string</td><td> image_thumbnail_path </td><td>read only</td><td> Image thumbnail path of the person </td></tr> <tr><td>string</td><td> vibration </td><td>read, write</td><td> Vibration path of the person </td></tr> <tr><td>string</td><td> message_alert </td><td>read, write</td><td> Message alert path of the person </td></tr> <tr><td>string</td><td> status </td><td>read only</td><td> Status of social account </td></tr> <tr><td>boolean</td><td> is_favorite </td><td>read, write</td><td> The person is favorite or not </td></tr> <tr><td>double</td><td> favorite_priority </td><td> read only </td><td> The priority of favorite contacts. it can be used as sorting key, see the `contacts_query_set_sort` </td></tr> <tr><td>integer</td><td> link_count </td><td>read only</td><td> Link count of contact records (projection) </td></tr> <tr><td>string</td><td> addressbook_ids </td><td>read only</td><td> Addressbook IDs that the person belongs to (projection) </td></tr> <tr><td>boolean</td><td> has_phonenumber </td><td>read only</td><td> The person has phone number or not </td></tr> <tr><td>boolean</td><td> has_email </td><td>read only</td><td> The person has email or not </td></tr> <tr><td>integer</td><td> snippet_type </td><td>read only</td><td> keyword matched data type, refer to they `contacts_data_type_e` (Since 3.0) </td></tr> <tr><td>string</td><td> snippet_string </td><td>read only</td><td> keyword matched data string (Since 3.0) </td></tr> </table>
+/// @nodoc
 final class _contacts_person_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -6119,31 +6874,12 @@ final class _contacts_person_property_ids extends ffi.Struct {
   external int snippet_string;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_simple_contact _contacts_simple_contact view
-/// You can only get simple contact using this view.
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td> Identifier of this simple contact view </td></tr>
-/// <tr><td>integer</td><td>id</td><td> DB record ID of the contact </td></tr>
-/// <tr><td>string</td><td>display_name</td><td> Display name of the contact </td></tr>
-/// <tr><td>integer</td><td>display_source_id</td><td> The source type of display name, refer to the @ref contacts_display_name_source_type_e </td></tr>
-/// <tr><td>integer</td><td>address_book_id</td><td> Addressbook that the contact belongs to </td></tr>
-/// <tr><td>string</td><td>ringtone_path</td><td> Ringtone path of the contact </td></tr>
-/// <tr><td>string</td><td>image_thumbnail_path</td><td> Image thumbnail path of the contact </td></tr>
-/// <tr><td>boolean</td><td>is_favorite</td><td> The contact is favorite or not </td></tr>
-/// <tr><td>boolean</td><td>has_phonenumber</td><td> The contact has phone number or not </td></tr>
-/// <tr><td>boolean</td><td>has_email</td><td> The contact has email or not </td></tr>
-/// <tr><td>integer</td><td>person_id</td><td> Person ID that the contact belongs to </td></tr>
-/// <tr><td>string</td><td>uid</td><td> Unique identifier </td></tr>
-/// <tr><td>string</td><td>vibration</td><td> Vibration path of the contact </td></tr>
-/// <tr><td>string</td><td>message_alert</td><td> Message alert path of the contact </td></tr>
-/// <tr><td>integer</td><td>changed_time</td><td> Last changed contact time </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_simple_contact _contacts_simple_contact view You can only get simple contact using this view. <table> <tr> <th>Type</th> <th>Property ID</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td> Identifier of this simple contact view </td></tr> <tr><td>integer</td><td>id</td><td> DB record ID of the contact </td></tr> <tr><td>string</td><td>display_name</td><td> Display name of the contact </td></tr> <tr><td>integer</td><td>display_source_id</td><td> The source type of display name, refer to the `contacts_display_name_source_type_e` </td></tr> <tr><td>integer</td><td>address_book_id</td><td> Addressbook that the contact belongs to </td></tr> <tr><td>string</td><td>ringtone_path</td><td> Ringtone path of the contact </td></tr> <tr><td>string</td><td>image_thumbnail_path</td><td> Image thumbnail path of the contact </td></tr> <tr><td>boolean</td><td>is_favorite</td><td> The contact is favorite or not </td></tr> <tr><td>boolean</td><td>has_phonenumber</td><td> The contact has phone number or not </td></tr> <tr><td>boolean</td><td>has_email</td><td> The contact has email or not </td></tr> <tr><td>integer</td><td>person_id</td><td> Person ID that the contact belongs to </td></tr> <tr><td>string</td><td>uid</td><td> Unique identifier </td></tr> <tr><td>string</td><td>vibration</td><td> Vibration path of the contact </td></tr> <tr><td>string</td><td>message_alert</td><td> Message alert path of the contact </td></tr> <tr><td>integer</td><td>changed_time</td><td> Last changed contact time </td></tr> </table>
+/// @nodoc
 final class _contacts_simple_contact_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -6190,47 +6926,12 @@ final class _contacts_simple_contact_property_ids extends ffi.Struct {
   external int message_alert;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact _contacts_contact view
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Read, Write</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contact view </td></tr>
-/// <tr><td>integer</td><td>id</td><td>read only</td><td> DB record ID of the contact </td></tr>
-/// <tr><td>string</td><td>display_name</td><td>read only</td><td> Display name of the contact </td></tr>
-/// <tr><td>integer</td><td>display_source_id</td><td>read only</td><td> The source type of display name, refer to the @ref contacts_display_name_source_type_e </td></tr>
-/// <tr><td>integer</td><td>address_book_id</td><td>read, write once</td><td> Addressbook ID that the contact belongs to </td></tr>
-/// <tr><td>string</td><td>ringtone_path</td><td>read, write</td><td> Ringtone path of the contact </td></tr>
-/// <tr><td>string</td><td>image_thumbnail_path</td><td>read only</td><td> Image thumbnail path of the contact </td></tr>
-/// <tr><td>boolean</td><td>is_favorite</td><td>read, write</td><td> The contact is favorite or not </td></tr>
-/// <tr><td>boolean</td><td>has_phonenumber</td><td>read only</td><td> The contact has phone number or not </td></tr>
-/// <tr><td>boolean</td><td>has_email</td><td>read only</td><td> The contact has email or not </td></tr>
-/// <tr><td>integer</td><td>person_id</td><td>read, write once</td><td> Person ID that the contact belongs to. If set when inserting, a contact will be linked to person </td></tr>
-/// <tr><td>string</td><td>uid</td><td>read, write</td><td> Unique identifier </td></tr>
-/// <tr><td>string</td><td>vibration</td><td>read, write</td><td> Vibration path of the contact </td></tr>
-/// <tr><td>string</td><td>message_alert</td><td>read, write</td><td> Message alert path of the contact </td></tr>
-/// <tr><td>integer</td><td>changed_time</td><td>read only</td><td> Last changed contact time </td></tr>
-/// <tr><td>integer</td><td>link_mode</td><td>read, write once</td><td> The link mode, refer to the @ref contacts_contact_link_mode_e. If the person_id was set, this value will be ignored </td></tr>
-/// <tr><td>record</td><td>name</td><td>read, write</td><td> _contacts_name child record (single) </td></tr>
-/// <tr><td>record</td><td>company</td><td>read, write</td><td> _contacts_company child record (multiple) </td></tr>
-/// <tr><td>record</td><td>note</td><td>read, write</td><td> _contacts_note child record (multiple) </td></tr>
-/// <tr><td>record</td><td>number</td><td>read, write</td><td> _contacts_number child record (multiple) </td></tr>
-/// <tr><td>record</td><td>email</td><td>read, write</td><td> _contacts_email child record (multiple) </td></tr>
-/// <tr><td>record</td><td>event</td><td>read, write</td><td> _contacts_event child record (multiple) </td></tr>
-/// <tr><td>record</td><td>messenger</td><td>read, write</td><td> _contacts_messenger child record (multiple) </td></tr>
-/// <tr><td>record</td><td>address</td><td>read, write</td><td> _contacts_address child record (multiple) </td></tr>
-/// <tr><td>record</td><td>url</td><td>read, write</td><td> _contacts_url child record (multiple) </td></tr>
-/// <tr><td>record</td><td>nickname</td><td>read, write</td><td> _contacts_nickname child record (multiple) </td></tr>
-/// <tr><td>record</td><td>profile</td><td>read, write</td><td>	 _contacts_profile child record (multiple) </td></tr>
-/// <tr><td>record</td><td>relationship</td><td>read, write</td><td> _contacts_relationship child record (multiple)</td></tr>
-/// <tr><td>record</td><td>image</td><td>read, write</td><td> _contacts_image child record (multiple)</td></tr>
-/// <tr><td>record</td><td>group_relation</td><td>read, write</td><td> _contacts_group_relation child record (multiple)</td></tr>
-/// <tr><td>record</td><td>sip</td><td>read, write</td><td> _contacts_sip child record (multiple) (Since 3.0)</td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact _contacts_contact view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contact view </td></tr> <tr><td>integer</td><td>id</td><td>read only</td><td> DB record ID of the contact </td></tr> <tr><td>string</td><td>display_name</td><td>read only</td><td> Display name of the contact </td></tr> <tr><td>integer</td><td>display_source_id</td><td>read only</td><td> The source type of display name, refer to the `contacts_display_name_source_type_e` </td></tr> <tr><td>integer</td><td>address_book_id</td><td>read, write once</td><td> Addressbook ID that the contact belongs to </td></tr> <tr><td>string</td><td>ringtone_path</td><td>read, write</td><td> Ringtone path of the contact </td></tr> <tr><td>string</td><td>image_thumbnail_path</td><td>read only</td><td> Image thumbnail path of the contact </td></tr> <tr><td>boolean</td><td>is_favorite</td><td>read, write</td><td> The contact is favorite or not </td></tr> <tr><td>boolean</td><td>has_phonenumber</td><td>read only</td><td> The contact has phone number or not </td></tr> <tr><td>boolean</td><td>has_email</td><td>read only</td><td> The contact has email or not </td></tr> <tr><td>integer</td><td>person_id</td><td>read, write once</td><td> Person ID that the contact belongs to. If set when inserting, a contact will be linked to person </td></tr> <tr><td>string</td><td>uid</td><td>read, write</td><td> Unique identifier </td></tr> <tr><td>string</td><td>vibration</td><td>read, write</td><td> Vibration path of the contact </td></tr> <tr><td>string</td><td>message_alert</td><td>read, write</td><td> Message alert path of the contact </td></tr> <tr><td>integer</td><td>changed_time</td><td>read only</td><td> Last changed contact time </td></tr> <tr><td>integer</td><td>link_mode</td><td>read, write once</td><td> The link mode, refer to the `contacts_contact_link_mode_e.` If the person_id was set, this value will be ignored </td></tr> <tr><td>record</td><td>name</td><td>read, write</td><td> _contacts_name child record (single) </td></tr> <tr><td>record</td><td>company</td><td>read, write</td><td> _contacts_company child record (multiple) </td></tr> <tr><td>record</td><td>note</td><td>read, write</td><td> _contacts_note child record (multiple) </td></tr> <tr><td>record</td><td>number</td><td>read, write</td><td> _contacts_number child record (multiple) </td></tr> <tr><td>record</td><td>email</td><td>read, write</td><td> _contacts_email child record (multiple) </td></tr> <tr><td>record</td><td>event</td><td>read, write</td><td> _contacts_event child record (multiple) </td></tr> <tr><td>record</td><td>messenger</td><td>read, write</td><td> _contacts_messenger child record (multiple) </td></tr> <tr><td>record</td><td>address</td><td>read, write</td><td> _contacts_address child record (multiple) </td></tr> <tr><td>record</td><td>url</td><td>read, write</td><td> _contacts_url child record (multiple) </td></tr> <tr><td>record</td><td>nickname</td><td>read, write</td><td> _contacts_nickname child record (multiple) </td></tr> <tr><td>record</td><td>profile</td><td>read, write</td><td> _contacts_profile child record (multiple) </td></tr> <tr><td>record</td><td>relationship</td><td>read, write</td><td> _contacts_relationship child record (multiple)</td></tr> <tr><td>record</td><td>image</td><td>read, write</td><td> _contacts_image child record (multiple)</td></tr> <tr><td>record</td><td>group_relation</td><td>read, write</td><td> _contacts_group_relation child record (multiple)</td></tr> <tr><td>record</td><td>sip</td><td>read, write</td><td> _contacts_sip child record (multiple) (Since 3.0)</td></tr> </table>
+/// @nodoc
 final class _contacts_contact_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -6328,37 +7029,12 @@ final class _contacts_contact_property_ids extends ffi.Struct {
   external int sip;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_my_profile _contacts_my_profile view
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Read, Write</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this my profile view </td></tr>
-/// <tr><td>integer</td><td>id</td><td>read only</td><td> DB record ID of the my profile </td></tr>
-/// <tr><td>string</td><td>display_name</td><td>read only</td><td> Display name of the profile </td></tr>
-/// <tr><td>integer</td><td>address_book_id</td><td>read, write once</td><td> Addressbook ID that the profile belongs to </td></tr>
-/// <tr><td>string</td><td>image_thumbnail_path</td><td>read only</td><td> Image thumbnail path of the profile </td></tr>
-/// <tr><td>string</td><td>uid</td><td>read, write</td><td> Unique identifier </td></tr>
-/// <tr><td>integer</td><td>changed_time</td><td>read only</td><td> Last changed profile time </td></tr>
-/// <tr><td>record</td><td>name</td><td>read, write</td><td> _contacts_name child record (single) </td></tr>
-/// <tr><td>record</td><td>company</td><td>read, write</td><td> _contacts_company child record (multiple) </td></tr>
-/// <tr><td>record</td><td>note</td><td>read, write</td><td> _contacts_note child record (multiple) </td></tr>
-/// <tr><td>record</td><td>number</td><td>read, write</td><td> _contacts_number child record (multiple) </td></tr>
-/// <tr><td>record</td><td>email</td><td>read, write</td><td> _contacts_email child record (multiple) </td></tr>
-/// <tr><td>record</td><td>event</td><td>read, write</td><td> _contacts_event child record (multiple) </td></tr>
-/// <tr><td>record</td><td>messenger</td><td>read, write</td><td> _contacts_messenger child record (multiple) </td></tr>
-/// <tr><td>record</td><td>address</td><td>read, write</td><td> _contacts_address child record (multiple) </td></tr>
-/// <tr><td>record</td><td>url</td><td>read, write</td><td> _contacts_url child record (multiple) </td></tr>
-/// <tr><td>record</td><td>nickname</td><td>read, write</td><td> _contacts_nickname child record (multiple) </td></tr>
-/// <tr><td>record</td><td>profile</td><td>read, write</td><td> _contacts_profile child record (multiple) </td></tr>
-/// <tr><td>record</td><td>relationship</td><td>read, write</td><td> _contacts_relationship child record (multiple) </td></tr>
-/// <tr><td>record</td><td>image</td><td>read, write</td><td> _contacts_image child record (multiple) </td></tr>
-/// <tr><td>record</td><td>sip</td><td>read, write</td><td> _contacts_sip child record (multiple) (Since 3.0) </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_my_profile _contacts_my_profile view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this my profile view </td></tr> <tr><td>integer</td><td>id</td><td>read only</td><td> DB record ID of the my profile </td></tr> <tr><td>string</td><td>display_name</td><td>read only</td><td> Display name of the profile </td></tr> <tr><td>integer</td><td>address_book_id</td><td>read, write once</td><td> Addressbook ID that the profile belongs to </td></tr> <tr><td>string</td><td>image_thumbnail_path</td><td>read only</td><td> Image thumbnail path of the profile </td></tr> <tr><td>string</td><td>uid</td><td>read, write</td><td> Unique identifier </td></tr> <tr><td>integer</td><td>changed_time</td><td>read only</td><td> Last changed profile time </td></tr> <tr><td>record</td><td>name</td><td>read, write</td><td> _contacts_name child record (single) </td></tr> <tr><td>record</td><td>company</td><td>read, write</td><td> _contacts_company child record (multiple) </td></tr> <tr><td>record</td><td>note</td><td>read, write</td><td> _contacts_note child record (multiple) </td></tr> <tr><td>record</td><td>number</td><td>read, write</td><td> _contacts_number child record (multiple) </td></tr> <tr><td>record</td><td>email</td><td>read, write</td><td> _contacts_email child record (multiple) </td></tr> <tr><td>record</td><td>event</td><td>read, write</td><td> _contacts_event child record (multiple) </td></tr> <tr><td>record</td><td>messenger</td><td>read, write</td><td> _contacts_messenger child record (multiple) </td></tr> <tr><td>record</td><td>address</td><td>read, write</td><td> _contacts_address child record (multiple) </td></tr> <tr><td>record</td><td>url</td><td>read, write</td><td> _contacts_url child record (multiple) </td></tr> <tr><td>record</td><td>nickname</td><td>read, write</td><td> _contacts_nickname child record (multiple) </td></tr> <tr><td>record</td><td>profile</td><td>read, write</td><td> _contacts_profile child record (multiple) </td></tr> <tr><td>record</td><td>relationship</td><td>read, write</td><td> _contacts_relationship child record (multiple) </td></tr> <tr><td>record</td><td>image</td><td>read, write</td><td> _contacts_image child record (multiple) </td></tr> <tr><td>record</td><td>sip</td><td>read, write</td><td> _contacts_sip child record (multiple) (Since 3.0) </td></tr> </table>
+/// @nodoc
 final class _contacts_my_profile_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -6426,27 +7102,12 @@ final class _contacts_my_profile_property_ids extends ffi.Struct {
   external int sip;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_name _contacts_name view
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Read, Write</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts name view </td></tr>
-/// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the name </td></tr>
-/// <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contacts ID that the name record belongs to </td></tr>
-/// <tr><td>string</td><td> first </td><td>read, write</td><td> First name </td></tr>
-/// <tr><td>string</td><td> last </td><td>read, write</td><td> Last name </td></tr>
-/// <tr><td>string</td><td> addition </td><td>read, write</td><td> Middle name </td></tr>
-/// <tr><td>string</td><td> suffix </td><td>read, write</td><td> Suffix </td></tr>
-/// <tr><td>string</td><td> prefix </td><td>read, write</td><td> Prefix </td></tr>
-/// <tr><td>string</td><td> phonetic_first </td><td>read, write</td><td> Pronounce the first name </td></tr>
-/// <tr><td>string</td><td> phonetic_middle </td><td>read, write</td><td> Pronounce the middle name </td></tr>
-/// <tr><td>string</td><td> phonetic_last </td><td>read, write</td><td> Pronounce the last name </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_name _contacts_name view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts name view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the name </td></tr> <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contacts ID that the name record belongs to </td></tr> <tr><td>string</td><td> first </td><td>read, write</td><td> First name </td></tr> <tr><td>string</td><td> last </td><td>read, write</td><td> Last name </td></tr> <tr><td>string</td><td> addition </td><td>read, write</td><td> Middle name </td></tr> <tr><td>string</td><td> suffix </td><td>read, write</td><td> Suffix </td></tr> <tr><td>string</td><td> prefix </td><td>read, write</td><td> Prefix </td></tr> <tr><td>string</td><td> phonetic_first </td><td>read, write</td><td> Pronounce the first name </td></tr> <tr><td>string</td><td> phonetic_middle </td><td>read, write</td><td> Pronounce the middle name </td></tr> <tr><td>string</td><td> phonetic_last </td><td>read, write</td><td> Pronounce the last name </td></tr> </table>
+/// @nodoc
 final class _contacts_name_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -6481,26 +7142,12 @@ final class _contacts_name_property_ids extends ffi.Struct {
   external int phonetic_last;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_number _contacts_number view
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Read, Write</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts number view </td></tr>
-/// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the number </td></tr>
-/// <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the number belongs to</td></tr>
-/// <tr><td>integer</td><td> type </td><td>read, write</td><td> Number type, refer to the @ref contacts_number_type_e </td></tr>
-/// <tr><td>string</td><td> label </td><td>read, write</td><td> Custom number type label, when the number type is #CONTACTS_NUMBER_TYPE_CUSTOM </td></tr>
-/// <tr><td>boolean</td><td> is_default </td><td>read, write</td><td> The number is default number or not </td></tr>
-/// <tr><td>string</td><td> number </td><td>read, write</td><td> Number </td></tr>
-/// <tr><td>string</td><td> normalized_number </td><td> filter only </td><td> You can only use this property for search filter. </td></tr>
-/// <tr><td>string</td><td> cleaned_number </td><td> filter only </td><td> You can only use this property for search filter. </td></tr>
-/// <tr><td>string</td><td> number_filter </td><td> filter only </td><td> You can only use this property for search filter. </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_number _contacts_number view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts number view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the number </td></tr> <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the number belongs to</td></tr> <tr><td>integer</td><td> type </td><td>read, write</td><td> Number type, refer to the `contacts_number_type_e` </td></tr> <tr><td>string</td><td> label </td><td>read, write</td><td> Custom number type label, when the number type is `CONTACTS_NUMBER_TYPE_CUSTOM` </td></tr> <tr><td>boolean</td><td> is_default </td><td>read, write</td><td> The number is default number or not </td></tr> <tr><td>string</td><td> number </td><td>read, write</td><td> Number </td></tr> <tr><td>string</td><td> normalized_number </td><td> filter only </td><td> You can only use this property for search filter. </td></tr> <tr><td>string</td><td> cleaned_number </td><td> filter only </td><td> You can only use this property for search filter. </td></tr> <tr><td>string</td><td> number_filter </td><td> filter only </td><td> You can only use this property for search filter. </td></tr> </table>
+/// @nodoc
 final class _contacts_number_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -6532,23 +7179,12 @@ final class _contacts_number_property_ids extends ffi.Struct {
   external int number_filter;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_email _contacts_email view
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Read, Write</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts email view </td></tr>
-/// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the email </td></tr>
-/// <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the email belongs to </td></tr>
-/// <tr><td>integer</td><td> type </td><td>read, write</td><td> Email type, refer to the @ref contacts_email_type_e </td></tr>
-/// <tr><td>string</td><td> label </td><td>read, write</td><td> Custom mail type label, when the email type is #CONTACTS_EMAIL_TYPE_CUSTOM </td></tr>
-/// <tr><td>boolean</td><td> is_default </td><td>read, write</td><td> The email is default email or not </td></tr>
-/// <tr><td>string</td><td> email </td><td>read, write</td><td> Email address</td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_email _contacts_email view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts email view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the email </td></tr> <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the email belongs to </td></tr> <tr><td>integer</td><td> type </td><td>read, write</td><td> Email type, refer to the `contacts_email_type_e` </td></tr> <tr><td>string</td><td> label </td><td>read, write</td><td> Custom mail type label, when the email type is `CONTACTS_EMAIL_TYPE_CUSTOM` </td></tr> <tr><td>boolean</td><td> is_default </td><td>read, write</td><td> The email is default email or not </td></tr> <tr><td>string</td><td> email </td><td>read, write</td><td> Email address</td></tr> </table>
+/// @nodoc
 final class _contacts_email_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -6571,29 +7207,12 @@ final class _contacts_email_property_ids extends ffi.Struct {
   external int email;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address _contacts_address view
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Read, Write</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts address view </td></tr>
-/// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the address </td></tr>
-/// <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the address belongs to </td></tr>
-/// <tr><td>integer</td><td> type </td><td>read, write</td><td> Address type, refer to the @ref contacts_address_type_e </td></tr>
-/// <tr><td>string</td><td> label </td><td>read, write</td><td> Address type label, when the address type is #CONTACTS_ADDRESS_TYPE_CUSTOM </td></tr>
-/// <tr><td>string</td><td> postbox </td><td>read, write</td><td> Post office box </td></tr>
-/// <tr><td>string</td><td> postal_code </td><td>read, write</td><td> Postal code </td></tr>
-/// <tr><td>string</td><td> region </td><td>read, write</td><td> Region </td></tr>
-/// <tr><td>string</td><td> locality </td><td>read, write</td><td> Locality </td></tr>
-/// <tr><td>string</td><td> street </td><td>read, write</td><td> Street </td></tr>
-/// <tr><td>string</td><td> country </td><td>read, write</td><td> Country </td></tr>
-/// <tr><td>string</td><td> extended </td><td>read, write</td><td> Extended address </td></tr>
-/// <tr><td>boolean</td><td> is_default </td><td>read, write</td><td> The address is default or not </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_address _contacts_address view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts address view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the address </td></tr> <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the address belongs to </td></tr> <tr><td>integer</td><td> type </td><td>read, write</td><td> Address type, refer to the `contacts_address_type_e` </td></tr> <tr><td>string</td><td> label </td><td>read, write</td><td> Address type label, when the address type is `CONTACTS_ADDRESS_TYPE_CUSTOM` </td></tr> <tr><td>string</td><td> postbox </td><td>read, write</td><td> Post office box </td></tr> <tr><td>string</td><td> postal_code </td><td>read, write</td><td> Postal code </td></tr> <tr><td>string</td><td> region </td><td>read, write</td><td> Region </td></tr> <tr><td>string</td><td> locality </td><td>read, write</td><td> Locality </td></tr> <tr><td>string</td><td> street </td><td>read, write</td><td> Street </td></tr> <tr><td>string</td><td> country </td><td>read, write</td><td> Country </td></tr> <tr><td>string</td><td> extended </td><td>read, write</td><td> Extended address </td></tr> <tr><td>boolean</td><td> is_default </td><td>read, write</td><td> The address is default or not </td></tr> </table>
+/// @nodoc
 final class _contacts_address_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -6634,20 +7253,12 @@ final class _contacts_address_property_ids extends ffi.Struct {
   external int is_default;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_note _contacts_note view
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Read, Write</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts note view </td></tr>
-/// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the note </td></tr>
-/// <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the note belongs to </td></tr>
-/// <tr><td>string</td><td> note </td><td>read, write</td><td> Note contents </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_note _contacts_note view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts note view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the note </td></tr> <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the note belongs to </td></tr> <tr><td>string</td><td> note </td><td>read, write</td><td> Note contents </td></tr> </table>
+/// @nodoc
 final class _contacts_note_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -6661,22 +7272,12 @@ final class _contacts_note_property_ids extends ffi.Struct {
   external int note;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_url _contacts_url view
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Read, Write</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts URL view </td></tr>
-/// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the URL </td></tr>
-/// <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the URL belongs to </td></tr>
-/// <tr><td>integer</td><td> type </td><td>read, write</td><td> URL type, refer to the @ref contacts_url_type_e </td></tr>
-/// <tr><td>string</td><td> label </td><td>read, write</td><td> Custom URL type label, when the URL type is #CONTACTS_URL_TYPE_CUSTOM </td></tr>
-/// <tr><td>string</td><td> url </td><td>read, write</td><td> URL </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_url _contacts_url view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts URL view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the URL </td></tr> <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the URL belongs to </td></tr> <tr><td>integer</td><td> type </td><td>read, write</td><td> URL type, refer to the `contacts_url_type_e` </td></tr> <tr><td>string</td><td> label </td><td>read, write</td><td> Custom URL type label, when the URL type is `CONTACTS_URL_TYPE_CUSTOM` </td></tr> <tr><td>string</td><td> url </td><td>read, write</td><td> URL </td></tr> </table>
+/// @nodoc
 final class _contacts_url_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -6696,24 +7297,12 @@ final class _contacts_url_property_ids extends ffi.Struct {
   external int url;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_event _contacts_event view
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Read, Write</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts event view </td></tr>
-/// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the event </td></tr>
-/// <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the event belongs to </td></tr>
-/// <tr><td>integer</td><td> type </td><td>read, write</td><td> Event type, refer to the @ref contacts_event_type_e </td></tr>
-/// <tr><td>string</td><td> label </td><td>read, write</td><td> Custom event type label, when the event type is #CONTACTS_EVENT_TYPE_CUSTOM </td></tr>
-/// <tr><td>integer</td><td> date </td><td>read, write</td><td> Event date(YYYYMMDD). e.g. 2014/1/1 : 20140101. Even if the calendar_type is set as CONTACTS_EVENT_CALENDAR_TYPE_CHINESE, you SHOULD set Gregorian date </td></tr>
-/// <tr><td>integer</td><td> calendar_type </td><td>read, write</td><td> Calendar type, refer to the @ref contacts_event_calendar_type_e </td></tr>
-/// <tr><td>bool</td><td> is_leap_month (Deprecated) </td><td>read, write</td><td> The month is leap or not (valid on lunisolar calendar only) </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_event _contacts_event view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts event view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the event </td></tr> <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the event belongs to </td></tr> <tr><td>integer</td><td> type </td><td>read, write</td><td> Event type, refer to the `contacts_event_type_e` </td></tr> <tr><td>string</td><td> label </td><td>read, write</td><td> Custom event type label, when the event type is `CONTACTS_EVENT_TYPE_CUSTOM` </td></tr> <tr><td>integer</td><td> date </td><td>read, write</td><td> Event date(YYYYMMDD). e.g. 2014/1/1 : 20140101. Even if the calendar_type is set as CONTACTS_EVENT_CALENDAR_TYPE_CHINESE, you SHOULD set Gregorian date </td></tr> <tr><td>integer</td><td> calendar_type </td><td>read, write</td><td> Calendar type, refer to the `contacts_event_calendar_type_e` </td></tr> <tr><td>bool</td><td> is_leap_month (Deprecated) </td><td>read, write</td><td> The month is leap or not (valid on lunisolar calendar only) </td></tr> </table>
+/// @nodoc
 final class _contacts_event_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -6739,22 +7328,12 @@ final class _contacts_event_property_ids extends ffi.Struct {
   external int is_leap_month;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group_relation _contacts_group_relation view
-/// Refer @ref contacts_group_add_contact, @ref contacts_group_remove_contact
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Read, Write</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this relationship view </td></tr>
-/// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the group (can not be used as filter) </td></tr>
-/// <tr><td>integer</td><td> group_id </td><td>read, write once</td><td> DB record ID of the group </td></tr>
-/// <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> DB record ID of the contact </td></tr>
-/// <tr><td>string</td><td> name </td><td>read only</td><td> Group name </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group_relation _contacts_group_relation view Refer `contacts_group_add_contact,` `contacts_group_remove_contact` <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this relationship view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the group (can not be used as filter) </td></tr> <tr><td>integer</td><td> group_id </td><td>read, write once</td><td> DB record ID of the group </td></tr> <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> DB record ID of the contact </td></tr> <tr><td>string</td><td> name </td><td>read only</td><td> Group name </td></tr> </table>
+/// @nodoc
 final class _contacts_group_relation_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -6771,22 +7350,12 @@ final class _contacts_group_relation_property_ids extends ffi.Struct {
   external int name;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_relationship _contacts_relationship view
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Read, Write</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this relationship view </td></tr>
-/// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the relationship </td></tr>
-/// <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the relationship belongs to </td></tr>
-/// <tr><td>integer</td><td> type </td><td>read, write</td><td> Relationship type, refer to the @ref contacts_relationship_type_e </td></tr>
-/// <tr><td>string</td><td> label </td><td>read, write</td><td> Custom relationship type label, when the relationship type is CONTACTS_RELATIONSHIP_TYPE_CUSTOM </td></tr>
-/// <tr><td>string</td><td> name </td><td>read, write</td><td> Selected contact name that the relationship belongs to </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_relationship _contacts_relationship view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this relationship view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the relationship </td></tr> <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the relationship belongs to </td></tr> <tr><td>integer</td><td> type </td><td>read, write</td><td> Relationship type, refer to the `contacts_relationship_type_e` </td></tr> <tr><td>string</td><td> label </td><td>read, write</td><td> Custom relationship type label, when the relationship type is CONTACTS_RELATIONSHIP_TYPE_CUSTOM </td></tr> <tr><td>string</td><td> name </td><td>read, write</td><td> Selected contact name that the relationship belongs to </td></tr> </table>
+/// @nodoc
 final class _contacts_relationship_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -6806,22 +7375,12 @@ final class _contacts_relationship_property_ids extends ffi.Struct {
   external int name;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_image _contacts_image view
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Read, Write</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts image view </td></tr>
-/// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the image </td></tr>
-/// <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the image belongs to </td></tr>
-/// <tr><td>integer</td><td> type </td><td>read, write</td><td> Image type, refer to the @ref contacts_image_type_e </td></tr>
-/// <tr><td>string</td><td> label </td><td>read, write</td><td> Custom image type label, when the image type is #CONTACTS_IMAGE_TYPE_CUSTOM </td></tr>
-/// <tr><td>string</td><td> path </td><td>read, write</td><td> Image thumbnail path </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_image _contacts_image view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts image view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the image </td></tr> <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the image belongs to </td></tr> <tr><td>integer</td><td> type </td><td>read, write</td><td> Image type, refer to the `contacts_image_type_e` </td></tr> <tr><td>string</td><td> label </td><td>read, write</td><td> Custom image type label, when the image type is `CONTACTS_IMAGE_TYPE_CUSTOM` </td></tr> <tr><td>string</td><td> path </td><td>read, write</td><td> Image thumbnail path </td></tr> </table>
+/// @nodoc
 final class _contacts_image_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -6844,30 +7403,12 @@ final class _contacts_image_property_ids extends ffi.Struct {
   external int is_default;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_company _contacts_company view
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Read, Write</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts company view </td></tr>
-/// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the company </td></tr>
-/// <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the company belongs to </td></tr>
-/// <tr><td>integer</td><td> type </td><td>read, write</td><td> Company type, refer to the @ref contacts_company_type_e </td></tr>
-/// <tr><td>string</td><td> label </td><td>read, write</td><td> Custom company type label, when the company type is #CONTACTS_COMPANY_TYPE_CUSTOM </td></tr>
-/// <tr><td>string</td><td> name </td><td>read, write</td><td> Company name </td></tr>
-/// <tr><td>string</td><td> department </td><td>read, write</td><td> Department </td></tr>
-/// <tr><td>string</td><td> job_title </td><td>read, write</td><td> Job title </td></tr>
-/// <tr><td>string</td><td> assistant_name </td><td>read, write</td><td> Assistant name </td></tr>
-/// <tr><td>string</td><td> role </td><td>read, write</td><td> Role </td></tr>
-/// <tr><td>string</td><td> logo </td><td>read, write</td><td> Company logo image file path </td></tr>
-/// <tr><td>string</td><td> location </td><td>read, write</td><td> Company location </td></tr>
-/// <tr><td>string</td><td> description </td><td>read, write</td><td> Description </td></tr>
-/// <tr><td>string</td><td> phonetic_name </td><td>read, write</td><td> Pronounce the company name </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_company _contacts_company view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts company view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the company </td></tr> <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the company belongs to </td></tr> <tr><td>integer</td><td> type </td><td>read, write</td><td> Company type, refer to the `contacts_company_type_e` </td></tr> <tr><td>string</td><td> label </td><td>read, write</td><td> Custom company type label, when the company type is `CONTACTS_COMPANY_TYPE_CUSTOM` </td></tr> <tr><td>string</td><td> name </td><td>read, write</td><td> Company name </td></tr> <tr><td>string</td><td> department </td><td>read, write</td><td> Department </td></tr> <tr><td>string</td><td> job_title </td><td>read, write</td><td> Job title </td></tr> <tr><td>string</td><td> assistant_name </td><td>read, write</td><td> Assistant name </td></tr> <tr><td>string</td><td> role </td><td>read, write</td><td> Role </td></tr> <tr><td>string</td><td> logo </td><td>read, write</td><td> Company logo image file path </td></tr> <tr><td>string</td><td> location </td><td>read, write</td><td> Company location </td></tr> <tr><td>string</td><td> description </td><td>read, write</td><td> Description </td></tr> <tr><td>string</td><td> phonetic_name </td><td>read, write</td><td> Pronounce the company name </td></tr> </table>
+/// @nodoc
 final class _contacts_company_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -6911,20 +7452,12 @@ final class _contacts_company_property_ids extends ffi.Struct {
   external int phonetic_name;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_nickname _contacts_nickname view
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Read, Write</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts nickname view </td></tr>
-/// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the nickname </td></tr>
-/// <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the nickname belongs to </td></tr>
-/// <tr><td>string</td><td> name </td><td>read, write</td><td> Nickname </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_nickname _contacts_nickname view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts nickname view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the nickname </td></tr> <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the nickname belongs to </td></tr> <tr><td>string</td><td> name </td><td>read, write</td><td> Nickname </td></tr> </table>
+/// @nodoc
 final class _contacts_nickname_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -6938,22 +7471,12 @@ final class _contacts_nickname_property_ids extends ffi.Struct {
   external int name;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_messenger _contacts_messenger view
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Read, Write</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts messenger view </td></tr>
-/// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the messenger </td></tr>
-/// <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the messenger belongs to </td></tr>
-/// <tr><td>integer</td><td> type </td><td>read, write</td><td> Messenger type, refer to the @ref contacts_messenger_type_e </td></tr>
-/// <tr><td>string</td><td> label </td><td>read, write</td><td> Custom messenger type label, when the messenger type is #CONTACTS_MESSENGER_TYPE_CUSTOM </td></tr>
-/// <tr><td>string</td><td> im_id </td><td>read, write</td><td> Messenger ID (email address or email ID...) </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_messenger _contacts_messenger view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts messenger view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the messenger </td></tr> <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the messenger belongs to </td></tr> <tr><td>integer</td><td> type </td><td>read, write</td><td> Messenger type, refer to the `contacts_messenger_type_e` </td></tr> <tr><td>string</td><td> label </td><td>read, write</td><td> Custom messenger type label, when the messenger type is `CONTACTS_MESSENGER_TYPE_CUSTOM` </td></tr> <tr><td>string</td><td> im_id </td><td>read, write</td><td> Messenger ID (email address or email ID...) </td></tr> </table>
+/// @nodoc
 final class _contacts_messenger_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -6973,31 +7496,12 @@ final class _contacts_messenger_property_ids extends ffi.Struct {
   external int im_id;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_extension _contacts_extension view
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Read, Write</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts extension view </td></tr>
-/// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the contact extension </td></tr>
-/// <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the contact extension belongs to </td></tr>
-/// <tr><td>integer</td><td> data1 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr>
-/// <tr><td>string</td><td> data2 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr>
-/// <tr><td>string</td><td> data3 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr>
-/// <tr><td>string</td><td> data4 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr>
-/// <tr><td>string</td><td> data5 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr>
-/// <tr><td>string</td><td> data6 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr>
-/// <tr><td>string</td><td> data7 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr>
-/// <tr><td>string</td><td> data8 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr>
-/// <tr><td>string</td><td> data9 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr>
-/// <tr><td>string</td><td> data10 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr>
-/// <tr><td>string</td><td> data11 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr>
-/// <tr><td>string</td><td> data12 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_extension _contacts_extension view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts extension view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the contact extension </td></tr> <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the contact extension belongs to </td></tr> <tr><td>integer</td><td> data1 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr> <tr><td>string</td><td> data2 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr> <tr><td>string</td><td> data3 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr> <tr><td>string</td><td> data4 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr> <tr><td>string</td><td> data5 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr> <tr><td>string</td><td> data6 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr> <tr><td>string</td><td> data7 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr> <tr><td>string</td><td> data8 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr> <tr><td>string</td><td> data9 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr> <tr><td>string</td><td> data10 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr> <tr><td>string</td><td> data11 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr> <tr><td>string</td><td> data12 </td><td>read, write</td><td> The extra child record format for non-provided from contacts-service </td></tr> </table>
+/// @nodoc
 final class _contacts_extension_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -7044,21 +7548,12 @@ final class _contacts_extension_property_ids extends ffi.Struct {
   external int data12;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_sdn _contacts_sdn view
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Read, Write</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts sdn view </td></tr>
-/// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the sdn </td></tr>
-/// <tr><td>string</td><td> name </td><td>read only</td><td> Provided name of sdn </td></tr>
-/// <tr><td>string</td><td> number </td><td>read only</td><td> Provided number of sdn </td></tr>
-/// <tr><td>integer</td><td> sim_slot_no </td><td>read only</td><td>It is related to the SIM slot number. sim_slot_no 0 means first SIM card, sim_slot_no 1 means second SIM. It is same with handle index of telephony handle list. Refer to the telephony_init() </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_sdn _contacts_sdn view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts sdn view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the sdn </td></tr> <tr><td>string</td><td> name </td><td>read only</td><td> Provided name of sdn </td></tr> <tr><td>string</td><td> number </td><td>read only</td><td> Provided number of sdn </td></tr> <tr><td>integer</td><td> sim_slot_no </td><td>read only</td><td>It is related to the SIM slot number. sim_slot_no 0 means first SIM card, sim_slot_no 1 means second SIM. It is same with handle index of telephony handle list. Refer to the telephony_init() </td></tr> </table>
+/// @nodoc
 final class _contacts_sdn_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -7075,28 +7570,12 @@ final class _contacts_sdn_property_ids extends ffi.Struct {
   external int sim_slot_no;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_profile _contacts_profile view
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Read, Write</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts profile view </td></tr>
-/// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of profile </td></tr>
-/// <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contacts ID that the profile belongs to </td></tr>
-/// <tr><td>string</td><td> uid </td><td>read, write</td><td> Unique identifier </td></tr>
-/// <tr><td>string</td><td> text </td><td>read, write</td><td> Profile contents </td></tr>
-/// <tr><td>integer</td><td> order </td><td>read, write</td><td> Priority to display the profile </td></tr>
-/// <tr><td>string</td><td> service_operation </td><td>read, write</td><td> Data for app_control_set_operation </td></tr>
-/// <tr><td>string</td><td> mime </td><td>read, write</td><td> Data for app_control_set_mime </td></tr>
-/// <tr><td>string</td><td> app_id </td><td>read, write</td><td> Data for app_control_set_app_id </td></tr>
-/// <tr><td>string</td><td> uri </td><td>read, write</td><td> Data for app_control_set_uri </td></tr>
-/// <tr><td>string</td><td> category </td><td>read, write</td><td> Data for app_control_set_category </td></tr>
-/// <tr><td>string</td><td> extra_data </td><td>read, write</td><td> It includes "key:value,key:value," pairs. You should parse it. And you must base64 encode each key and value</td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_profile _contacts_profile view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts profile view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of profile </td></tr> <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contacts ID that the profile belongs to </td></tr> <tr><td>string</td><td> uid </td><td>read, write</td><td> Unique identifier </td></tr> <tr><td>string</td><td> text </td><td>read, write</td><td> Profile contents </td></tr> <tr><td>integer</td><td> order </td><td>read, write</td><td> Priority to display the profile </td></tr> <tr><td>string</td><td> service_operation </td><td>read, write</td><td> Data for app_control_set_operation </td></tr> <tr><td>string</td><td> mime </td><td>read, write</td><td> Data for app_control_set_mime </td></tr> <tr><td>string</td><td> app_id </td><td>read, write</td><td> Data for app_control_set_app_id </td></tr> <tr><td>string</td><td> uri </td><td>read, write</td><td> Data for app_control_set_uri </td></tr> <tr><td>string</td><td> category </td><td>read, write</td><td> Data for app_control_set_category </td></tr> <tr><td>string</td><td> extra_data </td><td>read, write</td><td> It includes "key:value,key:value," pairs. You should parse it. And you must base64 encode each key and value</td></tr> </table>
+/// @nodoc
 final class _contacts_profile_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -7134,21 +7613,12 @@ final class _contacts_profile_property_ids extends ffi.Struct {
   external int contact_id;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity_photo _contacts_activity_photo view
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Read, Write</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contact activity photo view </td></tr>
-/// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of activity photo </td></tr>
-/// <tr><td>integer</td><td> activity_id </td><td>read, write once</td><td> Activity ID that the activity photo belongs to </td></tr>
-/// <tr><td>string</td><td> photo_url </td><td>read, write</td><td> Photo URL </td></tr>
-/// <tr><td>integer</td><td> sort_index </td><td>read, write</td><td> Sorted photo index </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity_photo _contacts_activity_photo view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contact activity photo view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of activity photo </td></tr> <tr><td>integer</td><td> activity_id </td><td>read, write once</td><td> Activity ID that the activity photo belongs to </td></tr> <tr><td>string</td><td> photo_url </td><td>read, write</td><td> Photo URL </td></tr> <tr><td>integer</td><td> sort_index </td><td>read, write</td><td> Sorted photo index </td></tr> </table>
+/// @nodoc
 final class _contacts_activity_photo_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -7165,25 +7635,12 @@ final class _contacts_activity_photo_property_ids extends ffi.Struct {
   external int sort_index;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity _contacts_activity view
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Read, Write</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this activity view </td></tr>
-/// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of activity </td></tr>
-/// <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the activity belongs to </td></tr>
-/// <tr><td>string</td><td> source_name </td><td>read, write</td><td> Account name that the activity belongs to </td></tr>
-/// <tr><td>int</td><td> timestamp </td><td>read, write</td><td> Published time of activity </td></tr>
-/// <tr><td>string</td><td> status </td><td>read, write</td><td> Activity status </td></tr>
-/// <tr><td>string</td><td> service_operation </td><td>read, write</td><td> Data for app_control_set_operation </td></tr>
-/// <tr><td>string</td><td> uri </td><td>read, write</td><td> Data for app_control_set_uri </td></tr>
-/// <tr><td>record</td><td> photo </td><td>read, write</td><td> _contacts_activity_photo child record (multiple) </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_activity _contacts_activity view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this activity view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of activity </td></tr> <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the activity belongs to </td></tr> <tr><td>string</td><td> source_name </td><td>read, write</td><td> Account name that the activity belongs to </td></tr> <tr><td>int</td><td> timestamp </td><td>read, write</td><td> Published time of activity </td></tr> <tr><td>string</td><td> status </td><td>read, write</td><td> Activity status </td></tr> <tr><td>string</td><td> service_operation </td><td>read, write</td><td> Data for app_control_set_operation </td></tr> <tr><td>string</td><td> uri </td><td>read, write</td><td> Data for app_control_set_uri </td></tr> <tr><td>record</td><td> photo </td><td>read, write</td><td> _contacts_activity_photo child record (multiple) </td></tr> </table>
+/// @nodoc
 final class _contacts_activity_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -7212,28 +7669,12 @@ final class _contacts_activity_property_ids extends ffi.Struct {
   external int photo;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_speeddial _contacts_speeddial view
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Read, Write</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contact speed dial view </td></tr>
-/// <tr><td>integer</td><td> speeddial_number </td><td>read, write once</td><td> Stored speed dial number </td></tr>
-/// <tr><td>integer</td><td> number_id </td><td>read, write</td><td> Number ID that the speed dial belongs to </td></tr>
-/// <tr><td>string</td><td> number </td><td>read only</td><td> Contact number of specified speed dial </td></tr>
-/// <tr><td>string</td><td> number_label </td><td>read only</td><td> Contact number label of specified speed dial, when the number type is CONTACTS_NUMBER_TYPE_CUSTOM </td></tr>
-/// <tr><td>integer</td><td> number_type </td><td>read only</td><td> Contact number type, refer to the @ref contacts_number_type_e </td></tr>
-/// <tr><td>integer</td><td> person_id </td><td>read only</td><td> Person ID that the speed dial belongs to </td></tr>
-/// <tr><td>string</td><td> display_name </td><td>read only</td><td> Display name that the speed dial belongs to </td></tr>
-/// <tr><td>string</td><td> image_thumbnail_path </td><td>read only</td><td> Image thumbnail path that the speed dial belongs to </td></tr>
-/// <tr><td>string</td><td> normalized_number </td><td>filter only</td><td> You can only use this property for search filter </td></tr>
-/// <tr><td>string</td><td> cleaned_number </td><td>filter only</td><td> You can only use this property for search filter </td></tr>
-/// <tr><td>string</td><td> number_filter </td><td>filter only</td><td> If you add filter with this property, the string will be normalized as minmatch length internally and the match rule will be applied CONTACTS_MATCH_EXACTLY </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_speeddial _contacts_speeddial view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contact speed dial view </td></tr> <tr><td>integer</td><td> speeddial_number </td><td>read, write once</td><td> Stored speed dial number </td></tr> <tr><td>integer</td><td> number_id </td><td>read, write</td><td> Number ID that the speed dial belongs to </td></tr> <tr><td>string</td><td> number </td><td>read only</td><td> Contact number of specified speed dial </td></tr> <tr><td>string</td><td> number_label </td><td>read only</td><td> Contact number label of specified speed dial, when the number type is CONTACTS_NUMBER_TYPE_CUSTOM </td></tr> <tr><td>integer</td><td> number_type </td><td>read only</td><td> Contact number type, refer to the `contacts_number_type_e` </td></tr> <tr><td>integer</td><td> person_id </td><td>read only</td><td> Person ID that the speed dial belongs to </td></tr> <tr><td>string</td><td> display_name </td><td>read only</td><td> Display name that the speed dial belongs to </td></tr> <tr><td>string</td><td> image_thumbnail_path </td><td>read only</td><td> Image thumbnail path that the speed dial belongs to </td></tr> <tr><td>string</td><td> normalized_number </td><td>filter only</td><td> You can only use this property for search filter </td></tr> <tr><td>string</td><td> cleaned_number </td><td>filter only</td><td> You can only use this property for search filter </td></tr> <tr><td>string</td><td> number_filter </td><td>filter only</td><td> If you add filter with this property, the string will be normalized as minmatch length internally and the match rule will be applied CONTACTS_MATCH_EXACTLY </td></tr> </table>
+/// @nodoc
 final class _contacts_speeddial_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -7271,28 +7712,12 @@ final class _contacts_speeddial_property_ids extends ffi.Struct {
   external int number_filter;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log _contacts_phone_log view
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Read, Write</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this phone log view </td></tr>
-/// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of phone log </td></tr>
-/// <tr><td>integer</td><td> person_id </td><td>read, write once </td><td> Person ID that the phone log belongs to </td></tr>
-/// <tr><td>string</td><td> address </td><td>read, write once </td><td> Number or Email that the phone log displays </td></tr>
-/// <tr><td>integer</td><td> log_time </td><td>read, write once</td><td> Call end time. The value means number of seconds since 1970-01-01 00:00:00 (UTC) </td></tr>
-/// <tr><td>integer</td><td> log_type </td><td>read, write</td><td> Log type, refer to the @ref contacts_phone_log_type_e </td></tr>
-/// <tr><td>integer</td><td> extra_data1 </td><td>read, write once</td><td> You can set the related integer data (e.g. message_id, email_id or duration(seconds) of call) </td></tr>
-/// <tr><td>string</td><td> extra_data2 </td><td>read, write once</td><td> You can set the related string data (e.g. short message, subject) </td></tr>
-/// <tr><td>string</td><td> normalized_address </td><td> filter only</td><td> You can only use this property for search filter</td></tr>
-/// <tr><td>string</td><td> cleaned_address </td><td> filter only</td><td> You can only use this property for search filter</td></tr>
-/// <tr><td>string</td><td> address_filter </td><td> filter only</td><td> You can only use this property for search filter</td></tr>
-/// <tr><td>integer</td><td> sim_slot_no </td><td>read, write once</td><td> You can set the related SIM slot number. sim_slot_no 0 means first SIM card, sim_slot_no 1 means second SIM. It is same with handle index of telephony handle list. Refer to the telephony_init() </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log _contacts_phone_log view <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this phone log view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of phone log </td></tr> <tr><td>integer</td><td> person_id </td><td>read, write once </td><td> Person ID that the phone log belongs to </td></tr> <tr><td>string</td><td> address </td><td>read, write once </td><td> Number or Email that the phone log displays </td></tr> <tr><td>integer</td><td> log_time </td><td>read, write once</td><td> Call end time. The value means number of seconds since 1970-01-01 00:00:00 (UTC) </td></tr> <tr><td>integer</td><td> log_type </td><td>read, write</td><td> Log type, refer to the `contacts_phone_log_type_e` </td></tr> <tr><td>integer</td><td> extra_data1 </td><td>read, write once</td><td> You can set the related integer data (e.g. message_id, email_id or duration(seconds) of call) </td></tr> <tr><td>string</td><td> extra_data2 </td><td>read, write once</td><td> You can set the related string data (e.g. short message, subject) </td></tr> <tr><td>string</td><td> normalized_address </td><td> filter only</td><td> You can only use this property for search filter</td></tr> <tr><td>string</td><td> cleaned_address </td><td> filter only</td><td> You can only use this property for search filter</td></tr> <tr><td>string</td><td> address_filter </td><td> filter only</td><td> You can only use this property for search filter</td></tr> <tr><td>integer</td><td> sim_slot_no </td><td>read, write once</td><td> You can set the related SIM slot number. sim_slot_no 0 means first SIM card, sim_slot_no 1 means second SIM. It is same with handle index of telephony handle list. Refer to the telephony_init() </td></tr> </table>
+/// @nodoc
 final class _contacts_phone_log_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -7330,21 +7755,12 @@ final class _contacts_phone_log_property_ids extends ffi.Struct {
   external int sim_slot_no;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact_updated_info _contacts_contact_updated_info view (read only)
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td> Identifier of this contact updated info view </td></tr>
-/// <tr><td>integer</td><td> contact_id </td><td> Updated contact ID </td></tr>
-/// <tr><td>integer</td><td> address_book_id </td><td> Addressbook ID that the updated contact belongs to </td></tr>
-/// <tr><td>integer</td><td> type </td><td> Contact updated type, refer to the @ref contacts_changed_e </td></tr>
-/// <tr><td>integer</td><td> version </td><td> Updated version </td></tr>
-/// <tr><td>boolean</td><td> image_changed </td><td> Contact image is changed or not </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact_updated_info _contacts_contact_updated_info view (read only) <table> <tr> <th>Type</th> <th>Property ID</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td> Identifier of this contact updated info view </td></tr> <tr><td>integer</td><td> contact_id </td><td> Updated contact ID </td></tr> <tr><td>integer</td><td> address_book_id </td><td> Addressbook ID that the updated contact belongs to </td></tr> <tr><td>integer</td><td> type </td><td> Contact updated type, refer to the `contacts_changed_e` </td></tr> <tr><td>integer</td><td> version </td><td> Updated version </td></tr> <tr><td>boolean</td><td> image_changed </td><td> Contact image is changed or not </td></tr> </table>
+/// @nodoc
 final class _contacts_contact_updated_info_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -7364,19 +7780,12 @@ final class _contacts_contact_updated_info_property_ids extends ffi.Struct {
   external int image_changed;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_my_profile_updated_info _contacts_my_profile_updated_info view (read only)
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td> Identifier of this my profile updated info view </td></tr>
-/// <tr><td>integer</td><td> address_book_id </td><td> Address book ID that the updated my profile belongs to </td></tr>
-/// <tr><td>integer</td><td> last_changed_type </td><td> Changed update type, refer to the @ref contacts_changed_e </td></tr>
-/// <tr><td>integer</td><td> version </td><td> Updated version </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_my_profile_updated_info _contacts_my_profile_updated_info view (read only) <table> <tr> <th>Type</th> <th>Property ID</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td> Identifier of this my profile updated info view </td></tr> <tr><td>integer</td><td> address_book_id </td><td> Address book ID that the updated my profile belongs to </td></tr> <tr><td>integer</td><td> last_changed_type </td><td> Changed update type, refer to the `contacts_changed_e` </td></tr> <tr><td>integer</td><td> version </td><td> Updated version </td></tr> </table>
+/// @nodoc
 final class _contacts_my_profile_updated_info_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -7390,20 +7799,12 @@ final class _contacts_my_profile_updated_info_property_ids extends ffi.Struct {
   external int version;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group_updated_info _contacts_group_updated_info view (read only)
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td> Identifier of this group updated info view </td></tr>
-/// <tr><td>integer</td><td> group_id </td><td> Updated group ID </td></tr>
-/// <tr><td>integer</td><td> address_book_id </td><td> Address book ID that the updated group belongs to </td></tr>
-/// <tr><td>integer</td><td> type </td><td> Changed update type, refer to the @ref contacts_changed_e </td></tr>
-/// <tr><td>integer</td><td> version </td><td> Updated version </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group_updated_info _contacts_group_updated_info view (read only) <table> <tr> <th>Type</th> <th>Property ID</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td> Identifier of this group updated info view </td></tr> <tr><td>integer</td><td> group_id </td><td> Updated group ID </td></tr> <tr><td>integer</td><td> address_book_id </td><td> Address book ID that the updated group belongs to </td></tr> <tr><td>integer</td><td> type </td><td> Changed update type, refer to the `contacts_changed_e` </td></tr> <tr><td>integer</td><td> version </td><td> Updated version </td></tr> </table>
+/// @nodoc
 final class _contacts_group_updated_info_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -7420,19 +7821,12 @@ final class _contacts_group_updated_info_property_ids extends ffi.Struct {
   external int version;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group_member_updated_info _contacts_group_member_updated_info view (read only)
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td> Identifier of this group member updated info view </td></tr>
-/// <tr><td>integer</td><td> group_id </td><td> Updated group ID </td></tr>
-/// <tr><td>integer</td><td> address_book_id </td><td> Address book ID that the updated group belongs to </td></tr>
-/// <tr><td>integer</td><td> version </td><td> Updated version </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_group_member_updated_info _contacts_group_member_updated_info view (read only) <table> <tr> <th>Type</th> <th>Property ID</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td> Identifier of this group member updated info view </td></tr> <tr><td>integer</td><td> group_id </td><td> Updated group ID </td></tr> <tr><td>integer</td><td> address_book_id </td><td> Address book ID that the updated group belongs to </td></tr> <tr><td>integer</td><td> version </td><td> Updated version </td></tr> </table>
+/// @nodoc
 final class _contacts_group_member_updated_info_property_ids
     extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
@@ -7447,21 +7841,12 @@ final class _contacts_group_member_updated_info_property_ids
   external int version;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_grouprel_updated_info _contacts_grouprel_updated_info view (read only)
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td> Identifier of this group relation updated info view </td></tr>
-/// <tr><td>integer</td><td> group_id </td><td> Group ID of group relation </td></tr>
-/// <tr><td>integer</td><td> contact_id </td><td> Contact ID of the updated group relation </td></tr>
-/// <tr><td>integer</td><td> address_book_id </td><td> Address book ID of contact that the updated group relation </td></tr>
-/// <tr><td>integer</td><td> type </td><td> Changed update type, refer to the @ref contacts_changed_e </td></tr>
-/// <tr><td>integer</td><td> version </td><td> Updated version </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_grouprel_updated_info _contacts_grouprel_updated_info view (read only) <table> <tr> <th>Type</th> <th>Property ID</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td> Identifier of this group relation updated info view </td></tr> <tr><td>integer</td><td> group_id </td><td> Group ID of group relation </td></tr> <tr><td>integer</td><td> contact_id </td><td> Contact ID of the updated group relation </td></tr> <tr><td>integer</td><td> address_book_id </td><td> Address book ID of contact that the updated group relation </td></tr> <tr><td>integer</td><td> type </td><td> Changed update type, refer to the `contacts_changed_e` </td></tr> <tr><td>integer</td><td> version </td><td> Updated version </td></tr> </table>
+/// @nodoc
 final class _contacts_grouprel_updated_info_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -7481,36 +7866,12 @@ final class _contacts_grouprel_updated_info_property_ids extends ffi.Struct {
   external int version;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_contact _contacts_person_contact view (read only)
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td> Identifier of this person contact view </td></tr>
-/// <tr><td>integer</td><td> person_id </td><td> DB record ID of the person </td></tr>
-/// <tr><td>string</td><td> display_name </td><td> Display name of the person</td></tr>
-/// <tr><td>string</td><td> display_name_index </td><td> The first character of first string for grouping. This is normalized using icu (projection) </td></tr>
-/// <tr><td>integer</td><td> display_contact_id </td><td> Display contact ID that the person belongs to (projection) </td></tr>
-/// <tr><td>string</td><td> ringtone_path </td><td> Ringtone path of the person (projection) </td></tr>
-/// <tr><td>string</td><td> image_thumbnail_path </td><td> Image thumbnail path of the person (projection) </td></tr>
-/// <tr><td>string</td><td> vibration </td><td> Vibration path of the person (projection) </td></tr>
-/// <tr><td>string</td><td> message_alert </td><td> Message alert path of the person (projection) </td></tr>
-/// <tr><td>string</td><td> status </td><td> Status of social account (projection) </td></tr>
-/// <tr><td>boolean</td><td> is_favorite </td><td> The person is favorite or not </td></tr>
-/// <tr><td>integer</td><td> link_count </td><td> Link count of contact records (projection) </td></tr>
-/// <tr><td>integer</td><td> contact_id </td><td> Contact ID that the person belongs to </td></tr>
-/// <tr><td>string</td><td> addressbook_ids </td><td> Addressbook IDs that the person belongs to (projection) </td></tr>
-/// <tr><td>boolean</td><td> has_phonenumber </td><td> The person has phone number or not </td></tr>
-/// <tr><td>boolean</td><td> has_email </td><td> The person has email or not </td></tr>
-/// <tr><td>integer</td><td> address_book_id </td><td> Addressbook ID that the person belongs to </td></tr>
-/// <tr><td>integer</td><td> address_book_mode </td><td> Addressbook mode, refer to the @ref contacts_address_book_mode_e </td></tr>
-/// <tr><td>string</td><td> address_book_name </td><td> Addressbook name that the person belongs to </td></tr>
-/// <tr><td>integer</td><td> snippet_type </td><td> keyword matched data type, refer to they @ref contacts_data_type_e (Since 3.0) </td></tr>
-/// <tr><td>string</td><td> snippet_string </td><td> keyword matched data string (Since 3.0) </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_contact _contacts_person_contact view (read only) <table> <tr> <th>Type</th> <th>Property ID</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td> Identifier of this person contact view </td></tr> <tr><td>integer</td><td> person_id </td><td> DB record ID of the person </td></tr> <tr><td>string</td><td> display_name </td><td> Display name of the person</td></tr> <tr><td>string</td><td> display_name_index </td><td> The first character of first string for grouping. This is normalized using icu (projection) </td></tr> <tr><td>integer</td><td> display_contact_id </td><td> Display contact ID that the person belongs to (projection) </td></tr> <tr><td>string</td><td> ringtone_path </td><td> Ringtone path of the person (projection) </td></tr> <tr><td>string</td><td> image_thumbnail_path </td><td> Image thumbnail path of the person (projection) </td></tr> <tr><td>string</td><td> vibration </td><td> Vibration path of the person (projection) </td></tr> <tr><td>string</td><td> message_alert </td><td> Message alert path of the person (projection) </td></tr> <tr><td>string</td><td> status </td><td> Status of social account (projection) </td></tr> <tr><td>boolean</td><td> is_favorite </td><td> The person is favorite or not </td></tr> <tr><td>integer</td><td> link_count </td><td> Link count of contact records (projection) </td></tr> <tr><td>integer</td><td> contact_id </td><td> Contact ID that the person belongs to </td></tr> <tr><td>string</td><td> addressbook_ids </td><td> Addressbook IDs that the person belongs to (projection) </td></tr> <tr><td>boolean</td><td> has_phonenumber </td><td> The person has phone number or not </td></tr> <tr><td>boolean</td><td> has_email </td><td> The person has email or not </td></tr> <tr><td>integer</td><td> address_book_id </td><td> Addressbook ID that the person belongs to </td></tr> <tr><td>integer</td><td> address_book_mode </td><td> Addressbook mode, refer to the `contacts_address_book_mode_e` </td></tr> <tr><td>string</td><td> address_book_name </td><td> Addressbook name that the person belongs to </td></tr> <tr><td>integer</td><td> snippet_type </td><td> keyword matched data type, refer to they `contacts_data_type_e` (Since 3.0) </td></tr> <tr><td>string</td><td> snippet_string </td><td> keyword matched data string (Since 3.0) </td></tr> </table>
+/// @nodoc
 final class _contacts_person_contact_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -7575,37 +7936,12 @@ final class _contacts_person_contact_property_ids extends ffi.Struct {
   external int snippet_string;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_number _contacts_person_number view (read only)
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td> Identifier of this person number view </td></tr>
-/// <tr><td>integer</td><td> person_id </td><td> DB record ID of the person </td></tr>
-/// <tr><td>string</td><td> display_name </td><td> Display name of the person</td></tr>
-/// <tr><td>string</td><td> display_name_index </td><td> The first character of first string for grouping. This is normalized using icu (projection) </td></tr>
-/// <tr><td>integer</td><td> display_contact_id </td><td> Display contact ID that the person belongs to (projection) </td></tr>
-/// <tr><td>string</td><td> ringtone_path </td><td> Ringtone path of the person (projection) </td></tr>
-/// <tr><td>string</td><td> image_thumbnail_path </td><td> Image thumbnail path of the person (projection) </td></tr>
-/// <tr><td>string</td><td> vibration </td><td> Vibration path of the person (projection) </td></tr>
-/// <tr><td>string</td><td> message_alert </td><td> Message alert path of the person (projection) </td></tr>
-/// <tr><td>boolean</td><td> is_favorite </td><td> The person is favorite or not </td></tr>
-/// <tr><td>boolean</td><td> has_phonenumber </td><td> The person has phone number or not </td></tr>
-/// <tr><td>boolean</td><td> has_email </td><td> The person has email or not </td></tr>
-/// <tr><td>integer</td><td> number_id </td><td> Number ID that the person belongs to </td></tr>
-/// <tr><td>integer</td><td> type </td><td> Number type, refer to the @ref contacts_number_type_e (projection) </td></tr>
-/// <tr><td>string</td><td> label </td><td> Custom number type label, when the number type is #CONTACTS_NUMBER_TYPE_CUSTOM (projection) </td></tr>
-/// <tr><td>boolean</td><td> is_primary_default </td><td> The number is default number or not </td></tr>
-/// <tr><td>string</td><td> number </td><td> Number </td></tr>
-/// <tr><td>string</td><td> number_filter </td><td> If you add filter with this property, the string will be normalized as minmatch length internally and the match rule will be applied CONTACTS_MATCH_EXACTLY </td></tr>
-/// <tr><td>string</td><td> normalized_number </td><td> You can only use this property for search filter</td></tr>
-/// <tr><td>string</td><td> cleaned_number </td><td>You can only use this property for search filter </td></tr>
-/// <tr><td>integer</td><td> snippet_type </td><td> keyword matched data type, refer to they @ref contacts_data_type_e (Since 3.0) </td></tr>
-/// <tr><td>string</td><td> snippet_string </td><td> keyword matched data string (Since 3.0) </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_number _contacts_person_number view (read only) <table> <tr> <th>Type</th> <th>Property ID</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td> Identifier of this person number view </td></tr> <tr><td>integer</td><td> person_id </td><td> DB record ID of the person </td></tr> <tr><td>string</td><td> display_name </td><td> Display name of the person</td></tr> <tr><td>string</td><td> display_name_index </td><td> The first character of first string for grouping. This is normalized using icu (projection) </td></tr> <tr><td>integer</td><td> display_contact_id </td><td> Display contact ID that the person belongs to (projection) </td></tr> <tr><td>string</td><td> ringtone_path </td><td> Ringtone path of the person (projection) </td></tr> <tr><td>string</td><td> image_thumbnail_path </td><td> Image thumbnail path of the person (projection) </td></tr> <tr><td>string</td><td> vibration </td><td> Vibration path of the person (projection) </td></tr> <tr><td>string</td><td> message_alert </td><td> Message alert path of the person (projection) </td></tr> <tr><td>boolean</td><td> is_favorite </td><td> The person is favorite or not </td></tr> <tr><td>boolean</td><td> has_phonenumber </td><td> The person has phone number or not </td></tr> <tr><td>boolean</td><td> has_email </td><td> The person has email or not </td></tr> <tr><td>integer</td><td> number_id </td><td> Number ID that the person belongs to </td></tr> <tr><td>integer</td><td> type </td><td> Number type, refer to the `contacts_number_type_e` (projection) </td></tr> <tr><td>string</td><td> label </td><td> Custom number type label, when the number type is `CONTACTS_NUMBER_TYPE_CUSTOM` (projection) </td></tr> <tr><td>boolean</td><td> is_primary_default </td><td> The number is default number or not </td></tr> <tr><td>string</td><td> number </td><td> Number </td></tr> <tr><td>string</td><td> number_filter </td><td> If you add filter with this property, the string will be normalized as minmatch length internally and the match rule will be applied CONTACTS_MATCH_EXACTLY </td></tr> <tr><td>string</td><td> normalized_number </td><td> You can only use this property for search filter</td></tr> <tr><td>string</td><td> cleaned_number </td><td>You can only use this property for search filter </td></tr> <tr><td>integer</td><td> snippet_type </td><td> keyword matched data type, refer to they `contacts_data_type_e` (Since 3.0) </td></tr> <tr><td>string</td><td> snippet_string </td><td> keyword matched data string (Since 3.0) </td></tr> </table>
+/// @nodoc
 final class _contacts_person_number_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -7673,34 +8009,12 @@ final class _contacts_person_number_property_ids extends ffi.Struct {
   external int snippet_string;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_email _contacts_person_email view (read only)
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td> Identifier of this person email view </td></tr>
-/// <tr><td>integer</td><td> person_id </td><td> DB record ID of the person </td></tr>
-/// <tr><td>string</td><td> display_name </td><td> Display name of the person </td></tr>
-/// <tr><td>string</td><td> display_name_index </td><td> The first character of first string for grouping. This is normalized using icu (projection) </td></tr>
-/// <tr><td>integer</td><td> display_contact_id </td><td> Display contact ID that the person belongs to (projection) </td></tr>
-/// <tr><td>string</td><td> ringtone_path </td><td> Ringtone path of the person (projection) </td></tr>
-/// <tr><td>string</td><td> image_thumbnail_path </td><td> Image thumbnail path of the person (projection) </td></tr>
-/// <tr><td>string</td><td> vibration </td><td> Vibration path of the person (projection) </td></tr>
-/// <tr><td>string</td><td> message_alert </td><td> Message alert path of the person (projection) </td></tr>
-/// <tr><td>boolean</td><td> is_favorite </td><td> The person is favorite or not </td></tr>
-/// <tr><td>boolean</td><td> has_phonenumber </td><td> The person has phone number or not </td></tr>
-/// <tr><td>boolean</td><td> has_email </td><td> The person has email or not </td></tr>
-/// <tr><td>integer</td><td> email_id </td><td> Email ID that the person belongs to </td></tr>
-/// <tr><td>integer</td><td> type </td><td> Email type, refer to the @ref contacts_email_type_e (projection) </td></tr>
-/// <tr><td>string</td><td> label </td><td> Custom mail type label, when the email type is #CONTACTS_EMAIL_TYPE_CUSTOM (projection) </td></tr>
-/// <tr><td>boolean</td><td> is_primary_default </td><td> The email is default email or not </td></tr>
-/// <tr><td>string</td><td> email </td><td> Email address</td></tr>
-/// <tr><td>integer</td><td> snippet_type </td><td> keyword matched data type, refer to they @ref contacts_data_type_e (Since 3.0) </td></tr>
-/// <tr><td>string</td><td> snippet_string </td><td> keyword matched data string (Since 3.0) </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_email _contacts_person_email view (read only) <table> <tr> <th>Type</th> <th>Property ID</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td> Identifier of this person email view </td></tr> <tr><td>integer</td><td> person_id </td><td> DB record ID of the person </td></tr> <tr><td>string</td><td> display_name </td><td> Display name of the person </td></tr> <tr><td>string</td><td> display_name_index </td><td> The first character of first string for grouping. This is normalized using icu (projection) </td></tr> <tr><td>integer</td><td> display_contact_id </td><td> Display contact ID that the person belongs to (projection) </td></tr> <tr><td>string</td><td> ringtone_path </td><td> Ringtone path of the person (projection) </td></tr> <tr><td>string</td><td> image_thumbnail_path </td><td> Image thumbnail path of the person (projection) </td></tr> <tr><td>string</td><td> vibration </td><td> Vibration path of the person (projection) </td></tr> <tr><td>string</td><td> message_alert </td><td> Message alert path of the person (projection) </td></tr> <tr><td>boolean</td><td> is_favorite </td><td> The person is favorite or not </td></tr> <tr><td>boolean</td><td> has_phonenumber </td><td> The person has phone number or not </td></tr> <tr><td>boolean</td><td> has_email </td><td> The person has email or not </td></tr> <tr><td>integer</td><td> email_id </td><td> Email ID that the person belongs to </td></tr> <tr><td>integer</td><td> type </td><td> Email type, refer to the `contacts_email_type_e` (projection) </td></tr> <tr><td>string</td><td> label </td><td> Custom mail type label, when the email type is `CONTACTS_EMAIL_TYPE_CUSTOM` (projection) </td></tr> <tr><td>boolean</td><td> is_primary_default </td><td> The email is default email or not </td></tr> <tr><td>string</td><td> email </td><td> Email address</td></tr> <tr><td>integer</td><td> snippet_type </td><td> keyword matched data type, refer to they `contacts_data_type_e` (Since 3.0) </td></tr> <tr><td>string</td><td> snippet_string </td><td> keyword matched data string (Since 3.0) </td></tr> </table>
+/// @nodoc
 final class _contacts_person_email_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -7759,37 +8073,12 @@ final class _contacts_person_email_property_ids extends ffi.Struct {
   external int snippet_string;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_grouprel _contacts_person_grouprel view (read only)
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td> Identifier of this person group relation view </td></tr>
-/// <tr><td>integer</td><td> person_id </td><td> DB record ID of the person </td></tr>
-/// <tr><td>string</td><td> display_name </td><td> Display name of the person </td></tr>
-/// <tr><td>string</td><td> display_name_index </td><td> The first character of first string for grouping. This is normalized using icu (projection) </td></tr>
-/// <tr><td>integer</td><td> display_contact_id </td><td> Display contact ID that the person belongs to (projection) </td></tr>
-/// <tr><td>string</td><td> ringtone_path </td><td> Ringtone path of the person (projection) </td></tr>
-/// <tr><td>string</td><td> image_thumbnail_path </td><td> Image thumbnail path of the person (projection) </td></tr>
-/// <tr><td>string</td><td> vibration </td><td> Vibration path of the person (projection) </td></tr>
-/// <tr><td>string</td><td> message_alert </td><td> Message alert path of the person (projection) </td></tr>
-/// <tr><td>string</td><td> status </td><td> Status of social account (projection) </td></tr>
-/// <tr><td>boolean</td><td> is_favorite </td><td> The person is favorite or not </td></tr>
-/// <tr><td>integer</td><td> link_count </td><td> Link count of contact records (projection) </td></tr>
-/// <tr><td>string</td><td> addressbook_ids </td><td> Addressbook IDs that the person belongs to (projection) </td></tr>
-/// <tr><td>boolean</td><td> has_phonenumber </td><td> The person has phone number or not </td></tr>
-/// <tr><td>boolean</td><td> has_email </td><td> The person has email or not </td></tr>
-/// <tr><td>integer</td><td> address_book_id </td><td> Addressbook ID that the person belongs to </td></tr>
-/// <tr><td>integer</td><td> address_book_mode </td><td> Addressbook mode, refer to the @ref contacts_address_book_mode_e </td></tr>
-/// <tr><td>string</td><td> address_book_name </td><td> Addressbook name that the person belongs to </td></tr>
-/// <tr><td>integer</td><td> group_id </td><td> Group ID that the person belongs to </td></tr>
-/// <tr><td>integer</td><td> contact_id </td><td> Contact ID that the person belongs to (projection) </td></tr>
-/// <tr><td>integer</td><td> snippet_type </td><td> keyword matched data type, refer to they @ref contacts_data_type_e (Since 3.0) </td></tr>
-/// <tr><td>string</td><td> snippet_string </td><td> keyword matched data string (Since 3.0) </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_grouprel _contacts_person_grouprel view (read only) <table> <tr> <th>Type</th> <th>Property ID</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td> Identifier of this person group relation view </td></tr> <tr><td>integer</td><td> person_id </td><td> DB record ID of the person </td></tr> <tr><td>string</td><td> display_name </td><td> Display name of the person </td></tr> <tr><td>string</td><td> display_name_index </td><td> The first character of first string for grouping. This is normalized using icu (projection) </td></tr> <tr><td>integer</td><td> display_contact_id </td><td> Display contact ID that the person belongs to (projection) </td></tr> <tr><td>string</td><td> ringtone_path </td><td> Ringtone path of the person (projection) </td></tr> <tr><td>string</td><td> image_thumbnail_path </td><td> Image thumbnail path of the person (projection) </td></tr> <tr><td>string</td><td> vibration </td><td> Vibration path of the person (projection) </td></tr> <tr><td>string</td><td> message_alert </td><td> Message alert path of the person (projection) </td></tr> <tr><td>string</td><td> status </td><td> Status of social account (projection) </td></tr> <tr><td>boolean</td><td> is_favorite </td><td> The person is favorite or not </td></tr> <tr><td>integer</td><td> link_count </td><td> Link count of contact records (projection) </td></tr> <tr><td>string</td><td> addressbook_ids </td><td> Addressbook IDs that the person belongs to (projection) </td></tr> <tr><td>boolean</td><td> has_phonenumber </td><td> The person has phone number or not </td></tr> <tr><td>boolean</td><td> has_email </td><td> The person has email or not </td></tr> <tr><td>integer</td><td> address_book_id </td><td> Addressbook ID that the person belongs to </td></tr> <tr><td>integer</td><td> address_book_mode </td><td> Addressbook mode, refer to the `contacts_address_book_mode_e` </td></tr> <tr><td>string</td><td> address_book_name </td><td> Addressbook name that the person belongs to </td></tr> <tr><td>integer</td><td> group_id </td><td> Group ID that the person belongs to </td></tr> <tr><td>integer</td><td> contact_id </td><td> Contact ID that the person belongs to (projection) </td></tr> <tr><td>integer</td><td> snippet_type </td><td> keyword matched data type, refer to they `contacts_data_type_e` (Since 3.0) </td></tr> <tr><td>string</td><td> snippet_string </td><td> keyword matched data string (Since 3.0) </td></tr> </table>
+/// @nodoc
 final class _contacts_person_grouprel_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -7857,36 +8146,12 @@ final class _contacts_person_grouprel_property_ids extends ffi.Struct {
   external int snippet_string;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_assigned _contacts_person_group_assigned view (read only)
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td> Identifier of this person group assigned view </td></tr>
-/// <tr><td>integer</td><td> person_id </td><td> DB record ID of the person </td></tr>
-/// <tr><td>string</td><td> display_name </td><td> Display name of the person </td></tr>
-/// <tr><td>string</td><td> display_name_index </td><td> The first character of first string for grouping. This is normalized using icu (projection) </td></tr>
-/// <tr><td>integer</td><td> display_contact_id </td><td> Display contact ID that the person belongs to (projection) </td></tr>
-/// <tr><td>string</td><td> ringtone_path </td><td> Ringtone path of the person (projection) </td></tr>
-/// <tr><td>string</td><td> image_thumbnail_path </td><td> Image thumbnail path of the person (projection) </td></tr>
-/// <tr><td>string</td><td> vibration </td><td> Vibration path of the person (projection) </td></tr>
-/// <tr><td>string</td><td> message_alert </td><td> Message alert path of the person (projection) </td></tr>
-/// <tr><td>string</td><td> status </td><td> Status of social account (projection) </td></tr>
-/// <tr><td>boolean</td><td> is_favorite </td><td> The person is favorite or not </td></tr>
-/// <tr><td>integer</td><td> link_count </td><td> Link count of contact records (projection) </td></tr>
-/// <tr><td>string</td><td> linked_address_book_ids </td><td> Addressbook IDs that the linked person belongs to (projection) </td></tr>
-/// <tr><td>boolean</td><td> has_phonenumber </td><td> The person has phone number or not </td></tr>
-/// <tr><td>boolean</td><td> has_email </td><td> The person has email or not </td></tr>
-/// <tr><td>integer</td><td> address_book_id </td><td> Addressbook ID that the person belongs to </td></tr>
-/// <tr><td>integer</td><td> address_book_mode </td><td> Addressbook mode, refer to the @ref contacts_address_book_mode_e </td></tr>
-/// <tr><td>integer</td><td> group_id </td><td> Group ID that the person belongs to </td></tr>
-/// <tr><td>integer<dtd><td> contact_id </td><td> Contact ID that the person belongs to (projection) </td></tr>
-/// <tr><td>integer</td><td> snippet_type </td><td> keyword matched data type, refer to they @ref contacts_data_type_e (Since 3.0) </td></tr>
-/// <tr><td>string</td><td> snippet_string </td><td> keyword matched data string (Since 3.0) </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_assigned _contacts_person_group_assigned view (read only) <table> <tr> <th>Type</th> <th>Property ID</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td> Identifier of this person group assigned view </td></tr> <tr><td>integer</td><td> person_id </td><td> DB record ID of the person </td></tr> <tr><td>string</td><td> display_name </td><td> Display name of the person </td></tr> <tr><td>string</td><td> display_name_index </td><td> The first character of first string for grouping. This is normalized using icu (projection) </td></tr> <tr><td>integer</td><td> display_contact_id </td><td> Display contact ID that the person belongs to (projection) </td></tr> <tr><td>string</td><td> ringtone_path </td><td> Ringtone path of the person (projection) </td></tr> <tr><td>string</td><td> image_thumbnail_path </td><td> Image thumbnail path of the person (projection) </td></tr> <tr><td>string</td><td> vibration </td><td> Vibration path of the person (projection) </td></tr> <tr><td>string</td><td> message_alert </td><td> Message alert path of the person (projection) </td></tr> <tr><td>string</td><td> status </td><td> Status of social account (projection) </td></tr> <tr><td>boolean</td><td> is_favorite </td><td> The person is favorite or not </td></tr> <tr><td>integer</td><td> link_count </td><td> Link count of contact records (projection) </td></tr> <tr><td>string</td><td> linked_address_book_ids </td><td> Addressbook IDs that the linked person belongs to (projection) </td></tr> <tr><td>boolean</td><td> has_phonenumber </td><td> The person has phone number or not </td></tr> <tr><td>boolean</td><td> has_email </td><td> The person has email or not </td></tr> <tr><td>integer</td><td> address_book_id </td><td> Addressbook ID that the person belongs to </td></tr> <tr><td>integer</td><td> address_book_mode </td><td> Addressbook mode, refer to the `contacts_address_book_mode_e` </td></tr> <tr><td>integer</td><td> group_id </td><td> Group ID that the person belongs to </td></tr> <tr><td>integer<dtd><td> contact_id </td><td> Contact ID that the person belongs to (projection) </td></tr> <tr><td>integer</td><td> snippet_type </td><td> keyword matched data type, refer to they `contacts_data_type_e` (Since 3.0) </td></tr> <tr><td>string</td><td> snippet_string </td><td> keyword matched data string (Since 3.0) </td></tr> </table>
+/// @nodoc
 final class _contacts_person_group_assigned_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -7951,35 +8216,12 @@ final class _contacts_person_group_assigned_property_ids extends ffi.Struct {
   external int snippet_string;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_not_assigned _contacts_person_group_not_assigned view (read only)
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td> Identifier of this person group not assigned view </td></tr>
-/// <tr><td>integer</td><td> person_id </td><td> DB record ID of the person </td></tr>
-/// <tr><td>string</td><td> display_name </td><td> Display name of the person </td></tr>
-/// <tr><td>string</td><td> display_name_index </td><td> The first character of first string for grouping. This is normalized using icu (projection) </td></tr>
-/// <tr><td>integer</td><td> display_contact_id </td><td> Display contact ID that the person belongs to (projection) </td></tr>
-/// <tr><td>string</td><td> ringtone_path </td><td> Ringtone path of the person (projection) </td></tr>
-/// <tr><td>string</td><td> image_thumbnail_path </td><td> Image thumbnail path of the person (projection) </td></tr>
-/// <tr><td>string</td><td> vibration </td><td> Vibration path of the person (projection) </td></tr>
-/// <tr><td>string</td><td> message_alert </td><td> Message alert path of the person (projection) </td></tr>
-/// <tr><td>string</td><td> status </td><td> Status of social account (projection) </td></tr>
-/// <tr><td>boolean</td><td> is_favorite </td><td> The person is favorite or not </td></tr>
-/// <tr><td>integer</td><td> link_count </td><td> Link count of contact records (projection) </td></tr>
-/// <tr><td>string</td><td> linked_address_book_ids </td><td> Addressbook IDs that the linked person belongs to (projection) </td></tr>
-/// <tr><td>boolean</td><td> has_phonenumber </td><td> The person has phone number or not </td></tr>
-/// <tr><td>boolean</td><td> has_email </td><td> The person has email or not </td></tr>
-/// <tr><td>integer</td><td> address_book_id </td><td> Addressbook ID that the person belongs to </td></tr>
-/// <tr><td>integer</td><td> address_book_mode </td><td> Addressbook mode, refer to the @ref contacts_address_book_mode_e </td></tr>
-/// <tr><td>integer</td><td> contact_id </td><td> Contact ID that the person belongs to (projection) </td></tr>
-/// <tr><td>integer</td><td> snippet_type </td><td> keyword matched data type, refer to they @ref contacts_data_type_e (Since 3.0) </td></tr>
-/// <tr><td>string</td><td> snippet_string </td><td> keyword matched data string (Since 3.0) </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_group_not_assigned _contacts_person_group_not_assigned view (read only) <table> <tr> <th>Type</th> <th>Property ID</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td> Identifier of this person group not assigned view </td></tr> <tr><td>integer</td><td> person_id </td><td> DB record ID of the person </td></tr> <tr><td>string</td><td> display_name </td><td> Display name of the person </td></tr> <tr><td>string</td><td> display_name_index </td><td> The first character of first string for grouping. This is normalized using icu (projection) </td></tr> <tr><td>integer</td><td> display_contact_id </td><td> Display contact ID that the person belongs to (projection) </td></tr> <tr><td>string</td><td> ringtone_path </td><td> Ringtone path of the person (projection) </td></tr> <tr><td>string</td><td> image_thumbnail_path </td><td> Image thumbnail path of the person (projection) </td></tr> <tr><td>string</td><td> vibration </td><td> Vibration path of the person (projection) </td></tr> <tr><td>string</td><td> message_alert </td><td> Message alert path of the person (projection) </td></tr> <tr><td>string</td><td> status </td><td> Status of social account (projection) </td></tr> <tr><td>boolean</td><td> is_favorite </td><td> The person is favorite or not </td></tr> <tr><td>integer</td><td> link_count </td><td> Link count of contact records (projection) </td></tr> <tr><td>string</td><td> linked_address_book_ids </td><td> Addressbook IDs that the linked person belongs to (projection) </td></tr> <tr><td>boolean</td><td> has_phonenumber </td><td> The person has phone number or not </td></tr> <tr><td>boolean</td><td> has_email </td><td> The person has email or not </td></tr> <tr><td>integer</td><td> address_book_id </td><td> Addressbook ID that the person belongs to </td></tr> <tr><td>integer</td><td> address_book_mode </td><td> Addressbook mode, refer to the `contacts_address_book_mode_e` </td></tr> <tr><td>integer</td><td> contact_id </td><td> Contact ID that the person belongs to (projection) </td></tr> <tr><td>integer</td><td> snippet_type </td><td> keyword matched data type, refer to they `contacts_data_type_e` (Since 3.0) </td></tr> <tr><td>string</td><td> snippet_string </td><td> keyword matched data string (Since 3.0) </td></tr> </table>
+/// @nodoc
 final class _contacts_person_group_not_assigned_property_ids
     extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
@@ -8042,30 +8284,12 @@ final class _contacts_person_group_not_assigned_property_ids
   external int snippet_string;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_phone_log _contacts_person_phone_log view (read only)
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td> Identifier of this phone log view </td></tr>
-/// <tr><td>integer</td><td> person_id </td><td> DB record ID of person </td></tr>
-/// <tr><td>string</td><td> display_name </td><td> Display name of the person </td></tr>
-/// <tr><td>string</td><td> image_thumbnail_path </td><td> Image thumbnail path of the person (projection) </td></tr>
-/// <tr><td>integer</td><td> log_id </td><td> DB record ID of phone log </td></tr>
-/// <tr><td>string</td><td> address </td><td> Number or Email that the phone log displays </td></tr>
-/// <tr><td>integer</td><td> address_type </td><td> Number or Email type (projection)</td></tr>
-/// <tr><td>integer</td><td> log_time </td><td> Call end time. The value means number of seconds since 1970-01-01 00:00:00 (UTC) </td></tr>
-/// <tr><td>integer</td><td> log_type </td><td> Log type, refer to the @ref contacts_phone_log_type_e </td></tr>
-/// <tr><td>integer</td><td> extra_data1 </td><td> You can set the related integer data (e.g. message_id, email_id or duration(seconds) of call) (projection) </td></tr>
-/// <tr><td>string</td><td> extra_data2 </td><td> You can set the related string data (e.g. short message, subject) (projection) </td></tr>
-/// <tr><td>string</td><td> normalized_address </td><td> You can only use this property for search filter </td></tr>
-/// <tr><td>string</td><td> cleaned_address </td><td> You can only use this property for search filter </td></tr>
-/// <tr><td>string</td><td> address_filter </td><td> You can only use this property for search filter </td></tr>
-/// <tr><td>integer</td><td> sim_slot_no </td><td>It is related to the SIM slot number. sim_slot_no 0 means first SIM card, sim_slot_no 1 means second SIM. It is same with handle index of telephony handle list. Refer to the telephony_init() </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_phone_log _contacts_person_phone_log view (read only) <table> <tr> <th>Type</th> <th>Property ID</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td> Identifier of this phone log view </td></tr> <tr><td>integer</td><td> person_id </td><td> DB record ID of person </td></tr> <tr><td>string</td><td> display_name </td><td> Display name of the person </td></tr> <tr><td>string</td><td> image_thumbnail_path </td><td> Image thumbnail path of the person (projection) </td></tr> <tr><td>integer</td><td> log_id </td><td> DB record ID of phone log </td></tr> <tr><td>string</td><td> address </td><td> Number or Email that the phone log displays </td></tr> <tr><td>integer</td><td> address_type </td><td> Number or Email type (projection)</td></tr> <tr><td>integer</td><td> log_time </td><td> Call end time. The value means number of seconds since 1970-01-01 00:00:00 (UTC) </td></tr> <tr><td>integer</td><td> log_type </td><td> Log type, refer to the `contacts_phone_log_type_e` </td></tr> <tr><td>integer</td><td> extra_data1 </td><td> You can set the related integer data (e.g. message_id, email_id or duration(seconds) of call) (projection) </td></tr> <tr><td>string</td><td> extra_data2 </td><td> You can set the related string data (e.g. short message, subject) (projection) </td></tr> <tr><td>string</td><td> normalized_address </td><td> You can only use this property for search filter </td></tr> <tr><td>string</td><td> cleaned_address </td><td> You can only use this property for search filter </td></tr> <tr><td>string</td><td> address_filter </td><td> You can only use this property for search filter </td></tr> <tr><td>integer</td><td> sim_slot_no </td><td>It is related to the SIM slot number. sim_slot_no 0 means first SIM card, sim_slot_no 1 means second SIM. It is same with handle index of telephony handle list. Refer to the telephony_init() </td></tr> </table>
+/// @nodoc
 final class _contacts_person_phone_log_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -8112,29 +8336,12 @@ final class _contacts_person_phone_log_property_ids extends ffi.Struct {
   external int sim_slot_no;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_usage _contacts_person_usage view (read only)
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td> Identifier of this person usage view </td></tr>
-/// <tr><td>integer</td><td> person_id </td><td> DB record ID of the person </td></tr>
-/// <tr><td>string</td><td> display_name </td><td> Display name of the person </td></tr>
-/// <tr><td>string</td><td> display_name_index </td><td> The first character of first string for grouping. This is normalized using icu (projection) </td></tr>
-/// <tr><td>integer</td><td> display_contact_id </td><td> Display contact ID that the person belongs to (projection) </td></tr>
-/// <tr><td>string</td><td> ringtone_path </td><td> Ringtone path of the person (projection) </td></tr>
-/// <tr><td>string</td><td> image_thumbnail_path </td><td> Image thumbnail path of the person (projection)</td></tr>
-/// <tr><td>string</td><td> vibration </td><td> Vibration path of the person (projection) </td></tr>
-/// <tr><td>string</td><td> message_alert </td><td> Message alert path of the person (projection) </td></tr>
-/// <tr><td>boolean</td><td> is_favorite </td><td> The person is favorite or not </td></tr>
-/// <tr><td>boolean</td><td> has_phonenumber </td><td> The person has phone number or not </td></tr>
-/// <tr><td>boolean</td><td> has_email </td><td> The person has email or not </td></tr>
-/// <tr><td>integer</td><td> usage_type </td><td> Usage type, refer to the @ref contacts_usage_type_e </td></tr>
-/// <tr><td>integer</td><td> times_used </td><td> Usage number of person </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_person_usage _contacts_person_usage view (read only) <table> <tr> <th>Type</th> <th>Property ID</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td> Identifier of this person usage view </td></tr> <tr><td>integer</td><td> person_id </td><td> DB record ID of the person </td></tr> <tr><td>string</td><td> display_name </td><td> Display name of the person </td></tr> <tr><td>string</td><td> display_name_index </td><td> The first character of first string for grouping. This is normalized using icu (projection) </td></tr> <tr><td>integer</td><td> display_contact_id </td><td> Display contact ID that the person belongs to (projection) </td></tr> <tr><td>string</td><td> ringtone_path </td><td> Ringtone path of the person (projection) </td></tr> <tr><td>string</td><td> image_thumbnail_path </td><td> Image thumbnail path of the person (projection)</td></tr> <tr><td>string</td><td> vibration </td><td> Vibration path of the person (projection) </td></tr> <tr><td>string</td><td> message_alert </td><td> Message alert path of the person (projection) </td></tr> <tr><td>boolean</td><td> is_favorite </td><td> The person is favorite or not </td></tr> <tr><td>boolean</td><td> has_phonenumber </td><td> The person has phone number or not </td></tr> <tr><td>boolean</td><td> has_email </td><td> The person has email or not </td></tr> <tr><td>integer</td><td> usage_type </td><td> Usage type, refer to the `contacts_usage_type_e` </td></tr> <tr><td>integer</td><td> times_used </td><td> Usage number of person </td></tr> </table>
+/// @nodoc
 final class _contacts_person_usage_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -8178,31 +8385,12 @@ final class _contacts_person_usage_property_ids extends ffi.Struct {
   external int message_alert;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact_number _contacts_contact_number view (read only)
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td> Identifier of this contacts number view </td></tr>
-/// <tr><td>integer</td><td>contact_id</td><td> Contact ID that the number belongs to </td></tr>
-/// <tr><td>string</td><td>display_name</td><td> Display name of contact that the number belongs to</td></tr>
-/// <tr><td>integer</td><td>display_source_type</td><td> The source type of display name, refer to the @ref contacts_display_name_source_type_e (projection) </td></tr>
-/// <tr><td>integer</td><td>address_book_id</td><td> Addressbook ID that the number belongs to </td></tr>
-/// <tr><td>integer</td><td>person_id</td><td> Person ID that the number belongs to </td></tr>
-/// <tr><td>string</td><td>ringtone_path</td><td> Ringtone path that the number belongs to (projection) </td></tr>
-/// <tr><td>string</td><td>image_thumbnail_path</td><td> Image thumbnail path that the number belongs to (projection) </td></tr>
-/// <tr><td>integer</td><td> number_id </td><td> DB record ID of the number </td></tr>
-/// <tr><td>integer</td><td> type </td><td> Number type, refer to the @ref contacts_number_type_e (projection) </td></tr>
-/// <tr><td>string</td><td> label </td><td> Custom number type label, when the number type is #CONTACTS_NUMBER_TYPE_CUSTOM (projection) </td></tr>
-/// <tr><td>boolean</td><td> is_default </td><td> The number is default number or not </td></tr>
-/// <tr><td>string</td><td> number </td><td> Number </td></tr>
-/// <tr><td>string</td><td> number_filter </td><td> If you add filter with this property, the string will be normalized as minmatch length internally and the match rule will be applied CONTACTS_MATCH_EXACTLY </td></tr>
-/// <tr><td>string</td><td> normalized_number </td><td>You can only use this property for search filter </td></tr>
-/// <tr><td>string</td><td> cleaned_number </td><td>You can only use this property for search filter </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact_number _contacts_contact_number view (read only) <table> <tr> <th>Type</th> <th>Property ID</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td> Identifier of this contacts number view </td></tr> <tr><td>integer</td><td>contact_id</td><td> Contact ID that the number belongs to </td></tr> <tr><td>string</td><td>display_name</td><td> Display name of contact that the number belongs to</td></tr> <tr><td>integer</td><td>display_source_type</td><td> The source type of display name, refer to the `contacts_display_name_source_type_e` (projection) </td></tr> <tr><td>integer</td><td>address_book_id</td><td> Addressbook ID that the number belongs to </td></tr> <tr><td>integer</td><td>person_id</td><td> Person ID that the number belongs to </td></tr> <tr><td>string</td><td>ringtone_path</td><td> Ringtone path that the number belongs to (projection) </td></tr> <tr><td>string</td><td>image_thumbnail_path</td><td> Image thumbnail path that the number belongs to (projection) </td></tr> <tr><td>integer</td><td> number_id </td><td> DB record ID of the number </td></tr> <tr><td>integer</td><td> type </td><td> Number type, refer to the `contacts_number_type_e` (projection) </td></tr> <tr><td>string</td><td> label </td><td> Custom number type label, when the number type is `CONTACTS_NUMBER_TYPE_CUSTOM` (projection) </td></tr> <tr><td>boolean</td><td> is_default </td><td> The number is default number or not </td></tr> <tr><td>string</td><td> number </td><td> Number </td></tr> <tr><td>string</td><td> number_filter </td><td> If you add filter with this property, the string will be normalized as minmatch length internally and the match rule will be applied CONTACTS_MATCH_EXACTLY </td></tr> <tr><td>string</td><td> normalized_number </td><td>You can only use this property for search filter </td></tr> <tr><td>string</td><td> cleaned_number </td><td>You can only use this property for search filter </td></tr> </table>
+/// @nodoc
 final class _contacts_contact_number_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -8252,28 +8440,12 @@ final class _contacts_contact_number_property_ids extends ffi.Struct {
   external int cleaned_number;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact_email _contacts_contact_email view (read only)
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td> Identifier of this contacts email view </td></tr>
-/// <tr><td>integer</td><td>contact_id</td><td> Contact ID that the email belongs to </td></tr>
-/// <tr><td>string</td><td>display_name</td><td> Display name that the email belongs to </td></tr>
-/// <tr><td>integer</td><td>display_source_type</td><td> The source type of display name that the email belongs to (projection) </td></tr>
-/// <tr><td>integer</td><td>address_book_id</td><td> Addressbook ID that the email belongs to </td></tr>
-/// <tr><td>integer</td><td>person_id</td><td> Person ID that the email belongs to </td></tr>
-/// <tr><td>string</td><td>ringtone_path</td><td> Ringtone path that the email belongs to (projection) </td></tr>
-/// <tr><td>string</td><td>image_thumbnail_path</td><td> Image thumbnail path that the email belongs to (projection) </td></tr>
-/// <tr><td>integer</td><td> email_id </td><td> DB record ID of the email </td></tr>
-/// <tr><td>integer</td><td> type </td><td> Email type, refer to the @ref contacts_email_type_e (projection) </td></tr>
-/// <tr><td>string</td><td> label </td><td> Custom mail type label, when the email type is #CONTACTS_EMAIL_TYPE_CUSTOM (projection) </td></tr>
-/// <tr><td>boolean</td><td> is_default </td><td> Email is default email or not </td></tr>
-/// <tr><td>string</td><td> email </td><td> Email address </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact_email _contacts_contact_email view (read only) <table> <tr> <th>Type</th> <th>Property ID</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td> Identifier of this contacts email view </td></tr> <tr><td>integer</td><td>contact_id</td><td> Contact ID that the email belongs to </td></tr> <tr><td>string</td><td>display_name</td><td> Display name that the email belongs to </td></tr> <tr><td>integer</td><td>display_source_type</td><td> The source type of display name that the email belongs to (projection) </td></tr> <tr><td>integer</td><td>address_book_id</td><td> Addressbook ID that the email belongs to </td></tr> <tr><td>integer</td><td>person_id</td><td> Person ID that the email belongs to </td></tr> <tr><td>string</td><td>ringtone_path</td><td> Ringtone path that the email belongs to (projection) </td></tr> <tr><td>string</td><td>image_thumbnail_path</td><td> Image thumbnail path that the email belongs to (projection) </td></tr> <tr><td>integer</td><td> email_id </td><td> DB record ID of the email </td></tr> <tr><td>integer</td><td> type </td><td> Email type, refer to the `contacts_email_type_e` (projection) </td></tr> <tr><td>string</td><td> label </td><td> Custom mail type label, when the email type is `CONTACTS_EMAIL_TYPE_CUSTOM` (projection) </td></tr> <tr><td>boolean</td><td> is_default </td><td> Email is default email or not </td></tr> <tr><td>string</td><td> email </td><td> Email address </td></tr> </table>
+/// @nodoc
 final class _contacts_contact_email_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -8314,25 +8486,12 @@ final class _contacts_contact_email_property_ids extends ffi.Struct {
   external int email;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact_grouprel _contacts_contact_grouprel view (read only)
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td> Identifier of this contact grouprel view </td></tr>
-/// <tr><td>integer</td><td>contact_id</td><td> Contact ID that the contact group relation belongs to </td></tr>
-/// <tr><td>string</td><td>display_name</td><td> Display name of the group relation </td></tr>
-/// <tr><td>integer</td><td>display_source_type</td><td> The source type of display name (projection) </td></tr>
-/// <tr><td>integer</td><td>address_book_id</td><td> Addressbook ID that the group relation belongs to </td></tr>
-/// <tr><td>integer</td><td>person_id</td><td> Person ID that the group relation belongs to </td></tr>
-/// <tr><td>string</td><td>ringtone_path</td><td> Ringtone path of the group relation (projection) </td></tr>
-/// <tr><td>string</td><td>image_thumbnail_path</td><td> Image thumbnail path of the group relation (projection) </td></tr>
-/// <tr><td>integer</td><td> group_id </td><td> DB record ID of the group relation </td></tr>
-/// <tr><td>string</td><td> group_name </td><td> Group name (projection) </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact_grouprel _contacts_contact_grouprel view (read only) <table> <tr> <th>Type</th> <th>Property ID</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td> Identifier of this contact grouprel view </td></tr> <tr><td>integer</td><td>contact_id</td><td> Contact ID that the contact group relation belongs to </td></tr> <tr><td>string</td><td>display_name</td><td> Display name of the group relation </td></tr> <tr><td>integer</td><td>display_source_type</td><td> The source type of display name (projection) </td></tr> <tr><td>integer</td><td>address_book_id</td><td> Addressbook ID that the group relation belongs to </td></tr> <tr><td>integer</td><td>person_id</td><td> Person ID that the group relation belongs to </td></tr> <tr><td>string</td><td>ringtone_path</td><td> Ringtone path of the group relation (projection) </td></tr> <tr><td>string</td><td>image_thumbnail_path</td><td> Image thumbnail path of the group relation (projection) </td></tr> <tr><td>integer</td><td> group_id </td><td> DB record ID of the group relation </td></tr> <tr><td>string</td><td> group_name </td><td> Group name (projection) </td></tr> </table>
+/// @nodoc
 final class _contacts_contact_grouprel_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -8364,29 +8523,12 @@ final class _contacts_contact_grouprel_property_ids extends ffi.Struct {
   external int group_name;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact_activity _contacts_contact_activity view (read only)
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td> Identifier of this contact activity view </td></tr>
-/// <tr><td>integer</td><td>contact_id</td><td> Contact ID that the activity belongs to</td></tr>
-/// <tr><td>string</td><td>display_name</td><td> Display name of the contact that the activity belongs to </td></tr>
-/// <tr><td>integer</td><td>display_source_type</td><td> The source type of display name that the activity belongs to </td></tr>
-/// <tr><td>integer</td><td>address_book_id</td><td> Addressbook that the activity belongs to </td></tr>
-/// <tr><td>integer</td><td>person_id</td><td> Person ID that the activity belongs to </td></tr>
-/// <tr><td>string</td><td>ringtone_path</td><td> Ringtone path of the contact that the activity belongs to (projection) </td></tr>
-/// <tr><td>string</td><td>image_thumbnail_path</td><td> Image thumbnail path of the contact that the activity belongs to (projection) </td></tr>
-/// <tr><td>integer</td><td> activity_id </td><td> DB record ID of the activity </td></tr>
-/// <tr><td>string</td><td> source_name </td><td> Account name that the activity belongs to </td></tr>
-/// <tr><td>string</td><td> status </td><td> Activity status (projection) </td></tr>
-/// <tr><td>integer</td><td> timestamp </td><td> Published time of activity </td></tr>
-/// <tr><td>string</td><td> service_operation </td><td> Data for service_set_operation </td></tr>
-/// <tr><td>string</td><td> uri </td><td> Data for service_set_uri </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact_activity _contacts_contact_activity view (read only) <table> <tr> <th>Type</th> <th>Property ID</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td> Identifier of this contact activity view </td></tr> <tr><td>integer</td><td>contact_id</td><td> Contact ID that the activity belongs to</td></tr> <tr><td>string</td><td>display_name</td><td> Display name of the contact that the activity belongs to </td></tr> <tr><td>integer</td><td>display_source_type</td><td> The source type of display name that the activity belongs to </td></tr> <tr><td>integer</td><td>address_book_id</td><td> Addressbook that the activity belongs to </td></tr> <tr><td>integer</td><td>person_id</td><td> Person ID that the activity belongs to </td></tr> <tr><td>string</td><td>ringtone_path</td><td> Ringtone path of the contact that the activity belongs to (projection) </td></tr> <tr><td>string</td><td>image_thumbnail_path</td><td> Image thumbnail path of the contact that the activity belongs to (projection) </td></tr> <tr><td>integer</td><td> activity_id </td><td> DB record ID of the activity </td></tr> <tr><td>string</td><td> source_name </td><td> Account name that the activity belongs to </td></tr> <tr><td>string</td><td> status </td><td> Activity status (projection) </td></tr> <tr><td>integer</td><td> timestamp </td><td> Published time of activity </td></tr> <tr><td>string</td><td> service_operation </td><td> Data for service_set_operation </td></tr> <tr><td>string</td><td> uri </td><td> Data for service_set_uri </td></tr> </table>
+/// @nodoc
 final class _contacts_contact_activity_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -8433,19 +8575,12 @@ final class _contacts_contact_activity_property_ids extends ffi.Struct {
   external int uri;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log_stat _contacts_phone_log_stat view (read only)
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td> Identifier of this log stat view </td></tr>
-/// <tr><td>integer</td><td> log_count </td><td>Log count (projection) </td></tr>
-/// <tr><td>integer</td><td> log_type </td><td> Log type, see the @ref contacts_phone_log_type_e </td></tr>
-/// <tr><td>integer</td><td> sim_slot_no </td><td>It is related to the SIM slot number. sim_slot_no 0 means first SIM card, sim_slot_no 1 means second SIM. It is same with handle index of telephony handle list. Refer to the telephony_init() (Since 3.0)</td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_phone_log_stat _contacts_phone_log_stat view (read only) <table> <tr> <th>Type</th> <th>Property ID</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td> Identifier of this log stat view </td></tr> <tr><td>integer</td><td> log_count </td><td>Log count (projection) </td></tr> <tr><td>integer</td><td> log_type </td><td> Log type, see the `contacts_phone_log_type_e` </td></tr> <tr><td>integer</td><td> sim_slot_no </td><td>It is related to the SIM slot number. sim_slot_no 0 means first SIM card, sim_slot_no 1 means second SIM. It is same with handle index of telephony handle list. Refer to the telephony_init() (Since 3.0)</td></tr> </table>
+/// @nodoc
 final class _contacts_phone_log_stat_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -8459,22 +8594,12 @@ final class _contacts_phone_log_stat_property_ids extends ffi.Struct {
   external int sim_slot_no;
 }
 
-/// @addtogroup CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_sip _contacts_sip view (Since 3.0)
-/// <table>
-/// <tr>
-/// <th>Type</th>
-/// <th>Property ID</th>
-/// <th>Read, Write</th>
-/// <th>Description</th>
-/// </tr>
-/// <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts sip view </td></tr>
-/// <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the sip </td></tr>
-/// <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the sip belongs to </td></tr>
-/// <tr><td>string</td><td> address </td><td>read, write</td><td> SIP address </td></tr>
-/// <tr><td>integer</td><td> type </td><td>read, write</td><td> sip type, refer to the @ref contacts_sip_type_e </td></tr>
-/// <tr><td>string</td><td> label </td><td>read, write</td><td> Custom sip type label, when the sip type is #CONTACTS_SIP_TYPE_CUSTOM </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_sip _contacts_sip view (Since 3.0) <table> <tr> <th>Type</th> <th>Property ID</th> <th>Read, Write</th> <th>Description</th> </tr> <tr><td>string</td><td>_uri</td><td>read only</td><td> Identifier of this contacts sip view </td></tr> <tr><td>integer</td><td> id </td><td>read only</td><td> DB record ID of the sip </td></tr> <tr><td>integer</td><td> contact_id </td><td>read, write once</td><td> Contact ID that the sip belongs to </td></tr> <tr><td>string</td><td> address </td><td>read, write</td><td> SIP address </td></tr> <tr><td>integer</td><td> type </td><td>read, write</td><td> sip type, refer to the `contacts_sip_type_e` </td></tr> <tr><td>string</td><td> label </td><td>read, write</td><td> Custom sip type label, when the sip type is `CONTACTS_SIP_TYPE_CUSTOM` </td></tr> </table>
+/// @nodoc
 final class _contacts_sip_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -8494,16 +8619,25 @@ final class _contacts_sip_property_ids extends ffi.Struct {
   external int label;
 }
 
-/// @brief Handle for contacts record.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
+/// Handle for contacts record.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+/// @nodoc
 typedef contacts_record_h = ffi.Pointer<__contacts_record_h>;
 
-/// @brief Handle for contacts list.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
+/// Handle for contacts list.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+/// @nodoc
 typedef contacts_list_h = ffi.Pointer<__contacts_list_h>;
 
-/// @brief Enumeration for Contacts match string flags.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
+/// Enumeration for Contacts match string flags.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+/// @nodoc
 abstract class contacts_match_str_flag_e {
   /// < Full string, case-sensitive
   static const int CONTACTS_MATCH_EXACTLY = 0;
@@ -8524,8 +8658,11 @@ abstract class contacts_match_str_flag_e {
   static const int CONTACTS_MATCH_EXISTS = 5;
 }
 
-/// @brief Enumeration for Contacts match int flags.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
+/// Enumeration for Contacts match int flags.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+/// @nodoc
 abstract class contacts_match_int_flag_e {
   /// < '='
   static const int CONTACTS_MATCH_EQUAL = 0;
@@ -8549,8 +8686,11 @@ abstract class contacts_match_int_flag_e {
   static const int CONTACTS_MATCH_NONE = 6;
 }
 
-/// @brief Enumeration for Contacts filter operators.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
+/// Enumeration for Contacts filter operators.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+/// @nodoc
 abstract class contacts_filter_operator_e {
   /// < AND
   static const int CONTACTS_FILTER_OPERATOR_AND = 0;
@@ -8559,16 +8699,25 @@ abstract class contacts_filter_operator_e {
   static const int CONTACTS_FILTER_OPERATOR_OR = 1;
 }
 
-/// @brief Handle for contacts filter.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
+/// Handle for contacts filter.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+/// @nodoc
 typedef contacts_filter_h = ffi.Pointer<__contacts_filter_h>;
 
-/// @brief Handle for contacts query.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
+/// Handle for contacts query.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+/// @nodoc
 typedef contacts_query_h = ffi.Pointer<__contacts_query_h>;
 
-/// @brief Enumeration for contact change state.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
+/// Enumeration for contact change state.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+/// @nodoc
 abstract class contacts_changed_e {
   /// < Inserted
   static const int CONTACTS_CHANGE_INSERTED = 0;
@@ -8580,21 +8729,35 @@ abstract class contacts_changed_e {
   static const int CONTACTS_CHANGE_DELETED = 2;
 }
 
-/// @brief Called when the designated view changes.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-/// @param[in] view_uri The view URI
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre The callback must be registered using contacts_db_add_changed_cb().
-/// @see contacts_db_add_changed_cb()
+/// Called when the designated view changes.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+///
+/// **Parameters:**
+/// - `view_uri` (in): The view URI
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - The callback must be registered using contacts_db_add_changed_cb().
+///
+/// **See also:**
+/// - `contacts_db_add_changed_cb()`
+/// @nodoc
 typedef contacts_db_changed_cb
     = ffi.Pointer<ffi.NativeFunction<contacts_db_changed_cbFunction>>;
+/// @nodoc
 typedef contacts_db_changed_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> view_uri, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcontacts_db_changed_cbFunction = void Function(
     ffi.Pointer<ffi.Char> view_uri, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumeration for name display order.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
+/// Enumeration for name display order.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+/// @nodoc
 abstract class contacts_name_display_order_e {
   /// < First name comes at the first
   static const int CONTACTS_NAME_DISPLAY_ORDER_FIRSTLAST = 0;
@@ -8603,8 +8766,11 @@ abstract class contacts_name_display_order_e {
   static const int CONTACTS_NAME_DISPLAY_ORDER_LASTFIRST = 1;
 }
 
-/// @brief Enumeration for name sorting order.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
+/// Enumeration for name sorting order.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+/// @nodoc
 abstract class contacts_name_sorting_order_e {
   /// < Contacts are first sorted based on the first name
   static const int CONTACTS_NAME_SORTING_ORDER_FIRSTLAST = 0;
@@ -8613,38 +8779,61 @@ abstract class contacts_name_sorting_order_e {
   static const int CONTACTS_NAME_SORTING_ORDER_LASTFIRST = 1;
 }
 
-/// @brief Called when a designated view changes.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-/// @param[in] name_display_order The name display order setting value
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre The callback must be registered using contacts_setting_add_name_display_order_changed_cb().
-/// contacts_setting_set_name_display_order() must be called to invoke this callback.
-/// @see contacts_setting_add_name_display_order_changed_cb()
-/// @see contacts_setting_remove_name_display_order_changed_cb()
+/// Called when a designated view changes.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+///
+/// **Parameters:**
+/// - `name_display_order` (in): The name display order setting value
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - The callback must be registered using contacts_setting_add_name_display_order_changed_cb(). contacts_setting_set_name_display_order() must be called to invoke this callback.
+///
+/// **See also:**
+/// - `contacts_setting_add_name_display_order_changed_cb()`
+/// - `contacts_setting_remove_name_display_order_changed_cb()`
+/// @nodoc
 typedef contacts_setting_name_display_order_changed_cb = ffi.Pointer<
     ffi.NativeFunction<contacts_setting_name_display_order_changed_cbFunction>>;
+/// @nodoc
 typedef contacts_setting_name_display_order_changed_cbFunction = ffi.Void
     Function(ffi.Int32 name_display_order, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcontacts_setting_name_display_order_changed_cbFunction = void
     Function(int name_display_order, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when a designated view changes.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-/// @param[in] name_sorting_order The name sorting order setting value
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre The callback must be registered using contacts_setting_add_name_sorting_order_changed_cb().
-/// contacts_setting_set_name_sorting_order() must be called to invoke this callback.
-/// @see contacts_setting_add_name_sorting_order_changed_cb()
-/// @see contacts_setting_remove_name_sorting_order_changed_cb()
+/// Called when a designated view changes.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+///
+/// **Parameters:**
+/// - `name_sorting_order` (in): The name sorting order setting value
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - The callback must be registered using contacts_setting_add_name_sorting_order_changed_cb(). contacts_setting_set_name_sorting_order() must be called to invoke this callback.
+///
+/// **See also:**
+/// - `contacts_setting_add_name_sorting_order_changed_cb()`
+/// - `contacts_setting_remove_name_sorting_order_changed_cb()`
+/// @nodoc
 typedef contacts_setting_name_sorting_order_changed_cb = ffi.Pointer<
     ffi.NativeFunction<contacts_setting_name_sorting_order_changed_cbFunction>>;
+/// @nodoc
 typedef contacts_setting_name_sorting_order_changed_cbFunction = ffi.Void
     Function(ffi.Int32 name_sorting_order, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcontacts_setting_name_sorting_order_changed_cbFunction = void
     Function(int name_sorting_order, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumeration for Contacts person properties.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
+/// Enumeration for Contacts person properties.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+/// @nodoc
 abstract class contacts_person_property_e {
   /// < Default contacts record
   static const int CONTACTS_PERSON_PROPERTY_NAME_CONTACT = 0;
@@ -8659,39 +8848,66 @@ abstract class contacts_person_property_e {
   static const int CONTACTS_PERSON_PROPERTY_IMAGE = 3;
 }
 
-/// @brief Called whenever a contact is imported.
-/// @since_tizen 3.0
-/// @param[in] total The number of contacts that will be imported
-/// @param[in] imported_cnt The number of already imported contacts
-/// @param[in] user_data The user data passed from the callback registration function
-/// @return @c true to continue with the import of contacts
-/// otherwise @c false to stop the import of contacts
-/// @pre contacts_sim_import_all_contacts_by_sim_slot_no() will invoke this callback.
-/// @see contacts_sim_import_all_contacts_by_sim_slot_no()
+/// Called whenever a contact is imported.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `total` (in): The number of contacts that will be imported
+/// - `imported_cnt` (in): The number of already imported contacts
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Returns:**
+/// - `true` to continue with the import of contacts otherwise `false` to stop the import of contacts
+///
+/// **Preconditions:**
+/// - contacts_sim_import_all_contacts_by_sim_slot_no() will invoke this callback.
+///
+/// **See also:**
+/// - `contacts_sim_import_all_contacts_by_sim_slot_no()`
+/// @nodoc
 typedef contacts_sim_import_progress_cb
     = ffi.Pointer<ffi.NativeFunction<contacts_sim_import_progress_cbFunction>>;
+/// @nodoc
 typedef contacts_sim_import_progress_cbFunction = ffi.Bool Function(
     ffi.Int total, ffi.Int imported_cnt, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcontacts_sim_import_progress_cbFunction = bool Function(
     int total, int imported_cnt, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called to get a record handle of @ref CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-/// @param[in] record The record handle
-/// @param[in] user_data The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
-/// @pre contacts_vcard_parse_to_contact_foreach() will invoke this callback.
-/// @see contacts_vcard_parse_to_contact_foreach()
+/// Called to get a record handle of `CAPI_SOCIAL_CONTACTS_SVC_VIEW_MODULE_contacts_contact.`
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+///
+/// **Parameters:**
+/// - `record` (in): The record handle
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - contacts_vcard_parse_to_contact_foreach() will invoke this callback.
+///
+/// **See also:**
+/// - `contacts_vcard_parse_to_contact_foreach()`
+/// @nodoc
 typedef contacts_vcard_parse_cb
     = ffi.Pointer<ffi.NativeFunction<contacts_vcard_parse_cbFunction>>;
+/// @nodoc
 typedef contacts_vcard_parse_cbFunction = ffi.Bool Function(
     contacts_record_h record, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcontacts_vcard_parse_cbFunction = bool Function(
     contacts_record_h record, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumeration for contact DB status.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
+/// Enumeration for contact DB status.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+/// @nodoc
 abstract class contacts_db_status_e {
   /// < Normal
   static const int CONTACTS_DB_STATUS_NORMAL = 0;
@@ -8700,19 +8916,32 @@ abstract class contacts_db_status_e {
   static const int CONTACTS_DB_STATUS_CHANGING_COLLATION = 1;
 }
 
-/// @brief Called when contacts-service server status changes.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-/// @param[in] status The current status of server
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre This function requires an open connection to contacts service by contacts_connect().
-/// @see contacts_db_add_status_changed_cb()
+/// Called when contacts-service server status changes.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+///
+/// **Parameters:**
+/// - `status` (in): The current status of server
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - This function requires an open connection to contacts service by contacts_connect().
+///
+/// **See also:**
+/// - `contacts_db_add_status_changed_cb()`
+/// @nodoc
 typedef contacts_db_status_changed_cb
     = ffi.Pointer<ffi.NativeFunction<contacts_db_status_changed_cbFunction>>;
+/// @nodoc
 typedef contacts_db_status_changed_cbFunction = ffi.Void Function(
     ffi.Int32 status, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcontacts_db_status_changed_cbFunction = void Function(
     int status, ffi.Pointer<ffi.Void> user_data);
 
+/// @nodoc
 const int CONTACTS_CONNECT_FLAG_RETRY = 1;
 
+/// @nodoc
 const int CONTACTS_CONNECT_FLAG_NONE = 0;

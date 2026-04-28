@@ -1,3 +1,6 @@
+/// {@category 8.0/tizen}
+library tizen_interop_8_0.capi_appfw_app_control;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'generated_bindings_capi_appfw_app_control_uri.dart' as control_uri;
 
 /// Dart bindings for Tizen capi-appfw-app-control APIs.
+/// {@category 8.0/tizen}
 class Tizen80CapiAppfwAppControl {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,18 +29,27 @@ class Tizen80CapiAppfwAppControl {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates an app_control handle.
+  /// Creates an app_control handle.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks The @a app_control must be released using app_control_destroy().
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[out]  app_control     The app_control handle to be newly created on success
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see app_control_destroy()
+  /// **Remarks:**
+  /// - The `app_control` must be released using app_control_destroy().
+  ///
+  /// **Parameters:**
+  /// - `app_control` (out): The app_control handle to be newly created on success
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `app_control_destroy()`
   int app_control_create(
     ffi.Pointer<app_control_h> app_control,
   ) {
@@ -51,34 +64,42 @@ class Tizen80CapiAppfwAppControl {
   late final _app_control_create = _app_control_createPtr
       .asFunction<int Function(ffi.Pointer<app_control_h>)>();
 
-  /// @brief Creates an app_control handle and sets its attributes.
+  /// Creates an app_control handle and sets its attributes.
   ///
-  /// @details Extra data of array type cannot be added with this function. If you need to add arrays to the app_control handle,
-  /// create the handle with app_control_create_with_parameters() and then add arrays with app_control_add_extra_data_array().
-  /// For details on key-value pairs that app_control_create_with_parameters() allows,
-  /// their types and constraints, see app_control_add_extra_data().
-  /// @since_tizen 5.5
-  /// @remarks The @a app_control must be released using app_control_destroy().
-  /// @remarks Setting the type of key-value extra data that the value is an array of strings is not allowed.
+  /// Extra data of array type cannot be added with this function. If you need to add arrays to the app_control handle, create the handle with app_control_create_with_parameters() and then add arrays with app_control_add_extra_data_array(). For details on key-value pairs that app_control_create_with_parameters() allows, their types and constraints, see app_control_add_extra_data().
   ///
-  /// @param[out]  app_control             The app_control handle to be newly created on success
-  /// @param[in]   operation               The operation to be performed
-  /// @param[in]   uri                     The URI of the data this app_control is operating on
-  /// @param[in]   mime                    The explicit MIME type of the data this app_control is operating on
-  /// @param[in]   category                The explicit category
-  /// @param[in]   app_id                  The ID of the application to explicitly launch
-  /// @param[in]   mode                    The launch mode of the application
-  /// @param[in]   extra_data_count        The count of a extra data
-  /// @param[in]   ...                     The key-value pair list of app control extra data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #APP_CONTROL_ERROR_KEY_REJECTED Key not available
-  /// @see app_control_destroy()
-  /// @see app_control_add_extra_data()
-  /// @code
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - The `app_control` must be released using app_control_destroy().
+  /// - Setting the type of key-value extra data that the value is an array of strings is not allowed.
+  ///
+  /// **Parameters:**
+  /// - `app_control` (out): The app_control handle to be newly created on success
+  /// - `operation` (in): The operation to be performed
+  /// - `uri` (in): The URI of the data this app_control is operating on
+  /// - `mime` (in): The explicit MIME type of the data this app_control is operating on
+  /// - `category` (in): The explicit category
+  /// - `app_id` (in): The ID of the application to explicitly launch
+  /// - `mode` (in): The launch mode of the application
+  /// - `extra_data_count` (in): The count of a extra data
+  /// - `...` (in): The key-value pair list of app control extra data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `APP_CONTROL_ERROR_KEY_REJECTED`: Key not available
+  ///
+  /// **See also:**
+  /// - `app_control_destroy()`
+  /// - `app_control_add_extra_data()`
+  ///
+  /// ```
   ///
   /// static int create_app_control()
   /// {
@@ -87,7 +108,7 @@ class Tizen80CapiAppfwAppControl {
   /// "org.tizen.test", APP_CONTROL_LAUNCH_MODE_SINGLE, 2, "key1", "value1", "key2", "value2");
   /// return ret;
   /// }
-  /// @endcode
+  /// ```
   int app_control_create_with_parameters(
     ffi.Pointer<app_control_h> app_control,
     ffi.Pointer<ffi.Char> operation,
@@ -133,19 +154,28 @@ class Tizen80CapiAppfwAppControl {
               int,
               int)>();
 
-  /// @brief Creates an app_control handle using the URI in app_control_uri handle.
+  /// Creates an app_control handle using the URI in app_control_uri handle.
   ///
-  /// @since_tizen 5.5
-  /// @remarks The @a app_control must be released using app_control_destroy().
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[out]  app_control             The app_control handle to be newly created on success
-  /// @param[in]   uri                     The URI handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see app_control_destroy()
+  /// **Remarks:**
+  /// - The `app_control` must be released using app_control_destroy().
+  ///
+  /// **Parameters:**
+  /// - `app_control` (out): The app_control handle to be newly created on success
+  /// - `uri` (in): The URI handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `app_control_destroy()`
   int app_control_create_from_uri_handle(
     ffi.Pointer<app_control_h> app_control,
     control_uri.app_control_uri_h uri,
@@ -166,17 +196,24 @@ class Tizen80CapiAppfwAppControl {
           int Function(
               ffi.Pointer<app_control_h>, control_uri.app_control_uri_h)>();
 
-  /// @brief Destroys the app_control handle and releases all its resources.
+  /// Destroys the app_control handle and releases all its resources.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in]   app_control      The app_control handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see app_control_create()
+  /// **Parameters:**
+  /// - `app_control` (in): The app_control handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `app_control_create()`
   int app_control_destroy(
     app_control_h app_control,
   ) {
@@ -191,30 +228,36 @@ class Tizen80CapiAppfwAppControl {
   late final _app_control_destroy =
       _app_control_destroyPtr.asFunction<int Function(app_control_h)>();
 
-  /// @brief Sets the operation to be performed.
+  /// Sets the operation to be performed.
   ///
-  /// @details The @a operation is the mandatory information for the launch request.
-  /// If the operation is not specified, #APP_CONTROL_OPERATION_DEFAULT is used for the launch request.
-  /// If the operation is #APP_CONTROL_OPERATION_DEFAULT, the package information is mandatory to explicitly launch the application.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// The `operation` is the mandatory information for the launch request. If the operation is not specified, `APP_CONTROL_OPERATION_DEFAULT` is used for the launch request. If the operation is `APP_CONTROL_OPERATION_DEFAULT`, the package information is mandatory to explicitly launch the application.
   ///
-  /// @param[in]   app_control     The app_control handle
-  /// @param[in]   operation       The operation to be performed (if the @a operation is @c NULL, it clears the previous value)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see app_control_get_operation()
-  /// @see APP_CONTROL_OPERATION_DEFAULT
-  /// @see APP_CONTROL_OPERATION_EDIT
-  /// @see APP_CONTROL_OPERATION_VIEW
-  /// @see APP_CONTROL_OPERATION_PICK
-  /// @see APP_CONTROL_OPERATION_CREATE_CONTENT
-  /// @see APP_CONTROL_OPERATION_CALL
-  /// @see APP_CONTROL_OPERATION_SEND
-  /// @see APP_CONTROL_OPERATION_SEND_TEXT
-  /// @see APP_CONTROL_OPERATION_DIAL
-  /// @see APP_CONTROL_OPERATION_SEARCH
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `app_control` (in): The app_control handle
+  /// - `operation` (in): The operation to be performed (if the `operation` is `NULL`, it clears the previous value)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `app_control_get_operation()`
+  /// - `APP_CONTROL_OPERATION_DEFAULT`
+  /// - `APP_CONTROL_OPERATION_EDIT`
+  /// - `APP_CONTROL_OPERATION_VIEW`
+  /// - `APP_CONTROL_OPERATION_PICK`
+  /// - `APP_CONTROL_OPERATION_CREATE_CONTENT`
+  /// - `APP_CONTROL_OPERATION_CALL`
+  /// - `APP_CONTROL_OPERATION_SEND`
+  /// - `APP_CONTROL_OPERATION_SEND_TEXT`
+  /// - `APP_CONTROL_OPERATION_DIAL`
+  /// - `APP_CONTROL_OPERATION_SEARCH`
   int app_control_set_operation(
     app_control_h app_control,
     ffi.Pointer<ffi.Char> operation,
@@ -232,19 +275,28 @@ class Tizen80CapiAppfwAppControl {
   late final _app_control_set_operation = _app_control_set_operationPtr
       .asFunction<int Function(app_control_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the operation to be performed.
+  /// Gets the operation to be performed.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks The @a operation must be released using free().
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in]   app_control     The app_control handle
-  /// @param[out]  operation       The operation to be performed
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see app_control_set_operation()
+  /// **Remarks:**
+  /// - The `operation` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `app_control` (in): The app_control handle
+  /// - `operation` (out): The operation to be performed
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `app_control_set_operation()`
   int app_control_get_operation(
     app_control_h app_control,
     ffi.Pointer<ffi.Pointer<ffi.Char>> operation,
@@ -264,18 +316,27 @@ class Tizen80CapiAppfwAppControl {
       _app_control_get_operationPtr.asFunction<
           int Function(app_control_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the URI of the data.
+  /// Sets the URI of the data.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks Since Tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif, if the parameter @a uri is started with '%file://' and it is a regular file in this application's data path which can be obtained by calling the app_get_data_path() function, it will be shared to the callee application. Framework will grant a temporary permission to the callee application for this file and revoke it when the callee application is terminated. The callee application can just read it.
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in]   app_control      The app_control handle
-  /// @param[in]   uri              The URI of the data this app_control is operating on (if the @a uri is @c NULL, it clears the previous value)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see app_control_get_uri()
+  /// **Remarks:**
+  /// - Since Tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif, if the parameter `uri` is started with '%file://' and it is a regular file in this application's data path which can be obtained by calling the app_get_data_path() function, it will be shared to the callee application. Framework will grant a temporary permission to the callee application for this file and revoke it when the callee application is terminated. The callee application can just read it.
+  ///
+  /// **Parameters:**
+  /// - `app_control` (in): The app_control handle
+  /// - `uri` (in): The URI of the data this app_control is operating on (if the `uri` is `NULL`, it clears the previous value)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `app_control_get_uri()`
   int app_control_set_uri(
     app_control_h app_control,
     ffi.Pointer<ffi.Char> uri,
@@ -293,19 +354,28 @@ class Tizen80CapiAppfwAppControl {
   late final _app_control_set_uri = _app_control_set_uriPtr
       .asFunction<int Function(app_control_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the URI of the data.
+  /// Gets the URI of the data.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks The @a uri must be released using free().
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in]   app_control     The app_control handle
-  /// @param[out]  uri             The URI of the data this app_control is operating on
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see app_control_set_uri()
+  /// **Remarks:**
+  /// - The `uri` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `app_control` (in): The app_control handle
+  /// - `uri` (out): The URI of the data this app_control is operating on
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `app_control_set_uri()`
   int app_control_get_uri(
     app_control_h app_control,
     ffi.Pointer<ffi.Pointer<ffi.Char>> uri,
@@ -323,16 +393,24 @@ class Tizen80CapiAppfwAppControl {
   late final _app_control_get_uri = _app_control_get_uriPtr.asFunction<
       int Function(app_control_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the URI of the app_control handle as the URI in the app_control_uri handle.
+  /// Sets the URI of the app_control handle as the URI in the app_control_uri handle.
   ///
-  /// @since_tizen 5.5
-  /// @param[in] app_control The app_control handle
-  /// @param[in] uri The URI handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see app_control_set_uri()
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `app_control` (in): The app_control handle
+  /// - `uri` (in): The URI handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `app_control_set_uri()`
   int app_control_set_uri_by_handle(
     app_control_h app_control,
     control_uri.app_control_uri_h uri,
@@ -350,17 +428,24 @@ class Tizen80CapiAppfwAppControl {
   late final _app_control_set_uri_by_handle = _app_control_set_uri_by_handlePtr
       .asFunction<int Function(app_control_h, control_uri.app_control_uri_h)>();
 
-  /// @brief Sets the explicit MIME type of the data.
+  /// Sets the explicit MIME type of the data.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in]    app_control     The app_control handle
-  /// @param[in]    mime            The explicit MIME type of the data this app_control is operating on (if the @a mime is @c NULL, it clears the previous value)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see app_control_get_mime()
+  /// **Parameters:**
+  /// - `app_control` (in): The app_control handle
+  /// - `mime` (in): The explicit MIME type of the data this app_control is operating on (if the `mime` is `NULL`, it clears the previous value)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `app_control_get_mime()`
   int app_control_set_mime(
     app_control_h app_control,
     ffi.Pointer<ffi.Char> mime,
@@ -378,19 +463,28 @@ class Tizen80CapiAppfwAppControl {
   late final _app_control_set_mime = _app_control_set_mimePtr
       .asFunction<int Function(app_control_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the explicit MIME type of the data.
+  /// Gets the explicit MIME type of the data.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks The @a mime must be released using free().
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in]   app_control     The app_control handle
-  /// @param[out]  mime            The explicit MIME type of the data this app_control is operating on
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see app_control_set_mime()
+  /// **Remarks:**
+  /// - The `mime` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `app_control` (in): The app_control handle
+  /// - `mime` (out): The explicit MIME type of the data this app_control is operating on
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `app_control_set_mime()`
   int app_control_get_mime(
     app_control_h app_control,
     ffi.Pointer<ffi.Pointer<ffi.Char>> mime,
@@ -408,17 +502,24 @@ class Tizen80CapiAppfwAppControl {
   late final _app_control_get_mime = _app_control_get_mimePtr.asFunction<
       int Function(app_control_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the explicit category.
+  /// Sets the explicit category.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in]   app_control     The app_control handle
-  /// @param[in]   category 	The explicit category (if the @a category is @c NULL, it clears the previous value)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see app_control_get_category()
+  /// **Parameters:**
+  /// - `app_control` (in): The app_control handle
+  /// - `category` (in): The explicit category (if the `category` is `NULL`, it clears the previous value)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `app_control_get_category()`
   int app_control_set_category(
     app_control_h app_control,
     ffi.Pointer<ffi.Char> category,
@@ -436,19 +537,28 @@ class Tizen80CapiAppfwAppControl {
   late final _app_control_set_category = _app_control_set_categoryPtr
       .asFunction<int Function(app_control_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the explicit category.
+  /// Gets the explicit category.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks The @a category must be released using free().
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in]   app_control     The app_control handle
-  /// @param[out]  category        The explicit category
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see app_control_set_category()
+  /// **Remarks:**
+  /// - The `category` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `app_control` (in): The app_control handle
+  /// - `category` (out): The explicit category
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `app_control_set_category()`
   int app_control_get_category(
     app_control_h app_control,
     ffi.Pointer<ffi.Pointer<ffi.Char>> category,
@@ -467,18 +577,25 @@ class Tizen80CapiAppfwAppControl {
       _app_control_get_categoryPtr.asFunction<
           int Function(app_control_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the ID of the application to explicitly launch.
+  /// Sets the ID of the application to explicitly launch.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in]   app_control     The app_control handle
-  /// @param[in]   app_id          The ID of the application to explicitly launch (if the @a app_id is @c NULL, it clears the previous value)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see app_control_get_app_id()
+  /// **Parameters:**
+  /// - `app_control` (in): The app_control handle
+  /// - `app_id` (in): The ID of the application to explicitly launch (if the `app_id` is `NULL`, it clears the previous value)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `app_control_get_app_id()`
   int app_control_set_app_id(
     app_control_h app_control,
     ffi.Pointer<ffi.Char> app_id,
@@ -496,19 +613,28 @@ class Tizen80CapiAppfwAppControl {
   late final _app_control_set_app_id = _app_control_set_app_idPtr
       .asFunction<int Function(app_control_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the ID of the application to explicitly launch.
+  /// Gets the ID of the application to explicitly launch.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks The @a app_id must be released with free().
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in]   app_control     The app_control handle
-  /// @param[out]  app_id          The ID of the application to explicitly launch
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see app_control_set_app_id()
+  /// **Remarks:**
+  /// - The `app_id` must be released with free().
+  ///
+  /// **Parameters:**
+  /// - `app_control` (in): The app_control handle
+  /// - `app_id` (out): The ID of the application to explicitly launch
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `app_control_set_app_id()`
   int app_control_get_app_id(
     app_control_h app_control,
     ffi.Pointer<ffi.Pointer<ffi.Char>> app_id,
@@ -526,24 +652,33 @@ class Tizen80CapiAppfwAppControl {
   late final _app_control_get_app_id = _app_control_get_app_idPtr.asFunction<
       int Function(app_control_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Adds extra data to the app_control.
+  /// Adds extra data to the app_control.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks The function replaces any existing value for the given key.
-  /// @remarks The function returns #APP_CONTROL_ERROR_INVALID_PARAMETER if @a key or @a value is a zero-length string.
-  /// @remarks The function returns #APP_CONTROL_ERROR_KEY_REJECTED if the application tries to use the same key with the system-defined key.
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in]   app_control      The app_control handle
-  /// @param[in]   key              The name of the extra data
-  /// @param[in]   value            The value associated with the given key
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_CONTROL_ERROR_KEY_REJECTED Key not available
-  /// @see app_control_add_extra_data_array()
-  /// @see app_control_remove_extra_data()
-  /// @see app_control_get_extra_data()
+  /// **Remarks:**
+  /// - The function replaces any existing value for the given key.
+  /// - The function returns `APP_CONTROL_ERROR_INVALID_PARAMETER` if `key` or `value` is a zero-length string.
+  /// - The function returns `APP_CONTROL_ERROR_KEY_REJECTED` if the application tries to use the same key with the system-defined key.
+  ///
+  /// **Parameters:**
+  /// - `app_control` (in): The app_control handle
+  /// - `key` (in): The name of the extra data
+  /// - `value` (in): The value associated with the given key
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_CONTROL_ERROR_KEY_REJECTED`: Key not available
+  ///
+  /// **See also:**
+  /// - `app_control_add_extra_data_array()`
+  /// - `app_control_remove_extra_data()`
+  /// - `app_control_get_extra_data()`
   int app_control_add_extra_data(
     app_control_h app_control,
     ffi.Pointer<ffi.Char> key,
@@ -565,25 +700,34 @@ class Tizen80CapiAppfwAppControl {
           int Function(
               app_control_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Adds the extra data array to the app_control.
+  /// Adds the extra data array to the app_control.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks The function replaces any existing value for the given key.
-  /// @remarks The function returns #APP_CONTROL_ERROR_INVALID_PARAMETER if @a key is a zero-length string.
-  /// @remarks The function returns #APP_CONTROL_ERROR_KEY_REJECTED if the application tries to use the same key with the system-defined key.
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in]   app_control     The app_control handle
-  /// @param[in]   key             The name of the extra data
-  /// @param[in]   value           The array value associated with the given key
-  /// @param[in]   length          The length of the array
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_CONTROL_ERROR_KEY_REJECTED Key not available
-  /// @see app_control_add_extra_data()
-  /// @see app_control_remove_extra_data()
-  /// @see app_control_get_extra_data()
+  /// **Remarks:**
+  /// - The function replaces any existing value for the given key.
+  /// - The function returns `APP_CONTROL_ERROR_INVALID_PARAMETER` if `key` is a zero-length string.
+  /// - The function returns `APP_CONTROL_ERROR_KEY_REJECTED` if the application tries to use the same key with the system-defined key.
+  ///
+  /// **Parameters:**
+  /// - `app_control` (in): The app_control handle
+  /// - `key` (in): The name of the extra data
+  /// - `value` (in): The array value associated with the given key
+  /// - `length` (in): The length of the array
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_CONTROL_ERROR_KEY_REJECTED`: Key not available
+  ///
+  /// **See also:**
+  /// - `app_control_add_extra_data()`
+  /// - `app_control_remove_extra_data()`
+  /// - `app_control_get_extra_data()`
   int app_control_add_extra_data_array(
     app_control_h app_control,
     ffi.Pointer<ffi.Char> key,
@@ -610,21 +754,28 @@ class Tizen80CapiAppfwAppControl {
           int Function(app_control_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>, int)>();
 
-  /// @brief Removes the extra data from the app_control.
+  /// Removes the extra data from the app_control.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in]   app_control     The app_control handle
-  /// @param[in]   key             The name of the extra data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_CONTROL_ERROR_KEY_NOT_FOUND Specified key not found
-  /// @retval #APP_CONTROL_ERROR_KEY_REJECTED Key not available
-  /// @see app_control_add_extra_data()
-  /// @see app_control_add_extra_data_array()
-  /// @see app_control_get_extra_data()
+  /// **Parameters:**
+  /// - `app_control` (in): The app_control handle
+  /// - `key` (in): The name of the extra data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_CONTROL_ERROR_KEY_NOT_FOUND`: Specified key not found
+  /// - `APP_CONTROL_ERROR_KEY_REJECTED`: Key not available
+  ///
+  /// **See also:**
+  /// - `app_control_add_extra_data()`
+  /// - `app_control_add_extra_data_array()`
+  /// - `app_control_get_extra_data()`
   int app_control_remove_extra_data(
     app_control_h app_control,
     ffi.Pointer<ffi.Char> key,
@@ -642,27 +793,36 @@ class Tizen80CapiAppfwAppControl {
   late final _app_control_remove_extra_data = _app_control_remove_extra_dataPtr
       .asFunction<int Function(app_control_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the extra data from the app_control.
+  /// Gets the extra data from the app_control.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks The @a value must be released using free().
-  /// @remarks The function returns #APP_CONTROL_ERROR_INVALID_DATA_TYPE if @a value is of array data type.
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in]   app_control     The app_control handle
-  /// @param[in]   key             The name of the extra data
-  /// @param[out] value The value associated with the given key
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_CONTROL_ERROR_KEY_NOT_FOUND Specified key not found
-  /// @retval #APP_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #APP_CONTROL_ERROR_INVALID_DATA_TYPE Invalid data type
-  /// @retval #APP_CONTROL_ERROR_KEY_REJECTED Key not available
-  /// @see app_control_add_extra_data()
-  /// @see app_control_add_extra_data_array()
-  /// @see app_control_remove_extra_data()
-  /// @see app_control_foreach_extra_data()
+  /// **Remarks:**
+  /// - The `value` must be released using free().
+  /// - The function returns `APP_CONTROL_ERROR_INVALID_DATA_TYPE` if `value` is of array data type.
+  ///
+  /// **Parameters:**
+  /// - `app_control` (in): The app_control handle
+  /// - `key` (in): The name of the extra data
+  /// - `value` (out): The value associated with the given key
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_CONTROL_ERROR_KEY_NOT_FOUND`: Specified key not found
+  /// - `APP_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `APP_CONTROL_ERROR_INVALID_DATA_TYPE`: Invalid data type
+  /// - `APP_CONTROL_ERROR_KEY_REJECTED`: Key not available
+  ///
+  /// **See also:**
+  /// - `app_control_add_extra_data()`
+  /// - `app_control_add_extra_data_array()`
+  /// - `app_control_remove_extra_data()`
+  /// - `app_control_foreach_extra_data()`
   int app_control_get_extra_data(
     app_control_h app_control,
     ffi.Pointer<ffi.Char> key,
@@ -685,28 +845,37 @@ class Tizen80CapiAppfwAppControl {
           int Function(app_control_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the extra data array from the app_control.
+  /// Gets the extra data array from the app_control.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks The @a value must be released using free().
-  /// @remarks The function returns #APP_CONTROL_ERROR_INVALID_DATA_TYPE if @a value is not of array data type.
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in]   app_control     The app_control handle
-  /// @param[in]   key             The name of the extra data
-  /// @param[out]  value           The array value associated with the given key
-  /// @param[out]  length          The length of the array
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_CONTROL_ERROR_KEY_NOT_FOUND Specified key not found
-  /// @retval #APP_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #APP_CONTROL_ERROR_INVALID_DATA_TYPE Invalid data type
-  /// @retval #APP_CONTROL_ERROR_KEY_REJECTED Key not available
-  /// @see app_control_add_extra_data()
-  /// @see app_control_add_extra_data_array()
-  /// @see app_control_remove_extra_data()
-  /// @see app_control_foreach_extra_data()
+  /// **Remarks:**
+  /// - The `value` must be released using free().
+  /// - The function returns `APP_CONTROL_ERROR_INVALID_DATA_TYPE` if `value` is not of array data type.
+  ///
+  /// **Parameters:**
+  /// - `app_control` (in): The app_control handle
+  /// - `key` (in): The name of the extra data
+  /// - `value` (out): The array value associated with the given key
+  /// - `length` (out): The length of the array
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_CONTROL_ERROR_KEY_NOT_FOUND`: Specified key not found
+  /// - `APP_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `APP_CONTROL_ERROR_INVALID_DATA_TYPE`: Invalid data type
+  /// - `APP_CONTROL_ERROR_KEY_REJECTED`: Key not available
+  ///
+  /// **See also:**
+  /// - `app_control_add_extra_data()`
+  /// - `app_control_add_extra_data_array()`
+  /// - `app_control_remove_extra_data()`
+  /// - `app_control_foreach_extra_data()`
   int app_control_get_extra_data_array(
     app_control_h app_control,
     ffi.Pointer<ffi.Char> key,
@@ -736,21 +905,28 @@ class Tizen80CapiAppfwAppControl {
               ffi.Pointer<ffi.Pointer<ffi.Pointer<ffi.Char>>>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Checks whether the extra data associated with the given @a key is of array data type.
+  /// Checks whether the extra data associated with the given `key` is of array data type.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in]   app_control     The app_control handle
-  /// @param[in]   key             The name of the extra data
-  /// @param[out]  array           If @c true the extra data is of array data type, otherwise @c false
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see app_control_add_extra_data()
-  /// @see app_control_add_extra_data_array()
-  /// @see app_control_remove_extra_data()
-  /// @see app_control_foreach_extra_data()
+  /// **Parameters:**
+  /// - `app_control` (in): The app_control handle
+  /// - `key` (in): The name of the extra data
+  /// - `array` (out): If `true` the extra data is of array data type, otherwise `false`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `app_control_add_extra_data()`
+  /// - `app_control_add_extra_data_array()`
+  /// - `app_control_remove_extra_data()`
+  /// - `app_control_foreach_extra_data()`
   int app_control_is_extra_data_array(
     app_control_h app_control,
     ffi.Pointer<ffi.Char> key,
@@ -772,21 +948,30 @@ class Tizen80CapiAppfwAppControl {
           int Function(
               app_control_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Retrieves all extra data contained in app_control.
-  /// @details This function calls app_control_extra_data_cb() once for each key-value pair for extra data contained in app_control. \n
-  /// If the app_control_extra_data_cb() callback function returns @c false, then iteration will be finished.
+  /// Retrieves all extra data contained in app_control.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// This function calls app_control_extra_data_cb() once for each key-value pair for extra data contained in app_control. If the app_control_extra_data_cb() callback function returns `false`, then iteration will be finished.
   ///
-  /// @param[in]    app_control     The app_control handle
-  /// @param[in]    callback        The iteration callback function
-  /// @param[in]    user_data       The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @post This function invokes app_control_extra_data_cb().
-  /// @see app_control_extra_data_cb()
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `app_control` (in): The app_control handle
+  /// - `callback` (in): The iteration callback function
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Postconditions:**
+  /// - This function invokes app_control_extra_data_cb().
+  ///
+  /// **See also:**
+  /// - `app_control_extra_data_cb()`
   int app_control_foreach_extra_data(
     app_control_h app_control,
     app_control_extra_data_cb callback,
@@ -808,19 +993,28 @@ class Tizen80CapiAppfwAppControl {
           int Function(app_control_h, app_control_extra_data_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Retrieves all applications that can be launched to handle the given app_control request.
+  /// Retrieves all applications that can be launched to handle the given app_control request.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in]    app_control     The app_control handle
-  /// @param[in]    callback        The iteration callback function
-  /// @param[in]    user_data       The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Success
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @post This function invokes app_control_app_matched_cb().
-  /// @see app_control_app_matched_cb()
+  /// **Parameters:**
+  /// - `app_control` (in): The app_control handle
+  /// - `callback` (in): The iteration callback function
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Success
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Postconditions:**
+  /// - This function invokes app_control_app_matched_cb().
+  ///
+  /// **See also:**
+  /// - `app_control_app_matched_cb()`
   int app_control_foreach_app_matched(
     app_control_h app_control,
     app_control_app_matched_cb callback,
@@ -842,34 +1036,48 @@ class Tizen80CapiAppfwAppControl {
           int Function(app_control_h, app_control_app_matched_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sends the launch request.
+  /// Sends the launch request.
   ///
-  /// @details The operation is mandatory information for the launch request. \n
-  /// If the operation is not specified, #APP_CONTROL_OPERATION_DEFAULT is used by default.
-  /// If the operation is #APP_CONTROL_OPERATION_DEFAULT, the application ID is mandatory to explicitly launch the application.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/appmanager.launch
-  /// @remarks The function returns #APP_CONTROL_ERROR_LAUNCH_REJECTED if the operation value is #APP_CONTROL_OPERATION_LAUNCH_ON_EVENT which is only for handling the event from the platform or other application, refer to the @ref CAPI_EVENT_MODULE module.
-  /// @remarks Since Tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif, the launch request of the service application over out of packages is restricted by the platform. Also, implicit launch requests are NOT delivered to service applications since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif. To launch a service application, an explicit launch request with application ID given by the app_control_set_app_id() must be sent.
+  /// The operation is mandatory information for the launch request. If the operation is not specified, `APP_CONTROL_OPERATION_DEFAULT` is used by default. If the operation is `APP_CONTROL_OPERATION_DEFAULT`, the application ID is mandatory to explicitly launch the application.
   ///
-  /// @param[in]   app_control     The app_control handle
-  /// @param[in]   callback        The callback function to be called when the reply is delivered
-  /// @param[in]   user_data       The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #APP_CONTROL_ERROR_APP_NOT_FOUND The application to run the given launch request is not found
-  /// @retval #APP_CONTROL_ERROR_LAUNCH_REJECTED The application cannot be launched in current context
-  /// @retval #APP_CONTROL_ERROR_LAUNCH_FAILED Failed to launch the application
-  /// @retval #APP_CONTROL_ERROR_TIMED_OUT Failed due to timeout. The application that handles @a app_control may be busy
-  /// @post If the launch request is sent for the result, the result will come back through the app_control_reply_cb() from the callee application. Additional replies may be delivered on the app_control_enable_app_started_result_event() called.
-  /// @see app_control_reply_to_launch_request()
-  /// @see app_control_reply_cb()
-  /// @see app_control_enable_app_started_result_event()
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/appmanager.launch>
+  ///
+  /// **Remarks:**
+  /// - The function returns `APP_CONTROL_ERROR_LAUNCH_REJECTED` if the operation value is `APP_CONTROL_OPERATION_LAUNCH_ON_EVENT` which is only for handling the event from the platform or other application, refer to the `CAPI_EVENT_MODULE` module.
+  /// - Since Tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif, the launch request of the service application over out of packages is restricted by the platform. Also, implicit launch requests are NOT delivered to service applications since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif. To launch a service application, an explicit launch request with application ID given by the app_control_set_app_id() must be sent.
+  ///
+  /// **Parameters:**
+  /// - `app_control` (in): The app_control handle
+  /// - `callback` (in): The callback function to be called when the reply is delivered
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `APP_CONTROL_ERROR_APP_NOT_FOUND`: The application to run the given launch request is not found
+  /// - `APP_CONTROL_ERROR_LAUNCH_REJECTED`: The application cannot be launched in current context
+  /// - `APP_CONTROL_ERROR_LAUNCH_FAILED`: Failed to launch the application
+  /// - `APP_CONTROL_ERROR_TIMED_OUT`: Failed due to timeout. The application that handles `app_control` may be busy
+  ///
+  /// **Postconditions:**
+  /// - If the launch request is sent for the result, the result will come back through the app_control_reply_cb() from the callee application. Additional replies may be delivered on the app_control_enable_app_started_result_event() called.
+  ///
+  /// **See also:**
+  /// - `app_control_reply_to_launch_request()`
+  /// - `app_control_reply_cb()`
+  /// - `app_control_enable_app_started_result_event()`
   int app_control_send_launch_request(
     app_control_h app_control,
     app_control_reply_cb callback,
@@ -891,20 +1099,29 @@ class Tizen80CapiAppfwAppControl {
           int Function(
               app_control_h, app_control_reply_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sends the terminate request to the application that is launched by app_control. This function is only effective for some applications that are provided by default for handling platform default app_controls. You are not allowed to terminate other general applications using this function.
+  /// Sends the terminate request to the application that is launched by app_control. This function is only effective for some applications that are provided by default for handling platform default app_controls. You are not allowed to terminate other general applications using this function.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks Since Tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif, this function can be used to terminate sub-applications which were launched as group mode by the caller application.
-  /// Once callee application is being terminated by this function, other applications which were launched by the callee application as a group mode will be terminated as well.
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in]   app_control     The app_control handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see app_control_send_launch_request()
-  /// @see app_control_set_launch_mode()
+  /// **Remarks:**
+  /// - Since Tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif, this function can be used to terminate sub-applications which were launched as group mode by the caller application.
+  /// - Once callee application is being terminated by this function, other applications which were launched by the callee application as a group mode will be terminated as well.
+  ///
+  /// **Parameters:**
+  /// - `app_control` (in): The app_control handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `app_control_send_launch_request()`
+  /// - `app_control_set_launch_mode()`
   int app_control_send_terminate_request(
     app_control_h app_control,
   ) {
@@ -920,21 +1137,31 @@ class Tizen80CapiAppfwAppControl {
       _app_control_send_terminate_requestPtr
           .asFunction<int Function(app_control_h)>();
 
-  /// @brief Replies to the launch request sent by the caller.
-  /// @details If the caller application sent the launch request to receive the result, the callee application can return the result back to the caller.
+  /// Replies to the launch request sent by the caller.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks The function is not allowed to send reply #APP_CONTROL_RESULT_APP_STARTED as @a result which is reserved for platform developers.
+  /// If the caller application sent the launch request to receive the result, the callee application can return the result back to the caller.
   ///
-  /// @param[in]   reply           The app_control handle in which the results of the callee are contained
-  /// @param[in]   request         The app_control handle sent by the caller
-  /// @param[in]   result          The result code of the launch request
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see app_control_send_launch_request()
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - The function is not allowed to send reply `APP_CONTROL_RESULT_APP_STARTED` as `result` which is reserved for platform developers.
+  ///
+  /// **Parameters:**
+  /// - `reply` (in): The app_control handle in which the results of the callee are contained
+  /// - `request` (in): The app_control handle sent by the caller
+  /// - `result` (in): The result code of the launch request
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `app_control_send_launch_request()`
   int app_control_reply_to_launch_request(
     app_control_h reply,
     app_control_h request,
@@ -955,19 +1182,28 @@ class Tizen80CapiAppfwAppControl {
       _app_control_reply_to_launch_requestPtr
           .asFunction<int Function(app_control_h, app_control_h, int)>();
 
-  /// @brief Creates and returns a copy of the given app_control handle.
+  /// Creates and returns a copy of the given app_control handle.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks A newly created app_control should be destroyed by calling the app_control_destroy() if it is no longer needed.
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[out]  clone           If successful, a newly created app_control handle will be returned
-  /// @param[in]   app_control     The app_control handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see app_control_destroy()
+  /// **Remarks:**
+  /// - A newly created app_control should be destroyed by calling the app_control_destroy() if it is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `clone` (out): If successful, a newly created app_control handle will be returned
+  /// - `app_control` (in): The app_control handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `app_control_destroy()`
   int app_control_clone(
     ffi.Pointer<app_control_h> clone,
     app_control_h app_control,
@@ -985,20 +1221,27 @@ class Tizen80CapiAppfwAppControl {
   late final _app_control_clone = _app_control_clonePtr
       .asFunction<int Function(ffi.Pointer<app_control_h>, app_control_h)>();
 
-  /// @brief Gets the application ID of the caller from the launch request.
+  /// Gets the application ID of the caller from the launch request.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks The @a app_control must be the launch request from app_control_cb().
-  /// @remarks This function returns #APP_CONTROL_ERROR_INVALID_PARAMETER if the given app_control is not the launch request.
-  /// @remarks The @a id must be released using free().
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in]   app_control     The app_control handle from app_control_cb()
-  /// @param[out]  id              The application ID of the caller
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Remarks:**
+  /// - The `app_control` must be the launch request from app_control_cb().
+  /// - This function returns `APP_CONTROL_ERROR_INVALID_PARAMETER` if the given app_control is not the launch request.
+  /// - The `id` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `app_control` (in): The app_control handle from app_control_cb()
+  /// - `id` (out): The application ID of the caller
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
   int app_control_get_caller(
     app_control_h app_control,
     ffi.Pointer<ffi.Pointer<ffi.Char>> id,
@@ -1016,19 +1259,26 @@ class Tizen80CapiAppfwAppControl {
   late final _app_control_get_caller = _app_control_get_callerPtr.asFunction<
       int Function(app_control_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Checks whether the caller is requesting a reply from the launch request.
+  /// Checks whether the caller is requesting a reply from the launch request.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks The @a app_control must be the launch request from app_control_cb().
-  /// @remarks This function returns #APP_CONTROL_ERROR_INVALID_PARAMETER if the given app_control is not the launch request.
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in]   app_control     The app_control handle from app_control_cb()
-  /// @param[out]  requested       If @c true a reply is requested by the caller, otherwise @c false
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Remarks:**
+  /// - The `app_control` must be the launch request from app_control_cb().
+  /// - This function returns `APP_CONTROL_ERROR_INVALID_PARAMETER` if the given app_control is not the launch request.
+  ///
+  /// **Parameters:**
+  /// - `app_control` (in): The app_control handle from app_control_cb()
+  /// - `requested` (out): If `true` a reply is requested by the caller, otherwise `false`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
   int app_control_is_reply_requested(
     app_control_h app_control,
     ffi.Pointer<ffi.Bool> requested,
@@ -1047,22 +1297,32 @@ class Tizen80CapiAppfwAppControl {
       _app_control_is_reply_requestedPtr
           .asFunction<int Function(app_control_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Sets the launch mode of the application.
+  /// Sets the launch mode of the application.
   ///
-  /// @details This function allows the callee application to be launched as a group or as a single mode.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks Although launch_mode were set as #APP_CONTROL_LAUNCH_MODE_GROUP, the callee application would be launched as a single mode if the manifest file of callee application defined the launch mode as "single".
-  /// This function can just set the preference of the caller application to launch an application.
-  /// @remarks Sub-applications which were launched as a group mode always have own process.
+  /// This function allows the callee application to be launched as a group or as a single mode.
   ///
-  /// @param[in]   app_control     The app_control handle
-  /// @param[in]   mode            The launch mode of the application
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see app_control_get_launch_mode()
-  /// @see app_control_launch_mode_e
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - Although launch_mode were set as `APP_CONTROL_LAUNCH_MODE_GROUP`, the callee application would be launched as a single mode if the manifest file of callee application defined the launch mode as "single".
+  /// - This function can just set the preference of the caller application to launch an application.
+  /// - Sub-applications which were launched as a group mode always have own process.
+  ///
+  /// **Parameters:**
+  /// - `app_control` (in): The app_control handle
+  /// - `mode` (in): The launch mode of the application
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `app_control_get_launch_mode()`
+  /// - `app_control_launch_mode_e`
   int app_control_set_launch_mode(
     app_control_h app_control,
     int mode,
@@ -1079,20 +1339,29 @@ class Tizen80CapiAppfwAppControl {
   late final _app_control_set_launch_mode = _app_control_set_launch_modePtr
       .asFunction<int Function(app_control_h, int)>();
 
-  /// @brief Gets the launch mode of the application.
+  /// Gets the launch mode of the application.
   ///
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks Since Tizen 3.0, if launch mode is not set in the caller application control,
-  /// the function returns the #APP_CONTROL_LAUNCH_MODE_SINGLE launch mode.
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @param[in]   app_control      The app_control handle
-  /// @param[out]  mode             The launch mode of the application
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see app_control_set_launch_mode()
-  /// @see app_control_launch_mode_e
+  /// **Remarks:**
+  /// - Since Tizen 3.0, if launch mode is not set in the caller application control,
+  /// - the function returns the `APP_CONTROL_LAUNCH_MODE_SINGLE` launch mode.
+  ///
+  /// **Parameters:**
+  /// - `app_control` (in): The app_control handle
+  /// - `mode` (out): The launch mode of the application
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `app_control_set_launch_mode()`
+  /// - `app_control_launch_mode_e`
   int app_control_get_launch_mode(
     app_control_h app_control,
     ffi.Pointer<ffi.Int32> mode,
@@ -1110,20 +1379,29 @@ class Tizen80CapiAppfwAppControl {
   late final _app_control_get_launch_mode = _app_control_get_launch_modePtr
       .asFunction<int Function(app_control_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Enables an additional launch result event on the launch request.
+  /// Enables an additional launch result event on the launch request.
   ///
-  /// @details The function allows to receive the #APP_CONTROL_RESULT_APP_STARTED event on\n
-  /// application get launched by the app_control.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks app_control_reply_cb() will be called on the #APP_CONTROL_RESULT_APP_STARTED event received.
+  /// The function allows to receive the `APP_CONTROL_RESULT_APP_STARTED` event on application get launched by the app_control.
   ///
-  /// @param[in]    app_control     The app_control handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see app_control_send_launch_request()
-  /// @see #APP_CONTROL_RESULT_APP_STARTED
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - app_control_reply_cb() will be called on the `APP_CONTROL_RESULT_APP_STARTED` event received.
+  ///
+  /// **Parameters:**
+  /// - `app_control` (in): The app_control handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `app_control_send_launch_request()`
+  /// - `APP_CONTROL_RESULT_APP_STARTED`
   int app_control_enable_app_started_result_event(
     app_control_h app_control,
   ) {
@@ -1139,37 +1417,52 @@ class Tizen80CapiAppfwAppControl {
       _app_control_enable_app_started_result_eventPtr
           .asFunction<int Function(app_control_h)>();
 
-  /// @brief Sends the launch request asynchronously.
+  /// Sends the launch request asynchronously.
   ///
-  /// @details The operation is mandatory information for the launch request. \n
-  /// If the operation is not specified, #APP_CONTROL_OPERATION_DEFAULT is used by default.
-  /// If the operation is #APP_CONTROL_OPERATION_DEFAULT, the application ID is mandatory to explicitly launch the application.
-  /// @details After the callee application is initialized or the launch request is delivered to the running application successfully, the result callback function will be invoked.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/appmanager.launch
-  /// @remarks The function returns #APP_CONTROL_ERROR_LAUNCH_REJECTED if the operation value is #APP_CONTROL_OPERATION_LAUNCH_ON_EVENT which is only for handling the event from the platform or other application, refer to the @ref CAPI_EVENT_MODULE Module.
-  /// @remarks The launch request of the service application over out of packages is restricted by the platform. Also, implicit launch requests are NOT delivered to service applications since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif. To launch a service application, an explicit launch request with application ID given by the app_control_set_app_id() must be sent.
+  /// The operation is mandatory information for the launch request. If the operation is not specified, `APP_CONTROL_OPERATION_DEFAULT` is used by default. If the operation is `APP_CONTROL_OPERATION_DEFAULT`, the application ID is mandatory to explicitly launch the application.
   ///
-  /// @param[in]   app_control     The app_control handle
-  /// @param[in]   result_cb       The callback function to be called when the result is delivered
-  /// @param[in]   reply_cb        The callback function to be called when the reply is delivered
-  /// @param[in]   user_data       The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #APP_CONTROL_ERROR_APP_NOT_FOUND The application to run the given launch request is not found
-  /// @retval #APP_CONTROL_ERROR_LAUNCH_REJECTED The application cannot be launched in current context
-  /// @retval #APP_CONTROL_ERROR_LAUNCH_FAILED Failed to launch the application
-  /// @retval #APP_CONTROL_ERROR_TIMED_OUT Failed due to timeout. The application that handles @a app_control may be busy
-  /// @post If the launch request is sent for the result, the result will come back through the app_control_reply_cb() from the callee application. Additional replies may be delivered if app_control_enable_app_started_result_event() was called.
-  /// @see app_control_result_cb()
-  /// @see app_control_reply_to_launch_request()
-  /// @see app_control_reply_cb()
-  /// @see app_control_enable_app_started_result_event()
+  /// After the callee application is initialized or the launch request is delivered to the running application successfully, the result callback function will be invoked.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/appmanager.launch>
+  ///
+  /// **Remarks:**
+  /// - The function returns `APP_CONTROL_ERROR_LAUNCH_REJECTED` if the operation value is `APP_CONTROL_OPERATION_LAUNCH_ON_EVENT` which is only for handling the event from the platform or other application, refer to the `CAPI_EVENT_MODULE` Module.
+  /// - The launch request of the service application over out of packages is restricted by the platform. Also, implicit launch requests are NOT delivered to service applications since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif. To launch a service application, an explicit launch request with application ID given by the app_control_set_app_id() must be sent.
+  ///
+  /// **Parameters:**
+  /// - `app_control` (in): The app_control handle
+  /// - `result_cb` (in): The callback function to be called when the result is delivered
+  /// - `reply_cb` (in): The callback function to be called when the reply is delivered
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `APP_CONTROL_ERROR_APP_NOT_FOUND`: The application to run the given launch request is not found
+  /// - `APP_CONTROL_ERROR_LAUNCH_REJECTED`: The application cannot be launched in current context
+  /// - `APP_CONTROL_ERROR_LAUNCH_FAILED`: Failed to launch the application
+  /// - `APP_CONTROL_ERROR_TIMED_OUT`: Failed due to timeout. The application that handles `app_control` may be busy
+  ///
+  /// **Postconditions:**
+  /// - If the launch request is sent for the result, the result will come back through the app_control_reply_cb() from the callee application. Additional replies may be delivered if app_control_enable_app_started_result_event() was called.
+  ///
+  /// **See also:**
+  /// - `app_control_result_cb()`
+  /// - `app_control_reply_to_launch_request()`
+  /// - `app_control_reply_cb()`
+  /// - `app_control_enable_app_started_result_event()`
   int app_control_send_launch_request_async(
     app_control_h app_control,
     app_control_result_cb result_cb,
@@ -1196,33 +1489,45 @@ class Tizen80CapiAppfwAppControl {
           int Function(app_control_h, app_control_result_cb,
               app_control_reply_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sends the launch request synchronously.
+  /// Sends the launch request synchronously.
   ///
-  /// @details The operation is mandatory information for the launch request. \n
-  /// If the operation is not specified, #APP_CONTROL_OPERATION_DEFAULT is used by default.
-  /// If the operation is #APP_CONTROL_OPERATION_DEFAULT, the application ID is mandatory to explicitly launch the application.
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/appmanager.launch
-  /// @remarks The function returns #APP_CONTROL_ERROR_LAUNCH_REJECTED if the operation value is #APP_CONTROL_OPERATION_LAUNCH_ON_EVENT, which is only for handling the event from the platform or other applications, refer to the @ref CAPI_EVENT_MODULE Module.
-  /// @remarks The platform does not allow launching service applications from packages other than the requesting application's package. Also, implicit launch requests are NOT delivered to service applications since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif. To launch a service application, an explicit launch request with application ID set by app_control_set_app_id() must be sent.
-  /// @remarks If the callee application doesn't respond, the function returns a negative error value.
-  /// @remarks The @a reply must be released using app_control_destroy().
+  /// The operation is mandatory information for the launch request. If the operation is not specified, `APP_CONTROL_OPERATION_DEFAULT` is used by default. If the operation is `APP_CONTROL_OPERATION_DEFAULT`, the application ID is mandatory to explicitly launch the application.
   ///
-  /// @param[in]   app_control     The app_control handle
-  /// @param[out]  reply           The app_control handle in which the results of the callee are contained
-  /// @param[out]  result          The result code of the launch request
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #APP_CONTROL_ERROR_APP_NOT_FOUND The application to run the given launch request is not found
-  /// @retval #APP_CONTROL_ERROR_LAUNCH_REJECTED The application cannot be launched in current context
-  /// @retval #APP_CONTROL_ERROR_LAUNCH_FAILED Failed to launch the application
-  /// @retval #APP_CONTROL_ERROR_TIMED_OUT Failed due to timeout. The application that handles @a app_control may be busy
-  /// @see app_control_destroy()
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/appmanager.launch>
+  ///
+  /// **Remarks:**
+  /// - The function returns `APP_CONTROL_ERROR_LAUNCH_REJECTED` if the operation value is `APP_CONTROL_OPERATION_LAUNCH_ON_EVENT`, which is only for handling the event from the platform or other applications, refer to the `CAPI_EVENT_MODULE` Module.
+  /// - The platform does not allow launching service applications from packages other than the requesting application's package. Also, implicit launch requests are NOT delivered to service applications since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif. To launch a service application, an explicit launch request with application ID set by app_control_set_app_id() must be sent.
+  /// - If the callee application doesn't respond, the function returns a negative error value.
+  /// - The `reply` must be released using app_control_destroy().
+  ///
+  /// **Parameters:**
+  /// - `app_control` (in): The app_control handle
+  /// - `reply` (out): The app_control handle in which the results of the callee are contained
+  /// - `result` (out): The result code of the launch request
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `APP_CONTROL_ERROR_APP_NOT_FOUND`: The application to run the given launch request is not found
+  /// - `APP_CONTROL_ERROR_LAUNCH_REJECTED`: The application cannot be launched in current context
+  /// - `APP_CONTROL_ERROR_LAUNCH_FAILED`: Failed to launch the application
+  /// - `APP_CONTROL_ERROR_TIMED_OUT`: Failed due to timeout. The application that handles `app_control` may be busy
+  ///
+  /// **See also:**
+  /// - `app_control_destroy()`
   int app_control_send_launch_request_sync(
     app_control_h app_control,
     ffi.Pointer<app_control_h> reply,
@@ -1244,23 +1549,33 @@ class Tizen80CapiAppfwAppControl {
           int Function(app_control_h, ffi.Pointer<app_control_h>,
               ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Adds the action handle of the app_control.
-  /// @since_tizen 5.5
-  /// @remarks The @a handle must be released using app_control_remove_action_handler().
+  /// Adds the action handle of the app_control.
   ///
-  /// @param[in]   action          The action name of the app_control
-  /// @param[in]   callback        The callback function
-  /// @param[in]   user_data       The user data to be passed to the callback function
-  /// @param[out]  handle          The app_control action handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #APP_CONTROL_ERROR_KEY_NOT_FOUND Specified app_control ID not found
-  /// @retval #APP_CONTROL_ERROR_IO_ERROR IO error
-  /// @see app_control_action_cb()
-  /// @see app_control_remove_action_handler()
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - The `handle` must be released using app_control_remove_action_handler().
+  ///
+  /// **Parameters:**
+  /// - `action` (in): The action name of the app_control
+  /// - `callback` (in): The callback function
+  /// - `user_data` (in): The user data to be passed to the callback function
+  /// - `handle` (out): The app_control action handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `APP_CONTROL_ERROR_KEY_NOT_FOUND`: Specified app_control ID not found
+  /// - `APP_CONTROL_ERROR_IO_ERROR`: IO error
+  ///
+  /// **See also:**
+  /// - `app_control_action_cb()`
+  /// - `app_control_remove_action_handler()`
   int app_control_add_action_handler(
     ffi.Pointer<ffi.Char> action,
     app_control_action_cb callback,
@@ -1285,15 +1600,23 @@ class Tizen80CapiAppfwAppControl {
           int Function(ffi.Pointer<ffi.Char>, app_control_action_cb,
               ffi.Pointer<ffi.Void>, ffi.Pointer<app_control_action_h>)>();
 
-  /// @brief Removes the registered action handle of the app_control.
-  /// @since_tizen 5.5
+  /// Removes the registered action handle of the app_control.
   ///
-  /// @param[in]    handle         The app_control action handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see app_control_add_action_handler()
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The app_control action handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `app_control_add_action_handler()`
   int app_control_remove_action_handler(
     app_control_action_h handle,
   ) {
@@ -1309,18 +1632,26 @@ class Tizen80CapiAppfwAppControl {
       _app_control_remove_action_handlerPtr
           .asFunction<int Function(app_control_action_h)>();
 
-  /// @brief Sets the ID of the component.
-  /// @since_tizen 5.5
-  /// @remarks If the @a component_id is null, the @a component_id set previously will be removed.
-  /// @remarks The @a component_id is declared by the component-based app, and it is unique globally.
+  /// Sets the ID of the component.
   ///
-  /// @param[in]   app_control     The app_control handle
-  /// @param[in]   component_id    The ID of the component which will receive the @a app_control
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - If the `component_id` is null, the `component_id` set previously will be removed.
+  /// - The `component_id` is declared by the component-based app, and it is unique globally.
+  ///
+  /// **Parameters:**
+  /// - `app_control` (in): The app_control handle
+  /// - `component_id` (in): The ID of the component which will receive the `app_control`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
   int app_control_set_component_id(
     app_control_h app_control,
     ffi.Pointer<ffi.Char> component_id,
@@ -1338,17 +1669,25 @@ class Tizen80CapiAppfwAppControl {
   late final _app_control_set_component_id = _app_control_set_component_idPtr
       .asFunction<int Function(app_control_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the ID of the component.
-  /// @since_tizen 5.5
-  /// @remarks The @a component_id must be released using free().
+  /// Gets the ID of the component.
   ///
-  /// @param[in]   app_control     The app_control handle
-  /// @param[out]  component_id    The ID of the component which will receive the @a app_control
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - The `component_id` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `app_control` (in): The app_control handle
+  /// - `component_id` (out): The ID of the component which will receive the `app_control`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
   int app_control_get_component_id(
     app_control_h app_control,
     ffi.Pointer<ffi.Pointer<ffi.Char>> component_id,
@@ -1368,19 +1707,25 @@ class Tizen80CapiAppfwAppControl {
       _app_control_get_component_idPtr.asFunction<
           int Function(app_control_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the window position of application.
-  /// @since_tizen 8.0
+  /// Sets the window position of application.
   ///
-  /// @param[in]   app_control The app_control handle
-  /// @param[in]   x           x position of application's left top
-  /// @param[in]   y           y position of application's left top
-  /// @param[in]   w           width of application
-  /// @param[in]   h           height of application
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_CONTROL_ERROR_IO_ERROR IO error
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Parameters:**
+  /// - `app_control` (in): The app_control handle
+  /// - `x` (in): x position of application's left top
+  /// - `y` (in): y position of application's left top
+  /// - `w` (in): width of application
+  /// - `h` (in): height of application
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_CONTROL_ERROR_IO_ERROR`: IO error
   int app_control_set_window_position(
     app_control_h app_control,
     int x,
@@ -1405,19 +1750,25 @@ class Tizen80CapiAppfwAppControl {
       _app_control_set_window_positionPtr
           .asFunction<int Function(app_control_h, int, int, int, int)>();
 
-  /// @brief Gets the window position of application.
-  /// @since_tizen 8.0
+  /// Gets the window position of application.
   ///
-  /// @param[in]   app_control The app_control handle
-  /// @param[out]   x          x position of application's left top
-  /// @param[out]   y          y position of application's left top
-  /// @param[out]   w          width of application
-  /// @param[out]   h          height of application
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_CONTROL_ERROR_IO_ERROR IO error
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Parameters:**
+  /// - `app_control` (in): The app_control handle
+  /// - `x` (out): x position of application's left top
+  /// - `y` (out): y position of application's left top
+  /// - `w` (out): width of application
+  /// - `h` (out): height of application
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_CONTROL_ERROR_IO_ERROR`: IO error
   int app_control_get_window_position(
     app_control_h app_control,
     ffi.Pointer<ffi.Int> x,
@@ -1452,10 +1803,14 @@ class Tizen80CapiAppfwAppControl {
               ffi.Pointer<ffi.Int>)>();
 }
 
+/// @nodoc
 final class app_control_s extends ffi.Opaque {}
 
-/// @brief Enumeration for the application control error.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for the application control error.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class app_control_error_e {
   /// < Successful
   static const int APP_CONTROL_ERROR_NONE = 0;
@@ -1494,9 +1849,14 @@ abstract class app_control_error_e {
   static const int APP_CONTROL_ERROR_IO_ERROR = -5;
 }
 
-/// @brief Enumeration for the application control result.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @see app_control_enable_app_started_result_event()
+/// Enumeration for the application control result.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **See also:**
+/// - `app_control_enable_app_started_result_event()`
+/// @nodoc
 abstract class app_control_result_e {
   /// < Callee application launched actually (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
   static const int APP_CONTROL_RESULT_APP_STARTED = 1;
@@ -1511,8 +1871,11 @@ abstract class app_control_result_e {
   static const int APP_CONTROL_RESULT_CANCELED = -2;
 }
 
-/// @brief Enumeration for the application control launch mode.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// Enumeration for the application control launch mode.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+/// @nodoc
 abstract class app_control_launch_mode_e {
   /// < Prefer to launch an application as single mode
   static const int APP_CONTROL_LAUNCH_MODE_SINGLE = 0;
@@ -1521,318 +1884,441 @@ abstract class app_control_launch_mode_e {
   static const int APP_CONTROL_LAUNCH_MODE_GROUP = 1;
 }
 
-/// @brief The application control handle.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// The application control handle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 typedef app_control_h = ffi.Pointer<app_control_s>;
 
-/// @brief Called to retrieve the extra data contained in the app_control.
+/// Called to retrieve the extra data contained in the app_control.
 ///
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @remarks The @a key must not be deallocated by the application.
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
 ///
-/// @param[in]   app_control     The app_control handle
-/// @param[in]   key             The key of the value contained in the app_control
-/// @param[in]   user_data       The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
-/// @pre app_control_foreach_extra_data() will invoke this callback.
-/// @see app_control_foreach_extra_data()
+/// **Remarks:**
+/// - The `key` must not be deallocated by the application.
+///
+/// **Parameters:**
+/// - `app_control` (in): The app_control handle
+/// - `key` (in): The key of the value contained in the app_control
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - app_control_foreach_extra_data() will invoke this callback.
+///
+/// **See also:**
+/// - `app_control_foreach_extra_data()`
+/// @nodoc
 typedef app_control_extra_data_cb
     = ffi.Pointer<ffi.NativeFunction<app_control_extra_data_cbFunction>>;
+/// @nodoc
 typedef app_control_extra_data_cbFunction = ffi.Bool Function(
     app_control_h app_control,
     ffi.Pointer<ffi.Char> key,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartapp_control_extra_data_cbFunction = bool Function(
     app_control_h app_control,
     ffi.Pointer<ffi.Char> key,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called once for each matched application that can be launched to handle the given app_control request.
+/// Called once for each matched application that can be launched to handle the given app_control request.
 ///
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
 ///
-/// @param[in]   app_control     The app_control handle
-/// @param[in]   appid           The name of the application that can handle the launch request of the given app_control
-/// @param[in]   user_data       The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
-/// @pre app_control_foreach_app_matched() will invoke this callback.
-/// @see app_control_foreach_app_matched()
+/// **Parameters:**
+/// - `app_control` (in): The app_control handle
+/// - `appid` (in): The name of the application that can handle the launch request of the given app_control
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - app_control_foreach_app_matched() will invoke this callback.
+///
+/// **See also:**
+/// - `app_control_foreach_app_matched()`
+/// @nodoc
 typedef app_control_app_matched_cb
     = ffi.Pointer<ffi.NativeFunction<app_control_app_matched_cbFunction>>;
+/// @nodoc
 typedef app_control_app_matched_cbFunction = ffi.Bool Function(
     app_control_h app_control,
     ffi.Pointer<ffi.Char> appid,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartapp_control_app_matched_cbFunction = bool Function(
     app_control_h app_control,
     ffi.Pointer<ffi.Char> appid,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the reply of the launch request is delivered.
+/// Called when the reply of the launch request is delivered.
 ///
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @remarks The @a request and @a reply must not be deallocated by the application.
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
 ///
-/// @param[in]   request         The app_control handle of the launch request that has been sent
-/// @param[in]   reply           The app_control handle in which the results of the callee are contained
-/// @param[in]   result          The result code of the launch request
-/// @param[in]   user_data       The user data passed from the callback registration function
-/// @pre When the callee replies to the launch request, this callback will be invoked.
-/// @pre Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif, if #APP_CONTROL_RESULT_APP_STARTED event is enabled,
-/// this callback will also be invoked when the callee application actually launched.
-/// @see app_control_send_launch_request()
-/// @see app_control_reply_to_launch_request()
-/// @see app_control_enable_app_started_result_event()
-/// @see #APP_CONTROL_RESULT_APP_STARTED
+/// **Remarks:**
+/// - The `request` and `reply` must not be deallocated by the application.
+///
+/// **Parameters:**
+/// - `request` (in): The app_control handle of the launch request that has been sent
+/// - `reply` (in): The app_control handle in which the results of the callee are contained
+/// - `result` (in): The result code of the launch request
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - When the callee replies to the launch request, this callback will be invoked.
+/// - Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif, if `APP_CONTROL_RESULT_APP_STARTED` event is enabled, this callback will also be invoked when the callee application actually launched.
+///
+/// **See also:**
+/// - `app_control_send_launch_request()`
+/// - `app_control_reply_to_launch_request()`
+/// - `app_control_enable_app_started_result_event()`
+/// - `APP_CONTROL_RESULT_APP_STARTED`
+/// @nodoc
 typedef app_control_reply_cb
     = ffi.Pointer<ffi.NativeFunction<app_control_reply_cbFunction>>;
+/// @nodoc
 typedef app_control_reply_cbFunction = ffi.Void Function(app_control_h request,
     app_control_h reply, ffi.Int32 result, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartapp_control_reply_cbFunction = void Function(app_control_h request,
     app_control_h reply, int result, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the result of the launch request is delivered.
-/// @details Following error codes can be delivered: \n
-/// #APP_CONTROL_ERROR_NONE, \n
-/// #APP_CONTROL_ERROR_APP_NOT_FOUND, \n
-/// #APP_CONTROL_ERROR_PERMISSION_DENIED, \n
-/// #APP_CONTROL_ERROR_INVALID_PARAMETER, \n
-/// #APP_CONTROL_ERROR_LAUNCH_REJECTED
+/// Called when the result of the launch request is delivered.
 ///
-/// @since_tizen 5.0
-/// @remarks The @a request is the same object for which app_control_send_launch_request_async() was called.
+/// Following error codes can be delivered: `APP_CONTROL_ERROR_NONE`, `APP_CONTROL_ERROR_APP_NOT_FOUND`, `APP_CONTROL_ERROR_PERMISSION_DENIED`, `APP_CONTROL_ERROR_INVALID_PARAMETER`, `APP_CONTROL_ERROR_LAUNCH_REJECTED`
 ///
-/// @param[in]   request         The app_control handle of the launch request that has been sent
-/// @param[in]   result          The result value of the launch request
-/// @param[in]   user_data       The user data passed from the callback registration function
-/// @see app_control_send_launch_request_async()
+/// **Since Tizen:**
+/// - 5.0
+///
+/// **Remarks:**
+/// - The `request` is the same object for which app_control_send_launch_request_async() was called.
+///
+/// **Parameters:**
+/// - `request` (in): The app_control handle of the launch request that has been sent
+/// - `result` (in): The result value of the launch request
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `app_control_send_launch_request_async()`
+/// @nodoc
 typedef app_control_result_cb
     = ffi.Pointer<ffi.NativeFunction<app_control_result_cbFunction>>;
+/// @nodoc
 typedef app_control_result_cbFunction = ffi.Void Function(
     app_control_h request, ffi.Int32 result, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartapp_control_result_cbFunction = void Function(
     app_control_h request, int result, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when another application sends a launch request to the application.
-/// @details Before calling app_control_cb() function, this callback function is called.
-/// @since_tizen 5.5
-/// @remarks After this callback function returns, the handle of the app_control is released.
-/// Therefore, if you want to use the handle after returning this callback function, you MUST copy it by using app_control_clone() function.
-/// @remarks The @a action must not be deallocated by the application. The platform frees the string when the app_control action handle is removed.
+/// Called when another application sends a launch request to the application.
 ///
-/// @param[in]   action          The name of the app_control action
-/// @param[in]   app_control     The handle of the app_control
-/// @param[in]   user_data       The user data passed from the callback registration function
-/// @see app_control_add_action_handler()
-/// @see @ref CAPI_APPLICATION_MODULE API
+/// Before calling app_control_cb() function, this callback function is called.
+///
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **Remarks:**
+/// - After this callback function returns, the handle of the app_control is released.
+/// - Therefore, if you want to use the handle after returning this callback function, you MUST copy it by using app_control_clone() function.
+/// - The `action` must not be deallocated by the application. The platform frees the string when the app_control action handle is removed.
+///
+/// **Parameters:**
+/// - `action` (in): The name of the app_control action
+/// - `app_control` (in): The handle of the app_control
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `app_control_add_action_handler()`
+/// - `CAPI_APPLICATION_MODULE` API
+/// @nodoc
 typedef app_control_action_cb
     = ffi.Pointer<ffi.NativeFunction<app_control_action_cbFunction>>;
+/// @nodoc
 typedef app_control_action_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> action,
     app_control_h app_control,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartapp_control_action_cbFunction = void Function(
     ffi.Pointer<ffi.Char> action,
     app_control_h app_control,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The application control action handle.
-/// @since_tizen 5.5
+/// The application control action handle.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 typedef app_control_action_h = ffi.Pointer<ffi.Void>;
 
+/// @nodoc
 const String APP_CONTROL_OPERATION_MAIN =
     'http://tizen.org/appcontrol/operation/main';
 
+/// @nodoc
 const String APP_CONTROL_OPERATION_DEFAULT =
     'http://tizen.org/appcontrol/operation/default';
 
+/// @nodoc
 const String APP_CONTROL_OPERATION_EDIT =
     'http://tizen.org/appcontrol/operation/edit';
 
+/// @nodoc
 const String APP_CONTROL_OPERATION_VIEW =
     'http://tizen.org/appcontrol/operation/view';
 
+/// @nodoc
 const String APP_CONTROL_OPERATION_PICK =
     'http://tizen.org/appcontrol/operation/pick';
 
+/// @nodoc
 const String APP_CONTROL_OPERATION_CREATE_CONTENT =
     'http://tizen.org/appcontrol/operation/create_content';
 
+/// @nodoc
 const String APP_CONTROL_OPERATION_CALL =
     'http://tizen.org/appcontrol/operation/call';
 
+/// @nodoc
 const String APP_CONTROL_OPERATION_SEND =
     'http://tizen.org/appcontrol/operation/send';
 
+/// @nodoc
 const String APP_CONTROL_OPERATION_SEND_TEXT =
     'http://tizen.org/appcontrol/operation/send_text';
 
+/// @nodoc
 const String APP_CONTROL_OPERATION_SHARE =
     'http://tizen.org/appcontrol/operation/share';
 
+/// @nodoc
 const String APP_CONTROL_OPERATION_MULTI_SHARE =
     'http://tizen.org/appcontrol/operation/multi_share';
 
+/// @nodoc
 const String APP_CONTROL_OPERATION_SHARE_TEXT =
     'http://tizen.org/appcontrol/operation/share_text';
 
+/// @nodoc
 const String APP_CONTROL_OPERATION_DIAL =
     'http://tizen.org/appcontrol/operation/dial';
 
+/// @nodoc
 const String APP_CONTROL_OPERATION_SEARCH =
     'http://tizen.org/appcontrol/operation/search';
 
+/// @nodoc
 const String APP_CONTROL_OPERATION_DOWNLOAD =
     'http://tizen.org/appcontrol/operation/download';
 
+/// @nodoc
 const String APP_CONTROL_OPERATION_PRINT =
     'http://tizen.org/appcontrol/operation/print';
 
+/// @nodoc
 const String APP_CONTROL_OPERATION_COMPOSE =
     'http://tizen.org/appcontrol/operation/compose';
 
+/// @nodoc
 const String APP_CONTROL_OPERATION_LAUNCH_ON_EVENT =
     'http://tizen.org/appcontrol/operation/launch_on_event';
 
+/// @nodoc
 const String APP_CONTROL_OPERATION_ADD =
     'http://tizen.org/appcontrol/operation/add';
 
+/// @nodoc
 const String APP_CONTROL_OPERATION_IMAGE_CAPTURE =
     'http://tizen.org/appcontrol/operation/image_capture';
 
+/// @nodoc
 const String APP_CONTROL_OPERATION_VIDEO_CAPTURE =
     'http://tizen.org/appcontrol/operation/video_capture';
 
+/// @nodoc
 const String APP_CONTROL_OPERATION_SETTING_BT_ENABLE =
     'http://tizen.org/appcontrol/operation/setting/bt_enable';
 
+/// @nodoc
 const String APP_CONTROL_OPERATION_SETTING_BT_VISIBILITY =
     'http://tizen.org/appcontrol/operation/setting/bt_visibility';
 
+/// @nodoc
 const String APP_CONTROL_OPERATION_SETTING_LOCATION =
     'http://tizen.org/appcontrol/operation/setting/location';
 
+/// @nodoc
 const String APP_CONTROL_OPERATION_SETTING_NFC =
     'http://tizen.org/appcontrol/operation/setting/nfc';
 
+/// @nodoc
 const String APP_CONTROL_OPERATION_SETTING =
     'http://tizen.org/appcontrol/operation/setting';
 
+/// @nodoc
 const String APP_CONTROL_OPERATION_SETTING_WIFI =
     'http://tizen.org/appcontrol/operation/setting/wifi';
 
+/// @nodoc
 const String APP_CONTROL_OPERATION_SETTING_VPN =
     'http://tizen.org/appcontrol/operation/setting/vpn';
 
+/// @nodoc
 const String APP_CONTROL_OPERATION_GET_INPUT =
     'http://tizen.org/appcontrol/operation/get_input';
 
+/// @nodoc
 const String APP_CONTROL_OPERATION_MEDIA_CONTROLLER =
     'http://tizen.org/appcontrol/operation/media_control';
 
+/// @nodoc
 const String APP_CONTROL_OPERATION_PRIVACY_SETTING_GUIDE =
     'http://tizen.org/appcontrol/operation/guide_privacy_setting';
 
+/// @nodoc
 const String APP_CONTROL_OPERATION_INTENT =
     'http://tizen.org/appcontrol/operation/intent';
 
+/// @nodoc
 const String APP_CONTROL_DATA_FEATURE =
     'http://tizen.org/appcontrol/data/feature';
 
+/// @nodoc
 const String APP_CONTROL_DATA_PRIVILEGES =
     'http://tizen.org/appcontrol/data/privileges';
 
+/// @nodoc
 const String APP_CONTROL_DATA_SUBJECT =
     'http://tizen.org/appcontrol/data/subject';
 
+/// @nodoc
 const String APP_CONTROL_DATA_TO = 'http://tizen.org/appcontrol/data/to';
 
+/// @nodoc
 const String APP_CONTROL_DATA_CC = 'http://tizen.org/appcontrol/data/cc';
 
+/// @nodoc
 const String APP_CONTROL_DATA_BCC = 'http://tizen.org/appcontrol/data/bcc';
 
+/// @nodoc
 const String APP_CONTROL_DATA_TEXT = 'http://tizen.org/appcontrol/data/text';
 
+/// @nodoc
 const String APP_CONTROL_DATA_TITLE = 'http://tizen.org/appcontrol/data/title';
 
+/// @nodoc
 const String APP_CONTROL_DATA_SELECTED =
     'http://tizen.org/appcontrol/data/selected';
 
+/// @nodoc
 const String APP_CONTROL_DATA_PATH = 'http://tizen.org/appcontrol/data/path';
 
+/// @nodoc
 const String APP_CONTROL_DATA_SELECTION_MODE =
     'http://tizen.org/appcontrol/data/selection_mode';
 
+/// @nodoc
 const String APP_CONTROL_DATA_CALENDAR_ALL_DAY =
     'http://tizen.org/appcontrol/data/calendar/all_day';
 
+/// @nodoc
 const String APP_CONTROL_DATA_CALENDAR_START_TIME =
     'http://tizen.org/appcontrol/data/calendar/start_time';
 
+/// @nodoc
 const String APP_CONTROL_DATA_CALENDAR_END_TIME =
     'http://tizen.org/appcontrol/data/calendar/end_time';
 
+/// @nodoc
 const String APP_CONTROL_DATA_EMAIL = 'http://tizen.org/appcontrol/data/email';
 
+/// @nodoc
 const String APP_CONTROL_DATA_PHONE = 'http://tizen.org/appcontrol/data/phone';
 
+/// @nodoc
 const String APP_CONTROL_DATA_URL = 'http://tizen.org/appcontrol/data/url';
 
+/// @nodoc
 const String APP_CONTROL_DATA_ID = 'http://tizen.org/appcontrol/data/id';
 
+/// @nodoc
 const String APP_CONTROL_DATA_TYPE = 'http://tizen.org/appcontrol/data/type';
 
+/// @nodoc
 const String APP_CONTROL_DATA_TOTAL_COUNT =
     'http://tizen.org/appcontrol/data/total_count';
 
+/// @nodoc
 const String APP_CONTROL_DATA_TOTAL_SIZE =
     'http://tizen.org/appcontrol/data/total_size';
 
+/// @nodoc
 const String APP_CONTROL_DATA_NAME = 'http://tizen.org/appcontrol/data/name';
 
+/// @nodoc
 const String APP_CONTROL_DATA_LOCATION =
     'http://tizen.org/appcontrol/data/location';
 
+/// @nodoc
 const String APP_CONTROL_DATA_INPUT_TYPE =
     'http://tizen.org/appcontrol/data/input_type';
 
+/// @nodoc
 const String APP_CONTROL_DATA_INPUT_DEFAULT_TEXT =
     'http://tizen.org/appcontrol/data/input_default_text';
 
+/// @nodoc
 const String APP_CONTROL_DATA_INPUT_GUIDE_TEXT =
     'http://tizen.org/appcontrol/data/input_guide_text';
 
+/// @nodoc
 const String APP_CONTROL_DATA_INPUT_PREDICTION_HINT =
     'http://tizen.org/appcontrol/data/input_prediction_hint';
 
+/// @nodoc
 const String APP_CONTROL_DATA_INPUT_RETURNKEY_TYPE =
     'http://tizen.org/appcontrol/data/input_returnkey_type';
 
+/// @nodoc
 const String APP_CONTROL_DATA_INPUT_MAX_TEXT_LENGTH =
     'http://tizen.org/appcontrol/data/input_max_text_length';
 
+/// @nodoc
 const String APP_CONTROL_DATA_INPUT_CURSOR_POSITION_SET =
     'http://tizen.org/appcontrol/data/input_cursor_position_set';
 
+/// @nodoc
 const String APP_CONTROL_DATA_INPUT_CURSOR_POSITION_GET =
     'http://tizen.org/appcontrol/data/input_cursor_position_get';
 
+/// @nodoc
 const String APP_CONTROL_DATA_INPUT_REPLY_TYPE =
     'http://tizen.org/appcontrol/data/input_reply_type';
 
+/// @nodoc
 const String APP_CONTROL_DATA_WIDGET_INSTANCE_ID =
     'http://tizen.org/appcontrol/data/widget_instance_id';
 
+/// @nodoc
 const String APP_CONTROL_DATA_WIDGET_CONTENT =
     'http://tizen.org/appcontrol/data/widget_content';
 
+/// @nodoc
 const String APP_CONTROL_DATA_WIDGET_APP_ID =
     'http://tizen.org/appcontrol/data/widget_app_id';
 
+/// @nodoc
 const String APP_CONTROL_DATA_URI_FRAGMENT =
     'http://tizen.org/appcontrol/data/uri/fragment';
 
+/// @nodoc
 const String APP_CONTROL_DATA_URI_PATH =
     'http://tizen.org/appcontrol/data/uri/path';

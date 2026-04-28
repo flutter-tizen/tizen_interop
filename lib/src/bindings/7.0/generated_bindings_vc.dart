@@ -1,3 +1,6 @@
+/// {@category 7.0/tizen}
+library tizen_interop_7_0.vc;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen vc APIs.
+/// {@category 7.0/tizen}
 class Tizen70Vc {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,18 +28,29 @@ class Tizen70Vc {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates a handle for command list.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks If the function succeeds, @a The list handle must be released with vc_cmd_list_destroy().
-  /// @param[out] vc_cmd_list The command list handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @see vc_cmd_list_destroy()
+  /// Creates a handle for command list.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, `The` list handle must be released with vc_cmd_list_destroy().
+  ///
+  /// **Parameters:**
+  /// - `vc_cmd_list` (out): The command list handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `vc_cmd_list_destroy()`
   int vc_cmd_list_create(
     ffi.Pointer<vc_cmd_list_h> vc_cmd_list,
   ) {
@@ -50,18 +65,26 @@ class Tizen70Vc {
   late final _vc_cmd_list_create = _vc_cmd_list_createPtr
       .asFunction<int Function(ffi.Pointer<vc_cmd_list_h>)>();
 
-  /// @brief Destroys the handle for command list.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in] vc_cmd_list The command list handle
-  /// @param[in] free_command The command free option @c true = release each commands in list,
-  /// @c false = remove command from list
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @see vc_cmd_list_create()
+  /// Destroys the handle for command list.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `vc_cmd_list` (in): The command list handle
+  /// - `free_command` (in): The command free option `true` = release each commands in list, `false` = remove command from list
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `vc_cmd_list_create()`
   int vc_cmd_list_destroy(
     vc_cmd_list_h vc_cmd_list,
     bool free_command,
@@ -78,16 +101,23 @@ class Tizen70Vc {
   late final _vc_cmd_list_destroy =
       _vc_cmd_list_destroyPtr.asFunction<int Function(vc_cmd_list_h, bool)>();
 
-  /// @brief Gets command count of list.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in] vc_cmd_list The command list handle
-  /// @param[out] count The count
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
+  /// Gets command count of list.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `vc_cmd_list` (in): The command list handle
+  /// - `count` (out): The count
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
   int vc_cmd_list_get_count(
     vc_cmd_list_h vc_cmd_list,
     ffi.Pointer<ffi.Int> count,
@@ -105,17 +135,26 @@ class Tizen70Vc {
   late final _vc_cmd_list_get_count = _vc_cmd_list_get_countPtr
       .asFunction<int Function(vc_cmd_list_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Adds command to command list.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in] vc_cmd_list The command list handle
-  /// @param[in] vc_command The command handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @see vc_cmd_list_remove()
+  /// Adds command to command list.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `vc_cmd_list` (in): The command list handle
+  /// - `vc_command` (in): The command handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `vc_cmd_list_remove()`
   int vc_cmd_list_add(
     vc_cmd_list_h vc_cmd_list,
     vc_cmd_h vc_command,
@@ -132,17 +171,26 @@ class Tizen70Vc {
   late final _vc_cmd_list_add =
       _vc_cmd_list_addPtr.asFunction<int Function(vc_cmd_list_h, vc_cmd_h)>();
 
-  /// @brief Removes command from command list.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in] vc_cmd_list The command list handle
-  /// @param[in] vc_command The command handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @see vc_cmd_list_add()
+  /// Removes command from command list.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `vc_cmd_list` (in): The command list handle
+  /// - `vc_command` (in): The command handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `vc_cmd_list_add()`
   int vc_cmd_list_remove(
     vc_cmd_list_h vc_cmd_list,
     vc_cmd_h vc_command,
@@ -159,19 +207,30 @@ class Tizen70Vc {
   late final _vc_cmd_list_remove = _vc_cmd_list_removePtr
       .asFunction<int Function(vc_cmd_list_h, vc_cmd_h)>();
 
-  /// @brief Retrieves all commands of command list using callback function.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in] vc_cmd_list The command list handle
-  /// @param[in] callback Callback function to invoke
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @post This function invokes vc_cmd_list_cb() repeatedly for getting commands.
-  /// @see vc_cmd_list_cb()
+  /// Retrieves all commands of command list using callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `vc_cmd_list` (in): The command list handle
+  /// - `callback` (in): Callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - This function invokes vc_cmd_list_cb() repeatedly for getting commands.
+  ///
+  /// **See also:**
+  /// - `vc_cmd_list_cb()`
   int vc_cmd_list_foreach_commands(
     vc_cmd_list_h vc_cmd_list,
     vc_cmd_list_cb callback,
@@ -192,17 +251,26 @@ class Tizen70Vc {
       _vc_cmd_list_foreach_commandsPtr.asFunction<
           int Function(vc_cmd_list_h, vc_cmd_list_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Moves index to first command.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in] vc_cmd_list The command list handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_EMPTY List empty
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @see vc_cmd_list_last()
+  /// Moves index to first command.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `vc_cmd_list` (in): The command list handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_EMPTY`: List empty
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `vc_cmd_list_last()`
   int vc_cmd_list_first(
     vc_cmd_list_h vc_cmd_list,
   ) {
@@ -217,17 +285,26 @@ class Tizen70Vc {
   late final _vc_cmd_list_first =
       _vc_cmd_list_firstPtr.asFunction<int Function(vc_cmd_list_h)>();
 
-  /// @brief Moves index to last command.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in] vc_cmd_list The command list handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_EMPTY List empty
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @see vc_cmd_list_first()
+  /// Moves index to last command.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `vc_cmd_list` (in): The command list handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_EMPTY`: List empty
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `vc_cmd_list_first()`
   int vc_cmd_list_last(
     vc_cmd_list_h vc_cmd_list,
   ) {
@@ -242,18 +319,27 @@ class Tizen70Vc {
   late final _vc_cmd_list_last =
       _vc_cmd_list_lastPtr.asFunction<int Function(vc_cmd_list_h)>();
 
-  /// @brief Moves index to next command.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in] vc_cmd_list The command list handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_EMPTY List empty
-  /// @retval #VC_ERROR_ITERATION_END List reached end
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @see vc_cmd_list_prev()
+  /// Moves index to next command.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `vc_cmd_list` (in): The command list handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_EMPTY`: List empty
+  /// - `VC_ERROR_ITERATION_END`: List reached end
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `vc_cmd_list_prev()`
   int vc_cmd_list_next(
     vc_cmd_list_h vc_cmd_list,
   ) {
@@ -268,18 +354,27 @@ class Tizen70Vc {
   late final _vc_cmd_list_next =
       _vc_cmd_list_nextPtr.asFunction<int Function(vc_cmd_list_h)>();
 
-  /// @brief Moves index to previous command.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in] vc_cmd_list The command list handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_EMPTY List empty
-  /// @retval #VC_ERROR_ITERATION_END List reached end
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @see vc_cmd_list_next()
+  /// Moves index to previous command.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `vc_cmd_list` (in): The command list handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_EMPTY`: List empty
+  /// - `VC_ERROR_ITERATION_END`: List reached end
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `vc_cmd_list_next()`
   int vc_cmd_list_prev(
     vc_cmd_list_h vc_cmd_list,
   ) {
@@ -294,21 +389,30 @@ class Tizen70Vc {
   late final _vc_cmd_list_prev =
       _vc_cmd_list_prevPtr.asFunction<int Function(vc_cmd_list_h)>();
 
-  /// @brief Get current command from command list by index.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in] vc_cmd_list The command list handle
-  /// @param[out] vc_command The command handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_EMPTY List empty
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @see vc_cmd_list_first()
-  /// @see vc_cmd_list_last()
-  /// @see vc_cmd_list_prev()
-  /// @see vc_cmd_list_next()
+  /// Get current command from command list by index.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `vc_cmd_list` (in): The command list handle
+  /// - `vc_command` (out): The command handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_EMPTY`: List empty
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `vc_cmd_list_first()`
+  /// - `vc_cmd_list_last()`
+  /// - `vc_cmd_list_prev()`
+  /// - `vc_cmd_list_next()`
   int vc_cmd_list_get_current(
     vc_cmd_list_h vc_cmd_list,
     ffi.Pointer<vc_cmd_h> vc_command,
@@ -326,21 +430,32 @@ class Tizen70Vc {
   late final _vc_cmd_list_get_current = _vc_cmd_list_get_currentPtr
       .asFunction<int Function(vc_cmd_list_h, ffi.Pointer<vc_cmd_h>)>();
 
-  /// @brief Creates a handle for command.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks If the function succeeds, @a The command handle must be released
-  /// with vc_cmd_destroy() or vc_cmd_list_destroy().
-  /// You should set command and type if command is valid.
-  /// The command format is set to #VC_COMMAND_FORMAT_FIXED by default and can be changed with vc_cmd_set_format().
-  /// @param[out] vc_command The command handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @see vc_cmd_destroy()
+  /// Creates a handle for command.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, `The` command handle must be released
+  /// - with vc_cmd_destroy() or vc_cmd_list_destroy().
+  /// - You should set command and type if command is valid.
+  /// - The command format is set to `VC_COMMAND_FORMAT_FIXED` by default and can be changed with vc_cmd_set_format().
+  ///
+  /// **Parameters:**
+  /// - `vc_command` (out): The command handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `vc_cmd_destroy()`
   int vc_cmd_create(
     ffi.Pointer<vc_cmd_h> vc_command,
   ) {
@@ -355,16 +470,25 @@ class Tizen70Vc {
   late final _vc_cmd_create =
       _vc_cmd_createPtr.asFunction<int Function(ffi.Pointer<vc_cmd_h>)>();
 
-  /// @brief Destroys the handle.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in] vc_command The command handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @see vc_cmd_create()
+  /// Destroys the handle.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `vc_command` (in): The command handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `vc_cmd_create()`
   int vc_cmd_destroy(
     vc_cmd_h vc_command,
   ) {
@@ -378,17 +502,26 @@ class Tizen70Vc {
   late final _vc_cmd_destroy =
       _vc_cmd_destroyPtr.asFunction<int Function(vc_cmd_h)>();
 
-  /// @brief Sets command or action.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in] vc_command The command handle
-  /// @param[in] command The command or action text
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @see vc_cmd_get_command()
+  /// Sets command or action.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `vc_command` (in): The command handle
+  /// - `command` (in): The command or action text
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `vc_cmd_get_command()`
   int vc_cmd_set_command(
     vc_cmd_h vc_command,
     ffi.Pointer<ffi.Char> command,
@@ -406,18 +539,29 @@ class Tizen70Vc {
   late final _vc_cmd_set_command = _vc_cmd_set_commandPtr
       .asFunction<int Function(vc_cmd_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets command.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks If the function succeeds, @a command must be released with free() by you if they are not NULL.
-  /// @param[in] vc_command The command handle
-  /// @param[out] command The command text
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @see vc_cmd_set_command()
+  /// Gets command.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, `command` must be released with free() by you if they are not NULL.
+  ///
+  /// **Parameters:**
+  /// - `vc_command` (in): The command handle
+  /// - `command` (out): The command text
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `vc_cmd_set_command()`
   int vc_cmd_get_command(
     vc_cmd_h vc_command,
     ffi.Pointer<ffi.Pointer<ffi.Char>> command,
@@ -435,19 +579,28 @@ class Tizen70Vc {
   late final _vc_cmd_get_command = _vc_cmd_get_commandPtr
       .asFunction<int Function(vc_cmd_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the unfixed command.
-  /// @since_tizen 3.0
-  /// @remarks If the function succeeds, the @a command must be released with free() if it is not NULL.
-  /// If the command of the given @a vc_command is NULL (@a vc_command is NOT NULL), @a command will be also NULL.
-  /// This function should be used for commands which have non-fixed format.
-  /// @param[in] vc_command The command handle
-  /// @param[out] command The unfixed command text
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported feature
+  /// Gets the unfixed command.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, the `command` must be released with free() if it is not NULL.
+  /// - If the command of the given `vc_command` is NULL (`vc_command` is NOT NULL), `command` will be also NULL.
+  /// - This function should be used for commands which have non-fixed format.
+  ///
+  /// **Parameters:**
+  /// - `vc_command` (in): The command handle
+  /// - `command` (out): The unfixed command text
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported feature
   int vc_cmd_get_unfixed_command(
     vc_cmd_h vc_command,
     ffi.Pointer<ffi.Pointer<ffi.Char>> command,
@@ -465,19 +618,30 @@ class Tizen70Vc {
   late final _vc_cmd_get_unfixed_command = _vc_cmd_get_unfixed_commandPtr
       .asFunction<int Function(vc_cmd_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets command type.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks If you do not set the command type, the default value is @c -1.
-  /// You should set type if command is valid
-  /// @param[in] vc_command The command handle
-  /// @param[in] type The command type
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @see vc_cmd_get_type()
+  /// Sets command type.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - If you do not set the command type, the default value is `-1`.
+  /// - You should set type if command is valid
+  ///
+  /// **Parameters:**
+  /// - `vc_command` (in): The command handle
+  /// - `type` (in): The command type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `vc_cmd_get_type()`
   int vc_cmd_set_type(
     vc_cmd_h vc_command,
     int type,
@@ -494,17 +658,26 @@ class Tizen70Vc {
   late final _vc_cmd_set_type =
       _vc_cmd_set_typePtr.asFunction<int Function(vc_cmd_h, int)>();
 
-  /// @brief Gets command type.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in] vc_command The command handle
-  /// @param[out] type The command type
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @see vc_cmd_set_type()
+  /// Gets command type.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `vc_command` (in): The command handle
+  /// - `type` (out): The command type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `vc_cmd_set_type()`
   int vc_cmd_get_type(
     vc_cmd_h vc_command,
     ffi.Pointer<ffi.Int> type,
@@ -521,18 +694,29 @@ class Tizen70Vc {
   late final _vc_cmd_get_type = _vc_cmd_get_typePtr
       .asFunction<int Function(vc_cmd_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the command format.
-  /// @since_tizen 3.0
-  /// @remarks The default format is #VC_COMMAND_FORMAT_FIXED.
-  /// @param[in] vc_command The command handle
-  /// @param[in] format The command format
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported feature
-  /// @see vc_cmd_get_format()
+  /// Sets the command format.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The default format is `VC_COMMAND_FORMAT_FIXED`.
+  ///
+  /// **Parameters:**
+  /// - `vc_command` (in): The command handle
+  /// - `format` (in): The command format
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported feature
+  ///
+  /// **See also:**
+  /// - `vc_cmd_get_format()`
   int vc_cmd_set_format(
     vc_cmd_h vc_command,
     int format,
@@ -549,18 +733,29 @@ class Tizen70Vc {
   late final _vc_cmd_set_format =
       _vc_cmd_set_formatPtr.asFunction<int Function(vc_cmd_h, int)>();
 
-  /// @brief Gets the command format.
-  /// @since_tizen 3.0
-  /// @remarks The default format is #VC_COMMAND_FORMAT_FIXED.
-  /// @param[in] vc_command The command handle
-  /// @param[out] format The command format
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported feature
-  /// @see vc_cmd_set_format()
+  /// Gets the command format.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The default format is `VC_COMMAND_FORMAT_FIXED`.
+  ///
+  /// **Parameters:**
+  /// - `vc_command` (in): The command handle
+  /// - `format` (out): The command format
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported feature
+  ///
+  /// **See also:**
+  /// - `vc_cmd_set_format()`
   int vc_cmd_get_format(
     vc_cmd_h vc_command,
     ffi.Pointer<ffi.Int> format,
@@ -577,20 +772,35 @@ class Tizen70Vc {
   late final _vc_cmd_get_format = _vc_cmd_get_formatPtr
       .asFunction<int Function(vc_cmd_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Initializes voice control.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @remarks If the function succeeds, vc must be released with vc_deinitialize().
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #VC_ERROR_OPERATION_FAILED Operation failure
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @post If this function is called, the state will be #VC_STATE_INITIALIZED.
-  /// @see vc_deinitialize()
+  /// Initializes voice control.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, vc must be released with vc_deinitialize().
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `VC_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - If this function is called, the state will be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_deinitialize()`
   int vc_initialize() {
     return _vc_initialize();
   }
@@ -599,18 +809,29 @@ class Tizen70Vc {
       _lookup<ffi.NativeFunction<ffi.Int Function()>>('vc_initialize');
   late final _vc_initialize = _vc_initializePtr.asFunction<int Function()>();
 
-  /// @brief Deinitializes voice control.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_STATE Invalid state
-  /// @retval #VC_ERROR_OPERATION_FAILED Operation failure
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @see vc_initialize()
+  /// Deinitializes voice control.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `vc_initialize()`
   int vc_deinitialize() {
     return _vc_deinitialize();
   }
@@ -620,20 +841,35 @@ class Tizen70Vc {
   late final _vc_deinitialize =
       _vc_deinitializePtr.asFunction<int Function()>();
 
-  /// @brief Connects the voice control service.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_STATE Invalid state
-  /// @retval #VC_ERROR_OPERATION_FAILED Operation failure
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The state should be #VC_STATE_INITIALIZED.
-  /// @post If this function is called, the state will be #VC_STATE_READY.
-  /// @see vc_unprepare()
+  /// Connects the voice control service.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **Postconditions:**
+  /// - If this function is called, the state will be `VC_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `vc_unprepare()`
   int vc_prepare() {
     return _vc_prepare();
   }
@@ -642,19 +878,34 @@ class Tizen70Vc {
       _lookup<ffi.NativeFunction<ffi.Int Function()>>('vc_prepare');
   late final _vc_prepare = _vc_preparePtr.asFunction<int Function()>();
 
-  /// @brief Disconnects the voice control service.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_STATE Invalid state
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The state should be #VC_STATE_READY.
-  /// @post If this function is called, the state will be #VC_STATE_INITIALIZED.
-  /// @see vc_prepare()
+  /// Disconnects the voice control service.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_READY`.
+  ///
+  /// **Postconditions:**
+  /// - If this function is called, the state will be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_prepare()`
   int vc_unprepare() {
     return _vc_unprepare();
   }
@@ -663,24 +914,41 @@ class Tizen70Vc {
       _lookup<ffi.NativeFunction<ffi.Int Function()>>('vc_unprepare');
   late final _vc_unprepare = _vc_unpreparePtr.asFunction<int Function()>();
 
-  /// @brief Retrieves all supported languages using callback function.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @param[in] callback Callback function to invoke
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_OPERATION_FAILED Operation failure
-  /// @retval #VC_ERROR_INVALID_STATE Invalid state
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The state should be #VC_STATE_INITIALIZED or #VC_STATE_READY.
-  /// @post This function invokes vc_supported_language_cb() repeatedly for getting languages.
-  /// @see vc_supported_language_cb()
-  /// @see vc_get_current_language()
+  /// Retrieves all supported languages using callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): Callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED` or `VC_STATE_READY`.
+  ///
+  /// **Postconditions:**
+  /// - This function invokes vc_supported_language_cb() repeatedly for getting languages.
+  ///
+  /// **See also:**
+  /// - `vc_supported_language_cb()`
+  /// - `vc_get_current_language()`
   int vc_foreach_supported_languages(
     vc_supported_language_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -699,25 +967,40 @@ class Tizen70Vc {
       _vc_foreach_supported_languagesPtr.asFunction<
           int Function(vc_supported_language_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets current language.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @remarks If the function succeeds, @a language must be released with free() by you when you no longer need it.
-  /// @param[out] language A language is specified as an ISO 3166 alpha-2 two letter country-code
-  /// followed by ISO 639-1 for the two-letter language code.
-  /// For example, "ko_KR" for Korean, "en_US" for American English
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #VC_ERROR_OPERATION_FAILED Operation failure
-  /// @retval #VC_ERROR_INVALID_STATE Invalid state
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The state should be #VC_STATE_INITIALIZED or #VC_STATE_READY.
-  /// @see vc_foreach_supported_languages()
+  /// Gets current language.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, `language` must be released with free() by you when you no longer need it.
+  ///
+  /// **Parameters:**
+  /// - `language` (out): A language is specified as an ISO 3166 alpha-2 two letter country-code followed by ISO 639-1 for the two-letter language code. For example, "ko_KR" for Korean, "en_US" for American English
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `VC_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED` or `VC_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `vc_foreach_supported_languages()`
   int vc_get_current_language(
     ffi.Pointer<ffi.Pointer<ffi.Char>> language,
   ) {
@@ -733,19 +1016,32 @@ class Tizen70Vc {
   late final _vc_get_current_language = _vc_get_current_languagePtr
       .asFunction<int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets current state of voice control client.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @param[out] state The current state
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @see vc_state_changed_cb()
-  /// @see vc_set_state_changed_cb()
+  /// Gets current state of voice control client.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `state` (out): The current state
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `vc_state_changed_cb()`
+  /// - `vc_set_state_changed_cb()`
   int vc_get_state(
     ffi.Pointer<ffi.Int32> state,
   ) {
@@ -760,20 +1056,35 @@ class Tizen70Vc {
   late final _vc_get_state =
       _vc_get_statePtr.asFunction<int Function(ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets current state of voice control service.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @param[out] state The current state
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The state should be #VC_STATE_READY.
-  /// @see vc_set_service_state_changed_cb()
-  /// @see vc_unset_service_state_changed_cb()
+  /// Gets current state of voice control service.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `state` (out): The current state
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `vc_set_service_state_changed_cb()`
+  /// - `vc_unset_service_state_changed_cb()`
   int vc_get_service_state(
     ffi.Pointer<ffi.Int32> state,
   ) {
@@ -788,23 +1099,40 @@ class Tizen70Vc {
   late final _vc_get_service_state = _vc_get_service_statePtr
       .asFunction<int Function(ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the system command list.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @remarks In the system command list, there are system commands predefined by product manufacturers. Those commands have the highest priority.
-  /// Therefore, the user can not set any commands same with the system commands.
-  /// The @a vc_sys_cmd_list must be released using vc_cmd_list_destroy() when it is no longer required.
-  /// @param[out] vc_sys_cmd_list System command list handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE Invalid state
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The service state should be #VC_SERVICE_STATE_READY.
-  /// @see vc_cmd_list_destroy()
+  /// Gets the system command list.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Remarks:**
+  /// - In the system command list, there are system commands predefined by product manufacturers. Those commands have the highest priority.
+  /// - Therefore, the user can not set any commands same with the system commands.
+  /// - The `vc_sys_cmd_list` must be released using vc_cmd_list_destroy() when it is no longer required.
+  ///
+  /// **Parameters:**
+  /// - `vc_sys_cmd_list` (out): System command list handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The service state should be `VC_SERVICE_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `vc_cmd_list_destroy()`
   int vc_get_system_command_list(
     ffi.Pointer<vc_cmd_list_h> vc_sys_cmd_list,
   ) {
@@ -819,26 +1147,43 @@ class Tizen70Vc {
   late final _vc_get_system_command_list = _vc_get_system_command_listPtr
       .asFunction<int Function(ffi.Pointer<vc_cmd_list_h>)>();
 
-  /// @brief Sets the invocation name.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @remarks Invocation name is used to activate background commands. The invocation name can be the same as the application name or any other phrase.
-  /// For example, an application "Tizen Sample" has a background command, "Play music", and the invocation name of the application is set to "Tizen Sample".
-  /// In order to activate the background command, users can say "Tizen Sample, Play music".
-  /// The invocation name is dependent on the current language. For example, if the current language is "en_US"(English), the invocation name is also "en_US".
-  /// If the current language is "ja_JP"(Japanese) and the invocation name is "en_US", the invocation name will not be recognized.
-  /// This function should be called before vc_set_command_list().
-  /// @param[in] name Invocation name that an application wants to be invoked by
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE Invalid state
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The state should be #VC_STATE_READY.
-  /// @see vc_set_command_list()
+  /// Sets the invocation name.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Remarks:**
+  /// - Invocation name is used to activate background commands. The invocation name can be the same as the application name or any other phrase.
+  /// - For example, an application "Tizen Sample" has a background command, "Play music", and the invocation name of the application is set to "Tizen Sample".
+  /// - In order to activate the background command, users can say "Tizen Sample, Play music".
+  /// - The invocation name is dependent on the current language. For example, if the current language is "en_US"(English), the invocation name is also "en_US".
+  /// - If the current language is "ja_JP"(Japanese) and the invocation name is "en_US", the invocation name will not be recognized.
+  /// - This function should be called before vc_set_command_list().
+  ///
+  /// **Parameters:**
+  /// - `name` (in): Invocation name that an application wants to be invoked by
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `vc_set_command_list()`
   int vc_set_invocation_name(
     ffi.Pointer<ffi.Char> name,
   ) {
@@ -853,24 +1198,38 @@ class Tizen70Vc {
   late final _vc_set_invocation_name = _vc_set_invocation_namePtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Requests to set app id which is to want to ask the server dialogue.
-  /// @details Using this function, the developer can request registering the application on vc framework.
-  /// If developer requests to register @a app_id with @a credential which is valid, the application will be set on vc framework.
-  /// and then, when the developer requests the dialogue using vc_request_dialog(), dialog from specific engine server will be played by vc framework.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @param[in] app_id App id which is to want to ask server dialog.
-  /// @param[in] credential Credential key.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE Invalid state
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The service state should be #VC_SERVICE_STATE_READY.
-  /// @see vc_unset_server_dialog()
+  /// Requests to set app id which is to want to ask the server dialogue.
+  ///
+  /// Using this function, the developer can request registering the application on vc framework. If developer requests to register `app_id` with `credential` which is valid, the application will be set on vc framework. and then, when the developer requests the dialogue using vc_request_dialog(), dialog from specific engine server will be played by vc framework.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `app_id` (in): App id which is to want to ask server dialog.
+  /// - `credential` (in): Credential key.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The service state should be `VC_SERVICE_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `vc_unset_server_dialog()`
   int vc_set_server_dialog(
     ffi.Pointer<ffi.Char> app_id,
     ffi.Pointer<ffi.Char> credential,
@@ -888,21 +1247,37 @@ class Tizen70Vc {
   late final _vc_set_server_dialog = _vc_set_server_dialogPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Requests to unset app id which is to not want to ask the server dialogue.
-  /// @details Using this function, the developer can disable function to ask dialog based on server.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @param[in] app_id App id which is to not want to ask server dialog.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE Invalid state
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The service state should be #VC_SERVICE_STATE_READY.
-  /// @see vc_set_server_dialog()
+  /// Requests to unset app id which is to not want to ask the server dialogue.
+  ///
+  /// Using this function, the developer can disable function to ask dialog based on server.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `app_id` (in): App id which is to not want to ask server dialog.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The service state should be `VC_SERVICE_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `vc_set_server_dialog()`
   int vc_unset_server_dialog(
     ffi.Pointer<ffi.Char> app_id,
   ) {
@@ -917,28 +1292,39 @@ class Tizen70Vc {
   late final _vc_unset_server_dialog = _vc_unset_server_dialogPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Requests to start the dialogue.
-  /// @details Using this function, the developer can request starting the dialogue to the framework.
-  /// When the developer requests the dialogue, two types of texts, @a disp_text and @a utt_text, can be sent by this function.
-  /// @a disp_text is a text for displaying, and @a utt_text is that for uttering.
-  /// For example, if @a disp_text is "October 10th" and @a utt_text is "Today is October 10th.", "October 10th" will be displayed on the screen and "Today is October 10th." will be spoken.
-  /// Also, the developer can set whether the dialogue starts automatically or not, using @a auto_start.
-  /// If the developer sets @a auto_start as @c true, the framework will start to record next speech and continue the dialogue.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @remarks If @a auto_start is @c true, the recognition will start again. In this case, it can be restarted up to 4 times.
-  /// @param[in] disp_text Text to be displayed on the screen
-  /// @param[in] utt_text Text to be spoken
-  /// @param[in] auto_start A variable for setting whether the dialog session will be restarted automatically or not
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE Invalid state
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The service state should be #VC_SERVICE_STATE_READY.
+  /// Requests to start the dialogue.
+  ///
+  /// Using this function, the developer can request starting the dialogue to the framework. When the developer requests the dialogue, two types of texts, `disp_text` and `utt_text`, can be sent by this function. `disp_text` is a text for displaying, and `utt_text` is that for uttering. For example, if `disp_text` is "October 10th" and `utt_text` is "Today is October 10th.", "October 10th" will be displayed on the screen and "Today is October 10th." will be spoken. Also, the developer can set whether the dialogue starts automatically or not, using `auto_start`. If the developer sets `auto_start` as `true`, the framework will start to record next speech and continue the dialogue.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Remarks:**
+  /// - If `auto_start` is `true`, the recognition will start again. In this case, it can be restarted up to 4 times.
+  ///
+  /// **Parameters:**
+  /// - `disp_text` (in): Text to be displayed on the screen
+  /// - `utt_text` (in): Text to be spoken
+  /// - `auto_start` (in): A variable for setting whether the dialog session will be restarted automatically or not
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The service state should be `VC_SERVICE_STATE_READY`.
   int vc_request_dialog(
     ffi.Pointer<ffi.Char> disp_text,
     ffi.Pointer<ffi.Char> utt_text,
@@ -958,23 +1344,40 @@ class Tizen70Vc {
   late final _vc_request_dialog = _vc_request_dialogPtr.asFunction<
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, bool)>();
 
-  /// @brief Sets command list.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @remarks The command type is valid for #VC_COMMAND_TYPE_FOREGROUND or #VC_COMMAND_TYPE_BACKGROUND.
-  /// The matched commands of command list should be set and they should include type and command text at least.
-  /// @param[in] vc_cmd_list Command list handle
-  /// @param[in] type Command type
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE Invalid state
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The state should be #VC_STATE_READY.
-  /// @see vc_unset_command_list()
+  /// Sets command list.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Remarks:**
+  /// - The command type is valid for `VC_COMMAND_TYPE_FOREGROUND` or `VC_COMMAND_TYPE_BACKGROUND`.
+  /// - The matched commands of command list should be set and they should include type and command text at least.
+  ///
+  /// **Parameters:**
+  /// - `vc_cmd_list` (in): Command list handle
+  /// - `type` (in): Command type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `vc_unset_command_list()`
   int vc_set_command_list(
     vc_cmd_list_h vc_cmd_list,
     int type,
@@ -991,20 +1394,35 @@ class Tizen70Vc {
   late final _vc_set_command_list =
       _vc_set_command_listPtr.asFunction<int Function(vc_cmd_list_h, int)>();
 
-  /// @brief Unsets command list.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @param[in] type Command type
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE Invalid state
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The state should be #VC_STATE_READY.
-  /// @see vc_set_command_list()
+  /// Unsets command list.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `type` (in): Command type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `vc_set_command_list()`
   int vc_unset_command_list(
     int type,
   ) {
@@ -1019,20 +1437,35 @@ class Tizen70Vc {
   late final _vc_unset_command_list =
       _vc_unset_command_listPtr.asFunction<int Function(int)>();
 
-  /// @brief Gets the recognition result.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @param[in] callback Callback function to get recognition result
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE Invalid state
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The state should be #VC_STATE_READY.
-  /// @see vc_result_cb()
+  /// Gets the recognition result.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): Callback function to get recognition result
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `vc_result_cb()`
   int vc_get_result(
     vc_result_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -1050,22 +1483,37 @@ class Tizen70Vc {
   late final _vc_get_result = _vc_get_resultPtr
       .asFunction<int Function(vc_result_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Registers a callback function for getting recognition result.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @param[in] callback Callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE Invalid state
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The state should be #VC_STATE_INITIALIZED.
-  /// @see vc_result_cb()
-  /// @see vc_unset_result_cb()
+  /// Registers a callback function for getting recognition result.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): Callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_result_cb()`
+  /// - `vc_unset_result_cb()`
   int vc_set_result_cb(
     vc_result_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -1083,17 +1531,30 @@ class Tizen70Vc {
   late final _vc_set_result_cb = _vc_set_result_cbPtr
       .asFunction<int Function(vc_result_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback function.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_STATE Invalid state
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The state should be #VC_STATE_INITIALIZED.
-  /// @see vc_set_result_cb()
+  /// Unregisters the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_set_result_cb()`
   int vc_unset_result_cb() {
     return _vc_unset_result_cb();
   }
@@ -1103,22 +1564,37 @@ class Tizen70Vc {
   late final _vc_unset_result_cb =
       _vc_unset_result_cbPtr.asFunction<int Function()>();
 
-  /// @brief Registers a callback function to be called when state is changed.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @param[in] callback Callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE Invalid state
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The state should be #VC_STATE_INITIALIZED.
-  /// @see vc_service_state_changed_cb()
-  /// @see vc_unset_service_state_changed_cb()
+  /// Registers a callback function to be called when state is changed.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): Callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_service_state_changed_cb()`
+  /// - `vc_unset_service_state_changed_cb()`
   int vc_set_service_state_changed_cb(
     vc_service_state_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -1137,18 +1613,31 @@ class Tizen70Vc {
       _vc_set_service_state_changed_cbPtr.asFunction<
           int Function(vc_service_state_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback function.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_STATE Invalid state
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The state should be #VC_STATE_INITIALIZED.
-  /// @see vc_set_service_state_changed_cb()
+  /// Unregisters the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_set_service_state_changed_cb()`
   int vc_unset_service_state_changed_cb() {
     return _vc_unset_service_state_changed_cb();
   }
@@ -1159,22 +1648,37 @@ class Tizen70Vc {
   late final _vc_unset_service_state_changed_cb =
       _vc_unset_service_state_changed_cbPtr.asFunction<int Function()>();
 
-  /// @brief Registers a callback function to be called when state is changed.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @param[in] callback Callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE Invalid state
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The state should be #VC_STATE_INITIALIZED.
-  /// @see vc_state_changed_cb()
-  /// @see vc_unset_state_changed_cb()
+  /// Registers a callback function to be called when state is changed.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): Callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_state_changed_cb()`
+  /// - `vc_unset_state_changed_cb()`
   int vc_set_state_changed_cb(
     vc_state_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -1192,18 +1696,31 @@ class Tizen70Vc {
   late final _vc_set_state_changed_cb = _vc_set_state_changed_cbPtr
       .asFunction<int Function(vc_state_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback function.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_STATE Invalid state
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The state should be #VC_STATE_INITIALIZED.
-  /// @see vc_set_state_changed_cb()
+  /// Unregisters the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_set_state_changed_cb()`
   int vc_unset_state_changed_cb() {
     return _vc_unset_state_changed_cb();
   }
@@ -1214,22 +1731,37 @@ class Tizen70Vc {
   late final _vc_unset_state_changed_cb =
       _vc_unset_state_changed_cbPtr.asFunction<int Function()>();
 
-  /// @brief Registers a callback function to be called when current language is changed.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @param[in] callback Callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE Invalid state
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The state should be #VC_STATE_INITIALIZED.
-  /// @see vc_current_language_changed_cb()
-  /// @see vc_unset_current_language_changed_cb()
+  /// Registers a callback function to be called when current language is changed.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): Callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_current_language_changed_cb()`
+  /// - `vc_unset_current_language_changed_cb()`
   int vc_set_current_language_changed_cb(
     vc_current_language_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -1249,18 +1781,31 @@ class Tizen70Vc {
           int Function(
               vc_current_language_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback function.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_STATE Invalid state
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The state should be #VC_STATE_INITIALIZED.
-  /// @see vc_set_current_language_changed_cb()
+  /// Unregisters the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_set_current_language_changed_cb()`
   int vc_unset_current_language_changed_cb() {
     return _vc_unset_current_language_changed_cb();
   }
@@ -1271,22 +1816,37 @@ class Tizen70Vc {
   late final _vc_unset_current_language_changed_cb =
       _vc_unset_current_language_changed_cbPtr.asFunction<int Function()>();
 
-  /// @brief Registers a callback function to be called when an error occurred.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @param[in] callback Callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE Invalid state
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The state should be #VC_STATE_INITIALIZED.
-  /// @see vc_error_cb()
-  /// @see vc_unset_error_cb()
+  /// Registers a callback function to be called when an error occurred.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): Callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_error_cb()`
+  /// - `vc_unset_error_cb()`
   int vc_set_error_cb(
     vc_error_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -1304,18 +1864,31 @@ class Tizen70Vc {
   late final _vc_set_error_cb = _vc_set_error_cbPtr
       .asFunction<int Function(vc_error_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback function.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_INVALID_STATE Invalid state
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The state should be #VC_STATE_INITIALIZED.
-  /// @see vc_set_error_cb()
+  /// Unregisters the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_set_error_cb()`
   int vc_unset_error_cb() {
     return _vc_unset_error_cb();
   }
@@ -1325,34 +1898,44 @@ class Tizen70Vc {
   late final _vc_unset_error_cb =
       _vc_unset_error_cbPtr.asFunction<int Function()>();
 
-  /// @partner
-  /// @brief Requests to send TTS streaming data, asynchronously.
-  /// @details Using this function, the developer can request text to speech to the framework.
-  /// When the developer requests the TTS with @a language, VC engine will send PCM data which is synthesized using VC engine's own persona.
-  /// If @a to_vc_manager is true, the synthesized PCM data will be delivered to the VC manager, otherwise it will be delivered to the VC client
-  /// For example, if @a text is "Alarm is set as 7 PM" and @a to_vc_manager is true, the PCM data corresponding "Alarm is set as 7 PM" will be delivered to VC manager client,
-  /// and then it will be spoken in VC manager. If @a to_vc_manager is false, you will receive PCM data through the vc_tts_streaming_cb() callback function if it was set using vc_tts_set_streaming_cb().
-  /// This function is executed asynchronously, so if there is an error while synthesizing, vc_error_cb() will be called.
-  /// @since_tizen 5.5
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/voicecontrol.tts
-  /// @param[in] text The text to be requested for TTS
-  /// @param[in] language The language is specified as an ISO 3166 alpha-2 two-letter country code
-  /// followed by ISO 639-1 for the two-letter language code.
-  /// For example, "ko_KR" for Korean, "en_US" for American English
-  /// @param[in] to_vc_manager The value for selection between VC client and VC manager\n
-  /// If @c true, the synthesized PCM data will be delivered to the VC manager, otherwise it will be delivered to the VC client
-  /// @param[out] utt_id The utterance id
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE Invalid state
-  /// @retval #VC_ERROR_OPERATION_FAILED Operation failure
-  /// @pre The state should be #VC_STATE_READY.
-  /// @see vc_tts_cancel()
+  /// Requests to send TTS streaming data, asynchronously.
+  ///
+  /// Using this function, the developer can request text to speech to the framework. When the developer requests the TTS with `language`, VC engine will send PCM data which is synthesized using VC engine's own persona. If `to_vc_manager` is true, the synthesized PCM data will be delivered to the VC manager, otherwise it will be delivered to the VC client For example, if `text` is "Alarm is set as 7 PM" and `to_vc_manager` is true, the PCM data corresponding "Alarm is set as 7 PM" will be delivered to VC manager client, and then it will be spoken in VC manager. If `to_vc_manager` is false, you will receive PCM data through the vc_tts_streaming_cb() callback function if it was set using vc_tts_set_streaming_cb(). This function is executed asynchronously, so if there is an error while synthesizing, vc_error_cb() will be called.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.tts>
+  ///
+  /// **Parameters:**
+  /// - `text` (in): The text to be requested for TTS
+  /// - `language` (in): The language is specified as an ISO 3166 alpha-2 two-letter country code followed by ISO 639-1 for the two-letter language code. For example, "ko_KR" for Korean, "en_US" for American English
+  /// - `to_vc_manager` (in): The value for selection between VC client and VC manager If `true`, the synthesized PCM data will be delivered to the VC manager, otherwise it will be delivered to the VC client
+  /// - `utt_id` (out): The utterance id
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `vc_tts_cancel()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int vc_tts_request(
     ffi.Pointer<ffi.Char> text,
     ffi.Pointer<ffi.Char> language,
@@ -1375,21 +1958,38 @@ class Tizen70Vc {
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, bool,
           ffi.Pointer<ffi.Int>)>();
 
-  /// @partner
-  /// @brief Requests to cancel TTS streaming data.
-  /// @since_tizen 5.5
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/voicecontrol.tts
-  /// @param[in] utt_id The utterance id
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE Invalid state
-  /// @pre The state should be #VC_STATE_READY.
-  /// @see vc_tts_request()
+  /// Requests to cancel TTS streaming data.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.tts>
+  ///
+  /// **Parameters:**
+  /// - `utt_id` (in): The utterance id
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `vc_tts_request()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int vc_tts_cancel(
     int utt_id,
   ) {
@@ -1402,23 +2002,39 @@ class Tizen70Vc {
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int)>>('vc_tts_cancel');
   late final _vc_tts_cancel = _vc_tts_cancelPtr.asFunction<int Function(int)>();
 
-  /// @partner
-  /// @brief Gets the TTS audio details.
-  /// @details Using this function, the developer can get details of synthesized audio data which is requested by vc_tts_request() function.
-  /// @since_tizen 5.5
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/voicecontrol.tts
-  /// @param[out] rate The audio sampling rate
-  /// @param[out] channel The audio channel
-  /// @param[out] audio_type The audio type
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE Invalid state
-  /// @pre The state should be #VC_STATE_READY.
+  /// Gets the TTS audio details.
+  ///
+  /// Using this function, the developer can get details of synthesized audio data which is requested by vc_tts_request() function.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.tts>
+  ///
+  /// **Parameters:**
+  /// - `rate` (out): The audio sampling rate
+  /// - `channel` (out): The audio channel
+  /// - `audio_type` (out): The audio type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_READY`.
+  ///
+  /// **Paragraph:**
+  /// - tner
   int vc_tts_get_synthesized_audio_details(
     ffi.Pointer<ffi.Int> rate,
     ffi.Pointer<ffi.Int32> channel,
@@ -1440,21 +2056,36 @@ class Tizen70Vc {
           int Function(ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int32>,
               ffi.Pointer<ffi.Int32>)>();
 
-  /// @partner
-  /// @brief Sets the TTS streaming callback function.
-  /// @since_tizen 5.5
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/voicecontrol.tts
-  /// @param[in] callback The callback function
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE Invalid state
-  /// @pre The state should be #VC_STATE_INITIALIZED.
+  /// Sets the TTS streaming callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.tts>
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **Paragraph:**
+  /// - tner
   int vc_tts_set_streaming_cb(
     vc_tts_streaming_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -1472,18 +2103,31 @@ class Tizen70Vc {
   late final _vc_tts_set_streaming_cb = _vc_tts_set_streaming_cbPtr
       .asFunction<int Function(vc_tts_streaming_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @partner
-  /// @brief Unsets the TTS streaming callback function.
-  /// @since_tizen 5.5
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/voicecontrol.tts
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_INVALID_STATE Invalid state
-  /// @pre The state should be #VC_STATE_INITIALIZED.
+  /// Unsets the TTS streaming callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.tts>
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **Paragraph:**
+  /// - tner
   int vc_tts_unset_streaming_cb() {
     return _vc_tts_unset_streaming_cb();
   }
@@ -1494,25 +2138,39 @@ class Tizen70Vc {
   late final _vc_tts_unset_streaming_cb =
       _vc_tts_unset_streaming_cbPtr.asFunction<int Function()>();
 
-  /// @partner
-  /// @brief Sets the TTS utterance status callback function.
-  /// @details Using this function, the developer can set the utterance status callback to be called
-  /// when the VC manager client starts or stops playing TTS PCM data which was requested to be synthesized with the vc_tts_request() function.
-  /// This function is called when @a to_vc_manager in the vc_tts_request() function call is @c true.
-  /// @since_tizen 5.5
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/voicecontrol.tts
-  /// @param[in] callback The callback function
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE Invalid state
-  /// @retval #VC_ERROR_OPERATION_FAILED Operation failure
-  /// @pre The state should be #VC_STATE_INITIALIZED.
+  /// Sets the TTS utterance status callback function.
+  ///
+  /// Using this function, the developer can set the utterance status callback to be called when the VC manager client starts or stops playing TTS PCM data which was requested to be synthesized with the vc_tts_request() function. This function is called when `to_vc_manager` in the vc_tts_request() function call is `true`.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.tts>
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **Paragraph:**
+  /// - tner
   int vc_tts_set_utterance_status_cb(
     vc_tts_utterance_status_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -1531,18 +2189,31 @@ class Tizen70Vc {
       _vc_tts_set_utterance_status_cbPtr.asFunction<
           int Function(vc_tts_utterance_status_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @partner
-  /// @brief Unsets the TTS utterance status callback function.
-  /// @since_tizen 5.5
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/voicecontrol.tts
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #VC_ERROR_NONE Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VC_ERROR_INVALID_STATE Invalid state
-  /// @pre The state should be #VC_STATE_INITIALIZED.
+  /// Unsets the TTS utterance status callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.tts>
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **Paragraph:**
+  /// - tner
   int vc_tts_unset_utterance_status_cb() {
     return _vc_tts_unset_utterance_status_cb();
   }
@@ -1554,35 +2225,58 @@ class Tizen70Vc {
       _vc_tts_unset_utterance_status_cbPtr.asFunction<int Function()>();
 }
 
+/// @nodoc
 final class vc_cmd_s extends ffi.Opaque {}
 
+/// @nodoc
 final class vc_cmd_list_s extends ffi.Opaque {}
 
-/// @brief The voice command list handle.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// The voice command list handle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+/// @nodoc
 typedef vc_cmd_list_h = ffi.Pointer<vc_cmd_list_s>;
 
-/// @brief The voice command handle.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// The voice command handle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+/// @nodoc
 typedef vc_cmd_h = ffi.Pointer<vc_cmd_s>;
 
-/// @brief Called to retrieve The commands in list.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-/// @param[in] vc_command The command handle
-/// @param[in] user_data The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop,
-/// @c false to break out of the loop
-/// @pre vc_cmd_list_foreach_commands() will invoke this callback.
-/// @see vc_cmd_list_foreach_commands()
+/// Called to retrieve The commands in list.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+///
+/// **Parameters:**
+/// - `vc_command` (in): The command handle
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - vc_cmd_list_foreach_commands() will invoke this callback.
+///
+/// **See also:**
+/// - `vc_cmd_list_foreach_commands()`
+/// @nodoc
 typedef vc_cmd_list_cb
     = ffi.Pointer<ffi.NativeFunction<vc_cmd_list_cbFunction>>;
+/// @nodoc
 typedef vc_cmd_list_cbFunction = ffi.Bool Function(
     vc_cmd_h vc_command, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartvc_cmd_list_cbFunction = bool Function(
     vc_cmd_h vc_command, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumeration for error codes.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// Enumeration for error codes.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+/// @nodoc
 abstract class vc_error_e {
   /// < Successful
   static const int VC_ERROR_NONE = 0;
@@ -1648,8 +2342,11 @@ abstract class vc_error_e {
   static const int VC_ERROR_TTS_FAILED = -49610716;
 }
 
-/// @brief Enumeration for result event.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// Enumeration for result event.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+/// @nodoc
 abstract class vc_result_event_e {
   /// < Normal result
   static const int VC_RESULT_EVENT_RESULT_SUCCESS = 0;
@@ -1658,8 +2355,11 @@ abstract class vc_result_event_e {
   static const int VC_RESULT_EVENT_REJECTED = 1;
 }
 
-/// @brief Enumeration for service state.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// Enumeration for service state.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+/// @nodoc
 abstract class vc_service_state_e {
   /// < 'None' state
   static const int VC_SERVICE_STATE_NONE = 0;
@@ -1674,8 +2374,11 @@ abstract class vc_service_state_e {
   static const int VC_SERVICE_STATE_PROCESSING = 3;
 }
 
-/// @brief Enumeration for client state.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// Enumeration for client state.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+/// @nodoc
 abstract class vc_state_e {
   /// < 'None' state
   static const int VC_STATE_NONE = 0;
@@ -1687,8 +2390,11 @@ abstract class vc_state_e {
   static const int VC_STATE_READY = 2;
 }
 
-/// @brief Enumerations of audio types.
-/// @since_tizen 5.0
+/// Enumerations of audio types.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class vc_audio_type_e {
   /// < Signed 16bit audio type, Little endian
   static const int VC_AUDIO_TYPE_PCM_S16_LE = 0;
@@ -1697,8 +2403,11 @@ abstract class vc_audio_type_e {
   static const int VC_AUDIO_TYPE_PCM_U8 = 1;
 }
 
-/// @brief Enumerations for audio channels.
-/// @since_tizen 5.0
+/// Enumerations for audio channels.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class vc_audio_channel_e {
   /// < 1 channel, mono
   static const int VC_AUDIO_CHANNEL_MONO = 0;
@@ -1707,8 +2416,11 @@ abstract class vc_audio_channel_e {
   static const int VC_AUDIO_CHANNEL_STEREO = 1;
 }
 
-/// @brief Enumeration for TTS feedback events.
-/// @since_tizen 5.0
+/// Enumeration for TTS feedback events.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class vc_feedback_event_e {
   /// < Failed
   static const int VC_FEEDBACK_EVENT_FAIL = -1;
@@ -1723,8 +2435,11 @@ abstract class vc_feedback_event_e {
   static const int VC_FEEDBACK_EVENT_FINISH = 3;
 }
 
-/// @brief Enumeration for requested TTS events.
-/// @since_tizen 5.5
+/// Enumeration for requested TTS events.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class vc_tts_event_e {
   /// < Failed
   static const int VC_TTS_EVENT_FAIL = -1;
@@ -1739,8 +2454,11 @@ abstract class vc_tts_event_e {
   static const int VC_TTS_EVENT_FINISH = 3;
 }
 
-/// @brief Enumeration for requested TTS utterance status events.
-/// @since_tizen 5.5
+/// Enumeration for requested TTS utterance status events.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class vc_tts_utterance_status_e {
   /// < None
   static const int VC_TTS_UTTERANCE_NONE = -1;
@@ -1755,121 +2473,199 @@ abstract class vc_tts_utterance_status_e {
   static const int VC_TTS_UTTERANCE_CANCELED = 3;
 }
 
-/// @brief Called to retrieve supported language.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-/// @param[in] language A language is specified as an ISO 3166 alpha-2 two letter country-code
-/// followed by ISO 639-1 for the two-letter language code.
-/// For example, "ko_KR" for Korean, "en_US" for American English
-/// @param[in] user_data The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop,
-/// @c false to break out of the loop
-/// @pre The function will invoke this callback.
+/// Called to retrieve supported language.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+///
+/// **Parameters:**
+/// - `language` (in): A language is specified as an ISO 3166 alpha-2 two letter country-code followed by ISO 639-1 for the two-letter language code. For example, "ko_KR" for Korean, "en_US" for American English
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - The function will invoke this callback.
+/// @nodoc
 typedef vc_supported_language_cb
     = ffi.Pointer<ffi.NativeFunction<vc_supported_language_cbFunction>>;
+/// @nodoc
 typedef vc_supported_language_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> language, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartvc_supported_language_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> language, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when client gets the recognition result.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-/// @remarks If the duplicated commands are recognized, the event(e.g. #VC_RESULT_EVENT_REJECTED) of command may be rejected
-/// for selecting command as priority. If you set similar or same commands or the recognized results are multi-results,
-/// vc_cmd_list has the multi commands.
-/// @param[in] event The result event (e.g. #VC_RESULT_EVENT_RESULT_SUCCESS, #VC_RESULT_EVENT_REJECTED)
-/// @param[in] vc_cmd_list The recognized command list
-/// @param[in] result The spoken text
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre An application registers callback function.
-/// @see vc_set_result_cb()
+/// Called when client gets the recognition result.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+///
+/// **Remarks:**
+/// - If the duplicated commands are recognized, the event(e.g. `VC_RESULT_EVENT_REJECTED`) of command may be rejected
+/// - for selecting command as priority. If you set similar or same commands or the recognized results are multi-results,
+/// - vc_cmd_list has the multi commands.
+///
+/// **Parameters:**
+/// - `event` (in): The result event (e.g. `VC_RESULT_EVENT_RESULT_SUCCESS`, `VC_RESULT_EVENT_REJECTED`)
+/// - `vc_cmd_list` (in): The recognized command list
+/// - `result` (in): The spoken text
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - An application registers callback function.
+///
+/// **See also:**
+/// - `vc_set_result_cb()`
+/// @nodoc
 typedef vc_result_cb = ffi.Pointer<ffi.NativeFunction<vc_result_cbFunction>>;
+/// @nodoc
 typedef vc_result_cbFunction = ffi.Void Function(
     ffi.Int32 event,
     vc_cmd_list_h vc_cmd_list,
     ffi.Pointer<ffi.Char> result,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartvc_result_cbFunction = void Function(
     int event,
     vc_cmd_list_h vc_cmd_list,
     ffi.Pointer<ffi.Char> result,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the state of voice control service is changed.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-/// @param[in] previous A previous state
-/// @param[in] current A current state
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre An application registers this callback to detect changing service state.
-/// @see vc_set_service_state_changed_cb()
+/// Called when the state of voice control service is changed.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+///
+/// **Parameters:**
+/// - `previous` (in): A previous state
+/// - `current` (in): A current state
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - An application registers this callback to detect changing service state.
+///
+/// **See also:**
+/// - `vc_set_service_state_changed_cb()`
+/// @nodoc
 typedef vc_service_state_changed_cb
     = ffi.Pointer<ffi.NativeFunction<vc_service_state_changed_cbFunction>>;
+/// @nodoc
 typedef vc_service_state_changed_cbFunction = ffi.Void Function(
     ffi.Int32 previous, ffi.Int32 current, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartvc_service_state_changed_cbFunction = void Function(
     int previous, int current, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the state of voice control client is changed.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-/// @param[in] previous A previous state
-/// @param[in] current A current state
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre An application registers this callback to detect changing state.
-/// @see vc_set_state_changed_cb()
+/// Called when the state of voice control client is changed.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+///
+/// **Parameters:**
+/// - `previous` (in): A previous state
+/// - `current` (in): A current state
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - An application registers this callback to detect changing state.
+///
+/// **See also:**
+/// - `vc_set_state_changed_cb()`
+/// @nodoc
 typedef vc_state_changed_cb
     = ffi.Pointer<ffi.NativeFunction<vc_state_changed_cbFunction>>;
+/// @nodoc
 typedef vc_state_changed_cbFunction = ffi.Void Function(
     ffi.Int32 previous, ffi.Int32 current, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartvc_state_changed_cbFunction = void Function(
     int previous, int current, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when default language is changed.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-/// @param[in] previous Previous language
-/// @param[in] current Current language
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre An application registers this callback to detect changing mode.
-/// @see vc_set_current_language_changed_cb()
+/// Called when default language is changed.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+///
+/// **Parameters:**
+/// - `previous` (in): Previous language
+/// - `current` (in): Current language
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - An application registers this callback to detect changing mode.
+///
+/// **See also:**
+/// - `vc_set_current_language_changed_cb()`
+/// @nodoc
 typedef vc_current_language_changed_cb
     = ffi.Pointer<ffi.NativeFunction<vc_current_language_changed_cbFunction>>;
+/// @nodoc
 typedef vc_current_language_changed_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> previous,
     ffi.Pointer<ffi.Char> current,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartvc_current_language_changed_cbFunction = void Function(
     ffi.Pointer<ffi.Char> previous,
     ffi.Pointer<ffi.Char> current,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when error occurred.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-/// @param[in] reason The error type (e.g. #VC_ERROR_OUT_OF_MEMORY, #VC_ERROR_TIMED_OUT)
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre An application registers this callback to detect error.
-/// @see vc_set_error_cb()
+/// Called when error occurred.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+///
+/// **Parameters:**
+/// - `reason` (in): The error type (e.g. `VC_ERROR_OUT_OF_MEMORY`, `VC_ERROR_TIMED_OUT`)
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - An application registers this callback to detect error.
+///
+/// **See also:**
+/// - `vc_set_error_cb()`
+/// @nodoc
 typedef vc_error_cb = ffi.Pointer<ffi.NativeFunction<vc_error_cbFunction>>;
+/// @nodoc
 typedef vc_error_cbFunction = ffi.Void Function(
     ffi.Int32 reason, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartvc_error_cbFunction = void Function(
     int reason, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the client receives TTS streaming data from the VC engine service.
-/// @since_tizen 5.5
-/// @remarks The @a buffer must be released with free() by you when you no longer need it.
-/// @param[in] event The TTS event
-/// @param[in] buffer The TTS streaming data
-/// @param[in] len The length of the TTS streaming data
-/// @param[in] utt_id The utterance id
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre The application registers the callback function using vc_tts_set_streaming_cb().
-/// @see vc_tts_set_streaming_cb()
+/// Called when the client receives TTS streaming data from the VC engine service.
+///
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **Remarks:**
+/// - The `buffer` must be released with free() by you when you no longer need it.
+///
+/// **Parameters:**
+/// - `event` (in): The TTS event
+/// - `buffer` (in): The TTS streaming data
+/// - `len` (in): The length of the TTS streaming data
+/// - `utt_id` (in): The utterance id
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - The application registers the callback function using vc_tts_set_streaming_cb().
+///
+/// **See also:**
+/// - `vc_tts_set_streaming_cb()`
+/// @nodoc
 typedef vc_tts_streaming_cb
     = ffi.Pointer<ffi.NativeFunction<vc_tts_streaming_cbFunction>>;
+/// @nodoc
 typedef vc_tts_streaming_cbFunction = ffi.Void Function(
     ffi.Int32 event,
     ffi.Pointer<ffi.Char> buffer,
     ffi.Int len,
     ffi.Int utt_id,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartvc_tts_streaming_cbFunction = void Function(
     int event,
     ffi.Pointer<ffi.Char> buffer,
@@ -1877,34 +2673,54 @@ typedef Dartvc_tts_streaming_cbFunction = void Function(
     int utt_id,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the client receives the TTS utterance status.
-/// @since_tizen 5.5
-/// @param[in] utt_id The utterance id
-/// @param[in] status The new TTS utterance status (e.g. #VC_TTS_UTTERANCE_STARTED, #VC_TTS_UTTERANCE_COMPLETED, and so on)
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre The application registers the callback function using vc_tts_set_utterance_status_cb().
-/// @see vc_tts_set_utterance_status_cb()
+/// Called when the client receives the TTS utterance status.
+///
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **Parameters:**
+/// - `utt_id` (in): The utterance id
+/// - `status` (in): The new TTS utterance status (e.g. `VC_TTS_UTTERANCE_STARTED`, `VC_TTS_UTTERANCE_COMPLETED`, and so on)
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - The application registers the callback function using vc_tts_set_utterance_status_cb().
+///
+/// **See also:**
+/// - `vc_tts_set_utterance_status_cb()`
+/// @nodoc
 typedef vc_tts_utterance_status_cb
     = ffi.Pointer<ffi.NativeFunction<vc_tts_utterance_status_cbFunction>>;
+/// @nodoc
 typedef vc_tts_utterance_status_cbFunction = ffi.Void Function(
     ffi.Int utt_id, ffi.Int32 status, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartvc_tts_utterance_status_cbFunction = void Function(
     int utt_id, int status, ffi.Pointer<ffi.Void> user_data);
 
+/// @nodoc
 const int VC_COMMAND_FORMAT_FIXED = 0;
 
+/// @nodoc
 const int VC_COMMAND_FORMAT_FIXED_AND_VFIXED = 1;
 
+/// @nodoc
 const int VC_COMMAND_FORMAT_VFIXED_AND_FIXED = 2;
 
+/// @nodoc
 const int VC_COMMAND_FORMAT_FIXED_AND_NONFIXED = 3;
 
+/// @nodoc
 const int VC_COMMAND_FORMAT_NONFIXED_AND_FIXED = 4;
 
+/// @nodoc
 const int VC_COMMAND_TYPE_FOREGROUND = 1;
 
+/// @nodoc
 const int VC_COMMAND_TYPE_BACKGROUND = 2;
 
+/// @nodoc
 const int VC_DIALOG_END = 0;
 
+/// @nodoc
 const int VC_DIALOG_CONTINUE = 1;

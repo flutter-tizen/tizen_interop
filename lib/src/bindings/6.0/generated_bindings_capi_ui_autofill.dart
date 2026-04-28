@@ -1,3 +1,6 @@
+/// {@category 6.0/tizen}
+library tizen_interop_6_0.capi_ui_autofill;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'generated_bindings_capi_ui_autofill_common.dart' as autofill_common;
 
 /// Dart bindings for Tizen capi-ui-autofill APIs.
+/// {@category 6.0/tizen}
 class Tizen60CapiUiAutofill {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,15 +29,27 @@ class Tizen60CapiUiAutofill {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates a handle for autofill.
-  /// @since_tizen 5.5
-  /// @remarks If the function succeeds, @a ah handle must be released with autofill_destroy().
-  /// @param[out] ah The autofill handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see autofill_destroy()
+  /// Creates a handle for autofill.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, `ah` handle must be released with autofill_destroy().
+  ///
+  /// **Parameters:**
+  /// - `ah` (out): The autofill handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `autofill_destroy()`
   int autofill_create(
     ffi.Pointer<autofill_h> ah,
   ) {
@@ -48,13 +64,23 @@ class Tizen60CapiUiAutofill {
   late final _autofill_create =
       _autofill_createPtr.asFunction<int Function(ffi.Pointer<autofill_h>)>();
 
-  /// @brief Destroys an autofill.
-  /// @since_tizen 5.5
-  /// @param[in] ah The autofill handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see autofill_create()
+  /// Destroys an autofill.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `ah` (in): The autofill handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `autofill_create()`
   int autofill_destroy(
     autofill_h ah,
   ) {
@@ -69,15 +95,23 @@ class Tizen60CapiUiAutofill {
   late final _autofill_destroy =
       _autofill_destroyPtr.asFunction<int Function(autofill_h)>();
 
-  /// @brief Connects to autofill daemon.
-  /// @since_tizen 5.5
-  /// @param[in] ah The autofill handle
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OPERATION_FAILED Operation failure
+  /// Connects to autofill daemon.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `ah` (in): The autofill handle
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OPERATION_FAILED`: Operation failure
   int autofill_connect(
     autofill_h ah,
     autofill_connection_status_changed_cb callback,
@@ -98,14 +132,22 @@ class Tizen60CapiUiAutofill {
       int Function(autofill_h, autofill_connection_status_changed_cb,
           ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Requests of authentication information.
-  /// @since_tizen 5.5
-  /// @param[in] ah The autofill handle
-  /// @param[in] vi The autofill view info handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OPERATION_FAILED Operation failure
+  /// Requests of authentication information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `ah` (in): The autofill handle
+  /// - `vi` (in): The autofill view info handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OPERATION_FAILED`: Operation failure
   int autofill_auth_info_request(
     autofill_h ah,
     autofill_common.autofill_view_info_h vi,
@@ -125,15 +167,25 @@ class Tizen60CapiUiAutofill {
       _autofill_auth_info_requestPtr.asFunction<
           int Function(autofill_h, autofill_common.autofill_view_info_h)>();
 
-  /// @brief Sets the callback to receive the authentication information.
-  /// @since_tizen 5.5
-  /// @param[in] ah The autofill handle
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see autofill_auth_info_unset_received_cb()
+  /// Sets the callback to receive the authentication information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `ah` (in): The autofill handle
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `autofill_auth_info_unset_received_cb()`
   int autofill_auth_info_set_received_cb(
     autofill_h ah,
     autofill_auth_info_received_cb callback,
@@ -155,13 +207,23 @@ class Tizen60CapiUiAutofill {
           int Function(autofill_h, autofill_auth_info_received_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback to receive the authentication information.
-  /// @since_tizen 5.5
-  /// @param[in] ah The autofill handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see autofill_auth_info_set_received_cb()
+  /// Unsets the callback to receive the authentication information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `ah` (in): The autofill handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `autofill_auth_info_set_received_cb()`
   int autofill_auth_info_unset_received_cb(
     autofill_h ah,
   ) {
@@ -177,15 +239,25 @@ class Tizen60CapiUiAutofill {
       _autofill_auth_info_unset_received_cbPtr
           .asFunction<int Function(autofill_h)>();
 
-  /// @brief Sends fill request to fill out each input form.
-  /// @since_tizen 5.5
-  /// @param[in] ah The autofill handle
-  /// @param[in] vi The autofill view info handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OPERATION_FAILED Operation failure
-  /// @see autofill_cancel_fill_request()
+  /// Sends fill request to fill out each input form.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `ah` (in): The autofill handle
+  /// - `vi` (in): The autofill view info handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **See also:**
+  /// - `autofill_cancel_fill_request()`
   int autofill_fill_request(
     autofill_h ah,
     autofill_common.autofill_view_info_h vi,
@@ -203,15 +275,25 @@ class Tizen60CapiUiAutofill {
   late final _autofill_fill_request = _autofill_fill_requestPtr.asFunction<
       int Function(autofill_h, autofill_common.autofill_view_info_h)>();
 
-  /// @brief Cancels autofill request to fill out each input form.
-  /// @since_tizen 5.5
-  /// @param[in] ah The autofill handle
-  /// @param[in] vi The autofill view info handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OPERATION_FAILED Operation failure
-  /// @see autofill_fill_request()
+  /// Cancels autofill request to fill out each input form.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `ah` (in): The autofill handle
+  /// - `vi` (in): The autofill view info handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **See also:**
+  /// - `autofill_fill_request()`
   int autofill_cancel_fill_request(
     autofill_h ah,
     autofill_common.autofill_view_info_h vi,
@@ -231,15 +313,25 @@ class Tizen60CapiUiAutofill {
       _autofill_cancel_fill_requestPtr.asFunction<
           int Function(autofill_h, autofill_common.autofill_view_info_h)>();
 
-  /// @brief Sets the callback to receive autofill fill response.
-  /// @since_tizen 5.5
-  /// @param[in] ah The autofill handle
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see autofill_fill_response_unset_received_cb()
+  /// Sets the callback to receive autofill fill response.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `ah` (in): The autofill handle
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `autofill_fill_response_unset_received_cb()`
   int autofill_fill_response_set_received_cb(
     autofill_h ah,
     autofill_fill_response_received_cb callback,
@@ -262,12 +354,20 @@ class Tizen60CapiUiAutofill {
           int Function(autofill_h, autofill_fill_response_received_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback to receive autofill fill response.
-  /// @since_tizen 5.5
-  /// @param[in] ah The autofill handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Unsets the callback to receive autofill fill response.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `ah` (in): The autofill handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_fill_response_unset_received_cb(
     autofill_h ah,
   ) {
@@ -283,14 +383,22 @@ class Tizen60CapiUiAutofill {
       _autofill_fill_response_unset_received_cbPtr
           .asFunction<int Function(autofill_h)>();
 
-  /// @brief Sends the autofill save view info.
-  /// @since_tizen 5.5
-  /// @param[in] ah The autofill handle
-  /// @param[in] vi The autofill save view info handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OPERATION_FAILED Operation failure
+  /// Sends the autofill save view info.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `ah` (in): The autofill handle
+  /// - `vi` (in): The autofill save view info handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OPERATION_FAILED`: Operation failure
   int autofill_commit(
     autofill_h ah,
     autofill_common.autofill_save_view_info_h vi,
@@ -308,15 +416,25 @@ class Tizen60CapiUiAutofill {
   late final _autofill_commit = _autofill_commitPtr.asFunction<
       int Function(autofill_h, autofill_common.autofill_save_view_info_h)>();
 
-  /// @brief Sets the callback to receive the error information.
-  /// @since_tizen 5.5
-  /// @param[in] ah The autofill handle
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see autofill_error_info_unset_received_cb()
+  /// Sets the callback to receive the error information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `ah` (in): The autofill handle
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `autofill_error_info_unset_received_cb()`
   int autofill_error_info_set_received_cb(
     autofill_h ah,
     autofill_error_info_received_cb callback,
@@ -338,13 +456,23 @@ class Tizen60CapiUiAutofill {
           int Function(autofill_h, autofill_error_info_received_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback to receive the error information.
-  /// @since_tizen 5.5
-  /// @param[in] ah The autofill handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see autofill_error_info_set_received_cb()
+  /// Unsets the callback to receive the error information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `ah` (in): The autofill handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `autofill_error_info_set_received_cb()`
   int autofill_error_info_unset_received_cb(
     autofill_h ah,
   ) {
@@ -361,8 +489,11 @@ class Tizen60CapiUiAutofill {
           .asFunction<int Function(autofill_h)>();
 }
 
-/// @brief Enumeration of connection status.
-/// @since_tizen 5.5
+/// Enumeration of connection status.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class autofill_connection_status_e {
   /// < Connected
   static const int AUTOFILL_CONNECTION_STATUS_CONNECTED = 0;
@@ -374,78 +505,126 @@ abstract class autofill_connection_status_e {
   static const int AUTOFILL_CONNECTION_STATUS_REJECTED = 2;
 }
 
+/// @nodoc
 final class autofill_s extends ffi.Opaque {}
 
-/// @brief The autofill handle.
-/// @since_tizen 5.5
+/// The autofill handle.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 typedef autofill_h = ffi.Pointer<autofill_s>;
 
-/// @brief Called when the connection status is changed.
-/// @since_tizen 5.5
-/// @remarks @a ah should not be freed and can be used only in the callback.
-/// @param[in] ah The autofill handle
-/// @param[in] status The connection status
-/// @param[in] user_data The user data passed from the callback function
-/// @see autofill_connect()
+/// Called when the connection status is changed.
+///
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **Remarks:**
+/// - `ah` should not be freed and can be used only in the callback.
+///
+/// **Parameters:**
+/// - `ah` (in): The autofill handle
+/// - `status` (in): The connection status
+/// - `user_data` (in): The user data passed from the callback function
+///
+/// **See also:**
+/// - `autofill_connect()`
+/// @nodoc
 typedef autofill_connection_status_changed_cb = ffi
     .Pointer<ffi.NativeFunction<autofill_connection_status_changed_cbFunction>>;
+/// @nodoc
 typedef autofill_connection_status_changed_cbFunction = ffi.Void Function(
     autofill_h ah, ffi.Int32 status, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartautofill_connection_status_changed_cbFunction = void Function(
     autofill_h ah, int status, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when receiving the authentication information.
-/// @since_tizen 5.5
-/// @remarks @a ah should not be freed and can be used only in the callback.
-/// @remarks @a auth_info should not be freed and can be used only in the callback.
-/// @param[in] ah The autofill handle
-/// @param[in] auth_info The autofill authentication information handle
-/// @param[in] user_data The user data passed from the callback function
-/// @see autofill_auth_info_set_received_cb()
+/// Called when receiving the authentication information.
+///
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **Remarks:**
+/// - `ah` should not be freed and can be used only in the callback.
+/// - `auth_info` should not be freed and can be used only in the callback.
+///
+/// **Parameters:**
+/// - `ah` (in): The autofill handle
+/// - `auth_info` (in): The autofill authentication information handle
+/// - `user_data` (in): The user data passed from the callback function
+///
+/// **See also:**
+/// - `autofill_auth_info_set_received_cb()`
+/// @nodoc
 typedef autofill_auth_info_received_cb
     = ffi.Pointer<ffi.NativeFunction<autofill_auth_info_received_cbFunction>>;
+/// @nodoc
 typedef autofill_auth_info_received_cbFunction = ffi.Void Function(
     autofill_h ah,
     autofill_common.autofill_auth_info_h auth_info,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartautofill_auth_info_received_cbFunction = void Function(
     autofill_h ah,
     autofill_common.autofill_auth_info_h auth_info,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when receiving autofill fill response data.
-/// @since_tizen 5.5
-/// @remarks @a ah should not be freed and can be used only in the callback.
-/// @remarks @a fill_response_h should not be freed and can be used only in the callback.
-/// @param[in] ah The autofill handle
-/// @param[in] fill_response_h The autofill fill response handle
-/// @param[in] user_data The user data to be passed to the callback function
-/// @see autofill_fill_response_set_received_cb()
+/// Called when receiving autofill fill response data.
+///
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **Remarks:**
+/// - `ah` should not be freed and can be used only in the callback.
+/// - `fill_response_h` should not be freed and can be used only in the callback.
+///
+/// **Parameters:**
+/// - `ah` (in): The autofill handle
+/// - `fill_response_h` (in): The autofill fill response handle
+/// - `user_data` (in): The user data to be passed to the callback function
+///
+/// **See also:**
+/// - `autofill_fill_response_set_received_cb()`
+/// @nodoc
 typedef autofill_fill_response_received_cb = ffi
     .Pointer<ffi.NativeFunction<autofill_fill_response_received_cbFunction>>;
+/// @nodoc
 typedef autofill_fill_response_received_cbFunction = ffi.Void Function(
     autofill_h ah,
     autofill_common.autofill_fill_response_h fill_response_h,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartautofill_fill_response_received_cbFunction = void Function(
     autofill_h ah,
     autofill_common.autofill_fill_response_h fill_response_h,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when receiving the error information.
-/// @since_tizen 5.5
-/// @remarks @a ah should not be freed and can be used only in the callback.
-/// @remarks @a error_info should not be freed and can be used only in the callback.
-/// @param[in] ah The autofill handle
-/// @param[in] error_info The autofill error information handle
-/// @param[in] user_data The user data passed from the callback function
-/// @see autofill_error_info_set_received_cb()
+/// Called when receiving the error information.
+///
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **Remarks:**
+/// - `ah` should not be freed and can be used only in the callback.
+/// - `error_info` should not be freed and can be used only in the callback.
+///
+/// **Parameters:**
+/// - `ah` (in): The autofill handle
+/// - `error_info` (in): The autofill error information handle
+/// - `user_data` (in): The user data passed from the callback function
+///
+/// **See also:**
+/// - `autofill_error_info_set_received_cb()`
+/// @nodoc
 typedef autofill_error_info_received_cb
     = ffi.Pointer<ffi.NativeFunction<autofill_error_info_received_cbFunction>>;
+/// @nodoc
 typedef autofill_error_info_received_cbFunction = ffi.Void Function(
     autofill_h ah,
     autofill_common.autofill_error_info_h error_info,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartautofill_error_info_received_cbFunction = void Function(
     autofill_h ah,
     autofill_common.autofill_error_info_h error_info,

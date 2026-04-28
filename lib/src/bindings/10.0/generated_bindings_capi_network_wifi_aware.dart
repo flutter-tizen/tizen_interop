@@ -1,3 +1,6 @@
+/// {@category 10.0/tizen}
+library tizen_interop_10_0.capi_network_wifi_aware;
+
 // Copyright 2026 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-network-wifi-aware APIs.
+/// {@category 10.0/tizen}
 class Tizen100CapiNetworkWifiAware {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,15 +28,23 @@ class Tizen100CapiNetworkWifiAware {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Initializes Wi-Fi Aware.
-  /// @since_tizen 9.0
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_ALREADY_INITIALIZED    Already initialized
-  /// @retval #WIFI_AWARE_ERROR_OPERATION_FAILED       Operation failed
-  /// @retval #WIFI_AWARE_ERROR_OUT_OF_MEMORY          Out of memory
-  /// @see wifi_aware_deinitialize()
+  /// Initializes Wi-Fi Aware.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_ALREADY_INITIALIZED`: Already initialized
+  /// - `WIFI_AWARE_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_AWARE_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `wifi_aware_deinitialize()`
   int wifi_aware_initialize() {
     return _wifi_aware_initialize();
   }
@@ -42,13 +54,21 @@ class Tizen100CapiNetworkWifiAware {
   late final _wifi_aware_initialize =
       _wifi_aware_initializePtr.asFunction<int Function()>();
 
-  /// @brief Deinitializes Wi-Fi Aware.
-  /// @since_tizen 9.0
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @see wifi_aware_initialize()
+  /// Deinitializes Wi-Fi Aware.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **See also:**
+  /// - `wifi_aware_initialize()`
   int wifi_aware_deinitialize() {
     return _wifi_aware_deinitialize();
   }
@@ -59,22 +79,38 @@ class Tizen100CapiNetworkWifiAware {
   late final _wifi_aware_deinitialize =
       _wifi_aware_deinitializePtr.asFunction<int Function()>();
 
-  /// @brief Enables Wi-Fi Aware functions.
-  /// @since_tizen 9.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.set
-  /// @remarks If the enable request is successfully done, the application can get the MAC address.
-  /// @param[in] callback The result of enable request is asynchronously delivered
-  /// @param[in] user_data The user data passed to the callback function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_PERMISSION_DENIED      Permission denied
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @retval #WIFI_AWARE_ERROR_ALREADY_ENABLED        Already enabled
-  /// @retval #WIFI_AWARE_ERROR_OPERATION_FAILED       Operation failed
-  /// @retval #WIFI_AWARE_ERROR_OUT_OF_MEMORY          Out of memory
-  /// @see wifi_aware_disable()
+  /// Enables Wi-Fi Aware functions.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.set>
+  ///
+  /// **Remarks:**
+  /// - If the enable request is successfully done, the application can get the MAC address.
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The result of enable request is asynchronously delivered
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_AWARE_ERROR_ALREADY_ENABLED`: Already enabled
+  /// - `WIFI_AWARE_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_AWARE_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `wifi_aware_disable()`
   int wifi_aware_enable(
     wifi_aware_enabled_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -92,20 +128,34 @@ class Tizen100CapiNetworkWifiAware {
   late final _wifi_aware_enable = _wifi_aware_enablePtr
       .asFunction<int Function(wifi_aware_enabled_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Disables Wi-Fi Aware functions.
-  /// @since_tizen 9.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.set
-  /// @param[in] callback The result of disable request is asynchronously delivered
-  /// @param[in] user_data The user data passed to the callback function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_PERMISSION_DENIED      Permission denied
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @retval #WIFI_AWARE_ERROR_INVALID_OPERATION      Invalid operation
-  /// @retval #WIFI_AWARE_ERROR_OPERATION_FAILED       Operation failed
-  /// @see wifi_aware_enable()
+  /// Disables Wi-Fi Aware functions.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.set>
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The result of disable request is asynchronously delivered
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_AWARE_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_AWARE_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `wifi_aware_enable()`
   int wifi_aware_disable(
     wifi_aware_disabled_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -123,20 +173,34 @@ class Tizen100CapiNetworkWifiAware {
   late final _wifi_aware_disable = _wifi_aware_disablePtr.asFunction<
       int Function(wifi_aware_disabled_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Creates the Wi-Fi Aware Session.
-  /// @since_tizen 9.0
-  /// @remarks The @a session should be released using wifi_aware_session_destroy().
-  /// @param[in] session_type The type of session
-  /// @param[out] session The Wi-Fi Aware Session handle that is newly created on success
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @retval #WIFI_AWARE_ERROR_OUT_OF_MEMORY          Out of memory
+  /// Creates the Wi-Fi Aware Session.
   ///
-  /// @par Here is an example of the usage:
-  /// @code
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Remarks:**
+  /// - The `session` should be released using wifi_aware_session_destroy().
+  ///
+  /// **Parameters:**
+  /// - `session_type` (in): The type of session
+  /// - `session` (out): The Wi-Fi Aware Session handle that is newly created on success
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_AWARE_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `wifi_aware_session_destroy()`
+  ///
+  /// **Here is an example of the usage:**
+  ///
+  /// ```
   ///
   /// int ret = 0;
   /// wifi_aware_session_h wifi_aware_session = NULL;
@@ -151,8 +215,7 @@ class Tizen100CapiNetworkWifiAware {
   ///
   /// wifi_aware_session_destroy(wifi_aware_session);
   ///
-  /// @endcode
-  /// @see wifi_aware_session_destroy()
+  /// ```
   int wifi_aware_session_create(
     int session_type,
     ffi.Pointer<wifi_aware_session_h> session,
@@ -170,15 +233,25 @@ class Tizen100CapiNetworkWifiAware {
   late final _wifi_aware_session_create = _wifi_aware_session_createPtr
       .asFunction<int Function(int, ffi.Pointer<wifi_aware_session_h>)>();
 
-  /// @brief Destroys the Wi-Fi Aware Session.
-  /// @since_tizen 9.0
-  /// @param[in] session The Wi-Fi Aware Session handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @see wifi_aware_session_create()
+  /// Destroys the Wi-Fi Aware Session.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `session` (in): The Wi-Fi Aware Session handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **See also:**
+  /// - `wifi_aware_session_create()`
   int wifi_aware_session_destroy(
     wifi_aware_session_h session,
   ) {
@@ -193,17 +266,27 @@ class Tizen100CapiNetworkWifiAware {
   late final _wifi_aware_session_destroy = _wifi_aware_session_destroyPtr
       .asFunction<int Function(wifi_aware_session_h)>();
 
-  /// @brief Sets a callback function to notify session is terminated.
-  /// @since_tizen 9.0
-  /// @param[in] session   The Wi-Fi Aware Session
-  /// @param[in] callback  The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @see wifi_aware_session_unset_terminated_cb()
+  /// Sets a callback function to notify session is terminated.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `session` (in): The Wi-Fi Aware Session
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **See also:**
+  /// - `wifi_aware_session_unset_terminated_cb()`
   int wifi_aware_session_set_terminated_cb(
     wifi_aware_session_h session,
     wifi_aware_session_terminated_cb callback,
@@ -227,15 +310,25 @@ class Tizen100CapiNetworkWifiAware {
           int Function(wifi_aware_session_h, wifi_aware_session_terminated_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the session terminated callback function.
-  /// @since_tizen 9.0
-  /// @param[in] session The Wi-Fi Aware Session
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @see wifi_aware_session_set_terminated_cb()
+  /// Unsets the session terminated callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `session` (in): The Wi-Fi Aware Session
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **See also:**
+  /// - `wifi_aware_session_set_terminated_cb()`
   int wifi_aware_session_unset_terminated_cb(
     wifi_aware_session_h session,
   ) {
@@ -251,22 +344,38 @@ class Tizen100CapiNetworkWifiAware {
       _wifi_aware_session_unset_terminated_cbPtr
           .asFunction<int Function(wifi_aware_session_h)>();
 
-  /// @brief Stops a Wi-Fi Aware session.
-  /// @since_tizen 9.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.set
-  /// @remarks The function of the session, Publish or Subscribe, will be cancelled.
-  /// @param[in] session The Wi-Fi Aware Session handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_PERMISSION_DENIED      Permission denied
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @retval #WIFI_AWARE_ERROR_INVALID_OPERATION      Invalid operation
-  /// @retval #WIFI_AWARE_ERROR_OPERATION_FAILED       Operation failed
-  /// @see wifi_aware_session_publish()
-  /// @see wifi_aware_session_subscribe()
+  /// Stops a Wi-Fi Aware session.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.set>
+  ///
+  /// **Remarks:**
+  /// - The function of the session, Publish or Subscribe, will be cancelled.
+  ///
+  /// **Parameters:**
+  /// - `session` (in): The Wi-Fi Aware Session handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_AWARE_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_AWARE_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `wifi_aware_session_publish()`
+  /// - `wifi_aware_session_subscribe()`
   int wifi_aware_session_stop(
     wifi_aware_session_h session,
   ) {
@@ -281,23 +390,37 @@ class Tizen100CapiNetworkWifiAware {
   late final _wifi_aware_session_stop = _wifi_aware_session_stopPtr
       .asFunction<int Function(wifi_aware_session_h)>();
 
-  /// @brief Publishes a Wi-Fi Aware service so that neighboring devices can find it.
-  /// @since_tizen 9.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.set
-  /// @param[in] session  The Wi-Fi Aware Session handle
-  /// @param[in] publish   The Wi-Fi Aware Publish handle
-  /// @param[in] callback  The callback which gets called when a service is published
-  /// @param[in] user_data The user data passed to the callback function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_PERMISSION_DENIED      Permission denied
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @retval #WIFI_AWARE_ERROR_INVALID_OPERATION      Invalid operation
-  /// @retval #WIFI_AWARE_ERROR_OPERATION_FAILED       Operation failed
-  /// @see wifi_aware_session_stop()
+  /// Publishes a Wi-Fi Aware service so that neighboring devices can find it.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.set>
+  ///
+  /// **Parameters:**
+  /// - `session` (in): The Wi-Fi Aware Session handle
+  /// - `publish` (in): The Wi-Fi Aware Publish handle
+  /// - `callback` (in): The callback which gets called when a service is published
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_AWARE_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_AWARE_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `wifi_aware_session_stop()`
   int wifi_aware_session_publish(
     wifi_aware_session_h session,
     wifi_aware_publish_h publish,
@@ -324,23 +447,37 @@ class Tizen100CapiNetworkWifiAware {
           int Function(wifi_aware_session_h, wifi_aware_publish_h,
               wifi_aware_published_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Updates the configuration for a Wi-Fi Aware service that has already been published.
-  /// @since_tizen 9.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.set
-  /// @param[in] session  The Wi-Fi Aware Session handle
-  /// @param[in] publish   The Wi-Fi Aware Publish handle
-  /// @param[in] callback  The callback which gets called when a service is updated
-  /// @param[in] user_data The user data passed to the callback function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_PERMISSION_DENIED      Permission denied
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @retval #WIFI_AWARE_ERROR_INVALID_OPERATION      Invalid operation
-  /// @retval #WIFI_AWARE_ERROR_OPERATION_FAILED       Operation failed
-  /// @see wifi_aware_session_publish()
+  /// Updates the configuration for a Wi-Fi Aware service that has already been published.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.set>
+  ///
+  /// **Parameters:**
+  /// - `session` (in): The Wi-Fi Aware Session handle
+  /// - `publish` (in): The Wi-Fi Aware Publish handle
+  /// - `callback` (in): The callback which gets called when a service is updated
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_AWARE_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_AWARE_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `wifi_aware_session_publish()`
   int wifi_aware_session_update_publish(
     wifi_aware_session_h session,
     wifi_aware_publish_h publish,
@@ -367,23 +504,37 @@ class Tizen100CapiNetworkWifiAware {
           int Function(wifi_aware_session_h, wifi_aware_publish_h,
               wifi_aware_published_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Starts to find Wi-Fi Aware services.
-  /// @since_tizen 9.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.set
-  /// @param[in] session   The Wi-Fi Aware Session handle
-  /// @param[in] subscribe The Wi-Fi Aware Subscribe handle
-  /// @param[in] callback  The callback which get called when request is finished
-  /// @param[in] user_data The user data passed to the callback function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_PERMISSION_DENIED      Permission denied
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @retval #WIFI_AWARE_ERROR_INVALID_OPERATION      Invalid operation
-  /// @retval #WIFI_AWARE_ERROR_OPERATION_FAILED       Operation failed
-  /// @see wifi_aware_session_stop()
+  /// Starts to find Wi-Fi Aware services.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.set>
+  ///
+  /// **Parameters:**
+  /// - `session` (in): The Wi-Fi Aware Session handle
+  /// - `subscribe` (in): The Wi-Fi Aware Subscribe handle
+  /// - `callback` (in): The callback which get called when request is finished
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_AWARE_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_AWARE_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `wifi_aware_session_stop()`
   int wifi_aware_session_subscribe(
     wifi_aware_session_h session,
     wifi_aware_subscribe_h subscribe,
@@ -410,23 +561,37 @@ class Tizen100CapiNetworkWifiAware {
           int Function(wifi_aware_session_h, wifi_aware_subscribe_h,
               wifi_aware_subscribed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Updates the configuration for a Wi-Fi Aware service that has already been subscribed.
-  /// @since_tizen 9.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.set
-  /// @param[in] session   The Wi-Fi Aware Session handle
-  /// @param[in] subscribe The Wi-Fi Aware Subscribe handle
-  /// @param[in] callback  The callback which gets called when service is updated
-  /// @param[in] user_data The user data passed to the callback function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_PERMISSION_DENIED      Permission denied
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @retval #WIFI_AWARE_ERROR_INVALID_OPERATION      Invalid operation
-  /// @retval #WIFI_AWARE_ERROR_OPERATION_FAILED       Operation failed
-  /// @see wifi_aware_session_subscribe()
+  /// Updates the configuration for a Wi-Fi Aware service that has already been subscribed.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.set>
+  ///
+  /// **Parameters:**
+  /// - `session` (in): The Wi-Fi Aware Session handle
+  /// - `subscribe` (in): The Wi-Fi Aware Subscribe handle
+  /// - `callback` (in): The callback which gets called when service is updated
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_AWARE_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_AWARE_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `wifi_aware_session_subscribe()`
   int wifi_aware_session_update_subscribe(
     wifi_aware_session_h session,
     wifi_aware_subscribe_h subscribe,
@@ -453,17 +618,27 @@ class Tizen100CapiNetworkWifiAware {
           int Function(wifi_aware_session_h, wifi_aware_subscribe_h,
               wifi_aware_subscribed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets a callback function to notify a service is discovered.
-  /// @since_tizen 9.0
-  /// @param[in] session   The Wi-Fi Aware Session handle
-  /// @param[in] callback  The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @see wifi_aware_session_unset_service_discovered_cb()
+  /// Sets a callback function to notify a service is discovered.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `session` (in): The Wi-Fi Aware Session handle
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **See also:**
+  /// - `wifi_aware_session_unset_service_discovered_cb()`
   int wifi_aware_session_set_service_discovered_cb(
     wifi_aware_session_h session,
     wifi_aware_service_discovered_cb callback,
@@ -486,15 +661,25 @@ class Tizen100CapiNetworkWifiAware {
           int Function(wifi_aware_session_h, wifi_aware_service_discovered_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the service discovered callback function.
-  /// @since_tizen 9.0
-  /// @param[in] session The Wi-Fi Aware Session handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @see wifi_aware_session_set_service_discovered_cb()
+  /// Unsets the service discovered callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `session` (in): The Wi-Fi Aware Session handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **See also:**
+  /// - `wifi_aware_session_set_service_discovered_cb()`
   int wifi_aware_session_unset_service_discovered_cb(
     wifi_aware_session_h session,
   ) {
@@ -510,25 +695,37 @@ class Tizen100CapiNetworkWifiAware {
       _wifi_aware_session_unset_service_discovered_cbPtr
           .asFunction<int Function(wifi_aware_session_h)>();
 
-  /// @brief Sends the message to a peer.
-  /// @since_tizen 9.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.set
-  /// @param[in] session   The Wi-Fi Aware Session handle
-  /// @param[in] peer      The peer who gets the message
-  /// @param[in] message   The message sent to a peer
-  /// @param[in] len       The length of the message
-  /// @param[in] callback  The callback function
-  /// @param[in] user_data The user data passed to the callback function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_PERMISSION_DENIED      Permission denied
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @retval #WIFI_AWARE_ERROR_INVALID_OPERATION      Invalid operation
-  /// @retval #WIFI_AWARE_ERROR_OPERATION_FAILED       Operation failed
-  /// @retval #WIFI_AWARE_ERROR_OUT_OF_MEMORY          Out of memory
+  /// Sends the message to a peer.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.set>
+  ///
+  /// **Parameters:**
+  /// - `session` (in): The Wi-Fi Aware Session handle
+  /// - `peer` (in): The peer who gets the message
+  /// - `message` (in): The message sent to a peer
+  /// - `len` (in): The length of the message
+  /// - `callback` (in): The callback function
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_AWARE_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_AWARE_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_AWARE_ERROR_OUT_OF_MEMORY`: Out of memory
   int wifi_aware_session_send_message(
     wifi_aware_session_h session,
     wifi_aware_peer_h peer,
@@ -566,17 +763,27 @@ class Tizen100CapiNetworkWifiAware {
               wifi_aware_send_message_result_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets a callback function to deliver received message from a peer.
-  /// @since_tizen 9.0
-  /// @param[in] session   The Wi-Fi Aware Session handle
-  /// @param[in] callback  The callback function which gets called
-  /// @param[in] user_data The user data passed to @a callback
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @see wifi_aware_session_unset_message_received_cb()
+  /// Sets a callback function to deliver received message from a peer.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `session` (in): The Wi-Fi Aware Session handle
+  /// - `callback` (in): The callback function which gets called
+  /// - `user_data` (in): The user data passed to `callback`
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **See also:**
+  /// - `wifi_aware_session_unset_message_received_cb()`
   int wifi_aware_session_set_message_received_cb(
     wifi_aware_session_h session,
     wifi_aware_message_received_cb callback,
@@ -599,15 +806,25 @@ class Tizen100CapiNetworkWifiAware {
           int Function(wifi_aware_session_h, wifi_aware_message_received_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets a callback function for received message.
-  /// @since_tizen 9.0
-  /// @param[in] session The Wi-Fi Aware Session handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @see wifi_aware_session_set_message_received_cb()
+  /// Unsets a callback function for received message.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `session` (in): The Wi-Fi Aware Session handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **See also:**
+  /// - `wifi_aware_session_set_message_received_cb()`
   int wifi_aware_session_unset_message_received_cb(
     wifi_aware_session_h session,
   ) {
@@ -623,20 +840,34 @@ class Tizen100CapiNetworkWifiAware {
       _wifi_aware_session_unset_message_received_cbPtr
           .asFunction<int Function(wifi_aware_session_h)>();
 
-  /// @brief Copies a Peer handle.
-  /// @since_tizen 9.0
-  /// @remarks The @a cloned should be released using wifi_aware_peer_destroy().
-  /// @param[out] cloned The Peer handle copied from @a origin
-  /// @param[in] origin  The origin Peer handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @retval #WIFI_AWARE_ERROR_OUT_OF_MEMORY          Out of memory
+  /// Copies a Peer handle.
   ///
-  /// @par Here is an example of the usage:
-  /// @code
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Remarks:**
+  /// - The `cloned` should be released using wifi_aware_peer_destroy().
+  ///
+  /// **Parameters:**
+  /// - `cloned` (out): The Peer handle copied from `origin`
+  /// - `origin` (in): The origin Peer handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_AWARE_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `wifi_aware_peer_destroy()`
+  ///
+  /// **Here is an example of the usage:**
+  ///
+  /// ```
   ///
   /// wifi_aware_peer_h cloned_peer;
   /// int ret = 0;
@@ -651,8 +882,7 @@ class Tizen100CapiNetworkWifiAware {
   ///
   /// wifi_aware_peer_destroy(cloned_peer);
   ///
-  /// @endcode
-  /// @see wifi_aware_peer_destroy()
+  /// ```
   int wifi_aware_peer_clone(
     ffi.Pointer<wifi_aware_peer_h> cloned,
     wifi_aware_peer_h origin,
@@ -670,15 +900,25 @@ class Tizen100CapiNetworkWifiAware {
   late final _wifi_aware_peer_clone = _wifi_aware_peer_clonePtr.asFunction<
       int Function(ffi.Pointer<wifi_aware_peer_h>, wifi_aware_peer_h)>();
 
-  /// @brief Destroys a Peer handle.
-  /// @since_tizen 9.0
-  /// @param[in] peer The Peer handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @see wifi_aware_peer_clone()
+  /// Destroys a Peer handle.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `peer` (in): The Peer handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **See also:**
+  /// - `wifi_aware_peer_clone()`
   int wifi_aware_peer_destroy(
     wifi_aware_peer_h peer,
   ) {
@@ -693,20 +933,31 @@ class Tizen100CapiNetworkWifiAware {
   late final _wifi_aware_peer_destroy =
       _wifi_aware_peer_destroyPtr.asFunction<int Function(wifi_aware_peer_h)>();
 
-  /// @brief Gets the MAC address (NAN Management Interface) of Wi-Fi Aware peer.
-  /// @since_tizen 9.0
-  /// @remarks The @a mac should be freed using free().
-  /// @param[in] peer The Peer handle
-  /// @param[out] mac The MAC address of the peer
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @retval #WIFI_AWARE_ERROR_OUT_OF_MEMORY          Out of memory
+  /// Gets the MAC address (NAN Management Interface) of Wi-Fi Aware peer.
   ///
-  /// @par Here is an example of the usage:
-  /// @code
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Remarks:**
+  /// - The `mac` should be freed using free().
+  ///
+  /// **Parameters:**
+  /// - `peer` (in): The Peer handle
+  /// - `mac` (out): The MAC address of the peer
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_AWARE_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Here is an example of the usage:**
+  ///
+  /// ```
   ///
   /// peer_info *info = (peer_info *)data;
   /// unsigned char *mac = NULL;
@@ -722,7 +973,7 @@ class Tizen100CapiNetworkWifiAware {
   ///
   /// free(mac);
   ///
-  /// @endcode
+  /// ```
   int wifi_aware_peer_get_mac(
     wifi_aware_peer_h peer,
     ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>> mac,
@@ -742,21 +993,35 @@ class Tizen100CapiNetworkWifiAware {
       int Function(
           wifi_aware_peer_h, ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>>)>();
 
-  /// @brief Creates a handle to be used for Wi-Fi Aware Data Path.
-  /// @since_tizen 9.0
-  /// @remarks The @a data_path should be released using wifi_aware_data_path_destroy().
-  /// @param[in] session    The Wi-Fi Aware Session handle
-  /// @param[in] peer       The Peer handle
-  /// @param[out] data_path The Data Path handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @retval #WIFI_AWARE_ERROR_OUT_OF_MEMORY          Out of memory
+  /// Creates a handle to be used for Wi-Fi Aware Data Path.
   ///
-  /// @par Here is an example of the usage:
-  /// @code
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Remarks:**
+  /// - The `data_path` should be released using wifi_aware_data_path_destroy().
+  ///
+  /// **Parameters:**
+  /// - `session` (in): The Wi-Fi Aware Session handle
+  /// - `peer` (in): The Peer handle
+  /// - `data_path` (out): The Data Path handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_AWARE_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `wifi_aware_data_path_destroy()`
+  ///
+  /// **Here is an example of the usage:**
+  ///
+  /// ```
   ///
   /// wifi_aware_data_path_h data_path;
   /// int ret = 0;
@@ -771,8 +1036,7 @@ class Tizen100CapiNetworkWifiAware {
   ///
   /// wifi_aware_data_path_destroy(data_path);
   ///
-  /// @endcode
-  /// @see wifi_aware_data_path_destroy()
+  /// ```
   int wifi_aware_data_path_create(
     wifi_aware_session_h session,
     wifi_aware_peer_h peer,
@@ -795,16 +1059,26 @@ class Tizen100CapiNetworkWifiAware {
           int Function(wifi_aware_session_h, wifi_aware_peer_h,
               ffi.Pointer<wifi_aware_data_path_h>)>();
 
-  /// @brief Sets a security type for Wi-Fi Aware Data Path.
-  /// @since_tizen 9.0
-  /// @param[in] data_path     The Data Path handle
-  /// @param[in] security_type The security type
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @see wifi_aware_data_path_create()
+  /// Sets a security type for Wi-Fi Aware Data Path.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `data_path` (in): The Data Path handle
+  /// - `security_type` (in): The security type
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **See also:**
+  /// - `wifi_aware_data_path_create()`
   int wifi_aware_data_path_set_security(
     wifi_aware_data_path_h data_path,
     int security_type,
@@ -823,18 +1097,30 @@ class Tizen100CapiNetworkWifiAware {
       _wifi_aware_data_path_set_securityPtr
           .asFunction<int Function(wifi_aware_data_path_h, int)>();
 
-  /// @brief Sets a passphrase for Wi-Fi Aware Data Path.
-  /// @since_tizen 9.0
-  /// @remarks The @a key can be used only when secure type is #WIFI_AWARE_SECURITY_TYPE_PSK.
-  /// @param[in] data_path The Data Path handle
-  /// @param[in] key       The passphrase
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @retval #WIFI_AWARE_ERROR_INVALID_OPERATION      Invalid operation
-  /// @see wifi_aware_data_path_create()
+  /// Sets a passphrase for Wi-Fi Aware Data Path.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Remarks:**
+  /// - The `key` can be used only when secure type is `WIFI_AWARE_SECURITY_TYPE_PSK`.
+  ///
+  /// **Parameters:**
+  /// - `data_path` (in): The Data Path handle
+  /// - `key` (in): The passphrase
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_AWARE_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `wifi_aware_data_path_create()`
   int wifi_aware_data_path_set_psk(
     wifi_aware_data_path_h data_path,
     ffi.Pointer<ffi.Char> key,
@@ -853,18 +1139,30 @@ class Tizen100CapiNetworkWifiAware {
       _wifi_aware_data_path_set_pskPtr.asFunction<
           int Function(wifi_aware_data_path_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets a PMK for Wi-Fi Aware Data Path.
-  /// @since_tizen 9.0
-  /// @remarks The @a key can be used only when security type is #WIFI_AWARE_SECURITY_TYPE_PMK.
-  /// @param[in] data_path The Data Path handle
-  /// @param[in] key        Pairwise Master Key. Its length shall be of length 32.
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @retval #WIFI_AWARE_ERROR_INVALID_OPERATION      Invalid operation
-  /// @see wifi_aware_data_path_create()
+  /// Sets a PMK for Wi-Fi Aware Data Path.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Remarks:**
+  /// - The `key` can be used only when security type is `WIFI_AWARE_SECURITY_TYPE_PMK`.
+  ///
+  /// **Parameters:**
+  /// - `data_path` (in): The Data Path handle
+  /// - `key` (in): Pairwise Master Key. Its length shall be of length 32.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_AWARE_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `wifi_aware_data_path_create()`
   int wifi_aware_data_path_set_pmk(
     wifi_aware_data_path_h data_path,
     ffi.Pointer<ffi.UnsignedChar> key,
@@ -884,17 +1182,29 @@ class Tizen100CapiNetworkWifiAware {
           int Function(
               wifi_aware_data_path_h, ffi.Pointer<ffi.UnsignedChar>)>();
 
-  /// @brief Sets a port for Wi-Fi Aware Data Path.
-  /// @since_tizen 9.0
-  /// @remarks The @a port cannot be exceed 65535.
-  /// @param[in] data_path The Data Path handle
-  /// @param[in] port      The port
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @see wifi_aware_data_path_create()
+  /// Sets a port for Wi-Fi Aware Data Path.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Remarks:**
+  /// - The `port` cannot be exceed 65535.
+  ///
+  /// **Parameters:**
+  /// - `data_path` (in): The Data Path handle
+  /// - `port` (in): The port
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **See also:**
+  /// - `wifi_aware_data_path_create()`
   int wifi_aware_data_path_set_port(
     wifi_aware_data_path_h data_path,
     int port,
@@ -912,15 +1222,25 @@ class Tizen100CapiNetworkWifiAware {
   late final _wifi_aware_data_path_set_port = _wifi_aware_data_path_set_portPtr
       .asFunction<int Function(wifi_aware_data_path_h, int)>();
 
-  /// @brief Destroys a handle for Wi-Fi Aware Data Path.
-  /// @since_tizen 9.0
-  /// @param[in] data_path The Data Path handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @see wifi_aware_data_path_create()
+  /// Destroys a handle for Wi-Fi Aware Data Path.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `data_path` (in): The Data Path handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **See also:**
+  /// - `wifi_aware_data_path_create()`
   int wifi_aware_data_path_destroy(
     wifi_aware_data_path_h data_path,
   ) {
@@ -935,23 +1255,39 @@ class Tizen100CapiNetworkWifiAware {
   late final _wifi_aware_data_path_destroy = _wifi_aware_data_path_destroyPtr
       .asFunction<int Function(wifi_aware_data_path_h)>();
 
-  /// @brief Requests to open a Wi-Fi Aware Data Path.
-  /// @since_tizen 9.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.set
-  /// @remarks The @a callback will be always invoked whether the open request succeeds or fails.
-  /// @param[in] data_path The Data Path handle
-  /// @param[in] callback  The callback function
-  /// @param[in] user_data The user data passed to the callback function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_PERMISSION_DENIED      Permission denied
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @retval #WIFI_AWARE_ERROR_INVALID_OPERATION      Invalid operation
-  /// @retval #WIFI_AWARE_ERROR_OPERATION_FAILED       Operation failed
-  /// @see wifi_aware_data_path_close()
+  /// Requests to open a Wi-Fi Aware Data Path.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.set>
+  ///
+  /// **Remarks:**
+  /// - The `callback` will be always invoked whether the open request succeeds or fails.
+  ///
+  /// **Parameters:**
+  /// - `data_path` (in): The Data Path handle
+  /// - `callback` (in): The callback function
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_AWARE_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_AWARE_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `wifi_aware_data_path_close()`
   int wifi_aware_data_path_open(
     wifi_aware_data_path_h data_path,
     wifi_aware_data_path_open_cb callback,
@@ -973,20 +1309,34 @@ class Tizen100CapiNetworkWifiAware {
           int Function(wifi_aware_data_path_h, wifi_aware_data_path_open_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Closes a Wi-Fi Aware Data Path.
-  /// @since_tizen 9.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.set
-  /// @param[in] data_path The Data Path handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_PERMISSION_DENIED      Permission denied
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @retval #WIFI_AWARE_ERROR_INVALID_OPERATION      Invalid operation
-  /// @retval #WIFI_AWARE_ERROR_OPERATION_FAILED       Operation failed
-  /// @see wifi_aware_data_path_open()
+  /// Closes a Wi-Fi Aware Data Path.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.set>
+  ///
+  /// **Parameters:**
+  /// - `data_path` (in): The Data Path handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_AWARE_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_AWARE_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `wifi_aware_data_path_open()`
   int wifi_aware_data_path_close(
     wifi_aware_data_path_h data_path,
   ) {
@@ -1001,16 +1351,24 @@ class Tizen100CapiNetworkWifiAware {
   late final _wifi_aware_data_path_close = _wifi_aware_data_path_closePtr
       .asFunction<int Function(wifi_aware_data_path_h)>();
 
-  /// @brief Gets a port of a peer.
-  /// @since_tizen 9.0
-  /// @param[in] data_path The Data Path handle
-  /// @param[out] port     The port
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @retval #WIFI_AWARE_ERROR_INVALID_OPERATION      Invalid operation
+  /// Gets a port of a peer.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `data_path` (in): The Data Path handle
+  /// - `port` (out): The port
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_AWARE_ERROR_INVALID_OPERATION`: Invalid operation
   int wifi_aware_data_path_get_peer_port(
     wifi_aware_data_path_h data_path,
     ffi.Pointer<ffi.Int> port,
@@ -1029,20 +1387,31 @@ class Tizen100CapiNetworkWifiAware {
       _wifi_aware_data_path_get_peer_portPtr.asFunction<
           int Function(wifi_aware_data_path_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets an IPv6 address of a peer.
-  /// @since_tizen 9.0
-  /// @remarks The @a ipv6_address should be freed by using free().
-  /// @param[in] data_path     The Data Path handle
-  /// @param[out] ipv6_address The IPv6 address of a peer
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @retval #WIFI_AWARE_ERROR_INVALID_OPERATION      Invalid operation
+  /// Gets an IPv6 address of a peer.
   ///
-  /// @par Here is an example of the usage:
-  /// @code
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Remarks:**
+  /// - The `ipv6_address` should be freed by using free().
+  ///
+  /// **Parameters:**
+  /// - `data_path` (in): The Data Path handle
+  /// - `ipv6_address` (out): The IPv6 address of a peer
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_AWARE_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Here is an example of the usage:**
+  ///
+  /// ```
   ///
   /// int ret = 0;
   /// char *ipv6 = NULL;
@@ -1057,7 +1426,7 @@ class Tizen100CapiNetworkWifiAware {
   ///
   /// free(ipv6);
   ///
-  /// @endcode
+  /// ```
   int wifi_aware_data_path_get_peer_ipv6_address(
     wifi_aware_data_path_h data_path,
     ffi.Pointer<ffi.Pointer<ffi.Char>> ipv6_address,
@@ -1078,20 +1447,31 @@ class Tizen100CapiNetworkWifiAware {
           int Function(
               wifi_aware_data_path_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets Interface name for Wi-Fi Aware Data Path.
-  /// @since_tizen 9.0
-  /// @remarks The @a interface should be freed by using free().
-  /// @param[in] data_path  The Data Path handle
-  /// @param[out] interface The interface name
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @retval #WIFI_AWARE_ERROR_INVALID_OPERATION      Invalid operation
+  /// Gets Interface name for Wi-Fi Aware Data Path.
   ///
-  /// @par Here is an example of the usage:
-  /// @code
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Remarks:**
+  /// - The `interface` should be freed by using free().
+  ///
+  /// **Parameters:**
+  /// - `data_path` (in): The Data Path handle
+  /// - `interface` (out): The interface name
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_AWARE_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Here is an example of the usage:**
+  ///
+  /// ```
   ///
   /// int ret = 0;
   /// char *interface = NULL;
@@ -1106,7 +1486,7 @@ class Tizen100CapiNetworkWifiAware {
   ///
   /// free(interface);
   ///
-  /// @endcode
+  /// ```
   int wifi_aware_data_path_get_interface(
     wifi_aware_data_path_h data_path,
     ffi.Pointer<ffi.Pointer<ffi.Char>> interface1,
@@ -1127,17 +1507,27 @@ class Tizen100CapiNetworkWifiAware {
           int Function(
               wifi_aware_data_path_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets a callback function to notify a Data Path termination.
-  /// @since_tizen 9.0
-  /// @param[in] data_path The Data Path handle
-  /// @param[in] callback  The callback function
-  /// @param[in] user_data The user data passed to the callback function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @see wifi_aware_data_path_unset_terminated_cb()
+  /// Sets a callback function to notify a Data Path termination.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `data_path` (in): The Data Path handle
+  /// - `callback` (in): The callback function
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **See also:**
+  /// - `wifi_aware_data_path_unset_terminated_cb()`
   int wifi_aware_data_path_set_terminated_cb(
     wifi_aware_data_path_h data_path,
     wifi_aware_data_path_terminated_cb callback,
@@ -1160,15 +1550,25 @@ class Tizen100CapiNetworkWifiAware {
           int Function(wifi_aware_data_path_h,
               wifi_aware_data_path_terminated_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the Data Path terminated callback function.
-  /// @since_tizen 9.0
-  /// @param[in] data_path The Data Path handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @see wifi_aware_data_path_set_terminated_cb()
+  /// Unsets the Data Path terminated callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `data_path` (in): The Data Path handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **See also:**
+  /// - `wifi_aware_data_path_set_terminated_cb()`
   int wifi_aware_data_path_unset_terminated_cb(
     wifi_aware_data_path_h data_path,
   ) {
@@ -1184,19 +1584,33 @@ class Tizen100CapiNetworkWifiAware {
       _wifi_aware_data_path_unset_terminated_cbPtr
           .asFunction<int Function(wifi_aware_data_path_h)>();
 
-  /// @brief Creates a Publish request.
-  /// @since_tizen 9.0
-  /// @remarks The @a publish should be released using wifi_aware_publish_destroy().
-  /// @param[out] publish The Wi-Fi Aware Publish handle.
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @retval #WIFI_AWARE_ERROR_OUT_OF_MEMORY          Out of memory
+  /// Creates a Publish request.
   ///
-  /// @par Here is an example of the usage:
-  /// @code
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Remarks:**
+  /// - The `publish` should be released using wifi_aware_publish_destroy().
+  ///
+  /// **Parameters:**
+  /// - `publish` (out): The Wi-Fi Aware Publish handle.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_AWARE_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `wifi_aware_publish_destroy()`
+  ///
+  /// **Here is an example of the usage:**
+  ///
+  /// ```
   ///
   /// int ret = 0;
   /// wifi_aware_session_h wifi_aware_session = NULL;
@@ -1219,8 +1633,7 @@ class Tizen100CapiNetworkWifiAware {
   /// wifi_aware_publish_destroy(publish_handle);
   /// wifi_aware_session_destroy(wifi_aware_session);
   ///
-  /// @endcode
-  /// @see wifi_aware_publish_destroy()
+  /// ```
   int wifi_aware_publish_create(
     ffi.Pointer<wifi_aware_publish_h> publish,
   ) {
@@ -1236,15 +1649,25 @@ class Tizen100CapiNetworkWifiAware {
   late final _wifi_aware_publish_create = _wifi_aware_publish_createPtr
       .asFunction<int Function(ffi.Pointer<wifi_aware_publish_h>)>();
 
-  /// @brief Destroys a Publish request.
-  /// @since_tizen 9.0
-  /// @param[in] publish The Wi-Fi Aware Publish handle.
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @see wifi_aware_publish_create()
+  /// Destroys a Publish request.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `publish` (in): The Wi-Fi Aware Publish handle.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **See also:**
+  /// - `wifi_aware_publish_create()`
   int wifi_aware_publish_destroy(
     wifi_aware_publish_h publish,
   ) {
@@ -1259,16 +1682,26 @@ class Tizen100CapiNetworkWifiAware {
   late final _wifi_aware_publish_destroy = _wifi_aware_publish_destroyPtr
       .asFunction<int Function(wifi_aware_publish_h)>();
 
-  /// @brief Sets TTL (Time To Live) for Publish session.
-  /// @since_tizen 9.0
-  /// @param[in] publish The Wi-Fi Aware Publish handle.
-  /// @param[in] ttl The lifetime(seconds) of publish session. 0 means forever until canceled.
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @see wifi_aware_publish_create()
+  /// Sets TTL (Time To Live) for Publish session.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `publish` (in): The Wi-Fi Aware Publish handle.
+  /// - `ttl` (in): The lifetime(seconds) of publish session. 0 means forever until canceled.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **See also:**
+  /// - `wifi_aware_publish_create()`
   int wifi_aware_publish_set_ttl(
     wifi_aware_publish_h publish,
     int ttl,
@@ -1286,16 +1719,26 @@ class Tizen100CapiNetworkWifiAware {
   late final _wifi_aware_publish_set_ttl = _wifi_aware_publish_set_ttlPtr
       .asFunction<int Function(wifi_aware_publish_h, int)>();
 
-  /// @brief Sets the type of the service as solicited or unsolicited.
-  /// @since_tizen 9.0
-  /// @param[in] publish The Wi-Fi Aware Publish handle
-  /// @param[in] publish_type The Publish type
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @see wifi_aware_publish_create()
+  /// Sets the type of the service as solicited or unsolicited.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `publish` (in): The Wi-Fi Aware Publish handle
+  /// - `publish_type` (in): The Publish type
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **See also:**
+  /// - `wifi_aware_publish_create()`
   int wifi_aware_publish_set_type(
     wifi_aware_publish_h publish,
     int publish_type,
@@ -1313,17 +1756,29 @@ class Tizen100CapiNetworkWifiAware {
   late final _wifi_aware_publish_set_type = _wifi_aware_publish_set_typePtr
       .asFunction<int Function(wifi_aware_publish_h, int)>();
 
-  /// @brief Sets the name of the service to publish.
-  /// @since_tizen 9.0
-  /// @remarks The length should be less than or equal to 255.
-  /// @param[in] publish The Wi-Fi Aware Publish handle
-  /// @param[in] service_name UTF-8 name which identifies the service
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @see wifi_aware_publish_create()
+  /// Sets the name of the service to publish.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Remarks:**
+  /// - The length should be less than or equal to 255.
+  ///
+  /// **Parameters:**
+  /// - `publish` (in): The Wi-Fi Aware Publish handle
+  /// - `service_name` (in): UTF-8 name which identifies the service
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **See also:**
+  /// - `wifi_aware_publish_create()`
   int wifi_aware_publish_set_service_name(
     wifi_aware_publish_h publish,
     ffi.Pointer<ffi.Char> service_name,
@@ -1342,17 +1797,27 @@ class Tizen100CapiNetworkWifiAware {
       _wifi_aware_publish_set_service_namePtr.asFunction<
           int Function(wifi_aware_publish_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the specific information for the service to publish.
-  /// @since_tizen 9.0
-  /// @param[in] publish The Wi-Fi Aware Publish handle
-  /// @param[in] service_specific_info The Sequence of values that are conveyed in the Publish message
-  /// @param[in] len The length of service specific information
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @see wifi_aware_publish_create()
+  /// Sets the specific information for the service to publish.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `publish` (in): The Wi-Fi Aware Publish handle
+  /// - `service_specific_info` (in): The Sequence of values that are conveyed in the Publish message
+  /// - `len` (in): The length of service specific information
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **See also:**
+  /// - `wifi_aware_publish_create()`
   int wifi_aware_publish_set_service_specific_info(
     wifi_aware_publish_h publish,
     ffi.Pointer<ffi.UnsignedChar> service_specific_info,
@@ -1374,18 +1839,30 @@ class Tizen100CapiNetworkWifiAware {
           int Function(
               wifi_aware_publish_h, ffi.Pointer<ffi.UnsignedChar>, int)>();
 
-  /// @brief Sets the match filter of the service to publish.
-  /// @since_tizen 9.0
-  /// @remarks The match filter is used to decide whether accepting a subscribe request or not.
-  /// @param[in] publish The Wi-Fi Aware Publish handle
-  /// @param[in] match_filter An ordered sequence of <length, value> pairs
-  /// @param[in] len The whole length of match_filter
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @see wifi_aware_publish_create()
+  /// Sets the match filter of the service to publish.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Remarks:**
+  /// - The match filter is used to decide whether accepting a subscribe request or not.
+  ///
+  /// **Parameters:**
+  /// - `publish` (in): The Wi-Fi Aware Publish handle
+  /// - `match_filter` (in): An ordered sequence of <length, value> pairs
+  /// - `len` (in): The whole length of match_filter
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **See also:**
+  /// - `wifi_aware_publish_create()`
   int wifi_aware_publish_set_match_filter(
     wifi_aware_publish_h publish,
     ffi.Pointer<ffi.UnsignedChar> match_filter,
@@ -1407,17 +1884,26 @@ class Tizen100CapiNetworkWifiAware {
           int Function(
               wifi_aware_publish_h, ffi.Pointer<ffi.UnsignedChar>, int)>();
 
-  /// @brief Sets whether the ranging function is supported or not.
-  /// @since_tizen 9.0
-  /// @param[in] publish The Wi-Fi Aware Publish handle
-  /// @param[in] enable @c true if ranging is enabled,
-  /// otherwise @c false if ranging is disabled.
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @see wifi_aware_publish_create()
+  /// Sets whether the ranging function is supported or not.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `publish` (in): The Wi-Fi Aware Publish handle
+  /// - `enable` (in): `true` if ranging is enabled, otherwise `false` if ranging is disabled.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **See also:**
+  /// - `wifi_aware_publish_create()`
   int wifi_aware_publish_enable_ranging(
     wifi_aware_publish_h publish,
     bool enable,
@@ -1435,19 +1921,33 @@ class Tizen100CapiNetworkWifiAware {
       _wifi_aware_publish_enable_rangingPtr
           .asFunction<int Function(wifi_aware_publish_h, bool)>();
 
-  /// @brief Creates a Subscribe request.
-  /// @since_tizen 9.0
-  /// @remarks The @a subscribe should be released using wifi_aware_subscribe_destroy().
-  /// @param[out] subscribe The Wi-Fi Aware Subscribe handle.
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @retval #WIFI_AWARE_ERROR_OUT_OF_MEMORY          Out of memory
+  /// Creates a Subscribe request.
   ///
-  /// @par Here is an example of the usage:
-  /// @code
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Remarks:**
+  /// - The `subscribe` should be released using wifi_aware_subscribe_destroy().
+  ///
+  /// **Parameters:**
+  /// - `subscribe` (out): The Wi-Fi Aware Subscribe handle.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_AWARE_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `wifi_aware_subscribe_destroy()`
+  ///
+  /// **Here is an example of the usage:**
+  ///
+  /// ```
   ///
   /// int ret = 0;
   /// wifi_aware_session_h wifi_aware_session = NULL;
@@ -1470,8 +1970,7 @@ class Tizen100CapiNetworkWifiAware {
   /// wifi_aware_subscribe_destroy(subscribe_handle);
   /// wifi_aware_session_destroy(wifi_aware_session);
   ///
-  /// @endcode
-  /// @see wifi_aware_subscribe_destroy()
+  /// ```
   int wifi_aware_subscribe_create(
     ffi.Pointer<wifi_aware_subscribe_h> subscribe,
   ) {
@@ -1487,15 +1986,25 @@ class Tizen100CapiNetworkWifiAware {
   late final _wifi_aware_subscribe_create = _wifi_aware_subscribe_createPtr
       .asFunction<int Function(ffi.Pointer<wifi_aware_subscribe_h>)>();
 
-  /// @brief Destroys a Subscribe request.
-  /// @since_tizen 9.0
-  /// @param[in] subscribe The Wi-Fi Aware Subscribe handle.
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @see wifi_aware_subscribe_create()
+  /// Destroys a Subscribe request.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `subscribe` (in): The Wi-Fi Aware Subscribe handle.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **See also:**
+  /// - `wifi_aware_subscribe_create()`
   int wifi_aware_subscribe_destroy(
     wifi_aware_subscribe_h subscribe,
   ) {
@@ -1510,17 +2019,26 @@ class Tizen100CapiNetworkWifiAware {
   late final _wifi_aware_subscribe_destroy = _wifi_aware_subscribe_destroyPtr
       .asFunction<int Function(wifi_aware_subscribe_h)>();
 
-  /// @brief Sets TTL (Time To Live) for Subscribe session.
-  /// @since_tizen 9.0
-  /// @param[in] subscribe The Wi-Fi Aware Subscribe handle
-  /// @param[in] ttl The lifetime(seconds) of subscribe session.\n
-  /// 0 means forever until wifi_aware_service_discovered_cb().
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @see wifi_aware_subscribe_create()
+  /// Sets TTL (Time To Live) for Subscribe session.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `subscribe` (in): The Wi-Fi Aware Subscribe handle
+  /// - `ttl` (in): The lifetime(seconds) of subscribe session. 0 means forever until wifi_aware_service_discovered_cb().
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **See also:**
+  /// - `wifi_aware_subscribe_create()`
   int wifi_aware_subscribe_set_ttl(
     wifi_aware_subscribe_h subscribe,
     int ttl,
@@ -1538,16 +2056,26 @@ class Tizen100CapiNetworkWifiAware {
   late final _wifi_aware_subscribe_set_ttl = _wifi_aware_subscribe_set_ttlPtr
       .asFunction<int Function(wifi_aware_subscribe_h, int)>();
 
-  /// @brief Sets the type of the service as passive or active.
-  /// @since_tizen 9.0
-  /// @param[in] subscribe The Wi-Fi Aware Subscribe handle
-  /// @param[in] subscribe_type The Subscribe type
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @see wifi_aware_subscribe_create()
+  /// Sets the type of the service as passive or active.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `subscribe` (in): The Wi-Fi Aware Subscribe handle
+  /// - `subscribe_type` (in): The Subscribe type
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **See also:**
+  /// - `wifi_aware_subscribe_create()`
   int wifi_aware_subscribe_set_type(
     wifi_aware_subscribe_h subscribe,
     int subscribe_type,
@@ -1565,17 +2093,29 @@ class Tizen100CapiNetworkWifiAware {
   late final _wifi_aware_subscribe_set_type = _wifi_aware_subscribe_set_typePtr
       .asFunction<int Function(wifi_aware_subscribe_h, int)>();
 
-  /// @brief Sets the name of the service to subscribe.
-  /// @since_tizen 9.0
-  /// @remarks The length should be less than or equal to 255
-  /// @param[in] subscribe The Wi-Fi Aware Subscribe handle
-  /// @param[in] service_name UTF-8 name which identifies the service
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @see wifi_aware_subscribe_create()
+  /// Sets the name of the service to subscribe.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Remarks:**
+  /// - The length should be less than or equal to 255
+  ///
+  /// **Parameters:**
+  /// - `subscribe` (in): The Wi-Fi Aware Subscribe handle
+  /// - `service_name` (in): UTF-8 name which identifies the service
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **See also:**
+  /// - `wifi_aware_subscribe_create()`
   int wifi_aware_subscribe_set_service_name(
     wifi_aware_subscribe_h subscribe,
     ffi.Pointer<ffi.Char> service_name,
@@ -1594,17 +2134,27 @@ class Tizen100CapiNetworkWifiAware {
       _wifi_aware_subscribe_set_service_namePtr.asFunction<
           int Function(wifi_aware_subscribe_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the specific information for the service to subscribe.
-  /// @since_tizen 9.0
-  /// @param[in] subscribe The Wi-Fi Aware Subscribe handle
-  /// @param[in] service_specific_info The Sequence of values that are conveyed in the Subscribe message
-  /// @param[in] len The length of service specific information
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @see wifi_aware_subscribe_create()
+  /// Sets the specific information for the service to subscribe.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `subscribe` (in): The Wi-Fi Aware Subscribe handle
+  /// - `service_specific_info` (in): The Sequence of values that are conveyed in the Subscribe message
+  /// - `len` (in): The length of service specific information
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **See also:**
+  /// - `wifi_aware_subscribe_create()`
   int wifi_aware_subscribe_set_service_specific_info(
     wifi_aware_subscribe_h subscribe,
     ffi.Pointer<ffi.UnsignedChar> service_specific_info,
@@ -1628,18 +2178,30 @@ class Tizen100CapiNetworkWifiAware {
           int Function(
               wifi_aware_subscribe_h, ffi.Pointer<ffi.UnsignedChar>, int)>();
 
-  /// @brief Sets the match filter of the service to subscribe.
-  /// @since_tizen 9.0
-  /// @remarks The match filter is used to decide whether accepting a subscribe request or not.
-  /// @param[in] subscribe The Wi-Fi Aware Subscribe handle
-  /// @param[in] match_filter An ordered sequence of <length, value> pairs
-  /// @param[in] len The whole length of match_filter
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @see wifi_aware_subscribe_create()
+  /// Sets the match filter of the service to subscribe.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Remarks:**
+  /// - The match filter is used to decide whether accepting a subscribe request or not.
+  ///
+  /// **Parameters:**
+  /// - `subscribe` (in): The Wi-Fi Aware Subscribe handle
+  /// - `match_filter` (in): An ordered sequence of <length, value> pairs
+  /// - `len` (in): The whole length of match_filter
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **See also:**
+  /// - `wifi_aware_subscribe_create()`
   int wifi_aware_subscribe_set_match_filter(
     wifi_aware_subscribe_h subscribe,
     ffi.Pointer<ffi.UnsignedChar> match_filter,
@@ -1663,17 +2225,29 @@ class Tizen100CapiNetworkWifiAware {
           int Function(
               wifi_aware_subscribe_h, ffi.Pointer<ffi.UnsignedChar>, int)>();
 
-  /// @brief Sets the maximum distance.
-  /// @since_tizen 9.0
-  /// @remarks Only for the services within the @a distance are searched.
-  /// @param[in] subscribe The Wi-Fi Aware Subscribe handle
-  /// @param[in] distance The maximum distance
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @see wifi_aware_subscribe_create()
+  /// Sets the maximum distance.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Remarks:**
+  /// - Only for the services within the `distance` are searched.
+  ///
+  /// **Parameters:**
+  /// - `subscribe` (in): The Wi-Fi Aware Subscribe handle
+  /// - `distance` (in): The maximum distance
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **See also:**
+  /// - `wifi_aware_subscribe_create()`
   int wifi_aware_subscribe_set_max_distance(
     wifi_aware_subscribe_h subscribe,
     int distance,
@@ -1692,17 +2266,29 @@ class Tizen100CapiNetworkWifiAware {
       _wifi_aware_subscribe_set_max_distancePtr
           .asFunction<int Function(wifi_aware_subscribe_h, int)>();
 
-  /// @brief Sets the minimum distance.
-  /// @since_tizen 9.0
-  /// @remarks Only for the services at least at the @a distance are searched.
-  /// @param[in] subscribe The Wi-Fi Aware Subscribe handle
-  /// @param[in] distance The minimum distance
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_AWARE_ERROR_NONE                   Successful
-  /// @retval #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter
-  /// @retval #WIFI_AWARE_ERROR_NOT_INITIALIZED        Not initialized
-  /// @see wifi_aware_subscribe_create()
+  /// Sets the minimum distance.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Remarks:**
+  /// - Only for the services at least at the `distance` are searched.
+  ///
+  /// **Parameters:**
+  /// - `subscribe` (in): The Wi-Fi Aware Subscribe handle
+  /// - `distance` (in): The minimum distance
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_AWARE_ERROR_NONE`: Successful
+  /// - `WIFI_AWARE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_AWARE_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `WIFI_AWARE_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **See also:**
+  /// - `wifi_aware_subscribe_create()`
   int wifi_aware_subscribe_set_min_distance(
     wifi_aware_subscribe_h subscribe,
     int distance,
@@ -1722,8 +2308,11 @@ class Tizen100CapiNetworkWifiAware {
           .asFunction<int Function(wifi_aware_subscribe_h, int)>();
 }
 
-/// @brief Enumeration for Wi-Fi Aware error code.
-/// @since_tizen 9.0
+/// Enumeration for Wi-Fi Aware error code.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 abstract class wifi_aware_error_e {
   /// Successful
   static const int WIFI_AWARE_ERROR_NONE = 0;
@@ -1771,15 +2360,21 @@ abstract class wifi_aware_error_e {
   static const int WIFI_AWARE_ERROR_INTERFACE_DOWN = -51445754;
 }
 
-/// @brief Enumeration for Wi-Fi Aware termination reason.
-/// @since_tizen 9.0
+/// Enumeration for Wi-Fi Aware termination reason.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 abstract class wifi_aware_termination_reason_e {
   /// < Unknown reason
   static const int WIFI_AWARE_TERMINATION_REASON_UNKNOWN = 0;
 }
 
-/// @brief Enumeration for Wi-Fi Aware session type.
-/// @since_tizen 9.0
+/// Enumeration for Wi-Fi Aware session type.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 abstract class wifi_aware_session_type_e {
   /// < Publish type
   static const int WIFI_AWARE_SESSION_PUBLISH = 0;
@@ -1788,8 +2383,11 @@ abstract class wifi_aware_session_type_e {
   static const int WIFI_AWARE_SESSION_SUBSCRIBE = 1;
 }
 
-/// @brief Enumeration for Wi-Fi Aware publish type.
-/// @since_tizen 9.0
+/// Enumeration for Wi-Fi Aware publish type.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 abstract class wifi_aware_publish_type_e {
   /// < Unsolicited type
   static const int WIFI_AWARE_PUBLISH_TYPE_UNSOLICITED = 0;
@@ -1798,8 +2396,11 @@ abstract class wifi_aware_publish_type_e {
   static const int WIFI_AWARE_PUBLISH_TYPE_SOLICITED = 1;
 }
 
-/// @brief Enumeration for Wi-Fi Aware subscribe type.
-/// @since_tizen 9.0
+/// Enumeration for Wi-Fi Aware subscribe type.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 abstract class wifi_aware_subscribe_type_e {
   /// < Passive type
   static const int WIFI_AWARE_SUBSCRIBE_TYPE_PASSIVE = 0;
@@ -1808,135 +2409,185 @@ abstract class wifi_aware_subscribe_type_e {
   static const int WIFI_AWARE_SUBSCRIBE_TYPE_ACTIVE = 1;
 }
 
-/// @brief Called when Wi-Fi Aware is enabled.
-/// @details The following error codes can be received: \n
-/// #WIFI_AWARE_ERROR_NONE                   Successful \n
-/// #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported \n
-/// #WIFI_AWARE_ERROR_PERMISSION_DENIED      Permission denied \n
-/// #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter \n
-/// #WIFI_AWARE_ERROR_INVALID_OPERATION      Invalid operation \n
-/// #WIFI_AWARE_ERROR_OPERATION_FAILED       Operation failed
-/// @since_tizen 9.0
-/// @param[in] error The error code
-/// @param[in] user_data The user data passed from the request function
-/// @see wifi_aware_enable()
+/// Called when Wi-Fi Aware is enabled.
+///
+/// The following error codes can be received: `WIFI_AWARE_ERROR_NONE` Successful `WIFI_AWARE_ERROR_NOT_SUPPORTED` Not supported `WIFI_AWARE_ERROR_PERMISSION_DENIED` Permission denied `WIFI_AWARE_ERROR_INVALID_PARAMETER` Invalid function parameter `WIFI_AWARE_ERROR_INVALID_OPERATION` Invalid operation `WIFI_AWARE_ERROR_OPERATION_FAILED` Operation failed
+///
+/// **Since Tizen:**
+/// - 9.0
+///
+/// **Parameters:**
+/// - `error` (in): The error code
+/// - `user_data` (in): The user data passed from the request function
+///
+/// **See also:**
+/// - `wifi_aware_enable()`
+/// @nodoc
 typedef wifi_aware_enabled_cb
     = ffi.Pointer<ffi.NativeFunction<wifi_aware_enabled_cbFunction>>;
+/// @nodoc
 typedef wifi_aware_enabled_cbFunction = ffi.Void Function(
     ffi.Int32 error, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_aware_enabled_cbFunction = void Function(
     int error, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when Wi-Fi Aware is disabled.
-/// @details The following error codes can be received: \n
-/// #WIFI_AWARE_ERROR_NONE			Successful \n
-/// #WIFI_AWARE_ERROR_NOT_SUPPORTED		Not supported \n
-/// #WIFI_AWARE_ERROR_PERMISSION_DENIED	Permission denied \n
-/// #WIFI_AWARE_ERROR_INVALID_PARAMETER	Invalid function parameter \n
-/// #WIFI_AWARE_ERROR_INVALID_OPERATION	Invalid operation \n
-/// #WIFI_AWARE_ERROR_OPERATION_FAILED	Operation failed
-/// @since_tizen 9.0
-/// @param[in] error The error code
-/// @param[in] user_data The user data passed from the request function
-/// @see wifi_aware_disable()
+/// Called when Wi-Fi Aware is disabled.
+///
+/// The following error codes can be received: `WIFI_AWARE_ERROR_NONE` Successful `WIFI_AWARE_ERROR_NOT_SUPPORTED` Not supported `WIFI_AWARE_ERROR_PERMISSION_DENIED` Permission denied `WIFI_AWARE_ERROR_INVALID_PARAMETER` Invalid function parameter `WIFI_AWARE_ERROR_INVALID_OPERATION` Invalid operation `WIFI_AWARE_ERROR_OPERATION_FAILED` Operation failed
+///
+/// **Since Tizen:**
+/// - 9.0
+///
+/// **Parameters:**
+/// - `error` (in): The error code
+/// - `user_data` (in): The user data passed from the request function
+///
+/// **See also:**
+/// - `wifi_aware_disable()`
+/// @nodoc
 typedef wifi_aware_disabled_cb
     = ffi.Pointer<ffi.NativeFunction<wifi_aware_disabled_cbFunction>>;
+/// @nodoc
 typedef wifi_aware_disabled_cbFunction = ffi.Void Function(
     ffi.Int32 error, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_aware_disabled_cbFunction = void Function(
     int error, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Wi-Fi Aware Session.
-/// @since_tizen 9.0
+/// Wi-Fi Aware Session.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 typedef wifi_aware_session_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when the Wi-Fi Aware Session has been lost.
-/// @since_tizen 9.0
-/// @remarks The @a session should not be released.
-/// @param[in] session   The Wi-Fi Aware Session handle
-/// @param[in] reason    The reason of termination
-/// @param[in] user_data The user data passed from request function
-/// @see wifi_aware_session_set_terminated_cb()
-/// @see wifi_aware_session_unset_terminated_cb()
+/// Called when the Wi-Fi Aware Session has been lost.
+///
+/// **Since Tizen:**
+/// - 9.0
+///
+/// **Remarks:**
+/// - The `session` should not be released.
+///
+/// **Parameters:**
+/// - `session` (in): The Wi-Fi Aware Session handle
+/// - `reason` (in): The reason of termination
+/// - `user_data` (in): The user data passed from request function
+///
+/// **See also:**
+/// - `wifi_aware_session_set_terminated_cb()`
+/// - `wifi_aware_session_unset_terminated_cb()`
+/// @nodoc
 typedef wifi_aware_session_terminated_cb
     = ffi.Pointer<ffi.NativeFunction<wifi_aware_session_terminated_cbFunction>>;
+/// @nodoc
 typedef wifi_aware_session_terminated_cbFunction = ffi.Void Function(
     wifi_aware_session_h session,
     ffi.Int32 reason,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_aware_session_terminated_cbFunction = void Function(
     wifi_aware_session_h session, int reason, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Handle for Wi-Fi Aware Publish configuration.
-/// @since_tizen 9.0
+/// Handle for Wi-Fi Aware Publish configuration.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 typedef wifi_aware_publish_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when publish request is finished.
-/// @details The following error codes can be received: \n
-/// #WIFI_AWARE_ERROR_NONE                   Successful \n
-/// #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported \n
-/// #WIFI_AWARE_ERROR_PERMISSION_DENIED      Permission denied \n
-/// #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter \n
-/// #WIFI_AWARE_ERROR_INVALID_OPERATION      Invalid operation \n
-/// #WIFI_AWARE_ERROR_OPERATION_FAILED       Operation failed
-/// @since_tizen 9.0
-/// @remarks The @a session should not be released.
-/// @param[in] session   The Wi-Fi Aware Session handle
-/// @param[in] error     The error code
-/// @param[in] user_data The user data passed from request function
-/// @see wifi_aware_session_publish()
-/// @see wifi_aware_session_update_publish()
+/// Called when publish request is finished.
+///
+/// The following error codes can be received: `WIFI_AWARE_ERROR_NONE` Successful `WIFI_AWARE_ERROR_NOT_SUPPORTED` Not supported `WIFI_AWARE_ERROR_PERMISSION_DENIED` Permission denied `WIFI_AWARE_ERROR_INVALID_PARAMETER` Invalid function parameter `WIFI_AWARE_ERROR_INVALID_OPERATION` Invalid operation `WIFI_AWARE_ERROR_OPERATION_FAILED` Operation failed
+///
+/// **Since Tizen:**
+/// - 9.0
+///
+/// **Remarks:**
+/// - The `session` should not be released.
+///
+/// **Parameters:**
+/// - `session` (in): The Wi-Fi Aware Session handle
+/// - `error` (in): The error code
+/// - `user_data` (in): The user data passed from request function
+///
+/// **See also:**
+/// - `wifi_aware_session_publish()`
+/// - `wifi_aware_session_update_publish()`
+/// @nodoc
 typedef wifi_aware_published_cb
     = ffi.Pointer<ffi.NativeFunction<wifi_aware_published_cbFunction>>;
+/// @nodoc
 typedef wifi_aware_published_cbFunction = ffi.Void Function(
     wifi_aware_session_h session,
     ffi.Int32 error,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_aware_published_cbFunction = void Function(
     wifi_aware_session_h session, int error, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Handle for Wi-Fi Aware Subscribe configuration.
-/// @since_tizen 9.0
+/// Handle for Wi-Fi Aware Subscribe configuration.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 typedef wifi_aware_subscribe_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when Subscribe request is finished.
-/// @details The following error codes can be received: \n
-/// #WIFI_AWARE_ERROR_NONE                   Successful \n
-/// #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported \n
-/// #WIFI_AWARE_ERROR_PERMISSION_DENIED      Permission denied \n
-/// #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter \n
-/// #WIFI_AWARE_ERROR_INVALID_OPERATION      Invalid operation \n
-/// #WIFI_AWARE_ERROR_OPERATION_FAILED       Operation failed
-/// @since_tizen 9.0
-/// @remarks The @a session should not be released.
-/// @param[in] session   The Wi-Fi Aware Session handle
-/// @param[in] error     The error code
-/// @param[in] user_data The user data passed from request function
-/// @see wifi_aware_session_subscribe()
+/// Called when Subscribe request is finished.
+///
+/// The following error codes can be received: `WIFI_AWARE_ERROR_NONE` Successful `WIFI_AWARE_ERROR_NOT_SUPPORTED` Not supported `WIFI_AWARE_ERROR_PERMISSION_DENIED` Permission denied `WIFI_AWARE_ERROR_INVALID_PARAMETER` Invalid function parameter `WIFI_AWARE_ERROR_INVALID_OPERATION` Invalid operation `WIFI_AWARE_ERROR_OPERATION_FAILED` Operation failed
+///
+/// **Since Tizen:**
+/// - 9.0
+///
+/// **Remarks:**
+/// - The `session` should not be released.
+///
+/// **Parameters:**
+/// - `session` (in): The Wi-Fi Aware Session handle
+/// - `error` (in): The error code
+/// - `user_data` (in): The user data passed from request function
+///
+/// **See also:**
+/// - `wifi_aware_session_subscribe()`
+/// @nodoc
 typedef wifi_aware_subscribed_cb
     = ffi.Pointer<ffi.NativeFunction<wifi_aware_subscribed_cbFunction>>;
+/// @nodoc
 typedef wifi_aware_subscribed_cbFunction = ffi.Void Function(
     wifi_aware_session_h session,
     ffi.Int32 error,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_aware_subscribed_cbFunction = void Function(
     wifi_aware_session_h session, int error, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called whenever a matched service for the subscribe configurations is found.
-/// @since_tizen 9.0
-/// @remarks If the publisher doesn't enabled ranging or the subscriber doesn't set both max and min distance,\n
-/// @a distance would be negative value.\n
-/// The @a session and @a peer should not be released.
-/// @param[in] session   The Wi-Fi Aware Session handle
-/// @param[in] peer      The found Peer information
-/// @param[in] service_specific_info     Sequence of octets which were received from published service
-/// @param[in] service_specific_info_len The length of @a service_specific_info
-/// @param[in] distance The distance to the peer
-/// @param[in] user_data The user data passed to the callback function
-/// @see wifi_aware_session_set_service_discovered_cb()
-/// @see wifi_aware_session_unset_service_discovered_cb()
+/// Called whenever a matched service for the subscribe configurations is found.
+///
+/// **Since Tizen:**
+/// - 9.0
+///
+/// **Remarks:**
+/// - If the publisher doesn't enabled ranging or the subscriber doesn't set both max and min distance,
+/// - `distance` would be negative value.
+/// - The `session` and `peer` should not be released.
+///
+/// **Parameters:**
+/// - `session` (in): The Wi-Fi Aware Session handle
+/// - `peer` (in): The found Peer information
+/// - `service_specific_info` (in): Sequence of octets which were received from published service
+/// - `service_specific_info_len` (in): The length of `service_specific_info`
+/// - `distance` (in): The distance to the peer
+/// - `user_data` (in): The user data passed to the callback function
+///
+/// **See also:**
+/// - `wifi_aware_session_set_service_discovered_cb()`
+/// - `wifi_aware_session_unset_service_discovered_cb()`
+/// @nodoc
 typedef wifi_aware_service_discovered_cb
     = ffi.Pointer<ffi.NativeFunction<wifi_aware_service_discovered_cbFunction>>;
+/// @nodoc
 typedef wifi_aware_service_discovered_cbFunction = ffi.Void Function(
     wifi_aware_session_h session,
     wifi_aware_peer_h peer,
@@ -1944,6 +2595,7 @@ typedef wifi_aware_service_discovered_cbFunction = ffi.Void Function(
     ffi.Size service_specific_info_len,
     ffi.Int distance,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_aware_service_discovered_cbFunction = void Function(
     wifi_aware_session_h session,
     wifi_aware_peer_h peer,
@@ -1952,50 +2604,68 @@ typedef Dartwifi_aware_service_discovered_cbFunction = void Function(
     int distance,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Handle for Wi-Fi Aware peer.
-/// @since_tizen 9.0
+/// Handle for Wi-Fi Aware peer.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 typedef wifi_aware_peer_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when a message is sent to a peer.
-/// @details The following error codes can be received: \n
-/// #WIFI_AWARE_ERROR_NONE                   Successful \n
-/// #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported \n
-/// #WIFI_AWARE_ERROR_PERMISSION_DENIED      Permission denied \n
-/// #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter \n
-/// #WIFI_AWARE_ERROR_INVALID_OPERATION      Invalid operation \n
-/// #WIFI_AWARE_ERROR_OPERATION_FAILED       Operation failed
-/// @since_tizen 9.0
-/// @remarks The @a session should not be released.
-/// @param[in] session   The Wi-Fi Aware Session handle
-/// @param[in] error     The error code
-/// @param[in] user_data The user data passed from request function
+/// Called when a message is sent to a peer.
+///
+/// The following error codes can be received: `WIFI_AWARE_ERROR_NONE` Successful `WIFI_AWARE_ERROR_NOT_SUPPORTED` Not supported `WIFI_AWARE_ERROR_PERMISSION_DENIED` Permission denied `WIFI_AWARE_ERROR_INVALID_PARAMETER` Invalid function parameter `WIFI_AWARE_ERROR_INVALID_OPERATION` Invalid operation `WIFI_AWARE_ERROR_OPERATION_FAILED` Operation failed
+///
+/// **Since Tizen:**
+/// - 9.0
+///
+/// **Remarks:**
+/// - The `session` should not be released.
+///
+/// **Parameters:**
+/// - `session` (in): The Wi-Fi Aware Session handle
+/// - `error` (in): The error code
+/// - `user_data` (in): The user data passed from request function
+/// @nodoc
 typedef wifi_aware_send_message_result_cb = ffi
     .Pointer<ffi.NativeFunction<wifi_aware_send_message_result_cbFunction>>;
+/// @nodoc
 typedef wifi_aware_send_message_result_cbFunction = ffi.Void Function(
     wifi_aware_session_h session,
     ffi.Int32 error,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_aware_send_message_result_cbFunction = void Function(
     wifi_aware_session_h session, int error, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called whenever receiving a message from a peer.
-/// @since_tizen 9.0
-/// @remarks The @a session and @a peer should not be released.
-/// @param[in] session   The Wi-Fi Aware Session handle
-/// @param[in] peer      The peer who sent the message
-/// @param[in] message   The message which is sent
-/// @param[in] len       The length of the message
-/// @param[in] user_data The user data passed to the callback function
-/// @see wifi_aware_session_set_message_received_cb()
-/// @see wifi_aware_session_unset_message_received_cb()
+/// Called whenever receiving a message from a peer.
+///
+/// **Since Tizen:**
+/// - 9.0
+///
+/// **Remarks:**
+/// - The `session` and `peer` should not be released.
+///
+/// **Parameters:**
+/// - `session` (in): The Wi-Fi Aware Session handle
+/// - `peer` (in): The peer who sent the message
+/// - `message` (in): The message which is sent
+/// - `len` (in): The length of the message
+/// - `user_data` (in): The user data passed to the callback function
+///
+/// **See also:**
+/// - `wifi_aware_session_set_message_received_cb()`
+/// - `wifi_aware_session_unset_message_received_cb()`
+/// @nodoc
 typedef wifi_aware_message_received_cb
     = ffi.Pointer<ffi.NativeFunction<wifi_aware_message_received_cbFunction>>;
+/// @nodoc
 typedef wifi_aware_message_received_cbFunction = ffi.Void Function(
     wifi_aware_session_h session,
     wifi_aware_peer_h peer,
     ffi.Pointer<ffi.UnsignedChar> message,
     ffi.Size len,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_aware_message_received_cbFunction = void Function(
     wifi_aware_session_h session,
     wifi_aware_peer_h peer,
@@ -2003,8 +2673,11 @@ typedef Dartwifi_aware_message_received_cbFunction = void Function(
     int len,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumeration for Wi-Fi Aware security type.
-/// @since_tizen 9.0
+/// Enumeration for Wi-Fi Aware security type.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 abstract class wifi_aware_security_type_e {
   /// < Wi-Fi Aware security type: Open
   static const int WIFI_AWARE_SECURITY_TYPE_OPEN = 0;
@@ -2016,49 +2689,69 @@ abstract class wifi_aware_security_type_e {
   static const int WIFI_AWARE_SECURITY_TYPE_PMK = 2;
 }
 
-/// @brief Handle for Wi-Fi Aware Data Path.
-/// @since_tizen 9.0
+/// Handle for Wi-Fi Aware Data Path.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 typedef wifi_aware_data_path_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when Data Path open request is done.
-/// @details The following error codes can be received: \n
-/// #WIFI_AWARE_ERROR_NONE                   Successful \n
-/// #WIFI_AWARE_ERROR_NOT_SUPPORTED          Not supported \n
-/// #WIFI_AWARE_ERROR_PERMISSION_DENIED      Permission denied \n
-/// #WIFI_AWARE_ERROR_INVALID_PARAMETER      Invalid function parameter \n
-/// #WIFI_AWARE_ERROR_INVALID_OPERATION      Invalid operation \n
-/// #WIFI_AWARE_ERROR_OPERATION_FAILED       Operation failed
-/// @since_tizen 9.0
-/// @remarks The @a data_path should not be released.
-/// @param[in] data_path The Data Path handle
-/// @param[in] error     The result of the open request
-/// @param[in] user_data The user data passed from request function
-/// @see wifi_aware_data_path_open()
+/// Called when Data Path open request is done.
+///
+/// The following error codes can be received: `WIFI_AWARE_ERROR_NONE` Successful `WIFI_AWARE_ERROR_NOT_SUPPORTED` Not supported `WIFI_AWARE_ERROR_PERMISSION_DENIED` Permission denied `WIFI_AWARE_ERROR_INVALID_PARAMETER` Invalid function parameter `WIFI_AWARE_ERROR_INVALID_OPERATION` Invalid operation `WIFI_AWARE_ERROR_OPERATION_FAILED` Operation failed
+///
+/// **Since Tizen:**
+/// - 9.0
+///
+/// **Remarks:**
+/// - The `data_path` should not be released.
+///
+/// **Parameters:**
+/// - `data_path` (in): The Data Path handle
+/// - `error` (in): The result of the open request
+/// - `user_data` (in): The user data passed from request function
+///
+/// **See also:**
+/// - `wifi_aware_data_path_open()`
+/// @nodoc
 typedef wifi_aware_data_path_open_cb
     = ffi.Pointer<ffi.NativeFunction<wifi_aware_data_path_open_cbFunction>>;
+/// @nodoc
 typedef wifi_aware_data_path_open_cbFunction = ffi.Void Function(
     wifi_aware_data_path_h data_path,
     ffi.Int32 error,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_aware_data_path_open_cbFunction = void Function(
     wifi_aware_data_path_h data_path,
     int error,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the Wi-Fi Aware Data Path has been lost.
-/// @since_tizen 9.0
-/// @remarks The @a data_path should not be released.
-/// @param[in] data_path The terminated Data Path handle
-/// @param[in] reason    The reason of termination
-/// @param[in] user_data The user data passed from request function
-/// @see wifi_aware_data_path_set_terminated_cb()
-/// @see wifi_aware_data_path_unset_terminated_cb()
+/// Called when the Wi-Fi Aware Data Path has been lost.
+///
+/// **Since Tizen:**
+/// - 9.0
+///
+/// **Remarks:**
+/// - The `data_path` should not be released.
+///
+/// **Parameters:**
+/// - `data_path` (in): The terminated Data Path handle
+/// - `reason` (in): The reason of termination
+/// - `user_data` (in): The user data passed from request function
+///
+/// **See also:**
+/// - `wifi_aware_data_path_set_terminated_cb()`
+/// - `wifi_aware_data_path_unset_terminated_cb()`
+/// @nodoc
 typedef wifi_aware_data_path_terminated_cb = ffi
     .Pointer<ffi.NativeFunction<wifi_aware_data_path_terminated_cbFunction>>;
+/// @nodoc
 typedef wifi_aware_data_path_terminated_cbFunction = ffi.Void Function(
     wifi_aware_data_path_h data_path,
     ffi.Int32 reason,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_aware_data_path_terminated_cbFunction = void Function(
     wifi_aware_data_path_h data_path,
     int reason,

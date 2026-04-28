@@ -1,3 +1,6 @@
+/// {@category 7.0/tizen}
+library tizen_interop_7_0.capi_media_tool;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'generated_bindings_tbm.dart' as tbm_surface;
 
 /// Dart bindings for Tizen capi-media-tool APIs.
+/// {@category 7.0/tizen}
 class Tizen70CapiMediaTool {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,20 +29,28 @@ class Tizen70CapiMediaTool {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates a media format.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @details	It creates media format. and reference count will be set to 1
-  /// For destroying #media_format_h handle, use media_format_unref().
-  /// @param[out] fmt allocated #media_format_h
+  /// Creates a media format.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_FORMAT_ERROR_NONE Successful
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_FORMAT_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_OPERATION Invalid operation
-  /// @see media_format_ref()
-  /// @see media_format_unref()
+  /// It creates media format. and reference count will be set to 1 For destroying `media_format_h` handle, use media_format_unref().
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `fmt` (out): allocated `media_format_h`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_FORMAT_ERROR_NONE`: Successful
+  /// - `MEDIA_FORMAT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_FORMAT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_FORMAT_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `media_format_ref()`
+  /// - `media_format_unref()`
   int media_format_create(
     ffi.Pointer<media_format_h> fmt,
   ) {
@@ -53,20 +65,30 @@ class Tizen70CapiMediaTool {
   late final _media_format_create = _media_format_createPtr
       .asFunction<int Function(ffi.Pointer<media_format_h>)>();
 
-  /// @brief Gets format type of media format.
-  /// @since_tizen 3.0
-  /// @remarks Since 6.5, #MEDIA_FORMAT_ERROR_INVALID_OPERATION is removed.
-  /// @param[in] fmt The #media_format_h to get format type
-  /// @param[out] formattype The #media_format_type_e, ex) #MEDIA_FORMAT_AUDIO
+  /// Gets format type of media format.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_FORMAT_ERROR_NONE Successful
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see media_format_set_container_mime()
-  /// @see media_format_set_text_mime()
-  /// @see media_format_set_audio_mime()
-  /// @see media_format_set_video_mime()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Since 6.5, `MEDIA_FORMAT_ERROR_INVALID_OPERATION` is removed.
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): The `media_format_h` to get format type
+  /// - `formattype` (out): The `media_format_type_e`, ex) `MEDIA_FORMAT_AUDIO`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_FORMAT_ERROR_NONE`: Successful
+  /// - `MEDIA_FORMAT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `media_format_set_container_mime()`
+  /// - `media_format_set_text_mime()`
+  /// - `media_format_set_audio_mime()`
+  /// - `media_format_set_video_mime()`
   int media_format_get_type(
     media_format_h fmt,
     ffi.Pointer<ffi.Int32> formattype,
@@ -84,17 +106,27 @@ class Tizen70CapiMediaTool {
   late final _media_format_get_type = _media_format_get_typePtr
       .asFunction<int Function(media_format_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets container MIME type of media format.
-  /// @since_tizen 3.0
-  /// @remarks Since 6.5, #MEDIA_FORMAT_ERROR_INVALID_OPERATION is removed.
-  /// @param[in] fmt The #media_format_h to get container mime type
-  /// @param[out] mimetype The #media_format_mimetype_e, ex) #MEDIA_FORMAT_CONTAINER_MP4
+  /// Gets container MIME type of media format.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_FORMAT_ERROR_NONE Successful
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see media_format_set_container_mime()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Since 6.5, `MEDIA_FORMAT_ERROR_INVALID_OPERATION` is removed.
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): The `media_format_h` to get container mime type
+  /// - `mimetype` (out): The `media_format_mimetype_e`, ex) `MEDIA_FORMAT_CONTAINER_MP4`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_FORMAT_ERROR_NONE`: Successful
+  /// - `MEDIA_FORMAT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `media_format_set_container_mime()`
   int media_format_get_container_mime(
     media_format_h fmt,
     ffi.Pointer<ffi.Int32> mimetype,
@@ -113,18 +145,28 @@ class Tizen70CapiMediaTool {
       _media_format_get_container_mimePtr
           .asFunction<int Function(media_format_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets text track information of media format.
-  /// @since_tizen 3.0
-  /// @remarks Since 6.5, #MEDIA_FORMAT_ERROR_INVALID_OPERATION is removed.
-  /// @param[in] fmt The #media_format_h to get text information
-  /// @param[out] mimetype The #media_format_mimetype_e, ex) #MEDIA_FORMAT_TEXT_MP4
-  /// @param[out] type The #media_format_text_type_e
+  /// Gets text track information of media format.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_FORMAT_ERROR_NONE Successful
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see media_format_set_text_mime()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Since 6.5, `MEDIA_FORMAT_ERROR_INVALID_OPERATION` is removed.
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): The `media_format_h` to get text information
+  /// - `mimetype` (out): The `media_format_mimetype_e`, ex) `MEDIA_FORMAT_TEXT_MP4`
+  /// - `type` (out): The `media_format_text_type_e`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_FORMAT_ERROR_NONE`: Successful
+  /// - `MEDIA_FORMAT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `media_format_set_text_mime()`
   int media_format_get_text_info(
     media_format_h fmt,
     ffi.Pointer<ffi.Int32> mimetype,
@@ -146,26 +188,37 @@ class Tizen70CapiMediaTool {
           int Function(media_format_h, ffi.Pointer<ffi.Int32>,
               ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets video information of media format.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks Since 6.5, #MEDIA_FORMAT_ERROR_INVALID_OPERATION is removed.
-  /// @details   returns mimetype, width, height, average bps, max bps of this media format.
-  /// @param[in] fmt #media_format_h to get video information
-  /// @param[out] mimetype #media_format_mimetype_e , ex) #MEDIA_FORMAT_H264_HP
-  /// @param[out] width width of the video
-  /// @param[out] height height of the video
-  /// @param[out] avg_bps average bps of the video
-  /// @param[out] max_bps max bps of the video
+  /// Gets video information of media format.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_FORMAT_ERROR_NONE Successful
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see media_format_set_video_mime()
-  /// @see media_format_set_video_width()
-  /// @see media_format_set_video_height()
-  /// @see media_format_set_video_avg_bps()
-  /// @see media_format_set_video_max_bps()
+  /// returns mimetype, width, height, average bps, max bps of this media format.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - Since 6.5, `MEDIA_FORMAT_ERROR_INVALID_OPERATION` is removed.
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): `media_format_h` to get video information
+  /// - `mimetype` (out): `media_format_mimetype_e` , ex) `MEDIA_FORMAT_H264_HP`
+  /// - `width` (out): width of the video
+  /// - `height` (out): height of the video
+  /// - `avg_bps` (out): average bps of the video
+  /// - `max_bps` (out): max bps of the video
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_FORMAT_ERROR_NONE`: Successful
+  /// - `MEDIA_FORMAT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `media_format_set_video_mime()`
+  /// - `media_format_set_video_width()`
+  /// - `media_format_set_video_height()`
+  /// - `media_format_set_video_avg_bps()`
+  /// - `media_format_set_video_max_bps()`
   int media_format_get_video_info(
     media_format_h fmt,
     ffi.Pointer<ffi.Int32> mimetype,
@@ -203,26 +256,37 @@ class Tizen70CapiMediaTool {
               ffi.Pointer<ffi.Int>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets audio information of media format.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks Since 6.5, #MEDIA_FORMAT_ERROR_INVALID_OPERATION is removed.
-  /// @details   returns mimetype, channels, height, samplerate bps, max bps of this media format.
-  /// @param[in] fmt #media_format_h to get audio information
-  /// @param[out] mimetype #media_format_mimetype_e , ex) #MEDIA_FORMAT_PCM
-  /// @param[out] channel channel of the audio
-  /// @param[out] samplerate sampling rate of the audio
-  /// @param[out] bit bit resolution of the audio
-  /// @param[out] avg_bps average bps of the audio
+  /// Gets audio information of media format.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_FORMAT_ERROR_NONE Successful
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see media_format_set_audio_mime()
-  /// @see media_format_set_audio_channel()
-  /// @see media_format_set_audio_samplerate()
-  /// @see media_format_set_audio_bit()
-  /// @see media_format_set_audio_avg_bps()
+  /// returns mimetype, channels, height, samplerate bps, max bps of this media format.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - Since 6.5, `MEDIA_FORMAT_ERROR_INVALID_OPERATION` is removed.
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): `media_format_h` to get audio information
+  /// - `mimetype` (out): `media_format_mimetype_e` , ex) `MEDIA_FORMAT_PCM`
+  /// - `channel` (out): channel of the audio
+  /// - `samplerate` (out): sampling rate of the audio
+  /// - `bit` (out): bit resolution of the audio
+  /// - `avg_bps` (out): average bps of the audio
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_FORMAT_ERROR_NONE`: Successful
+  /// - `MEDIA_FORMAT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `media_format_set_audio_mime()`
+  /// - `media_format_set_audio_channel()`
+  /// - `media_format_set_audio_samplerate()`
+  /// - `media_format_set_audio_bit()`
+  /// - `media_format_set_audio_avg_bps()`
   int media_format_get_audio_info(
     media_format_h fmt,
     ffi.Pointer<ffi.Int32> mimetype,
@@ -260,17 +324,27 @@ class Tizen70CapiMediaTool {
               ffi.Pointer<ffi.Int>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets audio aac type of media format.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks Since 6.5, #MEDIA_FORMAT_ERROR_INVALID_OPERATION is removed.
-  /// @param[in] fmt #media_format_h to get audio information
-  /// @param[out] is_adts AAC ADTS flag of the audio
+  /// Gets audio aac type of media format.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_FORMAT_ERROR_NONE Successful
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see media_format_set_audio_aac_type()
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - Since 6.5, `MEDIA_FORMAT_ERROR_INVALID_OPERATION` is removed.
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): `media_format_h` to get audio information
+  /// - `is_adts` (out): AAC ADTS flag of the audio
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_FORMAT_ERROR_NONE`: Successful
+  /// - `MEDIA_FORMAT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `media_format_set_audio_aac_type()`
   int media_format_get_audio_aac_type(
     media_format_h fmt,
     ffi.Pointer<ffi.Bool> is_adts,
@@ -289,17 +363,27 @@ class Tizen70CapiMediaTool {
       _media_format_get_audio_aac_typePtr
           .asFunction<int Function(media_format_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets audio aac header type of media format.
-  /// @since_tizen 3.0
-  /// @remarks Since 6.5, #MEDIA_FORMAT_ERROR_INVALID_OPERATION is removed.
-  /// @param[in] fmt The #media_format_h to get audio information
-  /// @param[out] aac_header_type The #media_format_aac_header_type_e, ex) #MEDIA_FORMAT_AAC_HEADER_ADTS
+  /// Gets audio aac header type of media format.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_FORMAT_ERROR_NONE Successful
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see media_format_set_audio_aac_header_type()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Since 6.5, `MEDIA_FORMAT_ERROR_INVALID_OPERATION` is removed.
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): The `media_format_h` to get audio information
+  /// - `aac_header_type` (out): The `media_format_aac_header_type_e`, ex) `MEDIA_FORMAT_AAC_HEADER_ADTS`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_FORMAT_ERROR_NONE`: Successful
+  /// - `MEDIA_FORMAT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `media_format_set_audio_aac_header_type()`
   int media_format_get_audio_aac_header_type(
     media_format_h fmt,
     ffi.Pointer<ffi.Int32> aac_header_type,
@@ -318,16 +402,24 @@ class Tizen70CapiMediaTool {
       _media_format_get_audio_aac_header_typePtr
           .asFunction<int Function(media_format_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets video frame rate of media format.
-  /// @since_tizen 3.0
-  /// @remarks Since 6.5, #MEDIA_FORMAT_ERROR_INVALID_OPERATION is removed.
-  /// @param[in] fmt The #media_format_h to get
-  /// @param[out] frame_rate The video frame rate
+  /// Gets video frame rate of media format.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_FORMAT_ERROR_NONE Successful
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Since 6.5, `MEDIA_FORMAT_ERROR_INVALID_OPERATION` is removed.
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): The `media_format_h` to get
+  /// - `frame_rate` (out): The video frame rate
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_FORMAT_ERROR_NONE`: Successful
+  /// - `MEDIA_FORMAT_ERROR_INVALID_PARAMETER`: Invalid parameter
   int media_format_get_video_frame_rate(
     media_format_h fmt,
     ffi.Pointer<ffi.Int> frame_rate,
@@ -346,17 +438,25 @@ class Tizen70CapiMediaTool {
       _media_format_get_video_frame_ratePtr
           .asFunction<int Function(media_format_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets container MIME type of media format.
-  /// @since_tizen 3.0
-  /// @param[in] fmt The #media_format_h to set
-  /// @param[in] mimetype The #media_format_mimetype_e, ex) #MEDIA_FORMAT_CONTAINER_MP4
+  /// Sets container MIME type of media format.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_FORMAT_ERROR_NONE Successful
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_OPERATION Invalid operation
-  /// @see media_format_get_container_mime()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): The `media_format_h` to set
+  /// - `mimetype` (in): The `media_format_mimetype_e`, ex) `MEDIA_FORMAT_CONTAINER_MP4`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_FORMAT_ERROR_NONE`: Successful
+  /// - `MEDIA_FORMAT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_FORMAT_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `media_format_get_container_mime()`
   int media_format_set_container_mime(
     media_format_h fmt,
     int mimetype,
@@ -374,16 +474,25 @@ class Tizen70CapiMediaTool {
       _media_format_set_container_mimePtr
           .asFunction<int Function(media_format_h, int)>();
 
-  /// @brief Sets text MIME type of media format.
-  /// @since_tizen 3.0
-  /// @param[in] fmt The #media_format_h to set
-  /// @param[in] mimetype The #media_format_mimetype_e, ex) #MEDIA_FORMAT_TEXT
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_FORMAT_ERROR_NONE Successful
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_OPERATION Invalid operation
-  /// @see media_format_get_text_info()
+  /// Sets text MIME type of media format.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): The `media_format_h` to set
+  /// - `mimetype` (in): The `media_format_mimetype_e`, ex) `MEDIA_FORMAT_TEXT`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_FORMAT_ERROR_NONE`: Successful
+  /// - `MEDIA_FORMAT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_FORMAT_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `media_format_get_text_info()`
   int media_format_set_text_mime(
     media_format_h fmt,
     int mimetype,
@@ -400,16 +509,25 @@ class Tizen70CapiMediaTool {
   late final _media_format_set_text_mime = _media_format_set_text_mimePtr
       .asFunction<int Function(media_format_h, int)>();
 
-  /// @brief Sets text type of media format.
-  /// @since_tizen 3.0
-  /// @param[in] fmt The #media_format_h to set
-  /// @param[in] type The text type
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_FORMAT_ERROR_NONE Successful
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_OPERATION Invalid operation
-  /// @see media_format_get_text_info()
+  /// Sets text type of media format.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): The `media_format_h` to set
+  /// - `type` (in): The text type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_FORMAT_ERROR_NONE`: Successful
+  /// - `MEDIA_FORMAT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_FORMAT_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `media_format_get_text_info()`
   int media_format_set_text_type(
     media_format_h fmt,
     int type,
@@ -426,17 +544,25 @@ class Tizen70CapiMediaTool {
   late final _media_format_set_text_type = _media_format_set_text_typePtr
       .asFunction<int Function(media_format_h, int)>();
 
-  /// @brief Sets video MIME type of media format.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] fmt #media_format_h to set
-  /// @param[in] mimetype #media_format_mimetype_e , ex) #MEDIA_FORMAT_H264_HP
+  /// Sets video MIME type of media format.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_FORMAT_ERROR_NONE Successful
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_OPERATION Invalid operation
-  /// @see media_format_get_video_info()
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): `media_format_h` to set
+  /// - `mimetype` (in): `media_format_mimetype_e` , ex) `MEDIA_FORMAT_H264_HP`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_FORMAT_ERROR_NONE`: Successful
+  /// - `MEDIA_FORMAT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_FORMAT_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `media_format_get_video_info()`
   int media_format_set_video_mime(
     media_format_h fmt,
     int mimetype,
@@ -453,18 +579,28 @@ class Tizen70CapiMediaTool {
   late final _media_format_set_video_mime = _media_format_set_video_mimePtr
       .asFunction<int Function(media_format_h, int)>();
 
-  /// @brief Sets video width of media format.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] fmt #media_format_h to set
-  /// @param[in] width width of the video
-  /// @pre must set video MIME type by media_format_set_video_mime()
+  /// Sets video width of media format.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_FORMAT_ERROR_NONE Successful
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_OPERATION Invalid operation
-  /// @see media_format_get_video_info()
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): `media_format_h` to set
+  /// - `width` (in): width of the video
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_FORMAT_ERROR_NONE`: Successful
+  /// - `MEDIA_FORMAT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_FORMAT_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - must set video MIME type by media_format_set_video_mime()
+  ///
+  /// **See also:**
+  /// - `media_format_get_video_info()`
   int media_format_set_video_width(
     media_format_h fmt,
     int width,
@@ -481,18 +617,28 @@ class Tizen70CapiMediaTool {
   late final _media_format_set_video_width = _media_format_set_video_widthPtr
       .asFunction<int Function(media_format_h, int)>();
 
-  /// @brief Sets video height of media format.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] fmt #media_format_h to set
-  /// @param[in] height height of the video
-  /// @pre must set video MIME type by media_format_set_video_mime()
+  /// Sets video height of media format.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_FORMAT_ERROR_NONE Successful
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_OPERATION Invalid operation
-  /// @see media_format_get_video_info()
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): `media_format_h` to set
+  /// - `height` (in): height of the video
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_FORMAT_ERROR_NONE`: Successful
+  /// - `MEDIA_FORMAT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_FORMAT_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - must set video MIME type by media_format_set_video_mime()
+  ///
+  /// **See also:**
+  /// - `media_format_get_video_info()`
   int media_format_set_video_height(
     media_format_h fmt,
     int height,
@@ -509,18 +655,28 @@ class Tizen70CapiMediaTool {
   late final _media_format_set_video_height = _media_format_set_video_heightPtr
       .asFunction<int Function(media_format_h, int)>();
 
-  /// @brief Sets video avg_bps of media format.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] fmt #media_format_h to set
-  /// @param[in] avg_bps average bps of the video
-  /// @pre must set video MIME type by media_format_set_video_mime()
+  /// Sets video avg_bps of media format.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_FORMAT_ERROR_NONE Successful
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_OPERATION Invalid operation
-  /// @see media_format_get_video_info()
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): `media_format_h` to set
+  /// - `avg_bps` (in): average bps of the video
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_FORMAT_ERROR_NONE`: Successful
+  /// - `MEDIA_FORMAT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_FORMAT_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - must set video MIME type by media_format_set_video_mime()
+  ///
+  /// **See also:**
+  /// - `media_format_get_video_info()`
   int media_format_set_video_avg_bps(
     media_format_h fmt,
     int avg_bps,
@@ -538,18 +694,28 @@ class Tizen70CapiMediaTool {
       _media_format_set_video_avg_bpsPtr
           .asFunction<int Function(media_format_h, int)>();
 
-  /// @brief Sets video max_bps of media format.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] fmt #media_format_h to set
-  /// @param[in] max_bps max bps of the video
-  /// @pre must set video MIME type by media_format_set_video_mime()
+  /// Sets video max_bps of media format.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_FORMAT_ERROR_NONE Successful
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_OPERATION Invalid operation
-  /// @see media_format_get_video_info()
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): `media_format_h` to set
+  /// - `max_bps` (in): max bps of the video
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_FORMAT_ERROR_NONE`: Successful
+  /// - `MEDIA_FORMAT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_FORMAT_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - must set video MIME type by media_format_set_video_mime()
+  ///
+  /// **See also:**
+  /// - `media_format_get_video_info()`
   int media_format_set_video_max_bps(
     media_format_h fmt,
     int max_bps,
@@ -567,17 +733,25 @@ class Tizen70CapiMediaTool {
       _media_format_set_video_max_bpsPtr
           .asFunction<int Function(media_format_h, int)>();
 
-  /// @brief Sets video frame rate of media format.
-  /// @since_tizen 3.0
-  /// @param[in] fmt The #media_format_h to set
-  /// @param[in] frame_rate The video frame rate
-  /// @pre must set video MIME type by media_format_set_video_mime()
+  /// Sets video frame rate of media format.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_FORMAT_ERROR_NONE Successful
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_OPERATION Invalid operation
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): The `media_format_h` to set
+  /// - `frame_rate` (in): The video frame rate
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_FORMAT_ERROR_NONE`: Successful
+  /// - `MEDIA_FORMAT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_FORMAT_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - must set video MIME type by media_format_set_video_mime()
   int media_format_set_video_frame_rate(
     media_format_h fmt,
     int frame_rate,
@@ -595,17 +769,25 @@ class Tizen70CapiMediaTool {
       _media_format_set_video_frame_ratePtr
           .asFunction<int Function(media_format_h, int)>();
 
-  /// @brief Sets audio MIME type of media format.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] fmt #media_format_h to set audio information
-  /// @param[in] mimetype #media_format_mimetype_e , ex) #MEDIA_FORMAT_PCM
+  /// Sets audio MIME type of media format.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_FORMAT_ERROR_NONE Successful
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_OPERATION Invalid operation
-  /// @see media_format_get_audio_info()
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): `media_format_h` to set audio information
+  /// - `mimetype` (in): `media_format_mimetype_e` , ex) `MEDIA_FORMAT_PCM`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_FORMAT_ERROR_NONE`: Successful
+  /// - `MEDIA_FORMAT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_FORMAT_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `media_format_get_audio_info()`
   int media_format_set_audio_mime(
     media_format_h fmt,
     int mimetype,
@@ -622,18 +804,28 @@ class Tizen70CapiMediaTool {
   late final _media_format_set_audio_mime = _media_format_set_audio_mimePtr
       .asFunction<int Function(media_format_h, int)>();
 
-  /// @brief Sets audio channel of media format.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] fmt #media_format_h to set audio information
-  /// @param[in] channel channel of the audio
-  /// @pre must set audio MIME type by media_format_set_audio_mime()
+  /// Sets audio channel of media format.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_FORMAT_ERROR_NONE Successful
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_OPERATION Invalid operation
-  /// @see media_format_get_audio_info()
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): `media_format_h` to set audio information
+  /// - `channel` (in): channel of the audio
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_FORMAT_ERROR_NONE`: Successful
+  /// - `MEDIA_FORMAT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_FORMAT_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - must set audio MIME type by media_format_set_audio_mime()
+  ///
+  /// **See also:**
+  /// - `media_format_get_audio_info()`
   int media_format_set_audio_channel(
     media_format_h fmt,
     int channel,
@@ -651,18 +843,28 @@ class Tizen70CapiMediaTool {
       _media_format_set_audio_channelPtr
           .asFunction<int Function(media_format_h, int)>();
 
-  /// @brief Sets audio samplerate of media format.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] fmt #media_format_h to set
-  /// @param[in] samplerate sampling rate of the audio
-  /// @pre must set audio MIME type by media_format_set_audio_mime()
+  /// Sets audio samplerate of media format.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_FORMAT_ERROR_NONE Successful
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_OPERATION Invalid operation
-  /// @see media_format_get_audio_info()
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): `media_format_h` to set
+  /// - `samplerate` (in): sampling rate of the audio
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_FORMAT_ERROR_NONE`: Successful
+  /// - `MEDIA_FORMAT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_FORMAT_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - must set audio MIME type by media_format_set_audio_mime()
+  ///
+  /// **See also:**
+  /// - `media_format_get_audio_info()`
   int media_format_set_audio_samplerate(
     media_format_h fmt,
     int samplerate,
@@ -680,19 +882,30 @@ class Tizen70CapiMediaTool {
       _media_format_set_audio_sampleratePtr
           .asFunction<int Function(media_format_h, int)>();
 
-  /// @brief Sets audio bit of media format.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @details   Sets audio bit resolution of this media format
-  /// @param[in] fmt #media_format_h to set
-  /// @param[in] bit bit of the audio
-  /// @pre must set audio MIME type by media_format_set_audio_mime()
+  /// Sets audio bit of media format.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_FORMAT_ERROR_NONE Successful
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_OPERATION Invalid operation
-  /// @see media_format_get_audio_info()
+  /// Sets audio bit resolution of this media format
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): `media_format_h` to set
+  /// - `bit` (in): bit of the audio
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_FORMAT_ERROR_NONE`: Successful
+  /// - `MEDIA_FORMAT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_FORMAT_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - must set audio MIME type by media_format_set_audio_mime()
+  ///
+  /// **See also:**
+  /// - `media_format_get_audio_info()`
   int media_format_set_audio_bit(
     media_format_h fmt,
     int bit,
@@ -709,18 +922,28 @@ class Tizen70CapiMediaTool {
   late final _media_format_set_audio_bit = _media_format_set_audio_bitPtr
       .asFunction<int Function(media_format_h, int)>();
 
-  /// @brief Sets audio avg_bps of media format.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] fmt #media_format_h to set
-  /// @param[in] avg_bps average bit per second of the audio
-  /// @pre must set audio MIME type by media_format_set_audio_mime()
+  /// Sets audio avg_bps of media format.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_FORMAT_ERROR_NONE Successful
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_OPERATION Invalid operation
-  /// @see media_format_get_audio_info()
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): `media_format_h` to set
+  /// - `avg_bps` (in): average bit per second of the audio
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_FORMAT_ERROR_NONE`: Successful
+  /// - `MEDIA_FORMAT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_FORMAT_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - must set audio MIME type by media_format_set_audio_mime()
+  ///
+  /// **See also:**
+  /// - `media_format_get_audio_info()`
   int media_format_set_audio_avg_bps(
     media_format_h fmt,
     int avg_bps,
@@ -738,19 +961,30 @@ class Tizen70CapiMediaTool {
       _media_format_set_audio_avg_bpsPtr
           .asFunction<int Function(media_format_h, int)>();
 
-  /// @brief Sets audio aac type of media format.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @details   Sets audio aac data type of this media format
-  /// @param[in] fmt #media_format_h to set
-  /// @param[in] is_adts aac adts flag of the audio
-  /// @pre must set audio MIME type by media_format_set_audio_mime()
+  /// Sets audio aac type of media format.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_FORMAT_ERROR_NONE Successful
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_OPERATION Invalid operation
-  /// @see media_format_get_audio_aac_type()
+  /// Sets audio aac data type of this media format
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): `media_format_h` to set
+  /// - `is_adts` (in): aac adts flag of the audio
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_FORMAT_ERROR_NONE`: Successful
+  /// - `MEDIA_FORMAT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_FORMAT_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - must set audio MIME type by media_format_set_audio_mime()
+  ///
+  /// **See also:**
+  /// - `media_format_get_audio_aac_type()`
   int media_format_set_audio_aac_type(
     media_format_h fmt,
     bool is_adts,
@@ -768,18 +1002,28 @@ class Tizen70CapiMediaTool {
       _media_format_set_audio_aac_typePtr
           .asFunction<int Function(media_format_h, bool)>();
 
-  /// @brief Sets audio aac header type of media format.
-  /// @since_tizen 3.0
-  /// @param[in] fmt The #media_format_h to get audio information
-  /// @param[in] aac_header_type The #media_format_aac_header_type_e, ex) #MEDIA_FORMAT_AAC_HEADER_ADTS
-  /// @pre must set audio MIME type by media_format_set_audio_mime()
+  /// Sets audio aac header type of media format.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_FORMAT_ERROR_NONE Successful
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_OPERATION Invalid operation
-  /// @see media_format_get_audio_aac_header_type()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): The `media_format_h` to get audio information
+  /// - `aac_header_type` (in): The `media_format_aac_header_type_e`, ex) `MEDIA_FORMAT_AAC_HEADER_ADTS`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_FORMAT_ERROR_NONE`: Successful
+  /// - `MEDIA_FORMAT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_FORMAT_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - must set audio MIME type by media_format_set_audio_mime()
+  ///
+  /// **See also:**
+  /// - `media_format_get_audio_aac_header_type()`
   int media_format_set_audio_aac_header_type(
     media_format_h fmt,
     int aac_header_type,
@@ -797,18 +1041,27 @@ class Tizen70CapiMediaTool {
       _media_format_set_audio_aac_header_typePtr
           .asFunction<int Function(media_format_h, int)>();
 
-  /// @brief Increases reference count of #media_format_h object.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @details    increase ref_count of #media_format_h
-  /// @param[in] fmt exist #media_format_h
+  /// Increases reference count of `media_format_h` object.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_FORMAT_ERROR_NONE Successful
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_FORMAT_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_OPERATION Invalid operation
-  /// @see media_format_unref()
+  /// increase ref_count of `media_format_h`
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): exist `media_format_h`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_FORMAT_ERROR_NONE`: Successful
+  /// - `MEDIA_FORMAT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_FORMAT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_FORMAT_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `media_format_unref()`
   int media_format_ref(
     media_format_h fmt,
   ) {
@@ -823,17 +1076,25 @@ class Tizen70CapiMediaTool {
   late final _media_format_ref =
       _media_format_refPtr.asFunction<int Function(media_format_h)>();
 
-  /// @brief Decreases reference count of #media_format_h object.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] fmt exist #media_format_h
+  /// Decreases reference count of `media_format_h` object.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_FORMAT_ERROR_NONE Successful
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_FORMAT_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_OPERATION Invalid operation
-  /// @see media_format_ref()
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): exist `media_format_h`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_FORMAT_ERROR_NONE`: Successful
+  /// - `MEDIA_FORMAT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_FORMAT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_FORMAT_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `media_format_ref()`
   int media_format_unref(
     media_format_h fmt,
   ) {
@@ -848,18 +1109,26 @@ class Tizen70CapiMediaTool {
   late final _media_format_unref =
       _media_format_unrefPtr.asFunction<int Function(media_format_h)>();
 
-  /// @brief Checks whether the #media_format_h is writable or not.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] fmt exist #media_format_h
-  /// @param[out] is_writable if ref_count is 1, return true. if not, return false
+  /// Checks whether the `media_format_h` is writable or not.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_FORMAT_ERROR_NONE Successful
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_FORMAT_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_OPERATION Invalid operation
-  /// @see media_format_make_writable()
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): exist `media_format_h`
+  /// - `is_writable` (out): if ref_count is 1, return true. if not, return false
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_FORMAT_ERROR_NONE`: Successful
+  /// - `MEDIA_FORMAT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_FORMAT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_FORMAT_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `media_format_make_writable()`
   int media_format_is_writable(
     media_format_h fmt,
     ffi.Pointer<ffi.Bool> is_writable,
@@ -877,26 +1146,32 @@ class Tizen70CapiMediaTool {
   late final _media_format_is_writable = _media_format_is_writablePtr
       .asFunction<int Function(media_format_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Returns a writable copy of #media_format_h.
-  /// @details If there is only one reference count on fmt, the caller must be the owner,
-  /// and so this function will return the object unchanged.
-  /// while, if there is more than one reference count on the object, a new object will be returned.
-  /// The caller will own a reference to the returned object.
-  /// In a nutshell, this function unrefs the fmt and refs the out_fmt returned.
-  /// Don't access fmt after calling this function.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks If a new object is returned, it will not have its own copy of extra data.
-  /// The new object's extra data object will be the original object's extra data.
-  /// @param[in] fmt exist #media_format_h , don't access it after calling this function
-  /// @param[out] out_fmt new copied #media_format_h, the caller is owner of this object
+  /// Returns a writable copy of `media_format_h`.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_FORMAT_ERROR_NONE Successful
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_FORMAT_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_OPERATION Invalid operation
-  /// @see media_format_is_writable()
+  /// If there is only one reference count on fmt, the caller must be the owner, and so this function will return the object unchanged. while, if there is more than one reference count on the object, a new object will be returned. The caller will own a reference to the returned object. In a nutshell, this function unrefs the fmt and refs the out_fmt returned. Don't access fmt after calling this function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - If a new object is returned, it will not have its own copy of extra data.
+  /// - The new object's extra data object will be the original object's extra data.
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): exist `media_format_h` , don't access it after calling this function
+  /// - `out_fmt` (out): new copied `media_format_h`, the caller is owner of this object
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_FORMAT_ERROR_NONE`: Successful
+  /// - `MEDIA_FORMAT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_FORMAT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_FORMAT_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `media_format_is_writable()`
   int media_format_make_writable(
     media_format_h fmt,
     ffi.Pointer<media_format_h> out_fmt,
@@ -914,20 +1189,31 @@ class Tizen70CapiMediaTool {
   late final _media_format_make_writable = _media_format_make_writablePtr
       .asFunction<int Function(media_format_h, ffi.Pointer<media_format_h>)>();
 
-  /// @brief Sets extra data of media format.
-  /// @details	The user can set data that media format does not support.
-  /// @since_tizen 4.0
-  /// @remarks The application is responsible for freeing @a extra_data.
-  /// For description of extra data behavior upon making an object writable,
-  /// see the description of media_format_make_writable().
-  /// @param[in] fmt   The media format handle
-  /// @param[in] extra_data  The extra data to set
+  /// Sets extra data of media format.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_FORMAT_ERROR_NONE Successful
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see media_format_get_extra()
+  /// The user can set data that media format does not support.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - The application is responsible for freeing `extra_data`.
+  /// - For description of extra data behavior upon making an object writable,
+  /// - see the description of media_format_make_writable().
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): The media format handle
+  /// - `extra_data` (in): The extra data to set
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_FORMAT_ERROR_NONE`: Successful
+  /// - `MEDIA_FORMAT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `media_format_get_extra()`
   int media_format_set_extra(
     media_format_h fmt,
     ffi.Pointer<ffi.Void> extra_data,
@@ -945,20 +1231,31 @@ class Tizen70CapiMediaTool {
   late final _media_format_set_extra = _media_format_set_extraPtr
       .asFunction<int Function(media_format_h, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets extra data of media format.
-  /// @details	The user can get extra data which user sets value via media_format_set_extra().
-  /// @since_tizen 4.0
-  /// @remarks The application is responsible for freeing @a extra_data.
-  /// For description of extra data behavior upon making an object writable,
-  /// see the description of media_format_make_writable().
-  /// @param[in]  fmt   The media format handle
-  /// @param[out] extra_data    The extra data to get
+  /// Gets extra data of media format.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_FORMAT_ERROR_NONE Successful
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see media_format_set_extra()
+  /// The user can get extra data which user sets value via media_format_set_extra().
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - The application is responsible for freeing `extra_data`.
+  /// - For description of extra data behavior upon making an object writable,
+  /// - see the description of media_format_make_writable().
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): The media format handle
+  /// - `extra_data` (out): The extra data to get
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_FORMAT_ERROR_NONE`: Successful
+  /// - `MEDIA_FORMAT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `media_format_set_extra()`
   int media_format_get_extra(
     media_format_h fmt,
     ffi.Pointer<ffi.Pointer<ffi.Void>> extra_data,
@@ -976,19 +1273,30 @@ class Tizen70CapiMediaTool {
   late final _media_format_get_extra = _media_format_get_extraPtr.asFunction<
       int Function(media_format_h, ffi.Pointer<ffi.Pointer<ffi.Void>>)>();
 
-  /// @brief Sets audio channel mask of media format.
-  /// @since_tizen 5.5
-  /// @param[in] fmt The media format handle
-  /// @param[in] channel_mask The input channel mask
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_FORMAT_ERROR_NONE Successful
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_OPERATION Invalid operation
-  /// @see media_format_get_audio_channel_mask()
-  /// @see media_format_channel_positions_to_mask()
-  /// @par Example
-  /// @code
+  /// Sets audio channel mask of media format.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): The media format handle
+  /// - `channel_mask` (in): The input channel mask
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_FORMAT_ERROR_NONE`: Successful
+  /// - `MEDIA_FORMAT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_FORMAT_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `media_format_get_audio_channel_mask()`
+  /// - `media_format_channel_positions_to_mask()`
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// uint64_t channel_mask;
   /// media_format_channel_position_e position[2];
   ///
@@ -997,7 +1305,7 @@ class Tizen70CapiMediaTool {
   ///
   /// media_format_channel_positions_to_mask(fmt, position, &channel_mask);
   /// media_format_set_audio_channel_mask(fmt, channel_mask);
-  /// @endcode
+  /// ```
   int media_format_set_audio_channel_mask(
     media_format_h fmt,
     int channel_mask,
@@ -1015,19 +1323,30 @@ class Tizen70CapiMediaTool {
       _media_format_set_audio_channel_maskPtr
           .asFunction<int Function(media_format_h, int)>();
 
-  /// @brief Gets audio channel mask of media format.
-  /// @since_tizen 5.5
-  /// @param[in] fmt The media format handle
-  /// @param[out] channel_mask The output channel mask
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_FORMAT_ERROR_NONE Successful
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_OPERATION Invalid operation
-  /// @see media_format_set_audio_channel_mask()
-  /// @see media_format_channel_positions_from_mask()
-  /// @par Example
-  /// @code
+  /// Gets audio channel mask of media format.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): The media format handle
+  /// - `channel_mask` (out): The output channel mask
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_FORMAT_ERROR_NONE`: Successful
+  /// - `MEDIA_FORMAT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_FORMAT_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `media_format_set_audio_channel_mask()`
+  /// - `media_format_channel_positions_from_mask()`
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// int channels;
   /// uint64_t channel_mask;
   /// media_format_channel_position_e *positions;
@@ -1038,7 +1357,7 @@ class Tizen70CapiMediaTool {
   /// media_format_channel_positions_from_mask(fmt, channel_mask, &positions);
   /// ...
   /// free(positions);
-  /// @endcode
+  /// ```
   int media_format_get_audio_channel_mask(
     media_format_h fmt,
     ffi.Pointer<ffi.Uint64> channel_mask,
@@ -1057,18 +1376,26 @@ class Tizen70CapiMediaTool {
       _media_format_get_audio_channel_maskPtr
           .asFunction<int Function(media_format_h, ffi.Pointer<ffi.Uint64>)>();
 
-  /// @brief Checks whether the given media format is little endian.
-  /// @since_tizen 5.5
-  /// @param[in]  fmt    The media format  handle
-  /// @param[out] is_little_endian  @c true if the given media format is little endian,
-  /// @c false if the given media format is big endian
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_FORMAT_ERROR_NONE              Successful
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_OPERATION Invalid operation
-  /// @see media_format_mimetype_e
-  /// @see media_format_type_e
+  /// Checks whether the given media format is little endian.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): The media format handle
+  /// - `is_little_endian` (out): `true` if the given media format is little endian, `false` if the given media format is big endian
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_FORMAT_ERROR_NONE`: Successful
+  /// - `MEDIA_FORMAT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_FORMAT_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `media_format_mimetype_e`
+  /// - `media_format_type_e`
   int media_format_is_little_endian(
     media_format_h fmt,
     ffi.Pointer<ffi.Bool> is_little_endian,
@@ -1086,16 +1413,25 @@ class Tizen70CapiMediaTool {
   late final _media_format_is_little_endian = _media_format_is_little_endianPtr
       .asFunction<int Function(media_format_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets the number of bits of information in digital audio using pulse-code modulation (PCM).
-  /// @since_tizen 5.5
-  /// @param[in] fmt The media format handle
-  /// @param[out] bit_depth The number of bits of information in each sample
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_FORMAT_ERROR_NONE Successful
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_OPERATION Invalid operation
-  /// @see media_format_set_audio_aac_header_type()
+  /// Gets the number of bits of information in digital audio using pulse-code modulation (PCM).
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): The media format handle
+  /// - `bit_depth` (out): The number of bits of information in each sample
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_FORMAT_ERROR_NONE`: Successful
+  /// - `MEDIA_FORMAT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_FORMAT_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `media_format_set_audio_aac_header_type()`
   int media_format_get_audio_bit_depth(
     media_format_h fmt,
     ffi.Pointer<ffi.Int> bit_depth,
@@ -1114,26 +1450,41 @@ class Tizen70CapiMediaTool {
       _media_format_get_audio_bit_depthPtr
           .asFunction<int Function(media_format_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Converts the channels in the @a channel_mask to a positions array.
-  /// @details The size of the position array is equal to the number of channels,
-  /// that can be obtained with media_format_get_audio_info().
-  /// @since_tizen 5.5
-  /// @remarks  A @a channel_mask with fewer bits set than the number of channels is considered valid.
-  /// The @a positions should be released with free().
-  /// @param[in]  fmt    The media format handle
-  /// @param[in]  channel_mask    The input channel_mask
-  /// @param[out] positions    The channel positions array, its length is equal to the number of channels
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_FORMAT_ERROR_NONE Successful
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_OPERATION Invalid operation
-  /// @pre The number of channels must be set with media_format_set_audio_channel().
-  /// @pre The channel should be set before calling media_format_channel_positions_from_mask().
-  /// @see media_format_set_audio_channel()
-  /// @see media_format_get_audio_info()
-  /// @par Example
-  /// @code
+  /// Converts the channels in the `channel_mask` to a positions array.
+  ///
+  /// The size of the position array is equal to the number of channels, that can be obtained with media_format_get_audio_info().
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - A `channel_mask` with fewer bits set than the number of channels is considered valid.
+  /// - The `positions` should be released with free().
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): The media format handle
+  /// - `channel_mask` (in): The input channel_mask
+  /// - `positions` (out): The channel positions array, its length is equal to the number of channels
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_FORMAT_ERROR_NONE`: Successful
+  /// - `MEDIA_FORMAT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_FORMAT_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - The number of channels must be set with media_format_set_audio_channel().
+  /// - The channel should be set before calling media_format_channel_positions_from_mask().
+  ///
+  /// **See also:**
+  /// - `media_format_set_audio_channel()`
+  /// - `media_format_get_audio_info()`
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// int channels;
   /// uint64_t channel_mask;
   /// media_format_channel_position_e *positions;
@@ -1143,7 +1494,7 @@ class Tizen70CapiMediaTool {
   /// media_format_channel_positions_from_mask(fmt, channel_mask, &positions);
   /// ...
   /// free(positions);
-  /// @endcode
+  /// ```
   int media_format_channel_positions_from_mask(
     media_format_h fmt,
     int channel_mask,
@@ -1166,20 +1517,33 @@ class Tizen70CapiMediaTool {
           int Function(
               media_format_h, int, ffi.Pointer<ffi.Pointer<ffi.Int32>>)>();
 
-  /// @brief Converts the @a positions array to a bitmask.
-  /// @since_tizen 5.5
-  /// @remarks  A @a channel_mask_out with fewer bits set than the number of channels is considered valid.
-  /// @param[in]  fmt    The media format handle
-  /// @param[in]  positions    The channel positions array, its length is equal to the number of channels
-  /// @param[out] channel_mask_out    the output channel mask
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_FORMAT_ERROR_NONE Successful
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_FORMAT_ERROR_INVALID_OPERATION Invalid operation
-  /// @pre The number of channels must be set with media_format_set_audio_channel().
-  /// @pre The channel should be set before calling media_format_channel_positions_to_mask().
-  /// @see media_format_set_audio_channel()
+  /// Converts the `positions` array to a bitmask.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - A `channel_mask_out` with fewer bits set than the number of channels is considered valid.
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): The media format handle
+  /// - `positions` (in): The channel positions array, its length is equal to the number of channels
+  /// - `channel_mask_out` (out): the output channel mask
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_FORMAT_ERROR_NONE`: Successful
+  /// - `MEDIA_FORMAT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_FORMAT_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - The number of channels must be set with media_format_set_audio_channel().
+  /// - The channel should be set before calling media_format_channel_positions_to_mask().
+  ///
+  /// **See also:**
+  /// - `media_format_set_audio_channel()`
   int media_format_channel_positions_to_mask(
     media_format_h fmt,
     ffi.Pointer<ffi.Int32> positions,
@@ -1202,31 +1566,47 @@ class Tizen70CapiMediaTool {
           int Function(media_format_h, ffi.Pointer<ffi.Int32>,
               ffi.Pointer<ffi.Uint64>)>();
 
-  /// @deprecated Deprecated since 6.5. Use media_packet_new_alloc() instead.
-  /// @brief    Creates a media packet handle and allocates buffer.
-  /// @details  The buffer will be allocated to heap or tbm_surface.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks The @a packet should be released using media_packet_destroy().
-  /// @param[in]  fmt       The allocated #media_format_h by caller
-  /// @param[in]  fcb       The media_packet_finalize_cb() to register
-  /// @param[in]  fcb_data  The user data to be passed to the media_packet_finalize_cb() function
-  /// @param[out] packet    A new handle for media packet
+  /// **Deprecated:** Deprecated since 6.5. Use media_packet_new_alloc() instead.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
+  /// Creates a media packet handle and allocates buffer.
   ///
-  /// @pre Must have media_format_h instance by media_format_create()
-  /// @post Must do media_format_unref()
+  /// The buffer will be allocated to heap or tbm_surface.
   ///
-  /// @see media_packet_destroy()
-  /// @see media_packet_finalize_cb()
-  /// @see media_format_unref()
-  /// @par Example
-  /// @code
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - The `packet` should be released using media_packet_destroy().
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): The allocated `media_format_h` by caller
+  /// - `fcb` (in): The media_packet_finalize_cb() to register
+  /// - `fcb_data` (in): The user data to be passed to the media_packet_finalize_cb() function
+  /// - `packet` (out): A new handle for media packet
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Must have media_format_h instance by media_format_create()
+  ///
+  /// **Postconditions:**
+  /// - Must do media_format_unref()
+  ///
+  /// **See also:**
+  /// - `media_packet_destroy()`
+  /// - `media_packet_finalize_cb()`
+  /// - `media_format_unref()`
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <media_packet.h>
   ///
   /// {
@@ -1253,7 +1633,7 @@ class Tizen70CapiMediaTool {
   /// return MEDIA_PACKET_FINALIZE;
   /// }
   ///
-  /// @endcode
+  /// ```
   int media_packet_create_alloc(
     media_format_h fmt,
     media_packet_finalize_cb fcb,
@@ -1280,33 +1660,47 @@ class Tizen70CapiMediaTool {
           int Function(media_format_h, media_packet_finalize_cb,
               ffi.Pointer<ffi.Void>, ffi.Pointer<media_packet_h>)>();
 
-  /// @deprecated Deprecated since 6.5. Use media_packet_new() instead.
-  /// @brief    Creates a media packet handle.
-  /// @details  It creates only media packet handle without allocated buffer.
+  /// **Deprecated:** Deprecated since 6.5. Use media_packet_new() instead.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Creates a media packet handle.
   ///
-  /// @remarks The @c packet must be released by using media_packet_destroy().
-  /// @param[in] fmt       The allocated #media_format_h by caller
-  /// @param[in] fcb       The media_packet_finalize_cb() to register
-  /// @param[in] fcb_data  The user data to be passed to the media_packet_finalize_cb() function
-  /// @param[out] packet   A new handle for media packet
+  /// It creates only media packet handle without allocated buffer.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @pre Must have media_format_h instance by media_format_create()
-  /// @post Must do media_format_unref()
+  /// **Remarks:**
+  /// - The `packet` must be released by using media_packet_destroy().
   ///
-  /// @see media_packet_destroy()
-  /// @see media_packet_finalize_cb()
-  /// @see media_format_unref()
-  /// @par Example
-  /// @code
+  /// **Parameters:**
+  /// - `fmt` (in): The allocated `media_format_h` by caller
+  /// - `fcb` (in): The media_packet_finalize_cb() to register
+  /// - `fcb_data` (in): The user data to be passed to the media_packet_finalize_cb() function
+  /// - `packet` (out): A new handle for media packet
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Must have media_format_h instance by media_format_create()
+  ///
+  /// **Postconditions:**
+  /// - Must do media_format_unref()
+  ///
+  /// **See also:**
+  /// - `media_packet_destroy()`
+  /// - `media_packet_finalize_cb()`
+  /// - `media_format_unref()`
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <media_packet.h>
   ///
   /// {
@@ -1333,7 +1727,7 @@ class Tizen70CapiMediaTool {
   /// return MEDIA_PACKET_FINALIZE;
   /// }
   ///
-  /// @endcode
+  /// ```
   int media_packet_create(
     media_format_h fmt,
     media_packet_finalize_cb fcb,
@@ -1359,24 +1753,41 @@ class Tizen70CapiMediaTool {
       int Function(media_format_h, media_packet_finalize_cb,
           ffi.Pointer<ffi.Void>, ffi.Pointer<media_packet_h>)>();
 
-  /// @brief Creates a media packet handle.
-  /// @details It creates only media packet handle without allocated buffer.
-  /// @since_tizen 6.5
-  /// @remarks The @c packet must be released by using media_packet_unref().
-  /// @param[in] fmt      The #media_format_h allocated by the caller
-  /// @param[in] dcb      The media_packet_dispose_cb() to register. Use @c NULL to skip the callback.
-  /// @param[in] dcb_data The user data to be passed to the media_packet_dispose_cb() function
-  /// @param[out] packet  A new handle for media packet
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
-  /// @pre Must have media_format_h instance by media_format_create()
-  /// @post Must call media_format_unref()
-  /// @see media_packet_ref()
-  /// @see media_packet_unref()
-  /// @see media_packet_dispose_cb()
+  /// Creates a media packet handle.
+  ///
+  /// It creates only media packet handle without allocated buffer.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - The `packet` must be released by using media_packet_unref().
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): The `media_format_h` allocated by the caller
+  /// - `dcb` (in): The media_packet_dispose_cb() to register. Use `NULL` to skip the callback.
+  /// - `dcb_data` (in): The user data to be passed to the media_packet_dispose_cb() function
+  /// - `packet` (out): A new handle for media packet
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Must have media_format_h instance by media_format_create()
+  ///
+  /// **Postconditions:**
+  /// - Must call media_format_unref()
+  ///
+  /// **See also:**
+  /// - `media_packet_ref()`
+  /// - `media_packet_unref()`
+  /// - `media_packet_dispose_cb()`
   int media_packet_new(
     media_format_h fmt,
     media_packet_dispose_cb dcb,
@@ -1402,24 +1813,41 @@ class Tizen70CapiMediaTool {
       int Function(media_format_h, media_packet_dispose_cb,
           ffi.Pointer<ffi.Void>, ffi.Pointer<media_packet_h>)>();
 
-  /// @brief Creates a media packet handle and allocates buffer.
-  /// @details The buffer will be allocated to heap or tbm_surface.
-  /// @since_tizen 6.5
-  /// @remarks The @a packet should be released using media_packet_unref().
-  /// @param[in]  fmt      The allocated #media_format_h by caller
-  /// @param[in]  dcb      The media_packet_dispose_cb() to register. Use @c NULL to skip the callback.
-  /// @param[in]  dcb_data The user data to be passed to the media_packet_dispose_cb() function
-  /// @param[out] packet   A new handle for media packet
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
-  /// @pre Must have media_format_h instance by media_format_create()
-  /// @post Must do media_format_unref()
-  /// @see media_packet_ref()
-  /// @see media_packet_unref()
-  /// @see media_packet_dispose_cb()
+  /// Creates a media packet handle and allocates buffer.
+  ///
+  /// The buffer will be allocated to heap or tbm_surface.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - The `packet` should be released using media_packet_unref().
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): The allocated `media_format_h` by caller
+  /// - `dcb` (in): The media_packet_dispose_cb() to register. Use `NULL` to skip the callback.
+  /// - `dcb_data` (in): The user data to be passed to the media_packet_dispose_cb() function
+  /// - `packet` (out): A new handle for media packet
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Must have media_format_h instance by media_format_create()
+  ///
+  /// **Postconditions:**
+  /// - Must do media_format_unref()
+  ///
+  /// **See also:**
+  /// - `media_packet_ref()`
+  /// - `media_packet_unref()`
+  /// - `media_packet_dispose_cb()`
   int media_packet_new_alloc(
     media_format_h fmt,
     media_packet_dispose_cb dcb,
@@ -1445,24 +1873,40 @@ class Tizen70CapiMediaTool {
       int Function(media_format_h, media_packet_dispose_cb,
           ffi.Pointer<ffi.Void>, ffi.Pointer<media_packet_h>)>();
 
-  /// @brief Creates media packet handle and allocates buffer with #tbm_surface_h.
-  /// @since_tizen 6.5
-  /// @remarks The @c packet must be released by using media_packet_unref().
-  /// @param[in]  fmt      The #media_format_h allocated by caller
-  /// @param[in]  surface  The #tbm_surface_h by caller
-  /// @param[in]  dcb      The media_packet_dispose_cb() to register. Use @c NULL to skip the callback.
-  /// @param[in]  dcb_data The user data to be passed to the media_packet_dispose_cb() function
-  /// @param[out] packet   A new handle for media packet
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
-  /// @pre Must have media_format_h instance by media_format_create()
-  /// @post Must do media_format_unref()
-  /// @see media_packet_ref()
-  /// @see media_packet_unref()
-  /// @see media_packet_dispose_cb()
+  /// Creates media packet handle and allocates buffer with `tbm_surface_h`.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - The `packet` must be released by using media_packet_unref().
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): The `media_format_h` allocated by caller
+  /// - `surface` (in): The `tbm_surface_h` by caller
+  /// - `dcb` (in): The media_packet_dispose_cb() to register. Use `NULL` to skip the callback.
+  /// - `dcb_data` (in): The user data to be passed to the media_packet_dispose_cb() function
+  /// - `packet` (out): A new handle for media packet
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Must have media_format_h instance by media_format_create()
+  ///
+  /// **Postconditions:**
+  /// - Must do media_format_unref()
+  ///
+  /// **See also:**
+  /// - `media_packet_ref()`
+  /// - `media_packet_unref()`
+  /// - `media_packet_dispose_cb()`
   int media_packet_new_from_tbm_surface(
     media_format_h fmt,
     tbm_surface.tbm_surface_h surface,
@@ -1497,27 +1941,44 @@ class Tizen70CapiMediaTool {
               ffi.Pointer<ffi.Void>,
               ffi.Pointer<media_packet_h>)>();
 
-  /// @brief Creates media packet handle with already allocated buffer.
-  /// @details It does not support video's #MEDIA_FORMAT_RAW type.
-  /// @since_tizen 6.5
-  /// @remarks The @c packet must be released by using media_packet_unref().
-  /// @param[in]  fmt      The allocated #media_format_h by caller
-  /// @param[in]  mem_ptr  The memory pointer which is created by external module
-  /// @param[in]  size     The buffer size value to set
-  /// @param[in]  dcb      The media_packet_dispose_cb() to register. Use @c NULL to skip the callback.
-  /// @param[in]  dcb_data The user data to be passed to the media_packet_dispose_cb() function
-  /// @param[out] packet   A new handle for media packet
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
-  /// @pre Must have media_format_h instance by media_format_create()
-  /// @post Must do media_format_unref()
-  /// @see media_packet_ref()
-  /// @see media_packet_unref()
-  /// @see media_packet_dispose_cb()
-  /// @see media_format_unref()
+  /// Creates media packet handle with already allocated buffer.
+  ///
+  /// It does not support video's `MEDIA_FORMAT_RAW` type.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - The `packet` must be released by using media_packet_unref().
+  ///
+  /// **Parameters:**
+  /// - `fmt` (in): The allocated `media_format_h` by caller
+  /// - `mem_ptr` (in): The memory pointer which is created by external module
+  /// - `size` (in): The buffer size value to set
+  /// - `dcb` (in): The media_packet_dispose_cb() to register. Use `NULL` to skip the callback.
+  /// - `dcb_data` (in): The user data to be passed to the media_packet_dispose_cb() function
+  /// - `packet` (out): A new handle for media packet
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Must have media_format_h instance by media_format_create()
+  ///
+  /// **Postconditions:**
+  /// - Must do media_format_unref()
+  ///
+  /// **See also:**
+  /// - `media_packet_ref()`
+  /// - `media_packet_unref()`
+  /// - `media_packet_dispose_cb()`
+  /// - `media_format_unref()`
   int media_packet_new_from_external_memory(
     media_format_h fmt,
     ffi.Pointer<ffi.Void> mem_ptr,
@@ -1556,14 +2017,24 @@ class Tizen70CapiMediaTool {
               ffi.Pointer<ffi.Void>,
               ffi.Pointer<media_packet_h>)>();
 
-  /// @brief Increases reference count of a media packet handle.
-  /// @since_tizen 6.5
-  /// @param[in] packet The media packet handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
-  /// @see media_packet_unref()
+  /// Increases reference count of a media packet handle.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `packet` (in): The media packet handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `media_packet_unref()`
   int media_packet_ref(
     media_packet_h packet,
   ) {
@@ -1578,14 +2049,24 @@ class Tizen70CapiMediaTool {
   late final _media_packet_ref =
       _media_packet_refPtr.asFunction<int Function(media_packet_h)>();
 
-  /// @brief Decreases reference count of a media packet handle.
-  /// @since_tizen 6.5
-  /// @param[in] packet The media packet handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
-  /// @see media_packet_ref()
+  /// Decreases reference count of a media packet handle.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `packet` (in): The media packet handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `media_packet_ref()`
   int media_packet_unref(
     media_packet_h packet,
   ) {
@@ -1600,31 +2081,40 @@ class Tizen70CapiMediaTool {
   late final _media_packet_unref =
       _media_packet_unrefPtr.asFunction<int Function(media_packet_h)>();
 
-  /// @deprecated Deprecated since 6.5.
-  /// @brief    Copies a media packet handle.
-  /// @details  It re-creates only media packet handle with exist media packet handle.
+  /// **Deprecated:** Deprecated since 6.5.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Copies a media packet handle.
   ///
-  /// @remarks The @c new_packet must be released by using media_packet_destroy().
-  /// @remarks It will return #MEDIA_PACKET_ERROR_INVALID_OPERATION \n
-  /// if the media packet handle is from media_packet_new(), \n
-  /// media_packet_new_alloc(), media_packet_new_from_tbm_surface() \n
-  /// and media_packet_new_from_external_memory(). (since 6.5)
-  /// @param[in]   org_packet   The existing media packet handle
-  /// @param[in]   fcb          The media_packet_finalize_cb() to register
-  /// @param[in]   fcb_data     The user data to be passed to the media_packet_finalize_cb() function
-  /// @param[out]  new_packet   A new handle for media packet
+  /// It re-creates only media packet handle with exist media packet handle.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @see media_packet_destroy()
-  /// @see media_packet_finalize_cb()
+  /// **Remarks:**
+  /// - The `new_packet` must be released by using media_packet_destroy().
+  /// - It will return `MEDIA_PACKET_ERROR_INVALID_OPERATION`
+  /// - if the media packet handle is from media_packet_new(),
+  /// - media_packet_new_alloc(), media_packet_new_from_tbm_surface()
+  /// - and media_packet_new_from_external_memory(). (since 6.5)
+  ///
+  /// **Parameters:**
+  /// - `org_packet` (in): The existing media packet handle
+  /// - `fcb` (in): The media_packet_finalize_cb() to register
+  /// - `fcb_data` (in): The user data to be passed to the media_packet_finalize_cb() function
+  /// - `new_packet` (out): A new handle for media packet
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `media_packet_destroy()`
+  /// - `media_packet_finalize_cb()`
   int media_packet_copy(
     media_packet_h org_packet,
     media_packet_finalize_cb fcb,
@@ -1650,22 +2140,28 @@ class Tizen70CapiMediaTool {
       int Function(media_packet_h, media_packet_finalize_cb,
           ffi.Pointer<ffi.Void>, ffi.Pointer<media_packet_h>)>();
 
-  /// @brief    Allocates buffer with media packet handle.
-  /// @details  Before using media_packet_alloc(), media packet handle must be exist.
+  /// Allocates buffer with media packet handle.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Before using media_packet_alloc(), media packet handle must be exist.
   ///
-  /// @param[in] packet   The existing media packet handle
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
+  /// **Parameters:**
+  /// - `packet` (in): The existing media packet handle
   ///
-  /// @see media_packet_new()
-  /// @see media_packet_unref()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `media_packet_new()`
+  /// - `media_packet_unref()`
   int media_packet_alloc(
     media_packet_h packet,
   ) {
@@ -1680,33 +2176,46 @@ class Tizen70CapiMediaTool {
   late final _media_packet_alloc =
       _media_packet_allocPtr.asFunction<int Function(media_packet_h)>();
 
-  /// @deprecated Deprecated since 6.5. Use media_packet_new_from_tbm_surface() instead.
-  /// @brief    Creates media packet handle and allocates buffer with #tbm_surface_h.
+  /// **Deprecated:** Deprecated since 6.5. Use media_packet_new_from_tbm_surface() instead.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Creates media packet handle and allocates buffer with `tbm_surface_h`.
   ///
-  /// @remarks The @c packet must be released by using media_packet_destroy().
-  /// @param[in]   fmt       The allocated #media_format_h by caller
-  /// @param[in]   surface   The #tbm_surface_h by caller
-  /// @param[in]   fcb       The media_packet_finalize_cb() to register
-  /// @param[in]   fcb_data  The user data to be passed to the media_packet_finalize_cb() function
-  /// @param[out]  packet  A new handle for media packet
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
+  /// **Remarks:**
+  /// - The `packet` must be released by using media_packet_destroy().
   ///
-  /// @pre Must have media_format_h instance by media_format_create()
-  /// @post Must do media_format_unref()
+  /// **Parameters:**
+  /// - `fmt` (in): The allocated `media_format_h` by caller
+  /// - `surface` (in): The `tbm_surface_h` by caller
+  /// - `fcb` (in): The media_packet_finalize_cb() to register
+  /// - `fcb_data` (in): The user data to be passed to the media_packet_finalize_cb() function
+  /// - `packet` (out): A new handle for media packet
   ///
-  /// @see media_packet_destroy()
-  /// @see media_packet_finalize_cb()
-  /// @see media_format_unref()
-  /// @par Example
-  /// @code
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Must have media_format_h instance by media_format_create()
+  ///
+  /// **Postconditions:**
+  /// - Must do media_format_unref()
+  ///
+  /// **See also:**
+  /// - `media_packet_destroy()`
+  /// - `media_packet_finalize_cb()`
+  /// - `media_format_unref()`
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <media_packet.h>
   ///
   /// {
@@ -1733,7 +2242,7 @@ class Tizen70CapiMediaTool {
   /// return MEDIA_PACKET_FINALIZE;
   /// }
   ///
-  /// @endcode
+  /// ```
   int media_packet_create_from_tbm_surface(
     media_format_h fmt,
     tbm_surface.tbm_surface_h surface,
@@ -1768,35 +2277,49 @@ class Tizen70CapiMediaTool {
               ffi.Pointer<ffi.Void>,
               ffi.Pointer<media_packet_h>)>();
 
-  /// @deprecated Deprecated since 6.5. Use media_packet_new_from_external_memory() instead.
-  /// @brief    Creates media packet handle with already allocated external buffer.
-  /// @details It does not support video's #MEDIA_FORMAT_RAW type.
+  /// **Deprecated:** Deprecated since 6.5. Use media_packet_new_from_external_memory() instead.
   ///
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// Creates media packet handle with already allocated external buffer.
   ///
-  /// @remarks The @c packet must be released by using media_packet_destroy().
-  /// @param[in]   fmt       The allocated #media_format_h by caller
-  /// @param[in]   mem_ptr   The memory pointer which is created by external module
-  /// @param[in]   size      The buffer size value to set
-  /// @param[in]   fcb       The media_packet_finalize_cb() to register
-  /// @param[in]   fcb_data  The user data to be passed to the media_packet_finalize_cb() function
-  /// @param[out]  packet  A new handle for media packet
+  /// It does not support video's `MEDIA_FORMAT_RAW` type.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @pre Must have media_format_h instance by media_format_create()
-  /// @post Must do media_format_unref()
+  /// **Remarks:**
+  /// - The `packet` must be released by using media_packet_destroy().
   ///
-  /// @see media_packet_destroy()
-  /// @see media_packet_finalize_cb()
-  /// @see media_format_unref()
-  /// @par Example
-  /// @code
+  /// **Parameters:**
+  /// - `fmt` (in): The allocated `media_format_h` by caller
+  /// - `mem_ptr` (in): The memory pointer which is created by external module
+  /// - `size` (in): The buffer size value to set
+  /// - `fcb` (in): The media_packet_finalize_cb() to register
+  /// - `fcb_data` (in): The user data to be passed to the media_packet_finalize_cb() function
+  /// - `packet` (out): A new handle for media packet
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Must have media_format_h instance by media_format_create()
+  ///
+  /// **Postconditions:**
+  /// - Must do media_format_unref()
+  ///
+  /// **See also:**
+  /// - `media_packet_destroy()`
+  /// - `media_packet_finalize_cb()`
+  /// - `media_format_unref()`
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <media_packet.h>
   ///
   /// {
@@ -1823,7 +2346,7 @@ class Tizen70CapiMediaTool {
   /// return MEDIA_PACKET_FINALIZE;
   /// }
   ///
-  /// @endcode
+  /// ```
   int media_packet_create_from_external_memory(
     media_format_h fmt,
     ffi.Pointer<ffi.Void> mem_ptr,
@@ -1862,20 +2385,28 @@ class Tizen70CapiMediaTool {
               ffi.Pointer<ffi.Void>,
               ffi.Pointer<media_packet_h>)>();
 
-  /// @brief Gets #media_format_h of media packet.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Gets `media_format_h` of media packet.
   ///
-  /// @param[in]  packet   The media packet handle
-  /// @param[out] fmt      The media format of media packet
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `packet` (in): The media packet handle
+  /// - `fmt` (out): The media format of media packet
   ///
-  /// @see media_format_unref()
-  /// @par Example
-  /// @code
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `media_format_unref()`
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <media_packet.h>
   ///
   /// {
@@ -1888,7 +2419,7 @@ class Tizen70CapiMediaTool {
   /// ...
   /// }
   ///
-  /// @endcode
+  /// ```
   int media_packet_get_format(
     media_packet_h packet,
     ffi.Pointer<media_format_h> fmt,
@@ -1906,20 +2437,28 @@ class Tizen70CapiMediaTool {
   late final _media_packet_get_format = _media_packet_get_formatPtr
       .asFunction<int Function(media_packet_h, ffi.Pointer<media_format_h>)>();
 
-  /// @brief Sets #media_format_h of media packet.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Sets `media_format_h` of media packet.
   ///
-  /// @param[in] packet   The media packet handle
-  /// @param[in] fmt      The #media_format_h to set
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `packet` (in): The media packet handle
+  /// - `fmt` (in): The `media_format_h` to set
   ///
-  /// @see media_format_unref()
-  /// @par Example
-  /// @code
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `media_format_unref()`
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <media_packet.h>
   ///
   /// {
@@ -1932,7 +2471,7 @@ class Tizen70CapiMediaTool {
   /// ...
   /// }
   ///
-  /// @endcode
+  /// ```
   int media_packet_set_format(
     media_packet_h packet,
     media_format_h fmt,
@@ -1949,17 +2488,22 @@ class Tizen70CapiMediaTool {
   late final _media_packet_set_format = _media_packet_set_formatPtr
       .asFunction<int Function(media_packet_h, media_format_h)>();
 
-  /// @brief Sets presentation timestamp(pts) of media packet.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Sets presentation timestamp(pts) of media packet.
   ///
-  /// @param[in] packet   The media packet handle
-  /// @param[in] pts      The pts in nanoseconds to set
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
+  /// **Parameters:**
+  /// - `packet` (in): The media packet handle
+  /// - `pts` (in): The pts in nanoseconds to set
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
   int media_packet_set_pts(
     media_packet_h packet,
     int pts,
@@ -1976,17 +2520,22 @@ class Tizen70CapiMediaTool {
   late final _media_packet_set_pts =
       _media_packet_set_ptsPtr.asFunction<int Function(media_packet_h, int)>();
 
-  /// @brief Sets decoding timestamp(dts) of media packet handle.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Sets decoding timestamp(dts) of media packet handle.
   ///
-  /// @param[in]  packet   The media packet handle
-  /// @param[in]  dts      The dts in nanoseconds to set
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
+  /// **Parameters:**
+  /// - `packet` (in): The media packet handle
+  /// - `dts` (in): The dts in nanoseconds to set
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
   int media_packet_set_dts(
     media_packet_h packet,
     int dts,
@@ -2003,17 +2552,22 @@ class Tizen70CapiMediaTool {
   late final _media_packet_set_dts =
       _media_packet_set_dtsPtr.asFunction<int Function(media_packet_h, int)>();
 
-  /// @brief Sets duration of media packet.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Sets duration of media packet.
   ///
-  /// @param[in] packet    The media packet handle
-  /// @param[in] duration  The duration in nanoseconds to set
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
+  /// **Parameters:**
+  /// - `packet` (in): The media packet handle
+  /// - `duration` (in): The duration in nanoseconds to set
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
   int media_packet_set_duration(
     media_packet_h packet,
     int duration,
@@ -2030,17 +2584,22 @@ class Tizen70CapiMediaTool {
   late final _media_packet_set_duration = _media_packet_set_durationPtr
       .asFunction<int Function(media_packet_h, int)>();
 
-  /// @brief Sets buffer size of media packet.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Sets buffer size of media packet.
   ///
-  /// @param[in] packet   The media packet handle
-  /// @param[in] size     The buffer size value to set
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
+  /// **Parameters:**
+  /// - `packet` (in): The media packet handle
+  /// - `size` (in): The buffer size value to set
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
   int media_packet_set_buffer_size(
     media_packet_h packet,
     int size,
@@ -2057,17 +2616,22 @@ class Tizen70CapiMediaTool {
   late final _media_packet_set_buffer_size = _media_packet_set_buffer_sizePtr
       .asFunction<int Function(media_packet_h, int)>();
 
-  /// @brief Gets presentation timestamp(pts) of media packet.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Gets presentation timestamp(pts) of media packet.
   ///
-  /// @param[in]  packet   The media packet handle
-  /// @param[out] pts      The pts in nanoseconds to get
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `packet` (in): The media packet handle
+  /// - `pts` (out): The pts in nanoseconds to get
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
   int media_packet_get_pts(
     media_packet_h packet,
     ffi.Pointer<ffi.Uint64> pts,
@@ -2085,17 +2649,22 @@ class Tizen70CapiMediaTool {
   late final _media_packet_get_pts = _media_packet_get_ptsPtr
       .asFunction<int Function(media_packet_h, ffi.Pointer<ffi.Uint64>)>();
 
-  /// @brief Gets decoding timestamp(dts) of media packet.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Gets decoding timestamp(dts) of media packet.
   ///
-  /// @param[in]  packet   The media packet handle
-  /// @param[out] dts      The dts in nanoseconds to get
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
+  /// **Parameters:**
+  /// - `packet` (in): The media packet handle
+  /// - `dts` (out): The dts in nanoseconds to get
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
   int media_packet_get_dts(
     media_packet_h packet,
     ffi.Pointer<ffi.Uint64> dts,
@@ -2113,17 +2682,22 @@ class Tizen70CapiMediaTool {
   late final _media_packet_get_dts = _media_packet_get_dtsPtr
       .asFunction<int Function(media_packet_h, ffi.Pointer<ffi.Uint64>)>();
 
-  /// @brief Gets duration of media packet.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Gets duration of media packet.
   ///
-  /// @param[in]  packet    The media packet handle
-  /// @param[out] duration  The duration in nanoseconds to get
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
+  /// **Parameters:**
+  /// - `packet` (in): The media packet handle
+  /// - `duration` (out): The duration in nanoseconds to get
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
   int media_packet_get_duration(
     media_packet_h packet,
     ffi.Pointer<ffi.Uint64> duration,
@@ -2141,17 +2715,22 @@ class Tizen70CapiMediaTool {
   late final _media_packet_get_duration = _media_packet_get_durationPtr
       .asFunction<int Function(media_packet_h, ffi.Pointer<ffi.Uint64>)>();
 
-  /// @brief Gets buffer size of media packet.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Gets buffer size of media packet.
   ///
-  /// @param[in]  packet   The media packet handle
-  /// @param[out] size     The buffer size value to get
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
+  /// **Parameters:**
+  /// - `packet` (in): The media packet handle
+  /// - `size` (out): The buffer size value to get
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
   int media_packet_get_buffer_size(
     media_packet_h packet,
     ffi.Pointer<ffi.Uint64> size,
@@ -2169,17 +2748,22 @@ class Tizen70CapiMediaTool {
   late final _media_packet_get_buffer_size = _media_packet_get_buffer_sizePtr
       .asFunction<int Function(media_packet_h, ffi.Pointer<ffi.Uint64>)>();
 
-  /// @brief Gets buffer data pointer of media packet.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Gets buffer data pointer of media packet.
   ///
-  /// @param[in]  packet   The media packet handle
-  /// @param[out] data     The allocated buffer data pointer
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
+  /// **Parameters:**
+  /// - `packet` (in): The media packet handle
+  /// - `data` (out): The allocated buffer data pointer
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
   int media_packet_get_buffer_data_ptr(
     media_packet_h packet,
     ffi.Pointer<ffi.Pointer<ffi.Void>> data,
@@ -2199,17 +2783,22 @@ class Tizen70CapiMediaTool {
       _media_packet_get_buffer_data_ptrPtr.asFunction<
           int Function(media_packet_h, ffi.Pointer<ffi.Pointer<ffi.Void>>)>();
 
-  /// @brief Gets TBM surface data of media packet.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Gets TBM surface data of media packet.
   ///
-  /// @param[in]  packet   The media packet handle
-  /// @param[out] surface  The tbm_surface data pointer
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
+  /// **Parameters:**
+  /// - `packet` (in): The media packet handle
+  /// - `surface` (out): The tbm_surface data pointer
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
   int media_packet_get_tbm_surface(
     media_packet_h packet,
     ffi.Pointer<tbm_surface.tbm_surface_h> surface,
@@ -2230,17 +2819,22 @@ class Tizen70CapiMediaTool {
           int Function(
               media_packet_h, ffi.Pointer<tbm_surface.tbm_surface_h>)>();
 
-  /// @brief Sets extra data of media packet.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Sets extra data of media packet.
   ///
-  /// @param[in] packet   The media packet handle
-  /// @param[in] extra    The extra data to set
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
+  /// **Parameters:**
+  /// - `packet` (in): The media packet handle
+  /// - `extra` (in): The extra data to set
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
   int media_packet_set_extra(
     media_packet_h packet,
     ffi.Pointer<ffi.Void> extra,
@@ -2258,17 +2852,22 @@ class Tizen70CapiMediaTool {
   late final _media_packet_set_extra = _media_packet_set_extraPtr
       .asFunction<int Function(media_packet_h, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets extra data of media packet.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Gets extra data of media packet.
   ///
-  /// @param[in]  packet   The media packet handle
-  /// @param[out] extra    The extra data to get
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
+  /// **Parameters:**
+  /// - `packet` (in): The media packet handle
+  /// - `extra` (out): The extra data to get
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
   int media_packet_get_extra(
     media_packet_h packet,
     ffi.Pointer<ffi.Pointer<ffi.Void>> extra,
@@ -2286,21 +2885,26 @@ class Tizen70CapiMediaTool {
   late final _media_packet_get_extra = _media_packet_get_extraPtr.asFunction<
       int Function(media_packet_h, ffi.Pointer<ffi.Pointer<ffi.Void>>)>();
 
-  /// @brief Checks whether the given media packet is for video.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Checks whether the given media packet is for video.
   ///
-  /// @param[in]  packet   The media packet handle
-  /// @param[out] is_video @c true if the given media packet is for video,
-  /// otherwise @c false if the given media packet is not for video
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
+  /// **Parameters:**
+  /// - `packet` (in): The media packet handle
+  /// - `is_video` (out): `true` if the given media packet is for video, otherwise `false` if the given media packet is not for video
   ///
-  /// @see media_format_mimetype_e
-  /// @see media_format_type_e
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `media_format_mimetype_e`
+  /// - `media_format_type_e`
   int media_packet_is_video(
     media_packet_h packet,
     ffi.Pointer<ffi.Bool> is_video,
@@ -2318,20 +2922,26 @@ class Tizen70CapiMediaTool {
   late final _media_packet_is_video = _media_packet_is_videoPtr
       .asFunction<int Function(media_packet_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Checks whether the given media packet is for audio.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Checks whether the given media packet is for audio.
   ///
-  /// @param[in]  packet    The media packet handle
-  /// @param[out] is_audio  @c true if the given media packet is for audio,
-  /// otherwise @c false if the given media packet is not for audio
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
-  /// @see media_format_mimetype_e
-  /// @see media_format_type_e
+  /// **Parameters:**
+  /// - `packet` (in): The media packet handle
+  /// - `is_audio` (out): `true` if the given media packet is for audio, otherwise `false` if the given media packet is not for audio
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `media_format_mimetype_e`
+  /// - `media_format_type_e`
   int media_packet_is_audio(
     media_packet_h packet,
     ffi.Pointer<ffi.Bool> is_audio,
@@ -2349,20 +2959,26 @@ class Tizen70CapiMediaTool {
   late final _media_packet_is_audio = _media_packet_is_audioPtr
       .asFunction<int Function(media_packet_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Checks whether the given media packet is for text.
-  /// @since_tizen 3.0
+  /// Checks whether the given media packet is for text.
   ///
-  /// @param[in]  packet    The media packet handle
-  /// @param[out] is_text  @c true if the given media packet is for text,
-  /// otherwise @c false if the given media packet is not for text
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
-  /// @see media_format_mimetype_e
-  /// @see media_format_type_e
+  /// **Parameters:**
+  /// - `packet` (in): The media packet handle
+  /// - `is_text` (out): `true` if the given media packet is for text, otherwise `false` if the given media packet is not for text
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `media_format_mimetype_e`
+  /// - `media_format_type_e`
   int media_packet_is_text(
     media_packet_h packet,
     ffi.Pointer<ffi.Bool> is_text,
@@ -2380,21 +2996,26 @@ class Tizen70CapiMediaTool {
   late final _media_packet_is_text = _media_packet_is_textPtr
       .asFunction<int Function(media_packet_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Checks whether the given media packet is encoded type.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Checks whether the given media packet is encoded type.
   ///
-  /// @param[in]  packet      The media packet handle
-  /// @param[out] is_encoded  @c true if the given media packet is encoded,
-  /// otherwise @c false if the given media packet is not encoded
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
+  /// **Parameters:**
+  /// - `packet` (in): The media packet handle
+  /// - `is_encoded` (out): `true` if the given media packet is encoded, otherwise `false` if the given media packet is not encoded
   ///
-  /// @see media_format_mimetype_e
-  /// @see media_format_data_type_e
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `media_format_mimetype_e`
+  /// - `media_format_data_type_e`
   int media_packet_is_encoded(
     media_packet_h packet,
     ffi.Pointer<ffi.Bool> is_encoded,
@@ -2412,21 +3033,26 @@ class Tizen70CapiMediaTool {
   late final _media_packet_is_encoded = _media_packet_is_encodedPtr
       .asFunction<int Function(media_packet_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Checks whether the given media packet is raw type.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Checks whether the given media packet is raw type.
   ///
-  /// @param[in]  packet   The media packet handle
-  /// @param[out] is_raw   @c true if the given media packet is for raw video,
-  /// otherwise @c false if the given media packet is not for raw video
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
+  /// **Parameters:**
+  /// - `packet` (in): The media packet handle
+  /// - `is_raw` (out): `true` if the given media packet is for raw video, otherwise `false` if the given media packet is not for raw video
   ///
-  /// @see media_format_mimetype_e
-  /// @see media_format_data_type_e
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `media_format_mimetype_e`
+  /// - `media_format_data_type_e`
   int media_packet_is_raw(
     media_packet_h packet,
     ffi.Pointer<ffi.Bool> is_raw,
@@ -2444,20 +3070,26 @@ class Tizen70CapiMediaTool {
   late final _media_packet_is_raw = _media_packet_is_rawPtr
       .asFunction<int Function(media_packet_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets #media_buffer_flags_e of media packet.
-  /// @since_tizen 3.0
+  /// Gets `media_buffer_flags_e` of media packet.
   ///
-  /// @param[in] packet    The media packet handle
-  /// @param[out] flags    The #media_buffer_flags_e of media packet to get
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
+  /// **Parameters:**
+  /// - `packet` (in): The media packet handle
+  /// - `flags` (out): The `media_buffer_flags_e` of media packet to get
   ///
-  /// @see media_buffer_flags_e
-  /// @see media_packet_unset_flags()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `media_buffer_flags_e`
+  /// - `media_packet_unset_flags()`
   int media_packet_get_flags(
     media_packet_h packet,
     ffi.Pointer<ffi.Int32> flags,
@@ -2475,20 +3107,26 @@ class Tizen70CapiMediaTool {
   late final _media_packet_get_flags = _media_packet_get_flagsPtr
       .asFunction<int Function(media_packet_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets #media_buffer_flags_e of media packet.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Sets `media_buffer_flags_e` of media packet.
   ///
-  /// @param[in] packet    The media packet handle
-  /// @param[in] flags    The #media_buffer_flags_e of media packet to set
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
+  /// **Parameters:**
+  /// - `packet` (in): The media packet handle
+  /// - `flags` (in): The `media_buffer_flags_e` of media packet to set
   ///
-  /// @see media_buffer_flags_e
-  /// @see media_packet_unset_flags()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `media_buffer_flags_e`
+  /// - `media_packet_unset_flags()`
   int media_packet_set_flags(
     media_packet_h packet,
     int flags,
@@ -2505,20 +3143,26 @@ class Tizen70CapiMediaTool {
   late final _media_packet_set_flags = _media_packet_set_flagsPtr
       .asFunction<int Function(media_packet_h, int)>();
 
-  /// @brief Unsets #media_buffer_flags_e of media packet.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Unsets `media_buffer_flags_e` of media packet.
   ///
-  /// @param[in] packet   The media packet handle
-  /// @param[in] flags    The #media_buffer_flags_e of media packet to unset
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
+  /// **Parameters:**
+  /// - `packet` (in): The media packet handle
+  /// - `flags` (in): The `media_buffer_flags_e` of media packet to unset
   ///
-  /// @see media_buffer_flags_e
-  /// @see media_packet_set_flags()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `media_buffer_flags_e`
+  /// - `media_packet_set_flags()`
   int media_packet_unset_flags(
     media_packet_h packet,
     int flags,
@@ -2535,21 +3179,26 @@ class Tizen70CapiMediaTool {
   late final _media_packet_unset_flags = _media_packet_unset_flagsPtr
       .asFunction<int Function(media_packet_h, int)>();
 
-  /// @brief Checks whether the given media packet is codec data.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Checks whether the given media packet is codec data.
   ///
-  /// @param[in] packet            The media packet handle
-  /// @param[out] is_codec_config  @c true if the given media packet is for codec data,
-  /// otherwise @c false if the given media packet is not for codec data
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
+  /// **Parameters:**
+  /// - `packet` (in): The media packet handle
+  /// - `is_codec_config` (out): `true` if the given media packet is for codec data, otherwise `false` if the given media packet is not for codec data
   ///
-  /// @see media_format_mimetype_e
-  /// @see media_format_data_type_e
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `media_format_mimetype_e`
+  /// - `media_format_data_type_e`
   int media_packet_is_codec_config(
     media_packet_h packet,
     ffi.Pointer<ffi.Bool> is_codec_config,
@@ -2567,21 +3216,26 @@ class Tizen70CapiMediaTool {
   late final _media_packet_is_codec_config = _media_packet_is_codec_configPtr
       .asFunction<int Function(media_packet_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Checks whether the given media packet is eos.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Checks whether the given media packet is eos.
   ///
-  /// @param[in] packet   The media packet handle
-  /// @param[out] is_eos  @c true if the given media packet is for eos,
-  /// otherwise @c false if the given media packet is not for eos
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
+  /// **Parameters:**
+  /// - `packet` (in): The media packet handle
+  /// - `is_eos` (out): `true` if the given media packet is for eos, otherwise `false` if the given media packet is not for eos
   ///
-  /// @see media_format_mimetype_e
-  /// @see media_format_data_type_e
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `media_format_mimetype_e`
+  /// - `media_format_data_type_e`
   int media_packet_is_end_of_stream(
     media_packet_h packet,
     ffi.Pointer<ffi.Bool> is_eos,
@@ -2599,21 +3253,26 @@ class Tizen70CapiMediaTool {
   late final _media_packet_is_end_of_stream = _media_packet_is_end_of_streamPtr
       .asFunction<int Function(media_packet_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Checks whether the given media packet is sync frame.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Checks whether the given media packet is sync frame.
   ///
-  /// @param[in]  packet   The media packet handle
-  /// @param[out] is_sync  @c true if the given media packet is for sync frame,
-  /// otherwise @c false if the given media packet is not for sync frame
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
+  /// **Parameters:**
+  /// - `packet` (in): The media packet handle
+  /// - `is_sync` (out): `true` if the given media packet is for sync frame, otherwise `false` if the given media packet is not for sync frame
   ///
-  /// @see media_format_mimetype_e
-  /// @see media_format_data_type_e
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `media_format_mimetype_e`
+  /// - `media_format_data_type_e`
   int media_packet_is_sync_frame(
     media_packet_h packet,
     ffi.Pointer<ffi.Bool> is_sync,
@@ -2631,18 +3290,22 @@ class Tizen70CapiMediaTool {
   late final _media_packet_is_sync_frame = _media_packet_is_sync_framePtr
       .asFunction<int Function(media_packet_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Checks whether the allocated buffer is tbm surface or not.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Checks whether the allocated buffer is tbm surface or not.
   ///
-  /// @param[in]  packet   The media packet handle
-  /// @param[out] has_tbm_surface  @c true if the given media packet's allocated buffer is tbm surface,
-  /// otherwise @c false if the given media packet's allocated buffer is not tbm surface
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
+  /// **Parameters:**
+  /// - `packet` (in): The media packet handle
+  /// - `has_tbm_surface` (out): `true` if the given media packet's allocated buffer is tbm surface, otherwise `false` if the given media packet's allocated buffer is not tbm surface
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
   int media_packet_has_tbm_surface_buffer(
     media_packet_h packet,
     ffi.Pointer<ffi.Bool> has_tbm_surface,
@@ -2661,21 +3324,24 @@ class Tizen70CapiMediaTool {
       _media_packet_has_tbm_surface_bufferPtr
           .asFunction<int Function(media_packet_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets the number of planes from tbm surface in the given media packet.
-  /// @details Use only if the media_format_h is #MEDIA_FORMAT_RAW and #MEDIA_FORMAT_VIDEO.
-  /// It means that media_packet_h's buffer is allocated on tbm_surface.
-  /// If not sure of that, use media_packet_is_video() and media_packet_is_raw() or media_packet_has_tbm_surface_buffer().
+  /// Gets the number of planes from tbm surface in the given media packet.
   ///
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// Use only if the media_format_h is `MEDIA_FORMAT_RAW` and `MEDIA_FORMAT_VIDEO`. It means that media_packet_h's buffer is allocated on tbm_surface. If not sure of that, use media_packet_is_video() and media_packet_is_raw() or media_packet_has_tbm_surface_buffer().
   ///
-  /// @param[in]  packet   The media packet handle
-  /// @param[out] num  The number of planes from tbm_surface
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
+  /// **Parameters:**
+  /// - `packet` (in): The media packet handle
+  /// - `num` (out): The number of planes from tbm_surface
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
   int media_packet_get_number_of_video_planes(
     media_packet_h packet,
     ffi.Pointer<ffi.Uint32> num,
@@ -2694,22 +3360,25 @@ class Tizen70CapiMediaTool {
       _media_packet_get_number_of_video_planesPtr
           .asFunction<int Function(media_packet_h, ffi.Pointer<ffi.Uint32>)>();
 
-  /// @brief Gets stride width from tbm surface in the given media packet.
-  /// @details Use only if the media_format_h is #MEDIA_FORMAT_RAW and #MEDIA_FORMAT_VIDEO.
-  /// It means that media_packet_h's buffer is allocated on tbm_surface.
-  /// If not sure of that, use media_packet_is_video() and media_packet_is_raw() or media_packet_has_tbm_surface_buffer().
+  /// Gets stride width from tbm surface in the given media packet.
   ///
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// Use only if the media_format_h is `MEDIA_FORMAT_RAW` and `MEDIA_FORMAT_VIDEO`. It means that media_packet_h's buffer is allocated on tbm_surface. If not sure of that, use media_packet_is_video() and media_packet_is_raw() or media_packet_has_tbm_surface_buffer().
   ///
-  /// @param[in]  packet   The media packet handle
-  /// @param[in]  plane_idx   The plane index value
-  /// @param[out] stride_width  the stride value from tbm_surface
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
+  /// **Parameters:**
+  /// - `packet` (in): The media packet handle
+  /// - `plane_idx` (in): The plane index value
+  /// - `stride_width` (out): the stride value from tbm_surface
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
   int media_packet_get_video_stride_width(
     media_packet_h packet,
     int plane_idx,
@@ -2730,22 +3399,25 @@ class Tizen70CapiMediaTool {
       _media_packet_get_video_stride_widthPtr.asFunction<
           int Function(media_packet_h, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets stride height from tbm surface in the given media packet.
-  /// @details Use only if the media_format_h is #MEDIA_FORMAT_RAW and #MEDIA_FORMAT_VIDEO.
-  /// It means that media_packet_h's buffer is allocated on tbm_surface.
-  /// If not sure of that, use media_packet_is_video() and media_packet_is_raw() or media_packet_has_tbm_surface_buffer().
+  /// Gets stride height from tbm surface in the given media packet.
   ///
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// Use only if the media_format_h is `MEDIA_FORMAT_RAW` and `MEDIA_FORMAT_VIDEO`. It means that media_packet_h's buffer is allocated on tbm_surface. If not sure of that, use media_packet_is_video() and media_packet_is_raw() or media_packet_has_tbm_surface_buffer().
   ///
-  /// @param[in]  packet   The media packet handle
-  /// @param[in]  plane_idx   The plane index value
-  /// @param[out] stride_height  The stride height value from tbm_surface
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
+  /// **Parameters:**
+  /// - `packet` (in): The media packet handle
+  /// - `plane_idx` (in): The plane index value
+  /// - `stride_height` (out): The stride height value from tbm_surface
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
   int media_packet_get_video_stride_height(
     media_packet_h packet,
     int plane_idx,
@@ -2766,23 +3438,28 @@ class Tizen70CapiMediaTool {
       _media_packet_get_video_stride_heightPtr.asFunction<
           int Function(media_packet_h, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets plane data pointer from tbm surface in the given media packet.
-  /// @details Use only if the media_format_h is #MEDIA_FORMAT_RAW and #MEDIA_FORMAT_VIDEO.
-  /// It means that media_packet_h's buffer is allocated on tbm_surface.
-  /// If not sure of that, use media_packet_is_video() and media_packet_is_raw() or media_packet_has_tbm_surface_buffer().
+  /// Gets plane data pointer from tbm surface in the given media packet.
   ///
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// Use only if the media_format_h is `MEDIA_FORMAT_RAW` and `MEDIA_FORMAT_VIDEO`. It means that media_packet_h's buffer is allocated on tbm_surface. If not sure of that, use media_packet_is_video() and media_packet_is_raw() or media_packet_has_tbm_surface_buffer().
   ///
-  /// @remarks The @c plane_data_ptr must not be released by using free(). Note that It is released by media_packet_destroy() or tbm_surface_destroy().
-  /// @param[in]  packet   The media packet handle
-  /// @param[in]  plane_idx   The plane index value
-  /// @param[out] plane_data_ptr  The plane data pointer from tbm_surface
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
+  /// **Remarks:**
+  /// - The `plane_data_ptr` must not be released by using free(). Note that It is released by media_packet_destroy() or tbm_surface_destroy().
+  ///
+  /// **Parameters:**
+  /// - `packet` (in): The media packet handle
+  /// - `plane_idx` (in): The plane index value
+  /// - `plane_data_ptr` (out): The plane data pointer from tbm_surface
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
   int media_packet_get_video_plane_data_ptr(
     media_packet_h packet,
     int plane_idx,
@@ -2805,18 +3482,26 @@ class Tizen70CapiMediaTool {
           int Function(
               media_packet_h, int, ffi.Pointer<ffi.Pointer<ffi.Void>>)>();
 
-  /// @brief Gets codec data and the codec data size of media packet.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks The @a codec_data should be released using free().
-  /// @param[in] packet   The media packet handle
-  /// @param[out] codec_data    The codec data to get
-  /// @param[out] codec_data_size    The codec data size to get
+  /// Gets codec data and the codec data size of media packet.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - The `codec_data` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `packet` (in): The media packet handle
+  /// - `codec_data` (out): The codec data to get
+  /// - `codec_data_size` (out): The codec data size to get
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
   int media_packet_get_codec_data(
     media_packet_h packet,
     ffi.Pointer<ffi.Pointer<ffi.Void>> codec_data,
@@ -2838,24 +3523,32 @@ class Tizen70CapiMediaTool {
           int Function(media_packet_h, ffi.Pointer<ffi.Pointer<ffi.Void>>,
               ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @deprecated Deprecated since 6.5. Use media_packet_unref() instead.
-  /// @brief Destroys the media packet handle.
-  /// @details The registered media_packet_finalize_cb() or media_packet_dispose_cb() \n
-  /// will be invoked when @a packet is released. (since 6.5)
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] packet  The handle to media packet to be destroyed
+  /// **Deprecated:** Deprecated since 6.5. Use media_packet_unref() instead.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
+  /// Destroys the media packet handle.
   ///
-  /// @see media_packet_create_alloc()
-  /// @see media_packet_create()
-  /// @see media_packet_copy()
-  /// @see media_packet_create_from_tbm_surface()
-  /// @see media_packet_create_from_external_memory()
+  /// The registered media_packet_finalize_cb() or media_packet_dispose_cb() will be invoked when `packet` is released. (since 6.5)
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `packet` (in): The handle to media packet to be destroyed
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `media_packet_create_alloc()`
+  /// - `media_packet_create()`
+  /// - `media_packet_copy()`
+  /// - `media_packet_create_from_tbm_surface()`
+  /// - `media_packet_create_from_external_memory()`
   int media_packet_destroy(
     media_packet_h packet,
   ) {
@@ -2870,17 +3563,22 @@ class Tizen70CapiMediaTool {
   late final _media_packet_destroy =
       _media_packet_destroyPtr.asFunction<int Function(media_packet_h)>();
 
-  /// @brief Sets the rotation method.
-  /// @since_tizen 5.0
+  /// Sets the rotation method.
   ///
-  /// @param[in] packet   The media packet handle
-  /// @param[in] method   The rotation method
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
+  /// **Parameters:**
+  /// - `packet` (in): The media packet handle
+  /// - `method` (in): The rotation method
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
   int media_packet_set_rotate_method(
     media_packet_h packet,
     int method,
@@ -2898,17 +3596,22 @@ class Tizen70CapiMediaTool {
       _media_packet_set_rotate_methodPtr
           .asFunction<int Function(media_packet_h, int)>();
 
-  /// @brief Gets the rotation method.
-  /// @since_tizen 5.0
+  /// Gets the rotation method.
   ///
-  /// @param[in] packet   The media packet handle
-  /// @param[out] method  The rotation method
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE              Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION Invalid operation
+  /// **Parameters:**
+  /// - `packet` (in): The media packet handle
+  /// - `method` (out): The rotation method
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: Invalid operation
   int media_packet_get_rotate_method(
     media_packet_h packet,
     ffi.Pointer<ffi.Int32> method,
@@ -2927,19 +3630,26 @@ class Tizen70CapiMediaTool {
       _media_packet_get_rotate_methodPtr
           .asFunction<int Function(media_packet_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief	Creates a media packet pool to handle the media packets.
-  /// @details	It creates a media packet pool instance
+  /// Creates a media packet pool to handle the media packets.
   ///
-  /// @since_tizen 3.0
+  /// It creates a media packet pool instance
   ///
-  /// @remarks	The @a pool must be released by using packet_pool_destroy().
-  /// @param[out] pool The media packet pool handle
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Remarks:**
+  /// - The `pool` must be released by using packet_pool_destroy().
+  ///
+  /// **Parameters:**
+  /// - `pool` (out): The media packet pool handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_OUT_OF_MEMORY`: Out of memory
   int media_packet_pool_create(
     ffi.Pointer<media_packet_pool_h> pool,
   ) {
@@ -2955,20 +3665,27 @@ class Tizen70CapiMediaTool {
   late final _media_packet_pool_create = _media_packet_pool_createPtr
       .asFunction<int Function(ffi.Pointer<media_packet_pool_h>)>();
 
-  /// @brief	Sets the media format for the media packet pool.
+  /// Sets the media format for the media packet pool.
   ///
-  /// @since_tizen 3.0
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in]	pool	The media packet pool handle
-  /// @param[in]	fmt	The #media_format_h allocated by the caller
+  /// **Parameters:**
+  /// - `pool` (in): The media packet pool handle
+  /// - `fmt` (in): The `media_format_h` allocated by the caller
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre Must have media_format_h instance by media_format_create().
-  /// @post Must do media_format_unref().
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Must have media_format_h instance by media_format_create().
+  ///
+  /// **Postconditions:**
+  /// - Must do media_format_unref().
   int media_packet_pool_set_media_format(
     media_packet_pool_h pool,
     media_format_h fmt,
@@ -2987,24 +3704,31 @@ class Tizen70CapiMediaTool {
       _media_packet_pool_set_media_formatPtr
           .asFunction<int Function(media_packet_pool_h, media_format_h)>();
 
-  /// @brief	Sets the media packet pool size.
-  /// @details	Sets the number of packets to allocate with given parameters.
-  /// The media packet pool will be allocated with @a min_buffers when media_packet_pool_allocate() is called.
-  /// When there are no media packets available, it will be increased to @a max_buffers of given parameter.
+  /// Sets the media packet pool size.
   ///
-  /// @since_tizen 3.0
+  /// Sets the number of packets to allocate with given parameters. The media packet pool will be allocated with `min_buffers` when media_packet_pool_allocate() is called. When there are no media packets available, it will be increased to `max_buffers` of given parameter.
   ///
-  /// @param[in]  pool The allocated pool handle
-  /// @param[in]  min_buffers   The minimum number of buffers to allocate
-  /// @param[in]  max_buffers   The maximum number of buffers to allocate
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_OUT_OF_MEMORY Out of memory
-  /// @post After the pool has been configured, it can be allocated with media_packet_pool_allocate().
-  /// @see media_packet_pool_get_size()
+  /// **Parameters:**
+  /// - `pool` (in): The allocated pool handle
+  /// - `min_buffers` (in): The minimum number of buffers to allocate
+  /// - `max_buffers` (in): The maximum number of buffers to allocate
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Postconditions:**
+  /// - After the pool has been configured, it can be allocated with media_packet_pool_allocate().
+  ///
+  /// **See also:**
+  /// - `media_packet_pool_get_size()`
   int media_packet_pool_set_size(
     media_packet_pool_h pool,
     int min_buffers,
@@ -3024,21 +3748,31 @@ class Tizen70CapiMediaTool {
   late final _media_packet_pool_set_size = _media_packet_pool_set_sizePtr
       .asFunction<int Function(media_packet_pool_h, int, int)>();
 
-  /// @brief	Gets the media packet pool size.
-  /// @details	Gets the configuration values from the pool.
+  /// Gets the media packet pool size.
   ///
-  /// @since_tizen 3.0
+  /// Gets the configuration values from the pool.
   ///
-  /// @param[in]	pool	The allocated pool handle
-  /// @param[out]	min_buffers		The minimum number of buffers to allocate
-  /// @param[out]	max_buffers		The maximum number of buffers to allocate
-  /// @param[out]	curr_buffers	The current number of allocated buffers
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @post After the pool has been configured, it can be allocated with media_packet_pool_allocate().
-  /// @see media_packet_pool_set_size()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `pool` (in): The allocated pool handle
+  /// - `min_buffers` (out): The minimum number of buffers to allocate
+  /// - `max_buffers` (out): The maximum number of buffers to allocate
+  /// - `curr_buffers` (out): The current number of allocated buffers
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Postconditions:**
+  /// - After the pool has been configured, it can be allocated with media_packet_pool_allocate().
+  ///
+  /// **See also:**
+  /// - `media_packet_pool_set_size()`
   int media_packet_pool_get_size(
     media_packet_pool_h pool,
     ffi.Pointer<ffi.Int> min_buffers,
@@ -3065,24 +3799,34 @@ class Tizen70CapiMediaTool {
           int Function(media_packet_pool_h, ffi.Pointer<ffi.Int>,
               ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief	Allocates the media packet pool.
-  /// @details It will allocate media packets with @a min_buffers which given to media_packet_pool_set_size().
+  /// Allocates the media packet pool.
   ///
-  /// @since_tizen 3.0
+  /// It will allocate media packets with `min_buffers` which given to media_packet_pool_set_size().
   ///
-  /// @param[in]	pool	The allocated pool handle
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION The user set the invalid format with media_packet_pool_set_format() or set the invalid size with media_packet_pool_set_size().\n
-  /// The user already allocate the pool.
-  /// @pre media_packet_pool_set_media_format() and media_pool_set_size() should be called before calling media_packet_pool_allocate()
-  /// @post The pool will be allocated. When the pool is allocated, media_packet_pool_acquire_packet() can be used to retrieve a packet from the pool.
-  /// @see media_packet_pool_set_media_format()
-  /// @see media_packet_pool_set_size()
+  /// **Parameters:**
+  /// - `pool` (in): The allocated pool handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: The user set the invalid format with media_packet_pool_set_format() or set the invalid size with media_packet_pool_set_size(). The user already allocate the pool.
+  ///
+  /// **Preconditions:**
+  /// - media_packet_pool_set_media_format() and media_pool_set_size() should be called before calling media_packet_pool_allocate()
+  ///
+  /// **Postconditions:**
+  /// - The pool will be allocated. When the pool is allocated, media_packet_pool_acquire_packet() can be used to retrieve a packet from the pool.
+  ///
+  /// **See also:**
+  /// - `media_packet_pool_set_media_format()`
+  /// - `media_packet_pool_set_size()`
   int media_packet_pool_allocate(
     media_packet_pool_h pool,
   ) {
@@ -3097,26 +3841,29 @@ class Tizen70CapiMediaTool {
   late final _media_packet_pool_allocate = _media_packet_pool_allocatePtr
       .asFunction<int Function(media_packet_pool_h)>();
 
-  /// @brief	Acquires a media packet from the media packet pool.
-  /// @details	It will take a media packet from the queue and block until media packet is released into the pool again.
-  /// When there are no media packets available, it will be increased to @a max_buffers of given parameter.
+  /// Acquires a media packet from the media packet pool.
   ///
-  /// @since_tizen 3.0
+  /// It will take a media packet from the queue and block until media packet is released into the pool again. When there are no media packets available, it will be increased to `max_buffers` of given parameter.
   ///
-  /// @param[in]	pool	The media packet pool handle
-  /// @param[out]	pkt		The media packet handle
-  /// @param[in]   timeout It indicates the millisecond-timeouts to block
-  /// while waiting for one of acquired packet to be released.
-  /// If the value of timeout is -1, the pool blocks indefinitely until media packet into the pool.
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION The user does not allocate the pool.\n
-  /// The pool should be allocated with media_packet_pool_allocate() before acquiring media packet from the pool.
-  /// @retval #MEDIA_PACKET_ERROR_NO_AVAILABLE_PACKET No available packet
-  /// @see media_packet_pool_release_packet()
+  /// **Parameters:**
+  /// - `pool` (in): The media packet pool handle
+  /// - `pkt` (out): The media packet handle
+  /// - `timeout` (in): It indicates the millisecond-timeouts to block while waiting for one of acquired packet to be released. If the value of timeout is -1, the pool blocks indefinitely until media packet into the pool.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: The user does not allocate the pool. The pool should be allocated with media_packet_pool_allocate() before acquiring media packet from the pool.
+  /// - `MEDIA_PACKET_ERROR_NO_AVAILABLE_PACKET`: No available packet
+  ///
+  /// **See also:**
+  /// - `media_packet_pool_release_packet()`
   int media_packet_pool_acquire_packet(
     media_packet_pool_h pool,
     ffi.Pointer<media_packet_h> pkt,
@@ -3138,21 +3885,28 @@ class Tizen70CapiMediaTool {
           int Function(
               media_packet_pool_h, ffi.Pointer<media_packet_h>, int)>();
 
-  /// @brief	Releases the media packet to pool.
-  /// @details	Rlease a packet back in the pool. It will put the packet back in the queue.
+  /// Releases the media packet to pool.
   ///
-  /// @since_tizen 3.0
+  /// Rlease a packet back in the pool. It will put the packet back in the queue.
   ///
-  /// @param[in]  pool The media packet pool handle
-  /// @param[in]  pkt The packet to release, the pkt should have previously been acquired from the pool with media_packet_pool_acquire_packet()
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION The user releases media packet which is not associated with a given pool.
-  /// @see media_packet_pool_acquire_packet()
+  /// **Parameters:**
+  /// - `pool` (in): The media packet pool handle
+  /// - `pkt` (in): The packet to release, the pkt should have previously been acquired from the pool with media_packet_pool_acquire_packet()
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: The user releases media packet which is not associated with a given pool.
+  ///
+  /// **See also:**
+  /// - `media_packet_pool_acquire_packet()`
   int media_packet_pool_release_packet(
     media_packet_pool_h pool,
     media_packet_h pkt,
@@ -3171,22 +3925,32 @@ class Tizen70CapiMediaTool {
       _media_packet_pool_release_packetPtr
           .asFunction<int Function(media_packet_pool_h, media_packet_h)>();
 
-  /// @brief	Deallocates all the media packets.
-  /// @details	Deallocates the packets allocated with media_packet_pool_allocate().
+  /// Deallocates all the media packets.
   ///
-  /// @since_tizen 3.0
+  /// Deallocates the packets allocated with media_packet_pool_allocate().
   ///
-  /// @param[in]  pool The media packet pool handle
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION The user does not release all media packets to the pool.
+  /// **Parameters:**
+  /// - `pool` (in): The media packet pool handle
   ///
-  /// @pre media packet should be released before calling media_packet_pool_deallocate().
-  /// @post The pool will be deallocated. media_packet_pool_acquire_packet() calls will return an error.
-  /// @see media_packet_pool_allocate()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: The user does not release all media packets to the pool.
+  ///
+  /// **Preconditions:**
+  /// - media packet should be released before calling media_packet_pool_deallocate().
+  ///
+  /// **Postconditions:**
+  /// - The pool will be deallocated. media_packet_pool_acquire_packet() calls will return an error.
+  ///
+  /// **See also:**
+  /// - `media_packet_pool_allocate()`
   int media_packet_pool_deallocate(
     media_packet_pool_h pool,
   ) {
@@ -3201,20 +3965,26 @@ class Tizen70CapiMediaTool {
   late final _media_packet_pool_deallocate = _media_packet_pool_deallocatePtr
       .asFunction<int Function(media_packet_pool_h)>();
 
-  /// @brief	Destroys the media packet pool.
-  /// @details	Destroys the media packet pool handle and releases all its resources.
+  /// Destroys the media packet pool.
   ///
-  /// @since_tizen 3.0
+  /// Destroys the media packet pool handle and releases all its resources.
   ///
-  /// @param[in]	 pool	The handle to media packet pool to be destroyed
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_PACKET_ERROR_NONE Successful
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_PACKET_ERROR_INVALID_OPERATION The user does not create media packet pool instance, or not deallocate all media packets with media_packet_pool_deallocate().
+  /// **Parameters:**
+  /// - `pool` (in): The handle to media packet pool to be destroyed
   ///
-  /// @see media_packet_pool_create()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_PACKET_ERROR_NONE`: Successful
+  /// - `MEDIA_PACKET_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_PACKET_ERROR_INVALID_OPERATION`: The user does not create media packet pool instance, or not deallocate all media packets with media_packet_pool_deallocate().
+  ///
+  /// **See also:**
+  /// - `media_packet_pool_create()`
   int media_packet_pool_destroy(
     media_packet_pool_h pool,
   ) {
@@ -3230,10 +4000,14 @@ class Tizen70CapiMediaTool {
       .asFunction<int Function(media_packet_pool_h)>();
 }
 
+/// @nodoc
 final class media_format_s extends ffi.Opaque {}
 
-/// @brief Enumerations of  media format error.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumerations of media format error.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class media_format_error_e {
   /// < Successful
   static const int MEDIA_FORMAT_ERROR_NONE = 0;
@@ -3251,8 +4025,11 @@ abstract class media_format_error_e {
   static const int MEDIA_FORMAT_ERROR_FILE_NO_SPACE_ON_DEVICE = -28;
 }
 
-/// @brief Enumeration for media format type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for media format type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class media_format_type_e {
   /// < media format type is NONE
   static const int MEDIA_FORMAT_NONE = 0;
@@ -3273,8 +4050,11 @@ abstract class media_format_type_e {
   static const int MEDIA_FORMAT_UNKNOWN = 134217728;
 }
 
-/// @brief Enumeration for media format data type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for media format data type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class media_format_data_type_e {
   /// < media format data type is encoded type
   static const int MEDIA_FORMAT_ENCODED = 268435456;
@@ -3283,8 +4063,11 @@ abstract class media_format_data_type_e {
   static const int MEDIA_FORMAT_RAW = 536870912;
 }
 
-/// @brief Enumeration for media format MIME type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for media format MIME type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class media_format_mimetype_e {
   /// < media format mime type is L16, AUDIO
   static const int MEDIA_FORMAT_L16 = 285216784;
@@ -3295,28 +4078,28 @@ abstract class media_format_mimetype_e {
   /// < media format mime type is ULAW,  AUDIO
   static const int MEDIA_FORMAT_ULAW = 285216816;
 
-  /// < media format mime type is AMR,  AUDIO,  indicates #MEDIA_FORMAT_AMR_NB (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
+  /// < media format mime type is AMR, AUDIO, indicates `MEDIA_FORMAT_AMR_NB` (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
   static const int MEDIA_FORMAT_AMR = 285216832;
 
-  /// < media format mime type is AMR_NB,  AUDIO , (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
+  /// < media format mime type is AMR_NB, AUDIO , (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
   static const int MEDIA_FORMAT_AMR_NB = 285216832;
 
-  /// < media format mime type is AMR_WB,  AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
+  /// < media format mime type is AMR_WB, AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
   static const int MEDIA_FORMAT_AMR_WB = 285216833;
 
   /// < media format mime type is G729,  AUDIO
   static const int MEDIA_FORMAT_G729 = 285216848;
 
-  /// < media format mime type is AAC,  AUDIO, indicates #MEDIA_FORMAT_AAC_LC (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
+  /// < media format mime type is AAC, AUDIO, indicates `MEDIA_FORMAT_AAC_LC` (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
   static const int MEDIA_FORMAT_AAC = 285216864;
 
-  /// < media format mime type is AAC_LC,  AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
+  /// < media format mime type is AAC_LC, AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
   static const int MEDIA_FORMAT_AAC_LC = 285216864;
 
-  /// < media format mime type is AAC_HE,  AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
+  /// < media format mime type is AAC_HE, AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
   static const int MEDIA_FORMAT_AAC_HE = 285216865;
 
-  /// < media format mime type is AAC_HE_PS,  AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
+  /// < media format mime type is AAC_HE_PS, AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
   static const int MEDIA_FORMAT_AAC_HE_PS = 285216866;
 
   /// < media format mime type is MP3,  AUDIO
@@ -3325,22 +4108,22 @@ abstract class media_format_mimetype_e {
   /// < media format mime type is MP23, AUDIO, (Since 4.0)
   static const int MEDIA_FORMAT_MP2 = 285216881;
 
-  /// < media format mime type is VORBIS,  AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
+  /// < media format mime type is VORBIS, AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
   static const int MEDIA_FORMAT_VORBIS = 285216896;
 
-  /// < media format mime type is FLAC,  AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
+  /// < media format mime type is FLAC, AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
   static const int MEDIA_FORMAT_FLAC = 285216912;
 
-  /// < media format mime type is WMAV1,  AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
+  /// < media format mime type is WMAV1, AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
   static const int MEDIA_FORMAT_WMAV1 = 285216928;
 
-  /// < media format mime type is WMAV2,  AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
+  /// < media format mime type is WMAV2, AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
   static const int MEDIA_FORMAT_WMAV2 = 285216929;
 
-  /// < media format mime type is WMAVPRO,  AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
+  /// < media format mime type is WMAVPRO, AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
   static const int MEDIA_FORMAT_WMAPRO = 285216930;
 
-  /// < media format mime type is WMAVLSL,  AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
+  /// < media format mime type is WMAVLSL, AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
   static const int MEDIA_FORMAT_WMALSL = 285216931;
 
   /// < media format mime type is AC3, AUDIO, (Since 4.0)
@@ -3608,8 +4391,11 @@ abstract class media_format_mimetype_e {
   static const int MEDIA_FORMAT_MAX = 318799905;
 }
 
-/// @brief Enumeration for media color model.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for media color model.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class media_format_color_model_e {
   /// < media format color model is NONE
   static const int MEDIA_COLOR_MODEL_NONE = 0;
@@ -3621,8 +4407,11 @@ abstract class media_format_color_model_e {
   static const int MEDIA_COLOR_MODEL_YUV = 2;
 }
 
-/// @brief Enumeration for media format aac header type.
-/// @since_tizen 3.0
+/// Enumeration for media format aac header type.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class media_format_aac_header_type_e {
   /// < media format aac header type is RAW, no header
   static const int MEDIA_FORMAT_AAC_HEADER_NONE = 0;
@@ -3637,8 +4426,11 @@ abstract class media_format_aac_header_type_e {
   static const int MEDIA_FORMAT_AAC_HEADER_UNKNOWN = 3;
 }
 
-/// @brief Enumeration for media format text type.
-/// @since_tizen 3.0
+/// Enumeration for media format text type.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class media_format_text_type_e {
   /// < media format text type is none
   static const int MEDIA_FORMAT_TEXT_TYPE_NONE = 0;
@@ -3653,8 +4445,11 @@ abstract class media_format_text_type_e {
   static const int MEDIA_FORMAT_TEXT_TYPE_UNKNOWN = 3;
 }
 
-/// @brief Enumeration for audio channel positions.
-/// @since_tizen 5.5
+/// Enumeration for audio channel positions.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class media_format_channel_position_e {
   /// < Used for position-less channels
   static const int MEDIA_FORMAT_CHANNEL_POSITION_NONE = -3;
@@ -3750,14 +4545,21 @@ abstract class media_format_channel_position_e {
   static const int MEDIA_FORMAT_CHANNEL_POSITION_SURROUND_RIGHT = 27;
 }
 
-/// @brief Media Format handle type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Media Format handle type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 typedef media_format_h = ffi.Pointer<media_format_s>;
 
+/// @nodoc
 final class media_packet_s extends ffi.Opaque {}
 
-/// @brief Enumeration for media packet error.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for media packet error.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class media_packet_error_e {
   /// < Successful
   static const int MEDIA_PACKET_ERROR_NONE = 0;
@@ -3778,8 +4580,11 @@ abstract class media_packet_error_e {
   static const int MEDIA_PACKET_ERROR_NO_AVAILABLE_PACKET = -27394047;
 }
 
-/// @brief Enumeration for media buffer flag.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for media buffer flag.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class media_buffer_flags_e {
   /// < The buffer marked as such contains codec initialization/codec specific data instead of media data
   static const int MEDIA_PACKET_CODEC_CONFIG = 1;
@@ -3791,10 +4596,16 @@ abstract class media_buffer_flags_e {
   static const int MEDIA_PACKET_SYNC_FRAME = 4;
 }
 
-/// @deprecated Deprecated since 6.5.
-/// @brief Enumeration for the return values of media packet finalize call back functions.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @see media_packet_finalize_cb()
+/// **Deprecated:** Deprecated since 6.5.
+///
+/// Enumeration for the return values of media packet finalize call back functions.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **See also:**
+/// - `media_packet_finalize_cb()`
+/// @nodoc
 abstract class finalize_cb_ret {
   /// < Packet handle is not destroyed
   static const int MEDIA_PACKET_REUSE = 0;
@@ -3803,8 +4614,11 @@ abstract class finalize_cb_ret {
   static const int MEDIA_PACKET_FINALIZE = 1;
 }
 
-/// @brief Enumeration for media packet rotation method.
-/// @since_tizen 5.0
+/// Enumeration for media packet rotation method.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class media_packet_rotate_method_e {
   /// < None
   static const int MEDIA_PACKET_ROTATE_IDENTITY = 0;
@@ -3825,57 +4639,90 @@ abstract class media_packet_rotate_method_e {
   static const int MEDIA_PACKET_ROTATE_VERTICAL_FLIP = 5;
 }
 
-/// @deprecated Deprecated since 6.5.
-/// @brief   Called when the media packet is destroyed.
-/// @details It will be invoked when media_packet_destroy() is called.
+/// **Deprecated:** Deprecated since 6.5.
 ///
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Called when the media packet is destroyed.
 ///
-/// @param[in] packet        The media packet handle
-/// @param[in] error_code    The error code of #media_packet_error_e
-/// @param[in] user_data  The user data passed from the callback registration function
-/// @retval #MEDIA_PACKET_REUSE     Packet handle is not destroyed, the handle will be reused.
-/// @retval #MEDIA_PACKET_FINALIZE  Destroy media packet handle, the handle will not be reused.
-/// @pre It will be invoked when media packet is destroyed.
-/// @see media_packet_destroy()
-/// @see media_packet_create_alloc()
-/// @see media_packet_create()
-/// @see media_packet_copy()
-/// @see media_packet_create_from_tbm_surface()
+/// It will be invoked when media_packet_destroy() is called.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `packet` (in): The media packet handle
+/// - `error_code` (in): The error code of `media_packet_error_e`
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Return values:**
+/// - `MEDIA_PACKET_REUSE`: Packet handle is not destroyed, the handle will be reused.
+/// - `MEDIA_PACKET_FINALIZE`: Destroy media packet handle, the handle will not be reused.
+///
+/// **Preconditions:**
+/// - It will be invoked when media packet is destroyed.
+///
+/// **See also:**
+/// - `media_packet_destroy()`
+/// - `media_packet_create_alloc()`
+/// - `media_packet_create()`
+/// - `media_packet_copy()`
+/// - `media_packet_create_from_tbm_surface()`
+/// @nodoc
 typedef media_packet_finalize_cb
     = ffi.Pointer<ffi.NativeFunction<media_packet_finalize_cbFunction>>;
+/// @nodoc
 typedef media_packet_finalize_cbFunction = ffi.Int Function(
     media_packet_h packet, ffi.Int error_code, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmedia_packet_finalize_cbFunction = int Function(
     media_packet_h packet, int error_code, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief  The Media Packet handle.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// The Media Packet handle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 typedef media_packet_h = ffi.Pointer<media_packet_s>;
 
-/// @brief   Called when the media packet is disposed.
-/// @details It will be invoked when media_packet_unref() is called, \n
-/// and reference count is decreased to 0.
-/// @since_tizen 6.5
-/// @remarks The media packet handle should not be released in this callback. \n
-/// It will be released by the framework after return.
-/// @param[in] packet    The media packet handle
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre It will be invoked when media packet is being destroyed.
-/// @see media_packet_unref()
-/// @see media_packet_new()
-/// @see media_packet_new_alloc()
-/// @see media_packet_new_from_tbm_surface()
-/// @see media_packet_new_from_external_memory()
+/// Called when the media packet is disposed.
+///
+/// It will be invoked when media_packet_unref() is called, and reference count is decreased to 0.
+///
+/// **Since Tizen:**
+/// - 6.5
+///
+/// **Remarks:**
+/// - The media packet handle should not be released in this callback.
+/// - It will be released by the framework after return.
+///
+/// **Parameters:**
+/// - `packet` (in): The media packet handle
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - It will be invoked when media packet is being destroyed.
+///
+/// **See also:**
+/// - `media_packet_unref()`
+/// - `media_packet_new()`
+/// - `media_packet_new_alloc()`
+/// - `media_packet_new_from_tbm_surface()`
+/// - `media_packet_new_from_external_memory()`
+/// @nodoc
 typedef media_packet_dispose_cb
     = ffi.Pointer<ffi.NativeFunction<media_packet_dispose_cbFunction>>;
+/// @nodoc
 typedef media_packet_dispose_cbFunction = ffi.Void Function(
     media_packet_h packet, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmedia_packet_dispose_cbFunction = void Function(
     media_packet_h packet, ffi.Pointer<ffi.Void> user_data);
 
+/// @nodoc
 final class media_packet_pool_s extends ffi.Opaque {}
 
-/// @brief  The Media Packet Pool Handle.
-/// @since_tizen 3.0
+/// The Media Packet Pool Handle.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef media_packet_pool_h = ffi.Pointer<media_packet_pool_s>;

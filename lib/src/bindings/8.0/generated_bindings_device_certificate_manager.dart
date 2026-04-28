@@ -1,3 +1,6 @@
+/// {@category 8.0/tizen}
+library tizen_interop_8_0.device_certificate_manager;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen device-certificate-manager APIs.
+/// {@category 8.0/tizen}
 class Tizen80DeviceCertificateManager {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,30 +28,43 @@ class Tizen80DeviceCertificateManager {
           lookup)
       : _lookup = lookup;
 
-  /// @platform
-  /// @brief Creates a new key context based on specific name indication (service name, key usage, key type).
-  /// @since_tizen 5.0
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/devicecertificate
+  /// Creates a new key context based on specific name indication (service name, key usage, key type).
   ///
-  /// @remarks The @a key_ctx should be freed with dcm_free_key_context() after use.
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] service  Service name indicates first category name (if null, default value is used)
-  /// @param[in] usage  Usage name indicates sub-category name (if null, default value is used)
-  /// @param[in] key_type  Key type name indication (if null, default value is used)
-  /// @param[out] key_ctx  Newly created key context
-  /// @return #DCM_ERROR_NONE on success,
-  /// otherwise a negative error value
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @retval #DCM_ERROR_NONE Successful
-  /// @retval #DCM_ERROR_NOT_SUPPORTED Feature needed to run API is not supported
-  /// @retval #DCM_ERROR_PERMISSION_DENIED Failed to access device certificate manager
-  /// @retval #DCM_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #DCM_ERROR_SOCKET Socket error between client and server
-  /// @retval #DCM_ERROR_OUT_OF_MEMORY Out of memory during processing
-  /// @retval #DCM_ERROR_UNKNOWN Unknown error
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/devicecertificate>
   ///
-  /// @see dcm_free_key_context()
+  /// **Remarks:**
+  /// - The `key_ctx` should be freed with dcm_free_key_context() after use.
+  ///
+  /// **Parameters:**
+  /// - `service` (in): Service name indicates first category name (if null, default value is used)
+  /// - `usage` (in): Usage name indicates sub-category name (if null, default value is used)
+  /// - `key_type` (in): Key type name indication (if null, default value is used)
+  /// - `key_ctx` (out): Newly created key context
+  ///
+  /// **Returns:**
+  /// - `DCM_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DCM_ERROR_NONE`: Successful
+  /// - `DCM_ERROR_NOT_SUPPORTED`: Feature needed to run API is not supported
+  /// - `DCM_ERROR_PERMISSION_DENIED`: Failed to access device certificate manager
+  /// - `DCM_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `DCM_ERROR_SOCKET`: Socket error between client and server
+  /// - `DCM_ERROR_OUT_OF_MEMORY`: Out of memory during processing
+  /// - `DCM_ERROR_UNKNOWN`: Unknown error
+  ///
+  /// **See also:**
+  /// - `dcm_free_key_context()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int dcm_create_key_context(
     ffi.Pointer<ffi.Char> service,
     ffi.Pointer<ffi.Char> usage,
@@ -73,26 +90,38 @@ class Tizen80DeviceCertificateManager {
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
           ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Void>>)>();
 
-  /// @platform
-  /// @brief Destroys the key context that was created by calling dcm_create_key_context().
-  /// @since_tizen 5.0
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/devicecertificate
+  /// Destroys the key context that was created by calling dcm_create_key_context().
   ///
-  /// @param[in] key_ctx  Key context object to be deallocated
-  /// @return #DCM_ERROR_NONE on success,
-  /// otherwise a negative error value
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @retval #DCM_ERROR_NONE Successful
-  /// @retval #DCM_ERROR_NOT_SUPPORTED Feature needed to run API is not supported
-  /// @retval #DCM_ERROR_PERMISSION_DENIED Failed to access device certificate manager
-  /// @retval #DCM_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #DCM_ERROR_SOCKET Socket error between client and server
-  /// @retval #DCM_ERROR_OUT_OF_MEMORY Out of memory during processing
-  /// @retval #DCM_ERROR_NO_DATA No such key context object
-  /// @retval #DCM_ERROR_UNKNOWN Unknown error
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @see dcm_create_key_context()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/devicecertificate>
+  ///
+  /// **Parameters:**
+  /// - `key_ctx` (in): Key context object to be deallocated
+  ///
+  /// **Returns:**
+  /// - `DCM_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DCM_ERROR_NONE`: Successful
+  /// - `DCM_ERROR_NOT_SUPPORTED`: Feature needed to run API is not supported
+  /// - `DCM_ERROR_PERMISSION_DENIED`: Failed to access device certificate manager
+  /// - `DCM_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `DCM_ERROR_SOCKET`: Socket error between client and server
+  /// - `DCM_ERROR_OUT_OF_MEMORY`: Out of memory during processing
+  /// - `DCM_ERROR_NO_DATA`: No such key context object
+  /// - `DCM_ERROR_UNKNOWN`: Unknown error
+  ///
+  /// **See also:**
+  /// - `dcm_create_key_context()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int dcm_free_key_context(
     ffi.Pointer<ffi.Void> key_ctx,
   ) {
@@ -107,28 +136,40 @@ class Tizen80DeviceCertificateManager {
   late final _dcm_free_key_context = _dcm_free_key_contextPtr
       .asFunction<int Function(ffi.Pointer<ffi.Void>)>();
 
-  /// @platform
-  /// @brief Returns a certificate chain which was pre-injected in device.
-  /// @since_tizen 5.0
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/devicecertificate
+  /// Returns a certificate chain which was pre-injected in device.
   ///
-  /// @remarks The @a cert_chain should be freed using free().
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] key_ctx  Key context object that identifies proper certificate chain
-  /// @param[out] cert_chain  Certificate chain in binary, will be allocated by the library
-  /// @param[out] cert_chain_len  The total length of certificate chain
-  /// @return #DCM_ERROR_NONE on success,
-  /// otherwise a negative error value
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @retval #DCM_ERROR_NONE Successful
-  /// @retval #DCM_ERROR_NOT_SUPPORTED Feature needed to run API is not supported
-  /// @retval #DCM_ERROR_PERMISSION_DENIED Failed to access device certificate manager
-  /// @retval #DCM_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #DCM_ERROR_SOCKET Socket error between client and server
-  /// @retval #DCM_ERROR_OUT_OF_MEMORY Out of memory during processing
-  /// @retval #DCM_ERROR_NO_DATA No certificate chain available
-  /// @retval #DCM_ERROR_UNKNOWN Unknown error
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/devicecertificate>
+  ///
+  /// **Remarks:**
+  /// - The `cert_chain` should be freed using free().
+  ///
+  /// **Parameters:**
+  /// - `key_ctx` (in): Key context object that identifies proper certificate chain
+  /// - `cert_chain` (out): Certificate chain in binary, will be allocated by the library
+  /// - `cert_chain_len` (out): The total length of certificate chain
+  ///
+  /// **Returns:**
+  /// - `DCM_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DCM_ERROR_NONE`: Successful
+  /// - `DCM_ERROR_NOT_SUPPORTED`: Feature needed to run API is not supported
+  /// - `DCM_ERROR_PERMISSION_DENIED`: Failed to access device certificate manager
+  /// - `DCM_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `DCM_ERROR_SOCKET`: Socket error between client and server
+  /// - `DCM_ERROR_OUT_OF_MEMORY`: Out of memory during processing
+  /// - `DCM_ERROR_NO_DATA`: No certificate chain available
+  /// - `DCM_ERROR_UNKNOWN`: Unknown error
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int dcm_get_certificate_chain(
     ffi.Pointer<ffi.Void> key_ctx,
     ffi.Pointer<ffi.Pointer<ffi.Char>> cert_chain,
@@ -152,25 +193,36 @@ class Tizen80DeviceCertificateManager {
           int Function(ffi.Pointer<ffi.Void>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
 
-  /// @platform
-  /// @brief Returns the key size in bits for a given key context.
-  /// @since_tizen 5.0
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/devicecertificate
+  /// Returns the key size in bits for a given key context.
   ///
-  /// @param[in] key_ctx  Key context object that identifies proper certificate chain
-  /// @param[out] key_bit_len  Key length in bits
-  /// @return #DCM_ERROR_NONE on success,
-  /// otherwise a negative error value
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @retval #DCM_ERROR_NONE Successful
-  /// @retval #DCM_ERROR_NOT_SUPPORTED Feature needed to run API is not supported
-  /// @retval #DCM_ERROR_PERMISSION_DENIED Failed to access device certificate manager
-  /// @retval #DCM_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #DCM_ERROR_SOCKET Socket error between client and server
-  /// @retval #DCM_ERROR_OUT_OF_MEMORY Out of memory during processing
-  /// @retval #DCM_ERROR_NO_DATA No certificate chain available
-  /// @retval #DCM_ERROR_UNKNOWN Unknown error
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/devicecertificate>
+  ///
+  /// **Parameters:**
+  /// - `key_ctx` (in): Key context object that identifies proper certificate chain
+  /// - `key_bit_len` (out): Key length in bits
+  ///
+  /// **Returns:**
+  /// - `DCM_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DCM_ERROR_NONE`: Successful
+  /// - `DCM_ERROR_NOT_SUPPORTED`: Feature needed to run API is not supported
+  /// - `DCM_ERROR_PERMISSION_DENIED`: Failed to access device certificate manager
+  /// - `DCM_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `DCM_ERROR_SOCKET`: Socket error between client and server
+  /// - `DCM_ERROR_OUT_OF_MEMORY`: Out of memory during processing
+  /// - `DCM_ERROR_NO_DATA`: No certificate chain available
+  /// - `DCM_ERROR_UNKNOWN`: Unknown error
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int dcm_get_key_bit_length(
     ffi.Pointer<ffi.Void> key_ctx,
     ffi.Pointer<ffi.Size> key_bit_len,
@@ -188,27 +240,39 @@ class Tizen80DeviceCertificateManager {
   late final _dcm_get_key_bit_length = _dcm_get_key_bit_lengthPtr
       .asFunction<int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Size>)>();
 
-  /// @platform
-  /// @brief Returns the key type name for a given key context.
-  /// @since_tizen 5.0
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/devicecertificate
+  /// Returns the key type name for a given key context.
   ///
-  /// @remarks The @a key_type should be freed using free().
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] key_ctx  Key context object that identifies proper certificate chain
-  /// @param[out] key_type  Key type name (UNKNOWN, RSA or ECDSA), will be allocated by the library
-  /// @return #DCM_ERROR_NONE on success,
-  /// otherwise a negative error value
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @retval #DCM_ERROR_NONE Successful
-  /// @retval #DCM_ERROR_NOT_SUPPORTED Feature needed to run API is not supported
-  /// @retval #DCM_ERROR_PERMISSION_DENIED Failed to access device certificate manager
-  /// @retval #DCM_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #DCM_ERROR_SOCKET Socket error between client and server
-  /// @retval #DCM_ERROR_OUT_OF_MEMORY Out of memory during processing
-  /// @retval #DCM_ERROR_NO_DATA No certificate chain available
-  /// @retval #DCM_ERROR_UNKNOWN Unknown error
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/devicecertificate>
+  ///
+  /// **Remarks:**
+  /// - The `key_type` should be freed using free().
+  ///
+  /// **Parameters:**
+  /// - `key_ctx` (in): Key context object that identifies proper certificate chain
+  /// - `key_type` (out): Key type name (UNKNOWN, RSA or ECDSA), will be allocated by the library
+  ///
+  /// **Returns:**
+  /// - `DCM_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DCM_ERROR_NONE`: Successful
+  /// - `DCM_ERROR_NOT_SUPPORTED`: Feature needed to run API is not supported
+  /// - `DCM_ERROR_PERMISSION_DENIED`: Failed to access device certificate manager
+  /// - `DCM_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `DCM_ERROR_SOCKET`: Socket error between client and server
+  /// - `DCM_ERROR_OUT_OF_MEMORY`: Out of memory during processing
+  /// - `DCM_ERROR_NO_DATA`: No certificate chain available
+  /// - `DCM_ERROR_UNKNOWN`: Unknown error
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int dcm_get_key_type(
     ffi.Pointer<ffi.Void> key_ctx,
     ffi.Pointer<ffi.Pointer<ffi.Char>> key_type,
@@ -227,32 +291,44 @@ class Tizen80DeviceCertificateManager {
       int Function(
           ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @platform
-  /// @brief Creates a signature on a given data using a private key and returns the signature.
-  /// @since_tizen 5.0
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/devicecertificate
+  /// Creates a signature on a given data using a private key and returns the signature.
   ///
-  /// @remarks The private key is identified by @a key_ctx.
-  /// @remarks The @a message can be NULL but then @a message_len must be 0.
-  /// @remarks The @a signature should be freed using free().
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] key_ctx  Key context object that identifies a proper private key for signing
-  /// @param[in] md  Message digest algorithm used in creating signature
-  /// @param[in] message  Message that is signed with a key
-  /// @param[in] message_len  Length of the message
-  /// @param[out] signature  Newly created signature, will be allocated by the library
-  /// @param[out] signature_len  Length of a newly created signature
-  /// @return #DCM_ERROR_NONE on success,
-  /// otherwise a negative error value
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @retval #DCM_ERROR_NONE Successful
-  /// @retval #DCM_ERROR_NOT_SUPPORTED Feature needed to run API is not supported
-  /// @retval #DCM_ERROR_PERMISSION_DENIED Failed to access device certificate manager
-  /// @retval #DCM_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #DCM_ERROR_SOCKET Socket error between client and server
-  /// @retval #DCM_ERROR_OUT_OF_MEMORY Out of memory during processing
-  /// @retval #DCM_ERROR_UNKNOWN Unknown error
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/devicecertificate>
+  ///
+  /// **Remarks:**
+  /// - The private key is identified by `key_ctx`.
+  /// - The `message` can be NULL but then `message_len` must be 0.
+  /// - The `signature` should be freed using free().
+  ///
+  /// **Parameters:**
+  /// - `key_ctx` (in): Key context object that identifies a proper private key for signing
+  /// - `md` (in): Message digest algorithm used in creating signature
+  /// - `message` (in): Message that is signed with a key
+  /// - `message_len` (in): Length of the message
+  /// - `signature` (out): Newly created signature, will be allocated by the library
+  /// - `signature_len` (out): Length of a newly created signature
+  ///
+  /// **Returns:**
+  /// - `DCM_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DCM_ERROR_NONE`: Successful
+  /// - `DCM_ERROR_NOT_SUPPORTED`: Feature needed to run API is not supported
+  /// - `DCM_ERROR_PERMISSION_DENIED`: Failed to access device certificate manager
+  /// - `DCM_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `DCM_ERROR_SOCKET`: Socket error between client and server
+  /// - `DCM_ERROR_OUT_OF_MEMORY`: Out of memory during processing
+  /// - `DCM_ERROR_UNKNOWN`: Unknown error
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int dcm_create_signature(
     ffi.Pointer<ffi.Void> key_ctx,
     int md,
@@ -285,8 +361,11 @@ class Tizen80DeviceCertificateManager {
           ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
 }
 
-/// @brief Enumeration for DCM error values.
-/// @since_tizen 5.0
+/// Enumeration for DCM error values.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class dcm_error_e {
   /// < Successful
   static const int DCM_ERROR_NONE = 0;
@@ -313,8 +392,11 @@ abstract class dcm_error_e {
   static const int DCM_ERROR_SOCKET = -50135039;
 }
 
-/// @brief Enumeration for DCM message digest algorithms.
-/// @since_tizen 5.0
+/// Enumeration for DCM message digest algorithms.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class dcm_digest_algorithm_e {
   /// < No message digest algorithm
   static const int DCM_DIGEST_NONE = 0;

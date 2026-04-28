@@ -1,3 +1,6 @@
+/// {@category 6.0/tizen}
+library tizen_interop_6_0.capi_mediademuxer;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'generated_bindings_capi_media_tool.dart' as media_tool;
 
 /// Dart bindings for Tizen capi-mediademuxer APIs.
+/// {@category 6.0/tizen}
 class Tizen60CapiMediademuxer {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,17 +29,31 @@ class Tizen60CapiMediademuxer {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates a media demuxer handle for demuxing.
-  /// @since_tizen 3.0
-  /// @remarks You must release @a demuxer using mediademuxer_destroy() function.
-  /// @param[out] demuxer A new handle to media demuxer
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIADEMUXER_ERROR_NONE Successful
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_OPERATION Invalid Operation
-  /// @retval #MEDIADEMUXER_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @post The media demuxer state will be #MEDIADEMUXER_STATE_IDLE.
-  /// @see mediademuxer_destroy()
+  /// Creates a media demuxer handle for demuxing.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `demuxer` using mediademuxer_destroy() function.
+  ///
+  /// **Parameters:**
+  /// - `demuxer` (out): A new handle to media demuxer
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIADEMUXER_ERROR_NONE`: Successful
+  /// - `MEDIADEMUXER_ERROR_INVALID_OPERATION`: Invalid Operation
+  /// - `MEDIADEMUXER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIADEMUXER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Postconditions:**
+  /// - The media demuxer state will be `MEDIADEMUXER_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `mediademuxer_destroy()`
   int mediademuxer_create(
     ffi.Pointer<mediademuxer_h> demuxer,
   ) {
@@ -50,20 +68,32 @@ class Tizen60CapiMediademuxer {
   late final _mediademuxer_create = _mediademuxer_createPtr
       .asFunction<int Function(ffi.Pointer<mediademuxer_h>)>();
 
-  /// @brief Sets the source path of input stream.
-  /// @since_tizen 3.0
-  /// @remarks The mediastorage privilege(http://tizen.org/privilege/mediastorage) should be added if any video/audio files are used to play located in the internal storage.
-  /// @remarks The externalstorage privilege(http://tizen.org/privilege/externalstorage) should be added if any video/audio files are used to play located in the external storage.
-  /// @remarks You must release @a demuxer using mediademuxer_destroy() function.
-  /// @param[in] demuxer The media demuxer handle
-  /// @param[in] path    The content location, such as the file path
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIADEMUXER_ERROR_NONE Successful
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_STATE Invalid state
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_OPERATION Invalid Operation
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_PATH Invalid path
-  /// @pre The media muxer state will be #MEDIADEMUXER_STATE_IDLE by calling mediademuxer_create() function.
+  /// Sets the source path of input stream.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The mediastorage privilege(http://tizen.org/privilege/mediastorage) should be added if any video/audio files are used to play located in the internal storage.
+  /// - The externalstorage privilege(http://tizen.org/privilege/externalstorage) should be added if any video/audio files are used to play located in the external storage.
+  /// - You must release `demuxer` using mediademuxer_destroy() function.
+  ///
+  /// **Parameters:**
+  /// - `demuxer` (in): The media demuxer handle
+  /// - `path` (in): The content location, such as the file path
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIADEMUXER_ERROR_NONE`: Successful
+  /// - `MEDIADEMUXER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIADEMUXER_ERROR_INVALID_STATE`: Invalid state
+  /// - `MEDIADEMUXER_ERROR_INVALID_OPERATION`: Invalid Operation
+  /// - `MEDIADEMUXER_ERROR_INVALID_PATH`: Invalid path
+  ///
+  /// **Preconditions:**
+  /// - The media muxer state will be `MEDIADEMUXER_STATE_IDLE` by calling mediademuxer_create() function.
   int mediademuxer_set_data_source(
     mediademuxer_h demuxer,
     ffi.Pointer<ffi.Char> path,
@@ -81,20 +111,36 @@ class Tizen60CapiMediademuxer {
   late final _mediademuxer_set_data_source = _mediademuxer_set_data_sourcePtr
       .asFunction<int Function(mediademuxer_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Prepares the media demuxer for demuxing.
-  /// @since_tizen 3.0
-  /// @remarks User should call this before mediademuxer_start() function.
-  /// @param[in] demuxer The media demuxer handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIADEMUXER_ERROR_NONE Successful
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_STATE Invalid state
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_OPERATION Invalid Operation
-  /// @pre The media demuxer state should be #MEDIADEMUXER_STATE_IDLE.
-  /// @pre mediademuxer_set_error_cb() should be called before mediademuxer_prepare().
-  /// @post The media demuxer state will be #MEDIADEMUXER_STATE_READY.
-  /// @see mediademuxer_set_data_source()
-  /// @see mediademuxer_unprepare()
+  /// Prepares the media demuxer for demuxing.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - User should call this before mediademuxer_start() function.
+  ///
+  /// **Parameters:**
+  /// - `demuxer` (in): The media demuxer handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIADEMUXER_ERROR_NONE`: Successful
+  /// - `MEDIADEMUXER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIADEMUXER_ERROR_INVALID_STATE`: Invalid state
+  /// - `MEDIADEMUXER_ERROR_INVALID_OPERATION`: Invalid Operation
+  ///
+  /// **Preconditions:**
+  /// - The media demuxer state should be `MEDIADEMUXER_STATE_IDLE`.
+  /// - mediademuxer_set_error_cb() should be called before mediademuxer_prepare().
+  ///
+  /// **Postconditions:**
+  /// - The media demuxer state will be `MEDIADEMUXER_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `mediademuxer_set_data_source()`
+  /// - `mediademuxer_unprepare()`
   int mediademuxer_prepare(
     mediademuxer_h demuxer,
   ) {
@@ -109,18 +155,30 @@ class Tizen60CapiMediademuxer {
   late final _mediademuxer_prepare =
       _mediademuxer_preparePtr.asFunction<int Function(mediademuxer_h)>();
 
-  /// @brief Gets the total track count present in the container stream.
-  /// @since_tizen 3.0
-  /// @param[in]  demuxer The media demuxer handle
-  /// @param[out] count   The number of tracks present
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIADEMUXER_ERROR_NONE Successful
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_STATE Invalid state
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_OPERATION Invalid Operation
-  /// @pre The media demuxer state should be #MEDIADEMUXER_STATE_READY.
-  /// @see mediademuxer_prepare()
-  /// @see mediademuxer_select_track()
+  /// Gets the total track count present in the container stream.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `demuxer` (in): The media demuxer handle
+  /// - `count` (out): The number of tracks present
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIADEMUXER_ERROR_NONE`: Successful
+  /// - `MEDIADEMUXER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIADEMUXER_ERROR_INVALID_STATE`: Invalid state
+  /// - `MEDIADEMUXER_ERROR_INVALID_OPERATION`: Invalid Operation
+  ///
+  /// **Preconditions:**
+  /// - The media demuxer state should be `MEDIADEMUXER_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `mediademuxer_prepare()`
+  /// - `mediademuxer_select_track()`
   int mediademuxer_get_track_count(
     mediademuxer_h demuxer,
     ffi.Pointer<ffi.Int> count,
@@ -138,18 +196,30 @@ class Tizen60CapiMediademuxer {
   late final _mediademuxer_get_track_count = _mediademuxer_get_track_countPtr
       .asFunction<int Function(mediademuxer_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Selects the track to be performed.
-  /// @since_tizen 3.0
-  /// @param[in] demuxer     The media demuxer handle
-  /// @param[in] track_index The track index on which is selected for read
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIADEMUXER_ERROR_NONE Successful
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_STATE Invalid state
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_OPERATION Invalid Operation
-  /// @pre The media demuxer state should be #MEDIADEMUXER_STATE_READY.
-  /// @see mediademuxer_get_track_count()
-  /// @see mediademuxer_start()
+  /// Selects the track to be performed.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `demuxer` (in): The media demuxer handle
+  /// - `track_index` (in): The track index on which is selected for read
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIADEMUXER_ERROR_NONE`: Successful
+  /// - `MEDIADEMUXER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIADEMUXER_ERROR_INVALID_STATE`: Invalid state
+  /// - `MEDIADEMUXER_ERROR_INVALID_OPERATION`: Invalid Operation
+  ///
+  /// **Preconditions:**
+  /// - The media demuxer state should be `MEDIADEMUXER_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `mediademuxer_get_track_count()`
+  /// - `mediademuxer_start()`
   int mediademuxer_select_track(
     mediademuxer_h demuxer,
     int track_index,
@@ -166,21 +236,37 @@ class Tizen60CapiMediademuxer {
   late final _mediademuxer_select_track = _mediademuxer_select_trackPtr
       .asFunction<int Function(mediademuxer_h, int)>();
 
-  /// @brief Starts the media demuxer.
-  /// @since_tizen 3.0
-  /// @remarks User should call this before mediademuxer_read_sample() function.
-  /// @param[in] demuxer The media demuxer handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIADEMUXER_ERROR_NONE Successful
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_STATE Invalid state
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_OPERATION Invalid Operation
-  /// @pre The media demuxer state should be #MEDIADEMUXER_STATE_READY.
-  /// @post The media demuxer state will be #MEDIADEMUXER_STATE_DEMUXING.
-  /// @see mediademuxer_prepare()
-  /// @see mediademuxer_get_track_count()
-  /// @see mediademuxer_select_track()
-  /// @see mediademuxer_get_track_info()
+  /// Starts the media demuxer.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - User should call this before mediademuxer_read_sample() function.
+  ///
+  /// **Parameters:**
+  /// - `demuxer` (in): The media demuxer handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIADEMUXER_ERROR_NONE`: Successful
+  /// - `MEDIADEMUXER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIADEMUXER_ERROR_INVALID_STATE`: Invalid state
+  /// - `MEDIADEMUXER_ERROR_INVALID_OPERATION`: Invalid Operation
+  ///
+  /// **Preconditions:**
+  /// - The media demuxer state should be `MEDIADEMUXER_STATE_READY`.
+  ///
+  /// **Postconditions:**
+  /// - The media demuxer state will be `MEDIADEMUXER_STATE_DEMUXING`.
+  ///
+  /// **See also:**
+  /// - `mediademuxer_prepare()`
+  /// - `mediademuxer_get_track_count()`
+  /// - `mediademuxer_select_track()`
+  /// - `mediademuxer_get_track_info()`
   int mediademuxer_start(
     mediademuxer_h demuxer,
   ) {
@@ -195,23 +281,36 @@ class Tizen60CapiMediademuxer {
   late final _mediademuxer_start =
       _mediademuxer_startPtr.asFunction<int Function(mediademuxer_h)>();
 
-  /// @brief Retrieves the track format of the read sample.
-  /// @since_tizen 3.0
-  /// @remarks The @a format should be released using media_format_unref() function.
-  /// @param[in]  demuxer     The media demuxer handle
-  /// @param[in]  track_index The index of the track
-  /// @param[out] format      The media format handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIADEMUXER_ERROR_NONE Successful
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_STATE Invalid state
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_OPERATION Invalid Operation
-  /// @pre The media demuxer state must be set to #MEDIADEMUXER_STATE_DEMUXING by calling
-  /// mediademuxer_start() or set to #MEDIADEMUXER_STATE_READY by calling mediademuxer_prepare().
-  /// @see mediademuxer_get_track_count()
-  /// @see mediademuxer_select_track()
-  /// @see media_format_unref()
-  /// @see #media_format_h
+  /// Retrieves the track format of the read sample.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `format` should be released using media_format_unref() function.
+  ///
+  /// **Parameters:**
+  /// - `demuxer` (in): The media demuxer handle
+  /// - `track_index` (in): The index of the track
+  /// - `format` (out): The media format handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIADEMUXER_ERROR_NONE`: Successful
+  /// - `MEDIADEMUXER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIADEMUXER_ERROR_INVALID_STATE`: Invalid state
+  /// - `MEDIADEMUXER_ERROR_INVALID_OPERATION`: Invalid Operation
+  ///
+  /// **Preconditions:**
+  /// - The media demuxer state must be set to `MEDIADEMUXER_STATE_DEMUXING` by calling mediademuxer_start() or set to `MEDIADEMUXER_STATE_READY` by calling mediademuxer_prepare().
+  ///
+  /// **See also:**
+  /// - `mediademuxer_get_track_count()`
+  /// - `mediademuxer_select_track()`
+  /// - `media_format_unref()`
+  /// - `media_format_h`
   int mediademuxer_get_track_info(
     mediademuxer_h demuxer,
     int track_index,
@@ -234,27 +333,41 @@ class Tizen60CapiMediademuxer {
           int Function(
               mediademuxer_h, int, ffi.Pointer<media_tool.media_format_h>)>();
 
-  /// @brief Reads a frame(sample) of one single track.
-  /// @since_tizen 3.0
-  /// @remarks The @a outbuf should be released using media_packet_destroy() function.
-  /// @remarks Once this function is called, user app can call the mediatool APIs to extract
-  /// side information such as pts, size, duration, flags etc.
-  /// @param[in]  demuxer     The media demuxer handle
-  /// @param[in]  track_index The index of track of which data is needed
-  /// @param[out] outbuf      The media packet handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIADEMUXER_ERROR_NONE Successful
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_STATE Invalid state
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_OPERATION Invalid Operation
-  /// @pre The media demuxer state should be #MEDIADEMUXER_STATE_DEMUXING.
-  /// @see mediademuxer_start()
-  /// @see mediademuxer_get_track_info()
-  /// @see mediademuxer_seek() if need to seek to a particular location
-  /// @see mediademuxer_unselect_track()
-  /// @see mediademuxer_stop()
-  /// @see media_packet_destroy()
-  /// @see #media_packet_h
+  /// Reads a frame(sample) of one single track.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `outbuf` should be released using media_packet_destroy() function.
+  /// - Once this function is called, user app can call the mediatool APIs to extract
+  /// - side information such as pts, size, duration, flags etc.
+  ///
+  /// **Parameters:**
+  /// - `demuxer` (in): The media demuxer handle
+  /// - `track_index` (in): The index of track of which data is needed
+  /// - `outbuf` (out): The media packet handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIADEMUXER_ERROR_NONE`: Successful
+  /// - `MEDIADEMUXER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIADEMUXER_ERROR_INVALID_STATE`: Invalid state
+  /// - `MEDIADEMUXER_ERROR_INVALID_OPERATION`: Invalid Operation
+  ///
+  /// **Preconditions:**
+  /// - The media demuxer state should be `MEDIADEMUXER_STATE_DEMUXING`.
+  ///
+  /// **See also:**
+  /// - `mediademuxer_start()`
+  /// - `mediademuxer_get_track_info()`
+  /// - mediademuxer_seek() if need to seek to a particular location
+  /// - `mediademuxer_unselect_track()`
+  /// - `mediademuxer_stop()`
+  /// - `media_packet_destroy()`
+  /// - `media_packet_h`
   int mediademuxer_read_sample(
     mediademuxer_h demuxer,
     int track_index,
@@ -277,19 +390,33 @@ class Tizen60CapiMediademuxer {
           int Function(
               mediademuxer_h, int, ffi.Pointer<media_tool.media_packet_h>)>();
 
-  /// @brief Seeks to a particular instance of time (in milli seconds).
-  /// @since_tizen 3.0
-  /// @remarks If mediademuxer_seek() is followed by mediademuxer_read_sample(), outbuf will be the key frame right before the seek position.
-  /// @param[in] demuxer The media demuxer handle
-  /// @param[in] pos     The value of the new start position
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIADEMUXER_ERROR_NONE Successful
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_STATE Invalid state
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_OPERATION Invalid Operation
-  /// @pre The media demuxer state should be #MEDIADEMUXER_STATE_DEMUXING.
-  /// @see mediademuxer_read_sample()
-  /// @see mediademuxer_stop()
+  /// Seeks to a particular instance of time (in milli seconds).
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - If mediademuxer_seek() is followed by mediademuxer_read_sample(), outbuf will be the key frame right before the seek position.
+  ///
+  /// **Parameters:**
+  /// - `demuxer` (in): The media demuxer handle
+  /// - `pos` (in): The value of the new start position
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIADEMUXER_ERROR_NONE`: Successful
+  /// - `MEDIADEMUXER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIADEMUXER_ERROR_INVALID_STATE`: Invalid state
+  /// - `MEDIADEMUXER_ERROR_INVALID_OPERATION`: Invalid Operation
+  ///
+  /// **Preconditions:**
+  /// - The media demuxer state should be `MEDIADEMUXER_STATE_DEMUXING`.
+  ///
+  /// **See also:**
+  /// - `mediademuxer_read_sample()`
+  /// - `mediademuxer_stop()`
   int mediademuxer_seek(
     mediademuxer_h demuxer,
     int pos,
@@ -306,19 +433,30 @@ class Tizen60CapiMediademuxer {
   late final _mediademuxer_seek =
       _mediademuxer_seekPtr.asFunction<int Function(mediademuxer_h, int)>();
 
-  /// @brief Unselects the selected track.
-  /// @since_tizen 3.0
-  /// @param[in] demuxer     The media demuxer handle
-  /// @param[in] track_index The track index to be unselected
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIADEMUXER_ERROR_NONE Successful
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_STATE Invalid state
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_OPERATION Invalid Operation
-  /// @pre The media demuxer state must be set to #MEDIADEMUXER_STATE_DEMUXING by calling
-  /// mediademuxer_read_sample() or set to #MEDIADEMUXER_STATE_READY by calling mediademuxer_select_track().
-  /// @see mediademuxer_select_track()
-  /// @see mediademuxer_read_sample()
+  /// Unselects the selected track.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `demuxer` (in): The media demuxer handle
+  /// - `track_index` (in): The track index to be unselected
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIADEMUXER_ERROR_NONE`: Successful
+  /// - `MEDIADEMUXER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIADEMUXER_ERROR_INVALID_STATE`: Invalid state
+  /// - `MEDIADEMUXER_ERROR_INVALID_OPERATION`: Invalid Operation
+  ///
+  /// **Preconditions:**
+  /// - The media demuxer state must be set to `MEDIADEMUXER_STATE_DEMUXING` by calling mediademuxer_read_sample() or set to `MEDIADEMUXER_STATE_READY` by calling mediademuxer_select_track().
+  ///
+  /// **See also:**
+  /// - `mediademuxer_select_track()`
+  /// - `mediademuxer_read_sample()`
   int mediademuxer_unselect_track(
     mediademuxer_h demuxer,
     int track_index,
@@ -335,19 +473,35 @@ class Tizen60CapiMediademuxer {
   late final _mediademuxer_unselect_track = _mediademuxer_unselect_trackPtr
       .asFunction<int Function(mediademuxer_h, int)>();
 
-  /// @brief Stops the media demuxer.
-  /// @since_tizen 3.0
-  /// @remarks User can call this if need to stop demuxing if needed.
-  /// @param[in] demuxer The media demuxer handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIADEMUXER_ERROR_NONE Successful
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_STATE Invalid state
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_OPERATION Invalid Operation
-  /// @pre The media demuxer state must be set to #MEDIADEMUXER_STATE_DEMUXING.
-  /// @post The media demuxer state will be in  #MEDIADEMUXER_STATE_READY.
-  /// @see mediademuxer_start()
-  /// @see mediademuxer_unprepare()
+  /// Stops the media demuxer.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - User can call this if need to stop demuxing if needed.
+  ///
+  /// **Parameters:**
+  /// - `demuxer` (in): The media demuxer handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIADEMUXER_ERROR_NONE`: Successful
+  /// - `MEDIADEMUXER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIADEMUXER_ERROR_INVALID_STATE`: Invalid state
+  /// - `MEDIADEMUXER_ERROR_INVALID_OPERATION`: Invalid Operation
+  ///
+  /// **Preconditions:**
+  /// - The media demuxer state must be set to `MEDIADEMUXER_STATE_DEMUXING`.
+  ///
+  /// **Postconditions:**
+  /// - The media demuxer state will be in `MEDIADEMUXER_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `mediademuxer_start()`
+  /// - `mediademuxer_unprepare()`
   int mediademuxer_stop(
     mediademuxer_h demuxer,
   ) {
@@ -362,18 +516,34 @@ class Tizen60CapiMediademuxer {
   late final _mediademuxer_stop =
       _mediademuxer_stopPtr.asFunction<int Function(mediademuxer_h)>();
 
-  /// @brief Resets the media demuxer.
-  /// @since_tizen 3.0
-  /// @remarks User should call this before mediademuxer_destroy() function.
-  /// @param[in] demuxer The media demuxer handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIADEMUXER_ERROR_NONE Successful
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_STATE Invalid state
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_OPERATION Invalid Operation
-  /// @pre The media demuxer state should be #MEDIADEMUXER_STATE_READY.
-  /// @post The media demuxer state will be #MEDIADEMUXER_STATE_IDLE.
-  /// @see mediademuxer_prepare()
+  /// Resets the media demuxer.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - User should call this before mediademuxer_destroy() function.
+  ///
+  /// **Parameters:**
+  /// - `demuxer` (in): The media demuxer handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIADEMUXER_ERROR_NONE`: Successful
+  /// - `MEDIADEMUXER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIADEMUXER_ERROR_INVALID_STATE`: Invalid state
+  /// - `MEDIADEMUXER_ERROR_INVALID_OPERATION`: Invalid Operation
+  ///
+  /// **Preconditions:**
+  /// - The media demuxer state should be `MEDIADEMUXER_STATE_READY`.
+  ///
+  /// **Postconditions:**
+  /// - The media demuxer state will be `MEDIADEMUXER_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `mediademuxer_prepare()`
   int mediademuxer_unprepare(
     mediademuxer_h demuxer,
   ) {
@@ -388,17 +558,31 @@ class Tizen60CapiMediademuxer {
   late final _mediademuxer_unprepare =
       _mediademuxer_unpreparePtr.asFunction<int Function(mediademuxer_h)>();
 
-  /// @brief Removes the instance of media demuxer and clear all its context memory.
-  /// @since_tizen 3.0
-  /// @param[in] demuxer The media demuxer handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIADEMUXER_ERROR_NONE Successful
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_STATE Invalid state
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_OPERATION Invalid Operation
-  /// @pre Create a media demuxer handle by calling mediademuxer_create() function.
-  /// @post The media demuxer state will be #MEDIADEMUXER_STATE_NONE.
-  /// @see mediademuxer_create()
+  /// Removes the instance of media demuxer and clear all its context memory.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `demuxer` (in): The media demuxer handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIADEMUXER_ERROR_NONE`: Successful
+  /// - `MEDIADEMUXER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIADEMUXER_ERROR_INVALID_STATE`: Invalid state
+  /// - `MEDIADEMUXER_ERROR_INVALID_OPERATION`: Invalid Operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media demuxer handle by calling mediademuxer_create() function.
+  ///
+  /// **Postconditions:**
+  /// - The media demuxer state will be `MEDIADEMUXER_STATE_NONE`.
+  ///
+  /// **See also:**
+  /// - `mediademuxer_create()`
   int mediademuxer_destroy(
     mediademuxer_h demuxer,
   ) {
@@ -413,16 +597,28 @@ class Tizen60CapiMediademuxer {
   late final _mediademuxer_destroy =
       _mediademuxer_destroyPtr.asFunction<int Function(mediademuxer_h)>();
 
-  /// @brief Gets media demuxer state.
-  /// @since_tizen 3.0
-  /// @param[in]  demuxer The media demuxer handle
-  /// @param[out] state   The media demuxer sate
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIADEMUXER_ERROR_NONE Successful
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_OPERATION Invalid operation
-  /// @pre Create a media demuxer handle by calling mediademuxer_create() function.
-  /// @see #mediademuxer_state
+  /// Gets media demuxer state.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `demuxer` (in): The media demuxer handle
+  /// - `state` (out): The media demuxer sate
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIADEMUXER_ERROR_NONE`: Successful
+  /// - `MEDIADEMUXER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIADEMUXER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media demuxer handle by calling mediademuxer_create() function.
+  ///
+  /// **See also:**
+  /// - `mediademuxer_state`
   int mediademuxer_get_state(
     mediademuxer_h demuxer,
     ffi.Pointer<ffi.Int32> state,
@@ -440,21 +636,33 @@ class Tizen60CapiMediademuxer {
   late final _mediademuxer_get_state = _mediademuxer_get_statePtr
       .asFunction<int Function(mediademuxer_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets an error callback function to be invoked when an error occurs.
-  /// @since_tizen 3.0
-  /// @param[in] demuxer   The media demuxer handle
-  /// @param[in] callback  Callback function pointer
-  /// @param[in] user_data The user data passed from the code where
-  /// mediademuxer_set_error_cb() was invoked
-  /// This data will be accessible from mediademuxer_error_cb()
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIADEMUXER_ERROR_NONE Successful
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_STATE Invalid state
-  /// @pre Create a media demuxer handle by calling mediademuxer_create() function.
-  /// @post mediademuxer_error_cb() will be invoked.
-  /// @see mediademuxer_unset_error_cb()
-  /// @see mediademuxer_error_cb()
+  /// Sets an error callback function to be invoked when an error occurs.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `demuxer` (in): The media demuxer handle
+  /// - `callback` (in): Callback function pointer
+  /// - `user_data` (in): The user data passed from the code where mediademuxer_set_error_cb() was invoked This data will be accessible from mediademuxer_error_cb()
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIADEMUXER_ERROR_NONE`: Successful
+  /// - `MEDIADEMUXER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIADEMUXER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - Create a media demuxer handle by calling mediademuxer_create() function.
+  ///
+  /// **Postconditions:**
+  /// - mediademuxer_error_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `mediademuxer_unset_error_cb()`
+  /// - `mediademuxer_error_cb()`
   int mediademuxer_set_error_cb(
     mediademuxer_h demuxer,
     mediademuxer_error_cb callback,
@@ -476,14 +684,24 @@ class Tizen60CapiMediademuxer {
           int Function(
               mediademuxer_h, mediademuxer_error_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the error callback function.
-  /// @since_tizen 3.0
-  /// @param[in] demuxer The media demuxer handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIADEMUXER_ERROR_NONE Successful
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_STATE Invalid state
-  /// @see mediademuxer_error_cb()
+  /// Unsets the error callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `demuxer` (in): The media demuxer handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIADEMUXER_ERROR_NONE`: Successful
+  /// - `MEDIADEMUXER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIADEMUXER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **See also:**
+  /// - `mediademuxer_error_cb()`
   int mediademuxer_unset_error_cb(
     mediademuxer_h demuxer,
   ) {
@@ -498,21 +716,33 @@ class Tizen60CapiMediademuxer {
   late final _mediademuxer_unset_error_cb = _mediademuxer_unset_error_cbPtr
       .asFunction<int Function(mediademuxer_h)>();
 
-  /// @brief Sets an eos callback function to be invoked when an eos occurs.
-  /// @since_tizen 3.0
-  /// @param[in] demuxer   The media demuxer handle
-  /// @param[in] callback  Callback function pointer
-  /// @param[in] user_data The user data passed from the code where
-  /// mediademuxer_set_eos_cb() was invoked
-  /// This data will be accessible from mediademuxer_eos_cb()
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIADEMUXER_ERROR_NONE Successful
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_STATE Invalid state
-  /// @pre Create a media demuxer handle by calling mediademuxer_create() function.
-  /// @post mediademuxer_eos_cb() will be invoked.
-  /// @see mediademuxer_unset_eos_cb()
-  /// @see mediademuxer_eos_cb()
+  /// Sets an eos callback function to be invoked when an eos occurs.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `demuxer` (in): The media demuxer handle
+  /// - `callback` (in): Callback function pointer
+  /// - `user_data` (in): The user data passed from the code where mediademuxer_set_eos_cb() was invoked This data will be accessible from mediademuxer_eos_cb()
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIADEMUXER_ERROR_NONE`: Successful
+  /// - `MEDIADEMUXER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIADEMUXER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - Create a media demuxer handle by calling mediademuxer_create() function.
+  ///
+  /// **Postconditions:**
+  /// - mediademuxer_eos_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `mediademuxer_unset_eos_cb()`
+  /// - `mediademuxer_eos_cb()`
   int mediademuxer_set_eos_cb(
     mediademuxer_h demuxer,
     mediademuxer_eos_cb callback,
@@ -533,14 +763,24 @@ class Tizen60CapiMediademuxer {
       int Function(
           mediademuxer_h, mediademuxer_eos_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the eos callback function.
-  /// @since_tizen 3.0
-  /// @param[in] demuxer The media demuxer handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIADEMUXER_ERROR_NONE Successful
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIADEMUXER_ERROR_INVALID_STATE Invalid state
-  /// @see mediademuxer_eos_cb()
+  /// Unsets the eos callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `demuxer` (in): The media demuxer handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIADEMUXER_ERROR_NONE`: Successful
+  /// - `MEDIADEMUXER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIADEMUXER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **See also:**
+  /// - `mediademuxer_eos_cb()`
   int mediademuxer_unset_eos_cb(
     mediademuxer_h demuxer,
   ) {
@@ -556,10 +796,14 @@ class Tizen60CapiMediademuxer {
       _mediademuxer_unset_eos_cbPtr.asFunction<int Function(mediademuxer_h)>();
 }
 
+/// @nodoc
 final class mediademuxer_s extends ffi.Opaque {}
 
-/// @brief Enumeration for media demuxer state.
-/// @since_tizen 3.0
+/// Enumeration for media demuxer state.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class mediademuxer_state {
   /// < The mediademuxer is not created
   static const int MEDIADEMUXER_STATE_NONE = 0;
@@ -574,8 +818,11 @@ abstract class mediademuxer_state {
   static const int MEDIADEMUXER_STATE_DEMUXING = 3;
 }
 
-/// @brief Enumeration for media demuxer error.
-/// @since_tizen 3.0
+/// Enumeration for media demuxer error.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class mediademuxer_error_e {
   /// < Successful
   static const int MEDIADEMUXER_ERROR_NONE = 0;
@@ -611,45 +858,61 @@ abstract class mediademuxer_error_e {
   static const int MEDIADEMUXER_ERROR_DRM_NOT_PERMITTED = -27131899;
 }
 
-/// @brief Media Demuxer handle type.
-/// @since_tizen 3.0
+/// Media Demuxer handle type.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef mediademuxer_h = ffi.Pointer<mediademuxer_s>;
 
-/// @brief Called when error occurs in media demuxer.
-/// @details Following error codes can be delivered.
-/// #MEDIADEMUXER_ERROR_INVALID_OPERATION,
-/// #MEDIADEMUXER_ERROR_NOT_SUPPORTED,
-/// #MEDIADEMUXER_ERROR_INVALID_PATH,
-/// #MEDIADEMUXER_ERROR_RESOURCE_LIMIT,
-/// #MEDIADEMUXER_ERROR_SEEK_FAILED,
-/// #MEDIADEMUXER_ERROR_DRM_NOT_PERMITTED
-/// @since_tizen 3.0
-/// @param[in] error     The error that occurred in media demuxer
-/// @param[in] user_data The user data passed from the code where
-/// mediademuxer_set_error_cb() was invoked
-/// This data will be accessible from mediademuxer_error_cb()
-/// @pre Create media demuxer handle by calling mediademuxer_create() function.
-/// @see mediademuxer_set_error_cb()
-/// @see mediademuxer_unset_error_cb()
+/// Called when error occurs in media demuxer.
+///
+/// Following error codes can be delivered. `MEDIADEMUXER_ERROR_INVALID_OPERATION`, `MEDIADEMUXER_ERROR_NOT_SUPPORTED`, `MEDIADEMUXER_ERROR_INVALID_PATH`, `MEDIADEMUXER_ERROR_RESOURCE_LIMIT`, `MEDIADEMUXER_ERROR_SEEK_FAILED`, `MEDIADEMUXER_ERROR_DRM_NOT_PERMITTED`
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `error` (in): The error that occurred in media demuxer
+/// - `user_data` (in): The user data passed from the code where mediademuxer_set_error_cb() was invoked This data will be accessible from mediademuxer_error_cb()
+///
+/// **Preconditions:**
+/// - Create media demuxer handle by calling mediademuxer_create() function.
+///
+/// **See also:**
+/// - `mediademuxer_set_error_cb()`
+/// - `mediademuxer_unset_error_cb()`
+/// @nodoc
 typedef mediademuxer_error_cb
     = ffi.Pointer<ffi.NativeFunction<mediademuxer_error_cbFunction>>;
+/// @nodoc
 typedef mediademuxer_error_cbFunction = ffi.Void Function(
     ffi.Int32 error, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmediademuxer_error_cbFunction = void Function(
     int error, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when end of stream occurs in media demuxer.
-/// @since_tizen 3.0
-/// @param[in] track_num The track_num which indicate eos for which track number occurred
-/// @param[in] user_data The user data passed from the code where
-/// mediademuxer_set_eos_cb() was invoked
-/// This data will be accessible from mediademuxer_eos_cb()
-/// @pre Create media demuxer handle by calling mediademuxer_create() function.
-/// @see mediademuxer_set_eos_cb()
-/// @see mediademuxer_unset_eos_cb()
+/// Called when end of stream occurs in media demuxer.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `track_num` (in): The track_num which indicate eos for which track number occurred
+/// - `user_data` (in): The user data passed from the code where mediademuxer_set_eos_cb() was invoked This data will be accessible from mediademuxer_eos_cb()
+///
+/// **Preconditions:**
+/// - Create media demuxer handle by calling mediademuxer_create() function.
+///
+/// **See also:**
+/// - `mediademuxer_set_eos_cb()`
+/// - `mediademuxer_unset_eos_cb()`
+/// @nodoc
 typedef mediademuxer_eos_cb
     = ffi.Pointer<ffi.NativeFunction<mediademuxer_eos_cbFunction>>;
+/// @nodoc
 typedef mediademuxer_eos_cbFunction = ffi.Void Function(
     ffi.Int track_num, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmediademuxer_eos_cbFunction = void Function(
     int track_num, ffi.Pointer<ffi.Void> user_data);

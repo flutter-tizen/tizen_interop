@@ -1,3 +1,6 @@
+/// {@category 6.0/tizen}
+library tizen_interop_6_0.capi_network_http;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-network-http APIs.
+/// {@category 6.0/tizen}
 class Tizen60CapiNetworkHttp {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,14 +28,21 @@ class Tizen60CapiNetworkHttp {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Initializes the HTTP module.
-  /// @since_tizen 3.0
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  /// @see http_deinit()
+  /// Initializes the HTTP module.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
+  ///
+  /// **See also:**
+  /// - `http_deinit()`
   int http_init() {
     return _http_init();
   }
@@ -40,14 +51,21 @@ class Tizen60CapiNetworkHttp {
       _lookup<ffi.NativeFunction<ffi.Int Function()>>('http_init');
   late final _http_init = _http_initPtr.asFunction<int Function()>();
 
-  /// @brief Deinitializes the HTTP module.
-  /// @since_tizen 3.0
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  /// @see http_init()
+  /// Deinitializes the HTTP module.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
+  ///
+  /// **See also:**
+  /// - `http_init()`
   int http_deinit() {
     return _http_deinit();
   }
@@ -56,20 +74,31 @@ class Tizen60CapiNetworkHttp {
       _lookup<ffi.NativeFunction<ffi.Int Function()>>('http_deinit');
   late final _http_deinit = _http_deinitPtr.asFunction<int Function()>();
 
-  /// @brief Creates the HTTP session handle.
-  /// @since_tizen 3.0
-  /// @remarks The @a http_session should be released using http_session_destroy().
-  /// Opened transactions can't be submitted after destroying session handle.
-  /// @param[in] mode The HTTP session mode
-  /// @param[out] http_session The HTTP session handle
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  /// @see http_session_destroy()
+  /// Creates the HTTP session handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `http_session` should be released using http_session_destroy().
+  /// - Opened transactions can't be submitted after destroying session handle.
+  ///
+  /// **Parameters:**
+  /// - `mode` (in): The HTTP session mode
+  /// - `http_session` (out): The HTTP session handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
+  ///
+  /// **See also:**
+  /// - `http_session_destroy()`
   int http_session_create(
     int mode,
     ffi.Pointer<http_session_h> http_session,
@@ -87,17 +116,28 @@ class Tizen60CapiNetworkHttp {
   late final _http_session_create = _http_session_createPtr
       .asFunction<int Function(int, ffi.Pointer<http_session_h>)>();
 
-  /// @brief Destroys the HTTP session handle.
-  /// @since_tizen 3.0
-  /// @remarks The @a http_session should be set to NULL after using it
-  /// @param[in] http_session The HTTP session handle
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  /// @see http_session_create()
+  /// Destroys the HTTP session handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `http_session` should be set to NULL after using it
+  ///
+  /// **Parameters:**
+  /// - `http_session` (in): The HTTP session handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
+  ///
+  /// **See also:**
+  /// - `http_session_create()`
   int http_session_destroy(
     http_session_h http_session,
   ) {
@@ -112,19 +152,28 @@ class Tizen60CapiNetworkHttp {
   late final _http_session_destroy =
       _http_session_destroyPtr.asFunction<int Function(http_session_h)>();
 
-  /// @brief Opens HTTP transaction from the HTTP Session.
-  /// @since_tizen 3.0
-  /// @remarks The @a http_transaction should be released using http_transaction_destroy().
-  /// @param[in] http_session The HTTP session handle
-  /// @param[in] method The HTTP request method
-  /// @param[out] http_transaction The HTTP transaction handle
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Opens HTTP transaction from the HTTP Session.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `http_transaction` should be released using http_transaction_destroy().
+  ///
+  /// **Parameters:**
+  /// - `http_session` (in): The HTTP session handle
+  /// - `method` (in): The HTTP request method
+  /// - `http_transaction` (out): The HTTP transaction handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_session_open_transaction(
     http_session_h http_session,
     int method,
@@ -146,17 +195,26 @@ class Tizen60CapiNetworkHttp {
       _http_session_open_transactionPtr.asFunction<
           int Function(http_session_h, int, ffi.Pointer<http_transaction_h>)>();
 
-  /// @brief Sets the value to redirect the HTTP request automatically.
-  /// @since_tizen 3.0
-  /// @param[in] http_session The HTTP session handle
-  /// @param[in] auto_redirection The value which determines whether allow redirection or not
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  /// @see http_session_get_auto_redirection()
+  /// Sets the value to redirect the HTTP request automatically.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `http_session` (in): The HTTP session handle
+  /// - `auto_redirection` (in): The value which determines whether allow redirection or not
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
+  ///
+  /// **See also:**
+  /// - `http_session_get_auto_redirection()`
   int http_session_set_auto_redirection(
     http_session_h http_session,
     bool auto_redirection,
@@ -174,17 +232,26 @@ class Tizen60CapiNetworkHttp {
       _http_session_set_auto_redirectionPtr
           .asFunction<int Function(http_session_h, bool)>();
 
-  /// @brief Gets the auto redirection for the HTTP request.
-  /// @since_tizen 3.0
-  /// @param[in] http_session The HTTP session handle
-  /// @param[out] auto_redirect The value of auto redirect
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  /// @see http_session_set_auto_redirection()
+  /// Gets the auto redirection for the HTTP request.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `http_session` (in): The HTTP session handle
+  /// - `auto_redirect` (out): The value of auto redirect
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
+  ///
+  /// **See also:**
+  /// - `http_session_set_auto_redirection()`
   int http_session_get_auto_redirection(
     http_session_h http_session,
     ffi.Pointer<ffi.Bool> auto_redirect,
@@ -203,16 +270,23 @@ class Tizen60CapiNetworkHttp {
       _http_session_get_auto_redirectionPtr
           .asFunction<int Function(http_session_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets the number of active transactions in the current session.
-  /// @since_tizen 3.0
-  /// @param[in] http_session The HTTP session handle
-  /// @param[out] active_transaction_count The number of activated transactions
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Gets the number of active transactions in the current session.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `http_session` (in): The HTTP session handle
+  /// - `active_transaction_count` (out): The number of activated transactions
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_session_get_active_transaction_count(
     http_session_h http_session,
     ffi.Pointer<ffi.Int> active_transaction_count,
@@ -231,16 +305,23 @@ class Tizen60CapiNetworkHttp {
       _http_session_get_active_transaction_countPtr
           .asFunction<int Function(http_session_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the maximum number of transactions for the current session.
-  /// @since_tizen 3.0
-  /// @param[in] http_session The HTTP session handle
-  /// @param[out] transaction_count The maximum transaction count
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Gets the maximum number of transactions for the current session.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `http_session` (in): The HTTP session handle
+  /// - `transaction_count` (out): The maximum transaction count
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_session_get_max_transaction_count(
     http_session_h http_session,
     ffi.Pointer<ffi.Int> transaction_count,
@@ -259,17 +340,26 @@ class Tizen60CapiNetworkHttp {
       _http_session_get_max_transaction_countPtr
           .asFunction<int Function(http_session_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Destroys all transactions.
-  /// @since_tizen 3.0
-  /// @remarks All http_transactions should be set to NULL after using it
-  /// @param[in] http_session The HTTP session handle
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Destroys all transactions.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - All http_transactions should be set to NULL after using it
+  ///
+  /// **Parameters:**
+  /// - `http_session` (in): The HTTP session handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_session_destroy_all_transactions(
     http_session_h http_session,
   ) {
@@ -285,19 +375,30 @@ class Tizen60CapiNetworkHttp {
       _http_session_destroy_all_transactionsPtr
           .asFunction<int Function(http_session_h)>();
 
-  /// @brief Submits the HTTP request.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet \n
-  /// %http://tizen.org/privilege/network.get
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  /// @retval #HTTP_ERROR_PERMISSION_DENIED Permission denied
+  /// Submits the HTTP request.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
+  /// - `HTTP_ERROR_PERMISSION_DENIED`: Permission denied
   int http_transaction_submit(
     http_transaction_h http_transaction,
   ) {
@@ -312,18 +413,29 @@ class Tizen60CapiNetworkHttp {
   late final _http_transaction_submit = _http_transaction_submitPtr
       .asFunction<int Function(http_transaction_h)>();
 
-  /// @brief Closes the HTTP transaction handle.
-  /// @since_tizen 3.0
-  /// @remarks The @a http_transaction should be set to NULL after using it.
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  /// @see http_session_open_transaction()
-  /// @see http_transaction_open_authentication()
+  /// Closes the HTTP transaction handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `http_transaction` should be set to NULL after using it.
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
+  ///
+  /// **See also:**
+  /// - `http_session_open_transaction()`
+  /// - `http_transaction_open_authentication()`
   int http_transaction_destroy(
     http_transaction_h http_transaction,
   ) {
@@ -338,17 +450,24 @@ class Tizen60CapiNetworkHttp {
   late final _http_transaction_destroy = _http_transaction_destroyPtr
       .asFunction<int Function(http_transaction_h)>();
 
-  /// @brief Registers callback called when receives header.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction        The HTTP transaction handle
-  /// @param[in] header_cb The callback  function to be called
-  /// @param[in] user_data The user data passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Registers callback called when receives header.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `header_cb` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_set_received_header_cb(
     http_transaction_h http_transaction,
     http_transaction_header_cb header_cb,
@@ -371,17 +490,24 @@ class Tizen60CapiNetworkHttp {
           int Function(http_transaction_h, http_transaction_header_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Registers callback called when receives body.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] body_cb The callback function to be called
-  /// @param[in] user_data The user data passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Registers callback called when receives body.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `body_cb` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_set_received_body_cb(
     http_transaction_h http_transaction,
     http_transaction_body_cb body_cb,
@@ -403,17 +529,24 @@ class Tizen60CapiNetworkHttp {
           int Function(http_transaction_h, http_transaction_body_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Registers callback called when writes data.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] write_cb The callback function to be called
-  /// @param[in] user_data The user data passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Registers callback called when writes data.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `write_cb` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_set_uploaded_cb(
     http_transaction_h http_transaction,
     http_transaction_write_cb write_cb,
@@ -435,17 +568,24 @@ class Tizen60CapiNetworkHttp {
           int Function(http_transaction_h, http_transaction_write_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Registers callback called when transaction is completed.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] completed_cb The callback function to be called
-  /// @param[in] user_data The user data passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Registers callback called when transaction is completed.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `completed_cb` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_set_completed_cb(
     http_transaction_h http_transaction,
     http_transaction_completed_cb completed_cb,
@@ -467,17 +607,24 @@ class Tizen60CapiNetworkHttp {
           int Function(http_transaction_h, http_transaction_completed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Registers callback called when transaction is aborted.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] aborted_cb The callback function to be called
-  /// @param[in] user_data The user data passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Registers callback called when transaction is aborted.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `aborted_cb` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_set_aborted_cb(
     http_transaction_h http_transaction,
     http_transaction_aborted_cb aborted_cb,
@@ -499,18 +646,26 @@ class Tizen60CapiNetworkHttp {
           int Function(http_transaction_h, http_transaction_aborted_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Registers the progress callbacks.
-  /// @details Registers callback that is called when data is uploaded/downloaded.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] progress_cb The callback function to be called
-  /// @param[in] user_data The user data passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Registers the progress callbacks.
+  ///
+  /// Registers callback that is called when data is uploaded/downloaded.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `progress_cb` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_set_progress_cb(
     http_transaction_h http_transaction,
     http_transaction_progress_cb progress_cb,
@@ -532,18 +687,25 @@ class Tizen60CapiNetworkHttp {
           int Function(http_transaction_h, http_transaction_progress_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets the timeout in seconds that is the timeout for waiting the transaction.
-  /// @details Sets the timeout in seconds that is the timeout for waiting the transaction. \n
-  /// A timeout value of zero means an infinite timeout.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] timeout The timeout in seconds
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Sets the timeout in seconds that is the timeout for waiting the transaction.
+  ///
+  /// Sets the timeout in seconds that is the timeout for waiting the transaction. A timeout value of zero means an infinite timeout.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `timeout` (in): The timeout in seconds
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_set_timeout(
     http_transaction_h http_transaction,
     int timeout,
@@ -560,16 +722,23 @@ class Tizen60CapiNetworkHttp {
   late final _http_transaction_set_timeout = _http_transaction_set_timeoutPtr
       .asFunction<int Function(http_transaction_h, int)>();
 
-  /// @brief Gets the timeout in seconds for the transaction.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] timeout The timeout in seconds
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Gets the timeout in seconds for the transaction.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `timeout` (out): The timeout in seconds
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_get_timeout(
     http_transaction_h http_transaction,
     ffi.Pointer<ffi.Int> timeout,
@@ -587,16 +756,23 @@ class Tizen60CapiNetworkHttp {
   late final _http_transaction_get_timeout = _http_transaction_get_timeoutPtr
       .asFunction<int Function(http_transaction_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Resumes the transaction.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Resumes the transaction.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_resume(
     http_transaction_h http_transaction,
   ) {
@@ -611,17 +787,24 @@ class Tizen60CapiNetworkHttp {
   late final _http_transaction_resume = _http_transaction_resumePtr
       .asFunction<int Function(http_transaction_h)>();
 
-  /// @brief Pauses the transaction.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] pause_type The pause type of the connection
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Pauses the transaction.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `pause_type` (in): The pause type of the connection
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_pause(
     http_transaction_h http_transaction,
     int pause_type,
@@ -638,18 +821,25 @@ class Tizen60CapiNetworkHttp {
   late final _http_transaction_pause = _http_transaction_pausePtr
       .asFunction<int Function(http_transaction_h, int)>();
 
-  /// @brief Cancels the transaction.
-  /// @details This function cancels the transaction.\n
-  /// The aborted callback is invoked after using it.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE  Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION  Invalid operation
-  /// @retval #HTTP_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED  Not Supported
+  /// Cancels the transaction.
+  ///
+  /// This function cancels the transaction. The aborted callback is invoked after using it.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_cancel(
     http_transaction_h http_transaction,
   ) {
@@ -664,16 +854,23 @@ class Tizen60CapiNetworkHttp {
   late final _http_transaction_cancel = _http_transaction_cancelPtr
       .asFunction<int Function(http_transaction_h)>();
 
-  /// @brief Sets ready to write event for a transaction.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] read_to_write Enable/disable ready to write
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Sets ready to write event for a transaction.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `read_to_write` (out): Enable/disable ready to write
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_set_ready_to_write(
     http_transaction_h http_transaction,
     bool read_to_write,
@@ -691,16 +888,23 @@ class Tizen60CapiNetworkHttp {
       _http_transaction_set_ready_to_writePtr
           .asFunction<int Function(http_transaction_h, bool)>();
 
-  /// @brief Sets the interface name.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] interface_name The interface name to use as outgoing network interface
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Sets the interface name.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `interface_name` (in): The interface name to use as outgoing network interface
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_set_interface_name(
     http_transaction_h http_transaction,
     ffi.Pointer<ffi.Char> interface_name,
@@ -719,17 +923,26 @@ class Tizen60CapiNetworkHttp {
       _http_transaction_set_interface_namePtr.asFunction<
           int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the interface name.
-  /// @since_tizen 3.0
-  /// @remarks The @a interface_name should be freed using free().
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] interface_name The interface name
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Gets the interface name.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `interface_name` should be freed using free().
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `interface_name` (out): The interface name
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_get_interface_name(
     http_transaction_h http_transaction,
     ffi.Pointer<ffi.Pointer<ffi.Char>> interface_name,
@@ -750,17 +963,25 @@ class Tizen60CapiNetworkHttp {
           int Function(
               http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the flag to verify a server certificate.
-  /// @details The verify determines whether verifies the peer's certificate.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] verify The flag to verify a server certificate; true means verifies; false means it doesn't.
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Sets the flag to verify a server certificate.
+  ///
+  /// The verify determines whether verifies the peer's certificate.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `verify` (in): The flag to verify a server certificate; true means verifies; false means it doesn't.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_set_server_certificate_verification(
     http_transaction_h http_transaction,
     bool verify,
@@ -778,16 +999,23 @@ class Tizen60CapiNetworkHttp {
       _http_transaction_set_server_certificate_verificationPtr
           .asFunction<int Function(http_transaction_h, bool)>();
 
-  /// @brief Gets the flag to verify a server certificate.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] verify The flag to verify a server certificate; true means verifies; false means it doesn't.
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Gets the flag to verify a server certificate.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `verify` (out): The flag to verify a server certificate; true means verifies; false means it doesn't.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_get_server_certificate_verification(
     http_transaction_h http_transaction,
     ffi.Pointer<ffi.Bool> verify,
@@ -806,18 +1034,27 @@ class Tizen60CapiNetworkHttp {
       _http_transaction_get_server_certificate_verificationPtr.asFunction<
           int Function(http_transaction_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Sets the flag to allow TCP Fast Open.
-  /// @since_tizen 5.0
-  /// @remarks TCP Fast Open depends on kernel version.\n
-  /// #HTTP_ERROR_NOT_SUPPORTED error will be returned for kernel version less than 3.13.
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] enable The flag to enable TCP Fast Open
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Sets the flag to allow TCP Fast Open.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - TCP Fast Open depends on kernel version.
+  /// - `HTTP_ERROR_NOT_SUPPORTED` error will be returned for kernel version less than 3.13.
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `enable` (in): The flag to enable TCP Fast Open
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_set_tcp_fastopen(
     http_transaction_h http_transaction,
     bool enable,
@@ -835,18 +1072,27 @@ class Tizen60CapiNetworkHttp {
       _http_transaction_set_tcp_fastopenPtr
           .asFunction<int Function(http_transaction_h, bool)>();
 
-  /// @brief Gets the flag to allow TCP Fast Open.
-  /// @since_tizen 5.0
-  /// @remarks TCP Fast Open depends on kernel version.\n
-  /// #HTTP_ERROR_NOT_SUPPORTED error will be returned for kernel version less than 3.13.
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] enable The flag to enable TCP Fast Open
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Gets the flag to allow TCP Fast Open.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - TCP Fast Open depends on kernel version.
+  /// - `HTTP_ERROR_NOT_SUPPORTED` error will be returned for kernel version less than 3.13.
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `enable` (out): The flag to enable TCP Fast Open
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_get_tcp_fastopen(
     http_transaction_h http_transaction,
     ffi.Pointer<ffi.Bool> enable,
@@ -865,18 +1111,26 @@ class Tizen60CapiNetworkHttp {
       _http_transaction_get_tcp_fastopenPtr.asFunction<
           int Function(http_transaction_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Adds a named field to header.
-  /// @details Adds a named field, which is a <@c fieldName, @c fieldValue> pair, to the current instance of HTTP Transaction.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] field_name The HTTP Header Field name
-  /// @param[in] field_value The HTTP Header Field value
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Adds a named field to header.
+  ///
+  /// Adds a named field, which is a <`fieldName`, `fieldValue>` pair, to the current instance of HTTP Transaction.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `field_name` (in): The HTTP Header Field name
+  /// - `field_value` (in): The HTTP Header Field value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_header_add_field(
     http_transaction_h http_transaction,
     ffi.Pointer<ffi.Char> field_name,
@@ -898,17 +1152,25 @@ class Tizen60CapiNetworkHttp {
           int Function(http_transaction_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Removes the named field from header.
-  /// @details Remove the named field, which is a <@c fieldName, @c fieldValue> pair, from the current instance of HTTP Transaction.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] field_name The HTTP Header Field name
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Removes the named field from header.
+  ///
+  /// Remove the named field, which is a <`fieldName`, `fieldValue>` pair, from the current instance of HTTP Transaction.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `field_name` (in): The HTTP Header Field name
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_header_remove_field(
     http_transaction_h http_transaction,
     ffi.Pointer<ffi.Char> field_name,
@@ -927,18 +1189,27 @@ class Tizen60CapiNetworkHttp {
       _http_transaction_header_remove_fieldPtr.asFunction<
           int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the HTTP Header Field value from custom header.
-  /// @since_tizen 3.0
-  /// @remarks The @a field_value should be freed using free().
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] field_name The HTTP Header Field name
-  /// @param[out] field_value The HTTP Header Field value
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Gets the HTTP Header Field value from custom header.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `field_value` should be freed using free().
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `field_name` (in): The HTTP Header Field name
+  /// - `field_value` (out): The HTTP Header Field value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_header_get_field_value(
     http_transaction_h http_transaction,
     ffi.Pointer<ffi.Char> field_name,
@@ -961,18 +1232,28 @@ class Tizen60CapiNetworkHttp {
           int Function(http_transaction_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets an HTTP method of the request header.
-  /// @details Sets an HTTP method such as GET, POST, PUT and etc.
-  /// @since_tizen 3.0
-  /// @remarks The default method is GET.
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] method The HTTP method
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Sets an HTTP method of the request header.
+  ///
+  /// Sets an HTTP method such as GET, POST, PUT and etc.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The default method is GET.
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `method` (in): The HTTP method
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_request_set_method(
     http_transaction_h http_transaction,
     int method,
@@ -990,16 +1271,23 @@ class Tizen60CapiNetworkHttp {
       _http_transaction_request_set_methodPtr
           .asFunction<int Function(http_transaction_h, int)>();
 
-  /// @brief Gets the HTTP method from request header.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] method The HTTP method
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Gets the HTTP method from request header.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `method` (out): The HTTP method
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_request_get_method(
     http_transaction_h http_transaction,
     ffi.Pointer<ffi.Int32> method,
@@ -1018,17 +1306,26 @@ class Tizen60CapiNetworkHttp {
       _http_transaction_request_get_methodPtr.asFunction<
           int Function(http_transaction_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets an HTTP version of the request header.
-  /// @since_tizen 3.0
-  /// @remarks The default version is HTTP 1.1.
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] version The HTTP version
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Sets an HTTP version of the request header.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The default version is HTTP 1.1.
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `version` (in): The HTTP version
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_request_set_version(
     http_transaction_h http_transaction,
     int version,
@@ -1046,17 +1343,25 @@ class Tizen60CapiNetworkHttp {
       _http_transaction_request_set_versionPtr
           .asFunction<int Function(http_transaction_h, int)>();
 
-  /// @brief Gets the HTTP version from request header.
-  /// @details Gets the HTTP version.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] version The HTTP version
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Gets the HTTP version from request header.
+  ///
+  /// Gets the HTTP version.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `version` (out): The HTTP version
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_request_get_version(
     http_transaction_h http_transaction,
     ffi.Pointer<ffi.Int32> version,
@@ -1075,18 +1380,28 @@ class Tizen60CapiNetworkHttp {
       _http_transaction_request_get_versionPtr.asFunction<
           int Function(http_transaction_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets a URI of the request header.
-  /// @details Sets a URI of the request header.
-  /// @since_tizen 3.0
-  /// @remarks It should be used before http_transaction_submit().
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] host_uri The URI to use in the request
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Sets a URI of the request header.
+  ///
+  /// Sets a URI of the request header.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - It should be used before http_transaction_submit().
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `host_uri` (in): The URI to use in the request
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_request_set_uri(
     http_transaction_h http_transaction,
     ffi.Pointer<ffi.Char> host_uri,
@@ -1105,17 +1420,26 @@ class Tizen60CapiNetworkHttp {
       _http_transaction_request_set_uriPtr.asFunction<
           int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the URI.
-  /// @since_tizen 3.0
-  /// @remarks The @a host_uri should be freed using free().
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] host_uri The host URI
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Gets the URI.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `host_uri` should be freed using free().
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `host_uri` (out): The host URI
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_request_get_uri(
     http_transaction_h http_transaction,
     ffi.Pointer<ffi.Pointer<ffi.Char>> host_uri,
@@ -1136,18 +1460,28 @@ class Tizen60CapiNetworkHttp {
           int Function(
               http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the Accept-Encoding header field of HTTP Request.
-  /// @details The Accept-Encoding header enables automatic decompression of HTTP downloads.
-  /// @since_tizen 3.0
-  /// @remarks If empty string is set, an Accept-Encoding header contains all supported built-in compressions.
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] encoding The encoding algorithms (e.g. gzip, deflate)
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Sets the Accept-Encoding header field of HTTP Request.
+  ///
+  /// The Accept-Encoding header enables automatic decompression of HTTP downloads.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - If empty string is set, an Accept-Encoding header contains all supported built-in compressions.
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `encoding` (in): The encoding algorithms (e.g. gzip, deflate)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_request_set_accept_encoding(
     http_transaction_h http_transaction,
     ffi.Pointer<ffi.Char> encoding,
@@ -1166,17 +1500,26 @@ class Tizen60CapiNetworkHttp {
       _http_transaction_request_set_accept_encodingPtr.asFunction<
           int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the Accept-Encoding header field of HTTP Request.
-  /// @since_tizen 3.0
-  /// @remarks The @a encoding should be freed using free().
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] encoding The encoding algorithms
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Gets the Accept-Encoding header field of HTTP Request.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `encoding` should be freed using free().
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `encoding` (out): The encoding algorithms
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_request_get_accept_encoding(
     http_transaction_h http_transaction,
     ffi.Pointer<ffi.Pointer<ffi.Char>> encoding,
@@ -1197,17 +1540,26 @@ class Tizen60CapiNetworkHttp {
           int Function(
               http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets a cookie in the HTTP request.
-  /// @since_tizen 3.0
-  /// @remarks The format of string should be NME=CONTENTS (e.g. "name1=hello; name2=tizen;")
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] cookie The cookie
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Sets a cookie in the HTTP request.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The format of string should be NME=CONTENTS (e.g. "name1=hello; name2=tizen;")
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `cookie` (in): The cookie
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_request_set_cookie(
     http_transaction_h http_transaction,
     ffi.Pointer<ffi.Char> cookie,
@@ -1226,17 +1578,26 @@ class Tizen60CapiNetworkHttp {
       _http_transaction_request_set_cookiePtr.asFunction<
           int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets a cookie in the HTTP request.
-  /// @since_tizen 3.0
-  /// @remarks The @a cookie should be freed using free().
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] cookie The cookie
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Gets a cookie in the HTTP request.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `cookie` should be freed using free().
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `cookie` (out): The cookie
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_request_get_cookie(
     http_transaction_h http_transaction,
     ffi.Pointer<ffi.Pointer<ffi.Char>> cookie,
@@ -1257,18 +1618,25 @@ class Tizen60CapiNetworkHttp {
           int Function(
               http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Writes the request message body.
-  /// @details This function writes the request message body in the internal queue. \n
-  /// The written queue for request body is uploaded after invoking http_transaction_submit().
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] body The message body data
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Writes the request message body.
+  ///
+  /// This function writes the request message body in the internal queue. The written queue for request body is uploaded after invoking http_transaction_submit().
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `body` (in): The message body data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_request_write_body(
     http_transaction_h http_transaction,
     ffi.Pointer<ffi.Char> body,
@@ -1287,20 +1655,29 @@ class Tizen60CapiNetworkHttp {
       _http_transaction_request_write_bodyPtr.asFunction<
           int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the file path for uploading a file.
-  /// @since_tizen 3.0
-  /// @remarks It is used with #HTTP_METHOD_PUT. \n
-  /// http://tizen.org/privilege/mediastorage is needed if input or output path are relevant to media storage. \n
-  /// http://tizen.org/privilege/externalstorage is needed if input or output path are relevant to external storage.
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] file_path The path for file
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE  Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION  Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED  Not Supported
-  /// @retval #HTTP_ERROR_PERMISSION_DENIED Permission denied
+  /// Sets the file path for uploading a file.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - It is used with `HTTP_METHOD_PUT`.
+  /// - <http://tizen.org/privilege/mediastorage is needed if input or output path are relevant to media storage.>
+  /// - <http://tizen.org/privilege/externalstorage is needed if input or output path are relevant to external storage.>
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `file_path` (in): The path for file
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
+  /// - `HTTP_ERROR_PERMISSION_DENIED`: Permission denied
   int http_transaction_request_set_upload_file(
     http_transaction_h http_transaction,
     ffi.Pointer<ffi.Char> file_path,
@@ -1319,16 +1696,23 @@ class Tizen60CapiNetworkHttp {
       _http_transaction_request_set_upload_filePtr.asFunction<
           int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the HTTP status code from HTTP Response.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] status_code The HTTP status code
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Gets the HTTP status code from HTTP Response.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `status_code` (out): The HTTP status code
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_response_get_status_code(
     http_transaction_h http_transaction,
     ffi.Pointer<ffi.Int32> status_code,
@@ -1347,17 +1731,26 @@ class Tizen60CapiNetworkHttp {
       _http_transaction_response_get_status_codePtr.asFunction<
           int Function(http_transaction_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the HTTP status text from HTTP Response.
-  /// @since_tizen 3.0
-  /// @remarks The @a status_text should be freed using free().
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] status_text The HTTP status text
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Gets the HTTP status text from HTTP Response.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `status_text` should be freed using free().
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `status_text` (out): The HTTP status text
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_response_get_status_text(
     http_transaction_h http_transaction,
     ffi.Pointer<ffi.Pointer<ffi.Char>> status_text,
@@ -1378,16 +1771,23 @@ class Tizen60CapiNetworkHttp {
           int Function(
               http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the HTTP version from HTTP Response.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] version The HTTP version
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Gets the HTTP version from HTTP Response.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `version` (out): The HTTP version
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_response_get_version(
     http_transaction_h http_transaction,
     ffi.Pointer<ffi.Int32> version,
@@ -1406,18 +1806,27 @@ class Tizen60CapiNetworkHttp {
       _http_transaction_response_get_versionPtr.asFunction<
           int Function(http_transaction_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Opens HTTP transaction with authentication information.
-  /// @since_tizen 3.0
-  /// @remarks The @a http_auth_transaction should be released using http_transaction_destroy().
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] http_auth_transaction The HTTP transaction handle
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Opens HTTP transaction with authentication information.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `http_auth_transaction` should be released using http_transaction_destroy().
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `http_auth_transaction` (out): The HTTP transaction handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_open_authentication(
     http_transaction_h http_transaction,
     ffi.Pointer<http_transaction_h> http_auth_transaction,
@@ -1437,17 +1846,25 @@ class Tizen60CapiNetworkHttp {
       _http_transaction_open_authenticationPtr.asFunction<
           int Function(http_transaction_h, ffi.Pointer<http_transaction_h>)>();
 
-  /// @brief Sets an HTTP credentials.
-  /// @details Sets an HTTP authentication scheme such as username and password.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] user_name The HTTP user name
-  /// @param[in] password The HTTP password
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Sets an HTTP credentials.
+  ///
+  /// Sets an HTTP authentication scheme such as username and password.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `user_name` (in): The HTTP user name
+  /// - `password` (in): The HTTP password
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_set_credentials(
     http_transaction_h http_transaction,
     ffi.Pointer<ffi.Char> user_name,
@@ -1469,19 +1886,28 @@ class Tizen60CapiNetworkHttp {
           int Function(http_transaction_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the username & password for the HTTP credential.
-  /// @since_tizen 3.0
-  /// @remarks The @a user_name & @a password should be freed using free().
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] user_name The HTTP credential user name
-  /// @param[out] password The HTTP credential password
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Gets the username & password for the HTTP credential.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `user_name` & `password` should be freed using free().
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `user_name` (out): The HTTP credential user name
+  /// - `password` (out): The HTTP credential password
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_get_credentials(
     http_transaction_h http_transaction,
     ffi.Pointer<ffi.Pointer<ffi.Char>> user_name,
@@ -1506,16 +1932,24 @@ class Tizen60CapiNetworkHttp {
           int Function(http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets an HTTP authentication scheme.
-  /// @details Set an HTTP authentication scheme such as BASIC, MD5, NTLM and etc.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] auth_scheme The HTTP authentication scheme
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Sets an HTTP authentication scheme.
+  ///
+  /// Set an HTTP authentication scheme such as BASIC, MD5, NTLM and etc.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `auth_scheme` (in): The HTTP authentication scheme
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_set_http_auth_scheme(
     http_transaction_h http_transaction,
     int auth_scheme,
@@ -1533,16 +1967,23 @@ class Tizen60CapiNetworkHttp {
       _http_transaction_set_http_auth_schemePtr
           .asFunction<int Function(http_transaction_h, int)>();
 
-  /// @brief Gets the HTTP authentication scheme.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] auth_scheme The HTTP auth scheme value
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Gets the HTTP authentication scheme.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `auth_scheme` (out): The HTTP auth scheme value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_get_http_auth_scheme(
     http_transaction_h http_transaction,
     ffi.Pointer<ffi.Int32> auth_scheme,
@@ -1561,18 +2002,27 @@ class Tizen60CapiNetworkHttp {
       _http_transaction_get_http_auth_schemePtr.asFunction<
           int Function(http_transaction_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the HTTP authentication realm.
-  /// @since_tizen 3.0
-  /// @remarks The @a realm should be freed using free().
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] realm The HTTP authentication realm value
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// Gets the HTTP authentication realm.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `realm` should be freed using free().
+  ///
+  /// **Parameters:**
+  /// - `http_transaction` (in): The HTTP transaction handle
+  /// - `realm` (out): The HTTP authentication realm value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `HTTP_ERROR_NONE`: Successful
+  /// - `HTTP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `HTTP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `HTTP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `HTTP_ERROR_NOT_SUPPORTED`: Not Supported
   int http_transaction_get_realm(
     http_transaction_h http_transaction,
     ffi.Pointer<ffi.Pointer<ffi.Char>> realm,
@@ -1594,8 +2044,11 @@ class Tizen60CapiNetworkHttp {
               http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 }
 
-/// @brief Enumeration for the HTTP session.
-/// @since_tizen 3.0
+/// Enumeration for the HTTP session.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class http_session_mode_e {
   /// < The Normal Mode
   static const int HTTP_SESSION_MODE_NORMAL = 0;
@@ -1604,8 +2057,11 @@ abstract class http_session_mode_e {
   static const int HTTP_SESSION_MODE_PIPELINING = 1;
 }
 
-/// @brief Enumeration for the HTTP method.
-/// @since_tizen 3.0
+/// Enumeration for the HTTP method.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class http_method_e {
   /// < The HTTP GET Method
   static const int HTTP_METHOD_GET = 64;
@@ -1632,8 +2088,11 @@ abstract class http_method_e {
   static const int HTTP_METHOD_CONNECT = 112;
 }
 
-/// @brief Enumeration for the HTTP version.
-/// @since_tizen 3.0
+/// Enumeration for the HTTP version.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class http_version_e {
   /// < HTTP version 1.0
   static const int HTTP_VERSION_1_0 = 0;
@@ -1642,8 +2101,11 @@ abstract class http_version_e {
   static const int HTTP_VERSION_1_1 = 1;
 }
 
-/// @brief Enumeration for transfer pause state.
-/// @since_tizen 3.0
+/// Enumeration for transfer pause state.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class http_pause_type_e {
   /// < Pause receiving data
   static const int HTTP_PAUSE_RECV = 1;
@@ -1655,8 +2117,11 @@ abstract class http_pause_type_e {
   static const int HTTP_PAUSE_ALL = 5;
 }
 
-/// @brief Enumeration for the HTTP error code.
-/// @since_tizen 3.0
+/// Enumeration for the HTTP error code.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class http_error_code_e {
   /// < Successful
   static const int HTTP_ERROR_NONE = 0;
@@ -1695,8 +2160,11 @@ abstract class http_error_code_e {
   static const int HTTP_ERROR_NOT_SUPPORTED = -1073741822;
 }
 
-/// @brief Enumeration for the HTTP status code.
-/// @since_tizen 3.0
+/// Enumeration for the HTTP status code.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class http_status_code_e {
   /// < The undefined status
   static const int HTTP_STATUS_UNDEFINED = 0;
@@ -1813,8 +2281,11 @@ abstract class http_status_code_e {
   static const int HTTP_STATUS_HTTP_VERSION_NOT_SUPPORTED = 505;
 }
 
-/// @brief Enumeration for the HTTP authentication schemes.
-/// @since_tizen 3.0
+/// Enumeration for the HTTP authentication schemes.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class http_auth_scheme_e {
   /// < No authentication type
   static const int HTTP_AUTH_NONE = 0;
@@ -1841,52 +2312,78 @@ abstract class http_auth_scheme_e {
   static const int HTTP_AUTH_WWW_NEGOTIATE = 8;
 }
 
-/// @brief The HTTP Session handle.
-/// @since_tizen 3.0
+/// The HTTP Session handle.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef http_session_h = ffi.Pointer<ffi.Void>;
 
-/// @brief The HTTP Transaction handle.
-/// @since_tizen 3.0
+/// The HTTP Transaction handle.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef http_transaction_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when the HTTP header is received.
-/// @since_tizen 3.0
-/// @remarks The @a header should be released using free(). \n
-/// The @a header is available until @a http_transaction is released.
-/// @param[in] http_transaction The HTTP transaction handle
-/// @param[in] header The header information of HTTP Transaction
-/// @param[in] header_len The length of the HTTP Transaction header
-/// @param[in] user_data The user data
-/// @see http_transaction_set_received_header_cb()
+/// Called when the HTTP header is received.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - The `header` should be released using free().
+/// - The `header` is available until `http_transaction` is released.
+///
+/// **Parameters:**
+/// - `http_transaction` (in): The HTTP transaction handle
+/// - `header` (in): The header information of HTTP Transaction
+/// - `header_len` (in): The length of the HTTP Transaction header
+/// - `user_data` (in): The user data
+///
+/// **See also:**
+/// - `http_transaction_set_received_header_cb()`
+/// @nodoc
 typedef http_transaction_header_cb
     = ffi.Pointer<ffi.NativeFunction<http_transaction_header_cbFunction>>;
+/// @nodoc
 typedef http_transaction_header_cbFunction = ffi.Void Function(
     http_transaction_h http_transaction,
     ffi.Pointer<ffi.Char> header,
     ffi.Size header_len,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Darthttp_transaction_header_cbFunction = void Function(
     http_transaction_h http_transaction,
     ffi.Pointer<ffi.Char> header,
     int header_len,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the HTTP response is received.
-/// @since_tizen 3.0
-/// @param[in] http_transaction The HTTP transaction handle
-/// @param[in] body Response information of HTTP Transaction
-/// @param[in] size Size in bytes of each element to be written
-/// @param[in] count Number of elements, each one with a size of size bytes
-/// @param[in] user_data The user data
-/// @see http_transaction_set_received_body_cb()
+/// Called when the HTTP response is received.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `http_transaction` (in): The HTTP transaction handle
+/// - `body` (in): Response information of HTTP Transaction
+/// - `size` (in): Size in bytes of each element to be written
+/// - `count` (in): Number of elements, each one with a size of size bytes
+/// - `user_data` (in): The user data
+///
+/// **See also:**
+/// - `http_transaction_set_received_body_cb()`
+/// @nodoc
 typedef http_transaction_body_cb
     = ffi.Pointer<ffi.NativeFunction<http_transaction_body_cbFunction>>;
+/// @nodoc
 typedef http_transaction_body_cbFunction = ffi.Void Function(
     http_transaction_h http_transaction,
     ffi.Pointer<ffi.Char> body,
     ffi.Size size,
     ffi.Size count,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Darthttp_transaction_body_cbFunction = void Function(
     http_transaction_h http_transaction,
     ffi.Pointer<ffi.Char> body,
@@ -1894,69 +2391,100 @@ typedef Darthttp_transaction_body_cbFunction = void Function(
     int count,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the HTTP ready to write event is received.
-/// @since_tizen 3.0
-/// @param[in] http_transaction The HTTP transaction handle
-/// @param[in] recommended_chunk_size Recommended chunk length(bytes) of the HTTP transaction
-/// @param[in] user_data The user data
-/// @see http_transaction_set_uploaded_cb()
+/// Called when the HTTP ready to write event is received.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `http_transaction` (in): The HTTP transaction handle
+/// - `recommended_chunk_size` (in): Recommended chunk length(bytes) of the HTTP transaction
+/// - `user_data` (in): The user data
+///
+/// **See also:**
+/// - `http_transaction_set_uploaded_cb()`
+/// @nodoc
 typedef http_transaction_write_cb
     = ffi.Pointer<ffi.NativeFunction<http_transaction_write_cbFunction>>;
+/// @nodoc
 typedef http_transaction_write_cbFunction = ffi.Void Function(
     http_transaction_h http_transaction,
     ffi.Int recommended_chunk_size,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Darthttp_transaction_write_cbFunction = void Function(
     http_transaction_h http_transaction,
     int recommended_chunk_size,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the HTTP transaction is completed.
-/// @since_tizen 3.0
-/// @param[in] http_transaction The HTTP transaction handle
-/// @param[in] user_data The user data
-/// @see http_transaction_set_completed_cb()
+/// Called when the HTTP transaction is completed.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `http_transaction` (in): The HTTP transaction handle
+/// - `user_data` (in): The user data
+///
+/// **See also:**
+/// - `http_transaction_set_completed_cb()`
+/// @nodoc
 typedef http_transaction_completed_cb
     = ffi.Pointer<ffi.NativeFunction<http_transaction_completed_cbFunction>>;
+/// @nodoc
 typedef http_transaction_completed_cbFunction = ffi.Void Function(
     http_transaction_h http_transaction, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Darthttp_transaction_completed_cbFunction = void Function(
     http_transaction_h http_transaction, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the HTTP transaction is aborted.
-/// @details Following error codes can be delivered. \n
-/// #HTTP_ERROR_OPERATION_FAILED, \n
-/// #HTTP_ERROR_COULDNT_RESOLVE_HOST, \n
-/// #HTTP_ERROR_COULDNT_CONNECT, \n
-/// #HTTP_ERROR_OPERATION_TIMEDOUT, \n
-/// #HTTP_ERROR_SSL_CONNECT_ERROR.
-/// @since_tizen 3.0
-/// @param[in] http_transaction The HTTP transaction handle
-/// @param[in] error The error code about aborted reason
-/// @param[in] user_data The user data
-/// @see http_transaction_set_aborted_cb()
+/// Called when the HTTP transaction is aborted.
+///
+/// Following error codes can be delivered. `HTTP_ERROR_OPERATION_FAILED`, `HTTP_ERROR_COULDNT_RESOLVE_HOST`, `HTTP_ERROR_COULDNT_CONNECT`, `HTTP_ERROR_OPERATION_TIMEDOUT`, `HTTP_ERROR_SSL_CONNECT_ERROR`.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `http_transaction` (in): The HTTP transaction handle
+/// - `error` (in): The error code about aborted reason
+/// - `user_data` (in): The user data
+///
+/// **See also:**
+/// - `http_transaction_set_aborted_cb()`
+/// @nodoc
 typedef http_transaction_aborted_cb
     = ffi.Pointer<ffi.NativeFunction<http_transaction_aborted_cbFunction>>;
+/// @nodoc
 typedef http_transaction_aborted_cbFunction = ffi.Void Function(
     http_transaction_h http_transaction,
     ffi.Int32 error,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Darthttp_transaction_aborted_cbFunction = void Function(
     http_transaction_h http_transaction,
     int error,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called to notify when the content body of the response message is being downloaded or uploaded.
-/// @since_tizen 3.0
-/// @param[in] http_transaction The HTTP transaction handle
-/// @param[in] download_total The total length of the data (in bytes) to download
-/// @param[in] download_now The current length of the downloaded data (in bytes)
-/// @param[in] upload_total The total length of the data (in bytes) to upload
-/// @param[in] upload_now The current length of the uploaded data (in bytes)
-/// @param[in] user_data The user data
-/// @see http_transaction_set_progress_cb()
+/// Called to notify when the content body of the response message is being downloaded or uploaded.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `http_transaction` (in): The HTTP transaction handle
+/// - `download_total` (in): The total length of the data (in bytes) to download
+/// - `download_now` (in): The current length of the downloaded data (in bytes)
+/// - `upload_total` (in): The total length of the data (in bytes) to upload
+/// - `upload_now` (in): The current length of the uploaded data (in bytes)
+/// - `user_data` (in): The user data
+///
+/// **See also:**
+/// - `http_transaction_set_progress_cb()`
+/// @nodoc
 typedef http_transaction_progress_cb
     = ffi.Pointer<ffi.NativeFunction<http_transaction_progress_cbFunction>>;
+/// @nodoc
 typedef http_transaction_progress_cbFunction = ffi.Void Function(
     http_transaction_h http_transaction,
     ffi.Double download_total,
@@ -1964,6 +2492,7 @@ typedef http_transaction_progress_cbFunction = ffi.Void Function(
     ffi.Double upload_total,
     ffi.Double upload_now,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Darthttp_transaction_progress_cbFunction = void Function(
     http_transaction_h http_transaction,
     double download_total,

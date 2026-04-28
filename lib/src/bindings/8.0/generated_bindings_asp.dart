@@ -1,3 +1,6 @@
+/// {@category 8.0/tizen}
+library tizen_interop_8_0.asp;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen asp APIs.
+/// {@category 8.0/tizen}
 class Tizen80Asp {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,15 +28,23 @@ class Tizen80Asp {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Initializes Application Service Platform (ASP).
-  /// @since_tizen 4.0
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #ASP_ERROR_NONE                  Successful
-  /// @retval #ASP_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @retval #ASP_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #ASP_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #ASP_ERROR_OPERATION_FAILED      Operation failed
-  /// @see asp_deinitialize()
+  /// Initializes Application Service Platform (ASP).
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_RESOURCE_BUSY`: Device or resource busy
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `asp_deinitialize()`
   int asp_initialize() {
     return _asp_initialize();
   }
@@ -41,18 +53,32 @@ class Tizen80Asp {
       _lookup<ffi.NativeFunction<ffi.Int Function()>>('asp_initialize');
   late final _asp_initialize = _asp_initializePtr.asFunction<int Function()>();
 
-  /// @brief Deinitializes Application Service Platform (ASP).
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #ASP_ERROR_NONE                  Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #ASP_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #ASP_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @pre Application Service Platform (ASP) must be initialized by asp_initialize().
-  /// @see asp_initialize()
+  /// Deinitializes Application Service Platform (ASP).
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_COMMUNICATION_FAILED`: Communication failed
+  ///
+  /// **Preconditions:**
+  /// - Application Service Platform (ASP) must be initialized by asp_initialize().
+  ///
+  /// **See also:**
+  /// - `asp_initialize()`
   int asp_deinitialize() {
     return _asp_deinitialize();
   }
@@ -62,21 +88,34 @@ class Tizen80Asp {
   late final _asp_deinitialize =
       _asp_deinitializePtr.asFunction<int Function()>();
 
-  /// @brief Registers the callback function that will be invoked when a service found.
-  /// @since_tizen 4.0
-  /// @param[in] cb         The callback function to invoke
-  /// @param[in] user_data  The user data passed from the callback registration function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @pre Application Service Platform (ASP) must be initialized by asp_initialize().
-  /// @post asp_search_result_cb will be called under certain conditions,
-  /// after calling asp_seek_start()
-  /// @see asp_initialize()
-  /// @see asp_seek_unset_search_result_cb()
-  /// @see asp_seek_start()
+  /// Registers the callback function that will be invoked when a service found.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `cb` (in): The callback function to invoke
+  /// - `user_data` (in): The user data passed from the callback registration function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **Preconditions:**
+  /// - Application Service Platform (ASP) must be initialized by asp_initialize().
+  ///
+  /// **Postconditions:**
+  /// - asp_search_result_cb will be called under certain conditions, after calling asp_seek_start()
+  ///
+  /// **See also:**
+  /// - `asp_initialize()`
+  /// - `asp_seek_unset_search_result_cb()`
+  /// - `asp_seek_start()`
   int asp_seek_set_search_result_cb(
     asp_seek_search_result_cb cb,
     ffi.Pointer<ffi.Void> user_data,
@@ -95,15 +134,25 @@ class Tizen80Asp {
       _asp_seek_set_search_result_cbPtr.asFunction<
           int Function(asp_seek_search_result_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback function that will invoked when a service found.
-  /// @since_tizen 4.0
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE             Successful
-  /// @retval #ASP_ERROR_NOT_SUPPORTED    Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED  Not initialized
-  /// @pre Application Service Platform (ASP) must be initialized by asp_initialize().
-  /// @see asp_initialize()
-  /// @see asp_seek_set_search_result_cb()
+  /// Unregisters the callback function that will invoked when a service found.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **Preconditions:**
+  /// - Application Service Platform (ASP) must be initialized by asp_initialize().
+  ///
+  /// **See also:**
+  /// - `asp_initialize()`
+  /// - `asp_seek_set_search_result_cb()`
   int asp_seek_unset_search_result_cb() {
     return _asp_seek_unset_search_result_cb();
   }
@@ -114,21 +163,34 @@ class Tizen80Asp {
   late final _asp_seek_unset_search_result_cb =
       _asp_seek_unset_search_result_cbPtr.asFunction<int Function()>();
 
-  /// @brief Registers the callback function that will invoked when the status of an advertisement to a service is changed.
-  /// @since_tizen 4.0
-  /// @param[in] cb         The callback function to invoke
-  /// @param[in] user_data  The user data passed from the callback registration function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @pre Application Service Platform (ASP) must be initialized by asp_initialize().
-  /// @post asp_seek_search_result_cb() will be called under certain conditions,
-  /// after calling asp_seek_start()
-  /// @see asp_initialize()
-  /// @see asp_advert_unset_status_changed_cb()
-  /// @see asp_advert_start_advertising()
+  /// Registers the callback function that will invoked when the status of an advertisement to a service is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `cb` (in): The callback function to invoke
+  /// - `user_data` (in): The user data passed from the callback registration function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **Preconditions:**
+  /// - Application Service Platform (ASP) must be initialized by asp_initialize().
+  ///
+  /// **Postconditions:**
+  /// - asp_seek_search_result_cb() will be called under certain conditions, after calling asp_seek_start()
+  ///
+  /// **See also:**
+  /// - `asp_initialize()`
+  /// - `asp_advert_unset_status_changed_cb()`
+  /// - `asp_advert_start_advertising()`
   int asp_advert_set_status_changed_cb(
     asp_advert_status_changed_cb cb,
     ffi.Pointer<ffi.Void> user_data,
@@ -147,15 +209,25 @@ class Tizen80Asp {
       _asp_advert_set_status_changed_cbPtr.asFunction<
           int Function(asp_advert_status_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback function that will invoked when the status of an advertisement to a service is changed.
-  /// @since_tizen 4.0
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE             Successful
-  /// @retval #ASP_ERROR_NOT_SUPPORTED    Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED  Not initialized
-  /// @pre Application Service Platform (ASP) must be initialized by asp_initialize().
-  /// @see asp_initialize()
-  /// @see asp_advert_set_status_changed_cb()
+  /// Unregisters the callback function that will invoked when the status of an advertisement to a service is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **Preconditions:**
+  /// - Application Service Platform (ASP) must be initialized by asp_initialize().
+  ///
+  /// **See also:**
+  /// - `asp_initialize()`
+  /// - `asp_advert_set_status_changed_cb()`
   int asp_advert_unset_status_changed_cb() {
     return _asp_advert_unset_status_changed_cb();
   }
@@ -166,18 +238,30 @@ class Tizen80Asp {
   late final _asp_advert_unset_status_changed_cb =
       _asp_advert_unset_status_changed_cbPtr.asFunction<int Function()>();
 
-  /// @brief Registers the callback called when ASP session connection is requested.
-  /// @since_tizen 4.0
-  /// @param[in] cb         The callback function to invoke
-  /// @param[in] user_data  The user data passed from the callback registration function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @pre Application Service Platform (ASP) must be initialized by asp_initialize().
-  /// @see asp_initialize()
-  /// @see asp_session_unset_request_cb()
+  /// Registers the callback called when ASP session connection is requested.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `cb` (in): The callback function to invoke
+  /// - `user_data` (in): The user data passed from the callback registration function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **Preconditions:**
+  /// - Application Service Platform (ASP) must be initialized by asp_initialize().
+  ///
+  /// **See also:**
+  /// - `asp_initialize()`
+  /// - `asp_session_unset_request_cb()`
   int asp_session_set_request_cb(
     asp_session_request_cb cb,
     ffi.Pointer<ffi.Void> user_data,
@@ -196,15 +280,25 @@ class Tizen80Asp {
       _asp_session_set_request_cbPtr.asFunction<
           int Function(asp_session_request_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback called ASP when session connection is requested.
-  /// @since_tizen 4.0
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE             Successful
-  /// @retval #ASP_ERROR_NOT_SUPPORTED    Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED  Not initialized
-  /// @pre Application Service Platform (ASP) must be initialized by asp_initialize().
-  /// @see asp_initialize()
-  /// @see asp_session_set_request_cb()
+  /// Unregisters the callback called ASP when session connection is requested.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **Preconditions:**
+  /// - Application Service Platform (ASP) must be initialized by asp_initialize().
+  ///
+  /// **See also:**
+  /// - `asp_initialize()`
+  /// - `asp_session_set_request_cb()`
   int asp_session_unset_request_cb() {
     return _asp_session_unset_request_cb();
   }
@@ -215,19 +309,31 @@ class Tizen80Asp {
   late final _asp_session_unset_request_cb =
       _asp_session_unset_request_cbPtr.asFunction<int Function()>();
 
-  /// @brief Registers the callback called when the session configuration is requested.
-  /// @since_tizen 4.0
-  /// @param[in] cb         The callback function to invoke
-  /// @param[in] user_data  The user data passed from the callback registration function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @pre Application Service Platform (ASP) must be initialized by asp_initialize().
-  /// @see asp_initialize()
-  /// @see asp_session_unset_config_request_cb()
-  /// @see asp_session_config_request_cb()
+  /// Registers the callback called when the session configuration is requested.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `cb` (in): The callback function to invoke
+  /// - `user_data` (in): The user data passed from the callback registration function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **Preconditions:**
+  /// - Application Service Platform (ASP) must be initialized by asp_initialize().
+  ///
+  /// **See also:**
+  /// - `asp_initialize()`
+  /// - `asp_session_unset_config_request_cb()`
+  /// - `asp_session_config_request_cb()`
   int asp_session_set_config_request_cb(
     asp_session_config_request_cb cb,
     ffi.Pointer<ffi.Void> user_data,
@@ -246,15 +352,25 @@ class Tizen80Asp {
       _asp_session_set_config_request_cbPtr.asFunction<
           int Function(asp_session_config_request_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback called when the session configuration is requested.
-  /// @since_tizen 4.0
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE             Successful
-  /// @retval #ASP_ERROR_NOT_SUPPORTED    Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED  Not initialized
-  /// @pre Application Service Platform (ASP) must be initialized by asp_initialize().
-  /// @see asp_initialize()
-  /// @see asp_session_config_request_cb()
+  /// Unregisters the callback called when the session configuration is requested.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **Preconditions:**
+  /// - Application Service Platform (ASP) must be initialized by asp_initialize().
+  ///
+  /// **See also:**
+  /// - `asp_initialize()`
+  /// - `asp_session_config_request_cb()`
   int asp_session_unset_config_request_cb() {
     return _asp_session_unset_config_request_cb();
   }
@@ -265,19 +381,31 @@ class Tizen80Asp {
   late final _asp_session_unset_config_request_cb =
       _asp_session_unset_config_request_cbPtr.asFunction<int Function()>();
 
-  /// @brief Registers the callback called when the state of the session connection is changed.
-  /// @since_tizen 4.0
-  /// @param[in] cb         The callback function to invoke
-  /// @param[in] user_data  The user data passed from the callback registration function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @pre Application Service Platform (ASP) must be initialized by asp_initialize().
-  /// @see asp_initialize()
-  /// @see asp_session_unset_connect_status_cb()
-  /// @see asp_session_connect_status_cb()
+  /// Registers the callback called when the state of the session connection is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `cb` (in): The callback function to invoke
+  /// - `user_data` (in): The user data passed from the callback registration function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **Preconditions:**
+  /// - Application Service Platform (ASP) must be initialized by asp_initialize().
+  ///
+  /// **See also:**
+  /// - `asp_initialize()`
+  /// - `asp_session_unset_connect_status_cb()`
+  /// - `asp_session_connect_status_cb()`
   int asp_session_set_connect_status_cb(
     asp_session_connect_status_cb cb,
     ffi.Pointer<ffi.Void> user_data,
@@ -296,15 +424,25 @@ class Tizen80Asp {
       _asp_session_set_connect_status_cbPtr.asFunction<
           int Function(asp_session_connect_status_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback called when the state of the session connection is changed.
-  /// @since_tizen 4.0
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE             Successful
-  /// @retval #ASP_ERROR_NOT_SUPPORTED    Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED  Not initialized
-  /// @pre Application Service Platform (ASP) must be initialized by asp_initialize().
-  /// @see asp_initialize()
-  /// @see asp_session_set_connect_status_cb()
+  /// Unregisters the callback called when the state of the session connection is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **Preconditions:**
+  /// - Application Service Platform (ASP) must be initialized by asp_initialize().
+  ///
+  /// **See also:**
+  /// - `asp_initialize()`
+  /// - `asp_session_set_connect_status_cb()`
   int asp_session_unset_connect_status_cb() {
     return _asp_session_unset_connect_status_cb();
   }
@@ -315,19 +453,31 @@ class Tizen80Asp {
   late final _asp_session_unset_connect_status_cb =
       _asp_session_unset_connect_status_cbPtr.asFunction<int Function()>();
 
-  /// @brief Registers the callback called when the state of the session is changed.
-  /// @since_tizen 4.0
-  /// @param[in] cb         The callback function to invoke
-  /// @param[in] user_data  The user data passed from the callback registration function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @pre Application Service Platform (ASP) must be initialized by asp_initialize().
-  /// @see asp_initialize()
-  /// @see asp_session_unset_status_cb()
-  /// @see asp_session_status_cb()
+  /// Registers the callback called when the state of the session is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `cb` (in): The callback function to invoke
+  /// - `user_data` (in): The user data passed from the callback registration function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **Preconditions:**
+  /// - Application Service Platform (ASP) must be initialized by asp_initialize().
+  ///
+  /// **See also:**
+  /// - `asp_initialize()`
+  /// - `asp_session_unset_status_cb()`
+  /// - `asp_session_status_cb()`
   int asp_session_set_status_cb(
     asp_session_status_cb cb,
     ffi.Pointer<ffi.Void> user_data,
@@ -345,15 +495,25 @@ class Tizen80Asp {
   late final _asp_session_set_status_cb = _asp_session_set_status_cbPtr
       .asFunction<int Function(asp_session_status_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback called when the state of the session is changed.
-  /// @since_tizen 4.0
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE             Successful
-  /// @retval #ASP_ERROR_NOT_SUPPORTED    Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED  Not initialized
-  /// @pre Application Service Platform (ASP) must be initialized by asp_initialize().
-  /// @see asp_initialize()
-  /// @see asp_session_set_status_cb()
+  /// Unregisters the callback called when the state of the session is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **Preconditions:**
+  /// - Application Service Platform (ASP) must be initialized by asp_initialize().
+  ///
+  /// **See also:**
+  /// - `asp_initialize()`
+  /// - `asp_session_set_status_cb()`
   int asp_session_unset_status_cb() {
     return _asp_session_unset_status_cb();
   }
@@ -364,17 +524,29 @@ class Tizen80Asp {
   late final _asp_session_unset_status_cb =
       _asp_session_unset_status_cbPtr.asFunction<int Function()>();
 
-  /// @brief Registers the callback called when the state of the port is changed.
-  /// @since_tizen 4.0
-  /// @param[in] cb         The callback function to invoke
-  /// @param[in] user_data  The user data passed from the callback registration function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @pre Application Service Platform (ASP) must be initialized by asp_initialize().
-  /// @see asp_initialize()
-  /// @see asp_session_unset_status_cb()
+  /// Registers the callback called when the state of the port is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `cb` (in): The callback function to invoke
+  /// - `user_data` (in): The user data passed from the callback registration function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **Preconditions:**
+  /// - Application Service Platform (ASP) must be initialized by asp_initialize().
+  ///
+  /// **See also:**
+  /// - `asp_initialize()`
+  /// - `asp_session_unset_status_cb()`
   int asp_session_set_port_status_cb(
     asp_session_port_status_cb cb,
     ffi.Pointer<ffi.Void> user_data,
@@ -393,15 +565,25 @@ class Tizen80Asp {
       _asp_session_set_port_status_cbPtr.asFunction<
           int Function(asp_session_port_status_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback called when the state of the port is changed.
-  /// @since_tizen 4.0
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE             Successful
-  /// @retval #ASP_ERROR_NOT_SUPPORTED    Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED  Not initialized
-  /// @pre Application Service Platform (ASP) must be initialized by asp_initialize().
-  /// @see asp_initialize()
-  /// @see asp_session_set_port_status_cb()
+  /// Unregisters the callback called when the state of the port is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **Preconditions:**
+  /// - Application Service Platform (ASP) must be initialized by asp_initialize().
+  ///
+  /// **See also:**
+  /// - `asp_initialize()`
+  /// - `asp_session_set_port_status_cb()`
   int asp_session_unset_port_status_cb() {
     return _asp_session_unset_port_status_cb();
   }
@@ -412,25 +594,35 @@ class Tizen80Asp {
   late final _asp_session_unset_port_status_cb =
       _asp_session_unset_port_status_cbPtr.asFunction<int Function()>();
 
-  /// @brief Creates the description of a service to be advertised.
-  /// @since_tizen 4.0
-  /// @remarks The @a adv_service should be released using asp_advert_destroy().
-  /// @param[in] instance_name  Service instance name of a service type to be advertised.
-  /// The length of this parameter be 63 byte or less and
-  /// encoding shall be single-byte or multi-byte UTF-8 characters.
-  /// If you want to advertise one of the original P2PS defined services,
-  /// this shall be NULL.
-  /// @param[out] adv_service   service descriptor handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @pre Application Service Platform (ASP) must be initialized by asp_initialize().
-  /// @see asp_advert_destroy()
+  /// Creates the description of a service to be advertised.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - The `adv_service` should be released using asp_advert_destroy().
+  ///
+  /// **Parameters:**
+  /// - `instance_name` (in): Service instance name of a service type to be advertised. The length of this parameter be 63 byte or less and encoding shall be single-byte or multi-byte UTF-8 characters. If you want to advertise one of the original P2PS defined services, this shall be NULL.
+  /// - `adv_service` (out): service descriptor handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **Preconditions:**
+  /// - Application Service Platform (ASP) must be initialized by asp_initialize().
+  ///
+  /// **See also:**
+  /// - `asp_advert_destroy()`
   int asp_advert_create(
     ffi.Pointer<ffi.Char> instance_name,
     ffi.Pointer<asp_advert_service_h> adv_service,
@@ -448,22 +640,34 @@ class Tizen80Asp {
   late final _asp_advert_create = _asp_advert_createPtr.asFunction<
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<asp_advert_service_h>)>();
 
-  /// @brief Destroys the description of a service to be advertised.
-  /// @details If asp_advert_start_advertising() was called for a service,
-  /// asp_advert_stop_advertising() should be called for it before destroying it.
-  /// @since_tizen 4.0
-  /// @param[in] adv_service Service descriptor handle provided by the asp_advert_create()
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #ASP_ERROR_SERVICE_NOT_FOUND  Service not found
-  /// @pre This API needs asp_advert_create() before use
-  /// @see asp_advert_create()
+  /// Destroys the description of a service to be advertised.
+  ///
+  /// If asp_advert_start_advertising() was called for a service, asp_advert_stop_advertising() should be called for it before destroying it.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `adv_service` (in): Service descriptor handle provided by the asp_advert_create()
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SERVICE_NOT_FOUND`: Service not found
+  ///
+  /// **Preconditions:**
+  /// - This API needs asp_advert_create() before use
+  ///
+  /// **See also:**
+  /// - `asp_advert_create()`
   int asp_advert_destroy(
     asp_advert_service_h adv_service,
   ) {
@@ -478,30 +682,35 @@ class Tizen80Asp {
   late final _asp_advert_destroy =
       _asp_advert_destroyPtr.asFunction<int Function(asp_advert_service_h)>();
 
-  /// @brief Sets the service type for a service to be advertised.
-  /// @details Application should set service type after creating service using
-  /// asp_advert_create() and before advertising service using
-  /// asp_advert_start_advertising().
-  /// @since_tizen 4.0
-  /// @param[in] adv_service   Service descriptor handle provided by the asp_advert_create()
-  /// @param[in]               service_type  The unique type of a particular service.
-  /// this shall be at least 1 character and no more than 15 characters long
-  /// contain only US-ASCII [ANSI.X3.4-1986] letters 'A' - 'Z' and
-  /// 'a' - 'z', digits '0' - '9', and hyphens ('-', ASCII 0x2D or decimal 45)
-  /// contain at least one letter ('A' - 'Z' or 'a' - ‘z')
-  /// not begin or end with a hyphen. If you want to advertise one of the
-  /// original P2PS defined services, this means service name.
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #ASP_ERROR_SERVICE_NOT_FOUND  Service not found
-  /// @pre This API needs asp_advert_create() before use
-  /// @see asp_advert_create()
+  /// Sets the service type for a service to be advertised.
+  ///
+  /// Application should set service type after creating service using asp_advert_create() and before advertising service using asp_advert_start_advertising().
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `adv_service` (in): Service descriptor handle provided by the asp_advert_create()
+  /// - `service_type` (in): The unique type of a particular service. this shall be at least 1 character and no more than 15 characters long contain only US-ASCII `[ANSI.X3.4-1986]` letters 'A' - 'Z' and 'a' - 'z', digits '0' - '9', and hyphens ('-', ASCII 0x2D or decimal 45) contain at least one letter ('A' - 'Z' or 'a' - ‘z') not begin or end with a hyphen. If you want to advertise one of the original P2PS defined services, this means service name.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SERVICE_NOT_FOUND`: Service not found
+  ///
+  /// **Preconditions:**
+  /// - This API needs asp_advert_create() before use
+  ///
+  /// **See also:**
+  /// - `asp_advert_create()`
   int asp_advert_set_service_type(
     asp_advert_service_h adv_service,
     ffi.Pointer<ffi.Char> service_type,
@@ -519,24 +728,35 @@ class Tizen80Asp {
   late final _asp_advert_set_service_type = _asp_advert_set_service_typePtr
       .asFunction<int Function(asp_advert_service_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets auto accept for a service to be advertised.
-  /// @details Application should set service auto accept after creating service using
-  /// asp_advert_create() and before advertising service using
-  /// asp_advert_start_advertising().
-  /// @since_tizen 4.0
-  /// @param[in] adv_service  Service descriptor handle provided by the asp_advert_create()
-  /// @param[in] auto_accept  Enables/Disables auto accept based on the value TRUE/FALSE
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #ASP_ERROR_SERVICE_NOT_FOUND  Service not found
-  /// @pre This API needs asp_advert_create() before use
-  /// @see asp_advert_create()
+  /// Sets auto accept for a service to be advertised.
+  ///
+  /// Application should set service auto accept after creating service using asp_advert_create() and before advertising service using asp_advert_start_advertising().
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `adv_service` (in): Service descriptor handle provided by the asp_advert_create()
+  /// - `auto_accept` (in): Enables/Disables auto accept based on the value TRUE/FALSE
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SERVICE_NOT_FOUND`: Service not found
+  ///
+  /// **Preconditions:**
+  /// - This API needs asp_advert_create() before use
+  ///
+  /// **See also:**
+  /// - `asp_advert_create()`
   int asp_advert_set_auto_accept(
     asp_advert_service_h adv_service,
     bool auto_accept,
@@ -553,28 +773,36 @@ class Tizen80Asp {
   late final _asp_advert_set_auto_accept = _asp_advert_set_auto_acceptPtr
       .asFunction<int Function(asp_advert_service_h, bool)>();
 
-  /// @brief Adds the information for a service to be advertised.
-  /// @details Application should set service information after creating service using
-  /// asp_advert_create() and before advertising service using
-  /// asp_advert_start_advertising().
-  /// @since_tizen 4.0
-  /// @param[in] adv_service  Service descriptor handle provided by the asp_advert_create()
-  /// @param[in] key          Service-defined key data specified in Section 6 of RFC6763
-  /// @param[in] value        Service-defined value data specified in Section 6 of RFC6763
-  /// Only one value can be added for a given key. If a value is set for a key,
-  /// and another value was set for the key before, the old value will be
-  /// overwritten with the new one.
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #ASP_ERROR_SERVICE_NOT_FOUND  Service not found
-  /// @pre This API needs asp_advert_create() before use
-  /// @see asp_advert_create()
+  /// Adds the information for a service to be advertised.
+  ///
+  /// Application should set service information after creating service using asp_advert_create() and before advertising service using asp_advert_start_advertising().
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `adv_service` (in): Service descriptor handle provided by the asp_advert_create()
+  /// - `key` (in): Service-defined key data specified in Section 6 of RFC6763
+  /// - `value` (in): Service-defined value data specified in Section 6 of RFC6763 Only one value can be added for a given key. If a value is set for a key, and another value was set for the key before, the old value will be overwritten with the new one.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SERVICE_NOT_FOUND`: Service not found
+  ///
+  /// **Preconditions:**
+  /// - This API needs asp_advert_create() before use
+  ///
+  /// **See also:**
+  /// - `asp_advert_create()`
   int asp_advert_add_info(
     asp_advert_service_h adv_service,
     ffi.Pointer<ffi.Char> key,
@@ -595,28 +823,41 @@ class Tizen80Asp {
       int Function(asp_advert_service_h, ffi.Pointer<ffi.Char>,
           ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the information for a service to be advertised.
-  /// @details Application should set service information after creating service using
-  /// asp_advert_create() and before advertising service using
-  /// asp_advert_start_advertising().
-  /// @since_tizen 4.0
-  /// @remarks @a value should not be freed.
-  /// It is recommended to make a copy of it to use.
-  /// @param[in] adv_service  Service descriptor handle provided by the asp_advert_create()
-  /// @param[in] key          Service-defined key data specified in Section 6 of RFC6763
-  /// @param[in] length       Length of service-defined value data specified in Section 6 of RFC6763
-  /// @param[in] value        Service-defined value data specified in Section 6 of RFC6763
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #ASP_ERROR_SERVICE_NOT_FOUND  Service not found
-  /// @pre This API needs asp_advert_create() before use
-  /// @see asp_advert_create()
+  /// Sets the information for a service to be advertised.
+  ///
+  /// Application should set service information after creating service using asp_advert_create() and before advertising service using asp_advert_start_advertising().
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - `value` should not be freed.
+  /// - It is recommended to make a copy of it to use.
+  ///
+  /// **Parameters:**
+  /// - `adv_service` (in): Service descriptor handle provided by the asp_advert_create()
+  /// - `key` (in): Service-defined key data specified in Section 6 of RFC6763
+  /// - `length` (in): Length of service-defined value data specified in Section 6 of RFC6763
+  /// - `value` (in): Service-defined value data specified in Section 6 of RFC6763
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SERVICE_NOT_FOUND`: Service not found
+  ///
+  /// **Preconditions:**
+  /// - This API needs asp_advert_create() before use
+  ///
+  /// **See also:**
+  /// - `asp_advert_create()`
   int asp_advert_get_info(
     asp_advert_service_h adv_service,
     ffi.Pointer<ffi.Char> key,
@@ -642,24 +883,35 @@ class Tizen80Asp {
       int Function(asp_advert_service_h, ffi.Pointer<ffi.Char>,
           ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the information for a service to be advertised.
-  /// @details Application should set service information after creating service using
-  /// asp_advert_create() and before advertising service using
-  /// asp_advert_start_advertising().
-  /// @since_tizen 4.0
-  /// @param[in] adv_service  Service descriptor handle provided by the asp_advert_create()
-  /// @param[in] key          Service-defined key data specified to be removed
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #ASP_ERROR_SERVICE_NOT_FOUND  Service not found
-  /// @pre This API needs asp_advert_create() before use
-  /// @see asp_advert_create()
+  /// Sets the information for a service to be advertised.
+  ///
+  /// Application should set service information after creating service using asp_advert_create() and before advertising service using asp_advert_start_advertising().
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `adv_service` (in): Service descriptor handle provided by the asp_advert_create()
+  /// - `key` (in): Service-defined key data specified to be removed
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SERVICE_NOT_FOUND`: Service not found
+  ///
+  /// **Preconditions:**
+  /// - This API needs asp_advert_create() before use
+  ///
+  /// **See also:**
+  /// - `asp_advert_create()`
   int asp_advert_remove_info(
     asp_advert_service_h adv_service,
     ffi.Pointer<ffi.Char> key,
@@ -677,26 +929,35 @@ class Tizen80Asp {
   late final _asp_advert_remove_info = _asp_advert_remove_infoPtr
       .asFunction<int Function(asp_advert_service_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the status for a service to be advertised.
-  /// @details Application should set service status after creating service using
-  /// asp_advert_create() and before advertising service using
-  /// asp_advert_start_advertising().
-  /// @since_tizen 4.0
-  /// @param[in] adv_service  Service descriptor handle provided by the asp_advert_create()
-  /// @param[in] status       Status of the service:
-  /// (@c 1 = available to use, @c 0 = not available to use,
-  /// @c 2-255 = service specific information)
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #ASP_ERROR_SERVICE_NOT_FOUND  Service not found
-  /// @pre This API needs asp_advert_create() before use
-  /// @see asp_advert_create()
+  /// Sets the status for a service to be advertised.
+  ///
+  /// Application should set service status after creating service using asp_advert_create() and before advertising service using asp_advert_start_advertising().
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `adv_service` (in): Service descriptor handle provided by the asp_advert_create()
+  /// - `status` (in): Status of the service: (`1` = available to use, `0` = not available to use, `2-255` = service specific information)
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SERVICE_NOT_FOUND`: Service not found
+  ///
+  /// **Preconditions:**
+  /// - This API needs asp_advert_create() before use
+  ///
+  /// **See also:**
+  /// - `asp_advert_create()`
   int asp_advert_set_status(
     asp_advert_service_h adv_service,
     int status,
@@ -714,25 +975,35 @@ class Tizen80Asp {
   late final _asp_advert_set_status = _asp_advert_set_statusPtr
       .asFunction<int Function(asp_advert_service_h, int)>();
 
-  /// @brief Sets the discovery mechanism for a service to be advertised.
-  /// @details Application should set discovery mechanism after creating service using
-  /// asp_advert_create() and before advertising service using
-  /// asp_advert_start_advertising().
-  /// @since_tizen 4.0
-  /// @param[in] adv_service     Service descriptor handle provided by the asp_advert_create()
-  /// @param[in] discovery_tech  The discovery mechanism; values of
-  /// #asp_discovery_tech_e combined with bitwise 'or'
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #ASP_ERROR_SERVICE_NOT_FOUND  Service not found
-  /// @pre This API needs asp_advert_create() before use
-  /// @see asp_advert_create()
+  /// Sets the discovery mechanism for a service to be advertised.
+  ///
+  /// Application should set discovery mechanism after creating service using asp_advert_create() and before advertising service using asp_advert_start_advertising().
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `adv_service` (in): Service descriptor handle provided by the asp_advert_create()
+  /// - `discovery_tech` (in): The discovery mechanism; values of `asp_discovery_tech_e` combined with bitwise 'or'
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SERVICE_NOT_FOUND`: Service not found
+  ///
+  /// **Preconditions:**
+  /// - This API needs asp_advert_create() before use
+  ///
+  /// **See also:**
+  /// - `asp_advert_create()`
   int asp_advert_set_discovery_tech(
     asp_advert_service_h adv_service,
     int discovery_tech,
@@ -749,24 +1020,35 @@ class Tizen80Asp {
   late final _asp_advert_set_discovery_tech = _asp_advert_set_discovery_techPtr
       .asFunction<int Function(asp_advert_service_h, int)>();
 
-  /// @brief Sets the preferred connection for a service to be advertised.
-  /// @details Application should set preferred connection after creating service using
-  /// asp_advert_create() and before advertising service using
-  /// asp_advert_start_advertising().
-  /// @since_tizen 4.0
-  /// @param[in] adv_service           Service descriptor handle provided by the asp_advert_create()
-  /// @param[in] preferred_connection  The preferred connection
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #ASP_ERROR_SERVICE_NOT_FOUND  Service not found
-  /// @pre This API needs asp_advert_create() before use
-  /// @see asp_advert_create()
+  /// Sets the preferred connection for a service to be advertised.
+  ///
+  /// Application should set preferred connection after creating service using asp_advert_create() and before advertising service using asp_advert_start_advertising().
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `adv_service` (in): Service descriptor handle provided by the asp_advert_create()
+  /// - `preferred_connection` (in): The preferred connection
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SERVICE_NOT_FOUND`: Service not found
+  ///
+  /// **Preconditions:**
+  /// - This API needs asp_advert_create() before use
+  ///
+  /// **See also:**
+  /// - `asp_advert_create()`
   int asp_advert_set_preferred_connection(
     asp_advert_service_h adv_service,
     int preferred_connection,
@@ -785,31 +1067,36 @@ class Tizen80Asp {
       _asp_advert_set_preferred_connectionPtr
           .asFunction<int Function(asp_advert_service_h, int)>();
 
-  /// @brief Sets the Wi-Fi P2P role for a service to be advertised.
-  /// @details Application should set role after creating service using
-  /// asp_advert_create() and before advertising service using
-  /// asp_advert_start_advertising().
-  /// @since_tizen 4.0
-  /// @param[in] adv_service  Service descriptor handle provided by the asp_advert_create()
-  /// @param[in] role         The role of the service: \n
-  /// #ASP_ADVERT_P2P_ROLE_SCHEME_ANY - All roles are acceptable \n
-  /// #ASP_ADVERT_P2P_ROLE_SCHEME_GO  - The receiving interface should assume \n
-  /// the GO role, if it's not possible, #ASP_ERROR_NETWORK_ROLE_REJECTED \n
-  /// is returned \n
-  /// #ASP_ADVERT_P2P_ROLE_SCHEME_GC  -
-  /// The receiving interface should assume the GC role
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE                   Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED          Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY          Out of memory
-  /// @retval #ASP_ERROR_INVALID_PARAMETER      Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED          Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED        Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED       Operation failed
-  /// @retval #ASP_ERROR_SERVICE_NOT_FOUND      Service not found
-  /// @retval #ASP_ERROR_NETWORK_ROLE_REJECTED  Network role rejected
-  /// @pre This API needs asp_advert_create() before use
-  /// @see asp_advert_create()
+  /// Sets the Wi-Fi P2P role for a service to be advertised.
+  ///
+  /// Application should set role after creating service using asp_advert_create() and before advertising service using asp_advert_start_advertising().
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `adv_service` (in): Service descriptor handle provided by the asp_advert_create()
+  /// - `role` (in): The role of the service: `ASP_ADVERT_P2P_ROLE_SCHEME_ANY` - All roles are acceptable `ASP_ADVERT_P2P_ROLE_SCHEME_GO` - The receiving interface should assume the GO role, if it's not possible, `ASP_ERROR_NETWORK_ROLE_REJECTED` is returned `ASP_ADVERT_P2P_ROLE_SCHEME_GC` - The receiving interface should assume the GC role
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SERVICE_NOT_FOUND`: Service not found
+  /// - `ASP_ERROR_NETWORK_ROLE_REJECTED`: Network role rejected
+  ///
+  /// **Preconditions:**
+  /// - This API needs asp_advert_create() before use
+  ///
+  /// **See also:**
+  /// - `asp_advert_create()`
   int asp_advert_set_p2p_role_scheme(
     asp_advert_service_h adv_service,
     int role,
@@ -828,29 +1115,35 @@ class Tizen80Asp {
       _asp_advert_set_p2p_role_schemePtr
           .asFunction<int Function(asp_advert_service_h, int)>();
 
-  /// @brief Gets the Wi-Fi P2P role for a service to be advertised.
-  /// @details Application should Get role after creating service using
-  /// asp_advert_create() and before advertising service using
-  /// asp_advert_start_advertising().
-  /// @since_tizen 4.0
-  /// @param[in] adv_service  Service descriptor handle provided by the asp_advert_create()
-  /// @param[in] role         The role of the service: \n
-  /// #ASP_ADVERT_P2P_ROLE_SCHEME_ANY - All roles are acceptable \n
-  /// #ASP_ADVERT_P2P_ROLE_SCHEME_GO  - The receiving interface should assume \n
-  /// the GO role \n
-  /// #ASP_ADVERT_P2P_ROLE_SCHEME_GC  -
-  /// The receiving interface should assume the GC role
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #ASP_ERROR_SERVICE_NOT_FOUND  Service not found
-  /// @pre This API needs asp_advert_create() before use
-  /// @see asp_advert_create()
+  /// Gets the Wi-Fi P2P role for a service to be advertised.
+  ///
+  /// Application should Get role after creating service using asp_advert_create() and before advertising service using asp_advert_start_advertising().
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `adv_service` (in): Service descriptor handle provided by the asp_advert_create()
+  /// - `role` (in): The role of the service: `ASP_ADVERT_P2P_ROLE_SCHEME_ANY` - All roles are acceptable `ASP_ADVERT_P2P_ROLE_SCHEME_GO` - The receiving interface should assume the GO role `ASP_ADVERT_P2P_ROLE_SCHEME_GC` - The receiving interface should assume the GC role
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SERVICE_NOT_FOUND`: Service not found
+  ///
+  /// **Preconditions:**
+  /// - This API needs asp_advert_create() before use
+  ///
+  /// **See also:**
+  /// - `asp_advert_create()`
   int asp_advert_get_p2p_role_scheme(
     asp_advert_service_h adv_service,
     ffi.Pointer<ffi.Int32> role,
@@ -869,25 +1162,35 @@ class Tizen80Asp {
       _asp_advert_get_p2p_role_schemePtr.asFunction<
           int Function(asp_advert_service_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets the P2P configuration method for a service to be advertised.
-  /// @details Application should set configuration method after creating service using
-  /// asp_advert_create() and before advertising service using
-  /// asp_advert_start_advertising().
-  /// @since_tizen 4.0
-  /// @param[in] adv_service    Service descriptor handle provided by the asp_advert_create()
-  /// @param[in] config_method  preferred Wi-Fi Simple Config (WSC) configuration method.
-  /// Default value is #ASP_WPS_TYPE_DEFAULT.
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #ASP_ERROR_SERVICE_NOT_FOUND  Service not found
-  /// @pre This API needs asp_advert_create() before use
-  /// @see asp_advert_create()
+  /// Sets the P2P configuration method for a service to be advertised.
+  ///
+  /// Application should set configuration method after creating service using asp_advert_create() and before advertising service using asp_advert_start_advertising().
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `adv_service` (in): Service descriptor handle provided by the asp_advert_create()
+  /// - `config_method` (in): preferred Wi-Fi Simple Config (WSC) configuration method. Default value is `ASP_WPS_TYPE_DEFAULT`.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SERVICE_NOT_FOUND`: Service not found
+  ///
+  /// **Preconditions:**
+  /// - This API needs asp_advert_create() before use
+  ///
+  /// **See also:**
+  /// - `asp_advert_create()`
   int asp_advert_set_p2p_config_method(
     asp_advert_service_h adv_service,
     int config_method,
@@ -906,24 +1209,35 @@ class Tizen80Asp {
       _asp_advert_set_p2p_config_methodPtr
           .asFunction<int Function(asp_advert_service_h, int)>();
 
-  /// @brief Gets the P2P configuration method for a service to be advertised.
-  /// @details Application should Get configuration method after creating service using
-  /// asp_advert_create() and before advertising service using
-  /// asp_advert_start_advertising().
-  /// @since_tizen 4.0
-  /// @param[in] adv_service    Service descriptor handle provided by the asp_advert_create()
-  /// @param[in] config_method  preferred Wi-Fi Simple Config (WSC)configuration method.
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #ASP_ERROR_SERVICE_NOT_FOUND  Service not found
-  /// @pre This API needs asp_advert_create() before use
-  /// @see asp_advert_create()
+  /// Gets the P2P configuration method for a service to be advertised.
+  ///
+  /// Application should Get configuration method after creating service using asp_advert_create() and before advertising service using asp_advert_start_advertising().
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `adv_service` (in): Service descriptor handle provided by the asp_advert_create()
+  /// - `config_method` (in): preferred Wi-Fi Simple Config (WSC)configuration method.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SERVICE_NOT_FOUND`: Service not found
+  ///
+  /// **Preconditions:**
+  /// - This API needs asp_advert_create() before use
+  ///
+  /// **See also:**
+  /// - `asp_advert_create()`
   int asp_advert_get_p2p_config_method(
     asp_advert_service_h adv_service,
     ffi.Pointer<ffi.Int32> config_method,
@@ -942,27 +1256,36 @@ class Tizen80Asp {
       _asp_advert_get_p2p_config_methodPtr.asFunction<
           int Function(asp_advert_service_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets the service response for an advertised service.
-  /// @details Application should set service response after creating service using
-  /// asp_advert_create() and before advertising service using
-  /// asp_advert_create().
-  /// @since_tizen 4.0
-  /// @param[in] adv_service  Service descriptor handle provided by the asp_advert_create()
-  /// @param[in] rsp_info     Specified for a particular service up to 144 bytes.
-  /// You can refer to Wi-Fi Peer-to-Peer Services Technical Specification,
-  /// Wi-Fi Alliance. Available at: http://www.wi-fi.org
-  /// @param[in] length       The length of @a rsp_info in bytes, maximum length is 144
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #ASP_ERROR_SERVICE_NOT_FOUND  Service not found
-  /// @pre This API needs asp_advert_create() before use
-  /// @see asp_advert_create()
+  /// Sets the service response for an advertised service.
+  ///
+  /// Application should set service response after creating service using asp_advert_create() and before advertising service using asp_advert_create().
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `adv_service` (in): Service descriptor handle provided by the asp_advert_create()
+  /// - `rsp_info` (in): Specified for a particular service up to 144 bytes. You can refer to Wi-Fi Peer-to-Peer Services Technical Specification, Wi-Fi Alliance. Available at: http://www.wi-fi.org
+  /// - `length` (in): The length of `rsp_info` in bytes, maximum length is 144
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SERVICE_NOT_FOUND`: Service not found
+  ///
+  /// **Preconditions:**
+  /// - This API needs asp_advert_create() before use
+  ///
+  /// **See also:**
+  /// - `asp_advert_create()`
   int asp_advert_set_p2p_response(
     asp_advert_service_h adv_service,
     ffi.Pointer<ffi.Char> rsp_info,
@@ -983,26 +1306,42 @@ class Tizen80Asp {
       _asp_advert_set_p2p_responsePtr.asFunction<
           int Function(asp_advert_service_h, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @brief Starts to advertise a service.
-  /// @details Application should start to advertise after creating service using
-  /// asp_advert_create(). If the service is being advertised, no changes can be made to it.
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] adv_service  Service descriptor handle provided by the asp_advert_create()
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #ASP_ERROR_SERVICE_NOT_FOUND  Service not found
-  /// @pre This API needs asp_advert_create() before use
-  /// @see asp_advert_create()
-  /// @see asp_advert_stop_advertising()
+  /// Starts to advertise a service.
+  ///
+  /// Application should start to advertise after creating service using asp_advert_create(). If the service is being advertised, no changes can be made to it.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `adv_service` (in): Service descriptor handle provided by the asp_advert_create()
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SERVICE_NOT_FOUND`: Service not found
+  ///
+  /// **Preconditions:**
+  /// - This API needs asp_advert_create() before use
+  ///
+  /// **See also:**
+  /// - `asp_advert_create()`
+  /// - `asp_advert_stop_advertising()`
   int asp_advert_start_advertising(
     asp_advert_service_h adv_service,
   ) {
@@ -1017,25 +1356,41 @@ class Tizen80Asp {
   late final _asp_advert_start_advertising = _asp_advert_start_advertisingPtr
       .asFunction<int Function(asp_advert_service_h)>();
 
-  /// @brief Stops a service advertisement.
-  /// @details Application should cancel to advertise after advertising service using
-  /// asp_advert_start_advertising().
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] adv_service  Service descriptor handle provided by the asp_advert_create()
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #ASP_ERROR_SERVICE_NOT_FOUND  Service not found
-  /// @pre This API needs asp_advert_start_advertising() before use
-  /// @see asp_advert_start_advertising()
+  /// Stops a service advertisement.
+  ///
+  /// Application should cancel to advertise after advertising service using asp_advert_start_advertising().
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `adv_service` (in): Service descriptor handle provided by the asp_advert_create()
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SERVICE_NOT_FOUND`: Service not found
+  ///
+  /// **Preconditions:**
+  /// - This API needs asp_advert_start_advertising() before use
+  ///
+  /// **See also:**
+  /// - `asp_advert_start_advertising()`
   int asp_advert_stop_advertising(
     asp_advert_service_h adv_service,
   ) {
@@ -1050,28 +1405,42 @@ class Tizen80Asp {
   late final _asp_advert_stop_advertising = _asp_advert_stop_advertisingPtr
       .asFunction<int Function(asp_advert_service_h)>();
 
-  /// @brief Changes the advertising service status.
-  /// @details Application should change the advertising service
-  /// status after advertising service using asp_advert_start_advertising().
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] adv_service  Service descriptor handle provided by the asp_advert_create()
-  /// @param[in] status       Status of the service:
-  /// (@c 1 = available to use, @c 0 = not available to use,
-  /// @c 2-255 = service specific information)
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #ASP_ERROR_SERVICE_NOT_FOUND  Service not found
-  /// @pre This API needs asp_advert_start_advertising() before use
-  /// @see asp_advert_start_advertising()
+  /// Changes the advertising service status.
+  ///
+  /// Application should change the advertising service status after advertising service using asp_advert_start_advertising().
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `adv_service` (in): Service descriptor handle provided by the asp_advert_create()
+  /// - `status` (in): Status of the service: (`1` = available to use, `0` = not available to use, `2-255` = service specific information)
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SERVICE_NOT_FOUND`: Service not found
+  ///
+  /// **Preconditions:**
+  /// - This API needs asp_advert_start_advertising() before use
+  ///
+  /// **See also:**
+  /// - `asp_advert_start_advertising()`
   int asp_advert_change_service_status(
     asp_advert_service_h adv_service,
     int status,
@@ -1090,27 +1459,35 @@ class Tizen80Asp {
       _asp_advert_change_service_statusPtr
           .asFunction<int Function(asp_advert_service_h, int)>();
 
-  /// @brief Creates the description of a seek operation.
-  /// @remarks The @a seek_service should be released using asp_seek_destroy().
-  /// @since_tizen 4.0
-  /// @param[in] service_type   Service Type of a service being searched.
-  /// this shall be at least 1 character and no more than 15 characters long
-  /// contain only US-ASCII [ANSI.X3.4-1986] letters 'A' - 'Z' and
-  /// 'a' - 'z', digits '0' - '9', and hyphens ('-', ASCII 0x2D or decimal 45)
-  /// contain at least one letter ('A' - 'Z' or 'a' - ‘z')
-  /// not begin or end with a hyphen. If you want to seek one of the
-  /// original P2PS defined services, this means service name.
-  /// @param[out] seek_service  Service seek handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @pre Application Service Platform (ASP) must be initialized by asp_initialize().
-  /// @see asp_seek_destroy()
+  /// Creates the description of a seek operation.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - The `seek_service` should be released using asp_seek_destroy().
+  ///
+  /// **Parameters:**
+  /// - `service_type` (in): Service Type of a service being searched. this shall be at least 1 character and no more than 15 characters long contain only US-ASCII `[ANSI.X3.4-1986]` letters 'A' - 'Z' and 'a' - 'z', digits '0' - '9', and hyphens ('-', ASCII 0x2D or decimal 45) contain at least one letter ('A' - 'Z' or 'a' - ‘z') not begin or end with a hyphen. If you want to seek one of the original P2PS defined services, this means service name.
+  /// - `seek_service` (out): Service seek handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **Preconditions:**
+  /// - Application Service Platform (ASP) must be initialized by asp_initialize().
+  ///
+  /// **See also:**
+  /// - `asp_seek_destroy()`
   int asp_seek_create(
     ffi.Pointer<ffi.Char> service_type,
     ffi.Pointer<asp_seek_service_h> seek_service,
@@ -1128,23 +1505,34 @@ class Tizen80Asp {
   late final _asp_seek_create = _asp_seek_createPtr.asFunction<
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<asp_seek_service_h>)>();
 
-  /// @brief Destroys the description of a seek operation.
-  /// @details If asp_seek_start() was called for a service,
-  /// asp_seek_stop() should be called for it before destroying it.
-  /// asp_seek_stop().
-  /// @since_tizen 4.0
-  /// @param[in] seek_service  Service seek handle provided by the asp_seek_create()
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #ASP_ERROR_SERVICE_NOT_FOUND  Service not found
-  /// @pre A seek service handle must be created with asp_seek_create().
-  /// @see asp_seek_create
+  /// Destroys the description of a seek operation.
+  ///
+  /// If asp_seek_start() was called for a service, asp_seek_stop() should be called for it before destroying it. asp_seek_stop().
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `seek_service` (in): Service seek handle provided by the asp_seek_create()
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SERVICE_NOT_FOUND`: Service not found
+  ///
+  /// **Preconditions:**
+  /// - A seek service handle must be created with asp_seek_create().
+  ///
+  /// **See also:**
+  /// - `asp_seek_create`
   int asp_seek_destroy(
     asp_seek_service_h seek_service,
   ) {
@@ -1159,25 +1547,38 @@ class Tizen80Asp {
   late final _asp_seek_destroy =
       _asp_seek_destroyPtr.asFunction<int Function(asp_seek_service_h)>();
 
-  /// @brief Adds the information for a service to be sought.
-  /// @details Application should set service information after creating service using
-  /// asp_seek_create() and before seeking service using asp_seek_start().
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @param[in] seek_service  Service descriptor handle provided by the asp_seek_create()
-  /// @param[in] key           Service-defined key data to be searched,
-  /// specified in Section 6 of RFC6763
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #ASP_ERROR_SERVICE_NOT_FOUND  Service not found
-  /// @pre This API needs asp_seek_create() before use
-  /// @see asp_seek_create()
+  /// Adds the information for a service to be sought.
+  ///
+  /// Application should set service information after creating service using asp_seek_create() and before seeking service using asp_seek_start().
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Parameters:**
+  /// - `seek_service` (in): Service descriptor handle provided by the asp_seek_create()
+  /// - `key` (in): Service-defined key data to be searched, specified in Section 6 of RFC6763
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SERVICE_NOT_FOUND`: Service not found
+  ///
+  /// **Preconditions:**
+  /// - This API needs asp_seek_create() before use
+  ///
+  /// **See also:**
+  /// - `asp_seek_create()`
   int asp_seek_add_info(
     asp_seek_service_h seek_service,
     ffi.Pointer<ffi.Char> key,
@@ -1195,24 +1596,35 @@ class Tizen80Asp {
   late final _asp_seek_add_info = _asp_seek_add_infoPtr
       .asFunction<int Function(asp_seek_service_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Removes the information for a service to be sought.
-  /// @details Application should set service information after creating service using
-  /// asp_seek_create() and before seeking service using asp_seek_start().
-  /// @since_tizen 4.0
-  /// @param[in] seek_service  Service descriptor handle provided by the asp_seek_create()
-  /// @param[in] key           Service-defined key data to be searched,
-  /// specified in Section 6 of RFC6763
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #ASP_ERROR_SERVICE_NOT_FOUND  Service not found
-  /// @pre This API needs asp_seek_create() before use
-  /// @see asp_seek_create()
+  /// Removes the information for a service to be sought.
+  ///
+  /// Application should set service information after creating service using asp_seek_create() and before seeking service using asp_seek_start().
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `seek_service` (in): Service descriptor handle provided by the asp_seek_create()
+  /// - `key` (in): Service-defined key data to be searched, specified in Section 6 of RFC6763
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SERVICE_NOT_FOUND`: Service not found
+  ///
+  /// **Preconditions:**
+  /// - This API needs asp_seek_create() before use
+  ///
+  /// **See also:**
+  /// - `asp_seek_create()`
   int asp_seek_remove_info(
     asp_seek_service_h seek_service,
     ffi.Pointer<ffi.Char> key,
@@ -1230,24 +1642,35 @@ class Tizen80Asp {
   late final _asp_seek_remove_info = _asp_seek_remove_infoPtr
       .asFunction<int Function(asp_seek_service_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the discovery mechanism for a service to be sought.
-  /// @details Application should set service information after creating service using
-  /// asp_seek_create() and before seeking service using asp_seek_start().
-  /// @since_tizen 4.0
-  /// @param[in] seek_service    Service descriptor handle provided by the asp_seek_create()
-  /// @param[in] discovery_tech  The discovery mechanism, values of
-  /// #asp_discovery_tech_e combined with bitwise 'or'
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #ASP_ERROR_SERVICE_NOT_FOUND  Service not found
-  /// @pre This API needs asp_seek_create() before use
-  /// @see asp_seek_create()
+  /// Sets the discovery mechanism for a service to be sought.
+  ///
+  /// Application should set service information after creating service using asp_seek_create() and before seeking service using asp_seek_start().
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `seek_service` (in): Service descriptor handle provided by the asp_seek_create()
+  /// - `discovery_tech` (in): The discovery mechanism, values of `asp_discovery_tech_e` combined with bitwise 'or'
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SERVICE_NOT_FOUND`: Service not found
+  ///
+  /// **Preconditions:**
+  /// - This API needs asp_seek_create() before use
+  ///
+  /// **See also:**
+  /// - `asp_seek_create()`
   int asp_seek_set_discovery_tech(
     asp_seek_service_h seek_service,
     int discovery_tech,
@@ -1264,23 +1687,35 @@ class Tizen80Asp {
   late final _asp_seek_set_discovery_tech = _asp_seek_set_discovery_techPtr
       .asFunction<int Function(asp_seek_service_h, int)>();
 
-  /// @brief Sets the preferred connection for a service to be sought.
-  /// @details Application should set service information after creating service using
-  /// asp_seek_create() and before seeking service using asp_seek_start().
-  /// @since_tizen 4.0
-  /// @param[in] seek_service          Service descriptor handle provided by the asp_seek_create()
-  /// @param[in] preferred_connection  The preferred connection
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #ASP_ERROR_SERVICE_NOT_FOUND  Service not found
-  /// @pre This API needs asp_seek_create() before use
-  /// @see asp_seek_create()
+  /// Sets the preferred connection for a service to be sought.
+  ///
+  /// Application should set service information after creating service using asp_seek_create() and before seeking service using asp_seek_start().
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `seek_service` (in): Service descriptor handle provided by the asp_seek_create()
+  /// - `preferred_connection` (in): The preferred connection
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SERVICE_NOT_FOUND`: Service not found
+  ///
+  /// **Preconditions:**
+  /// - This API needs asp_seek_create() before use
+  ///
+  /// **See also:**
+  /// - `asp_seek_create()`
   int asp_seek_set_preferred_connection(
     asp_seek_service_h seek_service,
     int preferred_connection,
@@ -1299,25 +1734,42 @@ class Tizen80Asp {
       _asp_seek_set_preferred_connectionPtr
           .asFunction<int Function(asp_seek_service_h, int)>();
 
-  /// @brief Starts to seek services on peer devices.
-  /// @details If the service is currently seeking, no changes can be made to it.
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] seek_service  Service seek handle provided by the asp_seek_create()
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #ASP_ERROR_SERVICE_NOT_FOUND  Service not found
-  /// @pre A seek service handle must be created with asp_seek_create().
-  /// @see asp_seek_create()
-  /// @see asp_seek_stop()
+  /// Starts to seek services on peer devices.
+  ///
+  /// If the service is currently seeking, no changes can be made to it.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `seek_service` (in): Service seek handle provided by the asp_seek_create()
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SERVICE_NOT_FOUND`: Service not found
+  ///
+  /// **Preconditions:**
+  /// - A seek service handle must be created with asp_seek_create().
+  ///
+  /// **See also:**
+  /// - `asp_seek_create()`
+  /// - `asp_seek_stop()`
   int asp_seek_start(
     asp_seek_service_h seek_service,
   ) {
@@ -1332,25 +1784,41 @@ class Tizen80Asp {
   late final _asp_seek_start =
       _asp_seek_startPtr.asFunction<int Function(asp_seek_service_h)>();
 
-  /// @brief Stops seeking services.
-  /// @details Application should cancel to seek service after searching service using
-  /// asp_seek_start().
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] seek_service  Service seek handle provided by the asp_seek_create()
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #ASP_ERROR_SERVICE_NOT_FOUND  Service not found
-  /// @pre A seek service handle must be created with asp_seek_create().
-  /// @see asp_seek_start()
+  /// Stops seeking services.
+  ///
+  /// Application should cancel to seek service after searching service using asp_seek_start().
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `seek_service` (in): Service seek handle provided by the asp_seek_create()
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SERVICE_NOT_FOUND`: Service not found
+  ///
+  /// **Preconditions:**
+  /// - A seek service handle must be created with asp_seek_create().
+  ///
+  /// **See also:**
+  /// - `asp_seek_start()`
   int asp_seek_stop(
     asp_seek_service_h seek_service,
   ) {
@@ -1365,23 +1833,33 @@ class Tizen80Asp {
   late final _asp_seek_stop =
       _asp_seek_stopPtr.asFunction<int Function(asp_seek_service_h)>();
 
-  /// @brief Creates a local Application Service Platform (ASP) session.
-  /// @since_tizen 4.0
-  /// @remarks The @a session should be released using asp_session_destroy().
-  /// @param[in] service_mac  P2P device address of remote P2P device provided by
-  /// asp_seek_search_result_cb()
-  /// @param[in] adv_id       The advertisement ID provided by
-  /// asp_seek_search_result_cb()
-  /// @param[out] session     ASP session descriptor handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @see asp_session_destroy()
+  /// Creates a local Application Service Platform (ASP) session.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - The `session` should be released using asp_session_destroy().
+  ///
+  /// **Parameters:**
+  /// - `service_mac` (in): P2P device address of remote P2P device provided by asp_seek_search_result_cb()
+  /// - `adv_id` (in): The advertisement ID provided by asp_seek_search_result_cb()
+  /// - `session` (out): ASP session descriptor handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `asp_session_destroy()`
   int asp_session_create(
     ffi.Pointer<ffi.Char> service_mac,
     int adv_id,
@@ -1401,21 +1879,34 @@ class Tizen80Asp {
   late final _asp_session_create = _asp_session_createPtr.asFunction<
       int Function(ffi.Pointer<ffi.Char>, int, ffi.Pointer<asp_session_h>)>();
 
-  /// @brief Destroys a local Application Service Platform (ASP) session.
-  /// @details Application should create session by asp_session_create().
-  /// @since_tizen 4.0
-  /// @param[in] session  Application Service Platform session descriptor handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #ASP_ERROR_SESSION_NOT_FOUND  Session not found
-  /// @pre This API needs asp_session_create() before use.
-  /// @see asp_session_create()
+  /// Destroys a local Application Service Platform (ASP) session.
+  ///
+  /// Application should create session by asp_session_create().
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `session` (in): Application Service Platform session descriptor handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SESSION_NOT_FOUND`: Session not found
+  ///
+  /// **Preconditions:**
+  /// - This API needs asp_session_create() before use.
+  ///
+  /// **See also:**
+  /// - `asp_session_create()`
   int asp_session_destroy(
     asp_session_h session,
   ) {
@@ -1430,27 +1921,40 @@ class Tizen80Asp {
   late final _asp_session_destroy =
       _asp_session_destroyPtr.asFunction<int Function(asp_session_h)>();
 
-  /// @brief Gets the session MAC for an Application Service Platform session.
-  /// @details Application should request to connect session by
-  /// asp_session_connect() or receive request by asp_session_request_cb().
-  /// @since_tizen 4.0
-  /// @remarks @a session_mac should not be freed.
-  /// It is recommended to make a copy of it to use.
-  /// @param[in] session       Application Service Platform session descriptor handle
-  /// @param[out] session_mac  The session MAC is the MAC address of
-  /// P2P device which assigned the session ID
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #ASP_ERROR_SESSION_NOT_FOUND  Session not found
-  /// @pre This API needs asp_session_connect() before use.
-  /// @see asp_session_connect()
-  /// @see asp_session_request_cb()
+  /// Gets the session MAC for an Application Service Platform session.
+  ///
+  /// Application should request to connect session by asp_session_connect() or receive request by asp_session_request_cb().
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - `session_mac` should not be freed.
+  /// - It is recommended to make a copy of it to use.
+  ///
+  /// **Parameters:**
+  /// - `session` (in): Application Service Platform session descriptor handle
+  /// - `session_mac` (out): The session MAC is the MAC address of P2P device which assigned the session ID
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SESSION_NOT_FOUND`: Session not found
+  ///
+  /// **Preconditions:**
+  /// - This API needs asp_session_connect() before use.
+  ///
+  /// **See also:**
+  /// - `asp_session_connect()`
+  /// - `asp_session_request_cb()`
   int asp_session_get_mac(
     asp_session_h session,
     ffi.Pointer<ffi.Pointer<ffi.Char>> session_mac,
@@ -1468,24 +1972,36 @@ class Tizen80Asp {
   late final _asp_session_get_mac = _asp_session_get_macPtr.asFunction<
       int Function(asp_session_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the ID of an Application Service Platform session.
-  /// @details Application should create local session by
-  /// asp_session_create() or receive request by asp_session_request_cb().
-  /// @since_tizen 4.0
-  /// @param[in] session      Application Service Platform session descriptor handle
-  /// @param[out] session_id  The session ID
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #ASP_ERROR_SESSION_NOT_FOUND  Session not found
-  /// @pre This API needs asp_session_create() before use.
-  /// @see asp_session_create()
-  /// @see asp_session_request_cb()
+  /// Gets the ID of an Application Service Platform session.
+  ///
+  /// Application should create local session by asp_session_create() or receive request by asp_session_request_cb().
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `session` (in): Application Service Platform session descriptor handle
+  /// - `session_id` (out): The session ID
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SESSION_NOT_FOUND`: Session not found
+  ///
+  /// **Preconditions:**
+  /// - This API needs asp_session_create() before use.
+  ///
+  /// **See also:**
+  /// - `asp_session_create()`
+  /// - `asp_session_request_cb()`
   int asp_session_get_id(
     asp_session_h session,
     ffi.Pointer<ffi.UnsignedInt> session_id,
@@ -1503,29 +2019,35 @@ class Tizen80Asp {
   late final _asp_session_get_id = _asp_session_get_idPtr
       .asFunction<int Function(asp_session_h, ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Sets the information for an Application Service Platform session.
-  /// @details Application should set session_info after creating session by
-  /// asp_session_create() and before requesting to connect
-  /// session by asp_session_connect().
-  /// @since_tizen 4.0
-  /// @param[in] session       Application Service Platform session descriptor handle
-  /// provided by the asp_session_create()
-  /// @param[in] session_info  Detailed information about the session.
-  /// The session_info parameter is defined for each service section
-  /// and up to 144 bytes. You can refer to Wi-Fi Peer-to-Peer Services
-  /// Technical Specification, Wi-Fi Alliance.
-  /// Available at: http://www.wi-fi.org
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #ASP_ERROR_SESSION_NOT_FOUND  Session not found
-  /// @pre This API needs asp_session_create() before use.
-  /// @see asp_session_create()
+  /// Sets the information for an Application Service Platform session.
+  ///
+  /// Application should set session_info after creating session by asp_session_create() and before requesting to connect session by asp_session_connect().
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `session` (in): Application Service Platform session descriptor handle provided by the asp_session_create()
+  /// - `session_info` (in): Detailed information about the session. The session_info parameter is defined for each service section and up to 144 bytes. You can refer to Wi-Fi Peer-to-Peer Services Technical Specification, Wi-Fi Alliance. Available at: http://www.wi-fi.org
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SESSION_NOT_FOUND`: Session not found
+  ///
+  /// **Preconditions:**
+  /// - This API needs asp_session_create() before use.
+  ///
+  /// **See also:**
+  /// - `asp_session_create()`
   int asp_session_set_info(
     asp_session_h session,
     ffi.Pointer<ffi.Char> session_info,
@@ -1543,27 +2065,39 @@ class Tizen80Asp {
   late final _asp_session_set_info = _asp_session_set_infoPtr
       .asFunction<int Function(asp_session_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the information for an Application Service Platform session.
-  /// @details Application should get session_info after creating session by
-  /// asp_session_create() and before requesting to connect
-  /// session by asp_session_connect().
-  /// @since_tizen 4.0
-  /// @remarks @a session_info should not be freed.
-  /// It is recommended to make a copy of it to use.
-  /// @param[in] session        Application Service Platform session descriptor handle
-  /// provided by the asp_session_create()
-  /// @param[out] session_info  detailed information about session
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #ASP_ERROR_SESSION_NOT_FOUND  Session not found
-  /// @pre This API needs asp_session_create() before use.
-  /// @see asp_session_create()
+  /// Gets the information for an Application Service Platform session.
+  ///
+  /// Application should get session_info after creating session by asp_session_create() and before requesting to connect session by asp_session_connect().
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - `session_info` should not be freed.
+  /// - It is recommended to make a copy of it to use.
+  ///
+  /// **Parameters:**
+  /// - `session` (in): Application Service Platform session descriptor handle provided by the asp_session_create()
+  /// - `session_info` (out): detailed information about session
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SESSION_NOT_FOUND`: Session not found
+  ///
+  /// **Preconditions:**
+  /// - This API needs asp_session_create() before use.
+  ///
+  /// **See also:**
+  /// - `asp_session_create()`
   int asp_session_get_info(
     asp_session_h session,
     ffi.Pointer<ffi.Pointer<ffi.Char>> session_info,
@@ -1581,32 +2115,36 @@ class Tizen80Asp {
   late final _asp_session_get_info = _asp_session_get_infoPtr.asFunction<
       int Function(asp_session_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the Wi-Fi Direct group role in session.
-  /// @details Application should set role after creating session by
-  /// asp_session_create() and before requesting to connect
-  /// session by asp_session_connect().
-  /// @since_tizen 4.0
-  /// @param[in] session  Application Service Platform session descriptor handle
-  /// provided by the asp_session_create()
-  /// @param[in] role     The role of the service: \n
-  /// #ASP_ADVERT_P2P_ROLE_SCHEME_ANY - All roles are acceptable \n
-  /// #ASP_ADVERT_P2P_ROLE_SCHEME_GO  - The receiving interface should assume \n
-  /// the GO role, if it's not possible, #ASP_ERROR_NETWORK_ROLE_REJECTED \n
-  /// is returned \n
-  /// #ASP_ADVERT_P2P_ROLE_SCHEME_GC  -
-  /// The receiving interface should assume the GC role
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE                  Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY         Out of memory
-  /// @retval #ASP_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #ASP_ERROR_SESSION_NOT_FOUND     Session not found
-  /// @retval #ASP_ERROR_NETWORK_ROLE_REJECTED Network role rejected
-  /// @pre This API needs asp_session_create() before use.
-  /// @see asp_session_create()
+  /// Sets the Wi-Fi Direct group role in session.
+  ///
+  /// Application should set role after creating session by asp_session_create() and before requesting to connect session by asp_session_connect().
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `session` (in): Application Service Platform session descriptor handle provided by the asp_session_create()
+  /// - `role` (in): The role of the service: `ASP_ADVERT_P2P_ROLE_SCHEME_ANY` - All roles are acceptable `ASP_ADVERT_P2P_ROLE_SCHEME_GO` - The receiving interface should assume the GO role, if it's not possible, `ASP_ERROR_NETWORK_ROLE_REJECTED` is returned `ASP_ADVERT_P2P_ROLE_SCHEME_GC` - The receiving interface should assume the GC role
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SESSION_NOT_FOUND`: Session not found
+  /// - `ASP_ERROR_NETWORK_ROLE_REJECTED`: Network role rejected
+  ///
+  /// **Preconditions:**
+  /// - This API needs asp_session_create() before use.
+  ///
+  /// **See also:**
+  /// - `asp_session_create()`
   int asp_session_set_p2p_role_scheme(
     asp_session_h session,
     int role,
@@ -1624,27 +2162,33 @@ class Tizen80Asp {
       _asp_session_set_p2p_role_schemePtr
           .asFunction<int Function(asp_session_h, int)>();
 
-  /// @brief Gets the Wi-Fi Direct group role in session.
-  /// @since_tizen 4.0
-  /// @param[in] session  Application Service Platform session descriptor handle
-  /// provided by the asp_session_create()
-  /// @param[in] role     The role of the service: \n
-  /// #ASP_ADVERT_P2P_ROLE_SCHEME_ANY - All roles are acceptable \n
-  /// #ASP_ADVERT_P2P_ROLE_SCHEME_GO  - The receiving interface should assume \n
-  /// the GO role\n
-  /// #ASP_ADVERT_P2P_ROLE_SCHEME_GC  -
-  /// The receiving interface should assume the GC role
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #ASP_ERROR_SESSION_NOT_FOUND  Session not found
-  /// @pre This API needs asp_session_create() before use.
-  /// @see asp_session_create()
+  /// Gets the Wi-Fi Direct group role in session.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `session` (in): Application Service Platform session descriptor handle provided by the asp_session_create()
+  /// - `role` (in): The role of the service: `ASP_ADVERT_P2P_ROLE_SCHEME_ANY` - All roles are acceptable `ASP_ADVERT_P2P_ROLE_SCHEME_GO` - The receiving interface should assume the GO role `ASP_ADVERT_P2P_ROLE_SCHEME_GC` - The receiving interface should assume the GC role
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SESSION_NOT_FOUND`: Session not found
+  ///
+  /// **Preconditions:**
+  /// - This API needs asp_session_create() before use.
+  ///
+  /// **See also:**
+  /// - `asp_session_create()`
   int asp_session_get_p2p_role_scheme(
     asp_session_h session,
     ffi.Pointer<ffi.Int32> role,
@@ -1663,26 +2207,35 @@ class Tizen80Asp {
       _asp_session_get_p2p_role_schemePtr
           .asFunction<int Function(asp_session_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets the Preferred WSC Configuration method.
-  /// @details Application should set the config method after creating session by
-  /// asp_session_create() and before requesting to connect
-  /// session by asp_session_connect().
-  /// @since_tizen 4.0
-  /// @param[in] session        Application Service Platform session descriptor handle
-  /// provided by the asp_session_create()
-  /// @param[in] config_method  Preferred WSC Configuration method.
-  /// Default value is #ASP_WPS_TYPE_DEFAULT.
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #ASP_ERROR_SESSION_NOT_FOUND  Session not found
-  /// @pre This API needs asp_session_create() before use.
-  /// @see asp_session_create()
+  /// Sets the Preferred WSC Configuration method.
+  ///
+  /// Application should set the config method after creating session by asp_session_create() and before requesting to connect session by asp_session_connect().
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `session` (in): Application Service Platform session descriptor handle provided by the asp_session_create()
+  /// - `config_method` (in): Preferred WSC Configuration method. Default value is `ASP_WPS_TYPE_DEFAULT`.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SESSION_NOT_FOUND`: Session not found
+  ///
+  /// **Preconditions:**
+  /// - This API needs asp_session_create() before use.
+  ///
+  /// **See also:**
+  /// - `asp_session_create()`
   int asp_session_set_p2p_config_method(
     asp_session_h session,
     int config_method,
@@ -1700,22 +2253,33 @@ class Tizen80Asp {
       _asp_session_set_p2p_config_methodPtr
           .asFunction<int Function(asp_session_h, int)>();
 
-  /// @brief Gets the Preferred WSC Configuration method.
-  /// @since_tizen 4.0
-  /// @param[in] session         Application Service Platform session descriptor handle
-  /// provided by the asp_session_create()
-  /// @param[out] config_method  Preferred WSC Configuration method
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #ASP_ERROR_SESSION_NOT_FOUND  Session not found
-  /// @pre This API needs asp_session_create() before use.
-  /// @see asp_session_create()
+  /// Gets the Preferred WSC Configuration method.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `session` (in): Application Service Platform session descriptor handle provided by the asp_session_create()
+  /// - `config_method` (out): Preferred WSC Configuration method
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SESSION_NOT_FOUND`: Session not found
+  ///
+  /// **Preconditions:**
+  /// - This API needs asp_session_create() before use.
+  ///
+  /// **See also:**
+  /// - `asp_session_create()`
   int asp_session_get_p2p_config_method(
     asp_session_h session,
     ffi.Pointer<ffi.Int32> config_method,
@@ -1734,22 +2298,27 @@ class Tizen80Asp {
       _asp_session_get_p2p_config_methodPtr
           .asFunction<int Function(asp_session_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the session close status.
-  /// @details This call is valid only for closed sessions (sessions in the #ASP_SESSION_STATE_CLOSED
-  /// state). If the @a session does not identify a closed session,
-  /// #ASP_ERROR_NOT_PERMITTED is returned.
-  /// @since_tizen 4.0
-  /// @param[in] session  ASP session descriptor handle provided by
-  /// the asp_session_request_cb() callback,
-  /// asp_session_create(), or asp_session_get_handle()
-  /// @param[out] status  The session close status
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_SESSION_NOT_FOUND  Session not found
+  /// Gets the session close status.
+  ///
+  /// This call is valid only for closed sessions (sessions in the `ASP_SESSION_STATE_CLOSED` state). If the `session` does not identify a closed session, `ASP_ERROR_NOT_PERMITTED` is returned.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `session` (in): ASP session descriptor handle provided by the asp_session_request_cb() callback, asp_session_create(), or asp_session_get_handle()
+  /// - `status` (out): The session close status
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_SESSION_NOT_FOUND`: Session not found
   int asp_session_get_close_status(
     asp_session_h session,
     ffi.Pointer<ffi.Int> status,
@@ -1767,23 +2336,39 @@ class Tizen80Asp {
   late final _asp_session_get_close_status = _asp_session_get_close_statusPtr
       .asFunction<int Function(asp_session_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Starts to connect the Application Service Platform session.
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] session  Application Service Platform session descriptor handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #ASP_ERROR_SESSION_NOT_FOUND  Session not found
-  /// @pre This API needs asp_session_create() before use.
-  /// @see asp_session_create()
+  /// Starts to connect the Application Service Platform session.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `session` (in): Application Service Platform session descriptor handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SESSION_NOT_FOUND`: Session not found
+  ///
+  /// **Preconditions:**
+  /// - This API needs asp_session_create() before use.
+  ///
+  /// **See also:**
+  /// - `asp_session_create()`
   int asp_session_connect(
     asp_session_h session,
   ) {
@@ -1798,27 +2383,39 @@ class Tizen80Asp {
   late final _asp_session_connect =
       _asp_session_connectPtr.asFunction<int Function(asp_session_h)>();
 
-  /// @brief Confirms the Application Service Platform(ASP) session request.
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] session    ASP session descriptor handle provided by
-  /// the asp_session_request_cb() callback or
-  /// asp_session_create() if pin is requested.
-  /// @param[in] confirmed  (@c true = confirm session, @c false = reject session)
-  /// @param[in] pin        If session requests the WSC PIN
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #ASP_ERROR_SESSION_NOT_FOUND  Session not found
-  /// @see asp_advert_start_advertising()
-  /// @see asp_session_create()
+  /// Confirms the Application Service Platform(ASP) session request.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `session` (in): ASP session descriptor handle provided by the asp_session_request_cb() callback or asp_session_create() if pin is requested.
+  /// - `confirmed` (in): (`true` = confirm session, `false` = reject session)
+  /// - `pin` (in): If session requests the WSC PIN
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SESSION_NOT_FOUND`: Session not found
+  ///
+  /// **See also:**
+  /// - `asp_advert_start_advertising()`
+  /// - `asp_session_create()`
   int asp_session_confirm(
     asp_session_h session,
     bool confirmed,
@@ -1838,24 +2435,31 @@ class Tizen80Asp {
   late final _asp_session_confirm = _asp_session_confirmPtr
       .asFunction<int Function(asp_session_h, bool, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the Description of Application Service Platform (ASP) session to be connected.
-  /// @since_tizen 4.0
-  /// @param[in] session_mac  The MAC address of the P2P device that assigned
-  /// the value of session_id, as provided by
-  /// the asp_session_request_cb() callback or
-  /// asp_session_create() if pin is requested.
-  /// @param[in] session_id   The session ID
-  /// @param[out] session     Peer-to-Peer service session descriptor handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #ASP_ERROR_SESSION_NOT_FOUND  Session not found
-  /// @see asp_session_create()
+  /// Gets the Description of Application Service Platform (ASP) session to be connected.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `session_mac` (in): The MAC address of the P2P device that assigned the value of session_id, as provided by the asp_session_request_cb() callback or asp_session_create() if pin is requested.
+  /// - `session_id` (in): The session ID
+  /// - `session` (out): Peer-to-Peer service session descriptor handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SESSION_NOT_FOUND`: Session not found
+  ///
+  /// **See also:**
+  /// - `asp_session_create()`
   int asp_session_get_handle(
     ffi.Pointer<ffi.Char> session_mac,
     int session_id,
@@ -1875,23 +2479,32 @@ class Tizen80Asp {
   late final _asp_session_get_handle = _asp_session_get_handlePtr.asFunction<
       int Function(ffi.Pointer<ffi.Char>, int, ffi.Pointer<asp_session_h>)>();
 
-  /// @brief Moves an Application Service Platform (ASP) session from Requested state to the Open state.
-  /// @since_tizen 4.0
-  /// @param[in] session  ASP session descriptor handle provided by
-  /// the asp_session_request_cb() callback
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #ASP_ERROR_SESSION_NOT_FOUND  Session not found
-  /// @pre Peer-to-Peer service must be advertised by asp_advert_start_advertising().\n
-  /// Local device should be listening or finding remote P2P device by
-  /// asp_advert_start_advertising()
-  /// @see asp_advert_start_advertising()
+  /// Moves an Application Service Platform (ASP) session from Requested state to the Open state.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `session` (in): ASP session descriptor handle provided by the asp_session_request_cb() callback
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SESSION_NOT_FOUND`: Session not found
+  ///
+  /// **Preconditions:**
+  /// - Peer-to-Peer service must be advertised by asp_advert_start_advertising(). Local device should be listening or finding remote P2P device by asp_advert_start_advertising()
+  ///
+  /// **See also:**
+  /// - `asp_advert_start_advertising()`
   int asp_session_set_state_ready(
     asp_session_h session,
   ) {
@@ -1906,27 +2519,39 @@ class Tizen80Asp {
   late final _asp_session_set_state_ready =
       _asp_session_set_state_readyPtr.asFunction<int Function(asp_session_h)>();
 
-  /// @brief Ends an Application Service Platform (ASP) session and releases associated resources.
-  /// @details The ASP may tear down the underlying ASP P2P group
-  /// if not other ASP sessions are using it.
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] session  ASP session descriptor handle provided by
-  /// the asp_session_request_cb() callback or
-  /// asp_session_create()
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #ASP_ERROR_SESSION_NOT_FOUND  Session not found
-  /// @see asp_session_create()
-  /// @see asp_session_request_cb()
+  /// Ends an Application Service Platform (ASP) session and releases associated resources.
+  ///
+  /// The ASP may tear down the underlying ASP P2P group if not other ASP sessions are using it.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `session` (in): ASP session descriptor handle provided by the asp_session_request_cb() callback or asp_session_create()
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SESSION_NOT_FOUND`: Session not found
+  ///
+  /// **See also:**
+  /// - `asp_session_create()`
+  /// - `asp_session_request_cb()`
   int asp_session_close(
     asp_session_h session,
   ) {
@@ -1941,25 +2566,33 @@ class Tizen80Asp {
   late final _asp_session_close =
       _asp_session_closePtr.asFunction<int Function(asp_session_h)>();
 
-  /// @brief Requests that incoming connections be allowed on a given port.
-  /// @since_tizen 4.0
-  /// @param[in] session     ASP session descriptor handle provided by
-  /// the asp_session_request_cb() callback or
-  /// asp_session_create()
-  /// @param[in] ip_address  The IP address on which the port is being used
-  /// @param[in] port        The port number
-  /// @param[in] proto       The IANA protocol number
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #ASP_ERROR_SESSION_NOT_FOUND  Session not found
-  /// @see asp_session_create()
-  /// @see asp_session_request_cb()
+  /// Requests that incoming connections be allowed on a given port.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `session` (in): ASP session descriptor handle provided by the asp_session_request_cb() callback or asp_session_create()
+  /// - `ip_address` (in): The IP address on which the port is being used
+  /// - `port` (in): The port number
+  /// - `proto` (in): The IANA protocol number
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SESSION_NOT_FOUND`: Session not found
+  ///
+  /// **See also:**
+  /// - `asp_session_create()`
+  /// - `asp_session_request_cb()`
   int asp_session_bind_port(
     asp_session_h session,
     ffi.Pointer<ffi.Char> ip_address,
@@ -1981,25 +2614,33 @@ class Tizen80Asp {
   late final _asp_session_bind_port = _asp_session_bind_portPtr.asFunction<
       int Function(asp_session_h, ffi.Pointer<ffi.Char>, int, int)>();
 
-  /// @brief Indicates that the service is no longer utilizing the port in the ASP session.
-  /// @since_tizen 4.0
-  /// @param[in] session     ASP session descriptor handle provided by
-  /// the asp_session_request_cb() callback or
-  /// asp_session_create()
-  /// @param[in] ip_address  The IP address on which the port is being used
-  /// @param[in] port        The port number
-  /// @param[in] proto       The IANA protocol number
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #ASP_ERROR_NONE               Successful
-  /// @retval #ASP_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #ASP_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ASP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ASP_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #ASP_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #ASP_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #ASP_ERROR_SESSION_NOT_FOUND  Session not found
-  /// @see asp_session_create()
-  /// @see asp_session_request_cb()
+  /// Indicates that the service is no longer utilizing the port in the ASP session.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `session` (in): ASP session descriptor handle provided by the asp_session_request_cb() callback or asp_session_create()
+  /// - `ip_address` (in): The IP address on which the port is being used
+  /// - `port` (in): The port number
+  /// - `proto` (in): The IANA protocol number
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ASP_ERROR_NONE`: Successful
+  /// - `ASP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `ASP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ASP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ASP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ASP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `ASP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `ASP_ERROR_SESSION_NOT_FOUND`: Session not found
+  ///
+  /// **See also:**
+  /// - `asp_session_create()`
+  /// - `asp_session_request_cb()`
   int asp_session_release_port(
     asp_session_h session,
     ffi.Pointer<ffi.Char> ip_address,
@@ -2023,8 +2664,11 @@ class Tizen80Asp {
           int Function(asp_session_h, ffi.Pointer<ffi.Char>, int, int)>();
 }
 
-/// @brief Enumeration for Application Service Platform (ASP) error code.
-/// @since_tizen 4.0
+/// Enumeration for Application Service Platform (ASP) error code.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class asp_error_e {
   /// < Successful
   static const int ASP_ERROR_NONE = 0;
@@ -2075,8 +2719,11 @@ abstract class asp_error_e {
   static const int ASP_ERROR_NETWORK_ROLE_REJECTED = -49676280;
 }
 
-/// @brief Enumeration for Advertise Status event reason.
-/// @since_tizen 4.0
+/// Enumeration for Advertise Status event reason.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class asp_advert_status_reason_e {
   /// < Status reason: Success
   static const int ASP_ADVERT_STATUS_REASON_SUCCESS = 0;
@@ -2088,12 +2735,17 @@ abstract class asp_advert_status_reason_e {
   static const int ASP_ADVERT_STATUS_REASON_OTHER_FAILURE = 2;
 }
 
-/// @brief Enumeration for the Wi-Fi P2P role assignment scheme.
-/// @since_tizen 4.0
-/// @see asp_advert_set_p2p_role_scheme()
-/// @see asp_advert_get_p2p_role_scheme()
-/// @see asp_session_set_p2p_role_scheme()
-/// @see asp_session_get_p2p_role_scheme()
+/// Enumeration for the Wi-Fi P2P role assignment scheme.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **See also:**
+/// - `asp_advert_set_p2p_role_scheme()`
+/// - `asp_advert_get_p2p_role_scheme()`
+/// - `asp_session_set_p2p_role_scheme()`
+/// - `asp_session_get_p2p_role_scheme()`
+/// @nodoc
 abstract class asp_advert_p2p_role_scheme_e {
   /// < All roles are acceptable
   static const int ASP_ADVERT_P2P_ROLE_SCHEME_ANY = 0;
@@ -2105,10 +2757,15 @@ abstract class asp_advert_p2p_role_scheme_e {
   static const int ASP_ADVERT_P2P_ROLE_SCHEME_GC = 2;
 }
 
-/// @brief Enumeration for service discovery mechanism.
-/// @since_tizen 4.0
-/// @see asp_advert_set_discovery_tech()
-/// @see asp_seek_set_discovery_tech()
+/// Enumeration for service discovery mechanism.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **See also:**
+/// - `asp_advert_set_discovery_tech()`
+/// - `asp_seek_set_discovery_tech()`
+/// @nodoc
 abstract class asp_discovery_tech_e {
   /// < Use Wi-Fi P2P for discovery mechanism
   static const int ASP_DISCOVERY_TECH_P2P = 1;
@@ -2126,12 +2783,17 @@ abstract class asp_discovery_tech_e {
   static const int ASP_DISCOVERY_TECH_NAN = 16;
 }
 
-/// @brief Enumeration for Wi-Fi WPS type.
-/// @see asp_advert_set_p2p_config_method()
-/// @see asp_advert_get_p2p_config_method()
-/// @see asp_session_set_p2p_config_method()
-/// @see asp_session_get_p2p_config_method()
-/// @since_tizen 4.0
+/// Enumeration for Wi-Fi WPS type.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **See also:**
+/// - `asp_advert_set_p2p_config_method()`
+/// - `asp_advert_get_p2p_config_method()`
+/// - `asp_session_set_p2p_config_method()`
+/// - `asp_session_get_p2p_config_method()`
+/// @nodoc
 abstract class asp_wps_type_e {
   /// < No WPS type
   static const int ASP_WPS_TYPE_NONE = 0;
@@ -2149,8 +2811,11 @@ abstract class asp_wps_type_e {
   static const int ASP_WPS_TYPE_PIN_KEYPAD = 4;
 }
 
-/// @brief Enumeration for Application Service Platform (ASP) Session connect status.
-/// @since_tizen 4.0
+/// Enumeration for Application Service Platform (ASP) Session connect status.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class asp_connect_status_e {
   /// < Network role rejected
   static const int ASP_CONNECT_STATUS_NETWORK_ROLE_REJECTED = 0;
@@ -2183,8 +2848,11 @@ abstract class asp_connect_status_e {
   static const int ASP_CONNECT_STATUS_GROUP_FORMATION_FAILED = 9;
 }
 
-/// @brief Enumeration for Application Service Platform (ASP) general session state.
-/// @since_tizen 4.0
+/// Enumeration for Application Service Platform (ASP) general session state.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class asp_session_state_e {
   /// < Session state error
   static const int ASP_SESSION_STATE_ERROR = 0;
@@ -2202,8 +2870,11 @@ abstract class asp_session_state_e {
   static const int ASP_SESSION_STATE_OPEN = 4;
 }
 
-/// @brief Enumeration for Application Service Platform (ASP) session close status.
-/// @since_tizen 4.0
+/// Enumeration for Application Service Platform (ASP) session close status.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class asp_session_close_status_e {
   /// < Session closed without error
   static const int ASP_SESSION_CLOSE_OK = 0;
@@ -2224,8 +2895,11 @@ abstract class asp_session_close_status_e {
   static const int ASP_SESSION_CLOSE_NO_RESPONSE = 5;
 }
 
-/// @brief Enumeration for Application Service Platform (ASP) port status.
-/// @since_tizen 4.0
+/// Enumeration for Application Service Platform (ASP) port status.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class asp_port_status_e {
   /// < Incoming connections are allowed on this local port for this ASP session
   static const int ASP_PORT_STATUS_LOCAL_PORT_ALLOWED = 0;
@@ -2240,8 +2914,11 @@ abstract class asp_port_status_e {
   static const int ASP_PORT_STATUS_REMOTE_PORT_ALLOWED = 3;
 }
 
-/// @brief Enumeration for service status.
-/// @since_tizen 4.0
+/// Enumeration for service status.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class asp_service_status_e {
   /// < Service status not advertised
   static const int ASP_SERVICE_STATUS_NOT_ADVERTISED = 0;
@@ -2250,35 +2927,38 @@ abstract class asp_service_status_e {
   static const int ASP_SERVICE_STATUS_ADVERTISED = 1;
 }
 
-/// @brief Called when the Application Service Platform (ASP) Service is found.
-/// @since_tizen 4.0
-/// @remarks @a service_mac, @a instance_name and @a service_info are valid only in the callback.
-/// To use outside the callback, make a copy.
-/// @param[in] error_code     The error code. \n
-/// #ASP_ERROR_NONE              Successful\n
-/// #ASP_ERROR_OUT_OF_MEMORY     Out of memory\n
-/// #ASP_ERROR_OPERATION_FAILED  Operation failed\n
-/// @param[in] seek_service   The seek service which found the current result;
-/// the handle to the same object for which the search was started
-/// @param[in] service_mac    The P2P device address of the device which provides the service;
-/// NULL if not available
-/// @param[in] adv_id         The service advertisement ID defined by remote P2P device
-/// @param[in] config_method  The preferred Wi-Fi Simple Config (WSC) configuration method
-/// @param[in] instance_name  The advertised service name defined by the remote P2P device;
-/// NULL if not available
-/// @param[in] service_info   The advertised service information defined by the remote P2P device;
-/// NULL if not available
-/// @param[in] info_size      The advertised service information payload size;
-/// if the information is not available, this is set to -1
-/// @param[in] status         The status of the service
-/// @param[in] user_data      The user data passed from the callback registration function
-/// @pre The callback must be registered using asp_seek_set_search_result_cb().\n
-/// asp_seek_start() must be called to invoke this callback.
-/// @see asp_seek_set_search_result_cb()
-/// @see asp_seek_unset_search_result_cb()
-/// @see asp_seek_start()
+/// Called when the Application Service Platform (ASP) Service is found.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Remarks:**
+/// - `service_mac`, `instance_name` and `service_info` are valid only in the callback.
+/// - To use outside the callback, make a copy.
+///
+/// **Parameters:**
+/// - `error_code` (in): The error code. `ASP_ERROR_NONE` Successful `ASP_ERROR_OUT_OF_MEMORY` Out of memory `ASP_ERROR_OPERATION_FAILED` Operation failed
+/// - `seek_service` (in): The seek service which found the current result; the handle to the same object for which the search was started
+/// - `service_mac` (in): The P2P device address of the device which provides the service; NULL if not available
+/// - `adv_id` (in): The service advertisement ID defined by remote P2P device
+/// - `config_method` (in): The preferred Wi-Fi Simple Config (WSC) configuration method
+/// - `instance_name` (in): The advertised service name defined by the remote P2P device; NULL if not available
+/// - `service_info` (in): The advertised service information defined by the remote P2P device; NULL if not available
+/// - `info_size` (in): The advertised service information payload size; if the information is not available, this is set to -1
+/// - `status` (in): The status of the service
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - The callback must be registered using asp_seek_set_search_result_cb(). asp_seek_start() must be called to invoke this callback.
+///
+/// **See also:**
+/// - `asp_seek_set_search_result_cb()`
+/// - `asp_seek_unset_search_result_cb()`
+/// - `asp_seek_start()`
+/// @nodoc
 typedef asp_seek_search_result_cb
     = ffi.Pointer<ffi.NativeFunction<asp_seek_search_result_cbFunction>>;
+/// @nodoc
 typedef asp_seek_search_result_cbFunction = ffi.Void Function(
     ffi.Int error_code,
     asp_seek_service_h seek_service,
@@ -2290,6 +2970,7 @@ typedef asp_seek_search_result_cbFunction = ffi.Void Function(
     ffi.Int info_size,
     ffi.UnsignedChar status,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartasp_seek_search_result_cbFunction = void Function(
     int error_code,
     asp_seek_service_h seek_service,
@@ -2302,64 +2983,83 @@ typedef Dartasp_seek_search_result_cbFunction = void Function(
     int status,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The searching service description.
-/// @since_tizen 4.0
+/// The searching service description.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 typedef asp_seek_service_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when the status of an advertisement to a service is changed.
-/// @since_tizen 4.0
-/// @param[in] adv_service  The service whose status has changed;
-/// the handle to the same object for which the callback was set
-/// @param[in] status       The status of the service
-/// @param[in] reason       The reason of the state change
-/// @param[in] user_data    The user data passed from the callback registration function
-/// @pre The callback must be registered using asp_advert_set_status_cb().\n
-/// asp_advert_start_advertising() and asp_change_service_state() invoke this callback.
-/// @see asp_advert_set_status_changed_cb()
-/// @see asp_advert_unset_status_changed_cb()
-/// @see asp_advert_start_advertising()
+/// Called when the status of an advertisement to a service is changed.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Parameters:**
+/// - `adv_service` (in): The service whose status has changed; the handle to the same object for which the callback was set
+/// - `status` (in): The status of the service
+/// - `reason` (in): The reason of the state change
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - The callback must be registered using asp_advert_set_status_cb(). asp_advert_start_advertising() and asp_change_service_state() invoke this callback.
+///
+/// **See also:**
+/// - `asp_advert_set_status_changed_cb()`
+/// - `asp_advert_unset_status_changed_cb()`
+/// - `asp_advert_start_advertising()`
+/// @nodoc
 typedef asp_advert_status_changed_cb
     = ffi.Pointer<ffi.NativeFunction<asp_advert_status_changed_cbFunction>>;
+/// @nodoc
 typedef asp_advert_status_changed_cbFunction = ffi.Void Function(
     asp_advert_service_h adv_service,
     ffi.Int32 status,
     ffi.Int32 reason,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartasp_advert_status_changed_cbFunction = void Function(
     asp_advert_service_h adv_service,
     int status,
     int reason,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The advertised service description.
-/// @since_tizen 4.0
+/// The advertised service description.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 typedef asp_advert_service_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when a remote device is attempting to initiate an ASP session.
-/// @since_tizen 4.0
-/// @remarks @a network_config_pin, @a device_name and @a info are valid only in the callback.
-/// To use outside the callback, make a copy.
-/// @param[in] error_code              The error code.\n
-/// #ASP_ERROR_NONE              Successful\n
-/// #ASP_ERROR_OUT_OF_MEMORY     Out of memory\n
-/// #ASP_ERROR_OPERATION_FAILED  Operation failed\n
-/// @param[in] adv_service             Service descriptor handle provided by the asp_advert_create()
-/// it is the "original" object not created specifically for the callback
-/// @param[in] session                 The session for which the request is made;
-/// the handle to the same object for which the callback was set
-/// @param[in] device_name             Device name of the remote peer
-/// @param[in] info                    The service-specific data payload (up to 144 bytes);
-/// NULL if not available
-/// @param[in] info_size               The service-specific data payload size (up to 144)
-/// @param[in] get_network_config_pin  (@c true = requires WSC PIN to be entered by
-/// the asp_session_confirm(),
-/// @c false = does not require PIN)
-/// @param[in] network_config_pin      The WSC PIN value to be displayed; NULL if not available
-/// @param[in] user_data               The user data passed from the callback registration function
-/// @pre The callback must be registered using asp_session_set_request_cb().
-/// @see asp_session_set_request_cb()
+/// Called when a remote device is attempting to initiate an ASP session.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Remarks:**
+/// - `network_config_pin`, `device_name` and `info` are valid only in the callback.
+/// - To use outside the callback, make a copy.
+///
+/// **Parameters:**
+/// - `error_code` (in): The error code. `ASP_ERROR_NONE` Successful `ASP_ERROR_OUT_OF_MEMORY` Out of memory `ASP_ERROR_OPERATION_FAILED` Operation failed
+/// - `adv_service` (in): Service descriptor handle provided by the asp_advert_create() it is the "original" object not created specifically for the callback
+/// - `session` (in): The session for which the request is made; the handle to the same object for which the callback was set
+/// - `device_name` (in): Device name of the remote peer
+/// - `info` (in): The service-specific data payload (up to 144 bytes); NULL if not available
+/// - `info_size` (in): The service-specific data payload size (up to 144)
+/// - `get_network_config_pin` (in): (`true` = requires WSC PIN to be entered by the asp_session_confirm(), `false` = does not require PIN)
+/// - `network_config_pin` (in): The WSC PIN value to be displayed; NULL if not available
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - The callback must be registered using asp_session_set_request_cb().
+///
+/// **See also:**
+/// - `asp_session_set_request_cb()`
+/// @nodoc
 typedef asp_session_request_cb
     = ffi.Pointer<ffi.NativeFunction<asp_session_request_cbFunction>>;
+/// @nodoc
 typedef asp_session_request_cbFunction = ffi.Void Function(
     ffi.Int error_code,
     asp_advert_service_h adv_service,
@@ -2370,6 +3070,7 @@ typedef asp_session_request_cbFunction = ffi.Void Function(
     ffi.Bool get_network_config_pin,
     ffi.Pointer<ffi.Char> network_config_pin,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartasp_session_request_cbFunction = void Function(
     int error_code,
     asp_advert_service_h adv_service,
@@ -2381,37 +3082,46 @@ typedef Dartasp_session_request_cbFunction = void Function(
     ffi.Pointer<ffi.Char> network_config_pin,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The Application Service Platform (ASP) session description.
-/// @since_tizen 4.0
+/// The Application Service Platform (ASP) session description.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 typedef asp_session_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when the Application Service Platform (ASP) has to provide
-/// a PIN value or collect a PIN value.
-/// @since_tizen 4.0
-/// @remarks @a config_pin is valid only in the callback.
-/// To use outside the callback, make a copy.
-/// @param[in] error_code  The error code.\n
-/// #ASP_ERROR_NONE              Successful\n
-/// #ASP_ERROR_OUT_OF_MEMORY     Out of memory\n
-/// #ASP_ERROR_OPERATION_FAILED  Operation failed\n
-/// @param[in] session     The session for which the request is made;
-/// the handle to the same object for which the callback was set
-/// @param[in] get_pin     (@c true = instruct the user to enter the PIN,
-/// @c false = display the PIN provided in the @a config_pin parameter)
-/// @param[in] config_pin  The WSC PIN value used for setting up; ignored if @a get_pin is @c true
-/// @param[in] user_data   The user data passed from the callback registration function
-/// @pre The callback must be registered using asp_session_set_config_request_cb().\n
-/// asp_session_connect() must be called to invoke this callback.
-/// @see asp_session_set_request_cb()
-/// @see asp_session_connect()
+/// Called when the Application Service Platform (ASP) has to provide a PIN value or collect a PIN value.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Remarks:**
+/// - `config_pin` is valid only in the callback.
+/// - To use outside the callback, make a copy.
+///
+/// **Parameters:**
+/// - `error_code` (in): The error code. `ASP_ERROR_NONE` Successful `ASP_ERROR_OUT_OF_MEMORY` Out of memory `ASP_ERROR_OPERATION_FAILED` Operation failed
+/// - `session` (in): The session for which the request is made; the handle to the same object for which the callback was set
+/// - `get_pin` (in): (`true` = instruct the user to enter the PIN, `false` = display the PIN provided in the `config_pin` parameter)
+/// - `config_pin` (in): The WSC PIN value used for setting up; ignored if `get_pin` is `true`
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - The callback must be registered using asp_session_set_config_request_cb(). asp_session_connect() must be called to invoke this callback.
+///
+/// **See also:**
+/// - `asp_session_set_request_cb()`
+/// - `asp_session_connect()`
+/// @nodoc
 typedef asp_session_config_request_cb
     = ffi.Pointer<ffi.NativeFunction<asp_session_config_request_cbFunction>>;
+/// @nodoc
 typedef asp_session_config_request_cbFunction = ffi.Void Function(
     ffi.Int error_code,
     asp_session_h session,
     ffi.Bool get_pin,
     ffi.Pointer<ffi.Char> config_pin,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartasp_session_config_request_cbFunction = void Function(
     int error_code,
     asp_session_h session,
@@ -2419,24 +3129,32 @@ typedef Dartasp_session_config_request_cbFunction = void Function(
     ffi.Pointer<ffi.Char> config_pin,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the Application Service Platform (ASP) reports progress on group formation.
-/// @since_tizen 4.0
-/// @remarks @a deferred_resp is valid only in the callback.
-/// To use outside the callback, make a copy.
-/// @param[in] error_code     The error code.\n
-/// #ASP_ERROR_NONE              Successful\n
-/// #ASP_ERROR_OUT_OF_MEMORY     Out of memory\n
-/// #ASP_ERROR_OPERATION_FAILED  Operation failed\n
-/// @param[in] session        The session for which progress is reported;
-/// the handle to the same object for which the callback was set
-/// @param[in] status         The connection progress status
-/// @param[in] deferred_resp  The service-specific data payload up to 144 bytes
-/// @param[in] resp_size      The service-specific data payload size(up to 144)
-/// @param[in] user_data      The user data passed from the callback registration function
-/// @pre The callback must be registered using asp_session_set_connect_status_cb()
-/// @see asp_session_set_connect_status_cb()
+/// Called when the Application Service Platform (ASP) reports progress on group formation.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Remarks:**
+/// - `deferred_resp` is valid only in the callback.
+/// - To use outside the callback, make a copy.
+///
+/// **Parameters:**
+/// - `error_code` (in): The error code. `ASP_ERROR_NONE` Successful `ASP_ERROR_OUT_OF_MEMORY` Out of memory `ASP_ERROR_OPERATION_FAILED` Operation failed
+/// - `session` (in): The session for which progress is reported; the handle to the same object for which the callback was set
+/// - `status` (in): The connection progress status
+/// - `deferred_resp` (in): The service-specific data payload up to 144 bytes
+/// - `resp_size` (in): The service-specific data payload size(up to 144)
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - The callback must be registered using asp_session_set_connect_status_cb()
+///
+/// **See also:**
+/// - `asp_session_set_connect_status_cb()`
+/// @nodoc
 typedef asp_session_connect_status_cb
     = ffi.Pointer<ffi.NativeFunction<asp_session_connect_status_cbFunction>>;
+/// @nodoc
 typedef asp_session_connect_status_cbFunction = ffi.Void Function(
     ffi.Int error_code,
     asp_session_h session,
@@ -2444,6 +3162,7 @@ typedef asp_session_connect_status_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> deferred_resp,
     ffi.Int resp_size,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartasp_session_connect_status_cbFunction = void Function(
     int error_code,
     asp_session_h session,
@@ -2452,29 +3171,38 @@ typedef Dartasp_session_connect_status_cbFunction = void Function(
     int resp_size,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the Application Service Platform (ASP) reports the state and status of an ASP session.
-/// @since_tizen 4.0
-/// @remarks @a additional_info is valid only in the callback.
-/// To use outside the callback, make a copy.
-/// @param[in] error_code       The error code.\n
-/// #ASP_ERROR_NONE              Successful\n
-/// #ASP_ERROR_OUT_OF_MEMORY     Out of memory\n
-/// #ASP_ERROR_OPERATION_FAILED  Operation failed\n
-/// @param[in] session          The session for which status is reported;
-/// the handle to the same object for which the callback was set
-/// @param[in] state            The session state
-/// @param[in] additional_info  Additional information related to the SessionStatus event
-/// @param[in] user_data        The user data passed from the callback registration function
-/// @pre The callback must be registered using asp_session_set_status_cb()
-/// @see asp_session_set_status_cb()
+/// Called when the Application Service Platform (ASP) reports the state and status of an ASP session.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Remarks:**
+/// - `additional_info` is valid only in the callback.
+/// - To use outside the callback, make a copy.
+///
+/// **Parameters:**
+/// - `error_code` (in): The error code. `ASP_ERROR_NONE` Successful `ASP_ERROR_OUT_OF_MEMORY` Out of memory `ASP_ERROR_OPERATION_FAILED` Operation failed
+/// - `session` (in): The session for which status is reported; the handle to the same object for which the callback was set
+/// - `state` (in): The session state
+/// - `additional_info` (in): Additional information related to the SessionStatus event
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - The callback must be registered using asp_session_set_status_cb()
+///
+/// **See also:**
+/// - `asp_session_set_status_cb()`
+/// @nodoc
 typedef asp_session_status_cb
     = ffi.Pointer<ffi.NativeFunction<asp_session_status_cbFunction>>;
+/// @nodoc
 typedef asp_session_status_cbFunction = ffi.Void Function(
     ffi.Int error_code,
     asp_session_h session,
     ffi.Int32 state,
     ffi.Pointer<ffi.Char> additional_info,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartasp_session_status_cbFunction = void Function(
     int error_code,
     asp_session_h session,
@@ -2482,24 +3210,33 @@ typedef Dartasp_session_status_cbFunction = void Function(
     ffi.Pointer<ffi.Char> additional_info,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the Application Service Platform (ASP) reports the status of the network port on the local and remote end of the ASP session.
-/// @since_tizen 4.0
-/// @remarks @a ip_address is valid only in the callback.
-/// To use outside the callback, make a copy.
-/// @param[in] error_code   The error code.\n
-/// #ASP_ERROR_NONE              Successful\n
-/// #ASP_ERROR_OUT_OF_MEMORY     Out of memory\n
-/// #ASP_ERROR_OPERATION_FAILED  Operation failed\n
-/// @param[in] session      Application Service Platform session descriptor handle
-/// @param[in] ip_address   The IP address for the port, local or remote
-/// @param[in] port         The port number
-/// @param[in] proto        The IANA protocol number
-/// @param[in] status       The port status
-/// @param[in] user_data    The user data passed from the callback registration function
-/// @pre The callback must be registered using asp_session_set_port_status_cb()
-/// @see asp_session_set_port_status_cb()
+/// Called when the Application Service Platform (ASP) reports the status of the network port on the local and remote end of the ASP session.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Remarks:**
+/// - `ip_address` is valid only in the callback.
+/// - To use outside the callback, make a copy.
+///
+/// **Parameters:**
+/// - `error_code` (in): The error code. `ASP_ERROR_NONE` Successful `ASP_ERROR_OUT_OF_MEMORY` Out of memory `ASP_ERROR_OPERATION_FAILED` Operation failed
+/// - `session` (in): Application Service Platform session descriptor handle
+/// - `ip_address` (in): The IP address for the port, local or remote
+/// - `port` (in): The port number
+/// - `proto` (in): The IANA protocol number
+/// - `status` (in): The port status
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - The callback must be registered using asp_session_set_port_status_cb()
+///
+/// **See also:**
+/// - `asp_session_set_port_status_cb()`
+/// @nodoc
 typedef asp_session_port_status_cb
     = ffi.Pointer<ffi.NativeFunction<asp_session_port_status_cbFunction>>;
+/// @nodoc
 typedef asp_session_port_status_cbFunction = ffi.Void Function(
     ffi.Int error_code,
     asp_session_h session,
@@ -2508,6 +3245,7 @@ typedef asp_session_port_status_cbFunction = ffi.Void Function(
     ffi.Int proto,
     ffi.Int32 status,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartasp_session_port_status_cbFunction = void Function(
     int error_code,
     asp_session_h session,

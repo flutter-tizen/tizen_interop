@@ -1,3 +1,6 @@
+/// {@category 8.0/tizen}
+library tizen_interop_8_0.capi_appfw_app_manager;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-appfw-app-manager APIs.
+/// {@category 8.0/tizen}
 class Tizen80CapiAppfwAppManager {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,15 +28,24 @@ class Tizen80CapiAppfwAppManager {
           lookup)
       : _lookup = lookup;
 
-  /// @brief  Destroys the application context handle and releases all its resources.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in]   app_context  The application context handle
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @see app_manager_foreach_app_context()
-  /// @see app_manager_get_app_context()
+  /// Destroys the application context handle and releases all its resources.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `app_context` (in): The application context handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `app_manager_foreach_app_context()`
+  /// - `app_manager_get_app_context()`
   int app_context_destroy(
     app_context_h app_context,
   ) {
@@ -47,17 +60,27 @@ class Tizen80CapiAppfwAppManager {
   late final _app_context_destroy =
       _app_context_destroyPtr.asFunction<int Function(app_context_h)>();
 
-  /// @deprecated Deprecated since 2.3.1. Use app_context_get_app_id() instead.
-  /// @brief    Gets the application ID with the given application context.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks You must release @a package using free().
-  /// @param[in]   app_context  The application context
-  /// @param[out]  package      The application ID of the given application context
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #APP_MANAGER_ERROR_OUT_OF_MEMORY      Out of memory
+  /// **Deprecated:** Deprecated since 2.3.1. Use app_context_get_app_id() instead.
+  ///
+  /// Gets the application ID with the given application context.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release `package` using free().
+  ///
+  /// **Parameters:**
+  /// - `app_context` (in): The application context
+  /// - `package` (out): The application ID of the given application context
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
   int app_context_get_package(
     app_context_h app_context,
     ffi.Pointer<ffi.Pointer<ffi.Char>> package,
@@ -75,16 +98,25 @@ class Tizen80CapiAppfwAppManager {
   late final _app_context_get_package = _app_context_get_packagePtr.asFunction<
       int Function(app_context_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief    Gets the application ID with the given application context.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks     You must release @a app_id using free().
-  /// @param[in]   app_context  The application context
-  /// @param[out]  app_id       The application ID of the given application context
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #APP_MANAGER_ERROR_OUT_OF_MEMORY      Out of memory
+  /// Gets the application ID with the given application context.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release `app_id` using free().
+  ///
+  /// **Parameters:**
+  /// - `app_context` (in): The application context
+  /// - `app_id` (out): The application ID of the given application context
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
   int app_context_get_app_id(
     app_context_h app_context,
     ffi.Pointer<ffi.Pointer<ffi.Char>> app_id,
@@ -102,14 +134,21 @@ class Tizen80CapiAppfwAppManager {
   late final _app_context_get_app_id = _app_context_get_app_idPtr.asFunction<
       int Function(app_context_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief  Gets the process ID with the given application context.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in]   app_context  The application context
-  /// @param[out]  pid          The process ID of the given application context
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// Gets the process ID with the given application context.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `app_context` (in): The application context
+  /// - `pid` (out): The process ID of the given application context
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
   int app_context_get_pid(
     app_context_h app_context,
     ffi.Pointer<pid_t> pid,
@@ -127,16 +166,25 @@ class Tizen80CapiAppfwAppManager {
   late final _app_context_get_pid = _app_context_get_pidPtr
       .asFunction<int Function(app_context_h, ffi.Pointer<pid_t>)>();
 
-  /// @brief  Gets the package id with the given application context.
-  /// @since_tizen 3.0
-  /// @remarks     You must release @a pkg_id using free().
-  /// @param[in]   app_context  The application context
-  /// @param[out]  pkg_id   The package ID of the given application context
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #APP_MANAGER_ERROR_OUT_OF_MEMORY      Out of memory
+  /// Gets the package id with the given application context.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `pkg_id` using free().
+  ///
+  /// **Parameters:**
+  /// - `app_context` (in): The application context
+  /// - `pkg_id` (out): The package ID of the given application context
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
   int app_context_get_package_id(
     app_context_h app_context,
     ffi.Pointer<ffi.Pointer<ffi.Char>> pkg_id,
@@ -156,16 +204,25 @@ class Tizen80CapiAppfwAppManager {
       _app_context_get_package_idPtr.asFunction<
           int Function(app_context_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief  Gets the application state with the given application context.
-  /// @since_tizen 3.0
-  /// @remarks Note that application's state might be changed after you get app_context.
-  /// This function just returns the state of application when you get the app_context.
-  /// @param[in]   app_context  The application context
-  /// @param[out]  state        The application state of the given application context
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// Gets the application state with the given application context.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Note that application's state might be changed after you get app_context.
+  /// - This function just returns the state of application when you get the app_context.
+  ///
+  /// **Parameters:**
+  /// - `app_context` (in): The application context
+  /// - `state` (out): The application state of the given application context
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
   int app_context_get_app_state(
     app_context_h app_context,
     ffi.Pointer<ffi.Int32> state,
@@ -183,15 +240,21 @@ class Tizen80CapiAppfwAppManager {
   late final _app_context_get_app_state = _app_context_get_app_statePtr
       .asFunction<int Function(app_context_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief  Checks whether the application with the given application context is terminated.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in]   app_context  The application context
-  /// @param[out]  terminated   @c true if the application is terminated, \n
-  /// otherwise @c false if the application is running
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// Checks whether the application with the given application context is terminated.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `app_context` (in): The application context
+  /// - `terminated` (out): `true` if the application is terminated, otherwise `false` if the application is running
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
   int app_context_is_terminated(
     app_context_h app_context,
     ffi.Pointer<ffi.Bool> terminated,
@@ -209,16 +272,22 @@ class Tizen80CapiAppfwAppManager {
   late final _app_context_is_terminated = _app_context_is_terminatedPtr
       .asFunction<int Function(app_context_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief  Checks whether two application contexts are equal.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in]   lhs    The first application context to compare
-  /// @param[in]   rhs    The second application context to compare
-  /// @param[out]  equal  @c true if the application contexts are equal, \n
-  /// otherwise @c false if they are not equal
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// Checks whether two application contexts are equal.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `lhs` (in): The first application context to compare
+  /// - `rhs` (in): The second application context to compare
+  /// - `equal` (out): `true` if the application contexts are equal, otherwise `false` if they are not equal
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
   int app_context_is_equal(
     app_context_h lhs,
     app_context_h rhs,
@@ -238,15 +307,21 @@ class Tizen80CapiAppfwAppManager {
   late final _app_context_is_equal = _app_context_is_equalPtr.asFunction<
       int Function(app_context_h, app_context_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief  Checks whether the application is running as a sub application of the application group.
-  /// @since_tizen 3.0
-  /// @param[in]   app_context  The application context
-  /// @param[out]  is_sub_app @c true if the sub application of the group, \n
-  /// otherwise @c false if the main application of the group
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// Checks whether the application is running as a sub application of the application group.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `app_context` (in): The application context
+  /// - `is_sub_app` (out): `true` if the sub application of the group, otherwise `false` if the main application of the group
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
   int app_context_is_sub_app(
     app_context_h app_context,
     ffi.Pointer<ffi.Bool> is_sub_app,
@@ -264,16 +339,25 @@ class Tizen80CapiAppfwAppManager {
   late final _app_context_is_sub_app = _app_context_is_sub_appPtr
       .asFunction<int Function(app_context_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief  Clones the application context handle.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks The @a clone should be released using app_context_destroy()
-  /// @param[out]  clone        The newly created application context handle, if cloning is successful
-  /// @param[in]   app_context  The application context
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #APP_MANAGER_ERROR_OUT_OF_MEMORY      Out of memory
+  /// Clones the application context handle.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - The `clone` should be released using app_context_destroy()
+  ///
+  /// **Parameters:**
+  /// - `clone` (out): The newly created application context handle, if cloning is successful
+  /// - `app_context` (in): The application context
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
   int app_context_clone(
     ffi.Pointer<app_context_h> clone,
     app_context_h app_context,
@@ -291,19 +375,30 @@ class Tizen80CapiAppfwAppManager {
   late final _app_context_clone = _app_context_clonePtr
       .asFunction<int Function(ffi.Pointer<app_context_h>, app_context_h)>();
 
-  /// @brief  Creates the application information handle.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks The @a app_info should be released using app_info_destroy().
-  /// @param[in]   app_id    The application ID
-  /// @param[out]  app_info  The application information handle
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #APP_MANAGER_ERROR_NO_SUCH_APP        The app is not installed
-  /// @retval  #APP_MANAGER_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @see app_manager_foreach_app_info()
-  /// @see app_manager_get_app_info()
+  /// Creates the application information handle.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - The `app_info` should be released using app_info_destroy().
+  ///
+  /// **Parameters:**
+  /// - `app_id` (in): The application ID
+  /// - `app_info` (out): The application information handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_NO_SUCH_APP`: The app is not installed
+  /// - `APP_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `app_manager_foreach_app_info()`
+  /// - `app_manager_get_app_info()`
   int app_info_create(
     ffi.Pointer<ffi.Char> app_id,
     ffi.Pointer<app_info_h> app_info,
@@ -321,15 +416,24 @@ class Tizen80CapiAppfwAppManager {
   late final _app_info_create = _app_info_createPtr.asFunction<
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<app_info_h>)>();
 
-  /// @brief  Destroys the application information handle and releases all its resources.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in]   app_info  The application information handle
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @see app_manager_foreach_app_info()
-  /// @see app_manager_get_app_info()
+  /// Destroys the application information handle and releases all its resources.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `app_info` (in): The application information handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `app_manager_foreach_app_info()`
+  /// - `app_manager_get_app_info()`
   int app_info_destroy(
     app_info_h app_info,
   ) {
@@ -344,16 +448,25 @@ class Tizen80CapiAppfwAppManager {
   late final _app_info_destroy =
       _app_info_destroyPtr.asFunction<int Function(app_info_h)>();
 
-  /// @brief  Gets the application ID with the given application context.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks     You must release @a app_id using free().
-  /// @param[in]   app_info  The application information
-  /// @param[out]  app_id    The application ID of the given application context
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #APP_MANAGER_ERROR_OUT_OF_MEMORY      Out of memory
+  /// Gets the application ID with the given application context.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release `app_id` using free().
+  ///
+  /// **Parameters:**
+  /// - `app_info` (in): The application information
+  /// - `app_id` (out): The application ID of the given application context
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
   int app_info_get_app_id(
     app_info_h app_info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> app_id,
@@ -371,16 +484,25 @@ class Tizen80CapiAppfwAppManager {
   late final _app_info_get_app_id = _app_info_get_app_idPtr.asFunction<
       int Function(app_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief  Gets the executable path of the application.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks     You must release @a exec path using free().
-  /// @param[in]   app_info The application information
-  /// @param[out]  exec     The executable path of the application
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #APP_MANAGER_ERROR_OUT_OF_MEMORY      Out of memory
+  /// Gets the executable path of the application.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release `exec` path using free().
+  ///
+  /// **Parameters:**
+  /// - `app_info` (in): The application information
+  /// - `exec` (out): The executable path of the application
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
   int app_info_get_exec(
     app_info_h app_info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> exec,
@@ -398,16 +520,25 @@ class Tizen80CapiAppfwAppManager {
   late final _app_info_get_exec = _app_info_get_execPtr.asFunction<
       int Function(app_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief  Gets the label of the application.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks     You must release @a label using free().
-  /// @param[in]   app_info  The application information
-  /// @param[out]  label     The label of the application
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #APP_MANAGER_ERROR_OUT_OF_MEMORY      Out of memory
+  /// Gets the label of the application.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release `label` using free().
+  ///
+  /// **Parameters:**
+  /// - `app_info` (in): The application information
+  /// - `label` (out): The label of the application
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
   int app_info_get_label(
     app_info_h app_info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> label,
@@ -425,17 +556,26 @@ class Tizen80CapiAppfwAppManager {
   late final _app_info_get_label = _app_info_get_labelPtr.asFunction<
       int Function(app_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief  Gets the localed name of the application.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks     You must release localed name using free().
-  /// @param[in]   app_id  The application ID
-  /// @param[in]   locale  The locale information
-  /// @param[out]  label   The localed name of the application
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #APP_MANAGER_ERROR_OUT_OF_MEMORY      Out of memory
+  /// Gets the localed name of the application.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release localed name using free().
+  ///
+  /// **Parameters:**
+  /// - `app_id` (in): The application ID
+  /// - `locale` (in): The locale information
+  /// - `label` (out): The localed name of the application
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
   int app_info_get_localed_label(
     ffi.Pointer<ffi.Char> app_id,
     ffi.Pointer<ffi.Char> locale,
@@ -458,16 +598,25 @@ class Tizen80CapiAppfwAppManager {
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief  Gets the absolute path to the icon image.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks     You must release @a path using free().
-  /// @param[in]   app_info  The application information
-  /// @param[out]  path      The absolute path to the icon
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #APP_MANAGER_ERROR_OUT_OF_MEMORY      Out of memory
+  /// Gets the absolute path to the icon image.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release `path` using free().
+  ///
+  /// **Parameters:**
+  /// - `app_info` (in): The application information
+  /// - `path` (out): The absolute path to the icon
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
   int app_info_get_icon(
     app_info_h app_info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> path,
@@ -485,16 +634,25 @@ class Tizen80CapiAppfwAppManager {
   late final _app_info_get_icon = _app_info_get_iconPtr.asFunction<
       int Function(app_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief  Gets the package name.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks     You must release @a package name using free().
-  /// @param[in]   app_info  The application information
-  /// @param[out]  package   The package name
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #APP_MANAGER_ERROR_OUT_OF_MEMORY      Out of memory
+  /// Gets the package name.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release `package` name using free().
+  ///
+  /// **Parameters:**
+  /// - `app_info` (in): The application information
+  /// - `package` (out): The package name
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
   int app_info_get_package(
     app_info_h app_info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> package,
@@ -512,16 +670,25 @@ class Tizen80CapiAppfwAppManager {
   late final _app_info_get_package = _app_info_get_packagePtr.asFunction<
       int Function(app_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief  Gets the package type name.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks     You must release package @a type name using free().
-  /// @param[in]   app_info The application information
-  /// @param[out]  type     The package type
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #APP_MANAGER_ERROR_OUT_OF_MEMORY      Out of memory
+  /// Gets the package type name.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release package `type` name using free().
+  ///
+  /// **Parameters:**
+  /// - `app_info` (in): The application information
+  /// - `type` (out): The package type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
   int app_info_get_type(
     app_info_h app_info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> type,
@@ -539,17 +706,26 @@ class Tizen80CapiAppfwAppManager {
   late final _app_info_get_type = _app_info_get_typePtr.asFunction<
       int Function(app_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief  Gets the application component type.
-  /// @since_tizen 4.0
-  /// @param[in]   app_info  The application information
-  /// @param[out]  type      The application component type
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #APP_MANAGER_ERROR_IO_ERROR           I/O error
-  /// @see #PACKAGE_INFO_PROP_APP_COMPONENT_TYPE
-  /// @see #app_info_app_component_type_e
+  /// Gets the application component type.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `app_info` (in): The application information
+  /// - `type` (out): The application component type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_IO_ERROR`: I/O error
+  ///
+  /// **See also:**
+  /// - `PACKAGE_INFO_PROP_APP_COMPONENT_TYPE`
+  /// - `app_info_app_component_type_e`
   int app_info_get_app_component_type(
     app_info_h app_info,
     ffi.Pointer<ffi.Int32> type,
@@ -568,16 +744,23 @@ class Tizen80CapiAppfwAppManager {
       _app_info_get_app_component_typePtr
           .asFunction<int Function(app_info_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief  Gets the list of metadata for a particular application.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in]  app_info   The application information
-  /// @param[in]  callback   The callback function for list
-  /// @param[in]  user_data  The user data to be passed to callback function
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #APP_MANAGER_ERROR_IO_ERROR           I/O error
+  /// Gets the list of metadata for a particular application.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `app_info` (in): The application information
+  /// - `callback` (in): The callback function for list
+  /// - `user_data` (in): The user data to be passed to callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_IO_ERROR`: I/O error
   int app_info_foreach_metadata(
     app_info_h app_info,
     app_info_metadata_cb callback,
@@ -599,15 +782,21 @@ class Tizen80CapiAppfwAppManager {
           int Function(
               app_info_h, app_info_metadata_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief  Checks whether application information is nodisplay.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in]   app_info   The application information
-  /// @param[out]  nodisplay  @c true if the application is nodisplay, \n
-  /// otherwise @c false
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// Checks whether application information is nodisplay.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `app_info` (in): The application information
+  /// - `nodisplay` (out): `true` if the application is nodisplay, otherwise `false`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
   int app_info_is_nodisplay(
     app_info_h app_info,
     ffi.Pointer<ffi.Bool> nodisplay,
@@ -625,16 +814,22 @@ class Tizen80CapiAppfwAppManager {
   late final _app_info_is_nodisplay = _app_info_is_nodisplayPtr
       .asFunction<int Function(app_info_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief  Checks whether two application information are equal.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in]   lhs    The first application information to compare
-  /// @param[in]   rhs    The second application information to compare
-  /// @param[out]  equal  @c true if the application information are equal, \n
-  /// otherwise @c false
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// Checks whether two application information are equal.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `lhs` (in): The first application information to compare
+  /// - `rhs` (in): The second application information to compare
+  /// - `equal` (out): `true` if the application information are equal, otherwise `false`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
   int app_info_is_equal(
     app_info_h lhs,
     app_info_h rhs,
@@ -654,15 +849,21 @@ class Tizen80CapiAppfwAppManager {
   late final _app_info_is_equal = _app_info_is_equalPtr.asFunction<
       int Function(app_info_h, app_info_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief  Checks whether application is enabled.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in]   app_info  The application information
-  /// @param[out]  enabled   @c true if the application is enabled, \n
-  /// otherwise @c false
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// Checks whether application is enabled.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `app_info` (in): The application information
+  /// - `enabled` (out): `true` if the application is enabled, otherwise `false`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
   int app_info_is_enabled(
     app_info_h app_info,
     ffi.Pointer<ffi.Bool> enabled,
@@ -680,15 +881,21 @@ class Tizen80CapiAppfwAppManager {
   late final _app_info_is_enabled = _app_info_is_enabledPtr
       .asFunction<int Function(app_info_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief  Checks whether application is launched on booting time.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in]   app_info  The application information
-  /// @param[out]  onboot    @c true if the application is launched on booting time, \n
-  /// otherwise @c false
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// Checks whether application is launched on booting time.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `app_info` (in): The application information
+  /// - `onboot` (out): `true` if the application is launched on booting time, otherwise `false`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
   int app_info_is_onboot(
     app_info_h app_info,
     ffi.Pointer<ffi.Bool> onboot,
@@ -706,15 +913,21 @@ class Tizen80CapiAppfwAppManager {
   late final _app_info_is_onboot = _app_info_is_onbootPtr
       .asFunction<int Function(app_info_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief  Checks whether application is preloaded.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in]   app_info  The application information
-  /// @param[out]  preload   @c true if the application is preloaded, \n
-  /// otherwise @c false
-  /// @return        @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// Checks whether application is preloaded.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `app_info` (in): The application information
+  /// - `preload` (out): `true` if the application is preloaded, otherwise `false`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
   int app_info_is_preload(
     app_info_h app_info,
     ffi.Pointer<ffi.Bool> preload,
@@ -732,15 +945,21 @@ class Tizen80CapiAppfwAppManager {
   late final _app_info_is_preload = _app_info_is_preloadPtr
       .asFunction<int Function(app_info_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief  Checks whether the application supports ambient mode.
-  /// @since_tizen 5.5
-  /// @param[in]   app_info         The application information
-  /// @param[out]  ambient_supported  @c true if the application supports ambient mode, \n
-  /// otherwise @c false
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// Checks whether the application supports ambient mode.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `app_info` (in): The application information
+  /// - `ambient_supported` (out): `true` if the application supports ambient mode, otherwise `false`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
   int app_info_is_support_ambient(
     app_info_h app_info,
     ffi.Pointer<ffi.Bool> ambient_supported,
@@ -758,17 +977,26 @@ class Tizen80CapiAppfwAppManager {
   late final _app_info_is_support_ambient = _app_info_is_support_ambientPtr
       .asFunction<int Function(app_info_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief  Clones the application information handle.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks The @a clone should be released using app_info_destroy().
-  /// @param[out]  clone     A newly created application information handle, if successfully cloned
-  /// @param[in]   app_info  The application information
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #APP_MANAGER_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval  #APP_MANAGER_ERROR_NO_SUCH_APP        The app is not installed
+  /// Clones the application information handle.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - The `clone` should be released using app_info_destroy().
+  ///
+  /// **Parameters:**
+  /// - `clone` (out): A newly created application information handle, if successfully cloned
+  /// - `app_info` (in): The application information
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `APP_MANAGER_ERROR_NO_SUCH_APP`: The app is not installed
   int app_info_clone(
     ffi.Pointer<app_info_h> clone,
     app_info_h app_info,
@@ -786,21 +1014,36 @@ class Tizen80CapiAppfwAppManager {
   late final _app_info_clone = _app_info_clonePtr
       .asFunction<int Function(ffi.Pointer<app_info_h>, app_info_h)>();
 
-  /// @platform
-  /// @brief  Runs a callback for each category which the given application belongs to.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/packagemanager.admin
-  /// @param[in]  app_info   The application information
-  /// @param[in]  callback   The callback function
-  /// @param[in]  user_data  The user data to be passed to the callback function
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #APP_MANAGER_ERROR_IO_ERROR           I/O error
-  /// @see app_info_create()
+  /// Runs a callback for each category which the given application belongs to.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.admin>
+  ///
+  /// **Parameters:**
+  /// - `app_info` (in): The application information
+  /// - `callback` (in): The callback function
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_IO_ERROR`: I/O error
+  ///
+  /// **See also:**
+  /// - `app_info_create()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int app_info_foreach_category(
     app_info_h app_info,
     app_info_category_cb callback,
@@ -822,17 +1065,25 @@ class Tizen80CapiAppfwAppManager {
           int Function(
               app_info_h, app_info_category_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief  Creates the application information filter handle from DB.
-  /// All filter properties will be ANDed.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks The @a handle should be released using app_info_filter_destroy().
-  /// @param[out]  handle  The pointer to the application info filter handle
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #APP_MANAGER_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval  #APP_MANAGER_ERROR_IO_ERROR           I/O error
+  /// Creates the application information filter handle from DB. All filter properties will be ANDed.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - The `handle` should be released using app_info_filter_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (out): The pointer to the application info filter handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `APP_MANAGER_ERROR_IO_ERROR`: I/O error
   int app_info_filter_create(
     ffi.Pointer<app_info_filter_h> handle,
   ) {
@@ -847,14 +1098,21 @@ class Tizen80CapiAppfwAppManager {
   late final _app_info_filter_create = _app_info_filter_createPtr
       .asFunction<int Function(ffi.Pointer<app_info_filter_h>)>();
 
-  /// @brief  Destroys the application information filter handle, freeing up all the resources.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in]  handle  The pointer to the application info filter handle
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #APP_MANAGER_ERROR_IO_ERROR           I/O error
+  /// Destroys the application information filter handle, freeing up all the resources.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The pointer to the application info filter handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_IO_ERROR`: I/O error
   int app_info_filter_destroy(
     app_info_filter_h handle,
   ) {
@@ -869,16 +1127,23 @@ class Tizen80CapiAppfwAppManager {
   late final _app_info_filter_destroy =
       _app_info_filter_destroyPtr.asFunction<int Function(app_info_filter_h)>();
 
-  /// @brief  Adds a boolean filter property to the filter handle.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in]  handle    The pointer to the application info filter handle
-  /// @param[in]  property  The integer property name
-  /// @param[in]  value     The value corresponding to the property
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #APP_MANAGER_ERROR_IO_ERROR           I/O error
+  /// Adds a boolean filter property to the filter handle.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The pointer to the application info filter handle
+  /// - `property` (in): The integer property name
+  /// - `value` (in): The value corresponding to the property
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_IO_ERROR`: I/O error
   int app_info_filter_add_bool(
     app_info_filter_h handle,
     ffi.Pointer<ffi.Char> property,
@@ -899,16 +1164,23 @@ class Tizen80CapiAppfwAppManager {
       _app_info_filter_add_boolPtr.asFunction<
           int Function(app_info_filter_h, ffi.Pointer<ffi.Char>, bool)>();
 
-  /// @brief  Adds a string filter property to the filter handle.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in]  handle    The pointer to the application info filter handle
-  /// @param[in]  property  The integer property name
-  /// @param[in]  value     The value corresponding to the property
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #APP_MANAGER_ERROR_IO_ERROR           I/O error
+  /// Adds a string filter property to the filter handle.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The pointer to the application info filter handle
+  /// - `property` (in): The integer property name
+  /// - `value` (in): The value corresponding to the property
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_IO_ERROR`: I/O error
   int app_info_filter_add_string(
     app_info_filter_h handle,
     ffi.Pointer<ffi.Char> property,
@@ -930,15 +1202,22 @@ class Tizen80CapiAppfwAppManager {
           int Function(app_info_filter_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>)>();
 
-  /// @brief  Gets the count of filtered apps.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in]   handle  The pointer to the application info filter handle
-  /// @param[out]  count   The pointer to the variable for count
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #APP_MANAGER_ERROR_IO_ERROR           I/O error
+  /// Gets the count of filtered apps.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The pointer to the application info filter handle
+  /// - `count` (out): The pointer to the variable for count
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_IO_ERROR`: I/O error
   int app_info_filter_count_appinfo(
     app_info_filter_h handle,
     ffi.Pointer<ffi.Int> count,
@@ -956,16 +1235,23 @@ class Tizen80CapiAppfwAppManager {
   late final _app_info_filter_count_appinfo = _app_info_filter_count_appinfoPtr
       .asFunction<int Function(app_info_filter_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief  Executes the user supplied callback function for each application that satisfy the filter conditions.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in]  handle     The pointer to the application info filter handle
-  /// @param[in]  callback   The callback function
-  /// @param[in]  user_data  The user data to be passed to the callback function
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #APP_MANAGER_ERROR_IO_ERROR           I/O error
+  /// Executes the user supplied callback function for each application that satisfy the filter conditions.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The pointer to the application info filter handle
+  /// - `callback` (in): The callback function
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_IO_ERROR`: I/O error
   int app_info_filter_foreach_appinfo(
     app_info_filter_h handle,
     app_info_filter_cb callback,
@@ -987,16 +1273,25 @@ class Tizen80CapiAppfwAppManager {
           int Function(
               app_info_filter_h, app_info_filter_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief  Creates the application's metadata information filter handle from DB.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks The @a handle should be released using app_info_metadata_filter_destroy().
-  /// @param[out]  handle  The pointer to the application metadata info filter handle
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #APP_MANAGER_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval  #APP_MANAGER_ERROR_IO_ERROR           I/O error
+  /// Creates the application's metadata information filter handle from DB.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - The `handle` should be released using app_info_metadata_filter_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (out): The pointer to the application metadata info filter handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `APP_MANAGER_ERROR_IO_ERROR`: I/O error
   int app_info_metadata_filter_create(
     ffi.Pointer<app_info_metadata_filter_h> handle,
   ) {
@@ -1013,14 +1308,21 @@ class Tizen80CapiAppfwAppManager {
       _app_info_metadata_filter_createPtr
           .asFunction<int Function(ffi.Pointer<app_info_metadata_filter_h>)>();
 
-  /// @brief  Destroys the application's metadata information filter handle.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in]  handle  The pointer to the application info filter handle
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #APP_MANAGER_ERROR_IO_ERROR           I/O error
+  /// Destroys the application's metadata information filter handle.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The pointer to the application info filter handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_IO_ERROR`: I/O error
   int app_info_metadata_filter_destroy(
     app_info_metadata_filter_h handle,
   ) {
@@ -1036,18 +1338,25 @@ class Tizen80CapiAppfwAppManager {
       _app_info_metadata_filter_destroyPtr
           .asFunction<int Function(app_info_metadata_filter_h)>();
 
-  /// @brief  Adds filter condition for the query API.
-  /// @details  The query will search the entire application metadata information collected from
-  /// the manifest file of all the installed packages. You can specify value as @c NULL to search based on key only.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in]  handle  The pointer to the application metadata info filter handle
-  /// @param[in]  key     The pointer to metadata key
-  /// @param[in]  value   The pointer to metadata value
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #APP_MANAGER_ERROR_IO_ERROR           I/O error
+  /// Adds filter condition for the query API.
+  ///
+  /// The query will search the entire application metadata information collected from the manifest file of all the installed packages. You can specify value as `NULL` to search based on key only.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The pointer to the application metadata info filter handle
+  /// - `key` (in): The pointer to metadata key
+  /// - `value` (in): The pointer to metadata value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_IO_ERROR`: I/O error
   int app_info_metadata_filter_add(
     app_info_metadata_filter_h handle,
     ffi.Pointer<ffi.Char> key,
@@ -1069,19 +1378,25 @@ class Tizen80CapiAppfwAppManager {
           int Function(app_info_metadata_filter_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>)>();
 
-  /// @brief  Executes the filter query.
-  /// @details  The query will search the entire application metadata information collected from
-  /// the manifest file of all the installed packages. For each application returned by the query, the callback will be called. If callback returns
-  /// negative value, no more callbacks will be called and API will return.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in]  handle     The pointer to the application metadata info filter handle
-  /// @param[in]  callback   The function pointer to callback
-  /// @param[in]  user_data  The pointer to user data
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #APP_MANAGER_ERROR_IO_ERROR           I/O error
+  /// Executes the filter query.
+  ///
+  /// The query will search the entire application metadata information collected from the manifest file of all the installed packages. For each application returned by the query, the callback will be called. If callback returns negative value, no more callbacks will be called and API will return.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The pointer to the application metadata info filter handle
+  /// - `callback` (in): The function pointer to callback
+  /// - `user_data` (in): The pointer to user data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_IO_ERROR`: I/O error
   int app_info_metadata_filter_foreach(
     app_info_metadata_filter_h handle,
     app_info_filter_cb callback,
@@ -1103,65 +1418,25 @@ class Tizen80CapiAppfwAppManager {
           int Function(app_info_metadata_filter_h, app_info_filter_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief  Gets the list of resource controls for a particular application.
-  /// @details If a application has declared @b res_control and there is an available resource allowed by the resource package, the application uses the allowed resource of highest @b res_version of resource package among them.
-  /// If a application has declared @b res_control and there is an available resource package, the application uses the global resource of highest @b res_version of resource package among them.
-  /// The allowed resource can be accessed at @b {rootpath}/mount/allowed/{res_type} and the global resource can be accessed at @b {rootpath}/mount/global/{res_type}
-  /// If the application declared @b res_control with @b auto_close 'true' and the resource package which the application is using is updated, the application will be terminated.
+  /// Gets the list of resource controls for a particular application.
   ///
-  /// If an application 'appA' declared @b res_control like below *
-  /// <table>
-  /// <tr>
-  /// <th> res_type </th>
-  /// <th> min_res_version </th>
-  /// <th> max_res_version </th>
-  /// </tr>
-  /// <tr>
-  /// <td> ai_model </td>
-  /// <td> 1.0.0 </td>
-  /// <td> 2.0.0 </td>
-  /// </tr>
-  /// </table>
-  /// and there are resource packages with res_type 'ai_model' like below
-  /// <table>
-  /// <tr>
-  /// <th> package </th>
-  /// <th> res_type </th>
-  /// <th> res_version </th>
-  /// <th> allows 'appA'? </th>
-  /// </tr>
-  /// <tr>
-  /// <td> ai_1 </td>
-  /// <td> ai_model </td>
-  /// <td> 0.0.1 </td>
-  /// <td> yes </td>
-  /// </tr>
-  /// <tr>
-  /// <td> ai_2 </td>
-  /// <td> ai_model </td>
-  /// <td> 1.0.0 </td>
-  /// <td> yes </td>
-  /// </tr>
-  /// <tr>
-  /// <td> ai_3 </td>
-  /// <td> ai_model </td>
-  /// <td> 2.0.0 </td>
-  /// <td> no </td>
-  /// </tr>
-  /// </table>
-  /// 'ai_1' package's @b res_version is lower than 'appA's @b min_res_version in @b res_control so 'ai_1' is not available.
-  /// 'ai_2' is available and allows 'appA' and 'ai_3' is available but doesn't allow 'appA'
-  /// In this situation 'appA' can access the allowed resource of 'ai_2' and the global resource of 'ai_3'
+  /// If a application has declared **res_control** and there is an available resource allowed by the resource package, the application uses the allowed resource of highest **res_version** of resource package among them. If a application has declared **res_control** and there is an available resource package, the application uses the global resource of highest **res_version** of resource package among them. The allowed resource can be accessed at **{rootpath}/mount/allowed/{res_type}** and the global resource can be accessed at **{rootpath}/mount/global/{res_type}** If the application declared **res_control** with **auto_close** 'true' and the resource package which the application is using is updated, the application will be terminated. If an application 'appA' declared **res_control** like below * <table> <tr> <th> res_type </th> <th> min_res_version </th> <th> max_res_version </th> </tr> <tr> <td> ai_model </td> <td> 1.0.0 </td> <td> 2.0.0 </td> </tr> </table> and there are resource packages with res_type 'ai_model' like below <table> <tr> <th> package </th> <th> res_type </th> <th> res_version </th> <th> allows 'appA'? </th> </tr> <tr> <td> ai_1 </td> <td> ai_model </td> <td> 0.0.1 </td> <td> yes </td> </tr> <tr> <td> ai_2 </td> <td> ai_model </td> <td> 1.0.0 </td> <td> yes </td> </tr> <tr> <td> ai_3 </td> <td> ai_model </td> <td> 2.0.0 </td> <td> no </td> </tr> </table> 'ai_1' package's **res_version** is lower than 'appA's **min_res_version** in **res_control** so 'ai_1' is not available. 'ai_2' is available and allows 'appA' and 'ai_3' is available but doesn't allow 'appA' In this situation 'appA' can access the allowed resource of 'ai_2' and the global resource of 'ai_3'
   ///
-  /// @since_tizen 6.5
-  /// @param[in]  app_info   The application information
-  /// @param[in]  callback   The callback function
-  /// @param[in]  user_data  The user data to be passed to the callback function
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #APP_MANAGER_ERROR_IO_ERROR           I/O error
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `app_info` (in): The application information
+  /// - `callback` (in): The callback function
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_IO_ERROR`: I/O error
   int app_info_foreach_res_control(
     app_info_h app_info,
     app_info_res_control_cb callback,
@@ -1183,19 +1458,30 @@ class Tizen80CapiAppfwAppManager {
           int Function(
               app_info_h, app_info_res_control_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief  Registers a callback function to be invoked when the applications get launched or terminated.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in]   callback   The callback function to register
-  /// @param[in]   user_data  The user data to be passed to the callback function
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #APP_MANAGER_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval  #APP_MANAGER_ERROR_IO_ERROR           Internal I/O error
-  /// @post It will invoke app_manager_app_context_event_cb() when the application is launched or terminated.
-  /// @see app_manager_unset_app_context_event_cb()
-  /// @see app_manager_app_context_event_cb()
+  /// Registers a callback function to be invoked when the applications get launched or terminated.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `APP_MANAGER_ERROR_IO_ERROR`: Internal I/O error
+  ///
+  /// **Postconditions:**
+  /// - It will invoke app_manager_app_context_event_cb() when the application is launched or terminated.
+  ///
+  /// **See also:**
+  /// - `app_manager_unset_app_context_event_cb()`
+  /// - `app_manager_app_context_event_cb()`
   int app_manager_set_app_context_event_cb(
     app_manager_app_context_event_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -1215,9 +1501,13 @@ class Tizen80CapiAppfwAppManager {
           int Function(
               app_manager_app_context_event_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief  Unregisters the callback function.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @see app_manager_app_context_event_cb()
+  /// Unregisters the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **See also:**
+  /// - `app_manager_app_context_event_cb()`
   void app_manager_unset_app_context_event_cb() {
     return _app_manager_unset_app_context_event_cb();
   }
@@ -1228,18 +1518,31 @@ class Tizen80CapiAppfwAppManager {
   late final _app_manager_unset_app_context_event_cb =
       _app_manager_unset_app_context_event_cbPtr.asFunction<void Function()>();
 
-  /// @brief  Retrieves all application contexts of running applications.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks  In case of ui applications, sub apps in application groups will not be shown.
-  /// @param[in]   callback   The callback function to invoke
-  /// @param[in]   user_data  The user data to be passed to the callback function
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #APP_MANAGER_ERROR_IO_ERROR           Internal I/O error
-  /// @post   This function invokes app_manager_app_context_cb() for each application context.
-  /// @see app_manager_app_context_cb()
+  /// Retrieves all application contexts of running applications.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - In case of ui applications, sub apps in application groups will not be shown.
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_IO_ERROR`: Internal I/O error
+  ///
+  /// **Postconditions:**
+  /// - This function invokes app_manager_app_context_cb() for each application context.
+  ///
+  /// **See also:**
+  /// - `app_manager_app_context_cb()`
   int app_manager_foreach_app_context(
     app_manager_app_context_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -1258,19 +1561,30 @@ class Tizen80CapiAppfwAppManager {
       _app_manager_foreach_app_contextPtr.asFunction<
           int Function(app_manager_app_context_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief  Retrieves all application contexts of running applications including sub apps.
-  /// @details You can iterate all the running application contexts using this function.
-  /// This function is similar to app_manager_foreach_app_context() except that this function iterates application contexts including sub apps in application groups.
-  /// @since_tizen 3.0
-  /// @param[in]   callback   The callback function to invoke
-  /// @param[in]   user_data  The user data to be passed to the callback function
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #APP_MANAGER_ERROR_IO_ERROR           Internal I/O error
-  /// @post   This function invokes app_manager_app_context_cb() for each application context.
-  /// @see app_manager_app_context_cb()
+  /// Retrieves all application contexts of running applications including sub apps.
+  ///
+  /// You can iterate all the running application contexts using this function. This function is similar to app_manager_foreach_app_context() except that this function iterates application contexts including sub apps in application groups.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_IO_ERROR`: Internal I/O error
+  ///
+  /// **Postconditions:**
+  /// - This function invokes app_manager_app_context_cb() for each application context.
+  ///
+  /// **See also:**
+  /// - `app_manager_app_context_cb()`
   int app_manager_foreach_running_app_context(
     app_manager_app_context_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -1290,18 +1604,27 @@ class Tizen80CapiAppfwAppManager {
       _app_manager_foreach_running_app_contextPtr.asFunction<
           int Function(app_manager_app_context_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief  Gets the application context for the given ID of the application.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks  This function returns #APP_MANAGER_ERROR_NO_SUCH_APP if the application with the given application ID is not running. \n
-  /// You must release @a app_context using app_context_destroy().
-  /// @param[in]   app_id       The ID of the application
-  /// @param[out]  app_context  The application context of the given application ID
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #APP_MANAGER_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval  #APP_MANAGER_ERROR_NO_SUCH_APP        No such application
+  /// Gets the application context for the given ID of the application.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - This function returns `APP_MANAGER_ERROR_NO_SUCH_APP` if the application with the given application ID is not running.
+  /// - You must release `app_context` using app_context_destroy().
+  ///
+  /// **Parameters:**
+  /// - `app_id` (in): The ID of the application
+  /// - `app_context` (out): The application context of the given application ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `APP_MANAGER_ERROR_NO_SUCH_APP`: No such application
   int app_manager_get_app_context(
     ffi.Pointer<ffi.Char> app_id,
     ffi.Pointer<app_context_h> app_context,
@@ -1320,17 +1643,26 @@ class Tizen80CapiAppfwAppManager {
       _app_manager_get_app_contextPtr.asFunction<
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<app_context_h>)>();
 
-  /// @brief  Gets the ID of the application for the given process ID.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks  This function returns #APP_MANAGER_ERROR_NO_SUCH_APP if the application with the given process ID is not valid. \n
-  /// You must release @a app_id using free().
-  /// @param[in]   pid     The process ID of the application
-  /// @param[out]  app_id  The ID of the application
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #APP_MANAGER_ERROR_OUT_OF_MEMORY      Out of memory
+  /// Gets the ID of the application for the given process ID.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - This function returns `APP_MANAGER_ERROR_NO_SUCH_APP` if the application with the given process ID is not valid.
+  /// - You must release `app_id` using free().
+  ///
+  /// **Parameters:**
+  /// - `pid` (in): The process ID of the application
+  /// - `app_id` (out): The ID of the application
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
   int app_manager_get_app_id(
     int pid,
     ffi.Pointer<ffi.Pointer<ffi.Char>> app_id,
@@ -1348,15 +1680,21 @@ class Tizen80CapiAppfwAppManager {
   late final _app_manager_get_app_id = _app_manager_get_app_idPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief  Checks whether the application with the given ID of the application is running.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in]   app_id   The ID of the application
-  /// @param[out]  running  @c true if the application is running, \n
-  /// otherwise @c false if not running
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// Checks whether the application with the given ID of the application is running.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `app_id` (in): The ID of the application
+  /// - `running` (out): `true` if the application is running, otherwise `false` if not running
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
   int app_manager_is_running(
     ffi.Pointer<ffi.Char> app_id,
     ffi.Pointer<ffi.Bool> running,
@@ -1374,18 +1712,29 @@ class Tizen80CapiAppfwAppManager {
   late final _app_manager_is_running = _app_manager_is_runningPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief  Resumes the application.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/appmanager.launch
-  /// @param[in]   app_context  The application context
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #APP_MANAGER_ERROR_APP_NO_RUNNING     App is not running
-  /// @retval  #APP_MANAGER_ERROR_REQUEST_FAILED     Internal resume error
+  /// Resumes the application.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/appmanager.launch>
+  ///
+  /// **Parameters:**
+  /// - `app_context` (in): The application context
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_APP_NO_RUNNING`: App is not running
+  /// - `APP_MANAGER_ERROR_REQUEST_FAILED`: Internal resume error
   int app_manager_resume_app(
     app_context_h app_context,
   ) {
@@ -1400,20 +1749,32 @@ class Tizen80CapiAppfwAppManager {
   late final _app_manager_resume_app =
       _app_manager_resume_appPtr.asFunction<int Function(app_context_h)>();
 
-  /// @brief  Terminates the back ground application.\n
-  /// UI applications that are in paused state or some service applications could be required to terminate by this function.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/appmanager.kill.bgapp
-  /// @remarks This function returns after it just sends a request for terminating a background application.\n
-  /// Platform will decide if the target application could be terminated or not according to the state of the target application.
-  /// @param[in]   app_context  The application context
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #APP_MANAGER_ERROR_REQUEST_FAILED  Failed to send terminate request
+  /// Terminates the back ground application. UI applications that are in paused state or some service applications could be required to terminate by this function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/appmanager.kill.bgapp>
+  ///
+  /// **Remarks:**
+  /// - This function returns after it just sends a request for terminating a background application.
+  /// - Platform will decide if the target application could be terminated or not according to the state of the target application.
+  ///
+  /// **Parameters:**
+  /// - `app_context` (in): The application context
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_REQUEST_FAILED`: Failed to send terminate request
   int app_manager_request_terminate_bg_app(
     app_context_h app_context,
   ) {
@@ -1429,16 +1790,27 @@ class Tizen80CapiAppfwAppManager {
       _app_manager_request_terminate_bg_appPtr
           .asFunction<int Function(app_context_h)>();
 
-  /// @brief  Retrieves all installed applications information.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in]   callback   The callback function to invoke
-  /// @param[in]   user_data  The user data to be passed to the callback function
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @post    This function invokes app_manager_app_info_cb() for each application information.
-  /// @see app_manager_app_info_cb()
+  /// Retrieves all installed applications information.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Postconditions:**
+  /// - This function invokes app_manager_app_info_cb() for each application information.
+  ///
+  /// **See also:**
+  /// - `app_manager_app_info_cb()`
   int app_manager_foreach_app_info(
     app_manager_app_info_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -1457,17 +1829,26 @@ class Tizen80CapiAppfwAppManager {
       _app_manager_foreach_app_infoPtr.asFunction<
           int Function(app_manager_app_info_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief  Gets the application information for the given application ID.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks     You must release @a app_info using app_info_destroy().
-  /// @param[in]   app_id    The ID of the application
-  /// @param[out]  app_info  The application information for the given application ID
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #APP_MANAGER_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval  #APP_MANAGER_ERROR_NO_SUCH_APP        No such application
+  /// Gets the application information for the given application ID.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release `app_info` using app_info_destroy().
+  ///
+  /// **Parameters:**
+  /// - `app_id` (in): The ID of the application
+  /// - `app_info` (out): The application information for the given application ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `APP_MANAGER_ERROR_NO_SUCH_APP`: No such application
   int app_manager_get_app_info(
     ffi.Pointer<ffi.Char> app_id,
     ffi.Pointer<app_info_h> app_info,
@@ -1486,24 +1867,31 @@ class Tizen80CapiAppfwAppManager {
       _app_manager_get_app_infoPtr.asFunction<
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<app_info_h>)>();
 
-  /// @brief  Gets the absolute path to the shared data directory of the application specified
-  /// with an application ID.
-  /// @details     An application can only read the files of other application's shared data directory.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks     The specified @a path should be released with free().\n
-  /// Since Tizen 3.0, the shared/data directory is supported only for the applications that declare the %http://tizen.org/privilege/appdir.shareddata privilege.
-  /// The function will fail with #APP_MANAGER_ERROR_NOT_SUPPORTED if the privilege is not declared.
+  /// Gets the absolute path to the shared data directory of the application specified with an application ID.
   ///
-  /// @param[in]   app_id  The ID of the application
-  /// @param[out]  path    The absolute path to the shared data directory of the application
-  /// specified with the @a app_id
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #APP_MANAGER_ERROR_NO_SUCH_APP        No such application
-  /// @retval  #APP_MANAGER_ERROR_OUT_OF_MEMORY      Out of memory
+  /// An application can only read the files of other application's shared data directory.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - The specified `path` should be released with free().
+  /// - Since Tizen 3.0, the shared/data directory is supported only for the applications that declare the http://tizen.org/privilege/appdir.shareddata privilege.
+  /// - The function will fail with `APP_MANAGER_ERROR_NOT_SUPPORTED` if the privilege is not declared.
+  ///
+  /// **Parameters:**
+  /// - `app_id` (in): The ID of the application
+  /// - `path` (out): The absolute path to the shared data directory of the application specified with the `app_id`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_NO_SUCH_APP`: No such application
+  /// - `APP_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
   int app_manager_get_shared_data_path(
     ffi.Pointer<ffi.Char> app_id,
     ffi.Pointer<ffi.Pointer<ffi.Char>> path,
@@ -1524,21 +1912,28 @@ class Tizen80CapiAppfwAppManager {
           int Function(
               ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief  Gets the absolute path to the shared resource directory of the application specified
-  /// with an application ID.
-  /// @details     An application can only read the files of other application's shared resource directory.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks     The specified @a path should be released with free().
+  /// Gets the absolute path to the shared resource directory of the application specified with an application ID.
   ///
-  /// @param[in]      app_id  The ID of the application
-  /// @param[in,out]  path    The absolute path to the shared resource directory of the application
-  /// specified with the @a app_id
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #APP_MANAGER_ERROR_NO_SUCH_APP        No such application
-  /// @retval  #APP_MANAGER_ERROR_OUT_OF_MEMORY      Out of memory
+  /// An application can only read the files of other application's shared resource directory.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - The specified `path` should be released with free().
+  ///
+  /// **Parameters:**
+  /// - `app_id` (in): The ID of the application
+  /// - `path` (in,out): The absolute path to the shared resource directory of the application specified with the `app_id`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_NO_SUCH_APP`: No such application
+  /// - `APP_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
   int app_manager_get_shared_resource_path(
     ffi.Pointer<ffi.Char> app_id,
     ffi.Pointer<ffi.Pointer<ffi.Char>> path,
@@ -1559,22 +1954,28 @@ class Tizen80CapiAppfwAppManager {
           int Function(
               ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief  Gets the absolute path to the shared trusted directory of the application specified
-  /// with an application ID.
-  /// @details     An application signed with the same certificate can read and write the files of
-  /// other application's shared trusted directory.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks     The specified @a path should be released with free().
+  /// Gets the absolute path to the shared trusted directory of the application specified with an application ID.
   ///
-  /// @param[in]      app_id  The ID of the application
-  /// @param[in,out]  path    The absolute path to the shared trusted directory of the application
-  /// specified with the @a app_id
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #APP_MANAGER_ERROR_NO_SUCH_APP        No such application
-  /// @retval  #APP_MANAGER_ERROR_OUT_OF_MEMORY      Out of memory
+  /// An application signed with the same certificate can read and write the files of other application's shared trusted directory.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - The specified `path` should be released with free().
+  ///
+  /// **Parameters:**
+  /// - `app_id` (in): The ID of the application
+  /// - `path` (in,out): The absolute path to the shared trusted directory of the application specified with the `app_id`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_NO_SUCH_APP`: No such application
+  /// - `APP_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
   int app_manager_get_shared_trusted_path(
     ffi.Pointer<ffi.Char> app_id,
     ffi.Pointer<ffi.Pointer<ffi.Char>> path,
@@ -1595,23 +1996,31 @@ class Tizen80CapiAppfwAppManager {
           int Function(
               ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @deprecated Deprecated since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif.
-  /// @brief  Gets the absolute path to the shared data directory of the application specified
-  /// with an application ID.
-  /// @details     An application can only read the files of other application's shared data directory.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks     The specified @a path should be released with free().
-  /// @remarks     To access the path returned by this function may not work as intended in certain devices due to some implementation issues.
+  /// **Deprecated:** Deprecated since Mobile 2.4; Wearable 3.0.
   ///
-  /// @param[in]      app_id  The ID of the application
-  /// @param[in,out]  path    The absolute path to the shared data directory of the application
-  /// specified with the @a app_id
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #APP_MANAGER_ERROR_NONE               Successful
-  /// @retval  #APP_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #APP_MANAGER_ERROR_NO_SUCH_APP        No such application
-  /// @retval  #APP_MANAGER_ERROR_OUT_OF_MEMORY      Out of memory
+  /// Gets the absolute path to the shared data directory of the application specified with an application ID.
+  ///
+  /// An application can only read the files of other application's shared data directory.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - The specified `path` should be released with free().
+  /// - To access the path returned by this function may not work as intended in certain devices due to some implementation issues.
+  ///
+  /// **Parameters:**
+  /// - `app_id` (in): The ID of the application
+  /// - `path` (in,out): The absolute path to the shared data directory of the application specified with the `app_id`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_NO_SUCH_APP`: No such application
+  /// - `APP_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
   int app_manager_get_external_shared_data_path(
     ffi.Pointer<ffi.Char> app_id,
     ffi.Pointer<ffi.Pointer<ffi.Char>> path,
@@ -1632,19 +2041,27 @@ class Tizen80CapiAppfwAppManager {
           int Function(
               ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Creates a app manager event handle.
-  /// @since_tizen 3.0
-  /// @remarks You must release @a handle using app_manager_event_destroy().
+  /// Creates a app manager event handle.
   ///
-  /// @param[out] handle The app manager event handle that is newly created on success
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - You must release `handle` using app_manager_event_destroy().
   ///
-  /// @retval #APP_MANAGER_ERROR_NONE              Successful
-  /// @retval #APP_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @see app_manager_event_destroy()
+  /// **Parameters:**
+  /// - `handle` (out): The app manager event handle that is newly created on success
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `app_manager_event_destroy()`
   int app_manager_event_create(
     ffi.Pointer<app_manager_event_h> handle,
   ) {
@@ -1660,22 +2077,26 @@ class Tizen80CapiAppfwAppManager {
   late final _app_manager_event_create = _app_manager_event_createPtr
       .asFunction<int Function(ffi.Pointer<app_manager_event_h>)>();
 
-  /// @brief Sets the event to handle to listen.
-  /// You can combine multiple status using OR operation which you want to listen.
-  /// @since_tizen 3.0
+  /// Sets the event to handle to listen. You can combine multiple status using OR operation which you want to listen.
   ///
-  /// @param[in] handle     The app manager event handle
-  /// @param[in] status_type The status of the application
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `handle` (in): The app manager event handle
+  /// - `status_type` (in): The status of the application
   ///
-  /// @retval #APP_MANAGER_ERROR_NONE              Successful
-  /// @retval #APP_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_MANAGER_ERROR_REQUEST_FAILED          Internal error
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see app_manager_event_status_type_e
-  /// @see app_manager_set_event_cb()
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_REQUEST_FAILED`: Internal error
+  ///
+  /// **See also:**
+  /// - `app_manager_event_status_type_e`
+  /// - `app_manager_set_event_cb()`
   int app_manager_event_set_status(
     app_manager_event_h handle,
     int status_type,
@@ -1692,23 +2113,31 @@ class Tizen80CapiAppfwAppManager {
   late final _app_manager_event_set_status = _app_manager_event_set_statusPtr
       .asFunction<int Function(app_manager_event_h, int)>();
 
-  /// @brief Registers a callback function to be invoked when the app is event has occurred.
-  /// @since_tizen 3.0
-  /// @param[in] handle    The app manager event handle
-  /// @param[in] callback   The callback function to be registered
-  /// @param[in] user_data  The user data to be passed to the callback function
+  /// Registers a callback function to be invoked when the app is event has occurred.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @retval #APP_MANAGER_ERROR_NONE              Successful
-  /// @retval #APP_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_MANAGER_ERROR_REQUEST_FAILED          Internal error
-  /// @post app_manager_event_cb() will be invoked.
+  /// **Parameters:**
+  /// - `handle` (in): The app manager event handle
+  /// - `callback` (in): The callback function to be registered
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @see app_manager_event_set_status()
-  /// @see app_manager_event_cb()
-  /// @see app_manager_unset_event_cb()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_REQUEST_FAILED`: Internal error
+  ///
+  /// **Postconditions:**
+  /// - app_manager_event_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `app_manager_event_set_status()`
+  /// - `app_manager_event_cb()`
+  /// - `app_manager_unset_event_cb()`
   int app_manager_set_event_cb(
     app_manager_event_h handle,
     app_manager_event_cb callback,
@@ -1730,20 +2159,25 @@ class Tizen80CapiAppfwAppManager {
           int Function(app_manager_event_h, app_manager_event_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback function.
-  /// @since_tizen 3.0
+  /// Unregisters the callback function.
   ///
-  /// @param[in] handle The app manager event handle
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `handle` (in): The app manager event handle
   ///
-  /// @retval #APP_MANAGER_ERROR_NONE              Successful
-  /// @retval #APP_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_MANAGER_ERROR_REQUEST_FAILED          Internal error
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see app_manager_event_cb()
-  /// @see app_manager_set_event_cb()
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_REQUEST_FAILED`: Internal error
+  ///
+  /// **See also:**
+  /// - `app_manager_event_cb()`
+  /// - `app_manager_set_event_cb()`
   int app_manager_unset_event_cb(
     app_manager_event_h handle,
   ) {
@@ -1758,19 +2192,24 @@ class Tizen80CapiAppfwAppManager {
   late final _app_manager_unset_event_cb = _app_manager_unset_event_cbPtr
       .asFunction<int Function(app_manager_event_h)>();
 
-  /// @brief Destroys the app manager event handle.
-  /// @since_tizen 3.0
+  /// Destroys the app manager event handle.
   ///
-  /// @param[in] handle The app manager event handle
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `handle` (in): The app manager event handle
   ///
-  /// @retval #APP_MANAGER_ERROR_NONE              Successful
-  /// @retval #APP_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_MANAGER_ERROR_REQUEST_FAILED          Internal error
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see app_manager_event_create()
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_REQUEST_FAILED`: Internal error
+  ///
+  /// **See also:**
+  /// - `app_manager_event_create()`
   int app_manager_event_destroy(
     app_manager_event_h handle,
   ) {
@@ -1785,25 +2224,39 @@ class Tizen80CapiAppfwAppManager {
   late final _app_manager_event_destroy = _app_manager_event_destroyPtr
       .asFunction<int Function(app_manager_event_h)>();
 
-  /// @platform
-  /// @brief Sets the application's icon path into given path.
-  /// @since_tizen 5.0
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/packagemanager.admin
-  /// @remarks   The icon file should be included in package which the applications belongs to.
-  /// @param[in] app_id    The ID of the application
-  /// @param[in] icon_path The path of icon file
+  /// Sets the application's icon path into given path.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @retval #APP_MANAGER_ERROR_NONE                 Successful
-  /// @retval #APP_MANAGER_ERROR_PERMISSION_DENIED    Permission denied
-  /// @retval #APP_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #APP_MANAGER_ERROR_OUT_OF_MEMORY        Out of memory
-  /// @retval #APP_MANAGER_ERROR_IO_ERROR             Internal error
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @see app_manager_event_create()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.admin>
+  ///
+  /// **Remarks:**
+  /// - The icon file should be included in package which the applications belongs to.
+  ///
+  /// **Parameters:**
+  /// - `app_id` (in): The ID of the application
+  /// - `icon_path` (in): The path of icon file
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_MANAGER_ERROR_NONE`: Successful
+  /// - `APP_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `APP_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `APP_MANAGER_ERROR_IO_ERROR`: Internal error
+  ///
+  /// **See also:**
+  /// - `app_manager_event_create()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int app_manager_set_app_icon(
     ffi.Pointer<ffi.Char> app_id,
     ffi.Pointer<ffi.Char> icon_path,
@@ -1822,10 +2275,14 @@ class Tizen80CapiAppfwAppManager {
       .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 }
 
+/// @nodoc
 final class app_context_s extends ffi.Opaque {}
 
-/// @brief  Enumeration for Application Context Event.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// Enumeration for Application Context Event.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+/// @nodoc
 abstract class app_context_event_e {
   /// < The application is launched
   static const int APP_CONTEXT_EVENT_LAUNCHED = 0;
@@ -1834,8 +2291,11 @@ abstract class app_context_event_e {
   static const int APP_CONTEXT_EVENT_TERMINATED = 1;
 }
 
-/// @brief Enumeration for the application state.
-/// @since_tizen 3.0
+/// Enumeration for the application state.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class app_state_e {
   /// < The undefined state
   static const int APP_STATE_UNDEFINED = 0;
@@ -1853,20 +2313,30 @@ abstract class app_state_e {
   static const int APP_STATE_TERMINATED = 4;
 }
 
-/// @brief  Application context handle.
-/// @since_tizen  @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Application context handle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 typedef app_context_h = ffi.Pointer<app_context_s>;
+/// @nodoc
 typedef pid_t = __pid_t;
+/// @nodoc
 typedef __pid_t = ffi.Int;
+/// @nodoc
 typedef Dart__pid_t = int;
 
-/// @brief Enumeration for application component type.
-/// @details A component is an application considered as a part of a package.
-/// The application component type indicates what type of
-/// a component an application is in a package.
-/// @since_tizen 4.0
-/// @see PACKAGE_INFO_PROP_APP_COMPONENT_TYPE
-/// @see app_info_get_app_component_type()
+/// Enumeration for application component type.
+///
+/// A component is an application considered as a part of a package. The application component type indicates what type of a component an application is in a package.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **See also:**
+/// - `PACKAGE_INFO_PROP_APP_COMPONENT_TYPE`
+/// - `app_info_get_app_component_type()`
+/// @nodoc
 abstract class app_info_app_component_type_e {
   /// < UI application
   static const int APP_INFO_APP_COMPONENT_TYPE_UI_APP = 0;
@@ -1884,96 +2354,160 @@ abstract class app_info_app_component_type_e {
   static const int APP_INFO_APP_COMPONENT_TYPE_COMPONENT_BASED_APP = 4;
 }
 
+/// @nodoc
 final class app_info_s extends ffi.Opaque {}
 
+/// @nodoc
 final class app_info_filter_s extends ffi.Opaque {}
 
+/// @nodoc
 final class app_info_metadata_filter_s extends ffi.Opaque {}
 
-/// @brief Application information handle.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Application information handle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 typedef app_info_h = ffi.Pointer<app_info_s>;
 
-/// @brief  Called to get application metadata in app_info_foreach_metadata().
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in]   metadata_key   The key of the metadata
-/// @param[in]   metadata_value  The value of the metadata
-/// @param[in]   user_data       The user data passed to app_info_foreach_metadata()
-/// @return      @c true to continue with the next iteration of the loop, \n
-/// otherwise @c false to break out of the loop
-/// @pre app_info_foreach_metadata() will invoke this callback.
-/// @see app_info_foreach_metadata()
+/// Called to get application metadata in app_info_foreach_metadata().
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `metadata_key` (in): The key of the metadata
+/// - `metadata_value` (in): The value of the metadata
+/// - `user_data` (in): The user data passed to app_info_foreach_metadata()
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - app_info_foreach_metadata() will invoke this callback.
+///
+/// **See also:**
+/// - `app_info_foreach_metadata()`
+/// @nodoc
 typedef app_info_metadata_cb
     = ffi.Pointer<ffi.NativeFunction<app_info_metadata_cbFunction>>;
+/// @nodoc
 typedef app_info_metadata_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> metadata_key,
     ffi.Pointer<ffi.Char> metadata_value,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartapp_info_metadata_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> metadata_key,
     ffi.Pointer<ffi.Char> metadata_value,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief  Called for each application category in app_info_foreach_category().
-/// @since_tizen 4.0
-/// @remarks     @a category will be freed when the application information handle is destroyed
-/// using app_info_destroy()
-/// @param[in]   category        The name of the category
-/// @param[in]   user_data       The user data passed to app_info_foreach_category()
-/// @return      @c true to continue with the next iteration of the loop, \n
-/// otherwise @c false to break out of the loop
-/// @pre app_info_foreach_category() will invoke this callback.
-/// @see app_info_foreach_category()
+/// Called for each application category in app_info_foreach_category().
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Remarks:**
+/// - `category` will be freed when the application information handle is destroyed
+/// - using app_info_destroy()
+///
+/// **Parameters:**
+/// - `category` (in): The name of the category
+/// - `user_data` (in): The user data passed to app_info_foreach_category()
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - app_info_foreach_category() will invoke this callback.
+///
+/// **See also:**
+/// - `app_info_foreach_category()`
+/// @nodoc
 typedef app_info_category_cb
     = ffi.Pointer<ffi.NativeFunction<app_info_category_cbFunction>>;
+/// @nodoc
 typedef app_info_category_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> category, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartapp_info_category_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> category, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Application filter handle.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Application filter handle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 typedef app_info_filter_h = ffi.Pointer<app_info_filter_s>;
 
-/// @brief  Called to get the application information once for each installed application.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in]   app_info   The application information of each installed application
-/// @param[in]   user_data  The user data passed from the foreach function
-/// @return      @c true to continue with the next iteration of the loop, \n
-/// otherwise @c false to break out of the loop
-/// @pre app_manager_foreach_app_info() will invoke this callback.
-/// @see app_manager_foreach_app_info()
+/// Called to get the application information once for each installed application.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `app_info` (in): The application information of each installed application
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - app_manager_foreach_app_info() will invoke this callback.
+///
+/// **See also:**
+/// - `app_manager_foreach_app_info()`
+/// @nodoc
 typedef app_info_filter_cb
     = ffi.Pointer<ffi.NativeFunction<app_info_filter_cbFunction>>;
+/// @nodoc
 typedef app_info_filter_cbFunction = ffi.Bool Function(
     app_info_h app_info, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartapp_info_filter_cbFunction = bool Function(
     app_info_h app_info, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Application metadata filter handle.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Application metadata filter handle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 typedef app_info_metadata_filter_h = ffi.Pointer<app_info_metadata_filter_s>;
 
-/// @brief  Called for each application resource control in app_info_foreach_res_control().
-/// @since_tizen 6.5
-/// @remarks @a res_type, @a min_res_version, @a max_res_version, and @a auto_close are managed by the platform and will be released after the callback exits.
-/// @param[in]   res_type         The resource type
-/// @param[in]   min_res_version  The minimum version of the resource package to use
-/// @param[in]   max_res_version  The maximum version of the resource package to use
-/// @param[in]   auto_close       The value of auto close
-/// @param[in]   user_data        The user data passed to app_info_foreach_res_control()
-/// @return      @c true to continue with the next iteration of the loop, \n
-/// otherwise @c false to break out of the loop
-/// @pre app_info_foreach_res_control() will invoke this callback.
-/// @see app_info_foreach_res_control()
+/// Called for each application resource control in app_info_foreach_res_control().
+///
+/// **Since Tizen:**
+/// - 6.5
+///
+/// **Remarks:**
+/// - `res_type`, `min_res_version`, `max_res_version`, and `auto_close` are managed by the platform and will be released after the callback exits.
+///
+/// **Parameters:**
+/// - `res_type` (in): The resource type
+/// - `min_res_version` (in): The minimum version of the resource package to use
+/// - `max_res_version` (in): The maximum version of the resource package to use
+/// - `auto_close` (in): The value of auto close
+/// - `user_data` (in): The user data passed to app_info_foreach_res_control()
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - app_info_foreach_res_control() will invoke this callback.
+///
+/// **See also:**
+/// - `app_info_foreach_res_control()`
+/// @nodoc
 typedef app_info_res_control_cb
     = ffi.Pointer<ffi.NativeFunction<app_info_res_control_cbFunction>>;
+/// @nodoc
 typedef app_info_res_control_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> res_type,
     ffi.Pointer<ffi.Char> min_res_version,
     ffi.Pointer<ffi.Char> max_res_version,
     ffi.Pointer<ffi.Char> auto_close,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartapp_info_res_control_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> res_type,
     ffi.Pointer<ffi.Char> min_res_version,
@@ -1981,8 +2515,11 @@ typedef Dartapp_info_res_control_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> auto_close,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumerations for Application Manager Error.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumerations for Application Manager Error.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class app_manager_error_e {
   /// < Successful
   static const int APP_MANAGER_ERROR_NONE = 0;
@@ -2018,8 +2555,11 @@ abstract class app_manager_error_e {
   static const int APP_MANAGER_ERROR_NOT_SUPPORTED = -1073741822;
 }
 
-/// @brief  Enumeration for app manager status type.
-/// @since_tizen 3.0
+/// Enumeration for app manager status type.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class app_manager_event_status_type_e {
   /// < All Status
   static const int APP_MANAGER_EVENT_STATUS_TYPE_ALL = 0;
@@ -2031,8 +2571,11 @@ abstract class app_manager_event_status_type_e {
   static const int APP_MANAGER_EVENT_STATUS_TYPE_DISABLE = 2;
 }
 
-/// @brief Enumeration for app manager event type.
-/// @since_tizen 3.0
+/// Enumeration for app manager event type.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class app_manager_event_type_e {
   /// < Application enable event
   static const int APP_MANAGER_EVENT_ENABLE_APP = 0;
@@ -2041,8 +2584,11 @@ abstract class app_manager_event_type_e {
   static const int APP_MANAGER_EVENT_DISABLE_APP = 1;
 }
 
-/// @brief Enumeration for app manager event state.
-/// @since_tizen 3.0
+/// Enumeration for app manager event state.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class app_manager_event_state_e {
   /// < Started event state
   static const int APP_MANAGER_EVENT_STATE_STARTED = 0;
@@ -2054,75 +2600,124 @@ abstract class app_manager_event_state_e {
   static const int APP_MANAGER_EVENT_STATE_FAILED = 2;
 }
 
+/// @nodoc
 final class app_manager_event_s extends ffi.Opaque {}
 
-/// @brief  Called when an application is launched or terminated.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-/// @remarks  Please don't try to free the handle of app_context, because it is managed by the framework.
-/// @param[in]   app_context  The application context of the application launched or terminated
-/// @param[in]   event        The application context event
-/// @param[in]   user_data    The user data passed from the foreach function
-/// @pre  This function is called when an application gets launched or terminated, after you register this callback using app_manager_set_app_context_event_cb().
-/// @see app_manager_set_app_context_event_cb()
-/// @see app_manager_unset_app_context_event_cb()
+/// Called when an application is launched or terminated.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+///
+/// **Remarks:**
+/// - Please don't try to free the handle of app_context, because it is managed by the framework.
+///
+/// **Parameters:**
+/// - `app_context` (in): The application context of the application launched or terminated
+/// - `event` (in): The application context event
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Preconditions:**
+/// - This function is called when an application gets launched or terminated, after you register this callback using app_manager_set_app_context_event_cb().
+///
+/// **See also:**
+/// - `app_manager_set_app_context_event_cb()`
+/// - `app_manager_unset_app_context_event_cb()`
+/// @nodoc
 typedef app_manager_app_context_event_cb
     = ffi.Pointer<ffi.NativeFunction<app_manager_app_context_event_cbFunction>>;
+/// @nodoc
 typedef app_manager_app_context_event_cbFunction = ffi.Void Function(
     app_context_h app_context,
     ffi.Int32 event,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartapp_manager_app_context_event_cbFunction = void Function(
     app_context_h app_context, int event, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief  Called to get the application context once for each running application.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in]   app_context  The application context of each running application
-/// @param[in]   user_data    The user data passed from the foreach function
-/// @return      @c true to continue with the next iteration of the loop, \n
-/// otherwise @c false to break out of the loop
-/// @pre app_manager_foreach_app_context() will invoke this callback.
-/// @see app_manager_foreach_app_context()
+/// Called to get the application context once for each running application.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `app_context` (in): The application context of each running application
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - app_manager_foreach_app_context() will invoke this callback.
+///
+/// **See also:**
+/// - `app_manager_foreach_app_context()`
+/// @nodoc
 typedef app_manager_app_context_cb
     = ffi.Pointer<ffi.NativeFunction<app_manager_app_context_cbFunction>>;
+/// @nodoc
 typedef app_manager_app_context_cbFunction = ffi.Bool Function(
     app_context_h app_context, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartapp_manager_app_context_cbFunction = bool Function(
     app_context_h app_context, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief  Called to get the application information once for each installed application.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in]   app_info   The application information of each installed application
-/// @param[in]   user_data  The user data passed from the foreach function
-/// @return      @c true to continue with the next iteration of the loop, \n
-/// otherwise @c false to break out of the loop
-/// @pre app_manager_foreach_app_info() will invoke this callback.
-/// @see app_manager_foreach_app_info()
+/// Called to get the application information once for each installed application.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `app_info` (in): The application information of each installed application
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - app_manager_foreach_app_info() will invoke this callback.
+///
+/// **See also:**
+/// - `app_manager_foreach_app_info()`
+/// @nodoc
 typedef app_manager_app_info_cb
     = ffi.Pointer<ffi.NativeFunction<app_manager_app_info_cbFunction>>;
+/// @nodoc
 typedef app_manager_app_info_cbFunction = ffi.Bool Function(
     app_info_h app_info, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartapp_manager_app_info_cbFunction = bool Function(
     app_info_h app_info, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief  App manager event handle.
-/// @since_tizen 3.0
+/// App manager event handle.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef app_manager_event_h = ffi.Pointer<app_manager_event_s>;
 
-/// @brief Called when the application is enabled or disabled.
-/// @since_tizen 3.0
+/// Called when the application is enabled or disabled.
 ///
-/// @param[in] type        The type of the app to be enabled or disabled
-/// @param[in] app_id     The app id to be enabled or disabled
-/// @param[in] event_type  The event type of the app
-/// @param[in] event_state The current event state of the app
-/// @param[in] handle       The app manager event handle
-/// @param[in] user_data   The user data passed from app_manager_set_event_cb()
-/// @pre  This function is called when an application being disabled or enabled, after you register this callback using app_manager_set_event_cb().
+/// **Since Tizen:**
+/// - 3.0
 ///
-/// @see app_manager_set_event_cb()
-/// @see app_manager_unset_event_cb()
+/// **Parameters:**
+/// - `type` (in): The type of the app to be enabled or disabled
+/// - `app_id` (in): The app id to be enabled or disabled
+/// - `event_type` (in): The event type of the app
+/// - `event_state` (in): The current event state of the app
+/// - `handle` (in): The app manager event handle
+/// - `user_data` (in): The user data passed from app_manager_set_event_cb()
+///
+/// **Preconditions:**
+/// - This function is called when an application being disabled or enabled, after you register this callback using app_manager_set_event_cb().
+///
+/// **See also:**
+/// - `app_manager_set_event_cb()`
+/// - `app_manager_unset_event_cb()`
+/// @nodoc
 typedef app_manager_event_cb
     = ffi.Pointer<ffi.NativeFunction<app_manager_event_cbFunction>>;
+/// @nodoc
 typedef app_manager_event_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> type,
     ffi.Pointer<ffi.Char> app_id,
@@ -2130,6 +2725,7 @@ typedef app_manager_event_cbFunction = ffi.Void Function(
     ffi.Int32 event_state,
     app_manager_event_h handle,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartapp_manager_event_cbFunction = void Function(
     ffi.Pointer<ffi.Char> type,
     ffi.Pointer<ffi.Char> app_id,
@@ -2138,22 +2734,30 @@ typedef Dartapp_manager_event_cbFunction = void Function(
     app_manager_event_h handle,
     ffi.Pointer<ffi.Void> user_data);
 
+/// @nodoc
 const String PACKAGE_INFO_PROP_APP_ID = 'PACKAGE_INFO_PROP_APP_ID';
 
+/// @nodoc
 const String PACKAGE_INFO_PROP_APP_TYPE = 'PACKAGE_INFO_PROP_APP_TYPE';
 
+/// @nodoc
 const String PACKAGE_INFO_PROP_APP_CATEGORY = 'PACKAGE_INFO_PROP_APP_CATEGORY';
 
+/// @nodoc
 const String PACKAGE_INFO_PROP_APP_INSTALLED_STORAGE =
     'PACKAGE_INFO_PROP_APP_INSTALLED_STORAGE';
 
+/// @nodoc
 const String PACKAGE_INFO_PROP_APP_NODISPLAY =
     'PACKAGE_INFO_PROP_APP_NODISPLAY';
 
+/// @nodoc
 const String PACKAGE_INFO_PROP_APP_TASKMANAGE =
     'PACKAGE_INFO_PROP_APP_TASKMANAGE';
 
+/// @nodoc
 const String PACKAGE_INFO_PROP_APP_DISABLED = 'PACKAGE_INFO_PROP_APP_DISABLED';
 
+/// @nodoc
 const String PACKAGE_INFO_PROP_APP_COMPONENT_TYPE =
     'PACKAGE_INFO_PROP_APP_COMPONENT_TYPE';

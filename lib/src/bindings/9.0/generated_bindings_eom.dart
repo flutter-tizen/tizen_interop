@@ -1,3 +1,6 @@
+/// {@category 9.0/tizen}
+library tizen_interop_9_0.eom;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'generated_bindings_capi_ui_inputmethod.dart' as ui_inputmethod;
 
 /// Dart bindings for Tizen eom APIs.
+/// {@category 9.0/tizen}
 class Tizen90Eom {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,16 +29,28 @@ class Tizen90Eom {
           lookup)
       : _lookup = lookup;
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief Initializes External Output Manager (EOM).
-  /// @details User should call this function previously for using EOM.
-  /// @since_tizen 2.4
-  /// @remarks After all using, call eom_deinit() function for resource returning.
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #EOM_ERROR_NONE Successful
-  /// @retval #EOM_ERROR_CONNECTION_FAILURE The EOM connection failure
-  /// @see eom_deinit()
-  /// @see #eom_error_e
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Initializes External Output Manager (EOM).
+  ///
+  /// User should call this function previously for using EOM.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Remarks:**
+  /// - After all using, call eom_deinit() function for resource returning.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `EOM_ERROR_NONE`: Successful
+  /// - `EOM_ERROR_CONNECTION_FAILURE`: The EOM connection failure
+  ///
+  /// **See also:**
+  /// - `eom_deinit()`
+  /// - `eom_error_e`
   int eom_init() {
     return _eom_init();
   }
@@ -43,12 +59,17 @@ class Tizen90Eom {
       _lookup<ffi.NativeFunction<ffi.Int Function()>>('eom_init');
   late final _eom_init = _eom_initPtr.asFunction<int Function()>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief Finalizes External Output Manager (EOM).
-  /// @details User should call this function after using EOM to release all
-  /// resources of EOM.
-  /// @since_tizen 2.4
-  /// @see eom_init()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Finalizes External Output Manager (EOM).
+  ///
+  /// User should call this function after using EOM to release all resources of EOM.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **See also:**
+  /// - `eom_init()`
   void eom_deinit() {
     return _eom_deinit();
   }
@@ -57,22 +78,32 @@ class Tizen90Eom {
       _lookup<ffi.NativeFunction<ffi.Void Function()>>('eom_deinit');
   late final _eom_deinit = _eom_deinitPtr.asFunction<void Function()>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief Registers a callback function to get output connection notification
-  /// from External Output Manager (EOM) module.
-  /// @since_tizen 2.4
-  /// @param[in] callback  The function pointer of eom_output_added_cb() callback
-  /// function
-  /// @param[in] user_data  The pointer of user data which is passed to
-  /// eom_output_added_cb() function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #EOM_ERROR_NONE Successful
-  /// @retval #EOM_ERROR_OUT_OF_MEMORY Memory allocation failure
-  /// @retval #EOM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre eom_init()
-  /// @pre eom_get_eom_output_ids()
-  /// @see eom_unset_output_added_cb()
-  /// @see #eom_output_added_cb
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Registers a callback function to get output connection notification from External Output Manager (EOM) module.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The function pointer of eom_output_added_cb() callback function
+  /// - `user_data` (in): The pointer of user data which is passed to eom_output_added_cb() function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `EOM_ERROR_NONE`: Successful
+  /// - `EOM_ERROR_OUT_OF_MEMORY`: Memory allocation failure
+  /// - `EOM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - eom_init()
+  /// - eom_get_eom_output_ids()
+  ///
+  /// **See also:**
+  /// - `eom_unset_output_added_cb()`
+  /// - `eom_output_added_cb`
   int eom_set_output_added_cb(
     eom_output_added_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -90,18 +121,30 @@ class Tizen90Eom {
   late final _eom_set_output_added_cb = _eom_set_output_added_cbPtr
       .asFunction<int Function(eom_output_added_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief Unregisters the callback function.
-  /// @since_tizen 2.4
-  /// @param[in] callback  The function pointer of eom_output_added_cb() callback
-  /// function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #EOM_ERROR_NONE Successful
-  /// @retval #EOM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre eom_init()
-  /// @pre eom_get_eom_output_ids()
-  /// @see eom_set_output_added_cb()
-  /// @see #eom_output_added_cb
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Unregisters the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The function pointer of eom_output_added_cb() callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `EOM_ERROR_NONE`: Successful
+  /// - `EOM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - eom_init()
+  /// - eom_get_eom_output_ids()
+  ///
+  /// **See also:**
+  /// - `eom_set_output_added_cb()`
+  /// - `eom_output_added_cb`
   int eom_unset_output_added_cb(
     eom_output_added_cb callback,
   ) {
@@ -116,22 +159,32 @@ class Tizen90Eom {
   late final _eom_unset_output_added_cb = _eom_unset_output_added_cbPtr
       .asFunction<int Function(eom_output_added_cb)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief Registers a callback function to get output disconnection
-  /// notification from External Output Manager (EOM) module.
-  /// @since_tizen 2.4
-  /// @param[in] callback  The function pointer of eom_output_removed_cb() callback
-  /// function
-  /// @param[in] user_data  The pointer of user data which is passed to
-  /// eom_output_removed_cb() function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #EOM_ERROR_NONE Successful
-  /// @retval #EOM_ERROR_OUT_OF_MEMORY Memory allocation failure
-  /// @retval #EOM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre eom_init()
-  /// @pre eom_get_eom_output_ids()
-  /// @see eom_unset_output_removed_cb()
-  /// @see #eom_output_removed_cb
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Registers a callback function to get output disconnection notification from External Output Manager (EOM) module.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The function pointer of eom_output_removed_cb() callback function
+  /// - `user_data` (in): The pointer of user data which is passed to eom_output_removed_cb() function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `EOM_ERROR_NONE`: Successful
+  /// - `EOM_ERROR_OUT_OF_MEMORY`: Memory allocation failure
+  /// - `EOM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - eom_init()
+  /// - eom_get_eom_output_ids()
+  ///
+  /// **See also:**
+  /// - `eom_unset_output_removed_cb()`
+  /// - `eom_output_removed_cb`
   int eom_set_output_removed_cb(
     eom_output_removed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -149,18 +202,30 @@ class Tizen90Eom {
   late final _eom_set_output_removed_cb = _eom_set_output_removed_cbPtr
       .asFunction<int Function(eom_output_removed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief Unregisters the callback function.
-  /// @since_tizen 2.4
-  /// @param[in] callback  The function pointer of eom_output_removed_cb() callback
-  /// function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #EOM_ERROR_NONE Successful
-  /// @retval #EOM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre eom_init()
-  /// @pre eom_get_eom_output_ids()
-  /// @see eom_set_output_removed_cb()
-  /// @see #eom_output_removed_cb
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Unregisters the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The function pointer of eom_output_removed_cb() callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `EOM_ERROR_NONE`: Successful
+  /// - `EOM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - eom_init()
+  /// - eom_get_eom_output_ids()
+  ///
+  /// **See also:**
+  /// - `eom_set_output_removed_cb()`
+  /// - `eom_output_removed_cb`
   int eom_unset_output_removed_cb(
     eom_output_removed_cb callback,
   ) {
@@ -175,22 +240,32 @@ class Tizen90Eom {
   late final _eom_unset_output_removed_cb = _eom_unset_output_removed_cbPtr
       .asFunction<int Function(eom_output_removed_cb)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief Registers a callback function to get output mode changing
-  /// notification from External Output Manager (EOM) module.
-  /// @since_tizen 2.4
-  /// @param[in] callback  The function pointer of eom_mode_changed_cb() callback
-  /// function
-  /// @param[in] user_data  The pointer of user data which is passed to
-  /// eom_mode_changed_cb() function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #EOM_ERROR_NONE Successful
-  /// @retval #EOM_ERROR_OUT_OF_MEMORY Memory allocation failure
-  /// @retval #EOM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre eom_init()
-  /// @pre eom_get_eom_output_ids()
-  /// @see eom_unset_mode_changed_cb()
-  /// @see #eom_mode_changed_cb
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Registers a callback function to get output mode changing notification from External Output Manager (EOM) module.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The function pointer of eom_mode_changed_cb() callback function
+  /// - `user_data` (in): The pointer of user data which is passed to eom_mode_changed_cb() function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `EOM_ERROR_NONE`: Successful
+  /// - `EOM_ERROR_OUT_OF_MEMORY`: Memory allocation failure
+  /// - `EOM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - eom_init()
+  /// - eom_get_eom_output_ids()
+  ///
+  /// **See also:**
+  /// - `eom_unset_mode_changed_cb()`
+  /// - `eom_mode_changed_cb`
   int eom_set_mode_changed_cb(
     eom_mode_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -208,18 +283,30 @@ class Tizen90Eom {
   late final _eom_set_mode_changed_cb = _eom_set_mode_changed_cbPtr
       .asFunction<int Function(eom_mode_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief Unregisters the callback function.
-  /// @since_tizen 2.4
-  /// @param[in] callback  The function pointer of eom_mode_changed_cb() callback
-  /// function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #EOM_ERROR_NONE Successful
-  /// @retval #EOM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre eom_init()
-  /// @pre eom_get_eom_output_ids()
-  /// @see eom_set_mode_changed_cb()
-  /// @see #eom_mode_changed_cb
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Unregisters the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The function pointer of eom_mode_changed_cb() callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `EOM_ERROR_NONE`: Successful
+  /// - `EOM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - eom_init()
+  /// - eom_get_eom_output_ids()
+  ///
+  /// **See also:**
+  /// - `eom_set_mode_changed_cb()`
+  /// - `eom_mode_changed_cb`
   int eom_unset_mode_changed_cb(
     eom_mode_changed_cb callback,
   ) {
@@ -234,22 +321,32 @@ class Tizen90Eom {
   late final _eom_unset_mode_changed_cb = _eom_unset_mode_changed_cbPtr
       .asFunction<int Function(eom_mode_changed_cb)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief Registers a callback function to get output attribute changing
-  /// notification from External Output Manager (EOM) module.
-  /// @since_tizen 2.4
-  /// @param[in] callback  The function pointer of eom_attribute_changed_cb()
-  /// callback function
-  /// @param[in] user_data  The pointer of user data which is passed to
-  /// eom_attribute_changed_cb() function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #EOM_ERROR_NONE Successful
-  /// @retval #EOM_ERROR_OUT_OF_MEMORY Memory allocation failure
-  /// @retval #EOM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre eom_init()
-  /// @pre eom_get_eom_output_ids()
-  /// @see eom_unset_attribute_changed_cb()
-  /// @see #eom_attribute_changed_cb
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Registers a callback function to get output attribute changing notification from External Output Manager (EOM) module.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The function pointer of eom_attribute_changed_cb() callback function
+  /// - `user_data` (in): The pointer of user data which is passed to eom_attribute_changed_cb() function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `EOM_ERROR_NONE`: Successful
+  /// - `EOM_ERROR_OUT_OF_MEMORY`: Memory allocation failure
+  /// - `EOM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - eom_init()
+  /// - eom_get_eom_output_ids()
+  ///
+  /// **See also:**
+  /// - `eom_unset_attribute_changed_cb()`
+  /// - `eom_attribute_changed_cb`
   int eom_set_attribute_changed_cb(
     eom_attribute_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -268,18 +365,30 @@ class Tizen90Eom {
       _eom_set_attribute_changed_cbPtr.asFunction<
           int Function(eom_attribute_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief Unregisters the callback function.
-  /// @since_tizen 2.4
-  /// @param[in] callback  The function pointer of eom_attribute_changed_cb()
-  /// callback function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #EOM_ERROR_NONE Successful
-  /// @retval #EOM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre eom_init()
-  /// @pre eom_get_eom_output_ids()
-  /// @see eom_set_attribute_changed_cb()
-  /// @see #eom_attribute_changed_cb
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Unregisters the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The function pointer of eom_attribute_changed_cb() callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `EOM_ERROR_NONE`: Successful
+  /// - `EOM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - eom_init()
+  /// - eom_get_eom_output_ids()
+  ///
+  /// **See also:**
+  /// - `eom_set_attribute_changed_cb()`
+  /// - `eom_attribute_changed_cb`
   int eom_unset_attribute_changed_cb(
     eom_attribute_changed_cb callback,
   ) {
@@ -295,26 +404,40 @@ class Tizen90Eom {
       _eom_unset_attribute_changed_cbPtr
           .asFunction<int Function(eom_attribute_changed_cb)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief Gets the IDs and count of external output.
-  /// @details This function returns the IDs of external output which are
-  /// available to connect to target device, and the count of them
-  /// also. User can get the id of external output.
-  /// which user want to watch.
-  /// @since_tizen 2.4
-  /// @remarks User should free return value by using free().
-  /// The specific error code can be obtained using the get_last_result() method.
-  /// Error codes are described in Exception section.
-  /// @param[out] count  The count of the eom_output_id supported by system
-  /// @return The array of the eom_output_id if this function succeeds, otherwise
-  /// NULL
-  /// @retval The pointer of #eom_output_id
-  /// @exception #EOM_ERROR_NONE Successful
-  /// @exception #EOM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @exception #EOM_ERROR_OUT_OF_MEMORY Memory allocation failure
-  /// @pre eom_init()
-  /// @see #eom_output_id
-  /// @see #eom_error_e
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Gets the IDs and count of external output.
+  ///
+  /// This function returns the IDs of external output which are available to connect to target device, and the count of them also. User can get the id of external output. which user want to watch.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Remarks:**
+  /// - User should free return value by using free().
+  /// - The specific error code can be obtained using the get_last_result() method.
+  /// - Error codes are described in Exception section.
+  ///
+  /// **Parameters:**
+  /// - `count` (out): The count of the eom_output_id supported by system
+  ///
+  /// **Returns:**
+  /// - The array of the eom_output_id if this function succeeds, otherwise NULL
+  ///
+  /// **Return values:**
+  /// - `The`: pointer of `eom_output_id`
+  ///
+  /// **Exceptions:**
+  /// - `EOM_ERROR_NONE`: Successful
+  /// - `EOM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `EOM_ERROR_OUT_OF_MEMORY`: Memory allocation failure
+  ///
+  /// **Preconditions:**
+  /// - eom_init()
+  ///
+  /// **See also:**
+  /// - `eom_output_id`
+  /// - `eom_error_e`
   ffi.Pointer<eom_output_id> eom_get_eom_output_ids(
     ffi.Pointer<ffi.Int> count,
   ) {
@@ -330,21 +453,36 @@ class Tizen90Eom {
   late final _eom_get_eom_output_ids = _eom_get_eom_output_idsPtr
       .asFunction<ffi.Pointer<eom_output_id> Function(ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief Gets type of external output.
-  /// @since_tizen 2.4
-  /// @remarks The specific error code can be obtained using the get_last_result()
-  /// method. Error codes are described in Exception section.
-  /// @param[in] output_id  The id of external output device
-  /// @param[out] type  The type of external output instance
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #EOM_ERROR_NONE Successful
-  /// @retval #EOM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre eom_init()
-  /// @pre eom_get_eom_output_ids()
-  /// @see #eom_output_id
-  /// @see #eom_error_e
-  /// @see #eom_output_type_e
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Gets type of external output.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the get_last_result()
+  /// - method. Error codes are described in Exception section.
+  ///
+  /// **Parameters:**
+  /// - `output_id` (in): The id of external output device
+  /// - `type` (out): The type of external output instance
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `EOM_ERROR_NONE`: Successful
+  /// - `EOM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - eom_init()
+  /// - eom_get_eom_output_ids()
+  ///
+  /// **See also:**
+  /// - `eom_output_id`
+  /// - `eom_error_e`
+  /// - `eom_output_type_e`
   int eom_get_output_type(
     int output_id,
     ffi.Pointer<ffi.Int32> type,
@@ -362,22 +500,37 @@ class Tizen90Eom {
   late final _eom_get_output_type = _eom_get_output_typePtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Int32>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief Gets mode of external output.
-  /// @since_tizen 2.4
-  /// @remarks The specific error code can be obtained using the get_last_result()
-  /// method. Error codes are described in Exception section.
-  /// @param[in] output_id  The id of external output device
-  /// @param[out] mode  The mode of external output instance
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #EOM_ERROR_NONE Successful
-  /// @retval #EOM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #EOM_ERROR_NO_SUCH_DEVICE Invalid external output instance
-  /// @pre eom_init()
-  /// @pre eom_get_eom_output_ids()
-  /// @see #eom_output_id
-  /// @see #eom_error_e
-  /// @see #eom_output_mode_e
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Gets mode of external output.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the get_last_result()
+  /// - method. Error codes are described in Exception section.
+  ///
+  /// **Parameters:**
+  /// - `output_id` (in): The id of external output device
+  /// - `mode` (out): The mode of external output instance
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `EOM_ERROR_NONE`: Successful
+  /// - `EOM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `EOM_ERROR_NO_SUCH_DEVICE`: Invalid external output instance
+  ///
+  /// **Preconditions:**
+  /// - eom_init()
+  /// - eom_get_eom_output_ids()
+  ///
+  /// **See also:**
+  /// - `eom_output_id`
+  /// - `eom_error_e`
+  /// - `eom_output_mode_e`
   int eom_get_output_mode(
     int output_id,
     ffi.Pointer<ffi.Int32> mode,
@@ -395,22 +548,37 @@ class Tizen90Eom {
   late final _eom_get_output_mode = _eom_get_output_modePtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Int32>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief Gets attribute of external output.
-  /// @since_tizen 2.4
-  /// @remarks The specific error code can be obtained using the get_last_result()
-  /// method. Error codes are described in Exception section.
-  /// @param[in] output_id  The id of external output device
-  /// @param[out] attribute  The attribute of external output instance
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #EOM_ERROR_NONE Successful
-  /// @retval #EOM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #EOM_ERROR_NO_SUCH_DEVICE Invalid external output instance
-  /// @pre eom_init()
-  /// @pre eom_get_eom_output_ids()
-  /// @see #eom_output_id
-  /// @see #eom_error_e
-  /// @see #eom_output_attribute_e
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Gets attribute of external output.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the get_last_result()
+  /// - method. Error codes are described in Exception section.
+  ///
+  /// **Parameters:**
+  /// - `output_id` (in): The id of external output device
+  /// - `attribute` (out): The attribute of external output instance
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `EOM_ERROR_NONE`: Successful
+  /// - `EOM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `EOM_ERROR_NO_SUCH_DEVICE`: Invalid external output instance
+  ///
+  /// **Preconditions:**
+  /// - eom_init()
+  /// - eom_get_eom_output_ids()
+  ///
+  /// **See also:**
+  /// - `eom_output_id`
+  /// - `eom_error_e`
+  /// - `eom_output_attribute_e`
   int eom_get_output_attribute(
     int output_id,
     ffi.Pointer<ffi.Int32> attribute,
@@ -428,22 +596,37 @@ class Tizen90Eom {
   late final _eom_get_output_attribute = _eom_get_output_attributePtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Int32>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief Gets attribute state of external output.
-  /// @since_tizen 2.4
-  /// @remarks The specific error code can be obtained using the get_last_result()
-  /// method. Error codes are described in Exception section.
-  /// @param[in] output_id  The id of external output device
-  /// @param[out] state  The attribute state of external output instance
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #EOM_ERROR_NONE Successful
-  /// @retval #EOM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #EOM_ERROR_NO_SUCH_DEVICE Invalid external output instance
-  /// @pre eom_init()
-  /// @pre eom_get_eom_output_ids()
-  /// @see #eom_output_id
-  /// @see #eom_error_e
-  /// @see #eom_output_attribute_state_e
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Gets attribute state of external output.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the get_last_result()
+  /// - method. Error codes are described in Exception section.
+  ///
+  /// **Parameters:**
+  /// - `output_id` (in): The id of external output device
+  /// - `state` (out): The attribute state of external output instance
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `EOM_ERROR_NONE`: Successful
+  /// - `EOM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `EOM_ERROR_NO_SUCH_DEVICE`: Invalid external output instance
+  ///
+  /// **Preconditions:**
+  /// - eom_init()
+  /// - eom_get_eom_output_ids()
+  ///
+  /// **See also:**
+  /// - `eom_output_id`
+  /// - `eom_error_e`
+  /// - `eom_output_attribute_state_e`
   int eom_get_output_attribute_state(
     int output_id,
     ffi.Pointer<ffi.Int32> state,
@@ -462,20 +645,33 @@ class Tizen90Eom {
       _eom_get_output_attribute_statePtr
           .asFunction<int Function(int, ffi.Pointer<ffi.Int32>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief Gets resolution of external output.
-  /// @since_tizen 2.4
-  /// @param[in] output_id  The id of external output device
-  /// @param[out] width  The width of external output instance
-  /// @param[out] height  The height of external output instance
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #EOM_ERROR_NONE Successful
-  /// @retval #EOM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #EOM_ERROR_NO_SUCH_DEVICE Invalid external output instance
-  /// @pre eom_init()
-  /// @pre eom_get_eom_output_ids()
-  /// @see #eom_output_id
-  /// @see #eom_error_e
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Gets resolution of external output.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Parameters:**
+  /// - `output_id` (in): The id of external output device
+  /// - `width` (out): The width of external output instance
+  /// - `height` (out): The height of external output instance
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `EOM_ERROR_NONE`: Successful
+  /// - `EOM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `EOM_ERROR_NO_SUCH_DEVICE`: Invalid external output instance
+  ///
+  /// **Preconditions:**
+  /// - eom_init()
+  /// - eom_get_eom_output_ids()
+  ///
+  /// **See also:**
+  /// - `eom_output_id`
+  /// - `eom_error_e`
   int eom_get_output_resolution(
     int output_id,
     ffi.Pointer<ffi.Int> width,
@@ -496,20 +692,33 @@ class Tizen90Eom {
       _eom_get_output_resolutionPtr.asFunction<
           int Function(int, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief Gets physical width/height (millimeters) of external output.
-  /// @since_tizen 2.4
-  /// @param[in] output_id  The id of external output device
-  /// @param[out] phy_width  The physical mm width of external output instance
-  /// @param[out] phy_height  The physical mm height of external output instance
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #EOM_ERROR_NONE Successful
-  /// @retval #EOM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #EOM_ERROR_NO_SUCH_DEVICE Invalid external output instance
-  /// @pre eom_init()
-  /// @pre eom_get_eom_output_ids()
-  /// @see #eom_output_id
-  /// @see #eom_error_e
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Gets physical width/height (millimeters) of external output.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Parameters:**
+  /// - `output_id` (in): The id of external output device
+  /// - `phy_width` (out): The physical mm width of external output instance
+  /// - `phy_height` (out): The physical mm height of external output instance
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `EOM_ERROR_NONE`: Successful
+  /// - `EOM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `EOM_ERROR_NO_SUCH_DEVICE`: Invalid external output instance
+  ///
+  /// **Preconditions:**
+  /// - eom_init()
+  /// - eom_get_eom_output_ids()
+  ///
+  /// **See also:**
+  /// - `eom_output_id`
+  /// - `eom_error_e`
   int eom_get_output_physical_size(
     int output_id,
     ffi.Pointer<ffi.Int> phy_width,
@@ -530,28 +739,36 @@ class Tizen90Eom {
       _eom_get_output_physical_sizePtr.asFunction<
           int Function(int, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief Sets the attribute of the external output ID.
-  /// @details The application can set the External Output Manager (EOM) attribute
-  /// to the external output ID.
-  /// The EOM module manages the windows to display on external output and
-  /// control the policy of external output. The application can recognize
-  /// the attribute state and manage the resources when the application receives
-  /// several notification callback from EOM module.
-  /// @since_tizen 2.4
-  /// @param[in] output_id  The id of external output device
-  /// @param[in] attr  The attribute of the external output
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #EOM_ERROR_NONE Successful
-  /// @retval #EOM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #EOM_ERROR_NO_SUCH_DEVICE Invalid external output instance
-  /// @retval #EOM_ERROR_MESSAGE_SENDING_FAILURE Communication failure with EOM
-  /// module
-  /// @retval #EOM_ERROR_MESSAGE_OPERATION_FAILURE Operation failure
-  /// @pre eom_init()
-  /// @pre eom_get_eom_output_ids()
-  /// @see #eom_output_id
-  /// @see #eom_error_e
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Sets the attribute of the external output ID.
+  ///
+  /// The application can set the External Output Manager (EOM) attribute to the external output ID. The EOM module manages the windows to display on external output and control the policy of external output. The application can recognize the attribute state and manage the resources when the application receives several notification callback from EOM module.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Parameters:**
+  /// - `output_id` (in): The id of external output device
+  /// - `attr` (in): The attribute of the external output
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `EOM_ERROR_NONE`: Successful
+  /// - `EOM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `EOM_ERROR_NO_SUCH_DEVICE`: Invalid external output instance
+  /// - `EOM_ERROR_MESSAGE_SENDING_FAILURE`: Communication failure with EOM module
+  /// - `EOM_ERROR_MESSAGE_OPERATION_FAILURE`: Operation failure
+  ///
+  /// **Preconditions:**
+  /// - eom_init()
+  /// - eom_get_eom_output_ids()
+  ///
+  /// **See also:**
+  /// - `eom_output_id`
+  /// - `eom_error_e`
   int eom_set_output_attribute(
     int output_id,
     int attr,
@@ -568,23 +785,34 @@ class Tizen90Eom {
   late final _eom_set_output_attribute =
       _eom_set_output_attributePtr.asFunction<int Function(int, int)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief Sets window to the external output best resolution of external output
-  /// device.
-  /// @since_tizen 2.4
-  /// @param[in] output_id  The id of external output device
-  /// @param[in] win  The pointer of evas object
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #EOM_ERROR_NONE Successful
-  /// @retval #EOM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #EOM_ERROR_NO_SUCH_DEVICE Invalid external output instance
-  /// @retval #EOM_ERROR_MESSAGE_SENDING_FAILURE Communication failure with EOM
-  /// module
-  /// @retval #EOM_ERROR_MESSAGE_OPERATION_FAILURE Operation failure
-  /// @pre eom_init()
-  /// @pre eom_get_eom_output_ids()
-  /// @see #eom_output_id
-  /// @see #eom_error_e
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Sets window to the external output best resolution of external output device.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Parameters:**
+  /// - `output_id` (in): The id of external output device
+  /// - `win` (in): The pointer of evas object
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `EOM_ERROR_NONE`: Successful
+  /// - `EOM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `EOM_ERROR_NO_SUCH_DEVICE`: Invalid external output instance
+  /// - `EOM_ERROR_MESSAGE_SENDING_FAILURE`: Communication failure with EOM module
+  /// - `EOM_ERROR_MESSAGE_OPERATION_FAILURE`: Operation failure
+  ///
+  /// **Preconditions:**
+  /// - eom_init()
+  /// - eom_get_eom_output_ids()
+  ///
+  /// **See also:**
+  /// - `eom_output_id`
+  /// - `eom_error_e`
   int eom_set_output_window(
     int output_id,
     ffi.Pointer<ui_inputmethod.Evas_Object> win,
@@ -604,9 +832,13 @@ class Tizen90Eom {
       .asFunction<int Function(int, ffi.Pointer<ui_inputmethod.Evas_Object>)>();
 }
 
-/// @deprecated Deprecated since 8.0.
-/// @brief Enumeration of External Output Manager (EOM) error type.
-/// @since_tizen 2.4
+/// **Deprecated:** Deprecated since 8.0.
+///
+/// Enumeration of External Output Manager (EOM) error type.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class eom_error_e {
   /// < Success
   static const int EOM_ERROR_NONE = 0;
@@ -630,9 +862,13 @@ abstract class eom_error_e {
   static const int EOM_ERROR_MESSAGE_OPERATION_FAILURE = -42205181;
 }
 
-/// @deprecated Deprecated since 8.0.
-/// @brief Enumeration of external output type.
-/// @since_tizen 2.4
+/// **Deprecated:** Deprecated since 8.0.
+///
+/// Enumeration of external output type.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class eom_output_type_e {
   /// < Unknown output type
   static const int EOM_OUTPUT_TYPE_UNKNOWN = 0;
@@ -687,9 +923,13 @@ abstract class eom_output_type_e {
   static const int EOM_OUTPUT_TYPE_MAX = 17;
 }
 
-/// @deprecated Deprecated since 8.0.
-/// @brief Enumeration of external output mode.
-/// @since_tizen 2.4
+/// **Deprecated:** Deprecated since 8.0.
+///
+/// Enumeration of external output mode.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class eom_output_mode_e {
   /// < None
   static const int EOM_OUTPUT_MODE_NONE = 0;
@@ -702,9 +942,13 @@ abstract class eom_output_mode_e {
   static const int EOM_OUTPUT_MODE_MAX = 3;
 }
 
-/// @deprecated Deprecated since 8.0.
-/// @brief Enumeration of External Output Manager (EOM) attributes.
-/// @since_tizen 2.4
+/// **Deprecated:** Deprecated since 8.0.
+///
+/// Enumeration of External Output Manager (EOM) attributes.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class eom_output_attribute_e {
   /// < None
   static const int EOM_OUTPUT_ATTRIBUTE_NONE = 0;
@@ -720,9 +964,13 @@ abstract class eom_output_attribute_e {
   static const int EOM_OUTPUT_ATTRIBUTE_MAX = 4;
 }
 
-/// @deprecated Deprecated since 8.0.
-/// @brief Enumeration of External Output Manager (EOM) attribute state.
-/// @since_tizen 2.4
+/// **Deprecated:** Deprecated since 8.0.
+///
+/// Enumeration of External Output Manager (EOM) attribute state.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class eom_output_attribute_state_e {
   /// < None
   static const int EOM_OUTPUT_ATTRIBUTE_STATE_NONE = 0;
@@ -738,72 +986,109 @@ abstract class eom_output_attribute_state_e {
   static const int EOM_OUTPUT_ATTRIBUTE_STATE_MAX = 4;
 }
 
-/// @deprecated Deprecated since 8.0.
-/// @brief Called when External Output Manager (EOM) module sends output
-/// connection notification.
-/// @since_tizen 2.4
-/// @param[in] output_id  The output id which is connected output
-/// @param[in] user_data  The pointer of user data which is passed to
-/// eom_output_added_cb() function
-/// @see eom_set_output_added_cb()
-/// @see eom_unset_output_added_cb()
+/// **Deprecated:** Deprecated since 8.0.
+///
+/// Called when External Output Manager (EOM) module sends output connection notification.
+///
+/// **Since Tizen:**
+/// - 2.4
+///
+/// **Parameters:**
+/// - `output_id` (in): The output id which is connected output
+/// - `user_data` (in): The pointer of user data which is passed to eom_output_added_cb() function
+///
+/// **See also:**
+/// - `eom_set_output_added_cb()`
+/// - `eom_unset_output_added_cb()`
+/// @nodoc
 typedef eom_output_added_cb
     = ffi.Pointer<ffi.NativeFunction<eom_output_added_cbFunction>>;
+/// @nodoc
 typedef eom_output_added_cbFunction = ffi.Void Function(
     eom_output_id output_id, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Darteom_output_added_cbFunction = void Function(
     Darteom_output_id output_id, ffi.Pointer<ffi.Void> user_data);
 
-/// @deprecated Deprecated since 8.0.
-/// @brief Definition for external output ID.
-/// @since_tizen 2.4
+/// **Deprecated:** Deprecated since 8.0.
+///
+/// Definition for external output ID.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 typedef eom_output_id = ffi.UnsignedInt;
+/// @nodoc
 typedef Darteom_output_id = int;
 
-/// @deprecated Deprecated since 8.0.
-/// @brief Called when External Output Manager (EOM) module sends output
-/// disconnection notification.
-/// @since_tizen 2.4
-/// @param[in] output_id  The output id which is connected output
-/// @param[in] user_data  The pointer of user data which is passed to
-/// eom_output_removed_cb() function
-/// @see eom_set_output_removed_cb()
-/// @see eom_unset_output_removed_cb()
+/// **Deprecated:** Deprecated since 8.0.
+///
+/// Called when External Output Manager (EOM) module sends output disconnection notification.
+///
+/// **Since Tizen:**
+/// - 2.4
+///
+/// **Parameters:**
+/// - `output_id` (in): The output id which is connected output
+/// - `user_data` (in): The pointer of user data which is passed to eom_output_removed_cb() function
+///
+/// **See also:**
+/// - `eom_set_output_removed_cb()`
+/// - `eom_unset_output_removed_cb()`
+/// @nodoc
 typedef eom_output_removed_cb
     = ffi.Pointer<ffi.NativeFunction<eom_output_removed_cbFunction>>;
+/// @nodoc
 typedef eom_output_removed_cbFunction = ffi.Void Function(
     eom_output_id output_id, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Darteom_output_removed_cbFunction = void Function(
     Darteom_output_id output_id, ffi.Pointer<ffi.Void> user_data);
 
-/// @deprecated Deprecated since 8.0.
-/// @brief Called when External Output Manager (EOM) module sends output
-/// mode changing notification.
-/// @since_tizen 2.4
-/// @param[in] output_id  The output id which is connected output
-/// @param[in] user_data  The pointer of user data which is passed to
-/// eom_mode_changed_cb() function
-/// @see eom_set_mode_changed_cb()
-/// @see eom_unset_mode_changed_cb()
+/// **Deprecated:** Deprecated since 8.0.
+///
+/// Called when External Output Manager (EOM) module sends output mode changing notification.
+///
+/// **Since Tizen:**
+/// - 2.4
+///
+/// **Parameters:**
+/// - `output_id` (in): The output id which is connected output
+/// - `user_data` (in): The pointer of user data which is passed to eom_mode_changed_cb() function
+///
+/// **See also:**
+/// - `eom_set_mode_changed_cb()`
+/// - `eom_unset_mode_changed_cb()`
+/// @nodoc
 typedef eom_mode_changed_cb
     = ffi.Pointer<ffi.NativeFunction<eom_mode_changed_cbFunction>>;
+/// @nodoc
 typedef eom_mode_changed_cbFunction = ffi.Void Function(
     eom_output_id output_id, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Darteom_mode_changed_cbFunction = void Function(
     Darteom_output_id output_id, ffi.Pointer<ffi.Void> user_data);
 
-/// @deprecated Deprecated since 8.0.
-/// @brief Called when External Output Manager (EOM) module sends output
-/// attribute changing notification.
-/// @since_tizen 2.4
-/// @param[in] output_id  The output id which is connected output
-/// @param[in] user_data  The pointer of user data which is passed to
-/// eom_attribute_changed_cb() function
-/// @see eom_set_attribute_changed_cb()
-/// @see eom_unset_attribute_changed_cb()
+/// **Deprecated:** Deprecated since 8.0.
+///
+/// Called when External Output Manager (EOM) module sends output attribute changing notification.
+///
+/// **Since Tizen:**
+/// - 2.4
+///
+/// **Parameters:**
+/// - `output_id` (in): The output id which is connected output
+/// - `user_data` (in): The pointer of user data which is passed to eom_attribute_changed_cb() function
+///
+/// **See also:**
+/// - `eom_set_attribute_changed_cb()`
+/// - `eom_unset_attribute_changed_cb()`
+/// @nodoc
 typedef eom_attribute_changed_cb
     = ffi.Pointer<ffi.NativeFunction<eom_attribute_changed_cbFunction>>;
+/// @nodoc
 typedef eom_attribute_changed_cbFunction = ffi.Void Function(
     eom_output_id output_id, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Darteom_attribute_changed_cbFunction = void Function(
     Darteom_output_id output_id, ffi.Pointer<ffi.Void> user_data);

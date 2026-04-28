@@ -1,3 +1,6 @@
+/// {@category 6.5/tizen}
+library tizen_interop_6_5.capi_network_stc;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'dart:ffi' as ffi_lib;
 
 /// Dart bindings for Tizen capi-network-stc APIs.
+/// {@category 6.5/tizen}
 class Tizen65CapiNetworkStc {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,25 +29,38 @@ class Tizen65CapiNetworkStc {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Initializes STC (Smart Traffic Control).
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @remarks You must release @a stc using stc_deinitialize().
+  /// Initializes STC (Smart Traffic Control).
   ///
-  /// @param[out] stc The STC handle
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #STC_ERROR_NONE                    Successful
-  /// @retval #STC_ERROR_OPERATION_FAILED        General error
-  /// @retval #STC_ERROR_OUT_OF_MEMORY           Out of memory
-  /// @retval #STC_ERROR_INVALID_PARAMETER       Invalid parameter
-  /// @retval #STC_ERROR_INVALID_OPERATION       Invalid operation
-  /// @retval #STC_ERROR_NOT_SUPPORTED           Not supported
-  /// @retval #STC_ERROR_PERMISSION_DENIED       Permission denied
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @see stc_h
-  /// @see stc_deinitialize()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - You must release `stc` using stc_deinitialize().
+  ///
+  /// **Parameters:**
+  /// - `stc` (out): The STC handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STC_ERROR_NONE`: Successful
+  /// - `STC_ERROR_OPERATION_FAILED`: General error
+  /// - `STC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `STC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STC_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `STC_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STC_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `stc_h`
+  /// - `stc_deinitialize()`
   int stc_initialize(
     ffi.Pointer<stc_h> stc,
   ) {
@@ -58,22 +75,29 @@ class Tizen65CapiNetworkStc {
   late final _stc_initialize =
       _stc_initializePtr.asFunction<int Function(ffi.Pointer<stc_h>)>();
 
-  /// @brief Deinitializes STC.
-  /// @since_tizen 4.0
+  /// Deinitializes STC.
   ///
-  /// @param[in] stc The STC handle
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #STC_ERROR_NONE                    Successful
-  /// @retval #STC_ERROR_OPERATION_FAILED        General error
-  /// @retval #STC_ERROR_OUT_OF_MEMORY           Out of memory
-  /// @retval #STC_ERROR_INVALID_PARAMETER       Invalid parameter
-  /// @retval #STC_ERROR_INVALID_OPERATION       Invalid operation
-  /// @retval #STC_ERROR_NOT_INITIALIZED         Not initialized
-  /// @retval #STC_ERROR_NOT_SUPPORTED           Not supported
+  /// **Parameters:**
+  /// - `stc` (in): The STC handle
   ///
-  /// @see stc_h
-  /// @see stc_initialize()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STC_ERROR_NONE`: Successful
+  /// - `STC_ERROR_OPERATION_FAILED`: General error
+  /// - `STC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `STC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STC_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `STC_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `STC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `stc_h`
+  /// - `stc_initialize()`
   int stc_deinitialize(
     stc_h stc,
   ) {
@@ -87,42 +111,53 @@ class Tizen65CapiNetworkStc {
   late final _stc_deinitialize =
       _stc_deinitializePtr.asFunction<int Function(stc_h)>();
 
-  /// @deprecated Deprecated since 5.5. Use stc_get_all_stats() and stc_foreach_all_stats() instead.
-  /// @brief Gets the statistics information an application matched rule asynchronously.
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
+  /// **Deprecated:** Deprecated since 5.5. Use stc_get_all_stats() and stc_foreach_all_stats() instead.
   ///
-  /// @param[in] stc           The STC handle
-  /// @param[in] rule          The statistics rule handle
-  /// @param[in] info_cb       The callback is called for each application
-  /// that used network in between timestamps specified
-  /// @param[in] user_data     The user data passed to the callback function
+  /// Gets the statistics information an application matched rule asynchronously.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #STC_ERROR_NONE                    Successful
-  /// @retval #STC_ERROR_OPERATION_FAILED        General error
-  /// @retval #STC_ERROR_OUT_OF_MEMORY           Out of memory
-  /// @retval #STC_ERROR_INVALID_PARAMETER       Invalid parameter
-  /// @retval #STC_ERROR_INVALID_OPERATION       Invalid operation
-  /// @retval #STC_ERROR_NOT_INITIALIZED         Not initialized
-  /// @retval #STC_ERROR_NOT_SUPPORTED           Not supported
-  /// @retval #STC_ERROR_PERMISSION_DENIED       Permission denied
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @see stc_h
-  /// @see stc_stats_rule_h
-  /// @see stc_initialize()
-  /// @see stc_stats_rule_create()
-  /// @see stc_stats_rule_destroy()
-  /// @see stc_stats_rule_set_app_id()
-  /// @see stc_stats_rule_set_time_interval()
-  /// @see stc_stats_rule_set_iface_type()
-  /// @see stc_stats_rule_set_time_period()
-  /// @see stc_stats_rule_get_app_id()
-  /// @see stc_stats_rule_get_time_interval()
-  /// @see stc_stats_rule_get_iface_type()
-  /// @see stc_stats_rule_get_time_period()
-  /// @see stc_stats_info_cb()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `stc` (in): The STC handle
+  /// - `rule` (in): The statistics rule handle
+  /// - `info_cb` (in): The callback is called for each application that used network in between timestamps specified
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STC_ERROR_NONE`: Successful
+  /// - `STC_ERROR_OPERATION_FAILED`: General error
+  /// - `STC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `STC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STC_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `STC_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `STC_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STC_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `stc_h`
+  /// - `stc_stats_rule_h`
+  /// - `stc_initialize()`
+  /// - `stc_stats_rule_create()`
+  /// - `stc_stats_rule_destroy()`
+  /// - `stc_stats_rule_set_app_id()`
+  /// - `stc_stats_rule_set_time_interval()`
+  /// - `stc_stats_rule_set_iface_type()`
+  /// - `stc_stats_rule_set_time_period()`
+  /// - `stc_stats_rule_get_app_id()`
+  /// - `stc_stats_rule_get_time_interval()`
+  /// - `stc_stats_rule_get_iface_type()`
+  /// - `stc_stats_rule_get_time_period()`
+  /// - `stc_stats_info_cb()`
   int stc_get_stats(
     stc_h stc,
     stc_stats_rule_h rule,
@@ -145,47 +180,55 @@ class Tizen65CapiNetworkStc {
       int Function(
           stc_h, stc_stats_rule_h, stc_stats_info_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @deprecated Deprecated since 5.5. Use stc_get_all_stats() and stc_foreach_all_stats() instead.
-  /// @brief Gets the statistics information of each application asynchronously.
-  /// @details The callback is called for each application that used network
-  /// in between timestamps specified.
-  /// If interface name is not specified, each application will only appear
-  /// once with the total traffic used over all interfaces.
+  /// **Deprecated:** Deprecated since 5.5. Use stc_get_all_stats() and stc_foreach_all_stats() instead.
   ///
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
+  /// Gets the statistics information of each application asynchronously.
   ///
-  /// @param[in] stc           The STC handle
-  /// @param[in] rule          The statistics rule handle
-  /// @param[in] info_cb The callback is called for each application
-  /// that used network in between timestamps specified
-  /// @param[in] user_data     The user data passed to the callback function
+  /// The callback is called for each application that used network in between timestamps specified. If interface name is not specified, each application will only appear once with the total traffic used over all interfaces.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #STC_ERROR_NONE                    Successful
-  /// @retval #STC_ERROR_OPERATION_FAILED        General error
-  /// @retval #STC_ERROR_OUT_OF_MEMORY           Out of memory
-  /// @retval #STC_ERROR_INVALID_PARAMETER       Invalid parameter
-  /// @retval #STC_ERROR_INVALID_OPERATION       Invalid operation
-  /// @retval #STC_ERROR_NOT_INITIALIZED         Not initialized
-  /// @retval #STC_ERROR_NOT_SUPPORTED           Not supported
-  /// @retval #STC_ERROR_PERMISSION_DENIED       Permission denied
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @see stc_h
-  /// @see stc_stats_rule_h
-  /// @see stc_initialize()
-  /// @see stc_stats_rule_create()
-  /// @see stc_stats_rule_destroy()
-  /// @see stc_stats_rule_set_app_id()
-  /// @see stc_stats_rule_set_time_interval()
-  /// @see stc_stats_rule_set_iface_type()
-  /// @see stc_stats_rule_set_time_period()
-  /// @see stc_stats_rule_get_app_id()
-  /// @see stc_stats_rule_get_time_interval()
-  /// @see stc_stats_rule_get_iface_type()
-  /// @see stc_stats_rule_get_time_period()
-  /// @see stc_stats_info_cb()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `stc` (in): The STC handle
+  /// - `rule` (in): The statistics rule handle
+  /// - `info_cb` (in): The callback is called for each application that used network in between timestamps specified
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STC_ERROR_NONE`: Successful
+  /// - `STC_ERROR_OPERATION_FAILED`: General error
+  /// - `STC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `STC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STC_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `STC_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `STC_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STC_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `stc_h`
+  /// - `stc_stats_rule_h`
+  /// - `stc_initialize()`
+  /// - `stc_stats_rule_create()`
+  /// - `stc_stats_rule_destroy()`
+  /// - `stc_stats_rule_set_app_id()`
+  /// - `stc_stats_rule_set_time_interval()`
+  /// - `stc_stats_rule_set_iface_type()`
+  /// - `stc_stats_rule_set_time_period()`
+  /// - `stc_stats_rule_get_app_id()`
+  /// - `stc_stats_rule_get_time_interval()`
+  /// - `stc_stats_rule_get_iface_type()`
+  /// - `stc_stats_rule_get_time_period()`
+  /// - `stc_stats_info_cb()`
   int stc_foreach_stats(
     stc_h stc,
     stc_stats_rule_h rule,
@@ -208,41 +251,53 @@ class Tizen65CapiNetworkStc {
       int Function(
           stc_h, stc_stats_rule_h, stc_stats_info_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Starts to get statistical information based on the rules asynchronously.
+  /// Starts to get statistical information based on the rules asynchronously.
   ///
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in] stc           The STC handle
-  /// @param[in] rule          The statistics rule handle
-  /// @param[in] finished_cb   The callback is called when information gathering is completed
-  /// @param[in] user_data     The user data passed to the callback function
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #STC_ERROR_NONE                    Successful
-  /// @retval #STC_ERROR_OPERATION_FAILED        General error
-  /// @retval #STC_ERROR_INVALID_PARAMETER       Invalid parameter
-  /// @retval #STC_ERROR_INVALID_OPERATION       Invalid operation
-  /// @retval #STC_ERROR_NOT_INITIALIZED         Not initialized
-  /// @retval #STC_ERROR_NOT_SUPPORTED           Not supported
-  /// @retval #STC_ERROR_PERMISSION_DENIED       Permission denied
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
   ///
-  /// @post This function invokes stc_get_all_stats_finished_cb().
-  /// @see stc_h
-  /// @see stc_stats_rule_h
-  /// @see stc_initialize()
-  /// @see stc_stats_rule_create()
-  /// @see stc_stats_rule_destroy()
-  /// @see stc_stats_rule_set_app_id()
-  /// @see stc_stats_rule_set_time_interval()
-  /// @see stc_stats_rule_set_iface_type()
-  /// @see stc_stats_rule_set_time_period()
-  /// @see stc_stats_rule_get_app_id()
-  /// @see stc_stats_rule_get_time_interval()
-  /// @see stc_stats_rule_get_iface_type()
-  /// @see stc_stats_rule_get_time_period()
-  /// @see stc_get_all_stats_finished_cb()
+  /// **Parameters:**
+  /// - `stc` (in): The STC handle
+  /// - `rule` (in): The statistics rule handle
+  /// - `finished_cb` (in): The callback is called when information gathering is completed
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STC_ERROR_NONE`: Successful
+  /// - `STC_ERROR_OPERATION_FAILED`: General error
+  /// - `STC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STC_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `STC_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `STC_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STC_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Postconditions:**
+  /// - This function invokes stc_get_all_stats_finished_cb().
+  ///
+  /// **See also:**
+  /// - `stc_h`
+  /// - `stc_stats_rule_h`
+  /// - `stc_initialize()`
+  /// - `stc_stats_rule_create()`
+  /// - `stc_stats_rule_destroy()`
+  /// - `stc_stats_rule_set_app_id()`
+  /// - `stc_stats_rule_set_time_interval()`
+  /// - `stc_stats_rule_set_iface_type()`
+  /// - `stc_stats_rule_set_time_period()`
+  /// - `stc_stats_rule_get_app_id()`
+  /// - `stc_stats_rule_get_time_interval()`
+  /// - `stc_stats_rule_get_iface_type()`
+  /// - `stc_stats_rule_get_time_period()`
+  /// - `stc_get_all_stats_finished_cb()`
   int stc_get_all_stats(
     stc_h stc,
     stc_stats_rule_h rule,
@@ -268,26 +323,35 @@ class Tizen65CapiNetworkStc {
       int Function(stc_h, stc_stats_rule_h, stc_get_all_stats_finished_cb,
           ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets all statistical information.
+  /// Gets all statistical information.
   ///
-  /// @since_tizen 5.5
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in] info          All statistics information handle
-  /// @param[in] info_cb       The callback is called for each application
-  /// @param[in] user_data     The user data passed to the callback function
+  /// **Parameters:**
+  /// - `info` (in): All statistics information handle
+  /// - `info_cb` (in): The callback is called for each application
+  /// - `user_data` (in): The user data passed to the callback function
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #STC_ERROR_NONE                    Successful
-  /// @retval #STC_ERROR_OPERATION_FAILED        General error
-  /// @retval #STC_ERROR_INVALID_PARAMETER       Invalid parameter
-  /// @retval #STC_ERROR_NOT_INITIALIZED         Not initialized
-  /// @retval #STC_ERROR_NOT_SUPPORTED           Not supported
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @pre stc_get_all_stats() needs to be called and data needs to be received
-  /// in stc_get_stats_finished_cb() before calling this function.
-  /// @post This function invokes stc_stats_info_cb().
-  /// @see stc_get_all_stats()
-  /// @see stc_stats_info_cb()
+  /// **Return values:**
+  /// - `STC_ERROR_NONE`: Successful
+  /// - `STC_ERROR_OPERATION_FAILED`: General error
+  /// - `STC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STC_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `STC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - stc_get_all_stats() needs to be called and data needs to be received in stc_get_stats_finished_cb() before calling this function.
+  ///
+  /// **Postconditions:**
+  /// - This function invokes stc_stats_info_cb().
+  ///
+  /// **See also:**
+  /// - `stc_get_all_stats()`
+  /// - `stc_stats_info_cb()`
   int stc_foreach_all_stats(
     stc_all_stats_info_h info,
     stc_stats_info_cb info_cb,
@@ -308,42 +372,53 @@ class Tizen65CapiNetworkStc {
       int Function(
           stc_all_stats_info_h, stc_stats_info_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @deprecated Deprecated since 5.5. Use stc_get_all_stats() and stc_foreach_all_stats() instead.
-  /// @brief Gets the total statistics information by interface type asynchronously.
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
+  /// **Deprecated:** Deprecated since 5.5. Use stc_get_all_stats() and stc_foreach_all_stats() instead.
   ///
-  /// @param[in] stc           The STC handle
-  /// @param[in] rule          The statistics rule handle
-  /// @param[in] info_cb       The callback is called for each application
-  /// that used network in between timestamps specified
-  /// @param[in] user_data     The user data passed to the callback function
+  /// Gets the total statistics information by interface type asynchronously.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #STC_ERROR_NONE                    Successful
-  /// @retval #STC_ERROR_OPERATION_FAILED        General error
-  /// @retval #STC_ERROR_OUT_OF_MEMORY           Out of memory
-  /// @retval #STC_ERROR_INVALID_PARAMETER       Invalid parameter
-  /// @retval #STC_ERROR_INVALID_OPERATION       Invalid operation
-  /// @retval #STC_ERROR_NOT_INITIALIZED         Not initialized
-  /// @retval #STC_ERROR_NOT_SUPPORTED           Not supported
-  /// @retval #STC_ERROR_PERMISSION_DENIED       Permission denied
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @see stc_h
-  /// @see stc_stats_rule_h
-  /// @see stc_initialize()
-  /// @see stc_stats_rule_create()
-  /// @see stc_stats_rule_destroy()
-  /// @see stc_stats_rule_set_app_id()
-  /// @see stc_stats_rule_set_time_interval()
-  /// @see stc_stats_rule_set_iface_type()
-  /// @see stc_stats_rule_set_time_period()
-  /// @see stc_stats_rule_get_app_id()
-  /// @see stc_stats_rule_get_time_interval()
-  /// @see stc_stats_rule_get_iface_type()
-  /// @see stc_stats_rule_get_time_period()
-  /// @see stc_stats_info_cb()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `stc` (in): The STC handle
+  /// - `rule` (in): The statistics rule handle
+  /// - `info_cb` (in): The callback is called for each application that used network in between timestamps specified
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STC_ERROR_NONE`: Successful
+  /// - `STC_ERROR_OPERATION_FAILED`: General error
+  /// - `STC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `STC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STC_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `STC_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `STC_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STC_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `stc_h`
+  /// - `stc_stats_rule_h`
+  /// - `stc_initialize()`
+  /// - `stc_stats_rule_create()`
+  /// - `stc_stats_rule_destroy()`
+  /// - `stc_stats_rule_set_app_id()`
+  /// - `stc_stats_rule_set_time_interval()`
+  /// - `stc_stats_rule_set_iface_type()`
+  /// - `stc_stats_rule_set_time_period()`
+  /// - `stc_stats_rule_get_app_id()`
+  /// - `stc_stats_rule_get_time_interval()`
+  /// - `stc_stats_rule_get_iface_type()`
+  /// - `stc_stats_rule_get_time_period()`
+  /// - `stc_stats_info_cb()`
   int stc_get_total_stats(
     stc_h stc,
     stc_stats_rule_h rule,
@@ -366,26 +441,35 @@ class Tizen65CapiNetworkStc {
       int Function(
           stc_h, stc_stats_rule_h, stc_stats_info_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Creates the statistics rule handle.
-  /// @since_tizen 4.0
-  /// @remarks You must release @a rule using stc_stats_rule_destroy().
+  /// Creates the statistics rule handle.
   ///
-  /// @param[in] stc           The STC handle
-  /// @param[out] rule         The statistics rule handle
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #STC_ERROR_NONE                    Successful
-  /// @retval #STC_ERROR_OPERATION_FAILED        General error
-  /// @retval #STC_ERROR_OUT_OF_MEMORY           Out of memory
-  /// @retval #STC_ERROR_INVALID_PARAMETER       Invalid parameter
-  /// @retval #STC_ERROR_INVALID_OPERATION       Invalid operation
-  /// @retval #STC_ERROR_NOT_INITIALIZED         Not initialized
-  /// @retval #STC_ERROR_NOT_SUPPORTED           Not supported
+  /// **Remarks:**
+  /// - You must release `rule` using stc_stats_rule_destroy().
   ///
-  /// @see stc_h
-  /// @see stc_stats_rule_h
-  /// @see stc_initialize()
-  /// @see stc_stats_rule_destroy()
+  /// **Parameters:**
+  /// - `stc` (in): The STC handle
+  /// - `rule` (out): The statistics rule handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STC_ERROR_NONE`: Successful
+  /// - `STC_ERROR_OPERATION_FAILED`: General error
+  /// - `STC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `STC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STC_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `STC_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `STC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `stc_h`
+  /// - `stc_stats_rule_h`
+  /// - `stc_initialize()`
+  /// - `stc_stats_rule_destroy()`
   int stc_stats_rule_create(
     stc_h stc,
     ffi.Pointer<stc_stats_rule_h> rule,
@@ -403,22 +487,29 @@ class Tizen65CapiNetworkStc {
   late final _stc_stats_rule_create = _stc_stats_rule_createPtr
       .asFunction<int Function(stc_h, ffi.Pointer<stc_stats_rule_h>)>();
 
-  /// @brief Destroys the statistics rule handle.
-  /// @since_tizen 4.0
+  /// Destroys the statistics rule handle.
   ///
-  /// @param[in] rule          The statistics rule handle
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #STC_ERROR_NONE                    Successful
-  /// @retval #STC_ERROR_OPERATION_FAILED        General error
-  /// @retval #STC_ERROR_OUT_OF_MEMORY           Out of memory
-  /// @retval #STC_ERROR_INVALID_PARAMETER       Invalid parameter
-  /// @retval #STC_ERROR_INVALID_OPERATION       Invalid operation
-  /// @retval #STC_ERROR_NOT_INITIALIZED         Not initialized
-  /// @retval #STC_ERROR_NOT_SUPPORTED           Not supported
+  /// **Parameters:**
+  /// - `rule` (in): The statistics rule handle
   ///
-  /// @see stc_stats_rule_h
-  /// @see stc_stats_rule_create()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STC_ERROR_NONE`: Successful
+  /// - `STC_ERROR_OPERATION_FAILED`: General error
+  /// - `STC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `STC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STC_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `STC_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `STC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `stc_stats_rule_h`
+  /// - `stc_stats_rule_create()`
   int stc_stats_rule_destroy(
     stc_stats_rule_h rule,
   ) {
@@ -433,25 +524,32 @@ class Tizen65CapiNetworkStc {
   late final _stc_stats_rule_destroy =
       _stc_stats_rule_destroyPtr.asFunction<int Function(stc_stats_rule_h)>();
 
-  /// @brief Sets the application ID for statistics rule.
-  /// @since_tizen 4.0
+  /// Sets the application ID for statistics rule.
   ///
-  /// @param[in] rule          The statistics rule handle
-  /// @param[in] app_id        The application ID
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #STC_ERROR_NONE                    Successful
-  /// @retval #STC_ERROR_OPERATION_FAILED        General error
-  /// @retval #STC_ERROR_OUT_OF_MEMORY           Out of memory
-  /// @retval #STC_ERROR_INVALID_PARAMETER       Invalid parameter
-  /// @retval #STC_ERROR_INVALID_OPERATION       Invalid operation
-  /// @retval #STC_ERROR_NOT_INITIALIZED         Not initialized
-  /// @retval #STC_ERROR_NOT_SUPPORTED           Not supported
+  /// **Parameters:**
+  /// - `rule` (in): The statistics rule handle
+  /// - `app_id` (in): The application ID
   ///
-  /// @see stc_stats_rule_h
-  /// @see stc_stats_rule_create()
-  /// @see stc_stats_rule_destroy()
-  /// @see stc_stats_rule_get_app_id()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STC_ERROR_NONE`: Successful
+  /// - `STC_ERROR_OPERATION_FAILED`: General error
+  /// - `STC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `STC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STC_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `STC_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `STC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `stc_stats_rule_h`
+  /// - `stc_stats_rule_create()`
+  /// - `stc_stats_rule_destroy()`
+  /// - `stc_stats_rule_get_app_id()`
   int stc_stats_rule_set_app_id(
     stc_stats_rule_h rule,
     ffi.Pointer<ffi.Char> app_id,
@@ -469,26 +567,33 @@ class Tizen65CapiNetworkStc {
   late final _stc_stats_rule_set_app_id = _stc_stats_rule_set_app_idPtr
       .asFunction<int Function(stc_stats_rule_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the time interval for statistics rule.
-  /// @since_tizen 4.0
+  /// Sets the time interval for statistics rule.
   ///
-  /// @param[in] rule          The statistics rule handle
-  /// @param[in] from          The beginning of the time interval
-  /// @param[in] to            The end of the time interval
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #STC_ERROR_NONE                    Successful
-  /// @retval #STC_ERROR_OPERATION_FAILED        General error
-  /// @retval #STC_ERROR_OUT_OF_MEMORY           Out of memory
-  /// @retval #STC_ERROR_INVALID_PARAMETER       Invalid parameter
-  /// @retval #STC_ERROR_INVALID_OPERATION       Invalid operation
-  /// @retval #STC_ERROR_NOT_INITIALIZED         Not initialized
-  /// @retval #STC_ERROR_NOT_SUPPORTED           Not supported
+  /// **Parameters:**
+  /// - `rule` (in): The statistics rule handle
+  /// - `from` (in): The beginning of the time interval
+  /// - `to` (in): The end of the time interval
   ///
-  /// @see stc_stats_rule_h
-  /// @see stc_stats_rule_create()
-  /// @see stc_stats_rule_destroy()
-  /// @see stc_stats_rule_get_time_interval()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STC_ERROR_NONE`: Successful
+  /// - `STC_ERROR_OPERATION_FAILED`: General error
+  /// - `STC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `STC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STC_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `STC_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `STC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `stc_stats_rule_h`
+  /// - `stc_stats_rule_create()`
+  /// - `stc_stats_rule_destroy()`
+  /// - `stc_stats_rule_get_time_interval()`
   int stc_stats_rule_set_time_interval(
     stc_stats_rule_h rule,
     int from,
@@ -509,26 +614,33 @@ class Tizen65CapiNetworkStc {
       _stc_stats_rule_set_time_intervalPtr
           .asFunction<int Function(stc_stats_rule_h, int, int)>();
 
-  /// @brief Sets the interface type for statistics rule.
-  /// @since_tizen 4.0
+  /// Sets the interface type for statistics rule.
   ///
-  /// @param[in] rule          The stats rule handle
-  /// @param[in] iface_type    The interface type
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #STC_ERROR_NONE                    Successful
-  /// @retval #STC_ERROR_OPERATION_FAILED        General error
-  /// @retval #STC_ERROR_OUT_OF_MEMORY           Out of memory
-  /// @retval #STC_ERROR_INVALID_PARAMETER       Invalid parameter
-  /// @retval #STC_ERROR_INVALID_OPERATION       Invalid operation
-  /// @retval #STC_ERROR_NOT_INITIALIZED         Not initialized
-  /// @retval #STC_ERROR_NOT_SUPPORTED           Not supported
+  /// **Parameters:**
+  /// - `rule` (in): The stats rule handle
+  /// - `iface_type` (in): The interface type
   ///
-  /// @see stc_stats_rule_h
-  /// @see stc_iface_type_e
-  /// @see stc_stats_rule_create()
-  /// @see stc_stats_rule_destroy()
-  /// @see stc_stats_rule_get_iface_type()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STC_ERROR_NONE`: Successful
+  /// - `STC_ERROR_OPERATION_FAILED`: General error
+  /// - `STC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `STC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STC_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `STC_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `STC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `stc_stats_rule_h`
+  /// - `stc_iface_type_e`
+  /// - `stc_stats_rule_create()`
+  /// - `stc_stats_rule_destroy()`
+  /// - `stc_stats_rule_get_iface_type()`
   int stc_stats_rule_set_iface_type(
     stc_stats_rule_h rule,
     int iface_type,
@@ -545,26 +657,33 @@ class Tizen65CapiNetworkStc {
   late final _stc_stats_rule_set_iface_type = _stc_stats_rule_set_iface_typePtr
       .asFunction<int Function(stc_stats_rule_h, int)>();
 
-  /// @brief Sets the time period for statistics rule.
-  /// @since_tizen 4.0
+  /// Sets the time period for statistics rule.
   ///
-  /// @param[in] rule          The statistics rule handle
-  /// @param[in] time_period   The time period
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #STC_ERROR_NONE                    Successful
-  /// @retval #STC_ERROR_OPERATION_FAILED        General error
-  /// @retval #STC_ERROR_OUT_OF_MEMORY           Out of memory
-  /// @retval #STC_ERROR_INVALID_PARAMETER       Invalid parameter
-  /// @retval #STC_ERROR_INVALID_OPERATION       Invalid operation
-  /// @retval #STC_ERROR_NOT_INITIALIZED         Not initialized
-  /// @retval #STC_ERROR_NOT_SUPPORTED           Not supported
+  /// **Parameters:**
+  /// - `rule` (in): The statistics rule handle
+  /// - `time_period` (in): The time period
   ///
-  /// @see stc_stats_rule_h
-  /// @see stc_time_period_e
-  /// @see stc_stats_rule_create()
-  /// @see stc_stats_rule_destroy()
-  /// @see stc_stats_rule_get_time_period()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STC_ERROR_NONE`: Successful
+  /// - `STC_ERROR_OPERATION_FAILED`: General error
+  /// - `STC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `STC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STC_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `STC_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `STC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `stc_stats_rule_h`
+  /// - `stc_time_period_e`
+  /// - `stc_stats_rule_create()`
+  /// - `stc_stats_rule_destroy()`
+  /// - `stc_stats_rule_get_time_period()`
   int stc_stats_rule_set_time_period(
     stc_stats_rule_h rule,
     int time_period,
@@ -582,26 +701,35 @@ class Tizen65CapiNetworkStc {
       _stc_stats_rule_set_time_periodPtr
           .asFunction<int Function(stc_stats_rule_h, int)>();
 
-  /// @brief Gets the application ID for statistics rule.
-  /// @since_tizen 4.0
-  /// @remarks You must release @a app_id using free().
+  /// Gets the application ID for statistics rule.
   ///
-  /// @param[in] rule          The statistics rule handle
-  /// @param[out] app_id       The application ID
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #STC_ERROR_NONE                    Successful
-  /// @retval #STC_ERROR_OPERATION_FAILED        General error
-  /// @retval #STC_ERROR_OUT_OF_MEMORY           Out of memory
-  /// @retval #STC_ERROR_INVALID_PARAMETER       Invalid parameter
-  /// @retval #STC_ERROR_INVALID_OPERATION       Invalid operation
-  /// @retval #STC_ERROR_NOT_INITIALIZED         Not initialized
-  /// @retval #STC_ERROR_NOT_SUPPORTED           Not supported
+  /// **Remarks:**
+  /// - You must release `app_id` using free().
   ///
-  /// @see stc_stats_rule_h
-  /// @see stc_stats_rule_create()
-  /// @see stc_stats_rule_destroy()
-  /// @see stc_stats_rule_set_app_id()
+  /// **Parameters:**
+  /// - `rule` (in): The statistics rule handle
+  /// - `app_id` (out): The application ID
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STC_ERROR_NONE`: Successful
+  /// - `STC_ERROR_OPERATION_FAILED`: General error
+  /// - `STC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `STC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STC_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `STC_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `STC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `stc_stats_rule_h`
+  /// - `stc_stats_rule_create()`
+  /// - `stc_stats_rule_destroy()`
+  /// - `stc_stats_rule_set_app_id()`
   int stc_stats_rule_get_app_id(
     stc_stats_rule_h rule,
     ffi.Pointer<ffi.Pointer<ffi.Char>> app_id,
@@ -621,26 +749,33 @@ class Tizen65CapiNetworkStc {
       _stc_stats_rule_get_app_idPtr.asFunction<
           int Function(stc_stats_rule_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the time interval for statistics rule.
-  /// @since_tizen 4.0
+  /// Gets the time interval for statistics rule.
   ///
-  /// @param[in] rule          The statistics rule handle
-  /// @param[out] from         The beginning of the time interval
-  /// @param[out] to           The end of the time interval
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #STC_ERROR_NONE                    Successful
-  /// @retval #STC_ERROR_OPERATION_FAILED        General error
-  /// @retval #STC_ERROR_OUT_OF_MEMORY           Out of memory
-  /// @retval #STC_ERROR_INVALID_PARAMETER       Invalid parameter
-  /// @retval #STC_ERROR_INVALID_OPERATION       Invalid operation
-  /// @retval #STC_ERROR_NOT_INITIALIZED         Not initialized
-  /// @retval #STC_ERROR_NOT_SUPPORTED           Not supported
+  /// **Parameters:**
+  /// - `rule` (in): The statistics rule handle
+  /// - `from` (out): The beginning of the time interval
+  /// - `to` (out): The end of the time interval
   ///
-  /// @see stc_stats_rule_h
-  /// @see stc_stats_rule_create()
-  /// @see stc_stats_rule_destroy()
-  /// @see stc_stats_rule_set_time_interval()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STC_ERROR_NONE`: Successful
+  /// - `STC_ERROR_OPERATION_FAILED`: General error
+  /// - `STC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `STC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STC_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `STC_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `STC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `stc_stats_rule_h`
+  /// - `stc_stats_rule_create()`
+  /// - `stc_stats_rule_destroy()`
+  /// - `stc_stats_rule_set_time_interval()`
   int stc_stats_rule_get_time_interval(
     stc_stats_rule_h rule,
     ffi.Pointer<ffi_lib.Long> from,
@@ -662,26 +797,33 @@ class Tizen65CapiNetworkStc {
           int Function(stc_stats_rule_h, ffi.Pointer<ffi_lib.Long>,
               ffi.Pointer<ffi_lib.Long>)>();
 
-  /// @brief Gets the interface type for statistics rule.
-  /// @since_tizen 4.0
+  /// Gets the interface type for statistics rule.
   ///
-  /// @param[in] rule          The statistics rule handle
-  /// @param[out] iface_type   The interface type
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #STC_ERROR_NONE                    Successful
-  /// @retval #STC_ERROR_OPERATION_FAILED        General error
-  /// @retval #STC_ERROR_OUT_OF_MEMORY           Out of memory
-  /// @retval #STC_ERROR_INVALID_PARAMETER       Invalid parameter
-  /// @retval #STC_ERROR_INVALID_OPERATION       Invalid operation
-  /// @retval #STC_ERROR_NOT_INITIALIZED         Not initialized
-  /// @retval #STC_ERROR_NOT_SUPPORTED           Not supported
+  /// **Parameters:**
+  /// - `rule` (in): The statistics rule handle
+  /// - `iface_type` (out): The interface type
   ///
-  /// @see stc_stats_rule_h
-  /// @see stc_iface_type_e
-  /// @see stc_stats_rule_create()
-  /// @see stc_stats_rule_destroy()
-  /// @see stc_stats_rule_set_iface_type()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STC_ERROR_NONE`: Successful
+  /// - `STC_ERROR_OPERATION_FAILED`: General error
+  /// - `STC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `STC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STC_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `STC_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `STC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `stc_stats_rule_h`
+  /// - `stc_iface_type_e`
+  /// - `stc_stats_rule_create()`
+  /// - `stc_stats_rule_destroy()`
+  /// - `stc_stats_rule_set_iface_type()`
   int stc_stats_rule_get_iface_type(
     stc_stats_rule_h rule,
     ffi.Pointer<ffi.Int32> iface_type,
@@ -699,26 +841,33 @@ class Tizen65CapiNetworkStc {
   late final _stc_stats_rule_get_iface_type = _stc_stats_rule_get_iface_typePtr
       .asFunction<int Function(stc_stats_rule_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the time period for statistics rule.
-  /// @since_tizen 4.0
+  /// Gets the time period for statistics rule.
   ///
-  /// @param[in] rule          The statistics rule handle
-  /// @param[out] time_period  The time period
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #STC_ERROR_NONE                    Successful
-  /// @retval #STC_ERROR_OPERATION_FAILED        General error
-  /// @retval #STC_ERROR_OUT_OF_MEMORY           Out of memory
-  /// @retval #STC_ERROR_INVALID_PARAMETER       Invalid parameter
-  /// @retval #STC_ERROR_INVALID_OPERATION       Invalid operation
-  /// @retval #STC_ERROR_NOT_INITIALIZED         Not initialized
-  /// @retval #STC_ERROR_NOT_SUPPORTED           Not supported
+  /// **Parameters:**
+  /// - `rule` (in): The statistics rule handle
+  /// - `time_period` (out): The time period
   ///
-  /// @see stc_stats_rule_h
-  /// @see stc_time_period_e
-  /// @see stc_stats_rule_create()
-  /// @see stc_stats_rule_destroy()
-  /// @see stc_stats_rule_set_time_period()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STC_ERROR_NONE`: Successful
+  /// - `STC_ERROR_OPERATION_FAILED`: General error
+  /// - `STC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `STC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STC_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `STC_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `STC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `stc_stats_rule_h`
+  /// - `stc_time_period_e`
+  /// - `stc_stats_rule_create()`
+  /// - `stc_stats_rule_destroy()`
+  /// - `stc_stats_rule_set_time_period()`
   int stc_stats_rule_get_time_period(
     stc_stats_rule_h rule,
     ffi.Pointer<ffi.Int32> time_period,
@@ -737,23 +886,32 @@ class Tizen65CapiNetworkStc {
       _stc_stats_rule_get_time_periodPtr
           .asFunction<int Function(stc_stats_rule_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Clones the statistics info handle.
-  /// @since_tizen 5.5
-  /// @remarks You must release @a cloned using stc_stats_info_destroy().
+  /// Clones the statistics info handle.
   ///
-  /// @param[in] info            The origin statistics info handle
-  /// @param[out] cloned         The cloned statistics info handle
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #STC_ERROR_NONE                    Successful
-  /// @retval #STC_ERROR_OUT_OF_MEMORY           Out of memory
-  /// @retval #STC_ERROR_INVALID_PARAMETER       Invalid parameter
-  /// @retval #STC_ERROR_NOT_SUPPORTED           Not supported
+  /// **Remarks:**
+  /// - You must release `cloned` using stc_stats_info_destroy().
   ///
-  /// @see stc_h
-  /// @see stc_stats_info_h
-  /// @see stc_initialize()
-  /// @see stc_stats_info_destroy()
+  /// **Parameters:**
+  /// - `info` (in): The origin statistics info handle
+  /// - `cloned` (out): The cloned statistics info handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STC_ERROR_NONE`: Successful
+  /// - `STC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `STC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `stc_h`
+  /// - `stc_stats_info_h`
+  /// - `stc_initialize()`
+  /// - `stc_stats_info_destroy()`
   int stc_stats_info_clone(
     stc_stats_info_h info,
     ffi.Pointer<stc_stats_info_h> cloned,
@@ -771,18 +929,25 @@ class Tizen65CapiNetworkStc {
   late final _stc_stats_info_clone = _stc_stats_info_clonePtr.asFunction<
       int Function(stc_stats_info_h, ffi.Pointer<stc_stats_info_h>)>();
 
-  /// @brief Destroys the statistics info handle.
-  /// @since_tizen 5.5
+  /// Destroys the statistics info handle.
   ///
-  /// @param[in] info          The statistics info handle
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #STC_ERROR_NONE                    Successful
-  /// @retval #STC_ERROR_INVALID_PARAMETER       Invalid parameter
-  /// @retval #STC_ERROR_NOT_SUPPORTED           Not supported
+  /// **Parameters:**
+  /// - `info` (in): The statistics info handle
   ///
-  /// @see stc_stats_info_h
-  /// @see stc_stats_info_clone()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STC_ERROR_NONE`: Successful
+  /// - `STC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `stc_stats_info_h`
+  /// - `stc_stats_info_clone()`
   int stc_stats_info_destroy(
     stc_stats_info_h info,
   ) {
@@ -797,24 +962,33 @@ class Tizen65CapiNetworkStc {
   late final _stc_stats_info_destroy =
       _stc_stats_info_destroyPtr.asFunction<int Function(stc_stats_info_h)>();
 
-  /// @brief Gets the application ID from statistics information.
-  /// @since_tizen 4.0
-  /// @remarks You must release @a app_id using free().
+  /// Gets the application ID from statistics information.
   ///
-  /// @param[in] info          The statistics information handle
-  /// @param[out] app_id       The application ID
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #STC_ERROR_NONE                    Successful
-  /// @retval #STC_ERROR_OPERATION_FAILED        General error
-  /// @retval #STC_ERROR_OUT_OF_MEMORY           Out of memory
-  /// @retval #STC_ERROR_INVALID_PARAMETER       Invalid parameter
-  /// @retval #STC_ERROR_INVALID_OPERATION       Invalid operation
-  /// @retval #STC_ERROR_NOT_INITIALIZED         Not initialized
-  /// @retval #STC_ERROR_NOT_SUPPORTED           Not supported
+  /// **Remarks:**
+  /// - You must release `app_id` using free().
   ///
-  /// @see stc_stats_info_h
-  /// @see stc_stats_info_cb()
+  /// **Parameters:**
+  /// - `info` (in): The statistics information handle
+  /// - `app_id` (out): The application ID
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STC_ERROR_NONE`: Successful
+  /// - `STC_ERROR_OPERATION_FAILED`: General error
+  /// - `STC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `STC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STC_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `STC_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `STC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `stc_stats_info_h`
+  /// - `stc_stats_info_cb()`
   int stc_stats_info_get_app_id(
     stc_stats_info_h info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> app_id,
@@ -834,24 +1008,33 @@ class Tizen65CapiNetworkStc {
       _stc_stats_info_get_app_idPtr.asFunction<
           int Function(stc_stats_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the interface name from statistics information.
-  /// @since_tizen 4.0
-  /// @remarks You must release @a iface_name using free().
+  /// Gets the interface name from statistics information.
   ///
-  /// @param[in] info          The statistics information handle
-  /// @param[out] iface_name   The interface name
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #STC_ERROR_NONE                    Successful
-  /// @retval #STC_ERROR_OPERATION_FAILED        General error
-  /// @retval #STC_ERROR_OUT_OF_MEMORY           Out of memory
-  /// @retval #STC_ERROR_INVALID_PARAMETER       Invalid parameter
-  /// @retval #STC_ERROR_INVALID_OPERATION       Invalid operation
-  /// @retval #STC_ERROR_NOT_INITIALIZED         Not initialized
-  /// @retval #STC_ERROR_NOT_SUPPORTED           Not supported
+  /// **Remarks:**
+  /// - You must release `iface_name` using free().
   ///
-  /// @see stc_stats_info_h
-  /// @see stc_stats_info_cb()
+  /// **Parameters:**
+  /// - `info` (in): The statistics information handle
+  /// - `iface_name` (out): The interface name
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STC_ERROR_NONE`: Successful
+  /// - `STC_ERROR_OPERATION_FAILED`: General error
+  /// - `STC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `STC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STC_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `STC_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `STC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `stc_stats_info_h`
+  /// - `stc_stats_info_cb()`
   int stc_stats_info_get_iface_name(
     stc_stats_info_h info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> iface_name,
@@ -871,24 +1054,31 @@ class Tizen65CapiNetworkStc {
       _stc_stats_info_get_iface_namePtr.asFunction<
           int Function(stc_stats_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the time interval from statistics information.
-  /// @since_tizen 4.0
+  /// Gets the time interval from statistics information.
   ///
-  /// @param[in] info          The statistics information handle
-  /// @param[out] from         The beginning of the time interval
-  /// @param[out] to           The end of the time interval
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #STC_ERROR_NONE                    Successful
-  /// @retval #STC_ERROR_OPERATION_FAILED        General error
-  /// @retval #STC_ERROR_OUT_OF_MEMORY           Out of memory
-  /// @retval #STC_ERROR_INVALID_PARAMETER       Invalid parameter
-  /// @retval #STC_ERROR_INVALID_OPERATION       Invalid operation
-  /// @retval #STC_ERROR_NOT_INITIALIZED         Not initialized
-  /// @retval #STC_ERROR_NOT_SUPPORTED           Not supported
+  /// **Parameters:**
+  /// - `info` (in): The statistics information handle
+  /// - `from` (out): The beginning of the time interval
+  /// - `to` (out): The end of the time interval
   ///
-  /// @see stc_stats_info_h
-  /// @see stc_stats_info_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STC_ERROR_NONE`: Successful
+  /// - `STC_ERROR_OPERATION_FAILED`: General error
+  /// - `STC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `STC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STC_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `STC_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `STC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `stc_stats_info_h`
+  /// - `stc_stats_info_cb()`
   int stc_stats_info_get_time_interval(
     stc_stats_info_h info,
     ffi.Pointer<ffi_lib.Long> from,
@@ -910,24 +1100,31 @@ class Tizen65CapiNetworkStc {
           int Function(stc_stats_info_h, ffi.Pointer<ffi_lib.Long>,
               ffi.Pointer<ffi_lib.Long>)>();
 
-  /// @brief Gets the interface type from statistics information.
-  /// @since_tizen 4.0
+  /// Gets the interface type from statistics information.
   ///
-  /// @param[in] info          The statistics information handle
-  /// @param[out] iface_type   The interface type
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #STC_ERROR_NONE                    Successful
-  /// @retval #STC_ERROR_OPERATION_FAILED        General error
-  /// @retval #STC_ERROR_OUT_OF_MEMORY           Out of memory
-  /// @retval #STC_ERROR_INVALID_PARAMETER       Invalid parameter
-  /// @retval #STC_ERROR_INVALID_OPERATION       Invalid operation
-  /// @retval #STC_ERROR_NOT_INITIALIZED         Not initialized
-  /// @retval #STC_ERROR_NOT_SUPPORTED           Not supported
+  /// **Parameters:**
+  /// - `info` (in): The statistics information handle
+  /// - `iface_type` (out): The interface type
   ///
-  /// @see stc_stats_info_h
-  /// @see stc_iface_type_e
-  /// @see stc_stats_info_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STC_ERROR_NONE`: Successful
+  /// - `STC_ERROR_OPERATION_FAILED`: General error
+  /// - `STC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `STC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STC_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `STC_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `STC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `stc_stats_info_h`
+  /// - `stc_iface_type_e`
+  /// - `stc_stats_info_cb()`
   int stc_stats_info_get_iface_type(
     stc_stats_info_h info,
     ffi.Pointer<ffi.Int32> iface_type,
@@ -945,24 +1142,31 @@ class Tizen65CapiNetworkStc {
   late final _stc_stats_info_get_iface_type = _stc_stats_info_get_iface_typePtr
       .asFunction<int Function(stc_stats_info_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the counters from statistics information.
-  /// @since_tizen 4.0
+  /// Gets the counters from statistics information.
   ///
-  /// @param[in] info          The statistics information handle
-  /// @param[out] incoming     The incoming counter
-  /// @param[out] outgoing     The outgoing counter
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #STC_ERROR_NONE                    Successful
-  /// @retval #STC_ERROR_OPERATION_FAILED        General error
-  /// @retval #STC_ERROR_OUT_OF_MEMORY           Out of memory
-  /// @retval #STC_ERROR_INVALID_PARAMETER       Invalid parameter
-  /// @retval #STC_ERROR_INVALID_OPERATION       Invalid operation
-  /// @retval #STC_ERROR_NOT_INITIALIZED         Not initialized
-  /// @retval #STC_ERROR_NOT_SUPPORTED           Not supported
+  /// **Parameters:**
+  /// - `info` (in): The statistics information handle
+  /// - `incoming` (out): The incoming counter
+  /// - `outgoing` (out): The outgoing counter
   ///
-  /// @see stc_stats_info_h
-  /// @see stc_stats_info_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STC_ERROR_NONE`: Successful
+  /// - `STC_ERROR_OPERATION_FAILED`: General error
+  /// - `STC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `STC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STC_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `STC_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `STC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `stc_stats_info_h`
+  /// - `stc_stats_info_cb()`
   int stc_stats_info_get_counter(
     stc_stats_info_h info,
     ffi.Pointer<ffi.Int64> incoming,
@@ -984,24 +1188,31 @@ class Tizen65CapiNetworkStc {
           int Function(stc_stats_info_h, ffi.Pointer<ffi.Int64>,
               ffi.Pointer<ffi.Int64>)>();
 
-  /// @brief Gets the roaming type from statistics information.
-  /// @since_tizen 4.0
+  /// Gets the roaming type from statistics information.
   ///
-  /// @param[in] info          The statistics information handle
-  /// @param[out] roaming_type The roaming type
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #STC_ERROR_NONE                    Successful
-  /// @retval #STC_ERROR_OPERATION_FAILED        General error
-  /// @retval #STC_ERROR_OUT_OF_MEMORY           Out of memory
-  /// @retval #STC_ERROR_INVALID_PARAMETER       Invalid parameter
-  /// @retval #STC_ERROR_INVALID_OPERATION       Invalid operation
-  /// @retval #STC_ERROR_NOT_INITIALIZED         Not initialized
-  /// @retval #STC_ERROR_NOT_SUPPORTED           Not supported
+  /// **Parameters:**
+  /// - `info` (in): The statistics information handle
+  /// - `roaming_type` (out): The roaming type
   ///
-  /// @see stc_stats_info_h
-  /// @see stc_roaming_type_e
-  /// @see stc_stats_info_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STC_ERROR_NONE`: Successful
+  /// - `STC_ERROR_OPERATION_FAILED`: General error
+  /// - `STC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `STC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STC_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `STC_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `STC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `stc_stats_info_h`
+  /// - `stc_roaming_type_e`
+  /// - `stc_stats_info_cb()`
   int stc_stats_info_get_roaming_type(
     stc_stats_info_h info,
     ffi.Pointer<ffi.Int32> roaming_type,
@@ -1020,24 +1231,31 @@ class Tizen65CapiNetworkStc {
       _stc_stats_info_get_roaming_typePtr
           .asFunction<int Function(stc_stats_info_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the protocol type from statistics information.
-  /// @since_tizen 4.0
+  /// Gets the protocol type from statistics information.
   ///
-  /// @param[in] info          The statistics information handle
-  /// @param[out] protocol     The protocol type
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #STC_ERROR_NONE                    Successful
-  /// @retval #STC_ERROR_OPERATION_FAILED        General error
-  /// @retval #STC_ERROR_OUT_OF_MEMORY           Out of memory
-  /// @retval #STC_ERROR_INVALID_PARAMETER       Invalid parameter
-  /// @retval #STC_ERROR_INVALID_OPERATION       Invalid operation
-  /// @retval #STC_ERROR_NOT_INITIALIZED         Not initialized
-  /// @retval #STC_ERROR_NOT_SUPPORTED           Not supported
+  /// **Parameters:**
+  /// - `info` (in): The statistics information handle
+  /// - `protocol` (out): The protocol type
   ///
-  /// @see stc_stats_info_h
-  /// @see stc_protocol_type_e
-  /// @see stc_stats_info_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STC_ERROR_NONE`: Successful
+  /// - `STC_ERROR_OPERATION_FAILED`: General error
+  /// - `STC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `STC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STC_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `STC_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `STC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `stc_stats_info_h`
+  /// - `stc_protocol_type_e`
+  /// - `stc_stats_info_cb()`
   int stc_stats_info_get_protocol_type(
     stc_stats_info_h info,
     ffi.Pointer<ffi.Int32> protocol,
@@ -1056,24 +1274,31 @@ class Tizen65CapiNetworkStc {
       _stc_stats_info_get_protocol_typePtr
           .asFunction<int Function(stc_stats_info_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the process state from statistics information.
-  /// @since_tizen 4.0
+  /// Gets the process state from statistics information.
   ///
-  /// @param[in] info          The statistics information handle
-  /// @param[out] state        The process state
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #STC_ERROR_NONE                    Successful
-  /// @retval #STC_ERROR_OPERATION_FAILED        General error
-  /// @retval #STC_ERROR_OUT_OF_MEMORY           Out of memory
-  /// @retval #STC_ERROR_INVALID_PARAMETER       Invalid parameter
-  /// @retval #STC_ERROR_INVALID_OPERATION       Invalid operation
-  /// @retval #STC_ERROR_NOT_INITIALIZED         Not initialized
-  /// @retval #STC_ERROR_NOT_SUPPORTED           Not supported
+  /// **Parameters:**
+  /// - `info` (in): The statistics information handle
+  /// - `state` (out): The process state
   ///
-  /// @see stc_stats_info_h
-  /// @see stc_process_state_e
-  /// @see stc_stats_info_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STC_ERROR_NONE`: Successful
+  /// - `STC_ERROR_OPERATION_FAILED`: General error
+  /// - `STC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `STC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STC_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `STC_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `STC_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `stc_stats_info_h`
+  /// - `stc_process_state_e`
+  /// - `stc_stats_info_cb()`
   int stc_stats_info_get_process_state(
     stc_stats_info_h info,
     ffi.Pointer<ffi.Int32> state,
@@ -1093,8 +1318,11 @@ class Tizen65CapiNetworkStc {
           .asFunction<int Function(stc_stats_info_h, ffi.Pointer<ffi.Int32>)>();
 }
 
-/// @brief Enumeration for Smart Traffic Control (STC) error type.
-/// @since_tizen 4.0
+/// Enumeration for Smart Traffic Control (STC) error type.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class stc_error_e {
   /// < Successful
   static const int STC_ERROR_NONE = 0;
@@ -1133,8 +1361,11 @@ abstract class stc_error_e {
   static const int STC_ERROR_IN_PROGRESS = -49807356;
 }
 
-/// @brief Enumeration for time period.
-/// @since_tizen 4.0
+/// Enumeration for time period.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class stc_time_period_e {
   /// < Unknown
   static const int STC_TIME_PERIOD_UNKNOWN = 0;
@@ -1152,8 +1383,11 @@ abstract class stc_time_period_e {
   static const int STC_TIME_PERIOD_MONTH = 2419200;
 }
 
-/// @brief Enumeration for network interface type.
-/// @since_tizen 4.0
+/// Enumeration for network interface type.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class stc_iface_type_e {
   /// < Unknown interface
   static const int STC_IFACE_UNKNOWN = 0;
@@ -1174,8 +1408,11 @@ abstract class stc_iface_type_e {
   static const int STC_IFACE_ALL = 5;
 }
 
-/// @brief Enumeration for network roaming type.
-/// @since_tizen 4.0
+/// Enumeration for network roaming type.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class stc_roaming_type_e {
   /// < Roaming unknown
   static const int STC_ROAMING_UNKNOWN = 0;
@@ -1187,8 +1424,11 @@ abstract class stc_roaming_type_e {
   static const int STC_ROAMING_DISABLED = 2;
 }
 
-/// @brief Enumeration for hardware network protocol type.
-/// @since_tizen 4.0
+/// Enumeration for hardware network protocol type.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class stc_protocol_type_e {
   /// < Network unknown
   static const int STC_PROTOCOL_UNKNOWN = 0;
@@ -1221,8 +1461,11 @@ abstract class stc_protocol_type_e {
   static const int STC_PROTOCOL_DATACALL_LTE = 9;
 }
 
-/// @brief Enumeration for monitored process state.
-/// @since_tizen 4.0
+/// Enumeration for monitored process state.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class stc_process_state_e {
   /// < Unknown state
   static const int STC_PROCESS_STATE_UNKNOWN = 0;
@@ -1234,9 +1477,13 @@ abstract class stc_process_state_e {
   static const int STC_PROCESS_STATE_BACKGROUND = 4;
 }
 
-/// @brief Enumeration for network connection period type.
-/// @details Last received/sent mean counting data from the first connection of each interface.
-/// @since_tizen 4.0
+/// Enumeration for network connection period type.
+///
+/// Last received/sent mean counting data from the first connection of each interface.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class stc_conn_period_e {
   /// < Unknown period
   static const int STC_CONN_PERIOD_UNKNOWN = 0;
@@ -1254,8 +1501,11 @@ abstract class stc_conn_period_e {
   static const int STC_CONN_PERIOD_TOTAL_SENT_DATA = 4;
 }
 
-/// @brief Enumeration for return type of the callback.
-/// @since_tizen 4.0
+/// Enumeration for return type of the callback.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class stc_callback_ret_e {
   /// < Cancel
   static const int STC_CALLBACK_CANCEL = 0;
@@ -1264,72 +1514,99 @@ abstract class stc_callback_ret_e {
   static const int STC_CALLBACK_CONTINUE = 1;
 }
 
-/// @brief The smart traffic control handle.
-/// @since_tizen 4.0
+/// The smart traffic control handle.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 typedef stc_h = ffi.Pointer<ffi.Void>;
 
-/// @brief The statistics rule handle.
-/// @since_tizen 4.0
+/// The statistics rule handle.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 typedef stc_stats_rule_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called whenever there is available statistical information.
-/// @details One of the following errors is delivered as a result.
-/// #STC_ERROR_NONE                Successful \n
-/// #STC_ERROR_INVALID_OPERATION   No reply \n
-/// #STC_ERROR_OPERATION_FAILED    Operation failed \n
-/// #STC_ERROR_PERMISSION_DENIED   Access or permission denied
-/// @since_tizen 4.0
+/// Called whenever there is available statistical information.
 ///
-/// @param[in] result        The result of statistics information getting
-/// @param[in] info          The statistics information handle
-/// @param[in] user_data     The user data passed from the statistics provider function
-/// @return  #STC_CALLBACK_CONTINUE to continue with the next iteration of the loop,
-/// otherwise #STC_CALLBACK_CANCEL to break out of the loop
+/// One of the following errors is delivered as a result. `STC_ERROR_NONE` Successful `STC_ERROR_INVALID_OPERATION` No reply `STC_ERROR_OPERATION_FAILED` Operation failed `STC_ERROR_PERMISSION_DENIED` Access or permission denied
 ///
-/// @pre stc_foreach_stats() will invoke this callback.
-/// @see stc_stats_info_get_app_id()
-/// @see stc_stats_info_get_iface_name()
-/// @see stc_stats_info_get_time_interval()
-/// @see stc_stats_info_get_iface_type()
-/// @see stc_stats_info_get_counter()
-/// @see stc_stats_info_get_roaming_type()
-/// @see stc_stats_info_get_protocol_type()
-/// @see stc_stats_info_get_process_state()
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Parameters:**
+/// - `result` (in): The result of statistics information getting
+/// - `info` (in): The statistics information handle
+/// - `user_data` (in): The user data passed from the statistics provider function
+///
+/// **Returns:**
+/// - `STC_CALLBACK_CONTINUE` to continue with the next iteration of the loop, otherwise `STC_CALLBACK_CANCEL` to break out of the loop
+///
+/// **Preconditions:**
+/// - stc_foreach_stats() will invoke this callback.
+///
+/// **See also:**
+/// - `stc_stats_info_get_app_id()`
+/// - `stc_stats_info_get_iface_name()`
+/// - `stc_stats_info_get_time_interval()`
+/// - `stc_stats_info_get_iface_type()`
+/// - `stc_stats_info_get_counter()`
+/// - `stc_stats_info_get_roaming_type()`
+/// - `stc_stats_info_get_protocol_type()`
+/// - `stc_stats_info_get_process_state()`
+/// @nodoc
 typedef stc_stats_info_cb
     = ffi.Pointer<ffi.NativeFunction<stc_stats_info_cbFunction>>;
+/// @nodoc
 typedef stc_stats_info_cbFunction = ffi.Int32 Function(
     ffi.Int32 result, stc_stats_info_h info, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartstc_stats_info_cbFunction = int Function(
     int result, stc_stats_info_h info, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The handle of statistical information about network traffic.
-/// @since_tizen 4.0
+/// The handle of statistical information about network traffic.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 typedef stc_stats_info_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when getting all statistical information is finished.
-/// @details One of the following errors is delivered as a result.
-/// #STC_ERROR_NONE                Successful \n
-/// #STC_ERROR_INVALID_OPERATION   No reply \n
-/// #STC_ERROR_OPERATION_FAILED    Operation failed \n
-/// #STC_ERROR_PERMISSION_DENIED   Access or permission denied
-/// @since_tizen 5.5
-/// @remarks @a info will be released by the platform after the callback exits.
+/// Called when getting all statistical information is finished.
 ///
-/// @param[in] result        The result of statistics gathering completion
-/// @param[in] info          The handle of all statistical information
-/// @param[in] user_data     The user data passed from the statistics provider function
+/// One of the following errors is delivered as a result. `STC_ERROR_NONE` Successful `STC_ERROR_INVALID_OPERATION` No reply `STC_ERROR_OPERATION_FAILED` Operation failed `STC_ERROR_PERMISSION_DENIED` Access or permission denied
 ///
-/// @pre stc_get_all_stats() will invoke this callback.
-/// @see stc_get_all_stats()
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **Remarks:**
+/// - `info` will be released by the platform after the callback exits.
+///
+/// **Parameters:**
+/// - `result` (in): The result of statistics gathering completion
+/// - `info` (in): The handle of all statistical information
+/// - `user_data` (in): The user data passed from the statistics provider function
+///
+/// **Preconditions:**
+/// - stc_get_all_stats() will invoke this callback.
+///
+/// **See also:**
+/// - `stc_get_all_stats()`
+/// @nodoc
 typedef stc_get_all_stats_finished_cb
     = ffi.Pointer<ffi.NativeFunction<stc_get_all_stats_finished_cbFunction>>;
+/// @nodoc
 typedef stc_get_all_stats_finished_cbFunction = ffi.Void Function(
     ffi.Int32 result,
     stc_all_stats_info_h info,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartstc_get_all_stats_finished_cbFunction = void Function(
     int result, stc_all_stats_info_h info, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The handle of all statistical information about network traffic.
-/// @since_tizen 5.5
+/// The handle of all statistical information about network traffic.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 typedef stc_all_stats_info_h = ffi.Pointer<ffi.Void>;

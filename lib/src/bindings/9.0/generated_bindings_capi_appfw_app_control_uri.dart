@@ -1,3 +1,6 @@
+/// {@category 9.0/tizen}
+library tizen_interop_9_0.capi_appfw_app_control_uri;
+
 // Copyright 2026 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-appfw-app-control-uri APIs.
+/// {@category 9.0/tizen}
 class Tizen90CapiAppfwAppControlUri {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,19 +28,27 @@ class Tizen90CapiAppfwAppControlUri {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates a URI builder handle.
-  /// @since_tizen 5.5
+  /// Creates a URI builder handle.
   ///
-  /// @remarks The @a handle should be released using app_control_uri_builder_destroy().
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[out]  handle                  The URI builder handle
+  /// **Remarks:**
+  /// - The `handle` should be released using app_control_uri_builder_destroy().
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_URI_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_URI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_CONTROL_URI_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see app_control_uri_builder_destroy()
+  /// **Parameters:**
+  /// - `handle` (out): The URI builder handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_URI_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_URI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_CONTROL_URI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `app_control_uri_builder_destroy()`
   int app_control_uri_builder_create(
     ffi.Pointer<app_control_uri_builder_h> handle,
   ) {
@@ -53,16 +65,21 @@ class Tizen90CapiAppfwAppControlUri {
       _app_control_uri_builder_createPtr
           .asFunction<int Function(ffi.Pointer<app_control_uri_builder_h>)>();
 
-  /// @brief Sets the scheme component.
-  /// @since_tizen 5.5
+  /// Sets the scheme component.
   ///
-  /// @param[in]   handle                  The URI builder handle
-  /// @param[in]   scheme                  The scheme component
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_URI_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_URI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `handle` (in): The URI builder handle
+  /// - `scheme` (in): The scheme component
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_URI_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_URI_ERROR_INVALID_PARAMETER`: Invalid parameter
   int app_control_uri_builder_set_scheme(
     app_control_uri_builder_h handle,
     ffi.Pointer<ffi.Char> scheme,
@@ -81,16 +98,21 @@ class Tizen90CapiAppfwAppControlUri {
       _app_control_uri_builder_set_schemePtr.asFunction<
           int Function(app_control_uri_builder_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the authority component.
-  /// @since_tizen 5.5
+  /// Sets the authority component.
   ///
-  /// @param[in]   handle                  The URI builder handle
-  /// @param[in]   auth                    The authority component
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_URI_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_URI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `handle` (in): The URI builder handle
+  /// - `auth` (in): The authority component
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_URI_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_URI_ERROR_INVALID_PARAMETER`: Invalid parameter
   int app_control_uri_builder_set_authority(
     app_control_uri_builder_h handle,
     ffi.Pointer<ffi.Char> auth,
@@ -109,17 +131,23 @@ class Tizen90CapiAppfwAppControlUri {
       _app_control_uri_builder_set_authorityPtr.asFunction<
           int Function(app_control_uri_builder_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the path component.
-  /// @details If the path was already set, it will be replaced with @a path.
-  /// @since_tizen 5.5
+  /// Sets the path component.
   ///
-  /// @param[in]   handle                  The URI builder handle
-  /// @param[in]   path                    The path component
+  /// If the path was already set, it will be replaced with `path`.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_URI_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_URI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The URI builder handle
+  /// - `path` (in): The path component
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_URI_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_URI_ERROR_INVALID_PARAMETER`: Invalid parameter
   int app_control_uri_builder_set_path(
     app_control_uri_builder_h handle,
     ffi.Pointer<ffi.Char> path,
@@ -138,18 +166,23 @@ class Tizen90CapiAppfwAppControlUri {
       _app_control_uri_builder_set_pathPtr.asFunction<
           int Function(app_control_uri_builder_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Adds the path component.
-  /// @details Builder appends @a path component to the path. If @a path doesn't
-  /// start with a '/', builder will prepend the given path with a '/'.
-  /// @since_tizen 5.5
+  /// Adds the path component.
   ///
-  /// @param[in]   handle                  The URI builder handle
-  /// @param[in]   path                    The path component
+  /// Builder appends `path` component to the path. If `path` doesn't start with a '/', builder will prepend the given path with a '/'.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_URI_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_URI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The URI builder handle
+  /// - `path` (in): The path component
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_URI_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_URI_ERROR_INVALID_PARAMETER`: Invalid parameter
   int app_control_uri_builder_add_path(
     app_control_uri_builder_h handle,
     ffi.Pointer<ffi.Char> path,
@@ -168,16 +201,21 @@ class Tizen90CapiAppfwAppControlUri {
       _app_control_uri_builder_add_pathPtr.asFunction<
           int Function(app_control_uri_builder_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the fragment identifier component.
-  /// @since_tizen 5.5
+  /// Sets the fragment identifier component.
   ///
-  /// @param[in]   handle                  The URI builder handle
-  /// @param[in]   fragment                The fragment identifier component
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_URI_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_URI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `handle` (in): The URI builder handle
+  /// - `fragment` (in): The fragment identifier component
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_URI_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_URI_ERROR_INVALID_PARAMETER`: Invalid parameter
   int app_control_uri_builder_set_fragment(
     app_control_uri_builder_h handle,
     ffi.Pointer<ffi.Char> fragment,
@@ -196,17 +234,22 @@ class Tizen90CapiAppfwAppControlUri {
       _app_control_uri_builder_set_fragmentPtr.asFunction<
           int Function(app_control_uri_builder_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Adds the key-value pair attribute of the query component.
-  /// @since_tizen 5.5
+  /// Adds the key-value pair attribute of the query component.
   ///
-  /// @param[in]   handle                  The URI builder handle
-  /// @param[in]   key                     The name of the query component key-value pairs
-  /// @param[in]   val                     The value associated with the given key
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_URI_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_URI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `handle` (in): The URI builder handle
+  /// - `key` (in): The name of the query component key-value pairs
+  /// - `val` (in): The value associated with the given key
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_URI_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_URI_ERROR_INVALID_PARAMETER`: Invalid parameter
   int app_control_uri_builder_add_query(
     app_control_uri_builder_h handle,
     ffi.Pointer<ffi.Char> key,
@@ -228,19 +271,25 @@ class Tizen90CapiAppfwAppControlUri {
           int Function(app_control_uri_builder_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Creates a URI handle using the attributes of URI builder handle.
-  /// @since_tizen 5.5
+  /// Creates a URI handle using the attributes of URI builder handle.
   ///
-  /// @remarks The @a app_control_uri should be released using app_control_uri_destroy().
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in]   builder                 The URI builder handle
-  /// @param[out]  app_control_uri         The URI handle
+  /// **Remarks:**
+  /// - The `app_control_uri` should be released using app_control_uri_destroy().
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_URI_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_URI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_CONTROL_URI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Parameters:**
+  /// - `builder` (in): The URI builder handle
+  /// - `app_control_uri` (out): The URI handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_URI_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_URI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_CONTROL_URI_ERROR_OUT_OF_MEMORY`: Out of memory
   int app_control_uri_builder_build(
     app_control_uri_builder_h builder,
     ffi.Pointer<app_control_uri_h> app_control_uri,
@@ -261,15 +310,20 @@ class Tizen90CapiAppfwAppControlUri {
           int Function(
               app_control_uri_builder_h, ffi.Pointer<app_control_uri_h>)>();
 
-  /// @brief Destroys the URI builder handle.
-  /// @since_tizen 5.5
+  /// Destroys the URI builder handle.
   ///
-  /// @param[in]   handle                  The URI builder handle
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_URI_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_URI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `handle` (in): The URI builder handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_URI_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_URI_ERROR_INVALID_PARAMETER`: Invalid parameter
   int app_control_uri_builder_destroy(
     app_control_uri_builder_h handle,
   ) {
@@ -285,20 +339,28 @@ class Tizen90CapiAppfwAppControlUri {
       _app_control_uri_builder_destroyPtr
           .asFunction<int Function(app_control_uri_builder_h)>();
 
-  /// @brief Creates a URI handle from the encoded URI string.
-  /// @since_tizen 5.5
+  /// Creates a URI handle from the encoded URI string.
   ///
-  /// @remarks The @a handle should be released using app_control_uri_destroy().
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in]   encoded_app_control_uri The encoded URI string
-  /// @param[out]  handle                  The URI handle
+  /// **Remarks:**
+  /// - The `handle` should be released using app_control_uri_destroy().
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_URI_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_URI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_CONTROL_URI_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see app_control_uri_encode()
+  /// **Parameters:**
+  /// - `encoded_app_control_uri` (in): The encoded URI string
+  /// - `handle` (out): The URI handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_URI_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_URI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_CONTROL_URI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `app_control_uri_encode()`
   int app_control_uri_create(
     ffi.Pointer<ffi.Char> encoded_app_control_uri,
     ffi.Pointer<app_control_uri_h> handle,
@@ -316,15 +378,20 @@ class Tizen90CapiAppfwAppControlUri {
   late final _app_control_uri_create = _app_control_uri_createPtr.asFunction<
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<app_control_uri_h>)>();
 
-  /// @brief Destroys the URI handle.
-  /// @since_tizen 5.5
+  /// Destroys the URI handle.
   ///
-  /// @param[in]   handle                  The URI handle
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_URI_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_URI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `handle` (in): The URI handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_URI_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_URI_ERROR_INVALID_PARAMETER`: Invalid parameter
   int app_control_uri_destroy(
     app_control_uri_h handle,
   ) {
@@ -339,19 +406,25 @@ class Tizen90CapiAppfwAppControlUri {
   late final _app_control_uri_destroy =
       _app_control_uri_destroyPtr.asFunction<int Function(app_control_uri_h)>();
 
-  /// @brief Encodes the URI handle to string. The string is RFC 3986-compliant.
-  /// @since_tizen 5.5
+  /// Encodes the URI handle to string. The string is RFC 3986-compliant.
   ///
-  /// @remarks The @a encoded_app_control_uri URI string should be released using free().
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in]   handle                  The URI handle
-  /// @param[out]  encoded_app_control_uri The encoded URI string
+  /// **Remarks:**
+  /// - The `encoded_app_control_uri` URI string should be released using free().
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_URI_ERROR_NONE Successfully
-  /// @retval #APP_CONTROL_URI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #APP_CONTROL_URI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Parameters:**
+  /// - `handle` (in): The URI handle
+  /// - `encoded_app_control_uri` (out): The encoded URI string
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_URI_ERROR_NONE`: Successfully
+  /// - `APP_CONTROL_URI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `APP_CONTROL_URI_ERROR_OUT_OF_MEMORY`: Out of memory
   int app_control_uri_encode(
     app_control_uri_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> encoded_app_control_uri,
@@ -369,19 +442,25 @@ class Tizen90CapiAppfwAppControlUri {
   late final _app_control_uri_encode = _app_control_uri_encodePtr.asFunction<
       int Function(app_control_uri_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the scheme component from a URI handle.
-  /// @since_tizen 5.5
+  /// Gets the scheme component from a URI handle.
   ///
-  /// @remarks The @a scheme must not be released. The platform will release it
-  /// when the App Control URI object containing it is released.
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in]   handle                  The URI handle
-  /// @param[out]  scheme                  The scheme component
+  /// **Remarks:**
+  /// - The `scheme` must not be released. The platform will release it
+  /// - when the App Control URI object containing it is released.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_URI_ERROR_NONE Successfully
-  /// @retval #APP_CONTROL_URI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `handle` (in): The URI handle
+  /// - `scheme` (out): The scheme component
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_URI_ERROR_NONE`: Successfully
+  /// - `APP_CONTROL_URI_ERROR_INVALID_PARAMETER`: Invalid parameter
   int app_control_uri_get_scheme(
     app_control_uri_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> scheme,
@@ -402,19 +481,25 @@ class Tizen90CapiAppfwAppControlUri {
           int Function(
               app_control_uri_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the authority component from a URI handle.
-  /// @since_tizen 5.5
+  /// Gets the authority component from a URI handle.
   ///
-  /// @remarks The @a auth must not be released. The platform will release it
-  /// when the App Control URI object containing it is released.
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in]   handle                  The URI handle
-  /// @param[out]  auth                    The authority component
+  /// **Remarks:**
+  /// - The `auth` must not be released. The platform will release it
+  /// - when the App Control URI object containing it is released.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_URI_ERROR_NONE Successfully
-  /// @retval #APP_CONTROL_URI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `handle` (in): The URI handle
+  /// - `auth` (out): The authority component
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_URI_ERROR_NONE`: Successfully
+  /// - `APP_CONTROL_URI_ERROR_INVALID_PARAMETER`: Invalid parameter
   int app_control_uri_get_authority(
     app_control_uri_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> auth,
@@ -435,19 +520,25 @@ class Tizen90CapiAppfwAppControlUri {
           int Function(
               app_control_uri_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the path component from a URI handle.
-  /// @since_tizen 5.5
+  /// Gets the path component from a URI handle.
   ///
-  /// @remarks The @a path must not be released. The platform will release it
-  /// when the App Control URI object containing it is released.
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in]   handle                  The URI handle
-  /// @param[out]  path                    The path component
+  /// **Remarks:**
+  /// - The `path` must not be released. The platform will release it
+  /// - when the App Control URI object containing it is released.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_URI_ERROR_NONE Successfully
-  /// @retval #APP_CONTROL_URI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `handle` (in): The URI handle
+  /// - `path` (out): The path component
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_URI_ERROR_NONE`: Successfully
+  /// - `APP_CONTROL_URI_ERROR_INVALID_PARAMETER`: Invalid parameter
   int app_control_uri_get_path(
     app_control_uri_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> path,
@@ -467,19 +558,25 @@ class Tizen90CapiAppfwAppControlUri {
           int Function(
               app_control_uri_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the fragment identifier component from a URI handle.
-  /// @since_tizen 5.5
+  /// Gets the fragment identifier component from a URI handle.
   ///
-  /// @remarks The @a fragment must not be released. The platform will release it
-  /// when the App Control URI object containing it is released.
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in]   handle                  The URI handle
-  /// @param[out]  fragment                The fragment identifier component
+  /// **Remarks:**
+  /// - The `fragment` must not be released. The platform will release it
+  /// - when the App Control URI object containing it is released.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_URI_ERROR_NONE Successfully
-  /// @retval #APP_CONTROL_URI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `handle` (in): The URI handle
+  /// - `fragment` (out): The fragment identifier component
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_URI_ERROR_NONE`: Successfully
+  /// - `APP_CONTROL_URI_ERROR_INVALID_PARAMETER`: Invalid parameter
   int app_control_uri_get_fragment(
     app_control_uri_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> fragment,
@@ -500,19 +597,25 @@ class Tizen90CapiAppfwAppControlUri {
           int Function(
               app_control_uri_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the handle of the query component from a URI handle.
-  /// @since_tizen 5.5
+  /// Gets the handle of the query component from a URI handle.
   ///
-  /// @remarks The @a query_handle will be released by the platform when
-  /// the App Control URI object which contains the query is released.
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in]    handle                 The URI handle
-  /// @param[out]   query_handle           The query component handle of the URI
+  /// **Remarks:**
+  /// - The `query_handle` will be released by the platform when
+  /// - the App Control URI object which contains the query is released.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_URI_ERROR_NONE Successfully
-  /// @retval #APP_CONTROL_URI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `handle` (in): The URI handle
+  /// - `query_handle` (out): The query component handle of the URI
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_URI_ERROR_NONE`: Successfully
+  /// - `APP_CONTROL_URI_ERROR_INVALID_PARAMETER`: Invalid parameter
   int app_control_uri_get_query(
     app_control_uri_h handle,
     ffi.Pointer<app_control_uri_query_h> query_handle,
@@ -533,19 +636,25 @@ class Tizen90CapiAppfwAppControlUri {
           int Function(
               app_control_uri_h, ffi.Pointer<app_control_uri_query_h>)>();
 
-  /// @brief Gets the host subcomponent from a URI handle.
-  /// @since_tizen 5.5
+  /// Gets the host subcomponent from a URI handle.
   ///
-  /// @remarks The @a host must not be released. The platform will release it
-  /// when the App Control URI object containing it is released.
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in]    handle                  The URI handle
-  /// @param[out]   host                    The host subcomponent of authority
+  /// **Remarks:**
+  /// - The `host` must not be released. The platform will release it
+  /// - when the App Control URI object containing it is released.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_URI_ERROR_NONE Successfully
-  /// @retval #APP_CONTROL_URI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `handle` (in): The URI handle
+  /// - `host` (out): The host subcomponent of authority
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_URI_ERROR_NONE`: Successfully
+  /// - `APP_CONTROL_URI_ERROR_INVALID_PARAMETER`: Invalid parameter
   int app_control_uri_get_host(
     app_control_uri_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> host,
@@ -565,19 +674,25 @@ class Tizen90CapiAppfwAppControlUri {
           int Function(
               app_control_uri_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the port subcomponent from a URI handle.
-  /// @since_tizen 5.5
+  /// Gets the port subcomponent from a URI handle.
   ///
-  /// @remarks The @a port must not be released. The platform will release it
-  /// when the App Control URI object containing it is released.
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in]   handle                   The URI handle
-  /// @param[out]  port                     The port subcomponent of authority
+  /// **Remarks:**
+  /// - The `port` must not be released. The platform will release it
+  /// - when the App Control URI object containing it is released.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_URI_ERROR_NONE Successfully
-  /// @retval #APP_CONTROL_URI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `handle` (in): The URI handle
+  /// - `port` (out): The port subcomponent of authority
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_URI_ERROR_NONE`: Successfully
+  /// - `APP_CONTROL_URI_ERROR_INVALID_PARAMETER`: Invalid parameter
   int app_control_uri_get_port(
     app_control_uri_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> port,
@@ -597,19 +712,25 @@ class Tizen90CapiAppfwAppControlUri {
           int Function(
               app_control_uri_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the user subcomponent from a URI handle.
-  /// @since_tizen 5.5
+  /// Gets the user subcomponent from a URI handle.
   ///
-  /// @remarks The @a user must not be released. The platform will release it
-  /// when the App Control URI object containing it is released.
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in]   handle                  The URI handle
-  /// @param[out]  user                    The user subcomponent of authority
+  /// **Remarks:**
+  /// - The `user` must not be released. The platform will release it
+  /// - when the App Control URI object containing it is released.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_URI_ERROR_NONE Successfully
-  /// @retval #APP_CONTROL_URI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `handle` (in): The URI handle
+  /// - `user` (out): The user subcomponent of authority
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_URI_ERROR_NONE`: Successfully
+  /// - `APP_CONTROL_URI_ERROR_INVALID_PARAMETER`: Invalid parameter
   int app_control_uri_get_user(
     app_control_uri_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> user,
@@ -629,17 +750,22 @@ class Tizen90CapiAppfwAppControlUri {
           int Function(
               app_control_uri_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Retrieves key-value pair attributes in the query component.
-  /// @since_tizen 5.5
+  /// Retrieves key-value pair attributes in the query component.
   ///
-  /// @param[in]   handle                  The query component handle of the URI
-  /// @param[in]   callback                The iteration callback function
-  /// @param[in]   user_data               The user data to be passed the callback function
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #APP_CONTROL_URI_ERROR_NONE Successful
-  /// @retval #APP_CONTROL_URI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `handle` (in): The query component handle of the URI
+  /// - `callback` (in): The iteration callback function
+  /// - `user_data` (in): The user data to be passed the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `APP_CONTROL_URI_ERROR_NONE`: Successful
+  /// - `APP_CONTROL_URI_ERROR_INVALID_PARAMETER`: Invalid parameter
   int app_control_uri_query_foreach(
     app_control_uri_query_h handle,
     app_control_uri_query_foreach_cb callback,
@@ -664,8 +790,11 @@ class Tizen90CapiAppfwAppControlUri {
               app_control_uri_query_foreach_cb, ffi.Pointer<ffi.Void>)>();
 }
 
-/// @brief Enumeration for error codes of the App Control URI submodule.
-/// @since_tizen 5.5
+/// Enumeration for error codes of the App Control URI submodule.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class app_control_uri_error_e {
   /// < Successful
   static const int APP_CONTROL_URI_ERROR_NONE = 0;
@@ -680,36 +809,54 @@ abstract class app_control_uri_error_e {
   static const int APP_CONTROL_URI_ERROR_INVALID_PARAMETER = -22;
 }
 
-/// @brief The URI builder handle.
-/// @since_tizen 5.5
+/// The URI builder handle.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 typedef app_control_uri_builder_h = ffi.Pointer<ffi.Void>;
 
-/// @brief The URI handle.
-/// @since_tizen 5.5
+/// The URI handle.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 typedef app_control_uri_h = ffi.Pointer<ffi.Void>;
 
-/// @brief The query component handle of the URI.
-/// @since_tizen 5.5
+/// The query component handle of the URI.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 typedef app_control_uri_query_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called to retrieve key-value pair attributes contained in the query component.
-/// @since_tizen 5.5
+/// Called to retrieve key-value pair attributes contained in the query component.
 ///
-/// @remarks @a key and @a val must not be released. The platform will release them when the query object is released (see app_control_uri_get_query())
+/// **Since Tizen:**
+/// - 5.5
 ///
-/// @param[in]   key                     The name of the query component key-value pairs
-/// @param[in]   val                     The value associated with the given key
-/// @param[in]   user_data               The user data passed from the foreach function
+/// **Remarks:**
+/// - `key` and `val` must not be released. The platform will release them when the query object is released (see app_control_uri_get_query())
 ///
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
-/// @see app_control_uri_query_foreach()
+/// **Parameters:**
+/// - `key` (in): The name of the query component key-value pairs
+/// - `val` (in): The value associated with the given key
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **See also:**
+/// - `app_control_uri_query_foreach()`
+/// @nodoc
 typedef app_control_uri_query_foreach_cb
     = ffi.Pointer<ffi.NativeFunction<app_control_uri_query_foreach_cbFunction>>;
+/// @nodoc
 typedef app_control_uri_query_foreach_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> key,
     ffi.Pointer<ffi.Char> val,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartapp_control_uri_query_foreach_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> key,
     ffi.Pointer<ffi.Char> val,

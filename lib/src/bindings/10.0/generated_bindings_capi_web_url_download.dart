@@ -1,3 +1,6 @@
+/// {@category 10.0/tizen}
+library tizen_interop_10_0.capi_web_url_download;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'generated_bindings_capi_appfw_app_control.dart' as app_control;
 
 /// Dart bindings for Tizen capi-web-url-download APIs.
+/// {@category 10.0/tizen}
 class Tizen100CapiWebUrlDownload {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,32 +29,43 @@ class Tizen100CapiWebUrlDownload {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Initializes a new download request and returns download ID that can be used to control the download process.
-  /// @details @a download_id is the handle for managing download progress, pausing, resuming, or canceling downloads.
+  /// Initializes a new download request and returns download ID that can be used to control the download process.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// `download_id` is the handle for managing download progress, pausing, resuming, or canceling downloads.
   ///
-  /// @remarks The caller must release @a download_id using download_destroy().
-  /// Even if the device is off, @a download_id is available for 48 hours if the user does not call download_destroy().
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[out] download_id The download ID that is newly created on success
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #DOWNLOAD_ERROR_IO_ERROR          Internal I/O error
-  /// @retval #DOWNLOAD_ERROR_QUEUE_FULL        Download server queue is full
+  /// **Remarks:**
+  /// - The caller must release `download_id` using download_destroy().
+  /// - Even if the device is off, `download_id` is available for 48 hours if the user does not call download_destroy().
   ///
-  /// @post The download state will be #DOWNLOAD_STATE_READY.
+  /// **Parameters:**
+  /// - `download_id` (out): The download ID that is newly created on success
   ///
-  /// @see download_destroy()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `DOWNLOAD_ERROR_IO_ERROR`: Internal I/O error
+  /// - `DOWNLOAD_ERROR_QUEUE_FULL`: Download server queue is full
+  ///
+  /// **Postconditions:**
+  /// - The download state will be `DOWNLOAD_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `download_destroy()`
   int download_create(
     ffi.Pointer<ffi.Int> download_id,
   ) {
@@ -65,29 +80,39 @@ class Tizen100CapiWebUrlDownload {
   late final _download_create =
       _download_createPtr.asFunction<int Function(ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Frees the resources associated with a previously created download ID.
-  /// @details This function should be called when the download is completed or no longer needed to prevent memory leaks.
+  /// Frees the resources associated with a previously created download ID.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// This function should be called when the download is completed or no longer needed to prevent memory leaks.
   ///
-  /// @remarks After calling this function, the @a download_id is existed at DB in certain time.
-  /// Within that time, it is able to use the other functions with the @a download_id.
-  /// If #DOWNLOAD_ERROR_ID_NOT_FOUND is returned, it means that the @a download_id is completely removed from DB.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in] download_id The download ID to be destroyed
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
+  /// **Remarks:**
+  /// - After calling this function, the `download_id` is existed at DB in certain time.
+  /// - Within that time, it is able to use the other functions with the `download_id`.
+  /// - If `DOWNLOAD_ERROR_ID_NOT_FOUND` is returned, it means that the `download_id` is completely removed from DB.
   ///
-  /// @see download_create()
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID to be destroyed
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  ///
+  /// **See also:**
+  /// - `download_create()`
   int download_destroy(
     int download_id,
   ) {
@@ -102,32 +127,41 @@ class Tizen100CapiWebUrlDownload {
   late final _download_destroy =
       _download_destroyPtr.asFunction<int Function(int)>();
 
-  /// @brief Sets the URL for the file to be downloaded.
+  /// Sets the URL for the file to be downloaded.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @remarks This function should be called before downloading (see download_start()).
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] download_id  The download ID
-  /// @param[in] url          The URL to download \n
-  /// If @a url is @c NULL, it clears the previous value.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - This function should be called before downloading (see download_start()).
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #DOWNLOAD_ERROR_INVALID_STATE     Invalid state
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID
+  /// - `url` (in): The URL to download If `url` is `NULL`, it clears the previous value.
   ///
-  /// @pre The state must be #DOWNLOAD_STATE_READY, #DOWNLOAD_STATE_FAILED, or #DOWNLOAD_STATE_CANCELED.
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see download_get_url()
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `DOWNLOAD_ERROR_INVALID_STATE`: Invalid state
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  ///
+  /// **Preconditions:**
+  /// - The state must be `DOWNLOAD_STATE_READY`, `DOWNLOAD_STATE_FAILED`, or `DOWNLOAD_STATE_CANCELED`.
+  ///
+  /// **See also:**
+  /// - `download_get_url()`
   int download_set_url(
     int download_id,
     ffi.Pointer<ffi.Char> url,
@@ -144,28 +178,37 @@ class Tizen100CapiWebUrlDownload {
   late final _download_set_url = _download_set_urlPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the URL for the file to be downloaded.
+  /// Gets the URL for the file to be downloaded.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @remarks The caller must release @a url using free().
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in]  download_id  The download ID
-  /// @param[out] url          The URL to download
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - The caller must release `url` using free().
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID
+  /// - `url` (out): The URL to download
   ///
-  /// @see download_set_url()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  ///
+  /// **See also:**
+  /// - `download_set_url()`
   int download_get_url(
     int download_id,
     ffi.Pointer<ffi.Pointer<ffi.Char>> url,
@@ -183,32 +226,43 @@ class Tizen100CapiWebUrlDownload {
   late final _download_get_url = _download_get_urlPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the type of network (e.g., Wi-Fi) that should be used for the download.
-  /// @details The file can be downloaded only under the allowed network.
+  /// Sets the type of network (e.g., Wi-Fi) that should be used for the download.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// The file can be downloaded only under the allowed network.
   ///
-  /// @remarks This function should be called before downloading (see download_start()).
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in] download_id  The download ID
-  /// @param[in] net_type     The network type that the user prefers
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_INVALID_STATE     Invalid state
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
+  /// **Remarks:**
+  /// - This function should be called before downloading (see download_start()).
   ///
-  /// @pre The state must be #DOWNLOAD_STATE_READY, #DOWNLOAD_STATE_FAILED, or #DOWNLOAD_STATE_CANCELED.
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID
+  /// - `net_type` (in): The network type that the user prefers
   ///
-  /// @see download_get_network_type()
-  /// @see #download_network_type_e
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_INVALID_STATE`: Invalid state
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  ///
+  /// **Preconditions:**
+  /// - The state must be `DOWNLOAD_STATE_READY`, `DOWNLOAD_STATE_FAILED`, or `DOWNLOAD_STATE_CANCELED`.
+  ///
+  /// **See also:**
+  /// - `download_get_network_type()`
+  /// - `download_network_type_e`
   int download_set_network_type(
     int download_id,
     int net_type,
@@ -225,26 +279,34 @@ class Tizen100CapiWebUrlDownload {
   late final _download_set_network_type =
       _download_set_network_typePtr.asFunction<int Function(int, int)>();
 
-  /// @brief Gets the current network type that is set for the download.
+  /// Gets the current network type that is set for the download.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in] download_id  The download ID
-  /// @param[out] net_type    The network type that is defined by the user
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID
+  /// - `net_type` (out): The network type that is defined by the user
   ///
-  /// @see download_set_network_type()
-  /// @see #download_network_type_e
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  ///
+  /// **See also:**
+  /// - `download_set_network_type()`
+  /// - `download_network_type_e`
   int download_get_network_type(
     int download_id,
     ffi.Pointer<ffi.Int32> net_type,
@@ -262,37 +324,46 @@ class Tizen100CapiWebUrlDownload {
   late final _download_get_network_type = _download_get_network_typePtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets the file path where the downloaded content will be saved on the device.
-  /// @details This function allows the application to define the location on the filesystem where the downloaded file should be stored.
-  /// If the destination is not specified, the file will be downloaded to a default storage (see the @ref CAPI_SYSTEM_STORAGE_MODULE API).
+  /// Sets the file path where the downloaded content will be saved on the device.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// This function allows the application to define the location on the filesystem where the downloaded file should be stored. If the destination is not specified, the file will be downloaded to a default storage (see the `CAPI_SYSTEM_STORAGE_MODULE` API).
   ///
-  /// @remarks This function should be called before downloading (see download_start()). \n
-  /// The mediastorage privilege %http://tizen.org/privilege/mediastorage is needed if @a path is relevant to media storage.\n
-  /// The externalstorage privilege %http://tizen.org/privilege/externalstorage is needed if @a path is relevant to external storage.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in] download_id  The download ID
-  /// @param[in] path         The absolute path where the downloaded file will be saved \n
-  /// If @a path is @c NULL, it clears the previous value.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE                Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_OUT_OF_MEMORY       Out of memory
-  /// @retval #DOWNLOAD_ERROR_INVALID_STATE       Invalid state
-  /// @retval #DOWNLOAD_ERROR_INVALID_DESTINATION Invalid destination
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND        No download ID
+  /// **Remarks:**
+  /// - This function should be called before downloading (see download_start()).
+  /// - The mediastorage privilege http://tizen.org/privilege/mediastorage is needed if `path` is relevant to media storage.
+  /// - The externalstorage privilege http://tizen.org/privilege/externalstorage is needed if `path` is relevant to external storage.
   ///
-  /// @pre The state must be #DOWNLOAD_STATE_READY, #DOWNLOAD_STATE_FAILED, or #DOWNLOAD_STATE_CANCELED.
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID
+  /// - `path` (in): The absolute path where the downloaded file will be saved If `path` is `NULL`, it clears the previous value.
   ///
-  /// @see download_get_destination()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `DOWNLOAD_ERROR_INVALID_STATE`: Invalid state
+  /// - `DOWNLOAD_ERROR_INVALID_DESTINATION`: Invalid destination
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  ///
+  /// **Preconditions:**
+  /// - The state must be `DOWNLOAD_STATE_READY`, `DOWNLOAD_STATE_FAILED`, or `DOWNLOAD_STATE_CANCELED`.
+  ///
+  /// **See also:**
+  /// - `download_get_destination()`
   int download_set_destination(
     int download_id,
     ffi.Pointer<ffi.Char> path,
@@ -309,29 +380,39 @@ class Tizen100CapiWebUrlDownload {
   late final _download_set_destination = _download_set_destinationPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the file path where the downloaded content will be or has been saved.
-  /// @details This function allows the application to verify or retrieve the path where the downloaded file is stored.
+  /// Gets the file path where the downloaded content will be or has been saved.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// This function allows the application to verify or retrieve the path where the downloaded file is stored.
   ///
-  /// @remarks The caller must release @a path using free().
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in]  download_id  The download ID
-  /// @param[out] path         A pointer to store the absolute path where the downloaded file is saved
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
+  /// **Remarks:**
+  /// - The caller must release `path` using free().
   ///
-  /// @see download_set_destination()
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID
+  /// - `path` (out): A pointer to store the absolute path where the downloaded file is saved
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  ///
+  /// **See also:**
+  /// - `download_set_destination()`
   int download_get_destination(
     int download_id,
     ffi.Pointer<ffi.Pointer<ffi.Char>> path,
@@ -349,33 +430,43 @@ class Tizen100CapiWebUrlDownload {
   late final _download_get_destination = _download_get_destinationPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the name to be used for the downloaded content.
-  /// @details This function allows the application to specify the file name for the content, independent of the URL or server-provided name.
+  /// Sets the name to be used for the downloaded content.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// This function allows the application to specify the file name for the content, independent of the URL or server-provided name.
   ///
-  /// @remarks This function should be called before downloading (see download_start()).
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in] download_id  The download ID
-  /// @param[in] file_name    The desired file name for the downloaded content. \n
-  /// If @a file_name is @c NULL it clears the previous value.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #DOWNLOAD_ERROR_INVALID_STATE     Invalid state
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
+  /// **Remarks:**
+  /// - This function should be called before downloading (see download_start()).
   ///
-  /// @pre The state must be #DOWNLOAD_STATE_READY, #DOWNLOAD_STATE_FAILED, or #DOWNLOAD_STATE_CANCELED.
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID
+  /// - `file_name` (in): The desired file name for the downloaded content. If `file_name` is `NULL` it clears the previous value.
   ///
-  /// @see download_get_file_name()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `DOWNLOAD_ERROR_INVALID_STATE`: Invalid state
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  ///
+  /// **Preconditions:**
+  /// - The state must be `DOWNLOAD_STATE_READY`, `DOWNLOAD_STATE_FAILED`, or `DOWNLOAD_STATE_CANCELED`.
+  ///
+  /// **See also:**
+  /// - `download_get_file_name()`
   int download_set_file_name(
     int download_id,
     ffi.Pointer<ffi.Char> file_name,
@@ -392,30 +483,39 @@ class Tizen100CapiWebUrlDownload {
   late final _download_set_file_name = _download_set_file_namePtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the name of the downloaded content previously set by download_set_file_name().
-  /// @details This function allows the application to check the file name that has been assigned for the download.
-  /// If the name is not set, @c NULL is returned.
+  /// Gets the name of the downloaded content previously set by download_set_file_name().
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// This function allows the application to check the file name that has been assigned for the download. If the name is not set, `NULL` is returned.
   ///
-  /// @remarks The caller must release @a file_name using free().
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in]  download_id  The download ID
-  /// @param[out] file_name    The file name which is set by the application
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
+  /// **Remarks:**
+  /// - The caller must release `file_name` using free().
   ///
-  /// @see download_set_file_name()
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID
+  /// - `file_name` (out): The file name which is set by the application
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  ///
+  /// **See also:**
+  /// - `download_set_file_name()`
   int download_get_file_name(
     int download_id,
     ffi.Pointer<ffi.Pointer<ffi.Char>> file_name,
@@ -433,33 +533,44 @@ class Tizen100CapiWebUrlDownload {
   late final _download_get_file_name = _download_get_file_namePtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the absolute file path of the downloaded content.
-  /// @details This function returns the absolute file path where the downloaded content has been saved after the download has been completed.
+  /// Gets the absolute file path of the downloaded content.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// This function returns the absolute file path where the downloaded content has been saved after the download has been completed.
   ///
-  /// @remarks This function returns #DOWNLOAD_ERROR_INVALID_STATE if the download is not completed.
-  /// The caller must release @a path using free().
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in]  download_id  The download ID
-  /// @param[out] path         A pointer to store the file path of the downloaded content
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE               Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND       No download ID
+  /// **Remarks:**
+  /// - This function returns `DOWNLOAD_ERROR_INVALID_STATE` if the download is not completed.
+  /// - The caller must release `path` using free().
   ///
-  /// @pre The download state must be #DOWNLOAD_STATE_COMPLETED.
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID
+  /// - `path` (out): A pointer to store the file path of the downloaded content
   ///
-  /// @see download_set_file_name()
-  /// @see download_set_destination()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  ///
+  /// **Preconditions:**
+  /// - The download state must be `DOWNLOAD_STATE_COMPLETED`.
+  ///
+  /// **See also:**
+  /// - `download_set_file_name()`
+  /// - `download_set_destination()`
   int download_get_downloaded_file_path(
     int download_id,
     ffi.Pointer<ffi.Pointer<ffi.Char>> path,
@@ -478,31 +589,40 @@ class Tizen100CapiWebUrlDownload {
       _download_get_downloaded_file_pathPtr
           .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the MIME type of the downloaded content.
+  /// Gets the MIME type of the downloaded content.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @remarks This function returns #DOWNLOAD_ERROR_INVALID_STATE if the download has not been started.
-  /// The caller must release @a mime_type using free().
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in]  download_id  The download ID
-  /// @param[out] mime_type    The MIME type of the downloaded file
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - This function returns `DOWNLOAD_ERROR_INVALID_STATE` if the download has not been started.
+  /// - The caller must release `mime_type` using free().
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID
+  /// - `mime_type` (out): The MIME type of the downloaded file
   ///
-  /// @see download_set_file_name()
-  /// @see download_set_destination()
-  /// @see download_get_downloaded_file_path()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  ///
+  /// **See also:**
+  /// - `download_set_file_name()`
+  /// - `download_set_destination()`
+  /// - `download_get_downloaded_file_path()`
   int download_get_mime_type(
     int download_id,
     ffi.Pointer<ffi.Pointer<ffi.Char>> mime_type,
@@ -520,34 +640,41 @@ class Tizen100CapiWebUrlDownload {
   late final _download_get_mime_type = _download_get_mime_typePtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Enables or disables automatic downloading of the file.
-  /// @details This function allows the application to control whether the download should start automatically
-  /// after the download daemon is restarted, or if it should be manually triggered.
-  /// The download progress continues after the application process is terminated.
+  /// Enables or disables automatic downloading of the file.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// This function allows the application to control whether the download should start automatically after the download daemon is restarted, or if it should be manually triggered. The download progress continues after the application process is terminated.
   ///
-  /// @remarks The default value is @c false.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in] download_id The download ID
-  /// @param[in] enable      A boolean value indicating whether to enable automatic download \n
-  /// @c true to start automatically,
-  /// @c false to require manual start
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
+  /// **Remarks:**
+  /// - The default value is `false`.
   ///
-  /// @pre The state must be #DOWNLOAD_STATE_READY, #DOWNLOAD_STATE_FAILED, or #DOWNLOAD_STATE_CANCELED.
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID
+  /// - `enable` (in): A boolean value indicating whether to enable automatic download `true` to start automatically, `false` to require manual start
   ///
-  /// @see download_get_auto_download()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  ///
+  /// **Preconditions:**
+  /// - The state must be `DOWNLOAD_STATE_READY`, `DOWNLOAD_STATE_FAILED`, or `DOWNLOAD_STATE_CANCELED`.
+  ///
+  /// **See also:**
+  /// - `download_get_auto_download()`
   int download_set_auto_download(
     int download_id,
     bool enable,
@@ -564,30 +691,35 @@ class Tizen100CapiWebUrlDownload {
   late final _download_set_auto_download =
       _download_set_auto_downloadPtr.asFunction<int Function(int, bool)>();
 
-  /// @brief Gets whether the download is set to start automatically.
+  /// Gets whether the download is set to start automatically.
   ///
-  /// @details This function allows the application to check if the download has been configured to start automatically
-  /// or if it requires manual initiation.
+  /// This function allows the application to check if the download has been configured to start automatically or if it requires manual initiation.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in]  download_id The download ID
-  /// @param[out] enable      A pointer to a boolean variable where the auto-download status will be stored \n
-  /// @c true if the download starts automatically,
-  /// @c false if it requires manual initiation
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID
+  /// - `enable` (out): A pointer to a boolean variable where the auto-download status will be stored `true` if the download starts automatically, `false` if it requires manual initiation
   ///
-  /// @see download_set_auto_download()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  ///
+  /// **See also:**
+  /// - `download_set_auto_download()`
   int download_get_auto_download(
     int download_id,
     ffi.Pointer<ffi.Bool> enable,
@@ -604,39 +736,48 @@ class Tizen100CapiWebUrlDownload {
   late final _download_get_auto_download = _download_get_auto_downloadPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Adds an HTTP header field to the download request.
-  /// @details This function allows the application to append custom headers to the download request,
-  /// which can be used for authentication, content negotiation, or other HTTP operations.
-  /// For more information, see <a href="HTTP://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html#sec4.2">HTTP/1.1: HTTP Message Headers</a>.
+  /// Adds an HTTP header field to the download request.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// This function allows the application to append custom headers to the download request, which can be used for authentication, content negotiation, or other HTTP operations. For more information, see <a href="HTTP://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html`sec4`.2">HTTP/1.1: HTTP Message Headers</a>.
   ///
-  /// @remarks This function should be called before downloading (see download_start()). \n
-  /// It replaces any existing value for the given key. \n
-  /// It returns #DOWNLOAD_ERROR_INVALID_PARAMETER if @a field or @a value is a zero-length string.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in] download_id  The download ID
-  /// @param[in] field        The name of the HTTP header field
-  /// @param[in] value        The value of the HTTP header field
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #DOWNLOAD_ERROR_INVALID_STATE     Invalid state
-  /// @retval #DOWNLOAD_ERROR_IO_ERROR Internal I/O error
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
+  /// **Remarks:**
+  /// - This function should be called before downloading (see download_start()).
+  /// - It replaces any existing value for the given key.
+  /// - It returns `DOWNLOAD_ERROR_INVALID_PARAMETER` if `field` or `value` is a zero-length string.
   ///
-  /// @pre The state must be #DOWNLOAD_STATE_READY, #DOWNLOAD_STATE_FAILED, or #DOWNLOAD_STATE_CANCELED.
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID
+  /// - `field` (in): The name of the HTTP header field
+  /// - `value` (in): The value of the HTTP header field
   ///
-  /// @see download_get_http_header_field()
-  /// @see download_remove_http_header_field()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `DOWNLOAD_ERROR_INVALID_STATE`: Invalid state
+  /// - `DOWNLOAD_ERROR_IO_ERROR`: Internal I/O error
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  ///
+  /// **Preconditions:**
+  /// - The state must be `DOWNLOAD_STATE_READY`, `DOWNLOAD_STATE_FAILED`, or `DOWNLOAD_STATE_CANCELED`.
+  ///
+  /// **See also:**
+  /// - `download_get_http_header_field()`
+  /// - `download_remove_http_header_field()`
   int download_add_http_header_field(
     int download_id,
     ffi.Pointer<ffi.Char> field,
@@ -657,34 +798,44 @@ class Tizen100CapiWebUrlDownload {
       _download_add_http_header_fieldPtr.asFunction<
           int Function(int, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the value of a specific HTTP header field that was added to the download request.
-  /// @details This function allows the application to query the value of an HTTP header field previously set using download_add_http_header_field().
+  /// Gets the value of a specific HTTP header field that was added to the download request.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// This function allows the application to query the value of an HTTP header field previously set using download_add_http_header_field().
   ///
-  /// @remarks This function returns #DOWNLOAD_ERROR_INVALID_PARAMETER if @a field is zero-length string.
-  /// The caller must release @a value using free().
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in]  download_id  The download ID
-  /// @param[in]  field        The name of the HTTP header field
-  /// @param[out] value        The value associated with given field
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #DOWNLOAD_ERROR_INVALID_STATE     Invalid state
-  /// @retval #DOWNLOAD_ERROR_FIELD_NOT_FOUND   Specified field not found
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
+  /// **Remarks:**
+  /// - This function returns `DOWNLOAD_ERROR_INVALID_PARAMETER` if `field` is zero-length string.
+  /// - The caller must release `value` using free().
   ///
-  /// @see download_add_http_header_field()
-  /// @see download_remove_http_header_field()
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID
+  /// - `field` (in): The name of the HTTP header field
+  /// - `value` (out): The value associated with given field
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `DOWNLOAD_ERROR_INVALID_STATE`: Invalid state
+  /// - `DOWNLOAD_ERROR_FIELD_NOT_FOUND`: Specified field not found
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  ///
+  /// **See also:**
+  /// - `download_add_http_header_field()`
+  /// - `download_remove_http_header_field()`
   int download_get_http_header_field(
     int download_id,
     ffi.Pointer<ffi.Char> field,
@@ -707,32 +858,42 @@ class Tizen100CapiWebUrlDownload {
           int Function(int, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets a list of all HTTP header fields that were added to the download request.
-  /// @details This function provides access to the names of all HTTP headers that were appended using download_add_http_header_field().
+  /// Gets a list of all HTTP header fields that were added to the download request.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// This function provides access to the names of all HTTP headers that were appended using download_add_http_header_field().
   ///
-  /// @remarks The caller must release @a fields using free().
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in]  download_id  The download ID
-  /// @param[out] fields       A pointer to a list that will contain the names of the HTTP header fields
-  /// @param[out] length       The number of the HTTP header fields
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #DOWNLOAD_ERROR_INVALID_STATE     Invalid state
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
+  /// **Remarks:**
+  /// - The caller must release `fields` using free().
   ///
-  /// @see download_add_http_header_field()
-  /// @see download_remove_http_header_field()
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID
+  /// - `fields` (out): A pointer to a list that will contain the names of the HTTP header fields
+  /// - `length` (out): The number of the HTTP header fields
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `DOWNLOAD_ERROR_INVALID_STATE`: Invalid state
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  ///
+  /// **See also:**
+  /// - `download_add_http_header_field()`
+  /// - `download_remove_http_header_field()`
   int download_get_http_header_field_list(
     int download_id,
     ffi.Pointer<ffi.Pointer<ffi.Pointer<ffi.Char>>> fields,
@@ -756,36 +917,47 @@ class Tizen100CapiWebUrlDownload {
           int Function(int, ffi.Pointer<ffi.Pointer<ffi.Pointer<ffi.Char>>>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Removes a specific HTTP header field from the download request.
-  /// @details This function allows the application to delete a previously added HTTP header.
+  /// Removes a specific HTTP header field from the download request.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// This function allows the application to delete a previously added HTTP header.
   ///
-  /// @remarks This function should be called before downloading (see download_start()).
-  /// It returns #DOWNLOAD_ERROR_INVALID_PARAMETER if the field is zero-length string.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in] download_id  The download ID
-  /// @param[in] field        The name of the HTTP header field to remove
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #DOWNLOAD_ERROR_INVALID_STATE     Invalid state
-  /// @retval #DOWNLOAD_ERROR_FIELD_NOT_FOUND   Specified field not found
-  /// @retval #DOWNLOAD_ERROR_IO_ERROR          Internal I/O error
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
+  /// **Remarks:**
+  /// - This function should be called before downloading (see download_start()).
+  /// - It returns `DOWNLOAD_ERROR_INVALID_PARAMETER` if the field is zero-length string.
   ///
-  /// @pre The state must be #DOWNLOAD_STATE_READY, #DOWNLOAD_STATE_FAILED, or #DOWNLOAD_STATE_CANCELED.
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID
+  /// - `field` (in): The name of the HTTP header field to remove
   ///
-  /// @see download_add_http_header_field()
-  /// @see download_get_http_header_field()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `DOWNLOAD_ERROR_INVALID_STATE`: Invalid state
+  /// - `DOWNLOAD_ERROR_FIELD_NOT_FOUND`: Specified field not found
+  /// - `DOWNLOAD_ERROR_IO_ERROR`: Internal I/O error
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  ///
+  /// **Preconditions:**
+  /// - The state must be `DOWNLOAD_STATE_READY`, `DOWNLOAD_STATE_FAILED`, or `DOWNLOAD_STATE_CANCELED`.
+  ///
+  /// **See also:**
+  /// - `download_add_http_header_field()`
+  /// - `download_get_http_header_field()`
   int download_remove_http_header_field(
     int download_id,
     ffi.Pointer<ffi.Char> field,
@@ -803,33 +975,43 @@ class Tizen100CapiWebUrlDownload {
       _download_remove_http_header_fieldPtr
           .asFunction<int Function(int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets a callback function to be called when the download state changes.
-  /// @details This function allows the application to register a callback that is triggered
-  /// when the download's state changes, such as when the download starts, pauses, completes, or fails.
+  /// Sets a callback function to be called when the download state changes.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// This function allows the application to register a callback that is triggered when the download's state changes, such as when the download starts, pauses, completes, or fails.
   ///
-  /// @remarks This function should be called before downloading (see download_start()).
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in] download_id  The download ID
-  /// @param[in] callback     The callback function to be invoked when the download state changes
-  /// @param[in] user_data    The user data to be passed to the callback function
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
+  /// **Remarks:**
+  /// - This function should be called before downloading (see download_start()).
   ///
-  /// @post download_state_changed_cb() will be invoked.
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID
+  /// - `callback` (in): The callback function to be invoked when the download state changes
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @see download_unset_state_changed_cb()
-  /// @see download_state_changed_cb()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  ///
+  /// **Postconditions:**
+  /// - download_state_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `download_unset_state_changed_cb()`
+  /// - `download_state_changed_cb()`
   int download_set_state_changed_cb(
     int download_id,
     download_state_changed_cb callback,
@@ -851,29 +1033,38 @@ class Tizen100CapiWebUrlDownload {
           int Function(
               int, download_state_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback function for the download state changes.
-  /// @details This function removes the previously set callback for state changes,
-  /// ensuring that no callback is invoked when the download's state changes.
+  /// Unsets the callback function for the download state changes.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// This function removes the previously set callback for state changes, ensuring that no callback is invoked when the download's state changes.
   ///
-  /// @remarks This function should be called before downloading (see download_start()).
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in] download_id The download ID
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
+  /// **Remarks:**
+  /// - This function should be called before downloading (see download_start()).
   ///
-  /// @see download_set_state_changed_cb()
-  /// @see download_state_changed_cb()
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  ///
+  /// **See also:**
+  /// - `download_set_state_changed_cb()`
+  /// - `download_state_changed_cb()`
   int download_unset_state_changed_cb(
     int download_id,
   ) {
@@ -888,34 +1079,44 @@ class Tizen100CapiWebUrlDownload {
   late final _download_unset_state_changed_cb =
       _download_unset_state_changed_cbPtr.asFunction<int Function(int)>();
 
-  /// @brief Sets a callback function to be called to track the progress of the download.
-  /// @details This function allows the application to monitor the progress of the download in real time,
-  /// typically used to update the UI with the current download percentage.
+  /// Sets a callback function to be called to track the progress of the download.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// This function allows the application to monitor the progress of the download in real time, typically used to update the UI with the current download percentage.
   ///
-  /// @remarks This function should be called before downloading (see download_start()).
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in] download_id  The download ID
-  /// @param[in] callback     The callback function to be invoked as the download progresses
-  /// @param[in] user_data    The user data to be passed to the callback function
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_INVALID_STATE     Invalid state
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
+  /// **Remarks:**
+  /// - This function should be called before downloading (see download_start()).
   ///
-  /// @post download_progress_cb() will be invoked.
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID
+  /// - `callback` (in): The callback function to be invoked as the download progresses
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @see download_unset_progress_cb()
-  /// @see download_progress_cb()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_INVALID_STATE`: Invalid state
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  ///
+  /// **Postconditions:**
+  /// - download_progress_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `download_unset_progress_cb()`
+  /// - `download_progress_cb()`
   int download_set_progress_cb(
     int download_id,
     download_progress_cb callback,
@@ -936,30 +1137,39 @@ class Tizen100CapiWebUrlDownload {
       _download_set_progress_cbPtr.asFunction<
           int Function(int, download_progress_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback function for the download progress.
-  /// @details This function removes the previously set progress callback,
-  /// so no further notifications about download progress will be received.
+  /// Unsets the callback function for the download progress.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// This function removes the previously set progress callback, so no further notifications about download progress will be received.
   ///
-  /// @remarks This function should be called before downloading (see download_start()).
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in] download_id The download ID
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_INVALID_STATE     Invalid state
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
+  /// **Remarks:**
+  /// - This function should be called before downloading (see download_start()).
   ///
-  /// @see download_set_progress_cb()
-  /// @see download_progress_cb()
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_INVALID_STATE`: Invalid state
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  ///
+  /// **See also:**
+  /// - `download_set_progress_cb()`
+  /// - `download_progress_cb()`
   int download_unset_progress_cb(
     int download_id,
   ) {
@@ -974,40 +1184,53 @@ class Tizen100CapiWebUrlDownload {
   late final _download_unset_progress_cb =
       _download_unset_progress_cbPtr.asFunction<int Function(int)>();
 
-  /// @brief Starts or resumes the download process asynchronously for the given download ID.
-  /// @details This function starts to download the specified URL, or resumes the download if paused.
+  /// Starts or resumes the download process asynchronously for the given download ID.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// This function starts to download the specified URL, or resumes the download if paused.
   ///
-  /// @remarks The URL is the mandatory information to start the download.
-  /// @remarks The application should call download_set_progress_cb() and download_set_state_changed_cb() again
-  /// after the application process is restarted or download_destroy() is called.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in] download_id The download ID
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #DOWNLOAD_ERROR_INVALID_STATE     Invalid state
-  /// @retval #DOWNLOAD_ERROR_IO_ERROR          Internal I/O error
-  /// @retval #DOWNLOAD_ERROR_INVALID_URL       Invalid URL
-  /// @retval #DOWNLOAD_ERROR_INVALID_DESTINATION Invalid destination
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
-  /// @retval #DOWNLOAD_ERROR_QUEUE_FULL        Download server queue is full
+  /// **Remarks:**
+  /// - The URL is the mandatory information to start the download.
+  /// - The application should call download_set_progress_cb() and download_set_state_changed_cb() again
+  /// - after the application process is restarted or download_destroy() is called.
   ///
-  /// @pre  The download state must be #DOWNLOAD_STATE_READY, #DOWNLOAD_STATE_PAUSED, #DOWNLOAD_STATE_CANCELED, or #DOWNLOAD_STATE_FAILED.
-  /// @post The download state will be #DOWNLOAD_STATE_QUEUED or #DOWNLOAD_STATE_DOWNLOADING.
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID
   ///
-  /// @see download_set_url()
-  /// @see download_pause()
-  /// @see download_cancel()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `DOWNLOAD_ERROR_INVALID_STATE`: Invalid state
+  /// - `DOWNLOAD_ERROR_IO_ERROR`: Internal I/O error
+  /// - `DOWNLOAD_ERROR_INVALID_URL`: Invalid URL
+  /// - `DOWNLOAD_ERROR_INVALID_DESTINATION`: Invalid destination
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  /// - `DOWNLOAD_ERROR_QUEUE_FULL`: Download server queue is full
+  ///
+  /// **Preconditions:**
+  /// - The download state must be `DOWNLOAD_STATE_READY`, `DOWNLOAD_STATE_PAUSED`, `DOWNLOAD_STATE_CANCELED`, or `DOWNLOAD_STATE_FAILED`.
+  ///
+  /// **Postconditions:**
+  /// - The download state will be `DOWNLOAD_STATE_QUEUED` or `DOWNLOAD_STATE_DOWNLOADING`.
+  ///
+  /// **See also:**
+  /// - `download_set_url()`
+  /// - `download_pause()`
+  /// - `download_cancel()`
   int download_start(
     int download_id,
   ) {
@@ -1021,33 +1244,45 @@ class Tizen100CapiWebUrlDownload {
   late final _download_start =
       _download_startPtr.asFunction<int Function(int)>();
 
-  /// @brief Pauses an ongoing download asynchronously.
+  /// Pauses an ongoing download asynchronously.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @remarks The download can later be resumed using download_start() or canceled using download_cancel().
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] download_id The download ID
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - The download can later be resumed using download_start() or canceled using download_cancel().
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #DOWNLOAD_ERROR_INVALID_STATE     Invalid state
-  /// @retval #DOWNLOAD_ERROR_IO_ERROR          Internal I/O error
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID
   ///
-  /// @pre  The download state must be #DOWNLOAD_STATE_DOWNLOADING.
-  /// @post The download state will be #DOWNLOAD_STATE_PAUSED.
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see download_start()
-  /// @see download_cancel()
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `DOWNLOAD_ERROR_INVALID_STATE`: Invalid state
+  /// - `DOWNLOAD_ERROR_IO_ERROR`: Internal I/O error
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  ///
+  /// **Preconditions:**
+  /// - The download state must be `DOWNLOAD_STATE_DOWNLOADING`.
+  ///
+  /// **Postconditions:**
+  /// - The download state will be `DOWNLOAD_STATE_PAUSED`.
+  ///
+  /// **See also:**
+  /// - `download_start()`
+  /// - `download_cancel()`
   int download_pause(
     int download_id,
   ) {
@@ -1061,33 +1296,46 @@ class Tizen100CapiWebUrlDownload {
   late final _download_pause =
       _download_pausePtr.asFunction<int Function(int)>();
 
-  /// @brief Cancels an active download, asynchronously.
-  /// @details This function cancels the running download and its state will be #DOWNLOAD_STATE_READY.
+  /// Cancels an active download, asynchronously.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// This function cancels the running download and its state will be `DOWNLOAD_STATE_READY`.
   ///
-  /// @remarks The canceled download can be restarted using download_start().
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in] download_id The download ID
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #DOWNLOAD_ERROR_INVALID_STATE     Invalid state
-  /// @retval #DOWNLOAD_ERROR_IO_ERROR          Internal I/O error
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
+  /// **Remarks:**
+  /// - The canceled download can be restarted using download_start().
   ///
-  /// @pre  The download state must be #DOWNLOAD_STATE_QUEUED, #DOWNLOAD_STATE_DOWNLOADING, or #DOWNLOAD_STATE_PAUSED.
-  /// @post The download state will be #DOWNLOAD_STATE_CANCELED.
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID
   ///
-  /// @see download_start()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `DOWNLOAD_ERROR_INVALID_STATE`: Invalid state
+  /// - `DOWNLOAD_ERROR_IO_ERROR`: Internal I/O error
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  ///
+  /// **Preconditions:**
+  /// - The download state must be `DOWNLOAD_STATE_QUEUED`, `DOWNLOAD_STATE_DOWNLOADING`, or `DOWNLOAD_STATE_PAUSED`.
+  ///
+  /// **Postconditions:**
+  /// - The download state will be `DOWNLOAD_STATE_CANCELED`.
+  ///
+  /// **See also:**
+  /// - `download_start()`
   int download_cancel(
     int download_id,
   ) {
@@ -1101,25 +1349,33 @@ class Tizen100CapiWebUrlDownload {
   late final _download_cancel =
       _download_cancelPtr.asFunction<int Function(int)>();
 
-  /// @brief Gets the current state of the download, such as whether it is in progress, paused, canceled, or completed.
+  /// Gets the current state of the download, such as whether it is in progress, paused, canceled, or completed.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in]  download_id  The download ID
-  /// @param[out] state        A pointer to store the retrieved state of the download
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID
+  /// - `state` (out): A pointer to store the retrieved state of the download
   ///
-  /// @see #download_state_e
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  ///
+  /// **See also:**
+  /// - `download_state_e`
   int download_get_state(
     int download_id,
     ffi.Pointer<ffi.Int32> state,
@@ -1137,32 +1393,43 @@ class Tizen100CapiWebUrlDownload {
   late final _download_get_state = _download_get_statePtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the temporary file path where the partially downloaded content is being stored.
-  /// @details This function provides access to the location where the file is saved during the download process before it is completed.
+  /// Gets the temporary file path where the partially downloaded content is being stored.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// This function provides access to the location where the file is saved during the download process before it is completed.
   ///
-  /// @remarks The caller must release @a temp_path using free().
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in]  download_id  The download ID
-  /// @param[out] temp_path    A pointer to store the retrieved temporary file path
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
+  /// **Remarks:**
+  /// - The caller must release `temp_path` using free().
   ///
-  /// @pre The download state must be one of the states after #DOWNLOAD_STATE_DOWNLOADING.
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID
+  /// - `temp_path` (out): A pointer to store the retrieved temporary file path
   ///
-  /// @see download_set_state_changed_cb()
-  /// @see download_unset_state_changed_cb()
-  /// @see download_start()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  ///
+  /// **Preconditions:**
+  /// - The download state must be one of the states after `DOWNLOAD_STATE_DOWNLOADING`.
+  ///
+  /// **See also:**
+  /// - `download_set_state_changed_cb()`
+  /// - `download_unset_state_changed_cb()`
+  /// - `download_start()`
   int download_get_temp_path(
     int download_id,
     ffi.Pointer<ffi.Pointer<ffi.Char>> temp_path,
@@ -1180,36 +1447,45 @@ class Tizen100CapiWebUrlDownload {
   late final _download_get_temp_path = _download_get_temp_pathPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the temporary file path used in the previous download request.
-  /// @details This is only useful when resuming download to make HTTP request header at the application side.
-  /// Otherwise, the path should be ignored internally.
+  /// Sets the temporary file path used in the previous download request.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// This is only useful when resuming download to make HTTP request header at the application side. Otherwise, the path should be ignored internally.
   ///
-  /// @remarks If the etag value is not present in the download database, it is useless to set the temporary path. \n
-  /// When resuming download, the data is attached at the end of this temporary file. \n
-  /// The mediastorage privilege %http://tizen.org/privilege/mediastorage is needed if @a path is relevant to media storage.\n
-  /// The externalstorage privilege %http://tizen.org/privilege/externalstorage is needed if @a path is relevant to external storage.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in]  download_id  The download ID
-  /// @param[out] path         The path where the temporary file will be stored
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - If the etag value is not present in the download database, it is useless to set the temporary path.
+  /// - When resuming download, the data is attached at the end of this temporary file.
+  /// - The mediastorage privilege http://tizen.org/privilege/mediastorage is needed if `path` is relevant to media storage.
+  /// - The externalstorage privilege http://tizen.org/privilege/externalstorage is needed if `path` is relevant to external storage.
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_INVALID_DESTINATION Invalid destination
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID
+  /// - `path` (out): The path where the temporary file will be stored
   ///
-  /// @pre The state must be #DOWNLOAD_STATE_READY, #DOWNLOAD_STATE_FAILED, or #DOWNLOAD_STATE_CANCELED.
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see download_get_etag()
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_INVALID_DESTINATION`: Invalid destination
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  ///
+  /// **Preconditions:**
+  /// - The state must be `DOWNLOAD_STATE_READY`, `DOWNLOAD_STATE_FAILED`, or `DOWNLOAD_STATE_CANCELED`.
+  ///
+  /// **See also:**
+  /// - `download_get_etag()`
   int download_set_temp_file_path(
     int download_id,
     ffi.Pointer<ffi.Char> path,
@@ -1226,32 +1502,43 @@ class Tizen100CapiWebUrlDownload {
   late final _download_set_temp_file_path = _download_set_temp_file_pathPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the content name of downloaded file.
-  /// @details This can be received when HTTP response header is received.
+  /// Gets the content name of downloaded file.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// This can be received when HTTP response header is received.
   ///
-  /// @remarks The caller must release @a content_name using free().
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in]  download_id   The download ID
-  /// @param[out] content_name  A pointer to store the retrieved content name
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
+  /// **Remarks:**
+  /// - The caller must release `content_name` using free().
   ///
-  /// @pre The download state must be one of the states after #DOWNLOAD_STATE_DOWNLOADING.
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID
+  /// - `content_name` (out): A pointer to store the retrieved content name
   ///
-  /// @see download_set_state_changed_cb()
-  /// @see download_unset_state_changed_cb()
-  /// @see download_start()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  ///
+  /// **Preconditions:**
+  /// - The download state must be one of the states after `DOWNLOAD_STATE_DOWNLOADING`.
+  ///
+  /// **See also:**
+  /// - `download_set_state_changed_cb()`
+  /// - `download_unset_state_changed_cb()`
+  /// - `download_start()`
   int download_get_content_name(
     int download_id,
     ffi.Pointer<ffi.Pointer<ffi.Char>> content_name,
@@ -1269,31 +1556,40 @@ class Tizen100CapiWebUrlDownload {
   late final _download_get_content_name = _download_get_content_namePtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the size of the content being downloaded.
-  /// @details This information is received from the server.
-  /// If the server does not send the total size of the content, @a content_size is set to zero.
+  /// Gets the size of the content being downloaded.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// This information is received from the server. If the server does not send the total size of the content, `content_size` is set to zero.
   ///
-  /// @param[in]  download_id  The download ID
-  /// @param[out] content_size A pointer to store the size of the content in bytes.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @pre The download state must be one of the states after #DOWNLOAD_STATE_DOWNLOADING.
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID
+  /// - `content_size` (out): A pointer to store the size of the content in bytes.
   ///
-  /// @see download_set_state_changed_cb()
-  /// @see download_unset_state_changed_cb()
-  /// @see download_start()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  ///
+  /// **Preconditions:**
+  /// - The download state must be one of the states after `DOWNLOAD_STATE_DOWNLOADING`.
+  ///
+  /// **See also:**
+  /// - `download_set_state_changed_cb()`
+  /// - `download_unset_state_changed_cb()`
+  /// - `download_start()`
   int download_get_content_size(
     int download_id,
     ffi.Pointer<ffi.UnsignedLongLong> content_size,
@@ -1311,31 +1607,40 @@ class Tizen100CapiWebUrlDownload {
   late final _download_get_content_size = _download_get_content_sizePtr
       .asFunction<int Function(int, ffi.Pointer<ffi.UnsignedLongLong>)>();
 
-  /// @brief Gets the last error that occurred during the download process.
+  /// Gets the last error that occurred during the download process.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in]  download_id The download ID
-  /// @param[out] error       A pointer to store the error code associated with the download
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID
+  /// - `error` (out): A pointer to store the error code associated with the download
   ///
-  /// @pre The download state must be #DOWNLOAD_STATE_FAILED.
-  /// @pre The download state must be #DOWNLOAD_STATE_CANCELED.
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see download_set_state_changed_cb()
-  /// @see download_unset_state_changed_cb()
-  /// @see download_start()
-  /// @see download_error_e
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  ///
+  /// **Preconditions:**
+  /// - The download state must be `DOWNLOAD_STATE_FAILED`.
+  /// - The download state must be `DOWNLOAD_STATE_CANCELED`.
+  ///
+  /// **See also:**
+  /// - `download_set_state_changed_cb()`
+  /// - `download_unset_state_changed_cb()`
+  /// - `download_start()`
+  /// - `download_error_e`
   int download_get_error(
     int download_id,
     ffi.Pointer<ffi.Int32> error,
@@ -1353,27 +1658,36 @@ class Tizen100CapiWebUrlDownload {
   late final _download_get_error = _download_get_errorPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the HTTP status code when the download error occurs.
+  /// Gets the HTTP status code when the download error occurs.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in]  download_id  The download ID
-  /// @param[out] HTTP_status  A pointer to store the retrieved HTTP status code defined in RFC 2616
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID
+  /// - `HTTP_status` (out): A pointer to store the retrieved HTTP status code defined in RFC 2616
   ///
-  /// @pre The download state must be #DOWNLOAD_STATE_FAILED.
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see download_start()
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  ///
+  /// **Preconditions:**
+  /// - The download state must be `DOWNLOAD_STATE_FAILED`.
+  ///
+  /// **See also:**
+  /// - `download_start()`
   int download_get_http_status(
     int download_id,
     ffi.Pointer<ffi.Int> HTTP_status,
@@ -1390,38 +1704,48 @@ class Tizen100CapiWebUrlDownload {
   late final _download_get_http_status = _download_get_http_statusPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets an app control handle to register notification messages.
-  /// @details Three types of notification message can be posted: completion, failed and ongoing type.
+  /// Sets an app control handle to register notification messages.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// Three types of notification message can be posted: completion, failed and ongoing type.
   ///
-  /// @remarks When the notification message is clicked, the action to take is decided by the app control handle. \n
-  /// If the app control handle is not set, the following default operation is executed when the notification message is clicked: \n
-  /// 1) download completed state - the viewer application is executed according to extension name of downloaded content, \n
-  /// 2) download failed state and ongoing state - the client application is executed. \n
-  /// This function should be called before starting the download. \n
-  /// The app control handle MUST BE FREED by the client when it is not used any more.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in] download_id The download ID
-  /// @param[in] type        The enumeration type \n
-  /// See #download_notification_app_control_type_e.
-  /// @param[in] handle      The app control handle pointer value
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
+  /// **Remarks:**
+  /// - When the notification message is clicked, the action to take is decided by the app control handle.
+  /// - If the app control handle is not set, the following default operation is executed when the notification message is clicked:
+  /// - 1) download completed state - the viewer application is executed according to extension name of downloaded content,
+  /// - 2) download failed state and ongoing state - the client application is executed.
+  /// - This function should be called before starting the download.
+  /// - The app control handle MUST BE FREED by the client when it is not used any more.
   ///
-  /// @pre The state must be #DOWNLOAD_STATE_READY, #DOWNLOAD_STATE_FAILED, or #DOWNLOAD_STATE_CANCELED.
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID
+  /// - `type` (in): The enumeration type See `download_notification_app_control_type_e`.
+  /// - `handle` (in): The app control handle pointer value
   ///
-  /// @see download_set_notification_type()
-  /// @see download_get_notification_app_control()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  ///
+  /// **Preconditions:**
+  /// - The state must be `DOWNLOAD_STATE_READY`, `DOWNLOAD_STATE_FAILED`, or `DOWNLOAD_STATE_CANCELED`.
+  ///
+  /// **See also:**
+  /// - `download_set_notification_type()`
+  /// - `download_get_notification_app_control()`
   int download_set_notification_app_control(
     int download_id,
     int type,
@@ -1442,31 +1766,42 @@ class Tizen100CapiWebUrlDownload {
       _download_set_notification_app_controlPtr
           .asFunction<int Function(int, int, app_control.app_control_h)>();
 
-  /// @brief Gets the app control handle which is set by download_set_notification_app_control().
-  /// @details When the notification message is clicked, the action is decided by the app control handle.
+  /// Gets the app control handle which is set by download_set_notification_app_control().
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// When the notification message is clicked, the action is decided by the app control handle.
   ///
-  /// @remarks The caller must release @a handle using free().
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in]  download_id The download ID
-  /// @param[in]  type        The enumeration type \n
-  /// See #download_notification_app_control_type_e.
-  /// @param[out] handle      A pointer to store the retrieved app control handle
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
-  /// @retval #DOWNLOAD_ERROR_NO_DATA           The app control handle has not been set
+  /// **Remarks:**
+  /// - The caller must release `handle` using free().
   ///
-  /// @code
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID
+  /// - `type` (in): The enumeration type See `download_notification_app_control_type_e`.
+  /// - `handle` (out): A pointer to store the retrieved app control handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  /// - `DOWNLOAD_ERROR_NO_DATA`: The app control handle has not been set
+  ///
+  /// **See also:**
+  /// - `download_set_notification_app_control()`
+  ///
+  /// ```
   /// #include <download.h>
   /// #include <app_control.h>
   /// ...
@@ -1475,9 +1810,7 @@ class Tizen100CapiWebUrlDownload {
   ///
   /// ret = app_control_destroy(handle);
   ///
-  /// @endcode
-  ///
-  /// @see download_set_notification_app_control()
+  /// ```
   int download_get_notification_app_control(
     int download_id,
     int type,
@@ -1499,29 +1832,39 @@ class Tizen100CapiWebUrlDownload {
       _download_get_notification_app_controlPtr.asFunction<
           int Function(int, int, ffi.Pointer<app_control.app_control_h>)>();
 
-  /// @brief Sets the text to be displayed in the download notification.
-  /// @details When registering a notification, the title is displayed in the title area of the notification message.
+  /// Sets the text to be displayed in the download notification.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// When registering a notification, the title is displayed in the title area of the notification message.
   ///
-  /// @param[in] download_id The download ID
-  /// @param[in] title       The title text to display in the notification
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @pre If a notification option is not enabled, this title is not shown to user.
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID
+  /// - `title` (in): The title text to display in the notification
   ///
-  /// @see download_set_notification_type()
-  /// @see download_get_notification_title()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  ///
+  /// **Preconditions:**
+  /// - If a notification option is not enabled, this title is not shown to user.
+  ///
+  /// **See also:**
+  /// - `download_set_notification_type()`
+  /// - `download_get_notification_title()`
   int download_set_notification_title(
     int download_id,
     ffi.Pointer<ffi.Char> title,
@@ -1539,31 +1882,42 @@ class Tizen100CapiWebUrlDownload {
       _download_set_notification_titlePtr
           .asFunction<int Function(int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the title text that is set to be displayed in the download notification.
-  /// @details When registering a notification, the title is displayed in the title area of the notification message.
+  /// Gets the title text that is set to be displayed in the download notification.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// When registering a notification, the title is displayed in the title area of the notification message.
   ///
-  /// @remarks The caller must release @a title using free().
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in]  download_id  The download ID
-  /// @param[out] title        A pointer to store the retrieved title text
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
-  /// @retval #DOWNLOAD_ERROR_NO_DATA           The title has not been set
+  /// **Remarks:**
+  /// - The caller must release `title` using free().
   ///
-  /// @pre It can get the title value before calling this function.
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID
+  /// - `title` (out): A pointer to store the retrieved title text
   ///
-  /// @see download_set_notification_title()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  /// - `DOWNLOAD_ERROR_NO_DATA`: The title has not been set
+  ///
+  /// **Preconditions:**
+  /// - It can get the title value before calling this function.
+  ///
+  /// **See also:**
+  /// - `download_set_notification_title()`
   int download_get_notification_title(
     int download_id,
     ffi.Pointer<ffi.Pointer<ffi.Char>> title,
@@ -1582,29 +1936,39 @@ class Tizen100CapiWebUrlDownload {
       _download_get_notification_titlePtr
           .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the description text to be displayed in the download notification.
-  /// @details When registering a notification, the description is displayed in the description area of the notification message.
+  /// Sets the description text to be displayed in the download notification.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// When registering a notification, the description is displayed in the description area of the notification message.
   ///
-  /// @param[in] download_id  The download ID
-  /// @param[in] description  The description text to display in the notification
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @pre If the notification option is not enabled, this description is not shown to user.
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID
+  /// - `description` (in): The description text to display in the notification
   ///
-  /// @see download_set_notification_type()
-  /// @see download_get_notification_description()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  ///
+  /// **Preconditions:**
+  /// - If the notification option is not enabled, this description is not shown to user.
+  ///
+  /// **See also:**
+  /// - `download_set_notification_type()`
+  /// - `download_get_notification_description()`
   int download_set_notification_description(
     int download_id,
     ffi.Pointer<ffi.Char> description,
@@ -1622,31 +1986,42 @@ class Tizen100CapiWebUrlDownload {
       _download_set_notification_descriptionPtr
           .asFunction<int Function(int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the description text that is set to be displayed in the download notification.
-  /// @details When registering a notification, the description is displayed in the description area of the notification message.
+  /// Gets the description text that is set to be displayed in the download notification.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// When registering a notification, the description is displayed in the description area of the notification message.
   ///
-  /// @remarks The caller must release @a description using free().
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in]  download_id  The download ID
-  /// @param[out] description  The description for displaying to user
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
-  /// @retval #DOWNLOAD_ERROR_NO_DATA           The description has not been set
+  /// **Remarks:**
+  /// - The caller must release `description` using free().
   ///
-  /// @pre It can get the title value before calling this function.
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID
+  /// - `description` (out): The description for displaying to user
   ///
-  /// @see download_set_notification_description()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  /// - `DOWNLOAD_ERROR_NO_DATA`: The description has not been set
+  ///
+  /// **Preconditions:**
+  /// - It can get the title value before calling this function.
+  ///
+  /// **See also:**
+  /// - `download_set_notification_description()`
   int download_get_notification_description(
     int download_id,
     ffi.Pointer<ffi.Pointer<ffi.Char>> description,
@@ -1665,37 +2040,47 @@ class Tizen100CapiWebUrlDownload {
       _download_get_notification_descriptionPtr
           .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the type of notification to be displayed during the download process.
-  /// @details Three types of notification message can be posted: completion, failed and ongoing type.
+  /// Sets the type of notification to be displayed during the download process.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// Three types of notification message can be posted: completion, failed and ongoing type.
   ///
-  /// @remarks When the notification message is clicked, the action to take is decided by the app control handle (set by download_set_notification_app_control()). \n
-  /// If the app control is not set, the following default operation is executed when the notification message is clicked: \n
-  /// 1) download completed state - the viewer application is executed according to extension name of downloaded content, \n
-  /// 2) download failed state and ongoing state - the client application is executed. \n
-  /// The default type is #DOWNLOAD_NOTIFICATION_TYPE_NONE. \n
-  /// This function should be called before starting the download.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in] download_id  The download ID
-  /// @param[in] type         The enumeration type \n
-  /// See #download_notification_type_e.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
+  /// **Remarks:**
+  /// - When the notification message is clicked, the action to take is decided by the app control handle (set by download_set_notification_app_control()).
+  /// - If the app control is not set, the following default operation is executed when the notification message is clicked:
+  /// - 1) download completed state - the viewer application is executed according to extension name of downloaded content,
+  /// - 2) download failed state and ongoing state - the client application is executed.
+  /// - The default type is `DOWNLOAD_NOTIFICATION_TYPE_NONE`.
+  /// - This function should be called before starting the download.
   ///
-  /// @pre The state must be #DOWNLOAD_STATE_READY, #DOWNLOAD_STATE_FAILED, or #DOWNLOAD_STATE_CANCELED.
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID
+  /// - `type` (in): The enumeration type See `download_notification_type_e`.
   ///
-  /// @see download_set_notification_app_control()
-  /// @see download_get_notification_type()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  ///
+  /// **Preconditions:**
+  /// - The state must be `DOWNLOAD_STATE_READY`, `DOWNLOAD_STATE_FAILED`, or `DOWNLOAD_STATE_CANCELED`.
+  ///
+  /// **See also:**
+  /// - `download_set_notification_app_control()`
+  /// - `download_get_notification_type()`
   int download_set_notification_type(
     int download_id,
     int type,
@@ -1712,30 +2097,39 @@ class Tizen100CapiWebUrlDownload {
   late final _download_set_notification_type =
       _download_set_notification_typePtr.asFunction<int Function(int, int)>();
 
-  /// @brief Gets the type of notification currently set for the download.
-  /// @details This function allows the application to check what type of notification is configured for the download process.
+  /// Gets the type of notification currently set for the download.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// This function allows the application to check what type of notification is configured for the download process.
   ///
-  /// @remarks When the notification message is clicked, the action is decided by the app control from download_set_notification_app_control(). \n
-  /// The default type is #DOWNLOAD_NOTIFICATION_TYPE_NONE.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in]  download_id  The download ID
-  /// @param[out] type         A pointer to store the retrieved notification type \n
-  /// See #download_notification_type_e.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
+  /// **Remarks:**
+  /// - When the notification message is clicked, the action is decided by the app control from download_set_notification_app_control().
+  /// - The default type is `DOWNLOAD_NOTIFICATION_TYPE_NONE`.
   ///
-  /// @see download_set_notification_type()
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID
+  /// - `type` (out): A pointer to store the retrieved notification type See `download_notification_type_e`.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  ///
+  /// **See also:**
+  /// - `download_set_notification_type()`
   int download_get_notification_type(
     int download_id,
     ffi.Pointer<ffi.Int32> type,
@@ -1754,31 +2148,40 @@ class Tizen100CapiWebUrlDownload {
       _download_get_notification_typePtr
           .asFunction<int Function(int, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the ETag (Entity Tag) from the server response for the download request when making a HTTP request for resume.
-  /// @details The ETag is a unique identifier assigned by the server to the content, which can be used to check for updates or changes to the file.
+  /// Gets the ETag (Entity Tag) from the server response for the download request when making a HTTP request for resume.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// The ETag is a unique identifier assigned by the server to the content, which can be used to check for updates or changes to the file.
   ///
-  /// @remarks The ETag is available or not depending on the web server. \n
-  /// After download is started, it can get the ETag.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @remarks The caller must release @a etag using free().
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in]  download_id  The download ID
-  /// @param[out] etag         A pointer to store the retrieved ETag
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - The ETag is available or not depending on the web server.
+  /// - After download is started, it can get the ETag.
+  /// - The caller must release `etag` using free().
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
+  /// **Parameters:**
+  /// - `download_id` (in): The download ID
+  /// - `etag` (out): A pointer to store the retrieved ETag
   ///
-  /// @see download_set_temp_file_path()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  ///
+  /// **See also:**
+  /// - `download_set_temp_file_path()`
   int download_get_etag(
     int download_id,
     ffi.Pointer<ffi.Pointer<ffi.Char>> etag,
@@ -1796,29 +2199,36 @@ class Tizen100CapiWebUrlDownload {
   late final _download_get_etag = _download_get_etagPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Enables or disables the use of cache for the download.
-  /// @details This function allows the developer to control whether the downloaded content should be cached locally,
-  /// reducing the need for re-downloading the same content in the future.
+  /// Enables or disables the use of cache for the download.
   ///
-  /// @since_tizen 8.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// This function allows the developer to control whether the downloaded content should be cached locally, reducing the need for re-downloading the same content in the future.
   ///
-  /// @param[in] download_id  The download id
-  /// @param[in] enable       A boolean value indicating whether to use the cache \n
-  /// @c true to enable caching,
-  /// @c false to disable it
+  /// **Since Tizen:**
+  /// - 8.0
   ///
-  /// @return 0 on success, otherwise a negative error value
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
-  /// @retval #DOWNLOAD_ERROR_IO_ERROR          Internal I/O error
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @see download_get_cache()
+  /// **Parameters:**
+  /// - `download_id` (in): The download id
+  /// - `enable` (in): A boolean value indicating whether to use the cache `true` to enable caching, `false` to disable it
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  /// - `DOWNLOAD_ERROR_IO_ERROR`: Internal I/O error
+  ///
+  /// **See also:**
+  /// - `download_get_cache()`
   int download_set_cache(
     int download_id,
     bool enable,
@@ -1835,28 +2245,37 @@ class Tizen100CapiWebUrlDownload {
   late final _download_set_cache =
       _download_set_cachePtr.asFunction<int Function(int, bool)>();
 
-  /// @brief Gets whether caching is enabled for the download.
-  /// @details This function allows the application to check if the download is set to use the cache.
+  /// Gets whether caching is enabled for the download.
   ///
-  /// @since_tizen 8.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// This function allows the application to check if the download is set to use the cache.
   ///
-  /// @param[in]  download_id  The download id
-  /// @param[out] enable       A pointer to a boolean variable that will store the cache setting
-  /// *                       @c true to enable caching,
-  /// @c false to disable it
+  /// **Since Tizen:**
+  /// - 8.0
   ///
-  /// @return 0 on success, otherwise a negative error value
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE              Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DOWNLOAD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DOWNLOAD_ERROR_ID_NOT_FOUND      No download ID
-  /// @retval #DOWNLOAD_ERROR_IO_ERROR          Internal I/O error
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
   ///
-  /// @see download_set_cache()
+  /// **Parameters:**
+  /// - `download_id` (in): The download id
+  /// - `enable` (out): A pointer to a boolean variable that will store the cache setting
+  ///   * `true` to enable caching, `false` to disable it
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DOWNLOAD_ERROR_ID_NOT_FOUND`: No download ID
+  /// - `DOWNLOAD_ERROR_IO_ERROR`: Internal I/O error
+  ///
+  /// **See also:**
+  /// - `download_set_cache()`
   int download_get_cache(
     int download_id,
     ffi.Pointer<ffi.Bool> enable,
@@ -1873,19 +2292,26 @@ class Tizen100CapiWebUrlDownload {
   late final _download_get_cache = _download_get_cachePtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Clears previously cached data.
+  /// Clears previously cached data.
   ///
-  /// @since_tizen 8.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/download
+  /// **Since Tizen:**
+  /// - 8.0
   ///
-  /// @return 0 on success, otherwise a negative error value
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @retval #DOWNLOAD_ERROR_NONE               Successful
-  /// @retval #DOWNLOAD_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #DOWNLOAD_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #DOWNLOAD_ERROR_TOO_MANY_DOWNLOADS Too many simultaneous downloads
-  /// @retval #DOWNLOAD_ERROR_IO_ERROR           Internal I/O error
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/download>
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DOWNLOAD_ERROR_NONE`: Successful
+  /// - `DOWNLOAD_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DOWNLOAD_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DOWNLOAD_ERROR_TOO_MANY_DOWNLOADS`: Too many simultaneous downloads
+  /// - `DOWNLOAD_ERROR_IO_ERROR`: Internal I/O error
   int download_reset_cache() {
     return _download_reset_cache();
   }
@@ -1896,8 +2322,11 @@ class Tizen100CapiWebUrlDownload {
       _download_reset_cachePtr.asFunction<int Function()>();
 }
 
-/// @brief Enumeration for error codes of URL download.
-/// @since_tizen 2.3
+/// Enumeration for error codes of URL download.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class download_error_e {
   /// < Successful
   static const int DOWNLOAD_ERROR_NONE = 0;
@@ -1981,8 +2410,11 @@ abstract class download_error_e {
   static const int DOWNLOAD_ERROR_IO_ERROR = -5;
 }
 
-/// @brief Enumeration for download states.
-/// @since_tizen 2.3
+/// Enumeration for download states.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class download_state_e {
   /// < Unhandled exception
   static const int DOWNLOAD_STATE_NONE = 0;
@@ -2009,8 +2441,11 @@ abstract class download_state_e {
   static const int DOWNLOAD_STATE_CANCELED = 7;
 }
 
-/// @brief Enumeration for network type for downloading.
-/// @since_tizen 2.3
+/// Enumeration for network type for downloading.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class download_network_type_e {
   /// < Download is available through data network
   static const int DOWNLOAD_NETWORK_DATA_NETWORK = 0;
@@ -2025,11 +2460,15 @@ abstract class download_network_type_e {
   static const int DOWNLOAD_NETWORK_ALL = 3;
 }
 
-/// @brief Enumeration for notification types when a client wants to register.
-/// @since_tizen 2.3
+/// Enumeration for notification types when a client wants to register.
 ///
-/// @see download_set_notification_type()
-/// @see download_get_notification_type()
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **See also:**
+/// - `download_set_notification_type()`
+/// - `download_get_notification_type()`
+/// @nodoc
 abstract class download_notification_type_e {
   /// < Do not register notification
   static const int DOWNLOAD_NOTIFICATION_TYPE_NONE = 0;
@@ -2041,11 +2480,15 @@ abstract class download_notification_type_e {
   static const int DOWNLOAD_NOTIFICATION_TYPE_ALL = 2;
 }
 
-/// @brief Enumeration for the type of notification app control action which the client wants to set when registering notification.
-/// @since_tizen 2.3
+/// Enumeration for the type of notification app control action which the client wants to set when registering notification.
 ///
-/// @see download_set_notification_app_control()
-/// @see download_get_notification_app_control()
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **See also:**
+/// - `download_set_notification_app_control()`
+/// - `download_get_notification_app_control()`
+/// @nodoc
 abstract class download_notification_app_control_type_e {
   /// < App control action for failed and ongoing notification
   static const int DOWNLOAD_NOTIFICATION_APP_CONTROL_TYPE_ONGOING = 0;
@@ -2057,43 +2500,58 @@ abstract class download_notification_app_control_type_e {
   static const int DOWNLOAD_NOTIFICATION_APP_CONTROL_TYPE_FAILED = 2;
 }
 
-/// @brief Called when a download state is changed.
+/// Called when a download state is changed.
 ///
-/// @since_tizen 2.3
+/// **Since Tizen:**
+/// - 2.3
 ///
-/// @param[in] download_id  The download ID
-/// @param[in] state        The state of download
-/// @param[in] user_data    The user data passed from download_set_state_changed_cb()
+/// **Parameters:**
+/// - `download_id` (in): The download ID
+/// - `state` (in): The state of download
+/// - `user_data` (in): The user data passed from download_set_state_changed_cb()
 ///
-/// @pre download_start() will invoke this callback if you register this callback using download_set_state_changed_cb().
+/// **Preconditions:**
+/// - download_start() will invoke this callback if you register this callback using download_set_state_changed_cb().
 ///
-/// @see download_set_state_changed_cb()
-/// @see download_unset_state_changed_cb()
+/// **See also:**
+/// - `download_set_state_changed_cb()`
+/// - `download_unset_state_changed_cb()`
+/// @nodoc
 typedef download_state_changed_cb
     = ffi.Pointer<ffi.NativeFunction<download_state_changed_cbFunction>>;
+/// @nodoc
 typedef download_state_changed_cbFunction = ffi.Void Function(
     ffi.Int download_id, ffi.Int32 state, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartdownload_state_changed_cbFunction = void Function(
     int download_id, int state, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the progress of download changes.
+/// Called when the progress of download changes.
 ///
-/// @since_tizen 2.3
+/// **Since Tizen:**
+/// - 2.3
 ///
-/// @remarks This callback function is only invoked in the downloading state.
+/// **Remarks:**
+/// - This callback function is only invoked in the downloading state.
 ///
-/// @param[in] download_id  The download ID
-/// @param[in] received     The size of the data received in bytes
-/// @param[in] user_data    The user data passed from download_set_progress_cb()
+/// **Parameters:**
+/// - `download_id` (in): The download ID
+/// - `received` (in): The size of the data received in bytes
+/// - `user_data` (in): The user data passed from download_set_progress_cb()
 ///
-/// @pre This callback function is invoked if you register this callback using download_set_progress_cb().
+/// **Preconditions:**
+/// - This callback function is invoked if you register this callback using download_set_progress_cb().
 ///
-/// @see download_cancel()
-/// @see download_set_progress_cb()
-/// @see download_unset_progress_cb()
+/// **See also:**
+/// - `download_cancel()`
+/// - `download_set_progress_cb()`
+/// - `download_unset_progress_cb()`
+/// @nodoc
 typedef download_progress_cb
     = ffi.Pointer<ffi.NativeFunction<download_progress_cbFunction>>;
+/// @nodoc
 typedef download_progress_cbFunction = ffi.Void Function(ffi.Int download_id,
     ffi.UnsignedLongLong received, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartdownload_progress_cbFunction = void Function(
     int download_id, int received, ffi.Pointer<ffi.Void> user_data);

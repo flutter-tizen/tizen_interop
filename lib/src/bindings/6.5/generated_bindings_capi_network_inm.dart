@@ -1,3 +1,6 @@
+/// {@category 6.5/tizen}
+library tizen_interop_6_5.capi_network_inm;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-network-inm APIs.
+/// {@category 6.5/tizen}
 class Tizen65CapiNetworkInm {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,20 +28,34 @@ class Tizen65CapiNetworkInm {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Initializes INM.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @remarks You must release @a inm using inm_deinitialize().
-  /// @param[out] inm  The INM handle
-  /// @return @c 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE                 Successful
-  /// @retval #INM_ERROR_OUT_OF_MEMORY        Out of memory
-  /// @retval #INM_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #INM_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED        Not supported
-  /// @retval #INM_ERROR_ALREADY_INITIALIZED  Already initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED     Operation failed
+  /// Initializes INM.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - You must release `inm` using inm_deinitialize().
+  ///
+  /// **Parameters:**
+  /// - `inm` (out): The INM handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `INM_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_ALREADY_INITIALIZED`: Already initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_initialize(
     ffi.Pointer<inm_h> inm,
   ) {
@@ -52,15 +70,23 @@ class Tizen65CapiNetworkInm {
   late final _inm_initialize =
       _inm_initializePtr.asFunction<int Function(ffi.Pointer<inm_h>)>();
 
-  /// @brief Deinitializes INM.
-  /// @since_tizen 5.0
-  /// @param[out] inm  The INM handle
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Deinitializes INM.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `inm` (out): The INM handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_deinitialize(
     inm_h inm,
   ) {
@@ -74,19 +100,29 @@ class Tizen65CapiNetworkInm {
   late final _inm_deinitialize =
       _inm_deinitializePtr.asFunction<int Function(inm_h)>();
 
-  /// @brief Sets a callback called when the Ethernet cable state is changed.
-  /// @since_tizen 5.0
-  /// @param[in] inm        The monitor handle
-  /// @param[in] callback   The callback function to be called
-  /// @param[in] user_data  The user data passed to the callback function
-  /// @return @c 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @see inm_ethernet_cable_state_changed_cb()
-  /// @see inm_unset_ethernet_cable_state_changed_cb()
+  /// Sets a callback called when the Ethernet cable state is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The monitor handle
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `inm_ethernet_cable_state_changed_cb()`
+  /// - `inm_unset_ethernet_cable_state_changed_cb()`
   int inm_set_ethernet_cable_state_changed_cb(
     inm_h inm,
     inm_ethernet_cable_state_changed_cb callback,
@@ -109,17 +145,27 @@ class Tizen65CapiNetworkInm {
           int Function(inm_h, inm_ethernet_cable_state_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback called when the Ethernet cable state is changed.
-  /// @since_tizen 5.0
-  /// @param[in] inm  The monitor handle
-  /// @return @c 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @see inm_ethernet_cable_state_changed_cb()
-  /// @see inm_set_ethernet_cable_state_changed_cb()
+  /// Unsets the callback called when the Ethernet cable state is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The monitor handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `inm_ethernet_cable_state_changed_cb()`
+  /// - `inm_set_ethernet_cable_state_changed_cb()`
   int inm_unset_ethernet_cable_state_changed_cb(
     inm_h inm,
   ) {
@@ -135,19 +181,31 @@ class Tizen65CapiNetworkInm {
       _inm_unset_ethernet_cable_state_changed_cbPtr
           .asFunction<int Function(inm_h)>();
 
-  /// @brief Gets the Ethernet cable state.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] inm     The monitor handle
-  /// @param[out] state  The Ethernet cable state
-  /// @return @c 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_PERMISSION_DENIED  Permission Denied
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets the Ethernet cable state.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The monitor handle
+  /// - `state` (out): The Ethernet cable state
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_get_ethernet_cable_state(
     inm_h inm,
     ffi.Pointer<ffi.Int32> state,
@@ -164,19 +222,29 @@ class Tizen65CapiNetworkInm {
   late final _inm_get_ethernet_cable_state = _inm_get_ethernet_cable_statePtr
       .asFunction<int Function(inm_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets a callback called when the Wi-Fi Module state is changed.
-  /// @since_tizen 5.0
-  /// @param[in] inm        The monitor handle
-  /// @param[in] callback   The callback function to be called
-  /// @param[in] user_data  The user data passed to the callback function
-  /// @return @c 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @see inm_wifi_module_state_changed_cb()
-  /// @see inm_unset_wifi_module_state_changed_cb()
+  /// Sets a callback called when the Wi-Fi Module state is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The monitor handle
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `inm_wifi_module_state_changed_cb()`
+  /// - `inm_unset_wifi_module_state_changed_cb()`
   int inm_set_wifi_module_state_changed_cb(
     inm_h inm,
     inm_wifi_module_state_changed_cb callback,
@@ -198,17 +266,27 @@ class Tizen65CapiNetworkInm {
           int Function(inm_h, inm_wifi_module_state_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback called when the Wi-Fi Module state is changed.
-  /// @since_tizen 5.0
-  /// @param[in] inm  The monitor handle
-  /// @return @c 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @see inm_wifi_module_state_changed_cb()
-  /// @see inm_set_wifi_module_state_changed_cb()
+  /// Unsets the callback called when the Wi-Fi Module state is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The monitor handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `inm_wifi_module_state_changed_cb()`
+  /// - `inm_set_wifi_module_state_changed_cb()`
   int inm_unset_wifi_module_state_changed_cb(
     inm_h inm,
   ) {
@@ -224,16 +302,24 @@ class Tizen65CapiNetworkInm {
       _inm_unset_wifi_module_state_changed_cbPtr
           .asFunction<int Function(inm_h)>();
 
-  /// @brief Gets the Wi-Fi Module state.
-  /// @since_tizen 5.0
-  /// @param[in] inm     The monitor handle
-  /// @param[out] state  The Wi-Fi Module state
-  /// @return @c 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets the Wi-Fi Module state.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The monitor handle
+  /// - `state` (out): The Wi-Fi Module state
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_get_wifi_module_state(
     inm_h inm,
     ffi.Pointer<ffi.Int32> state,
@@ -250,17 +336,25 @@ class Tizen65CapiNetworkInm {
   late final _inm_get_wifi_module_state = _inm_get_wifi_module_statePtr
       .asFunction<int Function(inm_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets the callback called when IP conflict state is changed.
-  /// @since_tizen 5.0
-  /// @param[in] inm        The monitoring handle
-  /// @param[in] callback   The callback function to be called
-  /// @param[in] user_data  The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Sets the callback called when IP conflict state is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The monitoring handle
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_set_ip_conflict_cb(
     inm_h inm,
     inm_ip_conflict_cb callback,
@@ -280,15 +374,23 @@ class Tizen65CapiNetworkInm {
   late final _inm_set_ip_conflict_cb = _inm_set_ip_conflict_cbPtr.asFunction<
       int Function(inm_h, inm_ip_conflict_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback called when IP conflict state is changed.
-  /// @since_tizen 5.0
-  /// @param[in] inm  The monitoring handle
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Unsets the callback called when IP conflict state is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The monitoring handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_unset_ip_conflict_cb(
     inm_h inm,
   ) {
@@ -303,20 +405,31 @@ class Tizen65CapiNetworkInm {
   late final _inm_unset_ip_conflict_cb =
       _inm_unset_ip_conflict_cbPtr.asFunction<int Function(inm_h)>();
 
-  /// @brief Checks whether IP conflict detection is enabled.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] inm     The monitoring handle
-  /// @param[out] state  @c true if IP conflict detection is enabled,
-  /// otherwise @c false if IP conflict detection is disabled.
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_PERMISSION_DENIED  Permission Denied
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Checks whether IP conflict detection is enabled.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The monitoring handle
+  /// - `state` (out): `true` if IP conflict detection is enabled, otherwise `false` if IP conflict detection is disabled.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_ip_conflict_detect_is_enabled(
     inm_h inm,
     ffi.Pointer<ffi.Bool> state,
@@ -334,19 +447,31 @@ class Tizen65CapiNetworkInm {
       _inm_ip_conflict_detect_is_enabledPtr
           .asFunction<int Function(inm_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets the state of the IP conflict.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] inm     The monitoring handle
-  /// @param[out] state  The current state of IP conflict
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_PERMISSION_DENIED  Permission Denied
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets the state of the IP conflict.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The monitoring handle
+  /// - `state` (out): The current state of IP conflict
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_get_ip_conflict_state(
     inm_h inm,
     ffi.Pointer<ffi.Int32> state,
@@ -363,23 +488,33 @@ class Tizen65CapiNetworkInm {
   late final _inm_get_ip_conflict_state = _inm_get_ip_conflict_statePtr
       .asFunction<int Function(inm_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the statistics information.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] inm              The monitor handle
-  /// @param[in] connection_type  The type of connection \n
-  /// Only #INM_CONNECTION_TYPE_WIFI and #INM_CONNECTION_TYPE_CELLULAR are supported
-  /// @param[in] statistics_type  The type of statistics
-  /// @param[out] size            The received data size of the last cellular packet data connection (bytes)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_PERMISSION_DENIED  Permission Denied
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets the statistics information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The monitor handle
+  /// - `connection_type` (in): The type of connection Only `INM_CONNECTION_TYPE_WIFI` and `INM_CONNECTION_TYPE_CELLULAR` are supported
+  /// - `statistics_type` (in): The type of statistics
+  /// - `size` (out): The received data size of the last cellular packet data connection (bytes)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_get_statistics(
     inm_h inm,
     int connection_type,
@@ -401,22 +536,32 @@ class Tizen65CapiNetworkInm {
   late final _inm_get_statistics = _inm_get_statisticsPtr.asFunction<
       int Function(inm_h, int, int, ffi.Pointer<ffi.UnsignedLongLong>)>();
 
-  /// @brief Resets the statistics information.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.set
-  /// @param[in] inm              The monitor handle
-  /// @param[in] connection_type  The type of connection \n
-  /// Only #INM_CONNECTION_TYPE_WIFI and #INM_CONNECTION_TYPE_CELLULAR are supported
-  /// @param[in] statistics_type  The type of statistics
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_PERMISSION_DENIED  Permission Denied
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Resets the statistics information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.set>
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The monitor handle
+  /// - `connection_type` (in): The type of connection Only `INM_CONNECTION_TYPE_WIFI` and `INM_CONNECTION_TYPE_CELLULAR` are supported
+  /// - `statistics_type` (in): The type of statistics
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_reset_statistics(
     inm_h inm,
     int connection_type,
@@ -435,17 +580,25 @@ class Tizen65CapiNetworkInm {
   late final _inm_reset_statistics =
       _inm_reset_statisticsPtr.asFunction<int Function(inm_h, int, int)>();
 
-  /// @brief Sets the callback called when the TCP congestion level is updated.
-  /// @since_tizen 5.0
-  /// @param[in] inm        The monitoring handle
-  /// @param[in] callback   The callback function to be called
-  /// @param[in] user_data  The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Sets the callback called when the TCP congestion level is updated.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The monitoring handle
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_set_congestion_level_cb(
     inm_h inm,
     inm_congestion_level_cb callback,
@@ -467,15 +620,23 @@ class Tizen65CapiNetworkInm {
           int Function(
               inm_h, inm_congestion_level_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback called when the TCP congestion level is updated.
-  /// @since_tizen 5.0
-  /// @param[in] inm  The monitoring handle
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Unsets the callback called when the TCP congestion level is updated.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The monitoring handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_unset_congestion_level_cb(
     inm_h inm,
   ) {
@@ -490,19 +651,31 @@ class Tizen65CapiNetworkInm {
   late final _inm_unset_congestion_level_cb =
       _inm_unset_congestion_level_cbPtr.asFunction<int Function(inm_h)>();
 
-  /// @brief Gets the TCP congestion level.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] inm     The monitoring handle
-  /// @param[out] level  The current TCP congestion level
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_PERMISSION_DENIED  Permission Denied
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets the TCP congestion level.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The monitoring handle
+  /// - `level` (out): The current TCP congestion level
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_get_congestion_level(
     inm_h inm,
     ffi.Pointer<ffi.Int32> level,
@@ -519,17 +692,25 @@ class Tizen65CapiNetworkInm {
   late final _inm_get_congestion_level = _inm_get_congestion_levelPtr
       .asFunction<int Function(inm_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets the callback called the TCP TX retry rate is updated.
-  /// @since_tizen 5.0
-  /// @param[in] inm        The monitoring handle
-  /// @param[in] callback   The callback function to be called
-  /// @param[in] user_data  The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Sets the callback called the TCP TX retry rate is updated.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The monitoring handle
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_set_retry_tx_rate_cb(
     inm_h inm,
     inm_retry_tx_rate_cb callback,
@@ -550,15 +731,23 @@ class Tizen65CapiNetworkInm {
       _inm_set_retry_tx_rate_cbPtr.asFunction<
           int Function(inm_h, inm_retry_tx_rate_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback called when the TCP TX retry rate is updated.
-  /// @since_tizen 5.0
-  /// @param[in] inm  The monitoring handle
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Unsets the callback called when the TCP TX retry rate is updated.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The monitoring handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_unset_retry_tx_rate_cb(
     inm_h inm,
   ) {
@@ -573,19 +762,31 @@ class Tizen65CapiNetworkInm {
   late final _inm_unset_retry_tx_rate_cb =
       _inm_unset_retry_tx_rate_cbPtr.asFunction<int Function(inm_h)>();
 
-  /// @brief Gets the TCP TX retry rate.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] inm     The monitoring handle
-  /// @param[out] rate   The current TCP TX retry rate
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_PERMISSION_DENIED  Permission Denied
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets the TCP TX retry rate.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The monitoring handle
+  /// - `rate` (out): The current TCP TX retry rate
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_get_retry_tx_rate(
     inm_h inm,
     ffi.Pointer<ffi.Int> rate,
@@ -602,17 +803,25 @@ class Tizen65CapiNetworkInm {
   late final _inm_get_retry_tx_rate = _inm_get_retry_tx_ratePtr
       .asFunction<int Function(inm_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the callback to be called when the channel interference is updated.
-  /// @since_tizen 5.0
-  /// @param[in] inm        The monitoring handle
-  /// @param[in] callback   The callback function to be called
-  /// @param[in] user_data  The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Sets the callback to be called when the channel interference is updated.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The monitoring handle
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_set_channel_interference_cb(
     inm_h inm,
     inm_channel_interference_cb callback,
@@ -634,15 +843,23 @@ class Tizen65CapiNetworkInm {
           int Function(
               inm_h, inm_channel_interference_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback called when the channel interference is updated.
-  /// @since_tizen 5.0
-  /// @param[in] inm  The monitoring handle
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Unsets the callback called when the channel interference is updated.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The monitoring handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_unset_channel_interference_cb(
     inm_h inm,
   ) {
@@ -657,19 +874,31 @@ class Tizen65CapiNetworkInm {
   late final _inm_unset_channel_interference_cb =
       _inm_unset_channel_interference_cbPtr.asFunction<int Function(inm_h)>();
 
-  /// @brief Gets the channel interference of the wireless network.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] inm        The monitoring handle
-  /// @param[out] ch_intf   The current channel interference
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_PERMISSION_DENIED  Permission Denied
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets the channel interference of the wireless network.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The monitoring handle
+  /// - `ch_intf` (out): The current channel interference
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_get_channel_interference(
     inm_h inm,
     ffi.Pointer<ffi.Double> ch_intf,
@@ -686,19 +915,29 @@ class Tizen65CapiNetworkInm {
   late final _inm_get_channel_interference = _inm_get_channel_interferencePtr
       .asFunction<int Function(inm_h, ffi.Pointer<ffi.Double>)>();
 
-  /// @brief Sets a callback called when the cellular state is changed.
-  /// @since_tizen 5.0
-  /// @param[in] inm        The monitor handle
-  /// @param[in] callback   The callback function to be called
-  /// @param[in] user_data  The user data passed to the callback function
-  /// @return @c 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @see inm_cellular_state_changed_cb()
-  /// @see inm_unset_cellular_state_changed_cb()
+  /// Sets a callback called when the cellular state is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The monitor handle
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `inm_cellular_state_changed_cb()`
+  /// - `inm_unset_cellular_state_changed_cb()`
   int inm_set_cellular_state_changed_cb(
     inm_h inm,
     inm_cellular_state_changed_cb callback,
@@ -720,17 +959,27 @@ class Tizen65CapiNetworkInm {
           int Function(
               inm_h, inm_cellular_state_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback called when the cellular state is changed.
-  /// @since_tizen 5.0
-  /// @param[in] inm  The monitor handle
-  /// @return @c 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @see inm_cellular_state_changed_cb()
-  /// @see inm_set_cellular_state_changed_cb()
+  /// Unsets the callback called when the cellular state is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The monitor handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `inm_cellular_state_changed_cb()`
+  /// - `inm_set_cellular_state_changed_cb()`
   int inm_unset_cellular_state_changed_cb(
     inm_h inm,
   ) {
@@ -745,18 +994,26 @@ class Tizen65CapiNetworkInm {
   late final _inm_unset_cellular_state_changed_cb =
       _inm_unset_cellular_state_changed_cbPtr.asFunction<int Function(inm_h)>();
 
-  /// @brief Gets the state of the cellular connection.
-  /// @details The returned state is for the cellular connection state.
-  /// @since_tizen 5.0
-  /// @param[in] inm     The inm handle
-  /// @param[out] state  The state of the cellular connection
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets the state of the cellular connection.
+  ///
+  /// The returned state is for the cellular connection state.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The inm handle
+  /// - `state` (out): The state of the cellular connection
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_get_cellular_state(
     inm_h inm,
     ffi.Pointer<ffi.Int32> state,
@@ -773,19 +1030,29 @@ class Tizen65CapiNetworkInm {
   late final _inm_get_cellular_state = _inm_get_cellular_statePtr
       .asFunction<int Function(inm_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets a callback called when the Wi-Fi state is changed.
-  /// @since_tizen 5.0
-  /// @param[in] inm        The monitor handle
-  /// @param[in] callback   The callback function to be called
-  /// @param[in] user_data  The user data passed to the callback function
-  /// @return @c 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @see inm_wifi_state_changed_cb()
-  /// @see inm_unset_wifi_state_changed_cb()
+  /// Sets a callback called when the Wi-Fi state is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The monitor handle
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `inm_wifi_state_changed_cb()`
+  /// - `inm_unset_wifi_state_changed_cb()`
   int inm_set_wifi_state_changed_cb(
     inm_h inm,
     inm_wifi_state_changed_cb callback,
@@ -807,17 +1074,27 @@ class Tizen65CapiNetworkInm {
           int Function(
               inm_h, inm_wifi_state_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback called when the Wi-Fi state is changed.
-  /// @since_tizen 5.0
-  /// @param[in] inm  The monitor handle
-  /// @return @c 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @see inm_wifi_state_changed_cb()
-  /// @see inm_set_wifi_state_changed_cb()
+  /// Unsets the callback called when the Wi-Fi state is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The monitor handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `inm_wifi_state_changed_cb()`
+  /// - `inm_set_wifi_state_changed_cb()`
   int inm_unset_wifi_state_changed_cb(
     inm_h inm,
   ) {
@@ -832,21 +1109,33 @@ class Tizen65CapiNetworkInm {
   late final _inm_unset_wifi_state_changed_cb =
       _inm_unset_wifi_state_changed_cbPtr.asFunction<int Function(inm_h)>();
 
-  /// @brief Gets the state of the Wi-Fi.
-  /// @details The returned state is for the Wi-Fi connection state.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] inm     The inm handle
-  /// @param[out] state  The state of Wi-Fi connection
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_PERMISSION_DENIED  Permission Denied
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets the state of the Wi-Fi.
+  ///
+  /// The returned state is for the Wi-Fi connection state.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The inm handle
+  /// - `state` (out): The state of Wi-Fi connection
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_get_wifi_state(
     inm_h inm,
     ffi.Pointer<ffi.Int32> state,
@@ -863,19 +1152,29 @@ class Tizen65CapiNetworkInm {
   late final _inm_get_wifi_state = _inm_get_wifi_statePtr
       .asFunction<int Function(inm_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets a callback called when the ethernet state is changed.
-  /// @since_tizen 5.0
-  /// @param[in] inm        The monitor handle
-  /// @param[in] callback   The callback function to be called
-  /// @param[in] user_data  The user data passed to the callback function
-  /// @return @c 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @see inm_ethernet_state_changed_cb()
-  /// @see inm_unset_ethernet_state_changed_cb()
+  /// Sets a callback called when the ethernet state is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The monitor handle
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `inm_ethernet_state_changed_cb()`
+  /// - `inm_unset_ethernet_state_changed_cb()`
   int inm_set_ethernet_state_changed_cb(
     inm_h inm,
     inm_ethernet_state_changed_cb callback,
@@ -897,17 +1196,27 @@ class Tizen65CapiNetworkInm {
           int Function(
               inm_h, inm_ethernet_state_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback called when the ethernet state is changed.
-  /// @since_tizen 5.0
-  /// @param[in] inm  The monitor handle
-  /// @return @c 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @see inm_ethernet_state_changed_cb()
-  /// @see inm_set_ethernet_state_changed_cb()
+  /// Unsets the callback called when the ethernet state is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The monitor handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `inm_ethernet_state_changed_cb()`
+  /// - `inm_set_ethernet_state_changed_cb()`
   int inm_unset_ethernet_state_changed_cb(
     inm_h inm,
   ) {
@@ -922,21 +1231,33 @@ class Tizen65CapiNetworkInm {
   late final _inm_unset_ethernet_state_changed_cb =
       _inm_unset_ethernet_state_changed_cbPtr.asFunction<int Function(inm_h)>();
 
-  /// @brief Gets the state of the ethernet.
-  /// @details The returned state is for the ethernet connection state.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] inm     The inm handle
-  /// @param[out] state  The state of ethernet connection
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_PERMISSION_DENIED  Permission Denied
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets the state of the ethernet.
+  ///
+  /// The returned state is for the ethernet connection state.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The inm handle
+  /// - `state` (out): The state of ethernet connection
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_get_ethernet_state(
     inm_h inm,
     ffi.Pointer<ffi.Int32> state,
@@ -953,22 +1274,35 @@ class Tizen65CapiNetworkInm {
   late final _inm_get_ethernet_state = _inm_get_ethernet_statePtr
       .asFunction<int Function(inm_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the handle of the default connection.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @remarks You must release @a connection using inm_connection_destroy().
-  /// @param[in] inm          The inm handle
-  /// @param[out] connection  The connection handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #INM_ERROR_PERMISSION_DENIED  Permission Denied
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets the handle of the default connection.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - You must release `connection` using inm_connection_destroy().
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The inm handle
+  /// - `connection` (out): The connection handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `INM_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_get_current_connection(
     inm_h inm,
     ffi.Pointer<inm_connection_h> connection,
@@ -986,17 +1320,26 @@ class Tizen65CapiNetworkInm {
   late final _inm_get_current_connection = _inm_get_current_connectionPtr
       .asFunction<int Function(inm_h, ffi.Pointer<inm_connection_h>)>();
 
-  /// @brief Destroys a connection handle.
-  /// @since_tizen 5.0
-  /// @param[out] connection  The connection handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @see inm_get_current_connection()
+  /// Destroys a connection handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `connection` (out): The connection handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `inm_get_current_connection()`
   int inm_connection_destroy(
     ffi.Pointer<inm_connection_h> connection,
   ) {
@@ -1011,20 +1354,31 @@ class Tizen65CapiNetworkInm {
   late final _inm_connection_destroy = _inm_connection_destroyPtr
       .asFunction<int Function(ffi.Pointer<inm_connection_h>)>();
 
-  /// @brief Clones a connection handle.
-  /// @since_tizen 5.0
-  /// @remarks You must release @a cloned connection using inm_connection_destroy().
-  /// @param[out] cloned  The handle of the cloned connection
-  /// @param[in] origin   The handle of the origin connection
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @see inm_connection_destroy()
+  /// Clones a connection handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - You must release `cloned` connection using inm_connection_destroy().
+  ///
+  /// **Parameters:**
+  /// - `cloned` (out): The handle of the cloned connection
+  /// - `origin` (in): The handle of the origin connection
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `inm_connection_destroy()`
   int inm_connection_clone(
     ffi.Pointer<inm_connection_h> cloned,
     inm_connection_h origin,
@@ -1042,22 +1396,35 @@ class Tizen65CapiNetworkInm {
   late final _inm_connection_clone = _inm_connection_clonePtr.asFunction<
       int Function(ffi.Pointer<inm_connection_h>, inm_connection_h)>();
 
-  /// @brief Gets a connections iterator.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @remarks You must release @a connection_iterator using inm_destroy_connection_iterator().
-  /// @param[in] inm                   The inm handle
-  /// @param[out] connection_iterator  The iterator of connection
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #INM_ERROR_PERMISSION_DENIED  Permission Denied
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets a connections iterator.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - You must release `connection_iterator` using inm_destroy_connection_iterator().
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The inm handle
+  /// - `connection_iterator` (out): The iterator of connection
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `INM_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_get_connection_iterator(
     inm_h inm,
     ffi.Pointer<inm_connection_iterator_h> connection_iterator,
@@ -1076,20 +1443,29 @@ class Tizen65CapiNetworkInm {
       _inm_get_connection_iteratorPtr.asFunction<
           int Function(inm_h, ffi.Pointer<inm_connection_iterator_h>)>();
 
-  /// @brief Moves the connection iterator to the next position and gets a connection handle.
-  /// @since_tizen 5.0
-  /// @remarks After the iterator is created, its inner cursor is placed before the first element.
-  /// The first call to inm_connection_iterator_next() gets the first element.
-  /// You must release @a connection using inm_connection_destroy().
-  /// @param[in] connection_iterator  The connection iterator
-  /// @param[out] connection          The connection handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Moves the connection iterator to the next position and gets a connection handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - After the iterator is created, its inner cursor is placed before the first element.
+  /// - The first call to inm_connection_iterator_next() gets the first element.
+  /// - You must release `connection` using inm_connection_destroy().
+  ///
+  /// **Parameters:**
+  /// - `connection_iterator` (in): The connection iterator
+  /// - `connection` (out): The connection handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_connection_iterator_next(
     inm_connection_iterator_h connection_iterator,
     ffi.Pointer<inm_connection_h> connection,
@@ -1109,15 +1485,22 @@ class Tizen65CapiNetworkInm {
           int Function(
               inm_connection_iterator_h, ffi.Pointer<inm_connection_h>)>();
 
-  /// @brief Destroys a connections iterator.
-  /// @since_tizen 5.0
-  /// @param[in] connection_iterator  The connection iterator
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
+  /// Destroys a connections iterator.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `connection_iterator` (in): The connection iterator
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
   int inm_destroy_connection_iterator(
     inm_connection_iterator_h connection_iterator,
   ) {
@@ -1133,23 +1516,36 @@ class Tizen65CapiNetworkInm {
       _inm_destroy_connection_iteratorPtr
           .asFunction<int Function(inm_connection_iterator_h)>();
 
-  /// @brief Gets handles of the link.
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] inm        The inm handle
-  /// @param[in] callback   The callback function to invoke
-  /// @param[in] user_data  The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #INM_ERROR_PERMISSION_DENIED  Permission Denied
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @see inm_link_clone()
+  /// Gets handles of the link.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The inm handle
+  /// - `callback` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `INM_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `inm_link_clone()`
   int inm_foreach_link(
     inm_h inm,
     inm_link_cb callback,
@@ -1169,21 +1565,34 @@ class Tizen65CapiNetworkInm {
   late final _inm_foreach_link = _inm_foreach_linkPtr
       .asFunction<int Function(inm_h, inm_link_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Refreshes link information held by a handle.
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] inm  The inm handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #INM_ERROR_PERMISSION_DENIED  Permission Denied
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @see inm_foreach_link()
+  /// Refreshes link information held by a handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The inm handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `INM_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `inm_foreach_link()`
   int inm_refresh_links(
     inm_h inm,
   ) {
@@ -1197,25 +1606,38 @@ class Tizen65CapiNetworkInm {
   late final _inm_refresh_links =
       _inm_refresh_linksPtr.asFunction<int Function(inm_h)>();
 
-  /// @brief Sets the ARP packet interval which is used to find targets IP on local network.
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] inm  The monitoring handle
-  /// @param[in] seconds  The ARP packet interval value in seconds
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_PERMISSION_DENIED  Permission Denied
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #INM_ERROR_NOW_IN_PROGRESS    Now in progress
-  /// @see inm_arp_request_start()
-  /// @see inm_arp_request_stop()
-  /// @see inm_default_gateway_start_checking()
-  /// @see inm_default_gateway_stop_checking()
+  /// Sets the ARP packet interval which is used to find targets IP on local network.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The monitoring handle
+  /// - `seconds` (in): The ARP packet interval value in seconds
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `INM_ERROR_NOW_IN_PROGRESS`: Now in progress
+  ///
+  /// **See also:**
+  /// - `inm_arp_request_start()`
+  /// - `inm_arp_request_stop()`
+  /// - `inm_default_gateway_start_checking()`
+  /// - `inm_default_gateway_stop_checking()`
   int inm_arp_request_set_packet_interval(
     inm_h inm,
     int seconds,
@@ -1233,24 +1655,37 @@ class Tizen65CapiNetworkInm {
       _inm_arp_request_set_packet_intervalPtr
           .asFunction<int Function(inm_h, int)>();
 
-  /// @brief Gets the ARP packet interval which is used to find targets IP on local network.
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] inm  The monitoring handle
-  /// @param[out] seconds  The ARP packet interval value in seconds
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_PERMISSION_DENIED  Permission Denied
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @see inm_arp_request_start()
-  /// @see inm_arp_request_stop()
-  /// @see inm_default_gateway_start_checking()
-  /// @see inm_default_gateway_stop_checking()
+  /// Gets the ARP packet interval which is used to find targets IP on local network.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The monitoring handle
+  /// - `seconds` (out): The ARP packet interval value in seconds
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `inm_arp_request_start()`
+  /// - `inm_arp_request_stop()`
+  /// - `inm_default_gateway_start_checking()`
+  /// - `inm_default_gateway_stop_checking()`
   int inm_arp_request_get_packet_interval(
     inm_h inm,
     ffi.Pointer<ffi.Int> seconds,
@@ -1268,23 +1703,36 @@ class Tizen65CapiNetworkInm {
       _inm_arp_request_get_packet_intervalPtr
           .asFunction<int Function(inm_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Starts to send ARP packets to find a @a target_ip.
-  /// @details User should set callback to get results by inm_arp_request_ip_found_cb()
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] inm        The monitoring handle
-  /// @param[in] target_ip  IP address to find
-  /// @param[in] callback   The callback function to be called
-  /// @param[in] user_data  The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_PERMISSION_DENIED  Permission Denied
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #INM_ERROR_NOW_IN_PROGRESS    Now in progress
+  /// Starts to send ARP packets to find a `target_ip`.
+  ///
+  /// User should set callback to get results by inm_arp_request_ip_found_cb()
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The monitoring handle
+  /// - `target_ip` (in): IP address to find
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `INM_ERROR_NOW_IN_PROGRESS`: Now in progress
   int inm_arp_request_start(
     inm_h inm,
     ffi.Pointer<ffi.Char> target_ip,
@@ -1310,20 +1758,32 @@ class Tizen65CapiNetworkInm {
       int Function(inm_h, ffi.Pointer<ffi.Char>, inm_arp_request_ip_found_cb,
           ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Stops sending ARP packets.
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] inm        The monitoring handle
-  /// @param[in] target_ip  IP address to stop finding
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_PERMISSION_DENIED  Permission Denied
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #INM_ERROR_NOW_IN_PROGRESS    Now in progress
+  /// Stops sending ARP packets.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The monitoring handle
+  /// - `target_ip` (in): IP address to stop finding
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `INM_ERROR_NOW_IN_PROGRESS`: Now in progress
   int inm_arp_request_stop(
     inm_h inm,
     ffi.Pointer<ffi.Char> target_ip,
@@ -1340,24 +1800,34 @@ class Tizen65CapiNetworkInm {
   late final _inm_arp_request_stop = _inm_arp_request_stopPtr
       .asFunction<int Function(inm_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Starts to send ARP packets to find gateway during @a timeout, in seconds.
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] inm        The monitoring handle
-  /// @param[in] timeout    Specifies the duration of discovery period,
-  /// in seconds. If @c 0, then there is no limit
-  /// on how long the discovery takes.
-  /// @param[in] callback   The callback function to be called
-  /// @param[in] user_data  The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_PERMISSION_DENIED  Permission Denied
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #INM_ERROR_NOW_IN_PROGRESS    Now in progress
+  /// Starts to send ARP packets to find gateway during `timeout`, in seconds.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The monitoring handle
+  /// - `timeout` (in): Specifies the duration of discovery period, in seconds. If `0`, then there is no limit on how long the discovery takes.
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `INM_ERROR_NOW_IN_PROGRESS`: Now in progress
   int inm_default_gateway_start_checking(
     inm_h inm,
     int timeout,
@@ -1381,19 +1851,31 @@ class Tizen65CapiNetworkInm {
           int Function(inm_h, int, inm_default_gateway_found_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Stops sending ARP packets to check default gateway.
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] inm        The monitoring handle
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_PERMISSION_DENIED  Permission Denied
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #INM_ERROR_NOW_IN_PROGRESS    Now in progress
+  /// Stops sending ARP packets to check default gateway.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The monitoring handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `INM_ERROR_NOW_IN_PROGRESS`: Now in progress
   int inm_default_gateway_stop_checking(
     inm_h inm,
   ) {
@@ -1408,21 +1890,33 @@ class Tizen65CapiNetworkInm {
   late final _inm_default_gateway_stop_checking =
       _inm_default_gateway_stop_checkingPtr.asFunction<int Function(inm_h)>();
 
-  /// @brief Checks DNS lookup of the target to check whether DNS server is valid or not.
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] inm        The monitoring handle
-  /// @param[in] callback   The callback function to be called
-  /// @param[in] user_data  The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_PERMISSION_DENIED  Permission Denied
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #INM_ERROR_NOW_IN_PROGRESS    Now in progress
+  /// Checks DNS lookup of the target to check whether DNS server is valid or not.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The monitoring handle
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `INM_ERROR_NOW_IN_PROGRESS`: Now in progress
   int inm_default_dns_lookup_check(
     inm_h inm,
     inm_default_dns_lookup_result_cb callback,
@@ -1444,23 +1938,35 @@ class Tizen65CapiNetworkInm {
           int Function(inm_h, inm_default_dns_lookup_result_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Adds URL to check reachability by inm_start_checking_reachable_urls()
-  /// with type #INM_URL_LIST_TYPE_USER.
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] inm  The monitoring handle
-  /// @param[in] url  The URL to check reachability
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_PERMISSION_DENIED  Permission Denied
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @see inm_reachable_urls_start_checking()
-  /// @see inm_reachable_urls_stop_checking()
+  /// Adds URL to check reachability by inm_start_checking_reachable_urls() with type `INM_URL_LIST_TYPE_USER`.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The monitoring handle
+  /// - `url` (in): The URL to check reachability
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `inm_reachable_urls_start_checking()`
+  /// - `inm_reachable_urls_stop_checking()`
   int inm_reachable_urls_add_url_to_check(
     inm_h inm,
     ffi.Pointer<ffi.Char> url,
@@ -1478,23 +1984,35 @@ class Tizen65CapiNetworkInm {
       _inm_reachable_urls_add_url_to_checkPtr
           .asFunction<int Function(inm_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Removes URL to check reachability by inm_start_checking_reachable_urls()
-  /// with type #INM_URL_LIST_TYPE_USER.
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] inm  The monitoring handle
-  /// @param[in] url  The URL to check reachability
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_PERMISSION_DENIED  Permission Denied
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @see inm_reachable_urls_start_checking()
-  /// @see inm_reachable_urls_stop_checking()
+  /// Removes URL to check reachability by inm_start_checking_reachable_urls() with type `INM_URL_LIST_TYPE_USER`.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The monitoring handle
+  /// - `url` (in): The URL to check reachability
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `inm_reachable_urls_start_checking()`
+  /// - `inm_reachable_urls_stop_checking()`
   int inm_reachable_urls_remove_url_to_check(
     inm_h inm,
     ffi.Pointer<ffi.Char> url,
@@ -1512,28 +2030,36 @@ class Tizen65CapiNetworkInm {
       _inm_reachable_urls_remove_url_to_checkPtr
           .asFunction<int Function(inm_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Starts to send HTTP GET requests with curl to check reachability of URLs of the given type.
-  /// @details This function just checks if URLs in the list can be reachable once.
-  /// If you want to check again, you need to call this function again
-  /// with the target URL list.
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] inm        The monitoring handle
-  /// @param[in] type       URL type to check. For #INM_URL_LIST_TYPE_DEFAULT,
-  /// the platform checks the reachability of "tizen.org".
-  /// For #INM_URL_LIST_TYPE_USER, the platform checks
-  /// the reachability of URLs added by inm_add_url_to_check()
-  /// @param[in] callback   The callback function to be called
-  /// @param[in] user_data  The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_PERMISSION_DENIED  Permission Denied
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #INM_ERROR_NOW_IN_PROGRESS    Now in progress
+  /// Starts to send HTTP GET requests with curl to check reachability of URLs of the given type.
+  ///
+  /// This function just checks if URLs in the list can be reachable once. If you want to check again, you need to call this function again with the target URL list.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The monitoring handle
+  /// - `type` (in): URL type to check. For `INM_URL_LIST_TYPE_DEFAULT`, the platform checks the reachability of "tizen.org". For `INM_URL_LIST_TYPE_USER`, the platform checks the reachability of URLs added by inm_add_url_to_check()
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `INM_ERROR_NOW_IN_PROGRESS`: Now in progress
   int inm_reachable_urls_start_checking(
     inm_h inm,
     int type,
@@ -1557,19 +2083,31 @@ class Tizen65CapiNetworkInm {
           int Function(inm_h, int, inm_reachable_urls_check_result_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Stops sending HTTP GET requests with curl to check reachability of URLs of the given type.
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] inm        The monitoring handle
-  /// @param[in] type       The URL type to check
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_PERMISSION_DENIED  Permission Denied
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Stops sending HTTP GET requests with curl to check reachability of URLs of the given type.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The monitoring handle
+  /// - `type` (in): The URL type to check
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_reachable_urls_stop_checking(
     inm_h inm,
     int type,
@@ -1587,20 +2125,32 @@ class Tizen65CapiNetworkInm {
       _inm_reachable_urls_stop_checkingPtr
           .asFunction<int Function(inm_h, int)>();
 
-  /// @brief Gets whether the reachable URLs check is running or not.
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] inm         The monitoring handle
-  /// @param[in] type        URL type to check
-  /// @param[out] is_running  checking URL is running or not
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_PERMISSION_DENIED  Permission Denied
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets whether the reachable URLs check is running or not.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The monitoring handle
+  /// - `type` (in): URL type to check
+  /// - `is_running` (out): checking URL is running or not
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_reachable_urls_is_check_running(
     inm_h inm,
     int type,
@@ -1621,23 +2171,33 @@ class Tizen65CapiNetworkInm {
       _inm_reachable_urls_is_check_runningPtr
           .asFunction<int Function(inm_h, int, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets the connection ID.
-  /// @details Two different connections can have the same name.
-  /// So, you must use this function instead of inm_connection_get_name()
-  /// if you want to get the unique identification.
-  /// @since_tizen 5.0
-  /// @remarks You must release @a id using free().
-  /// @param[in] connection  The connection handle
-  /// @param[out] id         The ID of the connection
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @see inm_connection_get_name()
+  /// Gets the connection ID.
+  ///
+  /// Two different connections can have the same name. So, you must use this function instead of inm_connection_get_name() if you want to get the unique identification.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - You must release `id` using free().
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `id` (out): The ID of the connection
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `inm_connection_get_name()`
   int inm_connection_get_id(
     inm_connection_h connection,
     ffi.Pointer<ffi.Pointer<ffi.Char>> id,
@@ -1655,20 +2215,31 @@ class Tizen65CapiNetworkInm {
   late final _inm_connection_get_id = _inm_connection_get_idPtr.asFunction<
       int Function(inm_connection_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the connection name.
-  /// @since_tizen 5.0
-  /// @remarks You must release @a name using free().
-  /// @param[in] connection  The connection handle
-  /// @param[out] name       The name of the connection
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @see inm_connection_get_id()
+  /// Gets the connection name.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - You must release `name` using free().
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `name` (out): The name of the connection
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `inm_connection_get_id()`
   int inm_connection_get_name(
     inm_connection_h connection,
     ffi.Pointer<ffi.Pointer<ffi.Char>> name,
@@ -1686,17 +2257,24 @@ class Tizen65CapiNetworkInm {
   late final _inm_connection_get_name = _inm_connection_get_namePtr.asFunction<
       int Function(inm_connection_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the network type.
-  /// @since_tizen 5.0
-  /// @param[in] connection  The connection handle
-  /// @param[out] type       The type of the connection
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets the network type.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `type` (out): The type of the connection
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_connection_get_type(
     inm_connection_h connection,
     ffi.Pointer<ffi.Int32> type,
@@ -1714,19 +2292,28 @@ class Tizen65CapiNetworkInm {
   late final _inm_connection_get_type = _inm_connection_get_typePtr
       .asFunction<int Function(inm_connection_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the name of the network interface, e.g. eth0 and pdp0.
-  /// @since_tizen 5.0
-  /// @remarks You must release @a interface_name using free().
-  /// @param[in] connection       The connection handle
-  /// @param[out] interface_name  The name of the network interface
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets the name of the network interface, e.g. eth0 and pdp0.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - You must release `interface_name` using free().
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `interface_name` (out): The name of the network interface
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_connection_get_network_interface_name(
     inm_connection_h connection,
     ffi.Pointer<ffi.Pointer<ffi.Char>> interface_name,
@@ -1746,22 +2333,35 @@ class Tizen65CapiNetworkInm {
       _inm_connection_get_network_interface_namePtr.asFunction<
           int Function(inm_connection_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Refreshes the connection information.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @remarks You should call this function in order to get the current information
-  /// because the connection information can be changed.
-  /// @param[in] connection  The connection handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #INM_ERROR_PERMISSION_DENIED  Permission Denied
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Refreshes the connection information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - You should call this function in order to get the current information
+  /// - because the connection information can be changed.
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `INM_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_connection_refresh(
     inm_connection_h connection,
   ) {
@@ -1776,17 +2376,24 @@ class Tizen65CapiNetworkInm {
   late final _inm_connection_refresh =
       _inm_connection_refreshPtr.asFunction<int Function(inm_connection_h)>();
 
-  /// @brief Gets the network state.
-  /// @since_tizen 5.0
-  /// @param[in] connection  The connection handle
-  /// @param[out] state      The state of the connection
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets the network state.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `state` (out): The state of the connection
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_connection_get_state(
     inm_connection_h connection,
     ffi.Pointer<ffi.Int32> state,
@@ -1804,16 +2411,24 @@ class Tizen65CapiNetworkInm {
   late final _inm_connection_get_state = _inm_connection_get_statePtr
       .asFunction<int Function(inm_connection_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the IPv6 network state.
-  /// @since_tizen 5.0
-  /// @param[in] connection  The connection handle
-  /// @param[out] state      The connection state
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets the IPv6 network state.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `state` (out): The connection state
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_connection_get_ipv6_state(
     inm_connection_h connection,
     ffi.Pointer<ffi.Int32> state,
@@ -1831,18 +2446,25 @@ class Tizen65CapiNetworkInm {
   late final _inm_connection_get_ipv6_state = _inm_connection_get_ipv6_statePtr
       .asFunction<int Function(inm_connection_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the IP config type.
-  /// @since_tizen 5.0
-  /// @param[in] connection      The connection handle
-  /// @param[in] address_family  The address family
-  /// @param[out] type           The type of the IP config
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets the IP config type.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `address_family` (in): The address family
+  /// - `type` (out): The type of the IP config
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_connection_get_ip_config_type(
     inm_connection_h connection,
     int address_family,
@@ -1863,20 +2485,29 @@ class Tizen65CapiNetworkInm {
       _inm_connection_get_ip_config_typePtr.asFunction<
           int Function(inm_connection_h, int, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the IP address.
-  /// @since_tizen 5.0
-  /// @remarks You must release @a ip_address using free().
-  /// @param[in] connection      The connection handle
-  /// @param[in] address_family  The address family
-  /// @param[out] ip_address     The IP address
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets the IP address.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - You must release `ip_address` using free().
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `address_family` (in): The address family
+  /// - `ip_address` (out): The IP address
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_connection_get_ip_address(
     inm_connection_h connection,
     int address_family,
@@ -1899,21 +2530,30 @@ class Tizen65CapiNetworkInm {
           int Function(
               inm_connection_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the Subnet Mask.
-  /// @since_tizen 5.0
-  /// @remarks You must release @a subnet_mask using free().
-  /// This function is supported only for IPv4 address family.
-  /// @param[in] connection           The connection handle
-  /// @param[in] address_family  The address family
-  /// @param[out] subnet_mask    The subnet mask
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets the Subnet Mask.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - You must release `subnet_mask` using free().
+  /// - This function is supported only for IPv4 address family.
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `address_family` (in): The address family
+  /// - `subnet_mask` (out): The subnet mask
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_connection_get_subnet_mask(
     inm_connection_h connection,
     int address_family,
@@ -1936,20 +2576,29 @@ class Tizen65CapiNetworkInm {
           int Function(
               inm_connection_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the Gateway address.
-  /// @since_tizen 5.0
-  /// @remarks You must release @a gateway_address using free().
-  /// @param[in] connection           The connection handle
-  /// @param[in] address_family    The address family
-  /// @param[out] gateway_address  The gateway address
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets the Gateway address.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - You must release `gateway_address` using free().
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `address_family` (in): The address family
+  /// - `gateway_address` (out): The gateway address
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_connection_get_gateway_address(
     inm_connection_h connection,
     int address_family,
@@ -1972,20 +2621,30 @@ class Tizen65CapiNetworkInm {
           int Function(
               inm_connection_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the DHCP Server address.
-  /// @since_tizen 5.0
-  /// @remarks You must release @a dhcp_server using free().
-  /// This function is supported only for IPv4 address family.
-  /// @param[in] connection      The connection handle
-  /// @param[in] address_family  The address family
-  /// @param[out] dhcp_server    The DHCP Server address
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets the DHCP Server address.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - You must release `dhcp_server` using free().
+  /// - This function is supported only for IPv4 address family.
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `address_family` (in): The address family
+  /// - `dhcp_server` (out): The DHCP Server address
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_connection_get_dhcp_server_address(
     inm_connection_h connection,
     int address_family,
@@ -2008,18 +2667,28 @@ class Tizen65CapiNetworkInm {
           int Function(
               inm_connection_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the DHCP lease duration.
-  /// @since_tizen 5.0
-  /// @remarks This function is supported only for IPv4 address family.
-  /// @param[in] connection            The connection handle
-  /// @param[in] address_family        The address family
-  /// @param[out] dhcp_lease_duration  The DHCP lease duration in seconds
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets the DHCP lease duration.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - This function is supported only for IPv4 address family.
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `address_family` (in): The address family
+  /// - `dhcp_lease_duration` (out): The DHCP lease duration in seconds
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_connection_get_dhcp_lease_duration(
     inm_connection_h connection,
     int address_family,
@@ -2040,22 +2709,30 @@ class Tizen65CapiNetworkInm {
       _inm_connection_get_dhcp_lease_durationPtr.asFunction<
           int Function(inm_connection_h, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the DNS address.
-  /// @since_tizen 5.0
-  /// @remarks The allowance of the DNS address is @c 2. You must release @a dns_address using free().
-  /// @param[in] connection      The connection handle
-  /// @param[in] order           The order of DNS address \n
-  /// It starts from 1, which means first DNS address
-  /// @param[in] address_family  The address family
-  /// @param[out] dns_address    The DNS address
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets the DNS address.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - The allowance of the DNS address is `2`. You must release `dns_address` using free().
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `order` (in): The order of DNS address It starts from 1, which means first DNS address
+  /// - `address_family` (in): The address family
+  /// - `dns_address` (out): The DNS address
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_connection_get_dns_address(
     inm_connection_h connection,
     int order,
@@ -2080,17 +2757,24 @@ class Tizen65CapiNetworkInm {
           int Function(inm_connection_h, int, int,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the Proxy type.
-  /// @since_tizen 5.0
-  /// @param[in] connection  The connection handle
-  /// @param[out] type       The type of the proxy
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets the Proxy type.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `type` (out): The type of the proxy
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_connection_get_proxy_type(
     inm_connection_h connection,
     ffi.Pointer<ffi.Int32> type,
@@ -2108,20 +2792,29 @@ class Tizen65CapiNetworkInm {
   late final _inm_connection_get_proxy_type = _inm_connection_get_proxy_typePtr
       .asFunction<int Function(inm_connection_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the Proxy address.
-  /// @since_tizen 5.0
-  /// @remarks You must release @a proxy_address using free().
-  /// @param[in] connection      The connection handle
-  /// @param[in] address_family  The address family
-  /// @param[out] proxy_address  The proxy address
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets the Proxy address.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - You must release `proxy_address` using free().
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `address_family` (in): The address family
+  /// - `proxy_address` (out): The proxy address
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_connection_get_proxy_address(
     inm_connection_h connection,
     int address_family,
@@ -2144,18 +2837,25 @@ class Tizen65CapiNetworkInm {
           int Function(
               inm_connection_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the DNS config type.
-  /// @since_tizen 5.0
-  /// @param[in] connection      The connection handle
-  /// @param[in] address_family  The address family
-  /// @param[out] type           The DNS config type
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets the DNS config type.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `address_family` (in): The address family
+  /// - `type` (out): The DNS config type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_connection_get_dns_config_type(
     inm_connection_h connection,
     int address_family,
@@ -2176,20 +2876,25 @@ class Tizen65CapiNetworkInm {
       _inm_connection_get_dns_config_typePtr.asFunction<
           int Function(inm_connection_h, int, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the network prefix length.
-  /// @since_tizen 5.0
-  /// @param[in] connection      The connection handle
-  /// @param[in] address_family  The address family
-  /// @param[out] prefix_len     The network prefix length \n
-  /// In case of IPv4, it means netmask length
-  /// (also called a prefix, e.g. 8, 16, 24, 32)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets the network prefix length.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `address_family` (in): The address family
+  /// - `prefix_len` (out): The network prefix length In case of IPv4, it means netmask length (also called a prefix, e.g. 8, 16, 24, 32)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_connection_get_prefix_length(
     inm_connection_h connection,
     int address_family,
@@ -2210,21 +2915,32 @@ class Tizen65CapiNetworkInm {
       _inm_connection_get_prefix_lengthPtr.asFunction<
           int Function(inm_connection_h, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the callback that is called when the state of connection is changed.
-  /// @since_tizen 5.0
-  /// @param[in] connection  The connection handle
-  /// @param[in] callback    The callback function to be called
-  /// @param[in] user_data   The user data passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @post connection_opened_cb() is invoked when the state of connection is changed.
-  /// @see connection_state_changed_cb()
-  /// @see inm_connection_unset_state_changed_cb()
+  /// Sets the callback that is called when the state of connection is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **Postconditions:**
+  /// - connection_opened_cb() is invoked when the state of connection is changed.
+  ///
+  /// **See also:**
+  /// - `connection_state_changed_cb()`
+  /// - `inm_connection_unset_state_changed_cb()`
   int inm_connection_set_state_changed_cb(
     inm_connection_h connection,
     connection_state_changed_cb callback,
@@ -2246,18 +2962,27 @@ class Tizen65CapiNetworkInm {
           int Function(inm_connection_h, connection_state_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback that is called when the state of connection is changed.
-  /// @since_tizen 5.0
-  /// @param[in] connection  The connection handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @see connection_state_changed_cb()
-  /// @see inm_connection_set_state_changed_cb()
+  /// Unsets the callback that is called when the state of connection is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `connection_state_changed_cb()`
+  /// - `inm_connection_set_state_changed_cb()`
   int inm_connection_unset_state_changed_cb(
     inm_connection_h connection,
   ) {
@@ -2273,20 +2998,31 @@ class Tizen65CapiNetworkInm {
       _inm_connection_unset_state_changed_cbPtr
           .asFunction<int Function(inm_connection_h)>();
 
-  /// @brief Gets the link handle for this connection.
-  /// @since_tizen 5.5
-  /// @remarks You must release @a link using inm_link_destroy().
-  /// @param[in] connection       The connection handle
-  /// @param[out] link            The link of the connection handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @see inm_link_clone()
+  /// Gets the link handle for this connection.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - You must release `link` using inm_link_destroy().
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `link` (out): The link of the connection handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `inm_link_clone()`
   int inm_connection_get_link(
     inm_connection_h connection,
     ffi.Pointer<inm_link_h> link,
@@ -2304,17 +3040,25 @@ class Tizen65CapiNetworkInm {
   late final _inm_connection_get_link = _inm_connection_get_linkPtr
       .asFunction<int Function(inm_connection_h, ffi.Pointer<inm_link_h>)>();
 
-  /// @brief Sets the callback called when the scanning state is changed.
-  /// @since_tizen 5.0
-  /// @param[in] inm        The inm handle
-  /// @param[in] callback   The callback function to be called
-  /// @param[in] user_data  The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Sets the callback called when the scanning state is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The inm handle
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_wifi_set_scan_state_changed_cb(
     inm_h inm,
     inm_wifi_scan_state_changed_cb callback,
@@ -2336,15 +3080,23 @@ class Tizen65CapiNetworkInm {
           int Function(
               inm_h, inm_wifi_scan_state_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback called when the scanning state is changed.
-  /// @since_tizen 5.0
-  /// @param[in] inm  The inm handle
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Unsets the callback called when the scanning state is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The inm handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_wifi_unset_scan_state_changed_cb(
     inm_h inm,
   ) {
@@ -2360,16 +3112,24 @@ class Tizen65CapiNetworkInm {
       _inm_wifi_unset_scan_state_changed_cbPtr
           .asFunction<int Function(inm_h)>();
 
-  /// @brief Gets the Wi-Fi scan state.
-  /// @since_tizen 5.0
-  /// @param[in] inm    The inm handle
-  /// @param[in] state  The Wi-Fi scan state
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets the Wi-Fi scan state.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The inm handle
+  /// - `state` (in): The Wi-Fi scan state
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_wifi_get_scan_state(
     inm_h inm,
     ffi.Pointer<ffi.Int32> state,
@@ -2386,21 +3146,35 @@ class Tizen65CapiNetworkInm {
   late final _inm_wifi_get_scan_state = _inm_wifi_get_scan_statePtr
       .asFunction<int Function(inm_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the handle of the connected access point.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @remarks You must release @a ap using inm_connection_destroy().
-  /// @param[in] inm             The inm handle
-  /// @param[out] ap             The access point handle
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #INM_ERROR_PERMISSION_DENIED  Permission Denied
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets the handle of the connected access point.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - You must release `ap` using inm_connection_destroy().
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The inm handle
+  /// - `ap` (out): The access point handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `INM_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_wifi_get_connected_ap(
     inm_h inm,
     ffi.Pointer<inm_connection_h> ap,
@@ -2418,22 +3192,36 @@ class Tizen65CapiNetworkInm {
   late final _inm_wifi_get_connected_ap = _inm_wifi_get_connected_apPtr
       .asFunction<int Function(inm_h, ffi.Pointer<inm_connection_h>)>();
 
-  /// @brief Gets the result of the scan.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] inm        The inm handle
-  /// @param[in] callback   The callback to be called
-  /// @param[in] user_data  The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #INM_ERROR_PERMISSION_DENIED  Permission Denied
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @post This function invokes inm_wifi_found_ap_cb().
+  /// Gets the result of the scan.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `inm` (in): The inm handle
+  /// - `callback` (in): The callback to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `INM_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **Postconditions:**
+  /// - This function invokes inm_wifi_found_ap_cb().
   int inm_wifi_foreach_found_ap(
     inm_h inm,
     inm_wifi_found_ap_cb callback,
@@ -2454,17 +3242,27 @@ class Tizen65CapiNetworkInm {
       _inm_wifi_foreach_found_apPtr.asFunction<
           int Function(inm_h, inm_wifi_found_ap_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets ESSID (Extended Service Set Identifier).
-  /// @since_tizen 5.0
-  /// @remarks You must release @a essid using free().
-  /// @param[in] ap      The access point handle
-  /// @param[out] essid  The ESSID
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets ESSID (Extended Service Set Identifier).
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - You must release `essid` using free().
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `essid` (out): The ESSID
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_wifi_ap_get_essid(
     inm_connection_h ap,
     ffi.Pointer<ffi.Pointer<ffi.Char>> essid,
@@ -2482,18 +3280,28 @@ class Tizen65CapiNetworkInm {
   late final _inm_wifi_ap_get_essid = _inm_wifi_ap_get_essidPtr.asFunction<
       int Function(inm_connection_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets raw SSID (Service Set Identifier).
-  /// @since_tizen 5.0
-  /// @remarks You must release @a ssid using free().
-  /// @param[in] ap         The access point handle
-  /// @param[out] ssid      The raw SSID bytes
-  /// @param[out] ssid_len  The raw SSID length
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets raw SSID (Service Set Identifier).
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - You must release `ssid` using free().
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `ssid` (out): The raw SSID bytes
+  /// - `ssid_len` (out): The raw SSID length
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_wifi_ap_get_raw_ssid(
     inm_connection_h ap,
     ffi.Pointer<ffi.Pointer<ffi.Char>> ssid,
@@ -2515,17 +3323,27 @@ class Tizen65CapiNetworkInm {
           int Function(inm_connection_h, ffi.Pointer<ffi.Pointer<ffi.Char>>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets BSSID (Basic Service Set Identifier).
-  /// @since_tizen 5.0
-  /// @remarks You must release @a bssid using free().
-  /// @param[in] ap      The access point handle
-  /// @param[out] bssid  The BSSID
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets BSSID (Basic Service Set Identifier).
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - You must release `bssid` using free().
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `bssid` (out): The BSSID
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_wifi_ap_get_bssid(
     inm_connection_h ap,
     ffi.Pointer<ffi.Pointer<ffi.Char>> bssid,
@@ -2543,15 +3361,23 @@ class Tizen65CapiNetworkInm {
   late final _inm_wifi_ap_get_bssid = _inm_wifi_ap_get_bssidPtr.asFunction<
       int Function(inm_connection_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the RSSI.
-  /// @since_tizen 5.0
-  /// @param[in] ap     The access point handle
-  /// @param[out] rssi  The RSSI value (in dBm)
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets the RSSI.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `rssi` (out): The RSSI value (in dBm)
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_wifi_ap_get_rssi(
     inm_connection_h ap,
     ffi.Pointer<ffi.Int> rssi,
@@ -2569,15 +3395,23 @@ class Tizen65CapiNetworkInm {
   late final _inm_wifi_ap_get_rssi = _inm_wifi_ap_get_rssiPtr
       .asFunction<int Function(inm_connection_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the RSSI level.
-  /// @since_tizen 5.0
-  /// @param[in] ap           The access point handle
-  /// @param[out] rssi_level  The RSSI level
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets the RSSI level.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `rssi_level` (out): The RSSI level
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_wifi_ap_get_rssi_level(
     inm_connection_h ap,
     ffi.Pointer<ffi.Int32> rssi_level,
@@ -2595,15 +3429,23 @@ class Tizen65CapiNetworkInm {
   late final _inm_wifi_ap_get_rssi_level = _inm_wifi_ap_get_rssi_levelPtr
       .asFunction<int Function(inm_connection_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the frequency band (MHz).
-  /// @since_tizen 5.0
-  /// @param[in] ap          The access point handle
-  /// @param[out] frequency  The frequency
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets the frequency band (MHz).
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `frequency` (out): The frequency
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_wifi_ap_get_frequency(
     inm_connection_h ap,
     ffi.Pointer<ffi.Int> frequency,
@@ -2621,15 +3463,23 @@ class Tizen65CapiNetworkInm {
   late final _inm_wifi_ap_get_frequency = _inm_wifi_ap_get_frequencyPtr
       .asFunction<int Function(inm_connection_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the max speed (Mbps).
-  /// @since_tizen 5.0
-  /// @param[in] ap          The access point handle
-  /// @param[out] max_speed  The max speed
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets the max speed (Mbps).
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `max_speed` (out): The max speed
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_wifi_ap_get_max_speed(
     inm_connection_h ap,
     ffi.Pointer<ffi.Int> max_speed,
@@ -2647,16 +3497,23 @@ class Tizen65CapiNetworkInm {
   late final _inm_wifi_ap_get_max_speed = _inm_wifi_ap_get_max_speedPtr
       .asFunction<int Function(inm_connection_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Checks whether the access point is favorite or not.
-  /// @since_tizen 5.0
-  /// @param[in] ap         The access point handle
-  /// @param[out] favorite  @c true if access point is favorite,
-  /// otherwise @c false if access point is not favorite
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Checks whether the access point is favorite or not.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `favorite` (out): `true` if access point is favorite, otherwise `false` if access point is not favorite
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_wifi_ap_is_favorite(
     inm_connection_h ap,
     ffi.Pointer<ffi.Bool> favorite,
@@ -2674,16 +3531,23 @@ class Tizen65CapiNetworkInm {
   late final _inm_wifi_ap_is_favorite = _inm_wifi_ap_is_favoritePtr
       .asFunction<int Function(inm_connection_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Checks whether the access point is a Passpoint or not.
-  /// @since_tizen 5.0
-  /// @param[in] ap          The access point handle
-  /// @param[out] passpoint  @c true if access point is a Passpoint,
-  /// @c false if access point is not a Passpoint.
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Checks whether the access point is a Passpoint or not.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `passpoint` (out): `true` if access point is a Passpoint, `false` if access point is not a Passpoint.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_wifi_ap_is_passpoint(
     inm_connection_h ap,
     ffi.Pointer<ffi.Bool> passpoint,
@@ -2701,15 +3565,23 @@ class Tizen65CapiNetworkInm {
   late final _inm_wifi_ap_is_passpoint = _inm_wifi_ap_is_passpointPtr
       .asFunction<int Function(inm_connection_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets the Wi-Fi security mode.
-  /// @since_tizen 5.0
-  /// @param[in] ap     The access point handle
-  /// @param[out] type  The type of Wi-Fi security
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets the Wi-Fi security mode.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `type` (out): The type of Wi-Fi security
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_wifi_ap_get_security_type(
     inm_connection_h ap,
     ffi.Pointer<ffi.Int32> type,
@@ -2727,15 +3599,23 @@ class Tizen65CapiNetworkInm {
   late final _inm_wifi_ap_get_security_type = _inm_wifi_ap_get_security_typePtr
       .asFunction<int Function(inm_connection_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the Wi-Fi encryption type.
-  /// @since_tizen 5.0
-  /// @param[in] ap     The access point handle
-  /// @param[out] type  The type of Wi-Fi encryption
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets the Wi-Fi encryption type.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `type` (out): The type of Wi-Fi encryption
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_wifi_ap_get_encryption_type(
     inm_connection_h ap,
     ffi.Pointer<ffi.Int32> type,
@@ -2754,17 +3634,26 @@ class Tizen65CapiNetworkInm {
       _inm_wifi_ap_get_encryption_typePtr
           .asFunction<int Function(inm_connection_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Checks whether the passphrase is required or not.
-  /// @since_tizen 5.0
-  /// @remarks This function is not valid if security type is #INM_WIFI_SECURITY_TYPE_EAP.
-  /// @param[in] ap         The access point handle
-  /// @param[out] required  @c true if passphrase is required,
-  /// @c false if passphrase is not required.
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Checks whether the passphrase is required or not.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - This function is not valid if security type is `INM_WIFI_SECURITY_TYPE_EAP`.
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `required` (out): `true` if passphrase is required, `false` if passphrase is not required.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_wifi_ap_is_passphrase_required(
     inm_connection_h ap,
     ffi.Pointer<ffi.Bool> required1,
@@ -2783,16 +3672,23 @@ class Tizen65CapiNetworkInm {
       _inm_wifi_ap_is_passphrase_requiredPtr
           .asFunction<int Function(inm_connection_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Checks whether the WPS (Wi-Fi Protected Setup) is supported or not.
-  /// @since_tizen 5.0
-  /// @param[in] ap          The access point handle
-  /// @param[out] supported  @c true if WPS is supported,
-  /// otherwise @c false is WPS is not supported.
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Checks whether the WPS (Wi-Fi Protected Setup) is supported or not.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `supported` (out): `true` if WPS is supported, otherwise `false` is WPS is not supported.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_wifi_ap_is_wps_supported(
     inm_connection_h ap,
     ffi.Pointer<ffi.Bool> supported,
@@ -2810,15 +3706,23 @@ class Tizen65CapiNetworkInm {
   late final _inm_wifi_ap_is_wps_supported = _inm_wifi_ap_is_wps_supportedPtr
       .asFunction<int Function(inm_connection_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets the Wi-Fi disconnect reason from the supplicant.
-  /// @since_tizen 5.0
-  /// @param[in] ap                  The access point handle
-  /// @param[out] disconnect_reason  The supplicant disconnect reason
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets the Wi-Fi disconnect reason from the supplicant.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `disconnect_reason` (out): The supplicant disconnect reason
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_wifi_ap_get_disconnect_reason(
     inm_connection_h ap,
     ffi.Pointer<ffi.Int32> disconnect_reason,
@@ -2837,15 +3741,23 @@ class Tizen65CapiNetworkInm {
       _inm_wifi_ap_get_disconnect_reasonPtr
           .asFunction<int Function(inm_connection_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the Wi-Fi Association Status Code from the supplicant.
-  /// @since_tizen 5.0
-  /// @param[in] ap            The access point handle
-  /// @param[out] status_code  The supplicant Wi-Fi association status code
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets the Wi-Fi Association Status Code from the supplicant.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `status_code` (out): The supplicant Wi-Fi association status code
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_wifi_ap_get_assoc_status_code(
     inm_connection_h ap,
     ffi.Pointer<ffi.Int32> status_code,
@@ -2864,17 +3776,25 @@ class Tizen65CapiNetworkInm {
       _inm_wifi_ap_get_assoc_status_codePtr
           .asFunction<int Function(inm_connection_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets all VSIE of AP.
-  /// @since_tizen 5.0
-  /// @param[in] ap         The access point handle
-  /// @param[in] callback   The callback to be called for each VSIE of AP
-  /// @param[in] user_data  The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value.
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets all VSIE of AP.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `callback` (in): The callback to be called for each VSIE of AP
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value.
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_wifi_ap_foreach_vsie(
     inm_connection_h ap,
     inm_wifi_ap_vsie_cb callback,
@@ -2896,18 +3816,27 @@ class Tizen65CapiNetworkInm {
           int Function(
               inm_connection_h, inm_wifi_ap_vsie_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Destroys a link handle.
-  /// @since_tizen 5.5
-  /// @param[out] link  The link handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @see inm_link_clone()
-  /// @see inm_foreach_link()
+  /// Destroys a link handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `link` (out): The link handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `inm_link_clone()`
+  /// - `inm_foreach_link()`
   int inm_link_destroy(
     inm_link_h link,
   ) {
@@ -2922,20 +3851,31 @@ class Tizen65CapiNetworkInm {
   late final _inm_link_destroy =
       _inm_link_destroyPtr.asFunction<int Function(inm_link_h)>();
 
-  /// @brief Clones a link handle.
-  /// @since_tizen 5.5
-  /// @remarks You must release @a cloned link using inm_link_destroy().
-  /// @param[out] cloned  The handle of the cloned link
-  /// @param[in] origin   The handle of the origin link
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @see inm_link_destroy()
+  /// Clones a link handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - You must release `cloned` link using inm_link_destroy().
+  ///
+  /// **Parameters:**
+  /// - `cloned` (out): The handle of the cloned link
+  /// - `origin` (in): The handle of the origin link
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `inm_link_destroy()`
   int inm_link_clone(
     ffi.Pointer<inm_link_h> cloned,
     inm_link_h origin,
@@ -2953,20 +3893,31 @@ class Tizen65CapiNetworkInm {
   late final _inm_link_clone = _inm_link_clonePtr
       .asFunction<int Function(ffi.Pointer<inm_link_h>, inm_link_h)>();
 
-  /// @brief Gets the link interface name.
-  /// @since_tizen 5.5
-  /// @remarks You must release @a interface_name using free().
-  /// @param[in] link             The link handle
-  /// @param[out] interface_name  The interface name of the link
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @see inm_foreach_link()
+  /// Gets the link interface name.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - You must release `interface_name` using free().
+  ///
+  /// **Parameters:**
+  /// - `link` (in): The link handle
+  /// - `interface_name` (out): The interface name of the link
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `inm_foreach_link()`
   int inm_link_get_interface_name(
     inm_link_h link,
     ffi.Pointer<ffi.Pointer<ffi.Char>> interface_name,
@@ -2986,18 +3937,27 @@ class Tizen65CapiNetworkInm {
       _inm_link_get_interface_namePtr.asFunction<
           int Function(inm_link_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the link flags.
-  /// @since_tizen 5.5
-  /// @param[in] link    The link handle
-  /// @param[out] flags The flags, values of #inm_link_flag_e combined with bitwise 'or'
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @see inm_foreach_link()
+  /// Gets the link flags.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `link` (in): The link handle
+  /// - `flags` (out): The flags, values of `inm_link_flag_e` combined with bitwise 'or'
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `inm_foreach_link()`
   int inm_link_get_flags(
     inm_link_h link,
     ffi.Pointer<ffi.Int> flags,
@@ -3015,18 +3975,27 @@ class Tizen65CapiNetworkInm {
   late final _inm_link_get_flags = _inm_link_get_flagsPtr
       .asFunction<int Function(inm_link_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the link operation status.
-  /// @since_tizen 5.5
-  /// @param[in] link              The link handle
-  /// @param[out] operation_state  The operation status of the link
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @see inm_foreach_link()
+  /// Gets the link operation status.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `link` (in): The link handle
+  /// - `operation_state` (out): The operation status of the link
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `inm_foreach_link()`
   int inm_link_get_operation_state(
     inm_link_h link,
     ffi.Pointer<ffi.Int32> operation_state,
@@ -3044,18 +4013,27 @@ class Tizen65CapiNetworkInm {
   late final _inm_link_get_operation_state = _inm_link_get_operation_statePtr
       .asFunction<int Function(inm_link_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the bytes received by the link.
-  /// @since_tizen 5.5
-  /// @param[in] link    The link handle
-  /// @param[out] bytes  The bytes received by the link
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @see inm_foreach_link()
+  /// Gets the bytes received by the link.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `link` (in): The link handle
+  /// - `bytes` (out): The bytes received by the link
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `inm_foreach_link()`
   int inm_link_get_received_bytes(
     inm_link_h link,
     ffi.Pointer<ffi.UnsignedLongLong> bytes,
@@ -3074,18 +4052,27 @@ class Tizen65CapiNetworkInm {
       _inm_link_get_received_bytesPtr.asFunction<
           int Function(inm_link_h, ffi.Pointer<ffi.UnsignedLongLong>)>();
 
-  /// @brief Gets the bytes sent by the link.
-  /// @since_tizen 5.5
-  /// @param[in] link    The link handle
-  /// @param[out] bytes  The bytes sent by the link
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @see inm_foreach_link()
+  /// Gets the bytes sent by the link.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `link` (in): The link handle
+  /// - `bytes` (out): The bytes sent by the link
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `inm_foreach_link()`
   int inm_link_get_sent_bytes(
     inm_link_h link,
     ffi.Pointer<ffi.UnsignedLongLong> bytes,
@@ -3103,17 +4090,25 @@ class Tizen65CapiNetworkInm {
   late final _inm_link_get_sent_bytes = _inm_link_get_sent_bytesPtr.asFunction<
       int Function(inm_link_h, ffi.Pointer<ffi.UnsignedLongLong>)>();
 
-  /// @brief Gets all addresses of the link.
-  /// @since_tizen 5.5
-  /// @param[in] link       The link handle
-  /// @param[in] callback   The callback to be called for each address of link
-  /// @param[in] user_data  The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value.
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets all addresses of the link.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `link` (in): The link handle
+  /// - `callback` (in): The callback to be called for each address of link
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value.
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_link_foreach_address(
     inm_link_h link,
     inm_link_address_cb callback,
@@ -3135,18 +4130,27 @@ class Tizen65CapiNetworkInm {
           int Function(
               inm_link_h, inm_link_address_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Destroys a link address handle.
-  /// @since_tizen 5.5
-  /// @param[in] address  The link address handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @see inm_link_address_clone()
-  /// @see inm_link_foreach_address()
+  /// Destroys a link address handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `address` (in): The link address handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `inm_link_address_clone()`
+  /// - `inm_link_foreach_address()`
   int inm_link_address_destroy(
     inm_link_address_h address,
   ) {
@@ -3161,20 +4165,31 @@ class Tizen65CapiNetworkInm {
   late final _inm_link_address_destroy = _inm_link_address_destroyPtr
       .asFunction<int Function(inm_link_address_h)>();
 
-  /// @brief Clones a link address handle.
-  /// @since_tizen 5.5
-  /// @remarks You must release @a cloned link address using inm_link_address_destroy().
-  /// @param[out] cloned  The handle of the cloned link address
-  /// @param[in] origin   The handle of the origin link address
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @see inm_link_address_destroy()
+  /// Clones a link address handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - You must release `cloned` link address using inm_link_address_destroy().
+  ///
+  /// **Parameters:**
+  /// - `cloned` (out): The handle of the cloned link address
+  /// - `origin` (in): The handle of the origin link address
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `inm_link_address_destroy()`
   int inm_link_address_clone(
     ffi.Pointer<inm_link_address_h> cloned,
     inm_link_address_h origin,
@@ -3192,18 +4207,27 @@ class Tizen65CapiNetworkInm {
   late final _inm_link_address_clone = _inm_link_address_clonePtr.asFunction<
       int Function(ffi.Pointer<inm_link_address_h>, inm_link_address_h)>();
 
-  /// @brief Gets the address family.
-  /// @since_tizen 5.5
-  /// @param[in] address  The address handle
-  /// @param[out] family  The address family
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @see inm_link_foreach_address()
+  /// Gets the address family.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `address` (in): The address handle
+  /// - `family` (out): The address family
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `inm_link_foreach_address()`
   int inm_link_address_get_family(
     inm_link_address_h address,
     ffi.Pointer<ffi.Int32> family,
@@ -3221,18 +4245,27 @@ class Tizen65CapiNetworkInm {
   late final _inm_link_address_get_family = _inm_link_address_get_familyPtr
       .asFunction<int Function(inm_link_address_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the address prefix length.
-  /// @since_tizen 5.5
-  /// @param[in] address         The address handle
-  /// @param[out] prefix_length  The prefix length of address
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @see inm_link_foreach_address()
+  /// Gets the address prefix length.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `address` (in): The address handle
+  /// - `prefix_length` (out): The prefix length of address
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `inm_link_foreach_address()`
   int inm_link_address_get_prefix_length(
     inm_link_address_h address,
     ffi.Pointer<ffi.Int> prefix_length,
@@ -3251,18 +4284,27 @@ class Tizen65CapiNetworkInm {
       _inm_link_address_get_prefix_lengthPtr
           .asFunction<int Function(inm_link_address_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the address scope.
-  /// @since_tizen 5.5
-  /// @param[in] address  The address handle
-  /// @param[out] scope   The address scope
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @see inm_link_foreach_address()
+  /// Gets the address scope.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `address` (in): The address handle
+  /// - `scope` (out): The address scope
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `inm_link_foreach_address()`
   int inm_link_address_get_scope(
     inm_link_address_h address,
     ffi.Pointer<ffi.Int32> scope,
@@ -3280,21 +4322,32 @@ class Tizen65CapiNetworkInm {
   late final _inm_link_address_get_scope = _inm_link_address_get_scopePtr
       .asFunction<int Function(inm_link_address_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the address string.
-  /// @since_tizen 5.5
-  /// @remarks You must release @a address_string using free().
-  /// @param[in] address          The address handle
-  /// @param[out] address_string  The address string
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #INM_ERROR_DATA_NOT_FOUND     Data not found
-  /// @see inm_link_foreach_address()
+  /// Gets the address string.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - You must release `address_string` using free().
+  ///
+  /// **Parameters:**
+  /// - `address` (in): The address handle
+  /// - `address_string` (out): The address string
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `INM_ERROR_DATA_NOT_FOUND`: Data not found
+  ///
+  /// **See also:**
+  /// - `inm_link_foreach_address()`
   int inm_link_address_get_string(
     inm_link_address_h address,
     ffi.Pointer<ffi.Pointer<ffi.Char>> address_string,
@@ -3315,17 +4368,25 @@ class Tizen65CapiNetworkInm {
           int Function(
               inm_link_address_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets all route tables of the link.
-  /// @since_tizen 5.0
-  /// @param[in] link       The link handle
-  /// @param[in] callback   The callback to be called for each route table of link
-  /// @param[in] user_data  The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value.
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
+  /// Gets all route tables of the link.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `link` (in): The link handle
+  /// - `callback` (in): The callback to be called for each route table of link
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value.
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
   int inm_link_foreach_route(
     inm_link_h link,
     inm_link_route_cb callback,
@@ -3345,18 +4406,27 @@ class Tizen65CapiNetworkInm {
   late final _inm_link_foreach_route = _inm_link_foreach_routePtr.asFunction<
       int Function(inm_link_h, inm_link_route_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Destroys a link route handle.
-  /// @since_tizen 5.5
-  /// @param[in] route  The link route handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @see inm_link_route_clone()
-  /// @see inm_link_foreach_route()
+  /// Destroys a link route handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `route` (in): The link route handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `inm_link_route_clone()`
+  /// - `inm_link_foreach_route()`
   int inm_link_route_destroy(
     inm_link_route_h route,
   ) {
@@ -3371,20 +4441,31 @@ class Tizen65CapiNetworkInm {
   late final _inm_link_route_destroy =
       _inm_link_route_destroyPtr.asFunction<int Function(inm_link_route_h)>();
 
-  /// @brief Clones a link route handle.
-  /// @since_tizen 5.5
-  /// @remarks You must release @a cloned link route using inm_link_route_destroy().
-  /// @param[out] cloned  The handle of the cloned link route
-  /// @param[in] origin   The handle of the origin link route
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @see inm_link_route_destroy()
+  /// Clones a link route handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - You must release `cloned` link route using inm_link_route_destroy().
+  ///
+  /// **Parameters:**
+  /// - `cloned` (out): The handle of the cloned link route
+  /// - `origin` (in): The handle of the origin link route
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `inm_link_route_destroy()`
   int inm_link_route_clone(
     ffi.Pointer<inm_link_route_h> cloned,
     inm_link_route_h origin,
@@ -3402,21 +4483,32 @@ class Tizen65CapiNetworkInm {
   late final _inm_link_route_clone = _inm_link_route_clonePtr.asFunction<
       int Function(ffi.Pointer<inm_link_route_h>, inm_link_route_h)>();
 
-  /// @brief Gets the route destination.
-  /// @since_tizen 5.5
-  /// @remarks You must release @a destination using free().
-  /// @param[in] route         The route handle
-  /// @param[out] destination  The route destination
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #INM_ERROR_DATA_NOT_FOUND     Data not found
-  /// @see inm_link_foreach_route()
+  /// Gets the route destination.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - You must release `destination` using free().
+  ///
+  /// **Parameters:**
+  /// - `route` (in): The route handle
+  /// - `destination` (out): The route destination
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `INM_ERROR_DATA_NOT_FOUND`: Data not found
+  ///
+  /// **See also:**
+  /// - `inm_link_foreach_route()`
   int inm_link_route_get_destination(
     inm_link_route_h route,
     ffi.Pointer<ffi.Pointer<ffi.Char>> destination,
@@ -3436,21 +4528,32 @@ class Tizen65CapiNetworkInm {
       _inm_link_route_get_destinationPtr.asFunction<
           int Function(inm_link_route_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the route gateway.
-  /// @since_tizen 5.5
-  /// @remarks You must release @a gateway using free().
-  /// @param[in] route     The route handle
-  /// @param[out] gateway  The route gateway
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #INM_ERROR_DATA_NOT_FOUND     Data not found
-  /// @see inm_link_foreach_route()
+  /// Gets the route gateway.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - You must release `gateway` using free().
+  ///
+  /// **Parameters:**
+  /// - `route` (in): The route handle
+  /// - `gateway` (out): The route gateway
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `INM_ERROR_DATA_NOT_FOUND`: Data not found
+  ///
+  /// **See also:**
+  /// - `inm_link_foreach_route()`
   int inm_link_route_get_gateway(
     inm_link_route_h route,
     ffi.Pointer<ffi.Pointer<ffi.Char>> gateway,
@@ -3470,21 +4573,32 @@ class Tizen65CapiNetworkInm {
       _inm_link_route_get_gatewayPtr.asFunction<
           int Function(inm_link_route_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the route interface.
-  /// @since_tizen 5.5
-  /// @remarks You must release @a interface using free().
-  /// @param[in] route       The route handle
-  /// @param[out] interface  The route interface
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #INM_ERROR_DATA_NOT_FOUND     Data not found
-  /// @see inm_link_foreach_route()
+  /// Gets the route interface.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - You must release `interface` using free().
+  ///
+  /// **Parameters:**
+  /// - `route` (in): The route handle
+  /// - `interface` (out): The route interface
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `INM_ERROR_DATA_NOT_FOUND`: Data not found
+  ///
+  /// **See also:**
+  /// - `inm_link_foreach_route()`
   int inm_link_route_get_interface(
     inm_link_route_h route,
     ffi.Pointer<ffi.Pointer<ffi.Char>> interface1,
@@ -3504,19 +4618,27 @@ class Tizen65CapiNetworkInm {
       _inm_link_route_get_interfacePtr.asFunction<
           int Function(inm_link_route_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Checks whether the route is default or not.
-  /// @since_tizen 5.5
-  /// @param[in] route        The route handle
-  /// @param[out] is_default  @c true if route is default,
-  /// otherwise @c false if route is not default
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @see inm_link_foreach_route()
+  /// Checks whether the route is default or not.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `route` (in): The route handle
+  /// - `is_default` (out): `true` if route is default, otherwise `false` if route is not default
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `inm_link_foreach_route()`
   int inm_link_route_is_default(
     inm_link_route_h route,
     ffi.Pointer<ffi.Bool> is_default,
@@ -3534,18 +4656,27 @@ class Tizen65CapiNetworkInm {
   late final _inm_link_route_is_default = _inm_link_route_is_defaultPtr
       .asFunction<int Function(inm_link_route_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets the route type.
-  /// @since_tizen 5.5
-  /// @param[in] route  The route handle
-  /// @param[out] type  The route type
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #INM_ERROR_NONE               Successful
-  /// @retval #INM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #INM_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #INM_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #INM_ERROR_OPERATION_FAILED   Operation failed
-  /// @see inm_link_foreach_route()
+  /// Gets the route type.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `route` (in): The route handle
+  /// - `type` (out): The route type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `INM_ERROR_NONE`: Successful
+  /// - `INM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `INM_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `INM_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `INM_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `inm_link_foreach_route()`
   int inm_link_route_get_type(
     inm_link_route_h route,
     ffi.Pointer<ffi.Int32> type,
@@ -3564,8 +4695,11 @@ class Tizen65CapiNetworkInm {
       .asFunction<int Function(inm_link_route_h, ffi.Pointer<ffi.Int32>)>();
 }
 
-/// @brief Enumeration for Intelligent Network Monitoring (INM) error code.
-/// @since_tizen 5.0
+/// Enumeration for Intelligent Network Monitoring (INM) error code.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class inm_error_e {
   /// Successful
   static const int INM_ERROR_NONE = 0;
@@ -3607,8 +4741,11 @@ abstract class inm_error_e {
   static const int INM_ERROR_DATA_NOT_FOUND = -50200572;
 }
 
-/// @brief Enumeration for the Ethernet cable state.
-/// @since_tizen 5.0
+/// Enumeration for the Ethernet cable state.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class inm_ethernet_cable_state_e {
   /// < Ethernet cable is detached
   static const int INM_ETHERNET_CABLE_STATE_DETACHED = 0;
@@ -3617,8 +4754,11 @@ abstract class inm_ethernet_cable_state_e {
   static const int INM_ETHERNET_CABLE_STATE_ATTACHED = 1;
 }
 
-/// @brief Enumeration for the Wi-Fi Module state.
-/// @since_tizen 5.0
+/// Enumeration for the Wi-Fi Module state.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class inm_wifi_module_state_e {
   /// < Wi-Fi Module is detached
   static const int INM_WIFI_MODULE_STATE_DETACHED = 0;
@@ -3627,8 +4767,11 @@ abstract class inm_wifi_module_state_e {
   static const int INM_WIFI_MODULE_STATE_ATTACHED = 1;
 }
 
-/// @brief Enumeration for the state of the IP conflict.
-/// @since_tizen 5.0
+/// Enumeration for the state of the IP conflict.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class inm_ip_conflict_state_e {
   /// < Unknown state
   static const int INM_IP_CONFLICT_STATE_UNKNOWN = 0;
@@ -3640,8 +4783,11 @@ abstract class inm_ip_conflict_state_e {
   static const int INM_IP_CONFLICT_STATE_CONFLICT_DETECTED = 2;
 }
 
-/// @brief Enumeration for connection type.
-/// @since_tizen 5.0
+/// Enumeration for connection type.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class inm_connection_type_e {
   /// < Disconnected
   static const int INM_CONNECTION_TYPE_DISCONNECTED = 0;
@@ -3662,8 +4808,11 @@ abstract class inm_connection_type_e {
   static const int INM_CONNECTION_TYPE_NET_PROXY = 5;
 }
 
-/// @brief Enumeration for statistics type.
-/// @since_tizen 5.0
+/// Enumeration for statistics type.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class inm_statistics_type_e {
   /// < Last received data
   static const int INM_STATISTICS_TYPE_LAST_RECEIVED_DATA = 0;
@@ -3678,8 +4827,11 @@ abstract class inm_statistics_type_e {
   static const int INM_STATISTICS_TYPE_TOTAL_SENT_DATA = 3;
 }
 
-/// @brief Enumeration for congestion level.
-/// @since_tizen 5.0
+/// Enumeration for congestion level.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class inm_congestion_level_e {
   /// < Very high TCP congestion
   static const int INM_CONGESTION_LEVEL_VERY_HIGH = 0;
@@ -3694,8 +4846,11 @@ abstract class inm_congestion_level_e {
   static const int INM_CONGESTION_LEVEL_LOW = 3;
 }
 
-/// @brief Enumeration for cellular network state.
-/// @since_tizen 5.0
+/// Enumeration for cellular network state.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class inm_cellular_state_e {
   /// < Cellular is deactivated
   static const int INM_CELLULAR_STATE_DEACTIVATED = 0;
@@ -3707,8 +4862,11 @@ abstract class inm_cellular_state_e {
   static const int INM_CELLULAR_STATE_CONNECTED = 2;
 }
 
-/// @brief Enumeration for Wi-Fi state.
-/// @since_tizen 5.0
+/// Enumeration for Wi-Fi state.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class inm_wifi_state_e {
   /// < Wi-Fi is deactivated
   static const int INM_WIFI_STATE_DEACTIVATED = 0;
@@ -3720,8 +4878,11 @@ abstract class inm_wifi_state_e {
   static const int INM_WIFI_STATE_CONNECTED = 2;
 }
 
-/// @brief Enumeration for ethernet state.
-/// @since_tizen 5.0
+/// Enumeration for ethernet state.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class inm_ethernet_state_e {
   /// < There is no Ethernet profile to open
   static const int INM_ETHERNET_STATE_DEACTIVATED = 0;
@@ -3733,8 +4894,11 @@ abstract class inm_ethernet_state_e {
   static const int INM_ETHERNET_STATE_CONNECTED = 2;
 }
 
-/// @brief Enumeration for URL list type.
-/// @since_tizen 5.5
+/// Enumeration for URL list type.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class inm_url_list_type_e {
   /// < Default test URLs
   static const int INM_URL_LIST_TYPE_DEFAULT = 0;
@@ -3743,8 +4907,11 @@ abstract class inm_url_list_type_e {
   static const int INM_URL_LIST_TYPE_USER = 1;
 }
 
-/// @brief Enumeration for result of checking URL callback.
-/// @since_tizen 5.5
+/// Enumeration for result of checking URL callback.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class inm_reachable_urls_check_result_e {
   /// < URL accessed successfully
   static const int INM_REACHABLE_URL_CHECK_RESULT_SUCCESS = 0;
@@ -3771,8 +4938,11 @@ abstract class inm_reachable_urls_check_result_e {
   static const int INM_REACHABLE_URL_CHECK_RESULT_ERROR_UNKNOWN = 255;
 }
 
-/// @brief Enumeration for connection state type.
-/// @since_tizen 5.0
+/// Enumeration for connection state type.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class inm_connection_state_e {
   /// < Disconnected state
   static const int INM_CONNECTION_STATE_DISCONNECTED = 0;
@@ -3787,8 +4957,11 @@ abstract class inm_connection_state_e {
   static const int INM_CONNECTION_STATE_CONNECTED = 3;
 }
 
-/// @brief Enumeration for address family.
-/// @since_tizen 5.0
+/// Enumeration for address family.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class inm_address_family_e {
   /// < IPV4 Address type
   static const int INM_ADDRESS_FAMILY_IPV4 = 0;
@@ -3797,8 +4970,11 @@ abstract class inm_address_family_e {
   static const int INM_ADDRESS_FAMILY_IPV6 = 1;
 }
 
-/// @brief Enumeration for IP configuration type.
-/// @since_tizen 5.0
+/// Enumeration for IP configuration type.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class inm_ip_config_type_e {
   /// Not defined
   static const int INM_IP_CONFIG_TYPE_NONE = 0;
@@ -3816,8 +4992,11 @@ abstract class inm_ip_config_type_e {
   static const int INM_IP_CONFIG_TYPE_FIXED = 4;
 }
 
-/// @brief Enumeration for proxy method type.
-/// @since_tizen 5.0
+/// Enumeration for proxy method type.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class inm_proxy_type_e {
   /// Direct connection
   static const int INM_PROXY_TYPE_DIRECT = 0;
@@ -3830,8 +5009,11 @@ abstract class inm_proxy_type_e {
   static const int INM_PROXY_TYPE_MANUAL = 2;
 }
 
-/// @brief Enumeration for DNS configuration type.
-/// @since_tizen 5.0
+/// Enumeration for DNS configuration type.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class inm_dns_config_type_e {
   /// < Not defined
   static const int INM_DNS_CONFIG_TYPE_NONE = 0;
@@ -3843,8 +5025,11 @@ abstract class inm_dns_config_type_e {
   static const int INM_DNS_CONFIG_TYPE_DYNAMIC = 2;
 }
 
-/// @brief Enumeration for the wifi scanning state.
-/// @since_tizen 5.0
+/// Enumeration for the wifi scanning state.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class inm_wifi_scan_state_e {
   /// < Scan is not running
   static const int INM_WIFI_SCAN_STATE_NOT_SCANNING = 0;
@@ -3853,8 +5038,11 @@ abstract class inm_wifi_scan_state_e {
   static const int INM_WIFI_SCAN_STATE_SCANNING = 1;
 }
 
-/// @brief Enumeration for the RSSI level.
-/// @since_tizen 5.0
+/// Enumeration for the RSSI level.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class inm_wifi_rssi_level_e {
   /// < No signal
   static const int INM_WIFI_RSSI_LEVEL_0 = 0;
@@ -3872,11 +5060,13 @@ abstract class inm_wifi_rssi_level_e {
   static const int INM_WIFI_RSSI_LEVEL_4 = 4;
 }
 
-/// @brief Enumeration for Wi-Fi security type.
-/// @details The following security modes are used in infrastructure and ad-hoc mode.
-/// For now all EAP security mechanisms are provided only in infrastructure mode.
+/// Enumeration for Wi-Fi security type.
 ///
-/// @since_tizen 5.0
+/// The following security modes are used in infrastructure and ad-hoc mode. For now all EAP security mechanisms are provided only in infrastructure mode.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class inm_wifi_security_type_e {
   /// < Security disabled
   static const int INM_WIFI_SECURITY_TYPE_NONE = 0;
@@ -3897,9 +5087,13 @@ abstract class inm_wifi_security_type_e {
   static const int INM_WIFI_SECURITY_TYPE_FT_PSK = 5;
 }
 
-/// @brief Enumeration for Wi-Fi encryption type.
-/// @details The following encryption modes are used in infrastructure and ad-hoc mode.
-/// @since_tizen 5.0
+/// Enumeration for Wi-Fi encryption type.
+///
+/// The following encryption modes are used in infrastructure and ad-hoc mode.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class inm_wifi_encryption_type_e {
   /// < Encryption disabled
   static const int INM_WIFI_ENCRYPTION_TYPE_NONE = 0;
@@ -3917,8 +5111,11 @@ abstract class inm_wifi_encryption_type_e {
   static const int INM_WIFI_ENCRYPTION_TYPE_TKIP_AES_MIXED = 4;
 }
 
-/// @brief Enumeration for Wi-Fi disconnect reason, provided by the supplicant.
-/// @since_tizen 5.0
+/// Enumeration for Wi-Fi disconnect reason, provided by the supplicant.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class inm_wifi_disconnect_reason_e {
   /// Locally Generate Disconnect from user side
   static const int INM_WIFI_REASON_LOCAL_GENERATE_FROM_USER = -3;
@@ -4041,9 +5238,13 @@ abstract class inm_wifi_disconnect_reason_e {
   static const int INM_WIFI_REASON_MESH_INVALID_SECURITY_CAP = 60;
 }
 
-/// @brief Enumeration for Wi-Fi Association Status code, provided by the supplicant.
-/// @details The Wi-Fi Standard Reference : Status codes (IEEE 802.11-2007, 7.3.1.9, Table 7-23).
-/// @since_tizen 5.0
+/// Enumeration for Wi-Fi Association Status code, provided by the supplicant.
+///
+/// The Wi-Fi Standard Reference : Status codes (IEEE 802.11-2007, 7.3.1.9, Table 7-23).
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class inm_wifi_assoc_status_code_e {
   /// Successful
   static const int INM_WLAN_STATUS_SUCCESS = 0;
@@ -4101,8 +5302,11 @@ abstract class inm_wifi_assoc_status_code_e {
   static const int INM_WLAN_STATUS_ASSOC_DENIED_NO_VHT = 104;
 }
 
-/// @brief Enumeration for link flag.
-/// @since_tizen 5.5
+/// Enumeration for link flag.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class inm_link_flag_e {
   /// Interface is up
   static const int INM_LINK_FLAG_UP = 1;
@@ -4147,8 +5351,11 @@ abstract class inm_link_flag_e {
   static const int INM_LINK_FLAG_DORMANT = 131072;
 }
 
-/// @brief Enumeration for link RFC 2863 operation status.
-/// @since_tizen 5.5
+/// Enumeration for link RFC 2863 operation status.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class inm_link_oper_state_e {
   /// < UNKNOWN
   static const int INM_LINK_OPER_UNKNOWN = 0;
@@ -4172,8 +5379,11 @@ abstract class inm_link_oper_state_e {
   static const int INM_LINK_OPER_UP = 6;
 }
 
-/// @brief Enumeration for link scope.
-/// @since_tizen 5.5
+/// Enumeration for link scope.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class inm_link_scope_e {
   /// Scope nowhere
   static const int INM_LINK_SCOPE_NOWHERE = 0;
@@ -4194,8 +5404,11 @@ abstract class inm_link_scope_e {
   static const int INM_LINK_SCOPE_UNIVERSE = 4;
 }
 
-/// @brief Enumeration for link route scope.
-/// @since_tizen 5.5
+/// Enumeration for link route scope.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class inm_link_route_type_e {
   /// Unspecified
   static const int INM_LINK_ROUTE_TYPE_UNSPEC = 0;
@@ -4234,339 +5447,565 @@ abstract class inm_link_route_type_e {
   static const int INM_LINK_ROUTE_TYPE_XRESOLVE = 11;
 }
 
-/// @brief The inm handle.
-/// @since_tizen 5.0
+/// The inm handle.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 typedef inm_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when the Ethernet cable state is changed.
-/// @since_tizen 5.0
-/// @param[in] state      The Ethernet cable state
-/// @param[in] user_data  The user data passed from the callback registration function
-/// @see inm_set_ethernet_cable_state_changed_cb()
-/// @see inm_unset_ethernet_cable_state_changed_cb()
+/// Called when the Ethernet cable state is changed.
+///
+/// **Since Tizen:**
+/// - 5.0
+///
+/// **Parameters:**
+/// - `state` (in): The Ethernet cable state
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `inm_set_ethernet_cable_state_changed_cb()`
+/// - `inm_unset_ethernet_cable_state_changed_cb()`
+/// @nodoc
 typedef inm_ethernet_cable_state_changed_cb = ffi
     .Pointer<ffi.NativeFunction<inm_ethernet_cable_state_changed_cbFunction>>;
+/// @nodoc
 typedef inm_ethernet_cable_state_changed_cbFunction = ffi.Void Function(
     ffi.Int32 state, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartinm_ethernet_cable_state_changed_cbFunction = void Function(
     int state, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the Wi-Fi Module state is changed.
-/// @since_tizen 5.0
-/// @param[in] state      The Wi-Fi Module state
-/// @param[in] user_data  The user data passed from the callback registration function
-/// @see inm_set_wifi_module_state_changed_cb()
-/// @see inm_unset_wifi_module_state_changed_cb()
+/// Called when the Wi-Fi Module state is changed.
+///
+/// **Since Tizen:**
+/// - 5.0
+///
+/// **Parameters:**
+/// - `state` (in): The Wi-Fi Module state
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `inm_set_wifi_module_state_changed_cb()`
+/// - `inm_unset_wifi_module_state_changed_cb()`
+/// @nodoc
 typedef inm_wifi_module_state_changed_cb
     = ffi.Pointer<ffi.NativeFunction<inm_wifi_module_state_changed_cbFunction>>;
+/// @nodoc
 typedef inm_wifi_module_state_changed_cbFunction = ffi.Void Function(
     ffi.Int32 state, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartinm_wifi_module_state_changed_cbFunction = void Function(
     int state, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the IP conflict state is changed.
-/// @since_tizen 5.0
-/// @remarks @a if_name and @a ip should not be freed. @a if_name and @a ip is available only in the callback. To use
-/// outside the callback, make a copy.
-/// @param[in] if_name    The destination interface name causing conflict
-/// @param[in] ip         The local IP address causing conflict
-/// @param[in] state      The current state
-/// @param[in] user_data  The user data passed from the callback registration function
-/// @see inm_set_ip_conflict_cb()
-/// @see inm_unset_ip_conflict_cb()
+/// Called when the IP conflict state is changed.
+///
+/// **Since Tizen:**
+/// - 5.0
+///
+/// **Remarks:**
+/// - `if_name` and `ip` should not be freed. `if_name` and `ip` is available only in the callback. To use
+/// - outside the callback, make a copy.
+///
+/// **Parameters:**
+/// - `if_name` (in): The destination interface name causing conflict
+/// - `ip` (in): The local IP address causing conflict
+/// - `state` (in): The current state
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `inm_set_ip_conflict_cb()`
+/// - `inm_unset_ip_conflict_cb()`
+/// @nodoc
 typedef inm_ip_conflict_cb
     = ffi.Pointer<ffi.NativeFunction<inm_ip_conflict_cbFunction>>;
+/// @nodoc
 typedef inm_ip_conflict_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> if_name,
     ffi.Pointer<ffi.Char> ip,
     ffi.Int32 state,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartinm_ip_conflict_cbFunction = void Function(
     ffi.Pointer<ffi.Char> if_name,
     ffi.Pointer<ffi.Char> ip,
     int state,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the TCP congestion level is updated.
-/// @since_tizen 5.0
-/// @param[in] level      The current TCP congestion level
-/// @param[in] user_data  The user data passed from the callback registration function
-/// @see inm_set_congestion_level_cb()
-/// @see inm_unset_congestion_level_cb()
+/// Called when the TCP congestion level is updated.
+///
+/// **Since Tizen:**
+/// - 5.0
+///
+/// **Parameters:**
+/// - `level` (in): The current TCP congestion level
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `inm_set_congestion_level_cb()`
+/// - `inm_unset_congestion_level_cb()`
+/// @nodoc
 typedef inm_congestion_level_cb
     = ffi.Pointer<ffi.NativeFunction<inm_congestion_level_cbFunction>>;
+/// @nodoc
 typedef inm_congestion_level_cbFunction = ffi.Void Function(
     ffi.Int32 level, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartinm_congestion_level_cbFunction = void Function(
     int level, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the retry TX rate is updated.
-/// @since_tizen 5.0
-/// @param[in] rate       The current TCP TX retry rate
-/// @param[in] user_data  The user data passed from the callback registration function
-/// @see inm_set_retry_tx_rate_cb()
-/// @see inm_unset_retry_tx_rate_cb()
+/// Called when the retry TX rate is updated.
+///
+/// **Since Tizen:**
+/// - 5.0
+///
+/// **Parameters:**
+/// - `rate` (in): The current TCP TX retry rate
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `inm_set_retry_tx_rate_cb()`
+/// - `inm_unset_retry_tx_rate_cb()`
+/// @nodoc
 typedef inm_retry_tx_rate_cb
     = ffi.Pointer<ffi.NativeFunction<inm_retry_tx_rate_cbFunction>>;
+/// @nodoc
 typedef inm_retry_tx_rate_cbFunction = ffi.Void Function(
     ffi.Int rate, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartinm_retry_tx_rate_cbFunction = void Function(
     int rate, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the channel interference is updated.
-/// @since_tizen 5.0
-/// @param[in] freq          The frequency of wireless network
-/// @param[in] channel_intf  The current channel interference
-/// @param[in] user_data     The user data passed from the callback registration function
-/// @see inm_set_channel_interference_cb()
-/// @see inm_unset_channel_interference_cb()
+/// Called when the channel interference is updated.
+///
+/// **Since Tizen:**
+/// - 5.0
+///
+/// **Parameters:**
+/// - `freq` (in): The frequency of wireless network
+/// - `channel_intf` (in): The current channel interference
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `inm_set_channel_interference_cb()`
+/// - `inm_unset_channel_interference_cb()`
+/// @nodoc
 typedef inm_channel_interference_cb
     = ffi.Pointer<ffi.NativeFunction<inm_channel_interference_cbFunction>>;
+/// @nodoc
 typedef inm_channel_interference_cbFunction = ffi.Void Function(
     ffi.Int freq, ffi.Double channel_intf, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartinm_channel_interference_cbFunction = void Function(
     int freq, double channel_intf, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the cellular state is changed.
-/// @since_tizen 5.0
-/// @param[in] state      The cellular state
-/// @param[in] user_data  The user data passed from the callback registration function
-/// @see inm_set_cellular_state_changed_cb()
-/// @see inm_unset_cellular_state_changed_cb()
+/// Called when the cellular state is changed.
+///
+/// **Since Tizen:**
+/// - 5.0
+///
+/// **Parameters:**
+/// - `state` (in): The cellular state
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `inm_set_cellular_state_changed_cb()`
+/// - `inm_unset_cellular_state_changed_cb()`
+/// @nodoc
 typedef inm_cellular_state_changed_cb
     = ffi.Pointer<ffi.NativeFunction<inm_cellular_state_changed_cbFunction>>;
+/// @nodoc
 typedef inm_cellular_state_changed_cbFunction = ffi.Void Function(
     ffi.Int32 state, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartinm_cellular_state_changed_cbFunction = void Function(
     int state, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the Wi-Fi state is changed.
-/// @since_tizen 5.0
-/// @param[in] state      The Wi-Fi state
-/// @param[in] user_data  The user data passed from the callback registration function
-/// @see inm_set_wifi_state_changed_cb()
-/// @see inm_unset_wifi_state_changed_cb()
+/// Called when the Wi-Fi state is changed.
+///
+/// **Since Tizen:**
+/// - 5.0
+///
+/// **Parameters:**
+/// - `state` (in): The Wi-Fi state
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `inm_set_wifi_state_changed_cb()`
+/// - `inm_unset_wifi_state_changed_cb()`
+/// @nodoc
 typedef inm_wifi_state_changed_cb
     = ffi.Pointer<ffi.NativeFunction<inm_wifi_state_changed_cbFunction>>;
+/// @nodoc
 typedef inm_wifi_state_changed_cbFunction = ffi.Void Function(
     ffi.Int32 state, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartinm_wifi_state_changed_cbFunction = void Function(
     int state, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the ethernet state is changed.
-/// @since_tizen 5.0
-/// @param[in] state      The ethernet state
-/// @param[in] user_data  The user data passed from the callback registration function
-/// @see inm_set_ethernet_state_changed_cb()
-/// @see inm_unset_ethernet_state_changed_cb()
+/// Called when the ethernet state is changed.
+///
+/// **Since Tizen:**
+/// - 5.0
+///
+/// **Parameters:**
+/// - `state` (in): The ethernet state
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `inm_set_ethernet_state_changed_cb()`
+/// - `inm_unset_ethernet_state_changed_cb()`
+/// @nodoc
 typedef inm_ethernet_state_changed_cb
     = ffi.Pointer<ffi.NativeFunction<inm_ethernet_state_changed_cbFunction>>;
+/// @nodoc
 typedef inm_ethernet_state_changed_cbFunction = ffi.Void Function(
     ffi.Int32 state, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartinm_ethernet_state_changed_cbFunction = void Function(
     int state, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The connection handle.
-/// @since_tizen 5.0
+/// The connection handle.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 typedef inm_connection_h = ffi.Pointer<ffi.Void>;
 
-/// @brief The connections iterator handle.
-/// @since_tizen 5.0
+/// The connections iterator handle.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 typedef inm_connection_iterator_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called with a link handle.
-/// @since_tizen 5.5
-/// @remarks  If @a link is needed outside the callback, a copy should be
-/// made. @a link will be freed automatically after the execution
-/// of this callback.
-/// @param[in] link       The link handle
-/// @param[in] user_data  The user data passed from foreach function
-/// @return @c true to continue with the next iteration of the loop,
-/// @c false to break out of the loop
-/// @see inm_foreach_link()
-/// @see inm_link_clone()
+/// Called with a link handle.
+///
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **Remarks:**
+/// - If `link` is needed outside the callback, a copy should be
+/// - made. `link` will be freed automatically after the execution
+/// - of this callback.
+///
+/// **Parameters:**
+/// - `link` (in): The link handle
+/// - `user_data` (in): The user data passed from foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, `false` to break out of the loop
+///
+/// **See also:**
+/// - `inm_foreach_link()`
+/// - `inm_link_clone()`
+/// @nodoc
 typedef inm_link_cb = ffi.Pointer<ffi.NativeFunction<inm_link_cbFunction>>;
+/// @nodoc
 typedef inm_link_cbFunction = ffi.Bool Function(
     inm_link_h link, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartinm_link_cbFunction = bool Function(
     inm_link_h link, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The link handle.
-/// @since_tizen 5.5
+/// The link handle.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 typedef inm_link_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when the IP is found on a local network.
-/// @since_tizen 5.5
-/// @remarks @a ip should not be freed. @a ip is available only in the callback.
-/// To use outside the callback, make a copy.
-/// @param[in] found      @c true if IP is found, @c false if ip IP not found
-/// @param[in] ip         The IP address found on a local network
-/// @param[in] user_data  The user data passed from the callback registration function
-/// @see inm_arp_request_start()
-/// @see inm_arp_request_stop()
+/// Called when the IP is found on a local network.
+///
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **Remarks:**
+/// - `ip` should not be freed. `ip` is available only in the callback.
+/// - To use outside the callback, make a copy.
+///
+/// **Parameters:**
+/// - `found` (in): `true` if IP is found, `false` if ip IP not found
+/// - `ip` (in): The IP address found on a local network
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `inm_arp_request_start()`
+/// - `inm_arp_request_stop()`
+/// @nodoc
 typedef inm_arp_request_ip_found_cb
     = ffi.Pointer<ffi.NativeFunction<inm_arp_request_ip_found_cbFunction>>;
+/// @nodoc
 typedef inm_arp_request_ip_found_cbFunction = ffi.Void Function(
     ffi.Bool found, ffi.Pointer<ffi.Char> ip, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartinm_arp_request_ip_found_cbFunction = void Function(
     bool found, ffi.Pointer<ffi.Char> ip, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the gateway IP is found on a local network
-/// by sending ARP packets.
-/// @since_tizen 5.5
-/// @remarks @a gateway_ip should not be freed. @a gateway_ip is available
-/// only in the callback. To use outside the callback, make a copy.
-/// @param[in] found      @c true if gateway IP address is found, @c false
-/// if gateway IP address isn't found after timeout
-/// @param[in] gateway_ip The gateway IP address found on a local network
-/// @param[in] user_data  The user data passed from the callback registration function
-/// @see inm_default_gateway_start_checking()
-/// @see inm_default_gateway_stop_checking()
+/// Called when the gateway IP is found on a local network by sending ARP packets.
+///
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **Remarks:**
+/// - `gateway_ip` should not be freed. `gateway_ip` is available
+/// - only in the callback. To use outside the callback, make a copy.
+///
+/// **Parameters:**
+/// - `found` (in): `true` if gateway IP address is found, `false` if gateway IP address isn't found after timeout
+/// - `gateway_ip` (in): The gateway IP address found on a local network
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `inm_default_gateway_start_checking()`
+/// - `inm_default_gateway_stop_checking()`
+/// @nodoc
 typedef inm_default_gateway_found_cb
     = ffi.Pointer<ffi.NativeFunction<inm_default_gateway_found_cbFunction>>;
+/// @nodoc
 typedef inm_default_gateway_found_cbFunction = ffi.Void Function(ffi.Bool found,
     ffi.Pointer<ffi.Char> gateway_ip, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartinm_default_gateway_found_cbFunction = void Function(bool found,
     ffi.Pointer<ffi.Char> gateway_ip, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the DNS lookup result is received.
-/// @since_tizen 5.5
-/// @param[in] found      @c true if DNS lookup succeeded, @c false
-/// if DNS lookup failed
-/// @param[in] user_data  The user data passed from the callback registration function
-/// @see inm_default_dns_lookup_check()
+/// Called when the DNS lookup result is received.
+///
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **Parameters:**
+/// - `found` (in): `true` if DNS lookup succeeded, `false` if DNS lookup failed
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `inm_default_dns_lookup_check()`
+/// @nodoc
 typedef inm_default_dns_lookup_result_cb
     = ffi.Pointer<ffi.NativeFunction<inm_default_dns_lookup_result_cbFunction>>;
+/// @nodoc
 typedef inm_default_dns_lookup_result_cbFunction = ffi.Void Function(
     ffi.Bool found, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartinm_default_dns_lookup_result_cbFunction = void Function(
     bool found, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the URL responds to HTTP GET generated by curl.
-/// @since_tizen 5.5
-/// @remarks @a url should not be freed. @a url is available only in the callback.
-/// To use outside the callback, make a copy.
-/// @param[in] result     The enumeration value to describe the result.
-/// @param[in] url        The URL responses to HTTP GET generated by curl
-/// @param[in] user_data  The user data passed from the callback registration function
-/// @see inm_reachable_urls_start_checking()
-/// @see inm_reachable_urls_stop_checking()
-/// @see inm_reachable_urls_is_check_running()
+/// Called when the URL responds to HTTP GET generated by curl.
+///
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **Remarks:**
+/// - `url` should not be freed. `url` is available only in the callback.
+/// - To use outside the callback, make a copy.
+///
+/// **Parameters:**
+/// - `result` (in): The enumeration value to describe the result.
+/// - `url` (in): The URL responses to HTTP GET generated by curl
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `inm_reachable_urls_start_checking()`
+/// - `inm_reachable_urls_stop_checking()`
+/// - `inm_reachable_urls_is_check_running()`
+/// @nodoc
 typedef inm_reachable_urls_check_result_cb = ffi
     .Pointer<ffi.NativeFunction<inm_reachable_urls_check_result_cbFunction>>;
+/// @nodoc
 typedef inm_reachable_urls_check_result_cbFunction = ffi.Void Function(
     ffi.Int32 result,
     ffi.Pointer<ffi.Char> url,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartinm_reachable_urls_check_result_cbFunction = void Function(
     int result, ffi.Pointer<ffi.Char> url, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the state of the connection is changed.
-/// @since_tizen 5.0
-/// @param[in] state      The state
-/// @param[in] user_data  The user data passed from the callback registration function
-/// @see inm_connection_set_state_changed_cb()
-/// @see inm_connection_unset_state_changed_cb()
+/// Called when the state of the connection is changed.
+///
+/// **Since Tizen:**
+/// - 5.0
+///
+/// **Parameters:**
+/// - `state` (in): The state
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `inm_connection_set_state_changed_cb()`
+/// - `inm_connection_unset_state_changed_cb()`
+/// @nodoc
 typedef connection_state_changed_cb
     = ffi.Pointer<ffi.NativeFunction<connection_state_changed_cbFunction>>;
+/// @nodoc
 typedef connection_state_changed_cbFunction = ffi.Void Function(
     ffi.Int32 state, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartconnection_state_changed_cbFunction = void Function(
     int state, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the scanning state is changed.
-/// @since_tizen 5.0
-/// @param[in] state      The wifi scanning state
-/// @param[in] user_data  The user data passed from the callback registration function
-/// @see inm_wifi_set_scan_state_changed_cb()
-/// @see inm_wifi_unset_scan_state_changed_cb()
+/// Called when the scanning state is changed.
+///
+/// **Since Tizen:**
+/// - 5.0
+///
+/// **Parameters:**
+/// - `state` (in): The wifi scanning state
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `inm_wifi_set_scan_state_changed_cb()`
+/// - `inm_wifi_unset_scan_state_changed_cb()`
+/// @nodoc
 typedef inm_wifi_scan_state_changed_cb
     = ffi.Pointer<ffi.NativeFunction<inm_wifi_scan_state_changed_cbFunction>>;
+/// @nodoc
 typedef inm_wifi_scan_state_changed_cbFunction = ffi.Void Function(
     ffi.Int32 state, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartinm_wifi_scan_state_changed_cbFunction = void Function(
     int state, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called for each found access point.
-/// @since_tizen 5.0
-/// @remarks @a ap should not be freed. @a ap is valid only in this function.
-/// In order to use @a ap outside this function, you must copy the ap with inm_connection_clone().
-/// @param[in]  ap         The access point handle
-/// @param[in]  user_data  The user data passed from the request function
-/// @return  @c true to continue with the next iteration of the loop, \n
-/// otherwise @c false to break out of the loop
-/// @pre  inm_wifi_foreach_found_ap() will invoke this callback.
-/// @see  inm_wifi_foreach_found_ap()
+/// Called for each found access point.
+///
+/// **Since Tizen:**
+/// - 5.0
+///
+/// **Remarks:**
+/// - `ap` should not be freed. `ap` is valid only in this function.
+/// - In order to use `ap` outside this function, you must copy the ap with inm_connection_clone().
+///
+/// **Parameters:**
+/// - `ap` (in): The access point handle
+/// - `user_data` (in): The user data passed from the request function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - inm_wifi_foreach_found_ap() will invoke this callback.
+///
+/// **See also:**
+/// - `inm_wifi_foreach_found_ap()`
+/// @nodoc
 typedef inm_wifi_found_ap_cb
     = ffi.Pointer<ffi.NativeFunction<inm_wifi_found_ap_cbFunction>>;
+/// @nodoc
 typedef inm_wifi_found_ap_cbFunction = ffi.Bool Function(
     inm_connection_h ap, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartinm_wifi_found_ap_cbFunction = bool Function(
     inm_connection_h ap, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called with VSIE data and length of VSIE.
-/// @since_tizen 5.0
-/// @remarks  If @a vsie is needed outside the callback, a copy should be
-/// made. @a vsie will be freed automatically after the execution
-/// of this callback.
-/// @param[in] vsie             The vendor specific data
-/// @param[in] length         The length of vendor specific data
-/// @param[in] user_data        The user data passed from the foreach function
-/// @return  @c true to continue with the next iteration of the loop, \n
-/// @c false to break out of the loop
-/// @pre  inm_wifi_ap_foreach_vsie() will invoke this callback.
-/// @see  inm_wifi_ap_foreach_vsie().
+/// Called with VSIE data and length of VSIE.
+///
+/// **Since Tizen:**
+/// - 5.0
+///
+/// **Remarks:**
+/// - If `vsie` is needed outside the callback, a copy should be
+/// - made. `vsie` will be freed automatically after the execution
+/// - of this callback.
+///
+/// **Parameters:**
+/// - `vsie` (in): The vendor specific data
+/// - `length` (in): The length of vendor specific data
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - inm_wifi_ap_foreach_vsie() will invoke this callback.
+///
+/// **See also:**
+/// - inm_wifi_ap_foreach_vsie().
+/// @nodoc
 typedef inm_wifi_ap_vsie_cb
     = ffi.Pointer<ffi.NativeFunction<inm_wifi_ap_vsie_cbFunction>>;
+/// @nodoc
 typedef inm_wifi_ap_vsie_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.UnsignedChar> vsie,
     ffi.Int length,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartinm_wifi_ap_vsie_cbFunction = bool Function(
     ffi.Pointer<ffi.UnsignedChar> vsie,
     int length,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called with handle of the link address.
-/// @since_tizen 5.5
-/// @remarks  If @a address is needed outside the callback, a copy should be
-/// made. @a address will be freed automatically after the execution
-/// of this callback.
-/// @param[in] address    The link address handle
-/// @param[in] user_data  The user data passed from the foreach function
-/// @return  @c true to continue with the next iteration of the loop, \n
-/// @c false to break out of the loop
-/// @pre  inm_link_foreach_address() will invoke this callback.
-/// @see  inm_link_foreach_address().
+/// Called with handle of the link address.
+///
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **Remarks:**
+/// - If `address` is needed outside the callback, a copy should be
+/// - made. `address` will be freed automatically after the execution
+/// - of this callback.
+///
+/// **Parameters:**
+/// - `address` (in): The link address handle
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - inm_link_foreach_address() will invoke this callback.
+///
+/// **See also:**
+/// - inm_link_foreach_address().
+/// @nodoc
 typedef inm_link_address_cb
     = ffi.Pointer<ffi.NativeFunction<inm_link_address_cbFunction>>;
+/// @nodoc
 typedef inm_link_address_cbFunction = ffi.Bool Function(
     inm_link_address_h address, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartinm_link_address_cbFunction = bool Function(
     inm_link_address_h address, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The link address handle.
-/// @since_tizen 5.5
+/// The link address handle.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 typedef inm_link_address_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called with handle of the link route table.
-/// @since_tizen 5.0
-/// @remarks  If @a route is needed outside the callback, a copy should be
-/// made. @a route will be freed automatically after the execution
-/// of this callback.
-/// @param[in] route      The link route handle
-/// @param[in] user_data  The user data passed from the foreach function
-/// @return  @c true to continue with the next iteration of the loop, \n
-/// @c false to break out of the loop
-/// @pre  inm_link_foreach_route() will invoke this callback.
-/// @see  inm_link_foreach_route().
+/// Called with handle of the link route table.
+///
+/// **Since Tizen:**
+/// - 5.0
+///
+/// **Remarks:**
+/// - If `route` is needed outside the callback, a copy should be
+/// - made. `route` will be freed automatically after the execution
+/// - of this callback.
+///
+/// **Parameters:**
+/// - `route` (in): The link route handle
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - inm_link_foreach_route() will invoke this callback.
+///
+/// **See also:**
+/// - inm_link_foreach_route().
+/// @nodoc
 typedef inm_link_route_cb
     = ffi.Pointer<ffi.NativeFunction<inm_link_route_cbFunction>>;
+/// @nodoc
 typedef inm_link_route_cbFunction = ffi.Bool Function(
     inm_link_route_h route, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartinm_link_route_cbFunction = bool Function(
     inm_link_route_h route, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The link route table handle.
-/// @since_tizen 5.5
+/// The link route table handle.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 typedef inm_link_route_h = ffi.Pointer<ffi.Void>;

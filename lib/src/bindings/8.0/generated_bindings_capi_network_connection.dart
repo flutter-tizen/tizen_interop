@@ -1,3 +1,6 @@
+/// {@category 8.0/tizen}
+library tizen_interop_8_0.capi_network_connection;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-network-connection APIs.
+/// {@category 8.0/tizen}
 class Tizen80CapiNetworkConnection {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,27 +28,41 @@ class Tizen80CapiNetworkConnection {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates a profile handle.
-  /// @details The profile name, which you get from connection_profile_get_name()
-  /// will include the keyword you set.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @remarks You must release @a profile using connection_profile_destroy().
-  /// @param[in] type               The type of profile \n
-  /// #CONNECTION_PROFILE_TYPE_CELLULAR and #CONNECTION_PROFILE_TYPE_WIFI are supported
-  /// @param[in] keyword            The keyword included in profile name
-  /// @param[out] profile           The handle of the profile
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OUT_OF_MEMORY         Out of memory
-  /// @retval #CONNECTION_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
-  /// @see connection_profile_destroy()
-  /// @see connection_profile_get_name()
+  /// Creates a profile handle.
+  ///
+  /// The profile name, which you get from connection_profile_get_name() will include the keyword you set.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - You must release `profile` using connection_profile_destroy().
+  ///
+  /// **Parameters:**
+  /// - `type` (in): The type of profile `CONNECTION_PROFILE_TYPE_CELLULAR` and `CONNECTION_PROFILE_TYPE_WIFI` are supported
+  /// - `keyword` (in): The keyword included in profile name
+  /// - `profile` (out): The handle of the profile
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONNECTION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `connection_profile_destroy()`
+  /// - `connection_profile_get_name()`
   int connection_profile_create(
     int type,
     ffi.Pointer<ffi.Char> keyword,
@@ -66,15 +84,24 @@ class Tizen80CapiNetworkConnection {
           int Function(
               int, ffi.Pointer<ffi.Char>, ffi.Pointer<connection_profile_h>)>();
 
-  /// @brief Destroys a profile handle.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[out] profile           The handle to the profile
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @see connection_profile_create()
+  /// Destroys a profile handle.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `profile` (out): The handle to the profile
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `connection_profile_create()`
   int connection_profile_destroy(
     connection_profile_h profile,
   ) {
@@ -89,18 +116,29 @@ class Tizen80CapiNetworkConnection {
   late final _connection_profile_destroy = _connection_profile_destroyPtr
       .asFunction<int Function(connection_profile_h)>();
 
-  /// @brief Clones a profile handle.
-  /// @since_tizen 2.3
-  /// @remarks You must release @a cloned_profile using connection_profile_destroy().
-  /// @param[out] cloned_profile    The handle of the cloned profile
-  /// @param[in] origin_profile     The handle of the origin profile
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OUT_OF_MEMORY         Out of memory
-  /// @see connection_profile_destroy()
+  /// Clones a profile handle.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - You must release `cloned_profile` using connection_profile_destroy().
+  ///
+  /// **Parameters:**
+  /// - `cloned_profile` (out): The handle of the cloned profile
+  /// - `origin_profile` (in): The handle of the origin profile
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `connection_profile_destroy()`
   int connection_profile_clone(
     ffi.Pointer<connection_profile_h> cloned_profile,
     connection_profile_h origin_profile,
@@ -120,23 +158,32 @@ class Tizen80CapiNetworkConnection {
           int Function(
               ffi.Pointer<connection_profile_h>, connection_profile_h)>();
 
-  /// @brief Gets the profile ID.
-  /// @details The separate profiles can have the same name.
-  /// So, you must use this function instead of connection_profile_get_name()
-  /// if you want to get the unique identification.
-  /// In case you create a profile, this value will be determined when you add the profile.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks You must release @a profile_id using free().
-  /// @param[in] profile            The profile handle
-  /// @param[out] profile_id        The ID of the profile
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OUT_OF_MEMORY         Out of memory
-  /// @see connection_profile_get_name()
-  /// @see connection_add_profile()
+  /// Gets the profile ID.
+  ///
+  /// The separate profiles can have the same name. So, you must use this function instead of connection_profile_get_name() if you want to get the unique identification. In case you create a profile, this value will be determined when you add the profile.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release `profile_id` using free().
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `profile_id` (out): The ID of the profile
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `connection_profile_get_name()`
+  /// - `connection_add_profile()`
   int connection_profile_get_id(
     connection_profile_h profile,
     ffi.Pointer<ffi.Pointer<ffi.Char>> profile_id,
@@ -157,18 +204,29 @@ class Tizen80CapiNetworkConnection {
           int Function(
               connection_profile_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the profile name.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks You must release @a profile_name using free().
-  /// @param[in] profile           The profile handle
-  /// @param[out] profile_name     The name of the profile
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OUT_OF_MEMORY         Out of memory
-  /// @see connection_profile_get_id()
+  /// Gets the profile name.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release `profile_name` using free().
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `profile_name` (out): The name of the profile
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `connection_profile_get_id()`
   int connection_profile_get_name(
     connection_profile_h profile,
     ffi.Pointer<ffi.Pointer<ffi.Char>> profile_name,
@@ -189,16 +247,23 @@ class Tizen80CapiNetworkConnection {
           int Function(
               connection_profile_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the network type.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] profile           The profile handle
-  /// @param[out] type             The type of the profile
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
+  /// Gets the network type.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `type` (out): The type of the profile
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
   int connection_profile_get_type(
     connection_profile_h profile,
     ffi.Pointer<ffi.Int32> type,
@@ -216,17 +281,26 @@ class Tizen80CapiNetworkConnection {
   late final _connection_profile_get_type = _connection_profile_get_typePtr
       .asFunction<int Function(connection_profile_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the name of the network interface, e.g. eth0 and pdp0.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks You must release @a interface_name using free().
-  /// @param[in] profile           The profile handle
-  /// @param[out] interface_name   The name of the network interface
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OUT_OF_MEMORY         Out of memory
+  /// Gets the name of the network interface, e.g. eth0 and pdp0.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release `interface_name` using free().
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `interface_name` (out): The name of the network interface
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OUT_OF_MEMORY`: Out of memory
   int connection_profile_get_network_interface_name(
     connection_profile_h profile,
     ffi.Pointer<ffi.Pointer<ffi.Char>> interface_name,
@@ -247,21 +321,34 @@ class Tizen80CapiNetworkConnection {
           int Function(
               connection_profile_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Refreshes the profile information.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @remarks You should call this function in order to get the current information
-  /// because the profile information can be changed.
-  /// @param[in] profile           The profile handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_OUT_OF_MEMORY         Out of memory
-  /// @retval #CONNECTION_ERROR_PERMISSION_DENIED     Permission denied
+  /// Refreshes the profile information.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - You should call this function in order to get the current information
+  /// - because the profile information can be changed.
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONNECTION_ERROR_PERMISSION_DENIED`: Permission denied
   int connection_profile_refresh(
     connection_profile_h profile,
   ) {
@@ -276,16 +363,23 @@ class Tizen80CapiNetworkConnection {
   late final _connection_profile_refresh = _connection_profile_refreshPtr
       .asFunction<int Function(connection_profile_h)>();
 
-  /// @brief Gets the network state.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] profile           The profile handle
-  /// @param[out] state            The state of the profile
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
+  /// Gets the network state.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `state` (out): The state of the profile
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
   int connection_profile_get_state(
     connection_profile_h profile,
     ffi.Pointer<ffi.Int32> state,
@@ -303,16 +397,23 @@ class Tizen80CapiNetworkConnection {
   late final _connection_profile_get_state = _connection_profile_get_statePtr
       .asFunction<int Function(connection_profile_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the Internet connection state.
-  /// @since_tizen 5.5
-  /// @param[in] profile           The profile handle
-  /// @param[out] state            The Internet connection state of the profile
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
+  /// Gets the Internet connection state.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `state` (out): The Internet connection state of the profile
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
   int connection_profile_get_internet_state(
     connection_profile_h profile,
     ffi.Pointer<ffi.Int32> state,
@@ -331,17 +432,24 @@ class Tizen80CapiNetworkConnection {
       _connection_profile_get_internet_statePtr.asFunction<
           int Function(connection_profile_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the IP config type.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] profile           The profile handle
-  /// @param[in] address_family    The address family
-  /// @param[out] type             The type of the IP config
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
+  /// Gets the IP config type.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `address_family` (in): The address family
+  /// - `type` (out): The type of the IP config
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
   int connection_profile_get_ip_config_type(
     connection_profile_h profile,
     int address_family,
@@ -363,20 +471,29 @@ class Tizen80CapiNetworkConnection {
       _connection_profile_get_ip_config_typePtr.asFunction<
           int Function(connection_profile_h, int, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the IP address.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks You must release @a ip_address using free().
-  /// @param[in] profile           The profile handle
-  /// @param[in] address_family    The address family
-  /// @param[out] ip_address       The IP address
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                           Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED                Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER              Invalid parameter
-  /// @retval #CONNECTION_ERROR_OUT_OF_MEMORY                  Out of memory
-  /// @retval #CONNECTION_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED   Not supported address family
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED               Operation failed
+  /// Gets the IP address.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release `ip_address` using free().
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `address_family` (in): The address family
+  /// - `ip_address` (out): The IP address
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONNECTION_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Not supported address family
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
   int connection_profile_get_ip_address(
     connection_profile_h profile,
     int address_family,
@@ -399,21 +516,30 @@ class Tizen80CapiNetworkConnection {
           int Function(
               connection_profile_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the Subnet Mask.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks You must release @a subnet_mask using free().
-  /// This function is supported only for IPv4 address family.
-  /// @param[in] profile           The profile handle
-  /// @param[in] address_family    The address family
-  /// @param[out] subnet_mask      The subnet mask
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                           Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED                Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER              Invalid parameter
-  /// @retval #CONNECTION_ERROR_OUT_OF_MEMORY                  Out of memory
-  /// @retval #CONNECTION_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED   Not supported address family
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED               Operation failed
+  /// Gets the Subnet Mask.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release `subnet_mask` using free().
+  /// - This function is supported only for IPv4 address family.
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `address_family` (in): The address family
+  /// - `subnet_mask` (out): The subnet mask
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONNECTION_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Not supported address family
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
   int connection_profile_get_subnet_mask(
     connection_profile_h profile,
     int address_family,
@@ -436,20 +562,29 @@ class Tizen80CapiNetworkConnection {
           int Function(
               connection_profile_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the Gateway address.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks You must release @a gateway_address using free().
-  /// @param[in] profile           The profile handle
-  /// @param[in] address_family    The address family
-  /// @param[out] gateway_address  The gateway address
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                           Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED                Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER              Invalid parameter
-  /// @retval #CONNECTION_ERROR_OUT_OF_MEMORY                  Out of memory
-  /// @retval #CONNECTION_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED   Not supported address family
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED               Operation failed
+  /// Gets the Gateway address.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release `gateway_address` using free().
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `address_family` (in): The address family
+  /// - `gateway_address` (out): The gateway address
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONNECTION_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Not supported address family
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
   int connection_profile_get_gateway_address(
     connection_profile_h profile,
     int address_family,
@@ -472,20 +607,30 @@ class Tizen80CapiNetworkConnection {
           int Function(
               connection_profile_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the DHCP Server address.
-  /// @since_tizen 4.0
-  /// @remarks You must release @a dhcp_server using free().
-  /// This function is supported only for IPv4 address family.
-  /// @param[in] profile           The profile handle
-  /// @param[in] address_family    The address family
-  /// @param[out] dhcp_server      The DHCP Server address
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                           Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED                Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER              Invalid parameter
-  /// @retval #CONNECTION_ERROR_OUT_OF_MEMORY                  Out of memory
-  /// @retval #CONNECTION_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED   Not supported address family
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED               Operation failed
+  /// Gets the DHCP Server address.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - You must release `dhcp_server` using free().
+  /// - This function is supported only for IPv4 address family.
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `address_family` (in): The address family
+  /// - `dhcp_server` (out): The DHCP Server address
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONNECTION_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Not supported address family
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
   int connection_profile_get_dhcp_server_address(
     connection_profile_h profile,
     int address_family,
@@ -508,18 +653,26 @@ class Tizen80CapiNetworkConnection {
           int Function(
               connection_profile_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the DHCP lease duration.
-  /// @since_tizen 4.0
-  /// @param[in] profile                   The profile handle
-  /// @param[in] address_family            The address family
-  /// @param[out] dhcp_lease_duration      The DHCP lease duration in seconds
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                           Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED                Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER              Invalid parameter
-  /// @retval #CONNECTION_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED   Not supported address family
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED               Operation failed
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED                  Not supported
+  /// Gets the DHCP lease duration.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `address_family` (in): The address family
+  /// - `dhcp_lease_duration` (out): The DHCP lease duration in seconds
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Not supported address family
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_profile_get_dhcp_lease_duration(
     connection_profile_h profile,
     int address_family,
@@ -541,22 +694,30 @@ class Tizen80CapiNetworkConnection {
       _connection_profile_get_dhcp_lease_durationPtr.asFunction<
           int Function(connection_profile_h, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the DNS address.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks The allowance of the DNS address is @c 2. You must release @a dns_address using free().
-  /// @param[in] profile           The profile handle
-  /// @param[in] order             The order of DNS address \n
-  /// It starts from 1, which means first DNS address
-  /// @param[in] address_family    The address family
-  /// @param[out] dns_address      The DNS address
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                           Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED                Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER              Invalid parameter
-  /// @retval #CONNECTION_ERROR_OUT_OF_MEMORY                  Out of memory
-  /// @retval #CONNECTION_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED   Not supported address family
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED               Operation failed
+  /// Gets the DNS address.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - The allowance of the DNS address is `2`. You must release `dns_address` using free().
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `order` (in): The order of DNS address It starts from 1, which means first DNS address
+  /// - `address_family` (in): The address family
+  /// - `dns_address` (out): The DNS address
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONNECTION_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Not supported address family
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
   int connection_profile_get_dns_address(
     connection_profile_h profile,
     int order,
@@ -581,16 +742,23 @@ class Tizen80CapiNetworkConnection {
           int Function(connection_profile_h, int, int,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the Proxy type.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] profile           The profile handle
-  /// @param[out] type             The type of the proxy
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
+  /// Gets the Proxy type.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `type` (out): The type of the proxy
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
   int connection_profile_get_proxy_type(
     connection_profile_h profile,
     ffi.Pointer<ffi.Int32> type,
@@ -609,20 +777,29 @@ class Tizen80CapiNetworkConnection {
       _connection_profile_get_proxy_typePtr.asFunction<
           int Function(connection_profile_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the Proxy address.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks You must release @a proxy_address using free().
-  /// @param[in] profile           The profile handle
-  /// @param[in] address_family    The address family
-  /// @param[out] proxy_address    The proxy address
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                           Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED                Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER              Invalid parameter
-  /// @retval #CONNECTION_ERROR_OUT_OF_MEMORY                  Out of memory
-  /// @retval #CONNECTION_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED   Not supported address family
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED               Operation failed
+  /// Gets the Proxy address.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release `proxy_address` using free().
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `address_family` (in): The address family
+  /// - `proxy_address` (out): The proxy address
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONNECTION_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Not supported address family
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
   int connection_profile_get_proxy_address(
     connection_profile_h profile,
     int address_family,
@@ -645,19 +822,26 @@ class Tizen80CapiNetworkConnection {
           int Function(
               connection_profile_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the IP config type.
-  /// @details If you set IP config type to #CONNECTION_IP_CONFIG_TYPE_STATIC,
-  /// then IP address, Gateway and Subnet mask will be set to the initial value "0.0.0.0".
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] profile           The profile handle
-  /// @param[in] address_family    The address family
-  /// @param[in] type              The type of the IP config
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
+  /// Sets the IP config type.
+  ///
+  /// If you set IP config type to `CONNECTION_IP_CONFIG_TYPE_STATIC`, then IP address, Gateway and Subnet mask will be set to the initial value "0.0.0.0".
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `address_family` (in): The address family
+  /// - `type` (in): The type of the IP config
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
   int connection_profile_set_ip_config_type(
     connection_profile_h profile,
     int address_family,
@@ -678,21 +862,31 @@ class Tizen80CapiNetworkConnection {
       _connection_profile_set_ip_config_typePtr
           .asFunction<int Function(connection_profile_h, int, int)>();
 
-  /// @brief Sets the IP address.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks You must release @a ip_address using free().
-  /// @param[in] profile           The profile handle
-  /// @param[in] address_family    The address family
-  /// @param[in] ip_address        The IP address \n
-  /// If you set this value to @c NULL, then the existing value will be deleted
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                           Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED                Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER              Invalid parameter
-  /// @retval #CONNECTION_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED   Not supported address family
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED               Operation failed
-  /// @see connection_update_profile()
+  /// Sets the IP address.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release `ip_address` using free().
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `address_family` (in): The address family
+  /// - `ip_address` (in): The IP address If you set this value to `NULL`, then the existing value will be deleted
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Not supported address family
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `connection_update_profile()`
   int connection_profile_set_ip_address(
     connection_profile_h profile,
     int address_family,
@@ -713,22 +907,32 @@ class Tizen80CapiNetworkConnection {
       _connection_profile_set_ip_addressPtr.asFunction<
           int Function(connection_profile_h, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the Subnet Mask.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks You must release @a subnet_mask using free().
-  /// This function is supported only for IPv4 address family.
-  /// @param[in] profile           The profile handle
-  /// @param[in] address_family    The address family
-  /// @param[in] subnet_mask       The subnet mask \n
-  /// If you set this value to @c NULL, then the existing value will be deleted
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                           Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED                Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER              Invalid parameter
-  /// @retval #CONNECTION_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED   Not supported address family
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED               Operation failed
-  /// @see connection_update_profile()
+  /// Sets the Subnet Mask.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release `subnet_mask` using free().
+  /// - This function is supported only for IPv4 address family.
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `address_family` (in): The address family
+  /// - `subnet_mask` (in): The subnet mask If you set this value to `NULL`, then the existing value will be deleted
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Not supported address family
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `connection_update_profile()`
   int connection_profile_set_subnet_mask(
     connection_profile_h profile,
     int address_family,
@@ -749,21 +953,31 @@ class Tizen80CapiNetworkConnection {
       _connection_profile_set_subnet_maskPtr.asFunction<
           int Function(connection_profile_h, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the Gateway address.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks You must release @a gateway_address using free().
-  /// @param[in] profile           The profile handle
-  /// @param[in] address_family    The address family
-  /// @param[in] gateway_address   The gateway address \n
-  /// If you set this value to @c NULL, then the existing value will be deleted
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                           Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED                Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER              Invalid parameter
-  /// @retval #CONNECTION_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED   Not supported address family
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED               Operation failed
-  /// @see connection_update_profile()
+  /// Sets the Gateway address.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release `gateway_address` using free().
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `address_family` (in): The address family
+  /// - `gateway_address` (in): The gateway address If you set this value to `NULL`, then the existing value will be deleted
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Not supported address family
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `connection_update_profile()`
   int connection_profile_set_gateway_address(
     connection_profile_h profile,
     int address_family,
@@ -785,24 +999,33 @@ class Tizen80CapiNetworkConnection {
       _connection_profile_set_gateway_addressPtr.asFunction<
           int Function(connection_profile_h, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the DNS address.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks The allowance of the DNS address is @c 2.
-  /// @remarks You must release @a dns_address using free().
-  /// @param[in] profile           The profile handle
-  /// @param[in] order             The order of the DNS address \n
-  /// It starts from @c 1, which means first DNS address
-  /// @param[in] address_family    The address family
-  /// @param[in] dns_address       The DNS address \n
-  /// If you set this value to NULL then the existing value will be deleted
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                           Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED                Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER              Invalid parameter
-  /// @retval #CONNECTION_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED   Not supported address family
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED               Operation failed
-  /// @see connection_update_profile()
+  /// Sets the DNS address.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - The allowance of the DNS address is `2`.
+  /// - You must release `dns_address` using free().
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `order` (in): The order of the DNS address It starts from `1`, which means first DNS address
+  /// - `address_family` (in): The address family
+  /// - `dns_address` (in): The DNS address If you set this value to NULL then the existing value will be deleted
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Not supported address family
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `connection_update_profile()`
   int connection_profile_set_dns_address(
     connection_profile_h profile,
     int order,
@@ -826,19 +1049,28 @@ class Tizen80CapiNetworkConnection {
           int Function(
               connection_profile_h, int, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the Proxy type.
-  /// @details If you set the Proxy type to #CONNECTION_PROXY_TYPE_AUTO or
-  /// #CONNECTION_PROXY_TYPE_MANUAL, then Proxy will be restored.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] profile           The profile handle
-  /// @param[in] type              The type of the proxy
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @see connection_update_profile()
+  /// Sets the Proxy type.
+  ///
+  /// If you set the Proxy type to `CONNECTION_PROXY_TYPE_AUTO` or `CONNECTION_PROXY_TYPE_MANUAL`, then Proxy will be restored.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `type` (in): The type of the proxy
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `connection_update_profile()`
   int connection_profile_set_proxy_type(
     connection_profile_h profile,
     int type,
@@ -857,21 +1089,31 @@ class Tizen80CapiNetworkConnection {
       _connection_profile_set_proxy_typePtr
           .asFunction<int Function(connection_profile_h, int)>();
 
-  /// @brief Sets the Proxy address.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks You must release @a proxy_address using free().
-  /// @param[in] profile           The profile handle
-  /// @param[in] address_family    The address family
-  /// @param[in] proxy_address     The proxy address \n
-  /// If you set this value to @c NULL, then the existing value will be deleted
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                           Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED                Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER              Invalid parameter
-  /// @retval #CONNECTION_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED   Not supported address family
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED               Operation failed
-  /// @see connection_update_profile()
+  /// Sets the Proxy address.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release `proxy_address` using free().
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `address_family` (in): The address family
+  /// - `proxy_address` (in): The proxy address If you set this value to `NULL`, then the existing value will be deleted
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Not supported address family
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `connection_update_profile()`
   int connection_profile_set_proxy_address(
     connection_profile_h profile,
     int address_family,
@@ -892,20 +1134,31 @@ class Tizen80CapiNetworkConnection {
       _connection_profile_set_proxy_addressPtr.asFunction<
           int Function(connection_profile_h, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the callback that is called when the state of profile is changed.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] profile           The profile handle
-  /// @param[in] callback          The callback function to be called
-  /// @param[in] user_data         The user data passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @post connection_opened_cb() is invoked when the state of profile is changed.
-  /// @see connection_profile_state_changed_cb()
-  /// @see connection_profile_unset_state_changed_cb()
+  /// Sets the callback that is called when the state of profile is changed.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **Postconditions:**
+  /// - connection_opened_cb() is invoked when the state of profile is changed.
+  ///
+  /// **See also:**
+  /// - `connection_profile_state_changed_cb()`
+  /// - `connection_profile_unset_state_changed_cb()`
   int connection_profile_set_state_changed_cb(
     connection_profile_h profile,
     connection_profile_state_changed_cb callback,
@@ -928,16 +1181,25 @@ class Tizen80CapiNetworkConnection {
           int Function(connection_profile_h,
               connection_profile_state_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback that is called when the state of profile is changed.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] profile           The profile handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @see connection_profile_state_changed_cb()
-  /// @see connection_profile_set_state_changed_cb()
+  /// Unsets the callback that is called when the state of profile is changed.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `connection_profile_state_changed_cb()`
+  /// - `connection_profile_set_state_changed_cb()`
   int connection_profile_unset_state_changed_cb(
     connection_profile_h profile,
   ) {
@@ -953,16 +1215,24 @@ class Tizen80CapiNetworkConnection {
       _connection_profile_unset_state_changed_cbPtr
           .asFunction<int Function(connection_profile_h)>();
 
-  /// @brief Gets the IPv6 network state.
-  /// @since_tizen 4.0
-  /// @param[in] profile           The profile handle
-  /// @param[out] state            The profile state
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
+  /// Gets the IPv6 network state.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `state` (out): The profile state
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_profile_get_ipv6_state(
     connection_profile_h profile,
     ffi.Pointer<ffi.Int32> state,
@@ -981,17 +1251,25 @@ class Tizen80CapiNetworkConnection {
       _connection_profile_get_ipv6_statePtr.asFunction<
           int Function(connection_profile_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets the DNS config type.
-  /// @since_tizen 4.0
-  /// @param[in] profile         The profile handle
-  /// @param[in] address_family  The address family
-  /// @param[in] type            The DNS config type
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #CONNECTION_ERROR_NONE               Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED      Not supported
+  /// Sets the DNS config type.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `address_family` (in): The address family
+  /// - `type` (in): The DNS config type
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_profile_set_dns_config_type(
     connection_profile_h profile,
     int address_family,
@@ -1012,17 +1290,25 @@ class Tizen80CapiNetworkConnection {
       _connection_profile_set_dns_config_typePtr
           .asFunction<int Function(connection_profile_h, int, int)>();
 
-  /// @brief Gets the DNS config type.
-  /// @since_tizen 4.0
-  /// @param[in] profile         The profile handle
-  /// @param[in] address_family  The address family
-  /// @param[out] type           The DNS config type
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #CONNECTION_ERROR_NONE               Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED      Not supported
+  /// Gets the DNS config type.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `address_family` (in): The address family
+  /// - `type` (out): The DNS config type
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_profile_get_dns_config_type(
     connection_profile_h profile,
     int address_family,
@@ -1044,19 +1330,25 @@ class Tizen80CapiNetworkConnection {
       _connection_profile_get_dns_config_typePtr.asFunction<
           int Function(connection_profile_h, int, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the network prefix length.
-  /// @since_tizen 4.0
-  /// @param[in] profile         The profile handle
-  /// @param[in] address_family  The address family
-  /// @param[out] prefix_len     The network prefix length \n
-  /// In case of IPv4, it means netmask length
-  /// (also called a prefix, e.g. 8, 16, 24, 32)
-  /// @return 0 on success, otherwise negative error value.
-  /// @retval #CONNECTION_ERROR_NONE               Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED      Not supported
+  /// Gets the network prefix length.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `address_family` (in): The address family
+  /// - `prefix_len` (out): The network prefix length In case of IPv4, it means netmask length (also called a prefix, e.g. 8, 16, 24, 32)
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value.
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_profile_get_prefix_length(
     connection_profile_h profile,
     int address_family,
@@ -1077,20 +1369,28 @@ class Tizen80CapiNetworkConnection {
       _connection_profile_get_prefix_lengthPtr.asFunction<
           int Function(connection_profile_h, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the network prefix length.
-  /// @since_tizen 4.0
-  /// @param[in] profile         The profile handle
-  /// @param[in] address_family  The address family
-  /// @param[in] prefix_len      The network prefix length
-  /// In case of IPv4, it means netmask length
-  /// (also called a prefix, e.g. 8, 16, 24, 32)
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #CONNECTION_ERROR_NONE               Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED      Not supported
-  /// @see connection_update_profile()
+  /// Sets the network prefix length.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `address_family` (in): The address family
+  /// - `prefix_len` (in): The network prefix length In case of IPv4, it means netmask length (also called a prefix, e.g. 8, 16, 24, 32)
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `connection_update_profile()`
   int connection_profile_set_prefix_length(
     connection_profile_h profile,
     int address_family,
@@ -1111,18 +1411,27 @@ class Tizen80CapiNetworkConnection {
       _connection_profile_set_prefix_lengthPtr
           .asFunction<int Function(connection_profile_h, int, int)>();
 
-  /// @brief Gets the ESSID (Extended Service Set Identifier).
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks You must release @a essid using free().
-  /// @param[in] profile         The profile handle
-  /// @param[out] essid          The ESSID
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE               Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #CONNECTION_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED      Not supported
+  /// Gets the ESSID (Extended Service Set Identifier).
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release `essid` using free().
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `essid` (out): The ESSID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_profile_get_wifi_essid(
     connection_profile_h profile,
     ffi.Pointer<ffi.Pointer<ffi.Char>> essid,
@@ -1143,18 +1452,27 @@ class Tizen80CapiNetworkConnection {
           int Function(
               connection_profile_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the BSSID (Basic Service Set Identifier).
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks You must release @a bssid using free().
-  /// @param[in] profile         The profile handle
-  /// @param[out] bssid          The BSSID
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE               Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #CONNECTION_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED      Not supported
+  /// Gets the BSSID (Basic Service Set Identifier).
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release `bssid` using free().
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `bssid` (out): The BSSID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_profile_get_wifi_bssid(
     connection_profile_h profile,
     ffi.Pointer<ffi.Pointer<ffi.Char>> bssid,
@@ -1175,16 +1493,23 @@ class Tizen80CapiNetworkConnection {
           int Function(
               connection_profile_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the RSSI.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] profile         The profile handle
-  /// @param[out] rssi           The RSSI
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE               Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED      Not supported
+  /// Gets the RSSI.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `rssi` (out): The RSSI
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_profile_get_wifi_rssi(
     connection_profile_h profile,
     ffi.Pointer<ffi.Int> rssi,
@@ -1203,16 +1528,23 @@ class Tizen80CapiNetworkConnection {
       _connection_profile_get_wifi_rssiPtr.asFunction<
           int Function(connection_profile_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the frequency (MHz).
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] profile         The profile handle
-  /// @param[out] frequency      The frequency
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE               Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED      Not supported
+  /// Gets the frequency (MHz).
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `frequency` (out): The frequency
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_profile_get_wifi_frequency(
     connection_profile_h profile,
     ffi.Pointer<ffi.Int> frequency,
@@ -1231,16 +1563,23 @@ class Tizen80CapiNetworkConnection {
       _connection_profile_get_wifi_frequencyPtr.asFunction<
           int Function(connection_profile_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the max speed (Mbps).
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] profile         The profile handle
-  /// @param[out] max_speed      The max speed
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE               Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED      Not supported
+  /// Gets the max speed (Mbps).
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `max_speed` (out): The max speed
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_profile_get_wifi_max_speed(
     connection_profile_h profile,
     ffi.Pointer<ffi.Int> max_speed,
@@ -1259,17 +1598,24 @@ class Tizen80CapiNetworkConnection {
       _connection_profile_get_wifi_max_speedPtr.asFunction<
           int Function(connection_profile_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the security type of Wi-Fi.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] profile         The profile handle
-  /// @param[out] type           The type of Wi-Fi security
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE               Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED      Not supported
+  /// Gets the security type of Wi-Fi.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `type` (out): The type of Wi-Fi security
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_profile_get_wifi_security_type(
     connection_profile_h profile,
     ffi.Pointer<ffi.Int32> type,
@@ -1288,17 +1634,24 @@ class Tizen80CapiNetworkConnection {
       _connection_profile_get_wifi_security_typePtr.asFunction<
           int Function(connection_profile_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the encryption type of Wi-Fi.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] profile         The profile handle
-  /// @param[out] type           The type of Wi-Fi security
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE               Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED      Not supported
+  /// Gets the encryption type of Wi-Fi.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `type` (out): The type of Wi-Fi security
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_profile_get_wifi_encryption_type(
     connection_profile_h profile,
     ffi.Pointer<ffi.Int32> type,
@@ -1317,18 +1670,26 @@ class Tizen80CapiNetworkConnection {
       _connection_profile_get_wifi_encryption_typePtr.asFunction<
           int Function(connection_profile_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Checks whether passphrase is required.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks This function is not valid if security type is #CONNECTION_WIFI_SECURITY_TYPE_EAP.
-  /// @param[in] profile         The profile handle
-  /// @param[out] required       @c true if a passphrase is required,
-  /// otherwise @c false if a passphrase is not required
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE               Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED      Not supported
+  /// Checks whether passphrase is required.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - This function is not valid if security type is `CONNECTION_WIFI_SECURITY_TYPE_EAP`.
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `required` (out): `true` if a passphrase is required, otherwise `false` if a passphrase is not required
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_profile_is_wifi_passphrase_required(
     connection_profile_h profile,
     ffi.Pointer<ffi.Bool> required1,
@@ -1347,18 +1708,29 @@ class Tizen80CapiNetworkConnection {
       _connection_profile_is_wifi_passphrase_requiredPtr.asFunction<
           int Function(connection_profile_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Sets the passphrase of the Wi-Fi WPA.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks You must release @a passphrase using free().
-  /// @param[in] profile         The profile handle
-  /// @param[in] passphrase      The passphrase of Wi-Fi security
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE               Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED      Not supported
-  /// @see connection_update_profile()
+  /// Sets the passphrase of the Wi-Fi WPA.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release `passphrase` using free().
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `passphrase` (in): The passphrase of Wi-Fi security
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `connection_update_profile()`
   int connection_profile_set_wifi_passphrase(
     connection_profile_h profile,
     ffi.Pointer<ffi.Char> passphrase,
@@ -1377,18 +1749,26 @@ class Tizen80CapiNetworkConnection {
       _connection_profile_set_wifi_passphrasePtr.asFunction<
           int Function(connection_profile_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Checks whether the WPS (Wi-Fi Protected Setup) is supported.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks If WPS is supported, you can connect the access point with WPS by wifi_connect_with_wps().
-  /// @param[in] profile         The profile handle
-  /// @param[out] supported      @c true if WPS is supported,
-  /// otherwise @c false if WPS is not supported
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #CONNECTION_ERROR_NONE               Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED      Not supported
+  /// Checks whether the WPS (Wi-Fi Protected Setup) is supported.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - If WPS is supported, you can connect the access point with WPS by wifi_connect_with_wps().
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `supported` (out): `true` if WPS is supported, otherwise `false` if WPS is not supported
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_profile_is_wifi_wps_supported(
     connection_profile_h profile,
     ffi.Pointer<ffi.Bool> supported,
@@ -1407,17 +1787,24 @@ class Tizen80CapiNetworkConnection {
       _connection_profile_is_wifi_wps_supportedPtr.asFunction<
           int Function(connection_profile_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets the service type.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] profile         The profile handle
-  /// @param[out] type           The type of the cellular service
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE               Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED      Not supported
+  /// Gets the service type.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `type` (out): The type of the cellular service
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_profile_get_cellular_service_type(
     connection_profile_h profile,
     ffi.Pointer<ffi.Int32> type,
@@ -1436,18 +1823,27 @@ class Tizen80CapiNetworkConnection {
       _connection_profile_get_cellular_service_typePtr.asFunction<
           int Function(connection_profile_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the APN (access point name).
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks You must release @a apn using free().
-  /// @param[in] profile         The profile handle
-  /// @param[out] apn            The name of the APN
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE               Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #CONNECTION_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED      Not supported
+  /// Gets the APN (access point name).
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release `apn` using free().
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `apn` (out): The name of the APN
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_profile_get_cellular_apn(
     connection_profile_h profile,
     ffi.Pointer<ffi.Pointer<ffi.Char>> apn,
@@ -1468,21 +1864,30 @@ class Tizen80CapiNetworkConnection {
           int Function(
               connection_profile_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the authentication information.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks You must release @a user_name and @a password using free().
-  /// @param[in] profile         The profile handle
-  /// @param[out] type           The type of the authentication
-  /// @param[out] user_name      The user name
-  /// @param[out] password       The password
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE               Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #CONNECTION_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED      Not supported
+  /// Gets the authentication information.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release `user_name` and `password` using free().
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `type` (out): The type of the authentication
+  /// - `user_name` (out): The user name
+  /// - `password` (out): The password
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_profile_get_cellular_auth_info(
     connection_profile_h profile,
     ffi.Pointer<ffi.Int32> type,
@@ -1513,18 +1918,27 @@ class Tizen80CapiNetworkConnection {
               ffi.Pointer<ffi.Pointer<ffi.Char>>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the home URL.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks You must release @a home_url using free().
-  /// @param[in] profile         The profile handle
-  /// @param[out] home_url       The home URL
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE               Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #CONNECTION_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED      Not supported
+  /// Gets the home URL.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release `home_url` using free().
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `home_url` (out): The home URL
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_profile_get_cellular_home_url(
     connection_profile_h profile,
     ffi.Pointer<ffi.Pointer<ffi.Char>> home_url,
@@ -1545,17 +1959,24 @@ class Tizen80CapiNetworkConnection {
           int Function(
               connection_profile_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the cellular pdn type.
-  /// @since_tizen 3.0
-  /// @param[in] profile         The profile handle
-  /// @param[out] type           The cellular pdn type
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #CONNECTION_ERROR_NONE               Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED      Not supported
+  /// Gets the cellular pdn type.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `type` (out): The cellular pdn type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_profile_get_cellular_pdn_type(
     connection_profile_h profile,
     ffi.Pointer<ffi.Int32> type,
@@ -1574,17 +1995,24 @@ class Tizen80CapiNetworkConnection {
       _connection_profile_get_cellular_pdn_typePtr.asFunction<
           int Function(connection_profile_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the cellular roam pdn type.
-  /// @since_tizen 3.0
-  /// @param[in] profile         The profile handle
-  /// @param[out] type           The cellular pdn type
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #CONNECTION_ERROR_NONE               Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED      Not supported
+  /// Gets the cellular roam pdn type.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `type` (out): The cellular pdn type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_profile_get_cellular_roam_pdn_type(
     connection_profile_h profile,
     ffi.Pointer<ffi.Int32> type,
@@ -1603,17 +2031,23 @@ class Tizen80CapiNetworkConnection {
       _connection_profile_get_cellular_roam_pdn_typePtr.asFunction<
           int Function(connection_profile_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Checks whether the connection is in roaming state.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] profile         The profile handle
-  /// @param[out] is_roaming     @c true if the cellular is roaming,
-  /// otherwise @c false if it is not roaming
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE               Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED      Not supported
+  /// Checks whether the connection is in roaming state.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `is_roaming` (out): `true` if the cellular is roaming, otherwise `false` if it is not roaming
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_profile_is_cellular_roaming(
     connection_profile_h profile,
     ffi.Pointer<ffi.Bool> is_roaming,
@@ -1632,17 +2066,23 @@ class Tizen80CapiNetworkConnection {
       _connection_profile_is_cellular_roamingPtr.asFunction<
           int Function(connection_profile_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Checks whether the profile is hidden.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] profile         The profile handle
-  /// @param[out] is_hidden      @c true if the profile is in hidden,
-  /// otherwise @c false if the profile is not hidden
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE               Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED      Not supported
+  /// Checks whether the profile is hidden.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `is_hidden` (out): `true` if the profile is in hidden, otherwise `false` if the profile is not hidden
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_profile_is_cellular_hidden(
     connection_profile_h profile,
     ffi.Pointer<ffi.Bool> is_hidden,
@@ -1661,17 +2101,23 @@ class Tizen80CapiNetworkConnection {
       _connection_profile_is_cellular_hiddenPtr.asFunction<
           int Function(connection_profile_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Checks whether the profile is editable.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] profile         The profile handle
-  /// @param[out] is_editable    @c true if the profile is editable,
-  /// otherwise @c false if the profile is not editable
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE               Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED      Not supported
+  /// Checks whether the profile is editable.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `is_editable` (out): `true` if the profile is editable, otherwise `false` if the profile is not editable
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_profile_is_cellular_editable(
     connection_profile_h profile,
     ffi.Pointer<ffi.Bool> is_editable,
@@ -1690,17 +2136,23 @@ class Tizen80CapiNetworkConnection {
       _connection_profile_is_cellular_editablePtr.asFunction<
           int Function(connection_profile_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Checks whether the profile is default.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] profile         The profile handle
-  /// @param[out] is_default     @c true if the profile is default,
-  /// otherwise @c false if the profile is not default
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE               Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED      Not supported
+  /// Checks whether the profile is default.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `is_default` (out): `true` if the profile is default, otherwise `false` if the profile is not default
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_profile_is_cellular_default(
     connection_profile_h profile,
     ffi.Pointer<ffi.Bool> is_default,
@@ -1719,17 +2171,26 @@ class Tizen80CapiNetworkConnection {
       _connection_profile_is_cellular_defaultPtr.asFunction<
           int Function(connection_profile_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Sets the service type.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] profile         The profile handle
-  /// @param[in] service_type    The type of cellular service
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE               Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED      Not supported
-  /// @see connection_update_profile()
+  /// Sets the service type.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `service_type` (in): The type of cellular service
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `connection_update_profile()`
   int connection_profile_set_cellular_service_type(
     connection_profile_h profile,
     int service_type,
@@ -1748,18 +2209,29 @@ class Tizen80CapiNetworkConnection {
       _connection_profile_set_cellular_service_typePtr
           .asFunction<int Function(connection_profile_h, int)>();
 
-  /// @brief Sets the APN (Access Point Name).
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks You must release @a apn using free().
-  /// @param[in] profile         The profile handle
-  /// @param[in] apn             The name of APN
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE               Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED      Not supported
-  /// @see connection_update_profile()
+  /// Sets the APN (Access Point Name).
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release `apn` using free().
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `apn` (in): The name of APN
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `connection_update_profile()`
   int connection_profile_set_cellular_apn(
     connection_profile_h profile,
     ffi.Pointer<ffi.Char> apn,
@@ -1778,20 +2250,31 @@ class Tizen80CapiNetworkConnection {
       _connection_profile_set_cellular_apnPtr.asFunction<
           int Function(connection_profile_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the Authentication information.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks You must release @a user_name using free().
-  /// @param[in] profile         The profile handle
-  /// @param[in] type            The type of the authentication
-  /// @param[in] user_name       The user name
-  /// @param[in] password        The password
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE               Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED      Not supported
-  /// @see connection_update_profile()
+  /// Sets the Authentication information.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release `user_name` using free().
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `type` (in): The type of the authentication
+  /// - `user_name` (in): The user name
+  /// - `password` (in): The password
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `connection_update_profile()`
   int connection_profile_set_cellular_auth_info(
     connection_profile_h profile,
     int type,
@@ -1816,18 +2299,29 @@ class Tizen80CapiNetworkConnection {
           int Function(connection_profile_h, int, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the home URL.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks You must release @a home_url using free().
-  /// @param[in] profile         The profile handle
-  /// @param[in] home_url        The home URL
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE               Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED      Not supported
-  /// @see connection_update_profile()
+  /// Sets the home URL.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release `home_url` using free().
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `home_url` (in): The home URL
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `connection_update_profile()`
   int connection_profile_set_cellular_home_url(
     connection_profile_h profile,
     ffi.Pointer<ffi.Char> home_url,
@@ -1846,17 +2340,24 @@ class Tizen80CapiNetworkConnection {
       _connection_profile_set_cellular_home_urlPtr.asFunction<
           int Function(connection_profile_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the cellular pdn type.
-  /// @since_tizen 3.0
-  /// @param[in] profile         The profile handle
-  /// @param[in] type            The cellular pdn type
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #CONNECTION_ERROR_NONE               Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED      Not supported
+  /// Sets the cellular pdn type.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `type` (in): The cellular pdn type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_profile_set_cellular_pdn_type(
     connection_profile_h profile,
     int type,
@@ -1875,17 +2376,24 @@ class Tizen80CapiNetworkConnection {
       _connection_profile_set_cellular_pdn_typePtr
           .asFunction<int Function(connection_profile_h, int)>();
 
-  /// @brief Sets the cellular roam pdn type.
-  /// @since_tizen 3.0
-  /// @param[in] profile         The profile handle
-  /// @param[in] type            The cellular pdn type
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #CONNECTION_ERROR_NONE               Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED      Not supported
+  /// Sets the cellular roam pdn type.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `profile` (in): The profile handle
+  /// - `type` (in): The cellular pdn type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_profile_set_cellular_roam_pdn_type(
     connection_profile_h profile,
     int type,
@@ -1904,24 +2412,38 @@ class Tizen80CapiNetworkConnection {
       _connection_profile_set_cellular_roam_pdn_typePtr
           .asFunction<int Function(connection_profile_h, int)>();
 
-  /// @brief Creates a handle for managing data connections.
-  /// @details If you do not use this function and use other functions,
-  /// you will get the #CONNECTION_ERROR_NOT_INITIALIZED error.
-  /// If you put an invalid handle, you will get the #CONNECTION_ERROR_INVALID_PARAMETER error.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @remarks You must release @a connection using connection_destroy().
-  /// @param[out] connection       The connection handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_ALREADY_INITIALIZED   Already initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OUT_OF_MEMORY         Out of memory
-  /// @retval #CONNECTION_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
-  /// @see connection_destroy()
+  /// Creates a handle for managing data connections.
+  ///
+  /// If you do not use this function and use other functions, you will get the `CONNECTION_ERROR_NOT_INITIALIZED` error. If you put an invalid handle, you will get the `CONNECTION_ERROR_INVALID_PARAMETER` error.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - You must release `connection` using connection_destroy().
+  ///
+  /// **Parameters:**
+  /// - `connection` (out): The connection handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_ALREADY_INITIALIZED`: Already initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONNECTION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `connection_destroy()`
   int connection_create(
     ffi.Pointer<connection_h> connection,
   ) {
@@ -1936,16 +2458,25 @@ class Tizen80CapiNetworkConnection {
   late final _connection_create = _connection_createPtr
       .asFunction<int Function(ffi.Pointer<connection_h>)>();
 
-  /// @brief Destroys the connection handle.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] connection        The connection handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
-  /// @see connection_create()
+  /// Destroys the connection handle.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `connection_create()`
   int connection_destroy(
     connection_h connection,
   ) {
@@ -1960,17 +2491,24 @@ class Tizen80CapiNetworkConnection {
   late final _connection_destroy =
       _connection_destroyPtr.asFunction<int Function(connection_h)>();
 
-  /// @brief Gets the type of the current profile for data connection.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] connection        The connection handle
-  /// @param[out] type             The type of the network
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
+  /// Gets the type of the current profile for data connection.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `type` (out): The type of the network
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_get_type(
     connection_h connection,
     ffi.Pointer<ffi.Int32> type,
@@ -1988,20 +2526,29 @@ class Tizen80CapiNetworkConnection {
   late final _connection_get_type = _connection_get_typePtr
       .asFunction<int Function(connection_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the IP address of the current connection.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks You must release @a ip_address using free().
-  /// @param[in] connection        The connection handle
-  /// @param[in] address_family    The address family
-  /// @param[out] ip_address       The pointer to the IP address string
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                           Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED                Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER              Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED               Operation failed
-  /// @retval #CONNECTION_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED   Not supported address family
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
+  /// Gets the IP address of the current connection.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release `ip_address` using free().
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `address_family` (in): The address family
+  /// - `ip_address` (out): The pointer to the IP address string
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Not supported address family
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_get_ip_address(
     connection_h connection,
     int address_family,
@@ -2024,20 +2571,29 @@ class Tizen80CapiNetworkConnection {
           int Function(
               connection_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the proxy address of the current connection.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks You must release @a proxy using free().
-  /// @param[in] connection        The connection handle
-  /// @param[in] address_family    The address family
-  /// @param[out] proxy            The proxy address
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                           Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED                Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER              Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED               Operation failed
-  /// @retval #CONNECTION_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED   Not supported address family
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
+  /// Gets the proxy address of the current connection.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release `proxy` using free().
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `address_family` (in): The address family
+  /// - `proxy` (out): The proxy address
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Not supported address family
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_get_proxy(
     connection_h connection,
     int address_family,
@@ -2057,21 +2613,30 @@ class Tizen80CapiNetworkConnection {
   late final _connection_get_proxy = _connection_get_proxyPtr.asFunction<
       int Function(connection_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the MAC address of the Wi-Fi or ethernet.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks @a mac_addr must be released with free() by you.
-  /// @param[in] connection        The handle of the connection
-  /// @param[in] type              The type of current network connection
-  /// @param[out] mac_addr         The MAC address
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_INVALID_OPERATION     Invalid operation
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #CONNECTION_ERROR_OUT_OF_MEMORY         Out of memory
+  /// Gets the MAC address of the Wi-Fi or ethernet.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - `mac_addr` must be released with free() by you.
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The handle of the connection
+  /// - `type` (in): The type of current network connection
+  /// - `mac_addr` (out): The MAC address
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONNECTION_ERROR_OUT_OF_MEMORY`: Out of memory
   int connection_get_mac_address(
     connection_h connection,
     int type,
@@ -2094,20 +2659,31 @@ class Tizen80CapiNetworkConnection {
           int Function(
               connection_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets if the current connection is metered.
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] connection        The connection handle
-  /// @param[out] is_metered       The value indicating whether it is metered
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
+  /// Gets if the current connection is metered.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `is_metered` (out): The value indicating whether it is metered
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_is_metered_network(
     connection_h connection,
     ffi.Pointer<ffi.Bool> is_metered,
@@ -2125,18 +2701,26 @@ class Tizen80CapiNetworkConnection {
   late final _connection_is_metered_network = _connection_is_metered_networkPtr
       .asFunction<int Function(connection_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets the state of cellular connection.
-  /// @details The returned state is for the cellular connection state.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] connection        The connection handle
-  /// @param[out] state            The state of the cellular connection
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
+  /// Gets the state of cellular connection.
+  ///
+  /// The returned state is for the cellular connection state.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `state` (out): The state of the cellular connection
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_get_cellular_state(
     connection_h connection,
     ffi.Pointer<ffi.Int32> state,
@@ -2154,21 +2738,33 @@ class Tizen80CapiNetworkConnection {
   late final _connection_get_cellular_state = _connection_get_cellular_statePtr
       .asFunction<int Function(connection_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the state of the Wi-Fi.
-  /// @details The returned state is for the Wi-Fi connection state.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] connection        The connection handle
-  /// @param[out] state            The state of Wi-Fi connection
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
+  /// Gets the state of the Wi-Fi.
+  ///
+  /// The returned state is for the Wi-Fi connection state.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `state` (out): The state of Wi-Fi connection
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_get_wifi_state(
     connection_h connection,
     ffi.Pointer<ffi.Int32> state,
@@ -2186,21 +2782,33 @@ class Tizen80CapiNetworkConnection {
   late final _connection_get_wifi_state = _connection_get_wifi_statePtr
       .asFunction<int Function(connection_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the state of the Ethernet.
-  /// @details The returned state is for the Ethernet connection state.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] connection        The connection handle
-  /// @param[out] state            The state of Ethernet connection
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
+  /// Gets the state of the Ethernet.
+  ///
+  /// The returned state is for the Ethernet connection state.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `state` (out): The state of Ethernet connection
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_get_ethernet_state(
     connection_h connection,
     ffi.Pointer<ffi.Int32> state,
@@ -2218,18 +2826,25 @@ class Tizen80CapiNetworkConnection {
   late final _connection_get_ethernet_state = _connection_get_ethernet_statePtr
       .asFunction<int Function(connection_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets the callback that is called when the Internet availability over the current connection is changed.
-  /// @since_tizen 5.5
-  /// @param[in] connection        The connection handle
-  /// @param[in] callback          The callback function to be called
-  /// @param[in] user_data         The user data passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
+  /// Sets the callback that is called when the Internet availability over the current connection is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_set_internet_state_changed_cb(
     connection_h connection,
     connection_internet_state_changed_cb callback,
@@ -2254,16 +2869,23 @@ class Tizen80CapiNetworkConnection {
           int Function(connection_h, connection_internet_state_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback that is called when the Internet state of the current connection is changed.
-  /// @since_tizen 5.5
-  /// @param[in] connection        The connection handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
+  /// Unsets the callback that is called when the Internet state of the current connection is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_unset_internet_state_changed_cb(
     connection_h connection,
   ) {
@@ -2279,21 +2901,33 @@ class Tizen80CapiNetworkConnection {
       _connection_unset_internet_state_changed_cbPtr
           .asFunction<int Function(connection_h)>();
 
-  /// @brief Checks for ethernet cable is attached or not.
-  /// @details The returned state is for the ethernet cable state.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] connection        The handle of the connection
-  /// @param[in] state             The state of ethernet cable
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #CONNECTION_ERROR_PERMISSION_DENIED     Permission denied
+  /// Checks for ethernet cable is attached or not.
+  ///
+  /// The returned state is for the ethernet cable state.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The handle of the connection
+  /// - `state` (in): The state of ethernet cable
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONNECTION_ERROR_PERMISSION_DENIED`: Permission denied
   int connection_get_ethernet_cable_state(
     connection_h connection,
     ffi.Pointer<ffi.Int32> state,
@@ -2312,20 +2946,31 @@ class Tizen80CapiNetworkConnection {
       _connection_get_ethernet_cable_statePtr
           .asFunction<int Function(connection_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the DHCP state of the interface.
-  /// @since_tizen 8.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] connection        The connection handle
-  /// @param[in] interface_name    The interface name
-  /// @param[out] state            The DHCP state of the interface
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
+  /// Gets the DHCP state of the interface.
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `interface_name` (in): The interface name
+  /// - `state` (out): The DHCP state of the interface
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_get_dhcp_state(
     connection_h connection,
     ffi.Pointer<ffi.Char> interface_name,
@@ -2347,19 +2992,27 @@ class Tizen80CapiNetworkConnection {
           int Function(
               connection_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Int32>)>();
 
-  /// @deprecated Deprecated since 4.0. Use connection_set_ethernet_cable_state_changed_cb() instead.
-  /// @brief Sets callback for ethernet cable is plugged [in/out] event.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in] connection        The connection handle
-  /// @param[in] callback          The callback function to be called
-  /// @param[in] user_data         The user data passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
+  /// **Deprecated:** Deprecated since 4.0. Use connection_set_ethernet_cable_state_changed_cb() instead.
+  ///
+  /// Sets callback for ethernet cable is plugged `[in/out]` event.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_set_ethernet_cable_state_chaged_cb(
     connection_h connection,
     connection_ethernet_cable_state_chaged_cb callback,
@@ -2384,17 +3037,25 @@ class Tizen80CapiNetworkConnection {
           int Function(connection_h, connection_ethernet_cable_state_chaged_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @deprecated Deprecated since 4.0. Use connection_unset_ethernet_cable_state_changed_cb() instead.
-  /// @brief Unsets callback for ethernet cable is plugged [in/out] event.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in] connection        The connection handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
+  /// **Deprecated:** Deprecated since 4.0. Use connection_unset_ethernet_cable_state_changed_cb() instead.
+  ///
+  /// Unsets callback for ethernet cable is plugged `[in/out]` event.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_unset_ethernet_cable_state_chaged_cb(
     connection_h connection,
   ) {
@@ -2410,18 +3071,25 @@ class Tizen80CapiNetworkConnection {
       _connection_unset_ethernet_cable_state_chaged_cbPtr
           .asFunction<int Function(connection_h)>();
 
-  /// @brief Sets callback for ethernet cable is plugged [in/out] event.
-  /// @since_tizen 4.0
-  /// @param[in] connection        The connection handle
-  /// @param[in] callback          The callback function to be called
-  /// @param[in] user_data         The user data passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
+  /// Sets callback for ethernet cable is plugged `[in/out]` event.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_set_ethernet_cable_state_changed_cb(
     connection_h connection,
     connection_ethernet_cable_state_changed_cb callback,
@@ -2446,16 +3114,23 @@ class Tizen80CapiNetworkConnection {
           int Function(connection_h, connection_ethernet_cable_state_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets callback for ethernet cable is plugged [in/out] event.
-  /// @since_tizen 4.0
-  /// @param[in] connection        The connection handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
+  /// Unsets callback for ethernet cable is plugged `[in/out]` event.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_unset_ethernet_cable_state_changed_cb(
     connection_h connection,
   ) {
@@ -2471,21 +3146,33 @@ class Tizen80CapiNetworkConnection {
       _connection_unset_ethernet_cable_state_changed_cbPtr
           .asFunction<int Function(connection_h)>();
 
-  /// @brief Gets the state of the Bluetooth.
-  /// @details The returned state is for the Bluetooth connection state.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] connection        The connection handle
-  /// @param[out] state            The state of the Bluetooth connection
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
+  /// Gets the state of the Bluetooth.
+  ///
+  /// The returned state is for the Bluetooth connection state.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `state` (out): The state of the Bluetooth connection
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_get_bt_state(
     connection_h connection,
     ffi.Pointer<ffi.Int32> state,
@@ -2503,18 +3190,25 @@ class Tizen80CapiNetworkConnection {
   late final _connection_get_bt_state = _connection_get_bt_statePtr
       .asFunction<int Function(connection_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets the callback that is called when the type of the current connection is changed.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] connection        The connection handle
-  /// @param[in] callback          The callback function to be called
-  /// @param[in] user_data         The user data passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
+  /// Sets the callback that is called when the type of the current connection is changed.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_set_type_changed_cb(
     connection_h connection,
     connection_type_changed_cb callback,
@@ -2536,16 +3230,23 @@ class Tizen80CapiNetworkConnection {
           int Function(connection_h, connection_type_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback that is called when the type of current connection is changed.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] connection        The connection handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
+  /// Unsets the callback that is called when the type of current connection is changed.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_unset_type_changed_cb(
     connection_h connection,
   ) {
@@ -2561,18 +3262,25 @@ class Tizen80CapiNetworkConnection {
       _connection_unset_type_changed_cbPtr
           .asFunction<int Function(connection_h)>();
 
-  /// @brief Sets the callback that is called when the IP address is changed.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] connection        The connection handle
-  /// @param[in] callback          The callback function to be called
-  /// @param[in] user_data         The user data passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
+  /// Sets the callback that is called when the IP address is changed.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_set_ip_address_changed_cb(
     connection_h connection,
     connection_address_changed_cb callback,
@@ -2594,16 +3302,23 @@ class Tizen80CapiNetworkConnection {
           int Function(connection_h, connection_address_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback that is called when the IP address is changed.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] connection        The connection handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
+  /// Unsets the callback that is called when the IP address is changed.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_unset_ip_address_changed_cb(
     connection_h connection,
   ) {
@@ -2619,18 +3334,25 @@ class Tizen80CapiNetworkConnection {
       _connection_unset_ip_address_changed_cbPtr
           .asFunction<int Function(connection_h)>();
 
-  /// @brief Sets the callback that is called when the proxy address is changed.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] connection        The connection handle
-  /// @param[in] callback          The callback function to be called
-  /// @param[in] user_data         The user data passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
+  /// Sets the callback that is called when the proxy address is changed.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_set_proxy_address_changed_cb(
     connection_h connection,
     connection_address_changed_cb callback,
@@ -2653,16 +3375,23 @@ class Tizen80CapiNetworkConnection {
           int Function(connection_h, connection_address_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback that is called when the proxy address is changed.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] connection        The connection handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
+  /// Unsets the callback that is called when the proxy address is changed.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_unset_proxy_address_changed_cb(
     connection_h connection,
   ) {
@@ -2678,18 +3407,25 @@ class Tizen80CapiNetworkConnection {
       _connection_unset_proxy_address_changed_cbPtr
           .asFunction<int Function(connection_h)>();
 
-  /// @brief Sets the callback that is called when the DHCP state is changed.
-  /// @since_tizen 8.0
-  /// @param[in] connection        The connection handle
-  /// @param[in] callback          The callback function to be called
-  /// @param[in] user_data         The user data passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
+  /// Sets the callback that is called when the DHCP state is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_set_dhcp_state_changed_cb(
     connection_h connection,
     connection_dhcp_state_changed_cb callback,
@@ -2711,16 +3447,23 @@ class Tizen80CapiNetworkConnection {
           int Function(connection_h, connection_dhcp_state_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback that is called when the DHCP state is changed.
-  /// @since_tizen 8.0
-  /// @param[in] connection        The connection handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
+  /// Unsets the callback that is called when the DHCP state is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_unset_dhcp_state_changed_cb(
     connection_h connection,
   ) {
@@ -2736,21 +3479,34 @@ class Tizen80CapiNetworkConnection {
       _connection_unset_dhcp_state_changed_cbPtr
           .asFunction<int Function(connection_h)>();
 
-  /// @brief Adds a new profile which is created by connection_profile_create().
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.profile
-  /// @remarks You can only add a profile of the cellular type.
-  /// @param[in] connection        The connection handle
-  /// @param[in] profile           The profile handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
+  /// Adds a new profile which is created by connection_profile_create().
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.profile>
+  ///
+  /// **Remarks:**
+  /// - You can only add a profile of the cellular type.
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `profile` (in): The profile handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_add_profile(
     connection_h connection,
     connection_profile_h profile,
@@ -2768,22 +3524,35 @@ class Tizen80CapiNetworkConnection {
   late final _connection_add_profile = _connection_add_profilePtr
       .asFunction<int Function(connection_h, connection_profile_h)>();
 
-  /// @brief Removes an existing profile.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.profile \n
-  /// %http://tizen.org/privilege/network.get
-  /// @remarks This function needs both privileges.
-  /// @param[in] connection        The connection handle
-  /// @param[in] profile           The profile handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
+  /// Removes an existing profile.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.profile>
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - This function needs both privileges.
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `profile` (in): The profile handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_remove_profile(
     connection_h connection,
     connection_profile_h profile,
@@ -2801,28 +3570,40 @@ class Tizen80CapiNetworkConnection {
   late final _connection_remove_profile = _connection_remove_profilePtr
       .asFunction<int Function(connection_h, connection_profile_h)>();
 
-  /// @brief Updates an existing profile.
-  /// @details When a profile is changed, these changes will be not applied to the
-  /// Connection Manager immediately.
-  /// When you call this function, your changes affect the Connection Manager
-  /// and the existing profile is updated.
-  /// In addition, the existing profile will be updated if you call connection_open_profile().
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.profile \n
-  /// %http://tizen.org/privilege/network.get
-  /// @remarks This function needs both privileges.
-  /// @param[in] connection        The connection handle
-  /// @param[in] profile           The profile handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
-  /// @see connection_open_profile()
+  /// Updates an existing profile.
+  ///
+  /// When a profile is changed, these changes will be not applied to the Connection Manager immediately. When you call this function, your changes affect the Connection Manager and the existing profile is updated. In addition, the existing profile will be updated if you call connection_open_profile().
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.profile>
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - This function needs both privileges.
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `profile` (in): The profile handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `connection_open_profile()`
   int connection_update_profile(
     connection_h connection,
     connection_profile_h profile,
@@ -2840,23 +3621,36 @@ class Tizen80CapiNetworkConnection {
   late final _connection_update_profile = _connection_update_profilePtr
       .asFunction<int Function(connection_h, connection_profile_h)>();
 
-  /// @brief Gets a profiles iterator.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @remarks You must release @a profile_iterator using connection_destroy().
-  /// @param[in] connection        The connection handle
-  /// @param[in] type              The type of the connection iterator
-  /// @param[out] profile_iterator The iterator of profile
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OUT_OF_MEMORY         Out of memory
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
+  /// Gets a profiles iterator.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - You must release `profile_iterator` using connection_destroy().
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `type` (in): The type of the connection iterator
+  /// - `profile_iterator` (out): The iterator of profile
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_get_profile_iterator(
     connection_h connection,
     int type,
@@ -2879,17 +3673,24 @@ class Tizen80CapiNetworkConnection {
           int Function(
               connection_h, int, ffi.Pointer<connection_profile_iterator_h>)>();
 
-  /// @brief Moves the profile iterator to the next position and gets a profile handle.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] profile_iterator  The iterator of profile
-  /// @param[out] profile          The profile handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_ITERATOR_END          End of iteration
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
+  /// Moves the profile iterator to the next position and gets a profile handle.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `profile_iterator` (in): The iterator of profile
+  /// - `profile` (out): The profile handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_ITERATOR_END`: End of iteration
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_profile_iterator_next(
     connection_profile_iterator_h profile_iterator,
     ffi.Pointer<connection_profile_h> profile,
@@ -2910,17 +3711,30 @@ class Tizen80CapiNetworkConnection {
           int Function(connection_profile_iterator_h,
               ffi.Pointer<connection_profile_h>)>();
 
-  /// @brief Checks whether the next element of a profile iterator exists or not.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks The specific error code can be obtained using the get_last_result() method.
-  /// Error codes are described in Exception section.
-  /// @param[in] profile_iterator  The iterator of profile
-  /// @return @c true if next element exists,
-  /// otherwise @c false if next element doesn't exist
-  /// @exception #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED          Not initialized
-  /// @exception #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
-  /// @see get_last_result()
+  /// Checks whether the next element of a profile iterator exists or not.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the get_last_result() method.
+  /// - Error codes are described in Exception section.
+  ///
+  /// **Parameters:**
+  /// - `profile_iterator` (in): The iterator of profile
+  ///
+  /// **Returns:**
+  /// - `true` if next element exists, otherwise `false` if next element doesn't exist
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **Exceptions:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `get_last_result()`
   bool connection_profile_iterator_has_next(
     connection_profile_iterator_h profile_iterator,
   ) {
@@ -2936,15 +3750,22 @@ class Tizen80CapiNetworkConnection {
       _connection_profile_iterator_has_nextPtr
           .asFunction<bool Function(connection_profile_iterator_h)>();
 
-  /// @brief Destroys a profiles iterator.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] profile_iterator  The iterator of the profile
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
+  /// Destroys a profiles iterator.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `profile_iterator` (in): The iterator of the profile
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_destroy_profile_iterator(
     connection_profile_iterator_h profile_iterator,
   ) {
@@ -2960,23 +3781,36 @@ class Tizen80CapiNetworkConnection {
       _connection_destroy_profile_iteratorPtr
           .asFunction<int Function(connection_profile_iterator_h)>();
 
-  /// @brief Gets the name of the default profile.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @remarks You must release @a profile using connection_profile_destroy().
-  /// @param[in] connection        The connection handle
-  /// @param[out] profile          The profile handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OUT_OF_MEMORY         Out of memory
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_NO_CONNECTION         There is no connection
-  /// @retval #CONNECTION_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
+  /// Gets the name of the default profile.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - You must release `profile` using connection_profile_destroy().
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `profile` (out): The profile handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_NO_CONNECTION`: There is no connection
+  /// - `CONNECTION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_get_current_profile(
     connection_h connection,
     ffi.Pointer<connection_profile_h> profile,
@@ -2996,24 +3830,36 @@ class Tizen80CapiNetworkConnection {
       _connection_get_current_profilePtr.asFunction<
           int Function(connection_h, ffi.Pointer<connection_profile_h>)>();
 
-  /// @brief Gets the default profile which provides the given cellular service.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @remarks You must release @a profile using connection_profile_destroy().
-  /// @param[in] connection        The connection handle
-  /// @param[in] type              The type of cellular service \n
-  /// #CONNECTION_CELLULAR_SERVICE_TYPE_APPLICATION is not permitted
-  /// @param[out] profile          The profile handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OUT_OF_MEMORY         Out of memory
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
+  /// Gets the default profile which provides the given cellular service.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - You must release `profile` using connection_profile_destroy().
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `type` (in): The type of cellular service `CONNECTION_CELLULAR_SERVICE_TYPE_APPLICATION` is not permitted
+  /// - `profile` (out): The profile handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_get_default_cellular_service_profile(
     connection_h connection,
     int type,
@@ -3035,25 +3881,36 @@ class Tizen80CapiNetworkConnection {
       _connection_get_default_cellular_service_profilePtr.asFunction<
           int Function(connection_h, int, ffi.Pointer<connection_profile_h>)>();
 
-  /// @brief Sets the default profile which provides the given cellular service.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.profile \n
-  /// %http://tizen.org/privilege/network.get
-  /// @remarks This function needs both privileges.
-  /// @param[in] connection        The connection handle
-  /// @param[in] type              The type of cellular service \n
-  /// Only #CONNECTION_CELLULAR_SERVICE_TYPE_INTERNET and
-  /// #CONNECTION_CELLULAR_SERVICE_TYPE_PREPAID_INTERNET are permitted
-  /// @param[in] profile           The profile handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
+  /// Sets the default profile which provides the given cellular service.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.profile>
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - This function needs both privileges.
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `type` (in): The type of cellular service Only `CONNECTION_CELLULAR_SERVICE_TYPE_INTERNET` and `CONNECTION_CELLULAR_SERVICE_TYPE_PREPAID_INTERNET` are permitted
+  /// - `profile` (in): The profile handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_set_default_cellular_service_profile(
     connection_h connection,
     int type,
@@ -3074,27 +3931,38 @@ class Tizen80CapiNetworkConnection {
       _connection_set_default_cellular_service_profilePtr
           .asFunction<int Function(connection_h, int, connection_profile_h)>();
 
-  /// @brief Sets the default profile which provides the given cellular service, asynchronously.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.profile \n
-  /// %http://tizen.org/privilege/network.get
-  /// @remarks This function needs both privileges.
-  /// @param[in] connection        The connection handle
-  /// @param[in] type              The type of cellular service \n
-  /// Only #CONNECTION_CELLULAR_SERVICE_TYPE_INTERNET and
-  /// #CONNECTION_CELLULAR_SERVICE_TYPE_PREPAID_INTERNET are permitted
-  /// @param[in] profile The profile handle
-  /// @param[in] callback The callback function to be called
-  /// @param[in] user_data The user data passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
+  /// Sets the default profile which provides the given cellular service, asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.profile>
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - This function needs both privileges.
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `type` (in): The type of cellular service Only `CONNECTION_CELLULAR_SERVICE_TYPE_INTERNET` and `CONNECTION_CELLULAR_SERVICE_TYPE_PREPAID_INTERNET` are permitted
+  /// - `profile` (in): The profile handle
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_set_default_cellular_service_profile_async(
     connection_h connection,
     int type,
@@ -3126,30 +3994,47 @@ class Tizen80CapiNetworkConnection {
           int Function(connection_h, int, connection_profile_h,
               connection_set_default_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Opens a connection of profile, asynchronously.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.set \n
-  /// %http://tizen.org/privilege/network.get
-  /// @remarks This function needs both privileges.
-  /// @param[in] connection        The connection handle
-  /// @param[in] profile           The profile handle
-  /// @param[in] callback          The callback function to be called
-  /// @param[in] user_data         The user data passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
-  /// @post connection_opened_cb() will be invoked.
-  /// @see connection_opened_cb()
-  /// @see connection_close_profile()
-  /// @see connection_profile_set_state_changed_cb()
-  /// @see connection_profile_unset_state_changed_cb()
-  /// @see connection_profile_state_changed_cb()
+  /// Opens a connection of profile, asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.set>
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - This function needs both privileges.
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `profile` (in): The profile handle
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - connection_opened_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `connection_opened_cb()`
+  /// - `connection_close_profile()`
+  /// - `connection_profile_set_state_changed_cb()`
+  /// - `connection_profile_unset_state_changed_cb()`
+  /// - `connection_profile_state_changed_cb()`
   int connection_open_profile(
     connection_h connection,
     connection_profile_h profile,
@@ -3175,28 +4060,43 @@ class Tizen80CapiNetworkConnection {
       int Function(connection_h, connection_profile_h, connection_opened_cb,
           ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Closes a connection of profile.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.set
-  /// @param[in] connection        The connection handle
-  /// @param[in] profile           The profile handle
-  /// @param[in] callback          The callback function to be called
-  /// @param[in] user_data         The user data passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
-  /// @post connection_closed_cb() will be invoked.
-  /// @see connection_closed_cb()
-  /// @see connection_open_profile()
-  /// @see connection_profile_set_state_changed_cb()
-  /// @see connection_profile_unset_state_changed_cb()
-  /// @see connection_profile_state_changed_cb()
+  /// Closes a connection of profile.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.set>
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `profile` (in): The profile handle
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - connection_closed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `connection_closed_cb()`
+  /// - `connection_open_profile()`
+  /// - `connection_profile_set_state_changed_cb()`
+  /// - `connection_profile_unset_state_changed_cb()`
+  /// - `connection_profile_state_changed_cb()`
   int connection_close_profile(
     connection_h connection,
     connection_profile_h profile,
@@ -3223,27 +4123,41 @@ class Tizen80CapiNetworkConnection {
           int Function(connection_h, connection_profile_h, connection_closed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Resets the cellular profile.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.profile \n
-  /// %http://tizen.org/privilege/network.get
-  /// @remarks This function needs both privileges.
-  /// @param[in] connection        The connection handle
-  /// @param[in] type              The type of reset
-  /// @param[in] id                The subscriber identity module ID to reset
-  /// (The sim index starts from 0.)
-  /// @param[in] callback          The callback function to be called
-  /// @param[in] user_data         The user data passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
-  /// @post connection_reset_cb() will be invoked.
+  /// Resets the cellular profile.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.profile>
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - This function needs both privileges.
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `type` (in): The type of reset
+  /// - `id` (in): The subscriber identity module ID to reset (The sim index starts from 0.)
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - connection_reset_cb() will be invoked.
   int connection_reset_profile(
     connection_h connection,
     int type,
@@ -3273,28 +4187,46 @@ class Tizen80CapiNetworkConnection {
           int Function(connection_h, int, int, connection_reset_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @platform
-  /// @deprecated Deprecated since 4.0. Use connection_add_route_entry() instead.
-  /// @brief Adds a IPv4 route to the routing table.
-  /// @details You can get the @a interface_name from
-  /// connection_profile_get_network_interface_name() of opened profile.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/network.route
-  /// @remarks Since 6.0, the required privilege and level of this function has changed.
-  /// @param[in] connection        The connection handle
-  /// @param[in] interface_name    The name of network interface
-  /// @param[in] host_address      The IP address of the host
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_ALREADY_EXISTS        Already exists
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
-  /// @see connection_profile_get_network_interface_name()
+  /// **Deprecated:** Deprecated since 4.0. Use connection_add_route_entry() instead.
+  ///
+  /// Adds a IPv4 route to the routing table.
+  ///
+  /// You can get the `interface_name` from connection_profile_get_network_interface_name() of opened profile.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.route>
+  ///
+  /// **Remarks:**
+  /// - Since 6.0, the required privilege and level of this function has changed.
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `interface_name` (in): The name of network interface
+  /// - `host_address` (in): The IP address of the host
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_ALREADY_EXISTS`: Already exists
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `connection_profile_get_network_interface_name()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int connection_add_route(
     connection_h connection,
     ffi.Pointer<ffi.Char> interface_name,
@@ -3315,27 +4247,45 @@ class Tizen80CapiNetworkConnection {
       int Function(
           connection_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @platform
-  /// @deprecated Deprecated since 4.0. Use connection_remove_route_entry() instead.
-  /// @brief Removes a IPv4 route from the routing table.
-  /// @details You can get the @a interface_name from
-  /// connection_profile_get_network_interface_name() of opened profile.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/network.route
-  /// @remarks Since 6.0, the required privilege and level of this function has changed.
-  /// @param[in] connection        The connection handle
-  /// @param[in] interface_name    The name of network interface
-  /// @param[in] host_address      The IP address of the host
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
-  /// @see connection_profile_get_network_interface_name()
+  /// **Deprecated:** Deprecated since 4.0. Use connection_remove_route_entry() instead.
+  ///
+  /// Removes a IPv4 route from the routing table.
+  ///
+  /// You can get the `interface_name` from connection_profile_get_network_interface_name() of opened profile.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.route>
+  ///
+  /// **Remarks:**
+  /// - Since 6.0, the required privilege and level of this function has changed.
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `interface_name` (in): The name of network interface
+  /// - `host_address` (in): The IP address of the host
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `connection_profile_get_network_interface_name()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int connection_remove_route(
     connection_h connection,
     ffi.Pointer<ffi.Char> interface_name,
@@ -3356,29 +4306,47 @@ class Tizen80CapiNetworkConnection {
       int Function(
           connection_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @platform
-  /// @deprecated Deprecated since 4.0. Use connection_add_route_entry() instead.
-  /// @brief Adds a IPv6 route to the routing table.
-  /// @details You can get the @a interface_name from
-  /// connection_profile_get_network_interface_name() of opened profile.
-  /// @since_tizen 2.3.1
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/network.route
-  /// @remarks Since 6.0, the required privilege and level of this function has changed.
-  /// @param[in] connection        The connection handle
-  /// @param[in] interface_name    The name of network interface
-  /// @param[in] host_address      The IP address of the host
-  /// @param[in] gateway           The gateway address
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_ALREADY_EXISTS        Already exists
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
-  /// @see connection_profile_get_network_interface_name()
+  /// **Deprecated:** Deprecated since 4.0. Use connection_add_route_entry() instead.
+  ///
+  /// Adds a IPv6 route to the routing table.
+  ///
+  /// You can get the `interface_name` from connection_profile_get_network_interface_name() of opened profile.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.route>
+  ///
+  /// **Remarks:**
+  /// - Since 6.0, the required privilege and level of this function has changed.
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `interface_name` (in): The name of network interface
+  /// - `host_address` (in): The IP address of the host
+  /// - `gateway` (in): The gateway address
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_ALREADY_EXISTS`: Already exists
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `connection_profile_get_network_interface_name()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int connection_add_route_ipv6(
     connection_h connection,
     ffi.Pointer<ffi.Char> interface_name,
@@ -3405,28 +4373,46 @@ class Tizen80CapiNetworkConnection {
           int Function(connection_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @platform
-  /// @deprecated Deprecated since 4.0. Use connection_remove_route_entry() instead.
-  /// @brief Removes a IPV6 route from the routing table.
-  /// @details You can get the @a interface_name from
-  /// connection_profile_get_network_interface_name() of opened profile.
-  /// @since_tizen 2.3.1
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/network.route
-  /// @remarks Since 6.0, the required privilege and level of this function has changed.
-  /// @param[in] connection        The connection handle
-  /// @param[in] interface_name    The name of network interface
-  /// @param[in] host_address      The IP address of the host
-  /// @param[in] gateway           The gateway address
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
-  /// @see connection_profile_get_network_interface_name()
+  /// **Deprecated:** Deprecated since 4.0. Use connection_remove_route_entry() instead.
+  ///
+  /// Removes a IPV6 route from the routing table.
+  ///
+  /// You can get the `interface_name` from connection_profile_get_network_interface_name() of opened profile.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.route>
+  ///
+  /// **Remarks:**
+  /// - Since 6.0, the required privilege and level of this function has changed.
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `interface_name` (in): The name of network interface
+  /// - `host_address` (in): The IP address of the host
+  /// - `gateway` (in): The gateway address
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `connection_profile_get_network_interface_name()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int connection_remove_route_ipv6(
     connection_h connection,
     ffi.Pointer<ffi.Char> interface_name,
@@ -3453,31 +4439,46 @@ class Tizen80CapiNetworkConnection {
           int Function(connection_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @platform
-  /// @brief Adds a route to the routing table.
-  /// @details You can get the @a interface_name from \n
-  /// connection_profile_get_network_interface_name() of opened profile.
-  /// @since_tizen 4.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/network.route
-  /// @remarks Since 6.0, the required privilege and level of this function has changed.
-  /// @param[in] connection        The connection handle
-  /// @param[in] address_family    The address family
-  /// @param[in] interface_name    The name of network interface
-  /// @param[in] host_address      The IP address of the host (e.g., single IP address such as
-  /// 163.152.10.2,192.168.1.2), group's IP address (e.g., 163.152.10.0, 192.168.0.0)
-  /// is not allowed
-  /// @param[in] gateway           The gateway address
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_ALREADY_EXISTS        Already exists
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
-  /// @see connection_profile_get_network_interface_name()
+  /// Adds a route to the routing table.
+  ///
+  /// You can get the `interface_name` from connection_profile_get_network_interface_name() of opened profile.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.route>
+  ///
+  /// **Remarks:**
+  /// - Since 6.0, the required privilege and level of this function has changed.
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `address_family` (in): The address family
+  /// - `interface_name` (in): The name of network interface
+  /// - `host_address` (in): The IP address of the host (e.g., single IP address such as 163.152.10.2,192.168.1.2), group's IP address (e.g., 163.152.10.0, 192.168.0.0) is not allowed
+  /// - `gateway` (in): The gateway address
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_ALREADY_EXISTS`: Already exists
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `connection_profile_get_network_interface_name()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int connection_add_route_entry(
     connection_h connection,
     int address_family,
@@ -3507,30 +4508,45 @@ class Tizen80CapiNetworkConnection {
           int Function(connection_h, int, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @platform
-  /// @brief Removes a route from the routing table.
-  /// @details You can get the @a interface_name from \n
-  /// connection_profile_get_network_interface_name() of opened profile.
-  /// @since_tizen 4.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/network.route
-  /// @remarks Since 6.0, the required privilege and level of this function has changed.
-  /// @param[in] connection        The connection handle
-  /// @param[in] address_family    The address family
-  /// @param[in] interface_name    The name of network interface
-  /// @param[in] host_address      The IP address of the host (e.g., single IP address such as
-  /// 163.152.10.2,192.168.1.2), group's IP address (e.g., 163.152.10.0, 192.168.0.0)
-  /// is not allowed
-  /// @param[in] gateway           The gateway address
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
-  /// @see connection_profile_get_network_interface_name()
+  /// Removes a route from the routing table.
+  ///
+  /// You can get the `interface_name` from connection_profile_get_network_interface_name() of opened profile.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.route>
+  ///
+  /// **Remarks:**
+  /// - Since 6.0, the required privilege and level of this function has changed.
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `address_family` (in): The address family
+  /// - `interface_name` (in): The name of network interface
+  /// - `host_address` (in): The IP address of the host (e.g., single IP address such as 163.152.10.2,192.168.1.2), group's IP address (e.g., 163.152.10.0, 192.168.0.0) is not allowed
+  /// - `gateway` (in): The gateway address
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `connection_profile_get_network_interface_name()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int connection_remove_route_entry(
     connection_h connection,
     int address_family,
@@ -3560,18 +4576,26 @@ class Tizen80CapiNetworkConnection {
           int Function(connection_h, int, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets all IPv6 addresses assigned to the network interface.
-  /// @since_tizen 4.0
-  /// @param[in] connection       The connection handle
-  /// @param[in] connection_type  The connection type
-  /// @param[in] callback         The callback to be called for each IPv6 address
-  /// @param[in] user_data        The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value.
-  /// @retval #CONNECTION_ERROR_NONE               Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED      Not supported
+  /// Gets all IPv6 addresses assigned to the network interface.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `connection_type` (in): The connection type
+  /// - `callback` (in): The callback to be called for each IPv6 address
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value.
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_foreach_ipv6_address(
     connection_h connection,
     int connection_type,
@@ -3595,23 +4619,33 @@ class Tizen80CapiNetworkConnection {
           int Function(connection_h, int, connection_ipv6_address_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the statistics information.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] connection The connection handle
-  /// @param[in] connection_type   The type of connection \n
-  /// Only #CONNECTION_TYPE_WIFI and #CONNECTION_TYPE_CELLULAR are supported
-  /// @param[in] statistics_type   The type of statistics
-  /// @param[out] size             The received data size of the last cellular packet data connection (bytes)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
+  /// Gets the statistics information.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `connection_type` (in): The type of connection Only `CONNECTION_TYPE_WIFI` and `CONNECTION_TYPE_CELLULAR` are supported
+  /// - `statistics_type` (in): The type of statistics
+  /// - `size` (out): The received data size of the last cellular packet data connection (bytes)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_get_statistics(
     connection_h connection,
     int connection_type,
@@ -3634,22 +4668,32 @@ class Tizen80CapiNetworkConnection {
       _connection_get_statisticsPtr.asFunction<
           int Function(connection_h, int, int, ffi.Pointer<ffi.LongLong>)>();
 
-  /// @brief Resets the statistics information.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.set
-  /// @param[in] connection        The connection handle
-  /// @param[in] connection_type   The type of connection \n
-  /// Only #CONNECTION_TYPE_WIFI and #CONNECTION_TYPE_CELLULAR are supported
-  /// @param[in] statistics_type   The type of statistics
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CONNECTION_ERROR_NONE                  Successful
-  /// @retval #CONNECTION_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #CONNECTION_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #CONNECTION_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #CONNECTION_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #CONNECTION_ERROR_NOT_SUPPORTED         Not supported
+  /// Resets the statistics information.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.set>
+  ///
+  /// **Parameters:**
+  /// - `connection` (in): The connection handle
+  /// - `connection_type` (in): The type of connection Only `CONNECTION_TYPE_WIFI` and `CONNECTION_TYPE_CELLULAR` are supported
+  /// - `statistics_type` (in): The type of statistics
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONNECTION_ERROR_NONE`: Successful
+  /// - `CONNECTION_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `CONNECTION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONNECTION_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONNECTION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CONNECTION_ERROR_NOT_SUPPORTED`: Not supported
   int connection_reset_statistics(
     connection_h connection,
     int connection_type,
@@ -3670,8 +4714,11 @@ class Tizen80CapiNetworkConnection {
       .asFunction<int Function(connection_h, int, int)>();
 }
 
-/// @brief Enumeration for security type of Wi-Fi.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for security type of Wi-Fi.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class connection_wifi_security_type_e {
   /// < Security disabled
   static const int CONNECTION_WIFI_SECURITY_TYPE_NONE = 0;
@@ -3692,8 +4739,11 @@ abstract class connection_wifi_security_type_e {
   static const int CONNECTION_WIFI_SECURITY_TYPE_SAE = 5;
 }
 
-/// @brief Enumeration for encryption modes.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for encryption modes.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class connection_wifi_encryption_type_e {
   /// < Encryption disabled
   static const int CONNECTION_WIFI_ENCRYPTION_TYPE_NONE = 0;
@@ -3711,8 +4761,11 @@ abstract class connection_wifi_encryption_type_e {
   static const int CONNECTION_WIFI_ENCRYPTION_TYPE_TKIP_AES_MIXED = 4;
 }
 
-/// @brief Enumeration for cellular service type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for cellular service type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class connection_cellular_service_type_e {
   /// < Unknown
   static const int CONNECTION_CELLULAR_SERVICE_TYPE_UNKNOWN = 0;
@@ -3736,10 +4789,15 @@ abstract class connection_cellular_service_type_e {
   static const int CONNECTION_CELLULAR_SERVICE_TYPE_APPLICATION = 6;
 }
 
-/// @brief Enumeration for cellular pdn type.
-/// @since_tizen 3.0
-/// @remarks Use #CONNECTION_CELLULAR_PDN_TYPE_IPV4_IPV6 instead of
-/// CONNECTION_CELLULAR_PDN_TYPE_IPV4_IPv6.
+/// Enumeration for cellular pdn type.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - Use `CONNECTION_CELLULAR_PDN_TYPE_IPV4_IPV6` instead of
+/// - CONNECTION_CELLULAR_PDN_TYPE_IPV4_IPv6.
+/// @nodoc
 abstract class connection_cellular_pdn_type_e {
   /// < Unknown
   static const int CONNECTION_CELLULAR_PDN_TYPE_UNKNOWN = 0;
@@ -3757,8 +4815,11 @@ abstract class connection_cellular_pdn_type_e {
   static const int CONNECTION_CELLULAR_PDN_TYPE_IPV4_IPV6 = 4;
 }
 
-/// @brief Enumeration for cellular authentication type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for cellular authentication type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class connection_cellular_auth_type_e {
   /// < No authentication
   static const int CONNECTION_CELLULAR_AUTH_TYPE_NONE = 0;
@@ -3770,8 +4831,11 @@ abstract class connection_cellular_auth_type_e {
   static const int CONNECTION_CELLULAR_AUTH_TYPE_CHAP = 2;
 }
 
-/// @brief Enumeration for profile state type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for profile state type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class connection_profile_state_e {
   /// < Disconnected state
   static const int CONNECTION_PROFILE_STATE_DISCONNECTED = 0;
@@ -3786,8 +4850,11 @@ abstract class connection_profile_state_e {
   static const int CONNECTION_PROFILE_STATE_CONNECTED = 3;
 }
 
-/// @brief Enumeration for address family.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for address family.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class connection_address_family_e {
   /// < IPV4 Address type
   static const int CONNECTION_ADDRESS_FAMILY_IPV4 = 0;
@@ -3796,8 +4863,11 @@ abstract class connection_address_family_e {
   static const int CONNECTION_ADDRESS_FAMILY_IPV6 = 1;
 }
 
-/// @brief Enumeration for IP configuration type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for IP configuration type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class connection_ip_config_type_e {
   /// Not defined
   static const int CONNECTION_IP_CONFIG_TYPE_NONE = 0;
@@ -3815,8 +4885,11 @@ abstract class connection_ip_config_type_e {
   static const int CONNECTION_IP_CONFIG_TYPE_FIXED = 4;
 }
 
-/// @brief Enumeration for proxy method type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for proxy method type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class connection_proxy_type_e {
   /// Direct connection
   static const int CONNECTION_PROXY_TYPE_DIRECT = 0;
@@ -3829,8 +4902,11 @@ abstract class connection_proxy_type_e {
   static const int CONNECTION_PROXY_TYPE_MANUAL = 2;
 }
 
-/// @brief Enumeration for DNS configuration type.
-/// @since_tizen 4.0
+/// Enumeration for DNS configuration type.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class connection_dns_config_type_e {
   /// < Not defined
   static const int CONNECTION_DNS_CONFIG_TYPE_NONE = 0;
@@ -3842,8 +4918,11 @@ abstract class connection_dns_config_type_e {
   static const int CONNECTION_DNS_CONFIG_TYPE_DYNAMIC = 2;
 }
 
-/// @brief Enumeration for network connection type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for network connection type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class connection_profile_type_e {
   /// < Cellular type
   static const int CONNECTION_PROFILE_TYPE_CELLULAR = 0;
@@ -3858,8 +4937,11 @@ abstract class connection_profile_type_e {
   static const int CONNECTION_PROFILE_TYPE_BT = 3;
 }
 
-/// @brief Enumeration for Internet connection state.
-/// @since_tizen 5.5
+/// Enumeration for Internet connection state.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class connection_internet_state_e {
   /// < Internet connection is unavailable
   static const int CONNECTION_INTERNET_STATE_OFFLINE = 0;
@@ -3868,25 +4950,40 @@ abstract class connection_internet_state_e {
   static const int CONNECTION_INTERNET_STATE_ONLINE = 1;
 }
 
-/// @brief The profile handle.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// The profile handle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 typedef connection_profile_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when the state of the profile is changed.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] state             The state
-/// @param[in] user_data         The user data passed from the callback registration function
-/// @see connection_profile_set_state_changed_cb()
-/// @see connection_profile_unset_state_changed_cb()
+/// Called when the state of the profile is changed.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `state` (in): The state
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `connection_profile_set_state_changed_cb()`
+/// - `connection_profile_unset_state_changed_cb()`
+/// @nodoc
 typedef connection_profile_state_changed_cb = ffi
     .Pointer<ffi.NativeFunction<connection_profile_state_changed_cbFunction>>;
+/// @nodoc
 typedef connection_profile_state_changed_cbFunction = ffi.Void Function(
     ffi.Int32 state, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartconnection_profile_state_changed_cbFunction = void Function(
     int state, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumeration for connection type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for connection type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class connection_type_e {
   /// < Disconnected
   static const int CONNECTION_TYPE_DISCONNECTED = 0;
@@ -3907,8 +5004,11 @@ abstract class connection_type_e {
   static const int CONNECTION_TYPE_NET_PROXY = 5;
 }
 
-/// @brief Enumeration for cellular network state.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for cellular network state.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class connection_cellular_state_e {
   /// < Out of service
   static const int CONNECTION_CELLULAR_STATE_OUT_OF_SERVICE = 0;
@@ -3929,8 +5029,11 @@ abstract class connection_cellular_state_e {
   static const int CONNECTION_CELLULAR_STATE_CONNECTED = 5;
 }
 
-/// @brief Enumeration for Wi-Fi state.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for Wi-Fi state.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class connection_wifi_state_e {
   /// < Wi-Fi is deactivated
   static const int CONNECTION_WIFI_STATE_DEACTIVATED = 0;
@@ -3942,8 +5045,11 @@ abstract class connection_wifi_state_e {
   static const int CONNECTION_WIFI_STATE_CONNECTED = 2;
 }
 
-/// @brief Enumeration for ethernet state.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// Enumeration for ethernet state.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+/// @nodoc
 abstract class connection_ethernet_state_e {
   /// < There is no Ethernet profile to open
   static const int CONNECTION_ETHERNET_STATE_DEACTIVATED = 0;
@@ -3955,8 +5061,11 @@ abstract class connection_ethernet_state_e {
   static const int CONNECTION_ETHERNET_STATE_CONNECTED = 2;
 }
 
-/// @brief Enumeration for Bluetooth state.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for Bluetooth state.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class connection_bt_state_e {
   /// < There is no Bluetooth profile to open
   static const int CONNECTION_BT_STATE_DEACTIVATED = 0;
@@ -3968,8 +5077,11 @@ abstract class connection_bt_state_e {
   static const int CONNECTION_BT_STATE_CONNECTED = 2;
 }
 
-/// @brief Enumeration for connection iterator type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for connection iterator type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class connection_iterator_type_e {
   /// < The iterator of the registered profile
   static const int CONNECTION_ITERATOR_TYPE_REGISTERED = 0;
@@ -3981,8 +5093,11 @@ abstract class connection_iterator_type_e {
   static const int CONNECTION_ITERATOR_TYPE_DEFAULT = 2;
 }
 
-/// @brief Enumeration for reset profile type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for reset profile type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class connection_reset_option_e {
   /// Initialized with the default profile defined by csc
   static const int CONNECTION_RESET_DEFAULT_PROFILE = 0;
@@ -3991,8 +5106,11 @@ abstract class connection_reset_option_e {
   static const int CONNECTION_RESET_CLEAR_PROFILE = 1;
 }
 
-/// @brief Enumeration for the attached or detached state of ethernet cable.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// Enumeration for the attached or detached state of ethernet cable.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+/// @nodoc
 abstract class connection_ethernet_cable_state_e {
   /// < Ethernet cable is detached
   static const int CONNECTION_ETHERNET_CABLE_DETACHED = 0;
@@ -4001,8 +5119,11 @@ abstract class connection_ethernet_cable_state_e {
   static const int CONNECTION_ETHERNET_CABLE_ATTACHED = 1;
 }
 
-/// @brief Enumeration for the DHCP state.
-/// @since_tizen 8.0
+/// Enumeration for the DHCP state.
+///
+/// **Since Tizen:**
+/// - 8.0
+/// @nodoc
 abstract class connection_dhcp_state_e {
   /// < Unknown state
   static const int CONNECTION_DHCP_STATE_UNKNOWN = 0;
@@ -4014,8 +5135,11 @@ abstract class connection_dhcp_state_e {
   static const int CONNECTION_DHCP_STATE_FINISHED = 2;
 }
 
-/// @brief Enumeration for connection errors.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for connection errors.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class connection_error_e {
   /// Successful
   static const int CONNECTION_ERROR_NONE = 0;
@@ -4072,8 +5196,11 @@ abstract class connection_error_e {
   static const int CONNECTION_ERROR_NOT_INITIALIZED = -29424630;
 }
 
-/// @brief Enumeration for statistics type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for statistics type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class connection_statistics_type_e {
   /// < Last received data
   static const int CONNECTION_STATISTICS_TYPE_LAST_RECEIVED_DATA = 0;
@@ -4088,170 +5215,285 @@ abstract class connection_statistics_type_e {
   static const int CONNECTION_STATISTICS_TYPE_TOTAL_SENT_DATA = 3;
 }
 
-/// @brief The connection handle.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// The connection handle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 typedef connection_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when the Internet state of the current connection is changed.
-/// @since_tizen 5.5
-/// @param[in] state             The Internet state of current connection
-/// @param[in] user_data         The user data passed to callback registration function
+/// Called when the Internet state of the current connection is changed.
+///
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **Parameters:**
+/// - `state` (in): The Internet state of current connection
+/// - `user_data` (in): The user data passed to callback registration function
+/// @nodoc
 typedef connection_internet_state_changed_cb = ffi
     .Pointer<ffi.NativeFunction<connection_internet_state_changed_cbFunction>>;
+/// @nodoc
 typedef connection_internet_state_changed_cbFunction = ffi.Void Function(
     ffi.Int32 state, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartconnection_internet_state_changed_cbFunction = void Function(
     int state, ffi.Pointer<ffi.Void> user_data);
 
-/// @deprecated Deprecated since 4.0. Use connection_ethernet_cable_state_changed_cb() instead.
-/// @brief Called when ethernet cable is plugged [in/out].
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-/// @param[in] state             The state of ethernet cable
-/// @param[in] user_data         The user data passed to callback registration function
+/// **Deprecated:** Deprecated since 4.0. Use connection_ethernet_cable_state_changed_cb() instead.
+///
+/// Called when ethernet cable is plugged `[in/out]`.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+///
+/// **Parameters:**
+/// - `state` (in): The state of ethernet cable
+/// - `user_data` (in): The user data passed to callback registration function
+/// @nodoc
 typedef connection_ethernet_cable_state_chaged_cb = ffi.Pointer<
     ffi.NativeFunction<connection_ethernet_cable_state_chaged_cbFunction>>;
+/// @nodoc
 typedef connection_ethernet_cable_state_chaged_cbFunction = ffi.Void Function(
     ffi.Int32 state, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartconnection_ethernet_cable_state_chaged_cbFunction = void Function(
     int state, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when ethernet cable is plugged [in/out].
-/// @since_tizen 4.0
-/// @param[in] state             The state of ethernet cable
-/// @param[in] user_data         The user data passed to callback registration function
+/// Called when ethernet cable is plugged `[in/out]`.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Parameters:**
+/// - `state` (in): The state of ethernet cable
+/// - `user_data` (in): The user data passed to callback registration function
+/// @nodoc
 typedef connection_ethernet_cable_state_changed_cb = ffi.Pointer<
     ffi.NativeFunction<connection_ethernet_cable_state_changed_cbFunction>>;
+/// @nodoc
 typedef connection_ethernet_cable_state_changed_cbFunction = ffi.Void Function(
     ffi.Int32 state, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartconnection_ethernet_cable_state_changed_cbFunction = void Function(
     int state, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the type of a connection is changed.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] type              The type of the current network connection
-/// @param[in] user_data         The user data passed from the callback registration function
-/// @see connection_set_type_changed_cb()
-/// @see connection_unset_type_changed_cb()
+/// Called when the type of a connection is changed.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `type` (in): The type of the current network connection
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `connection_set_type_changed_cb()`
+/// - `connection_unset_type_changed_cb()`
+/// @nodoc
 typedef connection_type_changed_cb
     = ffi.Pointer<ffi.NativeFunction<connection_type_changed_cbFunction>>;
+/// @nodoc
 typedef connection_type_changed_cbFunction = ffi.Void Function(
     ffi.Int32 type, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartconnection_type_changed_cbFunction = void Function(
     int type, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the address is changed.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @remarks @a ipv4_address @a ipv6_address should not be freed.
-/// @a ipv4_address @a ipv6_address is available only in the callback.
-/// To use outside the callback, make a copy.
-/// @param[in] ipv4_address      The IP address for IPv4
-/// @param[in] ipv6_address      The IP address for IPv6
-/// @param[in] user_data         The user data passed from the callback registration function
-/// @see connection_set_ip_address_changed_cb()
-/// @see connection_unset_ip_address_changed_cb()
-/// @see connection_set_proxy_address_changed_cb()
-/// @see connection_unset_proxy_address_changed_cb()
+/// Called when the address is changed.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Remarks:**
+/// - `ipv4_address` `ipv6_address` should not be freed.
+/// - `ipv4_address` `ipv6_address` is available only in the callback.
+/// - To use outside the callback, make a copy.
+///
+/// **Parameters:**
+/// - `ipv4_address` (in): The IP address for IPv4
+/// - `ipv6_address` (in): The IP address for IPv6
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `connection_set_ip_address_changed_cb()`
+/// - `connection_unset_ip_address_changed_cb()`
+/// - `connection_set_proxy_address_changed_cb()`
+/// - `connection_unset_proxy_address_changed_cb()`
+/// @nodoc
 typedef connection_address_changed_cb
     = ffi.Pointer<ffi.NativeFunction<connection_address_changed_cbFunction>>;
+/// @nodoc
 typedef connection_address_changed_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> ipv4_address,
     ffi.Pointer<ffi.Char> ipv6_address,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartconnection_address_changed_cbFunction = void Function(
     ffi.Pointer<ffi.Char> ipv4_address,
     ffi.Pointer<ffi.Char> ipv6_address,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the DHCP state is changed.
-/// @since_tizen 8.0
-/// @param[in]  state            The DHCP state
-/// @param[in]  interface_name   The interface name with DHCP state change
-/// @param[in]  result           The result of DHCP operation
-/// @param[in]  user_data        The user data passed from the callback registration function
-/// @see  connection_set_dhcp_state_changed_cb()
-/// @see  connection_unset_dhcp_state_changed_cb()
+/// Called when the DHCP state is changed.
+///
+/// **Since Tizen:**
+/// - 8.0
+///
+/// **Parameters:**
+/// - `state` (in): The DHCP state
+/// - `interface_name` (in): The interface name with DHCP state change
+/// - `result` (in): The result of DHCP operation
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `connection_set_dhcp_state_changed_cb()`
+/// - `connection_unset_dhcp_state_changed_cb()`
+/// @nodoc
 typedef connection_dhcp_state_changed_cb
     = ffi.Pointer<ffi.NativeFunction<connection_dhcp_state_changed_cbFunction>>;
+/// @nodoc
 typedef connection_dhcp_state_changed_cbFunction = ffi.Void Function(
     ffi.Int32 state,
     ffi.Pointer<ffi.Char> interface_name,
     ffi.Int32 result,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartconnection_dhcp_state_changed_cbFunction = void Function(
     int state,
     ffi.Pointer<ffi.Char> interface_name,
     int result,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The profiles iterator handle.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// The profiles iterator handle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 typedef connection_profile_iterator_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when connection_set_default_cellular_service_profile_async() finishes.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] result            The result
-/// @param[in] user_data         The user data passed from connection_open_profile()
-/// @pre connection_set_default_cellular_service_profile_async() will invoke this callback function.
-/// @see connection_set_default_cellular_service_profile_async()
+/// Called when connection_set_default_cellular_service_profile_async() finishes.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `result` (in): The result
+/// - `user_data` (in): The user data passed from connection_open_profile()
+///
+/// **Preconditions:**
+/// - connection_set_default_cellular_service_profile_async() will invoke this callback function.
+///
+/// **See also:**
+/// - `connection_set_default_cellular_service_profile_async()`
+/// @nodoc
 typedef connection_set_default_cb
     = ffi.Pointer<ffi.NativeFunction<connection_set_default_cbFunction>>;
+/// @nodoc
 typedef connection_set_default_cbFunction = ffi.Void Function(
     ffi.Int32 result, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartconnection_set_default_cbFunction = void Function(
     int result, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called after connection_open_profile() is finished.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] result            The result
-/// @param[in] user_data         The user data passed from connection_open_profile()
-/// @pre connection_open_profile() will invoke this callback function.
-/// @see connection_open_profile()
+/// Called after connection_open_profile() is finished.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `result` (in): The result
+/// - `user_data` (in): The user data passed from connection_open_profile()
+///
+/// **Preconditions:**
+/// - connection_open_profile() will invoke this callback function.
+///
+/// **See also:**
+/// - `connection_open_profile()`
+/// @nodoc
 typedef connection_opened_cb
     = ffi.Pointer<ffi.NativeFunction<connection_opened_cbFunction>>;
+/// @nodoc
 typedef connection_opened_cbFunction = ffi.Void Function(
     ffi.Int32 result, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartconnection_opened_cbFunction = void Function(
     int result, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called after connection_close_profile() is finished.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] result            The result
-/// @param[in] user_data         The user data passed from connection_close_profile()
-/// @pre connection_close_profile() will invoke this callback function.
-/// @see connection_close_profile()
+/// Called after connection_close_profile() is finished.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `result` (in): The result
+/// - `user_data` (in): The user data passed from connection_close_profile()
+///
+/// **Preconditions:**
+/// - connection_close_profile() will invoke this callback function.
+///
+/// **See also:**
+/// - `connection_close_profile()`
+/// @nodoc
 typedef connection_closed_cb
     = ffi.Pointer<ffi.NativeFunction<connection_closed_cbFunction>>;
+/// @nodoc
 typedef connection_closed_cbFunction = ffi.Void Function(
     ffi.Int32 result, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartconnection_closed_cbFunction = void Function(
     int result, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called after connection_reset_profile() is finished.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] result            The result
-/// @param[in] user_data         The user data passed from connection_reset_profile()
-/// @pre connection_reset_profile() will invoke this callback function.
-/// @see connection_reset_profile()
+/// Called after connection_reset_profile() is finished.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `result` (in): The result
+/// - `user_data` (in): The user data passed from connection_reset_profile()
+///
+/// **Preconditions:**
+/// - connection_reset_profile() will invoke this callback function.
+///
+/// **See also:**
+/// - `connection_reset_profile()`
+/// @nodoc
 typedef connection_reset_cb
     = ffi.Pointer<ffi.NativeFunction<connection_reset_cbFunction>>;
+/// @nodoc
 typedef connection_reset_cbFunction = ffi.Void Function(
     ffi.Int32 result, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartconnection_reset_cbFunction = void Function(
     int result, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called with an IPv6 address.
-/// @since_tizen 4.0
-/// @remarks   If @a ipv6_address is needed outside the callback, a copy should be made. \n
-/// @a ipv6_address will be freed automatically after the execution of this callback.
-/// @param[in]  ipv6_address     The IPv6 address
-/// @param[in]  user_data        The user data passed from the foreach function
-/// @return  @c true to continue with the next iteration of the loop, \n
-/// @c false to break out of the loop
-/// @pre  connection_foreach_ipv6_address() will invoke this callback.
-/// @see  connection_foreach_ipv6_address()
+/// Called with an IPv6 address.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Remarks:**
+/// - If `ipv6_address` is needed outside the callback, a copy should be made.
+/// - `ipv6_address` will be freed automatically after the execution of this callback.
+///
+/// **Parameters:**
+/// - `ipv6_address` (in): The IPv6 address
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - connection_foreach_ipv6_address() will invoke this callback.
+///
+/// **See also:**
+/// - `connection_foreach_ipv6_address()`
+/// @nodoc
 typedef connection_ipv6_address_cb
     = ffi.Pointer<ffi.NativeFunction<connection_ipv6_address_cbFunction>>;
+/// @nodoc
 typedef connection_ipv6_address_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> ipv6_address, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartconnection_ipv6_address_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> ipv6_address, ffi.Pointer<ffi.Void> user_data);

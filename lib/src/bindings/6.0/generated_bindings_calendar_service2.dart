@@ -1,3 +1,6 @@
+/// {@category 6.0/tizen}
+library tizen_interop_6_0.calendar_service2;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen calendar-service2 APIs.
+/// {@category 6.0/tizen}
 class Tizen60CalendarService2 {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,285 +28,80 @@ class Tizen60CalendarService2 {
           lookup)
       : _lookup = lookup;
 
-  /// @ingroup CAPI_SOCIAL_CALENDAR_SVC_MODULE
-  /// @addtogroup CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_book _calendar_book view
-  /// <table>
-  /// <tr>
-  /// <th> Type </th>
-  /// <th> Property ID </th>
-  /// <th> Read, Write </th>
-  /// <th> Description </th>
-  /// </tr>
-  /// <tr><td> string </td><td> _uri </td><td> read only </td><td> Identifier of this calendar book view </td></tr>
-  /// <tr><td> integer </td><td> id </td><td> read only </td><td> DB record ID of the calendar book </td></tr>
-  /// <tr><td> string </td><td> uid </td><td> read, write </td><td> Unique identifier </td></tr>
-  /// <tr><td> string </td><td> name </td><td> read, write </td><td> Calendar book name </td></tr>
-  /// <tr><td> string </td><td> description </td><td> read, write </td><td> Calendar book description </td></tr>
-  /// <tr><td> string </td><td> color </td><td> read, write </td><td> Calendar book color for UX </td></tr>
-  /// <tr><td> string </td><td> location </td><td> read, write </td><td> Location of the event </td></tr>
-  /// <tr><td> integer </td><td> visibility </td><td> read, write </td><td> Visibility of the calendar book for UX</td></tr>
-  /// <tr><td> integer </td><td> sync_event </td><td> read, write </td><td> </td>Currently NOT Used</tr>
-  /// <tr><td> integer </td><td> account_id </td><td> read, write once </td><td> Account for this calendar </td></tr>
-  /// <tr><td> integer </td><td> store_type </td><td> read, write </td><td> Type of calendar contents(refer to the @ref calendar_book_type_e) </td></tr>
-  /// <tr><td> string </td><td> sync_data1 </td><td> read, write </td><td> Generic data for use by syncing </td></tr>
-  /// <tr><td> string </td><td> sync_data2 </td><td> read, write </td><td> Generic data for use by syncing </td></tr>
-  /// <tr><td> string </td><td> sync_data3 </td><td> read, write </td><td> Generic data for use by syncing </td></tr>
-  /// <tr><td> string </td><td> sync_data4 </td><td> read, write </td><td> Generic data for use by syncing </td></tr>
-  /// <tr><td> integer </td><td> mode </td><td> read, write </td><td> Calendar book mode (refer to the @ref calendar_book_mode_e) </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CALENDAR_SVC_MODULE
+  /// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_book _calendar_book view <table> <tr> <th> Type </th> <th> Property ID </th> <th> Read, Write </th> <th> Description </th> </tr> <tr><td> string </td><td> _uri </td><td> read only </td><td> Identifier of this calendar book view </td></tr> <tr><td> integer </td><td> id </td><td> read only </td><td> DB record ID of the calendar book </td></tr> <tr><td> string </td><td> uid </td><td> read, write </td><td> Unique identifier </td></tr> <tr><td> string </td><td> name </td><td> read, write </td><td> Calendar book name </td></tr> <tr><td> string </td><td> description </td><td> read, write </td><td> Calendar book description </td></tr> <tr><td> string </td><td> color </td><td> read, write </td><td> Calendar book color for UX </td></tr> <tr><td> string </td><td> location </td><td> read, write </td><td> Location of the event </td></tr> <tr><td> integer </td><td> visibility </td><td> read, write </td><td> Visibility of the calendar book for UX</td></tr> <tr><td> integer </td><td> sync_event </td><td> read, write </td><td> </td>Currently NOT Used</tr> <tr><td> integer </td><td> account_id </td><td> read, write once </td><td> Account for this calendar </td></tr> <tr><td> integer </td><td> store_type </td><td> read, write </td><td> Type of calendar contents(refer to the `calendar_book_type_e)` </td></tr> <tr><td> string </td><td> sync_data1 </td><td> read, write </td><td> Generic data for use by syncing </td></tr> <tr><td> string </td><td> sync_data2 </td><td> read, write </td><td> Generic data for use by syncing </td></tr> <tr><td> string </td><td> sync_data3 </td><td> read, write </td><td> Generic data for use by syncing </td></tr> <tr><td> string </td><td> sync_data4 </td><td> read, write </td><td> Generic data for use by syncing </td></tr> <tr><td> integer </td><td> mode </td><td> read, write </td><td> Calendar book mode (refer to the `calendar_book_mode_e)` </td></tr> </table>
   late final ffi.Pointer<_calendar_book_property_ids> __calendar_book =
       _lookup<_calendar_book_property_ids>('_calendar_book');
 
   _calendar_book_property_ids get _calendar_book => __calendar_book.ref;
 
-  /// @ingroup CAPI_SOCIAL_CALENDAR_SVC_MODULE
-  /// @addtogroup CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_event _calendar_event view
-  /// <table>
-  /// <tr>
-  /// <th> Type </th>
-  /// <th> Property ID </th>
-  /// <th> Read, Write </th>
-  /// <th> Description </th>
-  /// </tr>
-  /// <tr><td> string </td><td> _uri </td><td> read only </td><td>Identifier of this event view</td></tr>
-  /// <tr><td> integer </td><td> id </td><td> read only </td><td>DB record ID of the event</td></tr>
-  /// <tr><td> integer </td><td> calendar_book_id </td><td> read, write </td><td>ID of the calendar book to which the event belongs</td></tr>
-  /// <tr><td> string </td><td> summary </td><td> read, write </td><td>The short description of the event</td></tr>
-  /// <tr><td> string </td><td> description </td><td> read, write </td><td>The description of the event</td></tr>
-  /// <tr><td> string </td><td> location </td><td> read, write </td><td>The location of the event</td></tr>
-  /// <tr><td> string </td><td> categories </td><td> read, write </td><td>The category of the event. For example APPOINTMENT, BIRTHDAY</td></tr>
-  /// <tr><td> string </td><td> exdate </td><td> read, write </td><td>The exception list of the event. If this event has a recurrence rule, the instance of the exdate is removed. Format is "YYYYMMDD"(allday event) or "YYYYMMDDTHHMMSS". Multiple exceptions can be included with a comma </td></tr>
-  /// <tr><td> integer </td><td> event_status </td><td> read, write </td><td>Refer to the @ref calendar_event_status_e</td></tr>
-  /// <tr><td> integer </td><td> priority </td><td> read, write </td><td></td>Refer to the @ref calendar_event_priority_e</tr>
-  /// <tr><td> integer </td><td> timezone </td><td> read, write </td><td>The timezone_id of the event if it exists. Refer to the @ref CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_timezone</td></tr>
-  /// <tr><td> integer </td><td> person_id </td><td> read, write </td><td>The person_id of the event if the event is a birthday. Refer to the contacts-service</td></tr>
-  /// <tr><td> integer </td><td> busy_status </td><td> read, write </td><td>Refer to the @ref calendar_event_busy_status_e</td></tr>
-  /// <tr><td> integer </td><td> sensitivity </td><td> read, write </td><td>Refer to the @ref calendar_sensitivity_e </td></tr>
-  /// <tr><td> string </td><td> uid </td><td> read, write </td><td>The unique ID of the event</td></tr>
-  /// <tr><td> string </td><td> organizer_name </td><td> read, write </td><td>The name of organizer of the event</td></tr>
-  /// <tr><td> string </td><td> organizer_email </td><td> read, write </td><td>The email address of the organizer of the event</td></tr>
-  /// <tr><td> integer </td><td> meeting_status </td><td> read, write </td><td>Refer to the @ref calendar_meeting_status_e</td></tr>
-  /// <tr><td> integer </td><td> original_event_id </td><td> read, write </td><td>The ID of the original event if the event is an exception.</td></tr>
-  /// <tr><td> double </td><td> latitude </td><td> read, write </td><td> The latitude of the location of the event</td></tr>
-  /// <tr><td> double </td><td> longitude </td><td> read, write </td><td> The longitude of the location of the event</td></tr>
-  /// <tr><td> integer </td><td> email_id </td><td> read, write </td><td>ID of the email_id. Refer to the email-service.</td></tr>
-  /// <tr><td> long long int </td><td> created_time </td><td> read, write </td><td> The time when the event is created</td></tr>
-  /// <tr><td> long long int </td><td> last_modified_time </td><td> read only </td><td>The time when the event is updated</td></tr>
-  /// <tr><td> integer </td><td> is_deleted </td><td> read only </td><td></td></tr>
-  /// <tr><td> integer </td><td> freq </td><td> read, write </td><td>The frequent type of event recurrence. Refer to the @ref calendar_recurrence_frequency_e</td></tr>
-  /// <tr><td> integer </td><td> range_type </td><td> read, write </td><td>Refer to the @ref calendar_range_type_e</td></tr>
-  /// <tr><td> calendar time </td><td> until_time </td><td> read, write </td><td>The end time of the event recurrence. If the range_type is @ref CALENDAR_RANGE_UNTIL</td></tr>
-  /// <tr><td> integer </td><td> count </td><td> read, write </td><td>The count of the event recurrence. If the range_type is @ref CALENDAR_RANGE_COUNT</td></tr>
-  /// <tr><td> integer </td><td> interval </td><td> read, write </td><td>The interval of the event recurrence</td></tr>
-  /// <tr><td> string </td><td> bysecond </td><td> read, write </td><td>The second list of the event recurrence. The value can be from 0 to 59. The list is seperated by commas</td></tr>
-  /// <tr><td> string </td><td> byminute </td><td> read, write </td><td>The minute list of the event recurrence. The value can be from 0 to 59. The list is seperated by commas</td></tr>
-  /// <tr><td> string </td><td> byhour </td><td> read, write </td><td>The hour list of the event recurrence. The value can be from 0 to 23. The list is seperated by commas</td></tr>
-  /// <tr><td> string </td><td> byday </td><td> read, write </td><td>The day list of the event recurrence. The value can be SU, MO, TU, WE, TH, FR, SA. The list is seperated by commas</td></tr>
-  /// <tr><td> string </td><td> bymonthday </td><td> read, write </td><td>The month day list of the event recurrence. The value can be from 1 to 31 and from -31 to -1. The list is seperated by commas</td></tr>
-  /// <tr><td> string </td><td> byyearday </td><td> read, write </td><td>The year day list of the event recurrence. The value can be from 1 to 366 and from -366 to -1. The list is seperated by commas</td></tr>
-  /// <tr><td> string </td><td> byweekno </td><td> read, write </td><td>The week number list of the event recurrence. The value can be from 1 to 53 and from -53 to -1. The list is seperated by commas</td></tr>
-  /// <tr><td> string </td><td> bymonth </td><td> read, write </td><td>The month list of the event recurrence. The value can be from 1 to 12. The list is seperated by commas</td></tr>
-  /// <tr><td> string </td><td> bysetpos </td><td> read, write </td><td>The position list of the event recurrence. The value can be from 1 to 366 and from -366 to -1. The list is seperated by commas</td></tr>
-  /// <tr><td> integer </td><td> wkst </td><td> read, write </td><td>The start day of the week. Refer to the @ref calendar_days_of_week_e</td></tr>
-  /// <tr><td> string </td><td> recurrence_id </td><td> read, write </td><td>RECURRENCE-ID of RFC #2445</td></tr>
-  /// <tr><td> string </td><td> rdate </td><td> read, write </td><td>RDATE of RFC #2445</td></tr>
-  /// <tr><td> integer </td><td> has_attendee </td><td> read only </td><td>Whether or not the event has an attendee list </td></tr>
-  /// <tr><td> integer </td><td> has_alarm </td><td> read only </td><td>Whether or not the event has an alarm list </td></tr>
-  /// <tr><td> integer </td><td> calendar_system_type </td><td> read, write </td><td>Refer to the @ref calendar_system_type_e</td></tr>
-  /// <tr><td> string </td><td> sync_data1 </td><td> read, write </td><td>The sync data of the event. If developer need to save some information related to the event, they can use this property</td></tr>
-  /// <tr><td> string </td><td> sync_data2 </td><td> read, write </td><td>The sync data of the event. If developer need to save some information related to the event, they can use this property</td></tr>
-  /// <tr><td> string </td><td> sync_data3 </td><td> read, write </td><td>The sync data of the event. If developer need to save some information related to the event, they can use this property</td></tr>
-  /// <tr><td> string </td><td> sync_data4 </td><td> read, write </td><td>The sync data of the event. If developer need to save some information related to the event, they can use this property</td></tr>
-  /// <tr><td> calendar time </td><td> start_time </td><td> read, write </td><td>The start time of the event</td></tr>
-  /// <tr><td> string </td><td> start_tzid </td><td> read, write </td><td></td>The timezone of the start_time</tr>
-  /// <tr><td> calendar time </td><td> end_time </td><td> read, write </td><td>The end time of the event</td></tr>
-  /// <tr><td> string </td><td> end_tzid </td><td> read, write </td><td>The timezone of the end_time</td></tr>
-  /// <tr><td> child list </td><td> calendar_alarm </td><td> read, write </td><td>The alarm list of the event. Refer to the @ref CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_alarm</td></tr>
-  /// <tr><td> child list </td><td> calendar_attendee </td><td> read, write </td><td>The attendee list of the event. Refer to the @ref CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_attendee</td></tr>
-  /// <tr><td> child list </td><td> exception </td><td> read, write </td><td>The exception mod event list of the event</td></tr>
-  /// <tr><td> child list </td><td> extended </td><td> read, write </td><td>The extended property list of the event. Refer to the @ref CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_extended_property</td></tr>
-  /// <tr><td> integer </td><td> is_allday </td><td> read only </td><td>The event is an allday event or not </td></tr>
-  /// <tr><td> integer </td><td> link_count </td><td> read only </td><td>The event is a linked event (Since 4.0)</td></tr>
-  /// <tr><td> integer </td><td> link_base_id </td><td> read only </td><td>The event is a base linked event (Since 4.0)</td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CALENDAR_SVC_MODULE
+  /// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_event _calendar_event view <table> <tr> <th> Type </th> <th> Property ID </th> <th> Read, Write </th> <th> Description </th> </tr> <tr><td> string </td><td> _uri </td><td> read only </td><td>Identifier of this event view</td></tr> <tr><td> integer </td><td> id </td><td> read only </td><td>DB record ID of the event</td></tr> <tr><td> integer </td><td> calendar_book_id </td><td> read, write </td><td>ID of the calendar book to which the event belongs</td></tr> <tr><td> string </td><td> summary </td><td> read, write </td><td>The short description of the event</td></tr> <tr><td> string </td><td> description </td><td> read, write </td><td>The description of the event</td></tr> <tr><td> string </td><td> location </td><td> read, write </td><td>The location of the event</td></tr> <tr><td> string </td><td> categories </td><td> read, write </td><td>The category of the event. For example APPOINTMENT, BIRTHDAY</td></tr> <tr><td> string </td><td> exdate </td><td> read, write </td><td>The exception list of the event. If this event has a recurrence rule, the instance of the exdate is removed. Format is "YYYYMMDD"(allday event) or "YYYYMMDDTHHMMSS". Multiple exceptions can be included with a comma </td></tr> <tr><td> integer </td><td> event_status </td><td> read, write </td><td>Refer to the `calendar_event_status_e</td></tr>` <tr><td> integer </td><td> priority </td><td> read, write </td><td></td>Refer to the `calendar_event_priority_e</tr>` <tr><td> integer </td><td> timezone </td><td> read, write </td><td>The timezone_id of the event if it exists. Refer to the `CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_timezone</td></tr>` <tr><td> integer </td><td> person_id </td><td> read, write </td><td>The person_id of the event if the event is a birthday. Refer to the contacts-service</td></tr> <tr><td> integer </td><td> busy_status </td><td> read, write </td><td>Refer to the `calendar_event_busy_status_e</td></tr>` <tr><td> integer </td><td> sensitivity </td><td> read, write </td><td>Refer to the `calendar_sensitivity_e` </td></tr> <tr><td> string </td><td> uid </td><td> read, write </td><td>The unique ID of the event</td></tr> <tr><td> string </td><td> organizer_name </td><td> read, write </td><td>The name of organizer of the event</td></tr> <tr><td> string </td><td> organizer_email </td><td> read, write </td><td>The email address of the organizer of the event</td></tr> <tr><td> integer </td><td> meeting_status </td><td> read, write </td><td>Refer to the `calendar_meeting_status_e</td></tr>` <tr><td> integer </td><td> original_event_id </td><td> read, write </td><td>The ID of the original event if the event is an exception.</td></tr> <tr><td> double </td><td> latitude </td><td> read, write </td><td> The latitude of the location of the event</td></tr> <tr><td> double </td><td> longitude </td><td> read, write </td><td> The longitude of the location of the event</td></tr> <tr><td> integer </td><td> email_id </td><td> read, write </td><td>ID of the email_id. Refer to the email-service.</td></tr> <tr><td> long long int </td><td> created_time </td><td> read, write </td><td> The time when the event is created</td></tr> <tr><td> long long int </td><td> last_modified_time </td><td> read only </td><td>The time when the event is updated</td></tr> <tr><td> integer </td><td> is_deleted </td><td> read only </td><td></td></tr> <tr><td> integer </td><td> freq </td><td> read, write </td><td>The frequent type of event recurrence. Refer to the `calendar_recurrence_frequency_e</td></tr>` <tr><td> integer </td><td> range_type </td><td> read, write </td><td>Refer to the `calendar_range_type_e</td></tr>` <tr><td> calendar time </td><td> until_time </td><td> read, write </td><td>The end time of the event recurrence. If the range_type is `CALENDAR_RANGE_UNTIL</td></tr>` <tr><td> integer </td><td> count </td><td> read, write </td><td>The count of the event recurrence. If the range_type is `CALENDAR_RANGE_COUNT</td></tr>` <tr><td> integer </td><td> interval </td><td> read, write </td><td>The interval of the event recurrence</td></tr> <tr><td> string </td><td> bysecond </td><td> read, write </td><td>The second list of the event recurrence. The value can be from 0 to 59. The list is seperated by commas</td></tr> <tr><td> string </td><td> byminute </td><td> read, write </td><td>The minute list of the event recurrence. The value can be from 0 to 59. The list is seperated by commas</td></tr> <tr><td> string </td><td> byhour </td><td> read, write </td><td>The hour list of the event recurrence. The value can be from 0 to 23. The list is seperated by commas</td></tr> <tr><td> string </td><td> byday </td><td> read, write </td><td>The day list of the event recurrence. The value can be SU, MO, TU, WE, TH, FR, SA. The list is seperated by commas</td></tr> <tr><td> string </td><td> bymonthday </td><td> read, write </td><td>The month day list of the event recurrence. The value can be from 1 to 31 and from -31 to -1. The list is seperated by commas</td></tr> <tr><td> string </td><td> byyearday </td><td> read, write </td><td>The year day list of the event recurrence. The value can be from 1 to 366 and from -366 to -1. The list is seperated by commas</td></tr> <tr><td> string </td><td> byweekno </td><td> read, write </td><td>The week number list of the event recurrence. The value can be from 1 to 53 and from -53 to -1. The list is seperated by commas</td></tr> <tr><td> string </td><td> bymonth </td><td> read, write </td><td>The month list of the event recurrence. The value can be from 1 to 12. The list is seperated by commas</td></tr> <tr><td> string </td><td> bysetpos </td><td> read, write </td><td>The position list of the event recurrence. The value can be from 1 to 366 and from -366 to -1. The list is seperated by commas</td></tr> <tr><td> integer </td><td> wkst </td><td> read, write </td><td>The start day of the week. Refer to the `calendar_days_of_week_e</td></tr>` <tr><td> string </td><td> recurrence_id </td><td> read, write </td><td>RECURRENCE-ID of RFC #2445</td></tr> <tr><td> string </td><td> rdate </td><td> read, write </td><td>RDATE of RFC #2445</td></tr> <tr><td> integer </td><td> has_attendee </td><td> read only </td><td>Whether or not the event has an attendee list </td></tr> <tr><td> integer </td><td> has_alarm </td><td> read only </td><td>Whether or not the event has an alarm list </td></tr> <tr><td> integer </td><td> calendar_system_type </td><td> read, write </td><td>Refer to the `calendar_system_type_e</td></tr>` <tr><td> string </td><td> sync_data1 </td><td> read, write </td><td>The sync data of the event. If developer need to save some information related to the event, they can use this property</td></tr> <tr><td> string </td><td> sync_data2 </td><td> read, write </td><td>The sync data of the event. If developer need to save some information related to the event, they can use this property</td></tr> <tr><td> string </td><td> sync_data3 </td><td> read, write </td><td>The sync data of the event. If developer need to save some information related to the event, they can use this property</td></tr> <tr><td> string </td><td> sync_data4 </td><td> read, write </td><td>The sync data of the event. If developer need to save some information related to the event, they can use this property</td></tr> <tr><td> calendar time </td><td> start_time </td><td> read, write </td><td>The start time of the event</td></tr> <tr><td> string </td><td> start_tzid </td><td> read, write </td><td></td>The timezone of the start_time</tr> <tr><td> calendar time </td><td> end_time </td><td> read, write </td><td>The end time of the event</td></tr> <tr><td> string </td><td> end_tzid </td><td> read, write </td><td>The timezone of the end_time</td></tr> <tr><td> child list </td><td> calendar_alarm </td><td> read, write </td><td>The alarm list of the event. Refer to the `CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_alarm</td></tr>` <tr><td> child list </td><td> calendar_attendee </td><td> read, write </td><td>The attendee list of the event. Refer to the `CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_attendee</td></tr>` <tr><td> child list </td><td> exception </td><td> read, write </td><td>The exception mod event list of the event</td></tr> <tr><td> child list </td><td> extended </td><td> read, write </td><td>The extended property list of the event. Refer to the `CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_extended_property</td></tr>` <tr><td> integer </td><td> is_allday </td><td> read only </td><td>The event is an allday event or not </td></tr> <tr><td> integer </td><td> link_count </td><td> read only </td><td>The event is a linked event (Since 4.0)</td></tr> <tr><td> integer </td><td> link_base_id </td><td> read only </td><td>The event is a base linked event (Since 4.0)</td></tr> </table>
   late final ffi.Pointer<_calendar_event_property_ids> __calendar_event =
       _lookup<_calendar_event_property_ids>('_calendar_event');
 
   _calendar_event_property_ids get _calendar_event => __calendar_event.ref;
 
-  /// @ingroup CAPI_SOCIAL_CALENDAR_SVC_MODULE
-  /// @addtogroup CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_todo _calendar_todo view
-  /// <table>
-  /// <tr>
-  /// <th> Type </th>
-  /// <th> Property ID </th>
-  /// <th> Read, Write </th>
-  /// <th> Description </th>
-  /// </tr>
-  /// <tr><td> string </td><td> _uri </td><td> read only </td><td>Identifier of this todo view</td></tr>
-  /// <tr><td> integer </td><td> id </td><td> read only </td><td>DB record ID of the todo</td></tr>
-  /// <tr><td> integer </td><td> calendar_book_id </td><td> read, write </td><td>ID of the calendar book to which the todo belongs</td></tr>
-  /// <tr><td> string </td><td> summary </td><td> read, write </td><td>The short description of the todo</td></tr>
-  /// <tr><td> string </td><td> description </td><td> read, write </td><td>The description of the todo</td></tr>
-  /// <tr><td> string </td><td> location </td><td> read, write </td><td>The location of the todo</td></tr>
-  /// <tr><td> string </td><td> categories </td><td> read, write </td><td>The category of the todo. For example APPOINTMENT, BIRTHDAY</td></tr>
-  /// <tr><td> integer </td><td> todo_status </td><td> read, write </td><td>Refer to the @ref calendar_todo_status_e</td></tr>
-  /// <tr><td> integer </td><td> priority </td><td> read, write </td><td>Refer to the @ref calendar_todo_priority_e</td></tr>
-  /// <tr><td> integer </td><td> sensitivity </td><td> read, write </td><td>Refer to the @ref calendar_sensitivity_e </td></tr>
-  /// <tr><td> string </td><td> uid </td><td> read, write </td><td>The unique ID of the todo</td></tr>
-  /// <tr><td> double </td><td> latitude </td><td> read, write </td><td>The latitude of the location of the todo</td></tr>
-  /// <tr><td> double </td><td> longitude </td><td> read, write </td><td>The longitude of the location of the todo</td></tr>
-  /// <tr><td> long long int </td><td> created_time </td><td> read, write </td><td>The time when the todo is created</td></tr>
-  /// <tr><td> long long int </td><td> last_modified_time </td><td> read only </td><td>The time when the todo is updated</td></tr>
-  /// <tr><td> long long int </td><td> completed_time </td><td> read, write </td><td>The time when the todo is completed</td></tr>
-  /// <tr><td> integer </td><td> progress </td><td> read, write </td><td> The progression of the todo. The value can be from 0 to 100</td></tr>
-  /// <tr><td> integer </td><td> is_deleted </td><td> read only </td><td></td></tr>
-  /// <tr><td> integer </td><td> freq </td><td> read, write </td><td>The frequent type of todo recurrence. Refer to the @ref calendar_recurrence_frequency_e</td></tr>
-  /// <tr><td> integer </td><td> range_type </td><td> read, write </td><td>Refer to the @ref calendar_range_type_e</td></tr>
-  /// <tr><td> calendar time </td><td> until_time </td><td> read, write </td><td>The end time of the todo recurrence. If the range_type is CALENDAR_RANGE_UNTIL</td></tr>
-  /// <tr><td> integer </td><td> count </td><td> read, write </td><td>The count of the todo recurrence. If the range_type is CALENDAR_RANGE_COUNT</td></tr>
-  /// <tr><td> integer </td><td> interval </td><td> read, write </td><td>The interval of the todo recurrence</td></tr>
-  /// <tr><td> string </td><td> bysecond </td><td> read, write </td><td>The second list of the todo recurrence. The value can be from 0 to 59. The list is seperated by commas</td></tr>
-  /// <tr><td> string </td><td> byminute </td><td> read, write </td><td>The minute list of the todo recurrence. The value can be from 0 to 59. The list is seperated by commas</td></tr>
-  /// <tr><td> string </td><td> byhour </td><td> read, write </td><td>The hour list of the todo recurrence. The value can be from 0 to 23. The list is seperated by commas</td></tr>
-  /// <tr><td> string </td><td> byday </td><td> read, write </td><td>The day list of the todo recurrence. The value can be SU, MO, TU, WE, TH, FR, SA. The list is seperated by commas</td></tr>
-  /// <tr><td> string </td><td> bymonthday </td><td> read, write </td><td>The month day list of the todo recurrence. The value can be from 1 to 31 and from -31 to -1. The list is seperated by commas</td></tr>
-  /// <tr><td> string </td><td> byyearday </td><td> read, write </td><td>The year day list of the todo recurrence. The value can be from 1 to 366 and from -366 to -1. The list is seperated by commas</td></tr>
-  /// <tr><td> string </td><td> byweekno </td><td> read, write </td><td>The week number list of the todo recurrence. The value can be from 1 to 53 and from -53 to -1. The list is seperated by commas</td></tr>
-  /// <tr><td> string </td><td> bymonth </td><td> read, write </td><td>The month list of the todo recurrence. The value can be from 1 to 12. The list is seperated by commas</td></tr>
-  /// <tr><td> string </td><td> bysetpos </td><td> read, write </td><td>The position list of the todo recurrence. The value can be from 1 to 366 and from -366 to -1. The list is seperated by commas</td></tr>
-  /// <tr><td> integer </td><td> wkst </td><td> read, write </td><td>The start day of the week. Refer to the @ref calendar_days_of_week_e</td></tr>
-  /// <tr><td> integer </td><td> has_alarm </td><td> read only </td><td>Whether or not the todo has an alarm list </td></tr>
-  /// <tr><td> string </td><td> sync_data1 </td><td> read, write </td><td>The sync data of the todo. If developers need to save some information related to the todo, they can use this property</td></tr>
-  /// <tr><td> string </td><td> sync_data2 </td><td> read, write </td><td>The sync data of the todo. If developers need to save some information related to the todo, they can use this property</td></tr>
-  /// <tr><td> string </td><td> sync_data3 </td><td> read, write </td><td>The sync data of the todo. If developers need to save some information related to the todo, they can use this property</td></tr>
-  /// <tr><td> string </td><td> sync_data4 </td><td> read, write </td><td>The sync data of the todo. If developers need to save some information related to the todo, they can use this property</td></tr>
-  /// <tr><td> calendar time </td><td> start_time </td><td> read, write </td><td>The start time of the todo</td></tr>
-  /// <tr><td> string </td><td> start_tzid </td><td> read, write </td><td></td>The timezone of the start_time</tr>
-  /// <tr><td> calendar time </td><td> due_time </td><td> read, write </td><td>The due time of the todo</td></tr>
-  /// <tr><td> string </td><td> due_tzid </td><td> read, write </td><td>The timezone of the due_time</td></tr>
-  /// <tr><td> child list </td><td> calendar_alarm </td><td> read, write </td><td>The alarm list of the todo. Refer to the @ref CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_alarm</td></tr>
-  /// <tr><td> string </td><td> organizer_name </td><td> read, write </td><td>The name of the organizer of the event</td></tr>
-  /// <tr><td> string </td><td> organizer_email </td><td> read, write </td><td>The email address of the organizer of the event</td></tr>
-  /// <tr><td> integer </td><td> has_attendee </td><td> read only </td><td>Whether or not the todo has an attendee list </td></tr>
-  /// <tr><td> child list </td><td> calendar_attendee </td><td> read, write </td><td>The attendee list of the todo. Refer to the @ref CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_attendee</td></tr>
-  /// <tr><td> child list </td><td> extended </td><td> read, write </td><td>The extended property list of the todo. Refer to the @ref CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_extended_property</td></tr>
-  /// <tr><td> integer </td><td> is_allday </td><td> read only </td><td>The todo is an allday event or not </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CALENDAR_SVC_MODULE
+  /// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_todo _calendar_todo view <table> <tr> <th> Type </th> <th> Property ID </th> <th> Read, Write </th> <th> Description </th> </tr> <tr><td> string </td><td> _uri </td><td> read only </td><td>Identifier of this todo view</td></tr> <tr><td> integer </td><td> id </td><td> read only </td><td>DB record ID of the todo</td></tr> <tr><td> integer </td><td> calendar_book_id </td><td> read, write </td><td>ID of the calendar book to which the todo belongs</td></tr> <tr><td> string </td><td> summary </td><td> read, write </td><td>The short description of the todo</td></tr> <tr><td> string </td><td> description </td><td> read, write </td><td>The description of the todo</td></tr> <tr><td> string </td><td> location </td><td> read, write </td><td>The location of the todo</td></tr> <tr><td> string </td><td> categories </td><td> read, write </td><td>The category of the todo. For example APPOINTMENT, BIRTHDAY</td></tr> <tr><td> integer </td><td> todo_status </td><td> read, write </td><td>Refer to the `calendar_todo_status_e</td></tr>` <tr><td> integer </td><td> priority </td><td> read, write </td><td>Refer to the `calendar_todo_priority_e</td></tr>` <tr><td> integer </td><td> sensitivity </td><td> read, write </td><td>Refer to the `calendar_sensitivity_e` </td></tr> <tr><td> string </td><td> uid </td><td> read, write </td><td>The unique ID of the todo</td></tr> <tr><td> double </td><td> latitude </td><td> read, write </td><td>The latitude of the location of the todo</td></tr> <tr><td> double </td><td> longitude </td><td> read, write </td><td>The longitude of the location of the todo</td></tr> <tr><td> long long int </td><td> created_time </td><td> read, write </td><td>The time when the todo is created</td></tr> <tr><td> long long int </td><td> last_modified_time </td><td> read only </td><td>The time when the todo is updated</td></tr> <tr><td> long long int </td><td> completed_time </td><td> read, write </td><td>The time when the todo is completed</td></tr> <tr><td> integer </td><td> progress </td><td> read, write </td><td> The progression of the todo. The value can be from 0 to 100</td></tr> <tr><td> integer </td><td> is_deleted </td><td> read only </td><td></td></tr> <tr><td> integer </td><td> freq </td><td> read, write </td><td>The frequent type of todo recurrence. Refer to the `calendar_recurrence_frequency_e</td></tr>` <tr><td> integer </td><td> range_type </td><td> read, write </td><td>Refer to the `calendar_range_type_e</td></tr>` <tr><td> calendar time </td><td> until_time </td><td> read, write </td><td>The end time of the todo recurrence. If the range_type is CALENDAR_RANGE_UNTIL</td></tr> <tr><td> integer </td><td> count </td><td> read, write </td><td>The count of the todo recurrence. If the range_type is CALENDAR_RANGE_COUNT</td></tr> <tr><td> integer </td><td> interval </td><td> read, write </td><td>The interval of the todo recurrence</td></tr> <tr><td> string </td><td> bysecond </td><td> read, write </td><td>The second list of the todo recurrence. The value can be from 0 to 59. The list is seperated by commas</td></tr> <tr><td> string </td><td> byminute </td><td> read, write </td><td>The minute list of the todo recurrence. The value can be from 0 to 59. The list is seperated by commas</td></tr> <tr><td> string </td><td> byhour </td><td> read, write </td><td>The hour list of the todo recurrence. The value can be from 0 to 23. The list is seperated by commas</td></tr> <tr><td> string </td><td> byday </td><td> read, write </td><td>The day list of the todo recurrence. The value can be SU, MO, TU, WE, TH, FR, SA. The list is seperated by commas</td></tr> <tr><td> string </td><td> bymonthday </td><td> read, write </td><td>The month day list of the todo recurrence. The value can be from 1 to 31 and from -31 to -1. The list is seperated by commas</td></tr> <tr><td> string </td><td> byyearday </td><td> read, write </td><td>The year day list of the todo recurrence. The value can be from 1 to 366 and from -366 to -1. The list is seperated by commas</td></tr> <tr><td> string </td><td> byweekno </td><td> read, write </td><td>The week number list of the todo recurrence. The value can be from 1 to 53 and from -53 to -1. The list is seperated by commas</td></tr> <tr><td> string </td><td> bymonth </td><td> read, write </td><td>The month list of the todo recurrence. The value can be from 1 to 12. The list is seperated by commas</td></tr> <tr><td> string </td><td> bysetpos </td><td> read, write </td><td>The position list of the todo recurrence. The value can be from 1 to 366 and from -366 to -1. The list is seperated by commas</td></tr> <tr><td> integer </td><td> wkst </td><td> read, write </td><td>The start day of the week. Refer to the `calendar_days_of_week_e</td></tr>` <tr><td> integer </td><td> has_alarm </td><td> read only </td><td>Whether or not the todo has an alarm list </td></tr> <tr><td> string </td><td> sync_data1 </td><td> read, write </td><td>The sync data of the todo. If developers need to save some information related to the todo, they can use this property</td></tr> <tr><td> string </td><td> sync_data2 </td><td> read, write </td><td>The sync data of the todo. If developers need to save some information related to the todo, they can use this property</td></tr> <tr><td> string </td><td> sync_data3 </td><td> read, write </td><td>The sync data of the todo. If developers need to save some information related to the todo, they can use this property</td></tr> <tr><td> string </td><td> sync_data4 </td><td> read, write </td><td>The sync data of the todo. If developers need to save some information related to the todo, they can use this property</td></tr> <tr><td> calendar time </td><td> start_time </td><td> read, write </td><td>The start time of the todo</td></tr> <tr><td> string </td><td> start_tzid </td><td> read, write </td><td></td>The timezone of the start_time</tr> <tr><td> calendar time </td><td> due_time </td><td> read, write </td><td>The due time of the todo</td></tr> <tr><td> string </td><td> due_tzid </td><td> read, write </td><td>The timezone of the due_time</td></tr> <tr><td> child list </td><td> calendar_alarm </td><td> read, write </td><td>The alarm list of the todo. Refer to the `CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_alarm</td></tr>` <tr><td> string </td><td> organizer_name </td><td> read, write </td><td>The name of the organizer of the event</td></tr> <tr><td> string </td><td> organizer_email </td><td> read, write </td><td>The email address of the organizer of the event</td></tr> <tr><td> integer </td><td> has_attendee </td><td> read only </td><td>Whether or not the todo has an attendee list </td></tr> <tr><td> child list </td><td> calendar_attendee </td><td> read, write </td><td>The attendee list of the todo. Refer to the `CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_attendee</td></tr>` <tr><td> child list </td><td> extended </td><td> read, write </td><td>The extended property list of the todo. Refer to the `CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_extended_property</td></tr>` <tr><td> integer </td><td> is_allday </td><td> read only </td><td>The todo is an allday event or not </td></tr> </table>
   late final ffi.Pointer<_calendar_todo_property_ids> __calendar_todo =
       _lookup<_calendar_todo_property_ids>('_calendar_todo');
 
   _calendar_todo_property_ids get _calendar_todo => __calendar_todo.ref;
 
-  /// @ingroup CAPI_SOCIAL_CALENDAR_SVC_MODULE
-  /// @addtogroup CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_timezone _calendar_timezone view
-  /// <table>
-  /// <tr>
-  /// <th> Type </th>
-  /// <th> Property ID </th>
-  /// <th> Read, Write </th>
-  /// <th> Description </th>
-  /// </tr>
-  /// <tr><td> string </td><td> _uri </td><td> read only </td><td> Identifier of this timezone view </td></tr>
-  /// <tr><td> integer </td><td> id </td><td> read only </td><td> DB record ID of the timezone </td></tr>
-  /// <tr><td> integer </td><td> calendar_book_id </td><td> read, write </td><td> DB record ID of a related calendar book </td></tr>
-  /// <tr><td> integer </td><td> tz_offset_from_gmt </td><td> read, write </td><td> UTC offset which is in use when the onset of this time zone observance begins. Valid values are -720(-12:00) to 840(+14:00) </td></tr>
-  /// <tr><td> string </td><td> standard_name </td><td> read, write </td><td> Name of the Standard Time </td></tr>
-  /// <tr><td> integer </td><td> standard_start_month </td><td> read, write </td><td> Starting month of the Standard Time. Month is 0-based. eg, 0 for January </td></tr>
-  /// <tr><td> integer </td><td> standard_start_position_of_week </td><td> read, write </td><td> Starting day-of-week-in-month of the Standard Time. Day is 1-based </td></tr>
-  /// <tr><td> integer </td><td> standard_start_day </td><td> read, write </td><td> Starting day-of-week of the Standard Time. Valid values are 1(SUNDAY) to 7(SATURDAY) </td></tr>
-  /// <tr><td> integer </td><td> standard_start_hour </td><td> read, write </td><td> Starting hour of the Standard Time. Valid values are 0 to 23 </td></tr>
-  /// <tr><td> integer </td><td> standard_bias </td><td> read, write </td><td> The number of minutes added during the Standard Time </td></tr>
-  /// <tr><td> string </td><td> day_light_name </td><td> read, write </td><td> Name of Daylight </td></tr>
-  /// <tr><td> integer </td><td> day_light_start_month </td><td> read, write </td><td> Starting month of Daylight. Month is 0-based. eg, 0 for January </td></tr>
-  /// <tr><td> integer </td><td> day_light_start_position_of_week </td><td> read, write </td><td> Starting day-of-week-in-month of Daylight. Day is 1-based </td></tr>
-  /// <tr><td> integer </td><td> day_light_start_day </td><td> read, write </td><td> Starting day-of-week of Daylight. Valid values are 1(SUNDAY) to 7(SATURDAY) </td></tr>
-  /// <tr><td> integer </td><td> day_light_start_hour </td><td> read, write </td><td> Starting hour of Daylight. Valid values are 0 to 23 </td></tr>
-  /// <tr><td> integer </td><td> day_light_bias </td><td> read, write </td><td> The number of minutes added during Daylight Time </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CALENDAR_SVC_MODULE
+  /// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_timezone _calendar_timezone view <table> <tr> <th> Type </th> <th> Property ID </th> <th> Read, Write </th> <th> Description </th> </tr> <tr><td> string </td><td> _uri </td><td> read only </td><td> Identifier of this timezone view </td></tr> <tr><td> integer </td><td> id </td><td> read only </td><td> DB record ID of the timezone </td></tr> <tr><td> integer </td><td> calendar_book_id </td><td> read, write </td><td> DB record ID of a related calendar book </td></tr> <tr><td> integer </td><td> tz_offset_from_gmt </td><td> read, write </td><td> UTC offset which is in use when the onset of this time zone observance begins. Valid values are -720(-12:00) to 840(+14:00) </td></tr> <tr><td> string </td><td> standard_name </td><td> read, write </td><td> Name of the Standard Time </td></tr> <tr><td> integer </td><td> standard_start_month </td><td> read, write </td><td> Starting month of the Standard Time. Month is 0-based. eg, 0 for January </td></tr> <tr><td> integer </td><td> standard_start_position_of_week </td><td> read, write </td><td> Starting day-of-week-in-month of the Standard Time. Day is 1-based </td></tr> <tr><td> integer </td><td> standard_start_day </td><td> read, write </td><td> Starting day-of-week of the Standard Time. Valid values are 1(SUNDAY) to 7(SATURDAY) </td></tr> <tr><td> integer </td><td> standard_start_hour </td><td> read, write </td><td> Starting hour of the Standard Time. Valid values are 0 to 23 </td></tr> <tr><td> integer </td><td> standard_bias </td><td> read, write </td><td> The number of minutes added during the Standard Time </td></tr> <tr><td> string </td><td> day_light_name </td><td> read, write </td><td> Name of Daylight </td></tr> <tr><td> integer </td><td> day_light_start_month </td><td> read, write </td><td> Starting month of Daylight. Month is 0-based. eg, 0 for January </td></tr> <tr><td> integer </td><td> day_light_start_position_of_week </td><td> read, write </td><td> Starting day-of-week-in-month of Daylight. Day is 1-based </td></tr> <tr><td> integer </td><td> day_light_start_day </td><td> read, write </td><td> Starting day-of-week of Daylight. Valid values are 1(SUNDAY) to 7(SATURDAY) </td></tr> <tr><td> integer </td><td> day_light_start_hour </td><td> read, write </td><td> Starting hour of Daylight. Valid values are 0 to 23 </td></tr> <tr><td> integer </td><td> day_light_bias </td><td> read, write </td><td> The number of minutes added during Daylight Time </td></tr> </table>
   late final ffi.Pointer<_calendar_timezone_property_ids> __calendar_timezone =
       _lookup<_calendar_timezone_property_ids>('_calendar_timezone');
 
   _calendar_timezone_property_ids get _calendar_timezone =>
       __calendar_timezone.ref;
 
-  /// @ingroup CAPI_SOCIAL_CALENDAR_SVC_MODULE
-  /// @addtogroup CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_attendee _calendar_attendee view
-  /// <table>
-  /// <tr>
-  /// <th> Type </th>
-  /// <th> Property ID </th>
-  /// <th> Read, Write </th>
-  /// <th> Description </th>
-  /// </tr>
-  /// <tr><td> string </td><td> _uri </td><td> read only </td><td> Identifier of this calendar attendee view </td></tr>
-  /// <tr><td> integer </td><td> event_id </td><td> read only </td><td> Event/TODO that the attendee belongs to </td></tr>
-  /// <tr><td> string </td><td> number </td><td> read, write </td><td> The number of the attendee </td></tr>
-  /// <tr><td> integer </td><td> cutype </td><td> read, write </td><td> The type of attendee (one of CALENDAR_ATTENDEE_CUTYPE_INDIVIDUAL, CALENDAR_ATTENDEE_CUTYPE_GROUP, CALENDAR_ATTENDEE_CUTYPE_RESOURCE, CALENDAR_ATTENDEE_CUTYPE_ROOM, CALENDAR_ATTENDEE_CUTYPE_UNKNOWN) </tr>
-  /// <tr><td> integer </td><td> person_id </td><td> read, write </td><td> Person ID that the attendee belongs to </td></tr>
-  /// <tr><td> string </td><td> uid </td><td> read, write </td><td> Unique identifier </td></tr>
-  /// <tr><td> string </td><td> email </td><td> read, write </td><td> The email address of the attendee </td></tr>
-  /// <tr><td> integer </td><td> role </td><td> read, write </td><td> Attendee role (one of CALENDAR_ATTENDEE_ROLE_REQ_PARTICIPANT, CALENDAR_ATTENDEE_ROLE_OPT_PARTICIPANT, CALENDAR_ATTENDEE_ROLE_NON_PARTICIPANT, CALENDAR_ATTENDEE_ROLE_CHAIR) </td></tr>
-  /// <tr><td> integer </td><td> status </td><td> read, write </td><td> Attendee status (one of CALENDAR_ATTENDEE_STATUS_PENDING, CALENDAR_ATTENDEE_STATUS_ACCEPTED, CALENDAR_ATTENDEE_STATUS_DECLINED, CALENDAR_ATTENDEE_STATUS_TENTATIVE, CALENDAR_ATTENDEE_STATUS_DELEGATED, CALENDAR_ATTENDEE_STATUS_COMPLETED, CALENDAR_ATTENDEE_STATUS_IN_PROCESS) </td></tr>
-  /// <tr><td> integer </td><td> rsvp </td><td> read, write </td><td> RSVP invitation reply (one of true, false) </td></tr>
-  /// <tr><td> string </td><td> delegatee_uri </td><td> read, write </td><td> Delegatee (DELEGATED-TO) </td></tr>
-  /// <tr><td> string </td><td> delegator_uri </td><td> read, write </td><td> Delegator (DELEGATED-FROM) </td></tr>
-  /// <tr><td> string </td><td> name </td><td> read, write </td><td> Attendee name </td></tr>
-  /// <tr><td> string </td><td> member </td><td> read, write </td><td> Group that the attendee belongs to </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CALENDAR_SVC_MODULE
+  /// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_attendee _calendar_attendee view <table> <tr> <th> Type </th> <th> Property ID </th> <th> Read, Write </th> <th> Description </th> </tr> <tr><td> string </td><td> _uri </td><td> read only </td><td> Identifier of this calendar attendee view </td></tr> <tr><td> integer </td><td> event_id </td><td> read only </td><td> Event/TODO that the attendee belongs to </td></tr> <tr><td> string </td><td> number </td><td> read, write </td><td> The number of the attendee </td></tr> <tr><td> integer </td><td> cutype </td><td> read, write </td><td> The type of attendee (one of CALENDAR_ATTENDEE_CUTYPE_INDIVIDUAL, CALENDAR_ATTENDEE_CUTYPE_GROUP, CALENDAR_ATTENDEE_CUTYPE_RESOURCE, CALENDAR_ATTENDEE_CUTYPE_ROOM, CALENDAR_ATTENDEE_CUTYPE_UNKNOWN) </tr> <tr><td> integer </td><td> person_id </td><td> read, write </td><td> Person ID that the attendee belongs to </td></tr> <tr><td> string </td><td> uid </td><td> read, write </td><td> Unique identifier </td></tr> <tr><td> string </td><td> email </td><td> read, write </td><td> The email address of the attendee </td></tr> <tr><td> integer </td><td> role </td><td> read, write </td><td> Attendee role (one of CALENDAR_ATTENDEE_ROLE_REQ_PARTICIPANT, CALENDAR_ATTENDEE_ROLE_OPT_PARTICIPANT, CALENDAR_ATTENDEE_ROLE_NON_PARTICIPANT, CALENDAR_ATTENDEE_ROLE_CHAIR) </td></tr> <tr><td> integer </td><td> status </td><td> read, write </td><td> Attendee status (one of CALENDAR_ATTENDEE_STATUS_PENDING, CALENDAR_ATTENDEE_STATUS_ACCEPTED, CALENDAR_ATTENDEE_STATUS_DECLINED, CALENDAR_ATTENDEE_STATUS_TENTATIVE, CALENDAR_ATTENDEE_STATUS_DELEGATED, CALENDAR_ATTENDEE_STATUS_COMPLETED, CALENDAR_ATTENDEE_STATUS_IN_PROCESS) </td></tr> <tr><td> integer </td><td> rsvp </td><td> read, write </td><td> RSVP invitation reply (one of true, false) </td></tr> <tr><td> string </td><td> delegatee_uri </td><td> read, write </td><td> Delegatee (DELEGATED-TO) </td></tr> <tr><td> string </td><td> delegator_uri </td><td> read, write </td><td> Delegator (DELEGATED-FROM) </td></tr> <tr><td> string </td><td> name </td><td> read, write </td><td> Attendee name </td></tr> <tr><td> string </td><td> member </td><td> read, write </td><td> Group that the attendee belongs to </td></tr> </table>
   late final ffi.Pointer<_calendar_attendee_property_ids> __calendar_attendee =
       _lookup<_calendar_attendee_property_ids>('_calendar_attendee');
 
   _calendar_attendee_property_ids get _calendar_attendee =>
       __calendar_attendee.ref;
 
-  /// @ingroup CAPI_SOCIAL_CALENDAR_SVC_MODULE
-  /// @addtogroup CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_alarm _calendar_alarm view
-  /// <table>
-  /// <tr>
-  /// <th> Type </th>
-  /// <th> Property ID </th>
-  /// <th> Read, Write </th>
-  /// <th> Description </th>
-  /// </tr>
-  /// <tr><td> string </td><td> _uri </td><td> read only </td><td> Identifier of this calendar alarm view </td></tr>
-  /// <tr><td> integer </td><td> parent_id </td><td> read only </td><td> Event that the alarm belongs to </td></tr>
-  /// <tr><td> integer </td><td> type </td><td> read, write </td><td> Currently NOT used </td></tr>
-  /// <tr><td> long long int </td><td> time </td><td> read, write </td><td> The alarm time of the event(This represents the number of seconds elapsed since the Epoch, 1970-01-01 00:00:00 +0000(UTC)). This MUST be used with CALENDAR_ALARM_TIME_UNIT_SPECIFIC </td></tr>
-  /// <tr><td> integer </td><td> tick </td><td> read, write </td><td> The number of unit before start time. This MUST be used with one of CALENDAR_ALARM_TIME_UNIT_MINUTE, CALENDAR_ALARM_TIME_UNIT_HOUR, CALENDAR_ALARM_TIME_UNIT_DAY, CALENDAR_ALARM_TIME_UNIT_WEEK. </td></tr>
-  /// <tr><td> integer </td><td> tick_unit </td><td> read, write </td><td> Reminder tick time unit (one of CALENDAR_ALARM_NONE, CALENDAR_ALARM_TIME_UNIT_SPECIFIC, CALENDAR_ALARM_TIME_UNIT_MINUTE, CALENDAR_ALARM_TIME_UNIT_HOUR, CALENDAR_ALARM_TIME_UNIT_DAY, CALENDAR_ALARM_TIME_UNIT_WEEK) </td></tr>
-  /// <tr><td> string </td><td> attach </td><td> read, write </td><td> Alarm tone path </td></tr>
-  /// <tr><td> string </td><td> summary </td><td> read, write </td><td> Alarm summary </td></tr>
-  /// <tr><td> string </td><td> description </td><td> read, write </td><td> Alarm description </td></tr>
-  /// <tr><td> integer </td><td> action </td><td> read, write </td><td> Action of alarm (one of CALENDAR_ALARM_ACTION_AUDIO, CALENDAR_ALARM_ACTION_DISPLAY, CALENDAR_ALARM_ACTION_EMAIL) </td></tr>
-  /// <tr><td> calendar time </td><td> alarm_time </td><td> read, write </td><td>The alarm time </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CALENDAR_SVC_MODULE
+  /// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_alarm _calendar_alarm view <table> <tr> <th> Type </th> <th> Property ID </th> <th> Read, Write </th> <th> Description </th> </tr> <tr><td> string </td><td> _uri </td><td> read only </td><td> Identifier of this calendar alarm view </td></tr> <tr><td> integer </td><td> parent_id </td><td> read only </td><td> Event that the alarm belongs to </td></tr> <tr><td> integer </td><td> type </td><td> read, write </td><td> Currently NOT used </td></tr> <tr><td> long long int </td><td> time </td><td> read, write </td><td> The alarm time of the event(This represents the number of seconds elapsed since the Epoch, 1970-01-01 00:00:00 +0000(UTC)). This MUST be used with CALENDAR_ALARM_TIME_UNIT_SPECIFIC </td></tr> <tr><td> integer </td><td> tick </td><td> read, write </td><td> The number of unit before start time. This MUST be used with one of CALENDAR_ALARM_TIME_UNIT_MINUTE, CALENDAR_ALARM_TIME_UNIT_HOUR, CALENDAR_ALARM_TIME_UNIT_DAY, CALENDAR_ALARM_TIME_UNIT_WEEK. </td></tr> <tr><td> integer </td><td> tick_unit </td><td> read, write </td><td> Reminder tick time unit (one of CALENDAR_ALARM_NONE, CALENDAR_ALARM_TIME_UNIT_SPECIFIC, CALENDAR_ALARM_TIME_UNIT_MINUTE, CALENDAR_ALARM_TIME_UNIT_HOUR, CALENDAR_ALARM_TIME_UNIT_DAY, CALENDAR_ALARM_TIME_UNIT_WEEK) </td></tr> <tr><td> string </td><td> attach </td><td> read, write </td><td> Alarm tone path </td></tr> <tr><td> string </td><td> summary </td><td> read, write </td><td> Alarm summary </td></tr> <tr><td> string </td><td> description </td><td> read, write </td><td> Alarm description </td></tr> <tr><td> integer </td><td> action </td><td> read, write </td><td> Action of alarm (one of CALENDAR_ALARM_ACTION_AUDIO, CALENDAR_ALARM_ACTION_DISPLAY, CALENDAR_ALARM_ACTION_EMAIL) </td></tr> <tr><td> calendar time </td><td> alarm_time </td><td> read, write </td><td>The alarm time </td></tr> </table>
   late final ffi.Pointer<_calendar_alarm_property_ids> __calendar_alarm =
       _lookup<_calendar_alarm_property_ids>('_calendar_alarm');
 
   _calendar_alarm_property_ids get _calendar_alarm => __calendar_alarm.ref;
 
-  /// @ingroup CAPI_SOCIAL_CALENDAR_SVC_MODULE
-  /// @addtogroup CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_updated_info _calendar_updated_info view (read only)
-  /// <table>
-  /// <tr>
-  /// <th> Type </th>
-  /// <th> Property ID </th>
-  /// <th> Description </th>
-  /// </tr>
-  /// <tr><td> string </td><td> _uri </td><td> Identifier of this updated_info view </td></tr>
-  /// <tr><td> integer </td><td> id </td><td> Modified event(or todo) record ID </td></tr>
-  /// <tr><td> integer </td><td> calendar_book_id </td><td> Calendar book ID of the modified event(or todo) record </td></tr>
-  /// <tr><td> integer </td><td> modified_status </td><td> Enumeration value of the modified status (@ref calendar_record_modified_status_e) </td></tr>
-  /// <tr><td> integer </td><td> version </td><td> Version after change </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CALENDAR_SVC_MODULE
+  /// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_updated_info _calendar_updated_info view (read only) <table> <tr> <th> Type </th> <th> Property ID </th> <th> Description </th> </tr> <tr><td> string </td><td> _uri </td><td> Identifier of this updated_info view </td></tr> <tr><td> integer </td><td> id </td><td> Modified event(or todo) record ID </td></tr> <tr><td> integer </td><td> calendar_book_id </td><td> Calendar book ID of the modified event(or todo) record </td></tr> <tr><td> integer </td><td> modified_status </td><td> Enumeration value of the modified status (`calendar_record_modified_status_e)` </td></tr> <tr><td> integer </td><td> version </td><td> Version after change </td></tr> </table>
   late final ffi.Pointer<_calendar_updated_info_property_ids>
       __calendar_updated_info =
       _lookup<_calendar_updated_info_property_ids>('_calendar_updated_info');
@@ -310,69 +109,12 @@ class Tizen60CalendarService2 {
   _calendar_updated_info_property_ids get _calendar_updated_info =>
       __calendar_updated_info.ref;
 
-  /// @ingroup CAPI_SOCIAL_CALENDAR_SVC_MODULE
-  /// @addtogroup CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_event_calendar_book _calendar_event_calendar_book view (read only)
-  /// <table>
-  /// <tr>
-  /// <th> Type </th>
-  /// <th> Property ID </th>
-  /// </tr>
-  /// <tr><td> string </td><td> _uri </td></tr>
-  /// <tr><td> integer </td><td> event_id </td></tr>
-  /// <tr><td> integer </td><td> calendar_book_id </td></tr>
-  /// <tr><td> string </td><td> summary </td></tr>
-  /// <tr><td> string </td><td> description </td></tr>
-  /// <tr><td> string </td><td> location </td></tr>
-  /// <tr><td> string </td><td> categories </td></tr>
-  /// <tr><td> string </td><td> exdate </td></tr>
-  /// <tr><td> integer </td><td> event_status </td></tr>
-  /// <tr><td> integer </td><td> priority </td></tr>
-  /// <tr><td> integer </td><td> timezone </td></tr>
-  /// <tr><td> integer </td><td> person_id </td></tr>
-  /// <tr><td> integer </td><td> busy_status </td></tr>
-  /// <tr><td> integer </td><td> sensitivity </td></tr>
-  /// <tr><td> string </td><td> uid </td></tr>
-  /// <tr><td> string </td><td> organizer_name </td></tr>
-  /// <tr><td> string </td><td> organizer_email </td></tr>
-  /// <tr><td> integer </td><td> meeting_status </td></tr>
-  /// <tr><td> integer </td><td> original_event_id </td></tr>
-  /// <tr><td> double </td><td> latitude </td></tr>
-  /// <tr><td> double </td><td> longitude </td></tr>
-  /// <tr><td> integer </td><td> email_id </td></tr>
-  /// <tr><td> long long int </td><td> created_time </td></tr>
-  /// <tr><td> long long int </td><td> last_modified_time </td></tr>
-  /// <tr><td> integer </td><td> freq </td></tr>
-  /// <tr><td> integer </td><td> range_type </td></tr>
-  /// <tr><td> calendar time </td><td> until_time </td></tr>
-  /// <tr><td> integer </td><td> count </td></tr>
-  /// <tr><td> integer </td><td> interval </td></tr>
-  /// <tr><td> string </td><td> bysecond </td></tr>
-  /// <tr><td> string </td><td> byminute </td></tr>
-  /// <tr><td> string </td><td> byhour </td></tr>
-  /// <tr><td> string </td><td> byday </td></tr>
-  /// <tr><td> string </td><td> bymonthday </td></tr>
-  /// <tr><td> string </td><td> byyearday </td></tr>
-  /// <tr><td> string </td><td> byweekno </td></tr>
-  /// <tr><td> string </td><td> bymonth </td></tr>
-  /// <tr><td> string </td><td> bysetpos </td></tr>
-  /// <tr><td> integer </td><td> wkst </td></tr>
-  /// <tr><td> string </td><td> recurrence_id </td></tr>
-  /// <tr><td> string </td><td> rdate </td></tr>
-  /// <tr><td> integer </td><td> has_attendee </td></tr>
-  /// <tr><td> integer </td><td> has_alarm </td></tr>
-  /// <tr><td> integer </td><td> calendar_system_type </td></tr>
-  /// <tr><td> string </td><td> sync_data1 </td></tr>
-  /// <tr><td> string </td><td> sync_data2 </td></tr>
-  /// <tr><td> string </td><td> sync_data3 </td></tr>
-  /// <tr><td> string </td><td> sync_data4 </td></tr>
-  /// <tr><td> calendar time </td><td> start_time </td></tr>
-  /// <tr><td> string </td><td> start_tzid </td></tr>
-  /// <tr><td> calendar time </td><td> end_time </td></tr>
-  /// <tr><td> string </td><td> end_tzid </td></tr>
-  /// <tr><td> filter integer </td><td> calendar_book_visibility </td></tr>
-  /// <tr><td> filter integer </td><td> calendar_book_account_id </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CALENDAR_SVC_MODULE
+  /// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_event_calendar_book _calendar_event_calendar_book view (read only) <table> <tr> <th> Type </th> <th> Property ID </th> </tr> <tr><td> string </td><td> _uri </td></tr> <tr><td> integer </td><td> event_id </td></tr> <tr><td> integer </td><td> calendar_book_id </td></tr> <tr><td> string </td><td> summary </td></tr> <tr><td> string </td><td> description </td></tr> <tr><td> string </td><td> location </td></tr> <tr><td> string </td><td> categories </td></tr> <tr><td> string </td><td> exdate </td></tr> <tr><td> integer </td><td> event_status </td></tr> <tr><td> integer </td><td> priority </td></tr> <tr><td> integer </td><td> timezone </td></tr> <tr><td> integer </td><td> person_id </td></tr> <tr><td> integer </td><td> busy_status </td></tr> <tr><td> integer </td><td> sensitivity </td></tr> <tr><td> string </td><td> uid </td></tr> <tr><td> string </td><td> organizer_name </td></tr> <tr><td> string </td><td> organizer_email </td></tr> <tr><td> integer </td><td> meeting_status </td></tr> <tr><td> integer </td><td> original_event_id </td></tr> <tr><td> double </td><td> latitude </td></tr> <tr><td> double </td><td> longitude </td></tr> <tr><td> integer </td><td> email_id </td></tr> <tr><td> long long int </td><td> created_time </td></tr> <tr><td> long long int </td><td> last_modified_time </td></tr> <tr><td> integer </td><td> freq </td></tr> <tr><td> integer </td><td> range_type </td></tr> <tr><td> calendar time </td><td> until_time </td></tr> <tr><td> integer </td><td> count </td></tr> <tr><td> integer </td><td> interval </td></tr> <tr><td> string </td><td> bysecond </td></tr> <tr><td> string </td><td> byminute </td></tr> <tr><td> string </td><td> byhour </td></tr> <tr><td> string </td><td> byday </td></tr> <tr><td> string </td><td> bymonthday </td></tr> <tr><td> string </td><td> byyearday </td></tr> <tr><td> string </td><td> byweekno </td></tr> <tr><td> string </td><td> bymonth </td></tr> <tr><td> string </td><td> bysetpos </td></tr> <tr><td> integer </td><td> wkst </td></tr> <tr><td> string </td><td> recurrence_id </td></tr> <tr><td> string </td><td> rdate </td></tr> <tr><td> integer </td><td> has_attendee </td></tr> <tr><td> integer </td><td> has_alarm </td></tr> <tr><td> integer </td><td> calendar_system_type </td></tr> <tr><td> string </td><td> sync_data1 </td></tr> <tr><td> string </td><td> sync_data2 </td></tr> <tr><td> string </td><td> sync_data3 </td></tr> <tr><td> string </td><td> sync_data4 </td></tr> <tr><td> calendar time </td><td> start_time </td></tr> <tr><td> string </td><td> start_tzid </td></tr> <tr><td> calendar time </td><td> end_time </td></tr> <tr><td> string </td><td> end_tzid </td></tr> <tr><td> filter integer </td><td> calendar_book_visibility </td></tr> <tr><td> filter integer </td><td> calendar_book_account_id </td></tr> </table>
   late final ffi.Pointer<_calendar_event_calendar_book_property_ids>
       __calendar_event_calendar_book =
       _lookup<_calendar_event_calendar_book_property_ids>(
@@ -381,58 +123,12 @@ class Tizen60CalendarService2 {
   _calendar_event_calendar_book_property_ids
       get _calendar_event_calendar_book => __calendar_event_calendar_book.ref;
 
-  /// @ingroup CAPI_SOCIAL_CALENDAR_SVC_MODULE
-  /// @addtogroup CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_todo_calendar_book _calendar_todo_calendar_book view (read only)
-  /// <table>
-  /// <tr>
-  /// <th> Type </th>
-  /// <th> Property ID </th>
-  /// </tr>
-  /// <tr><td> string </td><td> _uri </td></tr>
-  /// <tr><td> integer </td><td> todo_id </td></tr>
-  /// <tr><td> integer </td><td> calendar_book_id </td></tr>
-  /// <tr><td> string </td><td> summary </td></tr>
-  /// <tr><td> string </td><td> description </td></tr>
-  /// <tr><td> string </td><td> location </td></tr>
-  /// <tr><td> string </td><td> categories </td></tr>
-  /// <tr><td> integer </td><td> todo_status </td></tr>
-  /// <tr><td> integer </td><td> priority </td></tr>
-  /// <tr><td> integer </td><td> sensitivity </td></tr>
-  /// <tr><td> string </td><td> uid </td></tr>
-  /// <tr><td> double </td><td> latitude </td></tr>
-  /// <tr><td> double </td><td> longitude </td></tr>
-  /// <tr><td> long long int </td><td> created_time </td></tr>
-  /// <tr><td> long long int </td><td> last_modified_time </td></tr>
-  /// <tr><td> long long int </td><td> completed_time </td></tr>
-  /// <tr><td> integer </td><td> progress </td></tr>
-  /// <tr><td> integer </td><td> freq </td></tr>
-  /// <tr><td> integer </td><td> range_type </td></tr>
-  /// <tr><td> calendar time </td><td> until_time </td></tr>
-  /// <tr><td> integer </td><td> count </td></tr>
-  /// <tr><td> integer </td><td> interval </td></tr>
-  /// <tr><td> string </td><td> bysecond </td></tr>
-  /// <tr><td> string </td><td> byminute </td></tr>
-  /// <tr><td> string </td><td> byhour </td></tr>
-  /// <tr><td> string </td><td> byday </td></tr>
-  /// <tr><td> string </td><td> bymonthday </td></tr>
-  /// <tr><td> string </td><td> byyearday </td></tr>
-  /// <tr><td> string </td><td> byweekno </td></tr>
-  /// <tr><td> string </td><td> bymonth </td></tr>
-  /// <tr><td> string </td><td> bysetpos </td></tr>
-  /// <tr><td> integer </td><td> wkst </td></tr>
-  /// <tr><td> integer </td><td> has_alarm </td></tr>
-  /// <tr><td> string </td><td> sync_data1 </td></tr>
-  /// <tr><td> string </td><td> sync_data2 </td></tr>
-  /// <tr><td> string </td><td> sync_data3 </td></tr>
-  /// <tr><td> string </td><td> sync_data4 </td></tr>
-  /// <tr><td> calendar time </td><td> start_time </td></tr>
-  /// <tr><td> string </td><td> start_tzid </td></tr>
-  /// <tr><td> calendar time </td><td> due_time </td></tr>
-  /// <tr><td> string </td><td> due_tzid </td></tr>
-  /// <tr><td> filter integer </td><td> calendar_book_visibility </td></tr>
-  /// <tr><td> filter integer </td><td> calendar_book_account_id </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CALENDAR_SVC_MODULE
+  /// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_todo_calendar_book _calendar_todo_calendar_book view (read only) <table> <tr> <th> Type </th> <th> Property ID </th> </tr> <tr><td> string </td><td> _uri </td></tr> <tr><td> integer </td><td> todo_id </td></tr> <tr><td> integer </td><td> calendar_book_id </td></tr> <tr><td> string </td><td> summary </td></tr> <tr><td> string </td><td> description </td></tr> <tr><td> string </td><td> location </td></tr> <tr><td> string </td><td> categories </td></tr> <tr><td> integer </td><td> todo_status </td></tr> <tr><td> integer </td><td> priority </td></tr> <tr><td> integer </td><td> sensitivity </td></tr> <tr><td> string </td><td> uid </td></tr> <tr><td> double </td><td> latitude </td></tr> <tr><td> double </td><td> longitude </td></tr> <tr><td> long long int </td><td> created_time </td></tr> <tr><td> long long int </td><td> last_modified_time </td></tr> <tr><td> long long int </td><td> completed_time </td></tr> <tr><td> integer </td><td> progress </td></tr> <tr><td> integer </td><td> freq </td></tr> <tr><td> integer </td><td> range_type </td></tr> <tr><td> calendar time </td><td> until_time </td></tr> <tr><td> integer </td><td> count </td></tr> <tr><td> integer </td><td> interval </td></tr> <tr><td> string </td><td> bysecond </td></tr> <tr><td> string </td><td> byminute </td></tr> <tr><td> string </td><td> byhour </td></tr> <tr><td> string </td><td> byday </td></tr> <tr><td> string </td><td> bymonthday </td></tr> <tr><td> string </td><td> byyearday </td></tr> <tr><td> string </td><td> byweekno </td></tr> <tr><td> string </td><td> bymonth </td></tr> <tr><td> string </td><td> bysetpos </td></tr> <tr><td> integer </td><td> wkst </td></tr> <tr><td> integer </td><td> has_alarm </td></tr> <tr><td> string </td><td> sync_data1 </td></tr> <tr><td> string </td><td> sync_data2 </td></tr> <tr><td> string </td><td> sync_data3 </td></tr> <tr><td> string </td><td> sync_data4 </td></tr> <tr><td> calendar time </td><td> start_time </td></tr> <tr><td> string </td><td> start_tzid </td></tr> <tr><td> calendar time </td><td> due_time </td></tr> <tr><td> string </td><td> due_tzid </td></tr> <tr><td> filter integer </td><td> calendar_book_visibility </td></tr> <tr><td> filter integer </td><td> calendar_book_account_id </td></tr> </table>
   late final ffi.Pointer<_calendar_todo_calendar_book_property_ids>
       __calendar_todo_calendar_book =
       _lookup<_calendar_todo_calendar_book_property_ids>(
@@ -441,72 +137,12 @@ class Tizen60CalendarService2 {
   _calendar_todo_calendar_book_property_ids get _calendar_todo_calendar_book =>
       __calendar_todo_calendar_book.ref;
 
-  /// @ingroup CAPI_SOCIAL_CALENDAR_SVC_MODULE
-  /// @addtogroup CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_event_calendar_book_attendee _calendar_event_calendar_book_attendee view (read only)
-  /// <table>
-  /// <tr>
-  /// <th> Type </th>
-  /// <th> Property ID </th>
-  /// </tr>
-  /// <tr><td> string </td><td> _uri </td></tr>
-  /// <tr><td> integer </td><td> event_id </td></tr>
-  /// <tr><td> integer </td><td> calendar_book_id </td></tr>
-  /// <tr><td> string </td><td> summary </td></tr>
-  /// <tr><td> string </td><td> description </td></tr>
-  /// <tr><td> string </td><td> location </td></tr>
-  /// <tr><td> string </td><td> categories </td></tr>
-  /// <tr><td> string </td><td> exdate </td></tr>
-  /// <tr><td> integer </td><td> event_status </td></tr>
-  /// <tr><td> integer </td><td> priority </td></tr>
-  /// <tr><td> integer </td><td> timezone </td></tr>
-  /// <tr><td> integer </td><td> person_id </td></tr>
-  /// <tr><td> integer </td><td> busy_status </td></tr>
-  /// <tr><td> integer </td><td> sensitivity </td></tr>
-  /// <tr><td> string </td><td> uid </td></tr>
-  /// <tr><td> string </td><td> organizer_name </td></tr>
-  /// <tr><td> string </td><td> organizer_email </td></tr>
-  /// <tr><td> integer </td><td> meeting_status </td></tr>
-  /// <tr><td> integer </td><td> original_event_id </td></tr>
-  /// <tr><td> double </td><td> latitude </td></tr>
-  /// <tr><td> double </td><td> longitude </td></tr>
-  /// <tr><td> integer </td><td> email_id </td></tr>
-  /// <tr><td> long long int </td><td> created_time </td></tr>
-  /// <tr><td> long long int </td><td> last_modified_time </td></tr>
-  /// <tr><td> integer </td><td> freq </td></tr>
-  /// <tr><td> integer </td><td> range_type </td></tr>
-  /// <tr><td> calendar time </td><td> until_time </td></tr>
-  /// <tr><td> integer </td><td> count </td></tr>
-  /// <tr><td> integer </td><td> interval </td></tr>
-  /// <tr><td> string </td><td> bysecond </td></tr>
-  /// <tr><td> string </td><td> byminute </td></tr>
-  /// <tr><td> string </td><td> byhour </td></tr>
-  /// <tr><td> string </td><td> byday </td></tr>
-  /// <tr><td> string </td><td> bymonthday </td></tr>
-  /// <tr><td> string </td><td> byyearday </td></tr>
-  /// <tr><td> string </td><td> byweekno </td></tr>
-  /// <tr><td> string </td><td> bymonth </td></tr>
-  /// <tr><td> string </td><td> bysetpos </td></tr>
-  /// <tr><td> integer </td><td> wkst </td></tr>
-  /// <tr><td> string </td><td> recurrence_id </td></tr>
-  /// <tr><td> string </td><td> rdate </td></tr>
-  /// <tr><td> integer </td><td> has_attendee </td></tr>
-  /// <tr><td> integer </td><td> has_alarm </td></tr>
-  /// <tr><td> integer </td><td> calendar_system_type </td></tr>
-  /// <tr><td> string </td><td> sync_data1 </td></tr>
-  /// <tr><td> string </td><td> sync_data2 </td></tr>
-  /// <tr><td> string </td><td> sync_data3 </td></tr>
-  /// <tr><td> string </td><td> sync_data4 </td></tr>
-  /// <tr><td> calendar time </td><td> start_time </td></tr>
-  /// <tr><td> string </td><td> start_tzid </td></tr>
-  /// <tr><td> calendar time </td><td> end_time </td></tr>
-  /// <tr><td> string </td><td> end_tzid </td></tr>
-  /// <tr><td> filter integer </td><td> calendar_book_visibility </td></tr>
-  /// <tr><td> filter integer </td><td> calendar_book_account_id </td></tr>
-  /// <tr><td> filter string </td><td> attendee_email </td></tr>
-  /// <tr><td> filter string </td><td> attendee_name </td></tr>
-  /// <tr><td> filter string </td><td> attendee_member </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CALENDAR_SVC_MODULE
+  /// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_event_calendar_book_attendee _calendar_event_calendar_book_attendee view (read only) <table> <tr> <th> Type </th> <th> Property ID </th> </tr> <tr><td> string </td><td> _uri </td></tr> <tr><td> integer </td><td> event_id </td></tr> <tr><td> integer </td><td> calendar_book_id </td></tr> <tr><td> string </td><td> summary </td></tr> <tr><td> string </td><td> description </td></tr> <tr><td> string </td><td> location </td></tr> <tr><td> string </td><td> categories </td></tr> <tr><td> string </td><td> exdate </td></tr> <tr><td> integer </td><td> event_status </td></tr> <tr><td> integer </td><td> priority </td></tr> <tr><td> integer </td><td> timezone </td></tr> <tr><td> integer </td><td> person_id </td></tr> <tr><td> integer </td><td> busy_status </td></tr> <tr><td> integer </td><td> sensitivity </td></tr> <tr><td> string </td><td> uid </td></tr> <tr><td> string </td><td> organizer_name </td></tr> <tr><td> string </td><td> organizer_email </td></tr> <tr><td> integer </td><td> meeting_status </td></tr> <tr><td> integer </td><td> original_event_id </td></tr> <tr><td> double </td><td> latitude </td></tr> <tr><td> double </td><td> longitude </td></tr> <tr><td> integer </td><td> email_id </td></tr> <tr><td> long long int </td><td> created_time </td></tr> <tr><td> long long int </td><td> last_modified_time </td></tr> <tr><td> integer </td><td> freq </td></tr> <tr><td> integer </td><td> range_type </td></tr> <tr><td> calendar time </td><td> until_time </td></tr> <tr><td> integer </td><td> count </td></tr> <tr><td> integer </td><td> interval </td></tr> <tr><td> string </td><td> bysecond </td></tr> <tr><td> string </td><td> byminute </td></tr> <tr><td> string </td><td> byhour </td></tr> <tr><td> string </td><td> byday </td></tr> <tr><td> string </td><td> bymonthday </td></tr> <tr><td> string </td><td> byyearday </td></tr> <tr><td> string </td><td> byweekno </td></tr> <tr><td> string </td><td> bymonth </td></tr> <tr><td> string </td><td> bysetpos </td></tr> <tr><td> integer </td><td> wkst </td></tr> <tr><td> string </td><td> recurrence_id </td></tr> <tr><td> string </td><td> rdate </td></tr> <tr><td> integer </td><td> has_attendee </td></tr> <tr><td> integer </td><td> has_alarm </td></tr> <tr><td> integer </td><td> calendar_system_type </td></tr> <tr><td> string </td><td> sync_data1 </td></tr> <tr><td> string </td><td> sync_data2 </td></tr> <tr><td> string </td><td> sync_data3 </td></tr> <tr><td> string </td><td> sync_data4 </td></tr> <tr><td> calendar time </td><td> start_time </td></tr> <tr><td> string </td><td> start_tzid </td></tr> <tr><td> calendar time </td><td> end_time </td></tr> <tr><td> string </td><td> end_tzid </td></tr> <tr><td> filter integer </td><td> calendar_book_visibility </td></tr> <tr><td> filter integer </td><td> calendar_book_account_id </td></tr> <tr><td> filter string </td><td> attendee_email </td></tr> <tr><td> filter string </td><td> attendee_name </td></tr> <tr><td> filter string </td><td> attendee_member </td></tr> </table>
   late final ffi.Pointer<_calendar_event_calendar_book_attendee_property_ids>
       __calendar_event_calendar_book_attendee =
       _lookup<_calendar_event_calendar_book_attendee_property_ids>(
@@ -516,36 +152,12 @@ class Tizen60CalendarService2 {
       get _calendar_event_calendar_book_attendee =>
           __calendar_event_calendar_book_attendee.ref;
 
-  /// @ingroup CAPI_SOCIAL_CALENDAR_SVC_MODULE
-  /// @addtogroup CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_instance_utime_calendar_book _calendar_instance_utime_calendar_book view
-  /// <table>
-  /// <tr>
-  /// <th> Type </th>
-  /// <th> Property ID </th>
-  /// </tr>
-  /// <tr><td> string </td><td> _uri </td></tr>
-  /// <tr><td> integer </td><td> event_id </td></tr>
-  /// <tr><td> calendar time </td><td> start_time </td></tr>
-  /// <tr><td> calendar time </td><td> end_time </td></tr>
-  /// <tr><td> string </td><td> summary </td></tr>
-  /// <tr><td> string </td><td> location </td></tr>
-  /// <tr><td> integer </td><td> calendar_book_id </td></tr>
-  /// <tr><td> string </td><td> description </td></tr>
-  /// <tr><td> integer </td><td> busy_status </td></tr>
-  /// <tr><td> integer </td><td> event_status </td></tr>
-  /// <tr><td> integer </td><td> priority </td></tr>
-  /// <tr><td> integer </td><td> sensitivity </td></tr>
-  /// <tr><td> integer </td><td> has_rrule </td></tr>
-  /// <tr><td> double </td><td> latitude </td></tr>
-  /// <tr><td> double </td><td> longitude </td></tr>
-  /// <tr><td> integer </td><td> has_alarm </td></tr>
-  /// <tr><td> integer </td><td> original_event_id </td></tr>
-  /// <tr><td> filter integer </td><td> calendar_book_visibility </td></tr>
-  /// <tr><td> filter integer </td><td> calendar_book_account_id </td></tr>
-  /// <tr><td> long long int </td><td> last_modified_time </td></tr>
-  /// <tr><td> string </td><td> sync_data1 </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CALENDAR_SVC_MODULE
+  /// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_instance_utime_calendar_book _calendar_instance_utime_calendar_book view <table> <tr> <th> Type </th> <th> Property ID </th> </tr> <tr><td> string </td><td> _uri </td></tr> <tr><td> integer </td><td> event_id </td></tr> <tr><td> calendar time </td><td> start_time </td></tr> <tr><td> calendar time </td><td> end_time </td></tr> <tr><td> string </td><td> summary </td></tr> <tr><td> string </td><td> location </td></tr> <tr><td> integer </td><td> calendar_book_id </td></tr> <tr><td> string </td><td> description </td></tr> <tr><td> integer </td><td> busy_status </td></tr> <tr><td> integer </td><td> event_status </td></tr> <tr><td> integer </td><td> priority </td></tr> <tr><td> integer </td><td> sensitivity </td></tr> <tr><td> integer </td><td> has_rrule </td></tr> <tr><td> double </td><td> latitude </td></tr> <tr><td> double </td><td> longitude </td></tr> <tr><td> integer </td><td> has_alarm </td></tr> <tr><td> integer </td><td> original_event_id </td></tr> <tr><td> filter integer </td><td> calendar_book_visibility </td></tr> <tr><td> filter integer </td><td> calendar_book_account_id </td></tr> <tr><td> long long int </td><td> last_modified_time </td></tr> <tr><td> string </td><td> sync_data1 </td></tr> </table>
   late final ffi.Pointer<_calendar_instance_utime_calendar_book_property_ids>
       __calendar_instance_utime_calendar_book =
       _lookup<_calendar_instance_utime_calendar_book_property_ids>(
@@ -555,37 +167,12 @@ class Tizen60CalendarService2 {
       get _calendar_instance_utime_calendar_book =>
           __calendar_instance_utime_calendar_book.ref;
 
-  /// @ingroup CAPI_SOCIAL_CALENDAR_SVC_MODULE
-  /// @addtogroup CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_instance_localtime_calendar_book _calendar_instance_localtime_calendar_book view
-  /// <table>
-  /// <tr>
-  /// <th> Type </th>
-  /// <th> Property ID </th>
-  /// </tr>
-  /// <tr><td> string </td><td> _uri </td></tr>
-  /// <tr><td> integer </td><td> event_id </td></tr>
-  /// <tr><td> calendar time </td><td> start_time </td></tr>
-  /// <tr><td> calendar time </td><td> end_time </td></tr>
-  /// <tr><td> string </td><td> summary </td></tr>
-  /// <tr><td> string </td><td> location </td></tr>
-  /// <tr><td> integer </td><td> calendar_book_id </td></tr>
-  /// <tr><td> string </td><td> description </td></tr>
-  /// <tr><td> integer </td><td> busy_status </td></tr>
-  /// <tr><td> integer </td><td> event_status </td></tr>
-  /// <tr><td> integer </td><td> priority </td></tr>
-  /// <tr><td> integer </td><td> sensitivity </td></tr>
-  /// <tr><td> integer </td><td> has_rrule </td></tr>
-  /// <tr><td> double </td><td> latitude </td></tr>
-  /// <tr><td> double </td><td> longitude </td></tr>
-  /// <tr><td> integer </td><td> has_alarm </td></tr>
-  /// <tr><td> integer </td><td> original_event_id </td></tr>
-  /// <tr><td> filter integer </td><td> calendar_book_visibility </td></tr>
-  /// <tr><td> filter integer </td><td> calendar_book_account_id </td></tr>
-  /// <tr><td> long long int </td><td> last_modified_time </td></tr>
-  /// <tr><td> string </td><td> sync_data1 </td></tr>
-  /// <tr><td> int </td><td> is_allday </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CALENDAR_SVC_MODULE
+  /// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_instance_localtime_calendar_book _calendar_instance_localtime_calendar_book view <table> <tr> <th> Type </th> <th> Property ID </th> </tr> <tr><td> string </td><td> _uri </td></tr> <tr><td> integer </td><td> event_id </td></tr> <tr><td> calendar time </td><td> start_time </td></tr> <tr><td> calendar time </td><td> end_time </td></tr> <tr><td> string </td><td> summary </td></tr> <tr><td> string </td><td> location </td></tr> <tr><td> integer </td><td> calendar_book_id </td></tr> <tr><td> string </td><td> description </td></tr> <tr><td> integer </td><td> busy_status </td></tr> <tr><td> integer </td><td> event_status </td></tr> <tr><td> integer </td><td> priority </td></tr> <tr><td> integer </td><td> sensitivity </td></tr> <tr><td> integer </td><td> has_rrule </td></tr> <tr><td> double </td><td> latitude </td></tr> <tr><td> double </td><td> longitude </td></tr> <tr><td> integer </td><td> has_alarm </td></tr> <tr><td> integer </td><td> original_event_id </td></tr> <tr><td> filter integer </td><td> calendar_book_visibility </td></tr> <tr><td> filter integer </td><td> calendar_book_account_id </td></tr> <tr><td> long long int </td><td> last_modified_time </td></tr> <tr><td> string </td><td> sync_data1 </td></tr> <tr><td> int </td><td> is_allday </td></tr> </table>
   late final ffi
       .Pointer<_calendar_instance_localtime_calendar_book_property_ids>
       __calendar_instance_localtime_calendar_book =
@@ -596,41 +183,12 @@ class Tizen60CalendarService2 {
       get _calendar_instance_localtime_calendar_book =>
           __calendar_instance_localtime_calendar_book.ref;
 
-  /// @ingroup CAPI_SOCIAL_CALENDAR_SVC_MODULE
-  /// @addtogroup CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_instance_utime_calendar_book_extended _calendar_instance_utime_calendar_book_extended view
-  /// <table>
-  /// <tr>
-  /// <th> Type </th>
-  /// <th> Property ID </th>
-  /// </tr>
-  /// <tr><td> string </td><td> _uri </td></tr>
-  /// <tr><td> integer </td><td> event_id </td></tr>
-  /// <tr><td> calendar time </td><td> start_time </td></tr>
-  /// <tr><td> calendar time </td><td> end_time </td></tr>
-  /// <tr><td> string </td><td> summary </td></tr>
-  /// <tr><td> string </td><td> location </td></tr>
-  /// <tr><td> integer </td><td> calendar_book_id </td></tr>
-  /// <tr><td> string </td><td> description </td></tr>
-  /// <tr><td> integer </td><td> busy_status </td></tr>
-  /// <tr><td> integer </td><td> event_status </td></tr>
-  /// <tr><td> integer </td><td> priority </td></tr>
-  /// <tr><td> integer </td><td> sensitivity </td></tr>
-  /// <tr><td> integer </td><td> has_rrule </td></tr>
-  /// <tr><td> double </td><td> latitude </td></tr>
-  /// <tr><td> double </td><td> longitude </td></tr>
-  /// <tr><td> integer </td><td> has_alarm </td></tr>
-  /// <tr><td> integer </td><td> original_event_id </td></tr>
-  /// <tr><td> filter integer </td><td> calendar_book_visibility </td></tr>
-  /// <tr><td> filter integer </td><td> calendar_book_account_id </td></tr>
-  /// <tr><td> string </td><td> organizer_name </td></tr>
-  /// <tr><td> string </td><td> categories </td></tr>
-  /// <tr><td> integer </td><td> has_attendee </td></tr>
-  /// <tr><td> string </td><td> sync_data1 </td></tr>
-  /// <tr><td> string </td><td> sync_data2 </td></tr>
-  /// <tr><td> string </td><td> sync_data3 </td></tr>
-  /// <tr><td> string </td><td> sync_data4 </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CALENDAR_SVC_MODULE
+  /// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_instance_utime_calendar_book_extended _calendar_instance_utime_calendar_book_extended view <table> <tr> <th> Type </th> <th> Property ID </th> </tr> <tr><td> string </td><td> _uri </td></tr> <tr><td> integer </td><td> event_id </td></tr> <tr><td> calendar time </td><td> start_time </td></tr> <tr><td> calendar time </td><td> end_time </td></tr> <tr><td> string </td><td> summary </td></tr> <tr><td> string </td><td> location </td></tr> <tr><td> integer </td><td> calendar_book_id </td></tr> <tr><td> string </td><td> description </td></tr> <tr><td> integer </td><td> busy_status </td></tr> <tr><td> integer </td><td> event_status </td></tr> <tr><td> integer </td><td> priority </td></tr> <tr><td> integer </td><td> sensitivity </td></tr> <tr><td> integer </td><td> has_rrule </td></tr> <tr><td> double </td><td> latitude </td></tr> <tr><td> double </td><td> longitude </td></tr> <tr><td> integer </td><td> has_alarm </td></tr> <tr><td> integer </td><td> original_event_id </td></tr> <tr><td> filter integer </td><td> calendar_book_visibility </td></tr> <tr><td> filter integer </td><td> calendar_book_account_id </td></tr> <tr><td> string </td><td> organizer_name </td></tr> <tr><td> string </td><td> categories </td></tr> <tr><td> integer </td><td> has_attendee </td></tr> <tr><td> string </td><td> sync_data1 </td></tr> <tr><td> string </td><td> sync_data2 </td></tr> <tr><td> string </td><td> sync_data3 </td></tr> <tr><td> string </td><td> sync_data4 </td></tr> </table>
   late final ffi
       .Pointer<_calendar_instance_utime_calendar_book_extended_property_ids>
       __calendar_instance_utime_calendar_book_extended =
@@ -641,41 +199,12 @@ class Tizen60CalendarService2 {
       get _calendar_instance_utime_calendar_book_extended =>
           __calendar_instance_utime_calendar_book_extended.ref;
 
-  /// @ingroup CAPI_SOCIAL_CALENDAR_SVC_MODULE
-  /// @addtogroup CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_instance_localtime_calendar_book_extended _calendar_instance_localtime_calendar_book_extended view
-  /// <table>
-  /// <tr>
-  /// <th> Type </th>
-  /// <th> Property ID </th>
-  /// </tr>
-  /// <tr><td> string </td><td> _uri </td></tr>
-  /// <tr><td> integer </td><td> event_id </td></tr>
-  /// <tr><td> calendar time </td><td> start_time </td></tr>
-  /// <tr><td> calendar time </td><td> end_time </td></tr>
-  /// <tr><td> string </td><td> summary </td></tr>
-  /// <tr><td> string </td><td> location </td></tr>
-  /// <tr><td> integer </td><td> calendar_book_id </td></tr>
-  /// <tr><td> string </td><td> description </td></tr>
-  /// <tr><td> integer </td><td> busy_status </td></tr>
-  /// <tr><td> integer </td><td> event_status </td></tr>
-  /// <tr><td> integer </td><td> priority </td></tr>
-  /// <tr><td> integer </td><td> sensitivity </td></tr>
-  /// <tr><td> integer </td><td> has_rrule </td></tr>
-  /// <tr><td> double </td><td> latitude </td></tr>
-  /// <tr><td> double </td><td> longitude </td></tr>
-  /// <tr><td> integer </td><td> has_alarm </td></tr>
-  /// <tr><td> integer </td><td> original_event_id </td></tr>
-  /// <tr><td> filter integer </td><td> calendar_book_visibility </td></tr>
-  /// <tr><td> filter integer </td><td> calendar_book_account_id </td></tr>
-  /// <tr><td> string </td><td> organizer_name </td></tr>
-  /// <tr><td> string </td><td> categories </td></tr>
-  /// <tr><td> integer </td><td> has_attendee </td></tr>
-  /// <tr><td> string </td><td> sync_data1 </td></tr>
-  /// <tr><td> string </td><td> sync_data2 </td></tr>
-  /// <tr><td> string </td><td> sync_data3 </td></tr>
-  /// <tr><td> string </td><td> sync_data4 </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CALENDAR_SVC_MODULE
+  /// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_instance_localtime_calendar_book_extended _calendar_instance_localtime_calendar_book_extended view <table> <tr> <th> Type </th> <th> Property ID </th> </tr> <tr><td> string </td><td> _uri </td></tr> <tr><td> integer </td><td> event_id </td></tr> <tr><td> calendar time </td><td> start_time </td></tr> <tr><td> calendar time </td><td> end_time </td></tr> <tr><td> string </td><td> summary </td></tr> <tr><td> string </td><td> location </td></tr> <tr><td> integer </td><td> calendar_book_id </td></tr> <tr><td> string </td><td> description </td></tr> <tr><td> integer </td><td> busy_status </td></tr> <tr><td> integer </td><td> event_status </td></tr> <tr><td> integer </td><td> priority </td></tr> <tr><td> integer </td><td> sensitivity </td></tr> <tr><td> integer </td><td> has_rrule </td></tr> <tr><td> double </td><td> latitude </td></tr> <tr><td> double </td><td> longitude </td></tr> <tr><td> integer </td><td> has_alarm </td></tr> <tr><td> integer </td><td> original_event_id </td></tr> <tr><td> filter integer </td><td> calendar_book_visibility </td></tr> <tr><td> filter integer </td><td> calendar_book_account_id </td></tr> <tr><td> string </td><td> organizer_name </td></tr> <tr><td> string </td><td> categories </td></tr> <tr><td> integer </td><td> has_attendee </td></tr> <tr><td> string </td><td> sync_data1 </td></tr> <tr><td> string </td><td> sync_data2 </td></tr> <tr><td> string </td><td> sync_data3 </td></tr> <tr><td> string </td><td> sync_data4 </td></tr> </table>
   late final ffi
       .Pointer<_calendar_instance_localtime_calendar_book_extended_property_ids>
       __calendar_instance_localtime_calendar_book_extended =
@@ -686,23 +215,12 @@ class Tizen60CalendarService2 {
       get _calendar_instance_localtime_calendar_book_extended =>
           __calendar_instance_localtime_calendar_book_extended.ref;
 
-  /// @ingroup CAPI_SOCIAL_CALENDAR_SVC_MODULE
-  /// @addtogroup CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
-  /// @section CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_extended_property _calendar_extended_property view (read only)
-  /// <table>
-  /// <tr>
-  /// <th> Type </th>
-  /// <th> Property ID </th>
-  /// <th> Read, Write </th>
-  /// <th> Description </th>
-  /// </tr>
-  /// <tr><td> string </td><td> _uri </td><td> read only </td><td></td> Identifier of this extended_property view </tr>
-  /// <tr><td> integer </td><td> id </td><td> read only </td><td> DB record ID of the extended_property </td></tr>
-  /// <tr><td> integer </td><td> record_id </td><td> read,write </td><td> Related record ID </td></tr>
-  /// <tr><td> integer </td><td> record_type </td><td> read, write </td><td> Enumeration value of the record type (@ref calendar_record_type_e) </td></tr>
-  /// <tr><td> string </td><td> key </td><td> read, write </td><td> The key of the property </td></tr>
-  /// <tr><td> string </td><td> value </td><td> read, write </td><td> The value of the property </td></tr>
-  /// </table>
+  /// **Group:**
+  /// - CAPI_SOCIAL_CALENDAR_SVC_MODULE
+  /// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
+  ///
+  /// **Section:**
+  /// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_extended_property _calendar_extended_property view (read only) <table> <tr> <th> Type </th> <th> Property ID </th> <th> Read, Write </th> <th> Description </th> </tr> <tr><td> string </td><td> _uri </td><td> read only </td><td></td> Identifier of this extended_property view </tr> <tr><td> integer </td><td> id </td><td> read only </td><td> DB record ID of the extended_property </td></tr> <tr><td> integer </td><td> record_id </td><td> read,write </td><td> Related record ID </td></tr> <tr><td> integer </td><td> record_type </td><td> read, write </td><td> Enumeration value of the record type (`calendar_record_type_e)` </td></tr> <tr><td> string </td><td> key </td><td> read, write </td><td> The key of the property </td></tr> <tr><td> string </td><td> value </td><td> read, write </td><td> The value of the property </td></tr> </table>
   late final ffi.Pointer<_calendar_extended_property_property_ids>
       __calendar_extended_property =
       _lookup<_calendar_extended_property_property_ids>(
@@ -711,29 +229,44 @@ class Tizen60CalendarService2 {
   _calendar_extended_property_property_ids get _calendar_extended_property =>
       __calendar_extended_property.ref;
 
-  /// @brief Inserts a record into the calendar database.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/calendar.write
-  /// @param[in] record The record handle
-  /// @param[out] record_id The record ID
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_FILE_NO_SPACE File system is full
-  /// @retval #CALENDAR_ERROR_NOT_PERMITTED Operation not permitted
-  /// @retval #CALENDAR_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method.
-  /// @retval #CALENDAR_ERROR_DB_FAILED Database operation failure
-  /// @retval #CALENDAR_ERROR_IPC Unknown IPC error
-  /// @retval #CALENDAR_ERROR_NO_DATA Data does not exist
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @pre calendar_connect() should be called to open a connection to the calendar service.
-  /// @see calendar_connect()
-  /// @see calendar_db_update_record()
-  /// @see calendar_db_delete_record()
-  /// @see calendar_db_get_record()
+  /// Inserts a record into the calendar database.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/calendar.write>
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  /// - `record_id` (out): The record ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_FILE_NO_SPACE`: File system is full
+  /// - `CALENDAR_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `CALENDAR_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method.
+  /// - `CALENDAR_ERROR_DB_FAILED`: Database operation failure
+  /// - `CALENDAR_ERROR_IPC`: Unknown IPC error
+  /// - `CALENDAR_ERROR_NO_DATA`: Data does not exist
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - calendar_connect() should be called to open a connection to the calendar service.
+  ///
+  /// **See also:**
+  /// - `calendar_connect()`
+  /// - `calendar_db_update_record()`
+  /// - `calendar_db_delete_record()`
+  /// - `calendar_db_get_record()`
   int calendar_db_insert_record(
     calendar_record_h record,
     ffi.Pointer<ffi.Int> record_id,
@@ -751,33 +284,50 @@ class Tizen60CalendarService2 {
   late final _calendar_db_insert_record = _calendar_db_insert_recordPtr
       .asFunction<int Function(calendar_record_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets a record from the calendar database.
-  /// @details This function creates a new record handle from the calendar database by the given @a record_id. \n
-  /// @a record will be created and filled with record information.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/calendar.read
-  /// @remarks You must release @a record using calendar_record_destroy().
-  /// @param[in] view_uri The view URI of a record
-  /// @param[in] record_id The record ID
-  /// @param[out] record The record handle associated with the record ID
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_FILE_NO_SPACE File system is full
-  /// @retval #CALENDAR_ERROR_NOT_PERMITTED Operation not permitted
-  /// @retval #CALENDAR_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method.
-  /// @retval #CALENDAR_ERROR_DB_FAILED Database operation failure
-  /// @retval #CALENDAR_ERROR_DB_RECORD_NOT_FOUND Database not found
-  /// @retval #CALENDAR_ERROR_IPC Unknown IPC error
-  /// @retval #CALENDAR_ERROR_NO_DATA Data does not exist
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @pre calendar_connect() should be called to open a connection to the calendar service.
-  /// @see calendar_connect()
-  /// @see calendar_record_destroy()
+  /// Gets a record from the calendar database.
+  ///
+  /// This function creates a new record handle from the calendar database by the given `record_id`. `record` will be created and filled with record information.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/calendar.read>
+  ///
+  /// **Remarks:**
+  /// - You must release `record` using calendar_record_destroy().
+  ///
+  /// **Parameters:**
+  /// - `view_uri` (in): The view URI of a record
+  /// - `record_id` (in): The record ID
+  /// - `record` (out): The record handle associated with the record ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_FILE_NO_SPACE`: File system is full
+  /// - `CALENDAR_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `CALENDAR_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method.
+  /// - `CALENDAR_ERROR_DB_FAILED`: Database operation failure
+  /// - `CALENDAR_ERROR_DB_RECORD_NOT_FOUND`: Database not found
+  /// - `CALENDAR_ERROR_IPC`: Unknown IPC error
+  /// - `CALENDAR_ERROR_NO_DATA`: Data does not exist
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - calendar_connect() should be called to open a connection to the calendar service.
+  ///
+  /// **See also:**
+  /// - `calendar_connect()`
+  /// - `calendar_record_destroy()`
   int calendar_db_get_record(
     ffi.Pointer<ffi.Char> view_uri,
     int record_id,
@@ -798,29 +348,44 @@ class Tizen60CalendarService2 {
       int Function(
           ffi.Pointer<ffi.Char>, int, ffi.Pointer<calendar_record_h>)>();
 
-  /// @brief Updates a record in the calendar database.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/calendar.write
-  /// @param[in] record The record handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_DB_FAILED Database operation failure
-  /// @retval #CALENDAR_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method.
-  /// @retval #CALENDAR_ERROR_NOT_PERMITTED Operation not permitted
-  /// @retval #CALENDAR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CALENDAR_ERROR_DB_RECORD_NOT_FOUND Database not found
-  /// @retval #CALENDAR_ERROR_IPC Unknown IPC error
-  /// @retval #CALENDAR_ERROR_NO_DATA Data does not exist
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @pre calendar_connect() should be called to open a connection to the calendar service.
-  /// @see calendar_connect()
-  /// @see calendar_db_insert_record()
-  /// @see calendar_db_delete_record()
-  /// @see calendar_db_get_record()
+  /// Updates a record in the calendar database.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/calendar.write>
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_DB_FAILED`: Database operation failure
+  /// - `CALENDAR_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method.
+  /// - `CALENDAR_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `CALENDAR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CALENDAR_ERROR_DB_RECORD_NOT_FOUND`: Database not found
+  /// - `CALENDAR_ERROR_IPC`: Unknown IPC error
+  /// - `CALENDAR_ERROR_NO_DATA`: Data does not exist
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - calendar_connect() should be called to open a connection to the calendar service.
+  ///
+  /// **See also:**
+  /// - `calendar_connect()`
+  /// - `calendar_db_insert_record()`
+  /// - `calendar_db_delete_record()`
+  /// - `calendar_db_get_record()`
   int calendar_db_update_record(
     calendar_record_h record,
   ) {
@@ -835,28 +400,43 @@ class Tizen60CalendarService2 {
   late final _calendar_db_update_record = _calendar_db_update_recordPtr
       .asFunction<int Function(calendar_record_h)>();
 
-  /// @brief Deletes a record from the calendar database with related child records.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/calendar.write
-  /// @param[in] view_uri The view URI of a record
-  /// @param[in] record_id The record ID to be deleted
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_DB_FAILED Database operation failure
-  /// @retval #CALENDAR_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method.
-  /// @retval #CALENDAR_ERROR_DB_RECORD_NOT_FOUND Database not found
-  /// @retval #CALENDAR_ERROR_FILE_NO_SPACE File system is full
-  /// @retval #CALENDAR_ERROR_IPC Unknown IPC error
-  /// @retval #CALENDAR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CALENDAR_ERROR_NO_DATA Data does not exist
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @pre calendar_connect() should be called to open a connection to the calendar service.
-  /// @see calendar_connect()
-  /// @see calendar_db_insert_record()
+  /// Deletes a record from the calendar database with related child records.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/calendar.write>
+  ///
+  /// **Parameters:**
+  /// - `view_uri` (in): The view URI of a record
+  /// - `record_id` (in): The record ID to be deleted
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_DB_FAILED`: Database operation failure
+  /// - `CALENDAR_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method.
+  /// - `CALENDAR_ERROR_DB_RECORD_NOT_FOUND`: Database not found
+  /// - `CALENDAR_ERROR_FILE_NO_SPACE`: File system is full
+  /// - `CALENDAR_ERROR_IPC`: Unknown IPC error
+  /// - `CALENDAR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CALENDAR_ERROR_NO_DATA`: Data does not exist
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - calendar_connect() should be called to open a connection to the calendar service.
+  ///
+  /// **See also:**
+  /// - `calendar_connect()`
+  /// - `calendar_db_insert_record()`
   int calendar_db_delete_record(
     ffi.Pointer<ffi.Char> view_uri,
     int record_id,
@@ -873,30 +453,47 @@ class Tizen60CalendarService2 {
   late final _calendar_db_delete_record = _calendar_db_delete_recordPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, int)>();
 
-  /// @brief Retrieves all records as a list.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/calendar.read
-  /// @remarks You must release @a record_list using calendar_list_destroy().
-  /// @param[in] view_uri The view URI to get records from
-  /// @param[in] offset The index from which results are received
-  /// @param[in] limit The maximum number of results(value 0 is used for all records)
-  /// @param[out] record_list The record list
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_DB_FAILED Database operation failure
-  /// @retval #CALENDAR_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method.
-  /// @retval #CALENDAR_ERROR_NOT_PERMITTED Operation not permitted
-  /// @retval #CALENDAR_ERROR_IPC Unknown IPC error
-  /// @retval #CALENDAR_ERROR_NO_DATA Data does not exist
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @pre calendar_connect() should be called to open a connection to the calendar service.
-  /// @see calendar_connect()
-  /// @see calendar_list_destroy()
+  /// Retrieves all records as a list.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/calendar.read>
+  ///
+  /// **Remarks:**
+  /// - You must release `record_list` using calendar_list_destroy().
+  ///
+  /// **Parameters:**
+  /// - `view_uri` (in): The view URI to get records from
+  /// - `offset` (in): The index from which results are received
+  /// - `limit` (in): The maximum number of results(value 0 is used for all records)
+  /// - `record_list` (out): The record list
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_DB_FAILED`: Database operation failure
+  /// - `CALENDAR_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method.
+  /// - `CALENDAR_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `CALENDAR_ERROR_IPC`: Unknown IPC error
+  /// - `CALENDAR_ERROR_NO_DATA`: Data does not exist
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - calendar_connect() should be called to open a connection to the calendar service.
+  ///
+  /// **See also:**
+  /// - `calendar_connect()`
+  /// - `calendar_list_destroy()`
   int calendar_db_get_all_records(
     ffi.Pointer<ffi.Char> view_uri,
     int offset,
@@ -920,30 +517,47 @@ class Tizen60CalendarService2 {
           int Function(
               ffi.Pointer<ffi.Char>, int, int, ffi.Pointer<calendar_list_h>)>();
 
-  /// @brief Retrieves records using a query handle.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/calendar.read
-  /// @remarks You must release @a record_list using calendar_list_destroy().
-  /// @param[in] query The query handle used to filter results
-  /// @param[in] offset The index from which results are received
-  /// @param[in] limit The maximum number of results(value 0 is used for all records)
-  /// @param[out] record_list The record list
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_DB_FAILED Database operation failure
-  /// @retval #CALENDAR_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method.
-  /// @retval #CALENDAR_ERROR_NOT_PERMITTED Operation not permitted
-  /// @retval #CALENDAR_ERROR_IPC Unknown IPC error
-  /// @retval #CALENDAR_ERROR_NO_DATA Data does not exist
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @pre calendar_connect() should be called to open a connection to the calendar service.
-  /// @see calendar_connect()
-  /// @see calendar_list_destroy()
+  /// Retrieves records using a query handle.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/calendar.read>
+  ///
+  /// **Remarks:**
+  /// - You must release `record_list` using calendar_list_destroy().
+  ///
+  /// **Parameters:**
+  /// - `query` (in): The query handle used to filter results
+  /// - `offset` (in): The index from which results are received
+  /// - `limit` (in): The maximum number of results(value 0 is used for all records)
+  /// - `record_list` (out): The record list
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_DB_FAILED`: Database operation failure
+  /// - `CALENDAR_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method.
+  /// - `CALENDAR_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `CALENDAR_ERROR_IPC`: Unknown IPC error
+  /// - `CALENDAR_ERROR_NO_DATA`: Data does not exist
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - calendar_connect() should be called to open a connection to the calendar service.
+  ///
+  /// **See also:**
+  /// - `calendar_connect()`
+  /// - `calendar_list_destroy()`
   int calendar_db_get_records_with_query(
     calendar_query_h query,
     int offset,
@@ -968,26 +582,41 @@ class Tizen60CalendarService2 {
           int Function(
               calendar_query_h, int, int, ffi.Pointer<calendar_list_h>)>();
 
-  /// @brief Gets the record count of a specific view.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/calendar.read
-  /// @param[in] view_uri The view URI to get records from
-  /// @param[out] count The number of records
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_DB_FAILED Database operation failure
-  /// @retval #CALENDAR_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method.
-  /// @retval #CALENDAR_ERROR_NOT_PERMITTED Operation not permitted
-  /// @retval #CALENDAR_ERROR_IPC Unknown IPC error
-  /// @retval #CALENDAR_ERROR_NO_DATA Data does not exist
-  /// @retval #CALENDAR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @pre This function requires an open connection to the calendar service using calendar_connect().
-  /// @see calendar_connect()
+  /// Gets the record count of a specific view.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/calendar.read>
+  ///
+  /// **Parameters:**
+  /// - `view_uri` (in): The view URI to get records from
+  /// - `count` (out): The number of records
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_DB_FAILED`: Database operation failure
+  /// - `CALENDAR_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method.
+  /// - `CALENDAR_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `CALENDAR_ERROR_IPC`: Unknown IPC error
+  /// - `CALENDAR_ERROR_NO_DATA`: Data does not exist
+  /// - `CALENDAR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - This function requires an open connection to the calendar service using calendar_connect().
+  ///
+  /// **See also:**
+  /// - `calendar_connect()`
   int calendar_db_get_count(
     ffi.Pointer<ffi.Char> view_uri,
     ffi.Pointer<ffi.Int> count,
@@ -1005,26 +634,41 @@ class Tizen60CalendarService2 {
   late final _calendar_db_get_count = _calendar_db_get_countPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the record count with a query handle.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/calendar.read
-  /// @param[in] query The query handle used for filtering the results
-  /// @param[out] count The number of records
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_DB_FAILED Database operation failure
-  /// @retval #CALENDAR_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method.
-  /// @retval #CALENDAR_ERROR_NOT_PERMITTED Operation not permitted
-  /// @retval #CALENDAR_ERROR_IPC Unknown IPC error
-  /// @retval #CALENDAR_ERROR_NO_DATA Data does not exist
-  /// @retval #CALENDAR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @pre This function requires an open connection to the calendar service using calendar_connect().
-  /// @see calendar_connect()
+  /// Gets the record count with a query handle.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/calendar.read>
+  ///
+  /// **Parameters:**
+  /// - `query` (in): The query handle used for filtering the results
+  /// - `count` (out): The number of records
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_DB_FAILED`: Database operation failure
+  /// - `CALENDAR_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method.
+  /// - `CALENDAR_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `CALENDAR_ERROR_IPC`: Unknown IPC error
+  /// - `CALENDAR_ERROR_NO_DATA`: Data does not exist
+  /// - `CALENDAR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - This function requires an open connection to the calendar service using calendar_connect().
+  ///
+  /// **See also:**
+  /// - `calendar_connect()`
   int calendar_db_get_count_with_query(
     calendar_query_h query,
     ffi.Pointer<ffi.Int> count,
@@ -1043,30 +687,45 @@ class Tizen60CalendarService2 {
       _calendar_db_get_count_with_queryPtr
           .asFunction<int Function(calendar_query_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Inserts multiple records into the calendar database as a batch operation.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/calendar.write
-  /// @param[in] record_list The record list handle
-  /// @param[out] record_id_array The array of record IDs
-  /// @param[out] count The number of record IDs
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_DB_FAILED Database operation failure
-  /// @retval #CALENDAR_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method.
-  /// @retval #CALENDAR_ERROR_NOT_PERMITTED Operation not permitted
-  /// @retval #CALENDAR_ERROR_FILE_NO_SPACE File system is full
-  /// @retval #CALENDAR_ERROR_IPC Unknown IPC error
-  /// @retval #CALENDAR_ERROR_NO_DATA Data does not exist
-  /// @retval #CALENDAR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @pre calendar_connect() should be called to open a connection to the calendar service.
-  /// @see calendar_connect()
-  /// @see calendar_db_update_records()
-  /// @see calendar_db_delete_records()
+  /// Inserts multiple records into the calendar database as a batch operation.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/calendar.write>
+  ///
+  /// **Parameters:**
+  /// - `record_list` (in): The record list handle
+  /// - `record_id_array` (out): The array of record IDs
+  /// - `count` (out): The number of record IDs
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_DB_FAILED`: Database operation failure
+  /// - `CALENDAR_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method.
+  /// - `CALENDAR_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `CALENDAR_ERROR_FILE_NO_SPACE`: File system is full
+  /// - `CALENDAR_ERROR_IPC`: Unknown IPC error
+  /// - `CALENDAR_ERROR_NO_DATA`: Data does not exist
+  /// - `CALENDAR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - calendar_connect() should be called to open a connection to the calendar service.
+  ///
+  /// **See also:**
+  /// - `calendar_connect()`
+  /// - `calendar_db_update_records()`
+  /// - `calendar_db_delete_records()`
   int calendar_db_insert_records(
     calendar_list_h record_list,
     ffi.Pointer<ffi.Pointer<ffi.Int>> record_id_array,
@@ -1088,28 +747,43 @@ class Tizen60CalendarService2 {
           int Function(calendar_list_h, ffi.Pointer<ffi.Pointer<ffi.Int>>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Updates multiple records into the calendar database as a batch operation.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/calendar.write
-  /// @param[in] record_list The record list handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_DB_FAILED Database operation failure
-  /// @retval #CALENDAR_ERROR_NO_DATA Data does not exist
-  /// @retval #CALENDAR_ERROR_NOT_PERMITTED Operation not permitted
-  /// @retval #CALENDAR_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method.
-  /// @retval #CALENDAR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CALENDAR_ERROR_DB_RECORD_NOT_FOUND Database not found
-  /// @retval #CALENDAR_ERROR_IPC Unknown IPC error
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @pre calendar_connect() should be called to open a connection to the calendar service.
-  /// @see calendar_connect()
-  /// @see calendar_db_insert_records()
-  /// @see calendar_db_delete_records()
+  /// Updates multiple records into the calendar database as a batch operation.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/calendar.write>
+  ///
+  /// **Parameters:**
+  /// - `record_list` (in): The record list handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_DB_FAILED`: Database operation failure
+  /// - `CALENDAR_ERROR_NO_DATA`: Data does not exist
+  /// - `CALENDAR_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `CALENDAR_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method.
+  /// - `CALENDAR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CALENDAR_ERROR_DB_RECORD_NOT_FOUND`: Database not found
+  /// - `CALENDAR_ERROR_IPC`: Unknown IPC error
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - calendar_connect() should be called to open a connection to the calendar service.
+  ///
+  /// **See also:**
+  /// - `calendar_connect()`
+  /// - `calendar_db_insert_records()`
+  /// - `calendar_db_delete_records()`
   int calendar_db_update_records(
     calendar_list_h record_list,
   ) {
@@ -1124,29 +798,44 @@ class Tizen60CalendarService2 {
   late final _calendar_db_update_records = _calendar_db_update_recordsPtr
       .asFunction<int Function(calendar_list_h)>();
 
-  /// @brief Deletes multiple records with related child records from the calendar database as a batch operation.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/calendar.write
-  /// @param[in] view_uri The view URI of the records to delete
-  /// @param[in] record_id_array The record IDs to delete
-  /// @param[in] count The number of records
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_DB_FAILED Database operation failure
-  /// @retval #CALENDAR_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method.
-  /// @retval #CALENDAR_ERROR_NOT_PERMITTED Operation not permitted
-  /// @retval #CALENDAR_ERROR_DB_RECORD_NOT_FOUND Database not found
-  /// @retval #CALENDAR_ERROR_FILE_NO_SPACE File system is full
-  /// @retval #CALENDAR_ERROR_IPC Unknown IPC error
-  /// @retval #CALENDAR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @pre calendar_connect() should be called to open a connection to the calendar service.
-  /// @see calendar_connect()
-  /// @see calendar_db_insert_records()
+  /// Deletes multiple records with related child records from the calendar database as a batch operation.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/calendar.write>
+  ///
+  /// **Parameters:**
+  /// - `view_uri` (in): The view URI of the records to delete
+  /// - `record_id_array` (in): The record IDs to delete
+  /// - `count` (in): The number of records
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_DB_FAILED`: Database operation failure
+  /// - `CALENDAR_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method.
+  /// - `CALENDAR_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `CALENDAR_ERROR_DB_RECORD_NOT_FOUND`: Database not found
+  /// - `CALENDAR_ERROR_FILE_NO_SPACE`: File system is full
+  /// - `CALENDAR_ERROR_IPC`: Unknown IPC error
+  /// - `CALENDAR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - calendar_connect() should be called to open a connection to the calendar service.
+  ///
+  /// **See also:**
+  /// - `calendar_connect()`
+  /// - `calendar_db_insert_records()`
   int calendar_db_delete_records(
     ffi.Pointer<ffi.Char> view_uri,
     ffi.Pointer<ffi.Int> record_id_array,
@@ -1167,24 +856,39 @@ class Tizen60CalendarService2 {
       _calendar_db_delete_recordsPtr.asFunction<
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Int>, int)>();
 
-  /// @brief Gets the current calendar database version.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/calendar.read
-  /// @param[out] calendar_db_version The calendar database version
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_DB_FAILED Database operation failure
-  /// @retval #CALENDAR_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method.
-  /// @retval #CALENDAR_ERROR_DB_RECORD_NOT_FOUND Database not found
-  /// @retval #CALENDAR_ERROR_IPC Unknown IPC error
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @pre This function requires an open connection to the calendar service using calendar_connect().
-  /// @see calendar_connect()
-  /// @see calendar_db_get_changes_by_version()
+  /// Gets the current calendar database version.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/calendar.read>
+  ///
+  /// **Parameters:**
+  /// - `calendar_db_version` (out): The calendar database version
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_DB_FAILED`: Database operation failure
+  /// - `CALENDAR_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method.
+  /// - `CALENDAR_ERROR_DB_RECORD_NOT_FOUND`: Database not found
+  /// - `CALENDAR_ERROR_IPC`: Unknown IPC error
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - This function requires an open connection to the calendar service using calendar_connect().
+  ///
+  /// **See also:**
+  /// - `calendar_connect()`
+  /// - `calendar_db_get_changes_by_version()`
   int calendar_db_get_current_version(
     ffi.Pointer<ffi.Int> calendar_db_version,
   ) {
@@ -1200,32 +904,51 @@ class Tizen60CalendarService2 {
       _calendar_db_get_current_versionPtr
           .asFunction<int Function(ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Registers a callback function to be invoked when a record changes.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/calendar.read
-  /// @remarks If successive change notification produced on the view_uri are identical,
-  /// then they are coalesced into a single notification if the older notification has not yet been called
-  /// because default main loop is doing something.
-  /// But it means that a callback function is not called to reliably count of change.
-  /// This API supports only @ref CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_book view, @ref CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_event view,
-  /// @ref CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_todo view.
-  /// @param[in] view_uri The view URI of the record to subscribe for change notifications
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CALENDAR_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method.
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @pre This function requires an open connection to the calendar service using calendar_connect().
-  /// @post calendar_db_changed_cb() will be invoked when the designated view changes.
-  /// @see calendar_connect()
-  /// @see calendar_db_changed_cb()
-  /// @see calendar_db_remove_changed_cb()
+  /// Registers a callback function to be invoked when a record changes.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/calendar.read>
+  ///
+  /// **Remarks:**
+  /// - If successive change notification produced on the view_uri are identical,
+  /// - then they are coalesced into a single notification if the older notification has not yet been called
+  /// - because default main loop is doing something.
+  /// - But it means that a callback function is not called to reliably count of change.
+  /// - This API supports only `CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_book` view, `CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_event` view,
+  /// - `CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_todo` view.
+  ///
+  /// **Parameters:**
+  /// - `view_uri` (in): The view URI of the record to subscribe for change notifications
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CALENDAR_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method.
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - This function requires an open connection to the calendar service using calendar_connect().
+  ///
+  /// **Postconditions:**
+  /// - calendar_db_changed_cb() will be invoked when the designated view changes.
+  ///
+  /// **See also:**
+  /// - `calendar_connect()`
+  /// - `calendar_db_changed_cb()`
+  /// - `calendar_db_remove_changed_cb()`
   int calendar_db_add_changed_cb(
     ffi.Pointer<ffi.Char> view_uri,
     calendar_db_changed_cb callback,
@@ -1247,24 +970,39 @@ class Tizen60CalendarService2 {
           int Function(ffi.Pointer<ffi.Char>, calendar_db_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters a callback function.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/calendar.read
-  /// @param[in] view_uri The view URI of the record to subscribe for change notifications
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method.
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @pre This function requires an open connection to the calendar service using calendar_connect().
-  /// @see calendar_connect()
-  /// @see calendar_db_changed_cb()
-  /// @see calendar_db_add_changed_cb()
+  /// Unregisters a callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/calendar.read>
+  ///
+  /// **Parameters:**
+  /// - `view_uri` (in): The view URI of the record to subscribe for change notifications
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method.
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - This function requires an open connection to the calendar service using calendar_connect().
+  ///
+  /// **See also:**
+  /// - `calendar_connect()`
+  /// - `calendar_db_changed_cb()`
+  /// - `calendar_db_add_changed_cb()`
   int calendar_db_remove_changed_cb(
     ffi.Pointer<ffi.Char> view_uri,
     calendar_db_changed_cb callback,
@@ -1286,31 +1024,49 @@ class Tizen60CalendarService2 {
           int Function(ffi.Pointer<ffi.Char>, calendar_db_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Retrieves records with the given calendar database version.
-  /// @details This function finds all the changed records since the given @a calendar_db_version.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/calendar.read
-  /// @remarks You must release @a change_record_list using calendar_list_destroy().
-  /// @param[in] view_uri The view URI to get records from
-  /// @param[in] calendar_book_id The calendar book ID to filter
-  /// @param[in] calendar_db_version The calendar database version
-  /// @param[out] record_list The record list
-  /// @param[out] current_calendar_db_version The current calendar database version
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_DB_FAILED Database operation failure
-  /// @retval #CALENDAR_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method.
-  /// @retval #CALENDAR_ERROR_DB_RECORD_NOT_FOUND Database not found
-  /// @retval #CALENDAR_ERROR_IPC Unknown IPC error
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @pre calendar_connect() should be called to open a connection to the calendar service.
-  /// @see calendar_connect()
-  /// @see calendar_list_destroy()
+  /// Retrieves records with the given calendar database version.
+  ///
+  /// This function finds all the changed records since the given `calendar_db_version`.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/calendar.read>
+  ///
+  /// **Remarks:**
+  /// - You must release `change_record_list` using calendar_list_destroy().
+  ///
+  /// **Parameters:**
+  /// - `view_uri` (in): The view URI to get records from
+  /// - `calendar_book_id` (in): The calendar book ID to filter
+  /// - `calendar_db_version` (in): The calendar database version
+  /// - `record_list` (out): The record list
+  /// - `current_calendar_db_version` (out): The current calendar database version
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_DB_FAILED`: Database operation failure
+  /// - `CALENDAR_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method.
+  /// - `CALENDAR_ERROR_DB_RECORD_NOT_FOUND`: Database not found
+  /// - `CALENDAR_ERROR_IPC`: Unknown IPC error
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - calendar_connect() should be called to open a connection to the calendar service.
+  ///
+  /// **See also:**
+  /// - `calendar_connect()`
+  /// - `calendar_list_destroy()`
   int calendar_db_get_changes_by_version(
     ffi.Pointer<ffi.Char> view_uri,
     int calendar_book_id,
@@ -1340,29 +1096,44 @@ class Tizen60CalendarService2 {
           int Function(ffi.Pointer<ffi.Char>, int, int,
               ffi.Pointer<calendar_list_h>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Inserts a vcalendar stream into the calendar database.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/calendar.write
-  /// @param[in] vcalendar_stream The vcalendar stream
-  /// @param[out] record_id_array The record IDs to delete
-  /// @param[out] count The number of record ID arrays
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_DB_FAILED Database operation failure
-  /// @retval #CALENDAR_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method.
-  /// @retval #CALENDAR_ERROR_NO_DATA Data does not exist
-  /// @retval #CALENDAR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CALENDAR_ERROR_FILE_NO_SPACE File system is full
-  /// @retval #CALENDAR_ERROR_NOT_PERMITTED Operation not permitted
-  /// @retval #CALENDAR_ERROR_IPC Unknown IPC error
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @pre calendar_connect() should be called to open a connection to the calendar service.
-  /// @see calendar_connect()
-  /// @see calendar_db_replace_vcalendars()
+  /// Inserts a vcalendar stream into the calendar database.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/calendar.write>
+  ///
+  /// **Parameters:**
+  /// - `vcalendar_stream` (in): The vcalendar stream
+  /// - `record_id_array` (out): The record IDs to delete
+  /// - `count` (out): The number of record ID arrays
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_DB_FAILED`: Database operation failure
+  /// - `CALENDAR_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method.
+  /// - `CALENDAR_ERROR_NO_DATA`: Data does not exist
+  /// - `CALENDAR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CALENDAR_ERROR_FILE_NO_SPACE`: File system is full
+  /// - `CALENDAR_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `CALENDAR_ERROR_IPC`: Unknown IPC error
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - calendar_connect() should be called to open a connection to the calendar service.
+  ///
+  /// **See also:**
+  /// - `calendar_connect()`
+  /// - `calendar_db_replace_vcalendars()`
   int calendar_db_insert_vcalendars(
     ffi.Pointer<ffi.Char> vcalendar_stream,
     ffi.Pointer<ffi.Pointer<ffi.Int>> record_id_array,
@@ -1386,28 +1157,43 @@ class Tizen60CalendarService2 {
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Int>>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Replaces a vcalendar stream in the calendar database.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/calendar.write
-  /// @param[in] vcalendar_stream The vcalendar stream
-  /// @param[in] record_id_array The record IDs to replace
-  /// @param[in] count The number of record ID arrays
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_DB_FAILED Database operation failure
-  /// @retval #CALENDAR_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method.
-  /// @retval #CALENDAR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CALENDAR_ERROR_NO_DATA Data does not exist
-  /// @retval #CALENDAR_ERROR_NOT_PERMITTED Operation not permitted
-  /// @retval #CALENDAR_ERROR_DB_RECORD_NOT_FOUND Database not found
-  /// @retval #CALENDAR_ERROR_IPC Unknown IPC error
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @pre This function requires an open connection to the calendar service by calendar_connect().
-  /// @see calendar_connect()
+  /// Replaces a vcalendar stream in the calendar database.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/calendar.write>
+  ///
+  /// **Parameters:**
+  /// - `vcalendar_stream` (in): The vcalendar stream
+  /// - `record_id_array` (in): The record IDs to replace
+  /// - `count` (in): The number of record ID arrays
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_DB_FAILED`: Database operation failure
+  /// - `CALENDAR_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method.
+  /// - `CALENDAR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CALENDAR_ERROR_NO_DATA`: Data does not exist
+  /// - `CALENDAR_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `CALENDAR_ERROR_DB_RECORD_NOT_FOUND`: Database not found
+  /// - `CALENDAR_ERROR_IPC`: Unknown IPC error
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - This function requires an open connection to the calendar service by calendar_connect().
+  ///
+  /// **See also:**
+  /// - `calendar_connect()`
   int calendar_db_replace_vcalendars(
     ffi.Pointer<ffi.Char> vcalendar_stream,
     ffi.Pointer<ffi.Int> record_id_array,
@@ -1428,29 +1214,44 @@ class Tizen60CalendarService2 {
       _calendar_db_replace_vcalendarsPtr.asFunction<
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Int>, int)>();
 
-  /// @brief Replaces a record in the calendar database.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/calendar.write
-  /// @param[in] record The record handle
-  /// @param[in] record_id The record ID
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_DB_FAILED Database operation failure
-  /// @retval #CALENDAR_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method.
-  /// @retval #CALENDAR_ERROR_FILE_NO_SPACE File system is full
-  /// @retval #CALENDAR_ERROR_NOT_PERMITTED Operation not permitted
-  /// @retval #CALENDAR_ERROR_IPC Unknown IPC error
-  /// @retval #CALENDAR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @pre calendar_connect() should be called to open a connection to the calendar service.
-  /// @see calendar_connect()
-  /// @see calendar_db_update_record()
-  /// @see calendar_db_delete_record()
-  /// @see calendar_db_get_record()
+  /// Replaces a record in the calendar database.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/calendar.write>
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  /// - `record_id` (in): The record ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_DB_FAILED`: Database operation failure
+  /// - `CALENDAR_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method.
+  /// - `CALENDAR_ERROR_FILE_NO_SPACE`: File system is full
+  /// - `CALENDAR_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `CALENDAR_ERROR_IPC`: Unknown IPC error
+  /// - `CALENDAR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - calendar_connect() should be called to open a connection to the calendar service.
+  ///
+  /// **See also:**
+  /// - `calendar_connect()`
+  /// - `calendar_db_update_record()`
+  /// - `calendar_db_delete_record()`
+  /// - `calendar_db_get_record()`
   int calendar_db_replace_record(
     calendar_record_h record,
     int record_id,
@@ -1467,30 +1268,45 @@ class Tizen60CalendarService2 {
   late final _calendar_db_replace_record = _calendar_db_replace_recordPtr
       .asFunction<int Function(calendar_record_h, int)>();
 
-  /// @brief Replaces multiple records in the calendar database as a batch operation.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/calendar.write
-  /// @param[in] record_list The record list handle
-  /// @param[in] record_id_array The record IDs
-  /// @param[in] count The number of record ID arrays
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_DB_FAILED Database operation failure
-  /// @retval #CALENDAR_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method.
-  /// @retval #CALENDAR_ERROR_FILE_NO_SPACE File system is full
-  /// @retval #CALENDAR_ERROR_NOT_PERMITTED Operation not permitted
-  /// @retval #CALENDAR_ERROR_IPC Unknown IPC error
-  /// @retval #CALENDAR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @pre calendar_connect() should be called to open a connection to the calendar service.
-  /// @see calendar_connect()
-  /// @see calendar_db_update_records()
-  /// @see calendar_db_delete_records()
-  /// @see calendar_db_replace_record()
+  /// Replaces multiple records in the calendar database as a batch operation.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/calendar.write>
+  ///
+  /// **Parameters:**
+  /// - `record_list` (in): The record list handle
+  /// - `record_id_array` (in): The record IDs
+  /// - `count` (in): The number of record ID arrays
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_DB_FAILED`: Database operation failure
+  /// - `CALENDAR_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method.
+  /// - `CALENDAR_ERROR_FILE_NO_SPACE`: File system is full
+  /// - `CALENDAR_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `CALENDAR_ERROR_IPC`: Unknown IPC error
+  /// - `CALENDAR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - calendar_connect() should be called to open a connection to the calendar service.
+  ///
+  /// **See also:**
+  /// - `calendar_connect()`
+  /// - `calendar_db_update_records()`
+  /// - `calendar_db_delete_records()`
+  /// - `calendar_db_replace_record()`
   int calendar_db_replace_records(
     calendar_list_h record_list,
     ffi.Pointer<ffi.Int> record_id_array,
@@ -1510,21 +1326,36 @@ class Tizen60CalendarService2 {
   late final _calendar_db_replace_records = _calendar_db_replace_recordsPtr
       .asFunction<int Function(calendar_list_h, ffi.Pointer<ffi.Int>, int)>();
 
-  /// @brief Gets the last successful change version of the database on the current connection.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/calendar.read
-  /// @param[out] last_change_version The calendar database version on the current connection
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method.
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @pre This function requires an open connection to the calendar service using calendar_connect().
-  /// @see calendar_connect()
-  /// @see calendar_db_get_current_version()
+  /// Gets the last successful change version of the database on the current connection.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/calendar.read>
+  ///
+  /// **Parameters:**
+  /// - `last_change_version` (out): The calendar database version on the current connection
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method.
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - This function requires an open connection to the calendar service using calendar_connect().
+  ///
+  /// **See also:**
+  /// - `calendar_connect()`
+  /// - `calendar_db_get_current_version()`
   int calendar_db_get_last_change_version(
     ffi.Pointer<ffi.Int> last_change_version,
   ) {
@@ -1540,30 +1371,47 @@ class Tizen60CalendarService2 {
       _calendar_db_get_last_change_versionPtr
           .asFunction<int Function(ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Retrieves changed exception records since the given calendar database version.
-  /// Exceptions are the modified or deleted instances in a recurring event.
-  /// @details This function finds all the changed records since the given @a calendar_db_version.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/calendar.read
-  /// @remarks You must release @a change_record_list using calendar_list_destroy().
-  /// @param[in] view_uri The view URI to get records from
-  /// @param[in] original_event_id The original event ID
-  /// @param[in] calendar_db_version The calendar database version starting from which to get records
-  /// @param[out] list The record list
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_DB_FAILED Database operation failure
-  /// @retval #CALENDAR_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method.
-  /// @retval #CALENDAR_ERROR_IPC Unknown IPC error
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @pre calendar_connect() should be called to open a connection to the calendar service.
-  /// @see calendar_connect()
-  /// @see calendar_list_destroy()
+  /// Retrieves changed exception records since the given calendar database version. Exceptions are the modified or deleted instances in a recurring event.
+  ///
+  /// This function finds all the changed records since the given `calendar_db_version`.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/calendar.read>
+  ///
+  /// **Remarks:**
+  /// - You must release `change_record_list` using calendar_list_destroy().
+  ///
+  /// **Parameters:**
+  /// - `view_uri` (in): The view URI to get records from
+  /// - `original_event_id` (in): The original event ID
+  /// - `calendar_db_version` (in): The calendar database version starting from which to get records
+  /// - `list` (out): The record list
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_DB_FAILED`: Database operation failure
+  /// - `CALENDAR_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method.
+  /// - `CALENDAR_ERROR_IPC`: Unknown IPC error
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - calendar_connect() should be called to open a connection to the calendar service.
+  ///
+  /// **See also:**
+  /// - `calendar_connect()`
+  /// - `calendar_list_destroy()`
   int calendar_db_get_changes_exception_by_version(
     ffi.Pointer<ffi.Char> view_uri,
     int original_event_id,
@@ -1588,26 +1436,41 @@ class Tizen60CalendarService2 {
           int Function(
               ffi.Pointer<ffi.Char>, int, int, ffi.Pointer<calendar_list_h>)>();
 
-  /// @brief Cleans the data after sync.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/calendar.write
-  /// @param[in] calendar_book_id The calendar book ID
-  /// @param[in] calendar_db_version The calendar database version
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_DB_FAILED Database operation failure
-  /// @retval #CALENDAR_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #CALENDAR_ERROR_FILE_NO_SPACE File system is full
-  /// @retval #CALENDAR_ERROR_IPC Unknown IPC error
-  /// @retval #CALENDAR_ERROR_NO_DATA Data does not exist
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @pre calendar_connect() should be called to open a connection to the calendar service.
-  /// @see calendar_connect()
+  /// Cleans the data after sync.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/calendar.write>
+  ///
+  /// **Parameters:**
+  /// - `calendar_book_id` (in): The calendar book ID
+  /// - `calendar_db_version` (in): The calendar database version
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_DB_FAILED`: Database operation failure
+  /// - `CALENDAR_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CALENDAR_ERROR_FILE_NO_SPACE`: File system is full
+  /// - `CALENDAR_ERROR_IPC`: Unknown IPC error
+  /// - `CALENDAR_ERROR_NO_DATA`: Data does not exist
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - calendar_connect() should be called to open a connection to the calendar service.
+  ///
+  /// **See also:**
+  /// - `calendar_connect()`
   int calendar_db_clean_after_sync(
     int calendar_book_id,
     int calendar_db_version,
@@ -1624,25 +1487,40 @@ class Tizen60CalendarService2 {
   late final _calendar_db_clean_after_sync =
       _calendar_db_clean_after_syncPtr.asFunction<int Function(int, int)>();
 
-  /// @brief Links a record to another record.
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/calendar.write
-  /// @param[in] base_id The base record ID
-  /// @param[in] record_id The record ID to link to
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_DB_FAILED Database operation failure
-  /// @retval #CALENDAR_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #CALENDAR_ERROR_FILE_NO_SPACE File system is full
-  /// @retval #CALENDAR_ERROR_IPC Unknown IPC error
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @pre calendar_connect() should be called to open a connection to the calendar service.
-  /// @see calendar_connect()
+  /// Links a record to another record.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/calendar.write>
+  ///
+  /// **Parameters:**
+  /// - `base_id` (in): The base record ID
+  /// - `record_id` (in): The record ID to link to
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_DB_FAILED`: Database operation failure
+  /// - `CALENDAR_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CALENDAR_ERROR_FILE_NO_SPACE`: File system is full
+  /// - `CALENDAR_ERROR_IPC`: Unknown IPC error
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - calendar_connect() should be called to open a connection to the calendar service.
+  ///
+  /// **See also:**
+  /// - `calendar_connect()`
   int calendar_db_link_record(
     int base_id,
     int record_id,
@@ -1659,24 +1537,39 @@ class Tizen60CalendarService2 {
   late final _calendar_db_link_record =
       _calendar_db_link_recordPtr.asFunction<int Function(int, int)>();
 
-  /// @brief Unlinks a record from base record.
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/calendar.write
-  /// @param[in] record_id The record ID to unlink
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_DB_FAILED Database operation failure
-  /// @retval #CALENDAR_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #CALENDAR_ERROR_FILE_NO_SPACE File system is full
-  /// @retval #CALENDAR_ERROR_IPC Unknown IPC error
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @pre calendar_connect() should be called to open a connection to the calendar service.
-  /// @see calendar_connect()
+  /// Unlinks a record from base record.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/calendar.write>
+  ///
+  /// **Parameters:**
+  /// - `record_id` (in): The record ID to unlink
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_DB_FAILED`: Database operation failure
+  /// - `CALENDAR_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CALENDAR_ERROR_FILE_NO_SPACE`: File system is full
+  /// - `CALENDAR_ERROR_IPC`: Unknown IPC error
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - calendar_connect() should be called to open a connection to the calendar service.
+  ///
+  /// **See also:**
+  /// - `calendar_connect()`
   int calendar_db_unlink_record(
     int record_id,
   ) {
@@ -1691,20 +1584,33 @@ class Tizen60CalendarService2 {
   late final _calendar_db_unlink_record =
       _calendar_db_unlink_recordPtr.asFunction<int Function(int)>();
 
-  /// @brief Creates a filter handle.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @remarks You must release @a filter using calendar_filter_destroy().
-  /// @param[in] view_uri The view URI of a filter
-  /// @param[out] filter The filter handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @pre calendar_connect() should be called to initialize.
-  /// @see calendar_filter_destroy()
+  /// Creates a filter handle.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Remarks:**
+  /// - You must release `filter` using calendar_filter_destroy().
+  ///
+  /// **Parameters:**
+  /// - `view_uri` (in): The view URI of a filter
+  /// - `filter` (out): The filter handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - calendar_connect() should be called to initialize.
+  ///
+  /// **See also:**
+  /// - `calendar_filter_destroy()`
   int calendar_filter_create(
     ffi.Pointer<ffi.Char> view_uri,
     ffi.Pointer<calendar_filter_h> filter,
@@ -1722,16 +1628,25 @@ class Tizen60CalendarService2 {
   late final _calendar_filter_create = _calendar_filter_createPtr.asFunction<
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<calendar_filter_h>)>();
 
-  /// @brief Destroys a filter handle.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @param[in] filter The filter handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_filter_create()
+  /// Destroys a filter handle.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Parameters:**
+  /// - `filter` (in): The filter handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_filter_create()`
   int calendar_filter_destroy(
     calendar_filter_h filter,
   ) {
@@ -1746,19 +1661,28 @@ class Tizen60CalendarService2 {
   late final _calendar_filter_destroy =
       _calendar_filter_destroyPtr.asFunction<int Function(calendar_filter_h)>();
 
-  /// @brief Adds a condition for the string type property.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @param[in] filter The filter handle
-  /// @param[in] property_id The property ID to add a condition
-  /// @param[in] match The match flag
-  /// @param[in] match_value The match value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_filter_add_operator()
+  /// Adds a condition for the string type property.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Parameters:**
+  /// - `filter` (in): The filter handle
+  /// - `property_id` (in): The property ID to add a condition
+  /// - `match` (in): The match flag
+  /// - `match_value` (in): The match value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_filter_add_operator()`
   int calendar_filter_add_str(
     calendar_filter_h filter,
     int property_id,
@@ -1780,19 +1704,28 @@ class Tizen60CalendarService2 {
   late final _calendar_filter_add_str = _calendar_filter_add_strPtr.asFunction<
       int Function(calendar_filter_h, int, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Adds a condition for the integer type property.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @param[in] filter The filter handle
-  /// @param[in] property_id The property ID to add a condition
-  /// @param[in] match The match flag
-  /// @param[in] match_value The match value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_filter_add_operator()
+  /// Adds a condition for the integer type property.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Parameters:**
+  /// - `filter` (in): The filter handle
+  /// - `property_id` (in): The property ID to add a condition
+  /// - `match` (in): The match flag
+  /// - `match_value` (in): The match value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_filter_add_operator()`
   int calendar_filter_add_int(
     calendar_filter_h filter,
     int property_id,
@@ -1814,19 +1747,28 @@ class Tizen60CalendarService2 {
   late final _calendar_filter_add_int = _calendar_filter_add_intPtr
       .asFunction<int Function(calendar_filter_h, int, int, int)>();
 
-  /// @brief Adds a condition for the double type property.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @param[in] filter The filter handle
-  /// @param[in] property_id The property ID to add a condition
-  /// @param[in] match The match flag
-  /// @param[in] match_value The match value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_filter_add_operator()
+  /// Adds a condition for the double type property.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Parameters:**
+  /// - `filter` (in): The filter handle
+  /// - `property_id` (in): The property ID to add a condition
+  /// - `match` (in): The match flag
+  /// - `match_value` (in): The match value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_filter_add_operator()`
   int calendar_filter_add_double(
     calendar_filter_h filter,
     int property_id,
@@ -1848,19 +1790,28 @@ class Tizen60CalendarService2 {
   late final _calendar_filter_add_double = _calendar_filter_add_doublePtr
       .asFunction<int Function(calendar_filter_h, int, int, double)>();
 
-  /// @brief Adds a condition for the long long int type property.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @param[in] filter The filter handle
-  /// @param[in] property_id The property ID to add a condition
-  /// @param[in] match The match flag
-  /// @param[in] match_value The match value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_filter_add_operator()
+  /// Adds a condition for the long long int type property.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Parameters:**
+  /// - `filter` (in): The filter handle
+  /// - `property_id` (in): The property ID to add a condition
+  /// - `match` (in): The match flag
+  /// - `match_value` (in): The match value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_filter_add_operator()`
   int calendar_filter_add_lli(
     calendar_filter_h filter,
     int property_id,
@@ -1882,19 +1833,28 @@ class Tizen60CalendarService2 {
   late final _calendar_filter_add_lli = _calendar_filter_add_lliPtr
       .asFunction<int Function(calendar_filter_h, int, int, int)>();
 
-  /// @brief Adds a condition for the calendar_time_s type property.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @param[in] filter The filter handle
-  /// @param[in] property_id The property ID to add a condition
-  /// @param[in] match The match flag
-  /// @param[in] match_value The match value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_filter_add_operator()
+  /// Adds a condition for the calendar_time_s type property.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Parameters:**
+  /// - `filter` (in): The filter handle
+  /// - `property_id` (in): The property ID to add a condition
+  /// - `match` (in): The match flag
+  /// - `match_value` (in): The match value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_filter_add_operator()`
   int calendar_filter_add_caltime(
     calendar_filter_h filter,
     int property_id,
@@ -1916,17 +1876,26 @@ class Tizen60CalendarService2 {
   late final _calendar_filter_add_caltime = _calendar_filter_add_caltimePtr
       .asFunction<int Function(calendar_filter_h, int, int, calendar_time_s)>();
 
-  /// @brief Adds a child filter to a parent filter.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @param[in] parent_filter The parent filter handle
-  /// @param[in] child_filter The child filter handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_filter_add_operator()
+  /// Adds a child filter to a parent filter.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Parameters:**
+  /// - `parent_filter` (in): The parent filter handle
+  /// - `child_filter` (in): The child filter handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_filter_add_operator()`
   int calendar_filter_add_filter(
     calendar_filter_h parent_filter,
     calendar_filter_h child_filter,
@@ -1944,21 +1913,30 @@ class Tizen60CalendarService2 {
   late final _calendar_filter_add_filter = _calendar_filter_add_filterPtr
       .asFunction<int Function(calendar_filter_h, calendar_filter_h)>();
 
-  /// @brief Adds an operator between conditions.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @param[in] filter The filter handle
-  /// @param[in] operator_type The operator type
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_filter_add_str()
-  /// @see calendar_filter_add_int()
-  /// @see calendar_filter_add_double()
-  /// @see calendar_filter_add_caltime()
-  /// @see calendar_filter_add_filter()
+  /// Adds an operator between conditions.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Parameters:**
+  /// - `filter` (in): The filter handle
+  /// - `operator_type` (in): The operator type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_filter_add_str()`
+  /// - `calendar_filter_add_int()`
+  /// - `calendar_filter_add_double()`
+  /// - `calendar_filter_add_caltime()`
+  /// - `calendar_filter_add_filter()`
   int calendar_filter_add_operator(
     calendar_filter_h filter,
     int operator_type,
@@ -1975,18 +1953,29 @@ class Tizen60CalendarService2 {
   late final _calendar_filter_add_operator = _calendar_filter_add_operatorPtr
       .asFunction<int Function(calendar_filter_h, int)>();
 
-  /// @brief Creates a calendar list handle.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @remarks You must release @a calendar_list using calendar_list_destroy().
-  /// @param[out] out_list The calendar list handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_list_destroy()
+  /// Creates a calendar list handle.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Remarks:**
+  /// - You must release `calendar_list` using calendar_list_destroy().
+  ///
+  /// **Parameters:**
+  /// - `out_list` (out): The calendar list handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_list_destroy()`
   int calendar_list_create(
     ffi.Pointer<calendar_list_h> out_list,
   ) {
@@ -2001,18 +1990,26 @@ class Tizen60CalendarService2 {
   late final _calendar_list_create = _calendar_list_createPtr
       .asFunction<int Function(ffi.Pointer<calendar_list_h>)>();
 
-  /// @brief Destroys a calendar list handle and releases all its resources.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @param[in] list The calendar list handle
-  /// @param[in] delete_record If @c true, child records are destroyed automatically,
-  /// otherwise @c false
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_list_create()
+  /// Destroys a calendar list handle and releases all its resources.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Parameters:**
+  /// - `list` (in): The calendar list handle
+  /// - `delete_record` (in): If `true`, child records are destroyed automatically, otherwise `false`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_list_create()`
   int calendar_list_destroy(
     calendar_list_h list,
     bool delete_record,
@@ -2029,17 +2026,26 @@ class Tizen60CalendarService2 {
   late final _calendar_list_destroy = _calendar_list_destroyPtr
       .asFunction<int Function(calendar_list_h, bool)>();
 
-  /// @brief Retrieves the number of calendar entities in a calendar list.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @param[in] list The calendar list handle
-  /// @param[out] count The count of the calendar entity
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_list_add()
+  /// Retrieves the number of calendar entities in a calendar list.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Parameters:**
+  /// - `list` (in): The calendar list handle
+  /// - `count` (out): The count of the calendar entity
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_list_add()`
   int calendar_list_get_count(
     calendar_list_h list,
     ffi.Pointer<ffi.Int> count,
@@ -2057,17 +2063,26 @@ class Tizen60CalendarService2 {
   late final _calendar_list_get_count = _calendar_list_get_countPtr
       .asFunction<int Function(calendar_list_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Adds a record to the calendar list.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @param[in] list The calendar list handle
-  /// @param[in] record The record handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_list_remove()
+  /// Adds a record to the calendar list.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Parameters:**
+  /// - `list` (in): The calendar list handle
+  /// - `record` (in): The record handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_list_remove()`
   int calendar_list_add(
     calendar_list_h list,
     calendar_record_h record,
@@ -2085,20 +2100,29 @@ class Tizen60CalendarService2 {
   late final _calendar_list_add = _calendar_list_addPtr
       .asFunction<int Function(calendar_list_h, calendar_record_h)>();
 
-  /// @brief Removes a record from the calendar list.
-  /// @details If the record is the current record, then the current record is changed to the next record.\n
-  /// If the record is the last record then the current record will be @c NULL.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @param[in] list The calendar list handle
-  /// @param[in] record The record handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_NO_DATA Requested data does not exist
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_list_add()
+  /// Removes a record from the calendar list.
+  ///
+  /// If the record is the current record, then the current record is changed to the next record. If the record is the last record then the current record will be `NULL`.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Parameters:**
+  /// - `list` (in): The calendar list handle
+  /// - `record` (in): The record handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_NO_DATA`: Requested data does not exist
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_list_add()`
   int calendar_list_remove(
     calendar_list_h list,
     calendar_record_h record,
@@ -2116,20 +2140,30 @@ class Tizen60CalendarService2 {
   late final _calendar_list_remove = _calendar_list_removePtr
       .asFunction<int Function(calendar_list_h, calendar_record_h)>();
 
-  /// @brief Retrieves a record from the calendar list.
-  /// @details The default current record is the first record.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @remarks You MUST NOT destroy the @a record handle.
-  /// It is destroyed automatically when the @a list is destroyed.
-  /// @param[in] list The calendar list handle
-  /// @param[out] record The record handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_NO_DATA Requested data does not exist
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
+  /// Retrieves a record from the calendar list.
+  ///
+  /// The default current record is the first record.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Remarks:**
+  /// - You MUST NOT destroy the `record` handle.
+  /// - It is destroyed automatically when the `list` is destroyed.
+  ///
+  /// **Parameters:**
+  /// - `list` (in): The calendar list handle
+  /// - `record` (out): The record handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_NO_DATA`: Requested data does not exist
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
   int calendar_list_get_current_record_p(
     calendar_list_h list,
     ffi.Pointer<calendar_record_h> record,
@@ -2149,17 +2183,26 @@ class Tizen60CalendarService2 {
       _calendar_list_get_current_record_pPtr.asFunction<
           int Function(calendar_list_h, ffi.Pointer<calendar_record_h>)>();
 
-  /// @brief Moves a calendar list to the previous position.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @param[in] list The calendar list handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_NO_DATA Requested data does not exist
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_list_next()
+  /// Moves a calendar list to the previous position.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Parameters:**
+  /// - `list` (in): The calendar list handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_NO_DATA`: Requested data does not exist
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_list_next()`
   int calendar_list_prev(
     calendar_list_h list,
   ) {
@@ -2174,17 +2217,26 @@ class Tizen60CalendarService2 {
   late final _calendar_list_prev =
       _calendar_list_prevPtr.asFunction<int Function(calendar_list_h)>();
 
-  /// @brief Moves a calendar list to the next position.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @param[in] list The calendar list handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_NO_DATA Requested data does not exist
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_list_prev()
+  /// Moves a calendar list to the next position.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Parameters:**
+  /// - `list` (in): The calendar list handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_NO_DATA`: Requested data does not exist
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_list_prev()`
   int calendar_list_next(
     calendar_list_h list,
   ) {
@@ -2199,16 +2251,25 @@ class Tizen60CalendarService2 {
   late final _calendar_list_next =
       _calendar_list_nextPtr.asFunction<int Function(calendar_list_h)>();
 
-  /// @brief Moves a calendar list to the first position.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @param[in] list The calendar list handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_list_last()
+  /// Moves a calendar list to the first position.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Parameters:**
+  /// - `list` (in): The calendar list handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_list_last()`
   int calendar_list_first(
     calendar_list_h list,
   ) {
@@ -2223,16 +2284,25 @@ class Tizen60CalendarService2 {
   late final _calendar_list_first =
       _calendar_list_firstPtr.asFunction<int Function(calendar_list_h)>();
 
-  /// @brief Moves a calendar list to the last position.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @param[in] list The calendar list handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_list_first()
+  /// Moves a calendar list to the last position.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Parameters:**
+  /// - `list` (in): The calendar list handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_list_first()`
   int calendar_list_last(
     calendar_list_h list,
   ) {
@@ -2247,20 +2317,33 @@ class Tizen60CalendarService2 {
   late final _calendar_list_last =
       _calendar_list_lastPtr.asFunction<int Function(calendar_list_h)>();
 
-  /// @brief Creates a query handle.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @remarks You must release @a query using calendar_query_destroy().
-  /// @param[in] view_uri The view URI of a query
-  /// @param[out] query The filter handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @pre calendar_connect() should be called to initialize.
-  /// @see calendar_query_destroy()
+  /// Creates a query handle.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Remarks:**
+  /// - You must release `query` using calendar_query_destroy().
+  ///
+  /// **Parameters:**
+  /// - `view_uri` (in): The view URI of a query
+  /// - `query` (out): The filter handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - calendar_connect() should be called to initialize.
+  ///
+  /// **See also:**
+  /// - `calendar_query_destroy()`
   int calendar_query_create(
     ffi.Pointer<ffi.Char> view_uri,
     ffi.Pointer<calendar_query_h> query,
@@ -2278,16 +2361,25 @@ class Tizen60CalendarService2 {
   late final _calendar_query_create = _calendar_query_createPtr.asFunction<
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<calendar_query_h>)>();
 
-  /// @brief Destroys a query handle.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @param[in] query The query handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_query_create()
+  /// Destroys a query handle.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Parameters:**
+  /// - `query` (in): The query handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_query_create()`
   int calendar_query_destroy(
     calendar_query_h query,
   ) {
@@ -2302,18 +2394,26 @@ class Tizen60CalendarService2 {
   late final _calendar_query_destroy =
       _calendar_query_destroyPtr.asFunction<int Function(calendar_query_h)>();
 
-  /// @brief Adds property IDs for projection.
-  /// @details Property IDs can be of one of the properties of view_uri which is used in calendar_query_create().
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @param[in] query The query handle
-  /// @param[in] property_id_array The property ID array
-  /// @param[in] count The number of property IDs
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
+  /// Adds property IDs for projection.
+  ///
+  /// Property IDs can be of one of the properties of view_uri which is used in calendar_query_create().
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Parameters:**
+  /// - `query` (in): The query handle
+  /// - `property_id_array` (in): The property ID array
+  /// - `count` (in): The number of property IDs
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
   int calendar_query_set_projection(
     calendar_query_h query,
     ffi.Pointer<ffi.UnsignedInt> property_id_array,
@@ -2334,17 +2434,23 @@ class Tizen60CalendarService2 {
       _calendar_query_set_projectionPtr.asFunction<
           int Function(calendar_query_h, ffi.Pointer<ffi.UnsignedInt>, int)>();
 
-  /// @brief Sets the "distinct" option for projection.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @param[in] query The query handle
-  /// @param[in] set If @c true it is set,
-  /// otherwise if @c false it is unset
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
+  /// Sets the "distinct" option for projection.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Parameters:**
+  /// - `query` (in): The query handle
+  /// - `set` (in): If `true` it is set, otherwise if `false` it is unset
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
   int calendar_query_set_distinct(
     calendar_query_h query,
     bool set1,
@@ -2361,17 +2467,24 @@ class Tizen60CalendarService2 {
   late final _calendar_query_set_distinct = _calendar_query_set_distinctPtr
       .asFunction<int Function(calendar_query_h, bool)>();
 
-  /// @brief Sets the filter for a query.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @param[in] query The query handle
-  /// @param[in] filter The filter handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_NO_DATA Requested data does not exist
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
+  /// Sets the filter for a query.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Parameters:**
+  /// - `query` (in): The query handle
+  /// - `filter` (in): The filter handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_NO_DATA`: Requested data does not exist
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
   int calendar_query_set_filter(
     calendar_query_h query,
     calendar_filter_h filter,
@@ -2389,18 +2502,24 @@ class Tizen60CalendarService2 {
   late final _calendar_query_set_filter = _calendar_query_set_filterPtr
       .asFunction<int Function(calendar_query_h, calendar_filter_h)>();
 
-  /// @brief Sets the sort mode for a query.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @param[in] query The query handle
-  /// @param[in] property_id The property ID to sort
-  /// @param[in] is_ascending If @c true it sorts in the ascending order,
-  /// otherwise if @c false it sorts in the descending order
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
+  /// Sets the sort mode for a query.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Parameters:**
+  /// - `query` (in): The query handle
+  /// - `property_id` (in): The property ID to sort
+  /// - `is_ascending` (in): If `true` it sorts in the ascending order, otherwise if `false` it sorts in the descending order
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
   int calendar_query_set_sort(
     calendar_query_h query,
     int property_id,
@@ -2420,21 +2539,34 @@ class Tizen60CalendarService2 {
   late final _calendar_query_set_sort = _calendar_query_set_sortPtr
       .asFunction<int Function(calendar_query_h, int, bool)>();
 
-  /// @brief Creates a record handle.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @remarks You must release @a record using calendar_record_destroy().
-  /// @param[in] view_uri The view URI
-  /// @param[out] out_record The record handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_NOT_PERMITTED Operation not permitted
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @pre calendar_connect() should be called to initialize.
-  /// @see calendar_record_destroy()
+  /// Creates a record handle.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Remarks:**
+  /// - You must release `record` using calendar_record_destroy().
+  ///
+  /// **Parameters:**
+  /// - `view_uri` (in): The view URI
+  /// - `out_record` (out): The record handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - calendar_connect() should be called to initialize.
+  ///
+  /// **See also:**
+  /// - `calendar_record_destroy()`
   int calendar_record_create(
     ffi.Pointer<ffi.Char> view_uri,
     ffi.Pointer<calendar_record_h> out_record,
@@ -2452,19 +2584,27 @@ class Tizen60CalendarService2 {
   late final _calendar_record_create = _calendar_record_createPtr.asFunction<
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<calendar_record_h>)>();
 
-  /// @brief Destroys a record handle and releases all its resources.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @param[in] record The record handle
-  /// @param[in] delete_child If @c true, child records are destroyed automatically,
-  /// otherwise @c false
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_NOT_PERMITTED Operation not permitted
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_record_create()
+  /// Destroys a record handle and releases all its resources.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  /// - `delete_child` (in): If `true`, child records are destroyed automatically, otherwise `false`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_record_create()`
   int calendar_record_destroy(
     calendar_record_h record,
     bool delete_child,
@@ -2481,19 +2621,30 @@ class Tizen60CalendarService2 {
   late final _calendar_record_destroy = _calendar_record_destroyPtr
       .asFunction<int Function(calendar_record_h, bool)>();
 
-  /// @brief Makes a clone of a record handle.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @remarks You must release @a cloned_record using calendar_record_destroy().
-  /// @param[in] record The record handle
-  /// @param[out] out_record The cloned record handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_NOT_PERMITTED Operation not permitted
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_record_destroy()
+  /// Makes a clone of a record handle.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Remarks:**
+  /// - You must release `cloned_record` using calendar_record_destroy().
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  /// - `out_record` (out): The cloned record handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_record_destroy()`
   int calendar_record_clone(
     calendar_record_h record,
     ffi.Pointer<calendar_record_h> out_record,
@@ -2511,16 +2662,23 @@ class Tizen60CalendarService2 {
   late final _calendar_record_clone = _calendar_record_clonePtr.asFunction<
       int Function(calendar_record_h, ffi.Pointer<calendar_record_h>)>();
 
-  /// @brief Gets a URI string from a record.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @param[in] record The record handle
-  /// @param[out] uri The URI of the record
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
+  /// Gets a URI string from a record.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  /// - `uri` (out): The URI of the record
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
   int calendar_record_get_uri_p(
     calendar_record_h record,
     ffi.Pointer<ffi.Pointer<ffi.Char>> uri,
@@ -2541,21 +2699,32 @@ class Tizen60CalendarService2 {
           int Function(
               calendar_record_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets a string from a record.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @remarks You must release @a value using free().
-  /// @param[in] record The record handle
-  /// @param[in] property_id The property ID
-  /// @param[out] out_str The result value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_NOT_PERMITTED Operation not permitted
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_record_get_str_p()
-  /// @see calendar_record_set_str()
+  /// Gets a string from a record.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Remarks:**
+  /// - You must release `value` using free().
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  /// - `property_id` (in): The property ID
+  /// - `out_str` (out): The result value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_record_get_str_p()`
+  /// - `calendar_record_set_str()`
   int calendar_record_get_str(
     calendar_record_h record,
     int property_id,
@@ -2576,21 +2745,32 @@ class Tizen60CalendarService2 {
       int Function(
           calendar_record_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets a string pointer from a record.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @remarks You MUST NOT release @a value.
-  /// @param[in] record The record handle
-  /// @param[in] property_id The property ID
-  /// @param[out] out_str The result value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_NOT_PERMITTED Operation not permitted
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_record_get_str()
-  /// @see calendar_record_set_str()
+  /// Gets a string pointer from a record.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Remarks:**
+  /// - You MUST NOT release `value`.
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  /// - `property_id` (in): The property ID
+  /// - `out_str` (out): The result value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_record_get_str()`
+  /// - `calendar_record_set_str()`
   int calendar_record_get_str_p(
     calendar_record_h record,
     int property_id,
@@ -2613,19 +2793,28 @@ class Tizen60CalendarService2 {
           int Function(
               calendar_record_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets an integer value from a record.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @param[in] record The record handle
-  /// @param[in] property_id The property ID
-  /// @param[out] out_value The result value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_NOT_PERMITTED Operation not permitted
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_record_set_int()
+  /// Gets an integer value from a record.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  /// - `property_id` (in): The property ID
+  /// - `out_value` (out): The result value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_record_set_int()`
   int calendar_record_get_int(
     calendar_record_h record,
     int property_id,
@@ -2645,19 +2834,28 @@ class Tizen60CalendarService2 {
   late final _calendar_record_get_int = _calendar_record_get_intPtr
       .asFunction<int Function(calendar_record_h, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets a double value from a record.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @param[in] record The record handle
-  /// @param[in] property_id The property ID
-  /// @param[out] out_value The result value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_NOT_PERMITTED Operation not permitted
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_record_set_double()
+  /// Gets a double value from a record.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  /// - `property_id` (in): The property ID
+  /// - `out_value` (out): The result value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_record_set_double()`
   int calendar_record_get_double(
     calendar_record_h record,
     int property_id,
@@ -2678,19 +2876,28 @@ class Tizen60CalendarService2 {
       _calendar_record_get_doublePtr.asFunction<
           int Function(calendar_record_h, int, ffi.Pointer<ffi.Double>)>();
 
-  /// @brief Gets a long long integer value from a record.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @param[in] record The record handle
-  /// @param[in] property_id The property ID
-  /// @param[out] out_value The result value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_NOT_PERMITTED Operation not permitted
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_record_set_lli()
+  /// Gets a long long integer value from a record.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  /// - `property_id` (in): The property ID
+  /// - `out_value` (out): The result value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_record_set_lli()`
   int calendar_record_get_lli(
     calendar_record_h record,
     int property_id,
@@ -2710,19 +2917,28 @@ class Tizen60CalendarService2 {
   late final _calendar_record_get_lli = _calendar_record_get_lliPtr.asFunction<
       int Function(calendar_record_h, int, ffi.Pointer<ffi.LongLong>)>();
 
-  /// @brief Gets a calendar_caltime_s value from a record.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @param[in] record The record handle
-  /// @param[in] property_id The property ID
-  /// @param[out] out_value The result value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_NOT_PERMITTED Operation not permitted
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_record_set_caltime()
+  /// Gets a calendar_caltime_s value from a record.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  /// - `property_id` (in): The property ID
+  /// - `out_value` (out): The result value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_record_set_caltime()`
   int calendar_record_get_caltime(
     calendar_record_h record,
     int property_id,
@@ -2743,20 +2959,29 @@ class Tizen60CalendarService2 {
       _calendar_record_get_caltimePtr.asFunction<
           int Function(calendar_record_h, int, ffi.Pointer<calendar_time_s>)>();
 
-  /// @brief Sets a string to a record.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @param[in] record The record handle
-  /// @param[in] property_id The property ID
-  /// @param[in] value The value to be set
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_NOT_PERMITTED Operation not permitted
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_record_get_str()
-  /// @see calendar_record_get_str_p()
+  /// Sets a string to a record.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  /// - `property_id` (in): The property ID
+  /// - `value` (in): The value to be set
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_record_get_str()`
+  /// - `calendar_record_get_str_p()`
   int calendar_record_set_str(
     calendar_record_h record,
     int property_id,
@@ -2776,19 +3001,28 @@ class Tizen60CalendarService2 {
   late final _calendar_record_set_str = _calendar_record_set_strPtr.asFunction<
       int Function(calendar_record_h, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets an integer value to a record.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @param[in] record The record handle
-  /// @param[in] property_id The property ID
-  /// @param[in] value The value to be set
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_NOT_PERMITTED Operation not permitted
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_record_get_int()
+  /// Sets an integer value to a record.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  /// - `property_id` (in): The property ID
+  /// - `value` (in): The value to be set
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_record_get_int()`
   int calendar_record_set_int(
     calendar_record_h record,
     int property_id,
@@ -2808,19 +3042,28 @@ class Tizen60CalendarService2 {
   late final _calendar_record_set_int = _calendar_record_set_intPtr
       .asFunction<int Function(calendar_record_h, int, int)>();
 
-  /// @brief Sets a double value to a record.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @param[in] record The record handle
-  /// @param[in] property_id The property ID
-  /// @param[in] value The value to be set
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_NOT_PERMITTED Operation not permitted
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_record_get_double()
+  /// Sets a double value to a record.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  /// - `property_id` (in): The property ID
+  /// - `value` (in): The value to be set
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_record_get_double()`
   int calendar_record_set_double(
     calendar_record_h record,
     int property_id,
@@ -2840,19 +3083,28 @@ class Tizen60CalendarService2 {
   late final _calendar_record_set_double = _calendar_record_set_doublePtr
       .asFunction<int Function(calendar_record_h, int, double)>();
 
-  /// @brief Sets a long long integer value to a record.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @param[in] record The record handle
-  /// @param[in] property_id The property ID
-  /// @param[in] value The value to be set
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_NOT_PERMITTED Operation not permitted
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_record_get_lli()
+  /// Sets a long long integer value to a record.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  /// - `property_id` (in): The property ID
+  /// - `value` (in): The value to be set
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_record_get_lli()`
   int calendar_record_set_lli(
     calendar_record_h record,
     int property_id,
@@ -2872,19 +3124,28 @@ class Tizen60CalendarService2 {
   late final _calendar_record_set_lli = _calendar_record_set_lliPtr
       .asFunction<int Function(calendar_record_h, int, int)>();
 
-  /// @brief Sets a calendar_time_s value to a record.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @param[in] record The record handle
-  /// @param[in] property_id The property ID
-  /// @param[in] value The value to be set
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_NOT_PERMITTED Operation not permitted
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_record_get_caltime()
+  /// Sets a calendar_time_s value to a record.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  /// - `property_id` (in): The property ID
+  /// - `value` (in): The value to be set
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_record_get_caltime()`
   int calendar_record_set_caltime(
     calendar_record_h record,
     int property_id,
@@ -2904,19 +3165,28 @@ class Tizen60CalendarService2 {
   late final _calendar_record_set_caltime = _calendar_record_set_caltimePtr
       .asFunction<int Function(calendar_record_h, int, calendar_time_s)>();
 
-  /// @brief Adds a child record to the parent record.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @param[in] record The parent record handle
-  /// @param[in] property_id The property ID
-  /// @param[in] child_record The handle of the child record to be added to the parent record
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_NOT_PERMITTED Operation not permitted
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_record_remove_child_record()
+  /// Adds a child record to the parent record.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The parent record handle
+  /// - `property_id` (in): The property ID
+  /// - `child_record` (in): The handle of the child record to be added to the parent record
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_record_remove_child_record()`
   int calendar_record_add_child_record(
     calendar_record_h record,
     int property_id,
@@ -2937,19 +3207,28 @@ class Tizen60CalendarService2 {
       _calendar_record_add_child_recordPtr.asFunction<
           int Function(calendar_record_h, int, calendar_record_h)>();
 
-  /// @brief Removes a child record from the parent record.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @param[in] record The parent record handle
-  /// @param[in] property_id The property ID
-  /// @param[in] child_record The handle of the child record to be removed from the parent record
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_NOT_PERMITTED Operation not permitted
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_record_add_child_record()
+  /// Removes a child record from the parent record.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The parent record handle
+  /// - `property_id` (in): The property ID
+  /// - `child_record` (in): The handle of the child record to be removed from the parent record
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_record_add_child_record()`
   int calendar_record_remove_child_record(
     calendar_record_h record,
     int property_id,
@@ -2970,20 +3249,29 @@ class Tizen60CalendarService2 {
       _calendar_record_remove_child_recordPtr.asFunction<
           int Function(calendar_record_h, int, calendar_record_h)>();
 
-  /// @brief Gets the number of child records in a record.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @param[in] record The parent record handle
-  /// @param[in] property_id The property ID
-  /// @param[out] count The child record count
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_NOT_PERMITTED Operation not permitted
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_record_add_child_record()
-  /// @see calendar_record_remove_child_record()
+  /// Gets the number of child records in a record.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The parent record handle
+  /// - `property_id` (in): The property ID
+  /// - `count` (out): The child record count
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_record_add_child_record()`
+  /// - `calendar_record_remove_child_record()`
   int calendar_record_get_child_record_count(
     calendar_record_h record,
     int property_id,
@@ -3005,24 +3293,35 @@ class Tizen60CalendarService2 {
       _calendar_record_get_child_record_countPtr.asFunction<
           int Function(calendar_record_h, int, ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Gets a child record handle pointer from the parent record.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @remarks You MUST NOT release @a child_record. \n
-  /// It is released when the parent record handle is destroyed.
-  /// @param[in] record The record handle
-  /// @param[in] property_id The property ID
-  /// @param[in] index The index of the child record
-  /// @param[out] child_record The child record handle pointer
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_NOT_PERMITTED Operation not permitted
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_record_add_child_record()
-  /// @see calendar_record_remove_child_record()
-  /// @see calendar_record_get_child_record_count()
+  /// Gets a child record handle pointer from the parent record.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Remarks:**
+  /// - You MUST NOT release `child_record`.
+  /// - It is released when the parent record handle is destroyed.
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  /// - `property_id` (in): The property ID
+  /// - `index` (in): The index of the child record
+  /// - `child_record` (out): The child record handle pointer
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_record_add_child_record()`
+  /// - `calendar_record_remove_child_record()`
+  /// - `calendar_record_get_child_record_count()`
   int calendar_record_get_child_record_at_p(
     calendar_record_h record,
     int property_id,
@@ -3047,20 +3346,31 @@ class Tizen60CalendarService2 {
           int Function(
               calendar_record_h, int, int, ffi.Pointer<calendar_record_h>)>();
 
-  /// @brief Makes a clone of a given record's child record list.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @remarks You must release @a out_list using calendar_list_destroy().
-  /// @param[in] record The record handle
-  /// @param[in] property_id The property ID
-  /// @param[out] out_list The cloned list handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_NOT_PERMITTED Operation not permitted
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_list_destroy()
+  /// Makes a clone of a given record's child record list.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Remarks:**
+  /// - You must release `out_list` using calendar_list_destroy().
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  /// - `property_id` (in): The property ID
+  /// - `out_list` (out): The cloned list handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_list_destroy()`
   int calendar_record_clone_child_record_list(
     calendar_record_h record,
     int property_id,
@@ -3082,22 +3392,31 @@ class Tizen60CalendarService2 {
       _calendar_record_clone_child_record_listPtr.asFunction<
           int Function(calendar_record_h, int, ffi.Pointer<calendar_list_h>)>();
 
-  /// @brief Connects to the calendar service.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @remarks Opening the connection is necessary to access the calendar database and perform operations such as fetching, inserting, or updating records.\n
-  /// The execution of calendar_connect() and calendar_disconnect() could slow down your application, so you are recommended not to call them frequently.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_DB_FAILED Database operation failure
-  /// @retval #CALENDAR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_NOT_PERMITTED Operation not permitted
-  /// @retval #CALENDAR_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CALENDAR_ERROR_IPC Unknown IPC error
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see  calendar_disconnect()
+  /// Connects to the calendar service.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Remarks:**
+  /// - Opening the connection is necessary to access the calendar database and perform operations such as fetching, inserting, or updating records.
+  /// - The execution of calendar_connect() and calendar_disconnect() could slow down your application, so you are recommended not to call them frequently.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_DB_FAILED`: Database operation failure
+  /// - `CALENDAR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `CALENDAR_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CALENDAR_ERROR_IPC`: Unknown IPC error
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_disconnect()`
   int calendar_connect() {
     return _calendar_connect();
   }
@@ -3107,18 +3426,27 @@ class Tizen60CalendarService2 {
   late final _calendar_connect =
       _calendar_connectPtr.asFunction<int Function()>();
 
-  /// @brief Disconnects from the calendar service.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @remarks If there is no open connection, this function returns #CALENDAR_ERROR_DB_FAILED.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_NOT_PERMITTED Operation not permitted
-  /// @retval #CALENDAR_ERROR_IPC Unknown IPC error
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_connect()
+  /// Disconnects from the calendar service.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Remarks:**
+  /// - If there is no open connection, this function returns `CALENDAR_ERROR_DB_FAILED`.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `CALENDAR_ERROR_IPC`: Unknown IPC error
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_connect()`
   int calendar_disconnect() {
     return _calendar_disconnect();
   }
@@ -3128,19 +3456,28 @@ class Tizen60CalendarService2 {
   late final _calendar_disconnect =
       _calendar_disconnectPtr.asFunction<int Function()>();
 
-  /// @brief Connects to the calendar service on a thread.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @remarks Opening a connection is necessary to access the calendar database and perform operations such as fetching, inserting, or updating records.\n
-  /// On a thread environment with calendar_connect(), request in one thread could fail, while another request connection is working in the other thread.
-  /// To prevent request failure, calendar_connect_on_thread() is recommended.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_DB_FAILED Database operation failure
-  /// @retval #CALENDAR_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see  calendar_disconnect_on_thread()
+  /// Connects to the calendar service on a thread.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Remarks:**
+  /// - Opening a connection is necessary to access the calendar database and perform operations such as fetching, inserting, or updating records.
+  /// - On a thread environment with calendar_connect(), request in one thread could fail, while another request connection is working in the other thread.
+  /// - To prevent request failure, calendar_connect_on_thread() is recommended.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_DB_FAILED`: Database operation failure
+  /// - `CALENDAR_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_disconnect_on_thread()`
   int calendar_connect_on_thread() {
     return _calendar_connect_on_thread();
   }
@@ -3151,18 +3488,27 @@ class Tizen60CalendarService2 {
   late final _calendar_connect_on_thread =
       _calendar_connect_on_threadPtr.asFunction<int Function()>();
 
-  /// @brief Disconnects from the calendar service on a thread.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @remarks If there is no open connection, this function returns #CALENDAR_ERROR_DB_FAILED.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_DB_FAILED Database operation failure
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_NOT_PERMITTED Operation not permitted
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_connect_on_thread()
+  /// Disconnects from the calendar service on a thread.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Remarks:**
+  /// - If there is no open connection, this function returns `CALENDAR_ERROR_DB_FAILED`.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_DB_FAILED`: Database operation failure
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_connect_on_thread()`
   int calendar_disconnect_on_thread() {
     return _calendar_disconnect_on_thread();
   }
@@ -3173,24 +3519,35 @@ class Tizen60CalendarService2 {
   late final _calendar_disconnect_on_thread =
       _calendar_disconnect_on_threadPtr.asFunction<int Function()>();
 
-  /// @brief Connects to the calendar service.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @remarks Opening a connection is necessary to access the calendar database and perform operations such as fetching, inserting, or updating records.\n
-  /// Before the calendar-service daemon is ready, if you call calendar_connect(), it could fail.
-  /// It is recommended to call this API with #CALENDAR_CONNECT_FLAG_RETRY flags in such a situation.
-  /// @param[in] flags calendar_connect_flag
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_DB_FAILED Database operation failure
-  /// @retval #CALENDAR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_NOT_PERMITTED Operation not permitted
-  /// @retval #CALENDAR_ERROR_PERMISSION_DENIED Permission denied. This application does not have the privilege to call this method.
-  /// @retval #CALENDAR_ERROR_IPC Unknown IPC error
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see  calendar_disconnect(), CALENDAR_CONNECT_FLAG_RETRY
+  /// Connects to the calendar service.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Remarks:**
+  /// - Opening a connection is necessary to access the calendar database and perform operations such as fetching, inserting, or updating records.
+  /// - Before the calendar-service daemon is ready, if you call calendar_connect(), it could fail.
+  /// - It is recommended to call this API with `CALENDAR_CONNECT_FLAG_RETRY` flags in such a situation.
+  ///
+  /// **Parameters:**
+  /// - `flags` (in): calendar_connect_flag
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_DB_FAILED`: Database operation failure
+  /// - `CALENDAR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `CALENDAR_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method.
+  /// - `CALENDAR_ERROR_IPC`: Unknown IPC error
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - calendar_disconnect(), CALENDAR_CONNECT_FLAG_RETRY
   int calendar_connect_with_flags(
     int flags,
   ) {
@@ -3205,18 +3562,25 @@ class Tizen60CalendarService2 {
   late final _calendar_connect_with_flags =
       _calendar_connect_with_flagsPtr.asFunction<int Function(int)>();
 
-  /// @brief Retrieves a vcalendar stream from a calendar list.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @param[in] calendar_list The calendar list handle
-  /// @param[out] vcalendar_stream The vcalendar stream
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_NO_DATA Requested data does not exist
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
+  /// Retrieves a vcalendar stream from a calendar list.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Parameters:**
+  /// - `calendar_list` (in): The calendar list handle
+  /// - `vcalendar_stream` (out): The vcalendar stream
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_NO_DATA`: Requested data does not exist
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
   int calendar_vcalendar_make_from_records(
     calendar_list_h calendar_list,
     ffi.Pointer<ffi.Pointer<ffi.Char>> vcalendar_stream,
@@ -3236,19 +3600,28 @@ class Tizen60CalendarService2 {
       _calendar_vcalendar_make_from_recordsPtr.asFunction<
           int Function(calendar_list_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Retrieves all calendars from a vcalendar stream.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @param[in] vcalendar_stream The vcalendar stream
-  /// @param[out] calendar_list The calendar list handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_NO_DATA Requested data does not exist
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @pre calendar_connect() should be called to initialize.
+  /// Retrieves all calendars from a vcalendar stream.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Parameters:**
+  /// - `vcalendar_stream` (in): The vcalendar stream
+  /// - `calendar_list` (out): The calendar list handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_NO_DATA`: Requested data does not exist
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - calendar_connect() should be called to initialize.
   int calendar_vcalendar_parse_to_calendar(
     ffi.Pointer<ffi.Char> vcalendar_stream,
     ffi.Pointer<calendar_list_h> calendar_list,
@@ -3268,23 +3641,35 @@ class Tizen60CalendarService2 {
       _calendar_vcalendar_parse_to_calendarPtr.asFunction<
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<calendar_list_h>)>();
 
-  /// @brief Retrieves all events or to-dos
-  /// (\ref CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_event or \ref CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_todo) from a vCalendar file.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @param[in] vcalendar_file_path The file path of the vCalendar stream file
-  /// @param[in] callback The callback function to be invoked
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CALENDAR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @pre calendar_connect() should be called to initialize.
-  /// @post This function invokes calendar_vcalendar_parse_cb().
-  /// @see  calendar_vcalendar_parse_cb()
-  /// @see  calendar_record_get_uri_p()
+  /// Retrieves all events or to-dos (`CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_event` or `CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_todo)` from a vCalendar file.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Parameters:**
+  /// - `vcalendar_file_path` (in): The file path of the vCalendar stream file
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CALENDAR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - calendar_connect() should be called to initialize.
+  ///
+  /// **Postconditions:**
+  /// - This function invokes calendar_vcalendar_parse_cb().
+  ///
+  /// **See also:**
+  /// - `calendar_vcalendar_parse_cb()`
+  /// - `calendar_record_get_uri_p()`
   int calendar_vcalendar_parse_to_calendar_foreach(
     ffi.Pointer<ffi.Char> vcalendar_file_path,
     calendar_vcalendar_parse_cb callback,
@@ -3307,21 +3692,34 @@ class Tizen60CalendarService2 {
           int Function(ffi.Pointer<ffi.Char>, calendar_vcalendar_parse_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Adds a callback to get a notification when an alarm gives an alert.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/calendar.read
-  /// @param[in] callback The callback to be added
-  /// @param[in] user_data The user data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CALENDAR_ERROR_NOT_PERMITTED Operation not permitted
-  /// @retval #CALENDAR_ERROR_IPC Unknown IPC error
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_reminder_remove_cb()
+  /// Adds a callback to get a notification when an alarm gives an alert.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/calendar.read>
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback to be added
+  /// - `user_data` (in): The user data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CALENDAR_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `CALENDAR_ERROR_IPC`: Unknown IPC error
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_reminder_remove_cb()`
   int calendar_reminder_add_cb(
     calendar_reminder_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -3339,17 +3737,26 @@ class Tizen60CalendarService2 {
   late final _calendar_reminder_add_cb = _calendar_reminder_add_cbPtr
       .asFunction<int Function(calendar_reminder_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Removes a callback to get a notification when an alarm gives an alert.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-  /// @param[in] callback The callback to be removed
-  /// @param[in] user_data The user data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CALENDAR_ERROR_NONE Successful
-  /// @retval #CALENDAR_ERROR_DB_FAILED Database operation failure
-  /// @retval #CALENDAR_ERROR_SYSTEM Internal system module error
-  /// @retval #CALENDAR_ERROR_NOT_SUPPORTED Not supported
-  /// @see calendar_reminder_add_cb()
+  /// Removes a callback to get a notification when an alarm gives an alert.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0; Tv 4.0
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback to be removed
+  /// - `user_data` (in): The user data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CALENDAR_ERROR_NONE`: Successful
+  /// - `CALENDAR_ERROR_DB_FAILED`: Database operation failure
+  /// - `CALENDAR_ERROR_SYSTEM`: Internal system module error
+  /// - `CALENDAR_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `calendar_reminder_add_cb()`
   int calendar_reminder_remove_cb(
     calendar_reminder_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -3368,8 +3775,11 @@ class Tizen60CalendarService2 {
       .asFunction<int Function(calendar_reminder_cb, ffi.Pointer<ffi.Void>)>();
 }
 
-/// @brief Enumeration for calendar errors.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
+/// Enumeration for calendar errors.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0; Tv 4.0
+/// @nodoc
 abstract class calendar_error_e {
   /// < Successful
   static const int CALENDAR_ERROR_NONE = 0;
@@ -3417,33 +3827,13 @@ abstract class calendar_error_e {
   static const int CALENDAR_ERROR_NOT_SUPPORTED = -1073741822;
 }
 
-/// @ingroup CAPI_SOCIAL_CALENDAR_SVC_MODULE
-/// @addtogroup CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_book _calendar_book view
-/// <table>
-/// <tr>
-/// <th> Type </th>
-/// <th> Property ID </th>
-/// <th> Read, Write </th>
-/// <th> Description </th>
-/// </tr>
-/// <tr><td> string </td><td> _uri </td><td> read only </td><td> Identifier of this calendar book view </td></tr>
-/// <tr><td> integer </td><td> id </td><td> read only </td><td> DB record ID of the calendar book </td></tr>
-/// <tr><td> string </td><td> uid </td><td> read, write </td><td> Unique identifier </td></tr>
-/// <tr><td> string </td><td> name </td><td> read, write </td><td> Calendar book name </td></tr>
-/// <tr><td> string </td><td> description </td><td> read, write </td><td> Calendar book description </td></tr>
-/// <tr><td> string </td><td> color </td><td> read, write </td><td> Calendar book color for UX </td></tr>
-/// <tr><td> string </td><td> location </td><td> read, write </td><td> Location of the event </td></tr>
-/// <tr><td> integer </td><td> visibility </td><td> read, write </td><td> Visibility of the calendar book for UX</td></tr>
-/// <tr><td> integer </td><td> sync_event </td><td> read, write </td><td> </td>Currently NOT Used</tr>
-/// <tr><td> integer </td><td> account_id </td><td> read, write once </td><td> Account for this calendar </td></tr>
-/// <tr><td> integer </td><td> store_type </td><td> read, write </td><td> Type of calendar contents(refer to the @ref calendar_book_type_e) </td></tr>
-/// <tr><td> string </td><td> sync_data1 </td><td> read, write </td><td> Generic data for use by syncing </td></tr>
-/// <tr><td> string </td><td> sync_data2 </td><td> read, write </td><td> Generic data for use by syncing </td></tr>
-/// <tr><td> string </td><td> sync_data3 </td><td> read, write </td><td> Generic data for use by syncing </td></tr>
-/// <tr><td> string </td><td> sync_data4 </td><td> read, write </td><td> Generic data for use by syncing </td></tr>
-/// <tr><td> integer </td><td> mode </td><td> read, write </td><td> Calendar book mode (refer to the @ref calendar_book_mode_e) </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CALENDAR_SVC_MODULE
+/// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_book _calendar_book view <table> <tr> <th> Type </th> <th> Property ID </th> <th> Read, Write </th> <th> Description </th> </tr> <tr><td> string </td><td> _uri </td><td> read only </td><td> Identifier of this calendar book view </td></tr> <tr><td> integer </td><td> id </td><td> read only </td><td> DB record ID of the calendar book </td></tr> <tr><td> string </td><td> uid </td><td> read, write </td><td> Unique identifier </td></tr> <tr><td> string </td><td> name </td><td> read, write </td><td> Calendar book name </td></tr> <tr><td> string </td><td> description </td><td> read, write </td><td> Calendar book description </td></tr> <tr><td> string </td><td> color </td><td> read, write </td><td> Calendar book color for UX </td></tr> <tr><td> string </td><td> location </td><td> read, write </td><td> Location of the event </td></tr> <tr><td> integer </td><td> visibility </td><td> read, write </td><td> Visibility of the calendar book for UX</td></tr> <tr><td> integer </td><td> sync_event </td><td> read, write </td><td> </td>Currently NOT Used</tr> <tr><td> integer </td><td> account_id </td><td> read, write once </td><td> Account for this calendar </td></tr> <tr><td> integer </td><td> store_type </td><td> read, write </td><td> Type of calendar contents(refer to the `calendar_book_type_e)` </td></tr> <tr><td> string </td><td> sync_data1 </td><td> read, write </td><td> Generic data for use by syncing </td></tr> <tr><td> string </td><td> sync_data2 </td><td> read, write </td><td> Generic data for use by syncing </td></tr> <tr><td> string </td><td> sync_data3 </td><td> read, write </td><td> Generic data for use by syncing </td></tr> <tr><td> string </td><td> sync_data4 </td><td> read, write </td><td> Generic data for use by syncing </td></tr> <tr><td> integer </td><td> mode </td><td> read, write </td><td> Calendar book mode (refer to the `calendar_book_mode_e)` </td></tr> </table>
+/// @nodoc
 final class _calendar_book_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -3493,77 +3883,13 @@ final class _calendar_book_property_ids extends ffi.Struct {
   external int mode;
 }
 
-/// @ingroup CAPI_SOCIAL_CALENDAR_SVC_MODULE
-/// @addtogroup CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_event _calendar_event view
-/// <table>
-/// <tr>
-/// <th> Type </th>
-/// <th> Property ID </th>
-/// <th> Read, Write </th>
-/// <th> Description </th>
-/// </tr>
-/// <tr><td> string </td><td> _uri </td><td> read only </td><td>Identifier of this event view</td></tr>
-/// <tr><td> integer </td><td> id </td><td> read only </td><td>DB record ID of the event</td></tr>
-/// <tr><td> integer </td><td> calendar_book_id </td><td> read, write </td><td>ID of the calendar book to which the event belongs</td></tr>
-/// <tr><td> string </td><td> summary </td><td> read, write </td><td>The short description of the event</td></tr>
-/// <tr><td> string </td><td> description </td><td> read, write </td><td>The description of the event</td></tr>
-/// <tr><td> string </td><td> location </td><td> read, write </td><td>The location of the event</td></tr>
-/// <tr><td> string </td><td> categories </td><td> read, write </td><td>The category of the event. For example APPOINTMENT, BIRTHDAY</td></tr>
-/// <tr><td> string </td><td> exdate </td><td> read, write </td><td>The exception list of the event. If this event has a recurrence rule, the instance of the exdate is removed. Format is "YYYYMMDD"(allday event) or "YYYYMMDDTHHMMSS". Multiple exceptions can be included with a comma </td></tr>
-/// <tr><td> integer </td><td> event_status </td><td> read, write </td><td>Refer to the @ref calendar_event_status_e</td></tr>
-/// <tr><td> integer </td><td> priority </td><td> read, write </td><td></td>Refer to the @ref calendar_event_priority_e</tr>
-/// <tr><td> integer </td><td> timezone </td><td> read, write </td><td>The timezone_id of the event if it exists. Refer to the @ref CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_timezone</td></tr>
-/// <tr><td> integer </td><td> person_id </td><td> read, write </td><td>The person_id of the event if the event is a birthday. Refer to the contacts-service</td></tr>
-/// <tr><td> integer </td><td> busy_status </td><td> read, write </td><td>Refer to the @ref calendar_event_busy_status_e</td></tr>
-/// <tr><td> integer </td><td> sensitivity </td><td> read, write </td><td>Refer to the @ref calendar_sensitivity_e </td></tr>
-/// <tr><td> string </td><td> uid </td><td> read, write </td><td>The unique ID of the event</td></tr>
-/// <tr><td> string </td><td> organizer_name </td><td> read, write </td><td>The name of organizer of the event</td></tr>
-/// <tr><td> string </td><td> organizer_email </td><td> read, write </td><td>The email address of the organizer of the event</td></tr>
-/// <tr><td> integer </td><td> meeting_status </td><td> read, write </td><td>Refer to the @ref calendar_meeting_status_e</td></tr>
-/// <tr><td> integer </td><td> original_event_id </td><td> read, write </td><td>The ID of the original event if the event is an exception.</td></tr>
-/// <tr><td> double </td><td> latitude </td><td> read, write </td><td> The latitude of the location of the event</td></tr>
-/// <tr><td> double </td><td> longitude </td><td> read, write </td><td> The longitude of the location of the event</td></tr>
-/// <tr><td> integer </td><td> email_id </td><td> read, write </td><td>ID of the email_id. Refer to the email-service.</td></tr>
-/// <tr><td> long long int </td><td> created_time </td><td> read, write </td><td> The time when the event is created</td></tr>
-/// <tr><td> long long int </td><td> last_modified_time </td><td> read only </td><td>The time when the event is updated</td></tr>
-/// <tr><td> integer </td><td> is_deleted </td><td> read only </td><td></td></tr>
-/// <tr><td> integer </td><td> freq </td><td> read, write </td><td>The frequent type of event recurrence. Refer to the @ref calendar_recurrence_frequency_e</td></tr>
-/// <tr><td> integer </td><td> range_type </td><td> read, write </td><td>Refer to the @ref calendar_range_type_e</td></tr>
-/// <tr><td> calendar time </td><td> until_time </td><td> read, write </td><td>The end time of the event recurrence. If the range_type is @ref CALENDAR_RANGE_UNTIL</td></tr>
-/// <tr><td> integer </td><td> count </td><td> read, write </td><td>The count of the event recurrence. If the range_type is @ref CALENDAR_RANGE_COUNT</td></tr>
-/// <tr><td> integer </td><td> interval </td><td> read, write </td><td>The interval of the event recurrence</td></tr>
-/// <tr><td> string </td><td> bysecond </td><td> read, write </td><td>The second list of the event recurrence. The value can be from 0 to 59. The list is seperated by commas</td></tr>
-/// <tr><td> string </td><td> byminute </td><td> read, write </td><td>The minute list of the event recurrence. The value can be from 0 to 59. The list is seperated by commas</td></tr>
-/// <tr><td> string </td><td> byhour </td><td> read, write </td><td>The hour list of the event recurrence. The value can be from 0 to 23. The list is seperated by commas</td></tr>
-/// <tr><td> string </td><td> byday </td><td> read, write </td><td>The day list of the event recurrence. The value can be SU, MO, TU, WE, TH, FR, SA. The list is seperated by commas</td></tr>
-/// <tr><td> string </td><td> bymonthday </td><td> read, write </td><td>The month day list of the event recurrence. The value can be from 1 to 31 and from -31 to -1. The list is seperated by commas</td></tr>
-/// <tr><td> string </td><td> byyearday </td><td> read, write </td><td>The year day list of the event recurrence. The value can be from 1 to 366 and from -366 to -1. The list is seperated by commas</td></tr>
-/// <tr><td> string </td><td> byweekno </td><td> read, write </td><td>The week number list of the event recurrence. The value can be from 1 to 53 and from -53 to -1. The list is seperated by commas</td></tr>
-/// <tr><td> string </td><td> bymonth </td><td> read, write </td><td>The month list of the event recurrence. The value can be from 1 to 12. The list is seperated by commas</td></tr>
-/// <tr><td> string </td><td> bysetpos </td><td> read, write </td><td>The position list of the event recurrence. The value can be from 1 to 366 and from -366 to -1. The list is seperated by commas</td></tr>
-/// <tr><td> integer </td><td> wkst </td><td> read, write </td><td>The start day of the week. Refer to the @ref calendar_days_of_week_e</td></tr>
-/// <tr><td> string </td><td> recurrence_id </td><td> read, write </td><td>RECURRENCE-ID of RFC #2445</td></tr>
-/// <tr><td> string </td><td> rdate </td><td> read, write </td><td>RDATE of RFC #2445</td></tr>
-/// <tr><td> integer </td><td> has_attendee </td><td> read only </td><td>Whether or not the event has an attendee list </td></tr>
-/// <tr><td> integer </td><td> has_alarm </td><td> read only </td><td>Whether or not the event has an alarm list </td></tr>
-/// <tr><td> integer </td><td> calendar_system_type </td><td> read, write </td><td>Refer to the @ref calendar_system_type_e</td></tr>
-/// <tr><td> string </td><td> sync_data1 </td><td> read, write </td><td>The sync data of the event. If developer need to save some information related to the event, they can use this property</td></tr>
-/// <tr><td> string </td><td> sync_data2 </td><td> read, write </td><td>The sync data of the event. If developer need to save some information related to the event, they can use this property</td></tr>
-/// <tr><td> string </td><td> sync_data3 </td><td> read, write </td><td>The sync data of the event. If developer need to save some information related to the event, they can use this property</td></tr>
-/// <tr><td> string </td><td> sync_data4 </td><td> read, write </td><td>The sync data of the event. If developer need to save some information related to the event, they can use this property</td></tr>
-/// <tr><td> calendar time </td><td> start_time </td><td> read, write </td><td>The start time of the event</td></tr>
-/// <tr><td> string </td><td> start_tzid </td><td> read, write </td><td></td>The timezone of the start_time</tr>
-/// <tr><td> calendar time </td><td> end_time </td><td> read, write </td><td>The end time of the event</td></tr>
-/// <tr><td> string </td><td> end_tzid </td><td> read, write </td><td>The timezone of the end_time</td></tr>
-/// <tr><td> child list </td><td> calendar_alarm </td><td> read, write </td><td>The alarm list of the event. Refer to the @ref CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_alarm</td></tr>
-/// <tr><td> child list </td><td> calendar_attendee </td><td> read, write </td><td>The attendee list of the event. Refer to the @ref CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_attendee</td></tr>
-/// <tr><td> child list </td><td> exception </td><td> read, write </td><td>The exception mod event list of the event</td></tr>
-/// <tr><td> child list </td><td> extended </td><td> read, write </td><td>The extended property list of the event. Refer to the @ref CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_extended_property</td></tr>
-/// <tr><td> integer </td><td> is_allday </td><td> read only </td><td>The event is an allday event or not </td></tr>
-/// <tr><td> integer </td><td> link_count </td><td> read only </td><td>The event is a linked event (Since 4.0)</td></tr>
-/// <tr><td> integer </td><td> link_base_id </td><td> read only </td><td>The event is a base linked event (Since 4.0)</td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CALENDAR_SVC_MODULE
+/// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_event _calendar_event view <table> <tr> <th> Type </th> <th> Property ID </th> <th> Read, Write </th> <th> Description </th> </tr> <tr><td> string </td><td> _uri </td><td> read only </td><td>Identifier of this event view</td></tr> <tr><td> integer </td><td> id </td><td> read only </td><td>DB record ID of the event</td></tr> <tr><td> integer </td><td> calendar_book_id </td><td> read, write </td><td>ID of the calendar book to which the event belongs</td></tr> <tr><td> string </td><td> summary </td><td> read, write </td><td>The short description of the event</td></tr> <tr><td> string </td><td> description </td><td> read, write </td><td>The description of the event</td></tr> <tr><td> string </td><td> location </td><td> read, write </td><td>The location of the event</td></tr> <tr><td> string </td><td> categories </td><td> read, write </td><td>The category of the event. For example APPOINTMENT, BIRTHDAY</td></tr> <tr><td> string </td><td> exdate </td><td> read, write </td><td>The exception list of the event. If this event has a recurrence rule, the instance of the exdate is removed. Format is "YYYYMMDD"(allday event) or "YYYYMMDDTHHMMSS". Multiple exceptions can be included with a comma </td></tr> <tr><td> integer </td><td> event_status </td><td> read, write </td><td>Refer to the `calendar_event_status_e</td></tr>` <tr><td> integer </td><td> priority </td><td> read, write </td><td></td>Refer to the `calendar_event_priority_e</tr>` <tr><td> integer </td><td> timezone </td><td> read, write </td><td>The timezone_id of the event if it exists. Refer to the `CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_timezone</td></tr>` <tr><td> integer </td><td> person_id </td><td> read, write </td><td>The person_id of the event if the event is a birthday. Refer to the contacts-service</td></tr> <tr><td> integer </td><td> busy_status </td><td> read, write </td><td>Refer to the `calendar_event_busy_status_e</td></tr>` <tr><td> integer </td><td> sensitivity </td><td> read, write </td><td>Refer to the `calendar_sensitivity_e` </td></tr> <tr><td> string </td><td> uid </td><td> read, write </td><td>The unique ID of the event</td></tr> <tr><td> string </td><td> organizer_name </td><td> read, write </td><td>The name of organizer of the event</td></tr> <tr><td> string </td><td> organizer_email </td><td> read, write </td><td>The email address of the organizer of the event</td></tr> <tr><td> integer </td><td> meeting_status </td><td> read, write </td><td>Refer to the `calendar_meeting_status_e</td></tr>` <tr><td> integer </td><td> original_event_id </td><td> read, write </td><td>The ID of the original event if the event is an exception.</td></tr> <tr><td> double </td><td> latitude </td><td> read, write </td><td> The latitude of the location of the event</td></tr> <tr><td> double </td><td> longitude </td><td> read, write </td><td> The longitude of the location of the event</td></tr> <tr><td> integer </td><td> email_id </td><td> read, write </td><td>ID of the email_id. Refer to the email-service.</td></tr> <tr><td> long long int </td><td> created_time </td><td> read, write </td><td> The time when the event is created</td></tr> <tr><td> long long int </td><td> last_modified_time </td><td> read only </td><td>The time when the event is updated</td></tr> <tr><td> integer </td><td> is_deleted </td><td> read only </td><td></td></tr> <tr><td> integer </td><td> freq </td><td> read, write </td><td>The frequent type of event recurrence. Refer to the `calendar_recurrence_frequency_e</td></tr>` <tr><td> integer </td><td> range_type </td><td> read, write </td><td>Refer to the `calendar_range_type_e</td></tr>` <tr><td> calendar time </td><td> until_time </td><td> read, write </td><td>The end time of the event recurrence. If the range_type is `CALENDAR_RANGE_UNTIL</td></tr>` <tr><td> integer </td><td> count </td><td> read, write </td><td>The count of the event recurrence. If the range_type is `CALENDAR_RANGE_COUNT</td></tr>` <tr><td> integer </td><td> interval </td><td> read, write </td><td>The interval of the event recurrence</td></tr> <tr><td> string </td><td> bysecond </td><td> read, write </td><td>The second list of the event recurrence. The value can be from 0 to 59. The list is seperated by commas</td></tr> <tr><td> string </td><td> byminute </td><td> read, write </td><td>The minute list of the event recurrence. The value can be from 0 to 59. The list is seperated by commas</td></tr> <tr><td> string </td><td> byhour </td><td> read, write </td><td>The hour list of the event recurrence. The value can be from 0 to 23. The list is seperated by commas</td></tr> <tr><td> string </td><td> byday </td><td> read, write </td><td>The day list of the event recurrence. The value can be SU, MO, TU, WE, TH, FR, SA. The list is seperated by commas</td></tr> <tr><td> string </td><td> bymonthday </td><td> read, write </td><td>The month day list of the event recurrence. The value can be from 1 to 31 and from -31 to -1. The list is seperated by commas</td></tr> <tr><td> string </td><td> byyearday </td><td> read, write </td><td>The year day list of the event recurrence. The value can be from 1 to 366 and from -366 to -1. The list is seperated by commas</td></tr> <tr><td> string </td><td> byweekno </td><td> read, write </td><td>The week number list of the event recurrence. The value can be from 1 to 53 and from -53 to -1. The list is seperated by commas</td></tr> <tr><td> string </td><td> bymonth </td><td> read, write </td><td>The month list of the event recurrence. The value can be from 1 to 12. The list is seperated by commas</td></tr> <tr><td> string </td><td> bysetpos </td><td> read, write </td><td>The position list of the event recurrence. The value can be from 1 to 366 and from -366 to -1. The list is seperated by commas</td></tr> <tr><td> integer </td><td> wkst </td><td> read, write </td><td>The start day of the week. Refer to the `calendar_days_of_week_e</td></tr>` <tr><td> string </td><td> recurrence_id </td><td> read, write </td><td>RECURRENCE-ID of RFC #2445</td></tr> <tr><td> string </td><td> rdate </td><td> read, write </td><td>RDATE of RFC #2445</td></tr> <tr><td> integer </td><td> has_attendee </td><td> read only </td><td>Whether or not the event has an attendee list </td></tr> <tr><td> integer </td><td> has_alarm </td><td> read only </td><td>Whether or not the event has an alarm list </td></tr> <tr><td> integer </td><td> calendar_system_type </td><td> read, write </td><td>Refer to the `calendar_system_type_e</td></tr>` <tr><td> string </td><td> sync_data1 </td><td> read, write </td><td>The sync data of the event. If developer need to save some information related to the event, they can use this property</td></tr> <tr><td> string </td><td> sync_data2 </td><td> read, write </td><td>The sync data of the event. If developer need to save some information related to the event, they can use this property</td></tr> <tr><td> string </td><td> sync_data3 </td><td> read, write </td><td>The sync data of the event. If developer need to save some information related to the event, they can use this property</td></tr> <tr><td> string </td><td> sync_data4 </td><td> read, write </td><td>The sync data of the event. If developer need to save some information related to the event, they can use this property</td></tr> <tr><td> calendar time </td><td> start_time </td><td> read, write </td><td>The start time of the event</td></tr> <tr><td> string </td><td> start_tzid </td><td> read, write </td><td></td>The timezone of the start_time</tr> <tr><td> calendar time </td><td> end_time </td><td> read, write </td><td>The end time of the event</td></tr> <tr><td> string </td><td> end_tzid </td><td> read, write </td><td>The timezone of the end_time</td></tr> <tr><td> child list </td><td> calendar_alarm </td><td> read, write </td><td>The alarm list of the event. Refer to the `CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_alarm</td></tr>` <tr><td> child list </td><td> calendar_attendee </td><td> read, write </td><td>The attendee list of the event. Refer to the `CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_attendee</td></tr>` <tr><td> child list </td><td> exception </td><td> read, write </td><td>The exception mod event list of the event</td></tr> <tr><td> child list </td><td> extended </td><td> read, write </td><td>The extended property list of the event. Refer to the `CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_extended_property</td></tr>` <tr><td> integer </td><td> is_allday </td><td> read only </td><td>The event is an allday event or not </td></tr> <tr><td> integer </td><td> link_count </td><td> read only </td><td>The event is a linked event (Since 4.0)</td></tr> <tr><td> integer </td><td> link_base_id </td><td> read only </td><td>The event is a base linked event (Since 4.0)</td></tr> </table>
+/// @nodoc
 final class _calendar_event_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -3745,66 +4071,13 @@ final class _calendar_event_property_ids extends ffi.Struct {
   external int link_base_id;
 }
 
-/// @ingroup CAPI_SOCIAL_CALENDAR_SVC_MODULE
-/// @addtogroup CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_todo _calendar_todo view
-/// <table>
-/// <tr>
-/// <th> Type </th>
-/// <th> Property ID </th>
-/// <th> Read, Write </th>
-/// <th> Description </th>
-/// </tr>
-/// <tr><td> string </td><td> _uri </td><td> read only </td><td>Identifier of this todo view</td></tr>
-/// <tr><td> integer </td><td> id </td><td> read only </td><td>DB record ID of the todo</td></tr>
-/// <tr><td> integer </td><td> calendar_book_id </td><td> read, write </td><td>ID of the calendar book to which the todo belongs</td></tr>
-/// <tr><td> string </td><td> summary </td><td> read, write </td><td>The short description of the todo</td></tr>
-/// <tr><td> string </td><td> description </td><td> read, write </td><td>The description of the todo</td></tr>
-/// <tr><td> string </td><td> location </td><td> read, write </td><td>The location of the todo</td></tr>
-/// <tr><td> string </td><td> categories </td><td> read, write </td><td>The category of the todo. For example APPOINTMENT, BIRTHDAY</td></tr>
-/// <tr><td> integer </td><td> todo_status </td><td> read, write </td><td>Refer to the @ref calendar_todo_status_e</td></tr>
-/// <tr><td> integer </td><td> priority </td><td> read, write </td><td>Refer to the @ref calendar_todo_priority_e</td></tr>
-/// <tr><td> integer </td><td> sensitivity </td><td> read, write </td><td>Refer to the @ref calendar_sensitivity_e </td></tr>
-/// <tr><td> string </td><td> uid </td><td> read, write </td><td>The unique ID of the todo</td></tr>
-/// <tr><td> double </td><td> latitude </td><td> read, write </td><td>The latitude of the location of the todo</td></tr>
-/// <tr><td> double </td><td> longitude </td><td> read, write </td><td>The longitude of the location of the todo</td></tr>
-/// <tr><td> long long int </td><td> created_time </td><td> read, write </td><td>The time when the todo is created</td></tr>
-/// <tr><td> long long int </td><td> last_modified_time </td><td> read only </td><td>The time when the todo is updated</td></tr>
-/// <tr><td> long long int </td><td> completed_time </td><td> read, write </td><td>The time when the todo is completed</td></tr>
-/// <tr><td> integer </td><td> progress </td><td> read, write </td><td> The progression of the todo. The value can be from 0 to 100</td></tr>
-/// <tr><td> integer </td><td> is_deleted </td><td> read only </td><td></td></tr>
-/// <tr><td> integer </td><td> freq </td><td> read, write </td><td>The frequent type of todo recurrence. Refer to the @ref calendar_recurrence_frequency_e</td></tr>
-/// <tr><td> integer </td><td> range_type </td><td> read, write </td><td>Refer to the @ref calendar_range_type_e</td></tr>
-/// <tr><td> calendar time </td><td> until_time </td><td> read, write </td><td>The end time of the todo recurrence. If the range_type is CALENDAR_RANGE_UNTIL</td></tr>
-/// <tr><td> integer </td><td> count </td><td> read, write </td><td>The count of the todo recurrence. If the range_type is CALENDAR_RANGE_COUNT</td></tr>
-/// <tr><td> integer </td><td> interval </td><td> read, write </td><td>The interval of the todo recurrence</td></tr>
-/// <tr><td> string </td><td> bysecond </td><td> read, write </td><td>The second list of the todo recurrence. The value can be from 0 to 59. The list is seperated by commas</td></tr>
-/// <tr><td> string </td><td> byminute </td><td> read, write </td><td>The minute list of the todo recurrence. The value can be from 0 to 59. The list is seperated by commas</td></tr>
-/// <tr><td> string </td><td> byhour </td><td> read, write </td><td>The hour list of the todo recurrence. The value can be from 0 to 23. The list is seperated by commas</td></tr>
-/// <tr><td> string </td><td> byday </td><td> read, write </td><td>The day list of the todo recurrence. The value can be SU, MO, TU, WE, TH, FR, SA. The list is seperated by commas</td></tr>
-/// <tr><td> string </td><td> bymonthday </td><td> read, write </td><td>The month day list of the todo recurrence. The value can be from 1 to 31 and from -31 to -1. The list is seperated by commas</td></tr>
-/// <tr><td> string </td><td> byyearday </td><td> read, write </td><td>The year day list of the todo recurrence. The value can be from 1 to 366 and from -366 to -1. The list is seperated by commas</td></tr>
-/// <tr><td> string </td><td> byweekno </td><td> read, write </td><td>The week number list of the todo recurrence. The value can be from 1 to 53 and from -53 to -1. The list is seperated by commas</td></tr>
-/// <tr><td> string </td><td> bymonth </td><td> read, write </td><td>The month list of the todo recurrence. The value can be from 1 to 12. The list is seperated by commas</td></tr>
-/// <tr><td> string </td><td> bysetpos </td><td> read, write </td><td>The position list of the todo recurrence. The value can be from 1 to 366 and from -366 to -1. The list is seperated by commas</td></tr>
-/// <tr><td> integer </td><td> wkst </td><td> read, write </td><td>The start day of the week. Refer to the @ref calendar_days_of_week_e</td></tr>
-/// <tr><td> integer </td><td> has_alarm </td><td> read only </td><td>Whether or not the todo has an alarm list </td></tr>
-/// <tr><td> string </td><td> sync_data1 </td><td> read, write </td><td>The sync data of the todo. If developers need to save some information related to the todo, they can use this property</td></tr>
-/// <tr><td> string </td><td> sync_data2 </td><td> read, write </td><td>The sync data of the todo. If developers need to save some information related to the todo, they can use this property</td></tr>
-/// <tr><td> string </td><td> sync_data3 </td><td> read, write </td><td>The sync data of the todo. If developers need to save some information related to the todo, they can use this property</td></tr>
-/// <tr><td> string </td><td> sync_data4 </td><td> read, write </td><td>The sync data of the todo. If developers need to save some information related to the todo, they can use this property</td></tr>
-/// <tr><td> calendar time </td><td> start_time </td><td> read, write </td><td>The start time of the todo</td></tr>
-/// <tr><td> string </td><td> start_tzid </td><td> read, write </td><td></td>The timezone of the start_time</tr>
-/// <tr><td> calendar time </td><td> due_time </td><td> read, write </td><td>The due time of the todo</td></tr>
-/// <tr><td> string </td><td> due_tzid </td><td> read, write </td><td>The timezone of the due_time</td></tr>
-/// <tr><td> child list </td><td> calendar_alarm </td><td> read, write </td><td>The alarm list of the todo. Refer to the @ref CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_alarm</td></tr>
-/// <tr><td> string </td><td> organizer_name </td><td> read, write </td><td>The name of the organizer of the event</td></tr>
-/// <tr><td> string </td><td> organizer_email </td><td> read, write </td><td>The email address of the organizer of the event</td></tr>
-/// <tr><td> integer </td><td> has_attendee </td><td> read only </td><td>Whether or not the todo has an attendee list </td></tr>
-/// <tr><td> child list </td><td> calendar_attendee </td><td> read, write </td><td>The attendee list of the todo. Refer to the @ref CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_attendee</td></tr>
-/// <tr><td> child list </td><td> extended </td><td> read, write </td><td>The extended property list of the todo. Refer to the @ref CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_extended_property</td></tr>
-/// <tr><td> integer </td><td> is_allday </td><td> read only </td><td>The todo is an allday event or not </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CALENDAR_SVC_MODULE
+/// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_todo _calendar_todo view <table> <tr> <th> Type </th> <th> Property ID </th> <th> Read, Write </th> <th> Description </th> </tr> <tr><td> string </td><td> _uri </td><td> read only </td><td>Identifier of this todo view</td></tr> <tr><td> integer </td><td> id </td><td> read only </td><td>DB record ID of the todo</td></tr> <tr><td> integer </td><td> calendar_book_id </td><td> read, write </td><td>ID of the calendar book to which the todo belongs</td></tr> <tr><td> string </td><td> summary </td><td> read, write </td><td>The short description of the todo</td></tr> <tr><td> string </td><td> description </td><td> read, write </td><td>The description of the todo</td></tr> <tr><td> string </td><td> location </td><td> read, write </td><td>The location of the todo</td></tr> <tr><td> string </td><td> categories </td><td> read, write </td><td>The category of the todo. For example APPOINTMENT, BIRTHDAY</td></tr> <tr><td> integer </td><td> todo_status </td><td> read, write </td><td>Refer to the `calendar_todo_status_e</td></tr>` <tr><td> integer </td><td> priority </td><td> read, write </td><td>Refer to the `calendar_todo_priority_e</td></tr>` <tr><td> integer </td><td> sensitivity </td><td> read, write </td><td>Refer to the `calendar_sensitivity_e` </td></tr> <tr><td> string </td><td> uid </td><td> read, write </td><td>The unique ID of the todo</td></tr> <tr><td> double </td><td> latitude </td><td> read, write </td><td>The latitude of the location of the todo</td></tr> <tr><td> double </td><td> longitude </td><td> read, write </td><td>The longitude of the location of the todo</td></tr> <tr><td> long long int </td><td> created_time </td><td> read, write </td><td>The time when the todo is created</td></tr> <tr><td> long long int </td><td> last_modified_time </td><td> read only </td><td>The time when the todo is updated</td></tr> <tr><td> long long int </td><td> completed_time </td><td> read, write </td><td>The time when the todo is completed</td></tr> <tr><td> integer </td><td> progress </td><td> read, write </td><td> The progression of the todo. The value can be from 0 to 100</td></tr> <tr><td> integer </td><td> is_deleted </td><td> read only </td><td></td></tr> <tr><td> integer </td><td> freq </td><td> read, write </td><td>The frequent type of todo recurrence. Refer to the `calendar_recurrence_frequency_e</td></tr>` <tr><td> integer </td><td> range_type </td><td> read, write </td><td>Refer to the `calendar_range_type_e</td></tr>` <tr><td> calendar time </td><td> until_time </td><td> read, write </td><td>The end time of the todo recurrence. If the range_type is CALENDAR_RANGE_UNTIL</td></tr> <tr><td> integer </td><td> count </td><td> read, write </td><td>The count of the todo recurrence. If the range_type is CALENDAR_RANGE_COUNT</td></tr> <tr><td> integer </td><td> interval </td><td> read, write </td><td>The interval of the todo recurrence</td></tr> <tr><td> string </td><td> bysecond </td><td> read, write </td><td>The second list of the todo recurrence. The value can be from 0 to 59. The list is seperated by commas</td></tr> <tr><td> string </td><td> byminute </td><td> read, write </td><td>The minute list of the todo recurrence. The value can be from 0 to 59. The list is seperated by commas</td></tr> <tr><td> string </td><td> byhour </td><td> read, write </td><td>The hour list of the todo recurrence. The value can be from 0 to 23. The list is seperated by commas</td></tr> <tr><td> string </td><td> byday </td><td> read, write </td><td>The day list of the todo recurrence. The value can be SU, MO, TU, WE, TH, FR, SA. The list is seperated by commas</td></tr> <tr><td> string </td><td> bymonthday </td><td> read, write </td><td>The month day list of the todo recurrence. The value can be from 1 to 31 and from -31 to -1. The list is seperated by commas</td></tr> <tr><td> string </td><td> byyearday </td><td> read, write </td><td>The year day list of the todo recurrence. The value can be from 1 to 366 and from -366 to -1. The list is seperated by commas</td></tr> <tr><td> string </td><td> byweekno </td><td> read, write </td><td>The week number list of the todo recurrence. The value can be from 1 to 53 and from -53 to -1. The list is seperated by commas</td></tr> <tr><td> string </td><td> bymonth </td><td> read, write </td><td>The month list of the todo recurrence. The value can be from 1 to 12. The list is seperated by commas</td></tr> <tr><td> string </td><td> bysetpos </td><td> read, write </td><td>The position list of the todo recurrence. The value can be from 1 to 366 and from -366 to -1. The list is seperated by commas</td></tr> <tr><td> integer </td><td> wkst </td><td> read, write </td><td>The start day of the week. Refer to the `calendar_days_of_week_e</td></tr>` <tr><td> integer </td><td> has_alarm </td><td> read only </td><td>Whether or not the todo has an alarm list </td></tr> <tr><td> string </td><td> sync_data1 </td><td> read, write </td><td>The sync data of the todo. If developers need to save some information related to the todo, they can use this property</td></tr> <tr><td> string </td><td> sync_data2 </td><td> read, write </td><td>The sync data of the todo. If developers need to save some information related to the todo, they can use this property</td></tr> <tr><td> string </td><td> sync_data3 </td><td> read, write </td><td>The sync data of the todo. If developers need to save some information related to the todo, they can use this property</td></tr> <tr><td> string </td><td> sync_data4 </td><td> read, write </td><td>The sync data of the todo. If developers need to save some information related to the todo, they can use this property</td></tr> <tr><td> calendar time </td><td> start_time </td><td> read, write </td><td>The start time of the todo</td></tr> <tr><td> string </td><td> start_tzid </td><td> read, write </td><td></td>The timezone of the start_time</tr> <tr><td> calendar time </td><td> due_time </td><td> read, write </td><td>The due time of the todo</td></tr> <tr><td> string </td><td> due_tzid </td><td> read, write </td><td>The timezone of the due_time</td></tr> <tr><td> child list </td><td> calendar_alarm </td><td> read, write </td><td>The alarm list of the todo. Refer to the `CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_alarm</td></tr>` <tr><td> string </td><td> organizer_name </td><td> read, write </td><td>The name of the organizer of the event</td></tr> <tr><td> string </td><td> organizer_email </td><td> read, write </td><td>The email address of the organizer of the event</td></tr> <tr><td> integer </td><td> has_attendee </td><td> read only </td><td>Whether or not the todo has an attendee list </td></tr> <tr><td> child list </td><td> calendar_attendee </td><td> read, write </td><td>The attendee list of the todo. Refer to the `CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_attendee</td></tr>` <tr><td> child list </td><td> extended </td><td> read, write </td><td>The extended property list of the todo. Refer to the `CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_extended_property</td></tr>` <tr><td> integer </td><td> is_allday </td><td> read only </td><td>The todo is an allday event or not </td></tr> </table>
+/// @nodoc
 final class _calendar_todo_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -3953,33 +4226,13 @@ final class _calendar_todo_property_ids extends ffi.Struct {
   external int is_allday;
 }
 
-/// @ingroup CAPI_SOCIAL_CALENDAR_SVC_MODULE
-/// @addtogroup CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_timezone _calendar_timezone view
-/// <table>
-/// <tr>
-/// <th> Type </th>
-/// <th> Property ID </th>
-/// <th> Read, Write </th>
-/// <th> Description </th>
-/// </tr>
-/// <tr><td> string </td><td> _uri </td><td> read only </td><td> Identifier of this timezone view </td></tr>
-/// <tr><td> integer </td><td> id </td><td> read only </td><td> DB record ID of the timezone </td></tr>
-/// <tr><td> integer </td><td> calendar_book_id </td><td> read, write </td><td> DB record ID of a related calendar book </td></tr>
-/// <tr><td> integer </td><td> tz_offset_from_gmt </td><td> read, write </td><td> UTC offset which is in use when the onset of this time zone observance begins. Valid values are -720(-12:00) to 840(+14:00) </td></tr>
-/// <tr><td> string </td><td> standard_name </td><td> read, write </td><td> Name of the Standard Time </td></tr>
-/// <tr><td> integer </td><td> standard_start_month </td><td> read, write </td><td> Starting month of the Standard Time. Month is 0-based. eg, 0 for January </td></tr>
-/// <tr><td> integer </td><td> standard_start_position_of_week </td><td> read, write </td><td> Starting day-of-week-in-month of the Standard Time. Day is 1-based </td></tr>
-/// <tr><td> integer </td><td> standard_start_day </td><td> read, write </td><td> Starting day-of-week of the Standard Time. Valid values are 1(SUNDAY) to 7(SATURDAY) </td></tr>
-/// <tr><td> integer </td><td> standard_start_hour </td><td> read, write </td><td> Starting hour of the Standard Time. Valid values are 0 to 23 </td></tr>
-/// <tr><td> integer </td><td> standard_bias </td><td> read, write </td><td> The number of minutes added during the Standard Time </td></tr>
-/// <tr><td> string </td><td> day_light_name </td><td> read, write </td><td> Name of Daylight </td></tr>
-/// <tr><td> integer </td><td> day_light_start_month </td><td> read, write </td><td> Starting month of Daylight. Month is 0-based. eg, 0 for January </td></tr>
-/// <tr><td> integer </td><td> day_light_start_position_of_week </td><td> read, write </td><td> Starting day-of-week-in-month of Daylight. Day is 1-based </td></tr>
-/// <tr><td> integer </td><td> day_light_start_day </td><td> read, write </td><td> Starting day-of-week of Daylight. Valid values are 1(SUNDAY) to 7(SATURDAY) </td></tr>
-/// <tr><td> integer </td><td> day_light_start_hour </td><td> read, write </td><td> Starting hour of Daylight. Valid values are 0 to 23 </td></tr>
-/// <tr><td> integer </td><td> day_light_bias </td><td> read, write </td><td> The number of minutes added during Daylight Time </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CALENDAR_SVC_MODULE
+/// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_timezone _calendar_timezone view <table> <tr> <th> Type </th> <th> Property ID </th> <th> Read, Write </th> <th> Description </th> </tr> <tr><td> string </td><td> _uri </td><td> read only </td><td> Identifier of this timezone view </td></tr> <tr><td> integer </td><td> id </td><td> read only </td><td> DB record ID of the timezone </td></tr> <tr><td> integer </td><td> calendar_book_id </td><td> read, write </td><td> DB record ID of a related calendar book </td></tr> <tr><td> integer </td><td> tz_offset_from_gmt </td><td> read, write </td><td> UTC offset which is in use when the onset of this time zone observance begins. Valid values are -720(-12:00) to 840(+14:00) </td></tr> <tr><td> string </td><td> standard_name </td><td> read, write </td><td> Name of the Standard Time </td></tr> <tr><td> integer </td><td> standard_start_month </td><td> read, write </td><td> Starting month of the Standard Time. Month is 0-based. eg, 0 for January </td></tr> <tr><td> integer </td><td> standard_start_position_of_week </td><td> read, write </td><td> Starting day-of-week-in-month of the Standard Time. Day is 1-based </td></tr> <tr><td> integer </td><td> standard_start_day </td><td> read, write </td><td> Starting day-of-week of the Standard Time. Valid values are 1(SUNDAY) to 7(SATURDAY) </td></tr> <tr><td> integer </td><td> standard_start_hour </td><td> read, write </td><td> Starting hour of the Standard Time. Valid values are 0 to 23 </td></tr> <tr><td> integer </td><td> standard_bias </td><td> read, write </td><td> The number of minutes added during the Standard Time </td></tr> <tr><td> string </td><td> day_light_name </td><td> read, write </td><td> Name of Daylight </td></tr> <tr><td> integer </td><td> day_light_start_month </td><td> read, write </td><td> Starting month of Daylight. Month is 0-based. eg, 0 for January </td></tr> <tr><td> integer </td><td> day_light_start_position_of_week </td><td> read, write </td><td> Starting day-of-week-in-month of Daylight. Day is 1-based </td></tr> <tr><td> integer </td><td> day_light_start_day </td><td> read, write </td><td> Starting day-of-week of Daylight. Valid values are 1(SUNDAY) to 7(SATURDAY) </td></tr> <tr><td> integer </td><td> day_light_start_hour </td><td> read, write </td><td> Starting hour of Daylight. Valid values are 0 to 23 </td></tr> <tr><td> integer </td><td> day_light_bias </td><td> read, write </td><td> The number of minutes added during Daylight Time </td></tr> </table>
+/// @nodoc
 final class _calendar_timezone_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -4029,31 +4282,13 @@ final class _calendar_timezone_property_ids extends ffi.Struct {
   external int day_light_bias;
 }
 
-/// @ingroup CAPI_SOCIAL_CALENDAR_SVC_MODULE
-/// @addtogroup CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_attendee _calendar_attendee view
-/// <table>
-/// <tr>
-/// <th> Type </th>
-/// <th> Property ID </th>
-/// <th> Read, Write </th>
-/// <th> Description </th>
-/// </tr>
-/// <tr><td> string </td><td> _uri </td><td> read only </td><td> Identifier of this calendar attendee view </td></tr>
-/// <tr><td> integer </td><td> event_id </td><td> read only </td><td> Event/TODO that the attendee belongs to </td></tr>
-/// <tr><td> string </td><td> number </td><td> read, write </td><td> The number of the attendee </td></tr>
-/// <tr><td> integer </td><td> cutype </td><td> read, write </td><td> The type of attendee (one of CALENDAR_ATTENDEE_CUTYPE_INDIVIDUAL, CALENDAR_ATTENDEE_CUTYPE_GROUP, CALENDAR_ATTENDEE_CUTYPE_RESOURCE, CALENDAR_ATTENDEE_CUTYPE_ROOM, CALENDAR_ATTENDEE_CUTYPE_UNKNOWN) </tr>
-/// <tr><td> integer </td><td> person_id </td><td> read, write </td><td> Person ID that the attendee belongs to </td></tr>
-/// <tr><td> string </td><td> uid </td><td> read, write </td><td> Unique identifier </td></tr>
-/// <tr><td> string </td><td> email </td><td> read, write </td><td> The email address of the attendee </td></tr>
-/// <tr><td> integer </td><td> role </td><td> read, write </td><td> Attendee role (one of CALENDAR_ATTENDEE_ROLE_REQ_PARTICIPANT, CALENDAR_ATTENDEE_ROLE_OPT_PARTICIPANT, CALENDAR_ATTENDEE_ROLE_NON_PARTICIPANT, CALENDAR_ATTENDEE_ROLE_CHAIR) </td></tr>
-/// <tr><td> integer </td><td> status </td><td> read, write </td><td> Attendee status (one of CALENDAR_ATTENDEE_STATUS_PENDING, CALENDAR_ATTENDEE_STATUS_ACCEPTED, CALENDAR_ATTENDEE_STATUS_DECLINED, CALENDAR_ATTENDEE_STATUS_TENTATIVE, CALENDAR_ATTENDEE_STATUS_DELEGATED, CALENDAR_ATTENDEE_STATUS_COMPLETED, CALENDAR_ATTENDEE_STATUS_IN_PROCESS) </td></tr>
-/// <tr><td> integer </td><td> rsvp </td><td> read, write </td><td> RSVP invitation reply (one of true, false) </td></tr>
-/// <tr><td> string </td><td> delegatee_uri </td><td> read, write </td><td> Delegatee (DELEGATED-TO) </td></tr>
-/// <tr><td> string </td><td> delegator_uri </td><td> read, write </td><td> Delegator (DELEGATED-FROM) </td></tr>
-/// <tr><td> string </td><td> name </td><td> read, write </td><td> Attendee name </td></tr>
-/// <tr><td> string </td><td> member </td><td> read, write </td><td> Group that the attendee belongs to </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CALENDAR_SVC_MODULE
+/// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_attendee _calendar_attendee view <table> <tr> <th> Type </th> <th> Property ID </th> <th> Read, Write </th> <th> Description </th> </tr> <tr><td> string </td><td> _uri </td><td> read only </td><td> Identifier of this calendar attendee view </td></tr> <tr><td> integer </td><td> event_id </td><td> read only </td><td> Event/TODO that the attendee belongs to </td></tr> <tr><td> string </td><td> number </td><td> read, write </td><td> The number of the attendee </td></tr> <tr><td> integer </td><td> cutype </td><td> read, write </td><td> The type of attendee (one of CALENDAR_ATTENDEE_CUTYPE_INDIVIDUAL, CALENDAR_ATTENDEE_CUTYPE_GROUP, CALENDAR_ATTENDEE_CUTYPE_RESOURCE, CALENDAR_ATTENDEE_CUTYPE_ROOM, CALENDAR_ATTENDEE_CUTYPE_UNKNOWN) </tr> <tr><td> integer </td><td> person_id </td><td> read, write </td><td> Person ID that the attendee belongs to </td></tr> <tr><td> string </td><td> uid </td><td> read, write </td><td> Unique identifier </td></tr> <tr><td> string </td><td> email </td><td> read, write </td><td> The email address of the attendee </td></tr> <tr><td> integer </td><td> role </td><td> read, write </td><td> Attendee role (one of CALENDAR_ATTENDEE_ROLE_REQ_PARTICIPANT, CALENDAR_ATTENDEE_ROLE_OPT_PARTICIPANT, CALENDAR_ATTENDEE_ROLE_NON_PARTICIPANT, CALENDAR_ATTENDEE_ROLE_CHAIR) </td></tr> <tr><td> integer </td><td> status </td><td> read, write </td><td> Attendee status (one of CALENDAR_ATTENDEE_STATUS_PENDING, CALENDAR_ATTENDEE_STATUS_ACCEPTED, CALENDAR_ATTENDEE_STATUS_DECLINED, CALENDAR_ATTENDEE_STATUS_TENTATIVE, CALENDAR_ATTENDEE_STATUS_DELEGATED, CALENDAR_ATTENDEE_STATUS_COMPLETED, CALENDAR_ATTENDEE_STATUS_IN_PROCESS) </td></tr> <tr><td> integer </td><td> rsvp </td><td> read, write </td><td> RSVP invitation reply (one of true, false) </td></tr> <tr><td> string </td><td> delegatee_uri </td><td> read, write </td><td> Delegatee (DELEGATED-TO) </td></tr> <tr><td> string </td><td> delegator_uri </td><td> read, write </td><td> Delegator (DELEGATED-FROM) </td></tr> <tr><td> string </td><td> name </td><td> read, write </td><td> Attendee name </td></tr> <tr><td> string </td><td> member </td><td> read, write </td><td> Group that the attendee belongs to </td></tr> </table>
+/// @nodoc
 final class _calendar_attendee_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -4100,28 +4335,13 @@ final class _calendar_attendee_property_ids extends ffi.Struct {
   external int member;
 }
 
-/// @ingroup CAPI_SOCIAL_CALENDAR_SVC_MODULE
-/// @addtogroup CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_alarm _calendar_alarm view
-/// <table>
-/// <tr>
-/// <th> Type </th>
-/// <th> Property ID </th>
-/// <th> Read, Write </th>
-/// <th> Description </th>
-/// </tr>
-/// <tr><td> string </td><td> _uri </td><td> read only </td><td> Identifier of this calendar alarm view </td></tr>
-/// <tr><td> integer </td><td> parent_id </td><td> read only </td><td> Event that the alarm belongs to </td></tr>
-/// <tr><td> integer </td><td> type </td><td> read, write </td><td> Currently NOT used </td></tr>
-/// <tr><td> long long int </td><td> time </td><td> read, write </td><td> The alarm time of the event(This represents the number of seconds elapsed since the Epoch, 1970-01-01 00:00:00 +0000(UTC)). This MUST be used with CALENDAR_ALARM_TIME_UNIT_SPECIFIC </td></tr>
-/// <tr><td> integer </td><td> tick </td><td> read, write </td><td> The number of unit before start time. This MUST be used with one of CALENDAR_ALARM_TIME_UNIT_MINUTE, CALENDAR_ALARM_TIME_UNIT_HOUR, CALENDAR_ALARM_TIME_UNIT_DAY, CALENDAR_ALARM_TIME_UNIT_WEEK. </td></tr>
-/// <tr><td> integer </td><td> tick_unit </td><td> read, write </td><td> Reminder tick time unit (one of CALENDAR_ALARM_NONE, CALENDAR_ALARM_TIME_UNIT_SPECIFIC, CALENDAR_ALARM_TIME_UNIT_MINUTE, CALENDAR_ALARM_TIME_UNIT_HOUR, CALENDAR_ALARM_TIME_UNIT_DAY, CALENDAR_ALARM_TIME_UNIT_WEEK) </td></tr>
-/// <tr><td> string </td><td> attach </td><td> read, write </td><td> Alarm tone path </td></tr>
-/// <tr><td> string </td><td> summary </td><td> read, write </td><td> Alarm summary </td></tr>
-/// <tr><td> string </td><td> description </td><td> read, write </td><td> Alarm description </td></tr>
-/// <tr><td> integer </td><td> action </td><td> read, write </td><td> Action of alarm (one of CALENDAR_ALARM_ACTION_AUDIO, CALENDAR_ALARM_ACTION_DISPLAY, CALENDAR_ALARM_ACTION_EMAIL) </td></tr>
-/// <tr><td> calendar time </td><td> alarm_time </td><td> read, write </td><td>The alarm time </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CALENDAR_SVC_MODULE
+/// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_alarm _calendar_alarm view <table> <tr> <th> Type </th> <th> Property ID </th> <th> Read, Write </th> <th> Description </th> </tr> <tr><td> string </td><td> _uri </td><td> read only </td><td> Identifier of this calendar alarm view </td></tr> <tr><td> integer </td><td> parent_id </td><td> read only </td><td> Event that the alarm belongs to </td></tr> <tr><td> integer </td><td> type </td><td> read, write </td><td> Currently NOT used </td></tr> <tr><td> long long int </td><td> time </td><td> read, write </td><td> The alarm time of the event(This represents the number of seconds elapsed since the Epoch, 1970-01-01 00:00:00 +0000(UTC)). This MUST be used with CALENDAR_ALARM_TIME_UNIT_SPECIFIC </td></tr> <tr><td> integer </td><td> tick </td><td> read, write </td><td> The number of unit before start time. This MUST be used with one of CALENDAR_ALARM_TIME_UNIT_MINUTE, CALENDAR_ALARM_TIME_UNIT_HOUR, CALENDAR_ALARM_TIME_UNIT_DAY, CALENDAR_ALARM_TIME_UNIT_WEEK. </td></tr> <tr><td> integer </td><td> tick_unit </td><td> read, write </td><td> Reminder tick time unit (one of CALENDAR_ALARM_NONE, CALENDAR_ALARM_TIME_UNIT_SPECIFIC, CALENDAR_ALARM_TIME_UNIT_MINUTE, CALENDAR_ALARM_TIME_UNIT_HOUR, CALENDAR_ALARM_TIME_UNIT_DAY, CALENDAR_ALARM_TIME_UNIT_WEEK) </td></tr> <tr><td> string </td><td> attach </td><td> read, write </td><td> Alarm tone path </td></tr> <tr><td> string </td><td> summary </td><td> read, write </td><td> Alarm summary </td></tr> <tr><td> string </td><td> description </td><td> read, write </td><td> Alarm description </td></tr> <tr><td> integer </td><td> action </td><td> read, write </td><td> Action of alarm (one of CALENDAR_ALARM_ACTION_AUDIO, CALENDAR_ALARM_ACTION_DISPLAY, CALENDAR_ALARM_ACTION_EMAIL) </td></tr> <tr><td> calendar time </td><td> alarm_time </td><td> read, write </td><td>The alarm time </td></tr> </table>
+/// @nodoc
 final class _calendar_alarm_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -4150,21 +4370,13 @@ final class _calendar_alarm_property_ids extends ffi.Struct {
   external int alarm_time;
 }
 
-/// @ingroup CAPI_SOCIAL_CALENDAR_SVC_MODULE
-/// @addtogroup CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_updated_info _calendar_updated_info view (read only)
-/// <table>
-/// <tr>
-/// <th> Type </th>
-/// <th> Property ID </th>
-/// <th> Description </th>
-/// </tr>
-/// <tr><td> string </td><td> _uri </td><td> Identifier of this updated_info view </td></tr>
-/// <tr><td> integer </td><td> id </td><td> Modified event(or todo) record ID </td></tr>
-/// <tr><td> integer </td><td> calendar_book_id </td><td> Calendar book ID of the modified event(or todo) record </td></tr>
-/// <tr><td> integer </td><td> modified_status </td><td> Enumeration value of the modified status (@ref calendar_record_modified_status_e) </td></tr>
-/// <tr><td> integer </td><td> version </td><td> Version after change </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CALENDAR_SVC_MODULE
+/// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_updated_info _calendar_updated_info view (read only) <table> <tr> <th> Type </th> <th> Property ID </th> <th> Description </th> </tr> <tr><td> string </td><td> _uri </td><td> Identifier of this updated_info view </td></tr> <tr><td> integer </td><td> id </td><td> Modified event(or todo) record ID </td></tr> <tr><td> integer </td><td> calendar_book_id </td><td> Calendar book ID of the modified event(or todo) record </td></tr> <tr><td> integer </td><td> modified_status </td><td> Enumeration value of the modified status (`calendar_record_modified_status_e)` </td></tr> <tr><td> integer </td><td> version </td><td> Version after change </td></tr> </table>
+/// @nodoc
 final class _calendar_updated_info_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -4181,69 +4393,13 @@ final class _calendar_updated_info_property_ids extends ffi.Struct {
   external int version;
 }
 
-/// @ingroup CAPI_SOCIAL_CALENDAR_SVC_MODULE
-/// @addtogroup CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_event_calendar_book _calendar_event_calendar_book view (read only)
-/// <table>
-/// <tr>
-/// <th> Type </th>
-/// <th> Property ID </th>
-/// </tr>
-/// <tr><td> string </td><td> _uri </td></tr>
-/// <tr><td> integer </td><td> event_id </td></tr>
-/// <tr><td> integer </td><td> calendar_book_id </td></tr>
-/// <tr><td> string </td><td> summary </td></tr>
-/// <tr><td> string </td><td> description </td></tr>
-/// <tr><td> string </td><td> location </td></tr>
-/// <tr><td> string </td><td> categories </td></tr>
-/// <tr><td> string </td><td> exdate </td></tr>
-/// <tr><td> integer </td><td> event_status </td></tr>
-/// <tr><td> integer </td><td> priority </td></tr>
-/// <tr><td> integer </td><td> timezone </td></tr>
-/// <tr><td> integer </td><td> person_id </td></tr>
-/// <tr><td> integer </td><td> busy_status </td></tr>
-/// <tr><td> integer </td><td> sensitivity </td></tr>
-/// <tr><td> string </td><td> uid </td></tr>
-/// <tr><td> string </td><td> organizer_name </td></tr>
-/// <tr><td> string </td><td> organizer_email </td></tr>
-/// <tr><td> integer </td><td> meeting_status </td></tr>
-/// <tr><td> integer </td><td> original_event_id </td></tr>
-/// <tr><td> double </td><td> latitude </td></tr>
-/// <tr><td> double </td><td> longitude </td></tr>
-/// <tr><td> integer </td><td> email_id </td></tr>
-/// <tr><td> long long int </td><td> created_time </td></tr>
-/// <tr><td> long long int </td><td> last_modified_time </td></tr>
-/// <tr><td> integer </td><td> freq </td></tr>
-/// <tr><td> integer </td><td> range_type </td></tr>
-/// <tr><td> calendar time </td><td> until_time </td></tr>
-/// <tr><td> integer </td><td> count </td></tr>
-/// <tr><td> integer </td><td> interval </td></tr>
-/// <tr><td> string </td><td> bysecond </td></tr>
-/// <tr><td> string </td><td> byminute </td></tr>
-/// <tr><td> string </td><td> byhour </td></tr>
-/// <tr><td> string </td><td> byday </td></tr>
-/// <tr><td> string </td><td> bymonthday </td></tr>
-/// <tr><td> string </td><td> byyearday </td></tr>
-/// <tr><td> string </td><td> byweekno </td></tr>
-/// <tr><td> string </td><td> bymonth </td></tr>
-/// <tr><td> string </td><td> bysetpos </td></tr>
-/// <tr><td> integer </td><td> wkst </td></tr>
-/// <tr><td> string </td><td> recurrence_id </td></tr>
-/// <tr><td> string </td><td> rdate </td></tr>
-/// <tr><td> integer </td><td> has_attendee </td></tr>
-/// <tr><td> integer </td><td> has_alarm </td></tr>
-/// <tr><td> integer </td><td> calendar_system_type </td></tr>
-/// <tr><td> string </td><td> sync_data1 </td></tr>
-/// <tr><td> string </td><td> sync_data2 </td></tr>
-/// <tr><td> string </td><td> sync_data3 </td></tr>
-/// <tr><td> string </td><td> sync_data4 </td></tr>
-/// <tr><td> calendar time </td><td> start_time </td></tr>
-/// <tr><td> string </td><td> start_tzid </td></tr>
-/// <tr><td> calendar time </td><td> end_time </td></tr>
-/// <tr><td> string </td><td> end_tzid </td></tr>
-/// <tr><td> filter integer </td><td> calendar_book_visibility </td></tr>
-/// <tr><td> filter integer </td><td> calendar_book_account_id </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CALENDAR_SVC_MODULE
+/// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_event_calendar_book _calendar_event_calendar_book view (read only) <table> <tr> <th> Type </th> <th> Property ID </th> </tr> <tr><td> string </td><td> _uri </td></tr> <tr><td> integer </td><td> event_id </td></tr> <tr><td> integer </td><td> calendar_book_id </td></tr> <tr><td> string </td><td> summary </td></tr> <tr><td> string </td><td> description </td></tr> <tr><td> string </td><td> location </td></tr> <tr><td> string </td><td> categories </td></tr> <tr><td> string </td><td> exdate </td></tr> <tr><td> integer </td><td> event_status </td></tr> <tr><td> integer </td><td> priority </td></tr> <tr><td> integer </td><td> timezone </td></tr> <tr><td> integer </td><td> person_id </td></tr> <tr><td> integer </td><td> busy_status </td></tr> <tr><td> integer </td><td> sensitivity </td></tr> <tr><td> string </td><td> uid </td></tr> <tr><td> string </td><td> organizer_name </td></tr> <tr><td> string </td><td> organizer_email </td></tr> <tr><td> integer </td><td> meeting_status </td></tr> <tr><td> integer </td><td> original_event_id </td></tr> <tr><td> double </td><td> latitude </td></tr> <tr><td> double </td><td> longitude </td></tr> <tr><td> integer </td><td> email_id </td></tr> <tr><td> long long int </td><td> created_time </td></tr> <tr><td> long long int </td><td> last_modified_time </td></tr> <tr><td> integer </td><td> freq </td></tr> <tr><td> integer </td><td> range_type </td></tr> <tr><td> calendar time </td><td> until_time </td></tr> <tr><td> integer </td><td> count </td></tr> <tr><td> integer </td><td> interval </td></tr> <tr><td> string </td><td> bysecond </td></tr> <tr><td> string </td><td> byminute </td></tr> <tr><td> string </td><td> byhour </td></tr> <tr><td> string </td><td> byday </td></tr> <tr><td> string </td><td> bymonthday </td></tr> <tr><td> string </td><td> byyearday </td></tr> <tr><td> string </td><td> byweekno </td></tr> <tr><td> string </td><td> bymonth </td></tr> <tr><td> string </td><td> bysetpos </td></tr> <tr><td> integer </td><td> wkst </td></tr> <tr><td> string </td><td> recurrence_id </td></tr> <tr><td> string </td><td> rdate </td></tr> <tr><td> integer </td><td> has_attendee </td></tr> <tr><td> integer </td><td> has_alarm </td></tr> <tr><td> integer </td><td> calendar_system_type </td></tr> <tr><td> string </td><td> sync_data1 </td></tr> <tr><td> string </td><td> sync_data2 </td></tr> <tr><td> string </td><td> sync_data3 </td></tr> <tr><td> string </td><td> sync_data4 </td></tr> <tr><td> calendar time </td><td> start_time </td></tr> <tr><td> string </td><td> start_tzid </td></tr> <tr><td> calendar time </td><td> end_time </td></tr> <tr><td> string </td><td> end_tzid </td></tr> <tr><td> filter integer </td><td> calendar_book_visibility </td></tr> <tr><td> filter integer </td><td> calendar_book_account_id </td></tr> </table>
+/// @nodoc
 final class _calendar_event_calendar_book_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -4410,58 +4566,13 @@ final class _calendar_event_calendar_book_property_ids extends ffi.Struct {
   external int calendar_book_account_id;
 }
 
-/// @ingroup CAPI_SOCIAL_CALENDAR_SVC_MODULE
-/// @addtogroup CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_todo_calendar_book _calendar_todo_calendar_book view (read only)
-/// <table>
-/// <tr>
-/// <th> Type </th>
-/// <th> Property ID </th>
-/// </tr>
-/// <tr><td> string </td><td> _uri </td></tr>
-/// <tr><td> integer </td><td> todo_id </td></tr>
-/// <tr><td> integer </td><td> calendar_book_id </td></tr>
-/// <tr><td> string </td><td> summary </td></tr>
-/// <tr><td> string </td><td> description </td></tr>
-/// <tr><td> string </td><td> location </td></tr>
-/// <tr><td> string </td><td> categories </td></tr>
-/// <tr><td> integer </td><td> todo_status </td></tr>
-/// <tr><td> integer </td><td> priority </td></tr>
-/// <tr><td> integer </td><td> sensitivity </td></tr>
-/// <tr><td> string </td><td> uid </td></tr>
-/// <tr><td> double </td><td> latitude </td></tr>
-/// <tr><td> double </td><td> longitude </td></tr>
-/// <tr><td> long long int </td><td> created_time </td></tr>
-/// <tr><td> long long int </td><td> last_modified_time </td></tr>
-/// <tr><td> long long int </td><td> completed_time </td></tr>
-/// <tr><td> integer </td><td> progress </td></tr>
-/// <tr><td> integer </td><td> freq </td></tr>
-/// <tr><td> integer </td><td> range_type </td></tr>
-/// <tr><td> calendar time </td><td> until_time </td></tr>
-/// <tr><td> integer </td><td> count </td></tr>
-/// <tr><td> integer </td><td> interval </td></tr>
-/// <tr><td> string </td><td> bysecond </td></tr>
-/// <tr><td> string </td><td> byminute </td></tr>
-/// <tr><td> string </td><td> byhour </td></tr>
-/// <tr><td> string </td><td> byday </td></tr>
-/// <tr><td> string </td><td> bymonthday </td></tr>
-/// <tr><td> string </td><td> byyearday </td></tr>
-/// <tr><td> string </td><td> byweekno </td></tr>
-/// <tr><td> string </td><td> bymonth </td></tr>
-/// <tr><td> string </td><td> bysetpos </td></tr>
-/// <tr><td> integer </td><td> wkst </td></tr>
-/// <tr><td> integer </td><td> has_alarm </td></tr>
-/// <tr><td> string </td><td> sync_data1 </td></tr>
-/// <tr><td> string </td><td> sync_data2 </td></tr>
-/// <tr><td> string </td><td> sync_data3 </td></tr>
-/// <tr><td> string </td><td> sync_data4 </td></tr>
-/// <tr><td> calendar time </td><td> start_time </td></tr>
-/// <tr><td> string </td><td> start_tzid </td></tr>
-/// <tr><td> calendar time </td><td> due_time </td></tr>
-/// <tr><td> string </td><td> due_tzid </td></tr>
-/// <tr><td> filter integer </td><td> calendar_book_visibility </td></tr>
-/// <tr><td> filter integer </td><td> calendar_book_account_id </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CALENDAR_SVC_MODULE
+/// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_todo_calendar_book _calendar_todo_calendar_book view (read only) <table> <tr> <th> Type </th> <th> Property ID </th> </tr> <tr><td> string </td><td> _uri </td></tr> <tr><td> integer </td><td> todo_id </td></tr> <tr><td> integer </td><td> calendar_book_id </td></tr> <tr><td> string </td><td> summary </td></tr> <tr><td> string </td><td> description </td></tr> <tr><td> string </td><td> location </td></tr> <tr><td> string </td><td> categories </td></tr> <tr><td> integer </td><td> todo_status </td></tr> <tr><td> integer </td><td> priority </td></tr> <tr><td> integer </td><td> sensitivity </td></tr> <tr><td> string </td><td> uid </td></tr> <tr><td> double </td><td> latitude </td></tr> <tr><td> double </td><td> longitude </td></tr> <tr><td> long long int </td><td> created_time </td></tr> <tr><td> long long int </td><td> last_modified_time </td></tr> <tr><td> long long int </td><td> completed_time </td></tr> <tr><td> integer </td><td> progress </td></tr> <tr><td> integer </td><td> freq </td></tr> <tr><td> integer </td><td> range_type </td></tr> <tr><td> calendar time </td><td> until_time </td></tr> <tr><td> integer </td><td> count </td></tr> <tr><td> integer </td><td> interval </td></tr> <tr><td> string </td><td> bysecond </td></tr> <tr><td> string </td><td> byminute </td></tr> <tr><td> string </td><td> byhour </td></tr> <tr><td> string </td><td> byday </td></tr> <tr><td> string </td><td> bymonthday </td></tr> <tr><td> string </td><td> byyearday </td></tr> <tr><td> string </td><td> byweekno </td></tr> <tr><td> string </td><td> bymonth </td></tr> <tr><td> string </td><td> bysetpos </td></tr> <tr><td> integer </td><td> wkst </td></tr> <tr><td> integer </td><td> has_alarm </td></tr> <tr><td> string </td><td> sync_data1 </td></tr> <tr><td> string </td><td> sync_data2 </td></tr> <tr><td> string </td><td> sync_data3 </td></tr> <tr><td> string </td><td> sync_data4 </td></tr> <tr><td> calendar time </td><td> start_time </td></tr> <tr><td> string </td><td> start_tzid </td></tr> <tr><td> calendar time </td><td> due_time </td></tr> <tr><td> string </td><td> due_tzid </td></tr> <tr><td> filter integer </td><td> calendar_book_visibility </td></tr> <tr><td> filter integer </td><td> calendar_book_account_id </td></tr> </table>
+/// @nodoc
 final class _calendar_todo_calendar_book_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -4604,72 +4715,13 @@ final class _calendar_todo_calendar_book_property_ids extends ffi.Struct {
   external int calendar_book_account_id;
 }
 
-/// @ingroup CAPI_SOCIAL_CALENDAR_SVC_MODULE
-/// @addtogroup CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_event_calendar_book_attendee _calendar_event_calendar_book_attendee view (read only)
-/// <table>
-/// <tr>
-/// <th> Type </th>
-/// <th> Property ID </th>
-/// </tr>
-/// <tr><td> string </td><td> _uri </td></tr>
-/// <tr><td> integer </td><td> event_id </td></tr>
-/// <tr><td> integer </td><td> calendar_book_id </td></tr>
-/// <tr><td> string </td><td> summary </td></tr>
-/// <tr><td> string </td><td> description </td></tr>
-/// <tr><td> string </td><td> location </td></tr>
-/// <tr><td> string </td><td> categories </td></tr>
-/// <tr><td> string </td><td> exdate </td></tr>
-/// <tr><td> integer </td><td> event_status </td></tr>
-/// <tr><td> integer </td><td> priority </td></tr>
-/// <tr><td> integer </td><td> timezone </td></tr>
-/// <tr><td> integer </td><td> person_id </td></tr>
-/// <tr><td> integer </td><td> busy_status </td></tr>
-/// <tr><td> integer </td><td> sensitivity </td></tr>
-/// <tr><td> string </td><td> uid </td></tr>
-/// <tr><td> string </td><td> organizer_name </td></tr>
-/// <tr><td> string </td><td> organizer_email </td></tr>
-/// <tr><td> integer </td><td> meeting_status </td></tr>
-/// <tr><td> integer </td><td> original_event_id </td></tr>
-/// <tr><td> double </td><td> latitude </td></tr>
-/// <tr><td> double </td><td> longitude </td></tr>
-/// <tr><td> integer </td><td> email_id </td></tr>
-/// <tr><td> long long int </td><td> created_time </td></tr>
-/// <tr><td> long long int </td><td> last_modified_time </td></tr>
-/// <tr><td> integer </td><td> freq </td></tr>
-/// <tr><td> integer </td><td> range_type </td></tr>
-/// <tr><td> calendar time </td><td> until_time </td></tr>
-/// <tr><td> integer </td><td> count </td></tr>
-/// <tr><td> integer </td><td> interval </td></tr>
-/// <tr><td> string </td><td> bysecond </td></tr>
-/// <tr><td> string </td><td> byminute </td></tr>
-/// <tr><td> string </td><td> byhour </td></tr>
-/// <tr><td> string </td><td> byday </td></tr>
-/// <tr><td> string </td><td> bymonthday </td></tr>
-/// <tr><td> string </td><td> byyearday </td></tr>
-/// <tr><td> string </td><td> byweekno </td></tr>
-/// <tr><td> string </td><td> bymonth </td></tr>
-/// <tr><td> string </td><td> bysetpos </td></tr>
-/// <tr><td> integer </td><td> wkst </td></tr>
-/// <tr><td> string </td><td> recurrence_id </td></tr>
-/// <tr><td> string </td><td> rdate </td></tr>
-/// <tr><td> integer </td><td> has_attendee </td></tr>
-/// <tr><td> integer </td><td> has_alarm </td></tr>
-/// <tr><td> integer </td><td> calendar_system_type </td></tr>
-/// <tr><td> string </td><td> sync_data1 </td></tr>
-/// <tr><td> string </td><td> sync_data2 </td></tr>
-/// <tr><td> string </td><td> sync_data3 </td></tr>
-/// <tr><td> string </td><td> sync_data4 </td></tr>
-/// <tr><td> calendar time </td><td> start_time </td></tr>
-/// <tr><td> string </td><td> start_tzid </td></tr>
-/// <tr><td> calendar time </td><td> end_time </td></tr>
-/// <tr><td> string </td><td> end_tzid </td></tr>
-/// <tr><td> filter integer </td><td> calendar_book_visibility </td></tr>
-/// <tr><td> filter integer </td><td> calendar_book_account_id </td></tr>
-/// <tr><td> filter string </td><td> attendee_email </td></tr>
-/// <tr><td> filter string </td><td> attendee_name </td></tr>
-/// <tr><td> filter string </td><td> attendee_member </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CALENDAR_SVC_MODULE
+/// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_event_calendar_book_attendee _calendar_event_calendar_book_attendee view (read only) <table> <tr> <th> Type </th> <th> Property ID </th> </tr> <tr><td> string </td><td> _uri </td></tr> <tr><td> integer </td><td> event_id </td></tr> <tr><td> integer </td><td> calendar_book_id </td></tr> <tr><td> string </td><td> summary </td></tr> <tr><td> string </td><td> description </td></tr> <tr><td> string </td><td> location </td></tr> <tr><td> string </td><td> categories </td></tr> <tr><td> string </td><td> exdate </td></tr> <tr><td> integer </td><td> event_status </td></tr> <tr><td> integer </td><td> priority </td></tr> <tr><td> integer </td><td> timezone </td></tr> <tr><td> integer </td><td> person_id </td></tr> <tr><td> integer </td><td> busy_status </td></tr> <tr><td> integer </td><td> sensitivity </td></tr> <tr><td> string </td><td> uid </td></tr> <tr><td> string </td><td> organizer_name </td></tr> <tr><td> string </td><td> organizer_email </td></tr> <tr><td> integer </td><td> meeting_status </td></tr> <tr><td> integer </td><td> original_event_id </td></tr> <tr><td> double </td><td> latitude </td></tr> <tr><td> double </td><td> longitude </td></tr> <tr><td> integer </td><td> email_id </td></tr> <tr><td> long long int </td><td> created_time </td></tr> <tr><td> long long int </td><td> last_modified_time </td></tr> <tr><td> integer </td><td> freq </td></tr> <tr><td> integer </td><td> range_type </td></tr> <tr><td> calendar time </td><td> until_time </td></tr> <tr><td> integer </td><td> count </td></tr> <tr><td> integer </td><td> interval </td></tr> <tr><td> string </td><td> bysecond </td></tr> <tr><td> string </td><td> byminute </td></tr> <tr><td> string </td><td> byhour </td></tr> <tr><td> string </td><td> byday </td></tr> <tr><td> string </td><td> bymonthday </td></tr> <tr><td> string </td><td> byyearday </td></tr> <tr><td> string </td><td> byweekno </td></tr> <tr><td> string </td><td> bymonth </td></tr> <tr><td> string </td><td> bysetpos </td></tr> <tr><td> integer </td><td> wkst </td></tr> <tr><td> string </td><td> recurrence_id </td></tr> <tr><td> string </td><td> rdate </td></tr> <tr><td> integer </td><td> has_attendee </td></tr> <tr><td> integer </td><td> has_alarm </td></tr> <tr><td> integer </td><td> calendar_system_type </td></tr> <tr><td> string </td><td> sync_data1 </td></tr> <tr><td> string </td><td> sync_data2 </td></tr> <tr><td> string </td><td> sync_data3 </td></tr> <tr><td> string </td><td> sync_data4 </td></tr> <tr><td> calendar time </td><td> start_time </td></tr> <tr><td> string </td><td> start_tzid </td></tr> <tr><td> calendar time </td><td> end_time </td></tr> <tr><td> string </td><td> end_tzid </td></tr> <tr><td> filter integer </td><td> calendar_book_visibility </td></tr> <tr><td> filter integer </td><td> calendar_book_account_id </td></tr> <tr><td> filter string </td><td> attendee_email </td></tr> <tr><td> filter string </td><td> attendee_name </td></tr> <tr><td> filter string </td><td> attendee_member </td></tr> </table>
+/// @nodoc
 final class _calendar_event_calendar_book_attendee_property_ids
     extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
@@ -4846,36 +4898,13 @@ final class _calendar_event_calendar_book_attendee_property_ids
   external int attendee_member;
 }
 
-/// @ingroup CAPI_SOCIAL_CALENDAR_SVC_MODULE
-/// @addtogroup CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_instance_utime_calendar_book _calendar_instance_utime_calendar_book view
-/// <table>
-/// <tr>
-/// <th> Type </th>
-/// <th> Property ID </th>
-/// </tr>
-/// <tr><td> string </td><td> _uri </td></tr>
-/// <tr><td> integer </td><td> event_id </td></tr>
-/// <tr><td> calendar time </td><td> start_time </td></tr>
-/// <tr><td> calendar time </td><td> end_time </td></tr>
-/// <tr><td> string </td><td> summary </td></tr>
-/// <tr><td> string </td><td> location </td></tr>
-/// <tr><td> integer </td><td> calendar_book_id </td></tr>
-/// <tr><td> string </td><td> description </td></tr>
-/// <tr><td> integer </td><td> busy_status </td></tr>
-/// <tr><td> integer </td><td> event_status </td></tr>
-/// <tr><td> integer </td><td> priority </td></tr>
-/// <tr><td> integer </td><td> sensitivity </td></tr>
-/// <tr><td> integer </td><td> has_rrule </td></tr>
-/// <tr><td> double </td><td> latitude </td></tr>
-/// <tr><td> double </td><td> longitude </td></tr>
-/// <tr><td> integer </td><td> has_alarm </td></tr>
-/// <tr><td> integer </td><td> original_event_id </td></tr>
-/// <tr><td> filter integer </td><td> calendar_book_visibility </td></tr>
-/// <tr><td> filter integer </td><td> calendar_book_account_id </td></tr>
-/// <tr><td> long long int </td><td> last_modified_time </td></tr>
-/// <tr><td> string </td><td> sync_data1 </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CALENDAR_SVC_MODULE
+/// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_instance_utime_calendar_book _calendar_instance_utime_calendar_book view <table> <tr> <th> Type </th> <th> Property ID </th> </tr> <tr><td> string </td><td> _uri </td></tr> <tr><td> integer </td><td> event_id </td></tr> <tr><td> calendar time </td><td> start_time </td></tr> <tr><td> calendar time </td><td> end_time </td></tr> <tr><td> string </td><td> summary </td></tr> <tr><td> string </td><td> location </td></tr> <tr><td> integer </td><td> calendar_book_id </td></tr> <tr><td> string </td><td> description </td></tr> <tr><td> integer </td><td> busy_status </td></tr> <tr><td> integer </td><td> event_status </td></tr> <tr><td> integer </td><td> priority </td></tr> <tr><td> integer </td><td> sensitivity </td></tr> <tr><td> integer </td><td> has_rrule </td></tr> <tr><td> double </td><td> latitude </td></tr> <tr><td> double </td><td> longitude </td></tr> <tr><td> integer </td><td> has_alarm </td></tr> <tr><td> integer </td><td> original_event_id </td></tr> <tr><td> filter integer </td><td> calendar_book_visibility </td></tr> <tr><td> filter integer </td><td> calendar_book_account_id </td></tr> <tr><td> long long int </td><td> last_modified_time </td></tr> <tr><td> string </td><td> sync_data1 </td></tr> </table>
+/// @nodoc
 final class _calendar_instance_utime_calendar_book_property_ids
     extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
@@ -4941,37 +4970,13 @@ final class _calendar_instance_utime_calendar_book_property_ids
   external int sync_data1;
 }
 
-/// @ingroup CAPI_SOCIAL_CALENDAR_SVC_MODULE
-/// @addtogroup CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_instance_localtime_calendar_book _calendar_instance_localtime_calendar_book view
-/// <table>
-/// <tr>
-/// <th> Type </th>
-/// <th> Property ID </th>
-/// </tr>
-/// <tr><td> string </td><td> _uri </td></tr>
-/// <tr><td> integer </td><td> event_id </td></tr>
-/// <tr><td> calendar time </td><td> start_time </td></tr>
-/// <tr><td> calendar time </td><td> end_time </td></tr>
-/// <tr><td> string </td><td> summary </td></tr>
-/// <tr><td> string </td><td> location </td></tr>
-/// <tr><td> integer </td><td> calendar_book_id </td></tr>
-/// <tr><td> string </td><td> description </td></tr>
-/// <tr><td> integer </td><td> busy_status </td></tr>
-/// <tr><td> integer </td><td> event_status </td></tr>
-/// <tr><td> integer </td><td> priority </td></tr>
-/// <tr><td> integer </td><td> sensitivity </td></tr>
-/// <tr><td> integer </td><td> has_rrule </td></tr>
-/// <tr><td> double </td><td> latitude </td></tr>
-/// <tr><td> double </td><td> longitude </td></tr>
-/// <tr><td> integer </td><td> has_alarm </td></tr>
-/// <tr><td> integer </td><td> original_event_id </td></tr>
-/// <tr><td> filter integer </td><td> calendar_book_visibility </td></tr>
-/// <tr><td> filter integer </td><td> calendar_book_account_id </td></tr>
-/// <tr><td> long long int </td><td> last_modified_time </td></tr>
-/// <tr><td> string </td><td> sync_data1 </td></tr>
-/// <tr><td> int </td><td> is_allday </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CALENDAR_SVC_MODULE
+/// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_instance_localtime_calendar_book _calendar_instance_localtime_calendar_book view <table> <tr> <th> Type </th> <th> Property ID </th> </tr> <tr><td> string </td><td> _uri </td></tr> <tr><td> integer </td><td> event_id </td></tr> <tr><td> calendar time </td><td> start_time </td></tr> <tr><td> calendar time </td><td> end_time </td></tr> <tr><td> string </td><td> summary </td></tr> <tr><td> string </td><td> location </td></tr> <tr><td> integer </td><td> calendar_book_id </td></tr> <tr><td> string </td><td> description </td></tr> <tr><td> integer </td><td> busy_status </td></tr> <tr><td> integer </td><td> event_status </td></tr> <tr><td> integer </td><td> priority </td></tr> <tr><td> integer </td><td> sensitivity </td></tr> <tr><td> integer </td><td> has_rrule </td></tr> <tr><td> double </td><td> latitude </td></tr> <tr><td> double </td><td> longitude </td></tr> <tr><td> integer </td><td> has_alarm </td></tr> <tr><td> integer </td><td> original_event_id </td></tr> <tr><td> filter integer </td><td> calendar_book_visibility </td></tr> <tr><td> filter integer </td><td> calendar_book_account_id </td></tr> <tr><td> long long int </td><td> last_modified_time </td></tr> <tr><td> string </td><td> sync_data1 </td></tr> <tr><td> int </td><td> is_allday </td></tr> </table>
+/// @nodoc
 final class _calendar_instance_localtime_calendar_book_property_ids
     extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
@@ -5040,41 +5045,13 @@ final class _calendar_instance_localtime_calendar_book_property_ids
   external int is_allday;
 }
 
-/// @ingroup CAPI_SOCIAL_CALENDAR_SVC_MODULE
-/// @addtogroup CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_instance_utime_calendar_book_extended _calendar_instance_utime_calendar_book_extended view
-/// <table>
-/// <tr>
-/// <th> Type </th>
-/// <th> Property ID </th>
-/// </tr>
-/// <tr><td> string </td><td> _uri </td></tr>
-/// <tr><td> integer </td><td> event_id </td></tr>
-/// <tr><td> calendar time </td><td> start_time </td></tr>
-/// <tr><td> calendar time </td><td> end_time </td></tr>
-/// <tr><td> string </td><td> summary </td></tr>
-/// <tr><td> string </td><td> location </td></tr>
-/// <tr><td> integer </td><td> calendar_book_id </td></tr>
-/// <tr><td> string </td><td> description </td></tr>
-/// <tr><td> integer </td><td> busy_status </td></tr>
-/// <tr><td> integer </td><td> event_status </td></tr>
-/// <tr><td> integer </td><td> priority </td></tr>
-/// <tr><td> integer </td><td> sensitivity </td></tr>
-/// <tr><td> integer </td><td> has_rrule </td></tr>
-/// <tr><td> double </td><td> latitude </td></tr>
-/// <tr><td> double </td><td> longitude </td></tr>
-/// <tr><td> integer </td><td> has_alarm </td></tr>
-/// <tr><td> integer </td><td> original_event_id </td></tr>
-/// <tr><td> filter integer </td><td> calendar_book_visibility </td></tr>
-/// <tr><td> filter integer </td><td> calendar_book_account_id </td></tr>
-/// <tr><td> string </td><td> organizer_name </td></tr>
-/// <tr><td> string </td><td> categories </td></tr>
-/// <tr><td> integer </td><td> has_attendee </td></tr>
-/// <tr><td> string </td><td> sync_data1 </td></tr>
-/// <tr><td> string </td><td> sync_data2 </td></tr>
-/// <tr><td> string </td><td> sync_data3 </td></tr>
-/// <tr><td> string </td><td> sync_data4 </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CALENDAR_SVC_MODULE
+/// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_instance_utime_calendar_book_extended _calendar_instance_utime_calendar_book_extended view <table> <tr> <th> Type </th> <th> Property ID </th> </tr> <tr><td> string </td><td> _uri </td></tr> <tr><td> integer </td><td> event_id </td></tr> <tr><td> calendar time </td><td> start_time </td></tr> <tr><td> calendar time </td><td> end_time </td></tr> <tr><td> string </td><td> summary </td></tr> <tr><td> string </td><td> location </td></tr> <tr><td> integer </td><td> calendar_book_id </td></tr> <tr><td> string </td><td> description </td></tr> <tr><td> integer </td><td> busy_status </td></tr> <tr><td> integer </td><td> event_status </td></tr> <tr><td> integer </td><td> priority </td></tr> <tr><td> integer </td><td> sensitivity </td></tr> <tr><td> integer </td><td> has_rrule </td></tr> <tr><td> double </td><td> latitude </td></tr> <tr><td> double </td><td> longitude </td></tr> <tr><td> integer </td><td> has_alarm </td></tr> <tr><td> integer </td><td> original_event_id </td></tr> <tr><td> filter integer </td><td> calendar_book_visibility </td></tr> <tr><td> filter integer </td><td> calendar_book_account_id </td></tr> <tr><td> string </td><td> organizer_name </td></tr> <tr><td> string </td><td> categories </td></tr> <tr><td> integer </td><td> has_attendee </td></tr> <tr><td> string </td><td> sync_data1 </td></tr> <tr><td> string </td><td> sync_data2 </td></tr> <tr><td> string </td><td> sync_data3 </td></tr> <tr><td> string </td><td> sync_data4 </td></tr> </table>
+/// @nodoc
 final class _calendar_instance_utime_calendar_book_extended_property_ids
     extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
@@ -5158,41 +5135,13 @@ final class _calendar_instance_utime_calendar_book_extended_property_ids
   external int sync_data4;
 }
 
-/// @ingroup CAPI_SOCIAL_CALENDAR_SVC_MODULE
-/// @addtogroup CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_instance_localtime_calendar_book_extended _calendar_instance_localtime_calendar_book_extended view
-/// <table>
-/// <tr>
-/// <th> Type </th>
-/// <th> Property ID </th>
-/// </tr>
-/// <tr><td> string </td><td> _uri </td></tr>
-/// <tr><td> integer </td><td> event_id </td></tr>
-/// <tr><td> calendar time </td><td> start_time </td></tr>
-/// <tr><td> calendar time </td><td> end_time </td></tr>
-/// <tr><td> string </td><td> summary </td></tr>
-/// <tr><td> string </td><td> location </td></tr>
-/// <tr><td> integer </td><td> calendar_book_id </td></tr>
-/// <tr><td> string </td><td> description </td></tr>
-/// <tr><td> integer </td><td> busy_status </td></tr>
-/// <tr><td> integer </td><td> event_status </td></tr>
-/// <tr><td> integer </td><td> priority </td></tr>
-/// <tr><td> integer </td><td> sensitivity </td></tr>
-/// <tr><td> integer </td><td> has_rrule </td></tr>
-/// <tr><td> double </td><td> latitude </td></tr>
-/// <tr><td> double </td><td> longitude </td></tr>
-/// <tr><td> integer </td><td> has_alarm </td></tr>
-/// <tr><td> integer </td><td> original_event_id </td></tr>
-/// <tr><td> filter integer </td><td> calendar_book_visibility </td></tr>
-/// <tr><td> filter integer </td><td> calendar_book_account_id </td></tr>
-/// <tr><td> string </td><td> organizer_name </td></tr>
-/// <tr><td> string </td><td> categories </td></tr>
-/// <tr><td> integer </td><td> has_attendee </td></tr>
-/// <tr><td> string </td><td> sync_data1 </td></tr>
-/// <tr><td> string </td><td> sync_data2 </td></tr>
-/// <tr><td> string </td><td> sync_data3 </td></tr>
-/// <tr><td> string </td><td> sync_data4 </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CALENDAR_SVC_MODULE
+/// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_instance_localtime_calendar_book_extended _calendar_instance_localtime_calendar_book_extended view <table> <tr> <th> Type </th> <th> Property ID </th> </tr> <tr><td> string </td><td> _uri </td></tr> <tr><td> integer </td><td> event_id </td></tr> <tr><td> calendar time </td><td> start_time </td></tr> <tr><td> calendar time </td><td> end_time </td></tr> <tr><td> string </td><td> summary </td></tr> <tr><td> string </td><td> location </td></tr> <tr><td> integer </td><td> calendar_book_id </td></tr> <tr><td> string </td><td> description </td></tr> <tr><td> integer </td><td> busy_status </td></tr> <tr><td> integer </td><td> event_status </td></tr> <tr><td> integer </td><td> priority </td></tr> <tr><td> integer </td><td> sensitivity </td></tr> <tr><td> integer </td><td> has_rrule </td></tr> <tr><td> double </td><td> latitude </td></tr> <tr><td> double </td><td> longitude </td></tr> <tr><td> integer </td><td> has_alarm </td></tr> <tr><td> integer </td><td> original_event_id </td></tr> <tr><td> filter integer </td><td> calendar_book_visibility </td></tr> <tr><td> filter integer </td><td> calendar_book_account_id </td></tr> <tr><td> string </td><td> organizer_name </td></tr> <tr><td> string </td><td> categories </td></tr> <tr><td> integer </td><td> has_attendee </td></tr> <tr><td> string </td><td> sync_data1 </td></tr> <tr><td> string </td><td> sync_data2 </td></tr> <tr><td> string </td><td> sync_data3 </td></tr> <tr><td> string </td><td> sync_data4 </td></tr> </table>
+/// @nodoc
 final class _calendar_instance_localtime_calendar_book_extended_property_ids
     extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
@@ -5279,23 +5228,13 @@ final class _calendar_instance_localtime_calendar_book_extended_property_ids
   external int sync_data4;
 }
 
-/// @ingroup CAPI_SOCIAL_CALENDAR_SVC_MODULE
-/// @addtogroup CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
-/// @section CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_extended_property _calendar_extended_property view (read only)
-/// <table>
-/// <tr>
-/// <th> Type </th>
-/// <th> Property ID </th>
-/// <th> Read, Write </th>
-/// <th> Description </th>
-/// </tr>
-/// <tr><td> string </td><td> _uri </td><td> read only </td><td></td> Identifier of this extended_property view </tr>
-/// <tr><td> integer </td><td> id </td><td> read only </td><td> DB record ID of the extended_property </td></tr>
-/// <tr><td> integer </td><td> record_id </td><td> read,write </td><td> Related record ID </td></tr>
-/// <tr><td> integer </td><td> record_type </td><td> read, write </td><td> Enumeration value of the record type (@ref calendar_record_type_e) </td></tr>
-/// <tr><td> string </td><td> key </td><td> read, write </td><td> The key of the property </td></tr>
-/// <tr><td> string </td><td> value </td><td> read, write </td><td> The value of the property </td></tr>
-/// </table>
+/// **Group:**
+/// - CAPI_SOCIAL_CALENDAR_SVC_MODULE
+/// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
+///
+/// **Section:**
+/// - CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_extended_property _calendar_extended_property view (read only) <table> <tr> <th> Type </th> <th> Property ID </th> <th> Read, Write </th> <th> Description </th> </tr> <tr><td> string </td><td> _uri </td><td> read only </td><td></td> Identifier of this extended_property view </tr> <tr><td> integer </td><td> id </td><td> read only </td><td> DB record ID of the extended_property </td></tr> <tr><td> integer </td><td> record_id </td><td> read,write </td><td> Related record ID </td></tr> <tr><td> integer </td><td> record_type </td><td> read, write </td><td> Enumeration value of the record type (`calendar_record_type_e)` </td></tr> <tr><td> string </td><td> key </td><td> read, write </td><td> The key of the property </td></tr> <tr><td> string </td><td> value </td><td> read, write </td><td> The value of the property </td></tr> </table>
+/// @nodoc
 final class _calendar_extended_property_property_ids extends ffi.Struct {
   external ffi.Pointer<ffi.Char> _uri;
 
@@ -5315,44 +5254,72 @@ final class _calendar_extended_property_property_ids extends ffi.Struct {
   external int value;
 }
 
-/// @brief Handle for calendar record.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
+/// Handle for calendar record.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0; Tv 4.0
+/// @nodoc
 typedef calendar_record_h = ffi.Pointer<__calendar_record_h>;
 
+/// @nodoc
 final class __calendar_record_h extends ffi.Opaque {}
 
-/// @brief Handle for calendar list.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
+/// Handle for calendar list.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0; Tv 4.0
+/// @nodoc
 typedef calendar_list_h = ffi.Pointer<__calendar_list_h>;
 
+/// @nodoc
 final class __calendar_list_h extends ffi.Opaque {}
 
-/// @brief Handle for calendar query.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
+/// Handle for calendar query.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0; Tv 4.0
+/// @nodoc
 typedef calendar_query_h = ffi.Pointer<__calendar_query_h>;
 
+/// @nodoc
 final class __calendar_query_h extends ffi.Opaque {}
 
-/// @brief Called when a designated view changes.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-/// @param[in] view_uri The view URI
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see calendar_db_add_changed_cb()
+/// Called when a designated view changes.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0; Tv 4.0
+///
+/// **Parameters:**
+/// - `view_uri` (in): The view URI
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `calendar_db_add_changed_cb()`
+/// @nodoc
 typedef calendar_db_changed_cb
     = ffi.Pointer<ffi.NativeFunction<calendar_db_changed_cbFunction>>;
+/// @nodoc
 typedef calendar_db_changed_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> view_uri, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcalendar_db_changed_cbFunction = void Function(
     ffi.Pointer<ffi.Char> view_uri, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Handle for calendar filter.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
+/// Handle for calendar filter.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0; Tv 4.0
+/// @nodoc
 typedef calendar_filter_h = ffi.Pointer<__calendar_filter_h>;
 
+/// @nodoc
 final class __calendar_filter_h extends ffi.Opaque {}
 
-/// @brief Enumeration for the filter match type of a string.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
+/// Enumeration for the filter match type of a string.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0; Tv 4.0
+/// @nodoc
 abstract class calendar_match_str_flag_e {
   /// < Full string, case-sensitive
   static const int CALENDAR_MATCH_EXACTLY = 0;
@@ -5376,8 +5343,11 @@ abstract class calendar_match_str_flag_e {
   static const int CALENDAR_MATCH_STR_MAX = 6;
 }
 
-/// @brief Enumeration for the filter match type of an integer.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
+/// Enumeration for the filter match type of an integer.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0; Tv 4.0
+/// @nodoc
 abstract class calendar_match_int_flag_e {
   /// < '='
   static const int CALENDAR_MATCH_EQUAL = 0;
@@ -5404,8 +5374,11 @@ abstract class calendar_match_int_flag_e {
   static const int CALENDAR_MATCH_INT_MAX = 7;
 }
 
-/// @brief The structure of time.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
+/// The structure of time.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0; Tv 4.0
+/// @nodoc
 final class calendar_time_s extends ffi.Struct {
   /// < type
   @ffi.Int32()
@@ -5414,8 +5387,11 @@ final class calendar_time_s extends ffi.Struct {
   external UnnamedUnion1 time;
 }
 
-/// @brief Enumeration for the time type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
+/// Enumeration for the time type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0; Tv 4.0
+/// @nodoc
 abstract class calendar_time_type_e {
   /// < Unix time
   static const int CALENDAR_TIME_UTIME = 0;
@@ -5424,6 +5400,7 @@ abstract class calendar_time_type_e {
   static const int CALENDAR_TIME_LOCALTIME = 1;
 }
 
+/// @nodoc
 final class UnnamedUnion1 extends ffi.Union {
   /// < utime
   @ffi.LongLong()
@@ -5432,6 +5409,7 @@ final class UnnamedUnion1 extends ffi.Union {
   external UnnamedStruct1 date;
 }
 
+/// @nodoc
 final class UnnamedStruct1 extends ffi.Struct {
   /// < year
   @ffi.Int()
@@ -5462,8 +5440,11 @@ final class UnnamedStruct1 extends ffi.Struct {
   external bool is_leap_month;
 }
 
-/// @brief Enumeration for a filter operator.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
+/// Enumeration for a filter operator.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0; Tv 4.0
+/// @nodoc
 abstract class calendar_filter_operator_e {
   /// < AND
   static const int CALENDAR_FILTER_OPERATOR_AND = 0;
@@ -5475,31 +5456,51 @@ abstract class calendar_filter_operator_e {
   static const int CALENDAR_FILTER_OPERATOR_MAX = 2;
 }
 
-/// @brief Called to get a record handle of
-/// \ref CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_event or \ref CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_todo.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-/// @param[in] record The record handle (\ref CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_event or \ref CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_todo)
-/// @param[in] user_data The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
-/// @pre calendar_vcalendar_parse_to_calendar_foreach() will invoke this callback.
-/// @see calendar_vcalendar_parse_to_calendar_foreach()
-/// @see calendar_record_get_uri_p()
+/// Called to get a record handle of `CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_event` or `CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_todo.`
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0; Tv 4.0
+///
+/// **Parameters:**
+/// - `record` (in): The record handle (`CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_event` or `CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE_calendar_todo)`
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - calendar_vcalendar_parse_to_calendar_foreach() will invoke this callback.
+///
+/// **See also:**
+/// - `calendar_vcalendar_parse_to_calendar_foreach()`
+/// - `calendar_record_get_uri_p()`
+/// @nodoc
 typedef calendar_vcalendar_parse_cb
     = ffi.Pointer<ffi.NativeFunction<calendar_vcalendar_parse_cbFunction>>;
+/// @nodoc
 typedef calendar_vcalendar_parse_cbFunction = ffi.Bool Function(
     calendar_record_h record, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcalendar_vcalendar_parse_cbFunction = bool Function(
     calendar_record_h record, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when an alarm is alerted.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @elseif TV 4.0 @endif
-/// @param[in] param Value string like id=value&time=value&tick=value&unit=value&type=value
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see calendar_reminder_add_cb()
+/// Called when an alarm is alerted.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0; Tv 4.0
+///
+/// **Parameters:**
+/// - `param` (in): Value string like id=value&time=value&tick=value&unit=value&type=value
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `calendar_reminder_add_cb()`
+/// @nodoc
 typedef calendar_reminder_cb
     = ffi.Pointer<ffi.NativeFunction<calendar_reminder_cbFunction>>;
+/// @nodoc
 typedef calendar_reminder_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> param, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcalendar_reminder_cbFunction = void Function(
     ffi.Pointer<ffi.Char> param, ffi.Pointer<ffi.Void> user_data);

@@ -1,3 +1,6 @@
+/// {@category 6.5/tizen}
+library tizen_interop_6_5.capi_media_streamer;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -11,6 +14,7 @@ import 'generated_bindings_capi_media_tool.dart' as media_tool;
 import 'generated_bindings_bundle.dart' as bundle;
 
 /// Dart bindings for Tizen capi-media-streamer APIs.
+/// {@category 6.5/tizen}
 class Tizen65CapiMediaStreamer {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -26,28 +30,41 @@ class Tizen65CapiMediaStreamer {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Sets a error callback function to be invoked when an error occurs.
-  /// @since_tizen 3.0
-  /// @remarks Following error codes can be delivered by error callback.\n
-  /// #MEDIA_STREAMER_ERROR_INVALID_OPERATION,\n
-  /// #MEDIA_STREAMER_ERROR_FILE_NO_SPACE_ON_DEVICE,\n
-  /// #MEDIA_STREAMER_ERROR_NOT_SUPPORTED,\n
-  /// #MEDIA_STREAMER_ERROR_CONNECTION_FAILED,\n
-  /// #MEDIA_STREAMER_ERROR_RESOURCE_CONFLICT
-  /// @param[in] streamer  Media streamer handle
-  /// @param[in] callback  Callback function pointer
-  /// @param[in] user_data The user data passed from the code where
-  /// media_streamer_set_error_cb() was invoked
-  /// This data will be accessible from media_streamer_error_cb()
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @pre Create a media streamer handle by calling media_streamer_create().
-  /// @post media_streamer_error_cb() will be invoked.
-  /// @see media_streamer_unset_error_cb()
-  /// @see media_streamer_error_cb()
+  /// Sets a error callback function to be invoked when an error occurs.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Following error codes can be delivered by error callback.
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`,
+  /// - `MEDIA_STREAMER_ERROR_FILE_NO_SPACE_ON_DEVICE`,
+  /// - `MEDIA_STREAMER_ERROR_NOT_SUPPORTED`,
+  /// - `MEDIA_STREAMER_ERROR_CONNECTION_FAILED`,
+  /// - `MEDIA_STREAMER_ERROR_RESOURCE_CONFLICT`
+  ///
+  /// **Parameters:**
+  /// - `streamer` (in): Media streamer handle
+  /// - `callback` (in): Callback function pointer
+  /// - `user_data` (in): The user data passed from the code where media_streamer_set_error_cb() was invoked This data will be accessible from media_streamer_error_cb()
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media streamer handle by calling media_streamer_create().
+  ///
+  /// **Postconditions:**
+  /// - media_streamer_error_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `media_streamer_unset_error_cb()`
+  /// - `media_streamer_error_cb()`
   int media_streamer_set_error_cb(
     media_streamer_h streamer,
     media_streamer_error_cb callback,
@@ -69,15 +86,24 @@ class Tizen65CapiMediaStreamer {
           int Function(media_streamer_h, media_streamer_error_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the error callback function.
-  /// @since_tizen 3.0
-  /// @param[in] streamer  Media streamer handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @see media_streamer_error_cb()
+  /// Unsets the error callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `streamer` (in): Media streamer handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `media_streamer_error_cb()`
   int media_streamer_unset_error_cb(
     media_streamer_h streamer,
   ) {
@@ -92,22 +118,33 @@ class Tizen65CapiMediaStreamer {
   late final _media_streamer_unset_error_cb = _media_streamer_unset_error_cbPtr
       .asFunction<int Function(media_streamer_h)>();
 
-  /// @brief Sets a callback that will be triggered after media streamer state is changed.
-  /// @since_tizen 3.0
-  /// @param[in] streamer  Media streamer handle
-  /// @param[in] callback  Callback function pointer
-  /// @param[in] user_data The user data passed from the code
-  /// where media_streamer_set_state_change_cb() was invoked
-  /// This data will be accessible from media_streamer_state_changed_cb()
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @pre Create a media streamer handle by calling media_streamer_create().
-  /// @post media_streamer_state_changed_cb() will be invoked.
-  /// @see media_streamer_unset_state_change_cb()
-  /// @see media_streamer_state_changed_cb()
+  /// Sets a callback that will be triggered after media streamer state is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `streamer` (in): Media streamer handle
+  /// - `callback` (in): Callback function pointer
+  /// - `user_data` (in): The user data passed from the code where media_streamer_set_state_change_cb() was invoked This data will be accessible from media_streamer_state_changed_cb()
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media streamer handle by calling media_streamer_create().
+  ///
+  /// **Postconditions:**
+  /// - media_streamer_state_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `media_streamer_unset_state_change_cb()`
+  /// - `media_streamer_state_changed_cb()`
   int media_streamer_set_state_change_cb(
     media_streamer_h streamer,
     media_streamer_state_changed_cb callback,
@@ -129,15 +166,24 @@ class Tizen65CapiMediaStreamer {
           int Function(media_streamer_h, media_streamer_state_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the state changed callback function.
-  /// @since_tizen 3.0
-  /// @param[in] streamer  Media streamer handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @see media_streamer_set_state_change_cb()
+  /// Unsets the state changed callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `streamer` (in): Media streamer handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `media_streamer_set_state_change_cb()`
   int media_streamer_unset_state_change_cb(
     media_streamer_h streamer,
   ) {
@@ -153,19 +199,30 @@ class Tizen65CapiMediaStreamer {
       _media_streamer_unset_state_change_cbPtr
           .asFunction<int Function(media_streamer_h)>();
 
-  /// @brief Sets a callback function to be invoked when the media streamer is interrupted.
-  /// @since_tizen 3.0
-  /// @param[in] streamer  Media streamer handle
-  /// @param[in] callback  The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @post media_streamer_interrupted_cb() will be invoked.
-  /// @see media_streamer_unset_interrupted_cb()
-  /// @see #media_streamer_interrupted_code_e
+  /// Sets a callback function to be invoked when the media streamer is interrupted.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `streamer` (in): Media streamer handle
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Postconditions:**
+  /// - media_streamer_interrupted_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `media_streamer_unset_interrupted_cb()`
+  /// - `media_streamer_interrupted_code_e`
   int media_streamer_set_interrupted_cb(
     media_streamer_h streamer,
     media_streamer_interrupted_cb callback,
@@ -187,15 +244,24 @@ class Tizen65CapiMediaStreamer {
           int Function(media_streamer_h, media_streamer_interrupted_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback function.
-  /// @since_tizen 3.0
-  /// @param[in] streamer Media streamer handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @see media_streamer_set_interrupted_cb()
+  /// Unsets the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `streamer` (in): Media streamer handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `media_streamer_set_interrupted_cb()`
   int media_streamer_unset_interrupted_cb(
     media_streamer_h streamer,
   ) {
@@ -211,25 +277,39 @@ class Tizen65CapiMediaStreamer {
       _media_streamer_unset_interrupted_cbPtr
           .asFunction<int Function(media_streamer_h)>();
 
-  /// @brief Sets a callback function to be invoked when buffer underrun or overflow is occurred.
-  /// @details This function can be called only for #MEDIA_STREAMER_NODE_SRC_TYPE_CUSTOM source type node.
-  /// @since_tizen 3.0
-  /// @remarks This function is used for media stream playback only.
-  /// @param[in] src       Media streamer source node handle
-  /// @param[in] callback  The buffer status callback function to register
-  /// @param[in] user_data The user data passed from the code where
-  /// media_streamer_src_set_buffer_status_cb() was invoked
-  /// This data will be accessible from media_streamer_custom_buffer_status_cb()
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @pre Create a media streamer source node handle by calling media_streamer_node_create_src().
-  /// @pre Add created media streamer source node to media streamer by calling media_streamer_node_add().
-  /// @post media_streamer_custom_buffer_status_cb() will be invoked.
-  /// @see media_streamer_src_unset_buffer_status_cb()
-  /// @see media_streamer_custom_buffer_status_cb()
+  /// Sets a callback function to be invoked when buffer underrun or overflow is occurred.
+  ///
+  /// This function can be called only for `MEDIA_STREAMER_NODE_SRC_TYPE_CUSTOM` source type node.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - This function is used for media stream playback only.
+  ///
+  /// **Parameters:**
+  /// - `src` (in): Media streamer source node handle
+  /// - `callback` (in): The buffer status callback function to register
+  /// - `user_data` (in): The user data passed from the code where media_streamer_src_set_buffer_status_cb() was invoked This data will be accessible from media_streamer_custom_buffer_status_cb()
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media streamer source node handle by calling media_streamer_node_create_src().
+  /// - Add created media streamer source node to media streamer by calling media_streamer_node_add().
+  ///
+  /// **Postconditions:**
+  /// - media_streamer_custom_buffer_status_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `media_streamer_src_unset_buffer_status_cb()`
+  /// - `media_streamer_custom_buffer_status_cb()`
   int media_streamer_src_set_buffer_status_cb(
     media_streamer_node_h src,
     media_streamer_custom_buffer_status_cb callback,
@@ -254,15 +334,24 @@ class Tizen65CapiMediaStreamer {
           int Function(media_streamer_node_h,
               media_streamer_custom_buffer_status_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the source buffer status callback function.
-  /// @since_tizen 3.0
-  /// @param[in] src    Media streamer source node handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @see media_streamer_src_set_buffer_status_cb()
+  /// Unsets the source buffer status callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `src` (in): Media streamer source node handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `media_streamer_src_set_buffer_status_cb()`
   int media_streamer_src_unset_buffer_status_cb(
     media_streamer_node_h src,
   ) {
@@ -278,24 +367,36 @@ class Tizen65CapiMediaStreamer {
       _media_streamer_src_unset_buffer_status_cbPtr
           .asFunction<int Function(media_streamer_node_h)>();
 
-  /// @brief Sets a callback function to be called when the custom sink is ready for data processing.
-  /// @details This function can be called only for #MEDIA_STREAMER_NODE_SINK_TYPE_CUSTOM sink type node.
-  /// @since_tizen 3.0
-  /// @param[in] sink      Media streamer sink node handle
-  /// @param[in] callback  Callback function pointer
-  /// @param[in] user_data The user data passed from the code where
-  /// media_streamer_sink_set_data_ready_cb() was invoked
-  /// This data will be accessible from media_streamer_sink_data_ready_cb()
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @pre Create a media streamer sink handle by calling media_streamer_node_create_sink().
-  /// @pre Add created media streamer sink node to media streamer by calling media_streamer_node_add().
-  /// @post media_streamer_sink_data_ready_cb() will be invoked.
-  /// @see media_streamer_sink_unset_data_ready_cb()
-  /// @see media_streamer_sink_data_ready_cb()
+  /// Sets a callback function to be called when the custom sink is ready for data processing.
+  ///
+  /// This function can be called only for `MEDIA_STREAMER_NODE_SINK_TYPE_CUSTOM` sink type node.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `sink` (in): Media streamer sink node handle
+  /// - `callback` (in): Callback function pointer
+  /// - `user_data` (in): The user data passed from the code where media_streamer_sink_set_data_ready_cb() was invoked This data will be accessible from media_streamer_sink_data_ready_cb()
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media streamer sink handle by calling media_streamer_node_create_sink().
+  /// - Add created media streamer sink node to media streamer by calling media_streamer_node_add().
+  ///
+  /// **Postconditions:**
+  /// - media_streamer_sink_data_ready_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `media_streamer_sink_unset_data_ready_cb()`
+  /// - `media_streamer_sink_data_ready_cb()`
   int media_streamer_sink_set_data_ready_cb(
     media_streamer_node_h sink,
     media_streamer_sink_data_ready_cb callback,
@@ -319,15 +420,24 @@ class Tizen65CapiMediaStreamer {
           int Function(media_streamer_node_h, media_streamer_sink_data_ready_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the sink data ready callback function.
-  /// @since_tizen 3.0
-  /// @param[in] sink    Media streamer sink node handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @see media_streamer_sink_set_data_ready_cb()
+  /// Unsets the sink data ready callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `sink` (in): Media streamer sink node handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `media_streamer_sink_set_data_ready_cb()`
   int media_streamer_sink_unset_data_ready_cb(
     media_streamer_node_h sink,
   ) {
@@ -343,23 +453,34 @@ class Tizen65CapiMediaStreamer {
       _media_streamer_sink_unset_data_ready_cbPtr
           .asFunction<int Function(media_streamer_node_h)>();
 
-  /// @brief Sets a callback function to be called when custom sink detect the end-of-stream.
-  /// @since_tizen 3.0
-  /// @param[in] sink      Media streamer sink node handle
-  /// @param[in] callback  Callback function pointer
-  /// @param[in] user_data The user data passed from the code where
-  /// media_streamer_sink_set_eos_cb() was invoked.
-  /// This data will be accessible from media_streamer_sink_eos_cb()
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @pre Create a media streamer sink handle by calling media_streamer_node_create_sink().
-  /// @pre Add created media streamer sink node to media streamer by calling media_streamer_node_add().
-  /// @post media_streamer_sink_eos_cb() will be invoked.
-  /// @see media_streamer_sink_unset_eos_cb()
-  /// @see media_streamer_sink_eos_cb()
+  /// Sets a callback function to be called when custom sink detect the end-of-stream.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `sink` (in): Media streamer sink node handle
+  /// - `callback` (in): Callback function pointer
+  /// - `user_data` (in): The user data passed from the code where media_streamer_sink_set_eos_cb() was invoked. This data will be accessible from media_streamer_sink_eos_cb()
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media streamer sink handle by calling media_streamer_node_create_sink().
+  /// - Add created media streamer sink node to media streamer by calling media_streamer_node_add().
+  ///
+  /// **Postconditions:**
+  /// - media_streamer_sink_eos_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `media_streamer_sink_unset_eos_cb()`
+  /// - `media_streamer_sink_eos_cb()`
   int media_streamer_sink_set_eos_cb(
     media_streamer_node_h sink,
     media_streamer_sink_eos_cb callback,
@@ -381,15 +502,24 @@ class Tizen65CapiMediaStreamer {
           int Function(media_streamer_node_h, media_streamer_sink_eos_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the sink end-of-stream callback function.
-  /// @since_tizen 3.0
-  /// @param[in] sink    Media streamer sink node handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @see media_streamer_sink_set_eos_cb()
+  /// Unsets the sink end-of-stream callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `sink` (in): Media streamer sink node handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `media_streamer_sink_set_eos_cb()`
   int media_streamer_sink_unset_eos_cb(
     media_streamer_node_h sink,
   ) {
@@ -405,18 +535,30 @@ class Tizen65CapiMediaStreamer {
       _media_streamer_sink_unset_eos_cbPtr
           .asFunction<int Function(media_streamer_node_h)>();
 
-  /// @brief Creates an instance of media streamer and
-  /// passes the handle to the caller.
-  /// @since_tizen 3.0
-  /// @remarks The @a streamer should be released using media_streamer_destroy().
-  /// @param[out] streamer    Media streamer handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @post The media streamer state will be #MEDIA_STREAMER_STATE_IDLE.
-  /// @see media_streamer_destroy()
+  /// Creates an instance of media streamer and passes the handle to the caller.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `streamer` should be released using media_streamer_destroy().
+  ///
+  /// **Parameters:**
+  /// - `streamer` (out): Media streamer handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Postconditions:**
+  /// - The media streamer state will be `MEDIA_STREAMER_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `media_streamer_destroy()`
   int media_streamer_create(
     ffi.Pointer<media_streamer_h> streamer,
   ) {
@@ -431,22 +573,33 @@ class Tizen65CapiMediaStreamer {
   late final _media_streamer_create = _media_streamer_createPtr
       .asFunction<int Function(ffi.Pointer<media_streamer_h>)>();
 
-  /// @brief Sets media streamer state to #MEDIA_STREAMER_STATE_READY.
-  /// @since_tizen 3.0
-  /// @param[in] streamer     Media streamer handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_STATE Invalid state
-  /// @pre The media streamer state must be set to #MEDIA_STREAMER_STATE_IDLE
-  /// by calling media_streamer_create() or media_streamer_unprepare().
-  /// @pre At least one source and one sink should be added and linked in the streamer
-  /// by calling media_streamer_node_create_src(), media_streamer_node_create_sink() and media_streamer_node_link().
-  /// @post The media streamer state will be #MEDIA_STREAMER_STATE_READY.
-  /// @see media_streamer_unprepare()
-  /// @see media_streamer_create()
+  /// Sets media streamer state to `MEDIA_STREAMER_STATE_READY`.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `streamer` (in): Media streamer handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_STREAMER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The media streamer state must be set to `MEDIA_STREAMER_STATE_IDLE` by calling media_streamer_create() or media_streamer_unprepare().
+  /// - At least one source and one sink should be added and linked in the streamer by calling media_streamer_node_create_src(), media_streamer_node_create_sink() and media_streamer_node_link().
+  ///
+  /// **Postconditions:**
+  /// - The media streamer state will be `MEDIA_STREAMER_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `media_streamer_unprepare()`
+  /// - `media_streamer_create()`
   int media_streamer_prepare(
     media_streamer_h streamer,
   ) {
@@ -461,19 +614,33 @@ class Tizen65CapiMediaStreamer {
   late final _media_streamer_prepare =
       _media_streamer_preparePtr.asFunction<int Function(media_streamer_h)>();
 
-  /// @brief Sets media streamer state to #MEDIA_STREAMER_STATE_IDLE.
-  /// @details The most recently used media is reset and no longer associated with the media streamer.
-  /// @since_tizen 3.0
-  /// @param[in] streamer     Media streamer handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_STATE Invalid state
-  /// @pre The media streamer state should be higher than #MEDIA_STREAMER_STATE_IDLE.
-  /// @post The media streamer state will be #MEDIA_STREAMER_STATE_IDLE.
-  /// @see media_streamer_prepare()
+  /// Sets media streamer state to `MEDIA_STREAMER_STATE_IDLE`.
+  ///
+  /// The most recently used media is reset and no longer associated with the media streamer.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `streamer` (in): Media streamer handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_STREAMER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The media streamer state should be higher than `MEDIA_STREAMER_STATE_IDLE`.
+  ///
+  /// **Postconditions:**
+  /// - The media streamer state will be `MEDIA_STREAMER_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `media_streamer_prepare()`
   int media_streamer_unprepare(
     media_streamer_h streamer,
   ) {
@@ -488,22 +655,35 @@ class Tizen65CapiMediaStreamer {
   late final _media_streamer_unprepare =
       _media_streamer_unpreparePtr.asFunction<int Function(media_streamer_h)>();
 
-  /// @brief Sets media streamer state to #MEDIA_STREAMER_STATE_PLAYING.
-  /// @details Start running the current streamer, or resumes it if paused.
-  /// @since_tizen 3.0
-  /// @param[in] streamer     Media streamer handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_STATE Invalid state
-  /// @pre The media streamer state must be set to #MEDIA_STREAMER_STATE_READY by calling media_streamer_prepare() or
-  /// set to #MEDIA_STREAMER_STATE_PAUSED by calling media_streamer_pause().
-  /// @post The media streamer state will be #MEDIA_STREAMER_STATE_PLAYING.
-  /// @see media_streamer_create()
-  /// @see media_streamer_pause()
-  /// @see media_streamer_stop()
+  /// Sets media streamer state to `MEDIA_STREAMER_STATE_PLAYING`.
+  ///
+  /// Start running the current streamer, or resumes it if paused.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `streamer` (in): Media streamer handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_STREAMER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The media streamer state must be set to `MEDIA_STREAMER_STATE_READY` by calling media_streamer_prepare() or set to `MEDIA_STREAMER_STATE_PAUSED` by calling media_streamer_pause().
+  ///
+  /// **Postconditions:**
+  /// - The media streamer state will be `MEDIA_STREAMER_STATE_PLAYING`.
+  ///
+  /// **See also:**
+  /// - `media_streamer_create()`
+  /// - `media_streamer_pause()`
+  /// - `media_streamer_stop()`
   int media_streamer_play(
     media_streamer_h streamer,
   ) {
@@ -518,19 +698,32 @@ class Tizen65CapiMediaStreamer {
   late final _media_streamer_play =
       _media_streamer_playPtr.asFunction<int Function(media_streamer_h)>();
 
-  /// @brief Pauses the media streamer.
-  /// @since_tizen 3.0
-  /// @param[in] streamer     Media streamer handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_STATE Invalid state
-  /// @pre The media streamer state must be set to #MEDIA_STREAMER_STATE_PLAYING.
-  /// @post The media streamer state will be #MEDIA_STREAMER_STATE_PAUSED.
-  /// @see media_streamer_create()
-  /// @see media_streamer_play()
+  /// Pauses the media streamer.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `streamer` (in): Media streamer handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_STREAMER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The media streamer state must be set to `MEDIA_STREAMER_STATE_PLAYING`.
+  ///
+  /// **Postconditions:**
+  /// - The media streamer state will be `MEDIA_STREAMER_STATE_PAUSED`.
+  ///
+  /// **See also:**
+  /// - `media_streamer_create()`
+  /// - `media_streamer_play()`
   int media_streamer_pause(
     media_streamer_h streamer,
   ) {
@@ -545,21 +738,33 @@ class Tizen65CapiMediaStreamer {
   late final _media_streamer_pause =
       _media_streamer_pausePtr.asFunction<int Function(media_streamer_h)>();
 
-  /// @brief Stops the media streamer.
-  /// @since_tizen 3.0
-  /// @param[in] streamer     Media streamer handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_STATE Invalid state
-  /// @pre The media streamer state must be set to #MEDIA_STREAMER_STATE_PLAYING by calling media_streamer_play() or
-  /// set to #MEDIA_STREAMER_STATE_PAUSED by calling media_streamer_pause().
-  /// @post The media streamer state will be #MEDIA_STREAMER_STATE_READY.
-  /// @see media_streamer_create()
-  /// @see media_streamer_play()
-  /// @see media_streamer_pause()
+  /// Stops the media streamer.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `streamer` (in): Media streamer handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_STREAMER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The media streamer state must be set to `MEDIA_STREAMER_STATE_PLAYING` by calling media_streamer_play() or set to `MEDIA_STREAMER_STATE_PAUSED` by calling media_streamer_pause().
+  ///
+  /// **Postconditions:**
+  /// - The media streamer state will be `MEDIA_STREAMER_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `media_streamer_create()`
+  /// - `media_streamer_play()`
+  /// - `media_streamer_pause()`
   int media_streamer_stop(
     media_streamer_h streamer,
   ) {
@@ -574,23 +779,38 @@ class Tizen65CapiMediaStreamer {
   late final _media_streamer_stop =
       _media_streamer_stopPtr.asFunction<int Function(media_streamer_h)>();
 
-  /// @brief Destroys media streamer.
-  /// @since_tizen 3.0
-  /// @remarks Nodes in streamer will be removed automatically.
-  /// Don't need to remove nodes by calling media_streamer_node_remove().
-  /// If you want to change the node without destroying streamer handle,
-  /// you can call the media_streamer_node_remove().
-  /// after setting the streamer state to #MEDIA_STREAMER_STATE_IDLE state.
-  /// @param[in] streamer     Media streamer handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_STATE Invalid state
-  /// @pre Create a media streamer handle by calling media_streamer_create().
-  /// @post The media streamer state will be #MEDIA_STREAMER_STATE_NONE.
-  /// @see media_streamer_create()
+  /// Destroys media streamer.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Nodes in streamer will be removed automatically.
+  /// - Don't need to remove nodes by calling media_streamer_node_remove().
+  /// - If you want to change the node without destroying streamer handle,
+  /// - you can call the media_streamer_node_remove().
+  /// - after setting the streamer state to `MEDIA_STREAMER_STATE_IDLE` state.
+  ///
+  /// **Parameters:**
+  /// - `streamer` (in): Media streamer handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_STREAMER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - Create a media streamer handle by calling media_streamer_create().
+  ///
+  /// **Postconditions:**
+  /// - The media streamer state will be `MEDIA_STREAMER_STATE_NONE`.
+  ///
+  /// **See also:**
+  /// - `media_streamer_create()`
   int media_streamer_destroy(
     media_streamer_h streamer,
   ) {
@@ -605,24 +825,36 @@ class Tizen65CapiMediaStreamer {
   late final _media_streamer_destroy =
       _media_streamer_destroyPtr.asFunction<int Function(media_streamer_h)>();
 
-  /// @brief Changes playback position to the defined time value, asynchronously.
-  /// @since_tizen 3.0
-  /// @param[in] streamer     Media streamer handle
-  /// @param[in] time         Time in millisecond
-  /// @param[in] accurate     If @c true, it will seek to the accurate position, but this might be considerably slower for some formats,
-  /// otherwise @c false, it will seek to the nearest keyframe
-  /// @param[in] callback     The callback function to register
-  /// @param[in] user_data    The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE    Successful
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_STATE Invalid state
-  /// @retval #MEDIA_STREAMER_ERROR_SEEK_FAILED Seek operation failure
-  /// @pre The media streamer state must be one of these: #MEDIA_STREAMER_STATE_PAUSED, or #MEDIA_STREAMER_STATE_PLAYING.
-  /// @post It invokes media_streamer_set_play_position() when seek operation completes, if you set a callback.
-  /// @see media_streamer_get_play_position()
+  /// Changes playback position to the defined time value, asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `streamer` (in): Media streamer handle
+  /// - `time` (in): Time in millisecond
+  /// - `accurate` (in): If `true`, it will seek to the accurate position, but this might be considerably slower for some formats, otherwise `false`, it will seek to the nearest keyframe
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_STREAMER_ERROR_INVALID_STATE`: Invalid state
+  /// - `MEDIA_STREAMER_ERROR_SEEK_FAILED`: Seek operation failure
+  ///
+  /// **Preconditions:**
+  /// - The media streamer state must be one of these: `MEDIA_STREAMER_STATE_PAUSED`, or `MEDIA_STREAMER_STATE_PLAYING`.
+  ///
+  /// **Postconditions:**
+  /// - It invokes media_streamer_set_play_position() when seek operation completes, if you set a callback.
+  ///
+  /// **See also:**
+  /// - `media_streamer_get_play_position()`
   int media_streamer_set_play_position(
     media_streamer_h streamer,
     int time,
@@ -652,18 +884,29 @@ class Tizen65CapiMediaStreamer {
           int Function(media_streamer_h, int, bool,
               media_streamer_position_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the current position in milliseconds.
-  /// @since_tizen 3.0
-  /// @param[in]  streamer     Media streamer handle
-  /// @param[out] time         The current position in milliseconds
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_STATE Invalid state
-  /// @pre The media streamer state must be one of these: #MEDIA_STREAMER_STATE_PAUSED, or #MEDIA_STREAMER_STATE_PLAYING.
-  /// @see media_streamer_set_play_position()
+  /// Gets the current position in milliseconds.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `streamer` (in): Media streamer handle
+  /// - `time` (out): The current position in milliseconds
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_STREAMER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The media streamer state must be one of these: `MEDIA_STREAMER_STATE_PAUSED`, or `MEDIA_STREAMER_STATE_PLAYING`.
+  ///
+  /// **See also:**
+  /// - `media_streamer_set_play_position()`
   int media_streamer_get_play_position(
     media_streamer_h streamer,
     ffi.Pointer<ffi.Int> time,
@@ -682,19 +925,30 @@ class Tizen65CapiMediaStreamer {
       _media_streamer_get_play_positionPtr
           .asFunction<int Function(media_streamer_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the total running time of the associated media.
-  /// @since_tizen 3.0
-  /// @remarks The streamer's source node type should be #MEDIA_STREAMER_NODE_SRC_TYPE_FILE or #MEDIA_STREAMER_NODE_SRC_TYPE_HTTP.\n
-  /// If not, return value will be #MEDIA_STREAMER_ERROR_NONE and duration will be -1.
-  /// @param[in]  streamer     Media streamer handle
-  /// @param[out] duration     The duration in milliseconds
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_STATE Invalid state
-  /// @pre The media streamer state must be one of these: #MEDIA_STREAMER_STATE_PAUSED, or #MEDIA_STREAMER_STATE_PLAYING.
+  /// Gets the total running time of the associated media.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The streamer's source node type should be `MEDIA_STREAMER_NODE_SRC_TYPE_FILE` or `MEDIA_STREAMER_NODE_SRC_TYPE_HTTP`.
+  /// - If not, return value will be `MEDIA_STREAMER_ERROR_NONE` and duration will be -1.
+  ///
+  /// **Parameters:**
+  /// - `streamer` (in): Media streamer handle
+  /// - `duration` (out): The duration in milliseconds
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_STREAMER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The media streamer state must be one of these: `MEDIA_STREAMER_STATE_PAUSED`, or `MEDIA_STREAMER_STATE_PLAYING`.
   int media_streamer_get_duration(
     media_streamer_h streamer,
     ffi.Pointer<ffi.Int> duration,
@@ -712,17 +966,28 @@ class Tizen65CapiMediaStreamer {
   late final _media_streamer_get_duration = _media_streamer_get_durationPtr
       .asFunction<int Function(media_streamer_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets media streamer state.
-  /// @since_tizen 3.0
-  /// @param[in]  streamer     Media streamer handle
-  /// @param[out] state        Media streamer state
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE    Successful
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @pre Create a media streamer handle by calling media_streamer_create().
-  /// @see #media_streamer_state_e
+  /// Gets media streamer state.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `streamer` (in): Media streamer handle
+  /// - `state` (out): Media streamer state
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media streamer handle by calling media_streamer_create().
+  ///
+  /// **See also:**
+  /// - `media_streamer_state_e`
   int media_streamer_get_state(
     media_streamer_h streamer,
     ffi.Pointer<ffi.Int32> state,
@@ -740,23 +1005,34 @@ class Tizen65CapiMediaStreamer {
   late final _media_streamer_get_state = _media_streamer_get_statePtr
       .asFunction<int Function(media_streamer_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Creates media streamer source node.
-  /// @since_tizen 3.0
-  /// @remarks The internet privilege(%http://tizen.org/privilege/internet) should be added if any URIs are used to play from network.\n
-  /// The camera privilege(%http://tizen.org/privilege/camera) should be added if the source node handles the camera device.\n
-  /// The recorder privilege(%http://tizen.org/privilege/recorder) should be added if the source node handles the recorder device.\n
-  /// You can release the @a src using media_streamer_node_destroy().
-  /// @param[in]  type     Media streamer source node type
-  /// @param[out] src      Media streamer source node handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_STREAMER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @see #media_streamer_node_src_type_e
-  /// @see media_streamer_node_destroy()
+  /// Creates media streamer source node.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The internet privilege(http://tizen.org/privilege/internet) should be added if any URIs are used to play from network.
+  /// - The camera privilege(http://tizen.org/privilege/camera) should be added if the source node handles the camera device.
+  /// - The recorder privilege(http://tizen.org/privilege/recorder) should be added if the source node handles the recorder device.
+  /// - You can release the `src` using media_streamer_node_destroy().
+  ///
+  /// **Parameters:**
+  /// - `type` (in): Media streamer source node type
+  /// - `src` (out): Media streamer source node handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_STREAMER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `media_streamer_node_src_type_e`
+  /// - `media_streamer_node_destroy()`
   int media_streamer_node_create_src(
     int type,
     ffi.Pointer<media_streamer_node_h> src,
@@ -775,19 +1051,31 @@ class Tizen65CapiMediaStreamer {
       _media_streamer_node_create_srcPtr
           .asFunction<int Function(int, ffi.Pointer<media_streamer_node_h>)>();
 
-  /// @brief Pushes packet into custom source node.
-  /// @details This function can be called only for #MEDIA_STREAMER_NODE_SRC_TYPE_CUSTOM type node.
-  /// @since_tizen 3.0
-  /// @param[in] src       Media streamer source node handle
-  /// @param[in] packet    Media packet handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @pre Create a source node handle by calling media_streamer_node_create_src().
-  /// @pre The media streamer state must be set to #MEDIA_STREAMER_STATE_IDLE at least.
-  /// @see #media_packet_h
+  /// Pushes packet into custom source node.
+  ///
+  /// This function can be called only for `MEDIA_STREAMER_NODE_SRC_TYPE_CUSTOM` type node.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `src` (in): Media streamer source node handle
+  /// - `packet` (in): Media packet handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a source node handle by calling media_streamer_node_create_src().
+  /// - The media streamer state must be set to `MEDIA_STREAMER_STATE_IDLE` at least.
+  ///
+  /// **See also:**
+  /// - `media_packet_h`
   int media_streamer_node_push_packet(
     media_streamer_node_h src,
     media_tool.media_packet_h packet,
@@ -806,23 +1094,34 @@ class Tizen65CapiMediaStreamer {
       _media_streamer_node_push_packetPtr.asFunction<
           int Function(media_streamer_node_h, media_tool.media_packet_h)>();
 
-  /// @brief Creates media streamer sink node.
-  /// @since_tizen 3.0
-  /// @remarks The internet privilege(%http://tizen.org/privilege/internet) should be added if any URIs are used to transmit the output data.\n
-  /// You can release the @a sink using media_streamer_node_destroy().\n
-  /// If @a type is #MEDIA_STREAMER_NODE_SINK_TYPE_ADAPTIVE, the HTTP server will be started and the server will be able to transmit the output data to the other device.
-  /// The application must have an authentication responsibility between a server and client because the data transmission is not secure.
-  /// @param[in]  type     Type of sink node to be created
-  /// @param[out] sink     Media streamer sink node handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_STREAMER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @see #media_streamer_node_sink_type_e
-  /// @see media_streamer_node_destroy()
+  /// Creates media streamer sink node.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The internet privilege(http://tizen.org/privilege/internet) should be added if any URIs are used to transmit the output data.
+  /// - You can release the `sink` using media_streamer_node_destroy().
+  /// - If `type` is `MEDIA_STREAMER_NODE_SINK_TYPE_ADAPTIVE`, the HTTP server will be started and the server will be able to transmit the output data to the other device.
+  /// - The application must have an authentication responsibility between a server and client because the data transmission is not secure.
+  ///
+  /// **Parameters:**
+  /// - `type` (in): Type of sink node to be created
+  /// - `sink` (out): Media streamer sink node handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_STREAMER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `media_streamer_node_sink_type_e`
+  /// - `media_streamer_node_destroy()`
   int media_streamer_node_create_sink(
     int type,
     ffi.Pointer<media_streamer_node_h> sink,
@@ -841,22 +1140,36 @@ class Tizen65CapiMediaStreamer {
       _media_streamer_node_create_sinkPtr
           .asFunction<int Function(int, ffi.Pointer<media_streamer_node_h>)>();
 
-  /// @brief Pulls packet from custom sink node.
-  /// @details This function can be called only for #MEDIA_STREAMER_NODE_SINK_TYPE_CUSTOM type node.
-  /// @since_tizen 3.0
-  /// @remarks The @a packet should be released using media_packet_destroy().
-  /// @param[in] sink      Media streamer sink node handle
-  /// @param[out] packet   Media packet handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_STATE Invalid state
-  /// @pre Create a sink node handle by calling media_streamer_node_create_sink().
-  /// @pre Set media_streamer_sink_data_ready_cb() by calling media_streamer_sink_set_data_ready_cb().
-  /// @see #media_packet_h
-  /// @see media_streamer_node_create_sink()
+  /// Pulls packet from custom sink node.
+  ///
+  /// This function can be called only for `MEDIA_STREAMER_NODE_SINK_TYPE_CUSTOM` type node.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `packet` should be released using media_packet_destroy().
+  ///
+  /// **Parameters:**
+  /// - `sink` (in): Media streamer sink node handle
+  /// - `packet` (out): Media packet handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_STREAMER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - Create a sink node handle by calling media_streamer_node_create_sink().
+  /// - Set media_streamer_sink_data_ready_cb() by calling media_streamer_sink_set_data_ready_cb().
+  ///
+  /// **See also:**
+  /// - `media_packet_h`
+  /// - `media_streamer_node_create_sink()`
   int media_streamer_node_pull_packet(
     media_streamer_node_h sink,
     ffi.Pointer<media_tool.media_packet_h> packet,
@@ -877,27 +1190,39 @@ class Tizen65CapiMediaStreamer {
           int Function(
               media_streamer_node_h, ffi.Pointer<media_tool.media_packet_h>)>();
 
-  /// @brief Creates media streamer node except #MEDIA_STREAMER_NODE_TYPE_SRC and #MEDIA_STREAMER_NODE_TYPE_SINK.
-  /// @details Creates node specific @a type with specific format of input and output data.
-  /// @since_tizen 3.0
-  /// @remarks The node type should not be #MEDIA_STREAMER_NODE_TYPE_SRC and #MEDIA_STREAMER_NODE_TYPE_SINK.\n
-  /// To create source / sink type node, media_streamer_node_create_src() / media_streamer_node_create_sink() should be called.\n
-  /// The internet privilege (%http://tizen.org/privilege/internet) should be added if #MEDIA_STREAMER_NODE_TYPE_WEBRTC is set.\n
-  /// You can release the @a node using media_streamer_node_destroy().
-  /// @param[in]  type      Created node type
-  /// @param[in]  in_fmt    Media format handle for input data
-  /// @param[in]  out_fmt   Media format handle for output data
-  /// @param[out] node      Media streamer node handle to be created
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_STREAMER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @see #media_streamer_node_type_e
-  /// @see #media_format_h
-  /// @see media_streamer_node_destroy()
+  /// Creates media streamer node except `MEDIA_STREAMER_NODE_TYPE_SRC` and `MEDIA_STREAMER_NODE_TYPE_SINK`.
+  ///
+  /// Creates node specific `type` with specific format of input and output data.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The node type should not be `MEDIA_STREAMER_NODE_TYPE_SRC` and `MEDIA_STREAMER_NODE_TYPE_SINK`.
+  /// - To create source / sink type node, media_streamer_node_create_src() / media_streamer_node_create_sink() should be called.
+  /// - The internet privilege (http://tizen.org/privilege/internet) should be added if `MEDIA_STREAMER_NODE_TYPE_WEBRTC` is set.
+  /// - You can release the `node` using media_streamer_node_destroy().
+  ///
+  /// **Parameters:**
+  /// - `type` (in): Created node type
+  /// - `in_fmt` (in): Media format handle for input data
+  /// - `out_fmt` (in): Media format handle for output data
+  /// - `node` (out): Media streamer node handle to be created
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_STREAMER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `media_streamer_node_type_e`
+  /// - `media_format_h`
+  /// - `media_streamer_node_destroy()`
   int media_streamer_node_create(
     int type,
     media_tool.media_format_h in_fmt,
@@ -925,23 +1250,36 @@ class Tizen65CapiMediaStreamer {
           int Function(int, media_tool.media_format_h,
               media_tool.media_format_h, ffi.Pointer<media_streamer_node_h>)>();
 
-  /// @brief Adds node to media streamer.
-  /// @since_tizen 3.0
-  /// @remarks Before 6.0, this function returns #MEDIA_STREAMER_ERROR_INVALID_STATE if @a streamer is not in the #MEDIA_STREAMER_STATE_IDLE state.\n
-  /// Since 6.0, this function can be called in any state of @a streamer.
-  /// @param[in] streamer    Media streamer handle
-  /// @param[in] node        Media streamer node handle to be added
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @pre Create media streamer handle by calling media_streamer_create().
-  /// @pre Create node handle by calling media_streamer_node_create().
-  /// @see media_streamer_create()
-  /// @see media_streamer_node_create()
-  /// @see media_streamer_node_create_src()
-  /// @see media_streamer_node_create_sink()
+  /// Adds node to media streamer.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Before 6.0, this function returns `MEDIA_STREAMER_ERROR_INVALID_STATE` if `streamer` is not in the `MEDIA_STREAMER_STATE_IDLE` state.
+  /// - Since 6.0, this function can be called in any state of `streamer`.
+  ///
+  /// **Parameters:**
+  /// - `streamer` (in): Media streamer handle
+  /// - `node` (in): Media streamer node handle to be added
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create media streamer handle by calling media_streamer_create().
+  /// - Create node handle by calling media_streamer_node_create().
+  ///
+  /// **See also:**
+  /// - `media_streamer_create()`
+  /// - `media_streamer_node_create()`
+  /// - `media_streamer_node_create_src()`
+  /// - `media_streamer_node_create_sink()`
   int media_streamer_node_add(
     media_streamer_h streamer,
     media_streamer_node_h node,
@@ -959,21 +1297,32 @@ class Tizen65CapiMediaStreamer {
   late final _media_streamer_node_add = _media_streamer_node_addPtr
       .asFunction<int Function(media_streamer_h, media_streamer_node_h)>();
 
-  /// @brief Destroys media streamer node.
-  /// @since_tizen 3.0
-  /// @param[in] node        Media streamer node handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_STATE Invalid state
-  /// @pre Create node handle by calling media_streamer_node_create().
-  /// @pre If the node was added to media streamer, it has to be removed by calling media_streamer_node_remove().
-  /// @see media_streamer_node_create()
-  /// @see media_streamer_node_create_src()
-  /// @see media_streamer_node_create_sink()
-  /// @see media_streamer_node_remove()
+  /// Destroys media streamer node.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `node` (in): Media streamer node handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_STREAMER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - Create node handle by calling media_streamer_node_create().
+  /// - If the node was added to media streamer, it has to be removed by calling media_streamer_node_remove().
+  ///
+  /// **See also:**
+  /// - `media_streamer_node_create()`
+  /// - `media_streamer_node_create_src()`
+  /// - `media_streamer_node_create_sink()`
+  /// - `media_streamer_node_remove()`
   int media_streamer_node_destroy(
     media_streamer_node_h node,
   ) {
@@ -988,20 +1337,33 @@ class Tizen65CapiMediaStreamer {
   late final _media_streamer_node_destroy = _media_streamer_node_destroyPtr
       .asFunction<int Function(media_streamer_node_h)>();
 
-  /// @brief Removes media streamer node from streamer.
-  /// @since_tizen 3.0
-  /// @remarks To remove node without error posting, the state of streamer should be #MEDIA_STREAMER_STATE_IDLE.\n
-  /// If the node is linked, it will be unlinked before removing.
-  /// @param[in] streamer    Media streamer handle
-  /// @param[in] node        Media streamer node handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_STATE Invalid state
-  /// @pre Add node to streamer by calling media_streamer_node_add().
-  /// @see media_streamer_node_add()
+  /// Removes media streamer node from streamer.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - To remove node without error posting, the state of streamer should be `MEDIA_STREAMER_STATE_IDLE`.
+  /// - If the node is linked, it will be unlinked before removing.
+  ///
+  /// **Parameters:**
+  /// - `streamer` (in): Media streamer handle
+  /// - `node` (in): Media streamer node handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_STREAMER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - Add node to streamer by calling media_streamer_node_add().
+  ///
+  /// **See also:**
+  /// - `media_streamer_node_add()`
   int media_streamer_node_remove(
     media_streamer_h streamer,
     media_streamer_node_h node,
@@ -1019,32 +1381,44 @@ class Tizen65CapiMediaStreamer {
   late final _media_streamer_node_remove = _media_streamer_node_removePtr
       .asFunction<int Function(media_streamer_h, media_streamer_node_h)>();
 
-  /// @brief Links two media streamer nodes.
-  /// @since_tizen 3.0
-  /// @remarks Pads are node's input and output, where you can connect other nodes.\n
-  /// (@a node1) - (@a node2)\n
-  /// @a node1 and @a node2 are determined relatively.\n
-  /// In case of (A)-(B)-(C),\n
-  /// (B) can be @a node2 with (A) or (B) can be @a node1 with (C).\n
-  /// However, source type node is always @a node1 and sink type node is always @a node2.\n
-  /// (A) is source type node and it should be @a node1.\n
-  /// (C) is sink type node and it should be @a node2.
-  /// @param[in] node1     Media streamer node handle which has the @a src_pad_name pad
-  /// @param[in] src_pad_name  The name of the source pad of the @a node1
-  /// @param[in] node2     Media streamer node handle which has the @a sink_pad_name pad
-  /// @param[in] sink_pad_name The name of the sink pad of the @a node2
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_STATE Invalid state
-  /// @pre Create node handles by calling media_streamer_node_create(), media_streamer_node_create_src(), or media_streamer_node_create_sink().
-  /// And add the nodes into streamer by calling media_streamer_node_add().
-  /// @see media_streamer_node_create()
-  /// @see media_streamer_node_create_src()
-  /// @see media_streamer_node_create_sink()
-  /// @see media_streamer_node_add()
+  /// Links two media streamer nodes.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Pads are node's input and output, where you can connect other nodes.
+  /// - (`node1`) - (`node2`)
+  /// - `node1` and `node2` are determined relatively.
+  /// - In case of (A)-(B)-(C),
+  /// - (B) can be `node2` with (A) or (B) can be `node1` with (C).
+  /// - However, source type node is always `node1` and sink type node is always `node2`.
+  /// - (A) is source type node and it should be `node1`.
+  /// - (C) is sink type node and it should be `node2`.
+  ///
+  /// **Parameters:**
+  /// - `node1` (in): Media streamer node handle which has the `src_pad_name` pad
+  /// - `src_pad_name` (in): The name of the source pad of the `node1`
+  /// - `node2` (in): Media streamer node handle which has the `sink_pad_name` pad
+  /// - `sink_pad_name` (in): The name of the sink pad of the `node2`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_STREAMER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - Create node handles by calling media_streamer_node_create(), media_streamer_node_create_src(), or media_streamer_node_create_sink(). And add the nodes into streamer by calling media_streamer_node_add().
+  ///
+  /// **See also:**
+  /// - `media_streamer_node_create()`
+  /// - `media_streamer_node_create_src()`
+  /// - `media_streamer_node_create_sink()`
+  /// - `media_streamer_node_add()`
   int media_streamer_node_link(
     media_streamer_node_h node1,
     ffi.Pointer<ffi.Char> src_pad_name,
@@ -1071,20 +1445,31 @@ class Tizen65CapiMediaStreamer {
           int Function(media_streamer_node_h, ffi.Pointer<ffi.Char>,
               media_streamer_node_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets media format for pad of media streamer node.
-  /// @since_tizen 3.0
-  /// @param[in] node        Media streamer node handle
-  /// @param[in] pad_name    Pad name
-  /// @param[in] fmt         Media format handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_STATE Invalid state
-  /// @pre Create a node handle by calling media_streamer_node_create(), media_streamer_node_create_src(), or media_streamer_node_create_sink().
-  /// @pre Get pad name by calling media_streamer_node_get_pad_name().
-  /// @see #media_format_h
+  /// Sets media format for pad of media streamer node.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `node` (in): Media streamer node handle
+  /// - `pad_name` (in): Pad name
+  /// - `fmt` (in): Media format handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_STREAMER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - Create a node handle by calling media_streamer_node_create(), media_streamer_node_create_src(), or media_streamer_node_create_sink().
+  /// - Get pad name by calling media_streamer_node_get_pad_name().
+  ///
+  /// **See also:**
+  /// - `media_format_h`
   int media_streamer_node_set_pad_format(
     media_streamer_node_h node,
     ffi.Pointer<ffi.Char> pad_name,
@@ -1109,21 +1494,34 @@ class Tizen65CapiMediaStreamer {
           int Function(media_streamer_node_h, ffi.Pointer<ffi.Char>,
               media_tool.media_format_h)>();
 
-  /// @brief Gets media format for pad of media streamer node.
-  /// @since_tizen 3.0
-  /// @remarks The @a fmt should be released using media_format_unref().
-  /// @param[in] node        Media streamer node handle
-  /// @param[in] pad_name    Pad name
-  /// @param[out] fmt        Media format handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_STATE Invalid state
-  /// @pre Create a node handle by calling media_streamer_node_create(), media_streamer_node_create_src(), or media_streamer_node_create_sink().
-  /// @pre Get pad name by calling media_streamer_node_get_pad_name().
-  /// @see #media_format_h
+  /// Gets media format for pad of media streamer node.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `fmt` should be released using media_format_unref().
+  ///
+  /// **Parameters:**
+  /// - `node` (in): Media streamer node handle
+  /// - `pad_name` (in): Pad name
+  /// - `fmt` (out): Media format handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_STREAMER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - Create a node handle by calling media_streamer_node_create(), media_streamer_node_create_src(), or media_streamer_node_create_sink().
+  /// - Get pad name by calling media_streamer_node_get_pad_name().
+  ///
+  /// **See also:**
+  /// - `media_format_h`
   int media_streamer_node_get_pad_format(
     media_streamer_node_h node,
     ffi.Pointer<ffi.Char> pad_name,
@@ -1146,26 +1544,39 @@ class Tizen65CapiMediaStreamer {
           int Function(media_streamer_node_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<media_tool.media_format_h>)>();
 
-  /// @brief Gets name of node pads.
-  /// @since_tizen 3.0
-  /// @remarks The @a src_pad_name and the @a sink_pad_name should be released using free().\n
-  /// @a src_pad_name or @a sink_pad_name can be null according to the node type.\n
-  /// In case of source type node, @a sink_pad_name will be null.\n
-  /// In case of sink type node, @a src_pad_name will be null.
-  /// @param[in]  node            Media streamer node handle
-  /// @param[out] src_pad_name    Array of source pad name
-  /// @param[out] src_pad_num     The number of source pads
-  /// @param[out] sink_pad_name   Array of sink pad name
-  /// @param[out] sink_pad_num    The number of sink pads
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @pre Create a node handle by calling media_streamer_node_create(), media_streamer_node_create_src(), or media_streamer_node_create_sink().
-  /// @see media_streamer_node_create()
-  /// @see media_streamer_node_create_src()
-  /// @see media_streamer_node_create_sink()
+  /// Gets name of node pads.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `src_pad_name` and the `sink_pad_name` should be released using free().
+  /// - `src_pad_name` or `sink_pad_name` can be null according to the node type.
+  /// - In case of source type node, `sink_pad_name` will be null.
+  /// - In case of sink type node, `src_pad_name` will be null.
+  ///
+  /// **Parameters:**
+  /// - `node` (in): Media streamer node handle
+  /// - `src_pad_name` (out): Array of source pad name
+  /// - `src_pad_num` (out): The number of source pads
+  /// - `sink_pad_name` (out): Array of sink pad name
+  /// - `sink_pad_num` (out): The number of sink pads
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a node handle by calling media_streamer_node_create(), media_streamer_node_create_src(), or media_streamer_node_create_sink().
+  ///
+  /// **See also:**
+  /// - `media_streamer_node_create()`
+  /// - `media_streamer_node_create_src()`
+  /// - `media_streamer_node_create_sink()`
   int media_streamer_node_get_pad_name(
     media_streamer_node_h node,
     ffi.Pointer<ffi.Pointer<ffi.Pointer<ffi.Char>>> src_pad_name,
@@ -1199,27 +1610,41 @@ class Tizen65CapiMediaStreamer {
               ffi.Pointer<ffi.Pointer<ffi.Pointer<ffi.Char>>>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets parameters of node.
-  /// @details Many parameters can be set at one time all together by using bundle.
-  /// @since_tizen 3.0
-  /// @remarks The mediastorage privilege(%http://tizen.org/privilege/mediastorage) should be added if any video/audio files are written in the internal storage devices.\n
-  /// The externalstorage privilege(%http://tizen.org/privilege/externalstorage) should be added if any video/audio files are written in the external storage devices.
-  /// @param[in] node        Media streamer node handle
-  /// @param[in] param_list  Key value array of media streamer node parameters
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_STATE Invalid state
-  /// @pre Create a node handle by calling media_streamer_node_create(), media_streamer_node_create_src(), or media_streamer_node_create_sink().
-  /// @pre Get param list to set by calling media_streamer_node_get_params().
-  /// @see media_streamer_node_create()
-  /// @see media_streamer_node_create_src()
-  /// @see media_streamer_node_create_sink()
-  /// @see media_streamer_node_get_params()
-  /// @see #bundle
+  /// Sets parameters of node.
+  ///
+  /// Many parameters can be set at one time all together by using bundle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The mediastorage privilege(http://tizen.org/privilege/mediastorage) should be added if any video/audio files are written in the internal storage devices.
+  /// - The externalstorage privilege(http://tizen.org/privilege/externalstorage) should be added if any video/audio files are written in the external storage devices.
+  ///
+  /// **Parameters:**
+  /// - `node` (in): Media streamer node handle
+  /// - `param_list` (in): Key value array of media streamer node parameters
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_STREAMER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - Create a node handle by calling media_streamer_node_create(), media_streamer_node_create_src(), or media_streamer_node_create_sink().
+  /// - Get param list to set by calling media_streamer_node_get_params().
+  ///
+  /// **See also:**
+  /// - `media_streamer_node_create()`
+  /// - `media_streamer_node_create_src()`
+  /// - `media_streamer_node_create_sink()`
+  /// - `media_streamer_node_get_params()`
+  /// - `bundle`
   int media_streamer_node_set_params(
     media_streamer_node_h node,
     ffi.Pointer<bundle.bundle> param_list,
@@ -1238,26 +1663,41 @@ class Tizen65CapiMediaStreamer {
       _media_streamer_node_set_paramsPtr.asFunction<
           int Function(media_streamer_node_h, ffi.Pointer<bundle.bundle>)>();
 
-  /// @brief Gets node parameter list.
-  /// @since_tizen 3.0
-  /// @remarks The @a param_list should be released using bundle_free().\n
-  /// Refer to the "Parameter information of node" in this file to get info.
-  /// @param[in]  node         Media streamer node handle
-  /// @param[out] param_list   Key value array of media streamer node parameters
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_STATE Invalid state
-  /// @pre Create a node handle by calling media_streamer_node_create(), media_streamer_node_create_src(), or media_streamer_node_create_sink().
-  /// @post Set params which are needed to set by calling media_streamer_node_set_params() or media_streamer_node_set_param().
-  /// @see media_streamer_node_create()
-  /// @see media_streamer_node_create_src()
-  /// @see media_streamer_node_create_sink()
-  /// @see media_streamer_node_set_params()
-  /// @see media_streamer_node_set_param()
-  /// @see #bundle
+  /// Gets node parameter list.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `param_list` should be released using bundle_free().
+  /// - Refer to the "Parameter information of node" in this file to get info.
+  ///
+  /// **Parameters:**
+  /// - `node` (in): Media streamer node handle
+  /// - `param_list` (out): Key value array of media streamer node parameters
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_STREAMER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - Create a node handle by calling media_streamer_node_create(), media_streamer_node_create_src(), or media_streamer_node_create_sink().
+  ///
+  /// **Postconditions:**
+  /// - Set params which are needed to set by calling media_streamer_node_set_params() or media_streamer_node_set_param().
+  ///
+  /// **See also:**
+  /// - `media_streamer_node_create()`
+  /// - `media_streamer_node_create_src()`
+  /// - `media_streamer_node_create_sink()`
+  /// - `media_streamer_node_set_params()`
+  /// - `media_streamer_node_set_param()`
+  /// - `bundle`
   int media_streamer_node_get_params(
     media_streamer_node_h node,
     ffi.Pointer<ffi.Pointer<bundle.bundle>> param_list,
@@ -1278,28 +1718,42 @@ class Tizen65CapiMediaStreamer {
           int Function(media_streamer_node_h,
               ffi.Pointer<ffi.Pointer<bundle.bundle>>)>();
 
-  /// @brief Sets single parameter of node.
-  /// @details Sets parameter one by one without creating param bundle.
-  /// @since_tizen 3.0
-  /// @remarks The mediastorage privilege(%http://tizen.org/privilege/mediastorage) should be added if any video/audio files are written in the internal storage devices.\n
-  /// The externalstorage privilege(%http://tizen.org/privilege/externalstorage) should be added if any video/audio files are written in the external storage devices.
-  /// @param[in] node        Media streamer node handle
-  /// @param[in] param_name  Param name of node
-  /// @param[in] param_value Param value of node
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_STATE Invalid state
-  /// @pre Create a node handle by calling media_streamer_node_create(), media_streamer_node_create_src(), or media_streamer_node_create_sink().
-  /// @pre Get param list to set by calling media_streamer_node_get_params().
-  /// @see media_streamer_node_create()
-  /// @see media_streamer_node_create_src()
-  /// @see media_streamer_node_create_sink()
-  /// @see media_streamer_node_get_params()
-  /// @see media_streamer_node_get_param()
+  /// Sets single parameter of node.
+  ///
+  /// Sets parameter one by one without creating param bundle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The mediastorage privilege(http://tizen.org/privilege/mediastorage) should be added if any video/audio files are written in the internal storage devices.
+  /// - The externalstorage privilege(http://tizen.org/privilege/externalstorage) should be added if any video/audio files are written in the external storage devices.
+  ///
+  /// **Parameters:**
+  /// - `node` (in): Media streamer node handle
+  /// - `param_name` (in): Param name of node
+  /// - `param_value` (in): Param value of node
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_STREAMER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - Create a node handle by calling media_streamer_node_create(), media_streamer_node_create_src(), or media_streamer_node_create_sink().
+  /// - Get param list to set by calling media_streamer_node_get_params().
+  ///
+  /// **See also:**
+  /// - `media_streamer_node_create()`
+  /// - `media_streamer_node_create_src()`
+  /// - `media_streamer_node_create_sink()`
+  /// - `media_streamer_node_get_params()`
+  /// - `media_streamer_node_get_param()`
   int media_streamer_node_set_param(
     media_streamer_node_h node,
     ffi.Pointer<ffi.Char> param_name,
@@ -1321,26 +1775,40 @@ class Tizen65CapiMediaStreamer {
           int Function(media_streamer_node_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets value of parameter.
-  /// @details Gets parameter one by one without creating param bundle.
-  /// @since_tizen 3.0
-  /// @remarks The @a param_value should be released using free().
-  /// @param[in] node         Media streamer node handle
-  /// @param[in] param_name   Param name of node
-  /// @param[out] param_value Param value of node
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_STATE Invalid state
-  /// @pre Create a node handle by calling media_streamer_node_create(), media_streamer_node_create_src(), or media_streamer_node_create_sink().
-  /// @pre Get param list to know the param name by calling media_streamer_node_get_params().
-  /// @see media_streamer_node_create()
-  /// @see media_streamer_node_create_src()
-  /// @see media_streamer_node_create_sink()
-  /// @see media_streamer_node_get_params()
-  /// @see media_streamer_node_set_param()
+  /// Gets value of parameter.
+  ///
+  /// Gets parameter one by one without creating param bundle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `param_value` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `node` (in): Media streamer node handle
+  /// - `param_name` (in): Param name of node
+  /// - `param_value` (out): Param value of node
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_STREAMER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - Create a node handle by calling media_streamer_node_create(), media_streamer_node_create_src(), or media_streamer_node_create_sink().
+  /// - Get param list to know the param name by calling media_streamer_node_get_params().
+  ///
+  /// **See also:**
+  /// - `media_streamer_node_create()`
+  /// - `media_streamer_node_create_src()`
+  /// - `media_streamer_node_create_sink()`
+  /// - `media_streamer_node_get_params()`
+  /// - `media_streamer_node_set_param()`
   int media_streamer_node_get_param(
     media_streamer_node_h node,
     ffi.Pointer<ffi.Char> param_name,
@@ -1363,21 +1831,36 @@ class Tizen65CapiMediaStreamer {
           int Function(media_streamer_node_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets a callback function to be invoked when a source pad of @a node is ready to give decoded data.
-  /// @since_tizen 6.0
-  /// @remarks The available type of @a node for this function is #MEDIA_STREAMER_NODE_TYPE_WEBRTC.
-  /// @param[in] node      Media streamer node handle
-  /// @param[in] callback  The decoded ready callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_OPERATION Invalid operation
-  /// @pre Create a media streamer node handle by calling media_streamer_node_create().
-  /// @post media_streamer_node_decoded_ready_cb() will be invoked.
-  /// @see media_streamer_node_unset_decoded_ready_cb()
-  /// @see media_streamer_node_decoded_ready_cb()
+  /// Sets a callback function to be invoked when a source pad of `node` is ready to give decoded data.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Remarks:**
+  /// - The available type of `node` for this function is `MEDIA_STREAMER_NODE_TYPE_WEBRTC`.
+  ///
+  /// **Parameters:**
+  /// - `node` (in): Media streamer node handle
+  /// - `callback` (in): The decoded ready callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media streamer node handle by calling media_streamer_node_create().
+  ///
+  /// **Postconditions:**
+  /// - media_streamer_node_decoded_ready_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `media_streamer_node_unset_decoded_ready_cb()`
+  /// - `media_streamer_node_decoded_ready_cb()`
   int media_streamer_node_set_decoded_ready_cb(
     media_streamer_node_h node,
     media_streamer_node_decoded_ready_cb callback,
@@ -1402,14 +1885,23 @@ class Tizen65CapiMediaStreamer {
           int Function(media_streamer_node_h,
               media_streamer_node_decoded_ready_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the decoded ready callback function.
-  /// @since_tizen 6.0
-  /// @param[in] node    Media streamer node handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see media_streamer_node_set_decoded_ready_cb()
+  /// Unsets the decoded ready callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Parameters:**
+  /// - `node` (in): Media streamer node handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `media_streamer_node_set_decoded_ready_cb()`
   int media_streamer_node_unset_decoded_ready_cb(
     media_streamer_node_h node,
   ) {
@@ -1425,20 +1917,34 @@ class Tizen65CapiMediaStreamer {
       _media_streamer_node_unset_decoded_ready_cbPtr
           .asFunction<int Function(media_streamer_node_h)>();
 
-  /// @brief Sets a callback function to be invoked when WebRTC node needs to send a message to the remote peer of WebRTC connection.
-  /// @details This function can be called only for #MEDIA_STREAMER_NODE_TYPE_WEBRTC type node.
-  /// @since_tizen 6.0
-  /// @param[in] webrtc    Media streamer WebRTC node handle
-  /// @param[in] callback  The WebRTC message callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Create a media streamer WebRTC node handle by calling media_streamer_node_create().
-  /// @post media_streamer_webrtc_message_cb() will be invoked.
-  /// @see media_streamer_webrtc_node_unset_message_cb()
-  /// @see media_streamer_webrtc_message_cb()
+  /// Sets a callback function to be invoked when WebRTC node needs to send a message to the remote peer of WebRTC connection.
+  ///
+  /// This function can be called only for `MEDIA_STREAMER_NODE_TYPE_WEBRTC` type node.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Parameters:**
+  /// - `webrtc` (in): Media streamer WebRTC node handle
+  /// - `callback` (in): The WebRTC message callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a media streamer WebRTC node handle by calling media_streamer_node_create().
+  ///
+  /// **Postconditions:**
+  /// - media_streamer_webrtc_message_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `media_streamer_webrtc_node_unset_message_cb()`
+  /// - `media_streamer_webrtc_message_cb()`
   int media_streamer_webrtc_node_set_message_cb(
     media_streamer_node_h webrtc,
     media_streamer_webrtc_message_cb callback,
@@ -1461,14 +1967,23 @@ class Tizen65CapiMediaStreamer {
           int Function(media_streamer_node_h, media_streamer_webrtc_message_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the WebRTC message callback function.
-  /// @since_tizen 6.0
-  /// @param[in] webrtc    Media streamer WebRTC node handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_STREAMER_ERROR_NONE Successful
-  /// @retval #MEDIA_STREAMER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see media_streamer_webrtc_node_set_message_cb()
+  /// Unsets the WebRTC message callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Parameters:**
+  /// - `webrtc` (in): Media streamer WebRTC node handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_STREAMER_ERROR_NONE`: Successful
+  /// - `MEDIA_STREAMER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `media_streamer_webrtc_node_set_message_cb()`
   int media_streamer_webrtc_node_unset_message_cb(
     media_streamer_node_h webrtc,
   ) {
@@ -1485,9 +2000,11 @@ class Tizen65CapiMediaStreamer {
           .asFunction<int Function(media_streamer_node_h)>();
 }
 
-/// @brief Enumeration for media streamer node type.
+/// Enumeration for media streamer node type.
 ///
-/// @since_tizen 3.0
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class media_streamer_node_type_e {
   /// <  Not defined type
   static const int MEDIA_STREAMER_NODE_TYPE_NONE = 0;
@@ -1580,9 +2097,11 @@ abstract class media_streamer_node_type_e {
   static const int MEDIA_STREAMER_NODE_TYPE_WEBRTC = 29;
 }
 
-/// @brief Enumeration for media streamer source node type.
+/// Enumeration for media streamer source node type.
 ///
-/// @since_tizen 3.0
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class media_streamer_node_src_type_e {
   /// <  Not defined source type
   static const int MEDIA_STREAMER_NODE_SRC_TYPE_NONE = 0;
@@ -1618,9 +2137,11 @@ abstract class media_streamer_node_src_type_e {
   static const int MEDIA_STREAMER_NODE_SRC_TYPE_ADAPTIVE = 10;
 }
 
-/// @brief Enumeration for media streamer sink node type.
+/// Enumeration for media streamer sink node type.
 ///
-/// @since_tizen 3.0
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class media_streamer_node_sink_type_e {
   /// <  Not defined sink type
   static const int MEDIA_STREAMER_NODE_SINK_TYPE_NONE = 0;
@@ -1650,9 +2171,11 @@ abstract class media_streamer_node_sink_type_e {
   static const int MEDIA_STREAMER_NODE_SINK_TYPE_ADAPTIVE = 8;
 }
 
-/// @brief Enumeration for media streamer state.
+/// Enumeration for media streamer state.
 ///
-/// @since_tizen 3.0
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class media_streamer_state_e {
   /// <  Streamer is not created
   static const int MEDIA_STREAMER_STATE_NONE = 0;
@@ -1673,9 +2196,11 @@ abstract class media_streamer_state_e {
   static const int MEDIA_STREAMER_STATE_SEEKING = 5;
 }
 
-/// @brief Enumeration for media streamer error.
+/// Enumeration for media streamer error.
 ///
-/// @since_tizen 3.0
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class media_streamer_error_e {
   /// < Successful
   static const int MEDIA_STREAMER_ERROR_NONE = 0;
@@ -1708,9 +2233,11 @@ abstract class media_streamer_error_e {
   static const int MEDIA_STREAMER_ERROR_SEEK_FAILED = -27262972;
 }
 
-/// @brief Enumeration for media streamer buffer status of custom source.
+/// Enumeration for media streamer buffer status of custom source.
 ///
-/// @since_tizen 3.0
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class media_streamer_custom_buffer_status_e {
   /// < Buffer underrun of custom source
   static const int MEDIA_STREAMER_CUSTOM_BUFFER_UNDERRUN = 0;
@@ -1719,9 +2246,11 @@ abstract class media_streamer_custom_buffer_status_e {
   static const int MEDIA_STREAMER_CUSTOM_BUFFER_OVERFLOW = 1;
 }
 
-/// @brief Enumeration for media streamer's interruption type.
+/// Enumeration for media streamer's interruption type.
 ///
-/// @since_tizen 3.0
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class media_streamer_interrupted_code_e {
   /// < Interrupted by a resource conflict
   static const int MEDIA_STREAMER_INTERRUPTED_BY_RESOURCE_CONFLICT = 0;
@@ -1730,267 +2259,402 @@ abstract class media_streamer_interrupted_code_e {
   static const int MEDIA_STREAMER_INTERRUPTED_BY_SECURITY = 1;
 }
 
-/// @brief Media Streamer handle type.
+/// Media Streamer handle type.
 ///
-/// @since_tizen 3.0
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef media_streamer_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when error occurs in media streamer.
-/// @since_tizen 3.0
-/// @remarks Following error codes can be delivered.\n
-/// #MEDIA_STREAMER_ERROR_INVALID_OPERATION,\n
-/// #MEDIA_STREAMER_ERROR_FILE_NO_SPACE_ON_DEVICE,\n
-/// #MEDIA_STREAMER_ERROR_NOT_SUPPORTED,\n
-/// #MEDIA_STREAMER_ERROR_CONNECTION_FAILED,\n
-/// #MEDIA_STREAMER_ERROR_RESOURCE_CONFLICT.\n
-/// The @a streamer is the same object for which the callback was set.
-/// @param[in] streamer   Media streamer handle
-/// @param[in] error      The error that occurred in media steamer
-/// @param[in] user_data  The user data passed from the code where
-/// media_streamer_set_error_cb() was invoked
-/// This data will be accessible from media_streamer_error_cb()
-/// @pre Create media streamer handle by calling media_streamer_create().
-/// @see media_streamer_set_error_cb()
-/// @see media_streamer_unset_error_cb()
+/// Called when error occurs in media streamer.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - Following error codes can be delivered.
+/// - `MEDIA_STREAMER_ERROR_INVALID_OPERATION`,
+/// - `MEDIA_STREAMER_ERROR_FILE_NO_SPACE_ON_DEVICE`,
+/// - `MEDIA_STREAMER_ERROR_NOT_SUPPORTED`,
+/// - `MEDIA_STREAMER_ERROR_CONNECTION_FAILED`,
+/// - `MEDIA_STREAMER_ERROR_RESOURCE_CONFLICT`.
+/// - The `streamer` is the same object for which the callback was set.
+///
+/// **Parameters:**
+/// - `streamer` (in): Media streamer handle
+/// - `error` (in): The error that occurred in media steamer
+/// - `user_data` (in): The user data passed from the code where media_streamer_set_error_cb() was invoked This data will be accessible from media_streamer_error_cb()
+///
+/// **Preconditions:**
+/// - Create media streamer handle by calling media_streamer_create().
+///
+/// **See also:**
+/// - `media_streamer_set_error_cb()`
+/// - `media_streamer_unset_error_cb()`
+/// @nodoc
 typedef media_streamer_error_cb
     = ffi.Pointer<ffi.NativeFunction<media_streamer_error_cbFunction>>;
+/// @nodoc
 typedef media_streamer_error_cbFunction = ffi.Void Function(
     media_streamer_h streamer,
     ffi.Int32 error,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmedia_streamer_error_cbFunction = void Function(
     media_streamer_h streamer, int error, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when media streamer state is changed.
-/// @since_tizen 3.0
-/// @remarks The @a streamer is the same object for which the callback was set.
-/// @param[in] streamer        Media streamer handle
-/// @param[in] previous_state  The previous state of the media streamer
-/// @param[in] current_state   The current state of media streamer
-/// @param[in] user_data       The user data passed from the code where
-/// media_streamer_set_state_changed_cb() was invoked
-/// This data will be accessible from media_streamer_state_changed_cb()
-/// @pre Create media streamer handle by calling media_streamer_create().
-/// @see media_streamer_set_state_change_cb()
-/// @see media_streamer_unset_state_change_cb()
+/// Called when media streamer state is changed.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - The `streamer` is the same object for which the callback was set.
+///
+/// **Parameters:**
+/// - `streamer` (in): Media streamer handle
+/// - `previous_state` (in): The previous state of the media streamer
+/// - `current_state` (in): The current state of media streamer
+/// - `user_data` (in): The user data passed from the code where media_streamer_set_state_changed_cb() was invoked This data will be accessible from media_streamer_state_changed_cb()
+///
+/// **Preconditions:**
+/// - Create media streamer handle by calling media_streamer_create().
+///
+/// **See also:**
+/// - `media_streamer_set_state_change_cb()`
+/// - `media_streamer_unset_state_change_cb()`
+/// @nodoc
 typedef media_streamer_state_changed_cb
     = ffi.Pointer<ffi.NativeFunction<media_streamer_state_changed_cbFunction>>;
+/// @nodoc
 typedef media_streamer_state_changed_cbFunction = ffi.Void Function(
     media_streamer_h streamer,
     ffi.Int32 previous_state,
     ffi.Int32 current_state,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmedia_streamer_state_changed_cbFunction = void Function(
     media_streamer_h streamer,
     int previous_state,
     int current_state,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the media streamer is interrupted.
-/// @since_tizen 3.0
-/// @param[in] code       The interrupted error code
-/// @param[in] user_data  The user data passed from the callback registration function
-/// @see media_streamer_set_interrupted_cb()
-/// @see media_streamer_unset_interrupted_cb()
+/// Called when the media streamer is interrupted.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `code` (in): The interrupted error code
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `media_streamer_set_interrupted_cb()`
+/// - `media_streamer_unset_interrupted_cb()`
+/// @nodoc
 typedef media_streamer_interrupted_cb
     = ffi.Pointer<ffi.NativeFunction<media_streamer_interrupted_cbFunction>>;
+/// @nodoc
 typedef media_streamer_interrupted_cbFunction = ffi.Void Function(
     ffi.Int32 code, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmedia_streamer_interrupted_cbFunction = void Function(
     int code, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Media Streamer node handle type.
+/// Media Streamer node handle type.
 ///
-/// @since_tizen 3.0
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef media_streamer_node_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when the custom source needs more data or has enough data.
-/// @details This callback will be invoked when the buffer level drops below the threshold of max size
-/// or no free space in custom source buffer.
-/// @since_tizen 3.0
-/// @remarks This callback can be applied only to #MEDIA_STREAMER_NODE_SRC_TYPE_CUSTOM source type node.\n
-/// The @a src is the same object for which the callback was set.
-/// @param[in] src       Media streamer source node handle
-/// @param[in] status    Media streamer custom buffer status
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see media_streamer_src_set_buffer_status_cb()
-/// @see media_streamer_node_get_param()
-/// @see media_streamer_node_set_param()
+/// Called when the custom source needs more data or has enough data.
+///
+/// This callback will be invoked when the buffer level drops below the threshold of max size or no free space in custom source buffer.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - This callback can be applied only to `MEDIA_STREAMER_NODE_SRC_TYPE_CUSTOM` source type node.
+/// - The `src` is the same object for which the callback was set.
+///
+/// **Parameters:**
+/// - `src` (in): Media streamer source node handle
+/// - `status` (in): Media streamer custom buffer status
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `media_streamer_src_set_buffer_status_cb()`
+/// - `media_streamer_node_get_param()`
+/// - `media_streamer_node_set_param()`
+/// @nodoc
 typedef media_streamer_custom_buffer_status_cb = ffi.Pointer<
     ffi.NativeFunction<media_streamer_custom_buffer_status_cbFunction>>;
+/// @nodoc
 typedef media_streamer_custom_buffer_status_cbFunction = ffi.Void Function(
     media_streamer_node_h src,
     ffi.Int32 status,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmedia_streamer_custom_buffer_status_cbFunction = void Function(
     media_streamer_node_h src, int status, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when new data is available from custom sink.
-/// @details This callback can be applied only to #MEDIA_STREAMER_NODE_SINK_TYPE_CUSTOM sink type node.
-/// @since_tizen 3.0
-/// @remarks The @a sink is the same object for which the callback was set.
-/// @param[in] sink      Media streamer sink node handle
-/// @param[in] user_data The user data passed from the code where
-/// media_streamer_sink_set_data_ready_cb() was invoked
-/// This data will be accessible from media_streamer_sink_data_ready_cb()
-/// @pre media_streamer_sink_set_data_ready_cb()
-/// @see MEDIA_STREAMER_NODE_SINK_TYPE_CUSTOM
-/// @see media_streamer_sink_set_data_ready_cb()
-/// @see media_streamer_sink_unset_data_ready_cb()
+/// Called when new data is available from custom sink.
+///
+/// This callback can be applied only to `MEDIA_STREAMER_NODE_SINK_TYPE_CUSTOM` sink type node.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - The `sink` is the same object for which the callback was set.
+///
+/// **Parameters:**
+/// - `sink` (in): Media streamer sink node handle
+/// - `user_data` (in): The user data passed from the code where media_streamer_sink_set_data_ready_cb() was invoked This data will be accessible from media_streamer_sink_data_ready_cb()
+///
+/// **Preconditions:**
+/// - media_streamer_sink_set_data_ready_cb()
+///
+/// **See also:**
+/// - `MEDIA_STREAMER_NODE_SINK_TYPE_CUSTOM`
+/// - `media_streamer_sink_set_data_ready_cb()`
+/// - `media_streamer_sink_unset_data_ready_cb()`
+/// @nodoc
 typedef media_streamer_sink_data_ready_cb = ffi
     .Pointer<ffi.NativeFunction<media_streamer_sink_data_ready_cbFunction>>;
+/// @nodoc
 typedef media_streamer_sink_data_ready_cbFunction = ffi.Void Function(
     media_streamer_node_h sink, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmedia_streamer_sink_data_ready_cbFunction = void Function(
     media_streamer_node_h sink, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief  Called when the end-of-stream has been reached.
-/// @details This callback can be applied only to #MEDIA_STREAMER_NODE_SINK_TYPE_CUSTOM sink type node.
-/// @since_tizen 3.0
-/// @remarks The @a sink is the same object for which the callback was set.
-/// @param[in] sink      Media streamer sink node handle
-/// @param[in] user_data The user data passed from the code where
-/// media_streamer_sink_set_eos_cb() was invoked
-/// This data will be accessible from media_streamer_sink_eos_cb()
-/// @pre media_streamer_sink_set_eos_cb()
-/// @see MEDIA_STREAMER_NODE_SINK_TYPE_CUSTOM
-/// @see media_streamer_sink_set_eos_cb()
-/// @see media_streamer_sink_unset_eos_cb()
+/// Called when the end-of-stream has been reached.
+///
+/// This callback can be applied only to `MEDIA_STREAMER_NODE_SINK_TYPE_CUSTOM` sink type node.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - The `sink` is the same object for which the callback was set.
+///
+/// **Parameters:**
+/// - `sink` (in): Media streamer sink node handle
+/// - `user_data` (in): The user data passed from the code where media_streamer_sink_set_eos_cb() was invoked This data will be accessible from media_streamer_sink_eos_cb()
+///
+/// **Preconditions:**
+/// - media_streamer_sink_set_eos_cb()
+///
+/// **See also:**
+/// - `MEDIA_STREAMER_NODE_SINK_TYPE_CUSTOM`
+/// - `media_streamer_sink_set_eos_cb()`
+/// - `media_streamer_sink_unset_eos_cb()`
+/// @nodoc
 typedef media_streamer_sink_eos_cb
     = ffi.Pointer<ffi.NativeFunction<media_streamer_sink_eos_cbFunction>>;
+/// @nodoc
 typedef media_streamer_sink_eos_cbFunction = ffi.Void Function(
     media_streamer_node_h sink, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmedia_streamer_sink_eos_cbFunction = void Function(
     media_streamer_node_h sink, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the seek operation is completed.
-/// @since_tizen 3.0
-/// @param[in] user_data     The user data passed from the callback registration function
-/// @see media_streamer_set_play_position()
+/// Called when the seek operation is completed.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `media_streamer_set_play_position()`
+/// @nodoc
 typedef media_streamer_position_changed_cb = ffi
     .Pointer<ffi.NativeFunction<media_streamer_position_changed_cbFunction>>;
+/// @nodoc
 typedef media_streamer_position_changed_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmedia_streamer_position_changed_cbFunction = void Function(
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when a source pad of a media streamer node is ready to provide decoded data.
-/// @since_tizen 6.0
-/// @remarks The @a node is the same object for which the callback was set.\n
-/// The @a src_pad_name and the @a media_type can be used only in the callback. To use outside, make a copy.
-/// @param[in] node          Media streamer node handle
-/// @param[in] src_pad_name  The source pad name that can give decoded data to another one
-/// @param[in] media_type    The media type of the data from the given source pad such as 'video/x-raw', 'audio/x-raw', and so on
-/// @param[in] user_data     The user data passed from the callback registration function
-/// @see media_streamer_node_set_decoded_ready_cb()
-/// @see media_streamer_node_link()
-/// @see media_streamer_node_unset_decoded_ready_cb()
+/// Called when a source pad of a media streamer node is ready to provide decoded data.
+///
+/// **Since Tizen:**
+/// - 6.0
+///
+/// **Remarks:**
+/// - The `node` is the same object for which the callback was set.
+/// - The `src_pad_name` and the `media_type` can be used only in the callback. To use outside, make a copy.
+///
+/// **Parameters:**
+/// - `node` (in): Media streamer node handle
+/// - `src_pad_name` (in): The source pad name that can give decoded data to another one
+/// - `media_type` (in): The media type of the data from the given source pad such as 'video/x-raw', 'audio/x-raw', and so on
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `media_streamer_node_set_decoded_ready_cb()`
+/// - `media_streamer_node_link()`
+/// - `media_streamer_node_unset_decoded_ready_cb()`
+/// @nodoc
 typedef media_streamer_node_decoded_ready_cb = ffi
     .Pointer<ffi.NativeFunction<media_streamer_node_decoded_ready_cbFunction>>;
+/// @nodoc
 typedef media_streamer_node_decoded_ready_cbFunction = ffi.Void Function(
     media_streamer_node_h node,
     ffi.Pointer<ffi.Char> src_pad_name,
     ffi.Pointer<ffi.Char> media_type,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmedia_streamer_node_decoded_ready_cbFunction = void Function(
     media_streamer_node_h node,
     ffi.Pointer<ffi.Char> src_pad_name,
     ffi.Pointer<ffi.Char> media_type,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the media streamer WebRTC node needs to send the message to the remote peer of the WebRTC connection.
-/// @since_tizen 6.0
-/// @remarks Two types will be delivered with @a message which is a JSON string.\n
-/// One is for the remote session description and the other is for a new ICE candidate.\n
-/// For the remote session description, @a message will be {"sdp":{"type":"offer or answer","sdp":"..."}}.\n
-/// For the new ICE candidate, @a message will be {"ice":{"candidate":"..."}}.\n
-/// The @a webrtc is the same object for which the callback was set.\n
-/// The @a message can be used only in the callback. To use outside, make a copy.
-/// @param[in] webrtc     Media streamer WebRTC node handle
-/// @param[in] message    The message to be passed to the remote peer over the signaling channel
-/// @param[in] user_data  The user data passed from the callback registration function
-/// @see media_streamer_webrtc_node_set_message_cb()
-/// @see media_streamer_webrtc_node_unset_message_cb()
+/// Called when the media streamer WebRTC node needs to send the message to the remote peer of the WebRTC connection.
+///
+/// **Since Tizen:**
+/// - 6.0
+///
+/// **Remarks:**
+/// - Two types will be delivered with `message` which is a JSON string.
+/// - One is for the remote session description and the other is for a new ICE candidate.
+/// - For the remote session description, `message` will be {"sdp":{"type":"offer or answer","sdp":"..."}}.
+/// - For the new ICE candidate, `message` will be {"ice":{"candidate":"..."}}.
+/// - The `webrtc` is the same object for which the callback was set.
+/// - The `message` can be used only in the callback. To use outside, make a copy.
+///
+/// **Parameters:**
+/// - `webrtc` (in): Media streamer WebRTC node handle
+/// - `message` (in): The message to be passed to the remote peer over the signaling channel
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `media_streamer_webrtc_node_set_message_cb()`
+/// - `media_streamer_webrtc_node_unset_message_cb()`
+/// @nodoc
 typedef media_streamer_webrtc_message_cb
     = ffi.Pointer<ffi.NativeFunction<media_streamer_webrtc_message_cbFunction>>;
+/// @nodoc
 typedef media_streamer_webrtc_message_cbFunction = ffi.Void Function(
     media_streamer_node_h webrtc,
     ffi.Pointer<ffi.Char> message,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmedia_streamer_webrtc_message_cbFunction = void Function(
     media_streamer_node_h webrtc,
     ffi.Pointer<ffi.Char> message,
     ffi.Pointer<ffi.Void> user_data);
 
+/// @nodoc
 const String MEDIA_STREAMER_PARAM_CAMERA_ID = 'camera-id';
 
+/// @nodoc
 const String MEDIA_STREAMER_PARAM_CAPTURE_WIDTH = 'capture-width';
 
+/// @nodoc
 const String MEDIA_STREAMER_PARAM_CAPTURE_HEIGHT = 'capture-height';
 
+/// @nodoc
 const String MEDIA_STREAMER_PARAM_IS_LIVE_STREAM = 'is-live';
 
+/// @nodoc
 const String MEDIA_STREAMER_PARAM_URI = 'uri';
 
+/// @nodoc
 const String MEDIA_STREAMER_PARAM_USER_AGENT = 'user-agent';
 
+/// @nodoc
 const String MEDIA_STREAMER_PARAM_STREAM_TYPE = 'stream-type';
 
+/// @nodoc
 const String MEDIA_STREAMER_PARAM_PORT = 'port';
 
+/// @nodoc
 const String MEDIA_STREAMER_PARAM_RTP_LATENCY = 'rtp-latency';
 
+/// @nodoc
 const String MEDIA_STREAMER_PARAM_VIDEO_IN_PORT = 'video_in_port';
 
+/// @nodoc
 const String MEDIA_STREAMER_PARAM_AUDIO_IN_PORT = 'audio_in_port';
 
+/// @nodoc
 const String MEDIA_STREAMER_PARAM_VIDEO_OUT_PORT = 'video_out_port';
 
+/// @nodoc
 const String MEDIA_STREAMER_PARAM_AUDIO_OUT_PORT = 'audio_out_port';
 
+/// @nodoc
 const String MEDIA_STREAMER_PARAM_IP_ADDRESS = 'address';
 
+/// @nodoc
 const String MEDIA_STREAMER_PARAM_WEBRTC_PEER_TYPE = 'webrtc-peer-type';
 
+/// @nodoc
 const String MEDIA_STREAMER_PARAM_WEBRTC_STUN_SERVER = 'webrtc-stun-server';
 
+/// @nodoc
 const String MEDIA_STREAMER_PARAM_WEBRTC_REMOTE_SESSION_DESCRIPTION =
     'webrtc-remote-session-description';
 
+/// @nodoc
 const String MEDIA_STREAMER_PARAM_WEBRTC_ADD_ICE_CANDIDATE =
     'webrtc-add-ice-candidate';
 
+/// @nodoc
 const String MEDIA_STREAMER_PARAM_WEBRTC_RTP_TRANSCEIVER_DIRECTION_FOR_AUDIO =
     'webrtc-rtp-transceiver-direction-for-audio';
 
+/// @nodoc
 const String MEDIA_STREAMER_PARAM_WEBRTC_RTP_TRANSCEIVER_DIRECTION_FOR_VIDEO =
     'webrtc-rtp-transceiver-direction-for-video';
 
+/// @nodoc
 const String MEDIA_STREAMER_PARAM_AUDIO_DEVICE = 'audio_device';
 
+/// @nodoc
 const String MEDIA_STREAMER_PARAM_CLOCK_SYNCHRONIZED = 'sync';
 
+/// @nodoc
 const String MEDIA_STREAMER_PARAM_ROTATE = 'rotate';
 
+/// @nodoc
 const String MEDIA_STREAMER_PARAM_FLIP = 'flip';
 
+/// @nodoc
 const String MEDIA_STREAMER_PARAM_DISPLAY_GEOMETRY_METHOD =
     'display-geometry-method';
 
+/// @nodoc
 const String MEDIA_STREAMER_PARAM_DISPLAY = 'display';
 
+/// @nodoc
 const String MEDIA_STREAMER_PARAM_VISIBLE = 'visible';
 
+/// @nodoc
 const String MEDIA_STREAMER_PARAM_USE_TBM = 'use-tbm';
 
+/// @nodoc
 const String MEDIA_STREAMER_PARAM_HOST = 'host';
 
+/// @nodoc
 const String MEDIA_STREAMER_PARAM_SEGMENT_LOCATION = 'location';
 
+/// @nodoc
 const String MEDIA_STREAMER_PARAM_PLAYLIST_LOCATION = 'playlist-location';
 
+/// @nodoc
 const String MEDIA_STREAMER_PARAM_SINK_MAX_LATENESS = 'max-lateness';
 
+/// @nodoc
 const String MEDIA_STREAMER_NODE_PAD_VIDEO_SINK = 'video-in';
 
+/// @nodoc
 const String MEDIA_STREAMER_NODE_PAD_AUDIO_SINK = 'audio-in';

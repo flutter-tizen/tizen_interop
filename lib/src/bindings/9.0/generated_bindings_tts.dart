@@ -1,3 +1,6 @@
+/// {@category 9.0/tizen}
+library tizen_interop_9_0.tts;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen tts APIs.
+/// {@category 9.0/tizen}
 class Tizen90Tts {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,20 +28,33 @@ class Tizen90Tts {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates a handle for TTS.
-  /// @since_tizen 2.3
-  /// @remarks If the function succeeds, @a tts handle must be released with tts_destroy().
-  /// @param[out] tts The TTS handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #TTS_ERROR_ENGINE_NOT_FOUND Engine not found
-  /// @retval #TTS_ERROR_OPERATION_FAILED Operation failure
-  /// @post If this function is called, the TTS state will be #TTS_STATE_CREATED.
-  /// @see tts_destroy()
+  /// Creates a handle for TTS.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, `tts` handle must be released with tts_destroy().
+  ///
+  /// **Parameters:**
+  /// - `tts` (out): The TTS handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `TTS_ERROR_ENGINE_NOT_FOUND`: Engine not found
+  /// - `TTS_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **Postconditions:**
+  /// - If this function is called, the TTS state will be `TTS_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `tts_destroy()`
   int tts_create(
     ffi.Pointer<tts_h> tts,
   ) {
@@ -52,16 +69,25 @@ class Tizen90Tts {
   late final _tts_create =
       _tts_createPtr.asFunction<int Function(ffi.Pointer<tts_h>)>();
 
-  /// @brief Destroys the handle and disconnects the daemon.
-  /// @since_tizen 2.3
-  /// @param[in] tts The TTS handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_OPERATION_FAILED Operation failure
-  /// @see tts_create()
+  /// Destroys the handle and disconnects the daemon.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **See also:**
+  /// - `tts_create()`
   int tts_destroy(
     tts_h tts,
   ) {
@@ -74,19 +100,30 @@ class Tizen90Tts {
       _lookup<ffi.NativeFunction<ffi.Int Function(tts_h)>>('tts_destroy');
   late final _tts_destroy = _tts_destroyPtr.asFunction<int Function(tts_h)>();
 
-  /// @brief Sets the TTS mode.
-  /// @since_tizen 2.3
-  /// @param[in] tts The TTS handle
-  /// @param[in] mode The mode
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_INVALID_STATE Invalid state
-  /// @retval #TTS_ERROR_OPERATION_FAILED Operation failure
-  /// @pre The state should be #TTS_STATE_CREATED.
-  /// @see tts_get_mode()
+  /// Sets the TTS mode.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  /// - `mode` (in): The mode
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_INVALID_STATE`: Invalid state
+  /// - `TTS_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **Preconditions:**
+  /// - The state should be `TTS_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `tts_get_mode()`
   int tts_set_mode(
     tts_h tts,
     int mode,
@@ -103,18 +140,29 @@ class Tizen90Tts {
   late final _tts_set_mode =
       _tts_set_modePtr.asFunction<int Function(tts_h, int)>();
 
-  /// @brief Gets the TTS mode.
-  /// @since_tizen 2.3
-  /// @param[in] tts The TTS handle
-  /// @param[out] mode The mode
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_INVALID_STATE Invalid state
-  /// @pre The state should be #TTS_STATE_CREATED.
-  /// @see tts_set_mode()
+  /// Gets the TTS mode.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  /// - `mode` (out): The mode
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `TTS_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `tts_set_mode()`
   int tts_get_mode(
     tts_h tts,
     ffi.Pointer<ffi.Int32> mode,
@@ -131,23 +179,35 @@ class Tizen90Tts {
   late final _tts_get_mode = _tts_get_modePtr
       .asFunction<int Function(tts_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets the app credential.
-  /// @details Using this API, the application can set a credential.
-  /// The credential is a key to verify the authorization about using the engine.
-  /// If the application sets the credential, it will be able to use functions of the engine entirely.
-  /// @since_tizen 3.0
-  /// @remarks The necessity of the credential depends on the engine. In case of the engine which is basically embedded in Tizen, the credential is not necessary so far.
-  /// However, if the user wants to apply the 3rd party's engine, the credential may be necessary. In that case, please follow the policy provided by the corresponding engine.
-  /// @param[in] tts The TTS handle
-  /// @param[in] credential The app credential
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Success
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_INVALID_STATE Invalid state
-  /// @pre The state should be #TTS_STATE_CREATED or #TTS_STATE_READY.
-  /// @see tts_play()
+  /// Sets the app credential.
+  ///
+  /// Using this API, the application can set a credential. The credential is a key to verify the authorization about using the engine. If the application sets the credential, it will be able to use functions of the engine entirely.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The necessity of the credential depends on the engine. In case of the engine which is basically embedded in Tizen, the credential is not necessary so far.
+  /// - However, if the user wants to apply the 3rd party's engine, the credential may be necessary. In that case, please follow the policy provided by the corresponding engine.
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  /// - `credential` (in): The app credential
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Success
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `TTS_STATE_CREATED` or `TTS_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `tts_play()`
   int tts_set_credential(
     tts_h tts,
     ffi.Pointer<ffi.Char> credential,
@@ -164,20 +224,32 @@ class Tizen90Tts {
   late final _tts_set_credential = _tts_set_credentialPtr
       .asFunction<int Function(tts_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Connects the daemon asynchronously.
-  /// @since_tizen 2.3
-  /// @param[in] tts The TTS handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_INVALID_STATE Invalid state
-  /// @retval #TTS_ERROR_SCREEN_READER_OFF Screen reader is turned off
-  /// @pre The state should be #TTS_STATE_CREATED.
-  /// @post If this function is successful, the TTS state will be #TTS_STATE_READY.
-  /// If this function is failed, the error callback is called. (e.g. #TTS_ERROR_ENGINE_NOT_FOUND)
-  /// @see tts_unprepare()
+  /// Connects the daemon asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_INVALID_STATE`: Invalid state
+  /// - `TTS_ERROR_SCREEN_READER_OFF`: Screen reader is turned off
+  ///
+  /// **Preconditions:**
+  /// - The state should be `TTS_STATE_CREATED`.
+  ///
+  /// **Postconditions:**
+  /// - If this function is successful, the TTS state will be `TTS_STATE_READY`. If this function is failed, the error callback is called. (e.g. `TTS_ERROR_ENGINE_NOT_FOUND`)
+  ///
+  /// **See also:**
+  /// - `tts_unprepare()`
   int tts_prepare(
     tts_h tts,
   ) {
@@ -190,18 +262,31 @@ class Tizen90Tts {
       _lookup<ffi.NativeFunction<ffi.Int Function(tts_h)>>('tts_prepare');
   late final _tts_prepare = _tts_preparePtr.asFunction<int Function(tts_h)>();
 
-  /// @brief Disconnects the daemon.
-  /// @since_tizen 2.3
-  /// @param[in] tts The TTS handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_INVALID_STATE Invalid state
-  /// @pre The state should be #TTS_STATE_READY.
-  /// @post If this function is called, the TTS state will be #TTS_STATE_CREATED.
-  /// @see tts_prepare()
+  /// Disconnects the daemon.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `TTS_STATE_READY`.
+  ///
+  /// **Postconditions:**
+  /// - If this function is called, the TTS state will be `TTS_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `tts_prepare()`
   int tts_unprepare(
     tts_h tts,
   ) {
@@ -215,19 +300,32 @@ class Tizen90Tts {
   late final _tts_unprepare =
       _tts_unpreparePtr.asFunction<int Function(tts_h)>();
 
-  /// @brief Connects the daemon synchronously.
-  /// @since_tizen 7.0
-  /// @param[in] tts The TTS handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_INVALID_STATE Invalid state
-  /// @retval #TTS_ERROR_OPERATION_FAILED Operation failure
-  /// @pre The state should be #TTS_STATE_CREATED.
-  /// @post If this function is successful, the TTS state will be #TTS_STATE_READY.
-  /// @see tts_unprepare()
+  /// Connects the daemon synchronously.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_INVALID_STATE`: Invalid state
+  /// - `TTS_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **Preconditions:**
+  /// - The state should be `TTS_STATE_CREATED`.
+  ///
+  /// **Postconditions:**
+  /// - If this function is successful, the TTS state will be `TTS_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `tts_unprepare()`
   int tts_prepare_sync(
     tts_h tts,
   ) {
@@ -241,20 +339,31 @@ class Tizen90Tts {
   late final _tts_prepare_sync =
       _tts_prepare_syncPtr.asFunction<int Function(tts_h)>();
 
-  /// @brief Retrieves all supported voices of the current engine using callback function.
-  /// @since_tizen 2.3
-  /// @param[in] tts The TTS handle
-  /// @param[in] callback The callback function to invoke
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_ENGINE_NOT_FOUND Engine not found
-  /// @retval #TTS_ERROR_OPERATION_FAILED Operation failure
-  /// @post This function invokes tts_supported_voice_cb() repeatedly for getting voices.
-  /// @see tts_get_default_voice()
+  /// Retrieves all supported voices of the current engine using callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  /// - `callback` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_ENGINE_NOT_FOUND`: Engine not found
+  /// - `TTS_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **Postconditions:**
+  /// - This function invokes tts_supported_voice_cb() repeatedly for getting voices.
+  ///
+  /// **See also:**
+  /// - `tts_get_default_voice()`
   int tts_foreach_supported_voices(
     tts_h tts,
     tts_supported_voice_cb callback,
@@ -275,19 +384,28 @@ class Tizen90Tts {
       _tts_foreach_supported_voicesPtr.asFunction<
           int Function(tts_h, tts_supported_voice_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Retrieves all supported personal voices of the current engine using callback function.
-  /// @since_tizen 9.0
-  /// @param[in] tts The TTS handle
-  /// @param[in] callback The callback function to invoke
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_ENGINE_NOT_FOUND Engine not found
-  /// @retval #TTS_ERROR_OPERATION_FAILED Operation failure
-  /// @post This function invokes tts_supported_personal_voice_cb() repeatedly for getting personal voices.
+  /// Retrieves all supported personal voices of the current engine using callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  /// - `callback` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_ENGINE_NOT_FOUND`: Engine not found
+  /// - `TTS_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **Postconditions:**
+  /// - This function invokes tts_supported_personal_voice_cb() repeatedly for getting personal voices.
   int tts_foreach_supported_personal_voices(
     tts_h tts,
     tts_supported_personal_voice_cb callback,
@@ -309,20 +427,31 @@ class Tizen90Tts {
           int Function(
               tts_h, tts_supported_personal_voice_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the default voice set by the user.
-  /// @since_tizen 2.3
-  /// @remarks If the function succeeds, @a language must be released with free().
-  /// @param[in] tts The TTS handle
-  /// @param[out] language Language specified as an ISO 3166 alpha-2 two letter country-code followed by ISO 639-1 for the two-letter language code (for example, "ko_KR" for Korean, "en_US" for American English)
-  /// @param[out] voice_type The voice type
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_ENGINE_NOT_FOUND Engine not found
-  /// @retval #TTS_ERROR_OPERATION_FAILED Operation failure
-  /// @see tts_foreach_supported_voices()
+  /// Gets the default voice set by the user.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, `language` must be released with free().
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  /// - `language` (out): Language specified as an ISO 3166 alpha-2 two letter country-code followed by ISO 639-1 for the two-letter language code (for example, "ko_KR" for Korean, "en_US" for American English)
+  /// - `voice_type` (out): The voice type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_ENGINE_NOT_FOUND`: Engine not found
+  /// - `TTS_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **See also:**
+  /// - `tts_foreach_supported_voices()`
   int tts_get_default_voice(
     tts_h tts,
     ffi.Pointer<ffi.Pointer<ffi.Char>> language,
@@ -343,26 +472,37 @@ class Tizen90Tts {
       int Function(
           tts_h, ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the private data to tts engine.
-  /// @details The private data is the setting parameter for applying keys provided by the engine.
-  /// Using this API, the application can set the private data and use the corresponding key of the engine.
-  /// For example, if the engine provides 'girl's voice' as a voice type, the application can set the private data as the following.
-  /// int ret = tts_set_private_data(#tts_h, "voice_type", "GIRL");
-  /// @since_tizen 3.0
-  /// @remarks If the engine is replaced with the other engine, the key may be ignored.
-  /// @param[in] tts The TTS handle
-  /// @param[in] key The field name of private data
-  /// @param[in] data The data for set
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_INVALID_STATE Invalid state
-  /// @retval #TTS_ERROR_ENGINE_NOT_FOUND Engine not found
-  /// @retval #TTS_ERROR_OPERATION_FAILED Operation failure
-  /// @pre The state should be #TTS_STATE_READY.
-  /// @see tts_get_private_data()
+  /// Sets the private data to tts engine.
+  ///
+  /// The private data is the setting parameter for applying keys provided by the engine. Using this API, the application can set the private data and use the corresponding key of the engine. For example, if the engine provides 'girl's voice' as a voice type, the application can set the private data as the following. int ret = tts_set_private_data(`tts_h`, "voice_type", "GIRL");
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - If the engine is replaced with the other engine, the key may be ignored.
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  /// - `key` (in): The field name of private data
+  /// - `data` (in): The data for set
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_INVALID_STATE`: Invalid state
+  /// - `TTS_ERROR_ENGINE_NOT_FOUND`: Engine not found
+  /// - `TTS_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **Preconditions:**
+  /// - The state should be `TTS_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `tts_get_private_data()`
   int tts_set_private_data(
     tts_h tts,
     ffi.Pointer<ffi.Char> key,
@@ -382,25 +522,38 @@ class Tizen90Tts {
   late final _tts_set_private_data = _tts_set_private_dataPtr.asFunction<
       int Function(tts_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the private data from tts engine.
-  /// @details The private data is the information provided by the engine.
-  /// Using this API, the application can get the private data which corresponds to the key from the engine.
-  /// @since_tizen 3.0
-  /// @remarks The @a data must be released using free() when it is no longer required.
-  /// If the engine is replaced with the other engine, the key may be ignored.
-  /// @param[in] tts The TTS handle
-  /// @param[in] key The field name of private data
-  /// @param[out] data The data field of private data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_INVALID_STATE Invalid state
-  /// @retval #TTS_ERROR_ENGINE_NOT_FOUND Engine not found
-  /// @retval #TTS_ERROR_OPERATION_FAILED Operation failure
-  /// @pre The state should be #TTS_STATE_READY.
-  /// @see tts_set_private_data()
+  /// Gets the private data from tts engine.
+  ///
+  /// The private data is the information provided by the engine. Using this API, the application can get the private data which corresponds to the key from the engine.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `data` must be released using free() when it is no longer required.
+  /// - If the engine is replaced with the other engine, the key may be ignored.
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  /// - `key` (in): The field name of private data
+  /// - `data` (out): The data field of private data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_INVALID_STATE`: Invalid state
+  /// - `TTS_ERROR_ENGINE_NOT_FOUND`: Engine not found
+  /// - `TTS_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **Preconditions:**
+  /// - The state should be `TTS_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `tts_set_private_data()`
   int tts_get_private_data(
     tts_h tts,
     ffi.Pointer<ffi.Char> key,
@@ -421,19 +574,30 @@ class Tizen90Tts {
       int Function(
           tts_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the maximum byte size for text.
-  /// @since_tizen 2.3
-  /// @param[in] tts The TTS handle
-  /// @param[out] size The maximum byte size for text
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_INVALID_STATE Invalid state
-  /// @retval #TTS_ERROR_OPERATION_FAILED Operation failure
-  /// @pre The state should be #TTS_STATE_READY.
-  /// @see tts_add_text()
+  /// Gets the maximum byte size for text.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  /// - `size` (out): The maximum byte size for text
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_INVALID_STATE`: Invalid state
+  /// - `TTS_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **Preconditions:**
+  /// - The state should be `TTS_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `tts_add_text()`
   int tts_get_max_text_size(
     tts_h tts,
     ffi.Pointer<ffi.UnsignedInt> size,
@@ -451,18 +615,27 @@ class Tizen90Tts {
   late final _tts_get_max_text_size = _tts_get_max_text_sizePtr
       .asFunction<int Function(tts_h, ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Gets the current state of TTS.
-  /// @since_tizen 2.3
-  /// @param[in] tts The TTS handle
-  /// @param[out] state The current state of TTS
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see tts_play()
-  /// @see tts_stop()
-  /// @see tts_pause()
+  /// Gets the current state of TTS.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  /// - `state` (out): The current state of TTS
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `tts_play()`
+  /// - `tts_stop()`
+  /// - `tts_pause()`
   int tts_get_state(
     tts_h tts,
     ffi.Pointer<ffi.Int32> state,
@@ -479,21 +652,32 @@ class Tizen90Tts {
   late final _tts_get_state = _tts_get_statePtr
       .asFunction<int Function(tts_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the speed range.
-  /// @since_tizen 2.3
-  /// @param[in] tts The TTS handle
-  /// @param[out] min The minimum speed value
-  /// @param[out] normal The normal speed value
-  /// @param[out] max The maximum speed value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_INVALID_STATE Invalid state
-  /// @retval #TTS_ERROR_OPERATION_FAILED Operation failure
-  /// @pre The state should be #TTS_STATE_CREATED.
-  /// @see tts_add_text()
+  /// Gets the speed range.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  /// - `min` (out): The minimum speed value
+  /// - `normal` (out): The normal speed value
+  /// - `max` (out): The maximum speed value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_INVALID_STATE`: Invalid state
+  /// - `TTS_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **Preconditions:**
+  /// - The state should be `TTS_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `tts_add_text()`
   int tts_get_speed_range(
     tts_h tts,
     ffi.Pointer<ffi.Int> min,
@@ -516,20 +700,31 @@ class Tizen90Tts {
       int Function(tts_h, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>,
           ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the current error message.
-  /// @since_tizen 3.0
-  /// @remarks This function should be called from a tts error callback. Calling in any other context will result in an Operation failed error.
-  /// A successful call will allocate @a err_msg, which must be released by calling free() when it is no longer required.
-  /// @param[in] tts The TTS handle
-  /// @param[out] err_msg The current error message
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_OPERATION_FAILED Operation failure
-  /// @see tts_set_error_cb()
-  /// @see tts_unset_error_cb()
+  /// Gets the current error message.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - This function should be called from a tts error callback. Calling in any other context will result in an Operation failed error.
+  /// - A successful call will allocate `err_msg`, which must be released by calling free() when it is no longer required.
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  /// - `err_msg` (out): The current error message
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **See also:**
+  /// - `tts_set_error_cb()`
+  /// - `tts_unset_error_cb()`
   int tts_get_error_message(
     tts_h tts,
     ffi.Pointer<ffi.Pointer<ffi.Char>> err_msg,
@@ -547,21 +742,32 @@ class Tizen90Tts {
   late final _tts_get_error_message = _tts_get_error_messagePtr
       .asFunction<int Function(tts_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the current state of TTS service.
-  /// @since_tizen 7.0
-  /// @param[in] tts The TTS handle
-  /// @param[out] service_state The current state of TTS service
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_INVALID_STATE Invalid state
-  /// @retval #TTS_ERROR_OPERATION_FAILED Operation failure
-  /// @pre The TTS state should be one of: #TTS_STATE_READY, #TTS_STATE_PLAYING, #TTS_STATE_PAUSED.
-  /// @see tts_play()
-  /// @see tts_stop()
-  /// @see tts_pause()
+  /// Gets the current state of TTS service.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  /// - `service_state` (out): The current state of TTS service
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_INVALID_STATE`: Invalid state
+  /// - `TTS_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **Preconditions:**
+  /// - The TTS state should be one of: `TTS_STATE_READY`, `TTS_STATE_PLAYING`, `TTS_STATE_PAUSED`.
+  ///
+  /// **See also:**
+  /// - `tts_play()`
+  /// - `tts_stop()`
+  /// - `tts_pause()`
   int tts_get_service_state(
     tts_h tts,
     ffi.Pointer<ffi.Int32> service_state,
@@ -578,20 +784,31 @@ class Tizen90Tts {
   late final _tts_get_service_state = _tts_get_service_statePtr
       .asFunction<int Function(tts_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Checks whether screen reader is turned on or not.
-  /// @since_tizen 6.5
-  /// @remarks If TTS mode is #TTS_MODE_SCREEN_READER, you should call this function to check whether screen reader is turned on or not, before calling 'tts_prepare()'.
-  /// If TTS mode is #TTS_MODE_SCREEN_READER and @a is_on is @c false, all other functions will return #TTS_ERROR_SCREEN_READER_OFF.
-  /// The @a is_on must be released using free() when it is no longer required.
-  /// @param[in] tts The TTS handle
-  /// @param[out] is_on The current status of screen reader
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see tts_set_screen_reader_changed_cb()
-  /// @see tts_unset_screen_reader_changed_cb()
+  /// Checks whether screen reader is turned on or not.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - If TTS mode is `TTS_MODE_SCREEN_READER`, you should call this function to check whether screen reader is turned on or not, before calling 'tts_prepare()'.
+  /// - If TTS mode is `TTS_MODE_SCREEN_READER` and `is_on` is `false`, all other functions will return `TTS_ERROR_SCREEN_READER_OFF`.
+  /// - The `is_on` must be released using free() when it is no longer required.
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  /// - `is_on` (out): The current status of screen reader
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `tts_set_screen_reader_changed_cb()`
+  /// - `tts_unset_screen_reader_changed_cb()`
   int tts_check_screen_reader_on(
     tts_h tts,
     ffi.Pointer<ffi.Bool> is_on,
@@ -608,28 +825,41 @@ class Tizen90Tts {
   late final _tts_check_screen_reader_on = _tts_check_screen_reader_onPtr
       .asFunction<int Function(tts_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Adds a text to the queue.
-  /// @since_tizen 2.3
-  /// @remarks Locale(e.g. setlocale()) MUST be set for utf8 text validation check.
-  /// @param[in] tts The TTS handle
-  /// @param[in] text An input text based utf8
-  /// @param[in] language The language selected from the tts_foreach_supported_voices() (e.g. 'NULL'(Automatic), 'en_US')
-  /// @param[in] voice_type The voice type selected from the tts_foreach_supported_voices() (e.g. #TTS_VOICE_TYPE_AUTO, #TTS_VOICE_TYPE_FEMALE)
-  /// @param[in] speed A speaking speed (e.g. #TTS_SPEED_AUTO or the value from tts_get_speed_range())
-  /// @param[out] utt_id The utterance ID passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_INVALID_STATE Invalid state
-  /// @retval #TTS_ERROR_INVALID_VOICE Invalid voice about language, voice type
-  /// @retval #TTS_ERROR_OPERATION_FAILED Operation failure
-  /// @retval #TTS_ERROR_SCREEN_READER_OFF Screen reader is turned off
-  /// @pre The state should be #TTS_STATE_READY, #TTS_STATE_PLAYING or #TTS_STATE_PAUSED.
-  /// @see tts_get_max_text_size()
-  /// @see tts_set_credential()
+  /// Adds a text to the queue.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - Locale(e.g. setlocale()) MUST be set for utf8 text validation check.
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  /// - `text` (in): An input text based utf8
+  /// - `language` (in): The language selected from the tts_foreach_supported_voices() (e.g. 'NULL'(Automatic), 'en_US')
+  /// - `voice_type` (in): The voice type selected from the tts_foreach_supported_voices() (e.g. `TTS_VOICE_TYPE_AUTO`, `TTS_VOICE_TYPE_FEMALE`)
+  /// - `speed` (in): A speaking speed (e.g. `TTS_SPEED_AUTO` or the value from tts_get_speed_range())
+  /// - `utt_id` (out): The utterance ID passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_INVALID_STATE`: Invalid state
+  /// - `TTS_ERROR_INVALID_VOICE`: Invalid voice about language, voice type
+  /// - `TTS_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `TTS_ERROR_SCREEN_READER_OFF`: Screen reader is turned off
+  ///
+  /// **Preconditions:**
+  /// - The state should be `TTS_STATE_READY`, `TTS_STATE_PLAYING` or `TTS_STATE_PAUSED`.
+  ///
+  /// **See also:**
+  /// - `tts_get_max_text_size()`
+  /// - `tts_set_credential()`
   int tts_add_text(
     tts_h tts,
     ffi.Pointer<ffi.Char> text,
@@ -656,28 +886,41 @@ class Tizen90Tts {
       int Function(tts_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, int,
           int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Starts synthesizing voice from the text and plays the synthesized audio data.
-  /// @since_tizen 2.3
-  /// @param[in] tts The TTS handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_OUT_OF_NETWORK Out of network
-  /// @retval #TTS_ERROR_INVALID_STATE Invalid state
-  /// @retval #TTS_ERROR_OPERATION_FAILED Operation failure
-  /// @retval #TTS_ERROR_SCREEN_READER_OFF Screen reader is turned off
-  /// @pre The current state should be #TTS_STATE_READY or #TTS_STATE_PAUSED.
-  /// @post If this function succeeds, the TTS state will be #TTS_STATE_PLAYING.
-  /// @see tts_add_text()
-  /// @see tts_pause()
-  /// @see tts_stop()
-  /// @see tts_utterance_started_cb()
-  /// @see tts_utterance_completed_cb()
-  /// @see tts_error_cb()
-  /// @see tts_set_credential()
+  /// Starts synthesizing voice from the text and plays the synthesized audio data.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_OUT_OF_NETWORK`: Out of network
+  /// - `TTS_ERROR_INVALID_STATE`: Invalid state
+  /// - `TTS_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `TTS_ERROR_SCREEN_READER_OFF`: Screen reader is turned off
+  ///
+  /// **Preconditions:**
+  /// - The current state should be `TTS_STATE_READY` or `TTS_STATE_PAUSED`.
+  ///
+  /// **Postconditions:**
+  /// - If this function succeeds, the TTS state will be `TTS_STATE_PLAYING`.
+  ///
+  /// **See also:**
+  /// - `tts_add_text()`
+  /// - `tts_pause()`
+  /// - `tts_stop()`
+  /// - `tts_utterance_started_cb()`
+  /// - `tts_utterance_completed_cb()`
+  /// - `tts_error_cb()`
+  /// - `tts_set_credential()`
   int tts_play(
     tts_h tts,
   ) {
@@ -690,22 +933,34 @@ class Tizen90Tts {
       _lookup<ffi.NativeFunction<ffi.Int Function(tts_h)>>('tts_play');
   late final _tts_play = _tts_playPtr.asFunction<int Function(tts_h)>();
 
-  /// @brief Stops playing the utterance and clears the queue.
-  /// @since_tizen 2.3
-  /// @param[in] tts The TTS handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_INVALID_STATE Invalid state
-  /// @retval #TTS_ERROR_OPERATION_FAILED Operation failure
-  /// @retval #TTS_ERROR_SCREEN_READER_OFF Screen reader is turned off
-  /// @pre The TTS state should be #TTS_STATE_READY or #TTS_STATE_PLAYING or #TTS_STATE_PAUSED.
-  /// @post If this function succeeds, the TTS state will be #TTS_STATE_READY.
-  /// This function will remove all text via tts_add_text() and synthesized sound data.
-  /// @see tts_play()
-  /// @see tts_pause()
+  /// Stops playing the utterance and clears the queue.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_INVALID_STATE`: Invalid state
+  /// - `TTS_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `TTS_ERROR_SCREEN_READER_OFF`: Screen reader is turned off
+  ///
+  /// **Preconditions:**
+  /// - The TTS state should be `TTS_STATE_READY` or `TTS_STATE_PLAYING` or `TTS_STATE_PAUSED`.
+  ///
+  /// **Postconditions:**
+  /// - If this function succeeds, the TTS state will be `TTS_STATE_READY`. This function will remove all text via tts_add_text() and synthesized sound data.
+  ///
+  /// **See also:**
+  /// - `tts_play()`
+  /// - `tts_pause()`
   int tts_stop(
     tts_h tts,
   ) {
@@ -718,22 +973,35 @@ class Tizen90Tts {
       _lookup<ffi.NativeFunction<ffi.Int Function(tts_h)>>('tts_stop');
   late final _tts_stop = _tts_stopPtr.asFunction<int Function(tts_h)>();
 
-  /// @brief Pauses the currently playing utterance.
-  /// @since_tizen 2.3
-  /// @param[in] tts The TTS handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_INVALID_STATE Invalid state
-  /// @retval #TTS_ERROR_OPERATION_FAILED Operation failure
-  /// @retval #TTS_ERROR_SCREEN_READER_OFF Screen reader is turned off
-  /// @pre The TTS state should be #TTS_STATE_PLAYING.
-  /// @post If this function succeeds, the TTS state will be #TTS_STATE_PAUSED.
-  /// @see tts_play()
-  /// @see tts_stop()
-  /// @see tts_error_cb()
+  /// Pauses the currently playing utterance.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_INVALID_STATE`: Invalid state
+  /// - `TTS_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `TTS_ERROR_SCREEN_READER_OFF`: Screen reader is turned off
+  ///
+  /// **Preconditions:**
+  /// - The TTS state should be `TTS_STATE_PLAYING`.
+  ///
+  /// **Postconditions:**
+  /// - If this function succeeds, the TTS state will be `TTS_STATE_PAUSED`.
+  ///
+  /// **See also:**
+  /// - `tts_play()`
+  /// - `tts_stop()`
+  /// - `tts_error_cb()`
   int tts_pause(
     tts_h tts,
   ) {
@@ -746,29 +1014,43 @@ class Tizen90Tts {
       _lookup<ffi.NativeFunction<ffi.Int Function(tts_h)>>('tts_pause');
   late final _tts_pause = _tts_pausePtr.asFunction<int Function(tts_h)>();
 
-  /// @brief Repeats the last added text.
-  /// @since_tizen 5.0
-  /// @remarks This function repeats the last added text once again.
-  /// If there is no previously added text, this function will not work.
-  /// If the language is changed, the last added text is removed from the service.
-  /// Before calling this function, please call 'tts_stop()' in order to stop playing the previous one.
-  /// If this function succeeds, @a text_repeat must be released with free().
-  /// @param[in] tts The TTS handle
-  /// @param[out] text_repeat Texts to be played repeatedly
-  /// @param[out] utt_id The utterance ID passed to the callback function
+  /// Repeats the last added text.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_INVALID_STATE Invalid state
-  /// @retval #TTS_ERROR_OPERATION_FAILED Operation failure
-  /// @retval #TTS_ERROR_SCREEN_READER_OFF Screen reader is turned off
-  /// @pre The state should be #TTS_STATE_READY.
-  /// @post If this function succeeds, the TTS state will be #TTS_STATE_PLAYING.
-  /// @see tts_add_text()
-  /// @see tts_stop()
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - This function repeats the last added text once again.
+  /// - If there is no previously added text, this function will not work.
+  /// - If the language is changed, the last added text is removed from the service.
+  /// - Before calling this function, please call 'tts_stop()' in order to stop playing the previous one.
+  /// - If this function succeeds, `text_repeat` must be released with free().
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  /// - `text_repeat` (out): Texts to be played repeatedly
+  /// - `utt_id` (out): The utterance ID passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_INVALID_STATE`: Invalid state
+  /// - `TTS_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `TTS_ERROR_SCREEN_READER_OFF`: Screen reader is turned off
+  ///
+  /// **Preconditions:**
+  /// - The state should be `TTS_STATE_READY`.
+  ///
+  /// **Postconditions:**
+  /// - If this function succeeds, the TTS state will be `TTS_STATE_PLAYING`.
+  ///
+  /// **See also:**
+  /// - `tts_add_text()`
+  /// - `tts_stop()`
   int tts_repeat(
     tts_h tts,
     ffi.Pointer<ffi.Pointer<ffi.Char>> text_repeat,
@@ -789,20 +1071,31 @@ class Tizen90Tts {
       int Function(
           tts_h, ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets a callback function to be called when the TTS state changes.
-  /// @since_tizen 2.3
-  /// @param[in] tts The TTS handle
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_INVALID_STATE Invalid state
-  /// @pre The state should be #TTS_STATE_CREATED.
-  /// @see tts_state_changed_cb()
-  /// @see tts_unset_state_changed_cb()
+  /// Sets a callback function to be called when the TTS state changes.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `TTS_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `tts_state_changed_cb()`
+  /// - `tts_unset_state_changed_cb()`
   int tts_set_state_changed_cb(
     tts_h tts,
     tts_state_changed_cb callback,
@@ -823,17 +1116,28 @@ class Tizen90Tts {
       _tts_set_state_changed_cbPtr.asFunction<
           int Function(tts_h, tts_state_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback function to be called when the TTS state changes.
-  /// @since_tizen 2.3
-  /// @param[in] tts The TTS handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_INVALID_STATE Invalid state
-  /// @pre The state should be #TTS_STATE_CREATED.
-  /// @see tts_set_state_changed_cb()
+  /// Unsets the callback function to be called when the TTS state changes.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `TTS_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `tts_set_state_changed_cb()`
   int tts_unset_state_changed_cb(
     tts_h tts,
   ) {
@@ -848,20 +1152,31 @@ class Tizen90Tts {
   late final _tts_unset_state_changed_cb =
       _tts_unset_state_changed_cbPtr.asFunction<int Function(tts_h)>();
 
-  /// @brief Sets a callback function to detect utterance start.
-  /// @since_tizen 2.3
-  /// @param[in] tts The TTS handle
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_INVALID_STATE Invalid state
-  /// @pre The state should be #TTS_STATE_CREATED.
-  /// @see tts_utterance_started_cb()
-  /// @see tts_unset_utterance_started_cb()
+  /// Sets a callback function to detect utterance start.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `TTS_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `tts_utterance_started_cb()`
+  /// - `tts_unset_utterance_started_cb()`
   int tts_set_utterance_started_cb(
     tts_h tts,
     tts_utterance_started_cb callback,
@@ -883,17 +1198,28 @@ class Tizen90Tts {
           int Function(
               tts_h, tts_utterance_started_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback function to detect utterance start.
-  /// @since_tizen 2.3
-  /// @param[in] tts The TTS handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_INVALID_STATE Invalid state
-  /// @pre The state should be #TTS_STATE_CREATED.
-  /// @see tts_set_utterance_started_cb()
+  /// Unsets the callback function to detect utterance start.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `TTS_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `tts_set_utterance_started_cb()`
   int tts_unset_utterance_started_cb(
     tts_h tts,
   ) {
@@ -908,20 +1234,31 @@ class Tizen90Tts {
   late final _tts_unset_utterance_started_cb =
       _tts_unset_utterance_started_cbPtr.asFunction<int Function(tts_h)>();
 
-  /// @brief Sets a callback function to detect utterance completion.
-  /// @since_tizen 2.3
-  /// @param[in] tts The TTS handle
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_INVALID_STATE Invalid state
-  /// @pre The state should be #TTS_STATE_CREATED.
-  /// @see tts_utterance_completed_cb()
-  /// @see tts_unset_utterance_completed_cb()
+  /// Sets a callback function to detect utterance completion.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `TTS_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `tts_utterance_completed_cb()`
+  /// - `tts_unset_utterance_completed_cb()`
   int tts_set_utterance_completed_cb(
     tts_h tts,
     tts_utterance_completed_cb callback,
@@ -943,17 +1280,28 @@ class Tizen90Tts {
           int Function(
               tts_h, tts_utterance_completed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback function to detect utterance completion.
-  /// @since_tizen 2.3
-  /// @param[in] tts The TTS handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_INVALID_STATE Invalid state
-  /// @pre The state should be #TTS_STATE_CREATED.
-  /// @see tts_set_utterance_completed_cb()
+  /// Unsets the callback function to detect utterance completion.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `TTS_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `tts_set_utterance_completed_cb()`
   int tts_unset_utterance_completed_cb(
     tts_h tts,
   ) {
@@ -968,20 +1316,31 @@ class Tizen90Tts {
   late final _tts_unset_utterance_completed_cb =
       _tts_unset_utterance_completed_cbPtr.asFunction<int Function(tts_h)>();
 
-  /// @brief Sets a callback function to detect errors.
-  /// @since_tizen 2.3
-  /// @param[in] tts The TTS handle
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_INVALID_STATE Invalid state
-  /// @pre The state should be #TTS_STATE_CREATED.
-  /// @see tts_error_cb()
-  /// @see tts_unset_error_cb()
+  /// Sets a callback function to detect errors.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `TTS_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `tts_error_cb()`
+  /// - `tts_unset_error_cb()`
   int tts_set_error_cb(
     tts_h tts,
     tts_error_cb callback,
@@ -1001,17 +1360,28 @@ class Tizen90Tts {
   late final _tts_set_error_cb = _tts_set_error_cbPtr
       .asFunction<int Function(tts_h, tts_error_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback function to detect errors.
-  /// @since_tizen 2.3
-  /// @param[in] tts The TTS handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_INVALID_STATE Invalid state
-  /// @pre The state should be #TTS_STATE_CREATED.
-  /// @see tts_set_error_cb()
+  /// Unsets the callback function to detect errors.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `TTS_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `tts_set_error_cb()`
   int tts_unset_error_cb(
     tts_h tts,
   ) {
@@ -1026,20 +1396,31 @@ class Tizen90Tts {
   late final _tts_unset_error_cb =
       _tts_unset_error_cbPtr.asFunction<int Function(tts_h)>();
 
-  /// @brief Sets a callback function to detect default voice change.
-  /// @since_tizen 2.3
-  /// @param[in] tts The TTS handle
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_INVALID_STATE Invalid state
-  /// @pre The state should be #TTS_STATE_CREATED.
-  /// @see tts_default_voice_changed_cb()
-  /// @see tts_unset_default_voice_changed_cb()
+  /// Sets a callback function to detect default voice change.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `TTS_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `tts_default_voice_changed_cb()`
+  /// - `tts_unset_default_voice_changed_cb()`
   int tts_set_default_voice_changed_cb(
     tts_h tts,
     tts_default_voice_changed_cb callback,
@@ -1061,17 +1442,28 @@ class Tizen90Tts {
           int Function(
               tts_h, tts_default_voice_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback function to detect default voice change.
-  /// @since_tizen 2.3
-  /// @param[in] tts The TTS handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_INVALID_STATE Invalid state
-  /// @pre The state should be #TTS_STATE_CREATED.
-  /// @see tts_set_default_voice_changed_cb()
+  /// Unsets the callback function to detect default voice change.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `TTS_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `tts_set_default_voice_changed_cb()`
   int tts_unset_default_voice_changed_cb(
     tts_h tts,
   ) {
@@ -1086,20 +1478,31 @@ class Tizen90Tts {
   late final _tts_unset_default_voice_changed_cb =
       _tts_unset_default_voice_changed_cbPtr.asFunction<int Function(tts_h)>();
 
-  /// @brief Sets a callback function to detect the engine change.
-  /// @since_tizen 3.0
-  /// @param[in] tts The TTS handle
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_INVALID_STATE Invalid state
-  /// @pre The state should be #TTS_STATE_CREATED.
-  /// @see tts_engine_changed_cb()
-  /// @see tts_unset_engine_changed_cb()
+  /// Sets a callback function to detect the engine change.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `TTS_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `tts_engine_changed_cb()`
+  /// - `tts_unset_engine_changed_cb()`
   int tts_set_engine_changed_cb(
     tts_h tts,
     tts_engine_changed_cb callback,
@@ -1120,17 +1523,28 @@ class Tizen90Tts {
       _tts_set_engine_changed_cbPtr.asFunction<
           int Function(tts_h, tts_engine_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback function to detect the engine change.
-  /// @since_tizen 3.0
-  /// @param[in] tts The TTS handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_INVALID_STATE Invalid state
-  /// @pre The state should be #TTS_STATE_CREATED.
-  /// @see tts_set_engine_changed_cb()
+  /// Unsets the callback function to detect the engine change.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `TTS_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `tts_set_engine_changed_cb()`
   int tts_unset_engine_changed_cb(
     tts_h tts,
   ) {
@@ -1145,21 +1559,34 @@ class Tizen90Tts {
   late final _tts_unset_engine_changed_cb =
       _tts_unset_engine_changed_cbPtr.asFunction<int Function(tts_h)>();
 
-  /// @brief Sets a callback function to detect the option of screen reader is changed or not.
-  /// @since_tizen 6.5
-  /// @remarks If TTS mode is #TTS_MODE_SCREEN_READER, you should set the callback to check the option of screen reader is changed or not.
-  /// @param[in] tts The TTS handle
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_INVALID_STATE Invalid state
-  /// @pre The state should be #TTS_STATE_CREATED.
-  /// @see tts_screen_reader_changed_cb()
-  /// @see tts_unset_screen_reader_changed_cb()
+  /// Sets a callback function to detect the option of screen reader is changed or not.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - If TTS mode is `TTS_MODE_SCREEN_READER`, you should set the callback to check the option of screen reader is changed or not.
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `TTS_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `tts_screen_reader_changed_cb()`
+  /// - `tts_unset_screen_reader_changed_cb()`
   int tts_set_screen_reader_changed_cb(
     tts_h tts,
     tts_screen_reader_changed_cb callback,
@@ -1181,17 +1608,28 @@ class Tizen90Tts {
           int Function(
               tts_h, tts_screen_reader_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback function to detect the option of screen reader is changed or not.
-  /// @since_tizen 6.5
-  /// @param[in] tts The TTS handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_INVALID_STATE Invalid state
-  /// @pre The state should be #TTS_STATE_CREATED.
-  /// @see tts_set_screen_reader_changed_cb()
+  /// Unsets the callback function to detect the option of screen reader is changed or not.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `TTS_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `tts_set_screen_reader_changed_cb()`
   int tts_unset_screen_reader_changed_cb(
     tts_h tts,
   ) {
@@ -1206,20 +1644,31 @@ class Tizen90Tts {
   late final _tts_unset_screen_reader_changed_cb =
       _tts_unset_screen_reader_changed_cbPtr.asFunction<int Function(tts_h)>();
 
-  /// @brief Sets a callback function to be called when the TTS service state changes.
-  /// @since_tizen 7.0
-  /// @param[in] tts The TTS handle
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_INVALID_STATE Invalid state
-  /// @pre The TTS state should be #TTS_STATE_CREATED.
-  /// @see tts_service_state_changed_cb()
-  /// @see tts_unset_service_state_changed_cb()
+  /// Sets a callback function to be called when the TTS service state changes.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The TTS state should be `TTS_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `tts_service_state_changed_cb()`
+  /// - `tts_unset_service_state_changed_cb()`
   int tts_set_service_state_changed_cb(
     tts_h tts,
     tts_service_state_changed_cb callback,
@@ -1241,17 +1690,28 @@ class Tizen90Tts {
           int Function(
               tts_h, tts_service_state_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback function to be called when the TTS service state changes.
-  /// @since_tizen 7.0
-  /// @param[in] tts The TTS handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_INVALID_STATE Invalid state
-  /// @pre The TTS state should be #TTS_STATE_CREATED.
-  /// @see tts_set_service_state_changed_cb()
+  /// Unsets the callback function to be called when the TTS service state changes.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The TTS state should be `TTS_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `tts_set_service_state_changed_cb()`
   int tts_unset_service_state_changed_cb(
     tts_h tts,
   ) {
@@ -1266,18 +1726,29 @@ class Tizen90Tts {
   late final _tts_unset_service_state_changed_cb =
       _tts_unset_service_state_changed_cbPtr.asFunction<int Function(tts_h)>();
 
-  /// @brief Sets the TTS playing mode.
-  /// @since_tizen 8.0
-  /// @param[in] tts The TTS handle
-  /// @param[in] mode The mode
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_INVALID_STATE Invalid state
-  /// @pre The state should be #TTS_STATE_CREATED.
-  /// @see tts_play()
+  /// Sets the TTS playing mode.
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  /// - `mode` (in): The mode
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `TTS_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `tts_play()`
   int tts_set_playing_mode(
     tts_h tts,
     int mode,
@@ -1294,21 +1765,32 @@ class Tizen90Tts {
   late final _tts_set_playing_mode =
       _tts_set_playing_modePtr.asFunction<int Function(tts_h, int)>();
 
-  /// @brief Sets the callback function to receive the synthesized pcm data from the tts service.
-  /// @since_tizen 8.0
-  /// @param[in] tts The TTS handle
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_INVALID_STATE Invalid state
-  /// @pre The TTS state should be #TTS_STATE_CREATED.
-  /// @see tts_synthesized_pcm_cb()
-  /// @see tts_unset_synthesized_pcm_cb()
+  /// Sets the callback function to receive the synthesized pcm data from the tts service.
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The TTS state should be `TTS_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `tts_synthesized_pcm_cb()`
+  /// - `tts_unset_synthesized_pcm_cb()`
   int tts_set_synthesized_pcm_cb(
     tts_h tts,
     tts_synthesized_pcm_cb callback,
@@ -1329,17 +1811,28 @@ class Tizen90Tts {
       _tts_set_synthesized_pcm_cbPtr.asFunction<
           int Function(tts_h, tts_synthesized_pcm_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback function to receive synthesized PCM data from the tts service.
-  /// @since_tizen 8.0
-  /// @param[in] tts The TTS handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_INVALID_STATE Invalid state
-  /// @pre The TTS state should be #TTS_STATE_CREATED.
-  /// @see tts_set_synthesized_pcm_cb()
+  /// Unsets the callback function to receive synthesized PCM data from the tts service.
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The TTS state should be `TTS_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `tts_set_synthesized_pcm_cb()`
   int tts_unset_synthesized_pcm_cb(
     tts_h tts,
   ) {
@@ -1354,21 +1847,32 @@ class Tizen90Tts {
   late final _tts_unset_synthesized_pcm_cb =
       _tts_unset_synthesized_pcm_cbPtr.asFunction<int Function(tts_h)>();
 
-  /// @brief Adds silence for the specified amount of time.
-  /// @since_tizen 9.0
-  /// @remarks The maximum silent time is 5000 msec. If you want to perform a silent time of more than 5000 msec, call this function several times.
-  /// @param[in] tts The TTS handle
-  /// @param[in] duration_in_msec The duration of the silence
-  /// @param[out] utt_id The utterance ID passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_INVALID_STATE Invalid state
-  /// @retval #TTS_ERROR_OPERATION_FAILED Operation failure
-  /// @retval #TTS_ERROR_SCREEN_READER_OFF Screen reader is turned off
-  /// @pre The state should be #TTS_STATE_READY, #TTS_STATE_PLAYING, or #TTS_STATE_PAUSED.
+  /// Adds silence for the specified amount of time.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Remarks:**
+  /// - The maximum silent time is 5000 msec. If you want to perform a silent time of more than 5000 msec, call this function several times.
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  /// - `duration_in_msec` (in): The duration of the silence
+  /// - `utt_id` (out): The utterance ID passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_INVALID_STATE`: Invalid state
+  /// - `TTS_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `TTS_ERROR_SCREEN_READER_OFF`: Screen reader is turned off
+  ///
+  /// **Preconditions:**
+  /// - The state should be `TTS_STATE_READY`, `TTS_STATE_PLAYING`, or `TTS_STATE_PAUSED`.
   int tts_add_silent_utterance(
     tts_h tts,
     int duration_in_msec,
@@ -1388,17 +1892,28 @@ class Tizen90Tts {
   late final _tts_add_silent_utterance = _tts_add_silent_utterancePtr
       .asFunction<int Function(tts_h, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Creates a handle for TTS synthesis parameters.
-  /// @since_tizen 9.0
-  /// @remarks If the function succeeds, @a parameter handle must be released with tts_synthesis_parameter_destroy().
-  /// @param[out] parameter The TTS synthesis parameter handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see tts_synthesis_parameter_destroy()
+  /// Creates a handle for TTS synthesis parameters.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, `parameter` handle must be released with tts_synthesis_parameter_destroy().
+  ///
+  /// **Parameters:**
+  /// - `parameter` (out): The TTS synthesis parameter handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `tts_synthesis_parameter_destroy()`
   int tts_synthesis_parameter_create(
     ffi.Pointer<tts_synthesis_parameter_h> parameter,
   ) {
@@ -1415,15 +1930,24 @@ class Tizen90Tts {
       _tts_synthesis_parameter_createPtr
           .asFunction<int Function(ffi.Pointer<tts_synthesis_parameter_h>)>();
 
-  /// @brief Destroys the TTS synthesis parameter handle.
-  /// @since_tizen 9.0
-  /// @param[in] parameter The TTS synthesis parameter handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see tts_synthesis_parameter_create()
+  /// Destroys the TTS synthesis parameter handle.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `parameter` (in): The TTS synthesis parameter handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `tts_synthesis_parameter_create()`
   int tts_synthesis_parameter_destroy(
     tts_synthesis_parameter_h parameter,
   ) {
@@ -1439,17 +1963,24 @@ class Tizen90Tts {
       _tts_synthesis_parameter_destroyPtr
           .asFunction<int Function(tts_synthesis_parameter_h)>();
 
-  /// @brief Sets the language.
-  /// @since_tizen 9.0
-  /// @param[in] parameter The TTS synthesis parameter handle
-  /// @param[in] language The language selected from the tts_foreach_supported_voices() (e.g. 'NULL'(Automatic), 'en_US')
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_OPERATION_FAILED Operation failure
-  /// @retval #TTS_ERROR_OUT_OF_MEMORY Out of memory
+  /// Sets the language.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `parameter` (in): The TTS synthesis parameter handle
+  /// - `language` (in): The language selected from the tts_foreach_supported_voices() (e.g. 'NULL'(Automatic), 'en_US')
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `TTS_ERROR_OUT_OF_MEMORY`: Out of memory
   int tts_synthesis_parameter_set_language(
     tts_synthesis_parameter_h parameter,
     ffi.Pointer<ffi.Char> language,
@@ -1468,15 +1999,22 @@ class Tizen90Tts {
       _tts_synthesis_parameter_set_languagePtr.asFunction<
           int Function(tts_synthesis_parameter_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the voice type.
-  /// @since_tizen 9.0
-  /// @param[in] parameter The TTS synthesis parameter handle
-  /// @param[in] voice_type The voice type selected from the tts_foreach_supported_voices() (e.g. #TTS_VOICE_TYPE_AUTO, #TTS_VOICE_TYPE_FEMALE)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Sets the voice type.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `parameter` (in): The TTS synthesis parameter handle
+  /// - `voice_type` (in): The voice type selected from the tts_foreach_supported_voices() (e.g. `TTS_VOICE_TYPE_AUTO`, `TTS_VOICE_TYPE_FEMALE`)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
   int tts_synthesis_parameter_set_voice_type(
     tts_synthesis_parameter_h parameter,
     int voice_type,
@@ -1495,16 +2033,23 @@ class Tizen90Tts {
       _tts_synthesis_parameter_set_voice_typePtr
           .asFunction<int Function(tts_synthesis_parameter_h, int)>();
 
-  /// @brief Sets the ID for personal voice data.
-  /// @since_tizen 9.0
-  /// @param[in] parameter The TTS synthesis parameter handle
-  /// @param[in] ptts_id The id for personal voice data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_OUT_OF_MEMORY Out of memory
+  /// Sets the ID for personal voice data.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `parameter` (in): The TTS synthesis parameter handle
+  /// - `ptts_id` (in): The id for personal voice data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_OUT_OF_MEMORY`: Out of memory
   int tts_synthesis_parameter_set_personal_voice(
     tts_synthesis_parameter_h parameter,
     ffi.Pointer<ffi.Char> ptts_id,
@@ -1524,16 +2069,25 @@ class Tizen90Tts {
       _tts_synthesis_parameter_set_personal_voicePtr.asFunction<
           int Function(tts_synthesis_parameter_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the speed.
-  /// @since_tizen 9.0
-  /// @param[in] parameter The TTS synthesis parameter handle
-  /// @param[in] speed A speaking speed (e.g. #TTS_SPEED_AUTO or the value from tts_get_speed_range())
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see tts_get_speed_range()
+  /// Sets the speed.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `parameter` (in): The TTS synthesis parameter handle
+  /// - `speed` (in): A speaking speed (e.g. `TTS_SPEED_AUTO` or the value from tts_get_speed_range())
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `tts_get_speed_range()`
   int tts_synthesis_parameter_set_speed(
     tts_synthesis_parameter_h parameter,
     int speed,
@@ -1552,16 +2106,25 @@ class Tizen90Tts {
       _tts_synthesis_parameter_set_speedPtr
           .asFunction<int Function(tts_synthesis_parameter_h, int)>();
 
-  /// @brief Sets the pitch.
-  /// @since_tizen 9.0
-  /// @param[in] parameter The TTS synthesis parameter handle
-  /// @param[in] pitch A speaking pitch (e.g. #TTS_PITCH_AUTO or the value from tts_get_pitch_range())
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see tts_get_pitch_range()
+  /// Sets the pitch.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `parameter` (in): The TTS synthesis parameter handle
+  /// - `pitch` (in): A speaking pitch (e.g. `TTS_PITCH_AUTO` or the value from tts_get_pitch_range())
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `tts_get_pitch_range()`
   int tts_synthesis_parameter_set_pitch(
     tts_synthesis_parameter_h parameter,
     int pitch,
@@ -1580,16 +2143,25 @@ class Tizen90Tts {
       _tts_synthesis_parameter_set_pitchPtr
           .asFunction<int Function(tts_synthesis_parameter_h, int)>();
 
-  /// @brief Sets the volume.
-  /// @since_tizen 9.0
-  /// @param[in] parameter The TTS synthesis parameter handle
-  /// @param[in] volume A speaking volume ratio (e.g. #TTS_VOLUME_AUTO or the value from tts_get_volume_range())
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see tts_get_volume_range()
+  /// Sets the volume.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `parameter` (in): The TTS synthesis parameter handle
+  /// - `volume` (in): A speaking volume ratio (e.g. `TTS_VOLUME_AUTO` or the value from tts_get_volume_range())
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `tts_get_volume_range()`
   int tts_synthesis_parameter_set_volume(
     tts_synthesis_parameter_h parameter,
     double volume,
@@ -1608,15 +2180,22 @@ class Tizen90Tts {
       _tts_synthesis_parameter_set_volumePtr
           .asFunction<int Function(tts_synthesis_parameter_h, double)>();
 
-  /// @brief Sets the background volume ratio.
-  /// @since_tizen 9.0
-  /// @param[in] parameter The TTS synthesis parameter handle
-  /// @param[in] background_volume_ratio A background volume ratio ratio (Range 0.0 ~ 1.0)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Sets the background volume ratio.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `parameter` (in): The TTS synthesis parameter handle
+  /// - `background_volume_ratio` (in): A background volume ratio ratio (Range 0.0 ~ 1.0)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
   int tts_synthesis_parameter_set_background_volume_ratio(
     tts_synthesis_parameter_h parameter,
     double background_volume_ratio,
@@ -1635,20 +2214,29 @@ class Tizen90Tts {
       _tts_synthesis_parameter_set_background_volume_ratioPtr
           .asFunction<int Function(tts_synthesis_parameter_h, double)>();
 
-  /// @brief Gets the pitch range.
-  /// @since_tizen 9.0
-  /// @param[in] tts The TTS handle
-  /// @param[out] min The minimum pitch value
-  /// @param[out] normal The normal pitch value
-  /// @param[out] max The maximum pitch value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_INVALID_STATE Invalid state
-  /// @retval #TTS_ERROR_OPERATION_FAILED Operation failure
-  /// @see tts_synthesis_parameter_set_pitch()
+  /// Gets the pitch range.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  /// - `min` (out): The minimum pitch value
+  /// - `normal` (out): The normal pitch value
+  /// - `max` (out): The maximum pitch value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_INVALID_STATE`: Invalid state
+  /// - `TTS_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **See also:**
+  /// - `tts_synthesis_parameter_set_pitch()`
   int tts_get_pitch_range(
     tts_h tts,
     ffi.Pointer<ffi.Int> min,
@@ -1671,19 +2259,28 @@ class Tizen90Tts {
       int Function(tts_h, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>,
           ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the volume range.
-  /// @since_tizen 9.0
-  /// @param[in] tts The TTS handle
-  /// @param[out] min The minimum volume value
-  /// @param[out] max The maximum volume value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_INVALID_STATE Invalid state
-  /// @retval #TTS_ERROR_OPERATION_FAILED Operation failure
-  /// @see tts_synthesis_parameter_set_volume()
+  /// Gets the volume range.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  /// - `min` (out): The minimum volume value
+  /// - `max` (out): The maximum volume value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_INVALID_STATE`: Invalid state
+  /// - `TTS_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **See also:**
+  /// - `tts_synthesis_parameter_set_volume()`
   int tts_get_volume_range(
     tts_h tts,
     ffi.Pointer<ffi.Int> min,
@@ -1703,25 +2300,38 @@ class Tizen90Tts {
   late final _tts_get_volume_range = _tts_get_volume_rangePtr.asFunction<
       int Function(tts_h, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Adds a text to the queue with synthesis parameter.
-  /// @since_tizen 9.0
-  /// @remarks Locale(e.g. setlocale()) MUST be set for utf8 text validation check.
-  /// @param[in] tts The TTS handle
-  /// @param[in] text An input text based utf8
-  /// @param[in] parameter The TTS synthesis parameter handle
-  /// @param[out] utt_id The utterance ID passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTS_ERROR_NONE Successful
-  /// @retval #TTS_ERROR_NOT_SUPPORTED TTS NOT supported
-  /// @retval #TTS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTS_ERROR_INVALID_STATE Invalid state
-  /// @retval #TTS_ERROR_INVALID_VOICE Invalid voice about language, voice type
-  /// @retval #TTS_ERROR_OPERATION_FAILED Operation failure
-  /// @retval #TTS_ERROR_SCREEN_READER_OFF Screen reader is turned off
-  /// @pre The state should be #TTS_STATE_READY, #TTS_STATE_PLAYING or #TTS_STATE_PAUSED.
-  /// @see tts_get_max_text_size()
-  /// @see tts_set_credential()
+  /// Adds a text to the queue with synthesis parameter.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Remarks:**
+  /// - Locale(e.g. setlocale()) MUST be set for utf8 text validation check.
+  ///
+  /// **Parameters:**
+  /// - `tts` (in): The TTS handle
+  /// - `text` (in): An input text based utf8
+  /// - `parameter` (in): The TTS synthesis parameter handle
+  /// - `utt_id` (out): The utterance ID passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTS_ERROR_NONE`: Successful
+  /// - `TTS_ERROR_NOT_SUPPORTED`: TTS NOT supported
+  /// - `TTS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTS_ERROR_INVALID_STATE`: Invalid state
+  /// - `TTS_ERROR_INVALID_VOICE`: Invalid voice about language, voice type
+  /// - `TTS_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `TTS_ERROR_SCREEN_READER_OFF`: Screen reader is turned off
+  ///
+  /// **Preconditions:**
+  /// - The state should be `TTS_STATE_READY`, `TTS_STATE_PLAYING` or `TTS_STATE_PAUSED`.
+  ///
+  /// **See also:**
+  /// - `tts_get_max_text_size()`
+  /// - `tts_set_credential()`
   int tts_add_text_with_synthesis_parameter(
     tts_h tts,
     ffi.Pointer<ffi.Char> text,
@@ -1749,8 +2359,11 @@ class Tizen90Tts {
               ffi.Pointer<ffi.Int>)>();
 }
 
-/// @brief Enumeration for error code.
-/// @since_tizen 2.3
+/// Enumeration for error code.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class tts_error_e {
   /// < Successful
   static const int TTS_ERROR_NONE = 0;
@@ -1801,8 +2414,11 @@ abstract class tts_error_e {
   static const int TTS_ERROR_SCREEN_READER_OFF = -49348600;
 }
 
-/// @brief Enumeration for TTS mode.
-/// @since_tizen 2.3
+/// Enumeration for TTS mode.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class tts_mode_e {
   /// < Default mode for normal application
   static const int TTS_MODE_DEFAULT = 0;
@@ -1814,8 +2430,11 @@ abstract class tts_mode_e {
   static const int TTS_MODE_SCREEN_READER = 2;
 }
 
-/// @brief Enumeration for state.
-/// @since_tizen 2.3
+/// Enumeration for state.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class tts_state_e {
   /// < 'CREATED' state
   static const int TTS_STATE_CREATED = 0;
@@ -1830,8 +2449,11 @@ abstract class tts_state_e {
   static const int TTS_STATE_PAUSED = 3;
 }
 
-/// @brief Enumeration for service state.
-/// @since_tizen 7.0
+/// Enumeration for service state.
+///
+/// **Since Tizen:**
+/// - 7.0
+/// @nodoc
 abstract class tts_service_state_e {
   /// < 'None' state (Since 8.0)
   static const int TTS_SERVICE_STATE_NONE = -1;
@@ -1849,8 +2471,11 @@ abstract class tts_service_state_e {
   static const int TTS_SERVICE_STATE_BLOCKED = 3;
 }
 
-/// @brief Enumeration for playing mode of TTS.
-/// @since_tizen 8.0
+/// Enumeration for playing mode of TTS.
+///
+/// **Since Tizen:**
+/// - 8.0
+/// @nodoc
 abstract class tts_playing_mode_e {
   /// < Mode for TTS playing on TTS service
   static const int TTS_PLAYING_MODE_BY_SERVICE = 0;
@@ -1859,8 +2484,11 @@ abstract class tts_playing_mode_e {
   static const int TTS_PLAYING_MODE_BY_CLIENT = 1;
 }
 
-/// @brief Enumeration for audio type.
-/// @since_tizen 8.0
+/// Enumeration for audio type.
+///
+/// **Since Tizen:**
+/// - 8.0
+/// @nodoc
 abstract class tts_audio_type_e {
   /// < Signed 16-bit audio type
   static const int TTS_AUDIO_TYPE_RAW_S16 = 0;
@@ -1869,8 +2497,11 @@ abstract class tts_audio_type_e {
   static const int TTS_AUDIO_TYPE_RAW_U8 = 1;
 }
 
-/// @brief Enumeration for synthesized pcm event.
-/// @since_tizen 8.0
+/// Enumeration for synthesized pcm event.
+///
+/// **Since Tizen:**
+/// - 8.0
+/// @nodoc
 abstract class tts_synthesized_pcm_event_e {
   /// < Event when the synthesized PCM is failed
   static const int TTS_SYNTHESIZED_PCM_EVENT_FAIL = -1;
@@ -1885,51 +2516,79 @@ abstract class tts_synthesized_pcm_event_e {
   static const int TTS_SYNTHESIZED_PCM_EVENT_FINISH = 3;
 }
 
+/// @nodoc
 final class tts_s extends ffi.Opaque {}
 
+/// @nodoc
 final class tts_synthesis_parameter_s extends ffi.Opaque {}
 
-/// @brief The TTS handle.
-/// @since_tizen 2.3
+/// The TTS handle.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 typedef tts_h = ffi.Pointer<tts_s>;
 
-/// @brief Called to retrieve the supported voice.
-/// @since_tizen 2.3
-/// @param[in] tts The TTS handle
-/// @param[in] language Language specified as an ISO 3166 alpha-2 two letter country-code followed by ISO 639-1 for the two-letter language code (for example, "ko_KR" for Korean, "en_US" for American English)
-/// @param[in] voice_type A voice type (e.g. #TTS_VOICE_TYPE_MALE, #TTS_VOICE_TYPE_FEMALE)
-/// @param[in] user_data The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop,
-/// @c false to break out of the loop
-/// @pre tts_foreach_supported_voices() will invoke this callback function.
-/// @see tts_foreach_supported_voices()
+/// Called to retrieve the supported voice.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `tts` (in): The TTS handle
+/// - `language` (in): Language specified as an ISO 3166 alpha-2 two letter country-code followed by ISO 639-1 for the two-letter language code (for example, "ko_KR" for Korean, "en_US" for American English)
+/// - `voice_type` (in): A voice type (e.g. `TTS_VOICE_TYPE_MALE`, `TTS_VOICE_TYPE_FEMALE`)
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - tts_foreach_supported_voices() will invoke this callback function.
+///
+/// **See also:**
+/// - `tts_foreach_supported_voices()`
+/// @nodoc
 typedef tts_supported_voice_cb
     = ffi.Pointer<ffi.NativeFunction<tts_supported_voice_cbFunction>>;
+/// @nodoc
 typedef tts_supported_voice_cbFunction = ffi.Bool Function(
     tts_h tts,
     ffi.Pointer<ffi.Char> language,
     ffi.Int voice_type,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Darttts_supported_voice_cbFunction = bool Function(
     tts_h tts,
     ffi.Pointer<ffi.Char> language,
     int voice_type,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called to retrieve the supported personal voice.
-/// @since_tizen 9.0
-/// @param[in] tts The TTS handle
-/// @param[in] language Language specified as ISO 3166 alpha-2 two letter country-code followed by ISO 639-1 for the two-letter language code (for example, "ko_KR" for Korean, "en_US" for American English)
-/// @param[in] unique_id A unique identifier string for personal voice resource
-/// @param[in] display_name A display name that will be shown in UI for user selection
-/// @param[in] device_name A device name used for identifying the source target
-/// @param[in] user_data The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop,
-/// @c false to break out of the loop
-/// @pre tts_foreach_supported_personal_voices() will invoke this callback function.
-/// @see tts_foreach_supported_personal_voices()
+/// Called to retrieve the supported personal voice.
+///
+/// **Since Tizen:**
+/// - 9.0
+///
+/// **Parameters:**
+/// - `tts` (in): The TTS handle
+/// - `language` (in): Language specified as ISO 3166 alpha-2 two letter country-code followed by ISO 639-1 for the two-letter language code (for example, "ko_KR" for Korean, "en_US" for American English)
+/// - `unique_id` (in): A unique identifier string for personal voice resource
+/// - `display_name` (in): A display name that will be shown in UI for user selection
+/// - `device_name` (in): A device name used for identifying the source target
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - tts_foreach_supported_personal_voices() will invoke this callback function.
+///
+/// **See also:**
+/// - `tts_foreach_supported_personal_voices()`
+/// @nodoc
 typedef tts_supported_personal_voice_cb
     = ffi.Pointer<ffi.NativeFunction<tts_supported_personal_voice_cbFunction>>;
+/// @nodoc
 typedef tts_supported_personal_voice_cbFunction = ffi.Bool Function(
     tts_h tts,
     ffi.Pointer<ffi.Char> language,
@@ -1937,6 +2596,7 @@ typedef tts_supported_personal_voice_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> display_name,
     ffi.Pointer<ffi.Char> device_name,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Darttts_supported_personal_voice_cbFunction = bool Function(
     tts_h tts,
     ffi.Pointer<ffi.Char> language,
@@ -1945,85 +2605,137 @@ typedef Darttts_supported_personal_voice_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> device_name,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the state of TTS is changed.
-/// @details If the daemon must stop player because of changing engine and
-/// the daemon must pause player because of other requests, this callback function is called.
-/// @since_tizen 2.3
-/// @param[in] tts The TTS handle
-/// @param[in] previous The previous state
-/// @param[in] current The current state
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre An application registers this callback using tts_set_state_changed_cb() to detect changing state.
-/// @see tts_set_state_changed_cb()
-/// @see tts_unset_state_changed_cb()
+/// Called when the state of TTS is changed.
+///
+/// If the daemon must stop player because of changing engine and the daemon must pause player because of other requests, this callback function is called.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `tts` (in): The TTS handle
+/// - `previous` (in): The previous state
+/// - `current` (in): The current state
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - An application registers this callback using tts_set_state_changed_cb() to detect changing state.
+///
+/// **See also:**
+/// - `tts_set_state_changed_cb()`
+/// - `tts_unset_state_changed_cb()`
+/// @nodoc
 typedef tts_state_changed_cb
     = ffi.Pointer<ffi.NativeFunction<tts_state_changed_cbFunction>>;
+/// @nodoc
 typedef tts_state_changed_cbFunction = ffi.Void Function(tts_h tts,
     ffi.Int32 previous, ffi.Int32 current, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Darttts_state_changed_cbFunction = void Function(
     tts_h tts, int previous, int current, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when utterance has started.
-/// @since_tizen 2.3
-/// @param[in] tts The TTS handle
-/// @param[in] utt_id The utterance ID passed from the add text function
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre An application registers this callback using tts_set_utterance_started_cb() to detect utterance started.
-/// @see tts_add_text()
-/// @see tts_set_utterance_started_cb()
-/// @see tts_unset_utterance_started_cb()
+/// Called when utterance has started.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `tts` (in): The TTS handle
+/// - `utt_id` (in): The utterance ID passed from the add text function
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - An application registers this callback using tts_set_utterance_started_cb() to detect utterance started.
+///
+/// **See also:**
+/// - `tts_add_text()`
+/// - `tts_set_utterance_started_cb()`
+/// - `tts_unset_utterance_started_cb()`
+/// @nodoc
 typedef tts_utterance_started_cb
     = ffi.Pointer<ffi.NativeFunction<tts_utterance_started_cbFunction>>;
+/// @nodoc
 typedef tts_utterance_started_cbFunction = ffi.Void Function(
     tts_h tts, ffi.Int utt_id, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Darttts_utterance_started_cbFunction = void Function(
     tts_h tts, int utt_id, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when utterance is finished.
-/// @since_tizen 2.3
-/// @param[in] tts The TTS handle
-/// @param[in] utt_id The utterance ID passed from the add text function
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre An application registers this callback using tts_set_utterance_completed_cb() to detect utterance completed.
-/// @see tts_add_text()
-/// @see tts_set_utterance_completed_cb()
-/// @see tts_unset_utterance_completed_cb()
+/// Called when utterance is finished.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `tts` (in): The TTS handle
+/// - `utt_id` (in): The utterance ID passed from the add text function
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - An application registers this callback using tts_set_utterance_completed_cb() to detect utterance completed.
+///
+/// **See also:**
+/// - `tts_add_text()`
+/// - `tts_set_utterance_completed_cb()`
+/// - `tts_unset_utterance_completed_cb()`
+/// @nodoc
 typedef tts_utterance_completed_cb
     = ffi.Pointer<ffi.NativeFunction<tts_utterance_completed_cbFunction>>;
+/// @nodoc
 typedef tts_utterance_completed_cbFunction = ffi.Void Function(
     tts_h tts, ffi.Int utt_id, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Darttts_utterance_completed_cbFunction = void Function(
     tts_h tts, int utt_id, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when an error occurs.
-/// @since_tizen 2.3
-/// @param[in] tts The TTS handle
-/// @param[in] utt_id The utterance ID passed from the add text function
-/// @param[in] reason The error code
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre An application registers this callback using tts_set_error_cb() to detect error.
-/// @see tts_play()
-/// @see tts_pause()
-/// @see tts_stop()
-/// @see tts_set_error_cb()
-/// @see tts_unset_error_cb()
+/// Called when an error occurs.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `tts` (in): The TTS handle
+/// - `utt_id` (in): The utterance ID passed from the add text function
+/// - `reason` (in): The error code
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - An application registers this callback using tts_set_error_cb() to detect error.
+///
+/// **See also:**
+/// - `tts_play()`
+/// - `tts_pause()`
+/// - `tts_stop()`
+/// - `tts_set_error_cb()`
+/// - `tts_unset_error_cb()`
+/// @nodoc
 typedef tts_error_cb = ffi.Pointer<ffi.NativeFunction<tts_error_cbFunction>>;
+/// @nodoc
 typedef tts_error_cbFunction = ffi.Void Function(tts_h tts, ffi.Int utt_id,
     ffi.Int32 reason, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Darttts_error_cbFunction = void Function(
     tts_h tts, int utt_id, int reason, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the default voice is changed.
-/// @since_tizen 2.3
-/// @param[in] tts The TTS handle
-/// @param[in] previous_language The previous language
-/// @param[in] previous_voice_type The previous voice type
-/// @param[in] current_language The current language
-/// @param[in] current_voice_type The current voice type
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see tts_set_default_voice_changed_cb()
+/// Called when the default voice is changed.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `tts` (in): The TTS handle
+/// - `previous_language` (in): The previous language
+/// - `previous_voice_type` (in): The previous voice type
+/// - `current_language` (in): The current language
+/// - `current_voice_type` (in): The current voice type
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `tts_set_default_voice_changed_cb()`
+/// @nodoc
 typedef tts_default_voice_changed_cb
     = ffi.Pointer<ffi.NativeFunction<tts_default_voice_changed_cbFunction>>;
+/// @nodoc
 typedef tts_default_voice_changed_cbFunction = ffi.Void Function(
     tts_h tts,
     ffi.Pointer<ffi.Char> previous_language,
@@ -2031,6 +2743,7 @@ typedef tts_default_voice_changed_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> current_language,
     ffi.Int current_voice_type,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Darttts_default_voice_changed_cbFunction = void Function(
     tts_h tts,
     ffi.Pointer<ffi.Char> previous_language,
@@ -2039,17 +2752,25 @@ typedef Darttts_default_voice_changed_cbFunction = void Function(
     int current_voice_type,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the engine is changed.
-/// @since_tizen 3.0
-/// @param[in] tts The TTS handle
-/// @param[in] engine_id Engine ID
-/// @param[in] language The default language specified as an ISO 3166 alpha-2 two letter country-code followed by ISO 639-1 for the two-letter language code (for example, "ko_KR" for Korean, "en_US" for American English)
-/// @param[in] voice_type The default voice type
-/// @param[in] need_credential The necessity of credential
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see tts_set_engine_changed_cb()
+/// Called when the engine is changed.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `tts` (in): The TTS handle
+/// - `engine_id` (in): Engine ID
+/// - `language` (in): The default language specified as an ISO 3166 alpha-2 two letter country-code followed by ISO 639-1 for the two-letter language code (for example, "ko_KR" for Korean, "en_US" for American English)
+/// - `voice_type` (in): The default voice type
+/// - `need_credential` (in): The necessity of credential
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `tts_set_engine_changed_cb()`
+/// @nodoc
 typedef tts_engine_changed_cb
     = ffi.Pointer<ffi.NativeFunction<tts_engine_changed_cbFunction>>;
+/// @nodoc
 typedef tts_engine_changed_cbFunction = ffi.Void Function(
     tts_h tts,
     ffi.Pointer<ffi.Char> engine_id,
@@ -2057,6 +2778,7 @@ typedef tts_engine_changed_cbFunction = ffi.Void Function(
     ffi.Int voice_type,
     ffi.Bool need_credential,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Darttts_engine_changed_cbFunction = void Function(
     tts_h tts,
     ffi.Pointer<ffi.Char> engine_id,
@@ -2065,52 +2787,86 @@ typedef Darttts_engine_changed_cbFunction = void Function(
     bool need_credential,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the option of screen reader is changed.
-/// @since_tizen 6.5
-/// @param[in] tts The TTS handle
-/// @param[in] is_on The status of screen reader. If @a is_on is @c true, screen reader is turned on. If not, it is turned off.
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see tts_set_screen_reader_changed_cb()
+/// Called when the option of screen reader is changed.
+///
+/// **Since Tizen:**
+/// - 6.5
+///
+/// **Parameters:**
+/// - `tts` (in): The TTS handle
+/// - `is_on` (in): The status of screen reader. If `is_on` is `true`, screen reader is turned on. If not, it is turned off.
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `tts_set_screen_reader_changed_cb()`
+/// @nodoc
 typedef tts_screen_reader_changed_cb
     = ffi.Pointer<ffi.NativeFunction<tts_screen_reader_changed_cbFunction>>;
+/// @nodoc
 typedef tts_screen_reader_changed_cbFunction = ffi.Void Function(
     tts_h tts, ffi.Bool is_on, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Darttts_screen_reader_changed_cbFunction = void Function(
     tts_h tts, bool is_on, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the state of TTS service is changed.
-/// @since_tizen 7.0
-/// @remarks The @a tts handle should not be destroyed in the callback.
-/// @param[in] tts The TTS handle, the same handle for which the callback was set.
-/// @param[in] previous The previous state of TTS service
-/// @param[in] current The current state of TTS service
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre An application registers this callback using tts_set_service_state_changed_cb() to detect changing state of TTS service.
-/// @see tts_set_service_state_changed_cb()
-/// @see tts_unset_service_state_changed_cb()
+/// Called when the state of TTS service is changed.
+///
+/// **Since Tizen:**
+/// - 7.0
+///
+/// **Remarks:**
+/// - The `tts` handle should not be destroyed in the callback.
+///
+/// **Parameters:**
+/// - `tts` (in): The TTS handle, the same handle for which the callback was set.
+/// - `previous` (in): The previous state of TTS service
+/// - `current` (in): The current state of TTS service
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - An application registers this callback using tts_set_service_state_changed_cb() to detect changing state of TTS service.
+///
+/// **See also:**
+/// - `tts_set_service_state_changed_cb()`
+/// - `tts_unset_service_state_changed_cb()`
+/// @nodoc
 typedef tts_service_state_changed_cb
     = ffi.Pointer<ffi.NativeFunction<tts_service_state_changed_cbFunction>>;
+/// @nodoc
 typedef tts_service_state_changed_cbFunction = ffi.Void Function(tts_h tts,
     ffi.Int32 previous, ffi.Int32 current, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Darttts_service_state_changed_cbFunction = void Function(
     tts_h tts, int previous, int current, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the synthesized pcm data is come from the engine.
-/// @since_tizen 8.0
-/// @remarks The @a tts handle should not be destroyed in the callback.
-/// @param[in] tts The TTS handle, the same handle for which the callback was set.
-/// @param[in] utt_id The utterance ID
-/// @param[in] event The event type
-/// @param[in] pcm_data The synthesized pcm data. The @a pcm_data can be used only in the callback. To use outside, make a copy.
-/// @param[in] pcm_data_size The size of the pcm data
-/// @param[in] audio_type The audio type of pcm data
-/// @param[in] sample_rate The sampling rate of pcm data
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre An application registers this callback using tts_set_synthesized_pcm_cb() to get pcm data.
-/// @see tts_set_synthesized_pcm_cb()
-/// @see tts_unset_synthesized_pcm_cb()
+/// Called when the synthesized pcm data is come from the engine.
+///
+/// **Since Tizen:**
+/// - 8.0
+///
+/// **Remarks:**
+/// - The `tts` handle should not be destroyed in the callback.
+///
+/// **Parameters:**
+/// - `tts` (in): The TTS handle, the same handle for which the callback was set.
+/// - `utt_id` (in): The utterance ID
+/// - `event` (in): The event type
+/// - `pcm_data` (in): The synthesized pcm data. The `pcm_data` can be used only in the callback. To use outside, make a copy.
+/// - `pcm_data_size` (in): The size of the pcm data
+/// - `audio_type` (in): The audio type of pcm data
+/// - `sample_rate` (in): The sampling rate of pcm data
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - An application registers this callback using tts_set_synthesized_pcm_cb() to get pcm data.
+///
+/// **See also:**
+/// - `tts_set_synthesized_pcm_cb()`
+/// - `tts_unset_synthesized_pcm_cb()`
+/// @nodoc
 typedef tts_synthesized_pcm_cb
     = ffi.Pointer<ffi.NativeFunction<tts_synthesized_pcm_cbFunction>>;
+/// @nodoc
 typedef tts_synthesized_pcm_cbFunction = ffi.Void Function(
     tts_h tts,
     ffi.Int utt_id,
@@ -2120,6 +2876,7 @@ typedef tts_synthesized_pcm_cbFunction = ffi.Void Function(
     ffi.Int32 audio_type,
     ffi.Int sample_rate,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Darttts_synthesized_pcm_cbFunction = void Function(
     tts_h tts,
     int utt_id,
@@ -2130,22 +2887,33 @@ typedef Darttts_synthesized_pcm_cbFunction = void Function(
     int sample_rate,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The TTS synthesis parameter handle.
-/// @since_tizen 9.0
+/// The TTS synthesis parameter handle.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 typedef tts_synthesis_parameter_h = ffi.Pointer<tts_synthesis_parameter_s>;
 
+/// @nodoc
 const int TTS_SPEED_AUTO = 0;
 
+/// @nodoc
 const int TTS_PITCH_AUTO = 0;
 
+/// @nodoc
 const int TTS_VOLUME_AUTO = 0;
 
+/// @nodoc
 const int TTS_VOICE_TYPE_AUTO = 0;
 
+/// @nodoc
 const int TTS_VOICE_TYPE_MALE = 1;
 
+/// @nodoc
 const int TTS_VOICE_TYPE_FEMALE = 2;
 
+/// @nodoc
 const int TTS_VOICE_TYPE_CHILD = 3;
 
+/// @nodoc
 const int TTS_VOICE_TYPE_PERSONAL = 4;

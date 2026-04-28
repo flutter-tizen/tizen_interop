@@ -1,3 +1,6 @@
+/// {@category 7.0/tizen}
+library tizen_interop_7_0.capi_media_player;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -11,6 +14,7 @@ import 'generated_bindings_capi_media_sound_manager.dart' as sound_manager;
 import 'generated_bindings_capi_media_tool.dart' as media_tool;
 
 /// Dart bindings for Tizen capi-media-player APIs.
+/// {@category 7.0/tizen}
 class Tizen70CapiMediaPlayer {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -26,23 +30,35 @@ class Tizen70CapiMediaPlayer {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates a player handle for playing multimedia content.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks You must release @a player by using player_destroy().\n
-  /// Although you can create multiple player handles at the same time,
-  /// the player cannot guarantee proper operation because of limited resources, such as
-  /// audio or display device.
+  /// Creates a player handle for playing multimedia content.
   ///
-  /// @param[out] player   A new handle to the media player
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_RESOURCE_LIMIT Cannot create more instance due to resource(socket, thread, etc) limitation on system.
-  /// @post The player state will be #PLAYER_STATE_IDLE.
-  /// @see player_destroy()
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - You must release `player` by using player_destroy().
+  /// - Although you can create multiple player handles at the same time,
+  /// - the player cannot guarantee proper operation because of limited resources, such as
+  /// - audio or display device.
+  ///
+  /// **Parameters:**
+  /// - `player` (out): A new handle to the media player
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_RESOURCE_LIMIT`: Cannot create more instance due to resource(socket, thread, etc) limitation on system.
+  ///
+  /// **Postconditions:**
+  /// - The player state will be `PLAYER_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `player_destroy()`
   int player_create(
     ffi.Pointer<player_h> player,
   ) {
@@ -57,18 +73,33 @@ class Tizen70CapiMediaPlayer {
   late final _player_create =
       _player_createPtr.asFunction<int Function(ffi.Pointer<player_h>)>();
 
-  /// @brief Destroys the media player handle and releases all its resources.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks To completely shutdown player operation, call this function with a valid player handle from any player state.
-  /// @param[in] player   The handle to the media player to be destroyed
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @pre The player state must be one of #PLAYER_STATE_IDLE, #PLAYER_STATE_READY, #PLAYER_STATE_PLAYING, or #PLAYER_STATE_PAUSED.
-  /// @post The player state will be #PLAYER_STATE_NONE.
-  /// @see player_create()
+  /// Destroys the media player handle and releases all its resources.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - To completely shutdown player operation, call this function with a valid player handle from any player state.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player to be destroyed
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - The player state must be one of `PLAYER_STATE_IDLE`, `PLAYER_STATE_READY`, `PLAYER_STATE_PLAYING`, or `PLAYER_STATE_PAUSED`.
+  ///
+  /// **Postconditions:**
+  /// - The player state will be `PLAYER_STATE_NONE`.
+  ///
+  /// **See also:**
+  /// - `player_create()`
   int player_destroy(
     player_h player,
   ) {
@@ -82,29 +113,44 @@ class Tizen70CapiMediaPlayer {
   late final _player_destroy =
       _player_destroyPtr.asFunction<int Function(player_h)>();
 
-  /// @brief Prepares the media player for playback.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks The mediastorage privilege(http://tizen.org/privilege/mediastorage) must be added if any video/audio files are used to play located in the internal storage.
-  /// @remarks The externalstorage privilege(http://tizen.org/privilege/externalstorage) must be added if any video/audio files are used to play located in the external storage.
-  /// @remarks The internet privilege(http://tizen.org/privilege/internet) must be added if any URLs are used to play from network.
-  /// @param[in] player   The handle to the media player
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_URI Invalid URI
-  /// @retval #PLAYER_ERROR_NO_SUCH_FILE File not found
-  /// @retval #PLAYER_ERROR_NOT_SUPPORTED_FILE File not supported
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid player state
-  /// @retval #PLAYER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PLAYER_ERROR_NOT_SUPPORTED_AUDIO_CODEC Not support audio codec format (Since 4.0)
-  /// @retval #PLAYER_ERROR_NOT_SUPPORTED_VIDEO_CODEC Not support video codec format (Since 4.0)
-  /// @pre The player state must be set to #PLAYER_STATE_IDLE by calling player_create() or player_unprepare(). After that, call player_set_uri() to load the media content you want to play.
-  /// @post The player state will be #PLAYER_STATE_READY.
-  /// @see player_prepare_async()
-  /// @see player_unprepare()
-  /// @see player_set_uri()
+  /// Prepares the media player for playback.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - The mediastorage privilege(http://tizen.org/privilege/mediastorage) must be added if any video/audio files are used to play located in the internal storage.
+  /// - The externalstorage privilege(http://tizen.org/privilege/externalstorage) must be added if any video/audio files are used to play located in the external storage.
+  /// - The internet privilege(http://tizen.org/privilege/internet) must be added if any URLs are used to play from network.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_URI`: Invalid URI
+  /// - `PLAYER_ERROR_NO_SUCH_FILE`: File not found
+  /// - `PLAYER_ERROR_NOT_SUPPORTED_FILE`: File not supported
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid player state
+  /// - `PLAYER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PLAYER_ERROR_NOT_SUPPORTED_AUDIO_CODEC`: Not support audio codec format (Since 4.0)
+  /// - `PLAYER_ERROR_NOT_SUPPORTED_VIDEO_CODEC`: Not support video codec format (Since 4.0)
+  ///
+  /// **Preconditions:**
+  /// - The player state must be set to `PLAYER_STATE_IDLE` by calling player_create() or player_unprepare(). After that, call player_set_uri() to load the media content you want to play.
+  ///
+  /// **Postconditions:**
+  /// - The player state will be `PLAYER_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `player_prepare_async()`
+  /// - `player_unprepare()`
+  /// - `player_set_uri()`
   int player_prepare(
     player_h player,
   ) {
@@ -118,31 +164,46 @@ class Tizen70CapiMediaPlayer {
   late final _player_prepare =
       _player_preparePtr.asFunction<int Function(player_h)>();
 
-  /// @brief Prepares the media player for playback, asynchronously.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks The mediastorage privilege(http://tizen.org/privilege/mediastorage) must be added if any video/audio files are used to play located in the internal storage.
-  /// The externalstorage privilege(http://tizen.org/privilege/externalstorage) must be added if any video/audio files are used to play located in the external storage.
-  /// The internet privilege(http://tizen.org/privilege/internet) must be added if any URLs are used to play from network. \n
-  /// Since 5.0: To cancel the asynchronous preparing, call player_unprepare() even in #PLAYER_STATE_IDLE state.
-  /// @param[in] player      The handle to the media player
-  /// @param[in] callback    The callback function to register
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_URI Invalid URI
-  /// @retval #PLAYER_ERROR_NO_SUCH_FILE File not found
-  /// @retval #PLAYER_ERROR_NOT_SUPPORTED_FILE File not supported
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid player state
-  /// @retval #PLAYER_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre The player state must be set to #PLAYER_STATE_IDLE by calling player_create() or player_unprepare(). After that, call player_set_uri() to load the media content you want to play.
-  /// @post It invokes player_prepared_cb() when playback is prepared.
-  /// @see player_prepare()
-  /// @see player_prepared_cb()
-  /// @see player_unprepare()
-  /// @see player_set_uri()
+  /// Prepares the media player for playback, asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - The mediastorage privilege(http://tizen.org/privilege/mediastorage) must be added if any video/audio files are used to play located in the internal storage.
+  /// - The externalstorage privilege(http://tizen.org/privilege/externalstorage) must be added if any video/audio files are used to play located in the external storage.
+  /// - The internet privilege(http://tizen.org/privilege/internet) must be added if any URLs are used to play from network.
+  /// - Since 5.0: To cancel the asynchronous preparing, call player_unprepare() even in `PLAYER_STATE_IDLE` state.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_URI`: Invalid URI
+  /// - `PLAYER_ERROR_NO_SUCH_FILE`: File not found
+  /// - `PLAYER_ERROR_NOT_SUPPORTED_FILE`: File not supported
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid player state
+  /// - `PLAYER_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - The player state must be set to `PLAYER_STATE_IDLE` by calling player_create() or player_unprepare(). After that, call player_set_uri() to load the media content you want to play.
+  ///
+  /// **Postconditions:**
+  /// - It invokes player_prepared_cb() when playback is prepared.
+  ///
+  /// **See also:**
+  /// - `player_prepare()`
+  /// - `player_prepared_cb()`
+  /// - `player_unprepare()`
+  /// - `player_set_uri()`
   int player_prepare_async(
     player_h player,
     player_prepared_cb callback,
@@ -162,23 +223,34 @@ class Tizen70CapiMediaPlayer {
   late final _player_prepare_async = _player_prepare_asyncPtr.asFunction<
       int Function(player_h, player_prepared_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Resets the media player.
-  /// @details The most recently used media is reset and no longer associated with the player.
-  /// Playback is no longer possible. If you want to use the player again, you must set the data URI and call
-  /// player_prepare() again.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @param[in] player   The handle to the media player
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid player state
-  /// @pre Before 5.0: The player state must be one of: #PLAYER_STATE_READY, #PLAYER_STATE_PLAYING, #PLAYER_STATE_PAUSED. \n
-  /// @pre Since 5.0: The player state must be one of: #PLAYER_STATE_IDLE, #PLAYER_STATE_READY, #PLAYER_STATE_PLAYING, #PLAYER_STATE_PAUSED.
-  /// #PLAYER_STATE_IDLE is allowed only if player preparation was started with player_prepare_async().
-  /// @post The player state will be #PLAYER_STATE_IDLE.
-  /// @see player_prepare()
+  /// Resets the media player.
+  ///
+  /// The most recently used media is reset and no longer associated with the player. Playback is no longer possible. If you want to use the player again, you must set the data URI and call player_prepare() again.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid player state
+  ///
+  /// **Preconditions:**
+  /// - Before 5.0: The player state must be one of: `PLAYER_STATE_READY`, `PLAYER_STATE_PLAYING`, `PLAYER_STATE_PAUSED`.
+  /// - Since 5.0: The player state must be one of: `PLAYER_STATE_IDLE`, `PLAYER_STATE_READY`, `PLAYER_STATE_PLAYING`, `PLAYER_STATE_PAUSED`. `PLAYER_STATE_IDLE` is allowed only if player preparation was started with player_prepare_async().
+  ///
+  /// **Postconditions:**
+  /// - The player state will be `PLAYER_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `player_prepare()`
   int player_unprepare(
     player_h player,
   ) {
@@ -193,31 +265,40 @@ class Tizen70CapiMediaPlayer {
   late final _player_unprepare =
       _player_unpreparePtr.asFunction<int Function(player_h)>();
 
-  /// @brief Sets the data source (file-path, HTTP or RTSP URI) to use.
+  /// Sets the data source (file-path, HTTP or RTSP URI) to use.
   ///
-  /// @details Associates media contents, referred to by the URI, with the player.
-  /// If the function call is successful, subsequent calls to player_prepare() and player_start() will start playing the media.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks If you use HTTP or RTSP, URI must start with "http://" or "rtsp://". The default protocol is "file://".
-  /// If you provide an invalid URI, you won't receive an error message until you call player_start().
-  /// @remarks This function must be called before calling the player_prepare() or player_prepare_async() to build the player based on the URI information.
-  /// @remarks The mediastorage privilege(http://tizen.org/privilege/mediastorage) must be added if any video/audio files are used to play located in the internal storage.
-  /// @remarks The externalstorage privilege(http://tizen.org/privilege/externalstorage) must be added if any video/audio files are used to play located in the external storage.
-  /// @remarks The internet privilege(http://tizen.org/privilege/internet) must be added if any URLs are used to play from network.
+  /// Associates media contents, referred to by the URI, with the player. If the function call is successful, subsequent calls to player_prepare() and player_start() will start playing the media.
   ///
-  /// @param[in] player   The handle to the media player
-  /// @param[in] uri      The content location, such as the file path, the URI of the HTTP or RTSP stream you want to play
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid player state
-  /// @retval #PLAYER_ERROR_PERMISSION_DENIED Permission denied
-  /// @if WEARABLE @retval #PLAYER_ERROR_FEATURE_NOT_SUPPORTED_ON_DEVICE Unsupported feature @endif
-  /// @pre The player state must be set to #PLAYER_STATE_IDLE by calling player_create() or player_unprepare().
-  /// @see player_set_memory_buffer()
+  /// **Remarks:**
+  /// - If you use HTTP or RTSP, URI must start with "http://" or "rtsp://". The default protocol is "file://".
+  /// - If you provide an invalid URI, you won't receive an error message until you call player_start().
+  /// - This function must be called before calling the player_prepare() or player_prepare_async() to build the player based on the URI information.
+  /// - The mediastorage privilege(http://tizen.org/privilege/mediastorage) must be added if any video/audio files are used to play located in the internal storage.
+  /// - The externalstorage privilege(http://tizen.org/privilege/externalstorage) must be added if any video/audio files are used to play located in the external storage.
+  /// - The internet privilege(http://tizen.org/privilege/internet) must be added if any URLs are used to play from network.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `uri` (in): The content location, such as the file path, the URI of the HTTP or RTSP stream you want to play
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid player state
+  /// - `PLAYER_ERROR_PERMISSION_DENIED`: Permission denied @if WEARABLE @retval `PLAYER_ERROR_FEATURE_NOT_SUPPORTED_ON_DEVICE` Unsupported feature @endif
+  ///
+  /// **Preconditions:**
+  /// - The player state must be set to `PLAYER_STATE_IDLE` by calling player_create() or player_unprepare().
+  ///
+  /// **See also:**
+  /// - `player_set_memory_buffer()`
   int player_set_uri(
     player_h player,
     ffi.Pointer<ffi.Char> uri,
@@ -234,26 +315,37 @@ class Tizen70CapiMediaPlayer {
   late final _player_set_uri = _player_set_uriPtr
       .asFunction<int Function(player_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets memory as the data source.
+  /// Sets memory as the data source.
   ///
-  /// @details Associates media content, cached in memory, with the player. Unlike the case of player_set_uri(), the media resides in memory.
-  /// If the function call is successful, subsequent calls to player_prepare() and player_start() will start playing the media.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks If you provide an invalid data, you won't receive an error message until you call player_start().
-  /// @remarks This function must be called before calling the player_prepare() or player_prepare_async()
-  /// to build the player based on the data.
+  /// Associates media content, cached in memory, with the player. Unlike the case of player_set_uri(), the media resides in memory. If the function call is successful, subsequent calls to player_prepare() and player_start() will start playing the media.
   ///
-  /// @param[in] player   The handle to the media player
-  /// @param[in] data     The memory pointer of media data
-  /// @param[in] size     The size of media data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid player state
-  /// @pre The player state must be set to #PLAYER_STATE_IDLE by calling player_create() or player_unprepare().
-  /// @see player_set_uri()
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - If you provide an invalid data, you won't receive an error message until you call player_start().
+  /// - This function must be called before calling the player_prepare() or player_prepare_async()
+  /// - to build the player based on the data.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `data` (in): The memory pointer of media data
+  /// - `size` (in): The size of media data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid player state
+  ///
+  /// **Preconditions:**
+  /// - The player state must be set to `PLAYER_STATE_IDLE` by calling player_create() or player_unprepare().
+  ///
+  /// **See also:**
+  /// - `player_set_uri()`
   int player_set_memory_buffer(
     player_h player,
     ffi.Pointer<ffi.Void> data,
@@ -273,15 +365,24 @@ class Tizen70CapiMediaPlayer {
   late final _player_set_memory_buffer = _player_set_memory_bufferPtr
       .asFunction<int Function(player_h, ffi.Pointer<ffi.Void>, int)>();
 
-  /// @brief Gets the player's current state.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @param[in]  player   The handle to the media player
-  /// @param[out] state    The current state of the player
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #player_state_e
+  /// Gets the player's current state.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `state` (out): The current state of the player
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `player_state_e`
   int player_get_state(
     player_h player,
     ffi.Pointer<ffi.Int32> state,
@@ -299,21 +400,28 @@ class Tizen70CapiMediaPlayer {
   late final _player_get_state = _player_get_statePtr
       .asFunction<int Function(player_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets the player's volume.
-  /// @details  Setting this volume adjusts the player's instance volume, not the system volume.
-  /// The valid range is from 0 to 1.0, inclusive (1.0 = 100%). Default value is 1.0.
-  /// To change system volume, use the @ref CAPI_MEDIA_SOUND_MANAGER_MODULE API.
-  /// Finally, it does not support to set other value into each channel currently.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @param[in] player   The handle to the media player
-  /// @param[in] left     The left volume scalar
-  /// @param[in] right    The right volume scalar
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @see player_get_volume()
+  /// Sets the player's volume.
+  ///
+  /// Setting this volume adjusts the player's instance volume, not the system volume. The valid range is from 0 to 1.0, inclusive (1.0 = 100%). Default value is 1.0. To change system volume, use the `CAPI_MEDIA_SOUND_MANAGER_MODULE` API. Finally, it does not support to set other value into each channel currently.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `left` (in): The left volume scalar
+  /// - `right` (in): The right volume scalar
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `player_get_volume()`
   int player_set_volume(
     player_h player,
     double left,
@@ -332,20 +440,28 @@ class Tizen70CapiMediaPlayer {
   late final _player_set_volume = _player_set_volumePtr
       .asFunction<int Function(player_h, double, double)>();
 
-  /// @brief Gets the player's current volume factor.
-  /// @details The range of @a left and @a right is from @c 0 to @c 1.0, inclusive (1.0 = 100%).
-  /// This function gets the player volume, not the system volume.
-  /// To get the system volume, use the @ref CAPI_MEDIA_SOUND_MANAGER_MODULE API.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @param[in]  player   The handle to the media player
-  /// @param[out] left     The current left volume scalar
-  /// @param[out] right    The current right volume scalar
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @see player_set_volume()
+  /// Gets the player's current volume factor.
+  ///
+  /// The range of `left` and `right` is from `0` to `1.0`, inclusive (1.0 = 100%). This function gets the player volume, not the system volume. To get the system volume, use the `CAPI_MEDIA_SOUND_MANAGER_MODULE` API.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `left` (out): The current left volume scalar
+  /// - `right` (out): The current right volume scalar
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `player_set_volume()`
   int player_get_volume(
     player_h player,
     ffi.Pointer<ffi.Float> left,
@@ -365,30 +481,45 @@ class Tizen70CapiMediaPlayer {
   late final _player_get_volume = _player_get_volumePtr.asFunction<
       int Function(player_h, ffi.Pointer<ffi.Float>, ffi.Pointer<ffi.Float>)>();
 
-  /// @brief Sets the player's sound manager stream information.
-  /// @since_tizen 3.0
-  /// @remarks You can set sound stream information including audio routing and volume type.
-  /// For more details, please refer to sound_manager.h
-  /// @remarks This function must be called before calling the player_prepare() or player_prepare_async()
-  /// to reflect the sound stream information when the player is building.
-  /// @remarks This function is related to the following feature:\n
-  /// %http://tizen.org/feature/multimedia.player.stream_info\n
-  /// If this feature is not supported, the stream_type of the player is fixed to the #SOUND_STREAM_TYPE_MEDIA.
-  /// @param[in] player The handle to the media player
-  /// @param[in] stream_info The sound manager info type
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid player state
-  /// @retval #PLAYER_ERROR_FEATURE_NOT_SUPPORTED_ON_DEVICE Unsupported feature
-  /// @pre The player state must be set to #PLAYER_STATE_IDLE by calling player_create().
-  /// @see #sound_stream_info_h
-  /// @see sound_manager_create_stream_information()
-  /// @see sound_manager_destroy_stream_information()
-  /// @par Example
-  /// @code
+  /// Sets the player's sound manager stream information.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You can set sound stream information including audio routing and volume type.
+  /// - For more details, please refer to sound_manager.h
+  /// - This function must be called before calling the player_prepare() or player_prepare_async()
+  /// - to reflect the sound stream information when the player is building.
+  /// - This function is related to the following feature:
+  /// - <http://tizen.org/feature/multimedia.player.stream_info>
+  /// - If this feature is not supported, the stream_type of the player is fixed to the `SOUND_STREAM_TYPE_MEDIA`.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `stream_info` (in): The sound manager info type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid player state
+  /// - `PLAYER_ERROR_FEATURE_NOT_SUPPORTED_ON_DEVICE`: Unsupported feature
+  ///
+  /// **Preconditions:**
+  /// - The player state must be set to `PLAYER_STATE_IDLE` by calling player_create().
+  ///
+  /// **See also:**
+  /// - `sound_stream_info_h`
+  /// - `sound_manager_create_stream_information()`
+  /// - `sound_manager_destroy_stream_information()`
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <player.h>
   /// #include <sound_manager.h>
   /// ...
@@ -402,7 +533,7 @@ class Tizen70CapiMediaPlayer {
   /// ...
   /// player_prepare_async (player, _prepared_cb, udata);
   /// ...
-  /// @endcode
+  /// ```
   int player_set_sound_stream_info(
     player_h player,
     sound_manager.sound_stream_info_h stream_info,
@@ -420,27 +551,38 @@ class Tizen70CapiMediaPlayer {
   late final _player_set_sound_stream_info = _player_set_sound_stream_infoPtr
       .asFunction<int Function(player_h, sound_manager.sound_stream_info_h)>();
 
-  /// @brief Sets the audio latency mode.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks The default audio latency mode of the player is #AUDIO_LATENCY_MODE_MID.
-  /// To get the current audio latency mode, use player_get_audio_latency_mode().
-  /// If it's high mode, audio output interval can be increased so, it can keep more audio data to play.
-  /// But, state transition like pause or resume can be more slower than default(mid) mode.
-  /// @remarks If audio offload is enabled by calling player_audio_offload_set_enabled(),
-  /// this function will return #PLAYER_ERROR_NOT_AVAILABLE and
-  /// this will not work at all even if it was called before enabling offload. (Since 5.5)
-  /// @param[in] player The handle to the media player
-  /// @param[in] latency_mode The latency mode to be applied to the audio
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_NOT_AVAILABLE Not available (Since 5.5)
-  /// @see #audio_latency_mode_e
-  /// @see player_get_audio_latency_mode()
-  /// @see player_audio_offload_set_enabled()
-  /// @see player_audio_offload_is_enabled()
+  /// Sets the audio latency mode.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - The default audio latency mode of the player is `AUDIO_LATENCY_MODE_MID`.
+  /// - To get the current audio latency mode, use player_get_audio_latency_mode().
+  /// - If it's high mode, audio output interval can be increased so, it can keep more audio data to play.
+  /// - But, state transition like pause or resume can be more slower than default(mid) mode.
+  /// - If audio offload is enabled by calling player_audio_offload_set_enabled(),
+  /// - this function will return `PLAYER_ERROR_NOT_AVAILABLE` and
+  /// - this will not work at all even if it was called before enabling offload. (Since 5.5)
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `latency_mode` (in): The latency mode to be applied to the audio
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_NOT_AVAILABLE`: Not available (Since 5.5)
+  ///
+  /// **See also:**
+  /// - `audio_latency_mode_e`
+  /// - `player_get_audio_latency_mode()`
+  /// - `player_audio_offload_set_enabled()`
+  /// - `player_audio_offload_is_enabled()`
   int player_set_audio_latency_mode(
     player_h player,
     int latency_mode,
@@ -457,22 +599,33 @@ class Tizen70CapiMediaPlayer {
   late final _player_set_audio_latency_mode = _player_set_audio_latency_modePtr
       .asFunction<int Function(player_h, int)>();
 
-  /// @brief Gets the current audio latency mode.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks If audio offload is enabled by calling player_audio_offload_set_enabled(),
-  /// this function will return #PLAYER_ERROR_NOT_AVAILABLE. (Since 5.5)
-  /// @param[in] player The handle to the media player
-  /// @param[out] latency_mode The latency mode to get from the audio
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_NOT_AVAILABLE Not available (Since 5.5)
-  /// @see #audio_latency_mode_e
-  /// @see player_set_audio_latency_mode()
-  /// @see player_audio_offload_set_enabled()
-  /// @see player_audio_offload_is_enabled()
+  /// Gets the current audio latency mode.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - If audio offload is enabled by calling player_audio_offload_set_enabled(),
+  /// - this function will return `PLAYER_ERROR_NOT_AVAILABLE`. (Since 5.5)
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `latency_mode` (out): The latency mode to get from the audio
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_NOT_AVAILABLE`: Not available (Since 5.5)
+  ///
+  /// **See also:**
+  /// - `audio_latency_mode_e`
+  /// - `player_set_audio_latency_mode()`
+  /// - `player_audio_offload_set_enabled()`
+  /// - `player_audio_offload_is_enabled()`
   int player_get_audio_latency_mode(
     player_h player,
     ffi.Pointer<ffi.Int32> latency_mode,
@@ -490,39 +643,55 @@ class Tizen70CapiMediaPlayer {
   late final _player_get_audio_latency_mode = _player_get_audio_latency_modePtr
       .asFunction<int Function(player_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Starts or resumes playback.
-  /// @details Plays current media content, or resumes playback if the player is paused or buffering during HTTP streaming play.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks Even if you don't set visible to true by calling player_set_display_visible(), the video will be shown on #PLAYER_STATE_PLAYING state.
-  /// @remarks Since 3.0: \n
-  /// Sound can be mixed with other sounds, if you don't control the stream focus in sound-manager module.\n
-  /// You can refer to @ref CAPI_MEDIA_SOUND_MANAGER_MODULE.
-  /// @remarks Since 5.0: \n
-  /// In case of HTTP streaming playback, the player could be internally paused for buffering.
-  /// If the application calls this function during the buffering, the playback will be resumed by force
-  /// and the buffering message posting by player_buffering_cb() will be stopped.
-  /// @param[in]   player The handle to the media player
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid player state
-  /// @retval #PLAYER_ERROR_CONNECTION_FAILED Network connection failed
-  /// @retval #PLAYER_ERROR_SOUND_POLICY Sound policy error
-  /// @pre Before 5.0: The player state must be #PLAYER_STATE_READY or #PLAYER_STATE_PAUSED. \n
-  /// @pre Since 5.0: The player state must be one of #PLAYER_STATE_READY, #PLAYER_STATE_PLAYING, or #PLAYER_STATE_PAUSED.
-  /// @post The player state will be #PLAYER_STATE_PLAYING.
-  /// @post It invokes player_completed_cb() when playback completes, if you set a callback with player_set_completed_cb().
-  /// @see player_prepare()
-  /// @see player_prepare_async()
-  /// @see player_stop()
-  /// @see player_pause()
-  /// @see player_set_completed_cb()
-  /// @see player_completed_cb()
-  /// @see player_set_display_visible()
-  /// @see player_set_buffering_cb()
-  /// @see player_buffering_cb()
+  /// Starts or resumes playback.
+  ///
+  /// Plays current media content, or resumes playback if the player is paused or buffering during HTTP streaming play.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - Even if you don't set visible to true by calling player_set_display_visible(), the video will be shown on `PLAYER_STATE_PLAYING` state.
+  /// - Since 3.0:
+  /// - Sound can be mixed with other sounds, if you don't control the stream focus in sound-manager module.
+  /// - You can refer to `CAPI_MEDIA_SOUND_MANAGER_MODULE.`
+  /// - Since 5.0:
+  /// - In case of HTTP streaming playback, the player could be internally paused for buffering.
+  /// - If the application calls this function during the buffering, the playback will be resumed by force
+  /// - and the buffering message posting by player_buffering_cb() will be stopped.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid player state
+  /// - `PLAYER_ERROR_CONNECTION_FAILED`: Network connection failed
+  /// - `PLAYER_ERROR_SOUND_POLICY`: Sound policy error
+  ///
+  /// **Preconditions:**
+  /// - Before 5.0: The player state must be `PLAYER_STATE_READY` or `PLAYER_STATE_PAUSED`.
+  /// - Since 5.0: The player state must be one of `PLAYER_STATE_READY`, `PLAYER_STATE_PLAYING`, or `PLAYER_STATE_PAUSED`.
+  ///
+  /// **Postconditions:**
+  /// - The player state will be `PLAYER_STATE_PLAYING`.
+  /// - It invokes player_completed_cb() when playback completes, if you set a callback with player_set_completed_cb().
+  ///
+  /// **See also:**
+  /// - `player_prepare()`
+  /// - `player_prepare_async()`
+  /// - `player_stop()`
+  /// - `player_pause()`
+  /// - `player_set_completed_cb()`
+  /// - `player_completed_cb()`
+  /// - `player_set_display_visible()`
+  /// - `player_set_buffering_cb()`
+  /// - `player_buffering_cb()`
   int player_start(
     player_h player,
   ) {
@@ -536,20 +705,33 @@ class Tizen70CapiMediaPlayer {
   late final _player_start =
       _player_startPtr.asFunction<int Function(player_h)>();
 
-  /// @brief Stops playing media content.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @param[in]   player The handle to the media player
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid state
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid player state
-  /// @retval #PLAYER_ERROR_SOUND_POLICY Sound policy error
-  /// @pre The player state must be set to #PLAYER_STATE_PLAYING by calling player_start() or set to #PLAYER_STATE_PAUSED by calling player_pause().
-  /// @post The player state will be #PLAYER_STATE_READY.
-  /// @see player_start()
-  /// @see player_pause()
+  /// Stops playing media content.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid state
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid player state
+  /// - `PLAYER_ERROR_SOUND_POLICY`: Sound policy error
+  ///
+  /// **Preconditions:**
+  /// - The player state must be set to `PLAYER_STATE_PLAYING` by calling player_start() or set to `PLAYER_STATE_PAUSED` by calling player_pause().
+  ///
+  /// **Postconditions:**
+  /// - The player state will be `PLAYER_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `player_start()`
+  /// - `player_pause()`
   int player_stop(
     player_h player,
   ) {
@@ -563,21 +745,35 @@ class Tizen70CapiMediaPlayer {
   late final _player_stop =
       _player_stopPtr.asFunction<int Function(player_h)>();
 
-  /// @brief Pauses the player.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks You can resume playback using player_start().
+  /// Pauses the player.
   ///
-  /// @param[in]   player The handle to the media player
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid state
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid player state
-  /// @retval #PLAYER_ERROR_SOUND_POLICY Sound policy error
-  /// @pre The player state must be set to #PLAYER_STATE_PLAYING.
-  /// @post The player state will be #PLAYER_STATE_PAUSED.
-  /// @see player_start()
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - You can resume playback using player_start().
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid state
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid player state
+  /// - `PLAYER_ERROR_SOUND_POLICY`: Sound policy error
+  ///
+  /// **Preconditions:**
+  /// - The player state must be set to `PLAYER_STATE_PLAYING`.
+  ///
+  /// **Postconditions:**
+  /// - The player state will be `PLAYER_STATE_PAUSED`.
+  ///
+  /// **See also:**
+  /// - `player_start()`
   int player_pause(
     player_h player,
   ) {
@@ -591,37 +787,51 @@ class Tizen70CapiMediaPlayer {
   late final _player_pause =
       _player_pausePtr.asFunction<int Function(player_h)>();
 
-  /// @brief Sets the seek position for playback, asynchronously.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks This function will trigger the seeking operation on player instance like in the case of player_set_play_position_nsec().
-  /// Normally application needs to wait for player_seek_completed_cb() before calling setting position function again.
-  /// Otherwise it will return #PLAYER_ERROR_SEEK_FAILED.
-  /// @remarks Calling player_pause() or player_start() before player_seek_completed_cb() is invoked will cause #PLAYER_ERROR_INVALID_OPERATION to be returned.
-  /// @remarks Please note that if application is playing external media data via player_set_media_stream_info(),
-  /// then consecutive calling of this function will always succeed and there is no need to wait for player_seek_completed_cb()
-  /// before next calling of this function.(Since 3.0)
-  /// @remarks Even if you don't set visible to true by calling player_set_display_visible(),
-  /// the video will be shown when the player_seek_completed_cb() is invoked.
-  /// @remarks In case of non-seekable content, the function will return #PLAYER_ERROR_INVALID_OPERATION
-  /// and the player will keep playing without changing the play position.
-  /// @param[in] player        The handle to the media player
-  /// @param[in] milliseconds  The position in milliseconds from the start to the seek point
-  /// @param[in] accurate      If @c true the nearest frame position is returned, but this might be considerably slow,
-  /// if @c false the nearest key frame position is returned, this might be faster but less accurate.
-  /// @param[in] callback      The callback function to register
-  /// @param[in] user_data     The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid player state
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_SEEK_FAILED Seek operation failure
-  /// @pre The player state must be one of #PLAYER_STATE_READY, #PLAYER_STATE_PLAYING, or #PLAYER_STATE_PAUSED.
-  /// @post It invokes player_seek_completed_cb() when seek operation completes, if you set a callback.
-  /// @see player_get_play_position()
-  /// @see player_set_play_position_nsec()
-  /// @see player_get_play_position_nsec()
+  /// Sets the seek position for playback, asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - This function will trigger the seeking operation on player instance like in the case of player_set_play_position_nsec().
+  /// - Normally application needs to wait for player_seek_completed_cb() before calling setting position function again.
+  /// - Otherwise it will return `PLAYER_ERROR_SEEK_FAILED`.
+  /// - Calling player_pause() or player_start() before player_seek_completed_cb() is invoked will cause `PLAYER_ERROR_INVALID_OPERATION` to be returned.
+  /// - Please note that if application is playing external media data via player_set_media_stream_info(),
+  /// - then consecutive calling of this function will always succeed and there is no need to wait for player_seek_completed_cb()
+  /// - before next calling of this function.(Since 3.0)
+  /// - Even if you don't set visible to true by calling player_set_display_visible(),
+  /// - the video will be shown when the player_seek_completed_cb() is invoked.
+  /// - In case of non-seekable content, the function will return `PLAYER_ERROR_INVALID_OPERATION`
+  /// - and the player will keep playing without changing the play position.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `milliseconds` (in): The position in milliseconds from the start to the seek point
+  /// - `accurate` (in): If `true` the nearest frame position is returned, but this might be considerably slow, if `false` the nearest key frame position is returned, this might be faster but less accurate.
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid player state
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_SEEK_FAILED`: Seek operation failure
+  ///
+  /// **Preconditions:**
+  /// - The player state must be one of `PLAYER_STATE_READY`, `PLAYER_STATE_PLAYING`, or `PLAYER_STATE_PAUSED`.
+  ///
+  /// **Postconditions:**
+  /// - It invokes player_seek_completed_cb() when seek operation completes, if you set a callback.
+  ///
+  /// **See also:**
+  /// - `player_get_play_position()`
+  /// - `player_set_play_position_nsec()`
+  /// - `player_get_play_position_nsec()`
   int player_set_play_position(
     player_h player,
     int milliseconds,
@@ -651,37 +861,51 @@ class Tizen70CapiMediaPlayer {
           int Function(player_h, int, bool, player_seek_completed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets the seek position in nanoseconds for playback, asynchronously.
-  /// @since_tizen 5.0
-  /// @remarks This function will trigger the seeking operation on player instance like in the case of player_set_play_position().
-  /// Normally application needs to wait for player_seek_completed_cb() before calling setting position function again.
-  /// Otherwise it will return #PLAYER_ERROR_SEEK_FAILED.
-  /// @remarks Calling player_pause() or player_start() before player_seek_completed_cb() is invoked will cause #PLAYER_ERROR_INVALID_OPERATION to be returned.
-  /// @remarks Please note that if application is playing external media data via player_set_media_stream_info(),
-  /// then consecutive calling of this function will always succeed and there is no need to wait for player_seek_completed_cb()
-  /// before next calling of this function.
-  /// @remarks Even if you don't set visible to true by calling player_set_display_visible(),
-  /// the video will be shown when the player_seek_completed_cb() is invoked.
-  /// @remarks In case of non-seekable content, the function will return #PLAYER_ERROR_INVALID_OPERATION
-  /// and the player will keep playing without changing the play position.
-  /// @param[in] player        The handle to the media player
-  /// @param[in] nanoseconds   The position in nanoseconds from the start to the seek point
-  /// @param[in] accurate      If @c true the nearest frame position is returned, but this might be considerably slow,
-  /// if @c false the nearest key frame position is returned, this might be faster but less accurate.
-  /// @param[in] callback      The callback function to register
-  /// @param[in] user_data     The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid player state
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_SEEK_FAILED Seek operation failure
-  /// @pre The player state must be one of #PLAYER_STATE_READY, #PLAYER_STATE_PLAYING, or #PLAYER_STATE_PAUSED.
-  /// @post It invokes player_seek_completed_cb() when seek operation completes, if you set a callback.
-  /// @see player_set_play_position()
-  /// @see player_get_play_position()
-  /// @see player_get_play_position_nsec()
+  /// Sets the seek position in nanoseconds for playback, asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - This function will trigger the seeking operation on player instance like in the case of player_set_play_position().
+  /// - Normally application needs to wait for player_seek_completed_cb() before calling setting position function again.
+  /// - Otherwise it will return `PLAYER_ERROR_SEEK_FAILED`.
+  /// - Calling player_pause() or player_start() before player_seek_completed_cb() is invoked will cause `PLAYER_ERROR_INVALID_OPERATION` to be returned.
+  /// - Please note that if application is playing external media data via player_set_media_stream_info(),
+  /// - then consecutive calling of this function will always succeed and there is no need to wait for player_seek_completed_cb()
+  /// - before next calling of this function.
+  /// - Even if you don't set visible to true by calling player_set_display_visible(),
+  /// - the video will be shown when the player_seek_completed_cb() is invoked.
+  /// - In case of non-seekable content, the function will return `PLAYER_ERROR_INVALID_OPERATION`
+  /// - and the player will keep playing without changing the play position.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `nanoseconds` (in): The position in nanoseconds from the start to the seek point
+  /// - `accurate` (in): If `true` the nearest frame position is returned, but this might be considerably slow, if `false` the nearest key frame position is returned, this might be faster but less accurate.
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid player state
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_SEEK_FAILED`: Seek operation failure
+  ///
+  /// **Preconditions:**
+  /// - The player state must be one of `PLAYER_STATE_READY`, `PLAYER_STATE_PLAYING`, or `PLAYER_STATE_PAUSED`.
+  ///
+  /// **Postconditions:**
+  /// - It invokes player_seek_completed_cb() when seek operation completes, if you set a callback.
+  ///
+  /// **See also:**
+  /// - `player_set_play_position()`
+  /// - `player_get_play_position()`
+  /// - `player_get_play_position_nsec()`
   int player_set_play_position_nsec(
     player_h player,
     int nanoseconds,
@@ -711,19 +935,28 @@ class Tizen70CapiMediaPlayer {
           int Function(player_h, int, bool, player_seek_completed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the current position in milliseconds.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @param[in]   player        The handle to the media player
-  /// @param[out]  milliseconds  The current position in milliseconds
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_SEEK_FAILED Seek operation failure
-  /// @see player_set_play_position()
-  /// @see player_set_play_position_nsec()
-  /// @see player_get_play_position_nsec()
+  /// Gets the current position in milliseconds.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `milliseconds` (out): The current position in milliseconds
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_SEEK_FAILED`: Seek operation failure
+  ///
+  /// **See also:**
+  /// - `player_set_play_position()`
+  /// - `player_set_play_position_nsec()`
+  /// - `player_get_play_position_nsec()`
   int player_get_play_position(
     player_h player,
     ffi.Pointer<ffi.Int> milliseconds,
@@ -740,19 +973,28 @@ class Tizen70CapiMediaPlayer {
   late final _player_get_play_position = _player_get_play_positionPtr
       .asFunction<int Function(player_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the current position in nanoseconds.
-  /// @since_tizen 5.0
-  /// @param[in]   player        The handle to the media player
-  /// @param[out]  nanoseconds   The current position in nanoseconds
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_SEEK_FAILED Seek operation failure
-  /// @see player_set_play_position()
-  /// @see player_get_play_position()
-  /// @see player_set_play_position_nsec()
+  /// Gets the current position in nanoseconds.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `nanoseconds` (out): The current position in nanoseconds
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_SEEK_FAILED`: Seek operation failure
+  ///
+  /// **See also:**
+  /// - `player_set_play_position()`
+  /// - `player_get_play_position()`
+  /// - `player_set_play_position_nsec()`
   int player_get_play_position_nsec(
     player_h player,
     ffi.Pointer<ffi.Int64> nanoseconds,
@@ -770,19 +1012,27 @@ class Tizen70CapiMediaPlayer {
   late final _player_get_play_position_nsec = _player_get_play_position_nsecPtr
       .asFunction<int Function(player_h, ffi.Pointer<ffi.Int64>)>();
 
-  /// @brief Sets the player's mute status.
-  /// @details If the mute status is @c true, no sounds are played.
-  /// If it is @c false, sounds are played at the previously set volume level.
-  /// Until this function is called, by default the player is not muted.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @param[in]   player The handle to the media player
-  /// @param[in]   muted The new mute status: (@c true = mute, @c false = not muted)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @see player_is_muted()
+  /// Sets the player's mute status.
+  ///
+  /// If the mute status is `true`, no sounds are played. If it is `false`, sounds are played at the previously set volume level. Until this function is called, by default the player is not muted.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `muted` (in): The new mute status: (`true` = mute, `false` = not muted)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `player_is_muted()`
   int player_set_mute(
     player_h player,
     bool muted,
@@ -799,18 +1049,27 @@ class Tizen70CapiMediaPlayer {
   late final _player_set_mute =
       _player_set_mutePtr.asFunction<int Function(player_h, bool)>();
 
-  /// @brief Gets the player's mute status.
-  /// @details If the mute status is @c true, no sounds are played.
-  /// If it is @c false, sounds are played at the previously set volume level.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @param[in]   player The handle to the media player
-  /// @param[out]  muted  The current mute status: (@c true = mute, @c false = not muted)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @see player_set_mute()
+  /// Gets the player's mute status.
+  ///
+  /// If the mute status is `true`, no sounds are played. If it is `false`, sounds are played at the previously set volume level.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `muted` (out): The current mute status: (`true` = mute, `false` = not muted)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `player_set_mute()`
   int player_is_muted(
     player_h player,
     ffi.Pointer<ffi.Bool> muted,
@@ -828,18 +1087,27 @@ class Tizen70CapiMediaPlayer {
   late final _player_is_muted = _player_is_mutedPtr
       .asFunction<int Function(player_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Sets the player's looping status.
-  /// @details If the looping status is @c true, playback automatically restarts upon finishing.
-  /// If it is @c false, it won't. The default value is @c false.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @param[in]   player The handle to the media player
-  /// @param[in]   looping The new looping status: (@c true = looping, @c false = non-looping )
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @see player_is_looping()
+  /// Sets the player's looping status.
+  ///
+  /// If the looping status is `true`, playback automatically restarts upon finishing. If it is `false`, it won't. The default value is `false`.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `looping` (in): The new looping status: (`true` = looping, `false` = non-looping )
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `player_is_looping()`
   int player_set_looping(
     player_h player,
     bool looping,
@@ -856,18 +1124,27 @@ class Tizen70CapiMediaPlayer {
   late final _player_set_looping =
       _player_set_loopingPtr.asFunction<int Function(player_h, bool)>();
 
-  /// @brief Gets the player's looping status.
-  /// @details If the looping status is @c true, playback automatically restarts upon finishing.
-  /// If it is @c false, it won't.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @param[in]   player The handle to the media player
-  /// @param[out]  looping The looping status: (@c true = looping, @c false = non-looping )
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @see player_set_looping()
+  /// Gets the player's looping status.
+  ///
+  /// If the looping status is `true`, playback automatically restarts upon finishing. If it is `false`, it won't.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `looping` (out): The looping status: (`true` = looping, `false` = non-looping )
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `player_set_looping()`
   int player_is_looping(
     player_h player,
     ffi.Pointer<ffi.Bool> looping,
@@ -885,34 +1162,47 @@ class Tizen70CapiMediaPlayer {
   late final _player_is_looping = _player_is_loopingPtr
       .asFunction<int Function(player_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Sets the video display.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks To get @a display to set, use #GET_DISPLAY().
-  /// @remarks We are not supporting changing display.
-  /// @remarks This function must be called before calling the player_prepare() or player_prepare_async() \n
-  /// to reflect the display type.
-  /// @remarks This function must be called in main thread of application.
-  /// Otherwise, it will return #PLAYER_ERROR_INVALID_OPERATION by internal restriction.
-  /// To avoid #PLAYER_ERROR_INVALID_OPERATION in sub thread, ecore_thread_main_loop_begin() and
-  /// ecore_thread_main_loop_end() can be used, but deadlock can be also occurred if main thread is busy.
-  /// So, it's not recommended to use them. (since 5.0)
-  /// @param[in]   player The handle to the media player
-  /// @param[in]   type The display type
-  /// @param[in]   display The handle to display
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid player state
-  /// @pre The player state must be set to #PLAYER_STATE_IDLE by calling player_create() or player_unprepare().
-  /// @see #player_display_type_e
-  /// @see player_set_display_mode()
-  /// @see player_set_display_roi_area()
-  /// @see player_set_display_visible()
-  /// @see player_set_display_rotation()
-  /// @see ecore_thread_main_loop_begin()
-  /// @see ecore_thread_main_loop_end()
+  /// Sets the video display.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - To get `display` to set, use `GET_DISPLAY()`.
+  /// - We are not supporting changing display.
+  /// - This function must be called before calling the player_prepare() or player_prepare_async()
+  /// - to reflect the display type.
+  /// - This function must be called in main thread of application.
+  /// - Otherwise, it will return `PLAYER_ERROR_INVALID_OPERATION` by internal restriction.
+  /// - To avoid `PLAYER_ERROR_INVALID_OPERATION` in sub thread, ecore_thread_main_loop_begin() and
+  /// - ecore_thread_main_loop_end() can be used, but deadlock can be also occurred if main thread is busy.
+  /// - So, it's not recommended to use them. (since 5.0)
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `type` (in): The display type
+  /// - `display` (in): The handle to display
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid player state
+  ///
+  /// **Preconditions:**
+  /// - The player state must be set to `PLAYER_STATE_IDLE` by calling player_create() or player_unprepare().
+  ///
+  /// **See also:**
+  /// - `player_display_type_e`
+  /// - `player_set_display_mode()`
+  /// - `player_set_display_roi_area()`
+  /// - `player_set_display_visible()`
+  /// - `player_set_display_rotation()`
+  /// - `ecore_thread_main_loop_begin()`
+  /// - `ecore_thread_main_loop_end()`
   int player_set_display(
     player_h player,
     int type,
@@ -932,28 +1222,41 @@ class Tizen70CapiMediaPlayer {
   late final _player_set_display = _player_set_displayPtr
       .asFunction<int Function(player_h, int, player_display_h)>();
 
-  /// @brief Sets a callback function for getting the decoded video frame.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks This function must be called before calling player_prepare() or player_prepare_async().\n
-  /// A registered callback is called in a separate thread (not in the main loop).\n
-  /// A video frame can be retrieved using a registered callback as a media packet.\n
-  /// The callback function holds the same buffer that will be drawn on the display device.\n
-  /// So if you change the media packet in a registered callback, it will be displayed on the device\n
-  /// and the media packet is available until it's destroyed by media_packet_destroy().\n
-  /// The packet have to be destroyed as quickly as possible after rendering the packet\n
-  /// and all the packets have to be destroyed before player_unprepare() is called.\n
-  /// @remarks If the content is encrypted or there are copyright issues with it,
-  /// this function could be unsupported depending on the DRM policy.
-  /// @param[in] player The handle to the media player
-  /// @param[in] callback The callback function to be registered
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid state
-  /// @pre The player's state must be #PLAYER_STATE_IDLE. And, #PLAYER_DISPLAY_TYPE_NONE must be set by calling player_set_display().
-  /// @see player_unset_media_packet_video_frame_decoded_cb()
+  /// Sets a callback function for getting the decoded video frame.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - This function must be called before calling player_prepare() or player_prepare_async().
+  /// - A registered callback is called in a separate thread (not in the main loop).
+  /// - A video frame can be retrieved using a registered callback as a media packet.
+  /// - The callback function holds the same buffer that will be drawn on the display device.
+  /// - So if you change the media packet in a registered callback, it will be displayed on the device
+  /// - and the media packet is available until it's destroyed by media_packet_destroy().
+  /// - The packet have to be destroyed as quickly as possible after rendering the packet
+  /// - and all the packets have to be destroyed before player_unprepare() is called.
+  /// - If the content is encrypted or there are copyright issues with it,
+  /// - this function could be unsupported depending on the DRM policy.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `callback` (in): The callback function to be registered
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The player's state must be `PLAYER_STATE_IDLE`. And, `PLAYER_DISPLAY_TYPE_NONE` must be set by calling player_set_display().
+  ///
+  /// **See also:**
+  /// - `player_unset_media_packet_video_frame_decoded_cb()`
   int player_set_media_packet_video_frame_decoded_cb(
     player_h player,
     player_media_packet_video_decoded_cb callback,
@@ -976,15 +1279,26 @@ class Tizen70CapiMediaPlayer {
           int Function(player_h, player_media_packet_video_decoded_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback notifying the decoded video frame.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @param[in] player The handle to the media player
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre The player's state must be #PLAYER_STATE_READY or #PLAYER_STATE_IDLE
-  /// @see player_set_media_packet_video_frame_decoded_cb()
+  /// Unsets the callback notifying the decoded video frame.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - The player's state must be `PLAYER_STATE_READY` or `PLAYER_STATE_IDLE`
+  ///
+  /// **See also:**
+  /// - `player_set_media_packet_video_frame_decoded_cb()`
   int player_unset_media_packet_video_frame_decoded_cb(
     player_h player,
   ) {
@@ -1000,45 +1314,58 @@ class Tizen70CapiMediaPlayer {
       _player_unset_media_packet_video_frame_decoded_cbPtr
           .asFunction<int Function(player_h)>();
 
-  /// @brief Sets a callback function for getting the decoded audio data.
-  /// @details This function is used to get audio PCM data of input media content via registered callback.\n
-  /// An application can specify the output PCM format by @ref CAPI_MEDIA_TOOL_MEDIA_FORMAT_MODULE API.
-  /// @since_tizen 5.5
-  /// @remarks This function must be called before calling player_prepare() or player_prepare_async().\n
-  /// A registered callback is called in a separate thread (not in the main loop).\n
-  /// The audio PCM data can be retrieved using a registered callback as a media packet
-  /// and it is available until it's destroyed by media_packet_destroy().\n
-  /// The packet has to be destroyed as quickly as possible after rendering the data\n
-  /// and all the packets have to be destroyed before player_unprepare() is called.\n
-  /// @remarks If audio offload is enabled by calling player_audio_offload_set_enabled(),
-  /// this function will return #PLAYER_ERROR_NOT_AVAILABLE and
-  /// this will not work at all even if this was called before enabling offload.
-  /// @remarks This function could be unavailable depending on the audio codec type and
-  /// this will return #PLAYER_ERROR_NOT_AVAILABLE.
-  /// @remarks If the content is encrypted or there are copyright issues with it,
-  /// this function could be unsupported depending on the DRM policy.
-  /// @param[in] player     The handle to the media player
-  /// @param[in] format     The media format handle about required audio PCM specification.
-  /// This format has to include PCM MIME type, audio channel and sampling rate.
-  /// If the format is NULL, the original PCM format or platform default PCM format will be applied.
-  /// @param[in] opt        The audio extract option
-  /// @param[in] callback   The callback function to be registered
-  /// @param[in] user_data  The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid state
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_NOT_AVAILABLE Not available
-  /// @pre The player's state must be #PLAYER_STATE_IDLE.
-  /// @see player_unset_media_packet_audio_frame_decoded_cb()
-  /// @see player_audio_offload_set_enabled()
-  /// @see player_audio_offload_is_enabled()
-  /// @see player_set_audio_codec_type()
-  /// @see player_get_audio_codec_type()
-  /// @par Example
-  /// @code
+  /// Sets a callback function for getting the decoded audio data.
+  ///
+  /// This function is used to get audio PCM data of input media content via registered callback. An application can specify the output PCM format by `CAPI_MEDIA_TOOL_MEDIA_FORMAT_MODULE` API.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - This function must be called before calling player_prepare() or player_prepare_async().
+  /// - A registered callback is called in a separate thread (not in the main loop).
+  /// - The audio PCM data can be retrieved using a registered callback as a media packet
+  /// - and it is available until it's destroyed by media_packet_destroy().
+  /// - The packet has to be destroyed as quickly as possible after rendering the data
+  /// - and all the packets have to be destroyed before player_unprepare() is called.
+  /// - If audio offload is enabled by calling player_audio_offload_set_enabled(),
+  /// - this function will return `PLAYER_ERROR_NOT_AVAILABLE` and
+  /// - this will not work at all even if this was called before enabling offload.
+  /// - This function could be unavailable depending on the audio codec type and
+  /// - this will return `PLAYER_ERROR_NOT_AVAILABLE`.
+  /// - If the content is encrypted or there are copyright issues with it,
+  /// - this function could be unsupported depending on the DRM policy.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `format` (in): The media format handle about required audio PCM specification. This format has to include PCM MIME type, audio channel and sampling rate. If the format is NULL, the original PCM format or platform default PCM format will be applied.
+  /// - `opt` (in): The audio extract option
+  /// - `callback` (in): The callback function to be registered
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid state
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_NOT_AVAILABLE`: Not available
+  ///
+  /// **Preconditions:**
+  /// - The player's state must be `PLAYER_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `player_unset_media_packet_audio_frame_decoded_cb()`
+  /// - `player_audio_offload_set_enabled()`
+  /// - `player_audio_offload_is_enabled()`
+  /// - `player_set_audio_codec_type()`
+  /// - `player_get_audio_codec_type()`
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <player.h>
   /// #include <media_format.h>
   /// ...
@@ -1054,7 +1381,7 @@ class Tizen70CapiMediaPlayer {
   ///
   /// media_format_unref(a_format);
   /// ...
-  /// @endcode
+  /// ```
   int player_set_media_packet_audio_frame_decoded_cb(
     player_h player,
     media_tool.media_format_h format,
@@ -1085,23 +1412,36 @@ class Tizen70CapiMediaPlayer {
           int Function(player_h, media_tool.media_format_h, int,
               player_media_packet_audio_decoded_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback notifying the decoded audio data.
-  /// @since_tizen 5.5
-  /// @remarks Depending on the audio codec type or by enabling audio offload,
-  /// this function could be unavailable and this will return #PLAYER_ERROR_NOT_AVAILABLE.
-  /// @param[in] player The handle to the media player
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid state
-  /// @retval #PLAYER_ERROR_NOT_AVAILABLE Not available
-  /// @pre The player's state must be #PLAYER_STATE_READY or #PLAYER_STATE_IDLE
-  /// @see player_set_media_packet_audio_frame_decoded_cb()
-  /// @see player_audio_offload_set_enabled()
-  /// @see player_audio_offload_is_enabled()
-  /// @see player_set_audio_codec_type()
-  /// @see player_get_audio_codec_type()
+  /// Unsets the callback notifying the decoded audio data.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - Depending on the audio codec type or by enabling audio offload,
+  /// - this function could be unavailable and this will return `PLAYER_ERROR_NOT_AVAILABLE`.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid state
+  /// - `PLAYER_ERROR_NOT_AVAILABLE`: Not available
+  ///
+  /// **Preconditions:**
+  /// - The player's state must be `PLAYER_STATE_READY` or `PLAYER_STATE_IDLE`
+  ///
+  /// **See also:**
+  /// - `player_set_media_packet_audio_frame_decoded_cb()`
+  /// - `player_audio_offload_set_enabled()`
+  /// - `player_audio_offload_is_enabled()`
+  /// - `player_set_audio_codec_type()`
+  /// - `player_get_audio_codec_type()`
   int player_unset_media_packet_audio_frame_decoded_cb(
     player_h player,
   ) {
@@ -1117,24 +1457,37 @@ class Tizen70CapiMediaPlayer {
       _player_unset_media_packet_audio_frame_decoded_cbPtr
           .asFunction<int Function(player_h)>();
 
-  /// @brief  Pushes elementary stream to decode audio or video.
-  /// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-  /// @remarks player_set_media_stream_info() must be called before using this function.
-  /// @remarks The available buffer size can be set by calling player_set_media_stream_buffer_max_size().
-  /// If there is no available buffer space, this function will return error since 3.0.
-  /// @param[in]  player   The handle to media player
-  /// @param[in]  packet   The media packet to decode
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid state
-  /// @retval #PLAYER_ERROR_NOT_SUPPORTED_FILE File not supported
-  /// @retval #PLAYER_ERROR_BUFFER_SPACE No buffer space available (since 3.0)
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation (since 3.0)
-  /// @pre The player state must be one of #PLAYER_STATE_READY, #PLAYER_STATE_PLAYING or #PLAYER_STATE_PAUSED.
-  /// @see player_set_media_stream_info()
-  /// @see player_set_media_stream_buffer_max_size()
+  /// Pushes elementary stream to decode audio or video.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 3.0; Otherwise 2.4
+  ///
+  /// **Remarks:**
+  /// - player_set_media_stream_info() must be called before using this function.
+  /// - The available buffer size can be set by calling player_set_media_stream_buffer_max_size().
+  /// - If there is no available buffer space, this function will return error since 3.0.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to media player
+  /// - `packet` (in): The media packet to decode
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid state
+  /// - `PLAYER_ERROR_NOT_SUPPORTED_FILE`: File not supported
+  /// - `PLAYER_ERROR_BUFFER_SPACE`: No buffer space available (since 3.0)
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation (since 3.0)
+  ///
+  /// **Preconditions:**
+  /// - The player state must be one of `PLAYER_STATE_READY`, `PLAYER_STATE_PLAYING` or `PLAYER_STATE_PAUSED`.
+  ///
+  /// **See also:**
+  /// - `player_set_media_stream_info()`
+  /// - `player_set_media_stream_buffer_max_size()`
   int player_push_media_stream(
     player_h player,
     media_tool.media_packet_h packet,
@@ -1152,20 +1505,30 @@ class Tizen70CapiMediaPlayer {
   late final _player_push_media_stream = _player_push_media_streamPtr
       .asFunction<int Function(player_h, media_tool.media_packet_h)>();
 
-  /// @brief Retrieves all supported media formats for the playback of external media stream.
-  /// @details The supported media format can vary depending on the device capabilities.
-  /// @since_tizen 5.5
-  /// @param[in] player      The handle to the media player
-  /// @param[in] callback    The iteration callback function
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @see player_supported_media_format_cb()
-  /// @see player_set_media_stream_info()
-  /// @see player_push_media_stream()
+  /// Retrieves all supported media formats for the playback of external media stream.
+  ///
+  /// The supported media format can vary depending on the device capabilities.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `callback` (in): The iteration callback function
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `player_supported_media_format_cb()`
+  /// - `player_set_media_stream_info()`
+  /// - `player_push_media_stream()`
   int player_foreach_media_stream_supported_format(
     player_h player,
     player_supported_media_format_cb callback,
@@ -1188,26 +1551,39 @@ class Tizen70CapiMediaPlayer {
           int Function(player_h, player_supported_media_format_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief  Sets contents information for media stream.
-  /// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-  /// @remarks AV format must be set before pushing elementary stream with player_push_media_stream().
-  /// @remarks This function must be called before calling the player_prepare() or player_prepare_async()
-  /// to reflect the media information.
-  /// @remarks The supported media format MIME type can be checked
-  /// by calling player_foreach_media_stream_supported_format(). (Since 5.5)
-  /// @param[in] player The handle to media player
-  /// @param[in] type   The type of target stream
-  /// @param[in] format The media format to set media information
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid state
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_NOT_SUPPORTED_FORMAT Not supported format (Since 5.5)
-  /// @pre The player state must be set to #PLAYER_STATE_IDLE by calling player_create() or player_unprepare().
-  /// @see player_push_media_stream()
-  /// @see player_foreach_media_stream_supported_format()
+  /// Sets contents information for media stream.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 3.0; Otherwise 2.4
+  ///
+  /// **Remarks:**
+  /// - AV format must be set before pushing elementary stream with player_push_media_stream().
+  /// - This function must be called before calling the player_prepare() or player_prepare_async()
+  /// - to reflect the media information.
+  /// - The supported media format MIME type can be checked
+  /// - by calling player_foreach_media_stream_supported_format(). (Since 5.5)
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to media player
+  /// - `type` (in): The type of target stream
+  /// - `format` (in): The media format to set media information
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid state
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_NOT_SUPPORTED_FORMAT`: Not supported format (Since 5.5)
+  ///
+  /// **Preconditions:**
+  /// - The player state must be set to `PLAYER_STATE_IDLE` by calling player_create() or player_unprepare().
+  ///
+  /// **See also:**
+  /// - `player_push_media_stream()`
+  /// - `player_foreach_media_stream_supported_format()`
   int player_set_media_stream_info(
     player_h player,
     int type,
@@ -1227,23 +1603,38 @@ class Tizen70CapiMediaPlayer {
   late final _player_set_media_stream_info = _player_set_media_stream_infoPtr
       .asFunction<int Function(player_h, int, media_tool.media_format_h)>();
 
-  /// @brief Sets a callback function to be invoked when buffer underrun or overflow is occurred.
-  /// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-  /// @remarks This function is used for media stream playback only.
-  /// @remarks The callback is called in a separate thread (not in the main loop).
-  /// @param[in] player   The handle to the media player
-  /// @param[in] type     The type of target stream
-  /// @param[in] callback The buffer status callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid player state
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre The player state must be set to #PLAYER_STATE_IDLE by calling player_create() or player_unprepare().
-  /// @post player_media_stream_buffer_status_cb() will be invoked.
-  /// @see player_unset_media_stream_buffer_status_cb()
-  /// @see player_media_stream_buffer_status_cb()
+  /// Sets a callback function to be invoked when buffer underrun or overflow is occurred.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 3.0; Otherwise 2.4
+  ///
+  /// **Remarks:**
+  /// - This function is used for media stream playback only.
+  /// - The callback is called in a separate thread (not in the main loop).
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `type` (in): The type of target stream
+  /// - `callback` (in): The buffer status callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid player state
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - The player state must be set to `PLAYER_STATE_IDLE` by calling player_create() or player_unprepare().
+  ///
+  /// **Postconditions:**
+  /// - player_media_stream_buffer_status_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `player_unset_media_stream_buffer_status_cb()`
+  /// - `player_media_stream_buffer_status_cb()`
   int player_set_media_stream_buffer_status_cb(
     player_h player,
     int type,
@@ -1271,16 +1662,27 @@ class Tizen70CapiMediaPlayer {
           int Function(player_h, int, player_media_stream_buffer_status_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the buffer status callback function.
-  /// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-  /// @remarks This function is used for media stream playback only.
-  /// @param[in] player The handle to the media player
-  /// @param[in] type   The type of target stream
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see player_set_media_stream_buffer_status_cb()
+  /// Unsets the buffer status callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 3.0; Otherwise 2.4
+  ///
+  /// **Remarks:**
+  /// - This function is used for media stream playback only.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `type` (in): The type of target stream
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `player_set_media_stream_buffer_status_cb()`
   int player_unset_media_stream_buffer_status_cb(
     player_h player,
     int type,
@@ -1298,23 +1700,38 @@ class Tizen70CapiMediaPlayer {
       _player_unset_media_stream_buffer_status_cbPtr
           .asFunction<int Function(player_h, int)>();
 
-  /// @brief Sets a callback function to be invoked when seeking is occurred.
-  /// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-  /// @remarks This function is used for media stream playback only.
-  /// @remarks The callback is called in a separate thread (not in the main loop).
-  /// @param[in] player    The handle to the media player
-  /// @param[in] type      The type of target stream
-  /// @param[in] callback  The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid player state
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre The player state must be set to #PLAYER_STATE_IDLE by calling player_create() or player_unprepare().
-  /// @post player_media_stream_seek_cb() will be invoked.
-  /// @see player_unset_media_stream_seek_cb()
-  /// @see player_media_stream_seek_cb()
+  /// Sets a callback function to be invoked when seeking is occurred.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 3.0; Otherwise 2.4
+  ///
+  /// **Remarks:**
+  /// - This function is used for media stream playback only.
+  /// - The callback is called in a separate thread (not in the main loop).
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `type` (in): The type of target stream
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid player state
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - The player state must be set to `PLAYER_STATE_IDLE` by calling player_create() or player_unprepare().
+  ///
+  /// **Postconditions:**
+  /// - player_media_stream_seek_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `player_unset_media_stream_seek_cb()`
+  /// - `player_media_stream_seek_cb()`
   int player_set_media_stream_seek_cb(
     player_h player,
     int type,
@@ -1338,15 +1755,24 @@ class Tizen70CapiMediaPlayer {
           int Function(player_h, int, player_media_stream_seek_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the seek callback function.
-  /// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-  /// @param[in] player The handle to the media player
-  /// @param[in] type   The type of target stream
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see player_set_media_stream_seek_cb()
+  /// Unsets the seek callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 3.0; Otherwise 2.4
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `type` (in): The type of target stream
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `player_set_media_stream_seek_cb()`
   int player_unset_media_stream_seek_cb(
     player_h player,
     int type,
@@ -1364,19 +1790,30 @@ class Tizen70CapiMediaPlayer {
       _player_unset_media_stream_seek_cbPtr
           .asFunction<int Function(player_h, int)>();
 
-  /// @brief Sets the max size bytes of buffer.
-  /// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-  /// @remarks This function is used for media stream playback only.
-  /// @remarks If the buffer level over the max size, player_media_stream_buffer_status_cb() will be invoked with overflow status.
-  /// @param[in] player The handle to the media player
-  /// @param[in] type   The type of target stream
-  /// @param[in] max_size The max bytes of buffer, it has to be bigger than zero. (default: 200000)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see player_get_media_stream_buffer_max_size()
-  /// @see player_media_stream_buffer_status_cb()
+  /// Sets the max size bytes of buffer.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 3.0; Otherwise 2.4
+  ///
+  /// **Remarks:**
+  /// - This function is used for media stream playback only.
+  /// - If the buffer level over the max size, player_media_stream_buffer_status_cb() will be invoked with overflow status.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `type` (in): The type of target stream
+  /// - `max_size` (in): The max bytes of buffer, it has to be bigger than zero. (default: 200000)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `player_get_media_stream_buffer_max_size()`
+  /// - `player_media_stream_buffer_status_cb()`
   int player_set_media_stream_buffer_max_size(
     player_h player,
     int type,
@@ -1397,19 +1834,30 @@ class Tizen70CapiMediaPlayer {
       _player_set_media_stream_buffer_max_sizePtr
           .asFunction<int Function(player_h, int, int)>();
 
-  /// @brief Gets the max size bytes of buffer.
-  /// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-  /// @remarks This function is used for media stream playback only.
-  /// @remarks If the buffer level over the max size, player_media_stream_buffer_status_cb() will be invoked with overflow status.
-  /// @param[in] player The handle to the media player
-  /// @param[in] type   The type of target stream
-  /// @param[out] max_size The max bytes of buffer
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see player_set_media_stream_buffer_max_size()
-  /// @see player_media_stream_buffer_status_cb()
+  /// Gets the max size bytes of buffer.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 3.0; Otherwise 2.4
+  ///
+  /// **Remarks:**
+  /// - This function is used for media stream playback only.
+  /// - If the buffer level over the max size, player_media_stream_buffer_status_cb() will be invoked with overflow status.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `type` (in): The type of target stream
+  /// - `max_size` (out): The max bytes of buffer
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `player_set_media_stream_buffer_max_size()`
+  /// - `player_media_stream_buffer_status_cb()`
   int player_get_media_stream_buffer_max_size(
     player_h player,
     int type,
@@ -1431,19 +1879,30 @@ class Tizen70CapiMediaPlayer {
       _player_get_media_stream_buffer_max_sizePtr.asFunction<
           int Function(player_h, int, ffi.Pointer<ffi.UnsignedLongLong>)>();
 
-  /// @brief Sets the buffer threshold percent of buffer.
-  /// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-  /// @remarks This function is used for media stream playback only.
-  /// @remarks If the buffer level drops below the percent value, player_media_stream_buffer_status_cb() will be invoked with underrun status.
-  /// @param[in] player The handle to the media player
-  /// @param[in] type   The type of target stream
-  /// @param[in] percent The minimum threshold(0~100) of buffer (default: 0)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see player_get_media_stream_buffer_min_threshold()
-  /// @see player_media_stream_buffer_status_cb()
+  /// Sets the buffer threshold percent of buffer.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 3.0; Otherwise 2.4
+  ///
+  /// **Remarks:**
+  /// - This function is used for media stream playback only.
+  /// - If the buffer level drops below the percent value, player_media_stream_buffer_status_cb() will be invoked with underrun status.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `type` (in): The type of target stream
+  /// - `percent` (in): The minimum threshold(0~100) of buffer (default: 0)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `player_get_media_stream_buffer_min_threshold()`
+  /// - `player_media_stream_buffer_status_cb()`
   int player_set_media_stream_buffer_min_threshold(
     player_h player,
     int type,
@@ -1464,19 +1923,30 @@ class Tizen70CapiMediaPlayer {
       _player_set_media_stream_buffer_min_thresholdPtr
           .asFunction<int Function(player_h, int, int)>();
 
-  /// @brief Gets the buffer threshold percent of buffer.
-  /// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-  /// @remarks This function is used for media stream playback only.
-  /// @remarks If the buffer level drops below the percent value, player_media_stream_buffer_status_cb() will be invoked with underrun status.
-  /// @param[in] player The handle to the media player
-  /// @param[in] type   The type of target stream
-  /// @param[out] percent The minimum threshold(0~100) of buffer
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see player_set_media_stream_buffer_min_threshold()
-  /// @see player_media_stream_buffer_status_cb()
+  /// Gets the buffer threshold percent of buffer.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 3.0; Otherwise 2.4
+  ///
+  /// **Remarks:**
+  /// - This function is used for media stream playback only.
+  /// - If the buffer level drops below the percent value, player_media_stream_buffer_status_cb() will be invoked with underrun status.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `type` (in): The type of target stream
+  /// - `percent` (out): The minimum threshold(0~100) of buffer
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `player_set_media_stream_buffer_min_threshold()`
+  /// - `player_media_stream_buffer_status_cb()`
   int player_get_media_stream_buffer_min_threshold(
     player_h player,
     int type,
@@ -1498,20 +1968,31 @@ class Tizen70CapiMediaPlayer {
       _player_get_media_stream_buffer_min_thresholdPtr.asFunction<
           int Function(player_h, int, ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Sets the video display mode.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks If no display is set, no operation is performed.
-  /// @param[in] player   The handle to the media player
-  /// @param[in] mode     The display mode
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_NOT_AVAILABLE Not available (Since 6.5)
-  /// @see #player_display_mode_e
-  /// @see player_set_display()
-  /// @see player_get_display_mode()
+  /// Sets the video display mode.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - If no display is set, no operation is performed.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `mode` (in): The display mode
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_NOT_AVAILABLE`: Not available (Since 6.5)
+  ///
+  /// **See also:**
+  /// - `player_display_mode_e`
+  /// - `player_set_display()`
+  /// - `player_get_display_mode()`
   int player_set_display_mode(
     player_h player,
     int mode,
@@ -1528,19 +2009,30 @@ class Tizen70CapiMediaPlayer {
   late final _player_set_display_mode =
       _player_set_display_modePtr.asFunction<int Function(player_h, int)>();
 
-  /// @brief Gets the video display mode.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks If no display is set, no operation is performed.
-  /// @param[in] player The handle to the media player
-  /// @param[out] mode The current display mode
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #PLAYER_ERROR_NONE Successful
-  /// @retval  #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval  #PLAYER_ERROR_NOT_AVAILABLE Not available (Since 6.5)
-  /// @see #player_display_mode_e
-  /// @see player_set_display_mode()
+  /// Gets the video display mode.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - If no display is set, no operation is performed.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `mode` (out): The current display mode
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_NOT_AVAILABLE`: Not available (Since 6.5)
+  ///
+  /// **See also:**
+  /// - `player_display_mode_e`
+  /// - `player_set_display_mode()`
   int player_get_display_mode(
     player_h player,
     ffi.Pointer<ffi.Int32> mode,
@@ -1558,25 +2050,36 @@ class Tizen70CapiMediaPlayer {
   late final _player_get_display_mode = _player_get_display_modePtr
       .asFunction<int Function(player_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets the ROI (Region Of Interest) area of display.
-  /// @since_tizen 3.0
-  /// @remarks If no display is set, no operation is performed and
-  /// the ROI area is valid only in #PLAYER_DISPLAY_MODE_DST_ROI display mode.
-  /// @remarks The minimum value of width and height are 1.
-  /// @remarks ROI area can be set before setting ROI display mode. (since 4.0)
-  /// @param[in] player The handle to the media player
-  /// @param[in] x X coordinate of area
-  /// @param[in] y Y coordinate of area
-  /// @param[in] width Width of area
-  /// @param[in] height Height of area
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #PLAYER_ERROR_NONE Successful
-  /// @retval  #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval  #PLAYER_ERROR_NOT_AVAILABLE Not available (Since 6.5)
-  /// @see player_set_display()
-  /// @see player_set_display_mode()
+  /// Sets the ROI (Region Of Interest) area of display.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - If no display is set, no operation is performed and
+  /// - the ROI area is valid only in `PLAYER_DISPLAY_MODE_DST_ROI` display mode.
+  /// - The minimum value of width and height are 1.
+  /// - ROI area can be set before setting ROI display mode. (since 4.0)
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `x` (in): X coordinate of area
+  /// - `y` (in): Y coordinate of area
+  /// - `width` (in): Width of area
+  /// - `height` (in): Height of area
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_NOT_AVAILABLE`: Not available (Since 6.5)
+  ///
+  /// **See also:**
+  /// - `player_set_display()`
+  /// - `player_set_display_mode()`
   int player_set_display_roi_area(
     player_h player,
     int x,
@@ -1600,19 +2103,30 @@ class Tizen70CapiMediaPlayer {
   late final _player_set_display_roi_area = _player_set_display_roi_areaPtr
       .asFunction<int Function(player_h, int, int, int, int)>();
 
-  /// @brief Sets the visibility of the video display.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks If no display is set, no operation is performed.
-  /// @remarks If you set visible before calling player_set_display(), it will be applied on #PLAYER_STATE_READY state.
-  /// @param[in] player   The handle to the media player
-  /// @param[in] visible The visibility of the display (@c true = visible, @c false = non-visible )
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @see player_set_display()
-  /// @see player_is_display_visible()
+  /// Sets the visibility of the video display.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - If no display is set, no operation is performed.
+  /// - If you set visible before calling player_set_display(), it will be applied on `PLAYER_STATE_READY` state.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `visible` (in): The visibility of the display (`true` = visible, `false` = non-visible )
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `player_set_display()`
+  /// - `player_is_display_visible()`
   int player_set_display_visible(
     player_h player,
     bool visible,
@@ -1629,16 +2143,25 @@ class Tizen70CapiMediaPlayer {
   late final _player_set_display_visible =
       _player_set_display_visiblePtr.asFunction<int Function(player_h, bool)>();
 
-  /// @brief Gets the visibility of the video display.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @param[in] player The handle to the media player
-  /// @param[out] visible The current visibility of the display (@c true = visible, @c false = non-visible )
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #PLAYER_ERROR_NONE Successful
-  /// @retval  #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @see player_set_display_visible()
+  /// Gets the visibility of the video display.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `visible` (out): The current visibility of the display (`true` = visible, `false` = non-visible )
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `player_set_display_visible()`
   int player_is_display_visible(
     player_h player,
     ffi.Pointer<ffi.Bool> visible,
@@ -1656,22 +2179,33 @@ class Tizen70CapiMediaPlayer {
   late final _player_is_display_visible = _player_is_display_visiblePtr
       .asFunction<int Function(player_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Sets the rotation settings of the video surface display.
-  /// @details Use this function to change the video orientation to portrait mode.
-  /// The video out will be rotated in a counterclockwise direction.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks If no display is set, no operation is performed.
-  /// @param[in] player   The handle to the media player
-  /// @param[in] rotation The rotation of the display
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_NOT_AVAILABLE Not available (Since 6.5)
-  /// @see #player_display_rotation_e
-  /// @see  player_set_display()
-  /// @see  player_get_display_rotation()
+  /// Sets the rotation settings of the video surface display.
+  ///
+  /// Use this function to change the video orientation to portrait mode. The video out will be rotated in a counterclockwise direction.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - If no display is set, no operation is performed.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `rotation` (in): The rotation of the display
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_NOT_AVAILABLE`: Not available (Since 6.5)
+  ///
+  /// **See also:**
+  /// - `player_display_rotation_e`
+  /// - `player_set_display()`
+  /// - `player_get_display_rotation()`
   int player_set_display_rotation(
     player_h player,
     int rotation,
@@ -1688,18 +2222,27 @@ class Tizen70CapiMediaPlayer {
   late final _player_set_display_rotation =
       _player_set_display_rotationPtr.asFunction<int Function(player_h, int)>();
 
-  /// @brief Gets the rotation of the video surface display.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @param[in] player The handle to the media player
-  /// @param[out] rotation The current rotation of the display
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #PLAYER_ERROR_NONE Successful
-  /// @retval  #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval  #PLAYER_ERROR_NOT_AVAILABLE Not available (Since 6.5)
-  /// @see     #player_display_rotation_e
-  /// @see     player_set_display_rotation()
+  /// Gets the rotation of the video surface display.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `rotation` (out): The current rotation of the display
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_NOT_AVAILABLE`: Not available (Since 6.5)
+  ///
+  /// **See also:**
+  /// - `player_display_rotation_e`
+  /// - `player_set_display_rotation()`
   int player_get_display_rotation(
     player_h player,
     ffi.Pointer<ffi.Int32> rotation,
@@ -1717,22 +2260,32 @@ class Tizen70CapiMediaPlayer {
   late final _player_get_display_rotation = _player_get_display_rotationPtr
       .asFunction<int Function(player_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the media content information.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks You must release @a value using @c free().
-  /// @remarks The playback type should be local playback or HTTP streaming playback.
-  /// @param[in]  player The handle to the media player
-  /// @param[in] key The key attribute name to get
-  /// @param[out] value The value of the key attribute \n
-  /// It can be an empty string if there is no content information.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #PLAYER_ERROR_OUT_OF_MEMORY Not enough memory is available
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid player state
-  /// @pre The player state must be one of #PLAYER_STATE_READY, #PLAYER_STATE_PLAYING or #PLAYER_STATE_PAUSED.
+  /// Gets the media content information.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - You must release `value` using `free(`).
+  /// - The playback type should be local playback or HTTP streaming playback.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `key` (in): The key attribute name to get
+  /// - `value` (out): The value of the key attribute It can be an empty string if there is no content information.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_OUT_OF_MEMORY`: Not enough memory is available
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid player state
+  ///
+  /// **Preconditions:**
+  /// - The player state must be one of `PLAYER_STATE_READY`, `PLAYER_STATE_PLAYING` or `PLAYER_STATE_PAUSED`.
   int player_get_content_info(
     player_h player,
     int key,
@@ -1752,22 +2305,31 @@ class Tizen70CapiMediaPlayer {
   late final _player_get_content_info = _player_get_content_infoPtr.asFunction<
       int Function(player_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the audio and video codec information.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks You must release @a audio_codec and @a video_codec using free().
-  /// @remarks The playback type should be local playback or HTTP streaming playback.
-  /// @param[in] player The handle to the media player
-  /// @param[out] audio_codec The name of the audio codec \n
-  /// It can be @c NULL if there is no audio codec.
-  /// @param[out] video_codec The name of the video codec \n
-  /// It can be @c NULL if there is no video codec.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid player state
-  /// @pre The player state must be one of #PLAYER_STATE_READY, #PLAYER_STATE_PLAYING or #PLAYER_STATE_PAUSED.
+  /// Gets the audio and video codec information.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - You must release `audio_codec` and `video_codec` using free().
+  /// - The playback type should be local playback or HTTP streaming playback.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `audio_codec` (out): The name of the audio codec It can be `NULL` if there is no audio codec.
+  /// - `video_codec` (out): The name of the video codec It can be `NULL` if there is no video codec.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid player state
+  ///
+  /// **Preconditions:**
+  /// - The player state must be one of `PLAYER_STATE_READY`, `PLAYER_STATE_PLAYING` or `PLAYER_STATE_PAUSED`.
   int player_get_codec_info(
     player_h player,
     ffi.Pointer<ffi.Pointer<ffi.Char>> audio_codec,
@@ -1788,23 +2350,31 @@ class Tizen70CapiMediaPlayer {
       int Function(player_h, ffi.Pointer<ffi.Pointer<ffi.Char>>,
           ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the audio stream information.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks The playback type should be local playback or HTTP streaming playback.
-  /// @param[in] player The handle to the media player
-  /// @param[out]  sample_rate The audio sample rate [Hz] \n
-  /// Value can be invalid if there is no audio stream information.
-  /// @param[out]  channel The audio channel (1: mono, 2: stereo) \n
-  /// Value can be invalid if there is no audio stream information.
-  /// @param[out]  bit_rate The audio bit rate [Hz] \n
-  /// Value can be invalid if there is no audio stream information.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid player state
-  /// @pre The player state must be one of #PLAYER_STATE_READY, #PLAYER_STATE_PLAYING or #PLAYER_STATE_PAUSED.
+  /// Gets the audio stream information.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - The playback type should be local playback or HTTP streaming playback.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `sample_rate` (out): The audio sample rate `[Hz]` Value can be invalid if there is no audio stream information.
+  /// - `channel` (out): The audio channel (1: mono, 2: stereo) Value can be invalid if there is no audio stream information.
+  /// - `bit_rate` (out): The audio bit rate `[Hz]` Value can be invalid if there is no audio stream information.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid player state
+  ///
+  /// **Preconditions:**
+  /// - The player state must be one of `PLAYER_STATE_READY`, `PLAYER_STATE_PLAYING` or `PLAYER_STATE_PAUSED`.
   int player_get_audio_stream_info(
     player_h player,
     ffi.Pointer<ffi.Int> sample_rate,
@@ -1828,21 +2398,30 @@ class Tizen70CapiMediaPlayer {
           int Function(player_h, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the video stream information.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks The playback type should be local playback or HTTP streaming playback.
-  /// @param[in] player The handle to the media player
-  /// @param[out]  fps The frame per second of the video \n
-  /// It can be @c 0 if there is no video stream information.
-  /// @param[out]  bit_rate The video bit rate [Hz] \n
-  /// It can be an invalid value if there is no video stream information.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid player state
-  /// @pre The player state must be one of #PLAYER_STATE_READY, #PLAYER_STATE_PLAYING or #PLAYER_STATE_PAUSED.
+  /// Gets the video stream information.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - The playback type should be local playback or HTTP streaming playback.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `fps` (out): The frame per second of the video It can be `0` if there is no video stream information.
+  /// - `bit_rate` (out): The video bit rate `[Hz]` It can be an invalid value if there is no video stream information.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid player state
+  ///
+  /// **Preconditions:**
+  /// - The player state must be one of `PLAYER_STATE_READY`, `PLAYER_STATE_PLAYING` or `PLAYER_STATE_PAUSED`.
   int player_get_video_stream_info(
     player_h player,
     ffi.Pointer<ffi.Int> fps,
@@ -1863,21 +2442,30 @@ class Tizen70CapiMediaPlayer {
       _player_get_video_stream_infoPtr.asFunction<
           int Function(player_h, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the video display's height and width.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks The playback type should be local playback or HTTP streaming playback.
-  /// @param[in] player The handle to the media player
-  /// @param[out] width The width of the video \n
-  /// Value can be invalid if there is no video or no display is set.
-  /// @param[out] height The height of the video \n
-  /// Value can be invalid value if there is no video or no display is set.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid player state
-  /// @pre The player state must be one of #PLAYER_STATE_READY, #PLAYER_STATE_PLAYING or #PLAYER_STATE_PAUSED.
+  /// Gets the video display's height and width.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - The playback type should be local playback or HTTP streaming playback.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `width` (out): The width of the video Value can be invalid if there is no video or no display is set.
+  /// - `height` (out): The height of the video Value can be invalid value if there is no video or no display is set.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid player state
+  ///
+  /// **Preconditions:**
+  /// - The player state must be one of `PLAYER_STATE_READY`, `PLAYER_STATE_PLAYING` or `PLAYER_STATE_PAUSED`.
   int player_get_video_size(
     player_h player,
     ffi.Pointer<ffi.Int> width,
@@ -1897,21 +2485,32 @@ class Tizen70CapiMediaPlayer {
   late final _player_get_video_size = _player_get_video_sizePtr.asFunction<
       int Function(player_h, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the album art in the media resource.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks You must not release @a album_art.
-  /// The @a album_art is managed by the platform and will be released
-  /// when the player is unprepared or destroyed by calling player_unprepare() or player_destroy().
-  /// @param[in] player The handle to the media player
-  /// @param[out] album_art The encoded artwork image
-  /// @param[out] size The encoded artwork size
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid player state
-  /// @pre The player state must be one of #PLAYER_STATE_READY, #PLAYER_STATE_PLAYING or #PLAYER_STATE_PAUSED.
+  /// Gets the album art in the media resource.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - You must not release `album_art`.
+  /// - The `album_art` is managed by the platform and will be released
+  /// - when the player is unprepared or destroyed by calling player_unprepare() or player_destroy().
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `album_art` (out): The encoded artwork image
+  /// - `size` (out): The encoded artwork size
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid player state
+  ///
+  /// **Preconditions:**
+  /// - The player state must be one of `PLAYER_STATE_READY`, `PLAYER_STATE_PLAYING` or `PLAYER_STATE_PAUSED`.
   int player_get_album_art(
     player_h player,
     ffi.Pointer<ffi.Pointer<ffi.Void>> album_art,
@@ -1932,22 +2531,35 @@ class Tizen70CapiMediaPlayer {
       int Function(player_h, ffi.Pointer<ffi.Pointer<ffi.Void>>,
           ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the total running time of the associated media.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks The media source is associated with the player, using either player_set_uri() or player_set_memory_buffer().
-  /// @remarks The playback type should be local playback or HTTP streaming playback.
-  /// @param[in]   player         The handle to the media player
-  /// @param[out]  milliseconds   The duration in milliseconds
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid player state
-  /// @pre The player state must be one of #PLAYER_STATE_READY, #PLAYER_STATE_PLAYING or #PLAYER_STATE_PAUSED.
-  /// @see player_set_uri()
-  /// @see player_set_memory_buffer()
-  /// @see player_get_duration_nsec()
+  /// Gets the total running time of the associated media.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - The media source is associated with the player, using either player_set_uri() or player_set_memory_buffer().
+  /// - The playback type should be local playback or HTTP streaming playback.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `milliseconds` (out): The duration in milliseconds
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid player state
+  ///
+  /// **Preconditions:**
+  /// - The player state must be one of `PLAYER_STATE_READY`, `PLAYER_STATE_PLAYING` or `PLAYER_STATE_PAUSED`.
+  ///
+  /// **See also:**
+  /// - `player_set_uri()`
+  /// - `player_set_memory_buffer()`
+  /// - `player_get_duration_nsec()`
   int player_get_duration(
     player_h player,
     ffi.Pointer<ffi.Int> milliseconds,
@@ -1964,20 +2576,31 @@ class Tizen70CapiMediaPlayer {
   late final _player_get_duration = _player_get_durationPtr
       .asFunction<int Function(player_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the total running time in nanoseconds of the associated media.
-  /// @since_tizen 5.0
-  /// @param[in]   player         The handle to the media player
-  /// @param[out]  nanoseconds    The duration time in nanoseconds
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid player state
-  /// @pre The player state must be one of #PLAYER_STATE_READY, #PLAYER_STATE_PLAYING or #PLAYER_STATE_PAUSED.
-  /// @see player_set_uri()
-  /// @see player_set_memory_buffer()
-  /// @see player_get_duration()
+  /// Gets the total running time in nanoseconds of the associated media.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `nanoseconds` (out): The duration time in nanoseconds
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid player state
+  ///
+  /// **Preconditions:**
+  /// - The player state must be one of `PLAYER_STATE_READY`, `PLAYER_STATE_PLAYING` or `PLAYER_STATE_PAUSED`.
+  ///
+  /// **See also:**
+  /// - `player_set_uri()`
+  /// - `player_set_memory_buffer()`
+  /// - `player_get_duration()`
   int player_get_duration_nsec(
     player_h player,
     ffi.Pointer<ffi.Int64> nanoseconds,
@@ -1995,20 +2618,31 @@ class Tizen70CapiMediaPlayer {
   late final _player_get_duration_nsec = _player_get_duration_nsecPtr
       .asFunction<int Function(player_h, ffi.Pointer<ffi.Int64>)>();
 
-  /// @brief Gets the number of equalizer bands.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks If player_audio_effect_equalizer_is_available() returns @a available parameter as @c false,
-  /// this function will return #PLAYER_ERROR_NOT_AVAILABLE. (Since 5.5)
-  /// @param[in] player The handle to the media player
-  /// @param[out] count The number of equalizer bands
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_NOT_AVAILABLE Not available (Since 5.5)
-  /// @see player_audio_effect_equalizer_is_available()
-  /// @see player_audio_effect_set_equalizer_band_level()
-  /// @see player_audio_effect_set_equalizer_all_bands()
+  /// Gets the number of equalizer bands.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - If player_audio_effect_equalizer_is_available() returns `available` parameter as `false`,
+  /// - this function will return `PLAYER_ERROR_NOT_AVAILABLE`. (Since 5.5)
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `count` (out): The number of equalizer bands
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_NOT_AVAILABLE`: Not available (Since 5.5)
+  ///
+  /// **See also:**
+  /// - `player_audio_effect_equalizer_is_available()`
+  /// - `player_audio_effect_set_equalizer_band_level()`
+  /// - `player_audio_effect_set_equalizer_all_bands()`
   int player_audio_effect_get_equalizer_bands_count(
     player_h player,
     ffi.Pointer<ffi.Int> count,
@@ -2026,27 +2660,38 @@ class Tizen70CapiMediaPlayer {
       _player_audio_effect_get_equalizer_bands_countPtr
           .asFunction<int Function(player_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the gain set for the given equalizer band.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks If player_audio_effect_equalizer_is_available() returns @a available parameter as @c false,
-  /// this function will return #PLAYER_ERROR_NOT_AVAILABLE and
-  /// this will not work at all even if it was called before enabling audio offload
-  /// which makes audio effect function group unavailable. (Since 5.5)
-  /// @param[in] player The handle to the media player
-  /// @param[in] index The index of the equalizer band to be set
-  /// @param[in] level The new gain in decibel that is set to the given band [dB]
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_NOT_AVAILABLE Not available (Since 5.5)
-  /// @see player_audio_effect_equalizer_is_available()
-  /// @see player_audio_effect_get_equalizer_bands_count()
-  /// @see player_audio_effect_get_equalizer_level_range()
-  /// @see player_audio_effect_get_equalizer_band_level()
-  /// @see player_audio_effect_set_equalizer_all_bands()
-  /// @see player_audio_offload_set_enabled()
+  /// Sets the gain set for the given equalizer band.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - If player_audio_effect_equalizer_is_available() returns `available` parameter as `false`,
+  /// - this function will return `PLAYER_ERROR_NOT_AVAILABLE` and
+  /// - this will not work at all even if it was called before enabling audio offload
+  /// - which makes audio effect function group unavailable. (Since 5.5)
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `index` (in): The index of the equalizer band to be set
+  /// - `level` (in): The new gain in decibel that is set to the given band `[dB]`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_NOT_AVAILABLE`: Not available (Since 5.5)
+  ///
+  /// **See also:**
+  /// - `player_audio_effect_equalizer_is_available()`
+  /// - `player_audio_effect_get_equalizer_bands_count()`
+  /// - `player_audio_effect_get_equalizer_level_range()`
+  /// - `player_audio_effect_get_equalizer_band_level()`
+  /// - `player_audio_effect_set_equalizer_all_bands()`
+  /// - `player_audio_offload_set_enabled()`
   int player_audio_effect_set_equalizer_band_level(
     player_h player,
     int index,
@@ -2066,20 +2711,31 @@ class Tizen70CapiMediaPlayer {
       _player_audio_effect_set_equalizer_band_levelPtr
           .asFunction<int Function(player_h, int, int)>();
 
-  /// @brief Gets the gain set for the given equalizer band.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks If player_audio_effect_equalizer_is_available() returns @a available parameter as @c false,
-  /// this function will return #PLAYER_ERROR_NOT_AVAILABLE. (Since 5.5)
-  /// @param[in]   player The handle to the media player
-  /// @param[in]   index The index of the requested equalizer band
-  /// @param[out]   level The gain in decibel of the given band [dB]
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_NOT_AVAILABLE Not available (Since 5.5)
-  /// @see player_audio_effect_equalizer_is_available()
-  /// @see player_audio_effect_set_equalizer_band_level()
+  /// Gets the gain set for the given equalizer band.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - If player_audio_effect_equalizer_is_available() returns `available` parameter as `false`,
+  /// - this function will return `PLAYER_ERROR_NOT_AVAILABLE`. (Since 5.5)
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `index` (in): The index of the requested equalizer band
+  /// - `level` (out): The gain in decibel of the given band `[dB]`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_NOT_AVAILABLE`: Not available (Since 5.5)
+  ///
+  /// **See also:**
+  /// - `player_audio_effect_equalizer_is_available()`
+  /// - `player_audio_effect_set_equalizer_band_level()`
   int player_audio_effect_get_equalizer_band_level(
     player_h player,
     int index,
@@ -2100,26 +2756,37 @@ class Tizen70CapiMediaPlayer {
       _player_audio_effect_get_equalizer_band_levelPtr
           .asFunction<int Function(player_h, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets all bands of the equalizer.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks If player_audio_effect_equalizer_is_available() returns @a available parameter as @c false,
-  /// this function will return #PLAYER_ERROR_NOT_AVAILABLE and
-  /// this will not work at all even if it was called before enabling audio offload
-  /// which makes audio effect function group unavailable. (Since 5.5)
-  /// @param[in] player The handle to the media player
-  /// @param[in] band_levels The list of band levels to be set
-  /// @param[in] length The length of the band level
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_NOT_AVAILABLE Not available (Since 5.5)
-  /// @see player_audio_effect_equalizer_is_available()
-  /// @see player_audio_effect_get_equalizer_bands_count()
-  /// @see player_audio_effect_get_equalizer_level_range()
-  /// @see player_audio_effect_set_equalizer_band_level()
-  /// @see player_audio_offload_set_enabled()
+  /// Sets all bands of the equalizer.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - If player_audio_effect_equalizer_is_available() returns `available` parameter as `false`,
+  /// - this function will return `PLAYER_ERROR_NOT_AVAILABLE` and
+  /// - this will not work at all even if it was called before enabling audio offload
+  /// - which makes audio effect function group unavailable. (Since 5.5)
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `band_levels` (in): The list of band levels to be set
+  /// - `length` (in): The length of the band level
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_NOT_AVAILABLE`: Not available (Since 5.5)
+  ///
+  /// **See also:**
+  /// - `player_audio_effect_equalizer_is_available()`
+  /// - `player_audio_effect_get_equalizer_bands_count()`
+  /// - `player_audio_effect_get_equalizer_level_range()`
+  /// - `player_audio_effect_set_equalizer_band_level()`
+  /// - `player_audio_offload_set_enabled()`
   int player_audio_effect_set_equalizer_all_bands(
     player_h player,
     ffi.Pointer<ffi.Int> band_levels,
@@ -2140,22 +2807,33 @@ class Tizen70CapiMediaPlayer {
       _player_audio_effect_set_equalizer_all_bandsPtr
           .asFunction<int Function(player_h, ffi.Pointer<ffi.Int>, int)>();
 
-  /// @brief Gets the valid band level range of the equalizer.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks If player_audio_effect_equalizer_is_available() returns @a available parameter as @c false,
-  /// this function will return #PLAYER_ERROR_NOT_AVAILABLE. (Since 5.5)
-  /// @param[in] player The handle to the media player
-  /// @param[out] min The minimum value to be set [dB]
-  /// @param[out] max The maximum value to be set [dB]
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_NOT_AVAILABLE Not available (Since 5.5)
-  /// @see player_audio_effect_equalizer_is_available()
-  /// @see player_audio_effect_set_equalizer_band_level()
-  /// @see player_audio_effect_set_equalizer_all_bands()
+  /// Gets the valid band level range of the equalizer.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - If player_audio_effect_equalizer_is_available() returns `available` parameter as `false`,
+  /// - this function will return `PLAYER_ERROR_NOT_AVAILABLE`. (Since 5.5)
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `min` (out): The minimum value to be set `[dB]`
+  /// - `max` (out): The maximum value to be set `[dB]`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_NOT_AVAILABLE`: Not available (Since 5.5)
+  ///
+  /// **See also:**
+  /// - `player_audio_effect_equalizer_is_available()`
+  /// - `player_audio_effect_set_equalizer_band_level()`
+  /// - `player_audio_effect_set_equalizer_all_bands()`
   int player_audio_effect_get_equalizer_level_range(
     player_h player,
     ffi.Pointer<ffi.Int> min,
@@ -2177,19 +2855,30 @@ class Tizen70CapiMediaPlayer {
       _player_audio_effect_get_equalizer_level_rangePtr.asFunction<
           int Function(player_h, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the band frequency of the equalizer.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks If player_audio_effect_equalizer_is_available() returns @a available parameter as @c false,
-  /// this function will return #PLAYER_ERROR_NOT_AVAILABLE. (Since 5.5)
-  /// @param[in] player The handle to the media player
-  /// @param[in]  index The index of the requested equalizer band
-  /// @param[out] frequency The frequency of the given band [dB]
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_NOT_AVAILABLE Not available (Since 5.5)
-  /// @see player_audio_effect_equalizer_is_available()
+  /// Gets the band frequency of the equalizer.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - If player_audio_effect_equalizer_is_available() returns `available` parameter as `false`,
+  /// - this function will return `PLAYER_ERROR_NOT_AVAILABLE`. (Since 5.5)
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `index` (in): The index of the requested equalizer band
+  /// - `frequency` (out): The frequency of the given band `[dB]`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_NOT_AVAILABLE`: Not available (Since 5.5)
+  ///
+  /// **See also:**
+  /// - `player_audio_effect_equalizer_is_available()`
   int player_audio_effect_get_equalizer_band_frequency(
     player_h player,
     int index,
@@ -2210,19 +2899,30 @@ class Tizen70CapiMediaPlayer {
       _player_audio_effect_get_equalizer_band_frequencyPtr
           .asFunction<int Function(player_h, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the band frequency range of the equalizer.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks If player_audio_effect_equalizer_is_available() returns @a available parameter as @c false,
-  /// this function will return #PLAYER_ERROR_NOT_AVAILABLE. (Since 5.5)
-  /// @param[in] player The handle to the media player
-  /// @param[in]  index The index of the requested equalizer band
-  /// @param[out] range The frequency range of the given band [dB]
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_NOT_AVAILABLE Not available (Since 5.5)
-  /// @see player_audio_effect_equalizer_is_available()
+  /// Gets the band frequency range of the equalizer.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - If player_audio_effect_equalizer_is_available() returns `available` parameter as `false`,
+  /// - this function will return `PLAYER_ERROR_NOT_AVAILABLE`. (Since 5.5)
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `index` (in): The index of the requested equalizer band
+  /// - `range` (out): The frequency range of the given band `[dB]`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_NOT_AVAILABLE`: Not available (Since 5.5)
+  ///
+  /// **See also:**
+  /// - `player_audio_effect_equalizer_is_available()`
   int player_audio_effect_get_equalizer_band_frequency_range(
     player_h player,
     int index,
@@ -2244,20 +2944,31 @@ class Tizen70CapiMediaPlayer {
       _player_audio_effect_get_equalizer_band_frequency_rangePtr
           .asFunction<int Function(player_h, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Clears the equalizer effect.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks If player_audio_effect_equalizer_is_available() returns @a available parameter as @c false,
-  /// this function will return #PLAYER_ERROR_NOT_AVAILABLE. (Since 5.5)
-  /// @param[in] player The handle to the media player
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_NOT_AVAILABLE Not available (Since 5.5)
-  /// @see player_audio_effect_equalizer_is_available()
-  /// @see player_audio_effect_set_equalizer_band_level()
-  /// @see player_audio_effect_set_equalizer_all_bands()
+  /// Clears the equalizer effect.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - If player_audio_effect_equalizer_is_available() returns `available` parameter as `false`,
+  /// - this function will return `PLAYER_ERROR_NOT_AVAILABLE`. (Since 5.5)
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_NOT_AVAILABLE`: Not available (Since 5.5)
+  ///
+  /// **See also:**
+  /// - `player_audio_effect_equalizer_is_available()`
+  /// - `player_audio_effect_set_equalizer_band_level()`
+  /// - `player_audio_effect_set_equalizer_all_bands()`
   int player_audio_effect_equalizer_clear(
     player_h player,
   ) {
@@ -2273,25 +2984,35 @@ class Tizen70CapiMediaPlayer {
       _player_audio_effect_equalizer_clearPtr
           .asFunction<int Function(player_h)>();
 
-  /// @brief Checks whether the custom equalizer effect is available.
-  /// @details This function returns the availability of the audio effect function group and
-  /// it could be unavailable depending on the platform capabilities.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks If audio offload is enabled by calling player_audio_offload_set_enabled(),
-  /// @a available will be @c false.
-  /// @param[in]  player    The handle to the media player
-  /// @param[out] available If @c true the specified audio effect is available,
-  /// otherwise @c false
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see player_audio_effect_set_equalizer_band_level()
-  /// @see player_audio_effect_set_equalizer_all_bands()
-  /// @see player_audio_offload_set_enabled()
-  /// @see player_audio_offload_is_enabled()
-  /// @see player_set_audio_codec_type()
-  /// @see player_get_audio_codec_type()
+  /// Checks whether the custom equalizer effect is available.
+  ///
+  /// This function returns the availability of the audio effect function group and it could be unavailable depending on the platform capabilities.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - If audio offload is enabled by calling player_audio_offload_set_enabled(),
+  /// - `available` will be `false`.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `available` (out): If `true` the specified audio effect is available, otherwise `false`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `player_audio_effect_set_equalizer_band_level()`
+  /// - `player_audio_effect_set_equalizer_all_bands()`
+  /// - `player_audio_offload_set_enabled()`
+  /// - `player_audio_offload_is_enabled()`
+  /// - `player_set_audio_codec_type()`
+  /// - `player_get_audio_codec_type()`
   int player_audio_effect_equalizer_is_available(
     player_h player,
     ffi.Pointer<ffi.Bool> available,
@@ -2310,24 +3031,39 @@ class Tizen70CapiMediaPlayer {
       _player_audio_effect_equalizer_is_availablePtr
           .asFunction<int Function(player_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Captures the video frame, asynchronously.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks If the content is encrypted or there are copyright issues with it,
-  /// this function could be unsupported depending on the DRM policy.
-  /// In case the function is not supported by the DRM policy, it will return an error.
-  /// @param[in] player      The handle to the media player
-  /// @param[in] callback    The callback function to register
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid player state
-  /// @pre The player state must be set to #PLAYER_STATE_PLAYING by calling player_start() or set to #PLAYER_STATE_PAUSED by calling player_pause().
-  /// @pre Video display type should be set by calling player_set_display() otherwise, audio stream is only processed even though video file is set.
-  /// @post It invokes player_video_captured_cb() when capture completes, if you set a callback.
-  /// @see player_video_captured_cb()
+  /// Captures the video frame, asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - If the content is encrypted or there are copyright issues with it,
+  /// - this function could be unsupported depending on the DRM policy.
+  /// - In case the function is not supported by the DRM policy, it will return an error.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid player state
+  ///
+  /// **Preconditions:**
+  /// - The player state must be set to `PLAYER_STATE_PLAYING` by calling player_start() or set to `PLAYER_STATE_PAUSED` by calling player_pause().
+  /// - Video display type should be set by calling player_set_display() otherwise, audio stream is only processed even though video file is set.
+  ///
+  /// **Postconditions:**
+  /// - It invokes player_video_captured_cb() when capture completes, if you set a callback.
+  ///
+  /// **See also:**
+  /// - `player_video_captured_cb()`
   int player_capture_video(
     player_h player,
     player_video_captured_cb callback,
@@ -2348,22 +3084,35 @@ class Tizen70CapiMediaPlayer {
       int Function(
           player_h, player_video_captured_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets the cookie for streaming playback.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks This function must be called before calling the player_prepare() or player_prepare_async()
-  /// to reflect the cookie information when the streaming connection is set up.
-  /// @param[in] player The handle to the media player
-  /// @param[in] cookie The cookie to set
-  /// @param[in] size The size of the cookie
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid player state
-  /// @pre The player state must be set to #PLAYER_STATE_IDLE by calling player_create() or player_unprepare().
-  /// @see player_set_uri()
-  /// @see player_set_streaming_user_agent()
+  /// Sets the cookie for streaming playback.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - This function must be called before calling the player_prepare() or player_prepare_async()
+  /// - to reflect the cookie information when the streaming connection is set up.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `cookie` (in): The cookie to set
+  /// - `size` (in): The size of the cookie
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid player state
+  ///
+  /// **Preconditions:**
+  /// - The player state must be set to `PLAYER_STATE_IDLE` by calling player_create() or player_unprepare().
+  ///
+  /// **See also:**
+  /// - `player_set_uri()`
+  /// - `player_set_streaming_user_agent()`
   int player_set_streaming_cookie(
     player_h player,
     ffi.Pointer<ffi.Char> cookie,
@@ -2383,22 +3132,35 @@ class Tizen70CapiMediaPlayer {
   late final _player_set_streaming_cookie = _player_set_streaming_cookiePtr
       .asFunction<int Function(player_h, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @brief Sets the streaming user agent for playback.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks This function must be called before calling the player_prepare() or player_prepare_async()
-  /// to reflect the user agent information when the streaming connection is set up.
-  /// @param[in] player The handle to the media player
-  /// @param[in] user_agent The user agent to set
-  /// @param[in] size The size of the user agent
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid player state
-  /// @pre The player state must be set to #PLAYER_STATE_IDLE by calling player_create() or player_unprepare().
-  /// @see player_set_uri()
-  /// @see player_set_streaming_cookie()
+  /// Sets the streaming user agent for playback.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - This function must be called before calling the player_prepare() or player_prepare_async()
+  /// - to reflect the user agent information when the streaming connection is set up.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `user_agent` (in): The user agent to set
+  /// - `size` (in): The size of the user agent
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid player state
+  ///
+  /// **Preconditions:**
+  /// - The player state must be set to `PLAYER_STATE_IDLE` by calling player_create() or player_unprepare().
+  ///
+  /// **See also:**
+  /// - `player_set_uri()`
+  /// - `player_set_streaming_cookie()`
   int player_set_streaming_user_agent(
     player_h player,
     ffi.Pointer<ffi.Char> user_agent,
@@ -2419,18 +3181,27 @@ class Tizen70CapiMediaPlayer {
       _player_set_streaming_user_agentPtr
           .asFunction<int Function(player_h, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @brief Gets the download progress for streaming playback.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @param[in] player The handle to the media player
-  /// @param[out] start The starting position of received data in percentage [0, 100]
-  /// @param[out] end The end position of received data in percentage [0, 100]
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid player state
-  /// @pre The player state must be one of #PLAYER_STATE_READY, #PLAYER_STATE_PLAYING, or #PLAYER_STATE_PAUSED.
+  /// Gets the download progress for streaming playback.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `start` (out): The starting position of received data in percentage `[0, 100]`
+  /// - `end` (out): The end position of received data in percentage `[0, 100]`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid player state
+  ///
+  /// **Preconditions:**
+  /// - The player state must be one of `PLAYER_STATE_READY`, `PLAYER_STATE_PLAYING`, or `PLAYER_STATE_PAUSED`.
   int player_get_streaming_download_progress(
     player_h player,
     ffi.Pointer<ffi.Int> start,
@@ -2451,20 +3222,31 @@ class Tizen70CapiMediaPlayer {
       _player_get_streaming_download_progressPtr.asFunction<
           int Function(player_h, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets a callback function to be invoked when the playback is finished.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @param[in] player      The handle to the media player
-  /// @param[in] callback    The callback function to register
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @post  player_completed_cb() will be invoked.
-  /// @see player_unset_completed_cb()
-  /// @see player_completed_cb()
-  /// @see player_start()
+  /// Sets a callback function to be invoked when the playback is finished.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Postconditions:**
+  /// - player_completed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `player_unset_completed_cb()`
+  /// - `player_completed_cb()`
+  /// - `player_start()`
   int player_set_completed_cb(
     player_h player,
     player_completed_cb callback,
@@ -2484,15 +3266,24 @@ class Tizen70CapiMediaPlayer {
   late final _player_set_completed_cb = _player_set_completed_cbPtr.asFunction<
       int Function(player_h, player_completed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the playback completed callback function.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @param[in] player The handle to the media player
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @see player_set_completed_cb()
+  /// Unsets the playback completed callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `player_set_completed_cb()`
   int player_unset_completed_cb(
     player_h player,
   ) {
@@ -2507,20 +3298,31 @@ class Tizen70CapiMediaPlayer {
   late final _player_unset_completed_cb =
       _player_unset_completed_cbPtr.asFunction<int Function(player_h)>();
 
-  /// @brief Sets a callback function to be invoked when the playback is interrupted or the interrupt is completed.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @param[in] player      The handle to the media player
-  /// @param[in] callback    The callback function to register
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @post  player_interrupted_cb() will be invoked.
-  /// @see player_unset_interrupted_cb()
-  /// @see #player_interrupted_code_e
-  /// @see player_interrupted_cb()
+  /// Sets a callback function to be invoked when the playback is interrupted or the interrupt is completed.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Postconditions:**
+  /// - player_interrupted_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `player_unset_interrupted_cb()`
+  /// - `player_interrupted_code_e`
+  /// - `player_interrupted_cb()`
   int player_set_interrupted_cb(
     player_h player,
     player_interrupted_cb callback,
@@ -2542,15 +3344,24 @@ class Tizen70CapiMediaPlayer {
           int Function(
               player_h, player_interrupted_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the interrupted callback function.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @param[in] player The handle to the media player
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @see player_set_interrupted_cb()
+  /// Unsets the interrupted callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `player_set_interrupted_cb()`
   int player_unset_interrupted_cb(
     player_h player,
   ) {
@@ -2565,19 +3376,30 @@ class Tizen70CapiMediaPlayer {
   late final _player_unset_interrupted_cb =
       _player_unset_interrupted_cbPtr.asFunction<int Function(player_h)>();
 
-  /// @brief Sets a callback function to be invoked when an error occurs.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @param[in] player      The handle to the media player
-  /// @param[in] callback    The callback function to register
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @post  player_error_cb() will be invoked.
-  /// @see player_unset_error_cb()
-  /// @see player_error_cb()
+  /// Sets a callback function to be invoked when an error occurs.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Postconditions:**
+  /// - player_error_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `player_unset_error_cb()`
+  /// - `player_error_cb()`
   int player_set_error_cb(
     player_h player,
     player_error_cb callback,
@@ -2597,15 +3419,24 @@ class Tizen70CapiMediaPlayer {
   late final _player_set_error_cb = _player_set_error_cbPtr.asFunction<
       int Function(player_h, player_error_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the error callback function.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @param[in] player The handle to the media player
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @see player_set_error_cb()
+  /// Unsets the error callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `player_set_error_cb()`
   int player_unset_error_cb(
     player_h player,
   ) {
@@ -2620,22 +3451,34 @@ class Tizen70CapiMediaPlayer {
   late final _player_unset_error_cb =
       _player_unset_error_cbPtr.asFunction<int Function(player_h)>();
 
-  /// @brief Sets a callback function to be invoked when there is a change in the buffering status of a media stream.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks The media resource should be streamed over the network.
-  /// @param[in] player      The handle to the media player
-  /// @param[in] callback    The callback function to register
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @if WEARABLE @retval #PLAYER_ERROR_FEATURE_NOT_SUPPORTED_ON_DEVICE Unsupported feature @endif
-  /// @post  player_buffering_cb() will be invoked.
-  /// @see player_unset_buffering_cb()
-  /// @see player_set_uri()
-  /// @see player_buffering_cb()
+  /// Sets a callback function to be invoked when there is a change in the buffering status of a media stream.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - The media resource should be streamed over the network.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation @if WEARABLE @retval `PLAYER_ERROR_FEATURE_NOT_SUPPORTED_ON_DEVICE` Unsupported feature @endif
+  ///
+  /// **Postconditions:**
+  /// - player_buffering_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `player_unset_buffering_cb()`
+  /// - `player_set_uri()`
+  /// - `player_buffering_cb()`
   int player_set_buffering_cb(
     player_h player,
     player_buffering_cb callback,
@@ -2655,15 +3498,24 @@ class Tizen70CapiMediaPlayer {
   late final _player_set_buffering_cb = _player_set_buffering_cbPtr.asFunction<
       int Function(player_h, player_buffering_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the buffering callback function.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @param[in] player The handle to the media player
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @see player_set_buffering_cb()
+  /// Unsets the buffering callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `player_set_buffering_cb()`
   int player_unset_buffering_cb(
     player_h player,
   ) {
@@ -2678,25 +3530,39 @@ class Tizen70CapiMediaPlayer {
   late final _player_unset_buffering_cb =
       _player_unset_buffering_cbPtr.asFunction<int Function(player_h)>();
 
-  /// @brief Sets the playback rate.
-  /// @details The default value is @c 1.0.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks #PLAYER_ERROR_INVALID_OPERATION occurs when streaming playback.
-  /// @remarks No operation is performed, if @a rate is @c 0.
-  /// @remarks The sound is muted, when playback rate is under @c 0.0 and over @c 2.0.
-  /// @remarks If audio offload is enabled by calling player_audio_offload_set_enabled(),
-  /// this function will return #PLAYER_ERROR_NOT_AVAILABLE. (Since 5.5)
-  /// @param[in] player   The handle to the media player
-  /// @param[in] rate     The playback rate (-5.0x ~ 5.0x)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid player state
-  /// @retval #PLAYER_ERROR_NOT_AVAILABLE Not available (Since 5.5)
-  /// @pre The player state must be one of #PLAYER_STATE_READY, #PLAYER_STATE_PLAYING, or #PLAYER_STATE_PAUSED.
-  /// @see player_audio_offload_set_enabled()
+  /// Sets the playback rate.
+  ///
+  /// The default value is `1.0`.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - `PLAYER_ERROR_INVALID_OPERATION` occurs when streaming playback.
+  /// - No operation is performed, if `rate` is `0`.
+  /// - The sound is muted, when playback rate is under `0.0` and over `2.0`.
+  /// - If audio offload is enabled by calling player_audio_offload_set_enabled(),
+  /// - this function will return `PLAYER_ERROR_NOT_AVAILABLE`. (Since 5.5)
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `rate` (in): The playback rate (-5.0x ~ 5.0x)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid player state
+  /// - `PLAYER_ERROR_NOT_AVAILABLE`: Not available (Since 5.5)
+  ///
+  /// **Preconditions:**
+  /// - The player state must be one of `PLAYER_STATE_READY`, `PLAYER_STATE_PLAYING`, or `PLAYER_STATE_PAUSED`.
+  ///
+  /// **See also:**
+  /// - `player_audio_offload_set_enabled()`
   int player_set_playback_rate(
     player_h player,
     double rate,
@@ -2713,22 +3579,30 @@ class Tizen70CapiMediaPlayer {
   late final _player_set_playback_rate =
       _player_set_playback_ratePtr.asFunction<int Function(player_h, double)>();
 
-  /// @brief Sets a subtitle path.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks Only MicroDVD/SubViewer(*.sub), SAMI(*.smi), and SubRip(*.srt) subtitle formats are supported.
-  /// @remarks The mediastorage privilege(http://tizen.org/privilege/mediastorage) must be added if any files are used to play located in the internal storage.
-  /// @remarks The externalstorage privilege(http://tizen.org/privilege/externalstorage) must be added if any files are used to play located in the external storage.
-  /// @remarks The path value can be @c NULL for reset before calling player_prepare() or player_prepare_async().
+  /// Sets a subtitle path.
   ///
-  /// @param[in] player   The handle to the media player
-  /// @param[in] path     The absolute path of the subtitle file, it can be @c NULL in the #PLAYER_STATE_IDLE state.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PLAYER_ERROR_NO_SUCH_FILE File not found (Since 4.0)
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - Only MicroDVD/SubViewer(*.sub), SAMI(*.smi), and SubRip(*.srt) subtitle formats are supported.
+  /// - The mediastorage privilege(http://tizen.org/privilege/mediastorage) must be added if any files are used to play located in the internal storage.
+  /// - The externalstorage privilege(http://tizen.org/privilege/externalstorage) must be added if any files are used to play located in the external storage.
+  /// - The path value can be `NULL` for reset before calling player_prepare() or player_prepare_async().
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `path` (in): The absolute path of the subtitle file, it can be `NULL` in the `PLAYER_STATE_IDLE` state.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PLAYER_ERROR_NO_SUCH_FILE`: File not found (Since 4.0)
   int player_set_subtitle_path(
     player_h player,
     ffi.Pointer<ffi.Char> path,
@@ -2746,22 +3620,37 @@ class Tizen70CapiMediaPlayer {
   late final _player_set_subtitle_path = _player_set_subtitle_pathPtr
       .asFunction<int Function(player_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets a callback function to be invoked when a subtitle updates.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks The callback is called in a separate thread (not in the main loop).
-  /// @param[in] player      The handle to the media player
-  /// @param[in] callback    The callback function to register
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @pre The subtitle must be set by calling player_set_subtitle_path().
-  /// @post  player_subtitle_updated_cb() will be invoked.
-  /// @see player_unset_subtitle_updated_cb()
-  /// @see player_subtitle_updated_cb()
-  /// @see player_set_subtitle_path()
+  /// Sets a callback function to be invoked when a subtitle updates.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - The callback is called in a separate thread (not in the main loop).
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - The subtitle must be set by calling player_set_subtitle_path().
+  ///
+  /// **Postconditions:**
+  /// - player_subtitle_updated_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `player_unset_subtitle_updated_cb()`
+  /// - `player_subtitle_updated_cb()`
+  /// - `player_set_subtitle_path()`
   int player_set_subtitle_updated_cb(
     player_h player,
     player_subtitle_updated_cb callback,
@@ -2783,15 +3672,24 @@ class Tizen70CapiMediaPlayer {
           int Function(
               player_h, player_subtitle_updated_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the subtitle updated callback function.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @param[in] player The handle to the media player
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @see player_set_subtitle_updated_cb()
+  /// Unsets the subtitle updated callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `player_set_subtitle_updated_cb()`
   int player_unset_subtitle_updated_cb(
     player_h player,
   ) {
@@ -2806,19 +3704,30 @@ class Tizen70CapiMediaPlayer {
   late final _player_unset_subtitle_updated_cb =
       _player_unset_subtitle_updated_cbPtr.asFunction<int Function(player_h)>();
 
-  /// @brief Sets the seek position for the subtitle.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif.1
-  /// @remarks Only MicroDVD/SubViewer(*.sub), SAMI(*.smi), and SubRip(*.srt) subtitle formats are supported.
-  /// @param[in]  player        The handle to the media player
-  /// @param[in]  milliseconds  The position in milliseconds from the start to the seek point
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid player state
-  /// @pre The subtitle must be set by calling player_set_subtitle_path().
-  /// @pre The player state must be one of #PLAYER_STATE_PLAYING or #PLAYER_STATE_PAUSED.
+  /// Sets the seek position for the subtitle.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - Only MicroDVD/SubViewer(*.sub), SAMI(*.smi), and SubRip(*.srt) subtitle formats are supported.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `milliseconds` (in): The position in milliseconds from the start to the seek point
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid player state
+  ///
+  /// **Preconditions:**
+  /// - The subtitle must be set by calling player_set_subtitle_path().
+  /// - The player state must be one of `PLAYER_STATE_PLAYING` or `PLAYER_STATE_PAUSED`.
   int player_set_subtitle_position_offset(
     player_h player,
     int milliseconds,
@@ -2836,24 +3745,39 @@ class Tizen70CapiMediaPlayer {
       _player_set_subtitle_position_offsetPtr
           .asFunction<int Function(player_h, int)>();
 
-  /// @brief Sets a callback function to be invoked when video stream is changed.
-  /// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-  /// @remarks The stream changing is detected just before rendering operation.
-  /// @remarks The callback is called in a separate thread (not in the main loop).
-  /// @remarks This function must be called before calling the player_prepare() or player_prepare_async()
-  /// to reflect the requirement when the player is building.
-  /// @param[in] player      The handle to the media player
-  /// @param[in] callback    The stream changed callback function to register
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid player state
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre The player state must be set to #PLAYER_STATE_IDLE by calling player_create() or player_unprepare().
-  /// @post player_video_stream_changed_cb() will be invoked.
-  /// @see player_unset_video_stream_changed_cb()
-  /// @see player_video_stream_changed_cb()
+  /// Sets a callback function to be invoked when video stream is changed.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 3.0; Otherwise 2.4
+  ///
+  /// **Remarks:**
+  /// - The stream changing is detected just before rendering operation.
+  /// - The callback is called in a separate thread (not in the main loop).
+  /// - This function must be called before calling the player_prepare() or player_prepare_async()
+  /// - to reflect the requirement when the player is building.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `callback` (in): The stream changed callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid player state
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - The player state must be set to `PLAYER_STATE_IDLE` by calling player_create() or player_unprepare().
+  ///
+  /// **Postconditions:**
+  /// - player_video_stream_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `player_unset_video_stream_changed_cb()`
+  /// - `player_video_stream_changed_cb()`
   int player_set_video_stream_changed_cb(
     player_h player,
     player_video_stream_changed_cb callback,
@@ -2875,14 +3799,23 @@ class Tizen70CapiMediaPlayer {
           int Function(player_h, player_video_stream_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the video stream changed callback function.
-  /// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-  /// @param[in] player   The handle to the media player
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see player_set_video_stream_changed_cb()
+  /// Unsets the video stream changed callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 3.0; Otherwise 2.4
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `player_set_video_stream_changed_cb()`
   int player_unset_video_stream_changed_cb(
     player_h player,
   ) {
@@ -2898,23 +3831,37 @@ class Tizen70CapiMediaPlayer {
       _player_unset_video_stream_changed_cbPtr
           .asFunction<int Function(player_h)>();
 
-  /// @brief Gets current track index.
-  /// @details Index starts from 0.
-  /// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-  /// @remarks If audio offload is enabled by calling player_audio_offload_set_enabled(),
-  /// this function will return #PLAYER_ERROR_NOT_AVAILABLE. (Since 5.5)
-  /// @param[in]  player   The handle to the media player
-  /// @param[in]  type     The type of target stream which is #PLAYER_STREAM_TYPE_AUDIO or #PLAYER_STREAM_TYPE_TEXT
-  /// @param[out] index    The index of track
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid player state
-  /// @retval #PLAYER_ERROR_NOT_AVAILABLE Not available (Since 5.5)
-  /// @pre The player state must be one of #PLAYER_STATE_READY, #PLAYER_STATE_PLAYING, or #PLAYER_STATE_PAUSED
-  /// @see player_audio_offload_set_enabled()
+  /// Gets current track index.
+  ///
+  /// Index starts from 0.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 3.0; Otherwise 2.4
+  ///
+  /// **Remarks:**
+  /// - If audio offload is enabled by calling player_audio_offload_set_enabled(),
+  /// - this function will return `PLAYER_ERROR_NOT_AVAILABLE`. (Since 5.5)
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `type` (in): The type of target stream which is `PLAYER_STREAM_TYPE_AUDIO` or `PLAYER_STREAM_TYPE_TEXT`
+  /// - `index` (out): The index of track
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid player state
+  /// - `PLAYER_ERROR_NOT_AVAILABLE`: Not available (Since 5.5)
+  ///
+  /// **Preconditions:**
+  /// - The player state must be one of `PLAYER_STATE_READY`, `PLAYER_STATE_PLAYING`, or `PLAYER_STATE_PAUSED`
+  ///
+  /// **See also:**
+  /// - `player_audio_offload_set_enabled()`
   int player_get_current_track(
     player_h player,
     int type,
@@ -2934,24 +3881,37 @@ class Tizen70CapiMediaPlayer {
   late final _player_get_current_track = _player_get_current_trackPtr
       .asFunction<int Function(player_h, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets language code of a track.
-  /// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-  /// @remarks @a code must be released with @c free() by caller
-  /// @remarks If audio offload is enabled by calling player_audio_offload_set_enabled(),
-  /// this function will return #PLAYER_ERROR_NOT_AVAILABLE. (Since 5.5)
-  /// @param[in] player   The handle to the media player
-  /// @param[in] type     The type of target stream which is #PLAYER_STREAM_TYPE_AUDIO or #PLAYER_STREAM_TYPE_TEXT
-  /// @param[in] index    The index of track
-  /// @param[out] code A language code in ISO 639-1. "und" will be returned if the language is undefined.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid player state
-  /// @retval #PLAYER_ERROR_NOT_AVAILABLE Not available (Since 5.5)
-  /// @pre The player state must be one of #PLAYER_STATE_READY, #PLAYER_STATE_PLAYING, or #PLAYER_STATE_PAUSED
-  /// @see player_audio_offload_set_enabled()
+  /// Gets language code of a track.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 3.0; Otherwise 2.4
+  ///
+  /// **Remarks:**
+  /// - `code` must be released with `free(`) by caller
+  /// - If audio offload is enabled by calling player_audio_offload_set_enabled(),
+  /// - this function will return `PLAYER_ERROR_NOT_AVAILABLE`. (Since 5.5)
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `type` (in): The type of target stream which is `PLAYER_STREAM_TYPE_AUDIO` or `PLAYER_STREAM_TYPE_TEXT`
+  /// - `index` (in): The index of track
+  /// - `code` (out): A language code in ISO 639-1. "und" will be returned if the language is undefined.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid player state
+  /// - `PLAYER_ERROR_NOT_AVAILABLE`: Not available (Since 5.5)
+  ///
+  /// **Preconditions:**
+  /// - The player state must be one of `PLAYER_STATE_READY`, `PLAYER_STATE_PLAYING`, or `PLAYER_STATE_PAUSED`
+  ///
+  /// **See also:**
+  /// - `player_audio_offload_set_enabled()`
   int player_get_track_language_code(
     player_h player,
     int type,
@@ -2976,22 +3936,35 @@ class Tizen70CapiMediaPlayer {
           int Function(
               player_h, int, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the track count.
-  /// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-  /// @remarks If audio offload is enabled by calling player_audio_offload_set_enabled(),
-  /// this function will return #PLAYER_ERROR_NOT_AVAILABLE. (Since 5.5)
-  /// @param[in] player   The handle to the media player
-  /// @param[in] type     The type of target stream which is #PLAYER_STREAM_TYPE_AUDIO or #PLAYER_STREAM_TYPE_TEXT
-  /// @param[out] count The number of track
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid player state
-  /// @retval #PLAYER_ERROR_NOT_AVAILABLE Not available (Since 5.5)
-  /// @pre The player state must be one of #PLAYER_STATE_READY, #PLAYER_STATE_PLAYING, or #PLAYER_STATE_PAUSED
-  /// @see player_audio_offload_set_enabled()
+  /// Gets the track count.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 3.0; Otherwise 2.4
+  ///
+  /// **Remarks:**
+  /// - If audio offload is enabled by calling player_audio_offload_set_enabled(),
+  /// - this function will return `PLAYER_ERROR_NOT_AVAILABLE`. (Since 5.5)
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `type` (in): The type of target stream which is `PLAYER_STREAM_TYPE_AUDIO` or `PLAYER_STREAM_TYPE_TEXT`
+  /// - `count` (out): The number of track
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid player state
+  /// - `PLAYER_ERROR_NOT_AVAILABLE`: Not available (Since 5.5)
+  ///
+  /// **Preconditions:**
+  /// - The player state must be one of `PLAYER_STATE_READY`, `PLAYER_STATE_PLAYING`, or `PLAYER_STATE_PAUSED`
+  ///
+  /// **See also:**
+  /// - `player_audio_offload_set_enabled()`
   int player_get_track_count(
     player_h player,
     int type,
@@ -3011,23 +3984,36 @@ class Tizen70CapiMediaPlayer {
   late final _player_get_track_count = _player_get_track_countPtr
       .asFunction<int Function(player_h, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Selects a track to play.
-  /// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-  /// @remarks If audio offload is enabled by calling player_audio_offload_set_enabled(),
-  /// this function will return #PLAYER_ERROR_NOT_AVAILABLE. (Since 5.5)
-  /// @param[in] player   The handle to the media player
-  /// @param[in] type     The type of target stream which is #PLAYER_STREAM_TYPE_AUDIO or #PLAYER_STREAM_TYPE_TEXT
-  /// @param[in] index    The index of track
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid player state
-  /// @retval #PLAYER_ERROR_NOT_AVAILABLE Not available (Since 5.5)
-  /// @pre The player state must be one of #PLAYER_STATE_READY, #PLAYER_STATE_PLAYING, or #PLAYER_STATE_PAUSED
-  /// @see player_get_current_track()
-  /// @see player_audio_offload_set_enabled()
+  /// Selects a track to play.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 3.0; Otherwise 2.4
+  ///
+  /// **Remarks:**
+  /// - If audio offload is enabled by calling player_audio_offload_set_enabled(),
+  /// - this function will return `PLAYER_ERROR_NOT_AVAILABLE`. (Since 5.5)
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `type` (in): The type of target stream which is `PLAYER_STREAM_TYPE_AUDIO` or `PLAYER_STREAM_TYPE_TEXT`
+  /// - `index` (in): The index of track
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid player state
+  /// - `PLAYER_ERROR_NOT_AVAILABLE`: Not available (Since 5.5)
+  ///
+  /// **Preconditions:**
+  /// - The player state must be one of `PLAYER_STATE_READY`, `PLAYER_STATE_PLAYING`, or `PLAYER_STATE_PAUSED`
+  ///
+  /// **See also:**
+  /// - `player_get_current_track()`
+  /// - `player_audio_offload_set_enabled()`
   int player_select_track(
     player_h player,
     int type,
@@ -3046,20 +4032,33 @@ class Tizen70CapiMediaPlayer {
   late final _player_select_track =
       _player_select_trackPtr.asFunction<int Function(player_h, int, int)>();
 
-  /// @brief Retrieves all the streaming variant information.
-  /// @since_tizen 4.0
-  /// @remarks This function is used for adaptive streaming(hls/mpeg dash) only.
-  /// @param[in] player      The handle to the media player
-  /// @param[in] callback    The iteration callback function
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid player state
-  /// @pre The player state must be one of #PLAYER_STATE_READY, #PLAYER_STATE_PLAYING, or #PLAYER_STATE_PAUSED
-  /// @see player_adaptive_variant_cb()
+  /// Retrieves all the streaming variant information.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - This function is used for adaptive streaming(hls/mpeg dash) only.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `callback` (in): The iteration callback function
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid player state
+  ///
+  /// **Preconditions:**
+  /// - The player state must be one of `PLAYER_STATE_READY`, `PLAYER_STATE_PLAYING`, or `PLAYER_STATE_PAUSED`
+  ///
+  /// **See also:**
+  /// - `player_adaptive_variant_cb()`
   int player_foreach_adaptive_variant(
     player_h player,
     player_adaptive_variant_cb callback,
@@ -3081,23 +4080,34 @@ class Tizen70CapiMediaPlayer {
           int Function(
               player_h, player_adaptive_variant_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets the maximum limit of the streaming variant.
-  /// @since_tizen 4.0
-  /// @remarks This function is used for adaptive streaming(hls/mpeg dash) only.
-  /// @remarks The bandwidth setting can only be applied if there is no width, height information at streaming variant header.
-  /// Application can get all the variant information by calling player_foreach_adaptive_variant() function.
-  /// @remarks If there is no affordable stream for the condition, the minimum bandwidth stream will be selected.
-  /// @param[in] player      The handle to the media player
-  /// @param[in] bandwidth   The max bandwidth limit of the stream variant (default: -1)
-  /// @param[in] width       The max width limit of the stream variant (default: -1)
-  /// @param[in] height      The max height limit of the stream variant (default: -1)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @see player_foreach_adaptive_variant()
-  /// @see player_get_max_adaptive_variant_limit()
+  /// Sets the maximum limit of the streaming variant.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - This function is used for adaptive streaming(hls/mpeg dash) only.
+  /// - The bandwidth setting can only be applied if there is no width, height information at streaming variant header.
+  /// - Application can get all the variant information by calling player_foreach_adaptive_variant() function.
+  /// - If there is no affordable stream for the condition, the minimum bandwidth stream will be selected.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `bandwidth` (in): The max bandwidth limit of the stream variant (default: -1)
+  /// - `width` (in): The max width limit of the stream variant (default: -1)
+  /// - `height` (in): The max height limit of the stream variant (default: -1)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `player_foreach_adaptive_variant()`
+  /// - `player_get_max_adaptive_variant_limit()`
   int player_set_max_adaptive_variant_limit(
     player_h player,
     int bandwidth,
@@ -3120,20 +4130,31 @@ class Tizen70CapiMediaPlayer {
       _player_set_max_adaptive_variant_limitPtr
           .asFunction<int Function(player_h, int, int, int)>();
 
-  /// @brief Gets the maximum limit of the streaming variant.
-  /// @since_tizen 4.0
-  /// @remarks This function is used for adaptive streaming(hls/mpeg dash) only.
-  /// @param[in]  player      The handle to the media player
-  /// @param[out] bandwidth   The max bandwidth limit of the stream variant (default: -1)
-  /// @param[out] width       The max width limit of the stream variant (default: -1)
-  /// @param[out] height      The max height limit of the stream variant (default: -1)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @see player_foreach_adaptive_variant()
-  /// @see player_set_max_adaptive_variant_limit()
+  /// Gets the maximum limit of the streaming variant.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - This function is used for adaptive streaming(hls/mpeg dash) only.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `bandwidth` (out): The max bandwidth limit of the stream variant (default: -1)
+  /// - `width` (out): The max width limit of the stream variant (default: -1)
+  /// - `height` (out): The max height limit of the stream variant (default: -1)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `player_foreach_adaptive_variant()`
+  /// - `player_set_max_adaptive_variant_limit()`
   int player_get_max_adaptive_variant_limit(
     player_h player,
     ffi.Pointer<ffi.Int> bandwidth,
@@ -3157,19 +4178,31 @@ class Tizen70CapiMediaPlayer {
           int Function(player_h, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the audio only mode.
-  /// @details This function is used to disable or enable video rendering during playback.
-  /// @since_tizen 4.0
-  /// @param[in] player       The handle to the media player
-  /// @param[in] audio_only   The new audio only status: (@c true = enable audio only, @c false = disable audio only)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE                Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION   Invalid operation
-  /// @retval #PLAYER_ERROR_INVALID_STATE       Invalid player state
-  /// @pre The player state must be one of: #PLAYER_STATE_READY, #PLAYER_STATE_PLAYING, or #PLAYER_STATE_PAUSED.
-  /// @see player_is_audio_only()
+  /// Sets the audio only mode.
+  ///
+  /// This function is used to disable or enable video rendering during playback.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `audio_only` (in): The new audio only status: (`true` = enable audio only, `false` = disable audio only)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid player state
+  ///
+  /// **Preconditions:**
+  /// - The player state must be one of: `PLAYER_STATE_READY`, `PLAYER_STATE_PLAYING`, or `PLAYER_STATE_PAUSED`.
+  ///
+  /// **See also:**
+  /// - `player_is_audio_only()`
   int player_set_audio_only(
     player_h player,
     bool audio_only,
@@ -3186,16 +4219,25 @@ class Tizen70CapiMediaPlayer {
   late final _player_set_audio_only =
       _player_set_audio_onlyPtr.asFunction<int Function(player_h, bool)>();
 
-  /// @brief Gets the audio only mode status.
-  /// @since_tizen 4.0
-  /// @param[in]  player       The handle to the media player
-  /// @param[out] audio_only   The current audio only status: (@c true = audio only enabled, @c false = audio only disabled)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE                Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION   Invalid operation
-  /// @see player_set_audio_only()
+  /// Gets the audio only mode status.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `audio_only` (out): The current audio only status: (`true` = audio only enabled, `false` = audio only disabled)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `player_set_audio_only()`
   int player_is_audio_only(
     player_h player,
     ffi.Pointer<ffi.Bool> audio_only,
@@ -3213,28 +4255,39 @@ class Tizen70CapiMediaPlayer {
   late final _player_is_audio_only = _player_is_audio_onlyPtr
       .asFunction<int Function(player_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Sets the player's replaygain status.
-  /// @details If the replaygain status is @c true, replaygain is applied (if contents has a replaygain tag).
-  /// If it is @c false, the replaygain isn't affected by tag and properties.
-  /// @since_tizen 5.0
-  /// @remarks If audio offload is enabled by calling player_audio_offload_set_enabled(),
-  /// this function will return #PLAYER_ERROR_NOT_AVAILABLE and
-  /// this will not work at all even if this was called before enabling offload. (Since 5.5)
-  /// @remarks This function could be unavailable depending on the audio codec type and
-  /// this will return #PLAYER_ERROR_NOT_AVAILABLE. (Since 5.5)
-  /// @param[in]   player The handle to the media player
-  /// @param[in]   enabled The new replaygain status: (@c true = enable, @c false = disable)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_NOT_AVAILABLE Not available (Since 5.5)
-  /// @see player_is_replaygain_enabled()
-  /// @see player_audio_offload_set_enabled()
-  /// @see player_audio_offload_is_enabled()
-  /// @see player_set_audio_codec_type()
-  /// @see player_get_audio_codec_type()
+  /// Sets the player's replaygain status.
+  ///
+  /// If the replaygain status is `true`, replaygain is applied (if contents has a replaygain tag). If it is `false`, the replaygain isn't affected by tag and properties.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - If audio offload is enabled by calling player_audio_offload_set_enabled(),
+  /// - this function will return `PLAYER_ERROR_NOT_AVAILABLE` and
+  /// - this will not work at all even if this was called before enabling offload. (Since 5.5)
+  /// - This function could be unavailable depending on the audio codec type and
+  /// - this will return `PLAYER_ERROR_NOT_AVAILABLE`. (Since 5.5)
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `enabled` (in): The new replaygain status: (`true` = enable, `false` = disable)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_NOT_AVAILABLE`: Not available (Since 5.5)
+  ///
+  /// **See also:**
+  /// - `player_is_replaygain_enabled()`
+  /// - `player_audio_offload_set_enabled()`
+  /// - `player_audio_offload_is_enabled()`
+  /// - `player_set_audio_codec_type()`
+  /// - `player_get_audio_codec_type()`
   int player_set_replaygain_enabled(
     player_h player,
     bool enabled,
@@ -3251,25 +4304,34 @@ class Tizen70CapiMediaPlayer {
   late final _player_set_replaygain_enabled = _player_set_replaygain_enabledPtr
       .asFunction<int Function(player_h, bool)>();
 
-  /// @brief Gets the player's replaygain status.
-  /// @since_tizen 5.0
-  /// @remarks Depending on audio codec type or by enabling audio offload,
-  /// this function could be unavailable and this will return #PLAYER_ERROR_NOT_AVAILABLE. (Since 5.5)
-  /// @param[in]   player    The handle to the media player
-  /// @param[out]  enabled   Pointer to store current replaygain status:
-  /// (@c true = enabled replaygain,
-  /// @c false = disabled replaygain)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_NOT_AVAILABLE Not available (Since 5.5)
-  /// @see player_set_replaygain_enabled()
-  /// @see player_audio_offload_set_enabled()
-  /// @see player_audio_offload_is_enabled()
-  /// @see player_set_audio_codec_type()
-  /// @see player_get_audio_codec_type()
+  /// Gets the player's replaygain status.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - Depending on audio codec type or by enabling audio offload,
+  /// - this function could be unavailable and this will return `PLAYER_ERROR_NOT_AVAILABLE`. (Since 5.5)
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `enabled` (out): Pointer to store current replaygain status: (`true` = enabled replaygain, `false` = disabled replaygain)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_NOT_AVAILABLE`: Not available (Since 5.5)
+  ///
+  /// **See also:**
+  /// - `player_set_replaygain_enabled()`
+  /// - `player_audio_offload_set_enabled()`
+  /// - `player_audio_offload_is_enabled()`
+  /// - `player_set_audio_codec_type()`
+  /// - `player_get_audio_codec_type()`
   int player_is_replaygain_enabled(
     player_h player,
     ffi.Pointer<ffi.Bool> enabled,
@@ -3287,35 +4349,43 @@ class Tizen70CapiMediaPlayer {
   late final _player_is_replaygain_enabled = _player_is_replaygain_enabledPtr
       .asFunction<int Function(player_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Sets the ROI (Region Of Interest) area of the content video source.
-  /// @details This function is to set the ROI area of video content to render it
-  /// on #PLAYER_DISPLAY_TYPE_OVERLAY display with current display mode.
-  /// It can be regarded as zooming operation because the selected video area will be rendered fit to the display.
-  /// @since_tizen 5.0
-  /// @remarks This function requires the ratio value of the each coordinate and size based on the video resolution size
-  /// to consider the dynamic resolution video content.
-  /// @remarks This function have to be called after calling player_set_display() and the ROI area is valid only in #PLAYER_DISPLAY_TYPE_OVERLAY.
-  /// @param[in] player     The handle to the media player
-  /// @param[in] x_scale    X coordinate ratio value of the video source area based on the video width size \n
-  /// Valid range is 0.0~1.0.
-  /// @param[in] y_scale    Y coordinate ratio value of the video source area based on the video height size \n
-  /// Valid range is 0.0~1.0.
-  /// @param[in] w_scale    Width ratio value of the video source area based on the video width size \n
-  /// Valid range is from greater than 0.0 to 1.0.
-  /// @param[in] h_scale    Height ratio value of the video source area based on the video height size \n
-  /// Valid range is from greater than 0.0 to 1.0.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #PLAYER_ERROR_NONE Successful
-  /// @retval  #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @see #player_display_type_e
-  /// @see player_set_display()
-  /// @see player_set_display_mode()
-  /// @see player_get_video_size()
-  /// @see player_get_video_roi_area()
-  /// @par Example
-  /// @code
+  /// Sets the ROI (Region Of Interest) area of the content video source.
+  ///
+  /// This function is to set the ROI area of video content to render it on `PLAYER_DISPLAY_TYPE_OVERLAY` display with current display mode. It can be regarded as zooming operation because the selected video area will be rendered fit to the display.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - This function requires the ratio value of the each coordinate and size based on the video resolution size
+  /// - to consider the dynamic resolution video content.
+  /// - This function have to be called after calling player_set_display() and the ROI area is valid only in `PLAYER_DISPLAY_TYPE_OVERLAY`.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `x_scale` (in): X coordinate ratio value of the video source area based on the video width size Valid range is 0.0~1.0.
+  /// - `y_scale` (in): Y coordinate ratio value of the video source area based on the video height size Valid range is 0.0~1.0.
+  /// - `w_scale` (in): Width ratio value of the video source area based on the video width size Valid range is from greater than 0.0 to 1.0.
+  /// - `h_scale` (in): Height ratio value of the video source area based on the video height size Valid range is from greater than 0.0 to 1.0.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `player_display_type_e`
+  /// - `player_set_display()`
+  /// - `player_set_display_mode()`
+  /// - `player_get_video_size()`
+  /// - `player_get_video_roi_area()`
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <player.h>
   /// ...
   /// player_h player = NULL;
@@ -3327,7 +4397,7 @@ class Tizen70CapiMediaPlayer {
   /// ...
   /// player_set_video_roi_area (player, 30/(double)width, 30/(double)height, 480/(double)width, 270/(double)height);
   /// ...
-  /// @endcode
+  /// ```
   int player_set_video_roi_area(
     player_h player,
     double x_scale,
@@ -3351,24 +4421,35 @@ class Tizen70CapiMediaPlayer {
   late final _player_set_video_roi_area = _player_set_video_roi_areaPtr
       .asFunction<int Function(player_h, double, double, double, double)>();
 
-  /// @brief Gets the ROI (Region Of Interest) area of the content video source.
-  /// @since_tizen 5.0
-  /// @remarks This function gets the ratio value of the each coordinate and size based on the video resolution size.
-  /// @remarks The ROI area is valid only in #PLAYER_DISPLAY_TYPE_OVERLAY.
-  /// @param[in]  player     The handle to the media player
-  /// @param[out] x_scale    The current X coordinate ratio value of the video source area based on the video width size
-  /// @param[out] y_scale    The current Y coordinate ratio value of the video source area based on the video height size
-  /// @param[out] w_scale    The current width ratio value of the video source area based on the video width size
-  /// @param[out] h_scale    The current height ratio value of the video source area based on the video height size
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #PLAYER_ERROR_NONE Successful
-  /// @retval  #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @see #player_display_type_e
-  /// @see player_set_display()
-  /// @see player_get_video_size()
-  /// @see player_set_video_roi_area()
+  /// Gets the ROI (Region Of Interest) area of the content video source.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - This function gets the ratio value of the each coordinate and size based on the video resolution size.
+  /// - The ROI area is valid only in `PLAYER_DISPLAY_TYPE_OVERLAY`.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `x_scale` (out): The current X coordinate ratio value of the video source area based on the video width size
+  /// - `y_scale` (out): The current Y coordinate ratio value of the video source area based on the video height size
+  /// - `w_scale` (out): The current width ratio value of the video source area based on the video width size
+  /// - `h_scale` (out): The current height ratio value of the video source area based on the video height size
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `player_display_type_e`
+  /// - `player_set_display()`
+  /// - `player_get_video_size()`
+  /// - `player_set_video_roi_area()`
   int player_get_video_roi_area(
     player_h player,
     ffi.Pointer<ffi.Double> x_scale,
@@ -3402,32 +4483,45 @@ class Tizen70CapiMediaPlayer {
               ffi.Pointer<ffi.Double>,
               ffi.Pointer<ffi.Double>)>();
 
-  /// @brief Enables or disables controlling the pitch of audio.
-  /// @since_tizen 5.5
-  /// @remarks This function is used for audio content only.
-  /// @remarks Enabling pitch control could increase the CPU usage on some devices.
-  /// @remarks If audio offload is enabled by calling player_audio_offload_set_enabled(),
-  /// this function will return #PLAYER_ERROR_NOT_AVAILABLE and
-  /// this will not work at all even if this was called before enabling offload.
-  /// @remarks This function could be unavailable depending on the audio codec type and
-  /// this will return #PLAYER_ERROR_NOT_AVAILABLE.
-  /// @param[in] player   The handle to the media player
-  /// @param[in] enabled  The new audio pitch control status (default: false)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid player state
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_NOT_AVAILABLE Not available
-  /// @pre The player state must be #PLAYER_STATE_IDLE.
-  /// @see player_audio_pitch_is_enabled()
-  /// @see player_audio_pitch_set_value()
-  /// @see player_audio_pitch_get_value()
-  /// @see player_audio_offload_set_enabled()
-  /// @see player_audio_offload_is_enabled()
-  /// @see player_set_audio_codec_type()
-  /// @see player_get_audio_codec_type()
+  /// Enables or disables controlling the pitch of audio.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - This function is used for audio content only.
+  /// - Enabling pitch control could increase the CPU usage on some devices.
+  /// - If audio offload is enabled by calling player_audio_offload_set_enabled(),
+  /// - this function will return `PLAYER_ERROR_NOT_AVAILABLE` and
+  /// - this will not work at all even if this was called before enabling offload.
+  /// - This function could be unavailable depending on the audio codec type and
+  /// - this will return `PLAYER_ERROR_NOT_AVAILABLE`.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `enabled` (in): The new audio pitch control status (default: false)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid player state
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_NOT_AVAILABLE`: Not available
+  ///
+  /// **Preconditions:**
+  /// - The player state must be `PLAYER_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `player_audio_pitch_is_enabled()`
+  /// - `player_audio_pitch_set_value()`
+  /// - `player_audio_pitch_get_value()`
+  /// - `player_audio_offload_set_enabled()`
+  /// - `player_audio_offload_is_enabled()`
+  /// - `player_set_audio_codec_type()`
+  /// - `player_get_audio_codec_type()`
   int player_audio_pitch_set_enabled(
     player_h player,
     bool enabled,
@@ -3445,26 +4539,37 @@ class Tizen70CapiMediaPlayer {
       _player_audio_pitch_set_enabledPtr
           .asFunction<int Function(player_h, bool)>();
 
-  /// @brief Gets the status of controlling the pitch of audio.
-  /// @since_tizen 5.5
-  /// @remarks This function is used for audio content only.
-  /// @remarks Depending on audio codec type or by enabling audio offload,
-  /// this function could be unavailable and this will return #PLAYER_ERROR_NOT_AVAILABLE.
-  /// @param[in]   player   The handle to the media player
-  /// @param[out]  enabled  The audio pitch control status (default: false)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_NOT_AVAILABLE Not available
-  /// @see player_audio_pitch_set_enabled()
-  /// @see player_audio_pitch_set_value()
-  /// @see player_audio_pitch_get_value()
-  /// @see player_audio_offload_set_enabled()
-  /// @see player_audio_offload_is_enabled()
-  /// @see player_set_audio_codec_type()
-  /// @see player_get_audio_codec_type()
+  /// Gets the status of controlling the pitch of audio.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - This function is used for audio content only.
+  /// - Depending on audio codec type or by enabling audio offload,
+  /// - this function could be unavailable and this will return `PLAYER_ERROR_NOT_AVAILABLE`.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `enabled` (out): The audio pitch control status (default: false)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_NOT_AVAILABLE`: Not available
+  ///
+  /// **See also:**
+  /// - `player_audio_pitch_set_enabled()`
+  /// - `player_audio_pitch_set_value()`
+  /// - `player_audio_pitch_get_value()`
+  /// - `player_audio_offload_set_enabled()`
+  /// - `player_audio_offload_is_enabled()`
+  /// - `player_set_audio_codec_type()`
+  /// - `player_get_audio_codec_type()`
   int player_audio_pitch_is_enabled(
     player_h player,
     ffi.Pointer<ffi.Bool> enabled,
@@ -3482,31 +4587,43 @@ class Tizen70CapiMediaPlayer {
   late final _player_audio_pitch_is_enabled = _player_audio_pitch_is_enabledPtr
       .asFunction<int Function(player_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Sets the pitch of audio.
-  /// @since_tizen 5.5
-  /// @remarks This function is used for audio content only.
-  /// @remarks If audio offload is enabled by calling player_audio_offload_set_enabled(),
-  /// this function will return #PLAYER_ERROR_NOT_AVAILABLE and
-  /// this will not work at all even if this was called before enabling offload.
-  /// @remarks This function could be unavailable depending on the audio codec type and
-  /// this will return #PLAYER_ERROR_NOT_AVAILABLE.
-  /// @param[in] player The handle to the media player
-  /// @param[in] value  The audio stream pitch value  \n
-  /// Valid range is 0.5~2. Default value is 1.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_NOT_AVAILABLE Not available
-  /// @pre The pitch control must be enabled by calling player_audio_pitch_set_enabled() function.
-  /// @see player_audio_pitch_set_enabled()
-  /// @see player_audio_pitch_is_enabled()
-  /// @see player_audio_pitch_get_value()
-  /// @see player_audio_offload_set_enabled()
-  /// @see player_audio_offload_is_enabled()
-  /// @see player_set_audio_codec_type()
-  /// @see player_get_audio_codec_type()
+  /// Sets the pitch of audio.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - This function is used for audio content only.
+  /// - If audio offload is enabled by calling player_audio_offload_set_enabled(),
+  /// - this function will return `PLAYER_ERROR_NOT_AVAILABLE` and
+  /// - this will not work at all even if this was called before enabling offload.
+  /// - This function could be unavailable depending on the audio codec type and
+  /// - this will return `PLAYER_ERROR_NOT_AVAILABLE`.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `value` (in): The audio stream pitch value Valid range is 0.5~2. Default value is 1.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_NOT_AVAILABLE`: Not available
+  ///
+  /// **Preconditions:**
+  /// - The pitch control must be enabled by calling player_audio_pitch_set_enabled() function.
+  ///
+  /// **See also:**
+  /// - `player_audio_pitch_set_enabled()`
+  /// - `player_audio_pitch_is_enabled()`
+  /// - `player_audio_pitch_get_value()`
+  /// - `player_audio_offload_set_enabled()`
+  /// - `player_audio_offload_is_enabled()`
+  /// - `player_set_audio_codec_type()`
+  /// - `player_get_audio_codec_type()`
   int player_audio_pitch_set_value(
     player_h player,
     double value,
@@ -3523,27 +4640,37 @@ class Tizen70CapiMediaPlayer {
   late final _player_audio_pitch_set_value = _player_audio_pitch_set_valuePtr
       .asFunction<int Function(player_h, double)>();
 
-  /// @brief Gets the pitch of audio.
-  /// @since_tizen 5.5
-  /// @remarks This function is used for audio content only.
-  /// @remarks Depending on audio codec type or by enabling audio offload,
-  /// this function could be unavailable and this will return #PLAYER_ERROR_NOT_AVAILABLE.
-  /// @param[in]  player The handle to the media player
-  /// @param[out] value  The audio stream pitch value \n
-  /// Valid range is 0.5~2. Default value is 1.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_NOT_AVAILABLE Not available
-  /// @see player_audio_pitch_set_enabled()
-  /// @see player_audio_pitch_is_enabled()
-  /// @see player_audio_pitch_set_value()
-  /// @see player_audio_offload_set_enabled()
-  /// @see player_audio_offload_is_enabled()
-  /// @see player_set_audio_codec_type()
-  /// @see player_get_audio_codec_type()
+  /// Gets the pitch of audio.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - This function is used for audio content only.
+  /// - Depending on audio codec type or by enabling audio offload,
+  /// - this function could be unavailable and this will return `PLAYER_ERROR_NOT_AVAILABLE`.
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `value` (out): The audio stream pitch value Valid range is 0.5~2. Default value is 1.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_NOT_AVAILABLE`: Not available
+  ///
+  /// **See also:**
+  /// - `player_audio_pitch_set_enabled()`
+  /// - `player_audio_pitch_is_enabled()`
+  /// - `player_audio_pitch_set_value()`
+  /// - `player_audio_offload_set_enabled()`
+  /// - `player_audio_offload_is_enabled()`
+  /// - `player_set_audio_codec_type()`
+  /// - `player_get_audio_codec_type()`
   int player_audio_pitch_get_value(
     player_h player,
     ffi.Pointer<ffi.Float> value,
@@ -3561,24 +4688,36 @@ class Tizen70CapiMediaPlayer {
   late final _player_audio_pitch_get_value = _player_audio_pitch_get_valuePtr
       .asFunction<int Function(player_h, ffi.Pointer<ffi.Float>)>();
 
-  /// @brief Retrieves all supported media formats for audio offload.
-  /// @details The supported media format can vary depending on the device capabilities.
-  /// @since_tizen 5.5
-  /// @remarks This function is related to the following feature:\n
-  /// %http://tizen.org/feature/multimedia.player.audio_offload\n
-  /// @param[in] player      The handle to the media player
-  /// @param[in] callback    The iteration callback function
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_FEATURE_NOT_SUPPORTED_ON_DEVICE Unsupported feature
-  /// @see player_supported_media_format_cb()
-  /// @see player_audio_offload_set_enabled()
-  /// @see player_audio_offload_is_enabled()
-  /// @see player_audio_offload_is_activated()
+  /// Retrieves all supported media formats for audio offload.
+  ///
+  /// The supported media format can vary depending on the device capabilities.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - This function is related to the following feature:
+  /// - <http://tizen.org/feature/multimedia.player.audio_offload>
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `callback` (in): The iteration callback function
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_FEATURE_NOT_SUPPORTED_ON_DEVICE`: Unsupported feature
+  ///
+  /// **See also:**
+  /// - `player_supported_media_format_cb()`
+  /// - `player_audio_offload_set_enabled()`
+  /// - `player_audio_offload_is_enabled()`
+  /// - `player_audio_offload_is_activated()`
   int player_audio_offload_foreach_supported_format(
     player_h player,
     player_supported_media_format_cb callback,
@@ -3601,48 +4740,60 @@ class Tizen70CapiMediaPlayer {
           int Function(player_h, player_supported_media_format_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Enables or disables the audio offload.
-  /// @details The player lets the hardware decode and render the sound if the audio offload is enabled.
-  /// This will reduce the power consumption, but will disable the ability to handle output PCM.
-  /// Please check the remarks for a list of functions which will not work if offloading is enabled.
-  /// @since_tizen 5.5
-  /// @remarks This function is related to the following feature:\n
-  /// %http://tizen.org/feature/multimedia.player.audio_offload\n
-  /// @remarks The sound stream type of the player should be #SOUND_STREAM_TYPE_MEDIA.\n
-  /// @remarks If audio offload is enabled, functions for audio effect are not available.\n
-  /// @remarks If audio offload is enabled, the following functions will return #PLAYER_ERROR_NOT_AVAILABLE
-  /// and they will not work at all even if they were called before enabling offload. :\n
-  /// player_set_media_packet_audio_frame_decoded_cb()\n
-  /// player_unset_media_packet_audio_frame_decoded_cb()\n
-  /// player_set_audio_latency_mode()\n
-  /// player_get_audio_latency_mode()\n
-  /// player_set_playback_rate()\n
-  /// player_get_current_track()\n
-  /// player_get_track_language_code()\n
-  /// player_get_track_count()\n
-  /// player_select_track()\n
-  /// player_set_replaygain_enabled()\n
-  /// player_is_replaygain_enabled()\n
-  /// player_audio_pitch_set_enabled()\n
-  /// player_audio_pitch_is_enabled()\n
-  /// player_audio_pitch_set_value()\n
-  /// player_audio_pitch_get_value()\n
-  /// @param[in] player   The handle to the media player
-  /// @param[in] enabled  The new audio offload status (default: false)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid player state
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_FEATURE_NOT_SUPPORTED_ON_DEVICE Unsupported feature
-  /// @pre The player state must be #PLAYER_STATE_IDLE.
-  /// @see player_set_sound_stream_info()
-  /// @see player_audio_effect_equalizer_is_available()
-  /// @see player_set_interrupted_cb()
-  /// @see player_audio_offload_foreach_supported_format()
-  /// @see player_audio_offload_is_enabled()
-  /// @see player_audio_offload_is_activated()
+  /// Enables or disables the audio offload.
+  ///
+  /// The player lets the hardware decode and render the sound if the audio offload is enabled. This will reduce the power consumption, but will disable the ability to handle output PCM. Please check the remarks for a list of functions which will not work if offloading is enabled.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - This function is related to the following feature:
+  /// - <http://tizen.org/feature/multimedia.player.audio_offload>
+  /// - The sound stream type of the player should be `SOUND_STREAM_TYPE_MEDIA`.
+  /// - If audio offload is enabled, functions for audio effect are not available.
+  /// - If audio offload is enabled, the following functions will return `PLAYER_ERROR_NOT_AVAILABLE`
+  /// - and they will not work at all even if they were called before enabling offload. :
+  /// - player_set_media_packet_audio_frame_decoded_cb()
+  /// - player_unset_media_packet_audio_frame_decoded_cb()
+  /// - player_set_audio_latency_mode()
+  /// - player_get_audio_latency_mode()
+  /// - player_set_playback_rate()
+  /// - player_get_current_track()
+  /// - player_get_track_language_code()
+  /// - player_get_track_count()
+  /// - player_select_track()
+  /// - player_set_replaygain_enabled()
+  /// - player_is_replaygain_enabled()
+  /// - player_audio_pitch_set_enabled()
+  /// - player_audio_pitch_is_enabled()
+  /// - player_audio_pitch_set_value()
+  /// - player_audio_pitch_get_value()
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `enabled` (in): The new audio offload status (default: false)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid player state
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_FEATURE_NOT_SUPPORTED_ON_DEVICE`: Unsupported feature
+  ///
+  /// **Preconditions:**
+  /// - The player state must be `PLAYER_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `player_set_sound_stream_info()`
+  /// - `player_audio_effect_equalizer_is_available()`
+  /// - `player_set_interrupted_cb()`
+  /// - `player_audio_offload_foreach_supported_format()`
+  /// - `player_audio_offload_is_enabled()`
+  /// - `player_audio_offload_is_activated()`
   int player_audio_offload_set_enabled(
     player_h player,
     bool enabled,
@@ -3660,21 +4811,32 @@ class Tizen70CapiMediaPlayer {
       _player_audio_offload_set_enabledPtr
           .asFunction<int Function(player_h, bool)>();
 
-  /// @brief Gets the enabling status of audio offload.
-  /// @since_tizen 5.5
-  /// @remarks This function is related to the following feature:\n
-  /// %http://tizen.org/feature/multimedia.player.audio_offload\n
-  /// @param[in]   player   The handle to the media player
-  /// @param[out]  enabled  The enabling status (default: false)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_FEATURE_NOT_SUPPORTED_ON_DEVICE Unsupported feature
-  /// @see player_audio_offload_foreach_supported_format()
-  /// @see player_audio_offload_set_enabled()
-  /// @see player_audio_offload_is_activated()
+  /// Gets the enabling status of audio offload.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - This function is related to the following feature:
+  /// - <http://tizen.org/feature/multimedia.player.audio_offload>
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `enabled` (out): The enabling status (default: false)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_FEATURE_NOT_SUPPORTED_ON_DEVICE`: Unsupported feature
+  ///
+  /// **See also:**
+  /// - `player_audio_offload_foreach_supported_format()`
+  /// - `player_audio_offload_set_enabled()`
+  /// - `player_audio_offload_is_activated()`
   int player_audio_offload_is_enabled(
     player_h player,
     ffi.Pointer<ffi.Bool> enabled,
@@ -3693,25 +4855,38 @@ class Tizen70CapiMediaPlayer {
       _player_audio_offload_is_enabledPtr
           .asFunction<int Function(player_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets the activation status of audio offload.
-  /// @details Audio offload could be inactivated depending on the
-  /// audio device capability even if the audio offload feature is supported.
-  /// @since_tizen 5.5
-  /// @remarks This function is related to the following feature:\n
-  /// %http://tizen.org/feature/multimedia.player.audio_offload\n
-  /// @param[in]   player     The handle to the media player
-  /// @param[out]  activated  The activation status
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid state
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_FEATURE_NOT_SUPPORTED_ON_DEVICE Unsupported feature
-  /// @pre The player state must be one of #PLAYER_STATE_READY, #PLAYER_STATE_PLAYING, or #PLAYER_STATE_PAUSED
-  /// @see player_audio_offload_foreach_supported_format()
-  /// @see player_audio_offload_set_enabled()
-  /// @see player_audio_offload_is_enabled()
+  /// Gets the activation status of audio offload.
+  ///
+  /// Audio offload could be inactivated depending on the audio device capability even if the audio offload feature is supported.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - This function is related to the following feature:
+  /// - <http://tizen.org/feature/multimedia.player.audio_offload>
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `activated` (out): The activation status
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid state
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_FEATURE_NOT_SUPPORTED_ON_DEVICE`: Unsupported feature
+  ///
+  /// **Preconditions:**
+  /// - The player state must be one of `PLAYER_STATE_READY`, `PLAYER_STATE_PLAYING`, or `PLAYER_STATE_PAUSED`
+  ///
+  /// **See also:**
+  /// - `player_audio_offload_foreach_supported_format()`
+  /// - `player_audio_offload_set_enabled()`
+  /// - `player_audio_offload_is_enabled()`
   int player_audio_offload_is_activated(
     player_h player,
     ffi.Pointer<ffi.Bool> activated,
@@ -3730,35 +4905,48 @@ class Tizen70CapiMediaPlayer {
       _player_audio_offload_is_activatedPtr
           .asFunction<int Function(player_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Sets the default codec type of the audio decoder.
-  /// @since_tizen 5.5
-  /// @remarks The default codec type could be different depending on the device capability.
-  /// S/W codec type is supported basically.
-  /// @remarks If selected H/W audio codec type does not support in some cases,
-  /// S/W audio codec type could be used instead.\n
-  /// @remarks If application use the H/W audio codec type by default,
-  /// following functions should be called after setting codec type
-  /// because the availability could be changed depending on the codec capability. :\n
-  /// player_audio_effect_equalizer_is_available()\n
-  /// player_set_media_packet_audio_frame_decoded_cb()\n
-  /// player_unset_media_packet_audio_frame_decoded_cb()\n
-  /// player_set_replaygain_enabled()\n
-  /// player_is_replaygain_enabled()\n
-  /// player_audio_pitch_set_enabled()\n
-  /// player_audio_pitch_is_enabled()\n
-  /// player_audio_pitch_set_value()\n
-  /// player_audio_pitch_get_value()\n
-  /// @param[in] player       The handle to the media player
-  /// @param[in] codec_type   The default codec type
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid player state
-  /// @retval #PLAYER_ERROR_NOT_SUPPORTED_AUDIO_CODEC Not support audio codec type
-  /// @pre The player state must be #PLAYER_STATE_IDLE by player_create() or player_unprepare().
-  /// @see player_get_audio_codec_type()
+  /// Sets the default codec type of the audio decoder.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - The default codec type could be different depending on the device capability.
+  /// - S/W codec type is supported basically.
+  /// - If selected H/W audio codec type does not support in some cases,
+  /// - S/W audio codec type could be used instead.
+  /// - If application use the H/W audio codec type by default,
+  /// - following functions should be called after setting codec type
+  /// - because the availability could be changed depending on the codec capability. :
+  /// - player_audio_effect_equalizer_is_available()
+  /// - player_set_media_packet_audio_frame_decoded_cb()
+  /// - player_unset_media_packet_audio_frame_decoded_cb()
+  /// - player_set_replaygain_enabled()
+  /// - player_is_replaygain_enabled()
+  /// - player_audio_pitch_set_enabled()
+  /// - player_audio_pitch_is_enabled()
+  /// - player_audio_pitch_set_value()
+  /// - player_audio_pitch_get_value()
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `codec_type` (in): The default codec type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid player state
+  /// - `PLAYER_ERROR_NOT_SUPPORTED_AUDIO_CODEC`: Not support audio codec type
+  ///
+  /// **Preconditions:**
+  /// - The player state must be `PLAYER_STATE_IDLE` by player_create() or player_unprepare().
+  ///
+  /// **See also:**
+  /// - `player_get_audio_codec_type()`
   int player_set_audio_codec_type(
     player_h player,
     int codec_type,
@@ -3775,16 +4963,25 @@ class Tizen70CapiMediaPlayer {
   late final _player_set_audio_codec_type =
       _player_set_audio_codec_typePtr.asFunction<int Function(player_h, int)>();
 
-  /// @brief Gets the default codec type of the audio decoder.
-  /// @since_tizen 5.5
-  /// @param[in]  player        The handle to the media player
-  /// @param[out] codec_type    The default codec type
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @see player_set_audio_codec_type()
+  /// Gets the default codec type of the audio decoder.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `codec_type` (out): The default codec type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `player_set_audio_codec_type()`
   int player_get_audio_codec_type(
     player_h player,
     ffi.Pointer<ffi.Int32> codec_type,
@@ -3802,31 +4999,34 @@ class Tizen70CapiMediaPlayer {
   late final _player_get_audio_codec_type = _player_get_audio_codec_typePtr
       .asFunction<int Function(player_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets the streaming buffering time.
-  /// @since_tizen 4.0
-  /// @param[in] player        The handle to the media player
-  /// @param[in] prebuffer_ms  The time duration of buffering data that must be prerolled to start playback. \n
-  /// The value should be more than 1000 milliseconds to ensure the normal buffering. \n
-  /// There are, however, two exceptions: \n
-  /// 0: Indicate to use platform default value depending on the streaming type and network status (default) \n
-  /// -1: Indicate to use current value (since 5.5)
-  /// @param[in] rebuffer_ms   The time duration of buffering data that must be prerolled to resume playback
-  /// if player is paused for buffering internally. \n
-  /// The value should be more than 1000 milliseconds to ensure the normal buffering. \n
-  /// There are, however, two exceptions: \n
-  /// 0: Indicate to use platform default value depending on the streaming type and network status (default) \n
-  /// -1: Indicate to use current value (since 5.5)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_STATE Invalid state
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation (since 5.5)
-  /// @if WEARABLE @retval #PLAYER_ERROR_FEATURE_NOT_SUPPORTED_ON_DEVICE Unsupported feature @endif
-  /// @pre The player state must be #PLAYER_STATE_IDLE.
-  /// @see player_get_streaming_buffering_time()
-  /// @par Example
-  /// @code
+  /// Sets the streaming buffering time.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `prebuffer_ms` (in): The time duration of buffering data that must be prerolled to start playback. The value should be more than 1000 milliseconds to ensure the normal buffering. There are, however, two exceptions: 0: Indicate to use platform default value depending on the streaming type and network status (default) -1: Indicate to use current value (since 5.5)
+  /// - `rebuffer_ms` (in): The time duration of buffering data that must be prerolled to resume playback if player is paused for buffering internally. The value should be more than 1000 milliseconds to ensure the normal buffering. There are, however, two exceptions: 0: Indicate to use platform default value depending on the streaming type and network status (default) -1: Indicate to use current value (since 5.5)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid state
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation (since 5.5) @if WEARABLE @retval `PLAYER_ERROR_FEATURE_NOT_SUPPORTED_ON_DEVICE` Unsupported feature @endif
+  ///
+  /// **Preconditions:**
+  /// - The player state must be `PLAYER_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `player_get_streaming_buffering_time()`
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <player.h>
   /// bool set_buffering_time(player_h p)
   /// {
@@ -3840,7 +5040,7 @@ class Tizen70CapiMediaPlayer {
   /// }
   /// return true;
   /// }
-  /// @endcode
+  /// ```
   int player_set_streaming_buffering_time(
     player_h player,
     int prebuffer_ms,
@@ -3860,26 +5060,25 @@ class Tizen70CapiMediaPlayer {
       _player_set_streaming_buffering_timePtr
           .asFunction<int Function(player_h, int, int)>();
 
-  /// @brief Gets the streaming buffering time.
-  /// @since_tizen 4.0
-  /// @param[in]  player        The handle to the media player
-  /// @param[out] prebuffer_ms  The time duration of buffering data that must be prerolled to start playback
-  /// If the user did not set any value by calling player_set_streaming_buffering_time() function (or if the value was set to 0),
-  /// the value is @c 0 which means platform default value depending on the streaming type and network status. \n
-  /// The value is set to time duration instead of @c 0
-  /// if the player state is one of: #PLAYER_STATE_READY, #PLAYER_STATE_PLAYING or #PLAYER_STATE_PAUSED. (since 5.5)
-  /// @param[out] rebuffer_ms   The time duration of buffering data that must be prerolled to resume playback
-  /// if player is paused for buffering internally. \n
-  /// If the user did not set any value by calling player_set_streaming_buffering_time() function (or if the value was set to 0),
-  /// the value is @c 0 which means platform default value depending on the streaming type and network status. \n
-  /// The value is set to time duration instead of @c 0
-  /// if the player state is one of: #PLAYER_STATE_READY, #PLAYER_STATE_PLAYING or #PLAYER_STATE_PAUSED. (since 5.5)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @if WEARABLE @retval #PLAYER_ERROR_FEATURE_NOT_SUPPORTED_ON_DEVICE Unsupported feature @endif
-  /// @see player_set_streaming_buffering_time()
+  /// Gets the streaming buffering time.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `prebuffer_ms` (out): The time duration of buffering data that must be prerolled to start playback If the user did not set any value by calling player_set_streaming_buffering_time() function (or if the value was set to 0), the value is `0` which means platform default value depending on the streaming type and network status. The value is set to time duration instead of `0` if the player state is one of: `PLAYER_STATE_READY`, `PLAYER_STATE_PLAYING` or `PLAYER_STATE_PAUSED`. (since 5.5)
+  /// - `rebuffer_ms` (out): The time duration of buffering data that must be prerolled to resume playback if player is paused for buffering internally. If the user did not set any value by calling player_set_streaming_buffering_time() function (or if the value was set to 0), the value is `0` which means platform default value depending on the streaming type and network status. The value is set to time duration instead of `0` if the player state is one of: `PLAYER_STATE_READY`, `PLAYER_STATE_PLAYING` or `PLAYER_STATE_PAUSED`. (since 5.5)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter @if WEARABLE @retval `PLAYER_ERROR_FEATURE_NOT_SUPPORTED_ON_DEVICE` Unsupported feature @endif
+  ///
+  /// **See also:**
+  /// - `player_set_streaming_buffering_time()`
   int player_get_streaming_buffering_time(
     player_h player,
     ffi.Pointer<ffi.Int> prebuffer_ms,
@@ -3900,21 +5099,32 @@ class Tizen70CapiMediaPlayer {
       _player_get_streaming_buffering_timePtr.asFunction<
           int Function(player_h, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets information whether the current content of the player is spherical.
-  /// @since_tizen 5.0
-  /// @remarks This function is related to the following features:\n
-  /// %http://tizen.org/feature/multimedia.player.spherical_video\n
-  /// %http://tizen.org/feature/opengles.version.2_0\n
-  /// @param[in]   player         The handle to the media player
-  /// @param[out]  is_spherical   The value indicating whether the content is spherical
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE              Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_STATE     Invalid player state
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_FEATURE_NOT_SUPPORTED_ON_DEVICE Unsupported feature
-  /// @pre The player state must be one of #PLAYER_STATE_READY, #PLAYER_STATE_PLAYING or #PLAYER_STATE_PAUSED.
+  /// Gets information whether the current content of the player is spherical.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - This function is related to the following features:
+  /// - <http://tizen.org/feature/multimedia.player.spherical_video>
+  /// - <http://tizen.org/feature/opengles.version.2_0>
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `is_spherical` (out): The value indicating whether the content is spherical
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_STATE`: Invalid player state
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_FEATURE_NOT_SUPPORTED_ON_DEVICE`: Unsupported feature
+  ///
+  /// **Preconditions:**
+  /// - The player state must be one of `PLAYER_STATE_READY`, `PLAYER_STATE_PLAYING` or `PLAYER_STATE_PAUSED`.
   int player_360_is_content_spherical(
     player_h player,
     ffi.Pointer<ffi.Bool> is_spherical,
@@ -3933,22 +5143,33 @@ class Tizen70CapiMediaPlayer {
       _player_360_is_content_sphericalPtr
           .asFunction<int Function(player_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Sets the 360 video mode.
-  /// @details In case the media content is spherical, display mode can be selected by this function.
-  /// @since_tizen 5.0
-  /// @remarks This function is related to the following features:\n
-  /// %http://tizen.org/feature/multimedia.player.spherical_video\n
-  /// %http://tizen.org/feature/opengles.version.2_0\n
-  /// @param[in] player   The handle to the media player
-  /// @param[in] enabled  The 360 video display status: @c true = display with 360 video mode,
-  /// @c false = display with full panorama mode. The default value is @c true.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE              Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_FEATURE_NOT_SUPPORTED_ON_DEVICE Unsupported feature
-  /// @see player_360_is_enabled()
+  /// Sets the 360 video mode.
+  ///
+  /// In case the media content is spherical, display mode can be selected by this function.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - This function is related to the following features:
+  /// - <http://tizen.org/feature/multimedia.player.spherical_video>
+  /// - <http://tizen.org/feature/opengles.version.2_0>
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `enabled` (in): The 360 video display status: `true` = display with 360 video mode, `false` = display with full panorama mode. The default value is `true`.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_FEATURE_NOT_SUPPORTED_ON_DEVICE`: Unsupported feature
+  ///
+  /// **See also:**
+  /// - `player_360_is_enabled()`
   int player_360_set_enabled(
     player_h player,
     bool enabled,
@@ -3965,22 +5186,31 @@ class Tizen70CapiMediaPlayer {
   late final _player_360_set_enabled =
       _player_360_set_enabledPtr.asFunction<int Function(player_h, bool)>();
 
-  /// @brief Gets the 360 video display mode.
-  /// @since_tizen 5.0
-  /// @remarks This function is related to the following features:\n
-  /// %http://tizen.org/feature/multimedia.player.spherical_video\n
-  /// %http://tizen.org/feature/opengles.version.2_0\n
-  /// @param[in]   player    The handle to the media player
-  /// @param[out]  enabled   Pointer to store current 360 video display mode:
-  /// (@c true = display with 360 video mode,
-  /// @c false = display with full panorama mode)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE              Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_FEATURE_NOT_SUPPORTED_ON_DEVICE Unsupported feature
-  /// @see player_360_set_enabled()
+  /// Gets the 360 video display mode.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - This function is related to the following features:
+  /// - <http://tizen.org/feature/multimedia.player.spherical_video>
+  /// - <http://tizen.org/feature/opengles.version.2_0>
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `enabled` (out): Pointer to store current 360 video display mode: (`true` = display with 360 video mode, `false` = display with full panorama mode)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_FEATURE_NOT_SUPPORTED_ON_DEVICE`: Unsupported feature
+  ///
+  /// **See also:**
+  /// - `player_360_set_enabled()`
   int player_360_is_enabled(
     player_h player,
     ffi.Pointer<ffi.Bool> enabled,
@@ -3998,28 +5228,34 @@ class Tizen70CapiMediaPlayer {
   late final _player_360_is_enabled = _player_360_is_enabledPtr
       .asFunction<int Function(player_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Sets the 360 video direction of view.
-  /// @details This function is to set horizontal (yaw) and vertical (pitch) angles
-  /// of current direction of view in radians. Default direction of view
-  /// is taken from meta-data stored in the media. If meta-data omits
-  /// these values, zeros are assumed to be equal to the centre of the
-  /// panorama image.
-  /// @since_tizen 5.0
-  /// @remarks This function is related to the following features:\n
-  /// %http://tizen.org/feature/multimedia.player.spherical_video\n
-  /// %http://tizen.org/feature/opengles.version.2_0\n
-  /// @param[in] player   The handle to the media player
-  /// @param[in] yaw      The angle value around vertical axis. Valid values are in
-  /// range [-PI, PI]. Default value is 0.
-  /// @param[in] pitch    The angle value around lateral axis. Valid values are in
-  /// range [-PI/2, PI/2]. Default value is 0.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE              Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_FEATURE_NOT_SUPPORTED_ON_DEVICE Unsupported feature
-  /// @see player_360_get_direction_of_view()
+  /// Sets the 360 video direction of view.
+  ///
+  /// This function is to set horizontal (yaw) and vertical (pitch) angles of current direction of view in radians. Default direction of view is taken from meta-data stored in the media. If meta-data omits these values, zeros are assumed to be equal to the centre of the panorama image.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - This function is related to the following features:
+  /// - <http://tizen.org/feature/multimedia.player.spherical_video>
+  /// - <http://tizen.org/feature/opengles.version.2_0>
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `yaw` (in): The angle value around vertical axis. Valid values are in range `[-PI, PI]`. Default value is 0.
+  /// - `pitch` (in): The angle value around lateral axis. Valid values are in range `[-PI/2, PI/2]`. Default value is 0.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_FEATURE_NOT_SUPPORTED_ON_DEVICE`: Unsupported feature
+  ///
+  /// **See also:**
+  /// - `player_360_get_direction_of_view()`
   int player_360_set_direction_of_view(
     player_h player,
     double yaw,
@@ -4039,25 +5275,34 @@ class Tizen70CapiMediaPlayer {
       _player_360_set_direction_of_viewPtr
           .asFunction<int Function(player_h, double, double)>();
 
-  /// @brief Gets the 360 video direction of view.
-  /// @details This function is to get horizontal (yaw) and vertical (pitch) angles
-  /// of current direction of view in radians.
-  /// @since_tizen 5.0
-  /// @remarks This function is related to the following features:\n
-  /// %http://tizen.org/feature/multimedia.player.spherical_video\n
-  /// %http://tizen.org/feature/opengles.version.2_0\n
-  /// @param[in]  player   The handle to the media player
-  /// @param[out] yaw      Pointer to store current value of direction of view
-  /// angle around vertical axis
-  /// @param[out] pitch    Pointer to store current value of direction of view
-  /// angle around lateral axis
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE              Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_FEATURE_NOT_SUPPORTED_ON_DEVICE Unsupported feature
-  /// @see player_360_set_direction_of_view()
+  /// Gets the 360 video direction of view.
+  ///
+  /// This function is to get horizontal (yaw) and vertical (pitch) angles of current direction of view in radians.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - This function is related to the following features:
+  /// - <http://tizen.org/feature/multimedia.player.spherical_video>
+  /// - <http://tizen.org/feature/opengles.version.2_0>
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `yaw` (out): Pointer to store current value of direction of view angle around vertical axis
+  /// - `pitch` (out): Pointer to store current value of direction of view angle around lateral axis
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_FEATURE_NOT_SUPPORTED_ON_DEVICE`: Unsupported feature
+  ///
+  /// **See also:**
+  /// - `player_360_set_direction_of_view()`
   int player_360_get_direction_of_view(
     player_h player,
     ffi.Pointer<ffi.Float> yaw,
@@ -4079,24 +5324,33 @@ class Tizen70CapiMediaPlayer {
           int Function(
               player_h, ffi.Pointer<ffi.Float>, ffi.Pointer<ffi.Float>)>();
 
-  /// @brief Sets the zoom level of 360 video.
-  /// @details  The zoom means scaling of the flat image cut from the panorama.
-  /// The valid range is from 1.0 to 10.0, where 1.0 is the actual image and
-  /// values above are zoom-in factor. Default value is 1.0 - no zoom.
-  /// @since_tizen 5.0
-  /// @remarks This function is related to the following features:\n
-  /// %http://tizen.org/feature/multimedia.player.spherical_video\n
-  /// %http://tizen.org/feature/opengles.version.2_0\n
-  /// @param[in] player    The handle to the media player
-  /// @param[in] level     The zoom level\n
-  /// Valid range is 1.0~10.0. Default value is 1.0.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE              Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_FEATURE_NOT_SUPPORTED_ON_DEVICE Unsupported feature
-  /// @see player_360_get_zoom()
+  /// Sets the zoom level of 360 video.
+  ///
+  /// The zoom means scaling of the flat image cut from the panorama. The valid range is from 1.0 to 10.0, where 1.0 is the actual image and values above are zoom-in factor. Default value is 1.0 - no zoom.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - This function is related to the following features:
+  /// - <http://tizen.org/feature/multimedia.player.spherical_video>
+  /// - <http://tizen.org/feature/opengles.version.2_0>
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `level` (in): The zoom level Valid range is 1.0~10.0. Default value is 1.0.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_FEATURE_NOT_SUPPORTED_ON_DEVICE`: Unsupported feature
+  ///
+  /// **See also:**
+  /// - `player_360_get_zoom()`
   int player_360_set_zoom(
     player_h player,
     double level,
@@ -4113,23 +5367,33 @@ class Tizen70CapiMediaPlayer {
   late final _player_360_set_zoom =
       _player_360_set_zoomPtr.asFunction<int Function(player_h, double)>();
 
-  /// @brief Gets the current zoom level of 360 video.
-  /// @details  The zoom means scaling of the flat image cut from the panorama.
-  /// The valid range is from 1.0 to 10.0. Where 1.0 is actual image and
-  /// values above are zoom-in factor. Default value is 1.0 - no zoom.
-  /// @since_tizen 5.0
-  /// @remarks This function is related to the following features:\n
-  /// %http://tizen.org/feature/multimedia.player.spherical_video\n
-  /// %http://tizen.org/feature/opengles.version.2_0\n
-  /// @param[in]  player    The handle to the media player
-  /// @param[out] level     Pointer to store current value of zoom level
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE              Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_FEATURE_NOT_SUPPORTED_ON_DEVICE Unsupported feature
-  /// @see player_360_set_zoom()
+  /// Gets the current zoom level of 360 video.
+  ///
+  /// The zoom means scaling of the flat image cut from the panorama. The valid range is from 1.0 to 10.0. Where 1.0 is actual image and values above are zoom-in factor. Default value is 1.0 - no zoom.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - This function is related to the following features:
+  /// - <http://tizen.org/feature/multimedia.player.spherical_video>
+  /// - <http://tizen.org/feature/opengles.version.2_0>
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `level` (out): Pointer to store current value of zoom level
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_FEATURE_NOT_SUPPORTED_ON_DEVICE`: Unsupported feature
+  ///
+  /// **See also:**
+  /// - `player_360_set_zoom()`
   int player_360_get_zoom(
     player_h player,
     ffi.Pointer<ffi.Float> level,
@@ -4147,26 +5411,36 @@ class Tizen70CapiMediaPlayer {
   late final _player_360_get_zoom = _player_360_get_zoomPtr
       .asFunction<int Function(player_h, ffi.Pointer<ffi.Float>)>();
 
-  /// @brief Sets the field of view information of 360 video.
-  /// @details This function is to set the field of view to decide the output frame size.
-  /// @since_tizen 5.0
-  /// @remarks values above the default ones extend the field of view to significantly
-  /// distorted areas and will not be useful in most cases.
-  /// @remarks This function is related to the following features:\n
-  /// %http://tizen.org/feature/multimedia.player.spherical_video\n
-  /// %http://tizen.org/feature/opengles.version.2_0\n
-  /// @param[in] player              The handle to the media player
-  /// @param[in] horizontal_degrees  The horizontal field of view to display in degrees\n
-  /// Valid range is 1~360 degrees. Default value is 120 degrees.
-  /// @param[in] vertical_degrees    The vertical field of view to display in degrees\n
-  /// Valid range is 1~180 degrees. Default value is 67 degrees.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE              Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_FEATURE_NOT_SUPPORTED_ON_DEVICE Unsupported feature
-  /// @see player_360_get_field_of_view()
+  /// Sets the field of view information of 360 video.
+  ///
+  /// This function is to set the field of view to decide the output frame size.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - values above the default ones extend the field of view to significantly
+  /// - distorted areas and will not be useful in most cases.
+  /// - This function is related to the following features:
+  /// - <http://tizen.org/feature/multimedia.player.spherical_video>
+  /// - <http://tizen.org/feature/opengles.version.2_0>
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `horizontal_degrees` (in): The horizontal field of view to display in degrees Valid range is 1~360 degrees. Default value is 120 degrees.
+  /// - `vertical_degrees` (in): The vertical field of view to display in degrees Valid range is 1~180 degrees. Default value is 67 degrees.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_FEATURE_NOT_SUPPORTED_ON_DEVICE`: Unsupported feature
+  ///
+  /// **See also:**
+  /// - `player_360_get_field_of_view()`
   int player_360_set_field_of_view(
     player_h player,
     int horizontal_degrees,
@@ -4185,24 +5459,34 @@ class Tizen70CapiMediaPlayer {
   late final _player_360_set_field_of_view = _player_360_set_field_of_viewPtr
       .asFunction<int Function(player_h, int, int)>();
 
-  /// @brief Gets the field of view information of 360 video.
-  /// @details This function is to get the field of view information.
-  /// @since_tizen 5.0
-  /// @remarks This function is related to the following features:\n
-  /// %http://tizen.org/feature/multimedia.player.spherical_video\n
-  /// %http://tizen.org/feature/opengles.version.2_0\n
-  /// @param[in]  player              The handle to the media player
-  /// @param[out] horizontal_degrees  Pointer to store current value of horizontal
-  /// field of view to display in degrees.
-  /// @param[out] vertical_degrees    Pointer to store current value of vertical
-  /// field of view to display in degrees.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE              Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_FEATURE_NOT_SUPPORTED_ON_DEVICE Unsupported feature
-  /// @see player_360_set_field_of_view()
+  /// Gets the field of view information of 360 video.
+  ///
+  /// This function is to get the field of view information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - This function is related to the following features:
+  /// - <http://tizen.org/feature/multimedia.player.spherical_video>
+  /// - <http://tizen.org/feature/opengles.version.2_0>
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `horizontal_degrees` (out): Pointer to store current value of horizontal field of view to display in degrees.
+  /// - `vertical_degrees` (out): Pointer to store current value of vertical field of view to display in degrees.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_FEATURE_NOT_SUPPORTED_ON_DEVICE`: Unsupported feature
+  ///
+  /// **See also:**
+  /// - `player_360_set_field_of_view()`
   int player_360_get_field_of_view(
     player_h player,
     ffi.Pointer<ffi.Int> horizontal_degrees,
@@ -4223,35 +5507,40 @@ class Tizen70CapiMediaPlayer {
       _player_360_get_field_of_viewPtr.asFunction<
           int Function(player_h, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the zoom level with field of view information of 360 video.
-  /// @details This function is provided to reduce the distortion of zoom operation.
-  /// The zoom means scaling of the flat image cut from the panorama
-  /// which is decided by the field of view data.
-  /// The zoom level valid range is from 1.0 to 10.0, where 1.0 is the actual image and
-  /// values above are zoom-in factor. Default value is 1.0 - no zoom.
-  /// @since_tizen 5.0
-  /// @remarks The degree values above the default ones extend the field of view to significantly
-  /// distorted areas and will not be useful in most cases.
-  /// @remarks This function is related to the following features:\n
-  /// %http://tizen.org/feature/multimedia.player.spherical_video\n
-  /// %http://tizen.org/feature/opengles.version.2_0\n
-  /// @param[in] player              The handle to the media player
-  /// @param[in] level               The zoom level\n
-  /// Valid range is 1.0~10.0. Default value is 1.0.
-  /// @param[in] horizontal_degrees  The horizontal field of view to display in degrees\n
-  /// Valid range is 1~360 degrees. Default value is 120 degrees.
-  /// @param[in] vertical_degrees    The vertical field of view to display in degrees\n
-  /// Valid range is 1~180 degrees. Default value is 67 degrees.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PLAYER_ERROR_NONE              Successful
-  /// @retval #PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #PLAYER_ERROR_FEATURE_NOT_SUPPORTED_ON_DEVICE Unsupported feature
-  /// @see player_360_set_zoom()
-  /// @see player_360_get_zoom()
-  /// @see player_360_set_field_of_view()
-  /// @see player_360_get_field_of_view()
+  /// Sets the zoom level with field of view information of 360 video.
+  ///
+  /// This function is provided to reduce the distortion of zoom operation. The zoom means scaling of the flat image cut from the panorama which is decided by the field of view data. The zoom level valid range is from 1.0 to 10.0, where 1.0 is the actual image and values above are zoom-in factor. Default value is 1.0 - no zoom.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - The degree values above the default ones extend the field of view to significantly
+  /// - distorted areas and will not be useful in most cases.
+  /// - This function is related to the following features:
+  /// - <http://tizen.org/feature/multimedia.player.spherical_video>
+  /// - <http://tizen.org/feature/opengles.version.2_0>
+  ///
+  /// **Parameters:**
+  /// - `player` (in): The handle to the media player
+  /// - `level` (in): The zoom level Valid range is 1.0~10.0. Default value is 1.0.
+  /// - `horizontal_degrees` (in): The horizontal field of view to display in degrees Valid range is 1~360 degrees. Default value is 120 degrees.
+  /// - `vertical_degrees` (in): The vertical field of view to display in degrees Valid range is 1~180 degrees. Default value is 67 degrees.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PLAYER_ERROR_NONE`: Successful
+  /// - `PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `PLAYER_ERROR_FEATURE_NOT_SUPPORTED_ON_DEVICE`: Unsupported feature
+  ///
+  /// **See also:**
+  /// - `player_360_set_zoom()`
+  /// - `player_360_get_zoom()`
+  /// - `player_360_set_field_of_view()`
+  /// - `player_360_get_field_of_view()`
   int player_360_set_zoom_with_field_of_view(
     player_h player,
     double level,
@@ -4275,10 +5564,14 @@ class Tizen70CapiMediaPlayer {
           .asFunction<int Function(player_h, double, int, int)>();
 }
 
+/// @nodoc
 final class player_s extends ffi.Opaque {}
 
-/// @brief Enumeration for media player state.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Enumeration for media player state.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+/// @nodoc
 abstract class player_state_e {
   /// < Player is not created
   static const int PLAYER_STATE_NONE = 0;
@@ -4296,8 +5589,11 @@ abstract class player_state_e {
   static const int PLAYER_STATE_PAUSED = 4;
 }
 
-/// @brief Enumeration for media player's error codes.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Enumeration for media player's error codes.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+/// @nodoc
 abstract class player_error_e {
   /// < Successful
   static const int PLAYER_ERROR_NONE = 0;
@@ -4381,25 +5677,23 @@ abstract class player_error_e {
   static const int PLAYER_ERROR_NOT_AVAILABLE = -26476494;
 }
 
-/// @brief Enumeration for media player's interruption type.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Enumeration for media player's interruption type.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+/// @nodoc
 abstract class player_interrupted_code_e {
   /// < Interrupted by a resource conflict and the player handle will be paused or unprepared
   static const int PLAYER_INTERRUPTED_BY_RESOURCE_CONFLICT = 4;
 }
 
-/// @brief Enumeration for display type.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-/// @details In case of using #PLAYER_DISPLAY_TYPE_OVERLAY_SYNC_UI, the video is rendering in full scale in the rendering area.\n
-/// To change the video rendering position, use UI API functions like ecore_wl2_subsurface_exported_surface_move(),
-/// ecore_wl2_subsurface_exported_surface_resize(), ecore_wl2_subsurface_exported_surface_transform_set(),
-/// ecore_wl2_subsurface_exported_surface_show() and ecore_wl2_subsurface_exported_surface_commit().\n
-/// player_set_display_mode(), player_set_display_rotation() and player_set_display_roi_area() cannot be used and
-/// #PLAYER_ERROR_NOT_AVAILABLE is returned if they are used.\n
-/// Exported shell handle must be obtained by ecore_wl2_subsurface_exported_surface_handle_get() from Ecore_Wl2_Subsurface.\n
-/// Then the exported shell handle should be set with player_set_display().\n
-/// To render the first video buffer, commit by ecore_wl2_window_commit() after player_prepare() of Ecore_Wl2_Subsurface.\n
-/// Always commit with ecore_wl2_window_commit() with parent surface when the UI changes and the video needs to be synchronized.
+/// Enumeration for display type.
+///
+/// In case of using `PLAYER_DISPLAY_TYPE_OVERLAY_SYNC_UI`, the video is rendering in full scale in the rendering area. To change the video rendering position, use UI API functions like ecore_wl2_subsurface_exported_surface_move(), ecore_wl2_subsurface_exported_surface_resize(), ecore_wl2_subsurface_exported_surface_transform_set(), ecore_wl2_subsurface_exported_surface_show() and ecore_wl2_subsurface_exported_surface_commit(). player_set_display_mode(), player_set_display_rotation() and player_set_display_roi_area() cannot be used and `PLAYER_ERROR_NOT_AVAILABLE` is returned if they are used. Exported shell handle must be obtained by ecore_wl2_subsurface_exported_surface_handle_get() from Ecore_Wl2_Subsurface. Then the exported shell handle should be set with player_set_display(). To render the first video buffer, commit by ecore_wl2_window_commit() after player_prepare() of Ecore_Wl2_Subsurface. Always commit with ecore_wl2_window_commit() with parent surface when the UI changes and the video needs to be synchronized.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+/// @nodoc
 abstract class player_display_type_e {
   /// < Overlay surface display
   static const int PLAYER_DISPLAY_TYPE_OVERLAY = 0;
@@ -4414,8 +5708,11 @@ abstract class player_display_type_e {
   static const int PLAYER_DISPLAY_TYPE_OVERLAY_SYNC_UI = 5;
 }
 
-/// @brief Enumeration for audio latency mode.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Enumeration for audio latency mode.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+/// @nodoc
 abstract class audio_latency_mode_e {
   /// < Low audio latency mode
   static const int AUDIO_LATENCY_MODE_LOW = 0;
@@ -4427,8 +5724,11 @@ abstract class audio_latency_mode_e {
   static const int AUDIO_LATENCY_MODE_HIGH = 2;
 }
 
-/// @brief Enumeration for stream type.
-/// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
+/// Enumeration for stream type.
+///
+/// **Since Tizen:**
+/// - Wearable 3.0; Otherwise 2.4
+/// @nodoc
 abstract class player_stream_type_e {
   /// < Container type
   static const int PLAYER_STREAM_TYPE_DEFAULT = 0;
@@ -4443,10 +5743,15 @@ abstract class player_stream_type_e {
   static const int PLAYER_STREAM_TYPE_TEXT = 3;
 }
 
-/// @brief Enumeration of media stream buffer status.
-/// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-/// @see player_set_media_stream_buffer_max_size()
-/// @see player_set_media_stream_buffer_min_threshold()
+/// Enumeration of media stream buffer status.
+///
+/// **Since Tizen:**
+/// - Wearable 3.0; Otherwise 2.4
+///
+/// **See also:**
+/// - `player_set_media_stream_buffer_max_size()`
+/// - `player_set_media_stream_buffer_min_threshold()`
+/// @nodoc
 abstract class player_media_stream_buffer_status_e {
   /// < The buffer level is lower than the threshold
   static const int PLAYER_MEDIA_STREAM_BUFFER_UNDERRUN = 0;
@@ -4455,9 +5760,14 @@ abstract class player_media_stream_buffer_status_e {
   static const int PLAYER_MEDIA_STREAM_BUFFER_OVERFLOW = 1;
 }
 
-/// @brief Enumeration of audio extract option.
-/// @since_tizen 5.5
-/// @see player_set_media_packet_audio_frame_decoded_cb()
+/// Enumeration of audio extract option.
+///
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **See also:**
+/// - `player_set_media_packet_audio_frame_decoded_cb()`
+/// @nodoc
 abstract class player_audio_extract_option_e {
   /// < Synchronized multichannel audio stream with the playback clock
   static const int PLAYER_AUDIO_EXTRACT_DEFAULT = 0;
@@ -4472,8 +5782,11 @@ abstract class player_audio_extract_option_e {
   static const int PLAYER_AUDIO_EXTRACT_NO_SYNC_AND_DEINTERLEAVE = 3;
 }
 
-/// @brief Enumeration for codec type.
-/// @since_tizen 5.5
+/// Enumeration for codec type.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class player_codec_type_e {
   /// < This is an optional flag for using the H/W codec
   static const int PLAYER_CODEC_TYPE_HW = 0;
@@ -4482,8 +5795,11 @@ abstract class player_codec_type_e {
   static const int PLAYER_CODEC_TYPE_SW = 1;
 }
 
-/// @brief Enumeration for display rotation type.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Enumeration for display rotation type.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+/// @nodoc
 abstract class player_display_rotation_e {
   /// < Display is not rotated
   static const int PLAYER_DISPLAY_ROTATION_NONE = 0;
@@ -4498,8 +5814,11 @@ abstract class player_display_rotation_e {
   static const int PLAYER_DISPLAY_ROTATION_270 = 3;
 }
 
-/// @brief Enumeration for display mode.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Enumeration for display mode.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+/// @nodoc
 abstract class player_display_mode_e {
   /// < Letter box
   static const int PLAYER_DISPLAY_MODE_LETTER_BOX = 0;
@@ -4521,8 +5840,11 @@ abstract class player_display_mode_e {
   static const int PLAYER_DISPLAY_MODE_NUM = 6;
 }
 
-/// @brief Enumeration for media stream content information.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Enumeration for media stream content information.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+/// @nodoc
 abstract class player_content_info_e {
   /// < Album
   static const int PLAYER_CONTENT_INFO_ALBUM = 0;
@@ -4543,86 +5865,146 @@ abstract class player_content_info_e {
   static const int PLAYER_CONTENT_INFO_YEAR = 5;
 }
 
-/// @brief The media player's type handle.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// The media player's type handle.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+/// @nodoc
 typedef player_h = ffi.Pointer<player_s>;
 
-/// @brief Called when the media player is prepared.
-/// @details It will be invoked when player has reached the begin of stream.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-/// @param[in]   user_data  The user data passed from the callback registration function
-/// @pre player_prepare_async() will cause this callback.
-/// @post The player state will be #PLAYER_STATE_READY.
-/// @see player_prepare_async()
+/// Called when the media player is prepared.
+///
+/// It will be invoked when player has reached the begin of stream.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Parameters:**
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - player_prepare_async() will cause this callback.
+///
+/// **Postconditions:**
+/// - The player state will be `PLAYER_STATE_READY`.
+///
+/// **See also:**
+/// - `player_prepare_async()`
+/// @nodoc
 typedef player_prepared_cb
     = ffi.Pointer<ffi.NativeFunction<player_prepared_cbFunction>>;
+/// @nodoc
 typedef player_prepared_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartplayer_prepared_cbFunction = void Function(
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the seek operation is completed.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-/// @param[in]   user_data  The user data passed from the callback registration function
-/// @see player_set_play_position()
-/// @see player_set_play_position_nsec()
+/// Called when the seek operation is completed.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Parameters:**
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `player_set_play_position()`
+/// - `player_set_play_position_nsec()`
+/// @nodoc
 typedef player_seek_completed_cb
     = ffi.Pointer<ffi.NativeFunction<player_seek_completed_cbFunction>>;
+/// @nodoc
 typedef player_seek_completed_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartplayer_seek_completed_cbFunction = void Function(
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The player display handle.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// The player display handle.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+/// @nodoc
 typedef player_display_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called to register for notifications about delivering media packet when each video frame is decoded.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-/// @remarks The UI update code must not be directly invoked.\n
-/// @remarks The @a packet should be released using media_packet_destroy(). \n
-/// If not, the decoder will fail due to having insufficient buffer space for the decoded frame.
+/// Called to register for notifications about delivering media packet when each video frame is decoded.
 ///
-/// @param[in] packet      Reference pointer to the media packet
-/// @param[in] user_data   The user data passed from the callback registration function
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Remarks:**
+/// - The UI update code must not be directly invoked.
+/// - The `packet` should be released using media_packet_destroy().
+/// - If not, the decoder will fail due to having insufficient buffer space for the decoded frame.
+///
+/// **Parameters:**
+/// - `packet` (in): Reference pointer to the media packet
+/// - `user_data` (in): The user data passed from the callback registration function
+/// @nodoc
 typedef player_media_packet_video_decoded_cb = ffi
     .Pointer<ffi.NativeFunction<player_media_packet_video_decoded_cbFunction>>;
+/// @nodoc
 typedef player_media_packet_video_decoded_cbFunction = ffi.Void Function(
     media_tool.media_packet_h packet, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartplayer_media_packet_video_decoded_cbFunction = void Function(
     media_tool.media_packet_h packet, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called to register for notifications about delivering media packet when audio data is decoded.
-/// @since_tizen 5.5
-/// @remarks The @a packet should be released by calling media_packet_destroy(). \n
-/// It is recommended to release it as soon as it is rendered, to avoid memory exhaustion.
+/// Called to register for notifications about delivering media packet when audio data is decoded.
 ///
-/// @param[in] packet      Reference pointer to the media packet
-/// @param[in] user_data   The user data passed from the callback registration function
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **Remarks:**
+/// - The `packet` should be released by calling media_packet_destroy().
+/// - It is recommended to release it as soon as it is rendered, to avoid memory exhaustion.
+///
+/// **Parameters:**
+/// - `packet` (in): Reference pointer to the media packet
+/// - `user_data` (in): The user data passed from the callback registration function
+/// @nodoc
 typedef player_media_packet_audio_decoded_cb = ffi
     .Pointer<ffi.NativeFunction<player_media_packet_audio_decoded_cbFunction>>;
+/// @nodoc
 typedef player_media_packet_audio_decoded_cbFunction = ffi.Void Function(
     media_tool.media_packet_h packet, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartplayer_media_packet_audio_decoded_cbFunction = void Function(
     media_tool.media_packet_h packet, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called to inform about the supported media format MIME type.
-/// @details The supported media format can vary depending on the device capabilities.
-/// @since_tizen 5.5
-/// @param[in] format      The supportable media format MIME type
-/// @param[in] user_data   The user data passed from the callback registration function
-/// @return @c true to continue with the next iteration of the loop, otherwise @c false to break out of the loop
-/// @see #media_format_mimetype_e
-/// @see player_audio_offload_foreach_supported_format()
+/// Called to inform about the supported media format MIME type.
+///
+/// The supported media format can vary depending on the device capabilities.
+///
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **Parameters:**
+/// - `format` (in): The supportable media format MIME type
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **See also:**
+/// - `media_format_mimetype_e`
+/// - `player_audio_offload_foreach_supported_format()`
+/// @nodoc
 typedef player_supported_media_format_cb
     = ffi.Pointer<ffi.NativeFunction<player_supported_media_format_cbFunction>>;
+/// @nodoc
 typedef player_supported_media_format_cbFunction = ffi.Bool Function(
     ffi.Int32 format, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartplayer_supported_media_format_cbFunction = bool Function(
     int format, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumeration for media format MIME type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for media format MIME type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class _media_format_mimetype_e {
   /// < media format mime type is L16, AUDIO
   static const int MEDIA_FORMAT_L16 = 285216784;
@@ -4633,28 +6015,28 @@ abstract class _media_format_mimetype_e {
   /// < media format mime type is ULAW,  AUDIO
   static const int MEDIA_FORMAT_ULAW = 285216816;
 
-  /// < media format mime type is AMR,  AUDIO,  indicates #MEDIA_FORMAT_AMR_NB (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
+  /// < media format mime type is AMR, AUDIO, indicates `MEDIA_FORMAT_AMR_NB` (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
   static const int MEDIA_FORMAT_AMR = 285216832;
 
-  /// < media format mime type is AMR_NB,  AUDIO , (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
+  /// < media format mime type is AMR_NB, AUDIO , (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
   static const int MEDIA_FORMAT_AMR_NB = 285216832;
 
-  /// < media format mime type is AMR_WB,  AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
+  /// < media format mime type is AMR_WB, AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
   static const int MEDIA_FORMAT_AMR_WB = 285216833;
 
   /// < media format mime type is G729,  AUDIO
   static const int MEDIA_FORMAT_G729 = 285216848;
 
-  /// < media format mime type is AAC,  AUDIO, indicates #MEDIA_FORMAT_AAC_LC (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
+  /// < media format mime type is AAC, AUDIO, indicates `MEDIA_FORMAT_AAC_LC` (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
   static const int MEDIA_FORMAT_AAC = 285216864;
 
-  /// < media format mime type is AAC_LC,  AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
+  /// < media format mime type is AAC_LC, AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
   static const int MEDIA_FORMAT_AAC_LC = 285216864;
 
-  /// < media format mime type is AAC_HE,  AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
+  /// < media format mime type is AAC_HE, AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
   static const int MEDIA_FORMAT_AAC_HE = 285216865;
 
-  /// < media format mime type is AAC_HE_PS,  AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
+  /// < media format mime type is AAC_HE_PS, AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
   static const int MEDIA_FORMAT_AAC_HE_PS = 285216866;
 
   /// < media format mime type is MP3,  AUDIO
@@ -4663,22 +6045,22 @@ abstract class _media_format_mimetype_e {
   /// < media format mime type is MP23, AUDIO, (Since 4.0)
   static const int MEDIA_FORMAT_MP2 = 285216881;
 
-  /// < media format mime type is VORBIS,  AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
+  /// < media format mime type is VORBIS, AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
   static const int MEDIA_FORMAT_VORBIS = 285216896;
 
-  /// < media format mime type is FLAC,  AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
+  /// < media format mime type is FLAC, AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
   static const int MEDIA_FORMAT_FLAC = 285216912;
 
-  /// < media format mime type is WMAV1,  AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
+  /// < media format mime type is WMAV1, AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
   static const int MEDIA_FORMAT_WMAV1 = 285216928;
 
-  /// < media format mime type is WMAV2,  AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
+  /// < media format mime type is WMAV2, AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
   static const int MEDIA_FORMAT_WMAV2 = 285216929;
 
-  /// < media format mime type is WMAVPRO,  AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
+  /// < media format mime type is WMAVPRO, AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
   static const int MEDIA_FORMAT_WMAPRO = 285216930;
 
-  /// < media format mime type is WMAVLSL,  AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
+  /// < media format mime type is WMAVLSL, AUDIO, (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
   static const int MEDIA_FORMAT_WMALSL = 285216931;
 
   /// < media format mime type is AC3, AUDIO, (Since 4.0)
@@ -4946,53 +6328,85 @@ abstract class _media_format_mimetype_e {
   static const int MEDIA_FORMAT_MAX = 318799905;
 }
 
-/// @brief Called when the buffer level drops below the threshold of max size or no free space in buffer.
-/// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-/// @remarks This function is used for media stream playback only.
-/// @param[in] status The buffer status
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see player_set_media_stream_buffer_status_cb()
-/// @see player_set_media_stream_buffer_max_size()
-/// @see player_set_media_stream_buffer_min_threshold()
+/// Called when the buffer level drops below the threshold of max size or no free space in buffer.
+///
+/// **Since Tizen:**
+/// - Wearable 3.0; Otherwise 2.4
+///
+/// **Remarks:**
+/// - This function is used for media stream playback only.
+///
+/// **Parameters:**
+/// - `status` (in): The buffer status
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `player_set_media_stream_buffer_status_cb()`
+/// - `player_set_media_stream_buffer_max_size()`
+/// - `player_set_media_stream_buffer_min_threshold()`
+/// @nodoc
 typedef player_media_stream_buffer_status_cb = ffi
     .Pointer<ffi.NativeFunction<player_media_stream_buffer_status_cbFunction>>;
+/// @nodoc
 typedef player_media_stream_buffer_status_cbFunction = ffi.Void Function(
     ffi.Int32 status, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartplayer_media_stream_buffer_status_cbFunction = void Function(
     int status, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called to notify the next push-buffer offset when seeking is occurred.
-/// @details The next push-buffer should produce buffers from the new offset.
-/// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-/// @remarks This function is used for media stream playback only.
-/// @param[in] offset The new byte position to seek
-/// @param[in] user_data The user data passed from the callback registration function
+/// Called to notify the next push-buffer offset when seeking is occurred.
+///
+/// The next push-buffer should produce buffers from the new offset.
+///
+/// **Since Tizen:**
+/// - Wearable 3.0; Otherwise 2.4
+///
+/// **Remarks:**
+/// - This function is used for media stream playback only.
+///
+/// **Parameters:**
+/// - `offset` (in): The new byte position to seek
+/// - `user_data` (in): The user data passed from the callback registration function
+/// @nodoc
 typedef player_media_stream_seek_cb
     = ffi.Pointer<ffi.NativeFunction<player_media_stream_seek_cbFunction>>;
+/// @nodoc
 typedef player_media_stream_seek_cbFunction = ffi.Void Function(
     ffi.UnsignedLongLong offset, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartplayer_media_stream_seek_cbFunction = void Function(
     int offset, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the video is captured.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-/// @remarks The color space format of the captured image is #IMAGE_UTIL_COLORSPACE_RGB888.
-/// @remarks The @a captured_data should not be released and it can be used only in the callback.
-/// To use outside, make a copy.
-/// @param[in] captured_data     The captured image buffer
-/// @param[in] width             The width of the captured image
-/// @param[in] height            The height of the captured image
-/// @param[in] size              The size of the captured image
-/// @param[in] user_data         The user data passed from the callback registration function
-/// @see player_capture_video()
+/// Called when the video is captured.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Remarks:**
+/// - The color space format of the captured image is `IMAGE_UTIL_COLORSPACE_RGB888`.
+/// - The `captured_data` should not be released and it can be used only in the callback.
+/// - To use outside, make a copy.
+///
+/// **Parameters:**
+/// - `captured_data` (in): The captured image buffer
+/// - `width` (in): The width of the captured image
+/// - `height` (in): The height of the captured image
+/// - `size` (in): The size of the captured image
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `player_capture_video()`
+/// @nodoc
 typedef player_video_captured_cb
     = ffi.Pointer<ffi.NativeFunction<player_video_captured_cbFunction>>;
+/// @nodoc
 typedef player_video_captured_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.UnsignedChar> captured_data,
     ffi.Int width,
     ffi.Int height,
     ffi.UnsignedInt size,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartplayer_video_captured_cbFunction = void Function(
     ffi.Pointer<ffi.UnsignedChar> captured_data,
     int width,
@@ -5000,136 +6414,194 @@ typedef Dartplayer_video_captured_cbFunction = void Function(
     int size,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the media player is completed.
-/// @details It will be invoked when player has reached the end of the stream.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-/// @param[in]   user_data  The user data passed from the callback registration function
-/// @pre It will be invoked when the playback is completed if you register this callback using player_set_completed_cb().
-/// @see player_set_completed_cb()
-/// @see player_unset_completed_cb()
+/// Called when the media player is completed.
+///
+/// It will be invoked when player has reached the end of the stream.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Parameters:**
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - It will be invoked when the playback is completed if you register this callback using player_set_completed_cb().
+///
+/// **See also:**
+/// - `player_set_completed_cb()`
+/// - `player_unset_completed_cb()`
+/// @nodoc
 typedef player_completed_cb
     = ffi.Pointer<ffi.NativeFunction<player_completed_cbFunction>>;
+/// @nodoc
 typedef player_completed_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartplayer_completed_cbFunction = void Function(
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the media player is interrupted.
-/// @details If the code is #PLAYER_INTERRUPTED_BY_RESOURCE_CONFLICT,
-/// the player state will be one of #PLAYER_STATE_IDLE, #PLAYER_STATE_READY, or #PLAYER_STATE_PAUSED.
-/// Application should get exact state by calling player_get_state().
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-/// @param[in] code        The interrupted error code
-/// @param[in] user_data   The user data passed from the callback registration function
-/// @see player_set_interrupted_cb()
-/// @see player_unset_interrupted_cb()
-/// @see player_get_state()
+/// Called when the media player is interrupted.
+///
+/// If the code is `PLAYER_INTERRUPTED_BY_RESOURCE_CONFLICT`, the player state will be one of `PLAYER_STATE_IDLE`, `PLAYER_STATE_READY`, or `PLAYER_STATE_PAUSED`. Application should get exact state by calling player_get_state().
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Parameters:**
+/// - `code` (in): The interrupted error code
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `player_set_interrupted_cb()`
+/// - `player_unset_interrupted_cb()`
+/// - `player_get_state()`
+/// @nodoc
 typedef player_interrupted_cb
     = ffi.Pointer<ffi.NativeFunction<player_interrupted_cbFunction>>;
+/// @nodoc
 typedef player_interrupted_cbFunction = ffi.Void Function(
     ffi.Int32 code, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartplayer_interrupted_cbFunction = void Function(
     int code, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when an error occurs in the media player.
-/// @details Following error codes can be delivered.
-/// #PLAYER_ERROR_INVALID_OPERATION
-/// #PLAYER_ERROR_INVALID_STATE
-/// #PLAYER_ERROR_INVALID_URI
-/// #PLAYER_ERROR_CONNECTION_FAILED
-/// #PLAYER_ERROR_DRM_NOT_PERMITTED
-/// #PLAYER_ERROR_FILE_NO_SPACE_ON_DEVICE
-/// #PLAYER_ERROR_NOT_SUPPORTED_FILE
-/// #PLAYER_ERROR_SEEK_FAILED
-/// #PLAYER_ERROR_SERVICE_DISCONNECTED
-/// #PLAYER_ERROR_NOT_SUPPORTED_AUDIO_CODEC (Since 4.0)
-/// #PLAYER_ERROR_NOT_SUPPORTED_VIDEO_CODEC (Since 4.0)
-/// #PLAYER_ERROR_NOT_SUPPORTED_SUBTITLE (Since 4.0)
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-/// @param[in] error_code  The error code
-/// @param[in] user_data   The user data passed from the callback registration function
-/// @see player_set_error_cb()
-/// @see player_unset_error_cb()
+/// Called when an error occurs in the media player.
+///
+/// Following error codes can be delivered. `PLAYER_ERROR_INVALID_OPERATION` `PLAYER_ERROR_INVALID_STATE` `PLAYER_ERROR_INVALID_URI` `PLAYER_ERROR_CONNECTION_FAILED` `PLAYER_ERROR_DRM_NOT_PERMITTED` `PLAYER_ERROR_FILE_NO_SPACE_ON_DEVICE` `PLAYER_ERROR_NOT_SUPPORTED_FILE` `PLAYER_ERROR_SEEK_FAILED` `PLAYER_ERROR_SERVICE_DISCONNECTED` `PLAYER_ERROR_NOT_SUPPORTED_AUDIO_CODEC` (Since 4.0) `PLAYER_ERROR_NOT_SUPPORTED_VIDEO_CODEC` (Since 4.0) `PLAYER_ERROR_NOT_SUPPORTED_SUBTITLE` (Since 4.0)
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Parameters:**
+/// - `error_code` (in): The error code
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `player_set_error_cb()`
+/// - `player_unset_error_cb()`
+/// @nodoc
 typedef player_error_cb
     = ffi.Pointer<ffi.NativeFunction<player_error_cbFunction>>;
+/// @nodoc
 typedef player_error_cbFunction = ffi.Void Function(
     ffi.Int error_code, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartplayer_error_cbFunction = void Function(
     int error_code, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the buffering percentage of the media playback is updated.
-/// @details If the buffer is full, it will return 100%.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-/// @param[in] percent     The percentage of buffering completed (0~100)
-/// @param[in] user_data   The user data passed from the callback registration function
-/// @see player_set_buffering_cb()
-/// @see player_unset_buffering_cb()
+/// Called when the buffering percentage of the media playback is updated.
+///
+/// If the buffer is full, it will return 100%.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Parameters:**
+/// - `percent` (in): The percentage of buffering completed (0~100)
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `player_set_buffering_cb()`
+/// - `player_unset_buffering_cb()`
+/// @nodoc
 typedef player_buffering_cb
     = ffi.Pointer<ffi.NativeFunction<player_buffering_cbFunction>>;
+/// @nodoc
 typedef player_buffering_cbFunction = ffi.Void Function(
     ffi.Int percent, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartplayer_buffering_cbFunction = void Function(
     int percent, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief  Called when the subtitle is updated.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-/// @remarks The @a text should not be released and it can be used only in the callback.
-/// To use outside, make a copy.
-/// @param[in] duration    The duration of the updated subtitle
-/// @param[in] text        The text of the updated subtitle
-/// @param[in] user_data   The user data passed from the callback registration function
-/// @see player_set_subtitle_updated_cb()
-/// @see player_unset_subtitle_updated_cb()
+/// Called when the subtitle is updated.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Remarks:**
+/// - The `text` should not be released and it can be used only in the callback.
+/// - To use outside, make a copy.
+///
+/// **Parameters:**
+/// - `duration` (in): The duration of the updated subtitle
+/// - `text` (in): The text of the updated subtitle
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `player_set_subtitle_updated_cb()`
+/// - `player_unset_subtitle_updated_cb()`
+/// @nodoc
 typedef player_subtitle_updated_cb
     = ffi.Pointer<ffi.NativeFunction<player_subtitle_updated_cbFunction>>;
+/// @nodoc
 typedef player_subtitle_updated_cbFunction = ffi.Void Function(
     ffi.UnsignedLong duration,
     ffi.Pointer<ffi.Char> text,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartplayer_subtitle_updated_cbFunction = void Function(
     int duration, ffi.Pointer<ffi.Char> text, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called to notify the video stream changed.
-/// @details The video stream changing is detected just before rendering operation.
-/// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-/// @param[in] width       The width of the captured image
-/// @param[in] height      The height of the captured image
-/// @param[in] fps         The frame per second of the video \n
-/// It can be @c 0 if there is no video stream information.
-/// @param[in] bit_rate    The video bit rate [Hz] \n
-/// It can be an invalid value if there is no video stream information.
-/// @param[in] user_data   The user data passed from the callback registration function
-/// @see player_set_video_stream_changed_cb()
+/// Called to notify the video stream changed.
+///
+/// The video stream changing is detected just before rendering operation.
+///
+/// **Since Tizen:**
+/// - Wearable 3.0; Otherwise 2.4
+///
+/// **Parameters:**
+/// - `width` (in): The width of the captured image
+/// - `height` (in): The height of the captured image
+/// - `fps` (in): The frame per second of the video It can be `0` if there is no video stream information.
+/// - `bit_rate` (in): The video bit rate `[Hz]` It can be an invalid value if there is no video stream information.
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `player_set_video_stream_changed_cb()`
+/// @nodoc
 typedef player_video_stream_changed_cb
     = ffi.Pointer<ffi.NativeFunction<player_video_stream_changed_cbFunction>>;
+/// @nodoc
 typedef player_video_stream_changed_cbFunction = ffi.Void Function(
     ffi.Int width,
     ffi.Int height,
     ffi.Int fps,
     ffi.Int bit_rate,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartplayer_video_stream_changed_cbFunction = void Function(int width,
     int height, int fps, int bit_rate, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called to notify the streaming variant information.
-/// @details The adaptive streaming protocol(hls, mpeg dash) can support variant stream condition.
-/// All the streaming variant information can be shared by calling player_foreach_adaptive_variant().
-/// @since_tizen 4.0
-/// @param[in] bandwidth   The bandwidth of the stream can be supportable, this is mandatory parameter
-/// @param[in] width       The width of the stream, this is optional parameter
-/// @param[in] height      The height of the stream, this is optional parameter
-/// @param[in] user_data   The user data passed from the callback registration function
-/// @see player_foreach_adaptive_variant()
+/// Called to notify the streaming variant information.
+///
+/// The adaptive streaming protocol(hls, mpeg dash) can support variant stream condition. All the streaming variant information can be shared by calling player_foreach_adaptive_variant().
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Parameters:**
+/// - `bandwidth` (in): The bandwidth of the stream can be supportable, this is mandatory parameter
+/// - `width` (in): The width of the stream, this is optional parameter
+/// - `height` (in): The height of the stream, this is optional parameter
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `player_foreach_adaptive_variant()`
+/// @nodoc
 typedef player_adaptive_variant_cb
     = ffi.Pointer<ffi.NativeFunction<player_adaptive_variant_cbFunction>>;
+/// @nodoc
 typedef player_adaptive_variant_cbFunction = ffi.Void Function(
     ffi.Int bandwidth,
     ffi.Int width,
     ffi.Int height,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartplayer_adaptive_variant_cbFunction = void Function(
     int bandwidth, int width, int height, ffi.Pointer<ffi.Void> user_data);
 
+/// @nodoc
 const int PLAYER_ERROR_CLASS = -26476512;
 
+/// @nodoc
 const int PLAYER_CUSTOM_ERROR_CLASS = -26472448;

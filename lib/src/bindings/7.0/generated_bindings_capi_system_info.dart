@@ -1,3 +1,6 @@
+/// {@category 7.0/tizen}
+library tizen_interop_7_0.capi_system_info;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-system-info APIs.
+/// {@category 7.0/tizen}
 class Tizen70CapiSystemInfo {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,16 +28,23 @@ class Tizen70CapiSystemInfo {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Gets the boolean value of the @a platform feature.
-  /// @since_tizen 2.3
-  /// @param[in] key The name of the platform feature to get
-  /// @param[out] value The value of the given platform feature
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SYSTEM_INFO_ERROR_NONE Successful
-  /// @retval #SYSTEM_INFO_ERROR_INVALID_PARAMETER Cannot find the @a key in the model config file
-  /// @retval #SYSTEM_INFO_ERROR_IO_ERROR An input/output error occurred while reading the @a value from the model config file
-  /// @retval #SYSTEM_INFO_ERROR_PERMISSION_DENIED No permission to use the API
+  /// Gets the boolean value of the `platform` feature.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The name of the platform feature to get
+  /// - `value` (out): The value of the given platform feature
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SYSTEM_INFO_ERROR_NONE`: Successful
+  /// - `SYSTEM_INFO_ERROR_INVALID_PARAMETER`: Cannot find the `key` in the model config file
+  /// - `SYSTEM_INFO_ERROR_IO_ERROR`: An input/output error occurred while reading the `value` from the model config file
+  /// - `SYSTEM_INFO_ERROR_PERMISSION_DENIED`: No permission to use the API
   int system_info_get_platform_bool(
     ffi.Pointer<ffi.Char> key,
     ffi.Pointer<ffi.Bool> value,
@@ -51,16 +62,23 @@ class Tizen70CapiSystemInfo {
   late final _system_info_get_platform_bool = _system_info_get_platform_boolPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets the integer value of the @a platform feature.
-  /// @since_tizen 2.3
-  /// @param[in] key The name of the platform feature to get
-  /// @param[out] value The value of the given platform feature
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SYSTEM_INFO_ERROR_NONE Successful
-  /// @retval #SYSTEM_INFO_ERROR_INVALID_PARAMETER Cannot find the @a key in the model config file
-  /// @retval #SYSTEM_INFO_ERROR_IO_ERROR An input/output error occurred while reading the @a value from the model config file
-  /// @retval #SYSTEM_INFO_ERROR_PERMISSION_DENIED No permission to use the API
+  /// Gets the integer value of the `platform` feature.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The name of the platform feature to get
+  /// - `value` (out): The value of the given platform feature
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SYSTEM_INFO_ERROR_NONE`: Successful
+  /// - `SYSTEM_INFO_ERROR_INVALID_PARAMETER`: Cannot find the `key` in the model config file
+  /// - `SYSTEM_INFO_ERROR_IO_ERROR`: An input/output error occurred while reading the `value` from the model config file
+  /// - `SYSTEM_INFO_ERROR_PERMISSION_DENIED`: No permission to use the API
   int system_info_get_platform_int(
     ffi.Pointer<ffi.Char> key,
     ffi.Pointer<ffi.Int> value,
@@ -78,16 +96,23 @@ class Tizen70CapiSystemInfo {
   late final _system_info_get_platform_int = _system_info_get_platform_intPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the double value of the @a platform feature.
-  /// @since_tizen 2.3
-  /// @param[in] key The name of the platform feature to get
-  /// @param[out] value The value of the given platform feature
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SYSTEM_INFO_ERROR_NONE Successful
-  /// @retval #SYSTEM_INFO_ERROR_INVALID_PARAMETER Cannot find the @a key in the model config file
-  /// @retval #SYSTEM_INFO_ERROR_IO_ERROR An input/output error occurred while reading the @a value from the model config file
-  /// @retval #SYSTEM_INFO_ERROR_PERMISSION_DENIED No permission to use the API
+  /// Gets the double value of the `platform` feature.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The name of the platform feature to get
+  /// - `value` (out): The value of the given platform feature
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SYSTEM_INFO_ERROR_NONE`: Successful
+  /// - `SYSTEM_INFO_ERROR_INVALID_PARAMETER`: Cannot find the `key` in the model config file
+  /// - `SYSTEM_INFO_ERROR_IO_ERROR`: An input/output error occurred while reading the `value` from the model config file
+  /// - `SYSTEM_INFO_ERROR_PERMISSION_DENIED`: No permission to use the API
   int system_info_get_platform_double(
     ffi.Pointer<ffi.Char> key,
     ffi.Pointer<ffi.Double> value,
@@ -106,18 +131,27 @@ class Tizen70CapiSystemInfo {
       _system_info_get_platform_doublePtr.asFunction<
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Double>)>();
 
-  /// @brief Gets the string value of the @a platform feature.
-  /// @since_tizen 2.3
-  /// @remarks You must release the @a value using free().
-  /// @param[in] key The name of the platform feature to get
-  /// @param[out] value The value of the given platform feature
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SYSTEM_INFO_ERROR_NONE Successful
-  /// @retval #SYSTEM_INFO_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #SYSTEM_INFO_ERROR_INVALID_PARAMETER Cannot find the @a key in the model config file
-  /// @retval #SYSTEM_INFO_ERROR_IO_ERROR An input/output error occurred while reading the @a value from the model config file
-  /// @retval #SYSTEM_INFO_ERROR_PERMISSION_DENIED No permission to use the API
+  /// Gets the string value of the `platform` feature.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - You must release the `value` using free().
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The name of the platform feature to get
+  /// - `value` (out): The value of the given platform feature
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SYSTEM_INFO_ERROR_NONE`: Successful
+  /// - `SYSTEM_INFO_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SYSTEM_INFO_ERROR_INVALID_PARAMETER`: Cannot find the `key` in the model config file
+  /// - `SYSTEM_INFO_ERROR_IO_ERROR`: An input/output error occurred while reading the `value` from the model config file
+  /// - `SYSTEM_INFO_ERROR_PERMISSION_DENIED`: No permission to use the API
   int system_info_get_platform_string(
     ffi.Pointer<ffi.Char> key,
     ffi.Pointer<ffi.Pointer<ffi.Char>> value,
@@ -138,16 +172,23 @@ class Tizen70CapiSystemInfo {
           int Function(
               ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the boolean value of the @a custom feature.
-  /// @since_tizen 2.3
-  /// @param[in] key The name of the custom feature to get. NOTE: This custom function uses a custom key which is provided by OEM's
-  /// @param[out] value The value of the given custom feature
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SYSTEM_INFO_ERROR_NONE Successful
-  /// @retval #SYSTEM_INFO_ERROR_INVALID_PARAMETER Cannot find the @a key in the model config file
-  /// @retval #SYSTEM_INFO_ERROR_IO_ERROR An input/output error occurred while reading the @a value from the model config file
-  /// @retval #SYSTEM_INFO_ERROR_PERMISSION_DENIED No permission to use the API
+  /// Gets the boolean value of the `custom` feature.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The name of the custom feature to get. NOTE: This custom function uses a custom key which is provided by OEM's
+  /// - `value` (out): The value of the given custom feature
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SYSTEM_INFO_ERROR_NONE`: Successful
+  /// - `SYSTEM_INFO_ERROR_INVALID_PARAMETER`: Cannot find the `key` in the model config file
+  /// - `SYSTEM_INFO_ERROR_IO_ERROR`: An input/output error occurred while reading the `value` from the model config file
+  /// - `SYSTEM_INFO_ERROR_PERMISSION_DENIED`: No permission to use the API
   int system_info_get_custom_bool(
     ffi.Pointer<ffi.Char> key,
     ffi.Pointer<ffi.Bool> value,
@@ -165,16 +206,23 @@ class Tizen70CapiSystemInfo {
   late final _system_info_get_custom_bool = _system_info_get_custom_boolPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets the integer value of the @a custom feature.
-  /// @since_tizen 2.3
-  /// @param[in] key The name of the custom feature to get. NOTE: This custom function uses a custom key which is provided by OEM's
-  /// @param[out] value The value of the given custom feature
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SYSTEM_INFO_ERROR_NONE Successful
-  /// @retval #SYSTEM_INFO_ERROR_INVALID_PARAMETER Cannot the find @a key in the model config file
-  /// @retval #SYSTEM_INFO_ERROR_IO_ERROR An input/output error occurred while reading the @a value from the model config file
-  /// @retval #SYSTEM_INFO_ERROR_PERMISSION_DENIED No permission to use the API
+  /// Gets the integer value of the `custom` feature.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The name of the custom feature to get. NOTE: This custom function uses a custom key which is provided by OEM's
+  /// - `value` (out): The value of the given custom feature
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SYSTEM_INFO_ERROR_NONE`: Successful
+  /// - `SYSTEM_INFO_ERROR_INVALID_PARAMETER`: Cannot the find `key` in the model config file
+  /// - `SYSTEM_INFO_ERROR_IO_ERROR`: An input/output error occurred while reading the `value` from the model config file
+  /// - `SYSTEM_INFO_ERROR_PERMISSION_DENIED`: No permission to use the API
   int system_info_get_custom_int(
     ffi.Pointer<ffi.Char> key,
     ffi.Pointer<ffi.Int> value,
@@ -192,16 +240,23 @@ class Tizen70CapiSystemInfo {
   late final _system_info_get_custom_int = _system_info_get_custom_intPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the double value of the @a custom feature.
-  /// @since_tizen 2.3
-  /// @param[in] key The name of the custom feature to get. NOTE: This custom function uses a custom key which is provided by OEM's
-  /// @param[out] value The value of the given custom feature
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SYSTEM_INFO_ERROR_NONE Successful
-  /// @retval #SYSTEM_INFO_ERROR_INVALID_PARAMETER Cannot find the @a key in the model config file
-  /// @retval #SYSTEM_INFO_ERROR_IO_ERROR An input/output error occurred while reading the @a value from the model config file
-  /// @retval #SYSTEM_INFO_ERROR_PERMISSION_DENIED No permission to use the API
+  /// Gets the double value of the `custom` feature.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The name of the custom feature to get. NOTE: This custom function uses a custom key which is provided by OEM's
+  /// - `value` (out): The value of the given custom feature
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SYSTEM_INFO_ERROR_NONE`: Successful
+  /// - `SYSTEM_INFO_ERROR_INVALID_PARAMETER`: Cannot find the `key` in the model config file
+  /// - `SYSTEM_INFO_ERROR_IO_ERROR`: An input/output error occurred while reading the `value` from the model config file
+  /// - `SYSTEM_INFO_ERROR_PERMISSION_DENIED`: No permission to use the API
   int system_info_get_custom_double(
     ffi.Pointer<ffi.Char> key,
     ffi.Pointer<ffi.Double> value,
@@ -220,18 +275,27 @@ class Tizen70CapiSystemInfo {
       _system_info_get_custom_doublePtr.asFunction<
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Double>)>();
 
-  /// @brief Gets the string value of the @a custom feature.
-  /// @since_tizen 2.3
-  /// @remarks You must release the @a value using free().
-  /// @param[in] key The name of the custom feature to get. NOTE: This custom function uses a custom key which is provided by OEM's
-  /// @param[out] value The value of the given custom feature
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SYSTEM_INFO_ERROR_NONE Successful
-  /// @retval #SYSTEM_INFO_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #SYSTEM_INFO_ERROR_INVALID_PARAMETER Cannot find the @a key in the model config file
-  /// @retval #SYSTEM_INFO_ERROR_IO_ERROR An input/output error occurred while reading the @a value from the model config file
-  /// @retval #SYSTEM_INFO_ERROR_PERMISSION_DENIED No permission to use the API
+  /// Gets the string value of the `custom` feature.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - You must release the `value` using free().
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The name of the custom feature to get. NOTE: This custom function uses a custom key which is provided by OEM's
+  /// - `value` (out): The value of the given custom feature
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SYSTEM_INFO_ERROR_NONE`: Successful
+  /// - `SYSTEM_INFO_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SYSTEM_INFO_ERROR_INVALID_PARAMETER`: Cannot find the `key` in the model config file
+  /// - `SYSTEM_INFO_ERROR_IO_ERROR`: An input/output error occurred while reading the `value` from the model config file
+  /// - `SYSTEM_INFO_ERROR_PERMISSION_DENIED`: No permission to use the API
   int system_info_get_custom_string(
     ffi.Pointer<ffi.Char> key,
     ffi.Pointer<ffi.Pointer<ffi.Char>> value,
@@ -252,8 +316,7 @@ class Tizen70CapiSystemInfo {
           int Function(
               ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @internal
-  /// @brief Do not use it. It will be removed.
+  /// Do not use it. It will be removed.
   int system_info_get_value_int(
     int key,
     ffi.Pointer<ffi.Int> value,
@@ -271,8 +334,7 @@ class Tizen70CapiSystemInfo {
   late final _system_info_get_value_int = _system_info_get_value_intPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Int>)>();
 
-  /// @internal
-  /// @brief Do not use it. It will be removed.
+  /// Do not use it. It will be removed.
   int system_info_get_value_bool(
     int key,
     ffi.Pointer<ffi.Bool> value,
@@ -290,8 +352,7 @@ class Tizen70CapiSystemInfo {
   late final _system_info_get_value_bool = _system_info_get_value_boolPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Bool>)>();
 
-  /// @internal
-  /// @brief Do not use it. It will be removed.
+  /// Do not use it. It will be removed.
   int system_info_get_value_double(
     int key,
     ffi.Pointer<ffi.Double> value,
@@ -309,8 +370,7 @@ class Tizen70CapiSystemInfo {
   late final _system_info_get_value_double = _system_info_get_value_doublePtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Double>)>();
 
-  /// @internal
-  /// @brief Do not use it. It will be removed.
+  /// Do not use it. It will be removed.
   int system_info_get_value_string(
     int key,
     ffi.Pointer<ffi.Pointer<ffi.Char>> value,
@@ -328,8 +388,7 @@ class Tizen70CapiSystemInfo {
   late final _system_info_get_value_string = _system_info_get_value_stringPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @internal
-  /// @brief It is not decided if it should be opened to public.
+  /// It is not decided if it should be opened to public.
   int system_info_get_platform_type(
     ffi.Pointer<ffi.Char> key,
     ffi.Pointer<ffi.Int32> type,
@@ -348,8 +407,7 @@ class Tizen70CapiSystemInfo {
       _system_info_get_platform_typePtr.asFunction<
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Int32>)>();
 
-  /// @internal
-  /// @brief It is not decided if it should be opened to public.
+  /// It is not decided if it should be opened to public.
   int system_info_get_custom_type(
     ffi.Pointer<ffi.Char> key,
     ffi.Pointer<ffi.Int32> type,
@@ -369,7 +427,8 @@ class Tizen70CapiSystemInfo {
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Int32>)>();
 }
 
-/// @brief Enumeration for system information error codes.
+/// Enumeration for system information error codes.
+/// @nodoc
 abstract class system_info_error_e {
   /// < Successful
   static const int SYSTEM_INFO_ERROR_NONE = 0;
@@ -390,8 +449,8 @@ abstract class system_info_error_e {
   static const int SYSTEM_INFO_ERROR_NOT_SUPPORTED = -1073741822;
 }
 
-/// @internal
-/// @brief It is not decided if it should be opened to public.
+/// It is not decided if it should be opened to public.
+/// @nodoc
 abstract class system_info_type_e {
   static const int SYSTEM_INFO_TYPE_MIN = 0;
   static const int SYSTEM_INFO_BOOL = 0;
@@ -401,8 +460,8 @@ abstract class system_info_type_e {
   static const int SYSTEM_INFO_TYPE_MAX = 4;
 }
 
-/// @internal
-/// @brief Enumeration for system information key.
+/// Enumeration for system information key.
+/// @nodoc
 abstract class system_info_key_e {
   /// < @internal The model of the device
   static const int SYSTEM_INFO_KEY_MODEL = 0;

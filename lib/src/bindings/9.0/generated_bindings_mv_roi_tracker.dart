@@ -1,3 +1,6 @@
+/// {@category 9.0/tizen}
+library tizen_interop_9_0.mv_roi_tracker;
+
 // Copyright 2026 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'generated_bindings_mv_common.dart' as mv_common;
 
 /// Dart bindings for Tizen mv_roi_tracker APIs.
+/// {@category 9.0/tizen}
 class Tizen90MvRoiTracker {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,22 +29,30 @@ class Tizen90MvRoiTracker {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates tracker handle.
-  /// @details Use this function to create a tracker handle.
+  /// Creates tracker handle.
   ///
-  /// @since_tizen 7.0
+  /// Use this function to create a tracker handle.
   ///
-  /// @remarks The @a handle should be released using mv_roi_tracker_destroy().
+  /// **Since Tizen:**
+  /// - 7.0
   ///
-  /// @param[out] handle   The handle to the tracker to be created
+  /// **Remarks:**
+  /// - The `handle` should be released using mv_roi_tracker_destroy().
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Parameters:**
+  /// - `handle` (out): The handle to the tracker to be created
   ///
-  /// @see mv_roi_tracker_destroy()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `mv_roi_tracker_destroy()`
   int mv_roi_tracker_create(
     ffi.Pointer<mv_roi_tracker_h> handle,
   ) {
@@ -55,17 +67,23 @@ class Tizen90MvRoiTracker {
   late final _mv_roi_tracker_create = _mv_roi_tracker_createPtr
       .asFunction<int Function(ffi.Pointer<mv_roi_tracker_h>)>();
 
-  /// @brief Destroys tracker handle and release all its resources.
+  /// Destroys tracker handle and release all its resources.
   ///
-  /// @since_tizen 7.0
+  /// **Since Tizen:**
+  /// - 7.0
   ///
-  /// @param[in] handle    The handle to the tracker object to be destroyed
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the tracker object to be destroyed
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre Create tracker handle by using mv_roi_tracker_create()
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create tracker handle by using mv_roi_tracker_create()
   int mv_roi_tracker_destroy(
     mv_roi_tracker_h handle,
   ) {
@@ -80,21 +98,24 @@ class Tizen90MvRoiTracker {
   late final _mv_roi_tracker_destroy =
       _mv_roi_tracker_destroyPtr.asFunction<int Function(mv_roi_tracker_h)>();
 
-  /// @brief Configures the attributes of the roi tracker.
-  /// @details Use this function to configure the attributes of the roi tracker
-  /// which is set to @a engine_config.
+  /// Configures the attributes of the roi tracker.
   ///
-  /// @since_tizen 7.0
+  /// Use this function to configure the attributes of the roi tracker which is set to `engine_config`.
   ///
-  /// @param[in] handle         The handle to the roi tracker
-  /// @param[in] engine_config The handle to the configuration of
-  /// engine.
+  /// **Since Tizen:**
+  /// - 7.0
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// in @a engine_config
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the roi tracker
+  /// - `engine_config` (in): The handle to the configuration of engine.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter in `engine_config`
   int mv_roi_tracker_configure(
     mv_roi_tracker_h handle,
     mv_common.mv_engine_config_h engine_config,
@@ -113,21 +134,27 @@ class Tizen90MvRoiTracker {
       _mv_roi_tracker_configurePtr.asFunction<
           int Function(mv_roi_tracker_h, mv_common.mv_engine_config_h)>();
 
-  /// @brief Prepares roi tracker.
-  /// @details Use this function to prepare roi tracker based on
-  /// the configuration. ROI related variables are used when 'mv_roi_tracker_perform()' is executed.
+  /// Prepares roi tracker.
   ///
-  /// @since_tizen 7.0
+  /// Use this function to prepare roi tracker based on the configuration. ROI related variables are used when 'mv_roi_tracker_perform()' is executed.
   ///
-  /// @param[in] handle    The handle to the roi tracker
-  /// @param[in] x         The x coordinate to set ROI to be tracked
-  /// @param[in] y         The y coordinate to set ROI to be tracked
-  /// @param[in] width     The width to set ROI to be tracked
-  /// @param[in] height    The height to set ROI to be tracked
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the roi tracker
+  /// - `x` (in): The x coordinate to set ROI to be tracked
+  /// - `y` (in): The y coordinate to set ROI to be tracked
+  /// - `width` (in): The width to set ROI to be tracked
+  /// - `height` (in): The height to set ROI to be tracked
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
   int mv_roi_tracker_prepare(
     mv_roi_tracker_h handle,
     int x,
@@ -151,28 +178,32 @@ class Tizen90MvRoiTracker {
   late final _mv_roi_tracker_prepare = _mv_roi_tracker_preparePtr
       .asFunction<int Function(mv_roi_tracker_h, int, int, int, int)>();
 
-  /// @brief Tracks with a given tracker on the @a source.
-  /// @details Use this function to track with a given source and ROI information which is set to 'mv_roi_tracker_prepare()'.
-  /// This function returns a proper ROI coordinates of the tracked region inside given source.
+  /// Tracks with a given tracker on the `source`.
   ///
-  /// @since_tizen 7.0
+  /// Use this function to track with a given source and ROI information which is set to 'mv_roi_tracker_prepare()'. This function returns a proper ROI coordinates of the tracked region inside given source.
   ///
-  /// @param[in]  handle     The handle to the tracker object.
-  /// @param[in]  source     The handle to the source of the media.
-  /// @param[in]  tracked_cb The callback which will receive the tracked results.
-  /// @param[in]  user_data  The user data passed from the code where
-  /// mv_roi_tracker_perform() is invoked.
-  /// This data will be accessible in @a tracked_cb callback.
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIA_VISION_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT Source colorspace
-  /// isn't supported
+  /// **Since Tizen:**
+  /// - 7.0
   ///
-  /// @pre Create a new tracker handle by calling mv_roi_tracker_create()
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the tracker object.
+  /// - `source` (in): The handle to the source of the media.
+  /// - `tracked_cb` (in): The callback which will receive the tracked results.
+  /// - `user_data` (in): The user data passed from the code where mv_roi_tracker_perform() is invoked. This data will be accessible in `tracked_cb` callback.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_VISION_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT`: Source colorspace isn't supported
+  ///
+  /// **Preconditions:**
+  /// - Create a new tracker handle by calling mv_roi_tracker_create()
   int mv_roi_tracker_perform(
     mv_roi_tracker_h handle,
     mv_common.mv_source_h source,
@@ -199,9 +230,13 @@ class Tizen90MvRoiTracker {
           mv_roi_tracker_tracked_cb, ffi.Pointer<ffi.Void>)>();
 }
 
-/// @brief The ROI tracker result structure.
-/// @details Contains roi tracker result such as coordinates.
-/// @since_tizen 7.0
+/// The ROI tracker result structure.
+///
+/// Contains roi tracker result such as coordinates.
+///
+/// **Since Tizen:**
+/// - 7.0
+/// @nodoc
 final class mv_roi_tracker_result_s extends ffi.Struct {
   /// < Left-top x coordinate of tracked region
   @ffi.Int()
@@ -224,8 +259,11 @@ final class mv_roi_tracker_result_s extends ffi.Struct {
   external bool initialized;
 }
 
-/// @brief Enumeration for ROI tracker type.
-/// @since_tizen 7.0
+/// Enumeration for ROI tracker type.
+///
+/// **Since Tizen:**
+/// - 7.0
+/// @nodoc
 abstract class mv_roi_tracker_type_e {
   /// < None
   static const int MV_ROI_TRACKER_TYPE_NONE = 0;
@@ -240,40 +278,49 @@ abstract class mv_roi_tracker_type_e {
   static const int MV_ROI_TRACKER_TYPE_SPEED = 3;
 }
 
-/// @brief The ROI tracker handle.
-/// @since_tizen 7.0
+/// The ROI tracker handle.
+///
+/// **Since Tizen:**
+/// - 7.0
+/// @nodoc
 typedef mv_roi_tracker_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when roi in @a source are detected.
-/// @details This type callback is invoked each time when
-/// mv_roi_tracker_perform() is called to provide
-/// the results of the tracked roi.
+/// Called when roi in `source` are detected.
 ///
-/// @since_tizen 7.0
-/// @remarks The @a roi should not be released by app. They can be used only in the callback.
+/// This type callback is invoked each time when mv_roi_tracker_perform() is called to provide the results of the tracked roi.
 ///
-/// @param[in] source     The handle to the source of the media where
-/// roi tracker were performed. @a source is the same object
-/// for which mv_roi_tracker_perform() was called.
-/// It should be released by calling mv_destroy_source()
-/// when it's not needed anymore.
-/// @param[in] roi        Roi of the tracked result.
-/// @param[in] user_data  The user data passed from callback invoking code
+/// **Since Tizen:**
+/// - 7.0
 ///
-/// @see mv_roi_tracker_perform()
+/// **Remarks:**
+/// - The `roi` should not be released by app. They can be used only in the callback.
+///
+/// **Parameters:**
+/// - `source` (in): The handle to the source of the media where roi tracker were performed. `source` is the same object for which mv_roi_tracker_perform() was called. It should be released by calling mv_destroy_source() when it's not needed anymore.
+/// - `roi` (in): Roi of the tracked result.
+/// - `user_data` (in): The user data passed from callback invoking code
+///
+/// **See also:**
+/// - `mv_roi_tracker_perform()`
+/// @nodoc
 typedef mv_roi_tracker_tracked_cb
     = ffi.Pointer<ffi.NativeFunction<mv_roi_tracker_tracked_cbFunction>>;
+/// @nodoc
 typedef mv_roi_tracker_tracked_cbFunction = ffi.Void Function(
     mv_common.mv_source_h source,
     mv_common.mv_rectangle_s roi,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmv_roi_tracker_tracked_cbFunction = void Function(
     mv_common.mv_source_h source,
     mv_common.mv_rectangle_s roi,
     ffi.Pointer<ffi.Void> user_data);
 
+/// @nodoc
 const int MAX_LABEL_LEN = 128;
 
+/// @nodoc
 const int MAX_LABEL_CNT = 100;
 
+/// @nodoc
 const String MV_ROI_TRACKER_TYPE = 'MV_ROI_TRACKER_TYPE';

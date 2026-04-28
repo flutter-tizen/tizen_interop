@@ -1,3 +1,6 @@
+/// {@category 8.0/tizen}
+library tizen_interop_8_0.capi_media_controller;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'generated_bindings_bundle.dart' as bundle;
 
 /// Dart bindings for Tizen capi-media-controller APIs.
+/// {@category 8.0/tizen}
 class Tizen80CapiMediaController {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,26 +29,33 @@ class Tizen80CapiMediaController {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Gets the name of the playlist.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Gets the name of the playlist.
   ///
-  /// @remarks The @a playlist_name should be released using free().
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @param[in] playlist         The handle of the media controller playlist
-  /// @param[out] playlist_name      The name of the playlist
+  /// **Remarks:**
+  /// - The `playlist_name` should be released using free().
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `playlist` (in): The handle of the media controller playlist
+  /// - `playlist_name` (out): The name of the playlist
   ///
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre The playlist handle should be received by calling mc_playlist_foreach_playlist() or mc_playlist_get_playlist().
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
   ///
-  /// @see mc_playlist_foreach_playlist()
-  /// @see mc_playlist_get_playlist()
-  /// @see mc_playlist_destroy()
+  /// **Preconditions:**
+  /// - The playlist handle should be received by calling mc_playlist_foreach_playlist() or mc_playlist_get_playlist().
+  ///
+  /// **See also:**
+  /// - `mc_playlist_foreach_playlist()`
+  /// - `mc_playlist_get_playlist()`
+  /// - `mc_playlist_destroy()`
   int mc_playlist_get_name(
     mc_playlist_h playlist,
     ffi.Pointer<ffi.Pointer<ffi.Char>> playlist_name,
@@ -62,24 +73,30 @@ class Tizen80CapiMediaController {
   late final _mc_playlist_get_name = _mc_playlist_get_namePtr.asFunction<
       int Function(mc_playlist_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the number of the media item in a playlist.
-  /// @since_tizen 5.5
+  /// Gets the number of the media item in a playlist.
   ///
-  /// @param[in] playlist        The handle of the media controller playlist
-  /// @param[out] item_count      The number of media items.
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `playlist` (in): The handle of the media controller playlist
+  /// - `item_count` (out): The number of media items.
   ///
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre The playlist handle should be received by calling mc_playlist_foreach_playlist() or mc_playlist_get_playlist().
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
   ///
-  /// @see mc_playlist_foreach_playlist()
-  /// @see mc_playlist_get_playlist()
-  /// @see mc_playlist_destroy()
+  /// **Preconditions:**
+  /// - The playlist handle should be received by calling mc_playlist_foreach_playlist() or mc_playlist_get_playlist().
+  ///
+  /// **See also:**
+  /// - `mc_playlist_foreach_playlist()`
+  /// - `mc_playlist_get_playlist()`
+  /// - `mc_playlist_destroy()`
   int mc_playlist_get_item_count(
     mc_playlist_h playlist,
     ffi.Pointer<ffi.Int> item_count,
@@ -97,31 +114,38 @@ class Tizen80CapiMediaController {
   late final _mc_playlist_get_item_count = _mc_playlist_get_item_countPtr
       .asFunction<int Function(mc_playlist_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Iterates through media items in a playlist.
-  /// @details This function iterates through all items in the playlist.
-  /// The callback function will be invoked for every retrieved playlist item.
-  /// If there are no items on the playlist, the callback will not be invoked.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Iterates through media items in a playlist.
   ///
-  /// @param[in] playlist        The handle of the media controller playlist
-  /// @param[in] callback       The callback function to be invoked
-  /// @param[in] user_data     The user data to be passed to the callback function
+  /// This function iterates through all items in the playlist. The callback function will be invoked for every retrieved playlist item. If there are no items on the playlist, the callback will not be invoked.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Parameters:**
+  /// - `playlist` (in): The handle of the media controller playlist
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @pre The playlist handle should be received by calling mc_playlist_foreach_playlist() or mc_playlist_get_playlist().
-  /// @post This function invokes mc_playlist_item_cb().
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see mc_playlist_foreach_playlist()
-  /// @see mc_playlist_get_playlist()
-  /// @see mc_playlist_item_cb()
-  /// @see mc_playlist_destroy()
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - The playlist handle should be received by calling mc_playlist_foreach_playlist() or mc_playlist_get_playlist().
+  ///
+  /// **Postconditions:**
+  /// - This function invokes mc_playlist_item_cb().
+  ///
+  /// **See also:**
+  /// - `mc_playlist_foreach_playlist()`
+  /// - `mc_playlist_get_playlist()`
+  /// - `mc_playlist_item_cb()`
+  /// - `mc_playlist_destroy()`
   int mc_playlist_foreach_item(
     mc_playlist_h playlist,
     mc_playlist_item_cb callback,
@@ -143,30 +167,39 @@ class Tizen80CapiMediaController {
           int Function(
               mc_playlist_h, mc_playlist_item_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the number of playlists for the given @a app_id.
-  /// @details The media controller server can have several playlists. You can get a count of playlists only for the activated media controller server.
-  /// If @a app_id is not the ID of an activated media controller server, this function returns #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER.
-  /// @since_tizen 5.5
+  /// Gets the number of playlists for the given `app_id`.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server \n
-  /// %http://tizen.org/privilege/mediacontroller.client \n
+  /// The media controller server can have several playlists. You can get a count of playlists only for the activated media controller server. If `app_id` is not the ID of an activated media controller server, this function returns `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`.
   ///
-  /// @remarks You must add privilege %http://tizen.org/privilege/mediacontroller.server, if your application is a media controller server.
-  /// You must add privilege %http://tizen.org/privilege/mediacontroller.client, if your application is a media controller client.
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in] app_id                The app_id of the media controller server
-  /// @param[out] playlist_count      The number of playlists that the media controller server has.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
+  /// - <http://tizen.org/privilege/mediacontroller.client>
   ///
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
+  /// **Remarks:**
+  /// - You must add privilege http://tizen.org/privilege/mediacontroller.server, if your application is a media controller server.
+  /// - You must add privilege http://tizen.org/privilege/mediacontroller.client, if your application is a media controller client.
   ///
-  /// @see mc_client_foreach_server()
+  /// **Parameters:**
+  /// - `app_id` (in): The app_id of the media controller server
+  /// - `playlist_count` (out): The number of playlists that the media controller server has.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `mc_client_foreach_server()`
   int mc_playlist_get_playlist_count(
     ffi.Pointer<ffi.Char> app_id,
     ffi.Pointer<ffi.Int> playlist_count,
@@ -185,37 +218,44 @@ class Tizen80CapiMediaController {
       _mc_playlist_get_playlist_countPtr.asFunction<
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Iterates over playlists of the media controller server.
-  /// @details This function iterates through all playlists of the given @a app_id.
-  /// The media controller server can have several playlists. You can get playlists only for the activated media controller server.
-  /// If @a app_id is not an ID of an activated media controller server, this function will return #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER.
-  /// The callback function will be invoked for every retrieved playlist.
-  /// If there are no playlists, the callback will not be invoked.
-  /// @since_tizen 5.5
+  /// Iterates over playlists of the media controller server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server \n
-  /// %http://tizen.org/privilege/mediacontroller.client \n
+  /// This function iterates through all playlists of the given `app_id`. The media controller server can have several playlists. You can get playlists only for the activated media controller server. If `app_id` is not an ID of an activated media controller server, this function will return `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`. The callback function will be invoked for every retrieved playlist. If there are no playlists, the callback will not be invoked.
   ///
-  /// @remarks You must add privilege %http://tizen.org/privilege/mediacontroller.server, if your application is a media controller server.
-  /// You must add privilege %http://tizen.org/privilege/mediacontroller.client, if your application is a media controller client.
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in] app_id         The app_id of the media controller server
-  /// @param[in] callback       The callback function to be invoked
-  /// @param[in] user_data     The user data to be passed to the callback function
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
+  /// - <http://tizen.org/privilege/mediacontroller.client>
   ///
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Remarks:**
+  /// - You must add privilege http://tizen.org/privilege/mediacontroller.server, if your application is a media controller server.
+  /// - You must add privilege http://tizen.org/privilege/mediacontroller.client, if your application is a media controller client.
   ///
-  /// @post This function invokes mc_playlist_cb().
+  /// **Parameters:**
+  /// - `app_id` (in): The app_id of the media controller server
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @see mc_playlist_cb()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Postconditions:**
+  /// - This function invokes mc_playlist_cb().
+  ///
+  /// **See also:**
+  /// - `mc_playlist_cb()`
   int mc_playlist_foreach_playlist(
     ffi.Pointer<ffi.Char> app_id,
     mc_playlist_cb callback,
@@ -237,38 +277,45 @@ class Tizen80CapiMediaController {
           int Function(
               ffi.Pointer<ffi.Char>, mc_playlist_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the playlist handle.
-  /// @details This function creates a new playlist handle for the given @a app_id and @a playlist_name.
-  /// You can get the playlist only for the activated media controller server.
-  /// If @a app_id is not an ID of an activated media controller server, or if @a playlist_name is invalid, \n
-  /// this function will return #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER.
-  /// @since_tizen 5.5
+  /// Gets the playlist handle.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server \n
-  /// %http://tizen.org/privilege/mediacontroller.client \n
+  /// This function creates a new playlist handle for the given `app_id` and `playlist_name`. You can get the playlist only for the activated media controller server. If `app_id` is not an ID of an activated media controller server, or if `playlist_name` is invalid, this function will return `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`.
   ///
-  /// @remarks You must add privilege %http://tizen.org/privilege/mediacontroller.server, if your application is a media controller server.
-  /// You must add privilege %http://tizen.org/privilege/mediacontroller.client, if your application is a media controller client.
-  /// The @a playlist should be released using mc_playlist_destroy().
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in] app_id         The app_id of the media controller server
-  /// @param[in] playlist_name The name of the playlist
-  /// @param[out] playlist       The handle of the media controller playlist
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
+  /// - <http://tizen.org/privilege/mediacontroller.client>
   ///
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Remarks:**
+  /// - You must add privilege http://tizen.org/privilege/mediacontroller.server, if your application is a media controller server.
+  /// - You must add privilege http://tizen.org/privilege/mediacontroller.client, if your application is a media controller client.
+  /// - The `playlist` should be released using mc_playlist_destroy().
   ///
-  /// @see mc_playlist_get_name()
-  /// @see mc_playlist_get_item_count()
-  /// @see mc_playlist_foreach_item()
-  /// @see mc_playlist_destroy()
+  /// **Parameters:**
+  /// - `app_id` (in): The app_id of the media controller server
+  /// - `playlist_name` (in): The name of the playlist
+  /// - `playlist` (out): The handle of the media controller playlist
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `mc_playlist_get_name()`
+  /// - `mc_playlist_get_item_count()`
+  /// - `mc_playlist_foreach_item()`
+  /// - `mc_playlist_destroy()`
   int mc_playlist_get_playlist(
     ffi.Pointer<ffi.Char> app_id,
     ffi.Pointer<ffi.Char> playlist_name,
@@ -290,25 +337,30 @@ class Tizen80CapiMediaController {
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
               ffi.Pointer<mc_playlist_h>)>();
 
-  /// @brief Clones a media controller playlist handle.
-  /// @details This function copies the media controller playlist handle from a source to
-  /// destination. The #mc_playlist_h is created internally and available through media controller playlist functions.
+  /// Clones a media controller playlist handle.
   ///
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// This function copies the media controller playlist handle from a source to destination. The `mc_playlist_h` is created internally and available through media controller playlist functions.
   ///
-  /// @remarks The @a dst should be released using mc_playlist_destroy().
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @param[in] src The source handle to the media controller playlist
-  /// @param[out] dst The destination handle to the media controller playlist
+  /// **Remarks:**
+  /// - The `dst` should be released using mc_playlist_destroy().
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `src` (in): The source handle to the media controller playlist
+  /// - `dst` (out): The destination handle to the media controller playlist
   ///
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see mc_playlist_destroy()
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `mc_playlist_destroy()`
   int mc_playlist_clone(
     mc_playlist_h src,
     ffi.Pointer<mc_playlist_h> dst,
@@ -326,22 +378,25 @@ class Tizen80CapiMediaController {
   late final _mc_playlist_clone = _mc_playlist_clonePtr
       .asFunction<int Function(mc_playlist_h, ffi.Pointer<mc_playlist_h>)>();
 
-  /// @brief Destroys a media controller playlist handle.
-  /// @details This function frees all resources related to the media controller playlist handle. This
-  /// handle no longer can be used to perform any operations. A new handle has to
-  /// be created before next usage.
+  /// Destroys a media controller playlist handle.
   ///
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// This function frees all resources related to the media controller playlist handle. This handle no longer can be used to perform any operations. A new handle has to be created before next usage.
   ///
-  /// @param[in] playlist        The handle of the media controller playlist
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `playlist` (in): The handle of the media controller playlist
   ///
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see mc_playlist_clone()
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `mc_playlist_clone()`
   int mc_playlist_destroy(
     mc_playlist_h playlist,
   ) {
@@ -356,25 +411,30 @@ class Tizen80CapiMediaController {
   late final _mc_playlist_destroy =
       _mc_playlist_destroyPtr.asFunction<int Function(mc_playlist_h)>();
 
-  /// @brief Clones the metadata handle of media.
-  /// @details This function copies the metadata handle from one to another.
-  /// The #mc_metadata_h is created internally and therefore available through the functions of media controller metadata.
+  /// Clones the metadata handle of media.
   ///
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// This function copies the metadata handle from one to another. The `mc_metadata_h` is created internally and therefore available through the functions of media controller metadata.
   ///
-  /// @remarks The @a dst should be released using @c mc_metadata_destroy().
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @param[in] src The source handle of the media controller metadata
-  /// @param[out] dst The destination handle of the media controller metadata
+  /// **Remarks:**
+  /// - The `dst` should be released using `mc_metadata_destroy(`).
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `src` (in): The source handle of the media controller metadata
+  /// - `dst` (out): The destination handle of the media controller metadata
   ///
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see mc_metadata_destroy()
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `mc_metadata_destroy()`
   int mc_metadata_clone(
     mc_metadata_h src,
     ffi.Pointer<mc_metadata_h> dst,
@@ -392,22 +452,25 @@ class Tizen80CapiMediaController {
   late final _mc_metadata_clone = _mc_metadata_clonePtr
       .asFunction<int Function(mc_metadata_h, ffi.Pointer<mc_metadata_h>)>();
 
-  /// @brief Destroys a media controller metadata handle.
-  /// @details This function frees all resources related to the media controller metadata handle. This
-  /// handle no longer can be used to perform any operations. A new handle has to
-  /// be created before next usage.
+  /// Destroys a media controller metadata handle.
   ///
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// This function frees all resources related to the media controller metadata handle. This handle no longer can be used to perform any operations. A new handle has to be created before next usage.
   ///
-  /// @param[in] metadata        The handle of the media controller metadata
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `metadata` (in): The handle of the media controller metadata
   ///
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see mc_metadata_clone()
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `mc_metadata_clone()`
   int mc_metadata_destroy(
     mc_metadata_h metadata,
   ) {
@@ -422,28 +485,34 @@ class Tizen80CapiMediaController {
   late final _mc_metadata_destroy =
       _mc_metadata_destroyPtr.asFunction<int Function(mc_metadata_h)>();
 
-  /// @brief Gets the metadata.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Gets the metadata.
   ///
-  /// @remarks The @a value should be released using free(). \n
-  /// If the attribute value of the metadata is empty, return value is NULL.
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @param[in] metadata    The handle of the media controller metadata
-  /// @param[in] attribute    The key attribute name to get
-  /// @param[out] value      The value of the attribute
+  /// **Remarks:**
+  /// - The `value` should be released using free().
+  /// - If the attribute value of the metadata is empty, return value is NULL.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `metadata` (in): The handle of the media controller metadata
+  /// - `attribute` (in): The key attribute name to get
+  /// - `value` (out): The value of the attribute
   ///
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre Sets mc_client_set_metadata_updated_cb() function to get the metadata if you are media controller client. \n
-  /// and also you can use this function when get the metadata when callback function invoked in @c mc_playlist_foreach_item().
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
   ///
-  /// @see mc_client_set_metadata_updated_cb()
-  /// @see mc_playlist_foreach_item()
+  /// **Preconditions:**
+  /// - Sets mc_client_set_metadata_updated_cb() function to get the metadata if you are media controller client. and also you can use this function when get the metadata when callback function invoked in `mc_playlist_foreach_item(`).
+  ///
+  /// **See also:**
+  /// - `mc_client_set_metadata_updated_cb()`
+  /// - `mc_playlist_foreach_item()`
   int mc_metadata_get(
     mc_metadata_h metadata,
     int attribute,
@@ -463,30 +532,33 @@ class Tizen80CapiMediaController {
   late final _mc_metadata_get = _mc_metadata_getPtr.asFunction<
       int Function(mc_metadata_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Encodes the season metadata of the media.
-  /// @details You can set various metadata with functions such as mc_server_set_metadata() and mc_server_add_item_to_playlist().
-  /// If you want to set the season,\n
-  /// you should encode the season with this function and then set the encoded data.\n
-  /// Otherwise, the setting function returns an error. \n
-  /// @a season_title can be NULL. If it is NULL, the decoded season title will also be NULL.\n
-  /// @since_tizen 5.5
+  /// Encodes the season metadata of the media.
   ///
-  /// @remarks The @a encoded_season should be released using free(). \n
+  /// You can set various metadata with functions such as mc_server_set_metadata() and mc_server_add_item_to_playlist(). If you want to set the season, you should encode the season with this function and then set the encoded data. Otherwise, the setting function returns an error. `season_title` can be NULL. If it is NULL, the decoded season title will also be NULL.
   ///
-  /// @param[in] season_num    The season number
-  /// @param[in] season_title     The season title
-  /// @param[out] encoded_season         The encoded season information
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - The `encoded_season` should be released using free().
   ///
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Parameters:**
+  /// - `season_num` (in): The season number
+  /// - `season_title` (in): The season title
+  /// - `encoded_season` (out): The encoded season information
   ///
-  /// @see mc_server_set_metadata()
-  /// @see mc_server_add_item_to_playlist()
-  /// @see mc_metadata_decode_season()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `mc_server_set_metadata()`
+  /// - `mc_server_add_item_to_playlist()`
+  /// - `mc_metadata_decode_season()`
   int mc_metadata_encode_season(
     int season_num,
     ffi.Pointer<ffi.Char> season_title,
@@ -509,30 +581,33 @@ class Tizen80CapiMediaController {
           int Function(int, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Encodes the episode metadata of the media.
-  /// @details You can set various metadata with functions such as mc_server_set_metadata() and mc_server_add_item_to_playlist().
-  /// If you want to set the episode,\n
-  /// you should encode the episode with this function and then set the encoded data.\n
-  /// Otherwise, the setting function returns an error. \n
-  /// @a episode_title can be NULL. If it is NULL, the decoded episode title will also be NULL.\n
-  /// @since_tizen 5.5
+  /// Encodes the episode metadata of the media.
   ///
-  /// @remarks The @a encoded_episode should be released using free(). \n
+  /// You can set various metadata with functions such as mc_server_set_metadata() and mc_server_add_item_to_playlist(). If you want to set the episode, you should encode the episode with this function and then set the encoded data. Otherwise, the setting function returns an error. `episode_title` can be NULL. If it is NULL, the decoded episode title will also be NULL.
   ///
-  /// @param[in] episode_num    The episode number
-  /// @param[in] episode_title     The episode title
-  /// @param[out] encoded_episode         The encoded episode information
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - The `encoded_episode` should be released using free().
   ///
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Parameters:**
+  /// - `episode_num` (in): The episode number
+  /// - `episode_title` (in): The episode title
+  /// - `encoded_episode` (out): The encoded episode information
   ///
-  /// @see mc_server_set_metadata()
-  /// @see mc_server_add_item_to_playlist()
-  /// @see mc_metadata_decode_episode()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `mc_server_set_metadata()`
+  /// - `mc_server_add_item_to_playlist()`
+  /// - `mc_metadata_decode_episode()`
   int mc_metadata_encode_episode(
     int episode_num,
     ffi.Pointer<ffi.Char> episode_title,
@@ -555,29 +630,33 @@ class Tizen80CapiMediaController {
           int Function(int, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Encodes the resolution metadata of the media.
-  /// @details You can set various metadata with functions such as mc_server_set_metadata() and mc_server_add_item_to_playlist().
-  /// If you want to set the resolution,\n
-  /// you should encode the resolution with this function and then set the encoded data.\n
-  /// Otherwise, the setting function returns an error. \n
-  /// @since_tizen 5.5
+  /// Encodes the resolution metadata of the media.
   ///
-  /// @remarks The @a encoded_resolution should be released using free(). \n
+  /// You can set various metadata with functions such as mc_server_set_metadata() and mc_server_add_item_to_playlist(). If you want to set the resolution, you should encode the resolution with this function and then set the encoded data. Otherwise, the setting function returns an error.
   ///
-  /// @param[in] width                Content width
-  /// @param[in] height               Content height
-  /// @param[out] encoded_resolution         The encoded resolution information
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - The `encoded_resolution` should be released using free().
   ///
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Parameters:**
+  /// - `width` (in): Content width
+  /// - `height` (in): Content height
+  /// - `encoded_resolution` (out): The encoded resolution information
   ///
-  /// @see mc_server_set_metadata()
-  /// @see mc_server_add_item_to_playlist()
-  /// @see mc_metadata_decode_resolution()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `mc_server_set_metadata()`
+  /// - `mc_server_add_item_to_playlist()`
+  /// - `mc_metadata_decode_resolution()`
   int mc_metadata_encode_resolution(
     int width,
     int height,
@@ -598,30 +677,35 @@ class Tizen80CapiMediaController {
   late final _mc_metadata_encode_resolution = _mc_metadata_encode_resolutionPtr
       .asFunction<int Function(int, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Decodes the season of the media.
-  /// @details You can get various metadata using mc_metadata_get().
-  /// If you want to get the proper season number and season title,\n
-  /// you should decode the metadata values gotten by mc_metadata_get() with this function.\n
-  /// Otherwise, the values are illegible. \n
-  /// @since_tizen 5.5
+  /// Decodes the season of the media.
   ///
-  /// @remarks The @a season_title should be released using free(). \n
+  /// You can get various metadata using mc_metadata_get(). If you want to get the proper season number and season title, you should decode the metadata values gotten by mc_metadata_get() with this function. Otherwise, the values are illegible.
   ///
-  /// @param[in] encoded_season                The encoded season information
-  /// @param[out] season_num        The season number
-  /// @param[out] season_title         The season title
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - The `season_title` should be released using free().
   ///
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Parameters:**
+  /// - `encoded_season` (in): The encoded season information
+  /// - `season_num` (out): The season number
+  /// - `season_title` (out): The season title
   ///
-  /// @pre Get the encoded season information by calling mc_metadata_get()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see mc_metadata_get()
-  /// @see mc_metadata_encode_season()
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Get the encoded season information by calling mc_metadata_get()
+  ///
+  /// **See also:**
+  /// - `mc_metadata_get()`
+  /// - `mc_metadata_encode_season()`
   int mc_metadata_decode_season(
     ffi.Pointer<ffi.Char> encoded_season,
     ffi.Pointer<ffi.Int> season_num,
@@ -644,30 +728,35 @@ class Tizen80CapiMediaController {
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Int>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Decodes the episode of the media.
-  /// @details You can get various metadata using mc_metadata_get().
-  /// If you want to get the proper episode number and episode title,\n
-  /// you should decode the metadata values gotten by mc_metadata_get() with this function.\n
-  /// Otherwise, the values are illegible. \n
-  /// @since_tizen 5.5
+  /// Decodes the episode of the media.
   ///
-  /// @remarks The @a episode_title should be released using free(). \n
+  /// You can get various metadata using mc_metadata_get(). If you want to get the proper episode number and episode title, you should decode the metadata values gotten by mc_metadata_get() with this function. Otherwise, the values are illegible.
   ///
-  /// @param[in] encoded_episode                The encoded episode information
-  /// @param[out] episode_num        The episode number
-  /// @param[out] episode_title         The episode title
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - The `episode_title` should be released using free().
   ///
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Parameters:**
+  /// - `encoded_episode` (in): The encoded episode information
+  /// - `episode_num` (out): The episode number
+  /// - `episode_title` (out): The episode title
   ///
-  /// @pre Get the encoded episode information by calling mc_metadata_get()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see mc_metadata_get()
-  /// @see mc_metadata_encode_episode()
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Get the encoded episode information by calling mc_metadata_get()
+  ///
+  /// **See also:**
+  /// - `mc_metadata_get()`
+  /// - `mc_metadata_encode_episode()`
   int mc_metadata_decode_episode(
     ffi.Pointer<ffi.Char> encoded_episode,
     ffi.Pointer<ffi.Int> episode_num,
@@ -690,28 +779,32 @@ class Tizen80CapiMediaController {
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Int>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Decodes the resolution of the media.
-  /// @details You can get various metadata using mc_metadata_get().
-  /// If you want to get the proper resolution, \n
-  /// you should decode the metadata values gotten by mc_metadata_get() with this function.\n
-  /// Otherwise, the values are illegible. \n
-  /// @since_tizen 5.5
+  /// Decodes the resolution of the media.
   ///
-  /// @param[in] encoded_resolution    The encoded resolution information
-  /// @param[out] width        Content width
-  /// @param[out] height       Content height
+  /// You can get various metadata using mc_metadata_get(). If you want to get the proper resolution, you should decode the metadata values gotten by mc_metadata_get() with this function. Otherwise, the values are illegible.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Parameters:**
+  /// - `encoded_resolution` (in): The encoded resolution information
+  /// - `width` (out): Content width
+  /// - `height` (out): Content height
   ///
-  /// @pre Get the encoded resolution information by calling mc_metadata_get()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see mc_metadata_get()
-  /// @see mc_metadata_encode_resolution()
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Get the encoded resolution information by calling mc_metadata_get()
+  ///
+  /// **See also:**
+  /// - `mc_metadata_get()`
+  /// - `mc_metadata_encode_resolution()`
   int mc_metadata_decode_resolution(
     ffi.Pointer<ffi.Char> encoded_resolution,
     ffi.Pointer<ffi.UnsignedInt> width,
@@ -733,25 +826,30 @@ class Tizen80CapiMediaController {
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.UnsignedInt>,
               ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Clones a playback ability handle.
-  /// @details This function copies the playback ability handle from a source to
-  /// destination. The #mc_playback_ability_h is created internally and available through playback ability functions.
+  /// Clones a playback ability handle.
   ///
-  /// @since_tizen 5.0
+  /// This function copies the playback ability handle from a source to destination. The `mc_playback_ability_h` is created internally and available through playback ability functions.
   ///
-  /// @remarks The @a dst should be released using @c mc_playback_ability_destroy().
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] src The source handle of the playback ability
-  /// @param[out] dst The destination handle of the playback ability
+  /// **Remarks:**
+  /// - The `dst` should be released using `mc_playback_ability_destroy(`).
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `src` (in): The source handle of the playback ability
+  /// - `dst` (out): The destination handle of the playback ability
   ///
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see mc_playback_ability_destroy()
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `mc_playback_ability_destroy()`
   int mc_playback_ability_clone(
     mc_playback_ability_h src,
     ffi.Pointer<mc_playback_ability_h> dst,
@@ -772,22 +870,25 @@ class Tizen80CapiMediaController {
           int Function(
               mc_playback_ability_h, ffi.Pointer<mc_playback_ability_h>)>();
 
-  /// @brief Destroys a playback ability handle.
-  /// @details This function frees all resources related to the playback ability handle. This
-  /// handle no longer can be used to perform any operations. A new handle has to
-  /// be created before next use.
+  /// Destroys a playback ability handle.
   ///
-  /// @since_tizen 5.0
+  /// This function frees all resources related to the playback ability handle. This handle no longer can be used to perform any operations. A new handle has to be created before next use.
   ///
-  /// @param[in] ability        The handle of the playback ability
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `ability` (in): The handle of the playback ability
   ///
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see mc_playback_ability_clone()
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `mc_playback_ability_clone()`
   int mc_playback_ability_destroy(
     mc_playback_ability_h ability,
   ) {
@@ -802,26 +903,33 @@ class Tizen80CapiMediaController {
   late final _mc_playback_ability_destroy = _mc_playback_ability_destroyPtr
       .asFunction<int Function(mc_playback_ability_h)>();
 
-  /// @brief Gets the support value of the playback ability.
-  /// @since_tizen 5.0
+  /// Gets the support value of the playback ability.
   ///
-  /// @remarks If the ability's support is not set, the result value is #MC_ABILITY_SUPPORTED_UNDECIDED.
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] ability    The handle of the playback ability
-  /// @param[in] action    The playback action to get
-  /// @param[out] supported      The support value of the ability
+  /// **Remarks:**
+  /// - If the ability's support is not set, the result value is `MC_ABILITY_SUPPORTED_UNDECIDED`.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `ability` (in): The handle of the playback ability
+  /// - `action` (in): The playback action to get
+  /// - `supported` (out): The support value of the ability
   ///
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre Call the mc_client_set_playback_ability_updated_cb() function to get the ability if you are the media controller client.
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
   ///
-  /// @see mc_client_set_playback_ability_updated_cb()
-  /// @see mc_client_get_server_playback_ability()
+  /// **Preconditions:**
+  /// - Call the mc_client_set_playback_ability_updated_cb() function to get the ability if you are the media controller client.
+  ///
+  /// **See also:**
+  /// - `mc_client_set_playback_ability_updated_cb()`
+  /// - `mc_client_get_server_playback_ability()`
   int mc_playback_action_is_supported(
     mc_playback_ability_h ability,
     int action,
@@ -842,19 +950,28 @@ class Tizen80CapiMediaController {
       _mc_playback_action_is_supportedPtr.asFunction<
           int Function(mc_playback_ability_h, int, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Creates a handle for searching media.
-  /// @since_tizen 5.0
+  /// Creates a handle for searching media.
   ///
-  /// @remarks The @a search should be released using @c mc_search_destroy().
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[out] search The handle of the media controller search
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see mc_search_set_condition()
-  /// @see mc_search_foreach_condition()
+  /// **Remarks:**
+  /// - The `search` should be released using `mc_search_destroy(`).
+  ///
+  /// **Parameters:**
+  /// - `search` (out): The handle of the media controller search
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `mc_search_set_condition()`
+  /// - `mc_search_foreach_condition()`
   int mc_search_create(
     ffi.Pointer<mc_search_h> search,
   ) {
@@ -869,23 +986,33 @@ class Tizen80CapiMediaController {
   late final _mc_search_create =
       _mc_search_createPtr.asFunction<int Function(ffi.Pointer<mc_search_h>)>();
 
-  /// @brief Sets the information to search.
-  /// @details Sets the information to search. You can set various search condition by calling this function for the same search handle. \n
-  /// But it's not allowed to set more than 20 conditions. If you try to set more than 20 conditions, this function will return #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER.
-  /// @since_tizen 5.0
+  /// Sets the information to search.
   ///
-  /// @param[in] search The handle of the media controller search
-  /// @param[in] content_type The content type to search
-  /// @param[in] category The category to search
-  /// @param[in] search_keyword The key word to search
-  /// @param[in] data The extra data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
-  /// @pre mc_search_create()
-  /// @see mc_search_foreach_condition()
+  /// Sets the information to search. You can set various search condition by calling this function for the same search handle. But it's not allowed to set more than 20 conditions. If you try to set more than 20 conditions, this function will return `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `search` (in): The handle of the media controller search
+  /// - `content_type` (in): The content type to search
+  /// - `category` (in): The category to search
+  /// - `search_keyword` (in): The key word to search
+  /// - `data` (in): The extra data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - mc_search_create()
+  ///
+  /// **See also:**
+  /// - `mc_search_foreach_condition()`
   int mc_search_set_condition(
     mc_search_h search,
     int content_type,
@@ -914,16 +1041,27 @@ class Tizen80CapiMediaController {
       int Function(mc_search_h, int, int, ffi.Pointer<ffi.Char>,
           ffi.Pointer<bundle.bundle>)>();
 
-  /// @brief Destroys search.
-  /// @since_tizen 5.0
-  /// @param[in] search The handle of the media controller search
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @pre Create a media controller search handle by calling mc_search_create().
-  /// @see mc_search_create()
+  /// Destroys search.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `search` (in): The handle of the media controller search
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller search handle by calling mc_search_create().
+  ///
+  /// **See also:**
+  /// - `mc_search_create()`
   int mc_search_destroy(
     mc_search_h search,
   ) {
@@ -938,21 +1076,26 @@ class Tizen80CapiMediaController {
   late final _mc_search_destroy =
       _mc_search_destroyPtr.asFunction<int Function(mc_search_h)>();
 
-  /// @brief Gets the number of conditions to search.
-  /// @since_tizen 5.5
+  /// Gets the number of conditions to search.
   ///
-  /// @param[in] search        The handle of the media controller search
-  /// @param[out] condition_count      The number of conditions.
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `search` (in): The handle of the media controller search
+  /// - `condition_count` (out): The number of conditions.
   ///
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see mc_search_create()
-  /// @see mc_search_set_condition()
-  /// @see mc_search_foreach_condition()
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `mc_search_create()`
+  /// - `mc_search_set_condition()`
+  /// - `mc_search_foreach_condition()`
   int mc_search_get_condition_count(
     mc_search_h search,
     ffi.Pointer<ffi.Int> condition_count,
@@ -970,26 +1113,32 @@ class Tizen80CapiMediaController {
   late final _mc_search_get_condition_count = _mc_search_get_condition_countPtr
       .asFunction<int Function(mc_search_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Retrieves all search conditions.
-  /// @details This function gets all search conditions set.
-  /// The callback function will be invoked for every retrieved search condition.
-  /// If there were no search conditions set with mc_search_set_condition(), this function will return #MEDIA_CONTROLLER_ERROR_NONE, and the callback will not be invoked.
-  /// @since_tizen 5.0
+  /// Retrieves all search conditions.
   ///
-  /// @param[in] search    The handle of the media controller search
-  /// @param[in] callback      The callback function to be invoked.
-  /// @param[in] user_data   The user data to be passed to the callback function
+  /// This function gets all search conditions set. The callback function will be invoked for every retrieved search condition. If there were no search conditions set with mc_search_set_condition(), this function will return `MEDIA_CONTROLLER_ERROR_NONE`, and the callback will not be invoked.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `search` (in): The handle of the media controller search
+  /// - `callback` (in): The callback function to be invoked.
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @pre Create a media controller search handle by calling mc_search_create().
-  /// @pre Set the search conditions by calling mc_search_set_condition().
-  /// @see mc_search_create()
-  /// @see mc_search_set_condition()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller search handle by calling mc_search_create().
+  /// - Set the search conditions by calling mc_search_set_condition().
+  ///
+  /// **See also:**
+  /// - `mc_search_create()`
+  /// - `mc_search_set_condition()`
   int mc_search_foreach_condition(
     mc_search_h search,
     mc_search_condition_cb callback,
@@ -1011,25 +1160,30 @@ class Tizen80CapiMediaController {
           int Function(
               mc_search_h, mc_search_condition_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Clones a media controller search handle.
-  /// @details This function copies the media controller search handle from a source to
-  /// destination. The #mc_search_h is created internally and available through media controller search functions.
+  /// Clones a media controller search handle.
   ///
-  /// @since_tizen 5.0
+  /// This function copies the media controller search handle from a source to destination. The `mc_search_h` is created internally and available through media controller search functions.
   ///
-  /// @remarks The @a dst should be released using @c mc_search_destroy().
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] src The source handle of the media controller search
-  /// @param[out] dst The destination handle of the media controller search
+  /// **Remarks:**
+  /// - The `dst` should be released using `mc_search_destroy(`).
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `src` (in): The source handle of the media controller search
+  /// - `dst` (out): The destination handle of the media controller search
   ///
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see mc_search_destroy()
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `mc_search_destroy()`
   int mc_search_clone(
     mc_search_h src,
     ffi.Pointer<mc_search_h> dst,
@@ -1047,24 +1201,37 @@ class Tizen80CapiMediaController {
   late final _mc_search_clone = _mc_search_clonePtr
       .asFunction<int Function(mc_search_h, ffi.Pointer<mc_search_h>)>();
 
-  /// @brief Creates a media controller client.
-  /// @details The media controller client binds the latest media controller server when handlers are created.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// Creates a media controller client.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// The media controller client binds the latest media controller server when handlers are created.
   ///
-  /// @remarks The @a client should be released using @c mc_client_destroy(). You can create only one client handle for each process.
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @param[out] client The handle of the media controller client
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see mc_client_destroy()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Remarks:**
+  /// - The `client` should be released using `mc_client_destroy(`). You can create only one client handle for each process.
+  ///
+  /// **Parameters:**
+  /// - `client` (out): The handle of the media controller client
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `mc_client_destroy()`
   int mc_client_create(
     ffi.Pointer<mc_client_h> client,
   ) {
@@ -1079,28 +1246,41 @@ class Tizen80CapiMediaController {
   late final _mc_client_create =
       _mc_client_createPtr.asFunction<int Function(ffi.Pointer<mc_client_h>)>();
 
-  /// @brief Sets the callback for monitoring status of the media controller server.
-  /// @details The media controller client which calls this function will receive notifications from all media controller servers.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Sets the callback for monitoring status of the media controller server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// The media controller client which calls this function will receive notifications from all media controller servers.
   ///
-  /// @param[in] client         The handle of the media controller client
-  /// @param[in] callback      The callback to be invoked when the media controller server status is changed
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
-  /// @see mc_client_unset_server_updated_cb()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `callback` (in): The callback to be invoked when the media controller server status is changed
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
+  /// - `mc_client_unset_server_updated_cb()`
   int mc_client_set_server_updated_cb(
     mc_client_h client,
     mc_server_state_updated_cb callback,
@@ -1122,23 +1302,36 @@ class Tizen80CapiMediaController {
           int Function(mc_client_h, mc_server_state_updated_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback for monitoring status of the media controller server.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Unsets the callback for monitoring status of the media controller server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @param[in] client         The handle of the media controller client
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
-  /// @see mc_client_set_server_updated_cb()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
+  /// - `mc_client_set_server_updated_cb()`
   int mc_client_unset_server_updated_cb(
     mc_client_h client,
   ) {
@@ -1154,28 +1347,41 @@ class Tizen80CapiMediaController {
       _mc_client_unset_server_updated_cbPtr
           .asFunction<int Function(mc_client_h)>();
 
-  /// @brief Sets the callback for monitoring playback status of the media controller server.
-  /// @details The media controller client which calls this function will receive notifications from all media controller servers.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Sets the callback for monitoring playback status of the media controller server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// The media controller client which calls this function will receive notifications from all media controller servers.
   ///
-  /// @param[in] client         The handle of the media controller client
-  /// @param[in] callback      The callback to be invoked when the playback status is changed
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
-  /// @see mc_client_unset_playback_updated_cb()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `callback` (in): The callback to be invoked when the playback status is changed
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
+  /// - `mc_client_unset_playback_updated_cb()`
   int mc_client_set_playback_updated_cb(
     mc_client_h client,
     mc_playback_updated_cb callback,
@@ -1197,24 +1403,36 @@ class Tizen80CapiMediaController {
           int Function(
               mc_client_h, mc_playback_updated_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback for monitoring playback status of the media controller server.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Unsets the callback for monitoring playback status of the media controller server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @param[in] client         The handle of the media controller client
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
-  /// @see mc_client_set_playback_updated_cb()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
+  /// - `mc_client_set_playback_updated_cb()`
   int mc_client_unset_playback_updated_cb(
     mc_client_h client,
   ) {
@@ -1230,28 +1448,41 @@ class Tizen80CapiMediaController {
       _mc_client_unset_playback_updated_cbPtr
           .asFunction<int Function(mc_client_h)>();
 
-  /// @brief Sets the callback for monitoring metadata status of the media controller server.
-  /// @details The media controller client which calls this function will receive notifications from all media controller servers.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Sets the callback for monitoring metadata status of the media controller server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// The media controller client which calls this function will receive notifications from all media controller servers.
   ///
-  /// @param[in] client         The handle of the media controller client
-  /// @param[in] callback      The callback to be invoked when the metadata status is changed
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
-  /// @see mc_client_unset_metadata_updated_cb()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `callback` (in): The callback to be invoked when the metadata status is changed
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
+  /// - `mc_client_unset_metadata_updated_cb()`
   int mc_client_set_metadata_updated_cb(
     mc_client_h client,
     mc_metadata_updated_cb callback,
@@ -1273,24 +1504,36 @@ class Tizen80CapiMediaController {
           int Function(
               mc_client_h, mc_metadata_updated_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback for monitoring metadata status of the media controller server.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Unsets the callback for monitoring metadata status of the media controller server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @param[in] client         The handle of the media controller client
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
-  /// @see mc_client_set_metadata_updated_cb()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
+  /// - `mc_client_set_metadata_updated_cb()`
   int mc_client_unset_metadata_updated_cb(
     mc_client_h client,
   ) {
@@ -1306,28 +1549,41 @@ class Tizen80CapiMediaController {
       _mc_client_unset_metadata_updated_cbPtr
           .asFunction<int Function(mc_client_h)>();
 
-  /// @brief Sets the callback for monitoring shuffle mode of the media controller server.
-  /// @details The media controller client which calls this function will receive notifications from all media controller servers.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Sets the callback for monitoring shuffle mode of the media controller server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// The media controller client which calls this function will receive notifications from all media controller servers.
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @param[in] callback      The callback to be invoked when the shuffle mode is changed
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
-  /// @see mc_client_unset_shuffle_mode_updated_cb()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `callback` (in): The callback to be invoked when the shuffle mode is changed
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
+  /// - `mc_client_unset_shuffle_mode_updated_cb()`
   int mc_client_set_shuffle_mode_updated_cb(
     mc_client_h client,
     mc_shuffle_mode_updated_cb callback,
@@ -1349,24 +1605,36 @@ class Tizen80CapiMediaController {
           int Function(mc_client_h, mc_shuffle_mode_updated_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback for monitoring shuffle mode of the media controller server.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Unsets the callback for monitoring shuffle mode of the media controller server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
-  /// @see mc_client_set_shuffle_mode_updated_cb()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
+  /// - `mc_client_set_shuffle_mode_updated_cb()`
   int mc_client_unset_shuffle_mode_updated_cb(
     mc_client_h client,
   ) {
@@ -1382,28 +1650,41 @@ class Tizen80CapiMediaController {
       _mc_client_unset_shuffle_mode_updated_cbPtr
           .asFunction<int Function(mc_client_h)>();
 
-  /// @brief Sets the callback for monitoring repeat mode of the media controller server.
-  /// @details The media controller client which calls this function will receive notifications from all media controller servers.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Sets the callback for monitoring repeat mode of the media controller server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// The media controller client which calls this function will receive notifications from all media controller servers.
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @param[in] callback      The callback to be invoked when the repeat mode is changed
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
-  /// @see mc_client_unset_repeat_mode_updated_cb()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `callback` (in): The callback to be invoked when the repeat mode is changed
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
+  /// - `mc_client_unset_repeat_mode_updated_cb()`
   int mc_client_set_repeat_mode_updated_cb(
     mc_client_h client,
     mc_repeat_mode_updated_cb callback,
@@ -1425,24 +1706,36 @@ class Tizen80CapiMediaController {
           int Function(
               mc_client_h, mc_repeat_mode_updated_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback for monitoring repeat mode of the media controller server.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Unsets the callback for monitoring repeat mode of the media controller server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
-  /// @see mc_client_set_repeat_mode_updated_cb()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
+  /// - `mc_client_set_repeat_mode_updated_cb()`
   int mc_client_unset_repeat_mode_updated_cb(
     mc_client_h client,
   ) {
@@ -1458,28 +1751,41 @@ class Tizen80CapiMediaController {
       _mc_client_unset_repeat_mode_updated_cbPtr
           .asFunction<int Function(mc_client_h)>();
 
-  /// @brief Sets the callback for monitoring the playback ability of the media controller server.
-  /// @details The media controller client which calls this function will receive notifications from all media controller servers.
-  /// @since_tizen 5.0
+  /// Sets the callback for monitoring the playback ability of the media controller server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// The media controller client which calls this function will receive notifications from all media controller servers.
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @param[in] callback      The callback to be invoked when the ability is changed
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
-  /// @see mc_client_unset_playback_ability_updated_cb()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `callback` (in): The callback to be invoked when the ability is changed
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
+  /// - `mc_client_unset_playback_ability_updated_cb()`
   int mc_client_set_playback_ability_updated_cb(
     mc_client_h client,
     mc_playback_ability_updated_cb callback,
@@ -1502,24 +1808,36 @@ class Tizen80CapiMediaController {
           int Function(mc_client_h, mc_playback_ability_updated_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback for monitoring the playback ability of the media controller server.
-  /// @since_tizen 5.0
+  /// Unsets the callback for monitoring the playback ability of the media controller server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
-  /// @see mc_client_set_playback_ability_updated_cb()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
+  /// - `mc_client_set_playback_ability_updated_cb()`
   int mc_client_unset_playback_ability_updated_cb(
     mc_client_h client,
   ) {
@@ -1535,28 +1853,42 @@ class Tizen80CapiMediaController {
       _mc_client_unset_playback_ability_updated_cbPtr
           .asFunction<int Function(mc_client_h)>();
 
-  /// @deprecated Deprecated since 5.5. Use mc_client_set_ability_support_updated_cb() instead.
-  /// @brief Sets the callback for monitoring the shuffle ability of the media controller server.
-  /// @details The media controller client which calls this function will receive notifications from all media controller servers.
-  /// @since_tizen 5.0
+  /// **Deprecated:** Deprecated since 5.5. Use mc_client_set_ability_support_updated_cb() instead.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// Sets the callback for monitoring the shuffle ability of the media controller server.
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @param[in] callback      The callback to be invoked when the ability is changed
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// The media controller client which calls this function will receive notifications from all media controller servers.
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `callback` (in): The callback to be invoked when the ability is changed
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
   int mc_client_set_shuffle_ability_updated_cb(
     mc_client_h client,
     mc_shuffle_ability_updated_cb callback,
@@ -1579,24 +1911,37 @@ class Tizen80CapiMediaController {
           int Function(mc_client_h, mc_shuffle_ability_updated_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @deprecated Deprecated since 5.5. Use mc_client_unset_ability_support_updated_cb() instead.
-  /// @brief Unsets the callback for monitoring the shuffle ability of the media controller server.
-  /// @since_tizen 5.0
+  /// **Deprecated:** Deprecated since 5.5. Use mc_client_unset_ability_support_updated_cb() instead.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// Unsets the callback for monitoring the shuffle ability of the media controller server.
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
   int mc_client_unset_shuffle_ability_updated_cb(
     mc_client_h client,
   ) {
@@ -1612,28 +1957,42 @@ class Tizen80CapiMediaController {
       _mc_client_unset_shuffle_ability_updated_cbPtr
           .asFunction<int Function(mc_client_h)>();
 
-  /// @deprecated Deprecated since 5.5. Use mc_client_set_ability_support_updated_cb() instead.
-  /// @brief Sets the callback for monitoring the repeat ability of the media controller server.
-  /// @details The media controller client which calls this function will receive notifications from all media controller servers.
-  /// @since_tizen 5.0
+  /// **Deprecated:** Deprecated since 5.5. Use mc_client_set_ability_support_updated_cb() instead.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// Sets the callback for monitoring the repeat ability of the media controller server.
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @param[in] callback      The callback to be invoked when the ability is changed
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// The media controller client which calls this function will receive notifications from all media controller servers.
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `callback` (in): The callback to be invoked when the ability is changed
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
   int mc_client_set_repeat_ability_updated_cb(
     mc_client_h client,
     mc_repeat_ability_updated_cb callback,
@@ -1656,24 +2015,37 @@ class Tizen80CapiMediaController {
           int Function(mc_client_h, mc_repeat_ability_updated_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @deprecated Deprecated since 5.5. Use mc_client_unset_ability_support_updated_cb() instead.
-  /// @brief Unsets the callback for monitoring the repeat ability of the media controller server.
-  /// @since_tizen 5.0
+  /// **Deprecated:** Deprecated since 5.5. Use mc_client_unset_ability_support_updated_cb() instead.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// Unsets the callback for monitoring the repeat ability of the media controller server.
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
   int mc_client_unset_repeat_ability_updated_cb(
     mc_client_h client,
   ) {
@@ -1689,45 +2061,44 @@ class Tizen80CapiMediaController {
       _mc_client_unset_repeat_ability_updated_cbPtr
           .asFunction<int Function(mc_client_h)>();
 
-  /// @brief Sets the callback for monitoring the media controller server's support for an ability.
-  /// @details The media controller client which calls this function will receive notifications from all media controller servers.
-  /// This function can be used to monitor the following abilities:\n
-  /// #MC_ABILITY_SHUFFLE, \n
-  /// #MC_ABILITY_REPEAT, \n
-  /// #MC_ABILITY_PLAYBACK_POSITION, \n
-  /// #MC_ABILITY_PLAYLIST, \n
-  /// #MC_ABILITY_CLIENT_CUSTOM, \n
-  /// #MC_ABILITY_SEARCH, \n
-  /// #MC_ABILITY_SUBTITLES, \n
-  /// #MC_ABILITY_360_MODE, \n
-  /// To monitor the media controller server's support for other abilities, use corresponding function. \n
-  /// For a playback ability, use mc_client_set_playback_ability_updated_cb(). \n
-  /// For a display mode ability, use mc_client_set_display_mode_ability_updated_cb(). \n
-  /// For a display rotation ability, use mc_client_set_display_rotation_ability_updated_cb(). \n
+  /// Sets the callback for monitoring the media controller server's support for an ability.
   ///
-  /// @since_tizen 5.5
+  /// The media controller client which calls this function will receive notifications from all media controller servers. This function can be used to monitor the following abilities: `MC_ABILITY_SHUFFLE`, `MC_ABILITY_REPEAT`, `MC_ABILITY_PLAYBACK_POSITION`, `MC_ABILITY_PLAYLIST`, `MC_ABILITY_CLIENT_CUSTOM`, `MC_ABILITY_SEARCH`, `MC_ABILITY_SUBTITLES`, `MC_ABILITY_360_MODE`, To monitor the media controller server's support for other abilities, use corresponding function. For a playback ability, use mc_client_set_playback_ability_updated_cb(). For a display mode ability, use mc_client_set_display_mode_ability_updated_cb(). For a display rotation ability, use mc_client_set_display_rotation_ability_updated_cb().
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @param[in] callback      The callback to be invoked when the ability is changed
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
-  /// @see mc_client_unset_ability_support_updated_cb()
-  /// @see mc_client_set_playback_ability_updated_cb()
-  /// @see mc_client_set_display_mode_ability_updated_cb()
-  /// @see mc_client_set_display_rotation_ability_updated_cb()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `callback` (in): The callback to be invoked when the ability is changed
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
+  /// - `mc_client_unset_ability_support_updated_cb()`
+  /// - `mc_client_set_playback_ability_updated_cb()`
+  /// - `mc_client_set_display_mode_ability_updated_cb()`
+  /// - `mc_client_set_display_rotation_ability_updated_cb()`
   int mc_client_set_ability_support_updated_cb(
     mc_client_h client,
     mc_ability_support_updated_cb callback,
@@ -1750,42 +2121,41 @@ class Tizen80CapiMediaController {
           int Function(mc_client_h, mc_ability_support_updated_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback for monitoring the media controller server's support for an ability.
-  /// @details The media controller client which calls this function will not receive notifications from all media controller servers.
-  /// This function can be used for the following abilities:\n
-  /// #MC_ABILITY_SHUFFLE, \n
-  /// #MC_ABILITY_REPEAT, \n
-  /// #MC_ABILITY_PLAYBACK_POSITION, \n
-  /// #MC_ABILITY_PLAYLIST, \n
-  /// #MC_ABILITY_CLIENT_CUSTOM, \n
-  /// #MC_ABILITY_SEARCH, \n
-  /// #MC_ABILITY_SUBTITLES, \n
-  /// #MC_ABILITY_360_MODE, \n
-  /// To stop monitoring the media controller server's support for other abilities, use corresponding function. \n
-  /// For a playback ability, use mc_client_unset_playback_ability_updated_cb(). \n
-  /// For a display mode ability, use mc_client_unset_display_mode_ability_updated_cb(). \n
-  /// For a display rotation ability, use mc_client_unset_display_rotation_ability_updated_cb(). \n
+  /// Unsets the callback for monitoring the media controller server's support for an ability.
   ///
-  /// @since_tizen 5.5
+  /// The media controller client which calls this function will not receive notifications from all media controller servers. This function can be used for the following abilities: `MC_ABILITY_SHUFFLE`, `MC_ABILITY_REPEAT`, `MC_ABILITY_PLAYBACK_POSITION`, `MC_ABILITY_PLAYLIST`, `MC_ABILITY_CLIENT_CUSTOM`, `MC_ABILITY_SEARCH`, `MC_ABILITY_SUBTITLES`, `MC_ABILITY_360_MODE`, To stop monitoring the media controller server's support for other abilities, use corresponding function. For a playback ability, use mc_client_unset_playback_ability_updated_cb(). For a display mode ability, use mc_client_unset_display_mode_ability_updated_cb(). For a display rotation ability, use mc_client_unset_display_rotation_ability_updated_cb().
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
-  /// @see mc_ability_support_updated_cb()
-  /// @see mc_client_unset_playback_ability_updated_cb()
-  /// @see mc_client_unset_display_mode_ability_updated_cb()
-  /// @see mc_client_unset_display_rotation_ability_updated_cb()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
+  /// - `mc_ability_support_updated_cb()`
+  /// - `mc_client_unset_playback_ability_updated_cb()`
+  /// - `mc_client_unset_display_mode_ability_updated_cb()`
+  /// - `mc_client_unset_display_rotation_ability_updated_cb()`
   int mc_client_unset_ability_support_updated_cb(
     mc_client_h client,
   ) {
@@ -1801,28 +2171,41 @@ class Tizen80CapiMediaController {
       _mc_client_unset_ability_support_updated_cbPtr
           .asFunction<int Function(mc_client_h)>();
 
-  /// @brief Sets the callback for monitoring the display mode ability of the media controller server.
-  /// @details The media controller client which calls this function will receive notifications from all media controller servers.
-  /// @since_tizen 5.5
+  /// Sets the callback for monitoring the display mode ability of the media controller server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// The media controller client which calls this function will receive notifications from all media controller servers.
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @param[in] callback      The callback to be invoked when the ability is changed
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
-  /// @see mc_client_unset_display_mode_ability_updated_cb()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `callback` (in): The callback to be invoked when the ability is changed
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
+  /// - `mc_client_unset_display_mode_ability_updated_cb()`
   int mc_client_set_display_mode_ability_updated_cb(
     mc_client_h client,
     mc_ability_supported_items_updated_cb callback,
@@ -1847,24 +2230,36 @@ class Tizen80CapiMediaController {
           int Function(mc_client_h, mc_ability_supported_items_updated_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback for monitoring the display mode ability of the media controller server.
-  /// @since_tizen 5.5
+  /// Unsets the callback for monitoring the display mode ability of the media controller server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
-  /// @see mc_client_set_display_mode_ability_updated_cb()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
+  /// - `mc_client_set_display_mode_ability_updated_cb()`
   int mc_client_unset_display_mode_ability_updated_cb(
     mc_client_h client,
   ) {
@@ -1880,28 +2275,41 @@ class Tizen80CapiMediaController {
       _mc_client_unset_display_mode_ability_updated_cbPtr
           .asFunction<int Function(mc_client_h)>();
 
-  /// @brief Sets the callback for monitoring the display rotation ability of the media controller server.
-  /// @details The media controller client which calls this function will receive notifications from all media controller servers.
-  /// @since_tizen 5.5
+  /// Sets the callback for monitoring the display rotation ability of the media controller server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// The media controller client which calls this function will receive notifications from all media controller servers.
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @param[in] callback      The callback to be invoked when the ability is changed
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
-  /// @see mc_client_unset_display_rotation_ability_updated_cb()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `callback` (in): The callback to be invoked when the ability is changed
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
+  /// - `mc_client_unset_display_rotation_ability_updated_cb()`
   int mc_client_set_display_rotation_ability_updated_cb(
     mc_client_h client,
     mc_ability_supported_items_updated_cb callback,
@@ -1926,24 +2334,36 @@ class Tizen80CapiMediaController {
           int Function(mc_client_h, mc_ability_supported_items_updated_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback for monitoring the display rotation ability of the media controller server.
-  /// @since_tizen 5.5
+  /// Unsets the callback for monitoring the display rotation ability of the media controller server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
-  /// @see mc_client_set_display_rotation_ability_updated_cb()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
+  /// - `mc_client_set_display_rotation_ability_updated_cb()`
   int mc_client_unset_display_rotation_ability_updated_cb(
     mc_client_h client,
   ) {
@@ -1959,28 +2379,41 @@ class Tizen80CapiMediaController {
       _mc_client_unset_display_rotation_ability_updated_cbPtr
           .asFunction<int Function(mc_client_h)>();
 
-  /// @brief Sets the callback for receiving the result of the command from the media controller server.
-  /// @details The media controller client which calls this function will receives the result of the command from all media controller servers.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Sets the callback for receiving the result of the command from the media controller server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// The media controller client which calls this function will receives the result of the command from all media controller servers.
   ///
-  /// @param[in] client         The handle of the media controller client
-  /// @param[in] callback      The callback to be invoked when the reply is received
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_unset_cmd_reply_received_cb()
-  /// @see mc_client_destroy()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `callback` (in): The callback to be invoked when the reply is received
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_unset_cmd_reply_received_cb()`
+  /// - `mc_client_destroy()`
   int mc_client_set_cmd_reply_received_cb(
     mc_client_h client,
     mc_cmd_reply_received_cb callback,
@@ -2002,24 +2435,36 @@ class Tizen80CapiMediaController {
           int Function(
               mc_client_h, mc_cmd_reply_received_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback for receiving common reply of the media controller server.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Unsets the callback for receiving common reply of the media controller server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @param[in] client         The handle of the media controller client
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_set_cmd_reply_received_cb()
-  /// @see mc_client_destroy()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_set_cmd_reply_received_cb()`
+  /// - `mc_client_destroy()`
   int mc_client_unset_cmd_reply_received_cb(
     mc_client_h client,
   ) {
@@ -2035,29 +2480,42 @@ class Tizen80CapiMediaController {
       _mc_client_unset_cmd_reply_received_cbPtr
           .asFunction<int Function(mc_client_h)>();
 
-  /// @brief Sets the callback for monitoring playlist status of the media controller server.
-  /// @details The media controller client which calls this function will receive notifications from all media controller servers.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Sets the callback for monitoring playlist status of the media controller server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// The media controller client which calls this function will receive notifications from all media controller servers.
   ///
-  /// @param[in] client         The handle of the media controller client
-  /// @param[in] callback      The callback to be invoked when the playlist status is changed
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
-  /// @see mc_playlist_updated_cb()
-  /// @see mc_client_unset_playlist_updated_cb()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `callback` (in): The callback to be invoked when the playlist status is changed
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
+  /// - `mc_playlist_updated_cb()`
+  /// - `mc_client_unset_playlist_updated_cb()`
   int mc_client_set_playlist_updated_cb(
     mc_client_h client,
     mc_playlist_updated_cb callback,
@@ -2079,24 +2537,36 @@ class Tizen80CapiMediaController {
           int Function(
               mc_client_h, mc_playlist_updated_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback for monitoring playlist status of the media controller server.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Unsets the callback for monitoring playlist status of the media controller server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @param[in] client         The handle of the media controller client
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
-  /// @see mc_client_set_playlist_updated_cb()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
+  /// - `mc_client_set_playlist_updated_cb()`
   int mc_client_unset_playlist_updated_cb(
     mc_client_h client,
   ) {
@@ -2112,28 +2582,41 @@ class Tizen80CapiMediaController {
       _mc_client_unset_playlist_updated_cbPtr
           .asFunction<int Function(mc_client_h)>();
 
-  /// @brief Sets the callback for monitoring the media controller server's subtitles display.
-  /// @details The media controller client which calls this function will receive notifications from all media controller servers.
-  /// @since_tizen 5.5
+  /// Sets the callback for monitoring the media controller server's subtitles display.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// The media controller client which calls this function will receive notifications from all media controller servers.
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @param[in] callback      The callback to be invoked when the subtitles status is changed
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
-  /// @see mc_client_unset_subtitles_updated_cb()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `callback` (in): The callback to be invoked when the subtitles status is changed
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
+  /// - `mc_client_unset_subtitles_updated_cb()`
   int mc_client_set_subtitles_updated_cb(
     mc_client_h client,
     mc_bool_attribute_updated_cb callback,
@@ -2155,25 +2638,38 @@ class Tizen80CapiMediaController {
           int Function(mc_client_h, mc_bool_attribute_updated_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback for monitoring the media controller server's subtitles display.
-  /// @details The media controller client which calls this function will not receive notifications from all media controller servers.
-  /// @since_tizen 5.5
+  /// Unsets the callback for monitoring the media controller server's subtitles display.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// The media controller client which calls this function will not receive notifications from all media controller servers.
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
-  /// @see mc_client_set_subtitles_updated_cb()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
+  /// - `mc_client_set_subtitles_updated_cb()`
   int mc_client_unset_subtitles_updated_cb(
     mc_client_h client,
   ) {
@@ -2189,28 +2685,41 @@ class Tizen80CapiMediaController {
       _mc_client_unset_subtitles_updated_cbPtr
           .asFunction<int Function(mc_client_h)>();
 
-  /// @brief Sets the callback for monitoring the media controller server's 360 mode display.
-  /// @details The media controller client which calls this function will receive notifications from all media controller servers.
-  /// @since_tizen 5.5
+  /// Sets the callback for monitoring the media controller server's 360 mode display.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// The media controller client which calls this function will receive notifications from all media controller servers.
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @param[in] callback      The callback to be invoked when the 360 mode is changed
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
-  /// @see mc_client_unset_360_mode_updated_cb()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `callback` (in): The callback to be invoked when the 360 mode is changed
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
+  /// - `mc_client_unset_360_mode_updated_cb()`
   int mc_client_set_360_mode_updated_cb(
     mc_client_h client,
     mc_bool_attribute_updated_cb callback,
@@ -2232,25 +2741,38 @@ class Tizen80CapiMediaController {
           int Function(mc_client_h, mc_bool_attribute_updated_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback for monitoring the media controller server's 360 mode display.
-  /// @details The media controller client which calls this function will not receive notifications from all media controller servers.
-  /// @since_tizen 5.5
+  /// Unsets the callback for monitoring the media controller server's 360 mode display.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// The media controller client which calls this function will not receive notifications from all media controller servers.
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
-  /// @see mc_client_set_360_mode_updated_cb()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
+  /// - `mc_client_set_360_mode_updated_cb()`
   int mc_client_unset_360_mode_updated_cb(
     mc_client_h client,
   ) {
@@ -2266,28 +2788,41 @@ class Tizen80CapiMediaController {
       _mc_client_unset_360_mode_updated_cbPtr
           .asFunction<int Function(mc_client_h)>();
 
-  /// @brief Sets the callback for monitoring the media controller server's display mode.
-  /// @details The media controller client which calls this function will receive notifications from all media controller servers.
-  /// @since_tizen 5.5
+  /// Sets the callback for monitoring the media controller server's display mode.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// The media controller client which calls this function will receive notifications from all media controller servers.
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @param[in] callback      The callback to be invoked when the display mode is changed
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
-  /// @see mc_client_unset_display_mode_updated_cb()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `callback` (in): The callback to be invoked when the display mode is changed
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
+  /// - `mc_client_unset_display_mode_updated_cb()`
   int mc_client_set_display_mode_updated_cb(
     mc_client_h client,
     mc_display_mode_updated_cb callback,
@@ -2309,25 +2844,38 @@ class Tizen80CapiMediaController {
           int Function(mc_client_h, mc_display_mode_updated_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback for monitoring the media controller server's display mode.
-  /// @details The media controller client which calls this function will not receive notifications from all media controller servers.
-  /// @since_tizen 5.5
+  /// Unsets the callback for monitoring the media controller server's display mode.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// The media controller client which calls this function will not receive notifications from all media controller servers.
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
-  /// @see mc_client_set_display_mode_updated_cb()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
+  /// - `mc_client_set_display_mode_updated_cb()`
   int mc_client_unset_display_mode_updated_cb(
     mc_client_h client,
   ) {
@@ -2343,28 +2891,41 @@ class Tizen80CapiMediaController {
       _mc_client_unset_display_mode_updated_cbPtr
           .asFunction<int Function(mc_client_h)>();
 
-  /// @brief Sets the callback for monitoring the media controller server's display rotation.
-  /// @details The media controller client which calls this function will receive notifications from all media controller servers.
-  /// @since_tizen 5.5
+  /// Sets the callback for monitoring the media controller server's display rotation.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// The media controller client which calls this function will receive notifications from all media controller servers.
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @param[in] callback      The callback to be invoked when the display rotation is changed
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
-  /// @see mc_client_unset_display_rotation_updated_cb()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `callback` (in): The callback to be invoked when the display rotation is changed
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
+  /// - `mc_client_unset_display_rotation_updated_cb()`
   int mc_client_set_display_rotation_updated_cb(
     mc_client_h client,
     mc_display_rotation_updated_cb callback,
@@ -2387,25 +2948,38 @@ class Tizen80CapiMediaController {
           int Function(mc_client_h, mc_display_rotation_updated_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback for monitoring the media controller server's display rotation.
-  /// @details The media controller client which calls this function will not receive notifications from all media controller servers.
-  /// @since_tizen 5.5
+  /// Unsets the callback for monitoring the media controller server's display rotation.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// The media controller client which calls this function will not receive notifications from all media controller servers.
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
-  /// @see mc_client_set_display_rotation_updated_cb()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
+  /// - `mc_client_set_display_rotation_updated_cb()`
   int mc_client_unset_display_rotation_updated_cb(
     mc_client_h client,
   ) {
@@ -2421,29 +2995,41 @@ class Tizen80CapiMediaController {
       _mc_client_unset_display_rotation_updated_cbPtr
           .asFunction<int Function(mc_client_h)>();
 
-  /// @brief Sets the callback for receiving the custom event from a media controller server.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Sets the callback for receiving the custom event from a media controller server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @param[in] client    The handle to media controller client
-  /// @param[in] callback      The callback to be invoked when the media controller client receives custom event from a media controller server
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_client_create()
-  /// @see mc_client_custom_event_received_cb()
-  /// @see mc_client_unset_custom_event_received_cb()
-  /// @see mc_client_send_event_reply()
-  /// @see mc_client_destroy()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle to media controller client
+  /// - `callback` (in): The callback to be invoked when the media controller client receives custom event from a media controller server
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_custom_event_received_cb()`
+  /// - `mc_client_unset_custom_event_received_cb()`
+  /// - `mc_client_send_event_reply()`
+  /// - `mc_client_destroy()`
   int mc_client_set_custom_event_received_cb(
     mc_client_h client,
     mc_client_custom_event_received_cb callback,
@@ -2466,25 +3052,37 @@ class Tizen80CapiMediaController {
           int Function(mc_client_h, mc_client_custom_event_received_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback for receiving the custom event from a media controller server.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Unsets the callback for receiving the custom event from a media controller server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_client_create()
-  /// @see mc_client_custom_event_received_cb()
-  /// @see mc_client_set_custom_event_received_cb()
-  /// @see mc_client_destroy()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_custom_event_received_cb()`
+  /// - `mc_client_set_custom_event_received_cb()`
+  /// - `mc_client_destroy()`
   int mc_client_unset_custom_event_received_cb(
     mc_client_h client,
   ) {
@@ -2500,35 +3098,48 @@ class Tizen80CapiMediaController {
       _mc_client_unset_custom_event_received_cbPtr
           .asFunction<int Function(mc_client_h)>();
 
-  /// @brief Replies with the result of the requested event to the media controller server.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Replies with the result of the requested event to the media controller server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @remarks The media controller client get the @a server_name and @a request_id through the mc_client_custom_event_received_cb(). \n
-  /// If @a request_id is not null there, the media controller client should send the reply to the media controller server with the @a request_id. \n
-  /// If @a request_id is null, this function will return #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER.\n
-  /// If the @a server_name application doesn't support receiving the event reply, this function will return #MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP since 5.5.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @param[in] server_name    The app_id of the media controller server
-  /// @param[in] request_id    The id of the event request, received in the mc_client_set_custom_event_received_cb() function
-  /// @param[in] result_code    The result code of custom event, #mc_result_code_e since 6.0
-  /// @param[in] data                The extra data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_client_create()
-  /// @see mc_client_set_custom_event_received_cb()
-  /// @see mc_client_unset_custom_event_received_cb()
-  /// @see mc_client_destroy()
+  /// **Remarks:**
+  /// - The media controller client get the `server_name` and `request_id` through the mc_client_custom_event_received_cb().
+  /// - If `request_id` is not null there, the media controller client should send the reply to the media controller server with the `request_id`.
+  /// - If `request_id` is null, this function will return `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`.
+  /// - If the `server_name` application doesn't support receiving the event reply, this function will return `MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP` since 5.5.
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `server_name` (in): The app_id of the media controller server
+  /// - `request_id` (in): The id of the event request, received in the mc_client_set_custom_event_received_cb() function
+  /// - `result_code` (in): The result code of custom event, `mc_result_code_e` since 6.0
+  /// - `data` (in): The extra data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_set_custom_event_received_cb()`
+  /// - `mc_client_unset_custom_event_received_cb()`
+  /// - `mc_client_destroy()`
   int mc_client_send_event_reply(
     mc_client_h client,
     ffi.Pointer<ffi.Char> server_name,
@@ -2558,34 +3169,44 @@ class Tizen80CapiMediaController {
           int Function(mc_client_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>, int, ffi.Pointer<bundle.bundle>)>();
 
-  /// @brief Subscribes media controller server for monitoring status.
-  /// @details If media controller client subscribe media controller server,
-  /// the media controller client receive callback from subscribed media controller server. \n
-  /// If media controller client subscribe media controller server one or more,
-  /// the media controller client can receive callback from only subscribed media controller server. \n
-  /// If you want to subscribe for the all media controller server again,
-  /// unset mode update callback and set the callback for the monitoring status again.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// Subscribes media controller server for monitoring status.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// If media controller client subscribe media controller server, the media controller client receive callback from subscribed media controller server. If media controller client subscribe media controller server one or more, the media controller client can receive callback from only subscribed media controller server. If you want to subscribe for the all media controller server again, unset mode update callback and set the callback for the monitoring status again.
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @param[in] subscription_type    The subscription type
-  /// @param[in] server_name    The app_id of the media controller server
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create()
-  /// @pre Set the callback for monitoring status of the media controller server
-  /// @post Unsubscribe the media controller server for monitoring status by calling mc_client_unsubscribe()
-  /// @see mc_client_create()
-  /// @see mc_client_unsubscribe()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `subscription_type` (in): The subscription type
+  /// - `server_name` (in): The app_id of the media controller server
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create()
+  /// - Set the callback for monitoring status of the media controller server
+  ///
+  /// **Postconditions:**
+  /// - Unsubscribe the media controller server for monitoring status by calling mc_client_unsubscribe()
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_unsubscribe()`
   int mc_client_subscribe(
     mc_client_h client,
     int subscription_type,
@@ -2605,31 +3226,40 @@ class Tizen80CapiMediaController {
   late final _mc_client_subscribe = _mc_client_subscribePtr
       .asFunction<int Function(mc_client_h, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Unsubscribes media controller server for monitoring status.
-  /// @details If media controller client unsubscribe media controller server, \n
-  /// the media controller client don't receive callback from unsubscribed media controller server. \n
-  /// If media controller client unsubscribe all subscribed media controller server,
-  /// the media controller client don't receive callback from all media controller server. \n
-  /// After unset and set update callback function is called again, the media controller client can receive callback from all media controller servers.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// Unsubscribes media controller server for monitoring status.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// If media controller client unsubscribe media controller server, the media controller client don't receive callback from unsubscribed media controller server. If media controller client unsubscribe all subscribed media controller server, the media controller client don't receive callback from all media controller server. After unset and set update callback function is called again, the media controller client can receive callback from all media controller servers.
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @param[in] subscription_type    The subscription type
-  /// @param[in] server_name    The app_id of the media controller server
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create()
-  /// @pre Subscribe the media controller server for monitoring status by calling mc_client_subscribe()
-  /// @see mc_client_create()
-  /// @see mc_client_subscribe()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `subscription_type` (in): The subscription type
+  /// - `server_name` (in): The app_id of the media controller server
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create()
+  /// - Subscribe the media controller server for monitoring status by calling mc_client_subscribe()
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_subscribe()`
   int mc_client_unsubscribe(
     mc_client_h client,
     int subscription_type,
@@ -2649,28 +3279,40 @@ class Tizen80CapiMediaController {
   late final _mc_client_unsubscribe = _mc_client_unsubscribePtr
       .asFunction<int Function(mc_client_h, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Retrieves all subscribed Server.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// Retrieves all subscribed Server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @param[in] subscription_type    The subscription type
-  /// @param[in] callback      The callback to be invoked when the list of the subscribed media controller server
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create()
-  /// @pre Subscribe the media controller server for monitoring status by calling mc_client_subscribe()
-  /// @see mc_client_create()
-  /// @see mc_client_subscribe()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `subscription_type` (in): The subscription type
+  /// - `callback` (in): The callback to be invoked when the list of the subscribed media controller server
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create()
+  /// - Subscribe the media controller server for monitoring status by calling mc_client_subscribe()
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_subscribe()`
   int mc_client_foreach_server_subscribed(
     mc_client_h client,
     int subscription_type,
@@ -2694,22 +3336,34 @@ class Tizen80CapiMediaController {
           int Function(mc_client_h, int, mc_subscribed_server_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the playback state.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// Gets the playback state.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @param[in] playback    The handle to playback
-  /// @param[out] state      The state of the playback
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre The playback update callback should be set with mc_client_set_playback_updated_cb().
-  /// @see mc_client_set_playback_updated_cb()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `playback` (in): The handle to playback
+  /// - `state` (out): The state of the playback
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - The playback update callback should be set with mc_client_set_playback_updated_cb().
+  ///
+  /// **See also:**
+  /// - `mc_client_set_playback_updated_cb()`
   int mc_client_get_playback_state(
     mc_playback_h playback,
     ffi.Pointer<ffi.Int32> state,
@@ -2727,22 +3381,34 @@ class Tizen80CapiMediaController {
   late final _mc_client_get_playback_state = _mc_client_get_playback_statePtr
       .asFunction<int Function(mc_playback_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the playback position.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// Gets the playback position.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @param[in] playback    The handle to playback
-  /// @param[out] position      The position of the playback in milliseconds
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre The playback update callback should be set with mc_client_set_playback_updated_cb().
-  /// @see mc_client_set_playback_updated_cb()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `playback` (in): The handle to playback
+  /// - `position` (out): The position of the playback in milliseconds
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - The playback update callback should be set with mc_client_set_playback_updated_cb().
+  ///
+  /// **See also:**
+  /// - `mc_client_set_playback_updated_cb()`
   int mc_client_get_playback_position(
     mc_playback_h playback,
     ffi.Pointer<ffi.UnsignedLongLong> position,
@@ -2762,28 +3428,43 @@ class Tizen80CapiMediaController {
       _mc_client_get_playback_positionPtr.asFunction<
           int Function(mc_playback_h, ffi.Pointer<ffi.UnsignedLongLong>)>();
 
-  /// @deprecated Deprecated since 5.0. Use mc_client_get_playlist_item_info() instead.
-  /// @brief Gets the index of the media in playlist.
-  /// @details Gets the index of the current playing media in a playlist. If the media controller server didn't set the index, the value is NULL.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// **Deprecated:** Deprecated since 5.0. Use mc_client_get_playlist_item_info() instead.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// Gets the index of the media in playlist.
   ///
-  /// @remarks The @a index should be released using free().
+  /// Gets the index of the current playing media in a playlist. If the media controller server didn't set the index, the value is NULL.
   ///
-  /// @param[in] playback    The handle to playback
-  /// @param[out] index    The index of the media
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @pre The playback update callback should be set with mc_client_set_playback_updated_cb().
-  /// @see mc_client_set_playback_updated_cb()
-  /// @see mc_playlist_foreach_playlist()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Remarks:**
+  /// - The `index` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `playback` (in): The handle to playback
+  /// - `index` (out): The index of the media
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - The playback update callback should be set with mc_client_set_playback_updated_cb().
+  ///
+  /// **See also:**
+  /// - `mc_client_set_playback_updated_cb()`
+  /// - `mc_playlist_foreach_playlist()`
   int mc_client_get_playlist_item_index(
     mc_playback_h playback,
     ffi.Pointer<ffi.Pointer<ffi.Char>> index,
@@ -2803,30 +3484,43 @@ class Tizen80CapiMediaController {
       _mc_client_get_playlist_item_indexPtr.asFunction<
           int Function(mc_playback_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the playlist name and index of the media in playlist.
-  /// @details Gets the playlist name and index of the current playing media in a playlist. \n
-  /// If the media controller server didn't set the info, @a playlist_name and @a index will be set to NULL.
-  /// @since_tizen 5.0
+  /// Gets the playlist name and index of the media in playlist.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// Gets the playlist name and index of the current playing media in a playlist. If the media controller server didn't set the info, `playlist_name` and `index` will be set to NULL.
   ///
-  /// @remarks The @a playlist_name and @a index should be released using free().
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] playback    The handle to playback
-  /// @param[out] playlist_name    The playlist name media included
-  /// @param[out] index    The index of the media
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre The playback update callback should be set with mc_client_set_playback_updated_cb().
-  /// @see mc_client_set_playback_updated_cb()
-  /// @see mc_playlist_foreach_playlist()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Remarks:**
+  /// - The `playlist_name` and `index` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `playback` (in): The handle to playback
+  /// - `playlist_name` (out): The playlist name media included
+  /// - `index` (out): The index of the media
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - The playback update callback should be set with mc_client_set_playback_updated_cb().
+  ///
+  /// **See also:**
+  /// - `mc_client_set_playback_updated_cb()`
+  /// - `mc_playlist_foreach_playlist()`
   int mc_client_get_playlist_item_info(
     mc_playback_h playback,
     ffi.Pointer<ffi.Pointer<ffi.Char>> playlist_name,
@@ -2851,24 +3545,37 @@ class Tizen80CapiMediaController {
           int Function(mc_playback_h, ffi.Pointer<ffi.Pointer<ffi.Char>>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the playback content type.
-  /// @details Gets the content type of the current playing media. If there is no content type info, result value is #MC_CONTENT_TYPE_UNDECIDED.
-  /// @since_tizen 5.0
+  /// Gets the playback content type.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// Gets the content type of the current playing media. If there is no content type info, result value is `MC_CONTENT_TYPE_UNDECIDED`.
   ///
-  /// @param[in] playback    The handle to playback
-  /// @param[out] content_type    The content type of the playback
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @pre The playback update callback should be set with mc_client_set_playback_updated_cb().
-  /// @see mc_client_set_playback_updated_cb()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `playback` (in): The handle to playback
+  /// - `content_type` (out): The content type of the playback
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - The playback update callback should be set with mc_client_set_playback_updated_cb().
+  ///
+  /// **See also:**
+  /// - `mc_client_set_playback_updated_cb()`
   int mc_client_get_playback_content_type(
     mc_playback_h playback,
     ffi.Pointer<ffi.Int32> content_type,
@@ -2887,24 +3594,37 @@ class Tizen80CapiMediaController {
       _mc_client_get_playback_content_typePtr
           .asFunction<int Function(mc_playback_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the age rating of the content.
-  /// @details Gets the age rating of the current playing media.
-  /// @since_tizen 5.0
+  /// Gets the age rating of the content.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// Gets the age rating of the current playing media.
   ///
-  /// @param[in] playback    The handle to playback
-  /// @param[out] age_rating    Age rating of the content
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @pre The playback update callback should be set with mc_client_set_playback_updated_cb().
-  /// @see mc_client_set_playback_updated_cb()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `playback` (in): The handle to playback
+  /// - `age_rating` (out): Age rating of the content
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - The playback update callback should be set with mc_client_set_playback_updated_cb().
+  ///
+  /// **See also:**
+  /// - `mc_client_set_playback_updated_cb()`
   int mc_client_get_age_rating(
     mc_playback_h playback,
     ffi.Pointer<ffi.Int32> age_rating,
@@ -2922,16 +3642,24 @@ class Tizen80CapiMediaController {
   late final _mc_client_get_age_rating = _mc_client_get_age_ratingPtr
       .asFunction<int Function(mc_playback_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Destroys playback.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// Destroys playback.
   ///
-  /// @param[in] playback    The handle to playback
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see mc_client_set_playback_updated_cb()
-  /// @see mc_client_get_server_playback_info()
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `playback` (in): The handle to playback
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `mc_client_set_playback_updated_cb()`
+  /// - `mc_client_get_server_playback_info()`
   int mc_client_destroy_playback(
     mc_playback_h playback,
   ) {
@@ -2946,30 +3674,40 @@ class Tizen80CapiMediaController {
   late final _mc_client_destroy_playback =
       _mc_client_destroy_playbackPtr.asFunction<int Function(mc_playback_h)>();
 
-  /// @brief Gets the latest media controller server info.
-  /// @details The media controller client will get the most recently updated information by the server.
+  /// Gets the latest media controller server info.
   ///
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// The media controller client will get the most recently updated information by the server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @remarks The @a server_name should be released using free(). \n
-  /// If there is no activated media controller server, return value of the server name is NULL. \n
-  /// Before a media controller server sets the playback state to #MC_PLAYBACK_STATE_PLAYING, the @a server_state is #MC_SERVER_STATE_NONE. \n
-  /// After a media controller server sets the playback state to #MC_PLAYBACK_STATE_PLAYING, the @a server_state is #MC_SERVER_STATE_ACTIVATE. \n
-  /// After a media controller server is destroyed, @a server_state is #MC_SERVER_STATE_DEACTIVATE.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @param[out] server_name    The app_id of the latest media controller server
-  /// @param[out] server_state      The state of the latest media controller server
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Remarks:**
+  /// - The `server_name` should be released using free().
+  /// - If there is no activated media controller server, return value of the server name is NULL.
+  /// - Before a media controller server sets the playback state to `MC_PLAYBACK_STATE_PLAYING`, the `server_state` is `MC_SERVER_STATE_NONE`.
+  /// - After a media controller server sets the playback state to `MC_PLAYBACK_STATE_PLAYING`, the `server_state` is `MC_SERVER_STATE_ACTIVATE`.
+  /// - After a media controller server is destroyed, `server_state` is `MC_SERVER_STATE_DEACTIVATE`.
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `server_name` (out): The app_id of the latest media controller server
+  /// - `server_state` (out): The state of the latest media controller server
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
   int mc_client_get_latest_server_info(
     mc_client_h client,
     ffi.Pointer<ffi.Pointer<ffi.Char>> server_name,
@@ -2991,26 +3729,37 @@ class Tizen80CapiMediaController {
           int Function(mc_client_h, ffi.Pointer<ffi.Pointer<ffi.Char>>,
               ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the latest playback info.
-  /// @details The media controller client will get the most recently updated information from @a server_name.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// Gets the latest playback info.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// The media controller client will get the most recently updated information from `server_name`.
   ///
-  /// @remarks The @a playback should be released using @c mc_client_destroy_playback(). \n
-  /// If there is no playback info, return value of the playback is NULL.
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @param[in] server_name    The app_id of the media controller server
-  /// @param[out] playback    The handle to playback
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Remarks:**
+  /// - The `playback` should be released using `mc_client_destroy_playback(`).
+  /// - If there is no playback info, return value of the playback is NULL.
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `server_name` (in): The app_id of the media controller server
+  /// - `playback` (out): The handle to playback
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
   int mc_client_get_server_playback_info(
     mc_client_h client,
     ffi.Pointer<ffi.Char> server_name,
@@ -3033,26 +3782,37 @@ class Tizen80CapiMediaController {
           int Function(mc_client_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<mc_playback_h>)>();
 
-  /// @brief Gets the latest metadata.
-  /// @details The media controller client will get the most recently updated information from @a server_name.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// Gets the latest metadata.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// The media controller client will get the most recently updated information from `server_name`.
   ///
-  /// @remarks The @a metadata should be released using @c mc_metadata_destroy(). \n
-  /// If there is no metadata, return value of the @a metadata is NULL.
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @param[in] server_name    The app_id of the media controller server
-  /// @param[out] metadata    The handle to metadata
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Remarks:**
+  /// - The `metadata` should be released using `mc_metadata_destroy(`).
+  /// - If there is no metadata, return value of the `metadata` is NULL.
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `server_name` (in): The app_id of the media controller server
+  /// - `metadata` (out): The handle to metadata
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
   int mc_client_get_server_metadata(
     mc_client_h client,
     ffi.Pointer<ffi.Char> server_name,
@@ -3074,23 +3834,34 @@ class Tizen80CapiMediaController {
           int Function(mc_client_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<mc_metadata_h>)>();
 
-  /// @brief Gets the latest shuffle mode.
-  /// @details The media controller client will get the most recently updated information from @a server_name.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// Gets the latest shuffle mode.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// The media controller client will get the most recently updated information from `server_name`.
   ///
-  /// @remarks If there is no shuffle mode info, return value is #MC_SHUFFLE_MODE_OFF.
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @param[in] server_name    The app_id of the media controller server
-  /// @param[out] mode    The info of the latest shuffle mode
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Remarks:**
+  /// - If there is no shuffle mode info, return value is `MC_SHUFFLE_MODE_OFF`.
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `server_name` (in): The app_id of the media controller server
+  /// - `mode` (out): The info of the latest shuffle mode
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
   int mc_client_get_server_shuffle_mode(
     mc_client_h client,
     ffi.Pointer<ffi.Char> server_name,
@@ -3112,23 +3883,34 @@ class Tizen80CapiMediaController {
           int Function(
               mc_client_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the latest repeat mode.
-  /// @details The media controller client will get the most recently updated information from @a server_name.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// Gets the latest repeat mode.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// The media controller client will get the most recently updated information from `server_name`.
   ///
-  /// @remarks If there is no repeat mode info, return value is #MC_REPEAT_MODE_OFF.
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @param[in] server_name    The app_id of the media controller server
-  /// @param[out] mode    The info of the latest shuffle mode
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Remarks:**
+  /// - If there is no repeat mode info, return value is `MC_REPEAT_MODE_OFF`.
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `server_name` (in): The app_id of the media controller server
+  /// - `mode` (out): The info of the latest shuffle mode
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
   int mc_client_get_server_repeat_mode(
     mc_client_h client,
     ffi.Pointer<ffi.Char> server_name,
@@ -3150,29 +3932,42 @@ class Tizen80CapiMediaController {
           int Function(
               mc_client_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the icon URI of the media controller server.
-  /// @since_tizen 5.0
+  /// Gets the icon URI of the media controller server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @remarks The @a uri should be released using @c free(). \n
-  /// If there is no URI info, return value of the uri is NULL.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] client The handle of the media controller client
-  /// @param[in] server_name    The app_id of the media controller server
-  /// @param[out] uri    The icon URI
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
+  /// **Remarks:**
+  /// - The `uri` should be released using `free(`).
+  /// - If there is no URI info, return value of the uri is NULL.
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `server_name` (in): The app_id of the media controller server
+  /// - `uri` (out): The icon URI
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
   int mc_client_get_server_icon(
     mc_client_h client,
     ffi.Pointer<ffi.Char> server_name,
@@ -3195,27 +3990,40 @@ class Tizen80CapiMediaController {
           int Function(mc_client_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the latest subtitles display status.
-  /// @details The media controller client will get the most recently updated information from @a server_name.
-  /// @since_tizen 5.5
+  /// Gets the latest subtitles display status.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// The media controller client will get the most recently updated information from `server_name`.
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @param[in] server_name    The app_id of the media controller server
-  /// @param[out] enabled    The status of the latest subtitles display
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `server_name` (in): The app_id of the media controller server
+  /// - `enabled` (out): The status of the latest subtitles display
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
   int mc_client_get_server_subtitles_enabled(
     mc_client_h client,
     ffi.Pointer<ffi.Char> server_name,
@@ -3238,27 +4046,40 @@ class Tizen80CapiMediaController {
           int Function(
               mc_client_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets the latest 360 mode display status.
-  /// @details The media controller client will get the most recently updated information from @a server_name.
-  /// @since_tizen 5.5
+  /// Gets the latest 360 mode display status.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// The media controller client will get the most recently updated information from `server_name`.
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @param[in] server_name    The app_id of the media controller server
-  /// @param[out] enabled    The status of the latest 360 mode display
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `server_name` (in): The app_id of the media controller server
+  /// - `enabled` (out): The status of the latest 360 mode display
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
   int mc_client_get_server_360_mode_enabled(
     mc_client_h client,
     ffi.Pointer<ffi.Char> server_name,
@@ -3280,29 +4101,43 @@ class Tizen80CapiMediaController {
           int Function(
               mc_client_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets the latest display mode.
-  /// @details The media controller client will get the most recently updated information from @a server_name.
-  /// @since_tizen 5.5
+  /// Gets the latest display mode.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// The media controller client will get the most recently updated information from `server_name`.
   ///
-  /// @remarks The default display mode is #MC_DISPLAY_MODE_FULL_SCREEN.
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @param[in] server_name    The app_id of the media controller server
-  /// @param[out] mode    The info of the latest display mode
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Remarks:**
+  /// - The default display mode is `MC_DISPLAY_MODE_FULL_SCREEN`.
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `server_name` (in): The app_id of the media controller server
+  /// - `mode` (out): The info of the latest display mode
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
   int mc_client_get_server_display_mode(
     mc_client_h client,
     ffi.Pointer<ffi.Char> server_name,
@@ -3324,29 +4159,43 @@ class Tizen80CapiMediaController {
           int Function(
               mc_client_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the latest display rotation.
-  /// @details The media controller client will get the most recently updated information from @a server_name.
-  /// @since_tizen 5.5
+  /// Gets the latest display rotation.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// The media controller client will get the most recently updated information from `server_name`.
   ///
-  /// @remarks The default display rotation is #MC_DISPLAY_ROTATION_NONE.
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @param[in] server_name    The app_id of the media controller server
-  /// @param[out] rotation    The info of the latest display rotation
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Remarks:**
+  /// - The default display rotation is `MC_DISPLAY_ROTATION_NONE`.
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `server_name` (in): The app_id of the media controller server
+  /// - `rotation` (out): The info of the latest display rotation
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
   int mc_client_get_server_display_rotation(
     mc_client_h client,
     ffi.Pointer<ffi.Char> server_name,
@@ -3369,33 +4218,46 @@ class Tizen80CapiMediaController {
           int Function(
               mc_client_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the playback ability of the media controller server.
-  /// @since_tizen 5.0
+  /// Gets the playback ability of the media controller server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @remarks The @a ability should be released using @c mc_playback_ability_destroy().\n
-  /// If the media controller server is deactivated, this function will return #MC_ABILITY_SUPPORTED_UNDECIDED.\n
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] client The handle of the media controller client
-  /// @param[in] server_name    The app_id of the media controller server
-  /// @param[out] ability    The handle to ability
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @pre Get a server name handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
-  /// @see mc_client_get_latest_server_info()
-  /// @see mc_client_foreach_server()
-  /// @see mc_playback_action_is_supported()
+  /// **Remarks:**
+  /// - The `ability` should be released using `mc_playback_ability_destroy(`).
+  /// - If the media controller server is deactivated, this function will return `MC_ABILITY_SUPPORTED_UNDECIDED`.
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `server_name` (in): The app_id of the media controller server
+  /// - `ability` (out): The handle to ability
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  /// - Get a server name handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
+  /// - `mc_client_get_latest_server_info()`
+  /// - `mc_client_foreach_server()`
+  /// - `mc_playback_action_is_supported()`
   int mc_client_get_server_playback_ability(
     mc_client_h client,
     ffi.Pointer<ffi.Char> server_name,
@@ -3418,33 +4280,47 @@ class Tizen80CapiMediaController {
           int Function(mc_client_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<mc_playback_ability_h>)>();
 
-  /// @deprecated Deprecated since 5.5. Use mc_client_get_server_ability_support() instead.
-  /// @brief Gets the support value of the shuffle ability of the updated media controller server.
-  /// @since_tizen 5.0
+  /// **Deprecated:** Deprecated since 5.5. Use mc_client_get_server_ability_support() instead.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// Gets the support value of the shuffle ability of the updated media controller server.
   ///
-  /// @remarks If the server's ability support is not set, the result value is #MC_ABILITY_SUPPORTED_UNDECIDED. \n
-  /// It means you can send the corresponding command to the server, but it's not guaranteed that the server can handle it.
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] client The handle of the media controller client
-  /// @param[in] server_name    The app_id of the media controller server
-  /// @param[out] support    The support value of the shuffle ability
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @pre Get a server name handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
-  /// @see mc_client_get_latest_server_info()
-  /// @see mc_client_foreach_server()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Remarks:**
+  /// - If the server's ability support is not set, the result value is `MC_ABILITY_SUPPORTED_UNDECIDED`.
+  /// - It means you can send the corresponding command to the server, but it's not guaranteed that the server can handle it.
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `server_name` (in): The app_id of the media controller server
+  /// - `support` (out): The support value of the shuffle ability
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  /// - Get a server name handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
+  /// - `mc_client_get_latest_server_info()`
+  /// - `mc_client_foreach_server()`
   int mc_client_get_server_shuffle_ability_support(
     mc_client_h client,
     ffi.Pointer<ffi.Char> server_name,
@@ -3467,34 +4343,48 @@ class Tizen80CapiMediaController {
           int Function(
               mc_client_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Int32>)>();
 
-  /// @deprecated Deprecated since 5.5. Use mc_client_get_server_ability_support() instead.
-  /// @brief Gets the support value of the repeat ability of the updated media controller server.
-  /// @since_tizen 5.0
+  /// **Deprecated:** Deprecated since 5.5. Use mc_client_get_server_ability_support() instead.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// Gets the support value of the repeat ability of the updated media controller server.
   ///
-  /// @remarks If the server's ability support is not set, the result value is #MC_ABILITY_SUPPORTED_UNDECIDED. \n
-  /// It means you can send the corresponding command to the server, but it's not guaranteed that the server can handle it.
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] client The handle of the media controller client
-  /// @param[in] server_name    The app_id of the media controller server
-  /// @param[out] support    The support value of the repeat ability
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @pre Get a server name handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
-  /// @see mc_client_get_latest_server_info()
-  /// @see mc_client_foreach_server()
-  /// @see mc_client_get_server_playback_ability()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Remarks:**
+  /// - If the server's ability support is not set, the result value is `MC_ABILITY_SUPPORTED_UNDECIDED`.
+  /// - It means you can send the corresponding command to the server, but it's not guaranteed that the server can handle it.
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `server_name` (in): The app_id of the media controller server
+  /// - `support` (out): The support value of the repeat ability
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  /// - Get a server name handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
+  /// - `mc_client_get_latest_server_info()`
+  /// - `mc_client_foreach_server()`
+  /// - `mc_client_get_server_playback_ability()`
   int mc_client_get_server_repeat_ability_support(
     mc_client_h client,
     ffi.Pointer<ffi.Char> server_name,
@@ -3517,37 +4407,50 @@ class Tizen80CapiMediaController {
           int Function(
               mc_client_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the ability support of the media controller server.
-  /// @since_tizen 5.5
+  /// Gets the ability support of the media controller server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @remarks If the server's ability support is not set, the result value is #MC_ABILITY_SUPPORTED_UNDECIDED. \n
-  /// It means you can send the corresponding command to the server, but it's not guaranteed that the server can handle it. \n
-  /// If the media controller server is deactivated, this function will return #MC_ABILITY_SUPPORTED_UNDECIDED.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] client The handle of the media controller client
-  /// @param[in] server_name    The app_id of the media controller server
-  /// @param[in] ability The ability
-  /// @param[out] support    The support value of the ability
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @pre Get a server name handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
-  /// @see mc_client_get_latest_server_info()
-  /// @see mc_client_foreach_server()
-  /// @see mc_client_get_server_playback_ability()
-  /// @see mc_client_get_server_display_mode_ability()
-  /// @see mc_client_get_server_display_rotation_ability()
+  /// **Remarks:**
+  /// - If the server's ability support is not set, the result value is `MC_ABILITY_SUPPORTED_UNDECIDED`.
+  /// - It means you can send the corresponding command to the server, but it's not guaranteed that the server can handle it.
+  /// - If the media controller server is deactivated, this function will return `MC_ABILITY_SUPPORTED_UNDECIDED`.
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `server_name` (in): The app_id of the media controller server
+  /// - `ability` (in): The ability
+  /// - `support` (out): The support value of the ability
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  /// - Get a server name handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
+  /// - `mc_client_get_latest_server_info()`
+  /// - `mc_client_foreach_server()`
+  /// - `mc_client_get_server_playback_ability()`
+  /// - `mc_client_get_server_display_mode_ability()`
+  /// - `mc_client_get_server_display_rotation_ability()`
   int mc_client_get_server_ability_support(
     mc_client_h client,
     ffi.Pointer<ffi.Char> server_name,
@@ -3571,35 +4474,48 @@ class Tizen80CapiMediaController {
           int Function(mc_client_h, ffi.Pointer<ffi.Char>, int,
               ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the supported display mode of the updated media controller server.
-  /// @since_tizen 5.5
+  /// Gets the supported display mode of the updated media controller server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @remarks If a display mode is not present in the @a supported_modes, then the server's support for this mode is #MC_ABILITY_SUPPORTED_NO and you can't send the corresponding command to the server. \n
-  /// If the media controller server is deactivated, this function will return #MC_ABILITY_SUPPORTED_NO.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] client The handle of the media controller client
-  /// @param[in] server_name    The app_id of the media controller server
-  /// @param[out] supported_modes    The supported display mode, values of #mc_display_mode_e combined with bitwise 'or'.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @pre Get a server name handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
-  /// @see mc_client_get_latest_server_info()
-  /// @see mc_client_foreach_server()
-  /// @see mc_client_get_server_playback_ability()
-  /// @see mc_client_get_server_ability_support()
-  /// @see mc_client_get_server_display_rotation_ability()
+  /// **Remarks:**
+  /// - If a display mode is not present in the `supported_modes`, then the server's support for this mode is `MC_ABILITY_SUPPORTED_NO` and you can't send the corresponding command to the server.
+  /// - If the media controller server is deactivated, this function will return `MC_ABILITY_SUPPORTED_NO`.
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `server_name` (in): The app_id of the media controller server
+  /// - `supported_modes` (out): The supported display mode, values of `mc_display_mode_e` combined with bitwise 'or'.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  /// - Get a server name handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
+  /// - `mc_client_get_latest_server_info()`
+  /// - `mc_client_foreach_server()`
+  /// - `mc_client_get_server_playback_ability()`
+  /// - `mc_client_get_server_ability_support()`
+  /// - `mc_client_get_server_display_rotation_ability()`
   int mc_client_get_server_display_mode_ability(
     mc_client_h client,
     ffi.Pointer<ffi.Char> server_name,
@@ -3622,35 +4538,48 @@ class Tizen80CapiMediaController {
           int Function(mc_client_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Gets the supported display rotation of the updated media controller server.
-  /// @since_tizen 5.5
+  /// Gets the supported display rotation of the updated media controller server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @remarks If a display rotation is not present in the @a supported_rotations, then the server's support for this mode is #MC_ABILITY_SUPPORTED_NO and you can't send the corresponding command to the server. \n
-  /// If the media controller server is deactivated, this function will return #MC_ABILITY_SUPPORTED_NO.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] client The handle of the media controller client
-  /// @param[in] server_name    The app_id of the media controller server
-  /// @param[out] supported_rotations    The supported display rotation, values of #mc_display_rotation_e combined with bitwise 'or'
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @pre Get a server name handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_destroy()
-  /// @see mc_client_get_latest_server_info()
-  /// @see mc_client_foreach_server()
-  /// @see mc_client_get_server_playback_ability()
-  /// @see mc_client_get_server_ability_support()
-  /// @see mc_client_get_server_display_mode_ability()
+  /// **Remarks:**
+  /// - If a display rotation is not present in the `supported_rotations`, then the server's support for this mode is `MC_ABILITY_SUPPORTED_NO` and you can't send the corresponding command to the server.
+  /// - If the media controller server is deactivated, this function will return `MC_ABILITY_SUPPORTED_NO`.
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `server_name` (in): The app_id of the media controller server
+  /// - `supported_rotations` (out): The supported display rotation, values of `mc_display_rotation_e` combined with bitwise 'or'
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  /// - Get a server name handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_destroy()`
+  /// - `mc_client_get_latest_server_info()`
+  /// - `mc_client_foreach_server()`
+  /// - `mc_client_get_server_playback_ability()`
+  /// - `mc_client_get_server_ability_support()`
+  /// - `mc_client_get_server_display_mode_ability()`
   int mc_client_get_server_display_rotation_ability(
     mc_client_h client,
     ffi.Pointer<ffi.Char> server_name,
@@ -3673,28 +4602,39 @@ class Tizen80CapiMediaController {
           int Function(mc_client_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Retrieves all created servers.
-  /// @details This function gets all created media controller servers.
-  /// The callback function will be invoked for every created media controller server.
-  /// If there are no media controller servers, the callback will not be invoked.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// Retrieves all created servers.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// This function gets all created media controller servers. The callback function will be invoked for every created media controller server. If there are no media controller servers, the callback will not be invoked.
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @param[in] callback      The callback function to be invoked, will be called for each server
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `callback` (in): The callback function to be invoked, will be called for each server
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
   int mc_client_foreach_server(
     mc_client_h client,
     mc_activated_server_cb callback,
@@ -3716,33 +4656,43 @@ class Tizen80CapiMediaController {
           int Function(
               mc_client_h, mc_activated_server_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @deprecated Deprecated since 5.5. Use mc_playlist_foreach_playlist() instead.
-  /// @brief Retrieves all playlists of the media controller server.
-  /// @details This function gets all playlists of the media controller server.
-  /// The callback function will be invoked for every retrieved playlist.
-  /// If there are no playlists, the callback will not be invoked.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// **Deprecated:** Deprecated since 5.5. Use mc_playlist_foreach_playlist() instead.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// Retrieves all playlists of the media controller server.
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @param[in] server_name    The app_id of the media controller server
-  /// @param[in] callback      The callback function to be invoked
-  /// @param[in] user_data   The user data to be passed to the callback function
+  /// This function gets all playlists of the media controller server. The callback function will be invoked for every retrieved playlist. If there are no playlists, the callback will not be invoked.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_playlist_cb()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `server_name` (in): The app_id of the media controller server
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_playlist_cb()`
   int mc_client_foreach_server_playlist(
     mc_client_h client,
     ffi.Pointer<ffi.Char> server_name,
@@ -3766,33 +4716,46 @@ class Tizen80CapiMediaController {
           int Function(mc_client_h, ffi.Pointer<ffi.Char>, mc_playlist_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sends the playback action command to server.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Sends the playback action command to server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @remarks The @a request_id should be released using free().\n
-  /// If the @a request_id is null, the server will not send the reply of the command.\n
-  /// If the @a server_name application doesn't support the playback action command, this function will return #MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP since 5.5.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @param[in] server_name    The app_id of the media controller server
-  /// @param[in] action   The playback action command to send to the media controller server
-  /// @param[out] request_id   The id of the command request, it will be passed to the mc_cmd_reply_received_cb() function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP Limited by server application
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_get_server_playback_info()
-  /// @see mc_client_set_cmd_reply_received_cb()
+  /// **Remarks:**
+  /// - The `request_id` should be released using free().
+  /// - If the `request_id` is null, the server will not send the reply of the command.
+  /// - If the `server_name` application doesn't support the playback action command, this function will return `MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP` since 5.5.
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `server_name` (in): The app_id of the media controller server
+  /// - `action` (in): The playback action command to send to the media controller server
+  /// - `request_id` (out): The id of the command request, it will be passed to the mc_cmd_reply_received_cb() function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP`: Limited by server application
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_get_server_playback_info()`
+  /// - `mc_client_set_cmd_reply_received_cb()`
   int mc_client_send_playback_action_cmd(
     mc_client_h client,
     ffi.Pointer<ffi.Char> server_name,
@@ -3817,33 +4780,46 @@ class Tizen80CapiMediaController {
           int Function(mc_client_h, ffi.Pointer<ffi.Char>, int,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sends the playback position command to server.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Sends the playback position command to server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @remarks The @a request_id should be released using free().\n
-  /// If the @a request_id is null, the server will not send the reply of the command.\n
-  /// If the @a server_name application doesn't support the playback position command, this function will return #MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP since 5.5.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @param[in] server_name    The app_id of the media controller server
-  /// @param[in] position   The position of the playback in milliseconds to send to media controller server
-  /// @param[out] request_id   The id of the command request, it will be passed to the mc_cmd_reply_received_cb() function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP Limited by server application
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_get_server_playback_info()
-  /// @see mc_client_set_cmd_reply_received_cb()
+  /// **Remarks:**
+  /// - The `request_id` should be released using free().
+  /// - If the `request_id` is null, the server will not send the reply of the command.
+  /// - If the `server_name` application doesn't support the playback position command, this function will return `MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP` since 5.5.
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `server_name` (in): The app_id of the media controller server
+  /// - `position` (in): The position of the playback in milliseconds to send to media controller server
+  /// - `request_id` (out): The id of the command request, it will be passed to the mc_cmd_reply_received_cb() function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP`: Limited by server application
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_get_server_playback_info()`
+  /// - `mc_client_set_cmd_reply_received_cb()`
   int mc_client_send_playback_position_cmd(
     mc_client_h client,
     ffi.Pointer<ffi.Char> server_name,
@@ -3868,33 +4844,46 @@ class Tizen80CapiMediaController {
           int Function(mc_client_h, ffi.Pointer<ffi.Char>, int,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sends the shuffle mode command to server.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Sends the shuffle mode command to server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @remarks The @a request_id should be released using free().\n
-  /// If the @a request_id is null, the server will not send the reply of the command.\n
-  /// If the @a server_name application doesn't support the shuffle mode, this function will return #MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP since 5.5.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @param[in] server_name    The app_id of the media controller server
-  /// @param[in] shuffle_mode   The shuffle mode to send to media controller server
-  /// @param[out] request_id   The id of the command request, it will be passed to the mc_cmd_reply_received_cb() function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP Limited by server application
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_get_server_playback_info()
-  /// @see mc_client_set_cmd_reply_received_cb()
+  /// **Remarks:**
+  /// - The `request_id` should be released using free().
+  /// - If the `request_id` is null, the server will not send the reply of the command.
+  /// - If the `server_name` application doesn't support the shuffle mode, this function will return `MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP` since 5.5.
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `server_name` (in): The app_id of the media controller server
+  /// - `shuffle_mode` (in): The shuffle mode to send to media controller server
+  /// - `request_id` (out): The id of the command request, it will be passed to the mc_cmd_reply_received_cb() function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP`: Limited by server application
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_get_server_playback_info()`
+  /// - `mc_client_set_cmd_reply_received_cb()`
   int mc_client_send_shuffle_mode_cmd(
     mc_client_h client,
     ffi.Pointer<ffi.Char> server_name,
@@ -3919,33 +4908,46 @@ class Tizen80CapiMediaController {
           int Function(mc_client_h, ffi.Pointer<ffi.Char>, int,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sends the repeat mode command to server.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Sends the repeat mode command to server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @remarks The @a request_id should be released using free().\n
-  /// If the @a request_id is null, the server will not send the reply of the command.\n
-  /// If the @a server_name application doesn't support the repeat mode, this function will return #MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP since 5.5.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @param[in] server_name    The app_id of the media controller server
-  /// @param[in] repeat_mode   The repeat mode to send to media controller server
-  /// @param[out] request_id   The id of the command request, it will be passed to the mc_cmd_reply_received_cb() function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP Limited by server application
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_get_server_playback_info()
-  /// @see mc_client_set_cmd_reply_received_cb()
+  /// **Remarks:**
+  /// - The `request_id` should be released using free().
+  /// - If the `request_id` is null, the server will not send the reply of the command.
+  /// - If the `server_name` application doesn't support the repeat mode, this function will return `MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP` since 5.5.
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `server_name` (in): The app_id of the media controller server
+  /// - `repeat_mode` (in): The repeat mode to send to media controller server
+  /// - `request_id` (out): The id of the command request, it will be passed to the mc_cmd_reply_received_cb() function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP`: Limited by server application
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_get_server_playback_info()`
+  /// - `mc_client_set_cmd_reply_received_cb()`
   int mc_client_send_repeat_mode_cmd(
     mc_client_h client,
     ffi.Pointer<ffi.Char> server_name,
@@ -3970,36 +4972,50 @@ class Tizen80CapiMediaController {
           int Function(mc_client_h, ffi.Pointer<ffi.Char>, int,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sends the playlist command to server.
-  /// @details The media controller client can send "index" of the playlist to the media controller server with playback action and position.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Sends the playlist command to server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// The media controller client can send "index" of the playlist to the media controller server with playback action and position.
   ///
-  /// @remarks The @a request_id should be released using free().\n
-  /// If the @a request_id is null, the server will not send the reply of the command.\n
-  /// If the @a server_name application doesn't support the playlist command, this function will return #MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP since 5.5.
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @param[in] server_name    The app_id of the media controller server
-  /// @param[in] playlist_name    The playlist name of the server
-  /// @param[in] index    The index of the media in playlist to send to the media controller server
-  /// @param[in] action    The playback action command to send to the media controller server
-  /// @param[in] position    The position of the playback in milliseconds to send to media controller server
-  /// @param[out] request_id   The id of the command request, it will be passed to the mc_cmd_reply_received_cb() function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP Limited by server application
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_set_cmd_reply_received_cb()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Remarks:**
+  /// - The `request_id` should be released using free().
+  /// - If the `request_id` is null, the server will not send the reply of the command.
+  /// - If the `server_name` application doesn't support the playlist command, this function will return `MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP` since 5.5.
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `server_name` (in): The app_id of the media controller server
+  /// - `playlist_name` (in): The playlist name of the server
+  /// - `index` (in): The index of the media in playlist to send to the media controller server
+  /// - `action` (in): The playback action command to send to the media controller server
+  /// - `position` (in): The position of the playback in milliseconds to send to media controller server
+  /// - `request_id` (out): The id of the command request, it will be passed to the mc_cmd_reply_received_cb() function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP`: Limited by server application
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_set_cmd_reply_received_cb()`
   int mc_client_send_playlist_cmd(
     mc_client_h client,
     ffi.Pointer<ffi.Char> server_name,
@@ -4042,34 +5058,48 @@ class Tizen80CapiMediaController {
               int,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sends the custom command to server.
-  /// @details If the server sends the result of the command, the media controller client will get the result of the custom command by mc_cmd_reply_received_cb() callback.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Sends the custom command to server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// If the server sends the result of the command, the media controller client will get the result of the custom command by mc_cmd_reply_received_cb() callback.
   ///
-  /// @remarks The @a request_id should be released using free().\n
-  /// If the @a request_id is null, the server will not send the reply of the command.\n
-  /// If the @a server_name application doesn't support the custom command, this function will return #MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP since 5.5.
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @param[in] server_name    The app_id of the media controller server
-  /// @param[in] command      The command to be sent
-  /// @param[in] data      The extra data
-  /// @param[out] request_id   The id of the command request, it will be passed to the mc_cmd_reply_received_cb() function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP Limited by server application
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_set_cmd_reply_received_cb()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Remarks:**
+  /// - The `request_id` should be released using free().
+  /// - If the `request_id` is null, the server will not send the reply of the command.
+  /// - If the `server_name` application doesn't support the custom command, this function will return `MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP` since 5.5.
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `server_name` (in): The app_id of the media controller server
+  /// - `command` (in): The command to be sent
+  /// - `data` (in): The extra data
+  /// - `request_id` (out): The id of the command request, it will be passed to the mc_cmd_reply_received_cb() function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP`: Limited by server application
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_set_cmd_reply_received_cb()`
   int mc_client_send_custom_cmd(
     mc_client_h client,
     ffi.Pointer<ffi.Char> server_name,
@@ -4104,36 +5134,50 @@ class Tizen80CapiMediaController {
               ffi.Pointer<bundle.bundle>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sends the search command to server.
-  /// @details If the server sends the result of the command, the media controller client will get the result of the search command by mc_cmd_reply_received_cb() callback.
-  /// @since_tizen 5.0
+  /// Sends the search command to server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// If the server sends the result of the command, the media controller client will get the result of the search command by mc_cmd_reply_received_cb() callback.
   ///
-  /// @remarks The @a request_id should be released using free().\n
-  /// If the @a request_id is null, the server will not send the reply of the command.\n
-  /// If the @a server_name application doesn't support the search command, this function will return #MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP since 5.5.
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @param[in] server_name    The app_id of the media controller server
-  /// @param[in] search      The search handle to be sent
-  /// @param[out] request_id   The id of the command request, it will be passed to the mc_cmd_reply_received_cb() function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP Limited by server application
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @pre Create search handle and set data by calling mc_search_create() and mc_search_set_condition().
-  /// @see mc_client_create()
-  /// @see mc_client_set_cmd_reply_received_cb()
-  /// @see mc_search_create()
-  /// @see mc_search_set_condition()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Remarks:**
+  /// - The `request_id` should be released using free().
+  /// - If the `request_id` is null, the server will not send the reply of the command.
+  /// - If the `server_name` application doesn't support the search command, this function will return `MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP` since 5.5.
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `server_name` (in): The app_id of the media controller server
+  /// - `search` (in): The search handle to be sent
+  /// - `request_id` (out): The id of the command request, it will be passed to the mc_cmd_reply_received_cb() function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP`: Limited by server application
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  /// - Create search handle and set data by calling mc_search_create() and mc_search_set_condition().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_set_cmd_reply_received_cb()`
+  /// - `mc_search_create()`
+  /// - `mc_search_set_condition()`
   int mc_client_send_search_cmd(
     mc_client_h client,
     ffi.Pointer<ffi.Char> server_name,
@@ -4158,33 +5202,47 @@ class Tizen80CapiMediaController {
           int Function(mc_client_h, ffi.Pointer<ffi.Char>, mc_search_h,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sends the subtitles command to server.
-  /// @details If the server sends the result of the command, the media controller client will get the result of the subtitles command by mc_cmd_reply_received_cb() callback.
-  /// @since_tizen 5.5
+  /// Sends the subtitles command to server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// If the server sends the result of the command, the media controller client will get the result of the subtitles command by mc_cmd_reply_received_cb() callback.
   ///
-  /// @remarks The @a request_id should be released using free().\n
-  /// If the @a request_id is null, the server will not send the reply of the command.\n
-  /// If the @a server_name application doesn't support the subtitles command, this function will return #MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP.
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @param[in] server_name    The app_id of the media controller server
-  /// @param[in] enable      The request status to send to media controller server
-  /// @param[out] request_id   The id of the command request, it will be passed to the mc_cmd_reply_received_cb() function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP Limited by server application
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_set_cmd_reply_received_cb()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Remarks:**
+  /// - The `request_id` should be released using free().
+  /// - If the `request_id` is null, the server will not send the reply of the command.
+  /// - If the `server_name` application doesn't support the subtitles command, this function will return `MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP`.
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `server_name` (in): The app_id of the media controller server
+  /// - `enable` (in): The request status to send to media controller server
+  /// - `request_id` (out): The id of the command request, it will be passed to the mc_cmd_reply_received_cb() function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP`: Limited by server application
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_set_cmd_reply_received_cb()`
   int mc_client_send_subtitles_cmd(
     mc_client_h client,
     ffi.Pointer<ffi.Char> server_name,
@@ -4209,33 +5267,47 @@ class Tizen80CapiMediaController {
           int Function(mc_client_h, ffi.Pointer<ffi.Char>, bool,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sends the 360 mode command to server.
-  /// @details If the server sends the result of the command, the media controller client will get the result of the 360 mode command by mc_cmd_reply_received_cb() callback.
-  /// @since_tizen 5.5
+  /// Sends the 360 mode command to server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// If the server sends the result of the command, the media controller client will get the result of the 360 mode command by mc_cmd_reply_received_cb() callback.
   ///
-  /// @remarks The @a request_id should be released using free().\n
-  /// If the @a request_id is null, the server will not send the reply of the command.\n
-  /// If the @a server_name application doesn't support the 360 mode command, this function will return #MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP.
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @param[in] server_name    The app_id of the media controller server
-  /// @param[in] enable      The request status to send to media controller server
-  /// @param[out] request_id   The id of the command request, it will be passed to the mc_cmd_reply_received_cb() function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP Limited by server application
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_set_cmd_reply_received_cb()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Remarks:**
+  /// - The `request_id` should be released using free().
+  /// - If the `request_id` is null, the server will not send the reply of the command.
+  /// - If the `server_name` application doesn't support the 360 mode command, this function will return `MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP`.
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `server_name` (in): The app_id of the media controller server
+  /// - `enable` (in): The request status to send to media controller server
+  /// - `request_id` (out): The id of the command request, it will be passed to the mc_cmd_reply_received_cb() function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP`: Limited by server application
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_set_cmd_reply_received_cb()`
   int mc_client_send_360_mode_cmd(
     mc_client_h client,
     ffi.Pointer<ffi.Char> server_name,
@@ -4260,33 +5332,47 @@ class Tizen80CapiMediaController {
           int Function(mc_client_h, ffi.Pointer<ffi.Char>, bool,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sends the display mode command to server.
-  /// @details If the server sends the result of the command, the media controller client will get the result of the display mode command by mc_cmd_reply_received_cb() callback.
-  /// @since_tizen 5.5
+  /// Sends the display mode command to server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// If the server sends the result of the command, the media controller client will get the result of the display mode command by mc_cmd_reply_received_cb() callback.
   ///
-  /// @remarks The @a request_id should be released using free().\n
-  /// If the @a request_id is null, the server will not send the reply of the command.\n
-  /// If the @a server_name application doesn't support the display mode command, this function will return #MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP.
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @param[in] server_name    The app_id of the media controller server
-  /// @param[in] mode      The display mode to send to media controller server
-  /// @param[out] request_id   The id of the command request, it will be passed to the mc_cmd_reply_received_cb() function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP Limited by server application
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_set_cmd_reply_received_cb()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Remarks:**
+  /// - The `request_id` should be released using free().
+  /// - If the `request_id` is null, the server will not send the reply of the command.
+  /// - If the `server_name` application doesn't support the display mode command, this function will return `MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP`.
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `server_name` (in): The app_id of the media controller server
+  /// - `mode` (in): The display mode to send to media controller server
+  /// - `request_id` (out): The id of the command request, it will be passed to the mc_cmd_reply_received_cb() function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP`: Limited by server application
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_set_cmd_reply_received_cb()`
   int mc_client_send_display_mode_cmd(
     mc_client_h client,
     ffi.Pointer<ffi.Char> server_name,
@@ -4311,33 +5397,47 @@ class Tizen80CapiMediaController {
           int Function(mc_client_h, ffi.Pointer<ffi.Char>, int,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sends the display rotation command to server.
-  /// @details If the server sends the result of the command, the media controller client will get the result of the display rotation command by mc_cmd_reply_received_cb() callback.
-  /// @since_tizen 5.5
+  /// Sends the display rotation command to server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.client
+  /// If the server sends the result of the command, the media controller client will get the result of the display rotation command by mc_cmd_reply_received_cb() callback.
   ///
-  /// @remarks The @a request_id should be released using free().\n
-  /// If the @a request_id is null, the server will not send the reply of the command.\n
-  /// If the @a server_name application doesn't support the display rotation command, this function will return #MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP.
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in] client    The handle of the media controller client
-  /// @param[in] server_name    The app_id of the media controller server
-  /// @param[in] rotation      The display rotation to send to media controller server
-  /// @param[out] request_id   The id of the command request, it will be passed to the mc_cmd_reply_received_cb() function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP Limited by server application
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
-  /// @see mc_client_set_cmd_reply_received_cb()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.client>
+  ///
+  /// **Remarks:**
+  /// - The `request_id` should be released using free().
+  /// - If the `request_id` is null, the server will not send the reply of the command.
+  /// - If the `server_name` application doesn't support the display rotation command, this function will return `MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP`.
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  /// - `server_name` (in): The app_id of the media controller server
+  /// - `rotation` (in): The display rotation to send to media controller server
+  /// - `request_id` (out): The id of the command request, it will be passed to the mc_cmd_reply_received_cb() function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP`: Limited by server application
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
+  /// - `mc_client_set_cmd_reply_received_cb()`
   int mc_client_send_display_rotation_cmd(
     mc_client_h client,
     ffi.Pointer<ffi.Char> server_name,
@@ -4362,17 +5462,27 @@ class Tizen80CapiMediaController {
           int Function(mc_client_h, ffi.Pointer<ffi.Char>, int,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Destroys client.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in] client The handle of the media controller client
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
+  /// Destroys client.
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_client_create()
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The handle of the media controller client
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_client_create()`
   int mc_client_destroy(
     mc_client_h client,
   ) {
@@ -4387,24 +5497,35 @@ class Tizen80CapiMediaController {
   late final _mc_client_destroy =
       _mc_client_destroyPtr.asFunction<int Function(mc_client_h)>();
 
-  /// @brief Creates a media controller server.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// Creates a media controller server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @remarks The @a server should be released using mc_server_destroy(). You can create only one server handle for each process.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[out] server The handle to media controller server
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
   ///
-  /// @see mc_server_destroy()
+  /// **Remarks:**
+  /// - The `server` should be released using mc_server_destroy(). You can create only one server handle for each process.
+  ///
+  /// **Parameters:**
+  /// - `server` (out): The handle to media controller server
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `mc_server_destroy()`
   int mc_server_create(
     ffi.Pointer<mc_server_h> server,
   ) {
@@ -4419,27 +5540,41 @@ class Tizen80CapiMediaController {
   late final _mc_server_create =
       _mc_server_createPtr.asFunction<int Function(ffi.Pointer<mc_server_h>)>();
 
-  /// @brief Sets the playback state to update the latest state info.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// Sets the playback state to update the latest state info.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @param[in] server The handle to media controller server
-  /// @param[in] state The state to set
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @post Apply the updated playback information by calling mc_server_update_playback_info().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
-  /// @see mc_server_update_playback_info()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  /// - `state` (in): The state to set
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **Postconditions:**
+  /// - Apply the updated playback information by calling mc_server_update_playback_info().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
+  /// - `mc_server_update_playback_info()`
   int mc_server_set_playback_state(
     mc_server_h server,
     int state,
@@ -4456,27 +5591,41 @@ class Tizen80CapiMediaController {
   late final _mc_server_set_playback_state = _mc_server_set_playback_statePtr
       .asFunction<int Function(mc_server_h, int)>();
 
-  /// @brief Sets the playback position to update the latest playback info.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// Sets the playback position to update the latest playback info.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @param[in] server The handle to media controller server
-  /// @param[in] position The position to set in milliseconds
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @post Apply the updated playback information by calling mc_server_update_playback_info().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
-  /// @see mc_server_update_playback_info()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  /// - `position` (in): The position to set in milliseconds
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **Postconditions:**
+  /// - Apply the updated playback information by calling mc_server_update_playback_info().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
+  /// - `mc_server_update_playback_info()`
   int mc_server_set_playback_position(
     mc_server_h server,
     int position,
@@ -4495,32 +5644,46 @@ class Tizen80CapiMediaController {
       _mc_server_set_playback_positionPtr
           .asFunction<int Function(mc_server_h, int)>();
 
-  /// @deprecated Deprecated since 5.0. Use mc_server_set_playlist_item_info() instead.
-  /// @brief Sets the index of the current playing media in the playlist to update the latest playback info.
-  /// @details If a media controller server has a playlist, the server can register and share it with media controller client.
-  /// A playlist is a set of "index" and "media metadata".\n
-  /// The media controller server can let media controller clients know the index of current playing media by using this function.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// **Deprecated:** Deprecated since 5.0. Use mc_server_set_playlist_item_info() instead.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// Sets the index of the current playing media in the playlist to update the latest playback info.
   ///
-  /// @param[in] server The handle to media controller server
-  /// @param[in] index    The index of the current playing media in the playlist
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// If a media controller server has a playlist, the server can register and share it with media controller client. A playlist is a set of "index" and "media metadata". The media controller server can let media controller clients know the index of current playing media by using this function.
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @post Apply the updated playback information by calling mc_server_update_playback_info().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
-  /// @see mc_server_update_playback_info()
-  /// @see mc_server_create_playlist()
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  /// - `index` (in): The index of the current playing media in the playlist
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **Postconditions:**
+  /// - Apply the updated playback information by calling mc_server_update_playback_info().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
+  /// - `mc_server_update_playback_info()`
+  /// - `mc_server_create_playlist()`
   int mc_server_set_playlist_item_index(
     mc_server_h server,
     ffi.Pointer<ffi.Char> index,
@@ -4539,32 +5702,45 @@ class Tizen80CapiMediaController {
       _mc_server_set_playlist_item_indexPtr
           .asFunction<int Function(mc_server_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the playlist name and index of the current playing media in the playlist to update the latest playback info.
-  /// @details If a media controller server has a playlist, the server can register and share it with media controller client.
-  /// A playlist is a set of "index" and "media metadata".\n
-  /// The media controller server can let media controller clients know the playlist name and index of current playing media by using this function.
-  /// @since_tizen 5.0
+  /// Sets the playlist name and index of the current playing media in the playlist to update the latest playback info.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// If a media controller server has a playlist, the server can register and share it with media controller client. A playlist is a set of "index" and "media metadata". The media controller server can let media controller clients know the playlist name and index of current playing media by using this function.
   ///
-  /// @param[in] server The handle to media controller server
-  /// @param[in] playlist_name    The name of the playlist. The length of the playlist name should be less than 4096 bytes
-  /// @param[in] index    The index of the current playing media in the playlist
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @post Apply the updated playback information by calling mc_server_update_playback_info().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
-  /// @see mc_server_update_playback_info()
-  /// @see mc_server_create_playlist()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  /// - `playlist_name` (in): The name of the playlist. The length of the playlist name should be less than 4096 bytes
+  /// - `index` (in): The index of the current playing media in the playlist
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **Postconditions:**
+  /// - Apply the updated playback information by calling mc_server_update_playback_info().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
+  /// - `mc_server_update_playback_info()`
+  /// - `mc_server_create_playlist()`
   int mc_server_set_playlist_item_info(
     mc_server_h server,
     ffi.Pointer<ffi.Char> playlist_name,
@@ -4586,30 +5762,46 @@ class Tizen80CapiMediaController {
           int Function(
               mc_server_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the playback content type to update the latest playback info.
-  /// @details If this function is called, the updated content type information will be sent to all clients.
-  /// @since_tizen 5.0
+  /// Sets the playback content type to update the latest playback info.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// If this function is called, the updated content type information will be sent to all clients.
   ///
-  /// @remarks If @a content_type is #MC_CONTENT_TYPE_UNDECIDED, this function will return #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER.
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] server The handle to media controller server
-  /// @param[in] content_type The content type to set the latest status
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @post Apply the updated playback information by calling mc_server_update_playback_info().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
-  /// @see mc_server_update_playback_info()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
+  ///
+  /// **Remarks:**
+  /// - If `content_type` is `MC_CONTENT_TYPE_UNDECIDED`, this function will return `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`.
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  /// - `content_type` (in): The content type to set the latest status
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **Postconditions:**
+  /// - Apply the updated playback information by calling mc_server_update_playback_info().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
+  /// - `mc_server_update_playback_info()`
   int mc_server_set_playback_content_type(
     mc_server_h server,
     int content_type,
@@ -4627,28 +5819,43 @@ class Tizen80CapiMediaController {
       _mc_server_set_playback_content_typePtr
           .asFunction<int Function(mc_server_h, int)>();
 
-  /// @brief Sets the content age rating to update the latest playback info.
-  /// @details If this function is called, the updated age rating information will be sent to all clients. Default value is #MC_CONTENT_RATING_ALL.
-  /// @since_tizen 5.0
+  /// Sets the content age rating to update the latest playback info.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// If this function is called, the updated age rating information will be sent to all clients. Default value is `MC_CONTENT_RATING_ALL`.
   ///
-  /// @param[in] server The handle to media controller server
-  /// @param[in] age_rating Age rating of the content
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @post Apply the updated age rating information by calling mc_server_update_playback_info().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
-  /// @see mc_server_update_playback_info()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  /// - `age_rating` (in): Age rating of the content
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **Postconditions:**
+  /// - Apply the updated age rating information by calling mc_server_update_playback_info().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
+  /// - `mc_server_update_playback_info()`
   int mc_server_set_content_age_rating(
     mc_server_h server,
     int age_rating,
@@ -4666,25 +5873,38 @@ class Tizen80CapiMediaController {
       _mc_server_set_content_age_ratingPtr
           .asFunction<int Function(mc_server_h, int)>();
 
-  /// @brief Updates the modified playback info.
-  /// @details If this function is called, the updated playback information will be sent to the controller.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// Updates the modified playback info.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// If this function is called, the updated playback information will be sent to the controller.
   ///
-  /// @param[in] server The handle to media controller server
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
   int mc_server_update_playback_info(
     mc_server_h server,
   ) {
@@ -4700,28 +5920,42 @@ class Tizen80CapiMediaController {
       _mc_server_update_playback_infoPtr
           .asFunction<int Function(mc_server_h)>();
 
-  /// @brief Sets the metadata to update the latest metadata info.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// Sets the metadata to update the latest metadata info.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @param[in] server The handle to media controller server
-  /// @param[in] attribute    The key attribute name to set
-  /// @param[in] value      The value of the attribute
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @post Apply the updated metadata information by calling mc_server_update_metadata().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
-  /// @see mc_server_update_metadata()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  /// - `attribute` (in): The key attribute name to set
+  /// - `value` (in): The value of the attribute
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **Postconditions:**
+  /// - Apply the updated metadata information by calling mc_server_update_metadata().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
+  /// - `mc_server_update_metadata()`
   int mc_server_set_metadata(
     mc_server_h server,
     int attribute,
@@ -4741,25 +5975,38 @@ class Tizen80CapiMediaController {
   late final _mc_server_set_metadata = _mc_server_set_metadataPtr
       .asFunction<int Function(mc_server_h, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Updates the modified metadata info.
-  /// @details If this function is called, the updated metadata will be sent to all clients.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// Updates the modified metadata info.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// If this function is called, the updated metadata will be sent to all clients.
   ///
-  /// @param[in] server The handle to media controller server
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
   int mc_server_update_metadata(
     mc_server_h server,
   ) {
@@ -4774,26 +6021,39 @@ class Tizen80CapiMediaController {
   late final _mc_server_update_metadata =
       _mc_server_update_metadataPtr.asFunction<int Function(mc_server_h)>();
 
-  /// @brief Updates the modified shuffle mode.
-  /// @details If this function is called, the updated mode information will be sent to all clients.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// Updates the modified shuffle mode.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// If this function is called, the updated mode information will be sent to all clients.
   ///
-  /// @param[in] server The handle to media controller server
-  /// @param[in] mode The shuffle mode to update the latest status
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  /// - `mode` (in): The shuffle mode to update the latest status
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
   int mc_server_update_shuffle_mode(
     mc_server_h server,
     int mode,
@@ -4810,26 +6070,39 @@ class Tizen80CapiMediaController {
   late final _mc_server_update_shuffle_mode = _mc_server_update_shuffle_modePtr
       .asFunction<int Function(mc_server_h, int)>();
 
-  /// @brief Updates the modified repeat mode.
-  /// @details If this function is called, the updated mode information will be sent to all clients.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// Updates the modified repeat mode.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// If this function is called, the updated mode information will be sent to all clients.
   ///
-  /// @param[in] server The handle to media controller server
-  /// @param[in] mode The repeat mode to update the latest status
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  /// - `mode` (in): The repeat mode to update the latest status
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
   int mc_server_update_repeat_mode(
     mc_server_h server,
     int mode,
@@ -4846,28 +6119,42 @@ class Tizen80CapiMediaController {
   late final _mc_server_update_repeat_mode = _mc_server_update_repeat_modePtr
       .asFunction<int Function(mc_server_h, int)>();
 
-  /// @brief Updates the modified subtitles display status.
-  /// @details If this function is called, the updated subtitles display status will be sent to all clients.
-  /// @since_tizen 5.5
+  /// Updates the modified subtitles display status.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// If this function is called, the updated subtitles display status will be sent to all clients.
   ///
-  /// @remarks The default subtitles display is false.
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in] server The handle to media controller server
-  /// @param[in] enabled The subtitles display status to update the latest status
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
+  ///
+  /// **Remarks:**
+  /// - The default subtitles display is false.
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  /// - `enabled` (in): The subtitles display status to update the latest status
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
   int mc_server_update_subtitles_enabled(
     mc_server_h server,
     bool enabled,
@@ -4885,28 +6172,42 @@ class Tizen80CapiMediaController {
       _mc_server_update_subtitles_enabledPtr
           .asFunction<int Function(mc_server_h, bool)>();
 
-  /// @brief Updates the modified 360 mode display status.
-  /// @details If this function is called, the updated 360 mode display status will be sent to all clients.
-  /// @since_tizen 5.5
+  /// Updates the modified 360 mode display status.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// If this function is called, the updated 360 mode display status will be sent to all clients.
   ///
-  /// @remarks The default 360 mode display is false.
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in] server The handle to media controller server
-  /// @param[in] enabled The 360 mode display status to update the latest status
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
+  ///
+  /// **Remarks:**
+  /// - The default 360 mode display is false.
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  /// - `enabled` (in): The 360 mode display status to update the latest status
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
   int mc_server_update_360_mode_enabled(
     mc_server_h server,
     bool enabled,
@@ -4924,28 +6225,42 @@ class Tizen80CapiMediaController {
       _mc_server_update_360_mode_enabledPtr
           .asFunction<int Function(mc_server_h, bool)>();
 
-  /// @brief Updates the modified display mode.
-  /// @details If this function is called, the updated display mode information will be sent to all clients.
-  /// @since_tizen 5.5
+  /// Updates the modified display mode.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// If this function is called, the updated display mode information will be sent to all clients.
   ///
-  /// @remarks The default display mode is #MC_DISPLAY_MODE_FULL_SCREEN.
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in] server The handle to media controller server
-  /// @param[in] mode The display mode to update the latest status
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
+  ///
+  /// **Remarks:**
+  /// - The default display mode is `MC_DISPLAY_MODE_FULL_SCREEN`.
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  /// - `mode` (in): The display mode to update the latest status
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
   int mc_server_update_display_mode(
     mc_server_h server,
     int mode,
@@ -4962,28 +6277,42 @@ class Tizen80CapiMediaController {
   late final _mc_server_update_display_mode = _mc_server_update_display_modePtr
       .asFunction<int Function(mc_server_h, int)>();
 
-  /// @brief Updates the modified display rotation.
-  /// @details If this function is called, the updated display rotation information will be sent to all clients.
-  /// @since_tizen 5.5
+  /// Updates the modified display rotation.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// If this function is called, the updated display rotation information will be sent to all clients.
   ///
-  /// @remarks The default display rotation is #MC_DISPLAY_ROTATION_NONE.
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in] server The handle to media controller server
-  /// @param[in] rotation The display rotation to update the latest status
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
+  ///
+  /// **Remarks:**
+  /// - The default display rotation is `MC_DISPLAY_ROTATION_NONE`.
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  /// - `rotation` (in): The display rotation to update the latest status
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
   int mc_server_update_display_rotation(
     mc_server_h server,
     int rotation,
@@ -5001,30 +6330,43 @@ class Tizen80CapiMediaController {
       _mc_server_update_display_rotationPtr
           .asFunction<int Function(mc_server_h, int)>();
 
-  /// @brief Sets the callback for receiving playback action command from client.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Sets the callback for receiving playback action command from client.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @remarks It is recommended to set the corresponding ability's support using mc_server_set_playback_ability(). It will let the client know about the server's abilities and what commands the client can send.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] server    The handle to media controller server
-  /// @param[in] callback      The callback to be invoked when media controller server receives playback action from client.
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
-  /// @see mc_server_unset_playback_action_cmd_received_cb()
-  /// @see mc_server_set_playback_ability()
+  /// **Remarks:**
+  /// - It is recommended to set the corresponding ability's support using mc_server_set_playback_ability(). It will let the client know about the server's abilities and what commands the client can send.
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  /// - `callback` (in): The callback to be invoked when media controller server receives playback action from client.
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
+  /// - `mc_server_unset_playback_action_cmd_received_cb()`
+  /// - `mc_server_set_playback_ability()`
   int mc_server_set_playback_action_cmd_received_cb(
     mc_server_h server,
     mc_server_playback_action_cmd_received_cb callback,
@@ -5049,27 +6391,40 @@ class Tizen80CapiMediaController {
           int Function(mc_server_h, mc_server_playback_action_cmd_received_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback for receiving playback action command from client.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Unsets the callback for receiving playback action command from client.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @remarks It is recommended to set the corresponding ability's support using mc_server_set_playback_ability(). It will let the client know about the server's abilities and what commands the client can send.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] server    The handle to media controller server
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
-  /// @see mc_server_set_playback_action_cmd_received_cb()
-  /// @see mc_server_set_playback_ability()
+  /// **Remarks:**
+  /// - It is recommended to set the corresponding ability's support using mc_server_set_playback_ability(). It will let the client know about the server's abilities and what commands the client can send.
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
+  /// - `mc_server_set_playback_action_cmd_received_cb()`
+  /// - `mc_server_set_playback_ability()`
   int mc_server_unset_playback_action_cmd_received_cb(
     mc_server_h server,
   ) {
@@ -5085,30 +6440,43 @@ class Tizen80CapiMediaController {
       _mc_server_unset_playback_action_cmd_received_cbPtr
           .asFunction<int Function(mc_server_h)>();
 
-  /// @brief Sets the callback for receiving playback position command from client.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Sets the callback for receiving playback position command from client.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @remarks It is recommended to set the corresponding ability's support using mc_server_set_ability_support(). It will let the client know about the server's abilities and what commands the client can send.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] server    The handle to media controller server
-  /// @param[in] callback      The callback to be invoked when media controller server receives position command from client
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
-  /// @see mc_server_unset_playback_position_cmd_received_cb()
-  /// @see mc_server_set_ability_support()
+  /// **Remarks:**
+  /// - It is recommended to set the corresponding ability's support using mc_server_set_ability_support(). It will let the client know about the server's abilities and what commands the client can send.
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  /// - `callback` (in): The callback to be invoked when media controller server receives position command from client
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
+  /// - `mc_server_unset_playback_position_cmd_received_cb()`
+  /// - `mc_server_set_ability_support()`
   int mc_server_set_playback_position_cmd_received_cb(
     mc_server_h server,
     mc_server_playback_position_cmd_received_cb callback,
@@ -5133,27 +6501,40 @@ class Tizen80CapiMediaController {
           int Function(mc_server_h, mc_server_playback_position_cmd_received_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback for receiving playback position command from client.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Unsets the callback for receiving playback position command from client.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @remarks It is recommended to set the corresponding ability's support using mc_server_set_ability_support(). It will let the client know about the server's abilities and what commands the client can send.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] server    The handle to media controller server
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
-  /// @see mc_server_set_playback_position_cmd_received_cb()
-  /// @see mc_server_set_playback_ability()
+  /// **Remarks:**
+  /// - It is recommended to set the corresponding ability's support using mc_server_set_ability_support(). It will let the client know about the server's abilities and what commands the client can send.
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
+  /// - `mc_server_set_playback_position_cmd_received_cb()`
+  /// - `mc_server_set_playback_ability()`
   int mc_server_unset_playback_position_cmd_received_cb(
     mc_server_h server,
   ) {
@@ -5169,30 +6550,43 @@ class Tizen80CapiMediaController {
       _mc_server_unset_playback_position_cmd_received_cbPtr
           .asFunction<int Function(mc_server_h)>();
 
-  /// @brief Sets the callback for receiving shuffle mode command from client.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Sets the callback for receiving shuffle mode command from client.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @remarks It is recommended to set the corresponding ability's support using mc_server_set_ability_support(). It will let the client know about the server's abilities and what commands the client can send.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] server    The handle to media controller server
-  /// @param[in] callback      The callback to be invoked when media controller server receives shuffle mode from client
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
-  /// @see mc_server_unset_shuffle_mode_cmd_received_cb()
-  /// @see mc_server_set_ability_support()
+  /// **Remarks:**
+  /// - It is recommended to set the corresponding ability's support using mc_server_set_ability_support(). It will let the client know about the server's abilities and what commands the client can send.
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  /// - `callback` (in): The callback to be invoked when media controller server receives shuffle mode from client
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
+  /// - `mc_server_unset_shuffle_mode_cmd_received_cb()`
+  /// - `mc_server_set_ability_support()`
   int mc_server_set_shuffle_mode_cmd_received_cb(
     mc_server_h server,
     mc_server_shuffle_mode_cmd_received_cb callback,
@@ -5217,27 +6611,40 @@ class Tizen80CapiMediaController {
           int Function(mc_server_h, mc_server_shuffle_mode_cmd_received_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback for receiving shuffle mode command from client.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Unsets the callback for receiving shuffle mode command from client.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @remarks It is recommended to set the corresponding ability's support using mc_server_set_ability_support(). It will let the client know about the server's abilities and what commands the client can send.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] server    The handle to media controller server
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
-  /// @see mc_server_set_shuffle_mode_cmd_received_cb()
-  /// @see mc_server_set_ability_support()
+  /// **Remarks:**
+  /// - It is recommended to set the corresponding ability's support using mc_server_set_ability_support(). It will let the client know about the server's abilities and what commands the client can send.
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
+  /// - `mc_server_set_shuffle_mode_cmd_received_cb()`
+  /// - `mc_server_set_ability_support()`
   int mc_server_unset_shuffle_mode_cmd_received_cb(
     mc_server_h server,
   ) {
@@ -5253,30 +6660,43 @@ class Tizen80CapiMediaController {
       _mc_server_unset_shuffle_mode_cmd_received_cbPtr
           .asFunction<int Function(mc_server_h)>();
 
-  /// @brief Sets the callback for receiving repeat mode command from client.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Sets the callback for receiving repeat mode command from client.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @remarks It is recommended to set the corresponding ability's support using mc_server_set_ability_support(). It will let the client know about the server's abilities and what commands the client can send.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] server    The handle to media controller server
-  /// @param[in] callback      The callback to be invoked when media controller server receives repeat mode from client
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
-  /// @see mc_server_unset_repeat_mode_cmd_received_cb()
-  /// @see mc_server_set_ability_support()
+  /// **Remarks:**
+  /// - It is recommended to set the corresponding ability's support using mc_server_set_ability_support(). It will let the client know about the server's abilities and what commands the client can send.
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  /// - `callback` (in): The callback to be invoked when media controller server receives repeat mode from client
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
+  /// - `mc_server_unset_repeat_mode_cmd_received_cb()`
+  /// - `mc_server_set_ability_support()`
   int mc_server_set_repeat_mode_cmd_received_cb(
     mc_server_h server,
     mc_server_repeat_mode_cmd_received_cb callback,
@@ -5301,27 +6721,40 @@ class Tizen80CapiMediaController {
           int Function(mc_server_h, mc_server_repeat_mode_cmd_received_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback for receiving repeat mode command from client.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Unsets the callback for receiving repeat mode command from client.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @remarks It is recommended to set the corresponding ability's support using mc_server_set_ability_support(). It will let the client know about the server's abilities and what commands the client can send.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] server    The handle to media controller server
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
-  /// @see mc_server_set_repeat_mode_cmd_received_cb()
-  /// @see mc_server_set_ability_support()
+  /// **Remarks:**
+  /// - It is recommended to set the corresponding ability's support using mc_server_set_ability_support(). It will let the client know about the server's abilities and what commands the client can send.
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
+  /// - `mc_server_set_repeat_mode_cmd_received_cb()`
+  /// - `mc_server_set_ability_support()`
   int mc_server_unset_repeat_mode_cmd_received_cb(
     mc_server_h server,
   ) {
@@ -5337,30 +6770,43 @@ class Tizen80CapiMediaController {
       _mc_server_unset_repeat_mode_cmd_received_cbPtr
           .asFunction<int Function(mc_server_h)>();
 
-  /// @brief Sets the callback for receiving playlist command from client.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Sets the callback for receiving playlist command from client.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @remarks It is recommended to set the corresponding ability's support using mc_server_set_ability_support(). It will let the client know about the server's abilities and what commands the client can send.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] server    The handle to media controller server
-  /// @param[in] callback      The callback to be invoked when media controller server receives playlist command from client
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
-  /// @see mc_server_unset_playlist_cmd_received_cb()
-  /// @see mc_server_set_ability_support()
+  /// **Remarks:**
+  /// - It is recommended to set the corresponding ability's support using mc_server_set_ability_support(). It will let the client know about the server's abilities and what commands the client can send.
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  /// - `callback` (in): The callback to be invoked when media controller server receives playlist command from client
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
+  /// - `mc_server_unset_playlist_cmd_received_cb()`
+  /// - `mc_server_set_ability_support()`
   int mc_server_set_playlist_cmd_received_cb(
     mc_server_h server,
     mc_server_playlist_cmd_received_cb callback,
@@ -5383,27 +6829,40 @@ class Tizen80CapiMediaController {
           int Function(mc_server_h, mc_server_playlist_cmd_received_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback for receiving playlist command from client.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Unsets the callback for receiving playlist command from client.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @remarks It is recommended to set the corresponding ability's support using mc_server_set_ability_support(). It will let the client know about the server's abilities and what commands the client can send.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] server    The handle to media controller server
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
-  /// @see mc_server_set_playlist_cmd_received_cb()
-  /// @see mc_server_set_ability_support()
+  /// **Remarks:**
+  /// - It is recommended to set the corresponding ability's support using mc_server_set_ability_support(). It will let the client know about the server's abilities and what commands the client can send.
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
+  /// - `mc_server_set_playlist_cmd_received_cb()`
+  /// - `mc_server_set_ability_support()`
   int mc_server_unset_playlist_cmd_received_cb(
     mc_server_h server,
   ) {
@@ -5419,30 +6878,43 @@ class Tizen80CapiMediaController {
       _mc_server_unset_playlist_cmd_received_cbPtr
           .asFunction<int Function(mc_server_h)>();
 
-  /// @brief Sets the callback for receiving custom command from client.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Sets the callback for receiving custom command from client.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @remarks It is recommended to set the corresponding ability's support using mc_server_set_ability_support(). It will let the client know about the server's abilities and what commands the client can send.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] server    The handle to media controller server
-  /// @param[in] callback      The callback to be invoked when media controller server receives custom command from client
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
-  /// @see mc_server_unset_custom_cmd_received_cb()
-  /// @see mc_server_set_ability_support()
+  /// **Remarks:**
+  /// - It is recommended to set the corresponding ability's support using mc_server_set_ability_support(). It will let the client know about the server's abilities and what commands the client can send.
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  /// - `callback` (in): The callback to be invoked when media controller server receives custom command from client
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
+  /// - `mc_server_unset_custom_cmd_received_cb()`
+  /// - `mc_server_set_ability_support()`
   int mc_server_set_custom_cmd_received_cb(
     mc_server_h server,
     mc_server_custom_cmd_received_cb callback,
@@ -5464,27 +6936,40 @@ class Tizen80CapiMediaController {
           int Function(mc_server_h, mc_server_custom_cmd_received_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback for receiving custom command from client.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Unsets the callback for receiving custom command from client.
   ///
-  /// @remarks It is recommended to set the corresponding ability's support using mc_server_set_ability_support(). It will let the client know about the server's abilities and what commands the client can send.
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] server    The handle to media controller server
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
-  /// @see mc_server_set_custom_cmd_received_cb()
-  /// @see mc_server_set_ability_support()
+  /// **Remarks:**
+  /// - It is recommended to set the corresponding ability's support using mc_server_set_ability_support(). It will let the client know about the server's abilities and what commands the client can send.
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
+  /// - `mc_server_set_custom_cmd_received_cb()`
+  /// - `mc_server_set_ability_support()`
   int mc_server_unset_custom_cmd_received_cb(
     mc_server_h server,
   ) {
@@ -5500,31 +6985,44 @@ class Tizen80CapiMediaController {
       _mc_server_unset_custom_cmd_received_cbPtr
           .asFunction<int Function(mc_server_h)>();
 
-  /// @brief Sets the callback for receiving subtitles command from client.
-  /// @since_tizen 5.5
+  /// Sets the callback for receiving subtitles command from client.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @remarks It is mandatory to set the corresponding ability's support using mc_server_set_ability_support(). \n
-  /// If not, server can't receive command from clients. It will let the client know about the server's abilities and what commands the client can send.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] server    The handle to media controller server
-  /// @param[in] callback      The callback to be invoked when media controller server receives subtitles command from client
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
-  /// @see mc_server_unset_subtitles_cmd_received_cb()
-  /// @see mc_server_set_ability_support()
+  /// **Remarks:**
+  /// - It is mandatory to set the corresponding ability's support using mc_server_set_ability_support().
+  /// - If not, server can't receive command from clients. It will let the client know about the server's abilities and what commands the client can send.
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  /// - `callback` (in): The callback to be invoked when media controller server receives subtitles command from client
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
+  /// - `mc_server_unset_subtitles_cmd_received_cb()`
+  /// - `mc_server_set_ability_support()`
   int mc_server_set_subtitles_cmd_received_cb(
     mc_server_h server,
     mc_server_enable_cmd_received_cb callback,
@@ -5547,28 +7045,41 @@ class Tizen80CapiMediaController {
           int Function(mc_server_h, mc_server_enable_cmd_received_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback for receiving subtitles command from client.
-  /// @since_tizen 5.5
+  /// Unsets the callback for receiving subtitles command from client.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @remarks It is mandatory to set the corresponding ability's support using mc_server_set_ability_support(). \n
-  /// If not, server can't receive command from clients. It will let the client know about the server's abilities and what commands the client can send.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] server    The handle to media controller server
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
-  /// @see mc_server_set_subtitles_cmd_received_cb()
-  /// @see mc_server_set_ability_support()
+  /// **Remarks:**
+  /// - It is mandatory to set the corresponding ability's support using mc_server_set_ability_support().
+  /// - If not, server can't receive command from clients. It will let the client know about the server's abilities and what commands the client can send.
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
+  /// - `mc_server_set_subtitles_cmd_received_cb()`
+  /// - `mc_server_set_ability_support()`
   int mc_server_unset_subtitles_cmd_received_cb(
     mc_server_h server,
   ) {
@@ -5584,31 +7095,44 @@ class Tizen80CapiMediaController {
       _mc_server_unset_subtitles_cmd_received_cbPtr
           .asFunction<int Function(mc_server_h)>();
 
-  /// @brief Sets the callback for receiving 360 mode command from client.
-  /// @since_tizen 5.5
+  /// Sets the callback for receiving 360 mode command from client.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @remarks It is mandatory to set the corresponding ability's support using mc_server_set_ability_support(). \n
-  /// If not, server can't receive command from clients. It will let the client know about the server's abilities and what commands the client can send.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] server    The handle to media controller server
-  /// @param[in] callback      The callback to be invoked when media controller server receives 360 mode command from client
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
-  /// @see mc_server_unset_360_mode_cmd_received_cb()
-  /// @see mc_server_set_ability_support()
+  /// **Remarks:**
+  /// - It is mandatory to set the corresponding ability's support using mc_server_set_ability_support().
+  /// - If not, server can't receive command from clients. It will let the client know about the server's abilities and what commands the client can send.
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  /// - `callback` (in): The callback to be invoked when media controller server receives 360 mode command from client
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
+  /// - `mc_server_unset_360_mode_cmd_received_cb()`
+  /// - `mc_server_set_ability_support()`
   int mc_server_set_360_mode_cmd_received_cb(
     mc_server_h server,
     mc_server_enable_cmd_received_cb callback,
@@ -5631,28 +7155,41 @@ class Tizen80CapiMediaController {
           int Function(mc_server_h, mc_server_enable_cmd_received_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback for receiving 360 mode command from client.
-  /// @since_tizen 5.5
+  /// Unsets the callback for receiving 360 mode command from client.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @remarks It is mandatory to set the corresponding ability's support using mc_server_set_ability_support(). \n
-  /// If not, server can't receive command from clients. It will let the client know about the server's abilities and what commands the client can send.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] server    The handle to media controller server
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
-  /// @see mc_server_set_360_mode_cmd_received_cb()
-  /// @see mc_server_set_ability_support()
+  /// **Remarks:**
+  /// - It is mandatory to set the corresponding ability's support using mc_server_set_ability_support().
+  /// - If not, server can't receive command from clients. It will let the client know about the server's abilities and what commands the client can send.
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
+  /// - `mc_server_set_360_mode_cmd_received_cb()`
+  /// - `mc_server_set_ability_support()`
   int mc_server_unset_360_mode_cmd_received_cb(
     mc_server_h server,
   ) {
@@ -5668,31 +7205,44 @@ class Tizen80CapiMediaController {
       _mc_server_unset_360_mode_cmd_received_cbPtr
           .asFunction<int Function(mc_server_h)>();
 
-  /// @brief Sets the callback for receiving display mode command from client.
-  /// @since_tizen 5.5
+  /// Sets the callback for receiving display mode command from client.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @remarks It is mandatory to set the corresponding ability's support using mc_server_set_display_mode_ability(). \n
-  /// If not, server can't receive command from clients. It will let the client know about the server's abilities and what commands the client can send.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] server    The handle to media controller server
-  /// @param[in] callback      The callback to be invoked when media controller server receives display mode command from client
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
-  /// @see mc_server_unset_display_mode_cmd_received_cb()
-  /// @see mc_server_set_display_mode_ability()
+  /// **Remarks:**
+  /// - It is mandatory to set the corresponding ability's support using mc_server_set_display_mode_ability().
+  /// - If not, server can't receive command from clients. It will let the client know about the server's abilities and what commands the client can send.
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  /// - `callback` (in): The callback to be invoked when media controller server receives display mode command from client
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
+  /// - `mc_server_unset_display_mode_cmd_received_cb()`
+  /// - `mc_server_set_display_mode_ability()`
   int mc_server_set_display_mode_cmd_received_cb(
     mc_server_h server,
     mc_server_display_mode_cmd_received_cb callback,
@@ -5717,28 +7267,41 @@ class Tizen80CapiMediaController {
           int Function(mc_server_h, mc_server_display_mode_cmd_received_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback for receiving display mode command from client.
-  /// @since_tizen 5.5
+  /// Unsets the callback for receiving display mode command from client.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @remarks It is mandatory to set the corresponding ability's support using mc_server_set_display_mode_ability(). \n
-  /// If not, server can't receive command from clients. It will let the client know about the server's abilities and what commands the client can send.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] server    The handle to media controller server
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
-  /// @see mc_server_set_display_mode_cmd_received_cb()
-  /// @see mc_server_set_display_mode_ability()
+  /// **Remarks:**
+  /// - It is mandatory to set the corresponding ability's support using mc_server_set_display_mode_ability().
+  /// - If not, server can't receive command from clients. It will let the client know about the server's abilities and what commands the client can send.
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
+  /// - `mc_server_set_display_mode_cmd_received_cb()`
+  /// - `mc_server_set_display_mode_ability()`
   int mc_server_unset_display_mode_cmd_received_cb(
     mc_server_h server,
   ) {
@@ -5754,31 +7317,44 @@ class Tizen80CapiMediaController {
       _mc_server_unset_display_mode_cmd_received_cbPtr
           .asFunction<int Function(mc_server_h)>();
 
-  /// @brief Sets the callback for receiving display rotation command from client.
-  /// @since_tizen 5.5
+  /// Sets the callback for receiving display rotation command from client.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @remarks It is mandatory to set the corresponding ability's support using mc_server_set_display_rotation_ability(). \n
-  /// If not, server can't receive command from clients. It will let the client know about the server's abilities and what commands the client can send.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] server    The handle to media controller server
-  /// @param[in] callback      The callback to be invoked when media controller server receives display rotation command from client
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
-  /// @see mc_server_unset_display_rotation_cmd_received_cb()
-  /// @see mc_server_set_display_rotation_ability()
+  /// **Remarks:**
+  /// - It is mandatory to set the corresponding ability's support using mc_server_set_display_rotation_ability().
+  /// - If not, server can't receive command from clients. It will let the client know about the server's abilities and what commands the client can send.
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  /// - `callback` (in): The callback to be invoked when media controller server receives display rotation command from client
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
+  /// - `mc_server_unset_display_rotation_cmd_received_cb()`
+  /// - `mc_server_set_display_rotation_ability()`
   int mc_server_set_display_rotation_cmd_received_cb(
     mc_server_h server,
     mc_server_display_rotation_cmd_received_cb callback,
@@ -5803,28 +7379,41 @@ class Tizen80CapiMediaController {
           int Function(mc_server_h, mc_server_display_rotation_cmd_received_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback for receiving display rotation command from client.
-  /// @since_tizen 5.5
+  /// Unsets the callback for receiving display rotation command from client.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @remarks It is mandatory to set the corresponding ability's support using mc_server_set_display_rotation_ability(). \n
-  /// If not, server can't receive command from clients. It will let the client know about the server's abilities and what commands the client can send.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] server    The handle to media controller server
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
-  /// @see mc_server_set_display_rotation_cmd_received_cb()
-  /// @see mc_server_set_display_rotation_ability()
+  /// **Remarks:**
+  /// - It is mandatory to set the corresponding ability's support using mc_server_set_display_rotation_ability().
+  /// - If not, server can't receive command from clients. It will let the client know about the server's abilities and what commands the client can send.
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
+  /// - `mc_server_set_display_rotation_cmd_received_cb()`
+  /// - `mc_server_set_display_rotation_ability()`
   int mc_server_unset_display_rotation_cmd_received_cb(
     mc_server_h server,
   ) {
@@ -5840,37 +7429,50 @@ class Tizen80CapiMediaController {
       _mc_server_unset_display_rotation_cmd_received_cbPtr
           .asFunction<int Function(mc_server_h)>();
 
-  /// @brief Replies the result of the requested command to the client.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Replies the result of the requested command to the client.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @remarks When the server receives a command, this function can be called by mc_server_playback_action_cmd_received_cb(), mc_server_playback_position_cmd_received_cb(), mc_server_shuffle_mode_cmd_received_cb(), mc_server_repeat_mode_cmd_received_cb(), mc_server_playlist_cmd_received_cb() and mc_server_custom_cmd_received_cb().\n
-  /// If @a request_id is null, this function will return #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] server    The handle to media controller server
-  /// @param[in] client_name    The app_id of the media controller client
-  /// @param[in] request_id    The id of the command request, received in the mc_server_custom_cmd_received_cb() function
-  /// @param[in] result_code    The result code of custom command, #mc_result_code_e since 6.0
-  /// @param[in] data                The extra data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_server_playback_action_cmd_received_cb()
-  /// @see mc_server_playback_position_cmd_received_cb()
-  /// @see mc_server_shuffle_mode_cmd_received_cb()
-  /// @see mc_server_repeat_mode_cmd_received_cb()
-  /// @see mc_server_playlist_cmd_received_cb()
-  /// @see mc_server_custom_cmd_received_cb()
-  /// @see mc_server_destroy()
+  /// **Remarks:**
+  /// - When the server receives a command, this function can be called by mc_server_playback_action_cmd_received_cb(), mc_server_playback_position_cmd_received_cb(), mc_server_shuffle_mode_cmd_received_cb(), mc_server_repeat_mode_cmd_received_cb(), mc_server_playlist_cmd_received_cb() and mc_server_custom_cmd_received_cb().
+  /// - If `request_id` is null, this function will return `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`.
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  /// - `client_name` (in): The app_id of the media controller client
+  /// - `request_id` (in): The id of the command request, received in the mc_server_custom_cmd_received_cb() function
+  /// - `result_code` (in): The result code of custom command, `mc_result_code_e` since 6.0
+  /// - `data` (in): The extra data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_playback_action_cmd_received_cb()`
+  /// - `mc_server_playback_position_cmd_received_cb()`
+  /// - `mc_server_shuffle_mode_cmd_received_cb()`
+  /// - `mc_server_repeat_mode_cmd_received_cb()`
+  /// - `mc_server_playlist_cmd_received_cb()`
+  /// - `mc_server_custom_cmd_received_cb()`
+  /// - `mc_server_destroy()`
   int mc_server_send_cmd_reply(
     mc_server_h server,
     ffi.Pointer<ffi.Char> client_name,
@@ -5900,30 +7502,41 @@ class Tizen80CapiMediaController {
           int Function(mc_server_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>, int, ffi.Pointer<bundle.bundle>)>();
 
-  /// @brief Retrieves all created clients.
-  /// @details This function gets all created media controller clients.
-  /// The callback function will be invoked for every created media controller client.
-  /// If there are no media controller clients, the callback will not be invoked.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Retrieves all created clients.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// This function gets all created media controller clients. The callback function will be invoked for every created media controller client. If there are no media controller clients, the callback will not be invoked.
   ///
-  /// @param[in] server    The handle to media controller server
-  /// @param[in] callback      The callback function to be invoked, will be called for each client
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_activated_client_cb()
-  /// @see mc_server_destroy()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  /// - `callback` (in): The callback function to be invoked, will be called for each client
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_activated_client_cb()`
+  /// - `mc_server_destroy()`
   int mc_server_foreach_client(
     mc_server_h server,
     mc_activated_client_cb callback,
@@ -5945,34 +7558,48 @@ class Tizen80CapiMediaController {
           int Function(
               mc_server_h, mc_activated_client_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sends the customized event with the bundle data.
-  /// @details If the event is needed in the client, this function should be called. @a data is a bundle.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Sends the customized event with the bundle data.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// If the event is needed in the client, this function should be called. `data` is a bundle.
   ///
-  /// @remarks The @a request_id should be released using free().\n
-  /// If the @a request_id is null, the client will not send the reply of the custom event.
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @param[in] server The handle to media controller server
-  /// @param[in] client_name The name of the client which receive the event
-  /// @param[in] event The name of the event
-  /// @param[in] data The data can include other information associated with the event
-  /// @param[out] request_id   The id of the event request, it will be passed to the mc_server_event_reply_received_cb() function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_server_event_reply_received_cb()
-  /// @see mc_server_set_event_reply_received_cb()
-  /// @see mc_server_destroy()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
+  ///
+  /// **Remarks:**
+  /// - The `request_id` should be released using free().
+  /// - If the `request_id` is null, the client will not send the reply of the custom event.
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  /// - `client_name` (in): The name of the client which receive the event
+  /// - `event` (in): The name of the event
+  /// - `data` (in): The data can include other information associated with the event
+  /// - `request_id` (out): The id of the event request, it will be passed to the mc_server_event_reply_received_cb() function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_event_reply_received_cb()`
+  /// - `mc_server_set_event_reply_received_cb()`
+  /// - `mc_server_destroy()`
   int mc_server_send_custom_event(
     mc_server_h server,
     ffi.Pointer<ffi.Char> client_name,
@@ -6007,30 +7634,42 @@ class Tizen80CapiMediaController {
               ffi.Pointer<bundle.bundle>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the callback for receiving the result of the event from the media controller client.
-  /// @details The media controller server which calls this function will receive the result of the event from all media controller clients.\n
-  /// The media controller server can send event by using mc_server_send_custom_event().
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Sets the callback for receiving the result of the event from the media controller client.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// The media controller server which calls this function will receive the result of the event from all media controller clients. The media controller server can send event by using mc_server_send_custom_event().
   ///
-  /// @param[in] server         The handle of the media controller server
-  /// @param[in] callback      The callback to be invoked when the reply is received
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @pre mc_server_send_custom_event().
-  /// @see mc_server_create()
-  /// @see mc_server_unset_event_reply_received_cb()
-  /// @see mc_server_destroy()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle of the media controller server
+  /// - `callback` (in): The callback to be invoked when the reply is received
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  /// - mc_server_send_custom_event().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_unset_event_reply_received_cb()`
+  /// - `mc_server_destroy()`
   int mc_server_set_event_reply_received_cb(
     mc_server_h server,
     mc_server_event_reply_received_cb callback,
@@ -6052,24 +7691,36 @@ class Tizen80CapiMediaController {
           int Function(mc_server_h, mc_server_event_reply_received_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback for receiving event reply of the media controller client.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Unsets the callback for receiving event reply of the media controller client.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @param[in] server         The handle of the media controller server
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller client handle by calling mc_client_create().
-  /// @see mc_server_create()
-  /// @see mc_server_set_event_reply_received_cb()
-  /// @see mc_server_destroy()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle of the media controller server
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller client handle by calling mc_client_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_set_event_reply_received_cb()`
+  /// - `mc_server_destroy()`
   int mc_server_unset_event_reply_received_cb(
     mc_server_h server,
   ) {
@@ -6085,30 +7736,43 @@ class Tizen80CapiMediaController {
       _mc_server_unset_event_reply_received_cbPtr
           .asFunction<int Function(mc_server_h)>();
 
-  /// @brief Sets the callback for receiving search command from client.
-  /// @since_tizen 5.0
+  /// Sets the callback for receiving search command from client.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @remarks It is recommended to set the corresponding ability's support using mc_server_set_ability_support(). It will let the client know about the server's abilities and what commands the client can send.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] server    The handle to media controller server
-  /// @param[in] callback      The callback to be invoked when media controller server receives search command from client
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
-  /// @see mc_server_unset_search_cmd_received_cb()
-  /// @see mc_server_set_ability_support()
+  /// **Remarks:**
+  /// - It is recommended to set the corresponding ability's support using mc_server_set_ability_support(). It will let the client know about the server's abilities and what commands the client can send.
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  /// - `callback` (in): The callback to be invoked when media controller server receives search command from client
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
+  /// - `mc_server_unset_search_cmd_received_cb()`
+  /// - `mc_server_set_ability_support()`
   int mc_server_set_search_cmd_received_cb(
     mc_server_h server,
     mc_server_search_cmd_received_cb callback,
@@ -6130,27 +7794,40 @@ class Tizen80CapiMediaController {
           int Function(mc_server_h, mc_server_search_cmd_received_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback for receiving search command from client.
-  /// @since_tizen 5.0
+  /// Unsets the callback for receiving search command from client.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @remarks It is recommended to set the corresponding ability's support using mc_server_set_ability_support(). It will let the client know about the server's abilities and what commands the client can send.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] server    The handle to media controller server
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
-  /// @see mc_server_set_search_cmd_received_cb()
-  /// @see mc_server_set_ability_support()
+  /// **Remarks:**
+  /// - It is recommended to set the corresponding ability's support using mc_server_set_ability_support(). It will let the client know about the server's abilities and what commands the client can send.
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
+  /// - `mc_server_set_search_cmd_received_cb()`
+  /// - `mc_server_set_ability_support()`
   int mc_server_unset_search_cmd_received_cb(
     mc_server_h server,
   ) {
@@ -6166,20 +7843,30 @@ class Tizen80CapiMediaController {
       _mc_server_unset_search_cmd_received_cbPtr
           .asFunction<int Function(mc_server_h)>();
 
-  /// @brief Destroys media controller server.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// Destroys media controller server.
   ///
-  /// @remarks After the server is destroyed, all its abilities will be initialized to the default automatically.
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @param[in] server The handle to media controller server
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
+  /// **Remarks:**
+  /// - After the server is destroyed, all its abilities will be initialized to the default automatically.
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
   int mc_server_destroy(
     mc_server_h server,
   ) {
@@ -6194,36 +7881,49 @@ class Tizen80CapiMediaController {
   late final _mc_server_destroy =
       _mc_server_destroyPtr.asFunction<int Function(mc_server_h)>();
 
-  /// @brief Creates a new playlist with the given name.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Creates a new playlist with the given name.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @remarks The @a playlist should be released using mc_playlist_destroy().\n
-  /// When the server is destroyed, all its playlists will be deleted automatically.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] server The handle to media controller server
-  /// @param[in] playlist_name The name of the created playlist
-  /// @param[out] playlist  The handle of the media controller playlist
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - The `playlist` should be released using mc_playlist_destroy().
+  /// - When the server is destroyed, all its playlists will be deleted automatically.
   ///
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  /// - `playlist_name` (in): The name of the created playlist
+  /// - `playlist` (out): The handle of the media controller playlist
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @post You can call mc_server_add_item_to_playlist() if you have items to add in the playlist and should call @c mc_server_update_playlist_done() to register it.
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
-  /// @see mc_server_add_item_to_playlist()
-  /// @see mc_server_update_playlist_done()
-  /// @see mc_server_delete_playlist()
-  /// @see mc_playlist_destroy()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **Postconditions:**
+  /// - You can call mc_server_add_item_to_playlist() if you have items to add in the playlist and should call `mc_server_update_playlist_done(`) to register it.
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
+  /// - `mc_server_add_item_to_playlist()`
+  /// - `mc_server_update_playlist_done()`
+  /// - `mc_server_delete_playlist()`
+  /// - `mc_playlist_destroy()`
   int mc_server_create_playlist(
     mc_server_h server,
     ffi.Pointer<ffi.Char> playlist_name,
@@ -6245,38 +7945,51 @@ class Tizen80CapiMediaController {
           int Function(mc_server_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<mc_playlist_h>)>();
 
-  /// @brief Adds a new item to the playlist.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Adds a new item to the playlist.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @remarks It's possible to add at most 100 items at once. \n
-  /// If you have more items, register the first 100 items by calling mc_server_update_playlist_done(), then add the remaining items.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] server The handle to media controller server
-  /// @param[in] playlist  The handle of the media controller playlist
-  /// @param[in] index The index of the playlist item. It should not be NULL
-  /// @param[in] attribute    The key attribute name to set
-  /// @param[in] value      The value of the attribute
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - It's possible to add at most 100 items at once.
+  /// - If you have more items, register the first 100 items by calling mc_server_update_playlist_done(), then add the remaining items.
   ///
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  /// - `playlist` (in): The handle of the media controller playlist
+  /// - `index` (in): The index of the playlist item. It should not be NULL
+  /// - `attribute` (in): The key attribute name to set
+  /// - `value` (in): The value of the attribute
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @pre Create a media controller playlist handle by calling mc_server_create_playlist().
-  /// @post You should call @c mc_server_update_playlist_done() to register it.
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
-  /// @see mc_server_create_playlist()
-  /// @see mc_server_update_playlist_done()
-  /// @see mc_playlist_destroy()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  /// - Create a media controller playlist handle by calling mc_server_create_playlist().
+  ///
+  /// **Postconditions:**
+  /// - You should call `mc_server_update_playlist_done(`) to register it.
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
+  /// - `mc_server_create_playlist()`
+  /// - `mc_server_update_playlist_done()`
+  /// - `mc_playlist_destroy()`
   int mc_server_add_item_to_playlist(
     mc_server_h server,
     mc_playlist_h playlist,
@@ -6306,30 +8019,40 @@ class Tizen80CapiMediaController {
           int Function(mc_server_h, mc_playlist_h, ffi.Pointer<ffi.Char>, int,
               ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Registers items to the playlist.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Registers items to the playlist.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @param[in] server The handle to media controller server
-  /// @param[in] playlist  The handle of the media controller playlist
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
   ///
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  /// - `playlist` (in): The handle of the media controller playlist
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @pre Create a media controller playlist handle by calling mc_server_create_playlist().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
-  /// @see mc_server_create_playlist()
-  /// @see mc_playlist_destroy()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  /// - Create a media controller playlist handle by calling mc_server_create_playlist().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
+  /// - `mc_server_create_playlist()`
+  /// - `mc_playlist_destroy()`
   int mc_server_update_playlist_done(
     mc_server_h server,
     mc_playlist_h playlist,
@@ -6347,30 +8070,40 @@ class Tizen80CapiMediaController {
       _mc_server_update_playlist_donePtr
           .asFunction<int Function(mc_server_h, mc_playlist_h)>();
 
-  /// @brief Deletes the playlist of the media controller server.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Deletes the playlist of the media controller server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @param[in] server The handle to media controller server
-  /// @param[in] playlist  The handle of the media controller playlist
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
   ///
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  /// - `playlist` (in): The handle of the media controller playlist
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @pre Create a media controller playlist handle by calling mc_server_create_playlist().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
-  /// @see mc_server_create_playlist()
-  /// @see mc_playlist_destroy()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  /// - Create a media controller playlist handle by calling mc_server_create_playlist().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
+  /// - `mc_server_create_playlist()`
+  /// - `mc_playlist_destroy()`
   int mc_server_delete_playlist(
     mc_server_h server,
     mc_playlist_h playlist,
@@ -6387,33 +8120,43 @@ class Tizen80CapiMediaController {
   late final _mc_server_delete_playlist = _mc_server_delete_playlistPtr
       .asFunction<int Function(mc_server_h, mc_playlist_h)>();
 
-  /// @deprecated Deprecated since 5.5. Use mc_playlist_foreach_playlist() instead.
-  /// @brief Retrieves all playlists of the media controller server.
-  /// @details This function gets all playlists of the media controller server.
-  /// The callback function will be invoked for every retrieved playlist.
-  /// If there are no playlists, callback will not be invoked.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// **Deprecated:** Deprecated since 5.5. Use mc_playlist_foreach_playlist() instead.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// Retrieves all playlists of the media controller server.
   ///
-  /// @param[in] server The handle to media controller server
-  /// @param[in] callback      The callback function to be invoked, will be called for each playlist
-  /// @param[in] user_data   The user data to be passed to the callback function
+  /// This function gets all playlists of the media controller server. The callback function will be invoked for every retrieved playlist. If there are no playlists, callback will not be invoked.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
-  /// @see mc_playlist_cb()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  /// - `callback` (in): The callback function to be invoked, will be called for each playlist
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
+  /// - `mc_playlist_cb()`
   int mc_server_foreach_playlist(
     mc_server_h server,
     mc_playlist_cb callback,
@@ -6434,31 +8177,46 @@ class Tizen80CapiMediaController {
       _mc_server_foreach_playlistPtr.asFunction<
           int Function(mc_server_h, mc_playlist_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets the playback ability's support of the media controller.
-  /// @since_tizen 5.0
+  /// Sets the playback ability's support of the media controller.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @remarks If @a support is #MC_ABILITY_SUPPORTED_UNDECIDED, this function will return #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER.
-  /// To notify all clients about the changes of the playback's ability support, use mc_server_update_playback_ability().
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] server The handle to media controller server
-  /// @param[in] action   The playback action
-  /// @param[in] support    The support value of the ability
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @post Update abilities of a media controller server by calling mc_server_update_playback_ability().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
-  /// @see mc_server_update_playback_ability()
+  /// **Remarks:**
+  /// - If `support` is `MC_ABILITY_SUPPORTED_UNDECIDED`, this function will return `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`.
+  /// - To notify all clients about the changes of the playback's ability support, use mc_server_update_playback_ability().
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  /// - `action` (in): The playback action
+  /// - `support` (in): The support value of the ability
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **Postconditions:**
+  /// - Update abilities of a media controller server by calling mc_server_update_playback_ability().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
+  /// - `mc_server_update_playback_ability()`
   int mc_server_set_playback_ability(
     mc_server_h server,
     int action,
@@ -6479,27 +8237,40 @@ class Tizen80CapiMediaController {
       _mc_server_set_playback_abilityPtr
           .asFunction<int Function(mc_server_h, int, int)>();
 
-  /// @brief Updates the modified ability info.
-  /// @details If this function is called, the updated ability will be sent to all clients.
-  /// @since_tizen 5.0
+  /// Updates the modified ability info.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// If this function is called, the updated ability will be sent to all clients.
   ///
-  /// @param[in] server The handle to media controller server
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @pre Set abilities of a media controller server by calling mc_server_set_playback_ability().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
-  /// @see mc_server_set_playback_ability()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  /// - Set abilities of a media controller server by calling mc_server_set_playback_ability().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
+  /// - `mc_server_set_playback_ability()`
   int mc_server_update_playback_ability(
     mc_server_h server,
   ) {
@@ -6515,28 +8286,42 @@ class Tizen80CapiMediaController {
       _mc_server_update_playback_abilityPtr
           .asFunction<int Function(mc_server_h)>();
 
-  /// @deprecated Deprecated since 5.5. Use mc_server_set_ability_support() instead.
-  /// @brief Sets the shuffle ability's support of the media controller.
-  /// @since_tizen 5.0
+  /// **Deprecated:** Deprecated since 5.5. Use mc_server_set_ability_support() instead.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// Sets the shuffle ability's support of the media controller.
   ///
-  /// @remarks If @a support is #MC_ABILITY_SUPPORTED_UNDECIDED, this function will return #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER.
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] server The handle to media controller server
-  /// @param[in] support    The support value of the ability
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
+  ///
+  /// **Remarks:**
+  /// - If `support` is `MC_ABILITY_SUPPORTED_UNDECIDED`, this function will return `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`.
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  /// - `support` (in): The support value of the ability
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
   int mc_server_set_shuffle_ability(
     mc_server_h server,
     int support,
@@ -6553,28 +8338,42 @@ class Tizen80CapiMediaController {
   late final _mc_server_set_shuffle_ability = _mc_server_set_shuffle_abilityPtr
       .asFunction<int Function(mc_server_h, int)>();
 
-  /// @deprecated Deprecated since 5.5. Use mc_server_set_ability_support() instead.
-  /// @brief Sets the repeat ability's support of the media controller.
-  /// @since_tizen 5.0
+  /// **Deprecated:** Deprecated since 5.5. Use mc_server_set_ability_support() instead.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// Sets the repeat ability's support of the media controller.
   ///
-  /// @remarks If @a support is #MC_ABILITY_SUPPORTED_UNDECIDED, this function will return #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER.
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] server The handle to media controller server
-  /// @param[in] support    The support value of the ability
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
+  ///
+  /// **Remarks:**
+  /// - If `support` is `MC_ABILITY_SUPPORTED_UNDECIDED`, this function will return `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`.
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  /// - `support` (in): The support value of the ability
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
   int mc_server_set_repeat_ability(
     mc_server_h server,
     int support,
@@ -6591,49 +8390,51 @@ class Tizen80CapiMediaController {
   late final _mc_server_set_repeat_ability = _mc_server_set_repeat_abilityPtr
       .asFunction<int Function(mc_server_h, int)>();
 
-  /// @brief Sets the ability's support of the media controller.
-  /// @details This function allows setting the support for the following abilities:
-  /// #MC_ABILITY_SHUFFLE, \n
-  /// #MC_ABILITY_REPEAT, \n
-  /// #MC_ABILITY_PLAYBACK_POSITION, \n
-  /// #MC_ABILITY_PLAYLIST, \n
-  /// #MC_ABILITY_CLIENT_CUSTOM, \n
-  /// #MC_ABILITY_SEARCH, \n
-  /// #MC_ABILITY_SUBTITLES, \n
-  /// #MC_ABILITY_360_MODE, \n
-  /// To set the support for other abilities, use corresponding function. \n
-  /// For a playback ability, use mc_server_set_playback_ability() and mc_server_update_playback_ability(). \n
-  /// For a display mode ability, use mc_server_set_display_mode_ability(). \n
-  /// For a display rotation ability, use mc_server_set_display_rotation_ability(). \n
-  /// @since_tizen 5.5
+  /// Sets the ability's support of the media controller.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// This function allows setting the support for the following abilities: `MC_ABILITY_SHUFFLE`, `MC_ABILITY_REPEAT`, `MC_ABILITY_PLAYBACK_POSITION`, `MC_ABILITY_PLAYLIST`, `MC_ABILITY_CLIENT_CUSTOM`, `MC_ABILITY_SEARCH`, `MC_ABILITY_SUBTITLES`, `MC_ABILITY_360_MODE`, To set the support for other abilities, use corresponding function. For a playback ability, use mc_server_set_playback_ability() and mc_server_update_playback_ability(). For a display mode ability, use mc_server_set_display_mode_ability(). For a display rotation ability, use mc_server_set_display_rotation_ability().
   ///
-  /// @remarks If @a support is #MC_ABILITY_SUPPORTED_UNDECIDED, this function will return #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER. \n
-  /// Default value is #MC_ABILITY_SUPPORTED_UNDECIDED. \n
-  /// But for the #MC_ABILITY_SUBTITLES, #MC_ABILITY_360_MODE default value is #MC_ABILITY_SUPPORTED_NO. \n
-  /// Clients can send command to servers when server's ability is #MC_ABILITY_SUPPORTED_YES or #MC_ABILITY_SUPPORTED_UNDECIDED.
-  /// So, it is required that server set the corresponding ability's support to communicate with clients.
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in] server The handle to media controller server
-  /// @param[in] ability The ability to set support
-  /// @param[in] support    The support value of the ability
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
-  /// @see mc_server_set_playback_ability()
-  /// @see mc_server_update_playback_ability()
-  /// @see mc_server_set_display_mode_ability()
-  /// @see mc_server_set_display_rotation_ability()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
+  ///
+  /// **Remarks:**
+  /// - If `support` is `MC_ABILITY_SUPPORTED_UNDECIDED`, this function will return `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`.
+  /// - Default value is `MC_ABILITY_SUPPORTED_UNDECIDED`.
+  /// - But for the `MC_ABILITY_SUBTITLES`, `MC_ABILITY_360_MODE` default value is `MC_ABILITY_SUPPORTED_NO`.
+  /// - Clients can send command to servers when server's ability is `MC_ABILITY_SUPPORTED_YES` or `MC_ABILITY_SUPPORTED_UNDECIDED`.
+  /// - So, it is required that server set the corresponding ability's support to communicate with clients.
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  /// - `ability` (in): The ability to set support
+  /// - `support` (in): The support value of the ability
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
+  /// - `mc_server_set_playback_ability()`
+  /// - `mc_server_update_playback_ability()`
+  /// - `mc_server_set_display_mode_ability()`
+  /// - `mc_server_set_display_rotation_ability()`
   int mc_server_set_ability_support(
     mc_server_h server,
     int ability,
@@ -6653,31 +8454,44 @@ class Tizen80CapiMediaController {
   late final _mc_server_set_ability_support = _mc_server_set_ability_supportPtr
       .asFunction<int Function(mc_server_h, int, int)>();
 
-  /// @brief Sets the display mode ability of the media controller.
-  /// @since_tizen 5.5
+  /// Sets the display mode ability of the media controller.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @remarks If @a support is #MC_ABILITY_SUPPORTED_UNDECIDED, this function will return #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER.
-  /// The default display mode ability is #MC_ABILITY_SUPPORTED_NO. \n
-  /// It means client can't send the corresponding command to the server, so to receive command from clients, set ability as #MC_ABILITY_SUPPORTED_YES.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] server The handle to media controller server
-  /// @param[in] mode The display mode, values of #mc_display_mode_e combined with bitwise 'or'.
-  /// @param[in] support    The support value of the ability
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
-  /// @see mc_server_set_display_mode_cmd_received_cb()
+  /// **Remarks:**
+  /// - If `support` is `MC_ABILITY_SUPPORTED_UNDECIDED`, this function will return `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`.
+  /// - The default display mode ability is `MC_ABILITY_SUPPORTED_NO`.
+  /// - It means client can't send the corresponding command to the server, so to receive command from clients, set ability as `MC_ABILITY_SUPPORTED_YES`.
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  /// - `mode` (in): The display mode, values of `mc_display_mode_e` combined with bitwise 'or'.
+  /// - `support` (in): The support value of the ability
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
+  /// - `mc_server_set_display_mode_cmd_received_cb()`
   int mc_server_set_display_mode_ability(
     mc_server_h server,
     int mode,
@@ -6698,30 +8512,43 @@ class Tizen80CapiMediaController {
       _mc_server_set_display_mode_abilityPtr
           .asFunction<int Function(mc_server_h, int, int)>();
 
-  /// @brief Sets the display rotation ability of the media controller.
-  /// @since_tizen 5.5
+  /// Sets the display rotation ability of the media controller.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @remarks If @a support is #MC_ABILITY_SUPPORTED_UNDECIDED, this function will return #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER.
-  /// The default display rotation ability is #MC_ABILITY_SUPPORTED_NO. \n
-  /// It means client can't send the corresponding command to the server, so to receive command from clients, set ability as #MC_ABILITY_SUPPORTED_YES.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] server The handle to media controller server
-  /// @param[in] rotation The display rotation, values of #mc_display_rotation_e combined with bitwise 'or'
-  /// @param[in] support    The support value of the ability
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
+  /// **Remarks:**
+  /// - If `support` is `MC_ABILITY_SUPPORTED_UNDECIDED`, this function will return `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`.
+  /// - The default display rotation ability is `MC_ABILITY_SUPPORTED_NO`.
+  /// - It means client can't send the corresponding command to the server, so to receive command from clients, set ability as `MC_ABILITY_SUPPORTED_YES`.
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  /// - `rotation` (in): The display rotation, values of `mc_display_rotation_e` combined with bitwise 'or'
+  /// - `support` (in): The support value of the ability
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
   int mc_server_set_display_rotation_ability(
     mc_server_h server,
     int rotation,
@@ -6742,27 +8569,40 @@ class Tizen80CapiMediaController {
       _mc_server_set_display_rotation_abilityPtr
           .asFunction<int Function(mc_server_h, int, int)>();
 
-  /// @brief Sets the icon URI of media controller server.
-  /// @since_tizen 5.0
+  /// Sets the icon URI of media controller server.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediacontroller.server
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @remarks It's possible to set URI to NULL if there is no icon.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @param[in] server The handle to media controller server
-  /// @param[in] uri    The icon URI
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIA_CONTROLLER_ERROR_NONE Successful
-  /// @retval #MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_CONTROLLER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediacontroller.server>
   ///
-  /// @pre Create a media controller server handle by calling mc_server_create().
-  /// @see mc_server_create()
-  /// @see mc_server_destroy()
+  /// **Remarks:**
+  /// - It's possible to set URI to NULL if there is no icon.
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The handle to media controller server
+  /// - `uri` (in): The icon URI
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_CONTROLLER_ERROR_NONE`: Successful
+  /// - `MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_CONTROLLER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a media controller server handle by calling mc_server_create().
+  ///
+  /// **See also:**
+  /// - `mc_server_create()`
+  /// - `mc_server_destroy()`
   int mc_server_set_icon(
     mc_server_h server,
     ffi.Pointer<ffi.Char> uri,
@@ -6781,8 +8621,11 @@ class Tizen80CapiMediaController {
       .asFunction<int Function(mc_server_h, ffi.Pointer<ffi.Char>)>();
 }
 
-/// @brief Enumeration for the media controller error.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// Enumeration for the media controller error.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+/// @nodoc
 abstract class mc_error_e {
   /// < Successful
   static const int MEDIA_CONTROLLER_ERROR_NONE = 0;
@@ -6807,8 +8650,11 @@ abstract class mc_error_e {
       -50462719;
 }
 
-/// @brief Enumeration for the media controller server state.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// Enumeration for the media controller server state.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+/// @nodoc
 abstract class mc_server_state_e {
   /// < None state
   static const int MC_SERVER_STATE_NONE = 0;
@@ -6820,8 +8666,11 @@ abstract class mc_server_state_e {
   static const int MC_SERVER_STATE_DEACTIVATE = 2;
 }
 
-/// @brief Enumeration for the media meta info.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// Enumeration for the media meta info.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+/// @nodoc
 abstract class mc_meta_e {
   /// < Title
   static const int MC_META_MEDIA_TITLE = 0;
@@ -6866,8 +8715,11 @@ abstract class mc_meta_e {
   static const int MC_META_MEDIA_RESOLUTION = 13;
 }
 
-/// @brief Enumeration for the media playback state.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// Enumeration for the media playback state.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+/// @nodoc
 abstract class mc_playback_states_e {
   /// < None
   static const int MC_PLAYBACK_STATE_NONE = 0;
@@ -6903,8 +8755,11 @@ abstract class mc_playback_states_e {
   static const int MC_PLAYBACK_STATE_ERROR = 14;
 }
 
-/// @brief Enumeration for the media playback action.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+/// Enumeration for the media playback action.
+///
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
+/// @nodoc
 abstract class mc_playback_action_e {
   /// < Play
   static const int MC_PLAYBACK_ACTION_PLAY = 0;
@@ -6931,8 +8786,11 @@ abstract class mc_playback_action_e {
   static const int MC_PLAYBACK_ACTION_TOGGLE_PLAY_PAUSE = 7;
 }
 
-/// @brief Enumeration for the shuffle mode.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// Enumeration for the shuffle mode.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+/// @nodoc
 abstract class mc_shuffle_mode_e {
   /// < Shuffle mode on
   static const int MC_SHUFFLE_MODE_ON = 0;
@@ -6941,8 +8799,11 @@ abstract class mc_shuffle_mode_e {
   static const int MC_SHUFFLE_MODE_OFF = 1;
 }
 
-/// @brief Enumeration for the repeat mode.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// Enumeration for the repeat mode.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+/// @nodoc
 abstract class mc_repeat_mode_e {
   /// < Repeat mode on for all media
   static const int MC_REPEAT_MODE_ON = 0;
@@ -6954,8 +8815,11 @@ abstract class mc_repeat_mode_e {
   static const int MC_REPEAT_MODE_ONE_MEDIA = 2;
 }
 
-/// @brief Enumeration for the subscription type.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// Enumeration for the subscription type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+/// @nodoc
 abstract class mc_subscription_type_e {
   /// < Server state
   static const int MC_SUBSCRIPTION_TYPE_SERVER_STATE = 0;
@@ -6994,8 +8858,11 @@ abstract class mc_subscription_type_e {
   static const int MC_SUBSCRIPTION_TYPE_DISPLAY_ROTATION_ABILITY = 11;
 }
 
-/// @brief Enumeration for the playlist update mode.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+/// Enumeration for the playlist update mode.
+///
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
+/// @nodoc
 abstract class mc_playlist_update_mode_e {
   /// < Create or Update playlist
   static const int MC_PLAYLIST_UPDATED = 0;
@@ -7004,8 +8871,11 @@ abstract class mc_playlist_update_mode_e {
   static const int MC_PLAYLIST_REMOVED = 1;
 }
 
-/// @brief Enumeration for the content type of the content.
-/// @since_tizen 5.0
+/// Enumeration for the content type of the content.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class mc_content_type_e {
   /// < Image content type
   static const int MC_CONTENT_TYPE_IMAGE = 0;
@@ -7023,8 +8893,11 @@ abstract class mc_content_type_e {
   static const int MC_CONTENT_TYPE_UNDECIDED = 4;
 }
 
-/// @brief Enumeration for the content age rating of the content.
-/// @since_tizen 5.0
+/// Enumeration for the content age rating of the content.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class mc_content_age_rating_e {
   /// < Suitable for all ages
   static const int MC_CONTENT_RATING_ALL = 0;
@@ -7087,8 +8960,11 @@ abstract class mc_content_age_rating_e {
   static const int MC_CONTENT_RATING_19_PLUS = 19;
 }
 
-/// @brief Enumeration for the support of the ability.
-/// @since_tizen 5.0
+/// Enumeration for the support of the ability.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class mc_ability_support_e {
   /// < Supported
   static const int MC_ABILITY_SUPPORTED_YES = 0;
@@ -7100,8 +8976,11 @@ abstract class mc_ability_support_e {
   static const int MC_ABILITY_SUPPORTED_UNDECIDED = 2;
 }
 
-/// @brief Enumeration for the ability.
-/// @since_tizen 5.5
+/// Enumeration for the ability.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class mc_ability_e {
   /// < Shuffle
   static const int MC_ABILITY_SHUFFLE = 0;
@@ -7128,8 +9007,11 @@ abstract class mc_ability_e {
   static const int MC_ABILITY_360_MODE = 7;
 }
 
-/// @brief Enumeration for the search category.
-/// @since_tizen 5.0
+/// Enumeration for the search category.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class mc_search_category_e {
   /// < No search category
   static const int MC_SEARCH_NO_CATEGORY = 0;
@@ -7150,8 +9032,11 @@ abstract class mc_search_category_e {
   static const int MC_SEARCH_TPO = 5;
 }
 
-/// @brief Enumeration for the display mode.
-/// @since_tizen 5.5
+/// Enumeration for the display mode.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class mc_display_mode_e {
   /// < Letter box
   static const int MC_DISPLAY_MODE_LETTER_BOX = 1;
@@ -7166,8 +9051,11 @@ abstract class mc_display_mode_e {
   static const int MC_DISPLAY_MODE_CROPPED_FULL = 8;
 }
 
-/// @brief Enumeration for the display rotation.
-/// @since_tizen 5.5
+/// Enumeration for the display rotation.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class mc_display_rotation_e {
   /// < Display is not rotated
   static const int MC_DISPLAY_ROTATION_NONE = 1;
@@ -7182,13 +9070,17 @@ abstract class mc_display_rotation_e {
   static const int MC_DISPLAY_ROTATION_270 = 8;
 }
 
-/// @brief The result codes of the reply for the command or the event.
-/// @since_tizen 6.0
+/// The result codes of the reply for the command or the event.
 ///
-/// @see mc_cmd_reply_received_cb()
-/// @see mc_client_send_event_reply()
-/// @see mc_server_event_reply_received_cb()
-/// @see mc_server_send_cmd_reply()
+/// **Since Tizen:**
+/// - 6.0
+///
+/// **See also:**
+/// - `mc_cmd_reply_received_cb()`
+/// - `mc_client_send_event_reply()`
+/// - `mc_server_event_reply_received_cb()`
+/// - `mc_server_send_cmd_reply()`
+/// @nodoc
 abstract class mc_result_code_e {
   /// < The command or the event has been successfully completed.
   static const int MC_RESULT_CODE_SUCCESS = 0;
@@ -7236,109 +9128,147 @@ abstract class mc_result_code_e {
   static const int MC_RESULT_CODE_UNKNOWN = 2147483647;
 }
 
-/// @brief The structure type for the media controller playlist handle.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+/// The structure type for the media controller playlist handle.
+///
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
+/// @nodoc
 typedef mc_playlist_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called for every playlist item in the playlist.
+/// Called for every playlist item in the playlist.
 ///
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
 ///
-/// @remarks The @a index and @a metadata should not be released by the application. \n
-/// The @a index can be used only in the callback. To use outside, make a copy.
-/// And @a metadata also can be used only in the callback. To use outside, make a copy with the mc_metadata_clone() function. \n
-/// The callback is called in the main loop.
+/// **Remarks:**
+/// - The `index` and `metadata` should not be released by the application.
+/// - The `index` can be used only in the callback. To use outside, make a copy.
+/// - And `metadata` also can be used only in the callback. To use outside, make a copy with the mc_metadata_clone() function.
+/// - The callback is called in the main loop.
 ///
-/// @param[in] index The ID of the playlist member.
-/// @param[in] metadata The handle to metadata of the playlist item.
-/// @param[in] user_data The user data passed from the foreach function
+/// **Parameters:**
+/// - `index` (in): The ID of the playlist member.
+/// - `metadata` (in): The handle to metadata of the playlist item.
+/// - `user_data` (in): The user data passed from the foreach function
 ///
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
 ///
-/// @pre mc_playlist_foreach_item() will invoke this function.
+/// **Preconditions:**
+/// - mc_playlist_foreach_item() will invoke this function.
 ///
-/// @see mc_playlist_foreach_item()
-/// @see mc_metadata_clone()
-/// @see mc_metadata_get()
+/// **See also:**
+/// - `mc_playlist_foreach_item()`
+/// - `mc_metadata_clone()`
+/// - `mc_metadata_get()`
+/// @nodoc
 typedef mc_playlist_item_cb
     = ffi.Pointer<ffi.NativeFunction<mc_playlist_item_cbFunction>>;
+/// @nodoc
 typedef mc_playlist_item_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> index,
     mc_metadata_h metadata,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmc_playlist_item_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> index,
     mc_metadata_h metadata,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The structure type for the media controller metadata handle.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// The structure type for the media controller metadata handle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+/// @nodoc
 typedef mc_metadata_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called for every playlist.
+/// Called for every playlist.
 ///
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
 ///
-/// @remarks The @a playlist should not be released by the application. \n
-/// To use the @a playlist outside this function, copy the handle with the mc_playlist_clone() function. \n
-/// The callback is called in the main loop.
+/// **Remarks:**
+/// - The `playlist` should not be released by the application.
+/// - To use the `playlist` outside this function, copy the handle with the mc_playlist_clone() function.
+/// - The callback is called in the main loop.
 ///
-/// @param[in] playlist        The handle of the media controller playlist.
-/// @param[in] user_data The user data passed from the foreach function
+/// **Parameters:**
+/// - `playlist` (in): The handle of the media controller playlist.
+/// - `user_data` (in): The user data passed from the foreach function
 ///
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
 ///
-/// @pre mc_playlist_foreach_playlist() will invoke this function.
+/// **Preconditions:**
+/// - mc_playlist_foreach_playlist() will invoke this function.
 ///
-/// @see mc_playlist_clone()
-/// @see mc_playlist_foreach_playlist()
-/// @see mc_playlist_get_name()
-/// @see mc_playlist_foreach_item()
+/// **See also:**
+/// - `mc_playlist_clone()`
+/// - `mc_playlist_foreach_playlist()`
+/// - `mc_playlist_get_name()`
+/// - `mc_playlist_foreach_item()`
+/// @nodoc
 typedef mc_playlist_cb
     = ffi.Pointer<ffi.NativeFunction<mc_playlist_cbFunction>>;
+/// @nodoc
 typedef mc_playlist_cbFunction = ffi.Bool Function(
     mc_playlist_h playlist, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmc_playlist_cbFunction = bool Function(
     mc_playlist_h playlist, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The structure type for the media controller ability handle.
-/// @since_tizen 5.0
+/// The structure type for the media controller ability handle.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 typedef mc_playback_ability_h = ffi.Pointer<ffi.Void>;
 
-/// @brief The structure type for the media controller search handle.
-/// @since_tizen 5.0
+/// The structure type for the media controller search handle.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 typedef mc_search_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called for every search condition information in the obtained list of search.
-/// @details Iterates over a search list.
+/// Called for every search condition information in the obtained list of search.
 ///
-/// @since_tizen 5.0
+/// Iterates over a search list.
 ///
-/// @remarks The callback is called in the main loop.
-/// The @a search_keyword and @a data should not be released by the application. \n
-/// The @a search_keyword and @a data can be used only in the callback. To use outside, make a copy.
+/// **Since Tizen:**
+/// - 5.0
 ///
-/// @param[in] content_type The content type to search
-/// @param[in] category The category to search
-/// @param[in] search_keyword The key word to search
-/// @param[in] data The extra data
-/// @param[in] user_data The user data passed from the foreach function
+/// **Remarks:**
+/// - The callback is called in the main loop.
+/// - The `search_keyword` and `data` should not be released by the application.
+/// - The `search_keyword` and `data` can be used only in the callback. To use outside, make a copy.
 ///
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
+/// **Parameters:**
+/// - `content_type` (in): The content type to search
+/// - `category` (in): The category to search
+/// - `search_keyword` (in): The key word to search
+/// - `data` (in): The extra data
+/// - `user_data` (in): The user data passed from the foreach function
 ///
-/// @pre mc_search_foreach_condition() will invoke this function.
-/// @see mc_search_foreach_condition()
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - mc_search_foreach_condition() will invoke this function.
+///
+/// **See also:**
+/// - `mc_search_foreach_condition()`
+/// @nodoc
 typedef mc_search_condition_cb
     = ffi.Pointer<ffi.NativeFunction<mc_search_condition_cbFunction>>;
+/// @nodoc
 typedef mc_search_condition_cbFunction = ffi.Bool Function(
     ffi.Int32 content_type,
     ffi.Int32 category,
     ffi.Pointer<ffi.Char> search_keyword,
     ffi.Pointer<bundle.bundle> data,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmc_search_condition_cbFunction = bool Function(
     int content_type,
     int category,
@@ -7346,299 +9276,405 @@ typedef Dartmc_search_condition_cbFunction = bool Function(
     ffi.Pointer<bundle.bundle> data,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The structure type for the media client handle.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// The structure type for the media client handle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+/// @nodoc
 typedef mc_client_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when the status of the media controller server is updated.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// Called when the status of the media controller server is updated.
 ///
-/// @remarks The callback is called in the dbus event loop.\n
-/// The @a server_name should not be released by the application.\n
-/// The @a server_name can be used only in the callback. To use outside, make a copy.
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
 ///
-/// @param[in] server_name The app_id of the media controller server which sent the notification
-/// @param[in] state The state of the updated media controller server
-/// @param[in] user_data        The user data passed from the mc_client_set_server_updated_cb() function
+/// **Remarks:**
+/// - The callback is called in the dbus event loop.
+/// - The `server_name` should not be released by the application.
+/// - The `server_name` can be used only in the callback. To use outside, make a copy.
 ///
-/// @pre mc_client_set_server_updated_cb()
+/// **Parameters:**
+/// - `server_name` (in): The app_id of the media controller server which sent the notification
+/// - `state` (in): The state of the updated media controller server
+/// - `user_data` (in): The user data passed from the mc_client_set_server_updated_cb() function
 ///
-/// @see mc_client_set_server_updated_cb()
+/// **Preconditions:**
+/// - mc_client_set_server_updated_cb()
+///
+/// **See also:**
+/// - `mc_client_set_server_updated_cb()`
+/// @nodoc
 typedef mc_server_state_updated_cb
     = ffi.Pointer<ffi.NativeFunction<mc_server_state_updated_cbFunction>>;
+/// @nodoc
 typedef mc_server_state_updated_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> server_name,
     ffi.Int32 state,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmc_server_state_updated_cbFunction = void Function(
     ffi.Pointer<ffi.Char> server_name,
     int state,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the playback information of the media controller server is updated.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// Called when the playback information of the media controller server is updated.
 ///
-/// @remarks The callback is called in the dbus event loop.\n
-/// The @a server_name and @a playback should not be released by the application. \n
-/// The @a server_name can be used only in the callback. To use outside, make a copy. \n
-/// And @a playback also can be used only in the callback.
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
 ///
-/// @param[in] server_name The app_id of the media controller server which sent the notification
-/// @param[in] playback The playback information of the updated media controller server
-/// @param[in] user_data        The user data passed from the mc_client_set_playback_updated_cb() function
+/// **Remarks:**
+/// - The callback is called in the dbus event loop.
+/// - The `server_name` and `playback` should not be released by the application.
+/// - The `server_name` can be used only in the callback. To use outside, make a copy.
+/// - And `playback` also can be used only in the callback.
 ///
-/// @pre mc_client_set_playback_updated_cb()
+/// **Parameters:**
+/// - `server_name` (in): The app_id of the media controller server which sent the notification
+/// - `playback` (in): The playback information of the updated media controller server
+/// - `user_data` (in): The user data passed from the mc_client_set_playback_updated_cb() function
 ///
-/// @see mc_client_set_playback_updated_cb()
-/// @see mc_client_get_playback_state()
-/// @see mc_client_get_playback_position()
-/// @see mc_client_get_playlist_item_info()
+/// **Preconditions:**
+/// - mc_client_set_playback_updated_cb()
+///
+/// **See also:**
+/// - `mc_client_set_playback_updated_cb()`
+/// - `mc_client_get_playback_state()`
+/// - `mc_client_get_playback_position()`
+/// - `mc_client_get_playlist_item_info()`
+/// @nodoc
 typedef mc_playback_updated_cb
     = ffi.Pointer<ffi.NativeFunction<mc_playback_updated_cbFunction>>;
+/// @nodoc
 typedef mc_playback_updated_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> server_name,
     mc_playback_h playback,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmc_playback_updated_cbFunction = void Function(
     ffi.Pointer<ffi.Char> server_name,
     mc_playback_h playback,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The structure type for the media controller playback handle.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// The structure type for the media controller playback handle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+/// @nodoc
 typedef mc_playback_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when the metadata of the media controller server is updated.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// Called when the metadata of the media controller server is updated.
 ///
-/// @remarks The callback is called in the dbus event loop.\n
-/// The @a server_name and @a metadata should not be released by the application. \n
-/// The @a server_name can be used only in the callback. To use outside, make a copy. \n
-/// And @a metadata also can be used only in the callback. To use outside, make a copy using mc_metadata_clone().
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
 ///
-/// @param[in] server_name The app_id of the media controller server which sent the notification
-/// @param[in] metadata The metadata of the updated media controller server
-/// @param[in] user_data        The user data passed from the mc_client_set_metadata_updated_cb() function
+/// **Remarks:**
+/// - The callback is called in the dbus event loop.
+/// - The `server_name` and `metadata` should not be released by the application.
+/// - The `server_name` can be used only in the callback. To use outside, make a copy.
+/// - And `metadata` also can be used only in the callback. To use outside, make a copy using mc_metadata_clone().
 ///
-/// @pre mc_client_set_metadata_updated_cb()
+/// **Parameters:**
+/// - `server_name` (in): The app_id of the media controller server which sent the notification
+/// - `metadata` (in): The metadata of the updated media controller server
+/// - `user_data` (in): The user data passed from the mc_client_set_metadata_updated_cb() function
 ///
-/// @see mc_client_set_metadata_updated_cb()
-/// @see mc_metadata_get()
+/// **Preconditions:**
+/// - mc_client_set_metadata_updated_cb()
+///
+/// **See also:**
+/// - `mc_client_set_metadata_updated_cb()`
+/// - `mc_metadata_get()`
+/// @nodoc
 typedef mc_metadata_updated_cb
     = ffi.Pointer<ffi.NativeFunction<mc_metadata_updated_cbFunction>>;
+/// @nodoc
 typedef mc_metadata_updated_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> server_name,
     mc_metadata_h metadata,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmc_metadata_updated_cbFunction = void Function(
     ffi.Pointer<ffi.Char> server_name,
     mc_metadata_h metadata,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the shuffle mode of the media controller server is updated.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+/// Called when the shuffle mode of the media controller server is updated.
 ///
-/// @remarks The callback is called in the dbus event loop.\n
-/// The @a server_name should not be released by the application. \n
-/// The @a server_name can be used only in the callback. To use outside, make a copy.
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
 ///
-/// @param[in] server_name The app_id of the media controller server which sent the notification
-/// @param[in] mode The shuffle mode of the updated media controller server
-/// @param[in] user_data        The user data passed from the mc_client_set_shuffle_mode_updated_cb() function
+/// **Remarks:**
+/// - The callback is called in the dbus event loop.
+/// - The `server_name` should not be released by the application.
+/// - The `server_name` can be used only in the callback. To use outside, make a copy.
 ///
-/// @pre mc_client_set_shuffle_mode_updated_cb()
+/// **Parameters:**
+/// - `server_name` (in): The app_id of the media controller server which sent the notification
+/// - `mode` (in): The shuffle mode of the updated media controller server
+/// - `user_data` (in): The user data passed from the mc_client_set_shuffle_mode_updated_cb() function
 ///
-/// @see mc_client_set_shuffle_mode_updated_cb()
+/// **Preconditions:**
+/// - mc_client_set_shuffle_mode_updated_cb()
+///
+/// **See also:**
+/// - `mc_client_set_shuffle_mode_updated_cb()`
+/// @nodoc
 typedef mc_shuffle_mode_updated_cb
     = ffi.Pointer<ffi.NativeFunction<mc_shuffle_mode_updated_cbFunction>>;
+/// @nodoc
 typedef mc_shuffle_mode_updated_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> server_name,
     ffi.Int32 mode,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmc_shuffle_mode_updated_cbFunction = void Function(
     ffi.Pointer<ffi.Char> server_name,
     int mode,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the repeat mode of the media controller server is updated.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+/// Called when the repeat mode of the media controller server is updated.
 ///
-/// @remarks The callback is called in the dbus event loop.\n
-/// The @a server_name should not be released by the application. \n
-/// The @a server_name can be used only in the callback. To use outside, make a copy.
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
 ///
-/// @param[in] server_name The app_id of the media controller server which sent the notification
-/// @param[in] mode The repeat mode of the updated media controller server
-/// @param[in] user_data        The user data passed from the mc_client_set_repeat_mode_updated_cb() function
+/// **Remarks:**
+/// - The callback is called in the dbus event loop.
+/// - The `server_name` should not be released by the application.
+/// - The `server_name` can be used only in the callback. To use outside, make a copy.
 ///
-/// @pre mc_client_set_repeat_mode_updated_cb()
+/// **Parameters:**
+/// - `server_name` (in): The app_id of the media controller server which sent the notification
+/// - `mode` (in): The repeat mode of the updated media controller server
+/// - `user_data` (in): The user data passed from the mc_client_set_repeat_mode_updated_cb() function
 ///
-/// @see mc_client_set_repeat_mode_updated_cb()
+/// **Preconditions:**
+/// - mc_client_set_repeat_mode_updated_cb()
+///
+/// **See also:**
+/// - `mc_client_set_repeat_mode_updated_cb()`
+/// @nodoc
 typedef mc_repeat_mode_updated_cb
     = ffi.Pointer<ffi.NativeFunction<mc_repeat_mode_updated_cbFunction>>;
+/// @nodoc
 typedef mc_repeat_mode_updated_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> server_name,
     ffi.Int32 mode,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmc_repeat_mode_updated_cbFunction = void Function(
     ffi.Pointer<ffi.Char> server_name,
     int mode,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the playback ability support of the media controller server is updated.
-/// @since_tizen 5.0
+/// Called when the playback ability support of the media controller server is updated.
 ///
-/// @remarks The callback is called in the dbus event loop.\n
-/// The @a server_name should not be released by the application. \n
-/// The @a server_name can be used only in the callback. To use outside, make a copy. \n
-/// And @a ability also can be used only in the callback. To use outside, make a copy using mc_playback_ability_clone().
+/// **Since Tizen:**
+/// - 5.0
 ///
-/// @param[in] server_name The app_id of the media controller server which sent the notification
-/// @param[in] ability The ability of the updated media controller server
-/// @param[in] user_data        The user data passed from the mc_client_set_playback_ability_updated_cb() function
+/// **Remarks:**
+/// - The callback is called in the dbus event loop.
+/// - The `server_name` should not be released by the application.
+/// - The `server_name` can be used only in the callback. To use outside, make a copy.
+/// - And `ability` also can be used only in the callback. To use outside, make a copy using mc_playback_ability_clone().
 ///
-/// @pre mc_client_set_playback_ability_updated_cb()
+/// **Parameters:**
+/// - `server_name` (in): The app_id of the media controller server which sent the notification
+/// - `ability` (in): The ability of the updated media controller server
+/// - `user_data` (in): The user data passed from the mc_client_set_playback_ability_updated_cb() function
 ///
-/// @see mc_client_set_playback_ability_updated_cb()
-/// @see mc_playback_action_is_supported()
+/// **Preconditions:**
+/// - mc_client_set_playback_ability_updated_cb()
+///
+/// **See also:**
+/// - `mc_client_set_playback_ability_updated_cb()`
+/// - `mc_playback_action_is_supported()`
+/// @nodoc
 typedef mc_playback_ability_updated_cb
     = ffi.Pointer<ffi.NativeFunction<mc_playback_ability_updated_cbFunction>>;
+/// @nodoc
 typedef mc_playback_ability_updated_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> server_name,
     mc_playback_ability_h ability,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmc_playback_ability_updated_cbFunction = void Function(
     ffi.Pointer<ffi.Char> server_name,
     mc_playback_ability_h ability,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @deprecated Deprecated since 5.5. Use mc_ability_support_updated_cb() instead.
-/// @brief Called when the shuffle ability support of the media controller server is updated.
-/// @since_tizen 5.0
+/// **Deprecated:** Deprecated since 5.5. Use mc_ability_support_updated_cb() instead.
 ///
-/// @remarks The callback is called in the dbus event loop.\n
-/// The @a server_name should not be released by the application. \n
-/// The @a server_name can be used only in the callback. To use outside, make a copy.
+/// Called when the shuffle ability support of the media controller server is updated.
 ///
-/// @param[in] server_name The app_id of the media controller server which sent the notification
-/// @param[in] support The support value of the ability of the updated media controller server
-/// @param[in] user_data        The user data passed from the mc_client_set_shuffle_ability_updated_cb() function
+/// **Since Tizen:**
+/// - 5.0
 ///
-/// @pre mc_client_set_shuffle_ability_updated_cb()
+/// **Remarks:**
+/// - The callback is called in the dbus event loop.
+/// - The `server_name` should not be released by the application.
+/// - The `server_name` can be used only in the callback. To use outside, make a copy.
 ///
-/// @see mc_client_set_shuffle_ability_updated_cb()
+/// **Parameters:**
+/// - `server_name` (in): The app_id of the media controller server which sent the notification
+/// - `support` (in): The support value of the ability of the updated media controller server
+/// - `user_data` (in): The user data passed from the mc_client_set_shuffle_ability_updated_cb() function
+///
+/// **Preconditions:**
+/// - mc_client_set_shuffle_ability_updated_cb()
+///
+/// **See also:**
+/// - `mc_client_set_shuffle_ability_updated_cb()`
+/// @nodoc
 typedef mc_shuffle_ability_updated_cb
     = ffi.Pointer<ffi.NativeFunction<mc_shuffle_ability_updated_cbFunction>>;
+/// @nodoc
 typedef mc_shuffle_ability_updated_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> server_name,
     ffi.Int32 support,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmc_shuffle_ability_updated_cbFunction = void Function(
     ffi.Pointer<ffi.Char> server_name,
     int support,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @deprecated Deprecated since 5.5. Use mc_ability_support_updated_cb() instead.
-/// @brief Called when the repeat ability of the media controller server is updated.
-/// @since_tizen 5.0
+/// **Deprecated:** Deprecated since 5.5. Use mc_ability_support_updated_cb() instead.
 ///
-/// @remarks The callback is called in the dbus event loop.\n
-/// The @a server_name should not be released by the application. \n
-/// The @a server_name can be used only in the callback. To use outside, make a copy.
+/// Called when the repeat ability of the media controller server is updated.
 ///
-/// @param[in] server_name The app_id of the media controller server which sent the notification
-/// @param[in] support The support value of the ability of the updated media controller server
-/// @param[in] user_data        The user data passed from the mc_client_set_repeat_ability_updated_cb() function
+/// **Since Tizen:**
+/// - 5.0
 ///
-/// @pre mc_client_set_repeat_ability_updated_cb()
+/// **Remarks:**
+/// - The callback is called in the dbus event loop.
+/// - The `server_name` should not be released by the application.
+/// - The `server_name` can be used only in the callback. To use outside, make a copy.
 ///
-/// @see mc_client_set_repeat_ability_updated_cb()
+/// **Parameters:**
+/// - `server_name` (in): The app_id of the media controller server which sent the notification
+/// - `support` (in): The support value of the ability of the updated media controller server
+/// - `user_data` (in): The user data passed from the mc_client_set_repeat_ability_updated_cb() function
+///
+/// **Preconditions:**
+/// - mc_client_set_repeat_ability_updated_cb()
+///
+/// **See also:**
+/// - `mc_client_set_repeat_ability_updated_cb()`
+/// @nodoc
 typedef mc_repeat_ability_updated_cb
     = ffi.Pointer<ffi.NativeFunction<mc_repeat_ability_updated_cbFunction>>;
+/// @nodoc
 typedef mc_repeat_ability_updated_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> server_name,
     ffi.Int32 support,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmc_repeat_ability_updated_cbFunction = void Function(
     ffi.Pointer<ffi.Char> server_name,
     int support,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when a media controller server's support for an ability is updated.
-/// @since_tizen 5.5
+/// Called when a media controller server's support for an ability is updated.
 ///
-/// @remarks The callback is called in the dbus event loop.\n
-/// The @a server_name should not be released by the application. \n
-/// The @a server_name can be used only in the callback. To use outside, make a copy.
+/// **Since Tizen:**
+/// - 5.5
 ///
-/// @param[in] server_name The app_id of the media controller server which sent the notification
-/// @param[in] ability The ability
-/// @param[in] support The support value of the ability of the updated media controller server
-/// @param[in] user_data        The user data passed from the callback function
+/// **Remarks:**
+/// - The callback is called in the dbus event loop.
+/// - The `server_name` should not be released by the application.
+/// - The `server_name` can be used only in the callback. To use outside, make a copy.
 ///
-/// @see mc_client_set_ability_support_updated_cb()
+/// **Parameters:**
+/// - `server_name` (in): The app_id of the media controller server which sent the notification
+/// - `ability` (in): The ability
+/// - `support` (in): The support value of the ability of the updated media controller server
+/// - `user_data` (in): The user data passed from the callback function
+///
+/// **See also:**
+/// - `mc_client_set_ability_support_updated_cb()`
+/// @nodoc
 typedef mc_ability_support_updated_cb
     = ffi.Pointer<ffi.NativeFunction<mc_ability_support_updated_cbFunction>>;
+/// @nodoc
 typedef mc_ability_support_updated_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> server_name,
     ffi.Int32 ability,
     ffi.Int32 support,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmc_ability_support_updated_cbFunction = void Function(
     ffi.Pointer<ffi.Char> server_name,
     int ability,
     int support,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when a media controller server's supported items for an ability is updated.
-/// @since_tizen 5.5
+/// Called when a media controller server's supported items for an ability is updated.
 ///
-/// @remarks The callback is called in the dbus event loop.\n
-/// The @a server_name should not be released by the application. \n
-/// The @a server_name can be used only in the callback. To use outside, make a copy.
+/// **Since Tizen:**
+/// - 5.5
 ///
-/// @param[in] server_name The app_id of the media controller server which sent the notification
-/// @param[in] supported_items The supported items of the updated media controller server
-/// @param[in] user_data        The user data passed from the callback function
+/// **Remarks:**
+/// - The callback is called in the dbus event loop.
+/// - The `server_name` should not be released by the application.
+/// - The `server_name` can be used only in the callback. To use outside, make a copy.
 ///
-/// @see mc_client_set_display_mode_ability_updated_cb()
-/// @see mc_client_set_display_rotation_ability_updated_cb()
+/// **Parameters:**
+/// - `server_name` (in): The app_id of the media controller server which sent the notification
+/// - `supported_items` (in): The supported items of the updated media controller server
+/// - `user_data` (in): The user data passed from the callback function
+///
+/// **See also:**
+/// - `mc_client_set_display_mode_ability_updated_cb()`
+/// - `mc_client_set_display_rotation_ability_updated_cb()`
+/// @nodoc
 typedef mc_ability_supported_items_updated_cb = ffi
     .Pointer<ffi.NativeFunction<mc_ability_supported_items_updated_cbFunction>>;
+/// @nodoc
 typedef mc_ability_supported_items_updated_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> server_name,
     ffi.UnsignedInt supported_items,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmc_ability_supported_items_updated_cbFunction = void Function(
     ffi.Pointer<ffi.Char> server_name,
     int supported_items,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the result of the command from the server is received.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+/// Called when the result of the command from the server is received.
 ///
-/// @remarks The callback is called in the dbus event loop.\n @a data should be released using bundle_free().\n
-/// The @a server_name and @a request_id should not be released by the application. \n
-/// The @a server_name and @a request_id can be used only in the callback. To use outside, make a copy.
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
 ///
-/// @param[in] server_name    The app_id of the media controller server which sent the reply
-/// @param[in] request_id     The id of the command request
-/// @param[in] result_code    The result code of the action, #mc_result_code_e since 6.0
-/// @param[in] data The extra data
-/// @param[in] user_data        The user data passed from the mc_client_set_cmd_reply_received_cb() function
+/// **Remarks:**
+/// - The callback is called in the dbus event loop.
+/// - `data` should be released using bundle_free().
+/// - The `server_name` and `request_id` should not be released by the application.
+/// - The `server_name` and `request_id` can be used only in the callback. To use outside, make a copy.
 ///
-/// @pre mc_client_send_custom_cmd()
-/// @pre mc_client_set_cmd_reply_received_cb()
+/// **Parameters:**
+/// - `server_name` (in): The app_id of the media controller server which sent the reply
+/// - `request_id` (in): The id of the command request
+/// - `result_code` (in): The result code of the action, `mc_result_code_e` since 6.0
+/// - `data` (in): The extra data
+/// - `user_data` (in): The user data passed from the mc_client_set_cmd_reply_received_cb() function
 ///
-/// @see mc_client_send_custom_cmd()
+/// **Preconditions:**
+/// - mc_client_send_custom_cmd()
+/// - mc_client_set_cmd_reply_received_cb()
+///
+/// **See also:**
+/// - `mc_client_send_custom_cmd()`
+/// @nodoc
 typedef mc_cmd_reply_received_cb
     = ffi.Pointer<ffi.NativeFunction<mc_cmd_reply_received_cbFunction>>;
+/// @nodoc
 typedef mc_cmd_reply_received_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> server_name,
     ffi.Pointer<ffi.Char> request_id,
     ffi.Int result_code,
     ffi.Pointer<bundle.bundle> data,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmc_cmd_reply_received_cbFunction = void Function(
     ffi.Pointer<ffi.Char> server_name,
     ffi.Pointer<ffi.Char> request_id,
@@ -7646,32 +9682,41 @@ typedef Dartmc_cmd_reply_received_cbFunction = void Function(
     ffi.Pointer<bundle.bundle> data,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the playlist of the media controller server is updated.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+/// Called when the playlist of the media controller server is updated.
 ///
-/// @remarks The callback is called in the dbus event loop.\n
-/// The @a server_name, @a playlist_name and @a playlist should not be released by the application. \n
-/// The @a server_name and @a playlist_name can be used only in the callback. To use outside, make a copy.\n
-/// And @a playlist also can be used only in the callback. To use outside, make a copy using mc_playlist_clone().
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
 ///
-/// @param[in] server_name The app_id of the media controller server which sent the notification
-/// @param[in] mode The playlist update mode of the updated media controller server
-/// @param[in] playlist_name Updated playlist name
-/// @param[in] playlist        The handle of the media controller playlist
-/// @param[in] user_data The user data passed from the mc_client_set_playlist_updated_cb() function
+/// **Remarks:**
+/// - The callback is called in the dbus event loop.
+/// - The `server_name`, `playlist_name` and `playlist` should not be released by the application.
+/// - The `server_name` and `playlist_name` can be used only in the callback. To use outside, make a copy.
+/// - And `playlist` also can be used only in the callback. To use outside, make a copy using mc_playlist_clone().
 ///
-/// @pre mc_client_set_playlist_updated_cb()
+/// **Parameters:**
+/// - `server_name` (in): The app_id of the media controller server which sent the notification
+/// - `mode` (in): The playlist update mode of the updated media controller server
+/// - `playlist_name` (in): Updated playlist name
+/// - `playlist` (in): The handle of the media controller playlist
+/// - `user_data` (in): The user data passed from the mc_client_set_playlist_updated_cb() function
 ///
-/// @see mc_client_set_playlist_updated_cb()
-/// @see mc_playlist_foreach_playlist()
+/// **Preconditions:**
+/// - mc_client_set_playlist_updated_cb()
+///
+/// **See also:**
+/// - `mc_client_set_playlist_updated_cb()`
+/// - `mc_playlist_foreach_playlist()`
+/// @nodoc
 typedef mc_playlist_updated_cb
     = ffi.Pointer<ffi.NativeFunction<mc_playlist_updated_cbFunction>>;
+/// @nodoc
 typedef mc_playlist_updated_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> server_name,
     ffi.Int32 mode,
     ffi.Pointer<ffi.Char> playlist_name,
     mc_playlist_h playlist,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmc_playlist_updated_cbFunction = void Function(
     ffi.Pointer<ffi.Char> server_name,
     int mode,
@@ -7679,104 +9724,138 @@ typedef Dartmc_playlist_updated_cbFunction = void Function(
     mc_playlist_h playlist,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the status of a media controller server's boolean attribute (subtitles or 360 mode) is updated.
-/// @since_tizen 5.5
+/// Called when the status of a media controller server's boolean attribute (subtitles or 360 mode) is updated.
 ///
-/// @remarks The callback is called in the dbus event loop.\n
-/// The @a server_name should not be released by the application. \n
-/// The @a server_name can be used only in the callback. To use outside, make a copy.
+/// **Since Tizen:**
+/// - 5.5
 ///
-/// @param[in] server_name The app_id of the media controller server which sent the notification
-/// @param[in] enabled The new status of the attribute
-/// @param[in] user_data        The user data passed from the callback function
+/// **Remarks:**
+/// - The callback is called in the dbus event loop.
+/// - The `server_name` should not be released by the application.
+/// - The `server_name` can be used only in the callback. To use outside, make a copy.
 ///
-/// @see mc_client_set_subtitles_updated_cb()
-/// @see mc_client_set_360_mode_updated_cb()
+/// **Parameters:**
+/// - `server_name` (in): The app_id of the media controller server which sent the notification
+/// - `enabled` (in): The new status of the attribute
+/// - `user_data` (in): The user data passed from the callback function
+///
+/// **See also:**
+/// - `mc_client_set_subtitles_updated_cb()`
+/// - `mc_client_set_360_mode_updated_cb()`
+/// @nodoc
 typedef mc_bool_attribute_updated_cb
     = ffi.Pointer<ffi.NativeFunction<mc_bool_attribute_updated_cbFunction>>;
+/// @nodoc
 typedef mc_bool_attribute_updated_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> server_name,
     ffi.Bool enabled,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmc_bool_attribute_updated_cbFunction = void Function(
     ffi.Pointer<ffi.Char> server_name,
     bool enabled,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when a media controller server's display mode is updated.
-/// @since_tizen 5.5
+/// Called when a media controller server's display mode is updated.
 ///
-/// @remarks The callback is called in the dbus event loop.\n
-/// The @a server_name should not be released by the application. \n
-/// The @a server_name can be used only in the callback. To use outside, make a copy.
+/// **Since Tizen:**
+/// - 5.5
 ///
-/// @param[in] server_name The app_id of the media controller server which sent the notification
-/// @param[in] mode The display mode
-/// @param[in] user_data        The user data passed from the callback function
+/// **Remarks:**
+/// - The callback is called in the dbus event loop.
+/// - The `server_name` should not be released by the application.
+/// - The `server_name` can be used only in the callback. To use outside, make a copy.
 ///
-/// @see mc_client_set_display_mode_updated_cb()
+/// **Parameters:**
+/// - `server_name` (in): The app_id of the media controller server which sent the notification
+/// - `mode` (in): The display mode
+/// - `user_data` (in): The user data passed from the callback function
+///
+/// **See also:**
+/// - `mc_client_set_display_mode_updated_cb()`
+/// @nodoc
 typedef mc_display_mode_updated_cb
     = ffi.Pointer<ffi.NativeFunction<mc_display_mode_updated_cbFunction>>;
+/// @nodoc
 typedef mc_display_mode_updated_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> server_name,
     ffi.Int32 mode,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmc_display_mode_updated_cbFunction = void Function(
     ffi.Pointer<ffi.Char> server_name,
     int mode,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when a media controller server's display rotation is updated.
-/// @since_tizen 5.5
+/// Called when a media controller server's display rotation is updated.
 ///
-/// @remarks The callback is called in the dbus event loop.\n
-/// The @a server_name should not be released by the application. \n
-/// The @a server_name can be used only in the callback. To use outside, make a copy.
+/// **Since Tizen:**
+/// - 5.5
 ///
-/// @param[in] server_name The app_id of the media controller server which sent the notification
-/// @param[in] rotation The display rotation
-/// @param[in] user_data        The user data passed from the callback function
+/// **Remarks:**
+/// - The callback is called in the dbus event loop.
+/// - The `server_name` should not be released by the application.
+/// - The `server_name` can be used only in the callback. To use outside, make a copy.
 ///
-/// @see mc_client_set_display_rotation_updated_cb()
+/// **Parameters:**
+/// - `server_name` (in): The app_id of the media controller server which sent the notification
+/// - `rotation` (in): The display rotation
+/// - `user_data` (in): The user data passed from the callback function
+///
+/// **See also:**
+/// - `mc_client_set_display_rotation_updated_cb()`
+/// @nodoc
 typedef mc_display_rotation_updated_cb
     = ffi.Pointer<ffi.NativeFunction<mc_display_rotation_updated_cbFunction>>;
+/// @nodoc
 typedef mc_display_rotation_updated_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> server_name,
     ffi.Int32 rotation,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmc_display_rotation_updated_cbFunction = void Function(
     ffi.Pointer<ffi.Char> server_name,
     int rotation,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when receiving custom event of media controller servers.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+/// Called when receiving custom event of media controller servers.
 ///
-/// @remarks The callback is called in the dbus event loop.\n The @a data should be released using bundle_free(). \n
-/// The @a server_name, @a request_id and @a event should not be released by the application. \n
-/// The @a server_name, @a request_id and @a event can be used only in the callback. To use outside, make a copy.
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
 ///
-/// @param[in] server_name The app_id of the subscribed media controller server
-/// @param[in] request_id     The id of the custom event request
-/// @param[in] event          The name of the custom event
-/// @param[in] data           The data can include other information associated with the event
-/// @param[in] user_data        The user data passed from the mc_client_set_custom_event_received_cb() function
+/// **Remarks:**
+/// - The callback is called in the dbus event loop.
+/// - The `data` should be released using bundle_free().
+/// - The `server_name`, `request_id` and `event` should not be released by the application.
+/// - The `server_name`, `request_id` and `event` can be used only in the callback. To use outside, make a copy.
 ///
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
+/// **Parameters:**
+/// - `server_name` (in): The app_id of the subscribed media controller server
+/// - `request_id` (in): The id of the custom event request
+/// - `event` (in): The name of the custom event
+/// - `data` (in): The data can include other information associated with the event
+/// - `user_data` (in): The user data passed from the mc_client_set_custom_event_received_cb() function
 ///
-/// @pre mc_client_set_custom_event_received_cb()
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
 ///
-/// @see mc_client_set_custom_event_received_cb()
-/// @see mc_client_unset_custom_event_received_cb()
+/// **Preconditions:**
+/// - mc_client_set_custom_event_received_cb()
+///
+/// **See also:**
+/// - `mc_client_set_custom_event_received_cb()`
+/// - `mc_client_unset_custom_event_received_cb()`
+/// @nodoc
 typedef mc_client_custom_event_received_cb = ffi
     .Pointer<ffi.NativeFunction<mc_client_custom_event_received_cbFunction>>;
+/// @nodoc
 typedef mc_client_custom_event_received_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> server_name,
     ffi.Pointer<ffi.Char> request_id,
     ffi.Pointer<ffi.Char> event,
     ffi.Pointer<bundle.bundle> data,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmc_client_custom_event_received_cbFunction = void Function(
     ffi.Pointer<ffi.Char> server_name,
     ffi.Pointer<ffi.Char> request_id,
@@ -7784,198 +9863,263 @@ typedef Dartmc_client_custom_event_received_cbFunction = void Function(
     ffi.Pointer<bundle.bundle> data,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when requesting the list of subscribed servers.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// Called when requesting the list of subscribed servers.
 ///
-/// @remarks The callback is called in the dbus event loop.\n
-/// The @a server_name should not be released by the application. \n
-/// The @a server_name can be used only in the callback. To use outside, make a copy.
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
 ///
-/// @param[in] server_name The app_id of the subscribed media controller server
-/// @param[in] user_data        The user data passed from the mc_client_foreach_server_subscribed() function
+/// **Remarks:**
+/// - The callback is called in the dbus event loop.
+/// - The `server_name` should not be released by the application.
+/// - The `server_name` can be used only in the callback. To use outside, make a copy.
 ///
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
+/// **Parameters:**
+/// - `server_name` (in): The app_id of the subscribed media controller server
+/// - `user_data` (in): The user data passed from the mc_client_foreach_server_subscribed() function
 ///
-/// @pre mc_client_foreach_server_subscribed()
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
 ///
-/// @see mc_client_foreach_server_subscribed()
+/// **Preconditions:**
+/// - mc_client_foreach_server_subscribed()
+///
+/// **See also:**
+/// - `mc_client_foreach_server_subscribed()`
+/// @nodoc
 typedef mc_subscribed_server_cb
     = ffi.Pointer<ffi.NativeFunction<mc_subscribed_server_cbFunction>>;
+/// @nodoc
 typedef mc_subscribed_server_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> server_name, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmc_subscribed_server_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> server_name, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when requesting the list of created servers.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// Called when requesting the list of created servers.
 ///
-/// @remarks The callback is called in the main loop.\n
-/// The @a server_name should not be released by the application. \n
-/// The @a server_name can be used only in the callback. To use outside, make a copy.
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
 ///
-/// @param[in] server_name The app_id of the created media controller server
-/// @param[in] user_data        The user data passed from the mc_client_foreach_server() function
+/// **Remarks:**
+/// - The callback is called in the main loop.
+/// - The `server_name` should not be released by the application.
+/// - The `server_name` can be used only in the callback. To use outside, make a copy.
 ///
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
+/// **Parameters:**
+/// - `server_name` (in): The app_id of the created media controller server
+/// - `user_data` (in): The user data passed from the mc_client_foreach_server() function
 ///
-/// @pre mc_client_foreach_server()
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
 ///
-/// @see mc_client_foreach_server()
+/// **Preconditions:**
+/// - mc_client_foreach_server()
+///
+/// **See also:**
+/// - `mc_client_foreach_server()`
+/// @nodoc
 typedef mc_activated_server_cb
     = ffi.Pointer<ffi.NativeFunction<mc_activated_server_cbFunction>>;
+/// @nodoc
 typedef mc_activated_server_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> server_name, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmc_activated_server_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> server_name, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The structure type for the media server handle.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// The structure type for the media server handle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+/// @nodoc
 typedef mc_server_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when the server receives the playback action command from the client.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+/// Called when the server receives the playback action command from the client.
 ///
-/// @remarks The callback is called in the dbus event loop.\n
-/// If @a request_id is not null, the server should send the reply to the client with the @a request_id. \n
-/// The @a client_name and @a request_id should not be released by the application. \n
-/// The @a client_name and @a request_id can be used only in the callback. To use outside, make a copy.
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
 ///
-/// @param[in] client_name    The app_id of the media controller client
-/// @param[in] request_id    The request_id of the media controller client
-/// @param[in] action    The received playback action
-/// @param[in] user_data        The user data passed from the mc_server_set_playback_action_cmd_received_cb() function
+/// **Remarks:**
+/// - The callback is called in the dbus event loop.
+/// - If `request_id` is not null, the server should send the reply to the client with the `request_id`.
+/// - The `client_name` and `request_id` should not be released by the application.
+/// - The `client_name` and `request_id` can be used only in the callback. To use outside, make a copy.
 ///
-/// @pre mc_server_set_playback_action_cmd_received_cb()
+/// **Parameters:**
+/// - `client_name` (in): The app_id of the media controller client
+/// - `request_id` (in): The request_id of the media controller client
+/// - `action` (in): The received playback action
+/// - `user_data` (in): The user data passed from the mc_server_set_playback_action_cmd_received_cb() function
 ///
-/// @see mc_server_set_playback_action_cmd_received_cb()
-/// @see mc_server_send_cmd_reply()
+/// **Preconditions:**
+/// - mc_server_set_playback_action_cmd_received_cb()
+///
+/// **See also:**
+/// - `mc_server_set_playback_action_cmd_received_cb()`
+/// - `mc_server_send_cmd_reply()`
+/// @nodoc
 typedef mc_server_playback_action_cmd_received_cb = ffi.Pointer<
     ffi.NativeFunction<mc_server_playback_action_cmd_received_cbFunction>>;
+/// @nodoc
 typedef mc_server_playback_action_cmd_received_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> client_name,
     ffi.Pointer<ffi.Char> request_id,
     ffi.Int32 action,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmc_server_playback_action_cmd_received_cbFunction = void Function(
     ffi.Pointer<ffi.Char> client_name,
     ffi.Pointer<ffi.Char> request_id,
     int action,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the server receives the playback position from the client.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+/// Called when the server receives the playback position from the client.
 ///
-/// @remarks The callback is called in the dbus event loop.\n
-/// If @a request_id is not null, the server should send the reply to the client with the @a request_id.\n
-/// The @a client_name and @a request_id should not be released by the application. \n
-/// The @a client_name and @a request_id can be used only in the callback. To use outside, make a copy.
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
 ///
-/// @param[in] client_name    The app_id of the media controller client
-/// @param[in] request_id    The request_id of the media controller client
-/// @param[in] position    The received playback position (milliseconds)
-/// @param[in] user_data        The user data passed from the mc_server_set_playback_position_cmd_received_cb() function
+/// **Remarks:**
+/// - The callback is called in the dbus event loop.
+/// - If `request_id` is not null, the server should send the reply to the client with the `request_id`.
+/// - The `client_name` and `request_id` should not be released by the application.
+/// - The `client_name` and `request_id` can be used only in the callback. To use outside, make a copy.
 ///
-/// @pre mc_server_set_playback_position_cmd_received_cb()
+/// **Parameters:**
+/// - `client_name` (in): The app_id of the media controller client
+/// - `request_id` (in): The request_id of the media controller client
+/// - `position` (in): The received playback position (milliseconds)
+/// - `user_data` (in): The user data passed from the mc_server_set_playback_position_cmd_received_cb() function
 ///
-/// @see mc_server_set_playback_position_cmd_received_cb()
-/// @see mc_server_send_cmd_reply()
+/// **Preconditions:**
+/// - mc_server_set_playback_position_cmd_received_cb()
+///
+/// **See also:**
+/// - `mc_server_set_playback_position_cmd_received_cb()`
+/// - `mc_server_send_cmd_reply()`
+/// @nodoc
 typedef mc_server_playback_position_cmd_received_cb = ffi.Pointer<
     ffi.NativeFunction<mc_server_playback_position_cmd_received_cbFunction>>;
+/// @nodoc
 typedef mc_server_playback_position_cmd_received_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> client_name,
     ffi.Pointer<ffi.Char> request_id,
     ffi.UnsignedLongLong position,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmc_server_playback_position_cmd_received_cbFunction = void Function(
     ffi.Pointer<ffi.Char> client_name,
     ffi.Pointer<ffi.Char> request_id,
     int position,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the server receives the shuffle mode from the client.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+/// Called when the server receives the shuffle mode from the client.
 ///
-/// @remarks The callback is called in the dbus event loop.\n
-/// If @a request_id is not null, the server should send the reply to the client with the @a request_id.\n
-/// The @a client_name and @a request_id should not be released by the application. \n
-/// The @a client_name and @a request_id can be used only in the callback. To use outside, make a copy.
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
 ///
-/// @param[in] client_name    The app_id of the media controller client
-/// @param[in] request_id    The request_id of the media controller client
-/// @param[in] shuffle_mode    The received shuffle_mode
-/// @param[in] user_data        The user data passed from the mc_server_set_shuffle_mode_cmd_received_cb() function
+/// **Remarks:**
+/// - The callback is called in the dbus event loop.
+/// - If `request_id` is not null, the server should send the reply to the client with the `request_id`.
+/// - The `client_name` and `request_id` should not be released by the application.
+/// - The `client_name` and `request_id` can be used only in the callback. To use outside, make a copy.
 ///
-/// @pre mc_server_set_shuffle_mode_cmd_received_cb()
+/// **Parameters:**
+/// - `client_name` (in): The app_id of the media controller client
+/// - `request_id` (in): The request_id of the media controller client
+/// - `shuffle_mode` (in): The received shuffle_mode
+/// - `user_data` (in): The user data passed from the mc_server_set_shuffle_mode_cmd_received_cb() function
 ///
-/// @see mc_server_set_shuffle_mode_cmd_received_cb()
-/// @see mc_server_send_cmd_reply()
+/// **Preconditions:**
+/// - mc_server_set_shuffle_mode_cmd_received_cb()
+///
+/// **See also:**
+/// - `mc_server_set_shuffle_mode_cmd_received_cb()`
+/// - `mc_server_send_cmd_reply()`
+/// @nodoc
 typedef mc_server_shuffle_mode_cmd_received_cb = ffi.Pointer<
     ffi.NativeFunction<mc_server_shuffle_mode_cmd_received_cbFunction>>;
+/// @nodoc
 typedef mc_server_shuffle_mode_cmd_received_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> client_name,
     ffi.Pointer<ffi.Char> request_id,
     ffi.Int32 shuffle_mode,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmc_server_shuffle_mode_cmd_received_cbFunction = void Function(
     ffi.Pointer<ffi.Char> client_name,
     ffi.Pointer<ffi.Char> request_id,
     int shuffle_mode,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the server receives the repeat mode from the client.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+/// Called when the server receives the repeat mode from the client.
 ///
-/// @remarks The callback is called in the dbus event loop.\n
-/// If @a request_id is not null, the server should send the reply to the client with the @a request_id.\n
-/// The @a client_name and @a request_id should not be released by the application. \n
-/// The @a client_name and @a request_id can be used only in the callback. To use outside, make a copy.
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
 ///
-/// @param[in] client_name    The app_id of the media controller client
-/// @param[in] request_id    The request_id of the media controller client
-/// @param[in] repeat_mode    The received repeat mode
-/// @param[in] user_data        The user data passed from the mc_server_set_repeat_mode_cmd_received_cb() function
+/// **Remarks:**
+/// - The callback is called in the dbus event loop.
+/// - If `request_id` is not null, the server should send the reply to the client with the `request_id`.
+/// - The `client_name` and `request_id` should not be released by the application.
+/// - The `client_name` and `request_id` can be used only in the callback. To use outside, make a copy.
 ///
-/// @pre mc_server_set_repeat_mode_cmd_received_cb()
+/// **Parameters:**
+/// - `client_name` (in): The app_id of the media controller client
+/// - `request_id` (in): The request_id of the media controller client
+/// - `repeat_mode` (in): The received repeat mode
+/// - `user_data` (in): The user data passed from the mc_server_set_repeat_mode_cmd_received_cb() function
 ///
-/// @see mc_server_set_repeat_mode_cmd_received_cb()
-/// @see mc_server_send_cmd_reply()
+/// **Preconditions:**
+/// - mc_server_set_repeat_mode_cmd_received_cb()
+///
+/// **See also:**
+/// - `mc_server_set_repeat_mode_cmd_received_cb()`
+/// - `mc_server_send_cmd_reply()`
+/// @nodoc
 typedef mc_server_repeat_mode_cmd_received_cb = ffi
     .Pointer<ffi.NativeFunction<mc_server_repeat_mode_cmd_received_cbFunction>>;
+/// @nodoc
 typedef mc_server_repeat_mode_cmd_received_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> client_name,
     ffi.Pointer<ffi.Char> request_id,
     ffi.Int32 repeat_mode,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmc_server_repeat_mode_cmd_received_cbFunction = void Function(
     ffi.Pointer<ffi.Char> client_name,
     ffi.Pointer<ffi.Char> request_id,
     int repeat_mode,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the Server receives playlist command from the client.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+/// Called when the Server receives playlist command from the client.
 ///
-/// @remarks The callback is called in the dbus event loop. \n
-/// If @a request_id is not null, the server should send the reply to the client with the @a request_id.\n
-/// The @a client_name, @a request_id, @a playlist_name and @a index should not be released by the application. \n
-/// The @a client_name, @a request_id, @a playlist_name and @a index can be used only in the callback. To use outside, make a copy.
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
 ///
-/// @param[in] client_name    The app_id of the media controller client
-/// @param[in] request_id    The request_id of the media controller client
-/// @param[in] playlist_name    The name of the server playlist
-/// @param[in] index    The index of the media in playlist
-/// @param[in] action    The received playback action
-/// @param[in] position    The received playback position (milliseconds)
-/// @param[in] user_data    The user data passed from the mc_server_set_playlist_cmd_received_cb() function
+/// **Remarks:**
+/// - The callback is called in the dbus event loop.
+/// - If `request_id` is not null, the server should send the reply to the client with the `request_id`.
+/// - The `client_name`, `request_id`, `playlist_name` and `index` should not be released by the application.
+/// - The `client_name`, `request_id`, `playlist_name` and `index` can be used only in the callback. To use outside, make a copy.
 ///
-/// @pre mc_server_set_playlist_cmd_received_cb()
+/// **Parameters:**
+/// - `client_name` (in): The app_id of the media controller client
+/// - `request_id` (in): The request_id of the media controller client
+/// - `playlist_name` (in): The name of the server playlist
+/// - `index` (in): The index of the media in playlist
+/// - `action` (in): The received playback action
+/// - `position` (in): The received playback position (milliseconds)
+/// - `user_data` (in): The user data passed from the mc_server_set_playlist_cmd_received_cb() function
 ///
-/// @see mc_server_set_playlist_cmd_received_cb()
-/// @see mc_server_send_cmd_reply()
+/// **Preconditions:**
+/// - mc_server_set_playlist_cmd_received_cb()
+///
+/// **See also:**
+/// - `mc_server_set_playlist_cmd_received_cb()`
+/// - `mc_server_send_cmd_reply()`
+/// @nodoc
 typedef mc_server_playlist_cmd_received_cb = ffi
     .Pointer<ffi.NativeFunction<mc_server_playlist_cmd_received_cbFunction>>;
+/// @nodoc
 typedef mc_server_playlist_cmd_received_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> client_name,
     ffi.Pointer<ffi.Char> request_id,
@@ -7984,6 +10128,7 @@ typedef mc_server_playlist_cmd_received_cbFunction = ffi.Void Function(
     ffi.Int32 action,
     ffi.UnsignedLongLong position,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmc_server_playlist_cmd_received_cbFunction = void Function(
     ffi.Pointer<ffi.Char> client_name,
     ffi.Pointer<ffi.Char> request_id,
@@ -7993,35 +10138,44 @@ typedef Dartmc_server_playlist_cmd_received_cbFunction = void Function(
     int position,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the Server receives custom command from the client.
-/// @details This callback is called when server receives custom command from client.
-/// If you want to reply to the command, call mc_server_send_cmd_reply() function.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+/// Called when the Server receives custom command from the client.
 ///
-/// @remarks The callback is called in the dbus event loop. @a data should be released using bundle_free().\n
-/// If @a request_id is not null, the server should send the reply to the client with the @a request_id.\n
-/// The @a client_name, @a request_id and @a command should not be released by the application. \n
-/// The @a client_name, @a request_id and @a command can be used only in the callback. To use outside, make a copy.
+/// This callback is called when server receives custom command from client. If you want to reply to the command, call mc_server_send_cmd_reply() function.
 ///
-/// @param[in] client_name    The app_id of the media controller client
-/// @param[in] request_id     The id of the command request
-/// @param[in] command    The received command
-/// @param[in] data    The extra data
-/// @param[in] user_data        The user data passed from the mc_server_set_custom_cmd_received_cb() function
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
 ///
-/// @pre mc_server_set_custom_cmd_received_cb()
+/// **Remarks:**
+/// - The callback is called in the dbus event loop. `data` should be released using bundle_free().
+/// - If `request_id` is not null, the server should send the reply to the client with the `request_id`.
+/// - The `client_name`, `request_id` and `command` should not be released by the application.
+/// - The `client_name`, `request_id` and `command` can be used only in the callback. To use outside, make a copy.
 ///
-/// @see mc_server_set_custom_cmd_received_cb()
-/// @see mc_server_unset_custom_cmd_received_cb()
-/// @see mc_server_send_cmd_reply()
+/// **Parameters:**
+/// - `client_name` (in): The app_id of the media controller client
+/// - `request_id` (in): The id of the command request
+/// - `command` (in): The received command
+/// - `data` (in): The extra data
+/// - `user_data` (in): The user data passed from the mc_server_set_custom_cmd_received_cb() function
+///
+/// **Preconditions:**
+/// - mc_server_set_custom_cmd_received_cb()
+///
+/// **See also:**
+/// - `mc_server_set_custom_cmd_received_cb()`
+/// - `mc_server_unset_custom_cmd_received_cb()`
+/// - `mc_server_send_cmd_reply()`
+/// @nodoc
 typedef mc_server_custom_cmd_received_cb
     = ffi.Pointer<ffi.NativeFunction<mc_server_custom_cmd_received_cbFunction>>;
+/// @nodoc
 typedef mc_server_custom_cmd_received_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> client_name,
     ffi.Pointer<ffi.Char> request_id,
     ffi.Pointer<ffi.Char> command,
     ffi.Pointer<bundle.bundle> data,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmc_server_custom_cmd_received_cbFunction = void Function(
     ffi.Pointer<ffi.Char> client_name,
     ffi.Pointer<ffi.Char> request_id,
@@ -8029,147 +10183,192 @@ typedef Dartmc_server_custom_cmd_received_cbFunction = void Function(
     ffi.Pointer<bundle.bundle> data,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the server receives the subtitle and 360 mode command from the client.
-/// @since_tizen 5.5
+/// Called when the server receives the subtitle and 360 mode command from the client.
 ///
-/// @remarks The callback is called in the dbus event loop.\n
-/// If @a request_id is not null, the server should send the reply to the client with the @a request_id.\n
-/// The @a client_name and @a request_id should not be released by the application. \n
-/// The @a client_name and @a request_id can be used only in the callback. To use outside, make a copy.
+/// **Since Tizen:**
+/// - 5.5
 ///
-/// @param[in] client_name    The app_id of the media controller client
-/// @param[in] request_id    The request_id of the media controller client
-/// @param[in] enabled    The received command
-/// @param[in] user_data        The user data passed from the callback function
+/// **Remarks:**
+/// - The callback is called in the dbus event loop.
+/// - If `request_id` is not null, the server should send the reply to the client with the `request_id`.
+/// - The `client_name` and `request_id` should not be released by the application.
+/// - The `client_name` and `request_id` can be used only in the callback. To use outside, make a copy.
 ///
-/// @pre mc_server_set_subtitles_cmd_received_cb() or mc_server_set_360_mode_cmd_received_cb()
+/// **Parameters:**
+/// - `client_name` (in): The app_id of the media controller client
+/// - `request_id` (in): The request_id of the media controller client
+/// - `enabled` (in): The received command
+/// - `user_data` (in): The user data passed from the callback function
 ///
-/// @see mc_server_set_subtitles_cmd_received_cb()
-/// @see mc_server_set_360_mode_cmd_received_cb()
-/// @see mc_server_send_cmd_reply()
+/// **Preconditions:**
+/// - mc_server_set_subtitles_cmd_received_cb() or mc_server_set_360_mode_cmd_received_cb()
+///
+/// **See also:**
+/// - `mc_server_set_subtitles_cmd_received_cb()`
+/// - `mc_server_set_360_mode_cmd_received_cb()`
+/// - `mc_server_send_cmd_reply()`
+/// @nodoc
 typedef mc_server_enable_cmd_received_cb
     = ffi.Pointer<ffi.NativeFunction<mc_server_enable_cmd_received_cbFunction>>;
+/// @nodoc
 typedef mc_server_enable_cmd_received_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> client_name,
     ffi.Pointer<ffi.Char> request_id,
     ffi.Bool enabled,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmc_server_enable_cmd_received_cbFunction = void Function(
     ffi.Pointer<ffi.Char> client_name,
     ffi.Pointer<ffi.Char> request_id,
     bool enabled,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the server receives the display mode command from the client.
-/// @since_tizen 5.5
+/// Called when the server receives the display mode command from the client.
 ///
-/// @remarks The callback is called in the dbus event loop.\n
-/// If @a request_id is not null, the server should send the reply to the client with the @a request_id.\n
-/// The @a client_name and @a request_id should not be released by the application. \n
-/// The @a client_name and @a request_id can be used only in the callback. To use outside, make a copy.
+/// **Since Tizen:**
+/// - 5.5
 ///
-/// @param[in] client_name    The app_id of the media controller client
-/// @param[in] request_id    The request_id of the media controller client
-/// @param[in] mode    The received display mode
-/// @param[in] user_data        The user data passed from the mc_server_set_display_mode_cmd_received_cb() function
+/// **Remarks:**
+/// - The callback is called in the dbus event loop.
+/// - If `request_id` is not null, the server should send the reply to the client with the `request_id`.
+/// - The `client_name` and `request_id` should not be released by the application.
+/// - The `client_name` and `request_id` can be used only in the callback. To use outside, make a copy.
 ///
-/// @pre mc_server_set_display_mode_cmd_received_cb()
+/// **Parameters:**
+/// - `client_name` (in): The app_id of the media controller client
+/// - `request_id` (in): The request_id of the media controller client
+/// - `mode` (in): The received display mode
+/// - `user_data` (in): The user data passed from the mc_server_set_display_mode_cmd_received_cb() function
 ///
-/// @see mc_server_set_display_mode_cmd_received_cb()
-/// @see mc_server_send_cmd_reply()
+/// **Preconditions:**
+/// - mc_server_set_display_mode_cmd_received_cb()
+///
+/// **See also:**
+/// - `mc_server_set_display_mode_cmd_received_cb()`
+/// - `mc_server_send_cmd_reply()`
+/// @nodoc
 typedef mc_server_display_mode_cmd_received_cb = ffi.Pointer<
     ffi.NativeFunction<mc_server_display_mode_cmd_received_cbFunction>>;
+/// @nodoc
 typedef mc_server_display_mode_cmd_received_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> client_name,
     ffi.Pointer<ffi.Char> request_id,
     ffi.Int32 mode,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmc_server_display_mode_cmd_received_cbFunction = void Function(
     ffi.Pointer<ffi.Char> client_name,
     ffi.Pointer<ffi.Char> request_id,
     int mode,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the server receives the display rotation command from the client.
-/// @since_tizen 5.5
+/// Called when the server receives the display rotation command from the client.
 ///
-/// @remarks The callback is called in the dbus event loop.\n
-/// If @a request_id is not null, the server should send the reply to the client with the @a request_id.\n
-/// The @a client_name and @a request_id should not be released by the application. \n
-/// The @a client_name and @a request_id can be used only in the callback. To use outside, make a copy.
+/// **Since Tizen:**
+/// - 5.5
 ///
-/// @param[in] client_name    The app_id of the media controller client
-/// @param[in] request_id    The request_id of the media controller client
-/// @param[in] rotation    The received display rotation
-/// @param[in] user_data        The user data passed from the mc_server_set_display_mode_cmd_received_cb() function
+/// **Remarks:**
+/// - The callback is called in the dbus event loop.
+/// - If `request_id` is not null, the server should send the reply to the client with the `request_id`.
+/// - The `client_name` and `request_id` should not be released by the application.
+/// - The `client_name` and `request_id` can be used only in the callback. To use outside, make a copy.
 ///
-/// @pre mc_server_set_display_rotation_cmd_received_cb()
+/// **Parameters:**
+/// - `client_name` (in): The app_id of the media controller client
+/// - `request_id` (in): The request_id of the media controller client
+/// - `rotation` (in): The received display rotation
+/// - `user_data` (in): The user data passed from the mc_server_set_display_mode_cmd_received_cb() function
 ///
-/// @see mc_server_set_display_rotation_cmd_received_cb()
-/// @see mc_server_send_cmd_reply()
+/// **Preconditions:**
+/// - mc_server_set_display_rotation_cmd_received_cb()
+///
+/// **See also:**
+/// - `mc_server_set_display_rotation_cmd_received_cb()`
+/// - `mc_server_send_cmd_reply()`
+/// @nodoc
 typedef mc_server_display_rotation_cmd_received_cb = ffi.Pointer<
     ffi.NativeFunction<mc_server_display_rotation_cmd_received_cbFunction>>;
+/// @nodoc
 typedef mc_server_display_rotation_cmd_received_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> client_name,
     ffi.Pointer<ffi.Char> request_id,
     ffi.Int32 rotation,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmc_server_display_rotation_cmd_received_cbFunction = void Function(
     ffi.Pointer<ffi.Char> client_name,
     ffi.Pointer<ffi.Char> request_id,
     int rotation,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when requesting the list of created clients.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+/// Called when requesting the list of created clients.
 ///
-/// @remarks The callback is called in the main loop. \n
-/// The @a client_name should not be released by the application. \n
-/// The @a client_name can be used only in the callback. To use outside, make a copy.
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
 ///
-/// @param[in] client_name The app_id of the created media controller client
-/// @param[in] user_data        The user data passed from the mc_client_foreach_server() function
+/// **Remarks:**
+/// - The callback is called in the main loop.
+/// - The `client_name` should not be released by the application.
+/// - The `client_name` can be used only in the callback. To use outside, make a copy.
 ///
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
+/// **Parameters:**
+/// - `client_name` (in): The app_id of the created media controller client
+/// - `user_data` (in): The user data passed from the mc_client_foreach_server() function
 ///
-/// @pre mc_server_foreach_client()
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
 ///
-/// @see mc_server_foreach_client()
+/// **Preconditions:**
+/// - mc_server_foreach_client()
+///
+/// **See also:**
+/// - `mc_server_foreach_client()`
+/// @nodoc
 typedef mc_activated_client_cb
     = ffi.Pointer<ffi.NativeFunction<mc_activated_client_cbFunction>>;
+/// @nodoc
 typedef mc_activated_client_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> client_name, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmc_activated_client_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> client_name, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the result of the event from the client is received.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+/// Called when the result of the event from the client is received.
 ///
-/// @remarks The callback is called in the dbus event loop. @a data should be released using bundle_free(). \n
-/// The @a client_name and @a request_id should not be released by the application. \n
-/// The @a client_name and @a request_id can be used only in the callback. To use outside, make a copy.
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
 ///
-/// @param[in] client_name    The app_id of the media controller client
-/// @param[in] request_id     The id of the event request
-/// @param[in] result_code    The result code of the event, @a mc_result_code_e since 6.0
-/// @param[in] data The extra data
-/// @param[in] user_data        The user data passed from the mc_server_set_event_reply_received_cb() function
+/// **Remarks:**
+/// - The callback is called in the dbus event loop. `data` should be released using bundle_free().
+/// - The `client_name` and `request_id` should not be released by the application.
+/// - The `client_name` and `request_id` can be used only in the callback. To use outside, make a copy.
 ///
-/// @pre mc_server_send_custom_event()
-/// @pre mc_server_set_event_reply_received_cb()
+/// **Parameters:**
+/// - `client_name` (in): The app_id of the media controller client
+/// - `request_id` (in): The id of the event request
+/// - `result_code` (in): The result code of the event, `mc_result_code_e` since 6.0
+/// - `data` (in): The extra data
+/// - `user_data` (in): The user data passed from the mc_server_set_event_reply_received_cb() function
 ///
-/// @see mc_server_send_custom_event()
-/// @see mc_server_set_event_reply_received_cb()
-/// @see mc_server_unset_event_reply_received_cb()
+/// **Preconditions:**
+/// - mc_server_send_custom_event()
+/// - mc_server_set_event_reply_received_cb()
+///
+/// **See also:**
+/// - `mc_server_send_custom_event()`
+/// - `mc_server_set_event_reply_received_cb()`
+/// - `mc_server_unset_event_reply_received_cb()`
+/// @nodoc
 typedef mc_server_event_reply_received_cb = ffi
     .Pointer<ffi.NativeFunction<mc_server_event_reply_received_cbFunction>>;
+/// @nodoc
 typedef mc_server_event_reply_received_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> client_name,
     ffi.Pointer<ffi.Char> request_id,
     ffi.Int result_code,
     ffi.Pointer<bundle.bundle> data,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmc_server_event_reply_received_cbFunction = void Function(
     ffi.Pointer<ffi.Char> client_name,
     ffi.Pointer<ffi.Char> request_id,
@@ -8177,39 +10376,50 @@ typedef Dartmc_server_event_reply_received_cbFunction = void Function(
     ffi.Pointer<bundle.bundle> data,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the Server receives search command from the client.
-/// @details This callback is called when server receives search command from client.
-/// If you want to reply to the command, call mc_server_send_cmd_reply() function.
-/// @since_tizen 5.0
+/// Called when the Server receives search command from the client.
 ///
-/// @remarks The callback is called in the dbus event loop.\n
-/// If @a request_id is not null, the server should send the reply to the client with the @a request_id.\n
-/// The @a client_name, @a request_id and @a search should not be released by the application. \n
-/// The @a client_name and @a request_id can be used only in the callback. To use outside, make a copy.\n
-/// @a search also can be used only in the callback. To use outside, make a copy using mc_search_clone().
+/// This callback is called when server receives search command from client. If you want to reply to the command, call mc_server_send_cmd_reply() function.
 ///
-/// @param[in] client_name    The app_id of the media controller client
-/// @param[in] request_id     The id of the command request
-/// @param[in] search    The handle to search
-/// @param[in] user_data        The user data passed from the mc_server_set_search_cmd_received_cb() function
+/// **Since Tizen:**
+/// - 5.0
 ///
-/// @pre mc_server_set_search_cmd_received_cb()
-/// @see mc_server_set_search_cmd_received_cb()
-/// @see mc_server_unset_search_cmd_received_cb()
-/// @see mc_server_send_cmd_reply()
-/// @see mc_search_foreach_condition()
-/// @see mc_search_clone()
+/// **Remarks:**
+/// - The callback is called in the dbus event loop.
+/// - If `request_id` is not null, the server should send the reply to the client with the `request_id`.
+/// - The `client_name`, `request_id` and `search` should not be released by the application.
+/// - The `client_name` and `request_id` can be used only in the callback. To use outside, make a copy.
+/// - `search` also can be used only in the callback. To use outside, make a copy using mc_search_clone().
+///
+/// **Parameters:**
+/// - `client_name` (in): The app_id of the media controller client
+/// - `request_id` (in): The id of the command request
+/// - `search` (in): The handle to search
+/// - `user_data` (in): The user data passed from the mc_server_set_search_cmd_received_cb() function
+///
+/// **Preconditions:**
+/// - mc_server_set_search_cmd_received_cb()
+///
+/// **See also:**
+/// - `mc_server_set_search_cmd_received_cb()`
+/// - `mc_server_unset_search_cmd_received_cb()`
+/// - `mc_server_send_cmd_reply()`
+/// - `mc_search_foreach_condition()`
+/// - `mc_search_clone()`
+/// @nodoc
 typedef mc_server_search_cmd_received_cb
     = ffi.Pointer<ffi.NativeFunction<mc_server_search_cmd_received_cbFunction>>;
+/// @nodoc
 typedef mc_server_search_cmd_received_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> client_name,
     ffi.Pointer<ffi.Char> request_id,
     mc_search_h search,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmc_server_search_cmd_received_cbFunction = void Function(
     ffi.Pointer<ffi.Char> client_name,
     ffi.Pointer<ffi.Char> request_id,
     mc_search_h search,
     ffi.Pointer<ffi.Void> user_data);
 
+/// @nodoc
 const int MEDIA_CONTROLLER_ERROR_CLASS = -50462720;

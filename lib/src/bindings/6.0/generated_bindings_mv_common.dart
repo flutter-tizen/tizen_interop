@@ -1,3 +1,6 @@
+/// {@category 6.0/tizen}
+library tizen_interop_6_0.mv_common;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'generated_bindings_capi_media_tool.dart' as media_tool;
 
 /// Dart bindings for Tizen mv_common APIs.
+/// {@category 6.0/tizen}
 class Tizen60MvCommon {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,18 +29,28 @@ class Tizen60MvCommon {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates a source handle.
+  /// Creates a source handle.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
-  /// @remarks You must release @a source by using mv_destroy_source().
-  /// @param [out] source    A new handle to the source
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @see mv_destroy_source()
+  /// **Remarks:**
+  /// - You must release `source` by using mv_destroy_source().
+  ///
+  /// **Parameters:**
+  /// - `[out]`: source A new handle to the source
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `mv_destroy_source()`
   int mv_create_source(
     ffi.Pointer<mv_source_h> source,
   ) {
@@ -51,16 +65,24 @@ class Tizen60MvCommon {
   late final _mv_create_source =
       _mv_create_sourcePtr.asFunction<int Function(ffi.Pointer<mv_source_h>)>();
 
-  /// @brief Destroys the source handle and releases all its resources.
+  /// Destroys the source handle and releases all its resources.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
-  /// @param [in] source    The handle to the source to be destroyed
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @see mv_create_source()
+  /// **Parameters:**
+  /// - `[in]`: source The handle to the source to be destroyed
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `mv_create_source()`
   int mv_destroy_source(
     mv_source_h source,
   ) {
@@ -75,24 +97,32 @@ class Tizen60MvCommon {
   late final _mv_destroy_source =
       _mv_destroy_sourcePtr.asFunction<int Function(mv_source_h)>();
 
-  /// @brief Fills the media source based on the media packet.
+  /// Fills the media source based on the media packet.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
-  /// @param [in,out] source          The handle to the source
-  /// @param [in]     media_packet    The handle to the media packet from which
-  /// will be filled the source
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT Not supported format
-  /// @retval #MEDIA_VISION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @pre Create a source handle by calling mv_create_source()
+  /// **Parameters:**
+  /// - `[in,out]`: source The handle to the source
+  /// - `[in]`: media_packet The handle to the media packet from which will be filled the source
   ///
-  /// @see mv_create_source()
-  /// @see mv_destroy_source()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT`: Not supported format
+  /// - `MEDIA_VISION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Create a source handle by calling mv_create_source()
+  ///
+  /// **See also:**
+  /// - `mv_create_source()`
+  /// - `mv_destroy_source()`
   int mv_source_fill_by_media_packet(
     mv_source_h source,
     media_tool.media_packet_h media_packet,
@@ -111,24 +141,33 @@ class Tizen60MvCommon {
       _mv_source_fill_by_media_packetPtr
           .asFunction<int Function(mv_source_h, media_tool.media_packet_h)>();
 
-  /// @brief Fills the media source based on the buffer and metadata.
+  /// Fills the media source based on the buffer and metadata.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
-  /// @param [in,out] source             The handle to the source
-  /// @param [in]     data_buffer        The buffer of image data
-  /// @param [in]     buffer_size        The buffer size
-  /// @param [in]     image_width        The width of image data
-  /// @param [in]     image_height       The height of image data
-  /// @param [in]     image_colorspace   The image colorspace
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @pre Create a source handle by calling mv_create_source()
+  /// **Parameters:**
+  /// - `[in,out]`: source The handle to the source
+  /// - `[in]`: data_buffer The buffer of image data
+  /// - `[in]`: buffer_size The buffer size
+  /// - `[in]`: image_width The width of image data
+  /// - `[in]`: image_height The height of image data
+  /// - `[in]`: image_colorspace The image colorspace
   ///
-  /// @see mv_source_clear()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Create a source handle by calling mv_create_source()
+  ///
+  /// **See also:**
+  /// - `mv_source_clear()`
   int mv_source_fill_by_buffer(
     mv_source_h source,
     ffi.Pointer<ffi.UnsignedChar> data_buffer,
@@ -161,16 +200,24 @@ class Tizen60MvCommon {
           int Function(mv_source_h, ffi.Pointer<ffi.UnsignedChar>, int, int,
               int, int)>();
 
-  /// @brief Clears the buffer of the media source.
+  /// Clears the buffer of the media source.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
-  /// @param [in,out] source    The handle to the source
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @see mv_source_fill_by_buffer()
+  /// **Parameters:**
+  /// - `[in,out]`: source The handle to the source
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `mv_source_fill_by_buffer()`
   int mv_source_clear(
     mv_source_h source,
   ) {
@@ -185,24 +232,33 @@ class Tizen60MvCommon {
   late final _mv_source_clear =
       _mv_source_clearPtr.asFunction<int Function(mv_source_h)>();
 
-  /// @brief Gets buffer of the media source.
+  /// Gets buffer of the media source.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
-  /// @remarks Note that the retrieved buffer will be destroyed when
-  /// mv_destroy_source() or mv_source_clear() function
-  /// is called for the @a source.
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @param [in]    source        The handle to the source
-  /// @param [out]   data_buffer   The buffer of the source
-  /// @param [out]   buffer_size   The size of buffer
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// **Remarks:**
+  /// - Note that the retrieved buffer will be destroyed when
+  /// - mv_destroy_source() or mv_source_clear() function
+  /// - is called for the `source`.
   ///
-  /// @see mv_source_get_width()
-  /// @see mv_source_get_height()
-  /// @see mv_source_get_colorspace()
+  /// **Parameters:**
+  /// - `[in]`: source The handle to the source
+  /// - `[out]`: data_buffer The buffer of the source
+  /// - `[out]`: buffer_size The size of buffer
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `mv_source_get_width()`
+  /// - `mv_source_get_height()`
+  /// - `mv_source_get_colorspace()`
   int mv_source_get_buffer(
     mv_source_h source,
     ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>> data_buffer,
@@ -225,19 +281,27 @@ class Tizen60MvCommon {
       int Function(mv_source_h, ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>>,
           ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Gets height of the media source.
+  /// Gets height of the media source.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
-  /// @param [in]    source         The handle to the source
-  /// @param [out]   image_height   The height of an image in the source
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @see mv_source_get_width()
-  /// @see mv_source_get_colorspace()
-  /// @see mv_source_get_buffer()
+  /// **Parameters:**
+  /// - `[in]`: source The handle to the source
+  /// - `[out]`: image_height The height of an image in the source
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `mv_source_get_width()`
+  /// - `mv_source_get_colorspace()`
+  /// - `mv_source_get_buffer()`
   int mv_source_get_height(
     mv_source_h source,
     ffi.Pointer<ffi.UnsignedInt> image_height,
@@ -255,19 +319,27 @@ class Tizen60MvCommon {
   late final _mv_source_get_height = _mv_source_get_heightPtr
       .asFunction<int Function(mv_source_h, ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Gets width of the media source.
+  /// Gets width of the media source.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
-  /// @param [in]    source        The handle to the source
-  /// @param [out]   image_width   The width of an image in the source
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @see mv_source_get_height()
-  /// @see mv_source_get_colorspace()
-  /// @see mv_source_get_buffer()
+  /// **Parameters:**
+  /// - `[in]`: source The handle to the source
+  /// - `[out]`: image_width The width of an image in the source
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `mv_source_get_height()`
+  /// - `mv_source_get_colorspace()`
+  /// - `mv_source_get_buffer()`
   int mv_source_get_width(
     mv_source_h source,
     ffi.Pointer<ffi.UnsignedInt> image_width,
@@ -285,19 +357,27 @@ class Tizen60MvCommon {
   late final _mv_source_get_width = _mv_source_get_widthPtr
       .asFunction<int Function(mv_source_h, ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Gets colorspace of the media source.
+  /// Gets colorspace of the media source.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
-  /// @param [in]    source             The handle to the source
-  /// @param [out]   image_colorspace   The colorspace of an image in the source
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @see mv_source_get_width()
-  /// @see mv_source_get_height()
-  /// @see mv_source_get_buffer()
+  /// **Parameters:**
+  /// - `[in]`: source The handle to the source
+  /// - `[out]`: image_colorspace The colorspace of an image in the source
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `mv_source_get_width()`
+  /// - `mv_source_get_height()`
+  /// - `mv_source_get_buffer()`
   int mv_source_get_colorspace(
     mv_source_h source,
     ffi.Pointer<ffi.Int32> image_colorspace,
@@ -315,31 +395,41 @@ class Tizen60MvCommon {
   late final _mv_source_get_colorspace = _mv_source_get_colorspacePtr
       .asFunction<int Function(mv_source_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Creates the handle to the configuration of engine.
+  /// Creates the handle to the configuration of engine.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
-  /// @remarks Available engine configuration attributes can be get by using
-  /// mv_engine_config_foreach_supported_attribute().
-  /// The attributes can be changed by #mv_engine_config_h
-  /// related setters. Default values are used if the attributes
-  /// are not changed.
-  /// @param [out] engine_cfg    The handle to the engine to be created
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @see #mv_engine_config_h
-  /// @see mv_destroy_engine_config()
-  /// @see mv_engine_config_set_double_attribute()
-  /// @see mv_engine_config_set_int_attribute()
-  /// @see mv_engine_config_set_bool_attribute()
-  /// @see mv_engine_config_set_string_attribute()
-  /// @see mv_engine_config_get_double_attribute()
-  /// @see mv_engine_config_get_int_attribute()
-  /// @see mv_engine_config_get_bool_attribute()
-  /// @see mv_engine_config_get_string_attribute()
+  /// **Remarks:**
+  /// - Available engine configuration attributes can be get by using
+  /// - mv_engine_config_foreach_supported_attribute().
+  /// - The attributes can be changed by `mv_engine_config_h`
+  /// - related setters. Default values are used if the attributes
+  /// - are not changed.
+  ///
+  /// **Parameters:**
+  /// - `[out]`: engine_cfg The handle to the engine to be created
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `mv_engine_config_h`
+  /// - `mv_destroy_engine_config()`
+  /// - `mv_engine_config_set_double_attribute()`
+  /// - `mv_engine_config_set_int_attribute()`
+  /// - `mv_engine_config_set_bool_attribute()`
+  /// - `mv_engine_config_set_string_attribute()`
+  /// - `mv_engine_config_get_double_attribute()`
+  /// - `mv_engine_config_get_int_attribute()`
+  /// - `mv_engine_config_get_bool_attribute()`
+  /// - `mv_engine_config_get_string_attribute()`
   int mv_create_engine_config(
     ffi.Pointer<mv_engine_config_h> engine_cfg,
   ) {
@@ -355,19 +445,25 @@ class Tizen60MvCommon {
   late final _mv_create_engine_config = _mv_create_engine_configPtr
       .asFunction<int Function(ffi.Pointer<mv_engine_config_h>)>();
 
-  /// @brief Destroys the engine configuration handle and releases all its
-  /// resources.
+  /// Destroys the engine configuration handle and releases all its resources.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
-  /// @param [in] engine_cfg    The handle to the engine configuration
-  /// to be destroyed
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @see #mv_engine_config_h
-  /// @see mv_create_engine_config()
+  /// **Parameters:**
+  /// - `[in]`: engine_cfg The handle to the engine configuration to be destroyed
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `mv_engine_config_h`
+  /// - `mv_create_engine_config()`
   int mv_destroy_engine_config(
     mv_engine_config_h engine_cfg,
   ) {
@@ -382,25 +478,30 @@ class Tizen60MvCommon {
   late final _mv_destroy_engine_config = _mv_destroy_engine_configPtr
       .asFunction<int Function(mv_engine_config_h)>();
 
-  /// @brief Sets the double attribute to the configuration.
+  /// Sets the double attribute to the configuration.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
-  /// @param [in] engine_cfg        Engine configuration for which @a value has
-  /// to be set
-  /// @param [in] name              String key of the attribute will be used for
-  /// storing the @a value into configuration
-  /// dictionary
-  /// @param [in] value             The double value of the attribute
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_KEY_NOT_AVAILABLE Attribute key isn't available
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @see mv_engine_config_get_double_attribute()
-  /// @see mv_engine_config_set_int_attribute()
-  /// @see mv_engine_config_set_bool_attribute()
-  /// @see mv_engine_config_set_string_attribute()
+  /// **Parameters:**
+  /// - `[in]`: engine_cfg Engine configuration for which `value` has to be set
+  /// - `[in]`: name String key of the attribute will be used for storing the `value` into configuration dictionary
+  /// - `[in]`: value The double value of the attribute
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_KEY_NOT_AVAILABLE`: Attribute key isn't available
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `mv_engine_config_get_double_attribute()`
+  /// - `mv_engine_config_set_int_attribute()`
+  /// - `mv_engine_config_set_bool_attribute()`
+  /// - `mv_engine_config_set_string_attribute()`
   int mv_engine_config_set_double_attribute(
     mv_engine_config_h engine_cfg,
     ffi.Pointer<ffi.Char> name,
@@ -421,27 +522,32 @@ class Tizen60MvCommon {
       _mv_engine_config_set_double_attributePtr.asFunction<
           int Function(mv_engine_config_h, ffi.Pointer<ffi.Char>, double)>();
 
-  /// @brief Sets the integer attribute to the configuration.
+  /// Sets the integer attribute to the configuration.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
-  /// @param [in] engine_cfg        Engine configuration for which @a value has
-  /// to be set
-  /// @param [in] name              String key of the attribute will be used for
-  /// storing the @a value into configuration
-  /// dictionary
-  /// @param [in] value             The integer value of the attribute
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_KEY_NOT_AVAILABLE Attribute key isn't available
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @see mv_engine_config_get_int_attribute()
-  /// @see mv_engine_config_set_double_attribute()
-  /// @see mv_engine_config_set_bool_attribute()
-  /// @see mv_engine_config_set_string_attribute()
-  /// @see mv_barcode_detect_attr_target_e
-  /// @see mv_barcode_generate_attr_text_e
+  /// **Parameters:**
+  /// - `[in]`: engine_cfg Engine configuration for which `value` has to be set
+  /// - `[in]`: name String key of the attribute will be used for storing the `value` into configuration dictionary
+  /// - `[in]`: value The integer value of the attribute
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_KEY_NOT_AVAILABLE`: Attribute key isn't available
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `mv_engine_config_get_int_attribute()`
+  /// - `mv_engine_config_set_double_attribute()`
+  /// - `mv_engine_config_set_bool_attribute()`
+  /// - `mv_engine_config_set_string_attribute()`
+  /// - `mv_barcode_detect_attr_target_e`
+  /// - `mv_barcode_generate_attr_text_e`
   int mv_engine_config_set_int_attribute(
     mv_engine_config_h engine_cfg,
     ffi.Pointer<ffi.Char> name,
@@ -462,25 +568,30 @@ class Tizen60MvCommon {
       _mv_engine_config_set_int_attributePtr.asFunction<
           int Function(mv_engine_config_h, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @brief Sets the boolean attribute to the configuration.
+  /// Sets the boolean attribute to the configuration.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
-  /// @param [in] engine_cfg        Engine configuration for which @a value has
-  /// to be set
-  /// @param [in] name              String key of the attribute will be used for
-  /// storing the @a value into configuration
-  /// dictionary
-  /// @param [in] value             The boolean value of the attribute
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_KEY_NOT_AVAILABLE Attribute key isn't available
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @see mv_engine_config_get_bool_attribute()
-  /// @see mv_engine_config_set_double_attribute()
-  /// @see mv_engine_config_set_int_attribute()
-  /// @see mv_engine_config_set_string_attribute()
+  /// **Parameters:**
+  /// - `[in]`: engine_cfg Engine configuration for which `value` has to be set
+  /// - `[in]`: name String key of the attribute will be used for storing the `value` into configuration dictionary
+  /// - `[in]`: value The boolean value of the attribute
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_KEY_NOT_AVAILABLE`: Attribute key isn't available
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `mv_engine_config_get_bool_attribute()`
+  /// - `mv_engine_config_set_double_attribute()`
+  /// - `mv_engine_config_set_int_attribute()`
+  /// - `mv_engine_config_set_string_attribute()`
   int mv_engine_config_set_bool_attribute(
     mv_engine_config_h engine_cfg,
     ffi.Pointer<ffi.Char> name,
@@ -501,25 +612,30 @@ class Tizen60MvCommon {
       _mv_engine_config_set_bool_attributePtr.asFunction<
           int Function(mv_engine_config_h, ffi.Pointer<ffi.Char>, bool)>();
 
-  /// @brief Sets the string attribute to the configuration.
+  /// Sets the string attribute to the configuration.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
-  /// @param [in] engine_cfg        Engine configuration for which @a value has
-  /// to be set
-  /// @param [in] name              String key of the attribute will be used for
-  /// storing the @a value into configuration
-  /// dictionary
-  /// @param [in] value             The string value of the attribute
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_KEY_NOT_AVAILABLE Attribute key isn't available
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @see mv_engine_config_get_string_attribute()
-  /// @see mv_engine_config_set_double_attribute()
-  /// @see mv_engine_config_set_int_attribute()
-  /// @see mv_engine_config_set_bool_attribute()
+  /// **Parameters:**
+  /// - `[in]`: engine_cfg Engine configuration for which `value` has to be set
+  /// - `[in]`: name String key of the attribute will be used for storing the `value` into configuration dictionary
+  /// - `[in]`: value The string value of the attribute
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_KEY_NOT_AVAILABLE`: Attribute key isn't available
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `mv_engine_config_get_string_attribute()`
+  /// - `mv_engine_config_set_double_attribute()`
+  /// - `mv_engine_config_set_int_attribute()`
+  /// - `mv_engine_config_set_bool_attribute()`
   int mv_engine_config_set_string_attribute(
     mv_engine_config_h engine_cfg,
     ffi.Pointer<ffi.Char> name,
@@ -541,23 +657,28 @@ class Tizen60MvCommon {
           int Function(mv_engine_config_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the array of string attribute to the configuration.
+  /// Sets the array of string attribute to the configuration.
   ///
-  /// @since_tizen 5.5
-  /// @param [in] engine_cfg        Engine configuration for which @a values have
-  /// to be set
-  /// @param [in] name              String key of the attribute will be used for
-  /// storing the @a values into configuration
-  /// dictionary
-  /// @param [in] values            The string values of the attribute
-  /// @param [in] size              The number of string @a values
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_KEY_NOT_AVAILABLE Attribute key isn't available
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @see mv_engine_config_get_array_string_attribute()
+  /// **Parameters:**
+  /// - `[in]`: engine_cfg Engine configuration for which `values` have to be set
+  /// - `[in]`: name String key of the attribute will be used for storing the `values` into configuration dictionary
+  /// - `[in]`: values The string values of the attribute
+  /// - `[in]`: size The number of string `values`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_KEY_NOT_AVAILABLE`: Attribute key isn't available
+  ///
+  /// **See also:**
+  /// - `mv_engine_config_get_array_string_attribute()`
   int mv_engine_config_set_array_string_attribute(
     mv_engine_config_h engine_cfg,
     ffi.Pointer<ffi.Char> name,
@@ -584,26 +705,30 @@ class Tizen60MvCommon {
           int Function(mv_engine_config_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>, int)>();
 
-  /// @brief Gets the double attribute from the configuration dictionary.
+  /// Gets the double attribute from the configuration dictionary.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
-  /// @param [in] engine_cfg        Engine configuration from which @a value
-  /// has to be gotten
-  /// @param [in] name              String key of the attribute will be used for
-  /// getting the @a value from the
-  /// configuration dictionary
-  /// @param [out] value            The attribute to be filled with double value
-  /// from dictionary
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_KEY_NOT_AVAILABLE Attribute key isn't available
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @see mv_engine_config_set_double_attribute()
-  /// @see mv_engine_config_get_int_attribute()
-  /// @see mv_engine_config_get_bool_attribute()
-  /// @see mv_engine_config_get_string_attribute()
+  /// **Parameters:**
+  /// - `[in]`: engine_cfg Engine configuration from which `value` has to be gotten
+  /// - `[in]`: name String key of the attribute will be used for getting the `value` from the configuration dictionary
+  /// - `[out]`: value The attribute to be filled with double value from dictionary
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_KEY_NOT_AVAILABLE`: Attribute key isn't available
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `mv_engine_config_set_double_attribute()`
+  /// - `mv_engine_config_get_int_attribute()`
+  /// - `mv_engine_config_get_bool_attribute()`
+  /// - `mv_engine_config_get_string_attribute()`
   int mv_engine_config_get_double_attribute(
     mv_engine_config_h engine_cfg,
     ffi.Pointer<ffi.Char> name,
@@ -626,28 +751,32 @@ class Tizen60MvCommon {
           int Function(mv_engine_config_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Double>)>();
 
-  /// @brief Gets the integer attribute from the configuration dictionary.
+  /// Gets the integer attribute from the configuration dictionary.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
-  /// @param [in] engine_cfg        Engine configuration from which @a value
-  /// has to be gotten
-  /// @param [in] name              String key of the attribute will be used for
-  /// getting the @a value from the
-  /// configuration dictionary
-  /// @param [out] value            The attribute to be filled with integer value
-  /// from dictionary
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_KEY_NOT_AVAILABLE Attribute key isn't available
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @see mv_engine_config_set_int_attribute()
-  /// @see mv_engine_config_get_double_attribute()
-  /// @see mv_engine_config_get_bool_attribute()
-  /// @see mv_engine_config_get_string_attribute()
-  /// @see mv_barcode_detect_attr_target_e
-  /// @see mv_barcode_generate_attr_text_e
+  /// **Parameters:**
+  /// - `[in]`: engine_cfg Engine configuration from which `value` has to be gotten
+  /// - `[in]`: name String key of the attribute will be used for getting the `value` from the configuration dictionary
+  /// - `[out]`: value The attribute to be filled with integer value from dictionary
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_KEY_NOT_AVAILABLE`: Attribute key isn't available
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `mv_engine_config_set_int_attribute()`
+  /// - `mv_engine_config_get_double_attribute()`
+  /// - `mv_engine_config_get_bool_attribute()`
+  /// - `mv_engine_config_get_string_attribute()`
+  /// - `mv_barcode_detect_attr_target_e`
+  /// - `mv_barcode_generate_attr_text_e`
   int mv_engine_config_get_int_attribute(
     mv_engine_config_h engine_cfg,
     ffi.Pointer<ffi.Char> name,
@@ -669,26 +798,30 @@ class Tizen60MvCommon {
           int Function(mv_engine_config_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the boolean attribute from the configuration dictionary.
+  /// Gets the boolean attribute from the configuration dictionary.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
-  /// @param [in] engine_cfg        Engine configuration from which @a value
-  /// has to be gotten
-  /// @param [in] name              String key of the attribute will be used for
-  /// getting the @a value from the
-  /// configuration dictionary
-  /// @param [out] value            The attribute to be filled with boolean value
-  /// from dictionary
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_KEY_NOT_AVAILABLE Attribute key isn't available
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @see mv_engine_config_set_bool_attribute()
-  /// @see mv_engine_config_get_double_attribute()
-  /// @see mv_engine_config_get_int_attribute()
-  /// @see mv_engine_config_get_string_attribute()
+  /// **Parameters:**
+  /// - `[in]`: engine_cfg Engine configuration from which `value` has to be gotten
+  /// - `[in]`: name String key of the attribute will be used for getting the `value` from the configuration dictionary
+  /// - `[out]`: value The attribute to be filled with boolean value from dictionary
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_KEY_NOT_AVAILABLE`: Attribute key isn't available
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `mv_engine_config_set_bool_attribute()`
+  /// - `mv_engine_config_get_double_attribute()`
+  /// - `mv_engine_config_get_int_attribute()`
+  /// - `mv_engine_config_get_string_attribute()`
   int mv_engine_config_get_bool_attribute(
     mv_engine_config_h engine_cfg,
     ffi.Pointer<ffi.Char> name,
@@ -710,28 +843,34 @@ class Tizen60MvCommon {
           int Function(mv_engine_config_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets the string attribute from the configuration dictionary.
+  /// Gets the string attribute from the configuration dictionary.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
-  /// @remarks Function allocates memory required for output @a value, so
-  /// it has to be removed by the user himself.
-  /// @param [in] engine_cfg        Engine configuration from which @a value
-  /// has to be gotten
-  /// @param [in] name              String key of the attribute will be used for
-  /// getting the @a value from the
-  /// configuration dictionary
-  /// @param [out] value            The attribute to be filled with string value
-  /// from dictionary
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_KEY_NOT_AVAILABLE Attribute key isn't available
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @see mv_engine_config_set_string_attribute()
-  /// @see mv_engine_config_get_double_attribute()
-  /// @see mv_engine_config_get_int_attribute()
-  /// @see mv_engine_config_get_bool_attribute()
+  /// **Remarks:**
+  /// - Function allocates memory required for output `value`, so
+  /// - it has to be removed by the user himself.
+  ///
+  /// **Parameters:**
+  /// - `[in]`: engine_cfg Engine configuration from which `value` has to be gotten
+  /// - `[in]`: name String key of the attribute will be used for getting the `value` from the configuration dictionary
+  /// - `[out]`: value The attribute to be filled with string value from dictionary
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_KEY_NOT_AVAILABLE`: Attribute key isn't available
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `mv_engine_config_set_string_attribute()`
+  /// - `mv_engine_config_get_double_attribute()`
+  /// - `mv_engine_config_get_int_attribute()`
+  /// - `mv_engine_config_get_bool_attribute()`
   int mv_engine_config_get_string_attribute(
     mv_engine_config_h engine_cfg,
     ffi.Pointer<ffi.Char> name,
@@ -754,26 +893,32 @@ class Tizen60MvCommon {
           int Function(mv_engine_config_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the array of string attribute from the configuration dictionary.
+  /// Gets the array of string attribute from the configuration dictionary.
   ///
-  /// @since_tizen 5.5
-  /// @remarks Each element in the @a values array should be released using free(),
-  /// then the array itself should be released using free().
-  /// @param [in] engine_cfg        Engine configuration from which @a values
-  /// should be obtained.
-  /// @param [in] name              String key of the attribute which will be used
-  /// for getting the @a values from the
-  /// configuration dictionary
-  /// @param [out] values           The attribute to be filled with the array of
-  /// string value from dictionary
-  /// @param [out] size			 The number of elements in @a values
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_KEY_NOT_AVAILABLE Attribute key isn't available
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @see mv_engine_config_set_array_string_attribute()
+  /// **Remarks:**
+  /// - Each element in the `values` array should be released using free(),
+  /// - then the array itself should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `[in]`: engine_cfg Engine configuration from which `values` should be obtained.
+  /// - `[in]`: name String key of the attribute which will be used for getting the `values` from the configuration dictionary
+  /// - `[out]`: values The attribute to be filled with the array of string value from dictionary
+  /// - `[out]`: size The number of elements in `values`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_KEY_NOT_AVAILABLE`: Attribute key isn't available
+  ///
+  /// **See also:**
+  /// - `mv_engine_config_set_array_string_attribute()`
   int mv_engine_config_get_array_string_attribute(
     mv_engine_config_h engine_cfg,
     ffi.Pointer<ffi.Char> name,
@@ -804,41 +949,50 @@ class Tizen60MvCommon {
               ffi.Pointer<ffi.Pointer<ffi.Pointer<ffi.Char>>>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Traverses the list of supported attribute names and types.
-  /// @details Using this function names of supported attributes can be obtained.
-  /// Names of the attributes can be used with #mv_engine_config_h
-  /// related getters and setters to get/set appropriate attribute values.
+  /// Traverses the list of supported attribute names and types.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
-  /// @remarks If @a callback is called zero times after
-  /// mv_engine_config_foreach_supported_attribute() call, then
-  /// engine configuration is not supported and setting of attributes will
-  /// cause no effect. In this case for all Media Vision functions which
-  /// require #mv_engine_config_h handle as in parameter this
-  /// parameter can be set NULL.
-  /// @remarks If @a callback is called at least once, then attribute names and
-  /// types obtained in the mv_supported_attribute_cb() callback can be
-  /// changed after #mv_engine_config_h handle creation (with
-  /// mv_create_engine_config() function) by corresponding setters.
-  /// Although, if attributes aren't changed by setters, then default
-  /// values will be used.\n
-  /// Changing of attribute values will affect internal functionality
-  /// provided by concrete library underlying Media Vision API.
-  /// @param [in] callback     The iteration callback function
-  /// @param [in] user_data    The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NO_DATA Can't determine list of supported attributes
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// Using this function names of supported attributes can be obtained. Names of the attributes can be used with `mv_engine_config_h` related getters and setters to get/set appropriate attribute values.
   ///
-  /// @see mv_engine_config_set_double_attribute()
-  /// @see mv_engine_config_set_int_attribute()
-  /// @see mv_engine_config_set_bool_attribute()
-  /// @see mv_engine_config_set_string_attribute()
-  /// @see mv_engine_config_get_double_attribute()
-  /// @see mv_engine_config_get_int_attribute()
-  /// @see mv_engine_config_get_bool_attribute()
-  /// @see mv_engine_config_get_string_attribute()
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
+  ///
+  /// **Remarks:**
+  /// - If `callback` is called zero times after
+  /// - mv_engine_config_foreach_supported_attribute() call, then
+  /// - engine configuration is not supported and setting of attributes will
+  /// - cause no effect. In this case for all Media Vision functions which
+  /// - require `mv_engine_config_h` handle as in parameter this
+  /// - parameter can be set NULL.
+  /// - If `callback` is called at least once, then attribute names and
+  /// - types obtained in the mv_supported_attribute_cb() callback can be
+  /// - changed after `mv_engine_config_h` handle creation (with
+  /// - mv_create_engine_config() function) by corresponding setters.
+  /// - Although, if attributes aren't changed by setters, then default
+  /// - values will be used.
+  /// - Changing of attribute values will affect internal functionality
+  /// - provided by concrete library underlying Media Vision API.
+  ///
+  /// **Parameters:**
+  /// - `[in]`: callback The iteration callback function
+  /// - `[in]`: user_data The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NO_DATA`: Can't determine list of supported attributes
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `mv_engine_config_set_double_attribute()`
+  /// - `mv_engine_config_set_int_attribute()`
+  /// - `mv_engine_config_set_bool_attribute()`
+  /// - `mv_engine_config_set_string_attribute()`
+  /// - `mv_engine_config_get_double_attribute()`
+  /// - `mv_engine_config_get_int_attribute()`
+  /// - `mv_engine_config_get_bool_attribute()`
+  /// - `mv_engine_config_get_string_attribute()`
   int mv_engine_config_foreach_supported_attribute(
     mv_supported_attribute_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -859,9 +1013,11 @@ class Tizen60MvCommon {
           int Function(mv_supported_attribute_cb, ffi.Pointer<ffi.Void>)>();
 }
 
-/// @brief Point in 2D space.
+/// Point in 2D space.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
+/// @nodoc
 final class mv_point_s extends ffi.Struct {
   /// < X-axis coordinate of the point in 2D space
   @ffi.Int()
@@ -872,9 +1028,11 @@ final class mv_point_s extends ffi.Struct {
   external int y;
 }
 
-/// @brief Location of the object bounded by quadrangle defined by four 2D points.
+/// Location of the object bounded by quadrangle defined by four 2D points.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
+/// @nodoc
 final class mv_quadrangle_s extends ffi.Struct {
   /// < Four points that define object bounding
   /// quadrangle
@@ -882,10 +1040,11 @@ final class mv_quadrangle_s extends ffi.Struct {
   external ffi.Array<mv_point_s> points;
 }
 
-/// @brief Location of the object bounded by rectangle defined by
-/// coordinates of top left corner, width and height.
+/// Location of the object bounded by rectangle defined by coordinates of top left corner, width and height.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
+/// @nodoc
 final class mv_rectangle_s extends ffi.Struct {
   /// < Top left corner of rectangle coordinates
   external mv_point_s point;
@@ -899,9 +1058,11 @@ final class mv_rectangle_s extends ffi.Struct {
   external int height;
 }
 
-/// @brief Enumeration for Media Vision error.
+/// Enumeration for Media Vision error.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
+/// @nodoc
 abstract class mv_error_e {
   static const int MEDIA_VISION_ERROR_NONE = 0;
   static const int MEDIA_VISION_ERROR_NOT_SUPPORTED = -1073741822;
@@ -919,10 +1080,11 @@ abstract class mv_error_e {
   static const int MEDIA_VISION_ERROR_NOT_SUPPORTED_ENGINE = -27066363;
 }
 
-/// @brief Enumeration for Media Vision #mv_engine_config_h handle attribute
-/// type.
+/// Enumeration for Media Vision `mv_engine_config_h` handle attribute type.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
+/// @nodoc
 abstract class mv_config_attribute_type_e {
   /// < Double attribute type
   static const int MV_ENGINE_CONFIG_ATTR_TYPE_DOUBLE = 0;
@@ -940,9 +1102,11 @@ abstract class mv_config_attribute_type_e {
   static const int MV_ENGINE_CONFIG_ATTR_TYPE_ARRAY_STRING = 4;
 }
 
-/// @brief Enumeration for Media Vision colorspace.
+/// Enumeration for Media Vision colorspace.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
+/// @nodoc
 abstract class mv_colorspace_e {
   /// < The colorspace type is invalid
   static const int MEDIA_VISION_COLORSPACE_INVALID = 0;
@@ -981,48 +1145,53 @@ abstract class mv_colorspace_e {
   static const int MEDIA_VISION_COLORSPACE_RGBA = 11;
 }
 
-/// @brief The handle to the source.
+/// The handle to the source.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
+/// @nodoc
 typedef mv_source_h = ffi.Pointer<ffi.Void>;
 
-/// @brief The handle to the Media Vision API engine algorithms configuration.
-/// @details Configuration is a dictionary consists of key and value pairs to
-/// collect engine-specific settings and allow Media Vision module to
-/// access them internally. Engine configuration provides developer by
-/// the possibility to make computer vision algorithms work better
-/// in particular conditions of API usage. To create engine
-/// configuration handle mv_create_engine_config() function has to
-/// be used. When configuration is not needed any more, it is required to
-/// destroy it and release resources by mv_destroy_engine_config()
-/// function.
+/// The handle to the Media Vision API engine algorithms configuration.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// Configuration is a dictionary consists of key and value pairs to collect engine-specific settings and allow Media Vision module to access them internally. Engine configuration provides developer by the possibility to make computer vision algorithms work better in particular conditions of API usage. To create engine configuration handle mv_create_engine_config() function has to be used. When configuration is not needed any more, it is required to destroy it and release resources by mv_destroy_engine_config() function.
 ///
-/// @see mv_create_engine_config()
-/// @see mv_destroy_engine_config()
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
+///
+/// **See also:**
+/// - `mv_create_engine_config()`
+/// - `mv_destroy_engine_config()`
+/// @nodoc
 typedef mv_engine_config_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called to get information (type and name) once for each supported
-/// attribute.
+/// Called to get information (type and name) once for each supported attribute.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
-/// @param [in] attribute_type    The supported attribute type
-/// @param [in] attribute_name    The supported attribute name
-/// @param [in] user_data         The user data passed from the
-/// mv_engine_config_foreach_supported_attribute()
-/// function
-/// @return @c true to continue with the next iteration of the loop, \n
-/// otherwise @c false to break out of the loop
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
 ///
-/// @pre mv_engine_config_foreach_supported_attribute() will invoke this callback
-/// @see mv_engine_config_foreach_supported_attribute()
+/// **Parameters:**
+/// - `[in]`: attribute_type The supported attribute type
+/// - `[in]`: attribute_name The supported attribute name
+/// - `[in]`: user_data The user data passed from the mv_engine_config_foreach_supported_attribute() function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - mv_engine_config_foreach_supported_attribute() will invoke this callback
+///
+/// **See also:**
+/// - `mv_engine_config_foreach_supported_attribute()`
+/// @nodoc
 typedef mv_supported_attribute_cb
     = ffi.Pointer<ffi.NativeFunction<mv_supported_attribute_cbFunction>>;
+/// @nodoc
 typedef mv_supported_attribute_cbFunction = ffi.Bool Function(
     ffi.Int32 attribute_type,
     ffi.Pointer<ffi.Char> attribute_name,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmv_supported_attribute_cbFunction = bool Function(
     int attribute_type,
     ffi.Pointer<ffi.Char> attribute_name,

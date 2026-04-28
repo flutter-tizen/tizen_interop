@@ -1,3 +1,6 @@
+/// {@category 8.0/tizen}
+library tizen_interop_8_0.ttrace;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen ttrace APIs.
+/// {@category 8.0/tizen}
 class Tizen80Ttrace {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,14 +28,23 @@ class Tizen80Ttrace {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Writes a trace event to indicate that a synchronous event has begun.
+  /// Writes a trace event to indicate that a synchronous event has begun.
   ///
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 2.3.2 @endif
-  /// @remarks The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
-  /// @param[in] name The name of event (optionally containing format specifiers)
-  /// @exception #TRACE_ERROR_NONE	Success
-  /// @exception #TRACE_ERROR_IO_ERROR	I/O error
-  /// @see trace_end()
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 2.3.2
+  ///
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
+  ///
+  /// **Parameters:**
+  /// - `name` (in): The name of event (optionally containing format specifiers)
+  ///
+  /// **Exceptions:**
+  /// - `TRACE_ERROR_NONE`: Success
+  /// - `TRACE_ERROR_IO_ERROR`: I/O error
+  ///
+  /// **See also:**
+  /// - `trace_end()`
   void trace_begin(
     ffi.Pointer<ffi.Char> name,
   ) {
@@ -46,14 +59,21 @@ class Tizen80Ttrace {
   late final _trace_begin =
       _trace_beginPtr.asFunction<void Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Writes a trace event to indicate that the synchronous event has ended.
+  /// Writes a trace event to indicate that the synchronous event has ended.
   ///
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 2.3.2 @endif
-  /// @remarks trace_end() ends the most recently called trace_begin().
-  /// @remarks The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
-  /// @exception #TRACE_ERROR_NONE  Success
-  /// @exception #TRACE_ERROR_IO_ERROR      I/O error
-  /// @see trace_begin()
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 2.3.2
+  ///
+  /// **Remarks:**
+  /// - trace_end() ends the most recently called trace_begin().
+  /// - The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
+  ///
+  /// **Exceptions:**
+  /// - `TRACE_ERROR_NONE`: Success
+  /// - `TRACE_ERROR_IO_ERROR`: I/O error
+  ///
+  /// **See also:**
+  /// - `trace_begin()`
   void trace_end() {
     return _trace_end();
   }
@@ -62,15 +82,24 @@ class Tizen80Ttrace {
       _lookup<ffi.NativeFunction<ffi.Void Function()>>('trace_end');
   late final _trace_end = _trace_endPtr.asFunction<void Function()>();
 
-  /// @brief Writes a trace event to indicate that an asynchronous event has begun.
+  /// Writes a trace event to indicate that an asynchronous event has begun.
   ///
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 2.3.2 @endif
-  /// @remarks The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
-  /// @param[in] cookie An unique identifier for distinguishing simultaneous events
-  /// @param[in] name The name of event (optionally containing format specifiers)
-  /// @exception #TRACE_ERROR_NONE	Success
-  /// @exception #TRACE_ERROR_IO_ERROR	I/O error
-  /// @see trace_async_end()
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 2.3.2
+  ///
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
+  ///
+  /// **Parameters:**
+  /// - `cookie` (in): An unique identifier for distinguishing simultaneous events
+  /// - `name` (in): The name of event (optionally containing format specifiers)
+  ///
+  /// **Exceptions:**
+  /// - `TRACE_ERROR_NONE`: Success
+  /// - `TRACE_ERROR_IO_ERROR`: I/O error
+  ///
+  /// **See also:**
+  /// - `trace_async_end()`
   void trace_async_begin(
     int cookie,
     ffi.Pointer<ffi.Char> name,
@@ -88,16 +117,25 @@ class Tizen80Ttrace {
   late final _trace_async_begin = _trace_async_beginPtr
       .asFunction<void Function(int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Writes a trace event to indicate that the asynchronous event has ended.
+  /// Writes a trace event to indicate that the asynchronous event has ended.
   ///
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 2.3.2 @endif
-  /// @remarks trace_async_end() ends matched trace_async_begin() which has same cookie and name.
-  /// @remarks The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
-  /// @param[in] cookie An unique identifier for distinguishing simultaneous events
-  /// @param[in] name The name of event (optionally containing format specifiers)
-  /// @exception #TRACE_ERROR_NONE  Success
-  /// @exception #TRACE_ERROR_IO_ERROR      I/O error
-  /// @see trace_async_begin()
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 2.3.2
+  ///
+  /// **Remarks:**
+  /// - trace_async_end() ends matched trace_async_begin() which has same cookie and name.
+  /// - The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
+  ///
+  /// **Parameters:**
+  /// - `cookie` (in): An unique identifier for distinguishing simultaneous events
+  /// - `name` (in): The name of event (optionally containing format specifiers)
+  ///
+  /// **Exceptions:**
+  /// - `TRACE_ERROR_NONE`: Success
+  /// - `TRACE_ERROR_IO_ERROR`: I/O error
+  ///
+  /// **See also:**
+  /// - `trace_async_begin()`
   void trace_async_end(
     int cookie,
     ffi.Pointer<ffi.Char> name,
@@ -115,14 +153,21 @@ class Tizen80Ttrace {
   late final _trace_async_end = _trace_async_endPtr
       .asFunction<void Function(int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Writes a trace event to track change of integer counter.
+  /// Writes a trace event to track change of integer counter.
   ///
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 2.3.2 @endif
-  /// @remarks The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
-  /// @param[in] value The counter value
-  /// @param[in] name The name of event (optionally containing format specifiers)
-  /// @exception #TRACE_ERROR_NONE  Success
-  /// @exception #TRACE_ERROR_IO_ERROR      I/O error
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 2.3.2
+  ///
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
+  ///
+  /// **Parameters:**
+  /// - `value` (in): The counter value
+  /// - `name` (in): The name of event (optionally containing format specifiers)
+  ///
+  /// **Exceptions:**
+  /// - `TRACE_ERROR_NONE`: Success
+  /// - `TRACE_ERROR_IO_ERROR`: I/O error
   void trace_update_counter(
     int value,
     ffi.Pointer<ffi.Char> name,
@@ -141,8 +186,11 @@ class Tizen80Ttrace {
       .asFunction<void Function(int, ffi.Pointer<ffi.Char>)>();
 }
 
-/// @brief Enumeration for Trace Error.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 2.3.2 @endif
+/// Enumeration for Trace Error.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 2.3.2
+/// @nodoc
 abstract class trace_error_e {
   /// < Successful
   static const int TRACE_ERROR_NONE = 0;

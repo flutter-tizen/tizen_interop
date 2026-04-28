@@ -1,3 +1,6 @@
+/// {@category 10.0/tizen}
+library tizen_interop_10_0.mv_barcode_detector;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'generated_bindings_mv_common.dart' as mv_common;
 
 /// Dart bindings for Tizen mv_barcode_detector APIs.
+/// {@category 10.0/tizen}
 class Tizen100MvBarcodeDetector {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,31 +29,34 @@ class Tizen100MvBarcodeDetector {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Detects barcodes on a given media source and reads the message from the detected barcodes.
-  /// This function processes the specified region of interest (ROI) within the media source to identify barcodes \n
-  /// and provides the results through a callback function.
+  /// Detects barcodes on a given media source and reads the message from the detected barcodes. This function processes the specified region of interest (ROI) within the media source to identify barcodes and provides the results through a callback function.
   ///
-  /// @since_tizen 2.4
-  /// @param [in] source            The media source handle
-  /// @param [in] engine_cfg        The handle to the configuration of the engine
-  /// @param [in] roi               Region of interest - rectangular area on the
-  /// @a source which will be used for barcode detection
-  /// Note that @a roi should be inside area on the
-  /// @a source.
-  /// @param [in] detect_cb         The callback for result handling
-  /// @param [in] user_data    The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT Not supported format
-  /// @retval #MEDIA_VISION_ERROR_INTERNAL Internal error
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @pre Create a source handle by calling mv_create_source()
-  /// @pre Create an engine configuration handle by calling
-  /// mv_create_engine_config(), otherwise use NULL
+  /// **Parameters:**
+  /// - `[in]`: source The media source handle
+  /// - `[in]`: engine_cfg The handle to the configuration of the engine
+  /// - `[in]`: roi Region of interest - rectangular area on the `source` which will be used for barcode detection Note that `roi` should be inside area on the `source`.
+  /// - `[in]`: detect_cb The callback for result handling
+  /// - `[in]`: user_data The user data to be passed to the callback function
   ///
-  /// @see mv_barcode_detected_cb()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT`: Not supported format
+  /// - `MEDIA_VISION_ERROR_INTERNAL`: Internal error
+  ///
+  /// **Preconditions:**
+  /// - Create a source handle by calling mv_create_source()
+  /// - Create an engine configuration handle by calling mv_create_engine_config(), otherwise use NULL
+  ///
+  /// **See also:**
+  /// - `mv_barcode_detected_cb()`
   int mv_barcode_detect(
     mv_common.mv_source_h source,
     mv_common.mv_engine_config_h engine_cfg,
@@ -83,11 +90,16 @@ class Tizen100MvBarcodeDetector {
           ffi.Pointer<ffi.Void>)>();
 }
 
-/// @brief Enumeration for supported barcode types.
-/// @details QR codes (versions 1 to 40) and set of 1D barcodes are supported
+/// Enumeration for supported barcode types.
 ///
-/// @since_tizen 2.4
-/// @remarks #MV_BARCODE_UNDEFINED is deprecated. Use #MV_BARCODE_UNKNOWN instead
+/// QR codes (versions 1 to 40) and set of 1D barcodes are supported
+///
+/// **Since Tizen:**
+/// - 2.4
+///
+/// **Remarks:**
+/// - `MV_BARCODE_UNDEFINED` is deprecated. Use `MV_BARCODE_UNKNOWN` instead
+/// @nodoc
 abstract class mv_barcode_type_e {
   /// < 2D barcode - Quick Response code
   static const int MV_BARCODE_QR = 0;
@@ -138,10 +150,14 @@ abstract class mv_barcode_type_e {
   static const int MV_BARCODE_UNKNOWN = 100;
 }
 
-/// @brief Enumeration for supported QR code error correction level.
+/// Enumeration for supported QR code error correction level.
 ///
-/// @since_tizen 2.4
-/// @remarks This is unavailable for 1D barcodes
+/// **Since Tizen:**
+/// - 2.4
+///
+/// **Remarks:**
+/// - This is unavailable for 1D barcodes
+/// @nodoc
 abstract class mv_barcode_qr_ecc_e {
   /// < Recovery up to  7% losses
   static const int MV_BARCODE_QR_ECC_LOW = 0;
@@ -159,10 +175,14 @@ abstract class mv_barcode_qr_ecc_e {
   static const int MV_BARCODE_QR_ECC_UNAVAILABLE = 4;
 }
 
-/// @brief Enumeration for supported QR code encoding mode.
+/// Enumeration for supported QR code encoding mode.
 ///
-/// @since_tizen 2.4
-/// @remarks This is unavailable for 1D barcodes
+/// **Since Tizen:**
+/// - 2.4
+///
+/// **Remarks:**
+/// - This is unavailable for 1D barcodes
+/// @nodoc
 abstract class mv_barcode_qr_mode_e {
   /// < Numeric digits
   static const int MV_BARCODE_QR_MODE_NUMERIC = 0;
@@ -180,9 +200,11 @@ abstract class mv_barcode_qr_mode_e {
   static const int MV_BARCODE_QR_MODE_UNAVAILABLE = 4;
 }
 
-/// @brief Enumeration for supported image formats for the barcode generating.
+/// Enumeration for supported image formats for the barcode generating.
 ///
-/// @since_tizen 2.4
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class mv_barcode_image_format_e {
   /// < Unavailable image format
   static const int MV_BARCODE_IMAGE_FORMAT_UNAVAILABLE = -1;
@@ -200,9 +222,11 @@ abstract class mv_barcode_image_format_e {
   static const int MV_BARCODE_IMAGE_FORMAT_NUM = 3;
 }
 
-/// @brief Enumeration to target attribute
+/// Enumeration to target attribute
 ///
-/// @since_tizen 2.4
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class mv_barcode_detect_attr_target_e {
   /// < 1D and 2D
   static const int MV_BARCODE_DETECT_ATTR_TARGET_ALL = 0;
@@ -214,15 +238,17 @@ abstract class mv_barcode_detect_attr_target_e {
   static const int MV_BARCODE_DETECT_ATTR_TARGET_2D_BARCODE = 2;
 }
 
-/// @brief Enumeration for rotation direction attribute.
-/// @details Set one of rotation direction, which are:\n
-/// #MV_BARCODE_DETECT_ATTR_ROTATION_CLOCKWISE - clockwise rotation,\n
-/// #MV_BARCODE_DETECT_ATTR_ROTATION_COUNTER_CLOCKWISE - counter clockwise rotation,\n
-/// #MV_BARCODE_DETECT_ATTR_ROTATION_ALL - clockwise and counter clockwise rotation iteratively.\n
+/// Enumeration for rotation direction attribute.
 ///
-/// @since_tizen 6.5
-/// @see #MV_BARCODE_DETECT_ATTR_ROTATION_DIRECTION
-/// @see #MV_BARCODE_DETECT_ATTR_ROTATION_COUNT
+/// Set one of rotation direction, which are: `MV_BARCODE_DETECT_ATTR_ROTATION_CLOCKWISE` - clockwise rotation, `MV_BARCODE_DETECT_ATTR_ROTATION_COUNTER_CLOCKWISE` - counter clockwise rotation, `MV_BARCODE_DETECT_ATTR_ROTATION_ALL` - clockwise and counter clockwise rotation iteratively.
+///
+/// **Since Tizen:**
+/// - 6.5
+///
+/// **See also:**
+/// - `MV_BARCODE_DETECT_ATTR_ROTATION_DIRECTION`
+/// - `MV_BARCODE_DETECT_ATTR_ROTATION_COUNT`
+/// @nodoc
 abstract class mv_barcode_detect_attr_rotation_direction_e {
   /// < Clockwise
   static const int MV_BARCODE_DETECT_ATTR_ROTATION_CLOCKWISE = 0;
@@ -234,25 +260,31 @@ abstract class mv_barcode_detect_attr_rotation_direction_e {
   static const int MV_BARCODE_DETECT_ATTR_ROTATION_ALL = 2;
 }
 
-/// @brief Called when barcode detection is completed.
-/// @details If no barcode is detected then the method will be called, barcodes
-/// and states will be equal to NULL, and @a number_of_barcodes - 0.
+/// Called when barcode detection is completed.
 ///
-/// @since_tizen 2.4
-/// @param [in] source               The handle to the media source
-/// @param [in] engine_cfg           The handle to the configuration of the engine
-/// @param [in] barcode_locations    The quadrangle locations of detected barcodes
-/// @param [in] messages             The decoded messages of barcodes
-/// @param [in] types                The types of detected barcodes
-/// @param [in] number_of_barcodes   The number of detected barcodes
-/// @param [in] user_data            The user data passed from
-/// the mv_barcode_detect() function
+/// If no barcode is detected then the method will be called, barcodes and states will be equal to NULL, and `number_of_barcodes` - 0.
 ///
-/// @pre mv_barcode_detect() invokes this callback
+/// **Since Tizen:**
+/// - 2.4
 ///
-/// @see mv_barcode_detect()
+/// **Parameters:**
+/// - `[in]`: source The handle to the media source
+/// - `[in]`: engine_cfg The handle to the configuration of the engine
+/// - `[in]`: barcode_locations The quadrangle locations of detected barcodes
+/// - `[in]`: messages The decoded messages of barcodes
+/// - `[in]`: types The types of detected barcodes
+/// - `[in]`: number_of_barcodes The number of detected barcodes
+/// - `[in]`: user_data The user data passed from the mv_barcode_detect() function
+///
+/// **Preconditions:**
+/// - mv_barcode_detect() invokes this callback
+///
+/// **See also:**
+/// - `mv_barcode_detect()`
+/// @nodoc
 typedef mv_barcode_detected_cb
     = ffi.Pointer<ffi.NativeFunction<mv_barcode_detected_cbFunction>>;
+/// @nodoc
 typedef mv_barcode_detected_cbFunction = ffi.Void Function(
     mv_common.mv_source_h source,
     mv_common.mv_engine_config_h engine_cfg,
@@ -261,6 +293,7 @@ typedef mv_barcode_detected_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Int32> types,
     ffi.Int number_of_barcodes,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmv_barcode_detected_cbFunction = void Function(
     mv_common.mv_source_h source,
     mv_common.mv_engine_config_h engine_cfg,
@@ -270,16 +303,21 @@ typedef Dartmv_barcode_detected_cbFunction = void Function(
     int number_of_barcodes,
     ffi.Pointer<ffi.Void> user_data);
 
+/// @nodoc
 const String MV_BARCODE_DETECT_ATTR_TARGET = 'MV_BARCODE_DETECT_ATTR_TARGET';
 
+/// @nodoc
 const String MV_BARCODE_DETECT_ATTR_ROTATION_DEGREES =
     'MV_BARCODE_DETECT_ATTR_ROTATION_DEGREES';
 
+/// @nodoc
 const String MV_BARCODE_DETECT_ATTR_ROTATION_COUNT =
     'MV_BARCODE_DETECT_ATTR_ROTATION_COUNT';
 
+/// @nodoc
 const String MV_BARCODE_DETECT_ATTR_ROTATION_DIRECTION =
     'MV_BARCODE_DETECT_ATTR_ROTATION_DIRECTION';
 
+/// @nodoc
 const String MV_BARCODE_DETECT_ATTR_USE_ENHANCEMENT =
     'MV_BARCODE_DETECT_ATTR_USE_ENHANCEMENT';

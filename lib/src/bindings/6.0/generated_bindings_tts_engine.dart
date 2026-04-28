@@ -1,3 +1,6 @@
+/// {@category 6.0/tizen}
+library tizen_interop_6_0.tts_engine;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen tts_engine APIs.
+/// {@category 6.0/tizen}
 class Tizen60TtsEngine {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,21 +28,34 @@ class Tizen60TtsEngine {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Main function for Text-To-Speech (TTS) engine.
-  /// @details This function is the main function for operating TTS engine.
-  /// @since_tizen 3.0
-  /// @remarks The service_app_main() should be used for working the engine after this function.
-  /// @param[in] argc The argument count(original)
-  /// @param[in] argv The argument(original)
-  /// @param[in] callback The structure of engine request callback function
-  /// @return This function returns zero on success,
-  /// or negative with error code on failure
-  /// @retval #TTSE_ERROR_NONE Successful
-  /// @retval #TTSE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTSE_ERROR_OPERATION_FAILED Operation failure
-  /// @retval #TTSE_ERROR_NOT_SUPPORTED Not supported
-  /// @see ttse_request_callback_s
-  /// @code
+  /// Main function for Text-To-Speech (TTS) engine.
+  ///
+  /// This function is the main function for operating TTS engine.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The service_app_main() should be used for working the engine after this function.
+  ///
+  /// **Parameters:**
+  /// - `argc` (in): The argument count(original)
+  /// - `argv` (in): The argument(original)
+  /// - `callback` (in): The structure of engine request callback function
+  ///
+  /// **Returns:**
+  /// - This function returns zero on success, or negative with error code on failure
+  ///
+  /// **Return values:**
+  /// - `TTSE_ERROR_NONE`: Successful
+  /// - `TTSE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTSE_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `TTSE_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `ttse_request_callback_s`
+  ///
+  /// ```
   /// #include <ttse.h>
   ///
   /// // Required callback functions - MUST BE IMPLEMENTED
@@ -104,7 +121,7 @@ class Tizen60TtsEngine {
   /// return service_app_main(argc, argv, &event_callback, ad);
   /// }
   ///
-  /// @endcode
+  /// ```
   int ttse_main(
     int argc,
     ffi.Pointer<ffi.Pointer<ffi.Char>> argv,
@@ -125,18 +142,27 @@ class Tizen60TtsEngine {
       int Function(int, ffi.Pointer<ffi.Pointer<ffi.Char>>,
           ffi.Pointer<ttse_request_callback_s>)>();
 
-  /// @brief Gets the speed range from Tizen platform.
-  /// @since_tizen 3.0
-  /// @remarks This API is used when TTS engine wants to get the speed range from Tizen platform.
-  /// @param[out] min The minimum speed value
-  /// @param[out] normal The normal speed value
-  /// @param[out] max The maximum speed value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTSE_ERROR_NONE Successful
-  /// @retval #TTSE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTSE_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #TTSE_ERROR_OPERATION_FAILED Operation failure
+  /// Gets the speed range from Tizen platform.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - This API is used when TTS engine wants to get the speed range from Tizen platform.
+  ///
+  /// **Parameters:**
+  /// - `min` (out): The minimum speed value
+  /// - `normal` (out): The normal speed value
+  /// - `max` (out): The maximum speed value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTSE_ERROR_NONE`: Successful
+  /// - `TTSE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTSE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `TTSE_ERROR_OPERATION_FAILED`: Operation failure
   int ttse_get_speed_range(
     ffi.Pointer<ffi.Int> min,
     ffi.Pointer<ffi.Int> normal,
@@ -157,18 +183,27 @@ class Tizen60TtsEngine {
       int Function(
           ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the pitch range from Tizen platform.
-  /// @since_tizen 3.0
-  /// @remarks This API is used when TTS engine wants to get the pitch range from Tizen platform.
-  /// @param[out] min The minimum pitch value
-  /// @param[out] normal The normal pitch value
-  /// @param[out] max The maximum pitch value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTSE_ERROR_NONE Successful
-  /// @retval #TTSE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTSE_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #TTSE_ERROR_OPERATION_FAILED Operation failure
+  /// Gets the pitch range from Tizen platform.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - This API is used when TTS engine wants to get the pitch range from Tizen platform.
+  ///
+  /// **Parameters:**
+  /// - `min` (out): The minimum pitch value
+  /// - `normal` (out): The normal pitch value
+  /// - `max` (out): The maximum pitch value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTSE_ERROR_NONE`: Successful
+  /// - `TTSE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTSE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `TTSE_ERROR_OPERATION_FAILED`: Operation failure
   int ttse_get_pitch_range(
     ffi.Pointer<ffi.Int> min,
     ffi.Pointer<ffi.Int> normal,
@@ -189,25 +224,37 @@ class Tizen60TtsEngine {
       int Function(
           ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sends the synthesized result to the engine service user.
-  /// @since_tizen 3.0
-  /// @remarks This API is used in ttse_start_synthesis_cb(), when TTS engine sends the synthesized result to the engine service user.
-  /// The synthesized result and @a user_data must be transferred to the engine service user through this function.
-  /// @param[in] event The result event
-  /// @param[in] data Result data
-  /// @param[in] data_size Result data size
-  /// @param[in] audio_type The audio type
-  /// @param[in] rate The sample rate
-  /// @param[in] user_data The user data passed from ttse_start_synthesis_cb()
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTSE_ERROR_NONE Successful
-  /// @retval #TTSE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTSE_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #TTSE_ERROR_OPERATION_FAILED Operation failure
-  /// @pre The ttse_main() function should be invoked before this function is called.
-  /// ttse_start_synthesis_cb() will invoke this function.
-  /// @see ttse_start_synthesis_cb()
+  /// Sends the synthesized result to the engine service user.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - This API is used in ttse_start_synthesis_cb(), when TTS engine sends the synthesized result to the engine service user.
+  /// - The synthesized result and `user_data` must be transferred to the engine service user through this function.
+  ///
+  /// **Parameters:**
+  /// - `event` (in): The result event
+  /// - `data` (in): Result data
+  /// - `data_size` (in): Result data size
+  /// - `audio_type` (in): The audio type
+  /// - `rate` (in): The sample rate
+  /// - `user_data` (in): The user data passed from ttse_start_synthesis_cb()
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTSE_ERROR_NONE`: Successful
+  /// - `TTSE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTSE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `TTSE_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **Preconditions:**
+  /// - The ttse_main() function should be invoked before this function is called. ttse_start_synthesis_cb() will invoke this function.
+  ///
+  /// **See also:**
+  /// - `ttse_start_synthesis_cb()`
   int ttse_send_result(
     int event,
     ffi.Pointer<ffi.Void> data,
@@ -234,29 +281,28 @@ class Tizen60TtsEngine {
       int Function(
           int, ffi.Pointer<ffi.Void>, int, int, int, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sends the error to the engine service user.
-  /// @details The following error codes can be delivered.
-  /// #TTSE_ERROR_NONE,
-  /// #TTSE_ERROR_OUT_OF_MEMORY,
-  /// #TTSE_ERROR_IO_ERROR,
-  /// #TTSE_ERROR_INVALID_PARAMETER,
-  /// #TTSE_ERROR_NETWORK_DOWN,
-  /// #TTSE_ERROR_PERMISSION_DENIED,
-  /// #TTSE_ERROR_INVALID_STATE,
-  /// #TTSE_ERROR_INVALID_VOICE,
-  /// #TTSE_ERROR_OPERATION_FAILED,
-  /// #TTSE_ERROR_NOT_SUPPORTED_FEATURE,
-  /// #TTSE_ERROR_NOT_SUPPORTED.
-  /// @since_tizen 3.0
-  /// @param[in] error The error reason
-  /// @param[in] msg The error message
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTSE_ERROR_NONE Successful
-  /// @retval #TTSE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTSE_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #TTSE_ERROR_OPERATION_FAILED Operation failure
-  /// @pre The ttse_main() function should be invoked before this function is called.
+  /// Sends the error to the engine service user.
+  ///
+  /// The following error codes can be delivered. `TTSE_ERROR_NONE`, `TTSE_ERROR_OUT_OF_MEMORY`, `TTSE_ERROR_IO_ERROR`, `TTSE_ERROR_INVALID_PARAMETER`, `TTSE_ERROR_NETWORK_DOWN`, `TTSE_ERROR_PERMISSION_DENIED`, `TTSE_ERROR_INVALID_STATE`, `TTSE_ERROR_INVALID_VOICE`, `TTSE_ERROR_OPERATION_FAILED`, `TTSE_ERROR_NOT_SUPPORTED_FEATURE`, `TTSE_ERROR_NOT_SUPPORTED`.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `error` (in): The error reason
+  /// - `msg` (in): The error message
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTSE_ERROR_NONE`: Successful
+  /// - `TTSE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTSE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `TTSE_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **Preconditions:**
+  /// - The ttse_main() function should be invoked before this function is called.
   int ttse_send_error(
     int error,
     ffi.Pointer<ffi.Char> msg,
@@ -274,18 +320,31 @@ class Tizen60TtsEngine {
   late final _ttse_send_error = _ttse_send_errorPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets a callback function for setting the private data.
-  /// @since_tizen 3.0
-  /// @remarks The ttse_private_data_set_cb() function is called when the engine service user sends the private data.
-  /// @param[in] callback_func ttse_private_data_set event callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTSE_ERROR_NONE Successful
-  /// @retval #TTSE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTSE_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #TTSE_ERROR_OPERATION_FAILED Operation failure
-  /// @pre The ttse_main() function should be invoked before this function is called.
-  /// @see ttse_private_data_set_cb()
+  /// Sets a callback function for setting the private data.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The ttse_private_data_set_cb() function is called when the engine service user sends the private data.
+  ///
+  /// **Parameters:**
+  /// - `callback_func` (in): ttse_private_data_set event callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTSE_ERROR_NONE`: Successful
+  /// - `TTSE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTSE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `TTSE_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **Preconditions:**
+  /// - The ttse_main() function should be invoked before this function is called.
+  ///
+  /// **See also:**
+  /// - `ttse_private_data_set_cb()`
   int ttse_set_private_data_set_cb(
     ttse_private_data_set_cb callback_func,
   ) {
@@ -300,18 +359,31 @@ class Tizen60TtsEngine {
   late final _ttse_set_private_data_set_cb = _ttse_set_private_data_set_cbPtr
       .asFunction<int Function(ttse_private_data_set_cb)>();
 
-  /// @brief Sets a callback function for requesting the private data.
-  /// @since_tizen 3.0
-  /// @remarks The ttse_private_data_requested_cb() function is called when the engine service user gets the private data from TTS engine.
-  /// @param[in] callback_func ttse_private_data_requested event callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TTSE_ERROR_NONE Successful
-  /// @retval #TTSE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TTSE_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #TTSE_ERROR_OPERATION_FAILED Operation failure
-  /// @pre The ttse_main() function should be invoked before this function is called.
-  /// @see ttse_private_data_requested_cb()
+  /// Sets a callback function for requesting the private data.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The ttse_private_data_requested_cb() function is called when the engine service user gets the private data from TTS engine.
+  ///
+  /// **Parameters:**
+  /// - `callback_func` (in): ttse_private_data_requested event callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TTSE_ERROR_NONE`: Successful
+  /// - `TTSE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TTSE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `TTSE_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **Preconditions:**
+  /// - The ttse_main() function should be invoked before this function is called.
+  ///
+  /// **See also:**
+  /// - `ttse_private_data_requested_cb()`
   int ttse_set_private_data_requested_cb(
     ttse_private_data_requested_cb callback_func,
   ) {
@@ -328,8 +400,11 @@ class Tizen60TtsEngine {
           .asFunction<int Function(ttse_private_data_requested_cb)>();
 }
 
-/// @brief Enumeration for error codes.
-/// @since_tizen 3.0
+/// Enumeration for error codes.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class ttse_error_e {
   /// < Successful
   static const int TTSE_ERROR_NONE = 0;
@@ -365,8 +440,11 @@ abstract class ttse_error_e {
   static const int TTSE_ERROR_NOT_SUPPORTED = -1073741822;
 }
 
-/// @brief Enumeration for audio type.
-/// @since_tizen 3.0
+/// Enumeration for audio type.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class ttse_audio_type_e {
   /// < Signed 16-bit audio type
   static const int TTSE_AUDIO_TYPE_RAW_S16 = 0;
@@ -376,8 +454,11 @@ abstract class ttse_audio_type_e {
   static const int TTSE_AUDIO_TYPE_MAX = 2;
 }
 
-/// @brief Enumeration for result event type.
-/// @since_tizen 3.0
+/// Enumeration for result event type.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class ttse_result_event_e {
   /// < Event when the voice synthesis is failed
   static const int TTSE_RESULT_EVENT_FAIL = -1;
@@ -392,10 +473,16 @@ abstract class ttse_result_event_e {
   static const int TTSE_RESULT_EVENT_FINISH = 3;
 }
 
-/// @brief A structure for the TTS engine functions.
-/// @details This structure contains essential callback functions for operating TTS engine.
-/// @since_tizen 3.0
-/// @remarks These functions are mandatory for operating TTS engine. Therefore, all functions MUST be implemented.
+/// A structure for the TTS engine functions.
+///
+/// This structure contains essential callback functions for operating TTS engine.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - These functions are mandatory for operating TTS engine. Therefore, all functions MUST be implemented.
+/// @nodoc
 final class ttse_request_callback_s extends ffi.Struct {
   /// < The version of the structure 'ttse_request_callback_s'
   @ffi.Int()
@@ -438,222 +525,346 @@ final class ttse_request_callback_s extends ffi.Struct {
   external ttse_need_app_credential_cb need_app_credential;
 }
 
-/// @brief Called when the engine service user requests the basic information of TTS engine.
-/// @since_tizen 3.0
-/// @remarks This callback function is mandatory and must be registered using ttse_main().
-/// The allocated @a engine_uuid, @a engine_name, and @a engine_setting will be released internally.
-/// In order to upload the engine at Tizen Appstore, both a service app and a ui app are necessary.
-/// Therefore, @a engine_setting must be transferred to the engine service user.
-/// @param[out] engine_uuid UUID of engine
-/// @param[out] engine_name Name of engine
-/// @param[out] engine_setting The engine setting application(ui app)'s app ID
-/// @param[out] use_network The status for using network
-/// @return @c 0 on success,
-/// otherwise a negative error code on failure
-/// @retval #TTSE_ERROR_NONE Successful
-/// @retval #TTSE_ERROR_INVALID_PARAMETER Invalid parameter
-/// @retval #TTSE_ERROR_OPERATION_FAILED Operation failure
+/// Called when the engine service user requests the basic information of TTS engine.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - This callback function is mandatory and must be registered using ttse_main().
+/// - The allocated `engine_uuid`, `engine_name`, and `engine_setting` will be released internally.
+/// - In order to upload the engine at Tizen Appstore, both a service app and a ui app are necessary.
+/// - Therefore, `engine_setting` must be transferred to the engine service user.
+///
+/// **Parameters:**
+/// - `engine_uuid` (out): UUID of engine
+/// - `engine_name` (out): Name of engine
+/// - `engine_setting` (out): The engine setting application(ui app)'s app ID
+/// - `use_network` (out): The status for using network
+///
+/// **Returns:**
+/// - `0` on success, otherwise a negative error code on failure
+///
+/// **Return values:**
+/// - `TTSE_ERROR_NONE`: Successful
+/// - `TTSE_ERROR_INVALID_PARAMETER`: Invalid parameter
+/// - `TTSE_ERROR_OPERATION_FAILED`: Operation failure
+/// @nodoc
 typedef ttse_get_info_cb
     = ffi.Pointer<ffi.NativeFunction<ttse_get_info_cbFunction>>;
+/// @nodoc
 typedef ttse_get_info_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Pointer<ffi.Char>> engine_uuid,
     ffi.Pointer<ffi.Pointer<ffi.Char>> engine_name,
     ffi.Pointer<ffi.Pointer<ffi.Char>> engine_setting,
     ffi.Pointer<ffi.Bool> use_network);
+/// @nodoc
 typedef Dartttse_get_info_cbFunction = int Function(
     ffi.Pointer<ffi.Pointer<ffi.Char>> engine_uuid,
     ffi.Pointer<ffi.Pointer<ffi.Char>> engine_name,
     ffi.Pointer<ffi.Pointer<ffi.Char>> engine_setting,
     ffi.Pointer<ffi.Bool> use_network);
 
-/// @brief Called when the engine service user initializes TTS engine.
-/// @since_tizen 3.0
-/// @remarks This callback function is mandatory and must be registered using ttse_main().
-/// @return @c 0 on success,
-/// otherwise a negative error value
-/// @retval #TTSE_ERROR_NONE Successful
-/// @retval #TTSE_ERROR_INVALID_PARAMETER Invalid parameter
-/// @retval #TTSE_ERROR_INVALID_STATE Already initialized
-/// @retval #TTSE_ERROR_OPERATION_FAILED Operation failure
-/// @retval #TTSE_ERROR_PERMISSION_DENIED Permission denied
-/// @see ttse_deinitialize_cb()
+/// Called when the engine service user initializes TTS engine.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - This callback function is mandatory and must be registered using ttse_main().
+///
+/// **Returns:**
+/// - `0` on success, otherwise a negative error value
+///
+/// **Return values:**
+/// - `TTSE_ERROR_NONE`: Successful
+/// - `TTSE_ERROR_INVALID_PARAMETER`: Invalid parameter
+/// - `TTSE_ERROR_INVALID_STATE`: Already initialized
+/// - `TTSE_ERROR_OPERATION_FAILED`: Operation failure
+/// - `TTSE_ERROR_PERMISSION_DENIED`: Permission denied
+///
+/// **See also:**
+/// - `ttse_deinitialize_cb()`
+/// @nodoc
 typedef ttse_initialize_cb
     = ffi.Pointer<ffi.NativeFunction<ttse_initialize_cbFunction>>;
+/// @nodoc
 typedef ttse_initialize_cbFunction = ffi.Int Function();
+/// @nodoc
 typedef Dartttse_initialize_cbFunction = int Function();
 
-/// @brief Called when the engine service user deinitializes TTS engine.
-/// @since_tizen 3.0
-/// @remarks This callback function is mandatory and must be registered using ttse_main().
-/// NOTE that the engine may be terminated automatically.
-/// When this callback function is invoked, the release of resources is necessary.
-/// @return @c 0 on success,
-/// otherwise a negative error value
-/// @retval #TTSE_ERROR_NONE Successful
-/// @retval #TTSE_ERROR_INVALID_STATE Not initialized
-/// @see ttse_initialize_cb()
+/// Called when the engine service user deinitializes TTS engine.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - This callback function is mandatory and must be registered using ttse_main().
+/// - NOTE that the engine may be terminated automatically.
+/// - When this callback function is invoked, the release of resources is necessary.
+///
+/// **Returns:**
+/// - `0` on success, otherwise a negative error value
+///
+/// **Return values:**
+/// - `TTSE_ERROR_NONE`: Successful
+/// - `TTSE_ERROR_INVALID_STATE`: Not initialized
+///
+/// **See also:**
+/// - `ttse_initialize_cb()`
+/// @nodoc
 typedef ttse_deinitialize_cb
     = ffi.Pointer<ffi.NativeFunction<ttse_deinitialize_cbFunction>>;
+/// @nodoc
 typedef ttse_deinitialize_cbFunction = ffi.Int Function();
+/// @nodoc
 typedef Dartttse_deinitialize_cbFunction = int Function();
 
-/// @brief Called when the engine service user gets the whole supported voice list.
-/// @since_tizen 3.0
-/// @remarks This callback function is mandatory and must be registered using ttse_main().
-/// In this function, the engine service user's callback function 'ttse_supported_voice_cb()' is invoked repeatedly for getting all supported voices, and @a user_data must be transferred to 'ttse_supported_voice_cb()'.
-/// If 'ttse_supported_voice_cb()' returns @c false, it should be stopped to call 'ttse_supported_voice_cb()'.
-/// @param[in] callback The callback function
-/// @param[in] user_data The user data which must be passed to ttse_supported_voice_cb()
-/// @return @c 0 on success,
-/// otherwise a negative error value
-/// @retval #TTSE_ERROR_NONE Successful
-/// @retval #TTSE_ERROR_INVALID_PARAMETER Invalid parameter
-/// @retval #TTSE_ERROR_INVALID_STATE Not initialized
-/// @post	This callback function invokes ttse_supported_voice_cb() repeatedly for getting all supported voices.
-/// @see ttse_supported_voice_cb()
+/// Called when the engine service user gets the whole supported voice list.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - This callback function is mandatory and must be registered using ttse_main().
+/// - In this function, the engine service user's callback function 'ttse_supported_voice_cb()' is invoked repeatedly for getting all supported voices, and `user_data` must be transferred to 'ttse_supported_voice_cb()'.
+/// - If 'ttse_supported_voice_cb()' returns `false`, it should be stopped to call 'ttse_supported_voice_cb()'.
+///
+/// **Parameters:**
+/// - `callback` (in): The callback function
+/// - `user_data` (in): The user data which must be passed to ttse_supported_voice_cb()
+///
+/// **Returns:**
+/// - `0` on success, otherwise a negative error value
+///
+/// **Return values:**
+/// - `TTSE_ERROR_NONE`: Successful
+/// - `TTSE_ERROR_INVALID_PARAMETER`: Invalid parameter
+/// - `TTSE_ERROR_INVALID_STATE`: Not initialized
+///
+/// **Postconditions:**
+/// - This callback function invokes ttse_supported_voice_cb() repeatedly for getting all supported voices.
+///
+/// **See also:**
+/// - `ttse_supported_voice_cb()`
+/// @nodoc
 typedef ttse_foreach_supported_voices_cb
     = ffi.Pointer<ffi.NativeFunction<ttse_foreach_supported_voices_cbFunction>>;
+/// @nodoc
 typedef ttse_foreach_supported_voices_cbFunction = ffi.Int Function(
     ttse_supported_voice_cb callback, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartttse_foreach_supported_voices_cbFunction = int Function(
     ttse_supported_voice_cb callback, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when TTS engine informs the engine service user about whole supported language and voice type list.
-/// @details This callback function is implemented by the engine service user. Therefore, the engine developer does NOT have to implement this callback function.
-/// @since_tizen 3.0
-/// @remarks This callback function is called by ttse_foreach_supported_voices_cb() to inform the whole supported voice list.
-/// @a user_data must be transferred from ttse_foreach_supported_voices_cb().
-/// @param[in] language The language is specified as an ISO 3166 alpha-2 two-letter country code
-/// followed by ISO 639-1 for the two-letter language code.
-/// For example, "ko_KR" for Korean, "en_US" for American English
-/// @param[in] type The voice type
-/// @param[in] user_data The user data passed from ttse_foreach_supported_voices_cb()
-/// @return @c true to continue with the next iteration of the loop
-/// @c false to break out of the loop
-/// @pre ttse_foreach_supported_voices_cb() will invoke this callback function.
-/// @see ttse_foreach_supported_voices_cb()
+/// Called when TTS engine informs the engine service user about whole supported language and voice type list.
+///
+/// This callback function is implemented by the engine service user. Therefore, the engine developer does NOT have to implement this callback function.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - This callback function is called by ttse_foreach_supported_voices_cb() to inform the whole supported voice list.
+/// - `user_data` must be transferred from ttse_foreach_supported_voices_cb().
+///
+/// **Parameters:**
+/// - `language` (in): The language is specified as an ISO 3166 alpha-2 two-letter country code followed by ISO 639-1 for the two-letter language code. For example, "ko_KR" for Korean, "en_US" for American English
+/// - `type` (in): The voice type
+/// - `user_data` (in): The user data passed from ttse_foreach_supported_voices_cb()
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - ttse_foreach_supported_voices_cb() will invoke this callback function.
+///
+/// **See also:**
+/// - `ttse_foreach_supported_voices_cb()`
+/// @nodoc
 typedef ttse_supported_voice_cb
     = ffi.Pointer<ffi.NativeFunction<ttse_supported_voice_cbFunction>>;
+/// @nodoc
 typedef ttse_supported_voice_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> language,
     ffi.Int type,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartttse_supported_voice_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> language, int type, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the engine service user checks whether the voice is valid or not in TTS engine.
-/// @since_tizen 3.0
-/// @remarks This callback function is mandatory and must be registered using ttse_main().
-/// @param[in] language The language is specified as an ISO 3166 alpha-2 two-letter country code
-/// followed by ISO 639-1 for the two-letter language code.
-/// For example, "ko_KR" for Korean, "en_US" for American English
-/// @param[in] type The voice type
-/// @param[out] is_valid A variable for checking whether the corresponding voice is valid or not.
-/// @c true to be valid,
-/// @c false to be invalid
-/// @return @c 0 on success,
-/// otherwise a negative error value
-/// @retval #TTSE_ERROR_NONE Successful
-/// @retval #TTSE_ERROR_INVALID_PARAMETER Invalid parameter
-/// @see ttse_foreach_supported_voices_cb()
+/// Called when the engine service user checks whether the voice is valid or not in TTS engine.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - This callback function is mandatory and must be registered using ttse_main().
+///
+/// **Parameters:**
+/// - `language` (in): The language is specified as an ISO 3166 alpha-2 two-letter country code followed by ISO 639-1 for the two-letter language code. For example, "ko_KR" for Korean, "en_US" for American English
+/// - `type` (in): The voice type
+/// - `is_valid` (out): A variable for checking whether the corresponding voice is valid or not. `true` to be valid, `false` to be invalid
+///
+/// **Returns:**
+/// - `0` on success, otherwise a negative error value
+///
+/// **Return values:**
+/// - `TTSE_ERROR_NONE`: Successful
+/// - `TTSE_ERROR_INVALID_PARAMETER`: Invalid parameter
+///
+/// **See also:**
+/// - `ttse_foreach_supported_voices_cb()`
+/// @nodoc
 typedef ttse_is_valid_voice_cb
     = ffi.Pointer<ffi.NativeFunction<ttse_is_valid_voice_cbFunction>>;
+/// @nodoc
 typedef ttse_is_valid_voice_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Char> language,
     ffi.Int type,
     ffi.Pointer<ffi.Bool> is_valid);
+/// @nodoc
 typedef Dartttse_is_valid_voice_cbFunction = int Function(
     ffi.Pointer<ffi.Char> language, int type, ffi.Pointer<ffi.Bool> is_valid);
 
-/// @brief Called when the engine service user sets the default pitch of TTS engine.
-/// @since_tizen 3.0
-/// @remarks This callback function is mandatory and must be registered using ttse_main().
-/// @param[in] pitch The default pitch
-/// @return @c 0 on success,
-/// otherwise a negative error value
-/// @retval #TTSE_ERROR_NONE Successful
-/// @retval #TTSE_ERROR_INVALID_PARAMETER Invalid parameter
-/// @retval #TTSE_ERROR_INVALID_STATE Not initialized
-/// @retval #TTSE_ERROR_OPERATION_FAILED Operation failure
+/// Called when the engine service user sets the default pitch of TTS engine.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - This callback function is mandatory and must be registered using ttse_main().
+///
+/// **Parameters:**
+/// - `pitch` (in): The default pitch
+///
+/// **Returns:**
+/// - `0` on success, otherwise a negative error value
+///
+/// **Return values:**
+/// - `TTSE_ERROR_NONE`: Successful
+/// - `TTSE_ERROR_INVALID_PARAMETER`: Invalid parameter
+/// - `TTSE_ERROR_INVALID_STATE`: Not initialized
+/// - `TTSE_ERROR_OPERATION_FAILED`: Operation failure
+/// @nodoc
 typedef ttse_set_pitch_cb
     = ffi.Pointer<ffi.NativeFunction<ttse_set_pitch_cbFunction>>;
+/// @nodoc
 typedef ttse_set_pitch_cbFunction = ffi.Int Function(ffi.Int pitch);
+/// @nodoc
 typedef Dartttse_set_pitch_cbFunction = int Function(int pitch);
 
-/// @brief Called when the engine service user requests to load the corresponding voice type for the first time.
-/// @since_tizen 3.0
-/// @remarks This callback function is mandatory and must be registered using ttse_main().
-/// @param[in] language The language is specified as an ISO 3166 alpha-2 two-letter country code
-/// followed by ISO 639-1 for the two-letter language code.
-/// For example, "ko_KR" for Korean, "en_US" for American English
-/// @param[in] type The voice type
-/// @return @c 0 on success,
-/// otherwise a negative error value
-/// @retval #TTSE_ERROR_NONE Successful
-/// @retval #TTSE_ERROR_INVALID_PARAMETER Invalid parameter
-/// @retval #TTSE_ERROR_INVALID_STATE Not initialized
-/// @retval #TTSE_ERROR_OUT_OF_MEMORY Out of memory
-/// @retval #TTSE_ERROR_INVALID_VOICE Invalid voice
-/// @retval #TTSE_ERROR_OPERATION_FAILED Operation failure
-/// @see ttse_unload_voice_cb()
+/// Called when the engine service user requests to load the corresponding voice type for the first time.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - This callback function is mandatory and must be registered using ttse_main().
+///
+/// **Parameters:**
+/// - `language` (in): The language is specified as an ISO 3166 alpha-2 two-letter country code followed by ISO 639-1 for the two-letter language code. For example, "ko_KR" for Korean, "en_US" for American English
+/// - `type` (in): The voice type
+///
+/// **Returns:**
+/// - `0` on success, otherwise a negative error value
+///
+/// **Return values:**
+/// - `TTSE_ERROR_NONE`: Successful
+/// - `TTSE_ERROR_INVALID_PARAMETER`: Invalid parameter
+/// - `TTSE_ERROR_INVALID_STATE`: Not initialized
+/// - `TTSE_ERROR_OUT_OF_MEMORY`: Out of memory
+/// - `TTSE_ERROR_INVALID_VOICE`: Invalid voice
+/// - `TTSE_ERROR_OPERATION_FAILED`: Operation failure
+///
+/// **See also:**
+/// - `ttse_unload_voice_cb()`
+/// @nodoc
 typedef ttse_load_voice_cb
     = ffi.Pointer<ffi.NativeFunction<ttse_load_voice_cbFunction>>;
+/// @nodoc
 typedef ttse_load_voice_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Char> language, ffi.Int type);
+/// @nodoc
 typedef Dartttse_load_voice_cbFunction = int Function(
     ffi.Pointer<ffi.Char> language, int type);
 
-/// @brief Called when the engine service user requests to unload the corresponding voice type or to stop using voice.
-/// @since_tizen 3.0
-/// @remarks This callback function is mandatory and must be registered using ttse_main().
-/// @param[in] language The language is specified as an ISO 3166 alpha-2 two-letter country code
-/// followed by ISO 639-1 for the two-letter language code.
-/// For example, "ko_KR" for Korean, "en_US" for American English
-/// @param[in] type The voice type
-/// @return @c 0 on success,
-/// otherwise a negative error value
-/// @retval #TTSE_ERROR_NONE Successful
-/// @retval #TTSE_ERROR_INVALID_PARAMETER Invalid parameter
-/// @retval #TTSE_ERROR_INVALID_STATE Not initialized
-/// @retval #TTSE_ERROR_INVALID_VOICE Invalid voice
-/// @retval #TTSE_ERROR_OPERATION_FAILED Operation failure
-/// @see ttse_load_voice_cb()
+/// Called when the engine service user requests to unload the corresponding voice type or to stop using voice.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - This callback function is mandatory and must be registered using ttse_main().
+///
+/// **Parameters:**
+/// - `language` (in): The language is specified as an ISO 3166 alpha-2 two-letter country code followed by ISO 639-1 for the two-letter language code. For example, "ko_KR" for Korean, "en_US" for American English
+/// - `type` (in): The voice type
+///
+/// **Returns:**
+/// - `0` on success, otherwise a negative error value
+///
+/// **Return values:**
+/// - `TTSE_ERROR_NONE`: Successful
+/// - `TTSE_ERROR_INVALID_PARAMETER`: Invalid parameter
+/// - `TTSE_ERROR_INVALID_STATE`: Not initialized
+/// - `TTSE_ERROR_INVALID_VOICE`: Invalid voice
+/// - `TTSE_ERROR_OPERATION_FAILED`: Operation failure
+///
+/// **See also:**
+/// - `ttse_load_voice_cb()`
+/// @nodoc
 typedef ttse_unload_voice_cb
     = ffi.Pointer<ffi.NativeFunction<ttse_unload_voice_cbFunction>>;
+/// @nodoc
 typedef ttse_unload_voice_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Char> language, ffi.Int type);
+/// @nodoc
 typedef Dartttse_unload_voice_cbFunction = int Function(
     ffi.Pointer<ffi.Char> language, int type);
 
-/// @brief Called when the engine service user starts to synthesize a voice, asynchronously.
-/// @since_tizen 3.0
-/// @remarks This callback function is mandatory and must be registered using ttse_main().
-/// In this callback function, TTS engine must transfer the synthesized result and @a user_data to the engine service user using ttse_send_result().
-/// Also, if TTS engine needs the application's credential, it can set the credential granted to the application.
-/// @param[in] language The language is specified as an ISO 3166 alpha-2 two-letter country code
-/// followed by ISO 639-1 for the two-letter language code.
-/// For example, "ko_KR" for Korean, "en_US" for American English
-/// @param[in] type The voice type
-/// @param[in] text Texts
-/// @param[in] speed The speed of speaking
-/// @param[in] appid The Application ID
-/// @param[in] credential The credential granted to the application
-/// @param[in] user_data The user data which must be passed to ttse_send_result()
-/// @return @c 0 on success,
-/// otherwise a negative error value
-/// @retval #TTSE_ERROR_NONE Successful
-/// @retval #TTSE_ERROR_INVALID_PARAMETER Invalid parameter
-/// @retval #TTSE_ERROR_INVALID_STATE Not initialized or already started synthesis
-/// @retval #TTSE_ERROR_INVALID_VOICE Invalid voice
-/// @retval #TTSE_ERROR_OPERATION_FAILED Operation failure
-/// @retval #TTSE_ERROR_NETWORK_DOWN Out of network
-/// @retval #TTSE_ERROR_PERMISSION_DENIED Permission denied
-/// @post This function invokes ttse_send_result().
-/// @see ttse_send_result()
-/// @see ttse_cancel_synthesis_cb()
-/// @see ttse_need_app_credential_cb()
+/// Called when the engine service user starts to synthesize a voice, asynchronously.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - This callback function is mandatory and must be registered using ttse_main().
+/// - In this callback function, TTS engine must transfer the synthesized result and `user_data` to the engine service user using ttse_send_result().
+/// - Also, if TTS engine needs the application's credential, it can set the credential granted to the application.
+///
+/// **Parameters:**
+/// - `language` (in): The language is specified as an ISO 3166 alpha-2 two-letter country code followed by ISO 639-1 for the two-letter language code. For example, "ko_KR" for Korean, "en_US" for American English
+/// - `type` (in): The voice type
+/// - `text` (in): Texts
+/// - `speed` (in): The speed of speaking
+/// - `appid` (in): The Application ID
+/// - `credential` (in): The credential granted to the application
+/// - `user_data` (in): The user data which must be passed to ttse_send_result()
+///
+/// **Returns:**
+/// - `0` on success, otherwise a negative error value
+///
+/// **Return values:**
+/// - `TTSE_ERROR_NONE`: Successful
+/// - `TTSE_ERROR_INVALID_PARAMETER`: Invalid parameter
+/// - `TTSE_ERROR_INVALID_STATE`: Not initialized or already started synthesis
+/// - `TTSE_ERROR_INVALID_VOICE`: Invalid voice
+/// - `TTSE_ERROR_OPERATION_FAILED`: Operation failure
+/// - `TTSE_ERROR_NETWORK_DOWN`: Out of network
+/// - `TTSE_ERROR_PERMISSION_DENIED`: Permission denied
+///
+/// **Postconditions:**
+/// - This function invokes ttse_send_result().
+///
+/// **See also:**
+/// - `ttse_send_result()`
+/// - `ttse_cancel_synthesis_cb()`
+/// - `ttse_need_app_credential_cb()`
+/// @nodoc
 typedef ttse_start_synthesis_cb
     = ffi.Pointer<ffi.NativeFunction<ttse_start_synthesis_cbFunction>>;
+/// @nodoc
 typedef ttse_start_synthesis_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Char> language,
     ffi.Int type,
@@ -662,6 +873,7 @@ typedef ttse_start_synthesis_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Char> appid,
     ffi.Pointer<ffi.Char> credential,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartttse_start_synthesis_cbFunction = int Function(
     ffi.Pointer<ffi.Char> language,
     int type,
@@ -671,98 +883,163 @@ typedef Dartttse_start_synthesis_cbFunction = int Function(
     ffi.Pointer<ffi.Char> credential,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the engine service user cancels to synthesize a voice.
-/// @since_tizen 3.0
-/// @remarks This callback function is mandatory and must be registered using ttse_main().
-/// @return @c 0 on success,
-/// otherwise a negative error value
-/// @retval #TTSE_ERROR_NONE Successful
-/// @retval #TTSE_ERROR_INVALID_STATE Not initialized or not started synthesis
-/// @pre The ttse_start_synthesis_cb() should be performed
-/// @see ttse_start_synthesis_cb()
+/// Called when the engine service user cancels to synthesize a voice.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - This callback function is mandatory and must be registered using ttse_main().
+///
+/// **Returns:**
+/// - `0` on success, otherwise a negative error value
+///
+/// **Return values:**
+/// - `TTSE_ERROR_NONE`: Successful
+/// - `TTSE_ERROR_INVALID_STATE`: Not initialized or not started synthesis
+///
+/// **Preconditions:**
+/// - The ttse_start_synthesis_cb() should be performed
+///
+/// **See also:**
+/// - `ttse_start_synthesis_cb()`
+/// @nodoc
 typedef ttse_cancel_synthesis_cb
     = ffi.Pointer<ffi.NativeFunction<ttse_cancel_synthesis_cbFunction>>;
+/// @nodoc
 typedef ttse_cancel_synthesis_cbFunction = ffi.Int Function();
+/// @nodoc
 typedef Dartttse_cancel_synthesis_cbFunction = int Function();
 
-/// @brief Called when the engine service user requests for TTS engine to check whether the application agreed the usage of TTS engine.
-/// @details This callback function is called when the engine service user requests for TTS engine to check the application's agreement about using the engine.
-/// According to the need, the engine developer can provide some user interfaces to check the agreement.
-/// @since_tizen 3.0
-/// @remarks This callback function is mandatory and must be registered using ttse_main().
-/// If the TTS engine developer wants not to check the agreement, the developer has need to return proper values as @a is_agreed in accordance with the intention. @c true if the developer regards that every application agreed the usage of the engine, @c false if the developer regards that every application disagreed.
-/// NOTE that, however, there may be any legal issue unless the developer checks the agreement. Therefore, we suggest that the engine developers should provide a function to check the agreement.
-/// @param[in] appid The Application ID
-/// @param[out] is_agreed A variable for checking whether the application agreed to use TTS engine or not.
-/// @c true to agree,
-/// @c false to disagree
-/// @return @c 0 on success,
-/// otherwise a negative error value
-/// @retval #TTSE_ERROR_NONE Successful
-/// @retval #TTSE_ERROR_INVALID_STATE Not initialized
-/// @retval #TTSE_ERROR_INVALID_PARAMETER Invalid parameter
-/// @retval #TTSE_ERROR_NOT_SUPPORTED_FEATURE Not supported feature
+/// Called when the engine service user requests for TTS engine to check whether the application agreed the usage of TTS engine.
+///
+/// This callback function is called when the engine service user requests for TTS engine to check the application's agreement about using the engine. According to the need, the engine developer can provide some user interfaces to check the agreement.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - This callback function is mandatory and must be registered using ttse_main().
+/// - If the TTS engine developer wants not to check the agreement, the developer has need to return proper values as `is_agreed` in accordance with the intention. `true` if the developer regards that every application agreed the usage of the engine, `false` if the developer regards that every application disagreed.
+/// - NOTE that, however, there may be any legal issue unless the developer checks the agreement. Therefore, we suggest that the engine developers should provide a function to check the agreement.
+///
+/// **Parameters:**
+/// - `appid` (in): The Application ID
+/// - `is_agreed` (out): A variable for checking whether the application agreed to use TTS engine or not. `true` to agree, `false` to disagree
+///
+/// **Returns:**
+/// - `0` on success, otherwise a negative error value
+///
+/// **Return values:**
+/// - `TTSE_ERROR_NONE`: Successful
+/// - `TTSE_ERROR_INVALID_STATE`: Not initialized
+/// - `TTSE_ERROR_INVALID_PARAMETER`: Invalid parameter
+/// - `TTSE_ERROR_NOT_SUPPORTED_FEATURE`: Not supported feature
+/// @nodoc
 typedef ttse_check_app_agreed_cb
     = ffi.Pointer<ffi.NativeFunction<ttse_check_app_agreed_cbFunction>>;
+/// @nodoc
 typedef ttse_check_app_agreed_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Char> appid, ffi.Pointer<ffi.Bool> is_agreed);
+/// @nodoc
 typedef Dartttse_check_app_agreed_cbFunction = int Function(
     ffi.Pointer<ffi.Char> appid, ffi.Pointer<ffi.Bool> is_agreed);
 
-/// @brief Called when the engine service user checks whether TTS engine needs the application's credential.
-/// @since_tizen 3.0
-/// @remarks This callback function is mandatory and must be registered using ttse_main().
-/// @return @c true if TTS engine needs the application's credential,
-/// otherwise @c false
+/// Called when the engine service user checks whether TTS engine needs the application's credential.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - This callback function is mandatory and must be registered using ttse_main().
+///
+/// **Returns:**
+/// - `true` if TTS engine needs the application's credential, otherwise `false`
+/// @nodoc
 typedef ttse_need_app_credential_cb
     = ffi.Pointer<ffi.NativeFunction<ttse_need_app_credential_cbFunction>>;
+/// @nodoc
 typedef ttse_need_app_credential_cbFunction = ffi.Bool Function();
+/// @nodoc
 typedef Dartttse_need_app_credential_cbFunction = bool Function();
 
-/// @brief Called when TTS engine receives the private data from the engine service user.
-/// @details This callback function is called when the engine service user sends the private data to TTS engine.
-/// @since_tizen 3.0
-/// @remarks This callback function is optional and is registered using ttse_set_private_data_set_cb().
-/// @param[in] key The key field of private data
-/// @param[in] data The data field of private data
-/// @return @c 0 on success,
-/// otherwise a negative error value
-/// @retval #TTSE_ERROR_NONE Successful
-/// @retval #TTSE_ERROR_INVALID_PARAMETER Invalid parameter
-/// @retval #TTSE_ERROR_OPERATION_FAILED Operation failure
-/// @retval #TTSE_ERROR_NOT_SUPPORTED_FEATURE Not supported feature
-/// @see ttse_private_data_requested_cb()
-/// @see ttse_set_private_data_set_cb()
+/// Called when TTS engine receives the private data from the engine service user.
+///
+/// This callback function is called when the engine service user sends the private data to TTS engine.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - This callback function is optional and is registered using ttse_set_private_data_set_cb().
+///
+/// **Parameters:**
+/// - `key` (in): The key field of private data
+/// - `data` (in): The data field of private data
+///
+/// **Returns:**
+/// - `0` on success, otherwise a negative error value
+///
+/// **Return values:**
+/// - `TTSE_ERROR_NONE`: Successful
+/// - `TTSE_ERROR_INVALID_PARAMETER`: Invalid parameter
+/// - `TTSE_ERROR_OPERATION_FAILED`: Operation failure
+/// - `TTSE_ERROR_NOT_SUPPORTED_FEATURE`: Not supported feature
+///
+/// **See also:**
+/// - `ttse_private_data_requested_cb()`
+/// - `ttse_set_private_data_set_cb()`
+/// @nodoc
 typedef ttse_private_data_set_cb
     = ffi.Pointer<ffi.NativeFunction<ttse_private_data_set_cbFunction>>;
+/// @nodoc
 typedef ttse_private_data_set_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Char> key, ffi.Pointer<ffi.Char> data);
+/// @nodoc
 typedef Dartttse_private_data_set_cbFunction = int Function(
     ffi.Pointer<ffi.Char> key, ffi.Pointer<ffi.Char> data);
 
-/// @brief Called when TTS engine provides the engine service user with the private data.
-/// @details This callback function is called when the engine service user gets the private data from TTS engine.
-/// @since_tizen 3.0
-/// @remarks This callback function is optional and is registered using ttse_set_private_data_requested_cb().
-/// @param[out] key The key field of private data
-/// @param[out] data The data field of private data
-/// @return @c 0 on success,
-/// otherwise a negative error value
-/// @retval #TTSE_ERROR_NONE Successful
-/// @retval #TTSE_ERROR_INVALID_PARAMETER Invalid parameter
-/// @retval #TTSE_ERROR_OPERATION_FAILED Operation failure
-/// @retval #TTSE_ERROR_NOT_SUPPORTED_FEATURE Not supported feature
-/// @see ttse_private_data_set_cb()
-/// @see ttse_set_private_data_requested_cb()
+/// Called when TTS engine provides the engine service user with the private data.
+///
+/// This callback function is called when the engine service user gets the private data from TTS engine.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - This callback function is optional and is registered using ttse_set_private_data_requested_cb().
+///
+/// **Parameters:**
+/// - `key` (out): The key field of private data
+/// - `data` (out): The data field of private data
+///
+/// **Returns:**
+/// - `0` on success, otherwise a negative error value
+///
+/// **Return values:**
+/// - `TTSE_ERROR_NONE`: Successful
+/// - `TTSE_ERROR_INVALID_PARAMETER`: Invalid parameter
+/// - `TTSE_ERROR_OPERATION_FAILED`: Operation failure
+/// - `TTSE_ERROR_NOT_SUPPORTED_FEATURE`: Not supported feature
+///
+/// **See also:**
+/// - `ttse_private_data_set_cb()`
+/// - `ttse_set_private_data_requested_cb()`
+/// @nodoc
 typedef ttse_private_data_requested_cb
     = ffi.Pointer<ffi.NativeFunction<ttse_private_data_requested_cbFunction>>;
+/// @nodoc
 typedef ttse_private_data_requested_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Char> key, ffi.Pointer<ffi.Pointer<ffi.Char>> data);
+/// @nodoc
 typedef Dartttse_private_data_requested_cbFunction = int Function(
     ffi.Pointer<ffi.Char> key, ffi.Pointer<ffi.Pointer<ffi.Char>> data);
 
+/// @nodoc
 const int TTSE_VOICE_TYPE_MALE = 1;
 
+/// @nodoc
 const int TTSE_VOICE_TYPE_FEMALE = 2;
 
+/// @nodoc
 const int TTSE_VOICE_TYPE_CHILD = 3;

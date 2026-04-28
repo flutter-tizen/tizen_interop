@@ -1,3 +1,6 @@
+/// {@category 6.5/tizen}
+library tizen_interop_6_5.capi_media_radio;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-media-radio APIs.
+/// {@category 6.5/tizen}
 class Tizen65CapiMediaRadio {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,18 +28,29 @@ class Tizen65CapiMediaRadio {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates a radio handle.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks You must release @a radio using radio_destroy().
-  /// @param[out] radio A new handle to radio
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RADIO_ERROR_NONE Successful
-  /// @retval #RADIO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #RADIO_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #RADIO_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #RADIO_ERROR_NOT_SUPPORTED Not supported
-  /// @see radio_destroy()
+  /// Creates a radio handle.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release `radio` using radio_destroy().
+  ///
+  /// **Parameters:**
+  /// - `radio` (out): A new handle to radio
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RADIO_ERROR_NONE`: Successful
+  /// - `RADIO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RADIO_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `RADIO_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `RADIO_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `radio_destroy()`
   int radio_create(
     ffi.Pointer<radio_h> radio,
   ) {
@@ -50,18 +65,28 @@ class Tizen65CapiMediaRadio {
   late final _radio_create =
       _radio_createPtr.asFunction<int Function(ffi.Pointer<radio_h>)>();
 
-  /// @brief Destroys the radio handle and releases all its resources.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks To completely shutdown the radio operation, call this function with a valid radio handle.
+  /// Destroys the radio handle and releases all its resources.
   ///
-  /// @param[in] radio The handle to radio to be destroyed
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RADIO_ERROR_NONE Successful
-  /// @retval #RADIO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #RADIO_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #RADIO_ERROR_NOT_SUPPORTED Not supported
-  /// @see radio_create()
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - To completely shutdown the radio operation, call this function with a valid radio handle.
+  ///
+  /// **Parameters:**
+  /// - `radio` (in): The handle to radio to be destroyed
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RADIO_ERROR_NONE`: Successful
+  /// - `RADIO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RADIO_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `RADIO_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `radio_create()`
   int radio_destroy(
     radio_h radio,
   ) {
@@ -75,15 +100,22 @@ class Tizen65CapiMediaRadio {
   late final _radio_destroy =
       _radio_destroyPtr.asFunction<int Function(radio_h)>();
 
-  /// @brief Gets the radio's current state.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in]  radio The handle to radio
-  /// @param[out] state The current state of the radio
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RADIO_ERROR_NONE Successful
-  /// @retval #RADIO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #RADIO_ERROR_NOT_SUPPORTED Not supported
+  /// Gets the radio's current state.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `radio` (in): The handle to radio
+  /// - `state` (out): The current state of the radio
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RADIO_ERROR_NONE`: Successful
+  /// - `RADIO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RADIO_ERROR_NOT_SUPPORTED`: Not supported
   int radio_get_state(
     radio_h radio,
     ffi.Pointer<ffi.Int32> state,
@@ -101,20 +133,33 @@ class Tizen65CapiMediaRadio {
   late final _radio_get_state = _radio_get_statePtr
       .asFunction<int Function(radio_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Starts playing the radio.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] radio The handle to radio
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RADIO_ERROR_NONE Successful
-  /// @retval #RADIO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #RADIO_ERROR_INVALID_STATE Invalid radio state
-  /// @retval #RADIO_ERROR_SOUND_POLICY Sound policy error
-  /// @retval #RADIO_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #RADIO_ERROR_NO_ANTENNA No Antenna error
-  /// @pre The radio state must be set to #RADIO_STATE_READY by calling radio_create().
-  /// @post The radio state will be #RADIO_STATE_PLAYING.
-  /// @see radio_stop()
+  /// Starts playing the radio.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `radio` (in): The handle to radio
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RADIO_ERROR_NONE`: Successful
+  /// - `RADIO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RADIO_ERROR_INVALID_STATE`: Invalid radio state
+  /// - `RADIO_ERROR_SOUND_POLICY`: Sound policy error
+  /// - `RADIO_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `RADIO_ERROR_NO_ANTENNA`: No Antenna error
+  ///
+  /// **Preconditions:**
+  /// - The radio state must be set to `RADIO_STATE_READY` by calling radio_create().
+  ///
+  /// **Postconditions:**
+  /// - The radio state will be `RADIO_STATE_PLAYING`.
+  ///
+  /// **See also:**
+  /// - `radio_stop()`
   int radio_start(
     radio_h radio,
   ) {
@@ -127,19 +172,32 @@ class Tizen65CapiMediaRadio {
       _lookup<ffi.NativeFunction<ffi.Int Function(radio_h)>>('radio_start');
   late final _radio_start = _radio_startPtr.asFunction<int Function(radio_h)>();
 
-  /// @brief Stops playing the radio.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] radio The handle to radio
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RADIO_ERROR_NONE Successful
-  /// @retval #RADIO_ERROR_INVALID_PARAMETER Invalid state
-  /// @retval #RADIO_ERROR_INVALID_STATE Invalid radio state
-  /// @retval #RADIO_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The radio state must be set to #RADIO_STATE_PLAYING by calling radio_start().
-  /// @post The radio state will be #RADIO_STATE_READY.
-  /// @see radio_start()
-  /// @see radio_scan_start()
+  /// Stops playing the radio.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `radio` (in): The handle to radio
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RADIO_ERROR_NONE`: Successful
+  /// - `RADIO_ERROR_INVALID_PARAMETER`: Invalid state
+  /// - `RADIO_ERROR_INVALID_STATE`: Invalid radio state
+  /// - `RADIO_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The radio state must be set to `RADIO_STATE_PLAYING` by calling radio_start().
+  ///
+  /// **Postconditions:**
+  /// - The radio state will be `RADIO_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `radio_start()`
+  /// - `radio_scan_start()`
   int radio_stop(
     radio_h radio,
   ) {
@@ -152,21 +210,34 @@ class Tizen65CapiMediaRadio {
       _lookup<ffi.NativeFunction<ffi.Int Function(radio_h)>>('radio_stop');
   late final _radio_stop = _radio_stopPtr.asFunction<int Function(radio_h)>();
 
-  /// @brief Seeks up the effective frequency of the radio, asynchronously.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] radio     The handle to radio
-  /// @param[in] callback  The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RADIO_ERROR_NONE Successful
-  /// @retval #RADIO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #RADIO_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #RADIO_ERROR_INVALID_STATE Invalid radio state
-  /// @retval #RADIO_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The radio state must be set to #RADIO_STATE_PLAYING by calling radio_start().
-  /// @post It invokes radio_seek_completed_cb() when the seek completes.
-  /// @see radio_seek_down()
+  /// Seeks up the effective frequency of the radio, asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `radio` (in): The handle to radio
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RADIO_ERROR_NONE`: Successful
+  /// - `RADIO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RADIO_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `RADIO_ERROR_INVALID_STATE`: Invalid radio state
+  /// - `RADIO_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The radio state must be set to `RADIO_STATE_PLAYING` by calling radio_start().
+  ///
+  /// **Postconditions:**
+  /// - It invokes radio_seek_completed_cb() when the seek completes.
+  ///
+  /// **See also:**
+  /// - `radio_seek_down()`
   int radio_seek_up(
     radio_h radio,
     radio_seek_completed_cb callback,
@@ -186,21 +257,34 @@ class Tizen65CapiMediaRadio {
   late final _radio_seek_up = _radio_seek_upPtr.asFunction<
       int Function(radio_h, radio_seek_completed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Seeks down the effective frequency of the radio, asynchronously.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] radio     The handle to radio
-  /// @param[in] callback  The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RADIO_ERROR_NONE Successful
-  /// @retval #RADIO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #RADIO_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #RADIO_ERROR_INVALID_STATE Invalid radio state
-  /// @retval #RADIO_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The radio state must be set to #RADIO_STATE_PLAYING by calling radio_start().
-  /// @post It invokes radio_seek_completed_cb() when the seek completes.
-  /// @see radio_seek_up()
+  /// Seeks down the effective frequency of the radio, asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `radio` (in): The handle to radio
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RADIO_ERROR_NONE`: Successful
+  /// - `RADIO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RADIO_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `RADIO_ERROR_INVALID_STATE`: Invalid radio state
+  /// - `RADIO_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The radio state must be set to `RADIO_STATE_PLAYING` by calling radio_start().
+  ///
+  /// **Postconditions:**
+  /// - It invokes radio_seek_completed_cb() when the seek completes.
+  ///
+  /// **See also:**
+  /// - `radio_seek_up()`
   int radio_seek_down(
     radio_h radio,
     radio_seek_completed_cb callback,
@@ -220,17 +304,26 @@ class Tizen65CapiMediaRadio {
   late final _radio_seek_down = _radio_seek_downPtr.asFunction<
       int Function(radio_h, radio_seek_completed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets the radio frequency.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] radio     The handle to radio
-  /// @param[in] frequency The frequency to set [87500 ~ 108000] (kHz)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RADIO_ERROR_NONE Successful
-  /// @retval #RADIO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #RADIO_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #RADIO_ERROR_NOT_SUPPORTED Not supported
-  /// @see radio_get_frequency()
+  /// Sets the radio frequency.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `radio` (in): The handle to radio
+  /// - `frequency` (in): The frequency to set `[87500 ~ 108000]` (kHz)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RADIO_ERROR_NONE`: Successful
+  /// - `RADIO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RADIO_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `RADIO_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `radio_get_frequency()`
   int radio_set_frequency(
     radio_h radio,
     int frequency,
@@ -247,17 +340,26 @@ class Tizen65CapiMediaRadio {
   late final _radio_set_frequency =
       _radio_set_frequencyPtr.asFunction<int Function(radio_h, int)>();
 
-  /// @brief Gets the current frequency of the radio.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in]  radio     The handle to radio
-  /// @param[out] frequency The current frequency [87500 ~ 108000] (kHz)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RADIO_ERROR_NONE Successful
-  /// @retval #RADIO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #RADIO_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #RADIO_ERROR_NOT_SUPPORTED Not supported
-  /// @see radio_set_frequency()
+  /// Gets the current frequency of the radio.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `radio` (in): The handle to radio
+  /// - `frequency` (out): The current frequency `[87500 ~ 108000]` (kHz)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RADIO_ERROR_NONE`: Successful
+  /// - `RADIO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RADIO_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `RADIO_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `radio_set_frequency()`
   int radio_get_frequency(
     radio_h radio,
     ffi.Pointer<ffi.Int> frequency,
@@ -274,16 +376,23 @@ class Tizen65CapiMediaRadio {
   late final _radio_get_frequency = _radio_get_frequencyPtr
       .asFunction<int Function(radio_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the current signal strength of the radio.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in]  radio    The handle to radio
-  /// @param[out] strength The current signal strength [-128 ~ 128] (dBm)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RADIO_ERROR_NONE Successful
-  /// @retval #RADIO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #RADIO_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #RADIO_ERROR_NOT_SUPPORTED Not supported
+  /// Gets the current signal strength of the radio.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `radio` (in): The handle to radio
+  /// - `strength` (out): The current signal strength `[-128 ~ 128]` (dBm)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RADIO_ERROR_NONE`: Successful
+  /// - `RADIO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RADIO_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `RADIO_ERROR_NOT_SUPPORTED`: Not supported
   int radio_get_signal_strength(
     radio_h radio,
     ffi.Pointer<ffi.Int> strength,
@@ -300,25 +409,38 @@ class Tizen65CapiMediaRadio {
   late final _radio_get_signal_strength = _radio_get_signal_strengthPtr
       .asFunction<int Function(radio_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Starts scanning radio signals, asynchronously.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] radio     The handle to radio
-  /// @param[in] callback  The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RADIO_ERROR_NONE Successful
-  /// @retval #RADIO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #RADIO_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #RADIO_ERROR_INVALID_STATE Invalid radio state
-  /// @retval #RADIO_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The radio state must be set to #RADIO_STATE_READY or #RADIO_STATE_PLAYING.
-  /// @post The radio state will be #RADIO_STATE_SCANNING during a search. After the scan is completed, the radio state will be set back to the state from before the function call(#RADIO_STATE_READY or #RADIO_STATE_PLAYING).
-  /// @post It invokes radio_scan_updated_cb() when the scan information updates.
-  /// @post It invokes radio_scan_completed_cb() when the scan completes, if you set a callback with radio_set_scan_completed_cb().
-  /// @see radio_scan_stop()
-  /// @see radio_set_scan_completed_cb()
-  /// @see radio_scan_completed_cb()
+  /// Starts scanning radio signals, asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `radio` (in): The handle to radio
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RADIO_ERROR_NONE`: Successful
+  /// - `RADIO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RADIO_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `RADIO_ERROR_INVALID_STATE`: Invalid radio state
+  /// - `RADIO_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The radio state must be set to `RADIO_STATE_READY` or `RADIO_STATE_PLAYING`.
+  ///
+  /// **Postconditions:**
+  /// - The radio state will be `RADIO_STATE_SCANNING` during a search. After the scan is completed, the radio state will be set back to the state from before the function call(`RADIO_STATE_READY` or `RADIO_STATE_PLAYING`).
+  /// - It invokes radio_scan_updated_cb() when the scan information updates.
+  /// - It invokes radio_scan_completed_cb() when the scan completes, if you set a callback with radio_set_scan_completed_cb().
+  ///
+  /// **See also:**
+  /// - `radio_scan_stop()`
+  /// - `radio_set_scan_completed_cb()`
+  /// - `radio_scan_completed_cb()`
   int radio_scan_start(
     radio_h radio,
     radio_scan_updated_cb callback,
@@ -338,22 +460,35 @@ class Tizen65CapiMediaRadio {
   late final _radio_scan_start = _radio_scan_startPtr.asFunction<
       int Function(radio_h, radio_scan_updated_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Stops scanning radio signals, asynchronously.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] radio     The handle to radio
-  /// @param[in] callback  The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RADIO_ERROR_NONE Successful
-  /// @retval #RADIO_ERROR_INVALID_PARAMETER Invalid state
-  /// @retval #RADIO_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #RADIO_ERROR_INVALID_STATE Invalid radio state
-  /// @retval #RADIO_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The radio state must be set to #RADIO_STATE_SCANNING by calling radio_scan_start().
-  /// @post It invokes radio_scan_stopped_cb() when the scan stops.
-  /// @post After the scan stopped, the radio state will be set back to the state from before the radio_scan_start() function call(#RADIO_STATE_READY or #RADIO_STATE_PLAYING).
-  /// @see radio_scan_start()
+  /// Stops scanning radio signals, asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `radio` (in): The handle to radio
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RADIO_ERROR_NONE`: Successful
+  /// - `RADIO_ERROR_INVALID_PARAMETER`: Invalid state
+  /// - `RADIO_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `RADIO_ERROR_INVALID_STATE`: Invalid radio state
+  /// - `RADIO_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The radio state must be set to `RADIO_STATE_SCANNING` by calling radio_scan_start().
+  ///
+  /// **Postconditions:**
+  /// - It invokes radio_scan_stopped_cb() when the scan stops.
+  /// - After the scan stopped, the radio state will be set back to the state from before the radio_scan_start() function call(`RADIO_STATE_READY` or `RADIO_STATE_PLAYING`).
+  ///
+  /// **See also:**
+  /// - `radio_scan_start()`
   int radio_scan_stop(
     radio_h radio,
     radio_scan_stopped_cb callback,
@@ -373,18 +508,28 @@ class Tizen65CapiMediaRadio {
   late final _radio_scan_stop = _radio_scan_stopPtr.asFunction<
       int Function(radio_h, radio_scan_stopped_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets the radio's mute status.
-  /// @details If the mute status is @c true, no sounds will be played. If @c false, sounds will be played. Until this function is called, by default the radio is not muted.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] radio The handle to radio
-  /// @param[in] muted The new mute status: (@c true = mute, @c false = not muted)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RADIO_ERROR_NONE Successful
-  /// @retval #RADIO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #RADIO_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #RADIO_ERROR_NOT_SUPPORTED Not supported
-  /// @see radio_is_muted()
+  /// Sets the radio's mute status.
+  ///
+  /// If the mute status is `true`, no sounds will be played. If `false`, sounds will be played. Until this function is called, by default the radio is not muted.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `radio` (in): The handle to radio
+  /// - `muted` (in): The new mute status: (`true` = mute, `false` = not muted)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RADIO_ERROR_NONE`: Successful
+  /// - `RADIO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RADIO_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `RADIO_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `radio_is_muted()`
   int radio_set_mute(
     radio_h radio,
     bool muted,
@@ -401,18 +546,28 @@ class Tizen65CapiMediaRadio {
   late final _radio_set_mute =
       _radio_set_mutePtr.asFunction<int Function(radio_h, bool)>();
 
-  /// @brief Gets the radio's mute status.
-  /// @details If the mute status is @c true, no sounds are played. If @c false, sounds are played.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in]  radio The handle to radio
-  /// @param[out] muted The current mute status: (@c true = mute, @c false = not muted)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RADIO_ERROR_NONE Successful
-  /// @retval #RADIO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #RADIO_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #RADIO_ERROR_NOT_SUPPORTED Not supported
-  /// @see radio_set_mute()
+  /// Gets the radio's mute status.
+  ///
+  /// If the mute status is `true`, no sounds are played. If `false`, sounds are played.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `radio` (in): The handle to radio
+  /// - `muted` (out): The current mute status: (`true` = mute, `false` = not muted)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RADIO_ERROR_NONE`: Successful
+  /// - `RADIO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RADIO_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `RADIO_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `radio_set_mute()`
   int radio_is_muted(
     radio_h radio,
     ffi.Pointer<ffi.Bool> muted,
@@ -429,20 +584,31 @@ class Tizen65CapiMediaRadio {
   late final _radio_is_muted = _radio_is_mutedPtr
       .asFunction<int Function(radio_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Sets a callback function to be invoked when the scan finishes.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] radio     The handle to radio
-  /// @param[in] callback  The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RADIO_ERROR_NONE Successful
-  /// @retval #RADIO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #RADIO_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #RADIO_ERROR_NOT_SUPPORTED Not supported
-  /// @post radio_scan_completed_cb() will be invoked.
-  /// @see radio_unset_scan_completed_cb()
-  /// @see radio_scan_completed_cb()
+  /// Sets a callback function to be invoked when the scan finishes.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `radio` (in): The handle to radio
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RADIO_ERROR_NONE`: Successful
+  /// - `RADIO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RADIO_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `RADIO_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - radio_scan_completed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `radio_unset_scan_completed_cb()`
+  /// - `radio_scan_completed_cb()`
   int radio_set_scan_completed_cb(
     radio_h radio,
     radio_scan_completed_cb callback,
@@ -464,16 +630,25 @@ class Tizen65CapiMediaRadio {
           int Function(
               radio_h, radio_scan_completed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the scan completed callback function.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] radio The handle to radio
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RADIO_ERROR_NONE Successful
-  /// @retval #RADIO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #RADIO_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #RADIO_ERROR_NOT_SUPPORTED Not supported
-  /// @see radio_set_scan_completed_cb()
+  /// Unsets the scan completed callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `radio` (in): The handle to radio
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RADIO_ERROR_NONE`: Successful
+  /// - `RADIO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RADIO_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `RADIO_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `radio_set_scan_completed_cb()`
   int radio_unset_scan_completed_cb(
     radio_h radio,
   ) {
@@ -488,21 +663,32 @@ class Tizen65CapiMediaRadio {
   late final _radio_unset_scan_completed_cb =
       _radio_unset_scan_completed_cbPtr.asFunction<int Function(radio_h)>();
 
-  /// @brief Sets a callback function to be invoked when the radio is interrupted.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] radio     The handle to radio
-  /// @param[in] callback  The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RADIO_ERROR_NONE Successful
-  /// @retval #RADIO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #RADIO_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #RADIO_ERROR_NOT_SUPPORTED Not supported
-  /// @post  radio_interrupted_cb() will be invoked.
-  /// @see radio_unset_interrupted_cb()
-  /// @see #radio_interrupted_code_e
-  /// @see radio_interrupted_cb()
+  /// Sets a callback function to be invoked when the radio is interrupted.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `radio` (in): The handle to radio
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RADIO_ERROR_NONE`: Successful
+  /// - `RADIO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RADIO_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `RADIO_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - radio_interrupted_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `radio_unset_interrupted_cb()`
+  /// - `radio_interrupted_code_e`
+  /// - `radio_interrupted_cb()`
   int radio_set_interrupted_cb(
     radio_h radio,
     radio_interrupted_cb callback,
@@ -523,16 +709,25 @@ class Tizen65CapiMediaRadio {
       _radio_set_interrupted_cbPtr.asFunction<
           int Function(radio_h, radio_interrupted_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the interrupted callback function.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] radio The handle to radio
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RADIO_ERROR_NONE Successful
-  /// @retval #RADIO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #RADIO_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #RADIO_ERROR_NOT_SUPPORTED Not supported
-  /// @see radio_set_interrupted_cb()
+  /// Unsets the interrupted callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `radio` (in): The handle to radio
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RADIO_ERROR_NONE`: Successful
+  /// - `RADIO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RADIO_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `RADIO_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `radio_set_interrupted_cb()`
   int radio_unset_interrupted_cb(
     radio_h radio,
   ) {
@@ -547,17 +742,24 @@ class Tizen65CapiMediaRadio {
   late final _radio_unset_interrupted_cb =
       _radio_unset_interrupted_cbPtr.asFunction<int Function(radio_h)>();
 
-  /// @brief Gets the min, max frequency of the region.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in]  radio    The handle to radio
-  /// @param[out] min_freq The min frequency [87500 ~ 108000] (kHz)
-  /// @param[out] max_freq The max frequency [87500 ~ 108000] (kHz)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RADIO_ERROR_NONE Successful
-  /// @retval #RADIO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #RADIO_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #RADIO_ERROR_NOT_SUPPORTED Not supported
+  /// Gets the min, max frequency of the region.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `radio` (in): The handle to radio
+  /// - `min_freq` (out): The min frequency `[87500 ~ 108000]` (kHz)
+  /// - `max_freq` (out): The max frequency `[87500 ~ 108000]` (kHz)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RADIO_ERROR_NONE`: Successful
+  /// - `RADIO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RADIO_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `RADIO_ERROR_NOT_SUPPORTED`: Not supported
   int radio_get_frequency_range(
     radio_h radio,
     ffi.Pointer<ffi.Int> min_freq,
@@ -578,16 +780,23 @@ class Tizen65CapiMediaRadio {
       _radio_get_frequency_rangePtr.asFunction<
           int Function(radio_h, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets channel spacing.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in]   radio           The handle to radio
-  /// @param[out]  channel_spacing The channel spacing value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RADIO_ERROR_NONE Successful
-  /// @retval #RADIO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #RADIO_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #RADIO_ERROR_NOT_SUPPORTED Not supported
+  /// Gets channel spacing.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `radio` (in): The handle to radio
+  /// - `channel_spacing` (out): The channel spacing value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RADIO_ERROR_NONE`: Successful
+  /// - `RADIO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RADIO_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `RADIO_ERROR_NOT_SUPPORTED`: Not supported
   int radio_get_channel_spacing(
     radio_h radio,
     ffi.Pointer<ffi.Int> channel_spacing,
@@ -604,21 +813,28 @@ class Tizen65CapiMediaRadio {
   late final _radio_get_channel_spacing = _radio_get_channel_spacingPtr
       .asFunction<int Function(radio_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the radio's volume.
-  /// @details  Setting this volume adjusts the radio's instance volume, not the system volume.
-  /// The valid range is from 0 to 1.0, inclusive (1.0 = 100%). Default value is 1.0.
-  /// To change system volume, use the @ref CAPI_MEDIA_SOUND_MANAGER_MODULE API.
-  /// Finally, it does not support to set other value into each channel currently.
-  /// @since_tizen 3.0
-  /// @param[in] radio  The handle to radio
-  /// @param[in] volume The volume to set [0.0 ~ 1.0](1.0 = 100%)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RADIO_ERROR_NONE Successful
-  /// @retval #RADIO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #RADIO_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #RADIO_ERROR_NOT_SUPPORTED Not supported
-  /// @see radio_get_volume()
+  /// Sets the radio's volume.
+  ///
+  /// Setting this volume adjusts the radio's instance volume, not the system volume. The valid range is from 0 to 1.0, inclusive (1.0 = 100%). Default value is 1.0. To change system volume, use the `CAPI_MEDIA_SOUND_MANAGER_MODULE` API. Finally, it does not support to set other value into each channel currently.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `radio` (in): The handle to radio
+  /// - `volume` (in): The volume to set `[0.0 ~ 1.0]`(1.0 = 100%)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RADIO_ERROR_NONE`: Successful
+  /// - `RADIO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RADIO_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `RADIO_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `radio_get_volume()`
   int radio_set_volume(
     radio_h radio,
     double volume,
@@ -635,20 +851,28 @@ class Tizen65CapiMediaRadio {
   late final _radio_set_volume =
       _radio_set_volumePtr.asFunction<int Function(radio_h, double)>();
 
-  /// @brief Gets the radio's current volume.
-  /// @details The range of @a volume is from @c 0 to @c 1.0, inclusive (1.0 = 100%).
-  /// This function gets the radio volume, not the system volume.
-  /// To get the system volume, use the @ref CAPI_MEDIA_SOUND_MANAGER_MODULE API.
-  /// @since_tizen 3.0
-  /// @param[in]  radio  The handle to radio
-  /// @param[out] volume The current volume [0.0 ~ 1.0](1.0 = 100%)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RADIO_ERROR_NONE Successful
-  /// @retval #RADIO_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #RADIO_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #RADIO_ERROR_NOT_SUPPORTED Not supported
-  /// @see radio_set_volume()
+  /// Gets the radio's current volume.
+  ///
+  /// The range of `volume` is from `0` to `1.0`, inclusive (1.0 = 100%). This function gets the radio volume, not the system volume. To get the system volume, use the `CAPI_MEDIA_SOUND_MANAGER_MODULE` API.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `radio` (in): The handle to radio
+  /// - `volume` (out): The current volume `[0.0 ~ 1.0]`(1.0 = 100%)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RADIO_ERROR_NONE`: Successful
+  /// - `RADIO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RADIO_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `RADIO_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `radio_set_volume()`
   int radio_get_volume(
     radio_h radio,
     ffi.Pointer<ffi.Float> volume,
@@ -667,10 +891,14 @@ class Tizen65CapiMediaRadio {
       .asFunction<int Function(radio_h, ffi.Pointer<ffi.Float>)>();
 }
 
+/// @nodoc
 final class radio_s extends ffi.Opaque {}
 
-/// @brief Enumeration of radio state.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration of radio state.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class radio_state_e {
   /// < Ready to play or scan
   static const int RADIO_STATE_READY = 0;
@@ -682,8 +910,11 @@ abstract class radio_state_e {
   static const int RADIO_STATE_SCANNING = 2;
 }
 
-/// @brief Enumeration of error codes for the radio.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration of error codes for the radio.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class radio_error_e {
   /// < Successful
   static const int RADIO_ERROR_NONE = 0;
@@ -713,79 +944,138 @@ abstract class radio_error_e {
   static const int RADIO_ERROR_NOT_SUPPORTED = -1073741822;
 }
 
-/// @brief Enumeration of radio interrupted type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration of radio interrupted type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class radio_interrupted_code_e {
   /// < Interrupted by a resource conflict
   static const int RADIO_INTERRUPTED_BY_RESOURCE_CONFLICT = 4;
 }
 
-/// @brief Radio type handle.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Radio type handle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 typedef radio_h = ffi.Pointer<radio_s>;
 
-/// @brief  Called when the radio seek is completed.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] frequency  The current frequency [87500 ~ 108000] (kHz)
-/// @param[in] user_data  The user data passed from the callback registration function
-/// @pre It will be invoked when the radio seek is completed by registering this callback using radio_seek_up() or radio_seek_down().
-/// @see radio_seek_up()
-/// @see radio_seek_down()
+/// Called when the radio seek is completed.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `frequency` (in): The current frequency `[87500 ~ 108000]` (kHz)
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - It will be invoked when the radio seek is completed by registering this callback using radio_seek_up() or radio_seek_down().
+///
+/// **See also:**
+/// - `radio_seek_up()`
+/// - `radio_seek_down()`
+/// @nodoc
 typedef radio_seek_completed_cb
     = ffi.Pointer<ffi.NativeFunction<radio_seek_completed_cbFunction>>;
+/// @nodoc
 typedef radio_seek_completed_cbFunction = ffi.Void Function(
     ffi.Int frequency, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartradio_seek_completed_cbFunction = void Function(
     int frequency, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief  Called when the scan information is updated.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] frequency  The tuned radio frequency [87500 ~ 108000] (kHz)
-/// @param[in] user_data  The user data passed from the callback registration function
-/// @pre It will be invoked by radio_scan_start().
-/// @see radio_scan_start()
+/// Called when the scan information is updated.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `frequency` (in): The tuned radio frequency `[87500 ~ 108000]` (kHz)
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - It will be invoked by radio_scan_start().
+///
+/// **See also:**
+/// - `radio_scan_start()`
+/// @nodoc
 typedef radio_scan_updated_cb
     = ffi.Pointer<ffi.NativeFunction<radio_scan_updated_cbFunction>>;
+/// @nodoc
 typedef radio_scan_updated_cbFunction = ffi.Void Function(
     ffi.Int frequency, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartradio_scan_updated_cbFunction = void Function(
     int frequency, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief  Called when the radio scan is stopped.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] user_data  The user data passed from the callback registration function
-/// @pre It will be invoked when the scan is stopped by radio_scan_stop().
-/// @see radio_scan_stop()
+/// Called when the radio scan is stopped.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - It will be invoked when the scan is stopped by radio_scan_stop().
+///
+/// **See also:**
+/// - `radio_scan_stop()`
+/// @nodoc
 typedef radio_scan_stopped_cb
     = ffi.Pointer<ffi.NativeFunction<radio_scan_stopped_cbFunction>>;
+/// @nodoc
 typedef radio_scan_stopped_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartradio_scan_stopped_cbFunction = void Function(
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief  Called when the radio scan is completed.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] user_data  The user data passed from the callback registration function
-/// @pre It will be invoked when the scan is completed by registering this callback using radio_set_scan_completed_cb().
-/// @see radio_scan_start()
-/// @see radio_set_scan_completed_cb()
-/// @see radio_unset_scan_completed_cb()
+/// Called when the radio scan is completed.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - It will be invoked when the scan is completed by registering this callback using radio_set_scan_completed_cb().
+///
+/// **See also:**
+/// - `radio_scan_start()`
+/// - `radio_set_scan_completed_cb()`
+/// - `radio_unset_scan_completed_cb()`
+/// @nodoc
 typedef radio_scan_completed_cb
     = ffi.Pointer<ffi.NativeFunction<radio_scan_completed_cbFunction>>;
+/// @nodoc
 typedef radio_scan_completed_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartradio_scan_completed_cbFunction = void Function(
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief  Called when the radio is interrupted.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] code      The interrupted error code
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see radio_set_interrupted_cb()
-/// @see radio_unset_interrupted_cb()
+/// Called when the radio is interrupted.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `code` (in): The interrupted error code
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `radio_set_interrupted_cb()`
+/// - `radio_unset_interrupted_cb()`
+/// @nodoc
 typedef radio_interrupted_cb
     = ffi.Pointer<ffi.NativeFunction<radio_interrupted_cbFunction>>;
+/// @nodoc
 typedef radio_interrupted_cbFunction = ffi.Void Function(
     ffi.Int32 code, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartradio_interrupted_cbFunction = void Function(
     int code, ffi.Pointer<ffi.Void> user_data);

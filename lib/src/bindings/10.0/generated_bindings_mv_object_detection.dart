@@ -1,3 +1,6 @@
+/// {@category 10.0/tizen}
+library tizen_interop_10_0.mv_object_detection;
+
 // Copyright 2026 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'generated_bindings_mv_common.dart' as mv_common;
 
 /// Dart bindings for Tizen mv_object_detection APIs.
+/// {@category 10.0/tizen}
 class Tizen100MvObjectDetection {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,35 +29,40 @@ class Tizen100MvObjectDetection {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates a inference handle for face detection object.
-  /// @details Use this function to create a inference handle. After the creation
-  /// the face detection task has to be prepared with
-  /// mv_face_detection_prepare() function to prepare a network
-  /// for the inference.
+  /// Creates a inference handle for face detection object.
   ///
-  /// @since_tizen 9.0
+  /// Use this function to create a inference handle. After the creation the face detection task has to be prepared with mv_face_detection_prepare() function to prepare a network for the inference.
   ///
-  /// @remarks The @a handle should be released using mv_face_detection_destroy().
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @param[out] handle    The handle to the inference to be created.
+  /// **Remarks:**
+  /// - The `handle` should be released using mv_face_detection_destroy().
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_INTERNAL Internal Error
+  /// **Parameters:**
+  /// - `handle` (out): The handle to the inference to be created.
   ///
-  /// @code
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_INTERNAL`: Internal Error
+  ///
+  /// **See also:**
+  /// - `mv_face_detection_destroy()`
+  /// - `mv_face_detection_prepare()`
+  ///
+  /// ```
   /// #include <mv_face_detection.h>
   /// ...
   /// mv_face_detection_h handle = NULL;
   /// mv_face_detection_create(&handle);
   /// ...
   /// mv_face_detection_destroy(handle);
-  /// @endcode
-  ///
-  /// @see mv_face_detection_destroy()
-  /// @see mv_face_detection_prepare()
+  /// ```
   int mv_face_detection_create(
     ffi.Pointer<mv_face_detection_h> handle,
   ) {
@@ -69,20 +78,27 @@ class Tizen100MvObjectDetection {
   late final _mv_face_detection_create = _mv_face_detection_createPtr
       .asFunction<int Function(ffi.Pointer<mv_face_detection_h>)>();
 
-  /// @brief Destroys inference handle and releases all its resources.
+  /// Destroys inference handle and releases all its resources.
   ///
-  /// @since_tizen 9.0
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @param[in] handle    The handle to the inference to be destroyed.
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the inference to be destroyed.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre Create inference handle by using mv_face_detection_create()
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
   ///
-  /// @see mv_face_detection_create()
+  /// **Preconditions:**
+  /// - Create inference handle by using mv_face_detection_create()
+  ///
+  /// **See also:**
+  /// - `mv_face_detection_create()`
   int mv_face_detection_destroy(
     mv_face_detection_h handle,
   ) {
@@ -97,20 +113,26 @@ class Tizen100MvObjectDetection {
   late final _mv_face_detection_destroy = _mv_face_detection_destroyPtr
       .asFunction<int Function(mv_face_detection_h)>();
 
-  /// @brief Configures the backend for the face detection inference.
+  /// Configures the backend for the face detection inference.
   ///
-  /// @since_tizen 9.0
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @param[in] handle         The handle to the inference
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the inference
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_VISION_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre Create an inference handle by calling mv_face_detection_create()
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_VISION_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create an inference handle by calling mv_face_detection_create()
   int mv_face_detection_configure(
     mv_face_detection_h handle,
   ) {
@@ -125,24 +147,30 @@ class Tizen100MvObjectDetection {
   late final _mv_face_detection_configure = _mv_face_detection_configurePtr
       .asFunction<int Function(mv_face_detection_h)>();
 
-  /// @brief Prepares the face detection inference.
-  /// @details Use this function to prepare the face detection inference based on
-  /// the configured network.
+  /// Prepares the face detection inference.
   ///
-  /// @since_tizen 9.0
+  /// Use this function to prepare the face detection inference based on the configured network.
   ///
-  /// @param[in] handle         The handle to the inference.
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_INVALID_DATA Invalid model data
-  /// @retval #MEDIA_VISION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIA_VISION_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT Not supported format
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the inference.
   ///
-  /// @pre Prepare an inference by calling mv_face_detection_configure()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_INVALID_DATA`: Invalid model data
+  /// - `MEDIA_VISION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_VISION_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT`: Not supported format
+  ///
+  /// **Preconditions:**
+  /// - Prepare an inference by calling mv_face_detection_configure()
   int mv_face_detection_prepare(
     mv_face_detection_h handle,
   ) {
@@ -157,28 +185,35 @@ class Tizen100MvObjectDetection {
   late final _mv_face_detection_prepare = _mv_face_detection_preparePtr
       .asFunction<int Function(mv_face_detection_h)>();
 
-  /// @brief Performs the face detection inference on the @a source.
+  /// Performs the face detection inference on the `source`.
   ///
-  /// @since_tizen 9.0
-  /// @remarks This function is synchronous and may take considerable time to run.
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @param[in] handle          The handle to the inference
-  /// @param[in] source         The handle to the source of the media
+  /// **Remarks:**
+  /// - This function is synchronous and may take considerable time to run.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT Source colorspace
-  /// isn't supported
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the inference
+  /// - `source` (in): The handle to the source of the media
   ///
-  /// @pre Create a source handle by calling mv_create_source()
-  /// @pre Create an inference handle by calling mv_face_detection_create()
-  /// @pre Prepare an inference by calling mv_face_detection_configure()
-  /// @pre Prepare an inference by calling mv_face_detection_prepare()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @par Inference Example
-  /// @snippet face_detection_sync.c FD sync
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT`: Source colorspace isn't supported
+  ///
+  /// **Preconditions:**
+  /// - Create a source handle by calling mv_create_source()
+  /// - Create an inference handle by calling mv_face_detection_create()
+  /// - Prepare an inference by calling mv_face_detection_configure()
+  /// - Prepare an inference by calling mv_face_detection_prepare()
+  ///
+  /// **Inference Example:**
+  /// - @snippet face_detection_sync.c FD sync
   int mv_face_detection_inference(
     mv_face_detection_h handle,
     mv_common.mv_source_h source,
@@ -196,31 +231,38 @@ class Tizen100MvObjectDetection {
   late final _mv_face_detection_inference = _mv_face_detection_inferencePtr
       .asFunction<int Function(mv_face_detection_h, mv_common.mv_source_h)>();
 
-  /// @brief Performs asynchronously the face detection inference on the @a source.
+  /// Performs asynchronously the face detection inference on the `source`.
   ///
-  /// @since_tizen 9.0
-  /// @remarks This function operates asynchronously, so it returns immediately upon invocation.
-  /// The inference results are inserted into the outgoing queue within the framework
-  /// in the order of processing, and the results can be obtained through mv_face_detection_get_result_count()
-  /// and mv_face_detection_get_bound_box().
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @param[in] handle         The handle to the inference
-  /// @param[in] source         The handle to the source of the media
+  /// **Remarks:**
+  /// - This function operates asynchronously, so it returns immediately upon invocation.
+  /// - The inference results are inserted into the outgoing queue within the framework
+  /// - in the order of processing, and the results can be obtained through mv_face_detection_get_result_count()
+  /// - and mv_face_detection_get_bound_box().
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT Source colorspace
-  /// isn't supported
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the inference
+  /// - `source` (in): The handle to the source of the media
   ///
-  /// @pre Create a source handle by calling mv_create_source()
-  /// @pre Create an inference handle by calling mv_face_detection_create()
-  /// @pre Prepare an inference by calling mv_face_detection_configure()
-  /// @pre Prepare an inference by calling mv_face_detection_prepare()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @par Async Inference Example
-  /// @snippet face_detection_async.c FD async
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT`: Source colorspace isn't supported
+  ///
+  /// **Preconditions:**
+  /// - Create a source handle by calling mv_create_source()
+  /// - Create an inference handle by calling mv_face_detection_create()
+  /// - Prepare an inference by calling mv_face_detection_configure()
+  /// - Prepare an inference by calling mv_face_detection_prepare()
+  ///
+  /// **Async Inference Example:**
+  /// - @snippet face_detection_async.c FD async
   int mv_face_detection_inference_async(
     mv_face_detection_h handle,
     mv_common.mv_source_h source,
@@ -239,24 +281,30 @@ class Tizen100MvObjectDetection {
       _mv_face_detection_inference_asyncPtr.asFunction<
           int Function(mv_face_detection_h, mv_common.mv_source_h)>();
 
-  /// @brief Gets the face detection inference result on the @a handle.
+  /// Gets the face detection inference result on the `handle`.
   ///
-  /// @since_tizen 9.0
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @param[in] handle          The handle to the inference
-  /// @param[out] frame_number   A frame number inferenced.
-  /// @param[out] result_cnt     A number of results.
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the inference
+  /// - `frame_number` (out): A frame number inferenced.
+  /// - `result_cnt` (out): A number of results.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre Create a source handle by calling mv_create_source()
-  /// @pre Create an inference handle by calling mv_face_detection_create()
-  /// @pre Prepare an inference by calling mv_face_detection_configure()
-  /// @pre Prepare an inference by calling mv_face_detection_prepare()
-  /// @pre Request an inference by calling mv_face_detection_inference()
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a source handle by calling mv_create_source()
+  /// - Create an inference handle by calling mv_face_detection_create()
+  /// - Prepare an inference by calling mv_face_detection_configure()
+  /// - Prepare an inference by calling mv_face_detection_prepare()
+  /// - Request an inference by calling mv_face_detection_inference()
   int mv_face_detection_get_result_count(
     mv_face_detection_h handle,
     ffi.Pointer<ffi.UnsignedLong> frame_number,
@@ -281,28 +329,34 @@ class Tizen100MvObjectDetection {
           int Function(mv_face_detection_h, ffi.Pointer<ffi.UnsignedLong>,
               ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Gets a bound box to detected face region.
+  /// Gets a bound box to detected face region.
   ///
-  /// @since_tizen 9.0
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @param[in] handle              The handle to the inference
-  /// @param[in] index               A result index.
-  /// @param[out] left               An left position of bound box.
-  /// @param[out] top                An top position of bound box.
-  /// @param[out] right              An right position of bound box.
-  /// @param[out] bottom             An bottom position of bound box.
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the inference
+  /// - `index` (in): A result index.
+  /// - `left` (out): An left position of bound box.
+  /// - `top` (out): An top position of bound box.
+  /// - `right` (out): An right position of bound box.
+  /// - `bottom` (out): An bottom position of bound box.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre Create a source handle by calling mv_create_source()
-  /// @pre Create an inference handle by calling mv_face_detection_create()
-  /// @pre Prepare an inference by calling mv_face_detection_configure()
-  /// @pre Prepare an inference by calling mv_face_detection_prepare()
-  /// @pre Request an inference by calling mv_face_detection_inference()
-  /// @pre Get result count by calling mv_face_detection_get_result_count()
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a source handle by calling mv_create_source()
+  /// - Create an inference handle by calling mv_face_detection_create()
+  /// - Prepare an inference by calling mv_face_detection_configure()
+  /// - Prepare an inference by calling mv_face_detection_prepare()
+  /// - Request an inference by calling mv_face_detection_inference()
+  /// - Get result count by calling mv_face_detection_get_result_count()
   int mv_face_detection_get_bound_box(
     mv_face_detection_h handle,
     int index,
@@ -340,35 +394,40 @@ class Tizen100MvObjectDetection {
               ffi.Pointer<ffi.Int>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Creates a inference handle for object detection object.
-  /// @details Use this function to create a inference handle. After the creation
-  /// the object detection 3d task has to be prepared with
-  /// mv_object_detection_prepare() function to prepare a network
-  /// for the inference.
+  /// Creates a inference handle for object detection object.
   ///
-  /// @since_tizen 9.0
+  /// Use this function to create a inference handle. After the creation the object detection 3d task has to be prepared with mv_object_detection_prepare() function to prepare a network for the inference.
   ///
-  /// @remarks The @a infer should be released using mv_object_detection_destroy().
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @param[out] infer    The handle to the inference to be created.
+  /// **Remarks:**
+  /// - The `infer` should be released using mv_object_detection_destroy().
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_INTERNAL Internal Error
+  /// **Parameters:**
+  /// - `infer` (out): The handle to the inference to be created.
   ///
-  /// @code
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_INTERNAL`: Internal Error
+  ///
+  /// **See also:**
+  /// - `mv_object_detection_destroy()`
+  /// - `mv_object_detection_prepare()`
+  ///
+  /// ```
   /// #include <mv_object_detection.h>
   /// ...
   /// mv_object_detection_h handle = NULL;
   /// mv_object_detection_create(&handle);
   /// ...
   /// mv_object_detection_destroy(handle);
-  /// @endcode
-  ///
-  /// @see mv_object_detection_destroy()
-  /// @see mv_object_detection_prepare()
+  /// ```
   int mv_object_detection_create(
     ffi.Pointer<mv_object_detection_h> infer,
   ) {
@@ -384,20 +443,27 @@ class Tizen100MvObjectDetection {
   late final _mv_object_detection_create = _mv_object_detection_createPtr
       .asFunction<int Function(ffi.Pointer<mv_object_detection_h>)>();
 
-  /// @brief Destroys inference handle and releases all its resources.
+  /// Destroys inference handle and releases all its resources.
   ///
-  /// @since_tizen 9.0
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @param[in] infer    The handle to the inference to be destroyed.
+  /// **Parameters:**
+  /// - `infer` (in): The handle to the inference to be destroyed.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre Create inference handle by using mv_object_detection_create()
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
   ///
-  /// @see mv_object_detection_create()
+  /// **Preconditions:**
+  /// - Create inference handle by using mv_object_detection_create()
+  ///
+  /// **See also:**
+  /// - `mv_object_detection_create()`
   int mv_object_detection_destroy(
     mv_object_detection_h infer,
   ) {
@@ -412,18 +478,23 @@ class Tizen100MvObjectDetection {
   late final _mv_object_detection_destroy = _mv_object_detection_destroyPtr
       .asFunction<int Function(mv_object_detection_h)>();
 
-  /// @brief Configures the backend for the object detection inference.
+  /// Configures the backend for the object detection inference.
   ///
-  /// @since_tizen 9.0
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @param[in] infer         The handle to the inference
+  /// **Parameters:**
+  /// - `infer` (in): The handle to the inference
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_VISION_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_VISION_ERROR_OUT_OF_MEMORY`: Out of memory
   int mv_object_detection_configure(
     mv_object_detection_h infer,
   ) {
@@ -438,22 +509,27 @@ class Tizen100MvObjectDetection {
   late final _mv_object_detection_configure = _mv_object_detection_configurePtr
       .asFunction<int Function(mv_object_detection_h)>();
 
-  /// @brief Prepares the object detection inference.
-  /// @details Use this function to prepare the object detection inference based on
-  /// the configured network.
+  /// Prepares the object detection inference.
   ///
-  /// @since_tizen 9.0
+  /// Use this function to prepare the object detection inference based on the configured network.
   ///
-  /// @param[in] infer         The handle to the inference.
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_INVALID_DATA Invalid model data
-  /// @retval #MEDIA_VISION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIA_VISION_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT Not supported format
+  /// **Parameters:**
+  /// - `infer` (in): The handle to the inference.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_INVALID_DATA`: Invalid model data
+  /// - `MEDIA_VISION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_VISION_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT`: Not supported format
   int mv_object_detection_prepare(
     mv_object_detection_h infer,
   ) {
@@ -468,28 +544,35 @@ class Tizen100MvObjectDetection {
   late final _mv_object_detection_prepare = _mv_object_detection_preparePtr
       .asFunction<int Function(mv_object_detection_h)>();
 
-  /// @brief Performs the object detection inference on the @a source.
+  /// Performs the object detection inference on the `source`.
   ///
-  /// @since_tizen 9.0
-  /// @remarks This function is synchronous and may take considerable time to run.
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @param[in] infer          The handle to the inference
-  /// @param[in] source         The handle to the source of the media
+  /// **Remarks:**
+  /// - This function is synchronous and may take considerable time to run.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT Source colorspace
-  /// isn't supported
+  /// **Parameters:**
+  /// - `infer` (in): The handle to the inference
+  /// - `source` (in): The handle to the source of the media
   ///
-  /// @pre Create a source handle by calling mv_create_source()
-  /// @pre Create an inference handle by calling mv_object_detection_create()
-  /// @pre Prepare an inference by calling mv_object_detection_configure()
-  /// @pre Prepare an inference by calling mv_object_detection_prepare()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @par Inference Example
-  /// @snippet object_detection_sync.c OD sync
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT`: Source colorspace isn't supported
+  ///
+  /// **Preconditions:**
+  /// - Create a source handle by calling mv_create_source()
+  /// - Create an inference handle by calling mv_object_detection_create()
+  /// - Prepare an inference by calling mv_object_detection_configure()
+  /// - Prepare an inference by calling mv_object_detection_prepare()
+  ///
+  /// **Inference Example:**
+  /// - @snippet object_detection_sync.c OD sync
   int mv_object_detection_inference(
     mv_object_detection_h infer,
     mv_common.mv_source_h source,
@@ -507,31 +590,38 @@ class Tizen100MvObjectDetection {
   late final _mv_object_detection_inference = _mv_object_detection_inferencePtr
       .asFunction<int Function(mv_object_detection_h, mv_common.mv_source_h)>();
 
-  /// @brief Performs asynchronously the object detection inference on the @a source.
+  /// Performs asynchronously the object detection inference on the `source`.
   ///
-  /// @since_tizen 9.0
-  /// @remarks This function operates asynchronously, so it returns immediately upon invocation.
-  /// The inference results are inserted into the outgoing queue within the framework
-  /// in the order of processing, and the results can be obtained through
-  /// mv_object_detection_get_result_count() and mv_object_detection_get_bound_box().
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @param[in] handle         The handle to the inference
-  /// @param[in] source         The handle to the source of the media
+  /// **Remarks:**
+  /// - This function operates asynchronously, so it returns immediately upon invocation.
+  /// - The inference results are inserted into the outgoing queue within the framework
+  /// - in the order of processing, and the results can be obtained through
+  /// - mv_object_detection_get_result_count() and mv_object_detection_get_bound_box().
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT Source colorspace
-  /// isn't supported
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the inference
+  /// - `source` (in): The handle to the source of the media
   ///
-  /// @pre Create a source handle by calling mv_create_source()
-  /// @pre Create an inference handle by calling mv_object_detection_create()
-  /// @pre Prepare an inference by calling mv_object_detection_configure()
-  /// @pre Prepare an inference by calling mv_object_detection_prepare()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @par Async Inference Example
-  /// @snippet object_detection_async.c OD async
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT`: Source colorspace isn't supported
+  ///
+  /// **Preconditions:**
+  /// - Create a source handle by calling mv_create_source()
+  /// - Create an inference handle by calling mv_object_detection_create()
+  /// - Prepare an inference by calling mv_object_detection_configure()
+  /// - Prepare an inference by calling mv_object_detection_prepare()
+  ///
+  /// **Async Inference Example:**
+  /// - @snippet object_detection_async.c OD async
   int mv_object_detection_inference_async(
     mv_object_detection_h handle,
     mv_common.mv_source_h source,
@@ -550,24 +640,30 @@ class Tizen100MvObjectDetection {
       _mv_object_detection_inference_asyncPtr.asFunction<
           int Function(mv_object_detection_h, mv_common.mv_source_h)>();
 
-  /// @brief Gets the object detection inference result on the @a handle.
+  /// Gets the object detection inference result on the `handle`.
   ///
-  /// @since_tizen 9.0
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @param[in] handle          The handle to the inference
-  /// @param[out] frame_number   A frame number inferenced.
-  /// @param[out] result_cnt     A number of results.
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the inference
+  /// - `frame_number` (out): A frame number inferenced.
+  /// - `result_cnt` (out): A number of results.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre Create a source handle by calling mv_create_source()
-  /// @pre Create an inference handle by calling mv_object_detection_create()
-  /// @pre Prepare an inference by calling mv_object_detection_configure()
-  /// @pre Prepare an inference by calling mv_object_detection_prepare()
-  /// @pre Request an inference by calling mv_object_detection_inference()
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a source handle by calling mv_create_source()
+  /// - Create an inference handle by calling mv_object_detection_create()
+  /// - Prepare an inference by calling mv_object_detection_configure()
+  /// - Prepare an inference by calling mv_object_detection_prepare()
+  /// - Request an inference by calling mv_object_detection_inference()
   int mv_object_detection_get_result_count(
     mv_object_detection_h handle,
     ffi.Pointer<ffi.UnsignedLong> frame_number,
@@ -592,27 +688,33 @@ class Tizen100MvObjectDetection {
           int Function(mv_object_detection_h, ffi.Pointer<ffi.UnsignedLong>,
               ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Gets a bound box to detected object region.
+  /// Gets a bound box to detected object region.
   ///
-  /// @since_tizen 9.0
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @param[in] handle              The handle to the inference
-  /// @param[in] index               A result index.
-  /// @param[out] left               An left position array to bound boxes.
-  /// @param[out] top                An top position array to bound boxes.
-  /// @param[out] right              An right position array to bound boxes.
-  /// @param[out] bottom             An bottom position array to bound boxes.
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the inference
+  /// - `index` (in): A result index.
+  /// - `left` (out): An left position array to bound boxes.
+  /// - `top` (out): An top position array to bound boxes.
+  /// - `right` (out): An right position array to bound boxes.
+  /// - `bottom` (out): An bottom position array to bound boxes.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre Create a source handle by calling mv_create_source()
-  /// @pre Create an inference handle by calling mv_object_detection_create()
-  /// @pre Prepare an inference by calling mv_object_detection_configure()
-  /// @pre Prepare an inference by calling mv_object_detection_prepare()
-  /// @pre Prepare an inference by calling mv_object_detection_inference()
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a source handle by calling mv_create_source()
+  /// - Create an inference handle by calling mv_object_detection_create()
+  /// - Prepare an inference by calling mv_object_detection_configure()
+  /// - Prepare an inference by calling mv_object_detection_prepare()
+  /// - Prepare an inference by calling mv_object_detection_inference()
   int mv_object_detection_get_bound_box(
     mv_object_detection_h handle,
     int index,
@@ -651,12 +753,16 @@ class Tizen100MvObjectDetection {
               ffi.Pointer<ffi.Int>)>();
 }
 
-/// @brief The face detection object handle.
+/// The face detection object handle.
 ///
-/// @since_tizen 9.0
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 typedef mv_face_detection_h = ffi.Pointer<ffi.Void>;
 
-/// @brief The object detection object handle.
+/// The object detection object handle.
 ///
-/// @since_tizen 9.0
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 typedef mv_object_detection_h = ffi.Pointer<ffi.Void>;

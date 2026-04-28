@@ -1,3 +1,6 @@
+/// {@category 9.0/tizen}
+library tizen_interop_9_0.accounts_svc;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen accounts-svc APIs.
+/// {@category 9.0/tizen}
 class Tizen90AccountsSvc {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,20 +28,30 @@ class Tizen90AccountsSvc {
           lookup)
       : _lookup = lookup;
 
-  /// @deprecated Deprecated since Tizen 2.4.\n
-  /// This API is not necessary to use since Tizen 2.4.
-  /// @brief      Connects to the account database by readwrite mode.
+  /// **Deprecated:** Deprecated since Tizen 2.4. This API is not necessary to use since Tizen 2.4.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel  public
-  /// @privilege  %http://tizen.org/privilege/account.read \n
-  /// %http://tizen.org/privilege/account.write
-  /// @remarks    This API need both privileges
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #ACCOUNT_ERROR_NONE               Successful
-  /// @retval     #ACCOUNT_ERROR_DB_NOT_OPENED      DB is not connected
-  /// @retval     #ACCOUNT_ERROR_PERMISSION_DENIED  DB Access fail by permission
+  /// Connects to the account database by readwrite mode.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/account.read>
+  /// - <http://tizen.org/privilege/account.write>
+  ///
+  /// **Remarks:**
+  /// - This API need both privileges
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_DB_NOT_OPENED`: DB is not connected
+  /// - `ACCOUNT_ERROR_PERMISSION_DENIED`: DB Access fail by permission
   int account_connect() {
     return _account_connect();
   }
@@ -47,16 +61,20 @@ class Tizen90AccountsSvc {
   late final _account_connect =
       _account_connectPtr.asFunction<int Function()>();
 
-  /// @deprecated Deprecated since Tizen 2.4.\n
-  /// This API is not necessary to use since Tizen 2.4.
-  /// @brief      Connects to the account database by readonly mode.
+  /// **Deprecated:** Deprecated since Tizen 2.4. This API is not necessary to use since Tizen 2.4.
   ///
-  /// @since_tizen 2.3
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #ACCOUNT_ERROR_NONE               Successful
-  /// @retval     #ACCOUNT_ERROR_DB_NOT_OPENED      DB is not connected
-  /// @retval     #ACCOUNT_ERROR_PERMISSION_DENIED  DB Access fail by permission
+  /// Connects to the account database by readonly mode.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_DB_NOT_OPENED`: DB is not connected
+  /// - `ACCOUNT_ERROR_PERMISSION_DENIED`: DB Access fail by permission
   int account_connect_readonly() {
     return _account_connect_readonly();
   }
@@ -67,16 +85,20 @@ class Tizen90AccountsSvc {
   late final _account_connect_readonly =
       _account_connect_readonlyPtr.asFunction<int Function()>();
 
-  /// @deprecated Deprecated since Tizen 2.4.\n
-  /// This API is not necessary to use since Tizen 2.4.
-  /// @brief      Disconnects from the account database.
+  /// **Deprecated:** Deprecated since Tizen 2.4. This API is not necessary to use since Tizen 2.4.
   ///
-  /// @since_tizen 2.3
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #ACCOUNT_ERROR_NONE               Successful
-  /// @retval     #ACCOUNT_ERROR_PERMISSION_DENIED  DB Access fail by permission
-  /// @retval     #ACCOUNT_ERROR_DATABASE_BUSY      SQLite busy handler expired
+  /// Disconnects from the account database.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_PERMISSION_DENIED`: DB Access fail by permission
+  /// - `ACCOUNT_ERROR_DATABASE_BUSY`: SQLite busy handler expired
   int account_disconnect() {
     return _account_disconnect();
   }
@@ -86,22 +108,29 @@ class Tizen90AccountsSvc {
   late final _account_disconnect =
       _account_disconnectPtr.asFunction<int Function()>();
 
-  /// @brief  Creates a handle to the account.
+  /// Creates a handle to the account.
   ///
-  /// @since_tizen 2.3
-  /// @remarks    Release @a account using account_destroy().
-  /// @remarks    The created handle is not added to the account database until account_insert_to_db() is called.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in]  account  The account handle
+  /// **Remarks:**
+  /// - Release `account` using account_destroy().
+  /// - The created handle is not added to the account database until account_insert_to_db() is called.
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #ACCOUNT_ERROR_NONE               Successful
-  /// @retval     #ACCOUNT_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account` (in): The account handle
   ///
-  /// @see account_destroy()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_destroy()`
   int account_create(
     ffi.Pointer<account_h> account,
   ) {
@@ -116,18 +145,24 @@ class Tizen90AccountsSvc {
   late final _account_create =
       _account_createPtr.asFunction<int Function(ffi.Pointer<account_h>)>();
 
-  /// @brief  Destroys the account handle and releases all its resources.
+  /// Destroys the account handle and releases all its resources.
   ///
-  /// @since_tizen 2.3
-  /// @param[in]  account  The account handle
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #ACCOUNT_ERROR_NONE               Successful
-  /// @retval     #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account` (in): The account handle
   ///
-  /// @see account_create()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_create()`
   int account_destroy(
     account_h account,
   ) {
@@ -142,38 +177,50 @@ class Tizen90AccountsSvc {
   late final _account_destroy =
       _account_destroyPtr.asFunction<int Function(account_h)>();
 
-  /// @brief  Inserts the account details to the account database.
+  /// Inserts the account details to the account database.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel   public
-  /// @privilege   %http://tizen.org/privilege/account.read \n
-  /// %http://tizen.org/privilege/account.write
-  /// @remarks     This API need both privileges
-  /// @param[in]   account        The account handle
-  /// @param[out]  account_db_id  The account ID to be assigned to an account
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER        Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_OUT_OF_MEMORY            Out of Memory
-  /// @retval  #ACCOUNT_ERROR_DB_FAILED                Database operation failed
-  /// @retval  #ACCOUNT_ERROR_DUPLICATED               Same user name exists in your application
-  /// @retval  #ACCOUNT_ERROR_NOT_ALLOW_MULTIPLE       Tried to add an account in spite of multiple false accounts
-  /// @retval  #ACCOUNT_ERROR_NOT_REGISTERED_PROVIDER  Tried to add an account though you did not register the account type in manifest
-  /// @retval  #ACCOUNT_ERROR_PERMISSION_DENIED        DB Access fail by permission
-  /// @retval  #ACCOUNT_ERROR_DATABASE_BUSY            SQLite handler is busy
-  /// @retval  #ACCOUNT_ERROR_DB_NOT_OPENED            Account database did not opened
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED            Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre  This function requires an open connection to an account service by account_connect() on tizen 2.3 .\n
-  /// But the account_connect() is not required to use this function since tizen 2.4.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/account.read>
+  /// - <http://tizen.org/privilege/account.write>
   ///
-  /// @see account_delete_from_db_by_id()
-  /// @see account_delete_from_db_by_user_name()
-  /// @see account_delete_from_db_by_package_name()
-  /// @see account_update_to_db_by_id()
-  /// @see account_update_to_db_by_user_name()
+  /// **Remarks:**
+  /// - This API need both privileges
+  ///
+  /// **Parameters:**
+  /// - `account` (in): The account handle
+  /// - `account_db_id` (out): The account ID to be assigned to an account
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `ACCOUNT_ERROR_DB_FAILED`: Database operation failed
+  /// - `ACCOUNT_ERROR_DUPLICATED`: Same user name exists in your application
+  /// - `ACCOUNT_ERROR_NOT_ALLOW_MULTIPLE`: Tried to add an account in spite of multiple false accounts
+  /// - `ACCOUNT_ERROR_NOT_REGISTERED_PROVIDER`: Tried to add an account though you did not register the account type in manifest
+  /// - `ACCOUNT_ERROR_PERMISSION_DENIED`: DB Access fail by permission
+  /// - `ACCOUNT_ERROR_DATABASE_BUSY`: SQLite handler is busy
+  /// - `ACCOUNT_ERROR_DB_NOT_OPENED`: Account database did not opened
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - This function requires an open connection to an account service by account_connect() on tizen 2.3 . But the account_connect() is not required to use this function since tizen 2.4.
+  ///
+  /// **See also:**
+  /// - `account_delete_from_db_by_id()`
+  /// - `account_delete_from_db_by_user_name()`
+  /// - `account_delete_from_db_by_package_name()`
+  /// - `account_update_to_db_by_id()`
+  /// - `account_update_to_db_by_user_name()`
   int account_insert_to_db(
     account_h account,
     ffi.Pointer<ffi.Int> account_db_id,
@@ -191,35 +238,47 @@ class Tizen90AccountsSvc {
   late final _account_insert_to_db = _account_insert_to_dbPtr
       .asFunction<int Function(account_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief  Deletes an account from the account database by account DB ID.
+  /// Deletes an account from the account database by account DB ID.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel  public
-  /// @privilege  %http://tizen.org/privilege/account.read \n
-  /// %http://tizen.org/privilege/account.write
-  /// @remarks    This API need both privileges \n
-  /// Only can delete an account which was added by same package applications
-  /// @param[in]  account_db_id  The account ID to delete
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval  #ACCOUNT_ERROR_DB_FAILED          Database operation failed
-  /// @retval  #ACCOUNT_ERROR_PERMISSION_DENIED  The account owner is different from the caller or DB Access fail by permission
-  /// @retval  #ACCOUNT_ERROR_DATABASE_BUSY      SQLite handler is busy
-  /// @retval  #ACCOUNT_ERROR_DB_NOT_OPENED      Account database did not opened
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre  This function requires an open connection to an account service by account_connect() on tizen 2.3 .\n
-  /// But the account_connect() is not required to use this function since tizen 2.4.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/account.read>
+  /// - <http://tizen.org/privilege/account.write>
   ///
-  /// @see account_insert_to_db()
-  /// @see account_delete_from_db_by_user_name()
-  /// @see account_delete_from_db_by_package_name()
-  /// @see account_update_to_db_by_id()
-  /// @see account_update_to_db_by_user_name()
+  /// **Remarks:**
+  /// - This API need both privileges
+  /// - Only can delete an account which was added by same package applications
+  ///
+  /// **Parameters:**
+  /// - `account_db_id` (in): The account ID to delete
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `ACCOUNT_ERROR_DB_FAILED`: Database operation failed
+  /// - `ACCOUNT_ERROR_PERMISSION_DENIED`: The account owner is different from the caller or DB Access fail by permission
+  /// - `ACCOUNT_ERROR_DATABASE_BUSY`: SQLite handler is busy
+  /// - `ACCOUNT_ERROR_DB_NOT_OPENED`: Account database did not opened
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - This function requires an open connection to an account service by account_connect() on tizen 2.3 . But the account_connect() is not required to use this function since tizen 2.4.
+  ///
+  /// **See also:**
+  /// - `account_insert_to_db()`
+  /// - `account_delete_from_db_by_user_name()`
+  /// - `account_delete_from_db_by_package_name()`
+  /// - `account_update_to_db_by_id()`
+  /// - `account_update_to_db_by_user_name()`
   int account_delete_from_db_by_id(
     int account_db_id,
   ) {
@@ -234,36 +293,48 @@ class Tizen90AccountsSvc {
   late final _account_delete_from_db_by_id =
       _account_delete_from_db_by_idPtr.asFunction<int Function(int)>();
 
-  /// @brief  Deletes an account from the account database by user name.
+  /// Deletes an account from the account database by user name.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel  public
-  /// @privilege  %http://tizen.org/privilege/account.read \n
-  /// %http://tizen.org/privilege/account.write
-  /// @remarks    This API need both privileges \n
-  /// Only can delete accounts which were added by same package applications
-  /// @param[in]  user_name     The user name of the account to delete
-  /// @param[in]  package_name  The package name of the account to delete
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_DB_FAILED          Database operation failed
-  /// @retval  #ACCOUNT_ERROR_PERMISSION_DENIED  DB Access fail by permission
-  /// @retval  #ACCOUNT_ERROR_DATABASE_BUSY      SQLite handler is busy
-  /// @retval  #ACCOUNT_ERROR_DB_NOT_OPENED      Account database did not opened
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre  This function requires an open connection to an account service by account_connect() on tizen 2.3 .\n
-  /// But the account_connect() is not required to use this function since tizen 2.4.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/account.read>
+  /// - <http://tizen.org/privilege/account.write>
   ///
-  /// @see account_insert_to_db()
-  /// @see account_delete_from_db_by_id()
-  /// @see account_delete_from_db_by_package_name()
-  /// @see account_update_to_db_by_id()
-  /// @see account_update_to_db_by_user_name()
+  /// **Remarks:**
+  /// - This API need both privileges
+  /// - Only can delete accounts which were added by same package applications
+  ///
+  /// **Parameters:**
+  /// - `user_name` (in): The user name of the account to delete
+  /// - `package_name` (in): The package name of the account to delete
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_DB_FAILED`: Database operation failed
+  /// - `ACCOUNT_ERROR_PERMISSION_DENIED`: DB Access fail by permission
+  /// - `ACCOUNT_ERROR_DATABASE_BUSY`: SQLite handler is busy
+  /// - `ACCOUNT_ERROR_DB_NOT_OPENED`: Account database did not opened
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - This function requires an open connection to an account service by account_connect() on tizen 2.3 . But the account_connect() is not required to use this function since tizen 2.4.
+  ///
+  /// **See also:**
+  /// - `account_insert_to_db()`
+  /// - `account_delete_from_db_by_id()`
+  /// - `account_delete_from_db_by_package_name()`
+  /// - `account_update_to_db_by_id()`
+  /// - `account_update_to_db_by_user_name()`
   int account_delete_from_db_by_user_name(
     ffi.Pointer<ffi.Char> user_name,
     ffi.Pointer<ffi.Char> package_name,
@@ -282,34 +353,46 @@ class Tizen90AccountsSvc {
       _account_delete_from_db_by_user_namePtr.asFunction<
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief  Deletes an account from the account database by package name.
+  /// Deletes an account from the account database by package name.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel  public
-  /// @privilege  %http://tizen.org/privilege/account.read \n
-  /// %http://tizen.org/privilege/account.write
-  /// @remarks    This API need both privileges \n
-  /// Only can delete accounts which was added by same package applications
-  /// @param[in]  package_name  The package name of account(s) to delete
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_DB_FAILED          Database operation failed
-  /// @retval  #ACCOUNT_ERROR_PERMISSION_DENIED  DB Access fail by permission
-  /// @retval  #ACCOUNT_ERROR_DATABASE_BUSY      SQLite handler is busy
-  /// @retval  #ACCOUNT_ERROR_DB_NOT_OPENED      Account database did not opened
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre  This function requires an open connection to an account service by account_connect() on tizen 2.3 .\n
-  /// But the account_connect() is not required to use this function since tizen 2.4.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/account.read>
+  /// - <http://tizen.org/privilege/account.write>
   ///
-  /// @see account_insert_to_db()
-  /// @see account_delete_from_db_by_id()
-  /// @see account_delete_from_db_by_user_name()
-  /// @see account_update_to_db_by_id()
-  /// @see account_update_to_db_by_user_name()
+  /// **Remarks:**
+  /// - This API need both privileges
+  /// - Only can delete accounts which was added by same package applications
+  ///
+  /// **Parameters:**
+  /// - `package_name` (in): The package name of account(s) to delete
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_DB_FAILED`: Database operation failed
+  /// - `ACCOUNT_ERROR_PERMISSION_DENIED`: DB Access fail by permission
+  /// - `ACCOUNT_ERROR_DATABASE_BUSY`: SQLite handler is busy
+  /// - `ACCOUNT_ERROR_DB_NOT_OPENED`: Account database did not opened
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - This function requires an open connection to an account service by account_connect() on tizen 2.3 . But the account_connect() is not required to use this function since tizen 2.4.
+  ///
+  /// **See also:**
+  /// - `account_insert_to_db()`
+  /// - `account_delete_from_db_by_id()`
+  /// - `account_delete_from_db_by_user_name()`
+  /// - `account_update_to_db_by_id()`
+  /// - `account_update_to_db_by_user_name()`
   int account_delete_from_db_by_package_name(
     ffi.Pointer<ffi.Char> package_name,
   ) {
@@ -325,36 +408,48 @@ class Tizen90AccountsSvc {
       _account_delete_from_db_by_package_namePtr
           .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @brief  Updates the account details to the account database.
+  /// Updates the account details to the account database.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel  public
-  /// @privilege  %http://tizen.org/privilege/account.read \n
-  /// %http://tizen.org/privilege/account.write
-  /// @remarks    This API need both privileges \n
-  /// Only can update an account which was added by same package applications
-  /// @param[in]  account     The account handle
-  /// @param[in]  account_id  The account ID to update
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_DB_FAILED          Database operation failed
-  /// @retval  #ACCOUNT_ERROR_RECORD_NOT_FOUND   The account to update does not exist
-  /// @retval  #ACCOUNT_ERROR_PERMISSION_DENIED  DB Access fail by permission
-  /// @retval  #ACCOUNT_ERROR_DATABASE_BUSY      SQLite handler is busy
-  /// @retval  #ACCOUNT_ERROR_DB_NOT_OPENED      Account database did not opened
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre  This function requires an open connection to an account service by account_connect() on tizen 2.3 .\n
-  /// But the account_connect() is not required to use this function since tizen 2.4.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/account.read>
+  /// - <http://tizen.org/privilege/account.write>
   ///
-  /// @see account_insert_to_db()
-  /// @see account_delete_from_db_by_id()
-  /// @see account_delete_from_db_by_user_name()
-  /// @see account_delete_from_db_by_package_name()
-  /// @see account_update_to_db_by_user_name()
+  /// **Remarks:**
+  /// - This API need both privileges
+  /// - Only can update an account which was added by same package applications
+  ///
+  /// **Parameters:**
+  /// - `account` (in): The account handle
+  /// - `account_id` (in): The account ID to update
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_DB_FAILED`: Database operation failed
+  /// - `ACCOUNT_ERROR_RECORD_NOT_FOUND`: The account to update does not exist
+  /// - `ACCOUNT_ERROR_PERMISSION_DENIED`: DB Access fail by permission
+  /// - `ACCOUNT_ERROR_DATABASE_BUSY`: SQLite handler is busy
+  /// - `ACCOUNT_ERROR_DB_NOT_OPENED`: Account database did not opened
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - This function requires an open connection to an account service by account_connect() on tizen 2.3 . But the account_connect() is not required to use this function since tizen 2.4.
+  ///
+  /// **See also:**
+  /// - `account_insert_to_db()`
+  /// - `account_delete_from_db_by_id()`
+  /// - `account_delete_from_db_by_user_name()`
+  /// - `account_delete_from_db_by_package_name()`
+  /// - `account_update_to_db_by_user_name()`
   int account_update_to_db_by_id(
     account_h account,
     int account_id,
@@ -371,38 +466,49 @@ class Tizen90AccountsSvc {
   late final _account_update_to_db_by_id =
       _account_update_to_db_by_idPtr.asFunction<int Function(account_h, int)>();
 
-  /// @brief      Updates the account details to the account database.
-  /// The provider permission check has been added since tizen 2.4.
+  /// Updates the account details to the account database. The provider permission check has been added since tizen 2.4.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel  public
-  /// @privilege  %http://tizen.org/privilege/account.read \n
-  /// %http://tizen.org/privilege/account.write
-  /// @remarks    This API need both privileges \n
-  /// Only can update an account which was added by same package applications
-  /// @param[in]  account     The account handle
-  /// @param[in]  account_id  The account ID to update
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_DB_FAILED          Database operation failed
-  /// @retval  #ACCOUNT_ERROR_RECORD_NOT_FOUND   The account to update does not exist
-  /// @retval  #ACCOUNT_ERROR_PERMISSION_DENIED  DB Access fail by permission
-  /// @retval  #ACCOUNT_ERROR_DATABASE_BUSY      SQLite handler is busy
-  /// @retval  #ACCOUNT_ERROR_DB_NOT_OPENED      Account database did not opened
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre  This function requires an open connection to an account service by account_connect() on tizen 2.3 .\n
-  /// But the account_connect() is not required to use this function since tizen 2.4.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/account.read>
+  /// - <http://tizen.org/privilege/account.write>
   ///
-  /// @see account_insert_to_db()
-  /// @see account_delete_from_db_by_id()
-  /// @see account_delete_from_db_by_user_name()
-  /// @see account_delete_from_db_by_package_name()
-  /// @see account_update_to_db_by_user_name()
+  /// **Remarks:**
+  /// - This API need both privileges
+  /// - Only can update an account which was added by same package applications
+  ///
+  /// **Parameters:**
+  /// - `account` (in): The account handle
+  /// - `account_id` (in): The account ID to update
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_DB_FAILED`: Database operation failed
+  /// - `ACCOUNT_ERROR_RECORD_NOT_FOUND`: The account to update does not exist
+  /// - `ACCOUNT_ERROR_PERMISSION_DENIED`: DB Access fail by permission
+  /// - `ACCOUNT_ERROR_DATABASE_BUSY`: SQLite handler is busy
+  /// - `ACCOUNT_ERROR_DB_NOT_OPENED`: Account database did not opened
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - This function requires an open connection to an account service by account_connect() on tizen 2.3 . But the account_connect() is not required to use this function since tizen 2.4.
+  ///
+  /// **See also:**
+  /// - `account_insert_to_db()`
+  /// - `account_delete_from_db_by_id()`
+  /// - `account_delete_from_db_by_user_name()`
+  /// - `account_delete_from_db_by_package_name()`
+  /// - `account_update_to_db_by_user_name()`
   int account_update_to_db_by_id_ex(
     account_h account,
     int account_id,
@@ -419,37 +525,49 @@ class Tizen90AccountsSvc {
   late final _account_update_to_db_by_id_ex = _account_update_to_db_by_id_exPtr
       .asFunction<int Function(account_h, int)>();
 
-  /// @brief  Updates the account details to the account database.
+  /// Updates the account details to the account database.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel  public
-  /// @privilege  %http://tizen.org/privilege/account.read \n
-  /// %http://tizen.org/privilege/account.write
-  /// @remarks    This API need both privileges \n
-  /// Only can update accounts which were added by same package applications
-  /// @param[in]  account       The account handle
-  /// @param[in]  user_name     The user name of the account to update
-  /// @param[in]  package_name  The package name for the user name
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_DB_FAILED          Database operation failed
-  /// @retval  #ACCOUNT_ERROR_RECORD_NOT_FOUND   The account to update does not exist
-  /// @retval  #ACCOUNT_ERROR_PERMISSION_DENIED  DB Access fail by permission
-  /// @retval  #ACCOUNT_ERROR_DATABASE_BUSY      SQLite handler is busy
-  /// @retval  #ACCOUNT_ERROR_DB_NOT_OPENED      Account database did not opened
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre  This function requires an open connection to an account service by account_connect() on tizen 2.3 .\n
-  /// But the account_connect() is not required to use this function since tizen 2.4.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/account.read>
+  /// - <http://tizen.org/privilege/account.write>
   ///
-  /// @see account_insert_to_db()
-  /// @see account_delete_from_db_by_id()
-  /// @see account_delete_from_db_by_user_name()
-  /// @see account_delete_from_db_by_package_name()
-  /// @see account_update_to_db_by_id()
+  /// **Remarks:**
+  /// - This API need both privileges
+  /// - Only can update accounts which were added by same package applications
+  ///
+  /// **Parameters:**
+  /// - `account` (in): The account handle
+  /// - `user_name` (in): The user name of the account to update
+  /// - `package_name` (in): The package name for the user name
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_DB_FAILED`: Database operation failed
+  /// - `ACCOUNT_ERROR_RECORD_NOT_FOUND`: The account to update does not exist
+  /// - `ACCOUNT_ERROR_PERMISSION_DENIED`: DB Access fail by permission
+  /// - `ACCOUNT_ERROR_DATABASE_BUSY`: SQLite handler is busy
+  /// - `ACCOUNT_ERROR_DB_NOT_OPENED`: Account database did not opened
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - This function requires an open connection to an account service by account_connect() on tizen 2.3 . But the account_connect() is not required to use this function since tizen 2.4.
+  ///
+  /// **See also:**
+  /// - `account_insert_to_db()`
+  /// - `account_delete_from_db_by_id()`
+  /// - `account_delete_from_db_by_user_name()`
+  /// - `account_delete_from_db_by_package_name()`
+  /// - `account_update_to_db_by_id()`
   int account_update_to_db_by_user_name(
     account_h account,
     ffi.Pointer<ffi.Char> user_name,
@@ -471,17 +589,22 @@ class Tizen90AccountsSvc {
           int Function(
               account_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief  Gets the ID of an account.
+  /// Gets the ID of an account.
   ///
-  /// @since_tizen 2.3
-  /// @param[in]   account     The account handle
-  /// @param[out]  account_id  The account ID
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account` (in): The account handle
+  /// - `account_id` (out): The account ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
   int account_get_account_id(
     account_h account,
     ffi.Pointer<ffi.Int> account_id,
@@ -499,22 +622,29 @@ class Tizen90AccountsSvc {
   late final _account_get_account_id = _account_get_account_idPtr
       .asFunction<int Function(account_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief  Gets the user name of an account.
+  /// Gets the user name of an account.
   ///
-  /// @since_tizen 2.3
-  /// @remarks    You must release @a user_name using free().
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in]   account    The account handle
-  /// @param[out]  user_name  The user name of the account
+  /// **Remarks:**
+  /// - You must release `user_name` using free().
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account` (in): The account handle
+  /// - `user_name` (out): The user name of the account
   ///
-  /// @see account_set_user_name()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_set_user_name()`
   int account_get_user_name(
     account_h account,
     ffi.Pointer<ffi.Pointer<ffi.Char>> user_name,
@@ -532,19 +662,25 @@ class Tizen90AccountsSvc {
   late final _account_get_user_name = _account_get_user_namePtr.asFunction<
       int Function(account_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief  Sets the user name of an account.
+  /// Sets the user name of an account.
   ///
-  /// @since_tizen 2.3
-  /// @param[in]  account    The account handle
-  /// @param[in]  user_name  The string to set as user name
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account` (in): The account handle
+  /// - `user_name` (in): The string to set as user name
   ///
-  /// @see account_get_user_name()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_get_user_name()`
   int account_set_user_name(
     account_h account,
     ffi.Pointer<ffi.Char> user_name,
@@ -562,22 +698,29 @@ class Tizen90AccountsSvc {
   late final _account_set_user_name = _account_set_user_namePtr
       .asFunction<int Function(account_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief  Gets the display name of an account.
+  /// Gets the display name of an account.
   ///
-  /// @since_tizen 2.3
-  /// @remarks    You must release @a display_name using free().
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in]   account       The account handle
-  /// @param[out]  display_name  The display name of the account
+  /// **Remarks:**
+  /// - You must release `display_name` using free().
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account` (in): The account handle
+  /// - `display_name` (out): The display name of the account
   ///
-  /// @see account_set_display_name()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_set_display_name()`
   int account_get_display_name(
     account_h account,
     ffi.Pointer<ffi.Pointer<ffi.Char>> display_name,
@@ -596,17 +739,22 @@ class Tizen90AccountsSvc {
       _account_get_display_namePtr.asFunction<
           int Function(account_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief  Sets the display name of an account.
+  /// Sets the display name of an account.
   ///
-  /// @since_tizen 2.3
-  /// @param[in]  account      The account handle
-  /// @param[in]  display_name The text string to set as the display name
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account` (in): The account handle
+  /// - `display_name` (in): The text string to set as the display name
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
   int account_set_display_name(
     account_h account,
     ffi.Pointer<ffi.Char> display_name,
@@ -624,21 +772,27 @@ class Tizen90AccountsSvc {
   late final _account_set_display_name = _account_set_display_namePtr
       .asFunction<int Function(account_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief  Gets the capability detail of an account.
+  /// Gets the capability detail of an account.
   ///
-  /// @since_tizen 2.3
-  /// @param[in]   account           The account handle
-  /// @param[in]   capability_type   The capability type to get the capability value
-  /// @param[out]  capability_value  The capability value (on/off) of the specified capability_type
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_RECORD_NOT_FOUND   There is no given capability_type in the account
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account` (in): The account handle
+  /// - `capability_type` (in): The capability type to get the capability value
+  /// - `capability_value` (out): The capability value (on/off) of the specified capability_type
   ///
-  /// @see account_set_capability()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_RECORD_NOT_FOUND`: There is no given capability_type in the account
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_set_capability()`
   int account_get_capability(
     account_h account,
     ffi.Pointer<ffi.Char> capability_type,
@@ -658,20 +812,26 @@ class Tizen90AccountsSvc {
   late final _account_get_capability = _account_get_capabilityPtr.asFunction<
       int Function(account_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief  Gets all the capabilities of an account.
+  /// Gets all the capabilities of an account.
   ///
-  /// @since_tizen 2.3
-  /// @param[in]  account    The account handle
-  /// @param[in]  callback   The callback function
-  /// @param[in]  user_data  The user data to be passed to the callback function
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account` (in): The account handle
+  /// - `callback` (in): The callback function
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @see account_set_capability()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_set_capability()`
   int account_get_capability_all(
     account_h account,
     capability_cb callback,
@@ -692,20 +852,26 @@ class Tizen90AccountsSvc {
       _account_get_capability_allPtr.asFunction<
           int Function(account_h, capability_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief  Sets the capability.
+  /// Sets the capability.
   ///
-  /// @since_tizen 2.3
-  /// @param[in]  account           The account handle
-  /// @param[in]  capability_type   The capability type
-  /// @param[in]  capability_state  The capability state
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account` (in): The account handle
+  /// - `capability_type` (in): The capability type
+  /// - `capability_state` (in): The capability state
   ///
-  /// @see account_get_capability()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_get_capability()`
   int account_set_capability(
     account_h account,
     ffi.Pointer<ffi.Char> capability_type,
@@ -725,22 +891,29 @@ class Tizen90AccountsSvc {
   late final _account_set_capability = _account_set_capabilityPtr
       .asFunction<int Function(account_h, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @brief  Gets the icon path.
+  /// Gets the icon path.
   ///
-  /// @since_tizen 2.3
-  /// @remarks    You must release @a icon_path using free().
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in]   account    The account handle
-  /// @param[out]  icon_path  The icon path
+  /// **Remarks:**
+  /// - You must release `icon_path` using free().
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account` (in): The account handle
+  /// - `icon_path` (out): The icon path
   ///
-  /// @see account_set_icon_path()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_set_icon_path()`
   int account_get_icon_path(
     account_h account,
     ffi.Pointer<ffi.Pointer<ffi.Char>> icon_path,
@@ -758,19 +931,25 @@ class Tizen90AccountsSvc {
   late final _account_get_icon_path = _account_get_icon_pathPtr.asFunction<
       int Function(account_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief  Sets the icon path.
+  /// Sets the icon path.
   ///
-  /// @since_tizen 2.3
-  /// @param[in]  account    The account handle
-  /// @param[in]  icon_path  The text string to set as the icon path
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account` (in): The account handle
+  /// - `icon_path` (in): The text string to set as the icon path
   ///
-  /// @see account_get_icon_path()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_get_icon_path()`
   int account_set_icon_path(
     account_h account,
     ffi.Pointer<ffi.Char> icon_path,
@@ -788,22 +967,29 @@ class Tizen90AccountsSvc {
   late final _account_set_icon_path = _account_set_icon_pathPtr
       .asFunction<int Function(account_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief  Gets the domain name.
+  /// Gets the domain name.
   ///
-  /// @since_tizen 2.3
-  /// @remarks    You must release @a domain_name using free().
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in]   account      The account handle
-  /// @param[out]  domain_name  The domain name
+  /// **Remarks:**
+  /// - You must release `domain_name` using free().
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account` (in): The account handle
+  /// - `domain_name` (out): The domain name
   ///
-  /// @see account_set_domain_name()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_set_domain_name()`
   int account_get_domain_name(
     account_h account,
     ffi.Pointer<ffi.Pointer<ffi.Char>> domain_name,
@@ -821,19 +1007,25 @@ class Tizen90AccountsSvc {
   late final _account_get_domain_name = _account_get_domain_namePtr.asFunction<
       int Function(account_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief  Sets the domain name.
+  /// Sets the domain name.
   ///
-  /// @since_tizen 2.3
-  /// @param[in]  account      The account handle
-  /// @param[in]  domain_name  The text string to set as the domain name
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account` (in): The account handle
+  /// - `domain_name` (in): The text string to set as the domain name
   ///
-  /// @see account_get_domain_name()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_get_domain_name()`
   int account_set_domain_name(
     account_h account,
     ffi.Pointer<ffi.Char> domain_name,
@@ -851,22 +1043,29 @@ class Tizen90AccountsSvc {
   late final _account_set_domain_name = _account_set_domain_namePtr
       .asFunction<int Function(account_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief  Gets the email address.
+  /// Gets the email address.
   ///
-  /// @since_tizen 2.3
-  /// @remarks    You must release @a email_address using free().
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in]   account        The account handle
-  /// @param[out]  email_address  The email address
+  /// **Remarks:**
+  /// - You must release `email_address` using free().
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account` (in): The account handle
+  /// - `email_address` (out): The email address
   ///
-  /// @see account_set_email_address()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_set_email_address()`
   int account_get_email_address(
     account_h account,
     ffi.Pointer<ffi.Pointer<ffi.Char>> email_address,
@@ -885,19 +1084,25 @@ class Tizen90AccountsSvc {
       _account_get_email_addressPtr.asFunction<
           int Function(account_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief  Sets the email address.
+  /// Sets the email address.
   ///
-  /// @since_tizen 2.3
-  /// @param[in]  account        The account handle
-  /// @param[in]  email_address  The text string to set as the email address
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account` (in): The account handle
+  /// - `email_address` (in): The text string to set as the email address
   ///
-  /// @see account_get_email_address()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_get_email_address()`
   int account_set_email_address(
     account_h account,
     ffi.Pointer<ffi.Char> email_address,
@@ -915,22 +1120,29 @@ class Tizen90AccountsSvc {
   late final _account_set_email_address = _account_set_email_addressPtr
       .asFunction<int Function(account_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief  Gets the package name.
+  /// Gets the package name.
   ///
-  /// @since_tizen 2.3
-  /// @remarks    You must release @a package_name using free().
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in]   account       The account handle
-  /// @param[out]  package_name  The package name
+  /// **Remarks:**
+  /// - You must release `package_name` using free().
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account` (in): The account handle
+  /// - `package_name` (out): The package name
   ///
-  /// @see account_set_package_name()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_set_package_name()`
   int account_get_package_name(
     account_h account,
     ffi.Pointer<ffi.Pointer<ffi.Char>> package_name,
@@ -949,19 +1161,25 @@ class Tizen90AccountsSvc {
       _account_get_package_namePtr.asFunction<
           int Function(account_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief  Sets the package name.
+  /// Sets the package name.
   ///
-  /// @since_tizen 2.3
-  /// @param[in]  account       The account handle
-  /// @param[in]  package_name  The text string to set as the package name
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account` (in): The account handle
+  /// - `package_name` (in): The text string to set as the package name
   ///
-  /// @see account_get_email_address()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_get_email_address()`
   int account_set_package_name(
     account_h account,
     ffi.Pointer<ffi.Char> package_name,
@@ -979,24 +1197,30 @@ class Tizen90AccountsSvc {
   late final _account_set_package_name = _account_set_package_namePtr
       .asFunction<int Function(account_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief  Gets the access token. Access token field is used to store account secrets (such as password or master token).
+  /// Gets the access token. Access token field is used to store account secrets (such as password or master token).
   ///
-  /// @since_tizen 2.3
-  /// @remarks    You must release @a access_token using free().
-  /// @remarks    Access token field is used for storing account secret (password / master token etc)
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in]   account       The account handle
-  /// @param[out]  access_token  The access token
+  /// **Remarks:**
+  /// - You must release `access_token` using free().
+  /// - Access token field is used for storing account secret (password / master token etc)
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account` (in): The account handle
+  /// - `access_token` (out): The access token
   ///
-  /// Only account owner application can retrieve account password / access_token. For others this field will be null.
-  /// @see account_set_access_token()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported Only account owner application can retrieve account password / access_token. For others this field will be null.
+  ///
+  /// **See also:**
+  /// - `account_set_access_token()`
   int account_get_access_token(
     account_h account,
     ffi.Pointer<ffi.Pointer<ffi.Char>> access_token,
@@ -1015,20 +1239,28 @@ class Tizen90AccountsSvc {
       _account_get_access_tokenPtr.asFunction<
           int Function(account_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief  Sets the access token. Access token field is used to store account secrets (such as password or master token).
+  /// Sets the access token. Access token field is used to store account secrets (such as password or master token).
   ///
-  /// @since_tizen 2.3
-  /// @remarks    Only account owner application can retrieve account password / access_token. For others this field will be null.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in]  account       The account handle
-  /// @param[in]  access_token  The text string to set as the access token
+  /// **Remarks:**
+  /// - Only account owner application can retrieve account password / access_token. For others this field will be null.
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
-  /// @see account_get_access_token()
+  /// **Parameters:**
+  /// - `account` (in): The account handle
+  /// - `access_token` (in): The text string to set as the access token
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_get_access_token()`
   int account_set_access_token(
     account_h account,
     ffi.Pointer<ffi.Char> access_token,
@@ -1046,23 +1278,30 @@ class Tizen90AccountsSvc {
   late final _account_set_access_token = _account_set_access_tokenPtr
       .asFunction<int Function(account_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief  Gets the user text.
+  /// Gets the user text.
   ///
-  /// @since_tizen 2.3
-  /// @remarks    You must release @a user_text using free().
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in]   account          The account handle
-  /// @param[in]   user_text_index  The index of the user text (range: 0 ~ 4)
-  /// @param[out]  user_text        The user text
+  /// **Remarks:**
+  /// - You must release `user_text` using free().
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account` (in): The account handle
+  /// - `user_text_index` (in): The index of the user text (range: 0 ~ 4)
+  /// - `user_text` (out): The user text
   ///
-  /// @see account_set_user_text()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_set_user_text()`
   int account_get_user_text(
     account_h account,
     int user_text_index,
@@ -1082,20 +1321,26 @@ class Tizen90AccountsSvc {
   late final _account_get_user_text = _account_get_user_textPtr.asFunction<
       int Function(account_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief  Sets the user text.
+  /// Sets the user text.
   ///
-  /// @since_tizen 2.3
-  /// @param[in]  account          The account handle
-  /// @param[in]  user_text_index  The index of the user text (must be in range from @c 0 to @c 4)
-  /// @param[in]  user_text        The text string to set as the user text
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account` (in): The account handle
+  /// - `user_text_index` (in): The index of the user text (must be in range from `0` to `4`)
+  /// - `user_text` (in): The text string to set as the user text
   ///
-  /// @see account_get_user_text()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_get_user_text()`
   int account_set_user_text(
     account_h account,
     int user_text_index,
@@ -1115,20 +1360,26 @@ class Tizen90AccountsSvc {
   late final _account_set_user_text = _account_set_user_textPtr
       .asFunction<int Function(account_h, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief  Gets the user integer.
+  /// Gets the user integer.
   ///
-  /// @since_tizen 2.3
-  /// @param[in]   account         The account handle
-  /// @param[in]   user_int_index  The index of the user integer (must be in range from @c 0 to @c 4)
-  /// @param[out]  user_integer    The user integer
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account` (in): The account handle
+  /// - `user_int_index` (in): The index of the user integer (must be in range from `0` to `4`)
+  /// - `user_integer` (out): The user integer
   ///
-  /// @see account_set_user_int()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_set_user_int()`
   int account_get_user_int(
     account_h account,
     int user_int_index,
@@ -1148,20 +1399,26 @@ class Tizen90AccountsSvc {
   late final _account_get_user_int = _account_get_user_intPtr
       .asFunction<int Function(account_h, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief  Sets the user integer.
+  /// Sets the user integer.
   ///
-  /// @since_tizen 2.3
-  /// @param[in]  account         The account handle
-  /// @param[in]  user_int_index  The index of the user integer (must be in range from @c 0 to @c 4)
-  /// @param[in]  user_integer    The integer to set as the user integer
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account` (in): The account handle
+  /// - `user_int_index` (in): The index of the user integer (must be in range from `0` to `4`)
+  /// - `user_integer` (in): The integer to set as the user integer
   ///
-  /// @see account_get_user_int()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_get_user_int()`
   int account_set_user_int(
     account_h account,
     int user_int_index,
@@ -1180,19 +1437,25 @@ class Tizen90AccountsSvc {
   late final _account_set_user_int =
       _account_set_user_intPtr.asFunction<int Function(account_h, int, int)>();
 
-  /// @brief  Gets the authentication type.
+  /// Gets the authentication type.
   ///
-  /// @since_tizen 2.3
-  /// @param[in]   account    The account handle
-  /// @param[out]  auth_type  The authentication type
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account` (in): The account handle
+  /// - `auth_type` (out): The authentication type
   ///
-  /// @see account_set_auth_type()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_set_auth_type()`
   int account_get_auth_type(
     account_h account,
     ffi.Pointer<ffi.Int32> auth_type,
@@ -1210,19 +1473,25 @@ class Tizen90AccountsSvc {
   late final _account_get_auth_type = _account_get_auth_typePtr
       .asFunction<int Function(account_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief  Sets the authentication type.
+  /// Sets the authentication type.
   ///
-  /// @since_tizen 2.3
-  /// @param[in]  account    The account handle
-  /// @param[in]  auth_type  The integer to be set as the authentication type
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account` (in): The account handle
+  /// - `auth_type` (in): The integer to be set as the authentication type
   ///
-  /// @see account_get_auth_type()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_get_auth_type()`
   int account_set_auth_type(
     account_h account,
     int auth_type,
@@ -1239,19 +1508,25 @@ class Tizen90AccountsSvc {
   late final _account_set_auth_type =
       _account_set_auth_typePtr.asFunction<int Function(account_h, int)>();
 
-  /// @brief  Gets the secret.
+  /// Gets the secret.
   ///
-  /// @since_tizen 2.3
-  /// @param[in]   account  The account handle
-  /// @param[out]  secret   The secret
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account` (in): The account handle
+  /// - `secret` (out): The secret
   ///
-  /// @see account_set_secret()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_set_secret()`
   int account_get_secret(
     account_h account,
     ffi.Pointer<ffi.Int32> secret,
@@ -1269,19 +1544,25 @@ class Tizen90AccountsSvc {
   late final _account_get_secret = _account_get_secretPtr
       .asFunction<int Function(account_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief  Sets the secret.
+  /// Sets the secret.
   ///
-  /// @since_tizen 2.3
-  /// @param[in]  account  The account handle
-  /// @param[in]  secret   The secrecy to be set
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account` (in): The account handle
+  /// - `secret` (in): The secrecy to be set
   ///
-  /// @see account_get_secret()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_get_secret()`
   int account_set_secret(
     account_h account,
     int secret,
@@ -1298,19 +1579,25 @@ class Tizen90AccountsSvc {
   late final _account_set_secret =
       _account_set_secretPtr.asFunction<int Function(account_h, int)>();
 
-  /// @brief  Gets the sync support.
+  /// Gets the sync support.
   ///
-  /// @since_tizen 2.3
-  /// @param[in]   account       The account handle
-  /// @param[out]  sync_support  The sync support
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account` (in): The account handle
+  /// - `sync_support` (out): The sync support
   ///
-  /// @see account_set_sync_support()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_set_sync_support()`
   int account_get_sync_support(
     account_h account,
     ffi.Pointer<ffi.Int32> sync_support,
@@ -1328,19 +1615,25 @@ class Tizen90AccountsSvc {
   late final _account_get_sync_support = _account_get_sync_supportPtr
       .asFunction<int Function(account_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief  Sets the sync support.
+  /// Sets the sync support.
   ///
-  /// @since_tizen 2.3
-  /// @param[in]  account       The account handle
-  /// @param[in]  sync_support  The sync state to be set
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account` (in): The account handle
+  /// - `sync_support` (in): The sync state to be set
   ///
-  /// @see account_get_sync_support()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_get_sync_support()`
   int account_set_sync_support(
     account_h account,
     int sync_support,
@@ -1357,22 +1650,29 @@ class Tizen90AccountsSvc {
   late final _account_set_sync_support =
       _account_set_sync_supportPtr.asFunction<int Function(account_h, int)>();
 
-  /// @brief  Gets the source.
+  /// Gets the source.
   ///
-  /// @since_tizen 2.3
-  /// @remarks    You must release @a source using free().
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in]   account  The account handle
-  /// @param[out]  source   The source
+  /// **Remarks:**
+  /// - You must release `source` using free().
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account` (in): The account handle
+  /// - `source` (out): The source
   ///
-  /// @see account_set_source()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_set_source()`
   int account_get_source(
     account_h account,
     ffi.Pointer<ffi.Pointer<ffi.Char>> source,
@@ -1390,19 +1690,25 @@ class Tizen90AccountsSvc {
   late final _account_get_source = _account_get_sourcePtr.asFunction<
       int Function(account_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief  Sets the source.
+  /// Sets the source.
   ///
-  /// @since_tizen 2.3
-  /// @param[in]  account  The account handle
-  /// @param[in]  source   The text string to set as the source
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account` (in): The account handle
+  /// - `source` (in): The text string to set as the source
   ///
-  /// @see account_get_source()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_get_source()`
   int account_set_source(
     account_h account,
     ffi.Pointer<ffi.Char> source,
@@ -1420,20 +1726,26 @@ class Tizen90AccountsSvc {
   late final _account_set_source = _account_set_sourcePtr
       .asFunction<int Function(account_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief  Sets the custom.
+  /// Sets the custom.
   ///
-  /// @since_tizen 2.3
-  /// @param[in]  account  The account handle
-  /// @param[in]  key      The user custom key for the specific value
-  /// @param[in]  value    The user custom value about the given key
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account` (in): The account handle
+  /// - `key` (in): The user custom key for the specific value
+  /// - `value` (in): The user custom value about the given key
   ///
-  /// @see account_get_custom()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_get_custom()`
   int account_set_custom(
     account_h account,
     ffi.Pointer<ffi.Char> key,
@@ -1453,23 +1765,30 @@ class Tizen90AccountsSvc {
   late final _account_set_custom = _account_set_customPtr.asFunction<
       int Function(account_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief  Gets the user specific custom text of an account key.
+  /// Gets the user specific custom text of an account key.
   ///
-  /// @since_tizen 2.3
-  /// @remarks    You must release @a value using free().
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in]   account   The account handle
-  /// @param[in]   key       The key to retrieve custom text
-  /// @param[out]  value     The text of the given key
+  /// **Remarks:**
+  /// - You must release `value` using free().
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_RECORD_NOT_FOUND   There is no given capability type in the account
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account` (in): The account handle
+  /// - `key` (in): The key to retrieve custom text
+  /// - `value` (out): The text of the given key
   ///
-  /// @see account_set_custom()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_RECORD_NOT_FOUND`: There is no given capability type in the account
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_set_custom()`
   int account_get_custom(
     account_h account,
     ffi.Pointer<ffi.Char> key,
@@ -1490,21 +1809,26 @@ class Tizen90AccountsSvc {
       int Function(account_h, ffi.Pointer<ffi.Char>,
           ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief  Gets all the user custom texts of an account.
+  /// Gets all the user custom texts of an account.
   ///
-  /// @since_tizen 2.3
-  /// @param[in]  account    The account handle
-  /// @param[in]  callback   The callback function to retrieve all custom text \n
-  /// The callback function gives the key and value.
-  /// @param[in]  user_data  The user data to be passed to the callback function
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account` (in): The account handle
+  /// - `callback` (in): The callback function to retrieve all custom text The callback function gives the key and value.
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @see account_set_custom()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_set_custom()`
   int account_get_custom_all(
     account_h account,
     account_custom_cb callback,
@@ -1524,33 +1848,45 @@ class Tizen90AccountsSvc {
   late final _account_get_custom_all = _account_get_custom_allPtr.asFunction<
       int Function(account_h, account_custom_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief  Retrieves all accounts details by invoking the given callback function iteratively.
+  /// Retrieves all accounts details by invoking the given callback function iteratively.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel   public
-  /// @privilege   %http://tizen.org/privilege/account.read
-  /// @param[in]   callback   The callback function to invoke
-  /// @param[in]   user_data  The user data to be passed to the callback function
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_DB_FAILED          Database operation failed
-  /// @retval  #ACCOUNT_ERROR_PERMISSION_DENIED  DB Access fail by permission
-  /// @retval  #ACCOUNT_ERROR_RECORD_NOT_FOUND   Related record does not exist
-  /// @retval  #ACCOUNT_ERROR_DATABASE_BUSY      SQLite handler is busy
-  /// @retval  #ACCOUNT_ERROR_DB_NOT_OPENED      Account database did not opened
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre   This function requires an open connection to an account service by account_connect() on tizen 2.3 .\n
-  /// But the account_connect() is not required to use this function since tizen 2.4.
-  /// @post  This function invokes account_cb().
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/account.read>
   ///
-  /// @see account_query_account_by_account_id()
-  /// @see account_query_account_by_user_name()
-  /// @see account_query_account_by_package_name()
-  /// @see account_query_account_by_capability()
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_DB_FAILED`: Database operation failed
+  /// - `ACCOUNT_ERROR_PERMISSION_DENIED`: DB Access fail by permission
+  /// - `ACCOUNT_ERROR_RECORD_NOT_FOUND`: Related record does not exist
+  /// - `ACCOUNT_ERROR_DATABASE_BUSY`: SQLite handler is busy
+  /// - `ACCOUNT_ERROR_DB_NOT_OPENED`: Account database did not opened
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - This function requires an open connection to an account service by account_connect() on tizen 2.3 . But the account_connect() is not required to use this function since tizen 2.4.
+  ///
+  /// **Postconditions:**
+  /// - This function invokes account_cb().
+  ///
+  /// **See also:**
+  /// - `account_query_account_by_account_id()`
+  /// - `account_query_account_by_user_name()`
+  /// - `account_query_account_by_package_name()`
+  /// - `account_query_account_by_capability()`
   int account_foreach_account_from_db(
     account_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -1569,33 +1905,44 @@ class Tizen90AccountsSvc {
       _account_foreach_account_from_dbPtr
           .asFunction<int Function(account_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief  Retrieves an account with the account ID.
+  /// Retrieves an account with the account ID.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel   public
-  /// @privilege   %http://tizen.org/privilege/account.read
-  /// @remarks     You must allocate @a account using account_create() and release using account_destroy().
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in]   account_db_id  The account database ID to search
-  /// @param[out]  account        The account handle \n
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_DB_FAILED          Database operation failed
-  /// @retval  #ACCOUNT_ERROR_PERMISSION_DENIED  DB Access fail by permission
-  /// @retval  #ACCOUNT_ERROR_DATABASE_BUSY      SQLite handler is busy
-  /// @retval  #ACCOUNT_ERROR_DB_NOT_OPENED      Account database did not opened
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/account.read>
   ///
-  /// @pre  This function requires an open connection to an account service by account_connect() on tizen 2.3 .\n
-  /// But the account_connect() is not required to use this function since tizen 2.4.
+  /// **Remarks:**
+  /// - You must allocate `account` using account_create() and release using account_destroy().
   ///
-  /// @see account_query_account_by_user_name()
-  /// @see account_query_account_by_package_name()
-  /// @see account_query_account_by_capability()
+  /// **Parameters:**
+  /// - `account_db_id` (in): The account database ID to search
+  /// - `account` (out): The account handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_DB_FAILED`: Database operation failed
+  /// - `ACCOUNT_ERROR_PERMISSION_DENIED`: DB Access fail by permission
+  /// - `ACCOUNT_ERROR_DATABASE_BUSY`: SQLite handler is busy
+  /// - `ACCOUNT_ERROR_DB_NOT_OPENED`: Account database did not opened
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - This function requires an open connection to an account service by account_connect() on tizen 2.3 . But the account_connect() is not required to use this function since tizen 2.4.
+  ///
+  /// **See also:**
+  /// - `account_query_account_by_user_name()`
+  /// - `account_query_account_by_package_name()`
+  /// - `account_query_account_by_capability()`
   int account_query_account_by_account_id(
     int account_db_id,
     ffi.Pointer<account_h> account,
@@ -1614,31 +1961,42 @@ class Tizen90AccountsSvc {
       _account_query_account_by_account_idPtr
           .asFunction<int Function(int, ffi.Pointer<account_h>)>();
 
-  /// @brief  Retrieves deleted account with the account ID.
+  /// Retrieves deleted account with the account ID.
   ///
-  /// @since_tizen 5.5
-  /// @privlevel   public
-  /// @privilege   %http://tizen.org/privilege/account.read
-  /// @remarks     The  @a account should be released using account_destroy().
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in]   account_db_id  The id of the account to find in the database
-  /// @param[out]  account        The account handle
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval  #ACCOUNT_ERROR_PERMISSION_DENIED  DB Access fail by permission
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval  #ACCOUNT_ERROR_DB_FAILED          Database operation failed
-  /// @retval  #ACCOUNT_ERROR_DATABASE_BUSY      SQLite handler is busy
-  /// @retval  #ACCOUNT_ERROR_DB_NOT_OPENED      Account database did not opened
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/account.read>
   ///
-  /// @see account_query_account_by_account_id()
-  /// @see account_query_account_by_user_name()
-  /// @see account_query_account_by_package_name()
-  /// @see account_query_account_by_capability()
+  /// **Remarks:**
+  /// - The `account` should be released using account_destroy().
+  ///
+  /// **Parameters:**
+  /// - `account_db_id` (in): The id of the account to find in the database
+  /// - `account` (out): The account handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `ACCOUNT_ERROR_PERMISSION_DENIED`: DB Access fail by permission
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `ACCOUNT_ERROR_DB_FAILED`: Database operation failed
+  /// - `ACCOUNT_ERROR_DATABASE_BUSY`: SQLite handler is busy
+  /// - `ACCOUNT_ERROR_DB_NOT_OPENED`: Account database did not opened
+  ///
+  /// **See also:**
+  /// - `account_query_account_by_account_id()`
+  /// - `account_query_account_by_user_name()`
+  /// - `account_query_account_by_package_name()`
+  /// - `account_query_account_by_capability()`
   int account_query_deleted_account_info_by_account_id(
     int account_db_id,
     ffi.Pointer<account_h> account,
@@ -1657,34 +2015,46 @@ class Tizen90AccountsSvc {
       _account_query_deleted_account_info_by_account_idPtr
           .asFunction<int Function(int, ffi.Pointer<account_h>)>();
 
-  /// @brief  Retrieves all accounts with the user name.
+  /// Retrieves all accounts with the user name.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel   public
-  /// @privilege   %http://tizen.org/privilege/account.read
-  /// @param[in]   callback   The callback function to invoke
-  /// @param[in]   user_name  The user name to search
-  /// @param[in]   user_data  The user data to be passed to the callback function
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_DB_FAILED          Database operation failed
-  /// @retval  #ACCOUNT_ERROR_PERMISSION_DENIED  DB Access fail by permission
-  /// @retval  #ACCOUNT_ERROR_DATABASE_BUSY      SQLite handler is busy
-  /// @retval  #ACCOUNT_ERROR_DB_NOT_OPENED      Account database did not opened
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre   This function requires an open connection to an account service by account_connect() on tizen 2.3 .\n
-  /// But the account_connect() is not required to use this function since tizen 2.4.
-  /// @post  This function invokes account_cb().
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/account.read>
   ///
-  /// @see account_foreach_account_from_db()
-  /// @see account_query_account_by_account_id()
-  /// @see account_query_account_by_package_name()
-  /// @see account_query_account_by_capability()
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to invoke
+  /// - `user_name` (in): The user name to search
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_DB_FAILED`: Database operation failed
+  /// - `ACCOUNT_ERROR_PERMISSION_DENIED`: DB Access fail by permission
+  /// - `ACCOUNT_ERROR_DATABASE_BUSY`: SQLite handler is busy
+  /// - `ACCOUNT_ERROR_DB_NOT_OPENED`: Account database did not opened
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - This function requires an open connection to an account service by account_connect() on tizen 2.3 . But the account_connect() is not required to use this function since tizen 2.4.
+  ///
+  /// **Postconditions:**
+  /// - This function invokes account_cb().
+  ///
+  /// **See also:**
+  /// - `account_foreach_account_from_db()`
+  /// - `account_query_account_by_account_id()`
+  /// - `account_query_account_by_package_name()`
+  /// - `account_query_account_by_capability()`
   int account_query_account_by_user_name(
     account_cb callback,
     ffi.Pointer<ffi.Char> user_name,
@@ -1706,34 +2076,46 @@ class Tizen90AccountsSvc {
           int Function(
               account_cb, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief  Retrieves all accounts with the package name.
+  /// Retrieves all accounts with the package name.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel  public
-  /// @privilege  %http://tizen.org/privilege/account.read
-  /// @param[in]  callback      The callback function to invoke
-  /// @param[in]  package_name  The package name to search
-  /// @param[in]  user_data     The user data to be passed to the callback function
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_DB_FAILED          Database operation failed
-  /// @retval  #ACCOUNT_ERROR_PERMISSION_DENIED  DB Access fail by permission
-  /// @retval  #ACCOUNT_ERROR_DATABASE_BUSY      SQLite handler is busy
-  /// @retval  #ACCOUNT_ERROR_DB_NOT_OPENED      Account database did not opened
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre   This function requires an open connection to an account service by account_connect() on tizen 2.3 .\n
-  /// But the account_connect() is not required to use this function since tizen 2.4.
-  /// @post  This function invokes account_cb().
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/account.read>
   ///
-  /// @see account_foreach_account_from_db()
-  /// @see account_query_account_by_account_id()
-  /// @see account_query_account_by_user_name()
-  /// @see account_query_account_by_capability()
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to invoke
+  /// - `package_name` (in): The package name to search
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_DB_FAILED`: Database operation failed
+  /// - `ACCOUNT_ERROR_PERMISSION_DENIED`: DB Access fail by permission
+  /// - `ACCOUNT_ERROR_DATABASE_BUSY`: SQLite handler is busy
+  /// - `ACCOUNT_ERROR_DB_NOT_OPENED`: Account database did not opened
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - This function requires an open connection to an account service by account_connect() on tizen 2.3 . But the account_connect() is not required to use this function since tizen 2.4.
+  ///
+  /// **Postconditions:**
+  /// - This function invokes account_cb().
+  ///
+  /// **See also:**
+  /// - `account_foreach_account_from_db()`
+  /// - `account_query_account_by_account_id()`
+  /// - `account_query_account_by_user_name()`
+  /// - `account_query_account_by_capability()`
   int account_query_account_by_package_name(
     account_cb callback,
     ffi.Pointer<ffi.Char> package_name,
@@ -1755,35 +2137,47 @@ class Tizen90AccountsSvc {
           int Function(
               account_cb, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief  Retrieves all accounts with the capability type and capability value.
+  /// Retrieves all accounts with the capability type and capability value.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel   public
-  /// @privilege   %http://tizen.org/privilege/account.read
-  /// @param[in]   callback          The callback function to invoke
-  /// @param[in]   capability_type   The capability type to search
-  /// @param[in]   capability_value  The capability value to search
-  /// @param[in]   user_data         The user data to be passed to the callback function
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_DB_FAILED          Database operation failed
-  /// @retval  #ACCOUNT_ERROR_PERMISSION_DENIED  DB Access fail by permission
-  /// @retval  #ACCOUNT_ERROR_DATABASE_BUSY      SQLite handler is busy
-  /// @retval  #ACCOUNT_ERROR_DB_NOT_OPENED      Account database did not opened
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre   This function requires an open connection to an account service by account_connect() on tizen 2.3 .\n
-  /// But the account_connect() is not required to use this function since tizen 2.4.
-  /// @post  This function invokes account_cb().
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/account.read>
   ///
-  /// @see account_foreach_account_from_db()
-  /// @see account_query_account_by_account_id()
-  /// @see account_query_account_by_user_name()
-  /// @see account_query_account_by_package_name()
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to invoke
+  /// - `capability_type` (in): The capability type to search
+  /// - `capability_value` (in): The capability value to search
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_DB_FAILED`: Database operation failed
+  /// - `ACCOUNT_ERROR_PERMISSION_DENIED`: DB Access fail by permission
+  /// - `ACCOUNT_ERROR_DATABASE_BUSY`: SQLite handler is busy
+  /// - `ACCOUNT_ERROR_DB_NOT_OPENED`: Account database did not opened
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - This function requires an open connection to an account service by account_connect() on tizen 2.3 . But the account_connect() is not required to use this function since tizen 2.4.
+  ///
+  /// **Postconditions:**
+  /// - This function invokes account_cb().
+  ///
+  /// **See also:**
+  /// - `account_foreach_account_from_db()`
+  /// - `account_query_account_by_account_id()`
+  /// - `account_query_account_by_user_name()`
+  /// - `account_query_account_by_package_name()`
   int account_query_account_by_capability(
     account_cb callback,
     ffi.Pointer<ffi.Char> capability_type,
@@ -1807,34 +2201,46 @@ class Tizen90AccountsSvc {
           int Function(
               account_cb, ffi.Pointer<ffi.Char>, int, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief  Retrieves all accounts with the capability type.
+  /// Retrieves all accounts with the capability type.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel   public
-  /// @privilege   %http://tizen.org/privilege/account.read
-  /// @param[in]   callback         The callback function to invoke
-  /// @param[in]   capability_type  The capability type to search
-  /// @param[in]   user_data        The user data to be passed to the callback function
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_DB_FAILED          Database operation failed
-  /// @retval  #ACCOUNT_ERROR_PERMISSION_DENIED  DB Access fail by permission
-  /// @retval  #ACCOUNT_ERROR_DATABASE_BUSY      SQLite handler is busy
-  /// @retval  #ACCOUNT_ERROR_DB_NOT_OPENED      Account database did not opened
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre   This function requires an open connection to an account service by account_connect() on tizen 2.3 .\n
-  /// But the account_connect() is not required to use this function since tizen 2.4.
-  /// @post  This function invokes account_cb().
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/account.read>
   ///
-  /// @see account_foreach_account_from_db()
-  /// @see account_query_account_by_account_id()
-  /// @see account_query_account_by_user_name()
-  /// @see account_query_account_by_package_name()
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to invoke
+  /// - `capability_type` (in): The capability type to search
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_DB_FAILED`: Database operation failed
+  /// - `ACCOUNT_ERROR_PERMISSION_DENIED`: DB Access fail by permission
+  /// - `ACCOUNT_ERROR_DATABASE_BUSY`: SQLite handler is busy
+  /// - `ACCOUNT_ERROR_DB_NOT_OPENED`: Account database did not opened
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - This function requires an open connection to an account service by account_connect() on tizen 2.3 . But the account_connect() is not required to use this function since tizen 2.4.
+  ///
+  /// **Postconditions:**
+  /// - This function invokes account_cb().
+  ///
+  /// **See also:**
+  /// - `account_foreach_account_from_db()`
+  /// - `account_query_account_by_account_id()`
+  /// - `account_query_account_by_user_name()`
+  /// - `account_query_account_by_package_name()`
   int account_query_account_by_capability_type(
     account_cb callback,
     ffi.Pointer<ffi.Char> capability_type,
@@ -1857,32 +2263,44 @@ class Tizen90AccountsSvc {
           int Function(
               account_cb, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief  Retrieves all capabilities with the account database ID.
+  /// Retrieves all capabilities with the account database ID.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel   public
-  /// @privilege   %http://tizen.org/privilege/account.read
-  /// @param[in]   callback       The callback function to invoke
-  /// @param[in]   account_db_id  The account database ID to search
-  /// @param[in]   user_data      The user data to be passed to the callback function
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_DB_FAILED          Database operation failed
-  /// @retval  #ACCOUNT_ERROR_PERMISSION_DENIED  DB Access fail by permission
-  /// @retval  #ACCOUNT_ERROR_DATABASE_BUSY      SQLite handler is busy
-  /// @retval  #ACCOUNT_ERROR_DB_NOT_OPENED      Account database did not opened
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre   This function requires an open connection to an account service by account_connect() on tizen 2.3 .\n
-  /// But the account_connect() is not required to use this function since tizen 2.4.
-  /// @post  This function invokes capability_cb().
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/account.read>
   ///
-  /// @see account_get_capability()
-  /// @see account_set_capability()
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to invoke
+  /// - `account_db_id` (in): The account database ID to search
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_DB_FAILED`: Database operation failed
+  /// - `ACCOUNT_ERROR_PERMISSION_DENIED`: DB Access fail by permission
+  /// - `ACCOUNT_ERROR_DATABASE_BUSY`: SQLite handler is busy
+  /// - `ACCOUNT_ERROR_DB_NOT_OPENED`: Account database did not opened
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - This function requires an open connection to an account service by account_connect() on tizen 2.3 . But the account_connect() is not required to use this function since tizen 2.4.
+  ///
+  /// **Postconditions:**
+  /// - This function invokes capability_cb().
+  ///
+  /// **See also:**
+  /// - `account_get_capability()`
+  /// - `account_set_capability()`
   int account_query_capability_by_account_id(
     capability_cb callback,
     int account_db_id,
@@ -1903,24 +2321,33 @@ class Tizen90AccountsSvc {
       _account_query_capability_by_account_idPtr.asFunction<
           int Function(capability_cb, int, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief  Gets the count of accounts in the account database.
+  /// Gets the count of accounts in the account database.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel   public
-  /// @privilege   %http://tizen.org/privilege/account.read
-  /// @param[out]  count  The out parameter for count of all accounts
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_DB_FAILED          Database operation failed
-  /// @retval  #ACCOUNT_ERROR_PERMISSION_DENIED  DB Access fail by permission
-  /// @retval  #ACCOUNT_ERROR_DATABASE_BUSY      SQLite handler is busy
-  /// @retval  #ACCOUNT_ERROR_DB_NOT_OPENED      Account database did not opened
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre  This function requires an open connection to an account service by account_connect() on tizen 2.3 .\n
-  /// But the account_connect() is not required to use this function since tizen 2.4.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/account.read>
+  ///
+  /// **Parameters:**
+  /// - `count` (out): The out parameter for count of all accounts
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_DB_FAILED`: Database operation failed
+  /// - `ACCOUNT_ERROR_PERMISSION_DENIED`: DB Access fail by permission
+  /// - `ACCOUNT_ERROR_DATABASE_BUSY`: SQLite handler is busy
+  /// - `ACCOUNT_ERROR_DB_NOT_OPENED`: Account database did not opened
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - This function requires an open connection to an account service by account_connect() on tizen 2.3 . But the account_connect() is not required to use this function since tizen 2.4.
   int account_get_total_count_from_db(
     ffi.Pointer<ffi.Int> count,
   ) {
@@ -1936,30 +2363,41 @@ class Tizen90AccountsSvc {
       _account_get_total_count_from_dbPtr
           .asFunction<int Function(ffi.Pointer<ffi.Int>)>();
 
-  /// @brief  Updates the sync status of an account with the given account ID.
+  /// Updates the sync status of an account with the given account ID.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel   public
-  /// @privilege   %http://tizen.org/privilege/account.read \n
-  /// %http://tizen.org/privilege/account.write
-  /// @remarks     This API need both privileges \n
-  /// Only can update an account which was added by same package applications
-  /// @param[in]   account_db_id  The account ID for which sync status needs to be changed
-  /// @param[in]   sync_status    The new sync status
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_DB_FAILED          Database operation failed
-  /// @retval  #ACCOUNT_ERROR_PERMISSION_DENIED  DB Access fail by permission
-  /// @retval  #ACCOUNT_ERROR_DATABASE_BUSY      SQLite handler is busy
-  /// @retval  #ACCOUNT_ERROR_DB_NOT_OPENED      Account database did not opened
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre  This function requires an open connection to an account service by account_connect() on tizen 2.3 .\n
-  /// But the account_connect() is not required to use this function since tizen 2.4.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/account.read>
+  /// - <http://tizen.org/privilege/account.write>
+  ///
+  /// **Remarks:**
+  /// - This API need both privileges
+  /// - Only can update an account which was added by same package applications
+  ///
+  /// **Parameters:**
+  /// - `account_db_id` (in): The account ID for which sync status needs to be changed
+  /// - `sync_status` (in): The new sync status
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_DB_FAILED`: Database operation failed
+  /// - `ACCOUNT_ERROR_PERMISSION_DENIED`: DB Access fail by permission
+  /// - `ACCOUNT_ERROR_DATABASE_BUSY`: SQLite handler is busy
+  /// - `ACCOUNT_ERROR_DB_NOT_OPENED`: Account database did not opened
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - This function requires an open connection to an account service by account_connect() on tizen 2.3 . But the account_connect() is not required to use this function since tizen 2.4.
   int account_update_sync_status_by_id(
     int account_db_id,
     int sync_status,
@@ -1976,21 +2414,28 @@ class Tizen90AccountsSvc {
   late final _account_update_sync_status_by_id =
       _account_update_sync_status_by_idPtr.asFunction<int Function(int, int)>();
 
-  /// @brief  Creates a handle to the account provider.
+  /// Creates a handle to the account provider.
   ///
-  /// @since_tizen 2.3
-  /// @remarks     You must release @a account_type handle using account_type_destroy().\n
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in]  account_type  The account provider handle
+  /// **Remarks:**
+  /// - You must release `account_type` handle using account_type_destroy().
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account_type` (in): The account provider handle
   ///
-  /// @see account_type_destroy()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_type_destroy()`
   int account_type_create(
     ffi.Pointer<account_type_h> account_type,
   ) {
@@ -2005,21 +2450,27 @@ class Tizen90AccountsSvc {
   late final _account_type_create = _account_type_createPtr
       .asFunction<int Function(ffi.Pointer<account_type_h>)>();
 
-  /// @brief  Destroys the account provider handle and releases all its resources.
+  /// Destroys the account provider handle and releases all its resources.
   ///
-  /// @since_tizen 2.3
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @remarks    When you get @a account_type using account_type_create(), you must release the handle using account_destroy() to avoid the memory leak.
+  /// **Remarks:**
+  /// - When you get `account_type` using account_type_create(), you must release the handle using account_destroy() to avoid the memory leak.
   ///
-  /// @param[in]  account_type  The account provider handle
+  /// **Parameters:**
+  /// - `account_type` (in): The account provider handle
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see account_type_create()
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_type_create()`
   int account_type_destroy(
     account_type_h account_type,
   ) {
@@ -2034,28 +2485,36 @@ class Tizen90AccountsSvc {
   late final _account_type_destroy =
       _account_type_destroyPtr.asFunction<int Function(account_type_h)>();
 
-  /// @brief  Retrieves capability information with your application ID.
+  /// Retrieves capability information with your application ID.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel   public
-  /// @privilege   %http://tizen.org/privilege/account.read
-  /// @param[in]   callback   The callback function carries the capability name of an app ID
-  /// @param[in]   app_id     The application ID to search
-  /// @param[in]   user_data  The user data \n
-  /// If you have your private data to carry into callback function, then you can use it.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_DB_FAILED          Database operation failed
-  /// @retval  #ACCOUNT_ERROR_PERMISSION_DENIED  DB Access fail by permission
-  /// @retval  #ACCOUNT_ERROR_DATABASE_BUSY      SQLite handler is busy
-  /// @retval  #ACCOUNT_ERROR_DB_NOT_OPENED      Account database did not opened
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre  This function requires an open connection to an account service by account_connect() on tizen 2.3 .\n
-  /// But the account_connect() is not required to use this function since tizen 2.4.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/account.read>
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function carries the capability name of an app ID
+  /// - `app_id` (in): The application ID to search
+  /// - `user_data` (in): The user data If you have your private data to carry into callback function, then you can use it.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_DB_FAILED`: Database operation failed
+  /// - `ACCOUNT_ERROR_PERMISSION_DENIED`: DB Access fail by permission
+  /// - `ACCOUNT_ERROR_DATABASE_BUSY`: SQLite handler is busy
+  /// - `ACCOUNT_ERROR_DB_NOT_OPENED`: Account database did not opened
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - This function requires an open connection to an account service by account_connect() on tizen 2.3 . But the account_connect() is not required to use this function since tizen 2.4.
   int account_type_query_provider_feature_by_app_id(
     provider_feature_cb callback,
     ffi.Pointer<ffi.Char> app_id,
@@ -2078,29 +2537,39 @@ class Tizen90AccountsSvc {
           int Function(provider_feature_cb, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief   Checks whether the given application ID supports the capability.
+  /// Checks whether the given application ID supports the capability.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel   public
-  /// @privilege   %http://tizen.org/privilege/account.read
-  /// @remarks     The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
-  /// @param[in]   app_id      The application ID
-  /// @param[in]   capability  The capability \n
-  /// For example, ACCOUNT_SUPPORTS_CAPABILITY_CONTACT or "http://tizen.org/account/capability/contact"
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c TRUE if the application supports the given capability, \n
-  /// otherwise @c FALSE if the application does not support the given capability
-  /// @exception #ACCOUNT_ERROR_NONE               Successful
-  /// @exception #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @exception #ACCOUNT_ERROR_RECORD_NOT_FOUND   Related record does not exist
-  /// @exception #ACCOUNT_ERROR_DB_FAILED          Database operation failed
-  /// @exception #ACCOUNT_ERROR_PERMISSION_DENIED  DB access fail by permission
-  /// @exception #ACCOUNT_ERROR_DATABASE_BUSY      SQLite handler is busy
-  /// @exception #ACCOUNT_ERROR_DB_NOT_OPENED      Account database did not opened
-  /// @exception #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre  This function requires an open connection to an account service by account_connect() on tizen 2.3 .\n
-  /// But the account_connect() is not required to use this function since tizen 2.4.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/account.read>
+  ///
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
+  ///
+  /// **Parameters:**
+  /// - `app_id` (in): The application ID
+  /// - `capability` (in): The capability For example, ACCOUNT_SUPPORTS_CAPABILITY_CONTACT or "http://tizen.org/account/capability/contact"
+  ///
+  /// **Returns:**
+  /// - `TRUE` if the application supports the given capability, otherwise `FALSE` if the application does not support the given capability
+  ///
+  /// **Exceptions:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_RECORD_NOT_FOUND`: Related record does not exist
+  /// - `ACCOUNT_ERROR_DB_FAILED`: Database operation failed
+  /// - `ACCOUNT_ERROR_PERMISSION_DENIED`: DB access fail by permission
+  /// - `ACCOUNT_ERROR_DATABASE_BUSY`: SQLite handler is busy
+  /// - `ACCOUNT_ERROR_DB_NOT_OPENED`: Account database did not opened
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - This function requires an open connection to an account service by account_connect() on tizen 2.3 . But the account_connect() is not required to use this function since tizen 2.4.
   bool account_type_query_supported_feature(
     ffi.Pointer<ffi.Char> app_id,
     ffi.Pointer<ffi.Char> capability,
@@ -2119,24 +2588,30 @@ class Tizen90AccountsSvc {
       _account_type_query_supported_featurePtr.asFunction<
           bool Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief  Gets the application ID of an account provider.
+  /// Gets the application ID of an account provider.
   ///
-  /// @since_tizen 2.3
-  /// @remarks     You must release @a app_id using free().
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in]   account_type  The account provider handle \n
-  /// It should be given by account_type_query_* functions or account_type_foreach_account_type_from_db().
-  /// @param[out]  app_id        The application ID of an account provider item
+  /// **Remarks:**
+  /// - You must release `app_id` using free().
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account_type` (in): The account provider handle It should be given by account_type_query_* functions or account_type_foreach_account_type_from_db().
+  /// - `app_id` (out): The application ID of an account provider item
   ///
-  /// @see account_type_foreach_account_type_from_db()
-  /// @see account_type_query_by_app_id()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_type_foreach_account_type_from_db()`
+  /// - `account_type_query_by_app_id()`
   int account_type_get_app_id(
     account_type_h account_type,
     ffi.Pointer<ffi.Pointer<ffi.Char>> app_id,
@@ -2154,24 +2629,30 @@ class Tizen90AccountsSvc {
   late final _account_type_get_app_id = _account_type_get_app_idPtr.asFunction<
       int Function(account_type_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief  Gets the service provider ID of an account provider.
+  /// Gets the service provider ID of an account provider.
   ///
-  /// @since_tizen 2.3
-  /// @remarks     You must release @a service_provider_id using free().
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in]   account_type         The account provider handle \n
-  /// It should be given by account_type_query_* functions or account_type_foreach_account_type_from_db().
-  /// @param[out]  service_provider_id  The service provider text ID of an account provider item
+  /// **Remarks:**
+  /// - You must release `service_provider_id` using free().
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account_type` (in): The account provider handle It should be given by account_type_query_* functions or account_type_foreach_account_type_from_db().
+  /// - `service_provider_id` (out): The service provider text ID of an account provider item
   ///
-  /// @see account_type_foreach_account_type_from_db()
-  /// @see account_type_query_by_app_id()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_type_foreach_account_type_from_db()`
+  /// - `account_type_query_by_app_id()`
   int account_type_get_service_provider_id(
     account_type_h account_type,
     ffi.Pointer<ffi.Pointer<ffi.Char>> service_provider_id,
@@ -2191,24 +2672,30 @@ class Tizen90AccountsSvc {
       _account_type_get_service_provider_idPtr.asFunction<
           int Function(account_type_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief  Gets the icon path of an account provider.
+  /// Gets the icon path of an account provider.
   ///
-  /// @since_tizen 2.3
-  /// @remarks     You must release @a icon_path using free().
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in]   account_type  The account provider handle \n
-  /// It should be given by account_type_query_* functions or account_type_foreach_account_type_from_db().
-  /// @param[out]  icon_path     The icon path of the account provider item
+  /// **Remarks:**
+  /// - You must release `icon_path` using free().
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account_type` (in): The account provider handle It should be given by account_type_query_* functions or account_type_foreach_account_type_from_db().
+  /// - `icon_path` (out): The icon path of the account provider item
   ///
-  /// @see account_type_foreach_account_type_from_db()
-  /// @see account_type_query_by_app_id()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_type_foreach_account_type_from_db()`
+  /// - `account_type_query_by_app_id()`
   int account_type_get_icon_path(
     account_type_h account_type,
     ffi.Pointer<ffi.Pointer<ffi.Char>> icon_path,
@@ -2228,24 +2715,30 @@ class Tizen90AccountsSvc {
       _account_type_get_icon_pathPtr.asFunction<
           int Function(account_type_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief  Gets the small icon path of an account provider.
+  /// Gets the small icon path of an account provider.
   ///
-  /// @since_tizen 2.3
-  /// @remarks    You must release @a small_icon_path using free().
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in]   account_type     The account provider handle\n
-  /// It should be given by account_type_query_* functions or account_type_foreach_account_type_from_db().
-  /// @param[out]  small_icon_path  The small icon path of the account provider item
+  /// **Remarks:**
+  /// - You must release `small_icon_path` using free().
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account_type` (in): The account provider handle It should be given by account_type_query_* functions or account_type_foreach_account_type_from_db().
+  /// - `small_icon_path` (out): The small icon path of the account provider item
   ///
-  /// @see account_type_foreach_account_type_from_db()
-  /// @see account_type_query_by_app_id()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_type_foreach_account_type_from_db()`
+  /// - `account_type_query_by_app_id()`
   int account_type_get_small_icon_path(
     account_type_h account_type,
     ffi.Pointer<ffi.Pointer<ffi.Char>> small_icon_path,
@@ -2265,23 +2758,27 @@ class Tizen90AccountsSvc {
       _account_type_get_small_icon_pathPtr.asFunction<
           int Function(account_type_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief  Checks whether the given account provider supports multiple accounts.
+  /// Checks whether the given account provider supports multiple accounts.
   ///
-  /// @since_tizen 2.3
-  /// @param[in]   account_type              The account provider handle \n
-  /// It should be given by account_type_query_* functions or account_type_foreach_account_type_from_db().
-  /// @param[out]  multiple_account_support  The flag indicating support for multiple accounts accounts\n
-  /// TRUE or FALSE.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account_type` (in): The account provider handle It should be given by account_type_query_* functions or account_type_foreach_account_type_from_db().
+  /// - `multiple_account_support` (out): The flag indicating support for multiple accounts accounts TRUE or FALSE.
   ///
-  /// @see account_type_foreach_account_type_from_db()
-  /// @see account_type_query_by_app_id()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_type_foreach_account_type_from_db()`
+  /// - `account_type_query_by_app_id()`
   int account_type_get_multiple_account_support(
     account_type_h account_type,
     ffi.Pointer<ffi.Int> multiple_account_support,
@@ -2300,24 +2797,27 @@ class Tizen90AccountsSvc {
       _account_type_get_multiple_account_supportPtr
           .asFunction<int Function(account_type_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief  Gets capability information with the given account provider handle.
+  /// Gets capability information with the given account provider handle.
   ///
-  /// @since_tizen 2.3
-  /// @param[in]   account_type  The account provider handle\n
-  /// It should be given by account_type_query_* functions or account_type_foreach_account_type_from_db().
-  /// @param[in]   callback      The callback function that carries the capability name of the app ID
-  /// @param[in]   user_data     The user data \n
-  /// If you have your private data to carry into callback function, then you can use it.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_DB_FAILED          Database operation failed
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account_type` (in): The account provider handle It should be given by account_type_query_* functions or account_type_foreach_account_type_from_db().
+  /// - `callback` (in): The callback function that carries the capability name of the app ID
+  /// - `user_data` (in): The user data If you have your private data to carry into callback function, then you can use it.
   ///
-  /// @pre  This function requires an open connection to an account service by account_connect() on tizen 2.3 .\n
-  /// But the account_connect() is not required to use this function since tizen 2.4.
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_DB_FAILED`: Database operation failed
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - This function requires an open connection to an account service by account_connect() on tizen 2.3 . But the account_connect() is not required to use this function since tizen 2.4.
   int account_type_get_provider_feature_all(
     account_type_h account_type,
     provider_feature_cb callback,
@@ -2339,26 +2839,31 @@ class Tizen90AccountsSvc {
           int Function(
               account_type_h, provider_feature_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief  Gets the specific label information detail of an account provider.
+  /// Gets the specific label information detail of an account provider.
   ///
-  /// @since_tizen 2.3
-  /// @remarks    You must release @a label using free().
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in]   account_type The account provider handle\n
-  /// It should be given by account_type_query_* functions or account_type_foreach_account_type_from_db().
-  /// @param[in]   locale       The locale is specified as an ISO 3166 alpha-2 two letter country-code followed by ISO 639-1 for the two-letter language code.\n
-  /// For example, "ko_KR" or "ko-kr" for Korean, "en_US" or "en-us" for American English.
-  /// @param[out]  label        The label text given for the locale
+  /// **Remarks:**
+  /// - You must release `label` using free().
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_RECORD_NOT_FOUND   No label for the given locale
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account_type` (in): The account provider handle It should be given by account_type_query_* functions or account_type_foreach_account_type_from_db().
+  /// - `locale` (in): The locale is specified as an ISO 3166 alpha-2 two letter country-code followed by ISO 639-1 for the two-letter language code. For example, "ko_KR" or "ko-kr" for Korean, "en_US" or "en-us" for American English.
+  /// - `label` (out): The label text given for the locale
   ///
-  /// @see account_type_foreach_account_type_from_db()
-  /// @see account_type_query_by_app_id()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_RECORD_NOT_FOUND`: No label for the given locale
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_type_foreach_account_type_from_db()`
+  /// - `account_type_query_by_app_id()`
   int account_type_get_label_by_locale(
     account_type_h account_type,
     ffi.Pointer<ffi.Char> locale,
@@ -2381,22 +2886,27 @@ class Tizen90AccountsSvc {
           int Function(account_type_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief  Gets the label information detail of an account provider.
+  /// Gets the label information detail of an account provider.
   ///
-  /// @since_tizen 2.3
-  /// @param[in]   account_type  The account provider handle\n
-  /// It should be given by account_type_query_* functions or account_type_foreach_account_type_from_db().
-  /// @param[in]   callback      The callback function carrying the label information
-  /// @param[in]   user_data     The user data to be passed to the callback function
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account_type` (in): The account provider handle It should be given by account_type_query_* functions or account_type_foreach_account_type_from_db().
+  /// - `callback` (in): The callback function carrying the label information
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @see account_type_foreach_account_type_from_db()
-  /// @see account_type_query_by_app_id()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_type_foreach_account_type_from_db()`
+  /// - `account_type_query_by_app_id()`
   int account_type_get_label(
     account_type_h account_type,
     account_label_cb callback,
@@ -2416,32 +2926,40 @@ class Tizen90AccountsSvc {
   late final _account_type_get_label = _account_type_get_labelPtr.asFunction<
       int Function(account_type_h, account_label_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief  Retrieves the label information with your application ID.
+  /// Retrieves the label information with your application ID.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel   public
-  /// @privilege   %http://tizen.org/privilege/account.read
-  /// @param[in]   callback    The callback function that carries label_h for label information \n
-  /// label_h contains label info as parameter.
-  /// @param[in]   app_id     The application ID to search
-  /// @param[in]   user_data  The user data \n
-  /// If you have your private data to carry into callback function, then you can use it.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_DB_FAILED          Database operation failed
-  /// @retval  #ACCOUNT_ERROR_PERMISSION_DENIED  DB Access fail by permission
-  /// @retval  #ACCOUNT_ERROR_DATABASE_BUSY      SQLite handler is busy
-  /// @retval  #ACCOUNT_ERROR_DB_NOT_OPENED      Account database did not opened
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre  This function requires an open connection to an account service by account_connect() on tizen 2.3 .\n
-  /// But the account_connect() is not required to use this function since tizen 2.4.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/account.read>
   ///
-  /// @see account_type_query_by_app_id()
-  /// @see account_type_foreach_account_type_from_db()
+  /// **Parameters:**
+  /// - `callback` (in): The callback function that carries label_h for label information label_h contains label info as parameter.
+  /// - `app_id` (in): The application ID to search
+  /// - `user_data` (in): The user data If you have your private data to carry into callback function, then you can use it.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_DB_FAILED`: Database operation failed
+  /// - `ACCOUNT_ERROR_PERMISSION_DENIED`: DB Access fail by permission
+  /// - `ACCOUNT_ERROR_DATABASE_BUSY`: SQLite handler is busy
+  /// - `ACCOUNT_ERROR_DB_NOT_OPENED`: Account database did not opened
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - This function requires an open connection to an account service by account_connect() on tizen 2.3 . But the account_connect() is not required to use this function since tizen 2.4.
+  ///
+  /// **See also:**
+  /// - `account_type_query_by_app_id()`
+  /// - `account_type_foreach_account_type_from_db()`
   int account_type_query_label_by_app_id(
     account_label_cb callback,
     ffi.Pointer<ffi.Char> app_id,
@@ -2463,36 +2981,46 @@ class Tizen90AccountsSvc {
           int Function(account_label_cb, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief  Retrieves the account provider information with your application ID.
+  /// Retrieves the account provider information with your application ID.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel     public
-  /// @privilege     %http://tizen.org/privilege/account.read
-  /// @param[in]     app_id        The application ID to search
-  /// @param[in,out] account_type  The account handle which has to be created by account_type_create() before calling this function and released by account_type_destroy() after calling this function.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_DB_FAILED          Database operation failed
-  /// @retval  #ACCOUNT_ERROR_RECORD_NOT_FOUND   Queried data does not exist
-  /// @retval  #ACCOUNT_ERROR_PERMISSION_DENIED  DB Access fail by permission
-  /// @retval  #ACCOUNT_ERROR_DATABASE_BUSY      SQLite handler is busy
-  /// @retval  #ACCOUNT_ERROR_DB_NOT_OPENED      Account database did not opened
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre  This function requires an open connection to an account service by account_connect() on tizen 2.3 .\n
-  /// But the account_connect() is not required to use this function since tizen 2.4.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/account.read>
   ///
-  /// @see account_type_create()
-  /// @see account_type_get_app_id()
-  /// @see account_type_get_service_provider_id()
-  /// @see account_type_get_icon_path()
-  /// @see account_type_get_small_icon_path()
-  /// @see account_type_get_multiple_account_support()
-  /// @see account_type_get_label()
-  /// @see account_type_destroy()
+  /// **Parameters:**
+  /// - `app_id` (in): The application ID to search
+  /// - `account_type` (in,out): The account handle which has to be created by account_type_create() before calling this function and released by account_type_destroy() after calling this function.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_DB_FAILED`: Database operation failed
+  /// - `ACCOUNT_ERROR_RECORD_NOT_FOUND`: Queried data does not exist
+  /// - `ACCOUNT_ERROR_PERMISSION_DENIED`: DB Access fail by permission
+  /// - `ACCOUNT_ERROR_DATABASE_BUSY`: SQLite handler is busy
+  /// - `ACCOUNT_ERROR_DB_NOT_OPENED`: Account database did not opened
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - This function requires an open connection to an account service by account_connect() on tizen 2.3 . But the account_connect() is not required to use this function since tizen 2.4.
+  ///
+  /// **See also:**
+  /// - `account_type_create()`
+  /// - `account_type_get_app_id()`
+  /// - `account_type_get_service_provider_id()`
+  /// - `account_type_get_icon_path()`
+  /// - `account_type_get_small_icon_path()`
+  /// - `account_type_get_multiple_account_support()`
+  /// - `account_type_get_label()`
+  /// - `account_type_destroy()`
   int account_type_query_by_app_id(
     ffi.Pointer<ffi.Char> app_id,
     ffi.Pointer<account_type_h> account_type,
@@ -2511,37 +3039,45 @@ class Tizen90AccountsSvc {
       _account_type_query_by_app_idPtr.asFunction<
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<account_type_h>)>();
 
-  /// @brief  Retrieves all account provider information.
+  /// Retrieves all account provider information.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel   public
-  /// @privilege   %http://tizen.org/privilege/account.read
-  /// @param[in]   callback   The account provider information \n
-  /// You can get the account information through account_type_get_* with the carried account_type_handle.
-  /// @param[in]   user_data  The user data \n
-  /// It will be carried through your callback function.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_DB_FAILED          Database operation failed
-  /// @retval  #ACCOUNT_ERROR_PERMISSION_DENIED  DB Access fail by permission
-  /// @retval  #ACCOUNT_ERROR_DATABASE_BUSY      SQLite handler is busy
-  /// @retval  #ACCOUNT_ERROR_DB_NOT_OPENED      Account database did not opened
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre  This function requires an open connection to an account service by account_connect() on tizen 2.3 .\n
-  /// But the account_connect() is not required to use this function since tizen 2.4.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/account.read>
   ///
-  /// @see account_type_create()
-  /// @see account_type_get_app_id()
-  /// @see account_type_get_service_provider_id()
-  /// @see account_type_get_icon_path()
-  /// @see account_type_get_small_icon_path()
-  /// @see account_type_get_multiple_account_support()
-  /// @see account_type_get_label()
-  /// @see account_type_destroy()
+  /// **Parameters:**
+  /// - `callback` (in): The account provider information You can get the account information through account_type_get_* with the carried account_type_handle.
+  /// - `user_data` (in): The user data It will be carried through your callback function.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_DB_FAILED`: Database operation failed
+  /// - `ACCOUNT_ERROR_PERMISSION_DENIED`: DB Access fail by permission
+  /// - `ACCOUNT_ERROR_DATABASE_BUSY`: SQLite handler is busy
+  /// - `ACCOUNT_ERROR_DB_NOT_OPENED`: Account database did not opened
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - This function requires an open connection to an account service by account_connect() on tizen 2.3 . But the account_connect() is not required to use this function since tizen 2.4.
+  ///
+  /// **See also:**
+  /// - `account_type_create()`
+  /// - `account_type_get_app_id()`
+  /// - `account_type_get_service_provider_id()`
+  /// - `account_type_get_icon_path()`
+  /// - `account_type_get_small_icon_path()`
+  /// - `account_type_get_multiple_account_support()`
+  /// - `account_type_get_label()`
+  /// - `account_type_destroy()`
   int account_type_foreach_account_type_from_db(
     account_type_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -2560,34 +3096,43 @@ class Tizen90AccountsSvc {
       _account_type_foreach_account_type_from_dbPtr
           .asFunction<int Function(account_type_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief  Retrieves the label information with the given application ID and locale.
+  /// Retrieves the label information with the given application ID and locale.
   ///
-  /// @since_tizen 2.3
-  /// @remarks The @a label should be released using free().
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @privlevel   public
-  /// @privilege   %http://tizen.org/privilege/account.read
-  /// @param[in]   app_id  The application ID
-  /// @param[in]   locale  The locale is specified as an ISO 3166 alpha-2 two letter country-code followed by ISO 639-1 for the two-letter language code.\n
-  /// For example, "ko_KR" or "ko-kr" for Korean, "en_US" or "en-us" for American English.
-  /// @param[out]  label   The label text corresponding app_id and locale \n
-  /// It must be free text.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_DB_FAILED          Database operation failed
-  /// @retval  #ACCOUNT_ERROR_PERMISSION_DENIED  DB Access fail by permission
-  /// @retval  #ACCOUNT_ERROR_DATABASE_BUSY      SQLite handler is busy
-  /// @retval  #ACCOUNT_ERROR_DB_NOT_OPENED      Account database did not opened
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/account.read>
   ///
-  /// @pre  This function requires an open connection to an account service by account_connect() on tizen 2.3 .\n
-  /// But the account_connect() is not required to use this function since tizen 2.4.
+  /// **Remarks:**
+  /// - The `label` should be released using free().
   ///
-  /// @par Example
-  /// @code
+  /// **Parameters:**
+  /// - `app_id` (in): The application ID
+  /// - `locale` (in): The locale is specified as an ISO 3166 alpha-2 two letter country-code followed by ISO 639-1 for the two-letter language code. For example, "ko_KR" or "ko-kr" for Korean, "en_US" or "en-us" for American English.
+  /// - `label` (out): The label text corresponding app_id and locale It must be free text.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_DB_FAILED`: Database operation failed
+  /// - `ACCOUNT_ERROR_PERMISSION_DENIED`: DB Access fail by permission
+  /// - `ACCOUNT_ERROR_DATABASE_BUSY`: SQLite handler is busy
+  /// - `ACCOUNT_ERROR_DB_NOT_OPENED`: Account database did not opened
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - This function requires an open connection to an account service by account_connect() on tizen 2.3 . But the account_connect() is not required to use this function since tizen 2.4.
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <account.h>
   /// ...
   /// account_h account;
@@ -2622,7 +3167,7 @@ class Tizen90AccountsSvc {
   /// SECURE_LOGD("(%d)-[Account] ret = %d, account=%p\n", __LINE__, ret, account);
   /// }
   /// ...
-  /// @endcode
+  /// ```
   int account_type_query_label_by_locale(
     ffi.Pointer<ffi.Char> app_id,
     ffi.Pointer<ffi.Char> locale,
@@ -2645,29 +3190,37 @@ class Tizen90AccountsSvc {
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief  Retrieves account provider information with the capability name.
+  /// Retrieves account provider information with the capability name.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel   public
-  /// @privilege   %http://tizen.org/privilege/account.read
-  /// @param[in]   callback        The callback function to retrieve account provider information
-  /// @param[in]   key             The capability value to search account provider \n
-  /// For example, ACCOUNT_SUPPORTS_CAPABILITY_CONTACT or "http://tizen.org/account/capability/contact"
-  /// @param[in]  user_data        If you have your private data to carry into callback function, then you can use it
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_RECORD_NOT_FOUND   Record not found
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_DB_FAILED          Database operation failed
-  /// @retval  #ACCOUNT_ERROR_PERMISSION_DENIED DB Access fail by permission
-  /// @retval  #ACCOUNT_ERROR_DATABASE_BUSY      SQLite handler is busy
-  /// @retval  #ACCOUNT_ERROR_DB_NOT_OPENED      Account database did not opened
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre  This function requires an open connection to an account service by account_connect() on tizen 2.3 .\n
-  /// But the account_connect() is not required to use this function since tizen 2.4.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/account.read>
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to retrieve account provider information
+  /// - `key` (in): The capability value to search account provider For example, ACCOUNT_SUPPORTS_CAPABILITY_CONTACT or "http://tizen.org/account/capability/contact"
+  /// - `user_data` (in): If you have your private data to carry into callback function, then you can use it
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_RECORD_NOT_FOUND`: Record not found
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_DB_FAILED`: Database operation failed
+  /// - `ACCOUNT_ERROR_PERMISSION_DENIED`: DB Access fail by permission
+  /// - `ACCOUNT_ERROR_DATABASE_BUSY`: SQLite handler is busy
+  /// - `ACCOUNT_ERROR_DB_NOT_OPENED`: Account database did not opened
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - This function requires an open connection to an account service by account_connect() on tizen 2.3 . But the account_connect() is not required to use this function since tizen 2.4.
   int account_type_query_by_provider_feature(
     account_type_cb callback,
     ffi.Pointer<ffi.Char> key,
@@ -2690,28 +3243,38 @@ class Tizen90AccountsSvc {
           int Function(
               account_type_cb, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief  Checks whether the given app_id exists in the account provider DB.
+  /// Checks whether the given app_id exists in the account provider DB.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel   public
-  /// @privilege   %http://tizen.org/privilege/account.read
-  /// @param[in]   app_id  The application ID to check
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_RECORD_NOT_FOUND   Record not found
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid app ID
-  /// @retval  #ACCOUNT_ERROR_DB_FAILED          Database operation failed
-  /// @retval  #ACCOUNT_ERROR_PERMISSION_DENIED  DB Access fail by permission
-  /// @retval  #ACCOUNT_ERROR_DATABASE_BUSY      SQLite handler is busy
-  /// @retval  #ACCOUNT_ERROR_DB_NOT_OPENED      Account database did not opened
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre  This function requires an open connection to an account service by account_connect() on tizen 2.3 .\n
-  /// But the account_connect() is not required to use this function since tizen 2.4.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/account.read>
   ///
-  /// @see account_type_query_by_app_id()
+  /// **Parameters:**
+  /// - `app_id` (in): The application ID to check
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_RECORD_NOT_FOUND`: Record not found
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid app ID
+  /// - `ACCOUNT_ERROR_DB_FAILED`: Database operation failed
+  /// - `ACCOUNT_ERROR_PERMISSION_DENIED`: DB Access fail by permission
+  /// - `ACCOUNT_ERROR_DATABASE_BUSY`: SQLite handler is busy
+  /// - `ACCOUNT_ERROR_DB_NOT_OPENED`: Account database did not opened
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - This function requires an open connection to an account service by account_connect() on tizen 2.3 . But the account_connect() is not required to use this function since tizen 2.4.
+  ///
+  /// **See also:**
+  /// - `account_type_query_by_app_id()`
   int account_type_query_app_id_exist(
     ffi.Pointer<ffi.Char> app_id,
   ) {
@@ -2727,22 +3290,29 @@ class Tizen90AccountsSvc {
       _account_type_query_app_id_existPtr
           .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @brief  Creates a handle for the account event subscription.
+  /// Creates a handle for the account event subscription.
   ///
-  /// @since_tizen 2.3
-  /// @remarks     You must release @a account_subscribe handle using account_unsubscribe_notification().
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in]   account_subscribe  The account subscription handle
+  /// **Remarks:**
+  /// - You must release `account_subscribe` handle using account_unsubscribe_notification().
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE               Successful
-  /// @retval  #ACCOUNT_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `account_subscribe` (in): The account subscription handle
   ///
-  /// @see account_unsubscribe_notification()
-  /// @see account_subscribe_notification()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_unsubscribe_notification()`
+  /// - `account_subscribe_notification()`
   int account_subscribe_create(
     ffi.Pointer<account_subscribe_h> account_subscribe,
   ) {
@@ -2758,24 +3328,33 @@ class Tizen90AccountsSvc {
   late final _account_subscribe_create = _account_subscribe_createPtr
       .asFunction<int Function(ffi.Pointer<account_subscribe_h>)>();
 
-  /// @brief  Starts to subscribe account event through the given callback function.
+  /// Starts to subscribe account event through the given callback function.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel   public
-  /// @privilege   %http://tizen.org/privilege/account.read \n
-  /// @param[in]   account_subscribe  The account subscription handle
-  /// @param[in]   callback           The callback function that is called when an account is removed and a data of account is updated from the account database \n
-  /// It will be called with event message and account ID.
-  /// @param[in]   user_data          The user_data that is delivered to callback
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE                     Successful
-  /// @retval  #ACCOUNT_ERROR_EVENT_SUBSCRIPTION_FAIL  Subscription fail
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER        Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED            Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @see account_unsubscribe_notification()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/account.read>
+  ///
+  /// **Parameters:**
+  /// - `account_subscribe` (in): The account subscription handle
+  /// - `callback` (in): The callback function that is called when an account is removed and a data of account is updated from the account database It will be called with event message and account ID.
+  /// - `user_data` (in): The user_data that is delivered to callback
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_EVENT_SUBSCRIPTION_FAIL`: Subscription fail
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_unsubscribe_notification()`
   int account_subscribe_notification(
     account_subscribe_h account_subscribe,
     account_event_cb callback,
@@ -2797,23 +3376,34 @@ class Tizen90AccountsSvc {
           int Function(
               account_subscribe_h, account_event_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief  Destroys the account subscribe handle and releases all its resources.
+  /// Destroys the account subscribe handle and releases all its resources.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel   public
-  /// @privilege   %http://tizen.org/privilege/account.read \n
-  /// @remarks     You must call account_unsubscribe_notification() when you do not need to subscribe account event.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in]   account_subscribe  The account subscription handle
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ACCOUNT_ERROR_NONE                     Successful
-  /// @retval  #ACCOUNT_ERROR_INVALID_PARAMETER        Invalid parameter
-  /// @retval  #ACCOUNT_ERROR_EVENT_SUBSCRIPTION_FAIL  Unsubscription failed
-  /// @retval  #ACCOUNT_ERROR_NOT_SUPPORTED            Not supported
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/account.read>
   ///
-  /// @see account_create()
+  /// **Remarks:**
+  /// - You must call account_unsubscribe_notification() when you do not need to subscribe account event.
+  ///
+  /// **Parameters:**
+  /// - `account_subscribe` (in): The account subscription handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACCOUNT_ERROR_NONE`: Successful
+  /// - `ACCOUNT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ACCOUNT_ERROR_EVENT_SUBSCRIPTION_FAIL`: Unsubscription failed
+  /// - `ACCOUNT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `account_create()`
   int account_unsubscribe_notification(
     account_subscribe_h account_subscribe,
   ) {
@@ -2830,14 +3420,21 @@ class Tizen90AccountsSvc {
           .asFunction<int Function(account_subscribe_h)>();
 }
 
-/// @brief  The structure type for the Account handle.
-/// @since_tizen 2.3
+/// The structure type for the Account handle.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 typedef account_h = ffi.Pointer<account_s>;
 
+/// @nodoc
 final class account_s extends ffi.Opaque {}
 
-/// @brief  Enumeration for the state of capability.
-/// @since_tizen 2.3
+/// Enumeration for the state of capability.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class account_capability_state_e {
   /// < Account capability is invalid
   static const int ACCOUNT_CAPABILITY_STATE_INVALID = 0;
@@ -2850,31 +3447,42 @@ abstract class account_capability_state_e {
   static const int ACCOUNT_CAPABILITY_STATE_MAX = 3;
 }
 
-/// @brief  Called once for each capability of an account in the database.
+/// Called once for each capability of an account in the database.
 ///
-/// @since_tizen 2.3
-/// @param[in]   capability_type  The capability type
-/// @param[in]   capability_state The capability state
-/// @param[in]   user_data        The user data passed from the foreach function
+/// **Since Tizen:**
+/// - 2.3
 ///
-/// @return      @c true to continue with the next iteration of the loop, \n
-/// otherwise @c false to break out of the loop
+/// **Parameters:**
+/// - `capability_type` (in): The capability type
+/// - `capability_state` (in): The capability state
+/// - `user_data` (in): The user data passed from the foreach function
 ///
-/// @pre account_query_capability_by_account_id() must be called.
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
 ///
-/// @see account_query_capability_by_account_id()
+/// **Preconditions:**
+/// - account_query_capability_by_account_id() must be called.
+///
+/// **See also:**
+/// - `account_query_capability_by_account_id()`
+/// @nodoc
 typedef capability_cb = ffi.Pointer<ffi.NativeFunction<capability_cbFunction>>;
+/// @nodoc
 typedef capability_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> capability_type,
     ffi.Int32 capability_state,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcapability_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> capability_type,
     int capability_state,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief  Enumeration for the account auth type.
-/// @since_tizen 2.3
+/// Enumeration for the account auth type.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class account_auth_type_e {
   /// < Auth type is invalid
   static const int ACCOUNT_AUTH_TYPE_INVALID = 0;
@@ -2890,8 +3498,11 @@ abstract class account_auth_type_e {
   static const int ACCOUNT_AUTH_TYPE_MAX = 4;
 }
 
-/// @brief  Enumeration for the state of account secrecy.
-/// @since_tizen 2.3
+/// Enumeration for the state of account secrecy.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class account_secrecy_state_e {
   /// < Account secrecy is invalid
   static const int ACCOUNT_SECRECY_INVALID = 0;
@@ -2904,8 +3515,11 @@ abstract class account_secrecy_state_e {
   static const int ACCOUNT_SECRECY_MAX = 3;
 }
 
-/// @brief  Enumeration for the account sync status.
-/// @since_tizen 2.3
+/// Enumeration for the account sync status.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class account_sync_state_e {
   /// < Account sync is invalid
   static const int ACCOUNT_SYNC_INVALID = 0;
@@ -2930,152 +3544,207 @@ abstract class account_sync_state_e {
   static const int ACCOUNT_SYNC_MAX = 7;
 }
 
-/// @brief  Called once for each custom data of an account in the database.
+/// Called once for each custom data of an account in the database.
 ///
-/// @since_tizen 2.3
-/// @param[in]  key        The user custom key
-/// @param[in]  value      The user custom value of the specific key
-/// @param[in]  user_data  The user data passed
+/// **Since Tizen:**
+/// - 2.3
 ///
-/// @return     @c true to continue with the next iteration of the loop, \n
-/// otherwise @c false to break out of the loop
+/// **Parameters:**
+/// - `key` (in): The user custom key
+/// - `value` (in): The user custom value of the specific key
+/// - `user_data` (in): The user data passed
 ///
-/// @pre account_query_capability_by_account_id() must be called.
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
 ///
-/// @see account_query_capability_by_account_id()
+/// **Preconditions:**
+/// - account_query_capability_by_account_id() must be called.
+///
+/// **See also:**
+/// - `account_query_capability_by_account_id()`
+/// @nodoc
 typedef account_custom_cb
     = ffi.Pointer<ffi.NativeFunction<account_custom_cbFunction>>;
+/// @nodoc
 typedef account_custom_cbFunction = ffi.Bool Function(ffi.Pointer<ffi.Char> key,
     ffi.Pointer<ffi.Char> value, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartaccount_custom_cbFunction = bool Function(ffi.Pointer<ffi.Char> key,
     ffi.Pointer<ffi.Char> value, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief   Called once for each account from the database.
+/// Called once for each account from the database.
 ///
-/// @since_tizen 2.3
-/// @param[in]  account    The account handle
-/// @param[in]  user_data  The user data passed from the foreach function
+/// **Since Tizen:**
+/// - 2.3
 ///
-/// @return     @c true to continue with the next iteration of the loop, \n
-/// otherwise @c false to break out of the loop
+/// **Parameters:**
+/// - `account` (in): The account handle
+/// - `user_data` (in): The user data passed from the foreach function
 ///
-/// @pre account_foreach_account_from_db(), account_query_account_by_account_id(), account_query_account_by_user_name() or account_query_account_by_package_name() must be called.
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
 ///
-/// @see account_foreach_account_from_db()
-/// @see account_query_account_by_account_id()
-/// @see account_query_account_by_user_name()
-/// @see account_query_account_by_package_name()
+/// **Preconditions:**
+/// - account_foreach_account_from_db(), account_query_account_by_account_id(), account_query_account_by_user_name() or account_query_account_by_package_name() must be called.
+///
+/// **See also:**
+/// - `account_foreach_account_from_db()`
+/// - `account_query_account_by_account_id()`
+/// - `account_query_account_by_user_name()`
+/// - `account_query_account_by_package_name()`
+/// @nodoc
 typedef account_cb = ffi.Pointer<ffi.NativeFunction<account_cbFunction>>;
+/// @nodoc
 typedef account_cbFunction = ffi.Bool Function(
     account_h account, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartaccount_cbFunction = bool Function(
     account_h account, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief  The structure type for the Account provider handle.
-/// @since_tizen 2.3
+/// The structure type for the Account provider handle.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 typedef account_type_h = ffi.Pointer<account_type_s>;
 
+/// @nodoc
 final class account_type_s extends ffi.Opaque {}
 
-/// @brief  Called once for each capability of an account provider in the database.
+/// Called once for each capability of an account provider in the database.
 ///
-/// @since_tizen 2.3
-/// @param[in]  app_id     The application ID
-/// @param[in]  key        The user custom key
-/// @param[in]  user_data  The user data passed
+/// **Since Tizen:**
+/// - 2.3
 ///
-/// @return     @c true to continue with the next iteration of the loop, \n
-/// otherwise @c false to break out of the loop
+/// **Parameters:**
+/// - `app_id` (in): The application ID
+/// - `key` (in): The user custom key
+/// - `user_data` (in): The user data passed
 ///
-/// @pre account_type_query_provider_feature_by_app_id(), account_type_get_provider_feature_all() must be called.
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
 ///
-/// @see account_type_query_provider_feature_by_app_id()
-/// @see account_type_get_provider_feature_all()
+/// **Preconditions:**
+/// - account_type_query_provider_feature_by_app_id(), account_type_get_provider_feature_all() must be called.
+///
+/// **See also:**
+/// - `account_type_query_provider_feature_by_app_id()`
+/// - `account_type_get_provider_feature_all()`
+/// @nodoc
 typedef provider_feature_cb
     = ffi.Pointer<ffi.NativeFunction<provider_feature_cbFunction>>;
+/// @nodoc
 typedef provider_feature_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> app_id,
     ffi.Pointer<ffi.Char> key,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartprovider_feature_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> app_id,
     ffi.Pointer<ffi.Char> key,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief  Called once for each account label.
+/// Called once for each account label.
 ///
-/// @since_tizen 2.3
-/// @param[in]  app_id     The application ID
-/// @param[in]  label      The name of the account depends on the specified locale
-/// @param[in]  locale     The locale is specified as an ISO 3166 alpha-2 two letter country-code followed by ISO 639-1 for the two-letter language code.\n
-/// For example, "ko_KR" for Korean, "en_US" for American English.
-/// @param[in]  user_data  The user data passed
+/// **Since Tizen:**
+/// - 2.3
 ///
-/// @return     @c true to continue with the next iteration of the loop, \n
-/// otherwise @c false to break out of the loop
+/// **Parameters:**
+/// - `app_id` (in): The application ID
+/// - `label` (in): The name of the account depends on the specified locale
+/// - `locale` (in): The locale is specified as an ISO 3166 alpha-2 two letter country-code followed by ISO 639-1 for the two-letter language code. For example, "ko_KR" for Korean, "en_US" for American English.
+/// - `user_data` (in): The user data passed
 ///
-/// @pre account_type_get_label(), account_type_query_label_by_app_id() must be called.
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
 ///
-/// @see account_type_get_label()
-/// @see account_type_query_label_by_app_id()
+/// **Preconditions:**
+/// - account_type_get_label(), account_type_query_label_by_app_id() must be called.
+///
+/// **See also:**
+/// - `account_type_get_label()`
+/// - `account_type_query_label_by_app_id()`
+/// @nodoc
 typedef account_label_cb
     = ffi.Pointer<ffi.NativeFunction<account_label_cbFunction>>;
+/// @nodoc
 typedef account_label_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> app_id,
     ffi.Pointer<ffi.Char> label,
     ffi.Pointer<ffi.Char> locale,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartaccount_label_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> app_id,
     ffi.Pointer<ffi.Char> label,
     ffi.Pointer<ffi.Char> locale,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief  Called once for each account provider in the database.
+/// Called once for each account provider in the database.
 ///
-/// @since_tizen 2.3
-/// @param[in]  account_type  The account provider handle
-/// @param[in]  user_data     The user data passed
+/// **Since Tizen:**
+/// - 2.3
 ///
-/// @return     @c true to continue with the next iteration of the loop, \n
-/// otherwise @c false to break out of the loop
+/// **Parameters:**
+/// - `account_type` (in): The account provider handle
+/// - `user_data` (in): The user data passed
 ///
-/// @pre account_type_foreach_account_type_from_db(), account_type_query_by_provider_feature() must be called.
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
 ///
-/// @see account_type_foreach_account_type_from_db()
-/// @see account_type_query_by_provider_feature()
+/// **Preconditions:**
+/// - account_type_foreach_account_type_from_db(), account_type_query_by_provider_feature() must be called.
+///
+/// **See also:**
+/// - `account_type_foreach_account_type_from_db()`
+/// - `account_type_query_by_provider_feature()`
+/// @nodoc
 typedef account_type_cb
     = ffi.Pointer<ffi.NativeFunction<account_type_cbFunction>>;
+/// @nodoc
 typedef account_type_cbFunction = ffi.Bool Function(
     account_type_h account_type, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartaccount_type_cbFunction = bool Function(
     account_type_h account_type, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief  The structure type for the Account subscribe handle.
-/// @since_tizen 2.3
+/// The structure type for the Account subscribe handle.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 typedef account_subscribe_h = ffi.Pointer<account_subscribe_s>;
 
+/// @nodoc
 final class account_subscribe_s extends ffi.Opaque {}
 
-/// @brief Called once when an event occurs.
+/// Called once when an event occurs.
 ///
-/// @since_tizen 2.3
-/// @param[in]  event_type  The account event type
-/// @param[in]  account_id  The account ID to update
-/// @param[in]  user_data   The user data passed
+/// **Since Tizen:**
+/// - 2.3
 ///
-/// @return     @c true to continue with the next iteration of the loop, \n
-/// otherwise @c false to break out of the loop
+/// **Parameters:**
+/// - `event_type` (in): The account event type
+/// - `account_id` (in): The account ID to update
+/// - `user_data` (in): The user data passed
 ///
-/// @pre account_subscribe_notification() must be called.
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
 ///
-/// @see account_subscribe_notification()
+/// **Preconditions:**
+/// - account_subscribe_notification() must be called.
+///
+/// **See also:**
+/// - `account_subscribe_notification()`
+/// @nodoc
 typedef account_event_cb
     = ffi.Pointer<ffi.NativeFunction<account_event_cbFunction>>;
+/// @nodoc
 typedef account_event_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> event_type,
     ffi.Int account_id,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartaccount_event_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> event_type,
     int account_id,

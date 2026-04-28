@@ -1,3 +1,6 @@
+/// {@category 9.0/tizen}
+library tizen_interop_9_0.capi_system_runtime_info;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-system-runtime-info APIs.
+/// {@category 9.0/tizen}
 class Tizen90CapiSystemRuntimeInfo {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,20 +28,26 @@ class Tizen90CapiSystemRuntimeInfo {
           lookup)
       : _lookup = lookup;
 
-  /// @brief        Gets the integer value of the runtime information.
-  /// @details      This function gets current state of the given key which represents specific runtime information.
-  /// @since_tizen  2.3
+  /// Gets the integer value of the runtime information.
   ///
-  /// @param[in]  key    The runtime information status key from which data should be read
-  /// @param[out] value  The current value of the given key
+  /// This function gets current state of the given key which represents specific runtime information.
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RUNTIME_INFO_ERROR_NONE               Successful
-  /// @retval #RUNTIME_INFO_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #RUNTIME_INFO_ERROR_IO_ERROR           An input/output error occurred when read value from system
-  /// @retval #RUNTIME_INFO_ERROR_PERMISSION_DENIED  No permission to use the api
-  /// @retval #RUNTIME_INFO_ERROR_NOT_SUPPORTED      Not supported parameter
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The runtime information status key from which data should be read
+  /// - `value` (out): The current value of the given key
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RUNTIME_INFO_ERROR_NONE`: Successful
+  /// - `RUNTIME_INFO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RUNTIME_INFO_ERROR_IO_ERROR`: An input/output error occurred when read value from system
+  /// - `RUNTIME_INFO_ERROR_PERMISSION_DENIED`: No permission to use the api
+  /// - `RUNTIME_INFO_ERROR_NOT_SUPPORTED`: Not supported parameter
   int runtime_info_get_value_int(
     int key,
     ffi.Pointer<ffi.Int> value,
@@ -55,20 +65,26 @@ class Tizen90CapiSystemRuntimeInfo {
   late final _runtime_info_get_value_int = _runtime_info_get_value_intPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief        Gets the boolean value from the runtime information.
-  /// @details      This function gets current state of the given key which represents specific runtime information.
-  /// @since_tizen  2.3
+  /// Gets the boolean value from the runtime information.
   ///
-  /// @param[in]  key    The runtime information key from which data should be read
-  /// @param[out] value  The current value of the given key
+  /// This function gets current state of the given key which represents specific runtime information.
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RUNTIME_INFO_ERROR_NONE               Successful
-  /// @retval #RUNTIME_INFO_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #RUNTIME_INFO_ERROR_IO_ERROR           An input/output error occurred when read value from system
-  /// @retval #RUNTIME_INFO_ERROR_PERMISSION_DENIED  No permission to use the api
-  /// @retval #RUNTIME_INFO_ERROR_NOT_SUPPORTED      Not supported parameter
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The runtime information key from which data should be read
+  /// - `value` (out): The current value of the given key
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RUNTIME_INFO_ERROR_NONE`: Successful
+  /// - `RUNTIME_INFO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RUNTIME_INFO_ERROR_IO_ERROR`: An input/output error occurred when read value from system
+  /// - `RUNTIME_INFO_ERROR_PERMISSION_DENIED`: No permission to use the api
+  /// - `RUNTIME_INFO_ERROR_NOT_SUPPORTED`: Not supported parameter
   int runtime_info_get_value_bool(
     int key,
     ffi.Pointer<ffi.Bool> value,
@@ -86,20 +102,26 @@ class Tizen90CapiSystemRuntimeInfo {
   late final _runtime_info_get_value_bool = _runtime_info_get_value_boolPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief        Gets the double value from the runtime information.
-  /// @details      This function gets current state of the given key which represents specific runtime information.
-  /// @since_tizen  2.3
+  /// Gets the double value from the runtime information.
   ///
-  /// @param[in]  key    The runtime information key from which data should be read
-  /// @param[out] value  The current value of the given key
+  /// This function gets current state of the given key which represents specific runtime information.
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RUNTIME_INFO_ERROR_NONE               Successful
-  /// @retval #RUNTIME_INFO_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #RUNTIME_INFO_ERROR_IO_ERROR           An input/output error occurred when read value from system
-  /// @retval #RUNTIME_INFO_ERROR_PERMISSION_DENIED  No permission to use the api
-  /// @retval #RUNTIME_INFO_ERROR_NOT_SUPPORTED      Not supported parameter
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The runtime information key from which data should be read
+  /// - `value` (out): The current value of the given key
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RUNTIME_INFO_ERROR_NONE`: Successful
+  /// - `RUNTIME_INFO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RUNTIME_INFO_ERROR_IO_ERROR`: An input/output error occurred when read value from system
+  /// - `RUNTIME_INFO_ERROR_PERMISSION_DENIED`: No permission to use the api
+  /// - `RUNTIME_INFO_ERROR_NOT_SUPPORTED`: Not supported parameter
   int runtime_info_get_value_double(
     int key,
     ffi.Pointer<ffi.Double> value,
@@ -117,23 +139,30 @@ class Tizen90CapiSystemRuntimeInfo {
   late final _runtime_info_get_value_double = _runtime_info_get_value_doublePtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Double>)>();
 
-  /// @brief        Gets the string value for specified runtime information.
-  /// @details      This function gets current state of the given key which represents specific runtime information.
-  /// @since_tizen  2.3
+  /// Gets the string value for specified runtime information.
   ///
-  /// @remarks  You must release @a value using free().
+  /// This function gets current state of the given key which represents specific runtime information.
   ///
-  /// @param[in]  key    The runtime information key from which data should be read
-  /// @param[out] value  The current value of the given key
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RUNTIME_INFO_ERROR_NONE               Successful
-  /// @retval #RUNTIME_INFO_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #RUNTIME_INFO_ERROR_IO_ERROR           An input/output error occurred when read value from system
-  /// @retval #RUNTIME_INFO_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #RUNTIME_INFO_ERROR_PERMISSION_DENIED  No permission to use the api
-  /// @retval #RUNTIME_INFO_ERROR_NOT_SUPPORTED      Not supported parameter
+  /// **Remarks:**
+  /// - You must release `value` using free().
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The runtime information key from which data should be read
+  /// - `value` (out): The current value of the given key
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RUNTIME_INFO_ERROR_NONE`: Successful
+  /// - `RUNTIME_INFO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RUNTIME_INFO_ERROR_IO_ERROR`: An input/output error occurred when read value from system
+  /// - `RUNTIME_INFO_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `RUNTIME_INFO_ERROR_PERMISSION_DENIED`: No permission to use the api
+  /// - `RUNTIME_INFO_ERROR_NOT_SUPPORTED`: Not supported parameter
   int runtime_info_get_value_string(
     int key,
     ffi.Pointer<ffi.Pointer<ffi.Char>> value,
@@ -151,26 +180,36 @@ class Tizen90CapiSystemRuntimeInfo {
   late final _runtime_info_get_value_string = _runtime_info_get_value_stringPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief        Registers a change event callback for given runtime information key.
-  /// @details      Only the last registered callback will be operational if it is called multiple
-  /// times on a same key. That is, it replaces previously registered one, if any.
-  /// @since_tizen  2.3
-  /// @remarks  You must release @a callback using runtime_info_unset_changed_cb().
+  /// Registers a change event callback for given runtime information key.
   ///
-  /// @param[in] key        The runtime information type
-  /// @param[in] callback   The callback function to invoke
-  /// @param[in] user_data  The user data to be passed to the callback function
+  /// Only the last registered callback will be operational if it is called multiple times on a same key. That is, it replaces previously registered one, if any.
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RUNTIME_INFO_ERROR_NONE               Successful
-  /// @retval #RUNTIME_INFO_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #RUNTIME_INFO_ERROR_PERMISSION_DENIED  No permission to use the api
-  /// @retval #RUNTIME_INFO_ERROR_NOT_SUPPORTED      Not supported parameter
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @post  runtime_info_changed_cb() will be invoked.
-  /// @see   runtime_info_unset_changed_cb()
-  /// @see   runtime_info_changed_cb()
+  /// **Remarks:**
+  /// - You must release `callback` using runtime_info_unset_changed_cb().
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The runtime information type
+  /// - `callback` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RUNTIME_INFO_ERROR_NONE`: Successful
+  /// - `RUNTIME_INFO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RUNTIME_INFO_ERROR_PERMISSION_DENIED`: No permission to use the api
+  /// - `RUNTIME_INFO_ERROR_NOT_SUPPORTED`: Not supported parameter
+  ///
+  /// **Postconditions:**
+  /// - runtime_info_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `runtime_info_unset_changed_cb()`
+  /// - `runtime_info_changed_cb()`
   int runtime_info_set_changed_cb(
     int key,
     runtime_info_changed_cb callback,
@@ -191,18 +230,25 @@ class Tizen90CapiSystemRuntimeInfo {
       _runtime_info_set_changed_cbPtr.asFunction<
           int Function(int, runtime_info_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief        Unregisters the callback function registered by runtime_info_set_changed_cb().
-  /// @details      Unregisters the callback function registered by runtime_info_set_changed_cb() on the key.
-  /// @since_tizen  2.3
+  /// Unregisters the callback function registered by runtime_info_set_changed_cb().
   ///
-  /// @param[in] key  The runtime information type
+  /// Unregisters the callback function registered by runtime_info_set_changed_cb() on the key.
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RUNTIME_INFO_ERROR_NONE               Successful
-  /// @retval #RUNTIME_INFO_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @see  runtime_info_set_changed_cb()
+  /// **Parameters:**
+  /// - `key` (in): The runtime information type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RUNTIME_INFO_ERROR_NONE`: Successful
+  /// - `RUNTIME_INFO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `runtime_info_set_changed_cb()`
   int runtime_info_unset_changed_cb(
     int key,
   ) {
@@ -217,19 +263,26 @@ class Tizen90CapiSystemRuntimeInfo {
   late final _runtime_info_unset_changed_cb =
       _runtime_info_unset_changed_cbPtr.asFunction<int Function(int)>();
 
-  /// @brief        Gets system memory information in the form of #runtime_memory_info_s.
-  /// @details      The information is collected from /proc/meminfo.
-  /// @since_tizen  2.4
+  /// Gets system memory information in the form of `runtime_memory_info_s`.
   ///
-  /// @param[out] info  The system memory information structure
+  /// The information is collected from /proc/meminfo.
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RUNTIME_INFO_ERROR_NONE               Successful
-  /// @retval #RUNTIME_INFO_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #RUNTIME_INFO_ERROR_IO_ERROR           An Input/Output error occurred while reading from system
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @see  runtime_info_get_process_memory_info()
+  /// **Parameters:**
+  /// - `info` (out): The system memory information structure
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RUNTIME_INFO_ERROR_NONE`: Successful
+  /// - `RUNTIME_INFO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RUNTIME_INFO_ERROR_IO_ERROR`: An Input/Output error occurred while reading from system
+  ///
+  /// **See also:**
+  /// - `runtime_info_get_process_memory_info()`
   int runtime_info_get_system_memory_info(
     ffi.Pointer<runtime_memory_info_s> info,
   ) {
@@ -246,29 +299,41 @@ class Tizen90CapiSystemRuntimeInfo {
       _runtime_info_get_system_memory_infoPtr
           .asFunction<int Function(ffi.Pointer<runtime_memory_info_s>)>();
 
-  /// @brief        Gets memory information per process in the form of #process_memory_info_s.
-  /// @details      The information is collected from /proc/[pid]/stat and /proc/[pid]/smaps.
-  /// @since_tizen  2.4
+  /// Gets memory information per process in the form of `process_memory_info_s`.
   ///
-  /// @privlevel  public
-  /// @privilege  %http://tizen.org/privilege/systemmonitor
-  /// @remarks    You must release @a s value using free(). \n
-  /// The size of @a s is the same with @a size.
+  /// The information is collected from /proc/`[pid]`/stat and /proc/`[pid]`/smaps.
   ///
-  /// @param[in]  pid   The process unique id array
-  /// @param[in]  size  The size of pid array
-  /// @param[out] info  The memory information structure array of the processes
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RUNTIME_INFO_ERROR_NONE               Successful
-  /// @retval #RUNTIME_INFO_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #RUNTIME_INFO_ERROR_OUT_OF_MEMORY      Not able to allocate memory (for output param/other operations)
-  /// @retval #RUNTIME_INFO_ERROR_REMOTE_IO          Call to resource daemon failed (dbus errors/resource daemon errors)
-  /// @retval #RUNTIME_INFO_ERROR_IO_ERROR           An I/O error during dbus message operations
-  /// @retval #RUNTIME_INFO_ERROR_PERMISSION_DENIED  Process not authorized to request process usage info
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @see  runtime_info_get_system_memory_info()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/systemmonitor>
+  ///
+  /// **Remarks:**
+  /// - You must release `s` value using free().
+  /// - The size of `s` is the same with `size`.
+  ///
+  /// **Parameters:**
+  /// - `pid` (in): The process unique id array
+  /// - `size` (in): The size of pid array
+  /// - `info` (out): The memory information structure array of the processes
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RUNTIME_INFO_ERROR_NONE`: Successful
+  /// - `RUNTIME_INFO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RUNTIME_INFO_ERROR_OUT_OF_MEMORY`: Not able to allocate memory (for output param/other operations)
+  /// - `RUNTIME_INFO_ERROR_REMOTE_IO`: Call to resource daemon failed (dbus errors/resource daemon errors)
+  /// - `RUNTIME_INFO_ERROR_IO_ERROR`: An I/O error during dbus message operations
+  /// - `RUNTIME_INFO_ERROR_PERMISSION_DENIED`: Process not authorized to request process usage info
+  ///
+  /// **See also:**
+  /// - `runtime_info_get_system_memory_info()`
   int runtime_info_get_process_memory_info(
     ffi.Pointer<ffi.Int> pid,
     int size,
@@ -291,19 +356,26 @@ class Tizen90CapiSystemRuntimeInfo {
           int Function(ffi.Pointer<ffi.Int>, int,
               ffi.Pointer<ffi.Pointer<process_memory_info_s>>)>();
 
-  /// @brief        Gets CPU usgae information in the form of #runtime_cpu_usage_s.
-  /// @details      The information is collected from /proc/stat.
-  /// @since_tizen  2.4
+  /// Gets CPU usgae information in the form of `runtime_cpu_usage_s`.
   ///
-  /// @param[out] usage  The CPU usage structure
+  /// The information is collected from /proc/stat.
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RUNTIME_INFO_ERROR_NONE               Successful
-  /// @retval #RUNTIME_INFO_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #RUNTIME_INFO_ERROR_IO_ERROR           An input/output error occurred while reading from system
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @see  runtime_info_get_process_cpu_usage()
+  /// **Parameters:**
+  /// - `usage` (out): The CPU usage structure
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RUNTIME_INFO_ERROR_NONE`: Successful
+  /// - `RUNTIME_INFO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RUNTIME_INFO_ERROR_IO_ERROR`: An input/output error occurred while reading from system
+  ///
+  /// **See also:**
+  /// - `runtime_info_get_process_cpu_usage()`
   int runtime_info_get_cpu_usage(
     ffi.Pointer<runtime_cpu_usage_s> usage,
   ) {
@@ -319,29 +391,41 @@ class Tizen90CapiSystemRuntimeInfo {
   late final _runtime_info_get_cpu_usage = _runtime_info_get_cpu_usagePtr
       .asFunction<int Function(ffi.Pointer<runtime_cpu_usage_s>)>();
 
-  /// @brief        Gets CPU usage in the form of #process_cpu_usage_s.
-  /// @details      The information is collected from /proc/[pid]/stat.
-  /// @since_tizen  2.4
+  /// Gets CPU usage in the form of `process_cpu_usage_s`.
   ///
-  /// @privlevel  public
-  /// @privilege  %http://tizen.org/privilege/systemmonitor
-  /// @remarks    You must release @a s value using free(). \n
-  /// The size of @a s is the same with @a size.
+  /// The information is collected from /proc/`[pid]`/stat.
   ///
-  /// @param[in]  pid   The process unique id array
-  /// @param[in]  size  The size of pid array
-  /// @param[out] usage The CPU usage structure array of the processes
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RUNTIME_INFO_ERROR_NONE               Successful
-  /// @retval #RUNTIME_INFO_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #RUNTIME_INFO_ERROR_OUT_OF_MEMORY      Not able to allocate memory (for output param/other operations)
-  /// @retval #RUNTIME_INFO_ERROR_REMOTE_IO          Call to resource daemon failed (dbus errors/resource daemon errors)
-  /// @retval #RUNTIME_INFO_ERROR_IO_ERROR           An I/O error occurred (during dbus message operations/other IO operations)
-  /// @retval #RUNTIME_INFO_ERROR_PERMISSION_DENIED  Process not authorized to request process usage info
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @see  runtime_info_get_cpu_usage()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/systemmonitor>
+  ///
+  /// **Remarks:**
+  /// - You must release `s` value using free().
+  /// - The size of `s` is the same with `size`.
+  ///
+  /// **Parameters:**
+  /// - `pid` (in): The process unique id array
+  /// - `size` (in): The size of pid array
+  /// - `usage` (out): The CPU usage structure array of the processes
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RUNTIME_INFO_ERROR_NONE`: Successful
+  /// - `RUNTIME_INFO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RUNTIME_INFO_ERROR_OUT_OF_MEMORY`: Not able to allocate memory (for output param/other operations)
+  /// - `RUNTIME_INFO_ERROR_REMOTE_IO`: Call to resource daemon failed (dbus errors/resource daemon errors)
+  /// - `RUNTIME_INFO_ERROR_IO_ERROR`: An I/O error occurred (during dbus message operations/other IO operations)
+  /// - `RUNTIME_INFO_ERROR_PERMISSION_DENIED`: Process not authorized to request process usage info
+  ///
+  /// **See also:**
+  /// - `runtime_info_get_cpu_usage()`
   int runtime_info_get_process_cpu_usage(
     ffi.Pointer<ffi.Int> pid,
     int size,
@@ -364,17 +448,23 @@ class Tizen90CapiSystemRuntimeInfo {
           int Function(ffi.Pointer<ffi.Int>, int,
               ffi.Pointer<ffi.Pointer<process_cpu_usage_s>>)>();
 
-  /// @brief        Gets the total number of processors including both online and offline.
-  /// @details      The information is collected from /sys/devices/system/cpu/possible.
-  /// @since_tizen  3.0
+  /// Gets the total number of processors including both online and offline.
   ///
-  /// @param[out] num_core  The number of whole processors
+  /// The information is collected from /sys/devices/system/cpu/possible.
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RUNTIME_INFO_ERROR_NONE               Successful
-  /// @retval #RUNTIME_INFO_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #RUNTIME_INFO_ERROR_IO_ERROR           An I/O error occurred (during file open operation)
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `num_core` (out): The number of whole processors
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RUNTIME_INFO_ERROR_NONE`: Successful
+  /// - `RUNTIME_INFO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RUNTIME_INFO_ERROR_IO_ERROR`: An I/O error occurred (during file open operation)
   int runtime_info_get_processor_count(
     ffi.Pointer<ffi.Int> num_core,
   ) {
@@ -390,19 +480,25 @@ class Tizen90CapiSystemRuntimeInfo {
       _runtime_info_get_processor_countPtr
           .asFunction<int Function(ffi.Pointer<ffi.Int>)>();
 
-  /// @brief        Gets the current frequency of a specific processor.
-  /// @details      The information is collected from /sys/devices/system/cpu/cpu[idx]/cpufreq/scaling_cur_freq.
-  /// @since_tizen  3.0
+  /// Gets the current frequency of a specific processor.
   ///
-  /// @param[in]  core_idx  The index (from 0) of CPU core that you want to know the frequency
-  /// @param[out] cpu_freq  The current frequency(MHz) of processor
+  /// The information is collected from /sys/devices/system/cpu/cpu`[idx]`/cpufreq/scaling_cur_freq.
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RUNTIME_INFO_ERROR_NONE               Successful
-  /// @retval #RUNTIME_INFO_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #RUNTIME_INFO_ERROR_IO_ERROR           An I/O error occurred (during file open operation)
-  /// @retval #RUNTIME_INFO_ERROR_NO_DATA            No data available (Since 3.0)
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `core_idx` (in): The index (from 0) of CPU core that you want to know the frequency
+  /// - `cpu_freq` (out): The current frequency(MHz) of processor
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RUNTIME_INFO_ERROR_NONE`: Successful
+  /// - `RUNTIME_INFO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RUNTIME_INFO_ERROR_IO_ERROR`: An I/O error occurred (during file open operation)
+  /// - `RUNTIME_INFO_ERROR_NO_DATA`: No data available (Since 3.0)
   int runtime_info_get_processor_current_frequency(
     int core_idx,
     ffi.Pointer<ffi.Int> cpu_freq,
@@ -420,19 +516,25 @@ class Tizen90CapiSystemRuntimeInfo {
       _runtime_info_get_processor_current_frequencyPtr
           .asFunction<int Function(int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief        Gets the maximum frequency of a specific processor.
-  /// @details      The information is collected from /sys/devices/system/cpu/cpu[idx]/cpufreq/scaling_max_freq.
-  /// @since_tizen  3.0
+  /// Gets the maximum frequency of a specific processor.
   ///
-  /// @param[in]  core_idx  The index (from 0) of CPU core that you want to know the frequency
-  /// @param[out] cpu_freq  The max frequency(MHz) of processor
+  /// The information is collected from /sys/devices/system/cpu/cpu`[idx]`/cpufreq/scaling_max_freq.
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RUNTIME_INFO_ERROR_NONE               Successful
-  /// @retval #RUNTIME_INFO_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #RUNTIME_INFO_ERROR_IO_ERROR           An I/O error occurred (during file open operation)
-  /// @retval #RUNTIME_INFO_ERROR_NO_DATA            No data available (Since 3.0)
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `core_idx` (in): The index (from 0) of CPU core that you want to know the frequency
+  /// - `cpu_freq` (out): The max frequency(MHz) of processor
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RUNTIME_INFO_ERROR_NONE`: Successful
+  /// - `RUNTIME_INFO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RUNTIME_INFO_ERROR_IO_ERROR`: An I/O error occurred (during file open operation)
+  /// - `RUNTIME_INFO_ERROR_NO_DATA`: No data available (Since 3.0)
   int runtime_info_get_processor_max_frequency(
     int core_idx,
     ffi.Pointer<ffi.Int> cpu_freq,
@@ -450,17 +552,23 @@ class Tizen90CapiSystemRuntimeInfo {
       _runtime_info_get_processor_max_frequencyPtr
           .asFunction<int Function(int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief        Gets the total physical memory size in kibibyte(KiB).
-  /// @details      The information is collected from /proc/zoneinfo.
-  /// @since_tizen  4.0
+  /// Gets the total physical memory size in kibibyte(KiB).
   ///
-  /// @param[out] size  Physical memory size (KiB)
+  /// The information is collected from /proc/zoneinfo.
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RUNTIME_INFO_ERROR_NONE               Successful
-  /// @retval #RUNTIME_INFO_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #RUNTIME_INFO_ERROR_IO_ERROR           An I/O error occurred (during file open operation)
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `size` (out): Physical memory size (KiB)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RUNTIME_INFO_ERROR_NONE`: Successful
+  /// - `RUNTIME_INFO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RUNTIME_INFO_ERROR_IO_ERROR`: An I/O error occurred (during file open operation)
   int runtime_info_get_physical_memory_size(
     ffi.Pointer<ffi.Int> size,
   ) {
@@ -476,20 +584,26 @@ class Tizen90CapiSystemRuntimeInfo {
       _runtime_info_get_physical_memory_sizePtr
           .asFunction<int Function(ffi.Pointer<ffi.Int>)>();
 
-  /// @brief        Destroy #app_usage_h that won't be used anymore.
-  /// @details      Destroy #app_usage_h acquired by functions runtime_info_get_all_apps_memory_usage()
-  /// or runtime_info_get_all_apps_cpu_rate().
-  /// @since_tizen  4.0
+  /// Destroy `app_usage_h` that won't be used anymore.
   ///
-  /// @param[in] handle  App usage handle to free
+  /// Destroy `app_usage_h` acquired by functions runtime_info_get_all_apps_memory_usage() or runtime_info_get_all_apps_cpu_rate().
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RUNTIME_INFO_ERROR_NONE               Successful
-  /// @retval #RUNTIME_INFO_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @see  runtime_info_get_all_apps_memory_usage()
-  /// @see  runtime_info_get_all_apps_cpu_rate()
+  /// **Parameters:**
+  /// - `handle` (in): App usage handle to free
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RUNTIME_INFO_ERROR_NONE`: Successful
+  /// - `RUNTIME_INFO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `runtime_info_get_all_apps_memory_usage()`
+  /// - `runtime_info_get_all_apps_cpu_rate()`
   int runtime_info_app_usage_destroy(
     app_usage_h handle,
   ) {
@@ -505,20 +619,27 @@ class Tizen90CapiSystemRuntimeInfo {
       _runtime_info_app_usage_destroyPtr
           .asFunction<int Function(app_usage_h)>();
 
-  /// @brief        Gets the number of applications that #app_usage_h has retrieved.
-  /// @details      Gets only applications that are managed by <a href="https://docs.tizen.org/application/native/guides/app-management/app-manager/">Application Manager</a>.
-  /// @since_tizen  4.0
+  /// Gets the number of applications that `app_usage_h` has retrieved.
   ///
-  /// @param[in]  handle  The app usage handle
-  /// @param[out] count   The number of apps on the app list
+  /// Gets only applications that are managed by <a href="https://docs.tizen.org/application/native/guides/app-management/app-manager/">Application Manager</a>.
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RUNTIME_INFO_ERROR_NONE               Successful
-  /// @retval #RUNTIME_INFO_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @see  runtime_info_get_all_apps_memory_usage()
-  /// @see  runtime_info_get_all_apps_cpu_rate()
+  /// **Parameters:**
+  /// - `handle` (in): The app usage handle
+  /// - `count` (out): The number of apps on the app list
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RUNTIME_INFO_ERROR_NONE`: Successful
+  /// - `RUNTIME_INFO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `runtime_info_get_all_apps_memory_usage()`
+  /// - `runtime_info_get_all_apps_cpu_rate()`
   int runtime_info_app_usage_get_count(
     app_usage_h handle,
     ffi.Pointer<ffi.Int> count,
@@ -537,24 +658,31 @@ class Tizen90CapiSystemRuntimeInfo {
       _runtime_info_app_usage_get_countPtr
           .asFunction<int Function(app_usage_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief        Gets an application ID by index from an #app_usage_h.
-  /// @details      Gets only applications that are managed by <a href="https://docs.tizen.org/application/native/guides/app-management/app-manager/">Application Manager</a>.
-  /// @since_tizen  4.0
+  /// Gets an application ID by index from an `app_usage_h`.
   ///
-  /// @remarks  You must release @a appid using free().
+  /// Gets only applications that are managed by <a href="https://docs.tizen.org/application/native/guides/app-management/app-manager/">Application Manager</a>.
   ///
-  /// @param[in]  handle  The app usage handle
-  /// @param[in]  index   The index in the app list; should be between 0 and @a count - 1 (inclusive), \n
-  /// where @a count is provided by runtime_info_app_usage_get_count()
-  /// @param[out] appid   The app ID
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RUNTIME_INFO_ERROR_NONE               Successful
-  /// @retval #RUNTIME_INFO_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// **Remarks:**
+  /// - You must release `appid` using free().
   ///
-  /// @see  runtime_info_get_all_apps_memory_usage()
-  /// @see  runtime_info_get_all_apps_cpu_rate()
+  /// **Parameters:**
+  /// - `handle` (in): The app usage handle
+  /// - `index` (in): The index in the app list; should be between 0 and `count` - 1 (inclusive), where `count` is provided by runtime_info_app_usage_get_count()
+  /// - `appid` (out): The app ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RUNTIME_INFO_ERROR_NONE`: Successful
+  /// - `RUNTIME_INFO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `runtime_info_get_all_apps_memory_usage()`
+  /// - `runtime_info_get_all_apps_cpu_rate()`
   int runtime_info_app_usage_get_appid(
     app_usage_h handle,
     int index,
@@ -576,26 +704,31 @@ class Tizen90CapiSystemRuntimeInfo {
       _runtime_info_app_usage_get_appidPtr.asFunction<
           int Function(app_usage_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief        Gets resource usage of an application by index from an #app_usage_h.
-  /// @details      Counts memory that is exclusively used by an application. That is, it doesn't
-  /// count shared memory of an application such as file or shared library, etc.
-  /// Gets only applications that are managed by <a href="https://docs.tizen.org/application/native/guides/app-management/app-manager/">Application Manager</a>.
-  /// @since_tizen  4.0
+  /// Gets resource usage of an application by index from an `app_usage_h`.
   ///
-  /// @remarks  The meaning of @a usage depends on which function was used to create @a handle.
+  /// Counts memory that is exclusively used by an application. That is, it doesn't count shared memory of an application such as file or shared library, etc. Gets only applications that are managed by <a href="https://docs.tizen.org/application/native/guides/app-management/app-manager/">Application Manager</a>.
   ///
-  /// @param[in]  handle  The app usage handle
-  /// @param[in]  index   The index in the app list; should be between 0 and @a count - 1 (inclusive), \n
-  /// where @a count is provided by runtime_info_app_usage_get_count()
-  /// @param[out] usage   Resource usage
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RUNTIME_INFO_ERROR_NONE               Successful
-  /// @retval #RUNTIME_INFO_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// **Remarks:**
+  /// - The meaning of `usage` depends on which function was used to create `handle`.
   ///
-  /// @see  runtime_info_get_all_apps_memory_usage()
-  /// @see  runtime_info_get_all_apps_cpu_rate()
+  /// **Parameters:**
+  /// - `handle` (in): The app usage handle
+  /// - `index` (in): The index in the app list; should be between 0 and `count` - 1 (inclusive), where `count` is provided by runtime_info_app_usage_get_count()
+  /// - `usage` (out): Resource usage
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RUNTIME_INFO_ERROR_NONE`: Successful
+  /// - `RUNTIME_INFO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `runtime_info_get_all_apps_memory_usage()`
+  /// - `runtime_info_get_all_apps_cpu_rate()`
   int runtime_info_app_usage_get_usage(
     app_usage_h handle,
     int index,
@@ -617,29 +750,38 @@ class Tizen90CapiSystemRuntimeInfo {
       _runtime_info_app_usage_get_usagePtr.asFunction<
           int Function(app_usage_h, int, ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief        Gets memory usage of all applications in kilobyte into #app_usage_h.
-  /// @details      Counts memory that is exclusively used by an application. That is, it doesn't
-  /// count shared memory of an application such as file or shared library, etc.
-  /// Gets only applications that are managed by <a href="https://docs.tizen.org/application/native/guides/app-management/app-manager/">Application Manager</a>.
-  /// @since_tizen  4.0
+  /// Gets memory usage of all applications in kilobyte into `app_usage_h`.
   ///
-  /// @privlevel  public
-  /// @privilege  %http://tizen.org/privilege/systemmonitor
-  /// @remarks    You must release @a usage using runtime_info_app_usage_destroy().
+  /// Counts memory that is exclusively used by an application. That is, it doesn't count shared memory of an application such as file or shared library, etc. Gets only applications that are managed by <a href="https://docs.tizen.org/application/native/guides/app-management/app-manager/">Application Manager</a>.
   ///
-  /// @param[out] usage  An array of each app's memory usage (KB)
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RUNTIME_INFO_ERROR_NONE               Successful
-  /// @retval #RUNTIME_INFO_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #RUNTIME_INFO_ERROR_OUT_OF_MEMORY      Not able to allocate memory (for output param/other operations)
-  /// @retval #RUNTIME_INFO_ERROR_REMOTE_IO          Call to resource daemon failed (dbus errors/resource daemon errors)
-  /// @retval #RUNTIME_INFO_ERROR_IO_ERROR           An I/O error during dbus message operations
-  /// @retval #RUNTIME_INFO_ERROR_PERMISSION_DENIED  Process not authorized to request app usage info
-  /// @retval #RUNTIME_INFO_ERROR_NO_DATA            No app running
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @code
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/systemmonitor>
+  ///
+  /// **Remarks:**
+  /// - You must release `usage` using runtime_info_app_usage_destroy().
+  ///
+  /// **Parameters:**
+  /// - `usage` (out): An array of each app's memory usage (KB)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RUNTIME_INFO_ERROR_NONE`: Successful
+  /// - `RUNTIME_INFO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RUNTIME_INFO_ERROR_OUT_OF_MEMORY`: Not able to allocate memory (for output param/other operations)
+  /// - `RUNTIME_INFO_ERROR_REMOTE_IO`: Call to resource daemon failed (dbus errors/resource daemon errors)
+  /// - `RUNTIME_INFO_ERROR_IO_ERROR`: An I/O error during dbus message operations
+  /// - `RUNTIME_INFO_ERROR_PERMISSION_DENIED`: Process not authorized to request app usage info
+  /// - `RUNTIME_INFO_ERROR_NO_DATA`: No app running
+  ///
+  /// ```
   /// #include <runtime_info.h>
   ///
   /// void print_memory_usage(void)
@@ -663,7 +805,7 @@ class Tizen90CapiSystemRuntimeInfo {
   /// runtime_info_app_usage_destroy(mem_usage_handle);
   ///
   /// }
-  /// @endcode
+  /// ```
   int runtime_info_get_all_apps_memory_usage(
     ffi.Pointer<app_usage_h> usage,
   ) {
@@ -679,28 +821,38 @@ class Tizen90CapiSystemRuntimeInfo {
       _runtime_info_get_all_apps_memory_usagePtr
           .asFunction<int Function(ffi.Pointer<app_usage_h>)>();
 
-  /// @brief        Gets CPU rate of all applications in kilobyte into #app_usage_h.
-  /// @details      The information is collected from /proc/[pid]/stat.
-  /// Gets only applications that are managed by <a href="https://docs.tizen.org/application/native/guides/app-management/app-manager/">Application Manager</a>.
-  /// @since_tizen  4.0
+  /// Gets CPU rate of all applications in kilobyte into `app_usage_h`.
   ///
-  /// @privlevel  public
-  /// @privilege  %http://tizen.org/privilege/systemmonitor
-  /// @remarks    You must release @a rate using runtime_info_app_usage_destroy().
+  /// The information is collected from /proc/`[pid]`/stat. Gets only applications that are managed by <a href="https://docs.tizen.org/application/native/guides/app-management/app-manager/">Application Manager</a>.
   ///
-  /// @param[out] rate  An array of each app's CPU usage rate (%), the values are rounded down.
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RUNTIME_INFO_ERROR_NONE               Successful
-  /// @retval #RUNTIME_INFO_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #RUNTIME_INFO_ERROR_OUT_OF_MEMORY      Not able to allocate memory (for output param/other operations)
-  /// @retval #RUNTIME_INFO_ERROR_REMOTE_IO          Call to resource daemon failed (dbus errors/resource daemon errors)
-  /// @retval #RUNTIME_INFO_ERROR_IO_ERROR           An I/O error during dbus message operations
-  /// @retval #RUNTIME_INFO_ERROR_PERMISSION_DENIED  Process not authorized to request app usage info
-  /// @retval #RUNTIME_INFO_ERROR_NO_DATA            No app running
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @code
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/systemmonitor>
+  ///
+  /// **Remarks:**
+  /// - You must release `rate` using runtime_info_app_usage_destroy().
+  ///
+  /// **Parameters:**
+  /// - `rate` (out): An array of each app's CPU usage rate (%), the values are rounded down.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RUNTIME_INFO_ERROR_NONE`: Successful
+  /// - `RUNTIME_INFO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RUNTIME_INFO_ERROR_OUT_OF_MEMORY`: Not able to allocate memory (for output param/other operations)
+  /// - `RUNTIME_INFO_ERROR_REMOTE_IO`: Call to resource daemon failed (dbus errors/resource daemon errors)
+  /// - `RUNTIME_INFO_ERROR_IO_ERROR`: An I/O error during dbus message operations
+  /// - `RUNTIME_INFO_ERROR_PERMISSION_DENIED`: Process not authorized to request app usage info
+  /// - `RUNTIME_INFO_ERROR_NO_DATA`: No app running
+  ///
+  /// ```
   /// #include <runtime_info.h>
   ///
   /// void print_cpu_usage(void)
@@ -724,7 +876,7 @@ class Tizen90CapiSystemRuntimeInfo {
   /// runtime_info_app_usage_destroy(cpu_rate_handle);
   ///
   /// }
-  /// @endcode
+  /// ```
   int runtime_info_get_all_apps_cpu_rate(
     ffi.Pointer<app_usage_h> rate,
   ) {
@@ -741,8 +893,11 @@ class Tizen90CapiSystemRuntimeInfo {
           .asFunction<int Function(ffi.Pointer<app_usage_h>)>();
 }
 
-/// @brief        Enumeration for error codes for runtime information.
-/// @since_tizen  2.3
+/// Enumeration for error codes for runtime information.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class runtime_info_error_e {
   /// < Successful
   static const int RUNTIME_INFO_ERROR_NONE = 0;
@@ -769,10 +924,15 @@ abstract class runtime_info_error_e {
   static const int RUNTIME_INFO_ERROR_NO_DATA = -61;
 }
 
-/// @brief        Enumeration for keys for runtime information.
-/// @since_tizen  2.3
-/// @remarks      ~10000 : public key \n
-/// 10001~ : product specific key
+/// Enumeration for keys for runtime information.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Remarks:**
+/// - ~10000 : public key
+/// - 10001~ : product specific key
+/// @nodoc
 abstract class runtime_info_key_e {
   /// <Indicates whether Bluetooth is enabled.
   static const int RUNTIME_INFO_KEY_BLUETOOTH_ENABLED = 2;
@@ -820,8 +980,11 @@ abstract class runtime_info_key_e {
   static const int RUNTIME_INFO_KEY_AUTO_ROTATION_ENABLED = 26;
 }
 
-/// @brief        Enumeration for Wi-Fi status.
-/// @since_tizen  2.3
+/// Enumeration for Wi-Fi status.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class runtime_info_wifi_status_e {
   /// < Wi-Fi is disabled.
   static const int RUNTIME_INFO_WIFI_STATUS_DISABLED = 0;
@@ -833,8 +996,11 @@ abstract class runtime_info_wifi_status_e {
   static const int RUNTIME_INFO_WIFI_STATUS_CONNECTED = 2;
 }
 
-/// @brief        Enumeration for GPS status.
-/// @since_tizen  2.3
+/// Enumeration for GPS status.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class runtime_info_gps_status_e {
   /// < GPS is disabled.
   static const int RUNTIME_INFO_GPS_STATUS_DISABLED = 0;
@@ -846,8 +1012,11 @@ abstract class runtime_info_gps_status_e {
   static const int RUNTIME_INFO_GPS_STATUS_CONNECTED = 2;
 }
 
-/// @brief        Enumeration for audio jack status.
-/// @since_tizen  2.3
+/// Enumeration for audio jack status.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class runtime_info_audio_jack_status_e {
   /// < Audio jack is not connected
   static const int RUNTIME_INFO_AUDIO_JACK_STATUS_UNCONNECTED = 0;
@@ -859,24 +1028,36 @@ abstract class runtime_info_audio_jack_status_e {
   static const int RUNTIME_INFO_AUDIO_JACK_STATUS_CONNECTED_4WIRE = 2;
 }
 
-/// @brief        Called when the runtime information changes.
-/// @since_tizen  2.3
+/// Called when the runtime information changes.
 ///
-/// @param[in] key        The type of notification
-/// @param[in] user_data  The user data passed from the callback registration function
+/// **Since Tizen:**
+/// - 2.3
 ///
-/// @pre  runtime_info_set_changed_cb() will invoke this callback function.
-/// @see  runtime_info_set_changed_cb()
-/// @see  runtime_info_unset_changed_cb()
+/// **Parameters:**
+/// - `key` (in): The type of notification
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - runtime_info_set_changed_cb() will invoke this callback function.
+///
+/// **See also:**
+/// - `runtime_info_set_changed_cb()`
+/// - `runtime_info_unset_changed_cb()`
+/// @nodoc
 typedef runtime_info_changed_cb
     = ffi.Pointer<ffi.NativeFunction<runtime_info_changed_cbFunction>>;
+/// @nodoc
 typedef runtime_info_changed_cbFunction = ffi.Void Function(
     ffi.Int32 key, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartruntime_info_changed_cbFunction = void Function(
     int key, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief        Structure for memory information.
-/// @since_tizen  2.4
+/// Structure for memory information.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 final class runtime_memory_info_s extends ffi.Struct {
   /// < Total memory (KiB)
   @ffi.Int()
@@ -899,8 +1080,11 @@ final class runtime_memory_info_s extends ffi.Struct {
   external int swap;
 }
 
-/// @brief        Structure for memory information per process.
-/// @since_tizen  2.4
+/// Structure for memory information per process.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 final class process_memory_info_s extends ffi.Struct {
   /// < Virtual memory size (KiB)
   @ffi.Int()
@@ -931,8 +1115,11 @@ final class process_memory_info_s extends ffi.Struct {
   external int private_dirty;
 }
 
-/// @brief        Structure for CPU usage.
-/// @since_tizen  2.4
+/// Structure for CPU usage.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 final class runtime_cpu_usage_s extends ffi.Struct {
   /// < Time running un-niced user processes (Percent)
   @ffi.Double()
@@ -951,8 +1138,11 @@ final class runtime_cpu_usage_s extends ffi.Struct {
   external double iowait;
 }
 
-/// @brief        Structure for CPU usage per process.
-/// @since_tizen  2.4
+/// Structure for CPU usage per process.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 final class process_cpu_usage_s extends ffi.Struct {
   /// < Amount of time that this process has been scheduled in user mode (clock ticks)
   @ffi.Int()
@@ -963,8 +1153,12 @@ final class process_cpu_usage_s extends ffi.Struct {
   external int stime;
 }
 
+/// @nodoc
 final class app_usages_s extends ffi.Opaque {}
 
-/// @brief        Handle for app usage information.
-/// @since_tizen  4.0
+/// Handle for app usage information.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 typedef app_usage_h = ffi.Pointer<app_usages_s>;

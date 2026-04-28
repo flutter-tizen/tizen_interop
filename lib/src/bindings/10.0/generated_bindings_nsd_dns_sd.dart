@@ -1,3 +1,6 @@
+/// {@category 10.0/tizen}
+library tizen_interop_10_0.nsd_dns_sd;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen nsd-dns-sd APIs.
+/// {@category 10.0/tizen}
 class Tizen100NsdDnsSd {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,12 +28,17 @@ class Tizen100NsdDnsSd {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Initializes DNSSD.
-  /// @since_tizen 3.0
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #DNSSD_ERROR_NONE Successful
-  /// @retval #DNSSD_ERROR_NOT_SUPPORTED Not Supported
+  /// Initializes DNSSD.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `DNSSD_ERROR_NONE`: Successful
+  /// - `DNSSD_ERROR_NOT_SUPPORTED`: Not Supported
   int dnssd_initialize() {
     return _dnssd_initialize();
   }
@@ -39,14 +48,21 @@ class Tizen100NsdDnsSd {
   late final _dnssd_initialize =
       _dnssd_initializePtr.asFunction<int Function()>();
 
-  /// @brief Deinitializes DNSSD.
-  /// @since_tizen 3.0
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #DNSSD_ERROR_NONE Successful
-  /// @retval #DNSSD_ERROR_NOT_SUPPORTED Not Supported
-  /// @retval #DNSSD_ERROR_INVALID_OPERATION Invalid Operation
-  /// @pre DNS-SD service must be initialized by dnssd_initialize().
+  /// Deinitializes DNSSD.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `DNSSD_ERROR_NONE`: Successful
+  /// - `DNSSD_ERROR_NOT_SUPPORTED`: Not Supported
+  /// - `DNSSD_ERROR_INVALID_OPERATION`: Invalid Operation
+  ///
+  /// **Preconditions:**
+  /// - DNS-SD service must be initialized by dnssd_initialize().
   int dnssd_deinitialize() {
     return _dnssd_deinitialize();
   }
@@ -56,25 +72,33 @@ class Tizen100NsdDnsSd {
   late final _dnssd_deinitialize =
       _dnssd_deinitializePtr.asFunction<int Function()>();
 
-  /// @brief Creates a DNSSD local service handle.
-  /// @since_tizen 3.0
-  /// @remarks You must release @a dnssd_service using dnssd_destroy_local_service().
-  /// @param[in] service_type The DNSSD service type. It is expressed as type
-  /// followed by protocol, separated by a dot(e.g. "_ftp._tcp"). It
-  /// must begin with an underscore, followed by 1-15 characters which
-  /// may be letters, digits, or hyphens. The transport protocol must be
-  /// "_tcp" or "_udp". New service types should be registered at
-  /// http://www.dns-sd.org/ServiceTypes.html.
-  /// @param[out] dnssd_service The DNSSD local handle
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #DNSSD_ERROR_NONE Successful
-  /// @retval #DNSSD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DNSSD_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #DNSSD_ERROR_NOT_SUPPORTED Not Supported
-  /// @retval #DNSSD_ERROR_NOT_INITIALIZED Not Initialized
-  /// @see dnssd_destroy_local_service()
-  /// @pre This API needs dnssd_initialize() before use
+  /// Creates a DNSSD local service handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `dnssd_service` using dnssd_destroy_local_service().
+  ///
+  /// **Parameters:**
+  /// - `service_type` (in): The DNSSD service type. It is expressed as type followed by protocol, separated by a dot(e.g. "_ftp._tcp"). It must begin with an underscore, followed by 1-15 characters which may be letters, digits, or hyphens. The transport protocol must be "_tcp" or "_udp". New service types should be registered at http://www.dns-sd.org/ServiceTypes.html.
+  /// - `dnssd_service` (out): The DNSSD local handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `DNSSD_ERROR_NONE`: Successful
+  /// - `DNSSD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DNSSD_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `DNSSD_ERROR_NOT_SUPPORTED`: Not Supported
+  /// - `DNSSD_ERROR_NOT_INITIALIZED`: Not Initialized
+  ///
+  /// **Preconditions:**
+  /// - This API needs dnssd_initialize() before use
+  ///
+  /// **See also:**
+  /// - `dnssd_destroy_local_service()`
   int dnssd_create_local_service(
     ffi.Pointer<ffi.Char> service_type,
     ffi.Pointer<dnssd_service_h> dnssd_service,
@@ -93,22 +117,33 @@ class Tizen100NsdDnsSd {
       _dnssd_create_local_servicePtr.asFunction<
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<dnssd_service_h>)>();
 
-  /// @brief Destroys the DNSSD local service handle.
-  /// @details Destroying a local service doesn't deregister local service. If
-  /// local service was registered using dnssd_register_local_service(),
-  /// then it must be deregistered using dnssd_deregister_local_service()
-  /// before destroying the local service.
-  /// @since_tizen 3.0
-  /// @remarks You must destroy only local services created using dnssd_create_local_service().
-  /// @param[in] dnssd_service The DNSSD local service handle
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #DNSSD_ERROR_NONE Successful
-  /// @retval #DNSSD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DNSSD_ERROR_NOT_SUPPORTED Not Supported
-  /// @retval #DNSSD_ERROR_NOT_INITIALIZED Not Initialized
-  /// @see dnssd_create_local_service()
-  /// @pre This API needs dnssd_create_local_service() before use.
+  /// Destroys the DNSSD local service handle.
+  ///
+  /// Destroying a local service doesn't deregister local service. If local service was registered using dnssd_register_local_service(), then it must be deregistered using dnssd_deregister_local_service() before destroying the local service.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must destroy only local services created using dnssd_create_local_service().
+  ///
+  /// **Parameters:**
+  /// - `dnssd_service` (in): The DNSSD local service handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `DNSSD_ERROR_NONE`: Successful
+  /// - `DNSSD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DNSSD_ERROR_NOT_SUPPORTED`: Not Supported
+  /// - `DNSSD_ERROR_NOT_INITIALIZED`: Not Initialized
+  ///
+  /// **Preconditions:**
+  /// - This API needs dnssd_create_local_service() before use.
+  ///
+  /// **See also:**
+  /// - `dnssd_create_local_service()`
   int dnssd_destroy_local_service(
     int dnssd_service,
   ) {
@@ -123,23 +158,35 @@ class Tizen100NsdDnsSd {
   late final _dnssd_destroy_local_service =
       _dnssd_destroy_local_servicePtr.asFunction<int Function(int)>();
 
-  /// @brief Sets the name of DNSSD local service.
-  /// @details Application should set name after creating local service using
-  /// dnssd_create_local_service() and before registering the local
-  /// service using dnssd_register_local_service().
-  /// @since_tizen 3.0
-  /// @remarks You must pass only local services created using dnssd_create_local_service().
-  /// @param[in] local_service The DNSSD local service handle
-  /// @param[in] service_name The name of DNSSD local service
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #DNSSD_ERROR_NONE Successful
-  /// @retval #DNSSD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DNSSD_ERROR_NOT_SUPPORTED Not Supported
-  /// @retval #DNSSD_ERROR_OUT_OF_MEMORY Out of Memory
-  /// @retval #DNSSD_ERROR_NOT_INITIALIZED Not Initialized
-  /// @see dnssd_create_local_service()
-  /// @pre This API needs dnssd_create_local_service() before use.
+  /// Sets the name of DNSSD local service.
+  ///
+  /// Application should set name after creating local service using dnssd_create_local_service() and before registering the local service using dnssd_register_local_service().
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must pass only local services created using dnssd_create_local_service().
+  ///
+  /// **Parameters:**
+  /// - `local_service` (in): The DNSSD local service handle
+  /// - `service_name` (in): The name of DNSSD local service
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `DNSSD_ERROR_NONE`: Successful
+  /// - `DNSSD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DNSSD_ERROR_NOT_SUPPORTED`: Not Supported
+  /// - `DNSSD_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `DNSSD_ERROR_NOT_INITIALIZED`: Not Initialized
+  ///
+  /// **Preconditions:**
+  /// - This API needs dnssd_create_local_service() before use.
+  ///
+  /// **See also:**
+  /// - `dnssd_create_local_service()`
   int dnssd_service_set_name(
     int local_service,
     ffi.Pointer<ffi.Char> service_name,
@@ -157,22 +204,34 @@ class Tizen100NsdDnsSd {
   late final _dnssd_service_set_name = _dnssd_service_set_namePtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the port number of DNSSD local service.
-  /// @details Application should set port after creating local service using
-  /// dnssd_create_local_service() and before registering the local
-  /// service using dnssd_register_local_service().
-  /// @since_tizen 3.0
-  /// @remarks You must pass only local services created using dnssd_create_local_service().
-  /// @param[in] local_service The DNSSD local service handle
-  /// @param[in] port The port number of DNSSD local service
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #DNSSD_ERROR_NONE Successful
-  /// @retval #DNSSD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DNSSD_ERROR_NOT_SUPPORTED Not Supported
-  /// @retval #DNSSD_ERROR_NOT_INITIALIZED Not Initialized
-  /// @see dnssd_create_local_service()
-  /// @pre This API needs dnssd_create_local_service() before use.
+  /// Sets the port number of DNSSD local service.
+  ///
+  /// Application should set port after creating local service using dnssd_create_local_service() and before registering the local service using dnssd_register_local_service().
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must pass only local services created using dnssd_create_local_service().
+  ///
+  /// **Parameters:**
+  /// - `local_service` (in): The DNSSD local service handle
+  /// - `port` (in): The port number of DNSSD local service
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `DNSSD_ERROR_NONE`: Successful
+  /// - `DNSSD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DNSSD_ERROR_NOT_SUPPORTED`: Not Supported
+  /// - `DNSSD_ERROR_NOT_INITIALIZED`: Not Initialized
+  ///
+  /// **Preconditions:**
+  /// - This API needs dnssd_create_local_service() before use.
+  ///
+  /// **See also:**
+  /// - `dnssd_create_local_service()`
   int dnssd_service_set_port(
     int local_service,
     int port,
@@ -189,49 +248,39 @@ class Tizen100NsdDnsSd {
   late final _dnssd_service_set_port =
       _dnssd_service_set_portPtr.asFunction<int Function(int, int)>();
 
-  /// @brief Adds the TXT record.
-  /// @details TXT record gives additional information about the service.
-  /// Some services discovered via dnssd_start_browsing_service() may
-  /// need more than just IP address and port number to completely
-  /// identify the service instance. For example, A web server typically
-  /// has multiple pages, each identified by its own URL.
-  /// So additional data is stored in a TXT record. Check Section 6 of
-  /// http://files.dns-sd.org/draft-cheshire-dnsext-dns-sd.txt
-  /// for details. TXT record of known service types can be found at
-  /// http://www.dns-sd.org/ServiceTypes.html. TXT record is stored in a
-  /// structured form using key/value pairs.
-  /// @since_tizen 3.0
-  /// @remarks You must pass only local services created using dnssd_create_local_service().
-  /// @param[in] local_service The DNSSD local service handle
-  /// @param[in] key The key of the TXT record. A null-terminated string which only
-  /// contains printable ASCII values (0x20-0x7E), excluding '=' (0x3D).
-  /// Keys should be 9 characters or fewer excluding NULL. Keys are case
-  /// insensitive. Keys for known service types can be found at
-  /// http://www.dns-sd.org/ServiceTypes.html. For details, see section
-  /// 6.4 of http://files.dns-sd.org/draft-cheshire-dnsext-dns-sd.txt.
-  /// @param[in] length The length of the value of the TXT record in bytes. The
-  /// total size of a typical DNS-SD TXT record is intended to be small
-  /// (upto 200 bytes). For details, see section 6.2 of
-  /// http://files.dns-sd.org/draft-cheshire-dnsext-dns-sd.txt
-  /// @param[in] value The value of the TXT record. It can be any binary value. For
-  /// value that represents textual data, UTF-8 is STRONGLY recommended.
-  /// For value that represents textual data, value_length should NOT
-  /// include the terminating null (if any) at the end of the string. If
-  /// NULL, then "key" will be added with no value. If non-NULL but
-  /// value_length is zero, then "key=" will be added with empty value.
-  /// For details see section 6.5 of
-  /// http://files.dns-sd.org/draft-cheshire-dnsext-dns-sd.txt
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #DNSSD_ERROR_NONE Successful
-  /// @retval #DNSSD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DNSSD_ERROR_NOT_SUPPORTED Not Supported
-  /// @retval #DNSSD_ERROR_SERVICE_NOT_RUNNING Service Not Running
-  /// @retval #DNSSD_ERROR_ALREADY_REGISTERED Already Registered
-  /// @retval #DNSSD_ERROR_NOT_INITIALIZED Not Initialized
-  /// @retval #DNSSD_ERROR_OUT_OF_MEMORY Out of Memory
-  /// @see dnssd_create_local_service()
-  /// @pre This API needs dnssd_create_local_service() before use.
+  /// Adds the TXT record.
+  ///
+  /// TXT record gives additional information about the service. Some services discovered via dnssd_start_browsing_service() may need more than just IP address and port number to completely identify the service instance. For example, A web server typically has multiple pages, each identified by its own URL. So additional data is stored in a TXT record. Check Section 6 of http://files.dns-sd.org/draft-cheshire-dnsext-dns-sd.txt for details. TXT record of known service types can be found at http://www.dns-sd.org/ServiceTypes.html. TXT record is stored in a structured form using key/value pairs.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must pass only local services created using dnssd_create_local_service().
+  ///
+  /// **Parameters:**
+  /// - `local_service` (in): The DNSSD local service handle
+  /// - `key` (in): The key of the TXT record. A null-terminated string which only contains printable ASCII values (0x20-0x7E), excluding '=' (0x3D). Keys should be 9 characters or fewer excluding NULL. Keys are case insensitive. Keys for known service types can be found at http://www.dns-sd.org/ServiceTypes.html. For details, see section 6.4 of http://files.dns-sd.org/draft-cheshire-dnsext-dns-sd.txt.
+  /// - `length` (in): The length of the value of the TXT record in bytes. The total size of a typical DNS-SD TXT record is intended to be small (upto 200 bytes). For details, see section 6.2 of http://files.dns-sd.org/draft-cheshire-dnsext-dns-sd.txt
+  /// - `value` (in): The value of the TXT record. It can be any binary value. For value that represents textual data, UTF-8 is STRONGLY recommended. For value that represents textual data, value_length should NOT include the terminating null (if any) at the end of the string. If NULL, then "key" will be added with no value. If non-NULL but value_length is zero, then "key=" will be added with empty value. For details see section 6.5 of http://files.dns-sd.org/draft-cheshire-dnsext-dns-sd.txt
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `DNSSD_ERROR_NONE`: Successful
+  /// - `DNSSD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DNSSD_ERROR_NOT_SUPPORTED`: Not Supported
+  /// - `DNSSD_ERROR_SERVICE_NOT_RUNNING`: Service Not Running
+  /// - `DNSSD_ERROR_ALREADY_REGISTERED`: Already Registered
+  /// - `DNSSD_ERROR_NOT_INITIALIZED`: Not Initialized
+  /// - `DNSSD_ERROR_OUT_OF_MEMORY`: Out of Memory
+  ///
+  /// **Preconditions:**
+  /// - This API needs dnssd_create_local_service() before use.
+  ///
+  /// **See also:**
+  /// - `dnssd_create_local_service()`
   int dnssd_service_add_txt_record(
     int local_service,
     ffi.Pointer<ffi.Char> key,
@@ -258,21 +307,34 @@ class Tizen100NsdDnsSd {
           int Function(
               int, ffi.Pointer<ffi.Char>, int, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Removes the TXT record.
-  /// @since_tizen 3.0
-  /// @remarks You must pass only local services created using dnssd_create_local_service().
-  /// @param[in] local_service The DNSSD local service handle
-  /// @param[in] key The key of the TXT record to be removed
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #DNSSD_ERROR_NONE Successful
-  /// @retval #DNSSD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DNSSD_ERROR_NOT_SUPPORTED Not Supported
-  /// @retval #DNSSD_ERROR_SERVICE_NOT_RUNNING Service Not Running
-  /// @retval #DNSSD_ERROR_NOT_INITIALIZED Not Initialized
-  /// @see dnssd_create_local_service()
-  /// @see dnssd_service_add_txt_record()
-  /// @pre This API needs dnssd_create_local_service() before use.
+  /// Removes the TXT record.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must pass only local services created using dnssd_create_local_service().
+  ///
+  /// **Parameters:**
+  /// - `local_service` (in): The DNSSD local service handle
+  /// - `key` (in): The key of the TXT record to be removed
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `DNSSD_ERROR_NONE`: Successful
+  /// - `DNSSD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DNSSD_ERROR_NOT_SUPPORTED`: Not Supported
+  /// - `DNSSD_ERROR_SERVICE_NOT_RUNNING`: Service Not Running
+  /// - `DNSSD_ERROR_NOT_INITIALIZED`: Not Initialized
+  ///
+  /// **Preconditions:**
+  /// - This API needs dnssd_create_local_service() before use.
+  ///
+  /// **See also:**
+  /// - `dnssd_create_local_service()`
+  /// - `dnssd_service_add_txt_record()`
   int dnssd_service_remove_txt_record(
     int local_service,
     ffi.Pointer<ffi.Char> key,
@@ -291,31 +353,40 @@ class Tizen100NsdDnsSd {
       _dnssd_service_remove_txt_recordPtr
           .asFunction<int Function(int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets/updates the DNS resource record.
-  /// @details If the resource record for the type has been previously added using
-  /// dnssd_service_set_record(), then the record will be updated. DNS
-  /// resource record can be set only after local_service is registered
-  /// using dnssd_register_local_service(). Data is added using
-  /// dnssd_service_add_txt_record() and then obtained using
-  /// dnssd_service_get_all_txt_record() to pass here.
-  /// @since_tizen 3.0
-  /// @remarks You must pass only local services created using dnssd_create_local_service().
-  /// @param[in] local_service The DNSSD local service handle
-  /// @param[in] type The resource record type. For details see, RFC 1035 and RFC 2782
-  /// @param[in] length The length of the resource record in bytes
-  /// @param[in] data The data contained in resource record to be added
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #DNSSD_ERROR_NONE Successful
-  /// @retval #DNSSD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DNSSD_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #DNSSD_ERROR_NOT_SUPPORTED Not Supported
-  /// @retval #DNSSD_ERROR_SERVICE_NOT_RUNNING Service Not Running
-  /// @retval #DNSSD_ERROR_ALREADY_REGISTERED Already Registered
-  /// @retval #DNSSD_ERROR_NOT_INITIALIZED Not Initialized
-  /// @retval #DNSSD_ERROR_OUT_OF_MEMORY Out of Memory
-  /// @see dnssd_create_local_service()
-  /// @pre This API needs dnssd_create_local_service() before use.
+  /// Sets/updates the DNS resource record.
+  ///
+  /// If the resource record for the type has been previously added using dnssd_service_set_record(), then the record will be updated. DNS resource record can be set only after local_service is registered using dnssd_register_local_service(). Data is added using dnssd_service_add_txt_record() and then obtained using dnssd_service_get_all_txt_record() to pass here.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must pass only local services created using dnssd_create_local_service().
+  ///
+  /// **Parameters:**
+  /// - `local_service` (in): The DNSSD local service handle
+  /// - `type` (in): The resource record type. For details see, RFC 1035 and RFC 2782
+  /// - `length` (in): The length of the resource record in bytes
+  /// - `data` (in): The data contained in resource record to be added
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `DNSSD_ERROR_NONE`: Successful
+  /// - `DNSSD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DNSSD_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `DNSSD_ERROR_NOT_SUPPORTED`: Not Supported
+  /// - `DNSSD_ERROR_SERVICE_NOT_RUNNING`: Service Not Running
+  /// - `DNSSD_ERROR_ALREADY_REGISTERED`: Already Registered
+  /// - `DNSSD_ERROR_NOT_INITIALIZED`: Not Initialized
+  /// - `DNSSD_ERROR_OUT_OF_MEMORY`: Out of Memory
+  ///
+  /// **Preconditions:**
+  /// - This API needs dnssd_create_local_service() before use.
+  ///
+  /// **See also:**
+  /// - `dnssd_create_local_service()`
   int dnssd_service_set_record(
     int local_service,
     int type,
@@ -340,22 +411,34 @@ class Tizen100NsdDnsSd {
   late final _dnssd_service_set_record = _dnssd_service_set_recordPtr
       .asFunction<int Function(int, int, int, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the DNS resource record. DNS resource record for the given type
-  /// must be set using dnssd_service_set_record().
-  /// @since_tizen 3.0
-  /// @remarks You must pass only local services created using dnssd_create_local_service().
-  /// @param[in] local_service The DNSSD local service handle
-  /// @param[in] type The resource record type. For details, see RFC 1035 and RFC 2782
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #DNSSD_ERROR_NONE Successful
-  /// @retval #DNSSD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DNSSD_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #DNSSD_ERROR_NOT_SUPPORTED Not Supported
-  /// @retval #DNSSD_ERROR_SERVICE_NOT_RUNNING Service Not Running
-  /// @retval #DNSSD_ERROR_NOT_INITIALIZED Not Initialized
-  /// @see dnssd_create_local_service()
-  /// @pre This API needs dnssd_create_local_service() before use.
+  /// Unsets the DNS resource record. DNS resource record for the given type must be set using dnssd_service_set_record().
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must pass only local services created using dnssd_create_local_service().
+  ///
+  /// **Parameters:**
+  /// - `local_service` (in): The DNSSD local service handle
+  /// - `type` (in): The resource record type. For details, see RFC 1035 and RFC 2782
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `DNSSD_ERROR_NONE`: Successful
+  /// - `DNSSD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DNSSD_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `DNSSD_ERROR_NOT_SUPPORTED`: Not Supported
+  /// - `DNSSD_ERROR_SERVICE_NOT_RUNNING`: Service Not Running
+  /// - `DNSSD_ERROR_NOT_INITIALIZED`: Not Initialized
+  ///
+  /// **Preconditions:**
+  /// - This API needs dnssd_create_local_service() before use.
+  ///
+  /// **See also:**
+  /// - `dnssd_create_local_service()`
   int dnssd_service_unset_record(
     int local_service,
     int type,
@@ -373,17 +456,25 @@ class Tizen100NsdDnsSd {
   late final _dnssd_service_unset_record =
       _dnssd_service_unset_recordPtr.asFunction<int Function(int, int)>();
 
-  /// @brief Sets the interface name of DNSSD local service.
-  /// @details The @a interface is the interface of network card that this service is provided (e.g. wlan0, eth0, etc.).
-  /// @since_tizen 7.0
-  /// @param[in] local_service The DNSSD service handle
-  /// @param[in] interface The interface name
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #DNSSD_ERROR_NONE Successful
-  /// @retval #DNSSD_ERROR_NOT_SUPPORTED Not Supported
-  /// @retval #DNSSD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DNSSD_ERROR_NOT_INITIALIZED Not Initialized
+  /// Sets the interface name of DNSSD local service.
+  ///
+  /// The `interface` is the interface of network card that this service is provided (e.g. wlan0, eth0, etc.).
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `local_service` (in): The DNSSD service handle
+  /// - `interface` (in): The interface name
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `DNSSD_ERROR_NONE`: Successful
+  /// - `DNSSD_ERROR_NOT_SUPPORTED`: Not Supported
+  /// - `DNSSD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DNSSD_ERROR_NOT_INITIALIZED`: Not Initialized
   int dnssd_service_set_interface(
     int local_service,
     ffi.Pointer<ffi.Char> interface1,
@@ -401,18 +492,27 @@ class Tizen100NsdDnsSd {
   late final _dnssd_service_set_interface = _dnssd_service_set_interfacePtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the interface name of DNSSD local/remote service.
-  /// @since_tizen 7.0
-  /// @remarks You must release @a interface using free().
-  /// @param[in] service The DNSSD service handle
-  /// @param[out] interface The interface name
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #DNSSD_ERROR_NONE Successful
-  /// @retval #DNSSD_ERROR_NOT_SUPPORTED Not Supported
-  /// @retval #DNSSD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DNSSD_ERROR_NOT_INITIALIZED Not Initialized
-  /// @retval #DNSSD_ERROR_OUT_OF_MEMORY Out of Memory
+  /// Gets the interface name of DNSSD local/remote service.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Remarks:**
+  /// - You must release `interface` using free().
+  ///
+  /// **Parameters:**
+  /// - `service` (in): The DNSSD service handle
+  /// - `interface` (out): The interface name
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `DNSSD_ERROR_NONE`: Successful
+  /// - `DNSSD_ERROR_NOT_SUPPORTED`: Not Supported
+  /// - `DNSSD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DNSSD_ERROR_NOT_INITIALIZED`: Not Initialized
+  /// - `DNSSD_ERROR_OUT_OF_MEMORY`: Out of Memory
   int dnssd_service_get_interface(
     int service,
     ffi.Pointer<ffi.Pointer<ffi.Char>> interface1,
@@ -431,25 +531,42 @@ class Tizen100NsdDnsSd {
   late final _dnssd_service_get_interface = _dnssd_service_get_interfacePtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Registers the DNSSD local service for publishing.
-  /// @since_tizen 3.0
-  /// @remarks You must pass only local services created using dnssd_create_local_service().
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @param[in] local_service The DNSSD local service handle
-  /// @param[in] register_cb The callback function to be called
-  /// @param[in] user_data The user data passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #DNSSD_ERROR_NONE Successful
-  /// @retval #DNSSD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DNSSD_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #DNSSD_ERROR_NOT_SUPPORTED Not Supported
-  /// @retval #DNSSD_ERROR_SERVICE_NOT_RUNNING Service Not Running
-  /// @retval #DNSSD_ERROR_NOT_INITIALIZED Not Initialized
-  /// @retval #DNSSD_ERROR_PERMISSION_DENIED Permission Denied
-  /// @see dnssd_create_local_service()
-  /// @pre This API needs dnssd_create_local_service() before use.
+  /// Registers the DNSSD local service for publishing.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Remarks:**
+  /// - You must pass only local services created using dnssd_create_local_service().
+  ///
+  /// **Parameters:**
+  /// - `local_service` (in): The DNSSD local service handle
+  /// - `register_cb` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `DNSSD_ERROR_NONE`: Successful
+  /// - `DNSSD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DNSSD_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `DNSSD_ERROR_NOT_SUPPORTED`: Not Supported
+  /// - `DNSSD_ERROR_SERVICE_NOT_RUNNING`: Service Not Running
+  /// - `DNSSD_ERROR_NOT_INITIALIZED`: Not Initialized
+  /// - `DNSSD_ERROR_PERMISSION_DENIED`: Permission Denied
+  ///
+  /// **Preconditions:**
+  /// - This API needs dnssd_create_local_service() before use.
+  ///
+  /// **See also:**
+  /// - `dnssd_create_local_service()`
   int dnssd_register_local_service(
     int local_service,
     dnssd_registered_cb register_cb,
@@ -470,20 +587,33 @@ class Tizen100NsdDnsSd {
       _dnssd_register_local_servicePtr.asFunction<
           int Function(int, dnssd_registered_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Deregisters the DNSSD local service.
-  /// @since_tizen 3.0
-  /// @remarks You must pass only local services registered using dnssd_register_local_service().
-  /// @param[in] local_service The DNSSD local service handle
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #DNSSD_ERROR_NONE Successful
-  /// @retval #DNSSD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DNSSD_ERROR_NOT_SUPPORTED Not Supported
-  /// @retval #DNSSD_ERROR_SERVICE_NOT_RUNNING Service Not Running
-  /// @retval #DNSSD_ERROR_NOT_INITIALIZED Not Initialized
-  /// @see dnssd_create_local_service()
-  /// @see dnssd_register_local_service()
-  /// @pre This API needs dnssd_register_local_service() before use.
+  /// Deregisters the DNSSD local service.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must pass only local services registered using dnssd_register_local_service().
+  ///
+  /// **Parameters:**
+  /// - `local_service` (in): The DNSSD local service handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `DNSSD_ERROR_NONE`: Successful
+  /// - `DNSSD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DNSSD_ERROR_NOT_SUPPORTED`: Not Supported
+  /// - `DNSSD_ERROR_SERVICE_NOT_RUNNING`: Service Not Running
+  /// - `DNSSD_ERROR_NOT_INITIALIZED`: Not Initialized
+  ///
+  /// **Preconditions:**
+  /// - This API needs dnssd_register_local_service() before use.
+  ///
+  /// **See also:**
+  /// - `dnssd_create_local_service()`
+  /// - `dnssd_register_local_service()`
   int dnssd_deregister_local_service(
     int local_service,
   ) {
@@ -498,33 +628,41 @@ class Tizen100NsdDnsSd {
   late final _dnssd_deregister_local_service =
       _dnssd_deregister_local_servicePtr.asFunction<int Function(int)>();
 
-  /// @brief Starts browsing the DNSSD remote service.
-  /// @details found_cb would be called only if there are any services available of
-  /// service_type provided in the argument. Application will keep
-  /// browsing for available/unavailable services until it calls
-  /// dnssd_stop_browsing_service().
-  /// @since_tizen 3.0
-  /// @remarks The @a dnssd_service should be released using dnssd_stop_browsing_service().
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @param[in] service_type The DNSSD service type to browse. It is expressed
-  /// as type followed by protocol, separated by a dot(e.g. "_ftp._tcp").
-  /// It must begin with an underscore, followed by 1-15 characters
-  /// which may be letters, digits, or hyphens. The transport protocol
-  /// must be "_tcp" or "_udp". New service types should be registered
-  /// at http://www.dns-sd.org/ServiceTypes.html
-  /// @param[out] dnssd_service The DNSSD browse service handle
-  /// @param[in] found_cb The callback function to be called
-  /// @param[in] user_data The user data passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #DNSSD_ERROR_NONE Successful
-  /// @retval #DNSSD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DNSSD_ERROR_NOT_SUPPORTED Not Supported
-  /// @retval #DNSSD_ERROR_SERVICE_NOT_RUNNING Service Not Running
-  /// @retval #DNSSD_ERROR_NOT_INITIALIZED Not Initialized
-  /// @retval #DNSSD_ERROR_PERMISSION_DENIED Permission Denied
-  /// @pre This API needs dnssd_initialize() before use.
+  /// Starts browsing the DNSSD remote service.
+  ///
+  /// found_cb would be called only if there are any services available of service_type provided in the argument. Application will keep browsing for available/unavailable services until it calls dnssd_stop_browsing_service().
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Remarks:**
+  /// - The `dnssd_service` should be released using dnssd_stop_browsing_service().
+  ///
+  /// **Parameters:**
+  /// - `service_type` (in): The DNSSD service type to browse. It is expressed as type followed by protocol, separated by a dot(e.g. "_ftp._tcp"). It must begin with an underscore, followed by 1-15 characters which may be letters, digits, or hyphens. The transport protocol must be "_tcp" or "_udp". New service types should be registered at http://www.dns-sd.org/ServiceTypes.html
+  /// - `dnssd_service` (out): The DNSSD browse service handle
+  /// - `found_cb` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `DNSSD_ERROR_NONE`: Successful
+  /// - `DNSSD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DNSSD_ERROR_NOT_SUPPORTED`: Not Supported
+  /// - `DNSSD_ERROR_SERVICE_NOT_RUNNING`: Service Not Running
+  /// - `DNSSD_ERROR_NOT_INITIALIZED`: Not Initialized
+  /// - `DNSSD_ERROR_PERMISSION_DENIED`: Permission Denied
+  ///
+  /// **Preconditions:**
+  /// - This API needs dnssd_initialize() before use.
   int dnssd_start_browsing_service(
     ffi.Pointer<ffi.Char> service_type,
     ffi.Pointer<dnssd_browser_h> dnssd_service,
@@ -551,18 +689,26 @@ class Tizen100NsdDnsSd {
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<dnssd_browser_h>,
               dnssd_found_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Stops browsing the DNSSD remote service.
-  /// @since_tizen 3.0
-  /// @param[in] dnssd_service The DNSSD browse service handle returned by
-  /// dnssd_start_browsing_service()
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #DNSSD_ERROR_NONE Successful
-  /// @retval #DNSSD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DNSSD_ERROR_NOT_SUPPORTED Not Supported
-  /// @retval #DNSSD_ERROR_SERVICE_NOT_RUNNING Service Not Running
-  /// @retval #DNSSD_ERROR_NOT_INITIALIZED Not Initialized
-  /// @pre This API needs dnssd_start_browsing_service() before use.
+  /// Stops browsing the DNSSD remote service.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `dnssd_service` (in): The DNSSD browse service handle returned by dnssd_start_browsing_service()
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `DNSSD_ERROR_NONE`: Successful
+  /// - `DNSSD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DNSSD_ERROR_NOT_SUPPORTED`: Not Supported
+  /// - `DNSSD_ERROR_SERVICE_NOT_RUNNING`: Service Not Running
+  /// - `DNSSD_ERROR_NOT_INITIALIZED`: Not Initialized
+  ///
+  /// **Preconditions:**
+  /// - This API needs dnssd_start_browsing_service() before use.
   int dnssd_stop_browsing_service(
     int dnssd_service,
   ) {
@@ -577,23 +723,27 @@ class Tizen100NsdDnsSd {
   late final _dnssd_stop_browsing_service =
       _dnssd_stop_browsing_servicePtr.asFunction<int Function(int)>();
 
-  /// @brief Gets the type of DNSSD local/remote service.
-  /// @since_tizen 3.0
-  /// @remarks You must release @a service_type using free().
-  /// @param[in] dnssd_service The DNSSD local/remote service handle
-  /// @param[out] service_type The type of DNSSD service. It is expressed as type
-  /// followed by protocol, separated by a dot(e.g. "_ftp._tcp"). It
-  /// must begin with an underscore, followed by 1-15 characters which
-  /// may be letters, digits, or hyphens. The transport protocol must be
-  /// "_tcp" or "_udp". New service types should be registered at
-  /// http://www.dns-sd.org/ServiceTypes.html
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #DNSSD_ERROR_NONE Successful
-  /// @retval #DNSSD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DNSSD_ERROR_NOT_SUPPORTED Not Supported
-  /// @retval #DNSSD_ERROR_OUT_OF_MEMORY Out of Memory
-  /// @retval #DNSSD_ERROR_NOT_INITIALIZED Not Initialized
+  /// Gets the type of DNSSD local/remote service.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `service_type` using free().
+  ///
+  /// **Parameters:**
+  /// - `dnssd_service` (in): The DNSSD local/remote service handle
+  /// - `service_type` (out): The type of DNSSD service. It is expressed as type followed by protocol, separated by a dot(e.g. "_ftp._tcp"). It must begin with an underscore, followed by 1-15 characters which may be letters, digits, or hyphens. The transport protocol must be "_tcp" or "_udp". New service types should be registered at http://www.dns-sd.org/ServiceTypes.html
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `DNSSD_ERROR_NONE`: Successful
+  /// - `DNSSD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DNSSD_ERROR_NOT_SUPPORTED`: Not Supported
+  /// - `DNSSD_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `DNSSD_ERROR_NOT_INITIALIZED`: Not Initialized
   int dnssd_service_get_type(
     int dnssd_service,
     ffi.Pointer<ffi.Pointer<ffi.Char>> service_type,
@@ -611,18 +761,27 @@ class Tizen100NsdDnsSd {
   late final _dnssd_service_get_type = _dnssd_service_get_typePtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the name of DNSSD local/remote service.
-  /// @since_tizen 3.0
-  /// @remarks You must release @a service_name using free().
-  /// @param[in] dnssd_service The DNSSD local/remote service handle
-  /// @param[out] service_name The name of DNSSD service
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #DNSSD_ERROR_NONE Successful
-  /// @retval #DNSSD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DNSSD_ERROR_NOT_SUPPORTED Not Supported
-  /// @retval #DNSSD_ERROR_OUT_OF_MEMORY Out of Memory
-  /// @retval #DNSSD_ERROR_NOT_INITIALIZED Not Initialized
+  /// Gets the name of DNSSD local/remote service.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `service_name` using free().
+  ///
+  /// **Parameters:**
+  /// - `dnssd_service` (in): The DNSSD local/remote service handle
+  /// - `service_name` (out): The name of DNSSD service
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `DNSSD_ERROR_NONE`: Successful
+  /// - `DNSSD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DNSSD_ERROR_NOT_SUPPORTED`: Not Supported
+  /// - `DNSSD_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `DNSSD_ERROR_NOT_INITIALIZED`: Not Initialized
   int dnssd_service_get_name(
     int dnssd_service,
     ffi.Pointer<ffi.Pointer<ffi.Char>> service_name,
@@ -640,21 +799,28 @@ class Tizen100NsdDnsSd {
   late final _dnssd_service_get_name = _dnssd_service_get_namePtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the IP of DNSSD remote service.
-  /// @since_tizen 3.0
-  /// @remarks You must release @a ip_v4_address, @a ip_v6_address using free().
-  /// @param[in] dnssd_service The DNSSD remote service handle
-  /// @param[out] ip_v4_address The IP version 4 address of DNSSD service. If there
-  /// is no IPv4 Address, then it would contain NULL and should not be freed
-  /// @param[out] ip_v6_address The IP version 6 address of DNSSD service. If there
-  /// is no IPv6 Address, then it would contain NULL and should not be freed
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #DNSSD_ERROR_NONE Successful
-  /// @retval #DNSSD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DNSSD_ERROR_NOT_SUPPORTED Not Supported
-  /// @retval #DNSSD_ERROR_OUT_OF_MEMORY Out of Memory
-  /// @retval #DNSSD_ERROR_NOT_INITIALIZED Not Initialized
+  /// Gets the IP of DNSSD remote service.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `ip_v4_address`, `ip_v6_address` using free().
+  ///
+  /// **Parameters:**
+  /// - `dnssd_service` (in): The DNSSD remote service handle
+  /// - `ip_v4_address` (out): The IP version 4 address of DNSSD service. If there is no IPv4 Address, then it would contain NULL and should not be freed
+  /// - `ip_v6_address` (out): The IP version 6 address of DNSSD service. If there is no IPv6 Address, then it would contain NULL and should not be freed
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `DNSSD_ERROR_NONE`: Successful
+  /// - `DNSSD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DNSSD_ERROR_NOT_SUPPORTED`: Not Supported
+  /// - `DNSSD_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `DNSSD_ERROR_NOT_INITIALIZED`: Not Initialized
   int dnssd_service_get_ip(
     int dnssd_service,
     ffi.Pointer<ffi.Pointer<ffi.Char>> ip_v4_address,
@@ -675,16 +841,23 @@ class Tizen100NsdDnsSd {
       int Function(int, ffi.Pointer<ffi.Pointer<ffi.Char>>,
           ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the port number of DNSSD local/remote service.
-  /// @since_tizen 3.0
-  /// @param[in] dnssd_service The DNSSD service local/remote handle
-  /// @param[out] port The port number of DNSSD service
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #DNSSD_ERROR_NONE Successful
-  /// @retval #DNSSD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DNSSD_ERROR_NOT_SUPPORTED Not Supported
-  /// @retval #DNSSD_ERROR_NOT_INITIALIZED Not Initialized
+  /// Gets the port number of DNSSD local/remote service.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `dnssd_service` (in): The DNSSD service local/remote handle
+  /// - `port` (out): The port number of DNSSD service
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `DNSSD_ERROR_NONE`: Successful
+  /// - `DNSSD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DNSSD_ERROR_NOT_SUPPORTED`: Not Supported
+  /// - `DNSSD_ERROR_NOT_INITIALIZED`: Not Initialized
   int dnssd_service_get_port(
     int dnssd_service,
     ffi.Pointer<ffi.Int> port,
@@ -702,30 +875,31 @@ class Tizen100NsdDnsSd {
   late final _dnssd_service_get_port = _dnssd_service_get_portPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the TXT record.
-  /// @details TXT record gives additional information about the service. Some
-  /// services discovered via dnssd_start_browsing_service() may need
-  /// more than just IP address and port number to completely identify
-  /// the service instance. For example, a web server typically has
-  /// multiple pages, each identified by its own URL. So additional data
-  /// is stored in a TXT record. Check Section 6 of
-  /// http://files.dns-sd.org/draft-cheshire-dnsext-dns-sd.txt for
-  /// details. TXT record of known service types can be found at
-  /// http://www.dns-sd.org/ServiceTypes.html. TXT record is stored in a
-  /// structured form using key/value pairs.
-  /// @since_tizen 3.0
-  /// @remarks You must release @a value using free().
-  /// @param[in] dnssd_service The DNSSD local/remote service handle
-  /// @param[out] length The length of the value of the TXT record in bytes
-  /// @param[out] value The value of the TXT record
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #DNSSD_ERROR_NONE Successful
-  /// @retval #DNSSD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DNSSD_ERROR_NOT_SUPPORTED Not Supported
-  /// @retval #DNSSD_ERROR_OUT_OF_MEMORY Out of Memory
-  /// @retval #DNSSD_ERROR_SERVICE_NOT_RUNNING Service Not Running
-  /// @retval #DNSSD_ERROR_NOT_INITIALIZED Not Initialized
+  /// Gets the TXT record.
+  ///
+  /// TXT record gives additional information about the service. Some services discovered via dnssd_start_browsing_service() may need more than just IP address and port number to completely identify the service instance. For example, a web server typically has multiple pages, each identified by its own URL. So additional data is stored in a TXT record. Check Section 6 of http://files.dns-sd.org/draft-cheshire-dnsext-dns-sd.txt for details. TXT record of known service types can be found at http://www.dns-sd.org/ServiceTypes.html. TXT record is stored in a structured form using key/value pairs.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `value` using free().
+  ///
+  /// **Parameters:**
+  /// - `dnssd_service` (in): The DNSSD local/remote service handle
+  /// - `length` (out): The length of the value of the TXT record in bytes
+  /// - `value` (out): The value of the TXT record
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `DNSSD_ERROR_NONE`: Successful
+  /// - `DNSSD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DNSSD_ERROR_NOT_SUPPORTED`: Not Supported
+  /// - `DNSSD_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `DNSSD_ERROR_SERVICE_NOT_RUNNING`: Service Not Running
+  /// - `DNSSD_ERROR_NOT_INITIALIZED`: Not Initialized
   int dnssd_service_get_all_txt_record(
     int dnssd_service,
     ffi.Pointer<ffi.UnsignedShort> length,
@@ -748,31 +922,47 @@ class Tizen100NsdDnsSd {
           int Function(int, ffi.Pointer<ffi.UnsignedShort>,
               ffi.Pointer<ffi.Pointer<ffi.Void>>)>();
 
-  /// @brief Browses the services which have @a service_type.
-  /// @details @a found_cb will be called whenever a service appear or disappear from the network.
-  /// Application will keep browsing until it calls dnssd_cancel_browse_service().
-  /// @since_tizen 7.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @remarks dnssd_resolve_service() should be called in @a found_cb
-  /// if you want to get a service data such as a target host name, a port,
-  /// txt record and IP addresses.
-  /// @remarks The @a browser should be released using dnssd_cancel_browse_service().
-  /// @param[in] service_type The DNSSD service type to browse.
-  /// @param[in] interface The interface name
-  /// @param[out] browser The DNSSD browse service handle
-  /// @param[in] found_cb The callback function to be called
-  /// @param[in] user_data The user data passed to the callback function
-  /// @return @c 0 on success, otherwise negative error value
-  /// @retval #DNSSD_ERROR_NONE Successful
-  /// @retval #DNSSD_ERROR_NOT_SUPPORTED Not Supported
-  /// @retval #DNSSD_ERROR_PERMISSION_DENIED Permission Denied
-  /// @retval #DNSSD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DNSSD_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #DNSSD_ERROR_OUT_OF_MEMORY Out of Memory
-  /// @retval #DNSSD_ERROR_SERVICE_NOT_RUNNING Service Not Running
-  /// @retval #DNSSD_ERROR_NOT_INITIALIZED Not Initialized
-  /// @see dnssd_cancel_browse_service()
+  /// Browses the services which have `service_type`.
+  ///
+  /// `found_cb` will be called whenever a service appear or disappear from the network. Application will keep browsing until it calls dnssd_cancel_browse_service().
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Remarks:**
+  /// - dnssd_resolve_service() should be called in `found_cb`
+  /// - if you want to get a service data such as a target host name, a port,
+  /// - txt record and IP addresses.
+  /// - The `browser` should be released using dnssd_cancel_browse_service().
+  ///
+  /// **Parameters:**
+  /// - `service_type` (in): The DNSSD service type to browse.
+  /// - `interface` (in): The interface name
+  /// - `browser` (out): The DNSSD browse service handle
+  /// - `found_cb` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `DNSSD_ERROR_NONE`: Successful
+  /// - `DNSSD_ERROR_NOT_SUPPORTED`: Not Supported
+  /// - `DNSSD_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `DNSSD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DNSSD_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `DNSSD_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `DNSSD_ERROR_SERVICE_NOT_RUNNING`: Service Not Running
+  /// - `DNSSD_ERROR_NOT_INITIALIZED`: Not Initialized
+  ///
+  /// **See also:**
+  /// - `dnssd_cancel_browse_service()`
   int dnssd_browse_service(
     ffi.Pointer<ffi.Char> service_type,
     ffi.Pointer<ffi.Char> interface1,
@@ -805,17 +995,27 @@ class Tizen100NsdDnsSd {
           dnssd_found_cb,
           ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Cancels browsing the services.
-  /// @since_tizen 7.0
-  /// @param[in] browser The DNSSD browse service handle returned by dnssd_browse_service()
-  /// @return @c 0 on success, otherwise negative error value
-  /// @retval #DNSSD_ERROR_NONE Successful
-  /// @retval #DNSSD_ERROR_NOT_SUPPORTED Not Supported
-  /// @retval #DNSSD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DNSSD_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #DNSSD_ERROR_SERVICE_NOT_RUNNING Service Not Running
-  /// @retval #DNSSD_ERROR_NOT_INITIALIZED Not Initialized
-  /// @see dnssd_browse_service()
+  /// Cancels browsing the services.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `browser` (in): The DNSSD browse service handle returned by dnssd_browse_service()
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `DNSSD_ERROR_NONE`: Successful
+  /// - `DNSSD_ERROR_NOT_SUPPORTED`: Not Supported
+  /// - `DNSSD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DNSSD_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `DNSSD_ERROR_SERVICE_NOT_RUNNING`: Service Not Running
+  /// - `DNSSD_ERROR_NOT_INITIALIZED`: Not Initialized
+  ///
+  /// **See also:**
+  /// - `dnssd_browse_service()`
   int dnssd_cancel_browse_service(
     int browser,
   ) {
@@ -830,27 +1030,39 @@ class Tizen100NsdDnsSd {
   late final _dnssd_cancel_browse_service =
       _dnssd_cancel_browse_servicePtr.asFunction<int Function(int)>();
 
-  /// @brief Resolves a service browsed by dnssd_browse_service().
-  /// @details @a resolved_cb will be called when a service is resolved.
-  /// You can get a target host name, a port, txt record and IP addresses
-  /// from @a resolved_cb. If you have gotten the desired results,
-  /// cancel resolving service using dnssd_cancel_resolve_service().
-  /// @since_tizen 7.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @param[in] remote_service The DNSSD service handle
-  /// @param[in] resolved_cb The callback function to be called
-  /// @param[in] user_data The user data passed to the callback function
-  /// @return @c 0 on success, otherwise negative error value
-  /// @retval #DNSSD_ERROR_NONE Successful
-  /// @retval #DNSSD_ERROR_NOT_SUPPORTED Not Supported
-  /// @retval #DNSSD_ERROR_PERMISSION_DENIED Permission Denied
-  /// @retval #DNSSD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DNSSD_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #DNSSD_ERROR_SERVICE_NOT_RUNNING Service Not Running
-  /// @retval #DNSSD_ERROR_NOT_INITIALIZED Not Initialized
-  /// @see dnssd_browse_service()
-  /// @see dnssd_cancel_resolve_service()
+  /// Resolves a service browsed by dnssd_browse_service().
+  ///
+  /// `resolved_cb` will be called when a service is resolved. You can get a target host name, a port, txt record and IP addresses from `resolved_cb`. If you have gotten the desired results, cancel resolving service using dnssd_cancel_resolve_service().
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Parameters:**
+  /// - `remote_service` (in): The DNSSD service handle
+  /// - `resolved_cb` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `DNSSD_ERROR_NONE`: Successful
+  /// - `DNSSD_ERROR_NOT_SUPPORTED`: Not Supported
+  /// - `DNSSD_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `DNSSD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DNSSD_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `DNSSD_ERROR_SERVICE_NOT_RUNNING`: Service Not Running
+  /// - `DNSSD_ERROR_NOT_INITIALIZED`: Not Initialized
+  ///
+  /// **See also:**
+  /// - `dnssd_browse_service()`
+  /// - `dnssd_cancel_resolve_service()`
   int dnssd_resolve_service(
     int remote_service,
     dnssd_resolved_cb resolved_cb,
@@ -870,17 +1082,27 @@ class Tizen100NsdDnsSd {
   late final _dnssd_resolve_service = _dnssd_resolve_servicePtr.asFunction<
       int Function(int, dnssd_resolved_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Cancels resolving a service.
-  /// @since_tizen 7.0
-  /// @param[in] remote_service The DNSSD service handle
-  /// @return @c 0 on success, otherwise negative error value
-  /// @retval #DNSSD_ERROR_NONE Successful
-  /// @retval #DNSSD_ERROR_NOT_SUPPORTED Not Supported
-  /// @retval #DNSSD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DNSSD_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #DNSSD_ERROR_SERVICE_NOT_RUNNING Service Not Running
-  /// @retval #DNSSD_ERROR_NOT_INITIALIZED Not Initialized
-  /// @see dnssd_resolve_service()
+  /// Cancels resolving a service.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `remote_service` (in): The DNSSD service handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `DNSSD_ERROR_NONE`: Successful
+  /// - `DNSSD_ERROR_NOT_SUPPORTED`: Not Supported
+  /// - `DNSSD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DNSSD_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `DNSSD_ERROR_SERVICE_NOT_RUNNING`: Service Not Running
+  /// - `DNSSD_ERROR_NOT_INITIALIZED`: Not Initialized
+  ///
+  /// **See also:**
+  /// - `dnssd_resolve_service()`
   int dnssd_cancel_resolve_service(
     int remote_service,
   ) {
@@ -895,27 +1117,34 @@ class Tizen100NsdDnsSd {
   late final _dnssd_cancel_resolve_service =
       _dnssd_cancel_resolve_servicePtr.asFunction<int Function(int)>();
 
-  /// @brief Creates a DNSSD remote service handle.
-  /// @details @a remote_service is used for dnssd_resolve_service() only.
-  /// @since_tizen 7.0
-  /// @remarks You must release @a remote_service using dnssd_destroy_remote_service().
-  /// @param[in] service_type The DNSSD service type. It is expressed as type
-  /// followed by protocol, separated by a dot(e.g. "_ftp._tcp"). It
-  /// must begin with an underscore, followed by 1-15 characters which
-  /// may be letters, digits, or hyphens. The transport protocol must be
-  /// "_tcp" or "_udp". New service types should be registered at
-  /// http://www.dns-sd.org/ServiceTypes.html.
-  /// @param[in] service_name The name of DNSSD remote service
-  /// @param[in] interface The interface name
-  /// @param[out] remote_service The DNSSD remote handle
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #DNSSD_ERROR_NONE Successful
-  /// @retval #DNSSD_ERROR_NOT_SUPPORTED Not Supported
-  /// @retval #DNSSD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DNSSD_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #DNSSD_ERROR_NOT_INITIALIZED Not Initialized
-  /// @see dnssd_destroy_remote_service()
+  /// Creates a DNSSD remote service handle.
+  ///
+  /// `remote_service` is used for dnssd_resolve_service() only.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Remarks:**
+  /// - You must release `remote_service` using dnssd_destroy_remote_service().
+  ///
+  /// **Parameters:**
+  /// - `service_type` (in): The DNSSD service type. It is expressed as type followed by protocol, separated by a dot(e.g. "_ftp._tcp"). It must begin with an underscore, followed by 1-15 characters which may be letters, digits, or hyphens. The transport protocol must be "_tcp" or "_udp". New service types should be registered at http://www.dns-sd.org/ServiceTypes.html.
+  /// - `service_name` (in): The name of DNSSD remote service
+  /// - `interface` (in): The interface name
+  /// - `remote_service` (out): The DNSSD remote handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `DNSSD_ERROR_NONE`: Successful
+  /// - `DNSSD_ERROR_NOT_SUPPORTED`: Not Supported
+  /// - `DNSSD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DNSSD_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `DNSSD_ERROR_NOT_INITIALIZED`: Not Initialized
+  ///
+  /// **See also:**
+  /// - `dnssd_destroy_remote_service()`
   int dnssd_create_remote_service(
     ffi.Pointer<ffi.Char> service_type,
     ffi.Pointer<ffi.Char> service_name,
@@ -942,17 +1171,28 @@ class Tizen100NsdDnsSd {
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>, ffi.Pointer<dnssd_service_h>)>();
 
-  /// @brief Destroys the DNSSD remote service handle.
-  /// @since_tizen 7.0
-  /// @remarks You must destroy only remote services created using dnssd_create_remote_service().
-  /// @param[in] remote_service The DNSSD remote service handle
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #DNSSD_ERROR_NONE Successful
-  /// @retval #DNSSD_ERROR_NOT_SUPPORTED Not Supported
-  /// @retval #DNSSD_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DNSSD_ERROR_NOT_INITIALIZED Not Initialized
-  /// @see dnssd_create_remote_service()
+  /// Destroys the DNSSD remote service handle.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Remarks:**
+  /// - You must destroy only remote services created using dnssd_create_remote_service().
+  ///
+  /// **Parameters:**
+  /// - `remote_service` (in): The DNSSD remote service handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `DNSSD_ERROR_NONE`: Successful
+  /// - `DNSSD_ERROR_NOT_SUPPORTED`: Not Supported
+  /// - `DNSSD_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DNSSD_ERROR_NOT_INITIALIZED`: Not Initialized
+  ///
+  /// **See also:**
+  /// - `dnssd_create_remote_service()`
   int dnssd_destroy_remote_service(
     int remote_service,
   ) {
@@ -968,8 +1208,11 @@ class Tizen100NsdDnsSd {
       _dnssd_destroy_remote_servicePtr.asFunction<int Function(int)>();
 }
 
-/// @brief Enumeration for Network Service Discovery DNSSD error code.
-/// @since_tizen 3.0
+/// Enumeration for Network Service Discovery DNSSD error code.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class dnssd_error_e {
   /// < Successful
   static const int DNSSD_ERROR_NONE = 0;
@@ -1008,8 +1251,11 @@ abstract class dnssd_error_e {
   static const int DNSSD_ERROR_OPERATION_FAILED = -30015482;
 }
 
-/// @brief Enumeration for Network Service Discovery DNSSD browse state.
-/// @since_tizen 3.0
+/// Enumeration for Network Service Discovery DNSSD browse state.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class dnssd_service_state_e {
   /// <Available DNS-SD service found
   static const int DNSSD_SERVICE_STATE_AVAILABLE = 0;
@@ -1027,63 +1273,90 @@ abstract class dnssd_service_state_e {
   static const int DNSSD_SERVICE_STATE_ADDRESS_LOOKUP_FAILED = 4;
 }
 
-/// @brief The DNSSD service handle.
-/// @since_tizen 3.0
+/// The DNSSD service handle.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef dnssd_service_h = ffi.UnsignedInt;
+/// @nodoc
 typedef Dartdnssd_service_h = int;
 
-/// @brief Called when the registration of DNSSD service is finished.
-/// @since_tizen 3.0
-/// @param[in] result The result of registration.\n
-/// #DNSSD_ERROR_NONE Successful\n
-/// #DNSSD_ERROR_NAME_CONFLICT Name Conflict\n
-/// #DNSSD_ERROR_ALREADY_REGISTERED Already Registered
-/// @param[in] local_service The DNSSD local service handle
-/// @param[in] user_data The user data passed from the request function
-/// @see dnssd_register_local_service()
+/// Called when the registration of DNSSD service is finished.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `result` (in): The result of registration. `DNSSD_ERROR_NONE` Successful `DNSSD_ERROR_NAME_CONFLICT` Name Conflict `DNSSD_ERROR_ALREADY_REGISTERED` Already Registered
+/// - `local_service` (in): The DNSSD local service handle
+/// - `user_data` (in): The user data passed from the request function
+///
+/// **See also:**
+/// - `dnssd_register_local_service()`
+/// @nodoc
 typedef dnssd_registered_cb
     = ffi.Pointer<ffi.NativeFunction<dnssd_registered_cbFunction>>;
+/// @nodoc
 typedef dnssd_registered_cbFunction = ffi.Void Function(ffi.Int32 result,
     dnssd_service_h local_service, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartdnssd_registered_cbFunction = void Function(int result,
     Dartdnssd_service_h local_service, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The DNSSD Browser handle.
-/// @since_tizen 3.0
+/// The DNSSD Browser handle.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef dnssd_browser_h = ffi.UnsignedInt;
+/// @nodoc
 typedef Dartdnssd_browser_h = int;
 
-/// @brief Called when a DNSSD service is found.
-/// @details remote_service is valid only when service_state is
-/// #DNSSD_SERVICE_STATE_AVAILABLE or #DNSSD_SERVICE_STATE_UNAVAILABLE.
-/// In case of service_state #DNSSD_SERVICE_STATE_UNAVAILABLE, application
-/// can only use dnssd_service_get_type() and dnssd_service_get_name().
-/// Other get functions can only be used when service_state is
-/// #DNSSD_SERVICE_STATE_AVAILABLE.
-/// @since_tizen 3.0
-/// @param[in] service_state The DNSSD service state of remote service
-/// @param[in] remote_service The DNSSD remote service handle
-/// @param[in] user_data The user data passed from the request function
-/// @see dnssd_start_browsing_service()
+/// Called when a DNSSD service is found.
+///
+/// remote_service is valid only when service_state is `DNSSD_SERVICE_STATE_AVAILABLE` or `DNSSD_SERVICE_STATE_UNAVAILABLE`. In case of service_state `DNSSD_SERVICE_STATE_UNAVAILABLE`, application can only use dnssd_service_get_type() and dnssd_service_get_name(). Other get functions can only be used when service_state is `DNSSD_SERVICE_STATE_AVAILABLE`.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `service_state` (in): The DNSSD service state of remote service
+/// - `remote_service` (in): The DNSSD remote service handle
+/// - `user_data` (in): The user data passed from the request function
+///
+/// **See also:**
+/// - `dnssd_start_browsing_service()`
+/// @nodoc
 typedef dnssd_found_cb
     = ffi.Pointer<ffi.NativeFunction<dnssd_found_cbFunction>>;
+/// @nodoc
 typedef dnssd_found_cbFunction = ffi.Void Function(ffi.Int32 service_state,
     dnssd_service_h remote_service, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartdnssd_found_cbFunction = void Function(int service_state,
     Dartdnssd_service_h remote_service, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the service is resolved.
-/// @details The following @a result can be received: \n
-/// #DNSSD_ERROR_NONE Successful \n
-/// #DNSSD_ERROR_OPERATION_FAILED Operation failed \n
-/// @since_tizen 7.0
-/// @param[in] result The result of resolving.
-/// @param[in] remote_service The resolved service.
-/// @param[in] user_data The user data passed from the request function
-/// @see dnssd_resolve_service()
+/// Called when the service is resolved.
+///
+/// The following `result` can be received: `DNSSD_ERROR_NONE` Successful `DNSSD_ERROR_OPERATION_FAILED` Operation failed
+///
+/// **Since Tizen:**
+/// - 7.0
+///
+/// **Parameters:**
+/// - `result` (in): The result of resolving.
+/// - `remote_service` (in): The resolved service.
+/// - `user_data` (in): The user data passed from the request function
+///
+/// **See also:**
+/// - `dnssd_resolve_service()`
+/// @nodoc
 typedef dnssd_resolved_cb
     = ffi.Pointer<ffi.NativeFunction<dnssd_resolved_cbFunction>>;
+/// @nodoc
 typedef dnssd_resolved_cbFunction = ffi.Void Function(ffi.Int32 result,
     dnssd_service_h remote_service, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartdnssd_resolved_cbFunction = void Function(int result,
     Dartdnssd_service_h remote_service, ffi.Pointer<ffi.Void> user_data);

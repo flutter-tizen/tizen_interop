@@ -1,3 +1,6 @@
+/// {@category 6.0/tizen}
+library tizen_interop_6_0.update_control;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'generated_bindings_time.dart' as time;
 
 /// Dart bindings for Tizen update-control APIs.
+/// {@category 6.0/tizen}
 class Tizen60UpdateControl {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,17 +29,23 @@ class Tizen60UpdateControl {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Initializes the update controller.
+  /// Initializes the update controller.
   ///
-  /// @since_tizen 5.0
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #UPDATE_CONTROL_ERROR_NONE Successful
-  /// @retval #UPDATE_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #UPDATE_CONTROL_ERROR_SYSTEM_ERROR System error
-  /// @retval #UPDATE_CONTROL_ERROR_INVALID_OPERATION Function not implemented
-  /// @retval #UPDATE_CONTROL_ERROR_NOT_SUPPORTED Not supported
-  /// @see update_control_deinitialize()
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `UPDATE_CONTROL_ERROR_NONE`: Successful
+  /// - `UPDATE_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `UPDATE_CONTROL_ERROR_SYSTEM_ERROR`: System error
+  /// - `UPDATE_CONTROL_ERROR_INVALID_OPERATION`: Function not implemented
+  /// - `UPDATE_CONTROL_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `update_control_deinitialize()`
   int update_control_initialize() {
     return _update_control_initialize();
   }
@@ -46,17 +56,23 @@ class Tizen60UpdateControl {
   late final _update_control_initialize =
       _update_control_initializePtr.asFunction<int Function()>();
 
-  /// @brief Deinitializes the update controller.
+  /// Deinitializes the update controller.
   ///
-  /// @since_tizen 5.0
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #UPDATE_CONTROL_ERROR_NONE Successful
-  /// @retval #UPDATE_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #UPDATE_CONTROL_ERROR_SYSTEM_ERROR System error
-  /// @retval #UPDATE_CONTROL_ERROR_INVALID_OPERATION Function not implemented
-  /// @retval #UPDATE_CONTROL_ERROR_NOT_SUPPORTED Not supported
-  /// @see update_control_initialize()
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `UPDATE_CONTROL_ERROR_NONE`: Successful
+  /// - `UPDATE_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `UPDATE_CONTROL_ERROR_SYSTEM_ERROR`: System error
+  /// - `UPDATE_CONTROL_ERROR_INVALID_OPERATION`: Function not implemented
+  /// - `UPDATE_CONTROL_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `update_control_initialize()`
   int update_control_deinitialize() {
     return _update_control_deinitialize();
   }
@@ -67,16 +83,20 @@ class Tizen60UpdateControl {
   late final _update_control_deinitialize =
       _update_control_deinitializePtr.asFunction<int Function()>();
 
-  /// @brief Requests checking new version of firmware.
+  /// Requests checking new version of firmware.
   ///
-  /// @since_tizen 5.0
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #UPDATE_CONTROL_ERROR_NONE Successful
-  /// @retval #UPDATE_CONTROL_ERROR_CONNECTION_REFUSED Connection refused
-  /// @retval #UPDATE_CONTROL_ERROR_SYSTEM_ERROR System error
-  /// @retval #UPDATE_CONTROL_ERROR_INVALID_OPERATION Function not implemented
-  /// @retval #UPDATE_CONTROL_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `UPDATE_CONTROL_ERROR_NONE`: Successful
+  /// - `UPDATE_CONTROL_ERROR_CONNECTION_REFUSED`: Connection refused
+  /// - `UPDATE_CONTROL_ERROR_SYSTEM_ERROR`: System error
+  /// - `UPDATE_CONTROL_ERROR_INVALID_OPERATION`: Function not implemented
+  /// - `UPDATE_CONTROL_ERROR_NOT_SUPPORTED`: Not supported
   int update_control_check_new_version() {
     return _update_control_check_new_version();
   }
@@ -87,21 +107,25 @@ class Tizen60UpdateControl {
   late final _update_control_check_new_version =
       _update_control_check_new_versionPtr.asFunction<int Function()>();
 
-  /// @brief Requests downloading new version of firmware.
+  /// Requests downloading new version of firmware.
   ///
-  /// @since_tizen 5.0
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #UPDATE_CONTROL_ERROR_NONE Successful
-  /// @retval #UPDATE_CONTROL_ERROR_FILE_NO_SPACE_ON_DEVICE No space left on device
-  /// @retval #UPDATE_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #UPDATE_CONTROL_ERROR_CONNECTION_REFUSED Connection refused
-  /// @retval #UPDATE_CONTROL_ERROR_CONNECTION_ABORTED Software caused connection abort
-  /// @retval #UPDATE_CONTROL_ERROR_PROTOCOL_NOT_SUPPORTED Protocol not supported
-  /// @retval #UPDATE_CONTROL_ERROR_INVALID_URI Invalid URI
-  /// @retval #UPDATE_CONTROL_ERROR_SYSTEM_ERROR System error
-  /// @retval #UPDATE_CONTROL_ERROR_INVALID_OPERATION Function not implemented
-  /// @retval #UPDATE_CONTROL_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `UPDATE_CONTROL_ERROR_NONE`: Successful
+  /// - `UPDATE_CONTROL_ERROR_FILE_NO_SPACE_ON_DEVICE`: No space left on device
+  /// - `UPDATE_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `UPDATE_CONTROL_ERROR_CONNECTION_REFUSED`: Connection refused
+  /// - `UPDATE_CONTROL_ERROR_CONNECTION_ABORTED`: Software caused connection abort
+  /// - `UPDATE_CONTROL_ERROR_PROTOCOL_NOT_SUPPORTED`: Protocol not supported
+  /// - `UPDATE_CONTROL_ERROR_INVALID_URI`: Invalid URI
+  /// - `UPDATE_CONTROL_ERROR_SYSTEM_ERROR`: System error
+  /// - `UPDATE_CONTROL_ERROR_INVALID_OPERATION`: Function not implemented
+  /// - `UPDATE_CONTROL_ERROR_NOT_SUPPORTED`: Not supported
   int update_control_download_package() {
     return _update_control_download_package();
   }
@@ -112,22 +136,32 @@ class Tizen60UpdateControl {
   late final _update_control_download_package =
       _update_control_download_packagePtr.asFunction<int Function()>();
 
-  /// @platform
-  /// @brief Requests triggering update to new firmware.
+  /// Requests triggering update to new firmware.
   ///
-  /// @since_tizen 5.0
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/updatecontrol.admin
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #UPDATE_CONTROL_ERROR_NONE Successful
-  /// @retval #UPDATE_CONTROL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #UPDATE_CONTROL_ERROR_TIMED_OUT Time out
-  /// @retval #UPDATE_CONTROL_ERROR_INVALID_PACKAGE Invalid package
-  /// @retval #UPDATE_CONTROL_ERROR_PACKAGE_NOT_SUPPORTED Package type not supported
-  /// @retval #UPDATE_CONTROL_ERROR_SYSTEM_ERROR System error
-  /// @retval #UPDATE_CONTROL_ERROR_INVALID_OPERATION Function not implemented
-  /// @retval #UPDATE_CONTROL_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/updatecontrol.admin>
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `UPDATE_CONTROL_ERROR_NONE`: Successful
+  /// - `UPDATE_CONTROL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `UPDATE_CONTROL_ERROR_TIMED_OUT`: Time out
+  /// - `UPDATE_CONTROL_ERROR_INVALID_PACKAGE`: Invalid package
+  /// - `UPDATE_CONTROL_ERROR_PACKAGE_NOT_SUPPORTED`: Package type not supported
+  /// - `UPDATE_CONTROL_ERROR_SYSTEM_ERROR`: System error
+  /// - `UPDATE_CONTROL_ERROR_INVALID_OPERATION`: Function not implemented
+  /// - `UPDATE_CONTROL_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int update_control_do_update() {
     return _update_control_do_update();
   }
@@ -138,23 +172,38 @@ class Tizen60UpdateControl {
   late final _update_control_do_update =
       _update_control_do_updatePtr.asFunction<int Function()>();
 
-  /// @platform
-  /// @brief Makes reservation for update.
-  /// @details Makes update reservation at a specific time. At the given time, it automatically checks, downloads and updates to a new version. To cancel the reservation, call update_control_cancel_reservation().
+  /// Makes reservation for update.
   ///
-  /// @since_tizen 5.0
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/updatecontrol.admin
-  /// @remarks Only one reservation can be used at any given time. If a new reservation is made, the previous one will be removed.
-  /// @param[in] reservation_time The time to start update
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #UPDATE_CONTROL_ERROR_NONE Successful
-  /// @retval #UPDATE_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #UPDATE_CONTROL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #UPDATE_CONTROL_ERROR_SYSTEM_ERROR System error
-  /// @retval #UPDATE_CONTROL_ERROR_INVALID_OPERATION Function not implemented
-  /// @retval #UPDATE_CONTROL_ERROR_NOT_SUPPORTED Not supported
+  /// Makes update reservation at a specific time. At the given time, it automatically checks, downloads and updates to a new version. To cancel the reservation, call update_control_cancel_reservation().
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/updatecontrol.admin>
+  ///
+  /// **Remarks:**
+  /// - Only one reservation can be used at any given time. If a new reservation is made, the previous one will be removed.
+  ///
+  /// **Parameters:**
+  /// - `reservation_time` (in): The time to start update
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `UPDATE_CONTROL_ERROR_NONE`: Successful
+  /// - `UPDATE_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `UPDATE_CONTROL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `UPDATE_CONTROL_ERROR_SYSTEM_ERROR`: System error
+  /// - `UPDATE_CONTROL_ERROR_INVALID_OPERATION`: Function not implemented
+  /// - `UPDATE_CONTROL_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int update_control_make_reservation(
     ffi.Pointer<time.tm> reservation_time,
   ) {
@@ -170,19 +219,29 @@ class Tizen60UpdateControl {
       _update_control_make_reservationPtr
           .asFunction<int Function(ffi.Pointer<time.tm>)>();
 
-  /// @platform
-  /// @brief Cancels the update reservation.
+  /// Cancels the update reservation.
   ///
-  /// @since_tizen 5.0
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/updatecontrol.admin
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #UPDATE_CONTROL_ERROR_NONE Successful
-  /// @retval #UPDATE_CONTROL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #UPDATE_CONTROL_ERROR_SYSTEM_ERROR System error
-  /// @retval #UPDATE_CONTROL_ERROR_INVALID_OPERATION Function not implemented
-  /// @retval #UPDATE_CONTROL_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/updatecontrol.admin>
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `UPDATE_CONTROL_ERROR_NONE`: Successful
+  /// - `UPDATE_CONTROL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `UPDATE_CONTROL_ERROR_SYSTEM_ERROR`: System error
+  /// - `UPDATE_CONTROL_ERROR_INVALID_OPERATION`: Function not implemented
+  /// - `UPDATE_CONTROL_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int update_control_cancel_reservation() {
     return _update_control_cancel_reservation();
   }
@@ -193,22 +252,30 @@ class Tizen60UpdateControl {
   late final _update_control_cancel_reservation =
       _update_control_cancel_reservationPtr.asFunction<int Function()>();
 
-  /// @brief Gets the update property of the given key.
+  /// Gets the update property of the given key.
   ///
-  /// @since_tizen 5.0
-  /// @remarks The @a value must be released using free()
-  /// @param[in] property The key of property to get
-  /// @param[out] value The value of given property
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #UPDATE_CONTROL_ERROR_NONE Successful
-  /// @retval #UPDATE_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #UPDATE_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #UPDATE_CONTROL_ERROR_KEY_NOT_FOUND Specified property not found
-  /// @retval #UPDATE_CONTROL_ERROR_KEY_REJECTED Specified property not available
-  /// @retval #UPDATE_CONTROL_ERROR_SYSTEM_ERROR System error
-  /// @retval #UPDATE_CONTROL_ERROR_INVALID_OPERATION Function not implemented
-  /// @retval #UPDATE_CONTROL_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - The `value` must be released using free()
+  ///
+  /// **Parameters:**
+  /// - `property` (in): The key of property to get
+  /// - `value` (out): The value of given property
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `UPDATE_CONTROL_ERROR_NONE`: Successful
+  /// - `UPDATE_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `UPDATE_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `UPDATE_CONTROL_ERROR_KEY_NOT_FOUND`: Specified property not found
+  /// - `UPDATE_CONTROL_ERROR_KEY_REJECTED`: Specified property not available
+  /// - `UPDATE_CONTROL_ERROR_SYSTEM_ERROR`: System error
+  /// - `UPDATE_CONTROL_ERROR_INVALID_OPERATION`: Function not implemented
+  /// - `UPDATE_CONTROL_ERROR_NOT_SUPPORTED`: Not supported
   int update_control_get_property(
     int property,
     ffi.Pointer<ffi.Pointer<ffi.Void>> value,
@@ -227,8 +294,11 @@ class Tizen60UpdateControl {
       .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Void>>)>();
 }
 
-/// @brief Enumeration for the update control error.
-/// @since_tizen 5.0
+/// Enumeration for the update control error.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class update_control_error_e {
   /// < Successful
   static const int UPDATE_CONTROL_ERROR_NONE = 0;
@@ -282,8 +352,11 @@ abstract class update_control_error_e {
   static const int UPDATE_CONTROL_ERROR_SYSTEM_ERROR = -50266108;
 }
 
-/// @brief Enumeration for the update control properties.
-/// @since_tizen 5.0
+/// Enumeration for the update control properties.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class update_control_property_e {
   /// < New version
   static const int UPDATE_CONTROL_PROPERTY_NEW_VERSION = 0;

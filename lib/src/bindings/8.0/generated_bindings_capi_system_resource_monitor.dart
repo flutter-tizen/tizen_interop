@@ -1,3 +1,6 @@
+/// {@category 8.0/tizen}
+library tizen_interop_8_0.capi_system_resource_monitor;
+
 // Copyright 2026 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-system-resource-monitor APIs.
+/// {@category 8.0/tizen}
 class Tizen80CapiSystemResourceMonitor {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,18 +28,33 @@ class Tizen80CapiSystemResourceMonitor {
           lookup)
       : _lookup = lookup;
 
-  /// @brief  Initializes the resource monitor.
-  /// @since_tizen 7.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/systemmonitor
-  /// @remarks The @c return value should be released using resource_monitor_exit().
-  /// @return @c positive integer as resource monitor ID on success, otherwise a negative error value
-  /// @retval #RESOURCE_MONITOR_ERROR_NONE                         Successful
-  /// @retval #RESOURCE_MONITOR_ERROR_PERMISSION_DENIED            Permission Denied
-  /// @retval #RESOURCE_MONITOR_ERROR_NO_DATA                      Empty Data
-  /// @retval #RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY                Out of Memory
-  /// @see    resource_monitor_exit()
-  /// @code
+  /// Initializes the resource monitor.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/systemmonitor>
+  ///
+  /// **Remarks:**
+  /// - The `return` value should be released using resource_monitor_exit().
+  ///
+  /// **Returns:**
+  /// - `positive` integer as resource monitor ID on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RESOURCE_MONITOR_ERROR_NONE`: Successful
+  /// - `RESOURCE_MONITOR_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `RESOURCE_MONITOR_ERROR_NO_DATA`: Empty Data
+  /// - `RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY`: Out of Memory
+  ///
+  /// **See also:**
+  /// - `resource_monitor_exit()`
+  ///
+  /// ```
   /// // Create monitor_id and resource_id for CPU device.
   /// int monitor_id = resource_monitor_init();
   /// int resource_id = resource_monitor_create_resource(monitor_id, RESOURCE_MONITOR_TYPE_CPU);
@@ -56,7 +75,7 @@ class Tizen80CapiSystemResourceMonitor {
   /// int cpu_min_freq;
   /// ret = resource_monitor_get_value_int(monitor_id, resource_id, RESOURCE_MONITOR_CPU_ATTR_CUR_FREQ, &cpu_cur_freq);
   /// ret = resource_monitor_get_value_int(monitor_id, resource_id, RESOURCE_MONITOR_CPU_ATTR_MIN_FREQ, &cpu_min_freq);
-  /// @endcode
+  /// ```
   int resource_monitor_init() {
     return _resource_monitor_init();
   }
@@ -66,18 +85,32 @@ class Tizen80CapiSystemResourceMonitor {
   late final _resource_monitor_init =
       _resource_monitor_initPtr.asFunction<int Function()>();
 
-  /// @brief Exits the resource monitor.
-  /// @since_tizen 7.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/systemmonitor
-  /// @param[in] monitor_id     ID of resource monitor which be returned by resource_monitor_init()
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #RESOURCE_MONITOR_ERROR_NONE                         Successful
-  /// @retval #RESOURCE_MONITOR_ERROR_PERMISSION_DENIED            Permission Denied
-  /// @retval #RESOURCE_MONITOR_ERROR_INVALID_PARAMETER            Invalid Parameter
-  /// @retval #RESOURCE_MONITOR_ERROR_NO_DATA                      Empty Data
-  /// @retval #RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY                Out of Memory
-  /// @see    resource_monitor_init()
+  /// Exits the resource monitor.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/systemmonitor>
+  ///
+  /// **Parameters:**
+  /// - `monitor_id` (in): ID of resource monitor which be returned by resource_monitor_init()
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RESOURCE_MONITOR_ERROR_NONE`: Successful
+  /// - `RESOURCE_MONITOR_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `RESOURCE_MONITOR_ERROR_INVALID_PARAMETER`: Invalid Parameter
+  /// - `RESOURCE_MONITOR_ERROR_NO_DATA`: Empty Data
+  /// - `RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY`: Out of Memory
+  ///
+  /// **See also:**
+  /// - `resource_monitor_init()`
   int resource_monitor_exit(
     int monitor_id,
   ) {
@@ -92,21 +125,35 @@ class Tizen80CapiSystemResourceMonitor {
   late final _resource_monitor_exit =
       _resource_monitor_exitPtr.asFunction<int Function(int)>();
 
-  /// @brief Gets the count of supported resources according to resource type.
-  /// @since_tizen 7.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/systemmonitor
-  /// @param[in] monitor_id     Resource monitorID
-  /// @param[in] resource_type  Resource type
-  /// @param[out] resource_count  Resource count retrieved from resource monitor
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #RESOURCE_MONITOR_ERROR_NONE                         Successful
-  /// @retval #RESOURCE_MONITOR_ERROR_PERMISSION_DENIED            Permission Denied
-  /// @retval #RESOURCE_MONITOR_ERROR_INVALID_PARAMETER            Invalid Parameter
-  /// @retval #RESOURCE_MONITOR_ERROR_NO_DATA                      Empty Data
-  /// @retval #RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY                Out of Memory
-  /// @retval #RESOURCE_MONITOR_ERROR_NOT_SUPPORTED_RESOURCE       Unavailable Resource Type
-  /// @see    resource_monitor_init()
+  /// Gets the count of supported resources according to resource type.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/systemmonitor>
+  ///
+  /// **Parameters:**
+  /// - `monitor_id` (in): Resource monitorID
+  /// - `resource_type` (in): Resource type
+  /// - `resource_count` (out): Resource count retrieved from resource monitor
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RESOURCE_MONITOR_ERROR_NONE`: Successful
+  /// - `RESOURCE_MONITOR_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `RESOURCE_MONITOR_ERROR_INVALID_PARAMETER`: Invalid Parameter
+  /// - `RESOURCE_MONITOR_ERROR_NO_DATA`: Empty Data
+  /// - `RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `RESOURCE_MONITOR_ERROR_NOT_SUPPORTED_RESOURCE`: Unavailable Resource Type
+  ///
+  /// **See also:**
+  /// - `resource_monitor_init()`
   int resource_monitor_get_resource_count(
     int monitor_id,
     int resource_type,
@@ -127,22 +174,38 @@ class Tizen80CapiSystemResourceMonitor {
       _resource_monitor_get_resource_countPtr
           .asFunction<int Function(int, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Creates resource for given resource_type.
-  /// @since_tizen 7.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/systemmonitor
-  /// @remarks The @c return value should be released using resource_delete_resource().
-  /// @param[in] monitor_id     Resource monitor ID which be returned by resource_monitor_init()
-  /// @param[in] resource_type  Resource type
-  /// @return @c positive integer as resource ID on success, otherwise a negative error value
-  /// @retval #RESOURCE_MONITOR_ERROR_NONE                         Successful
-  /// @retval #RESOURCE_MONITOR_ERROR_PERMISSION_DENIED            Permission Denied
-  /// @retval #RESOURCE_MONITOR_ERROR_INVALID_PARAMETER            Invalid Parameter
-  /// @retval #RESOURCE_MONITOR_ERROR_NO_DATA                      Empty Data
-  /// @retval #RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY                Out of Memory
-  /// @retval #RESOURCE_MONITOR_ERROR_NOT_SUPPORTED_RESOURCE       Unavailable Resource Type
-  /// @see    resource_monitor_init()
-  /// @see    resource_monitor_delete_resource()
+  /// Creates resource for given resource_type.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/systemmonitor>
+  ///
+  /// **Remarks:**
+  /// - The `return` value should be released using resource_delete_resource().
+  ///
+  /// **Parameters:**
+  /// - `monitor_id` (in): Resource monitor ID which be returned by resource_monitor_init()
+  /// - `resource_type` (in): Resource type
+  ///
+  /// **Returns:**
+  /// - `positive` integer as resource ID on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RESOURCE_MONITOR_ERROR_NONE`: Successful
+  /// - `RESOURCE_MONITOR_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `RESOURCE_MONITOR_ERROR_INVALID_PARAMETER`: Invalid Parameter
+  /// - `RESOURCE_MONITOR_ERROR_NO_DATA`: Empty Data
+  /// - `RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `RESOURCE_MONITOR_ERROR_NOT_SUPPORTED_RESOURCE`: Unavailable Resource Type
+  ///
+  /// **See also:**
+  /// - `resource_monitor_init()`
+  /// - `resource_monitor_delete_resource()`
   int resource_monitor_create_resource(
     int monitor_id,
     int resource_type,
@@ -159,20 +222,34 @@ class Tizen80CapiSystemResourceMonitor {
   late final _resource_monitor_create_resource =
       _resource_monitor_create_resourcePtr.asFunction<int Function(int, int)>();
 
-  /// @brief Deletes resource of given resource ID.
-  /// @since_tizen 7.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/systemmonitor
-  /// @param[in] monitor_id     Resource monitor ID which be returned by resource_monitor_init()
-  /// @param[in] resource_id    Resource ID which be returned by resource_monitor_create_resource()
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #RESOURCE_MONITOR_ERROR_NONE                         Successful
-  /// @retval #RESOURCE_MONITOR_ERROR_PERMISSION_DENIED            Permission Denied
-  /// @retval #RESOURCE_MONITOR_ERROR_INVALID_PARAMETER            Invalid Parameter
-  /// @retval #RESOURCE_MONITOR_ERROR_NO_DATA                      Empty Data
-  /// @retval #RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY                Out of Memory
-  /// @see    resource_monitor_init()
-  /// @see    resource_monitor_create_resource()
+  /// Deletes resource of given resource ID.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/systemmonitor>
+  ///
+  /// **Parameters:**
+  /// - `monitor_id` (in): Resource monitor ID which be returned by resource_monitor_init()
+  /// - `resource_id` (in): Resource ID which be returned by resource_monitor_create_resource()
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RESOURCE_MONITOR_ERROR_NONE`: Successful
+  /// - `RESOURCE_MONITOR_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `RESOURCE_MONITOR_ERROR_INVALID_PARAMETER`: Invalid Parameter
+  /// - `RESOURCE_MONITOR_ERROR_NO_DATA`: Empty Data
+  /// - `RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY`: Out of Memory
+  ///
+  /// **See also:**
+  /// - `resource_monitor_init()`
+  /// - `resource_monitor_create_resource()`
   int resource_monitor_delete_resource(
     int monitor_id,
     int resource_id,
@@ -189,22 +266,36 @@ class Tizen80CapiSystemResourceMonitor {
   late final _resource_monitor_delete_resource =
       _resource_monitor_delete_resourcePtr.asFunction<int Function(int, int)>();
 
-  /// @brief Sets the resource control with value which is different according to resource control id.
-  /// @since_tizen 7.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/systemmonitor
-  /// @param[in] monitor_id     Resource monitor ID which be returned by resource_monitor_init()
-  /// @param[in] resource_id    Resource ID which be returned by resource_monitor_create_resource()
-  /// @param[in] ctrl_id        Resource control ID
-  /// @param[in] value          Value for resource control ID
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #RESOURCE_MONITOR_ERROR_NONE                         Successful
-  /// @retval #RESOURCE_MONITOR_ERROR_PERMISSION_DENIED            Permission Denied
-  /// @retval #RESOURCE_MONITOR_ERROR_INVALID_PARAMETER            Invalid Parameter
-  /// @retval #RESOURCE_MONITOR_ERROR_NO_DATA                      Empty Data
-  /// @retval #RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY                Out of Memory
-  /// @see    resource_monitor_init()
-  /// @see    resource_monitor_create_resource()
+  /// Sets the resource control with value which is different according to resource control id.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/systemmonitor>
+  ///
+  /// **Parameters:**
+  /// - `monitor_id` (in): Resource monitor ID which be returned by resource_monitor_init()
+  /// - `resource_id` (in): Resource ID which be returned by resource_monitor_create_resource()
+  /// - `ctrl_id` (in): Resource control ID
+  /// - `value` (in): Value for resource control ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RESOURCE_MONITOR_ERROR_NONE`: Successful
+  /// - `RESOURCE_MONITOR_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `RESOURCE_MONITOR_ERROR_INVALID_PARAMETER`: Invalid Parameter
+  /// - `RESOURCE_MONITOR_ERROR_NO_DATA`: Empty Data
+  /// - `RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY`: Out of Memory
+  ///
+  /// **See also:**
+  /// - `resource_monitor_init()`
+  /// - `resource_monitor_create_resource()`
   int resource_monitor_set_resource_ctrl(
     int monitor_id,
     int resource_id,
@@ -227,23 +318,37 @@ class Tizen80CapiSystemResourceMonitor {
       _resource_monitor_set_resource_ctrlPtr
           .asFunction<int Function(int, int, int, int)>();
 
-  /// @brief Sets the resource attributes of interest for monitoring.
-  /// @since_tizen 7.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/systemmonitor
-  /// @param[in] monitor_id     Resource monitor ID which be returned by resource_monitor_init()
-  /// @param[in] resource_id    Resource ID which be returned by resource_monitor_create_resource()
-  /// @param[in] attr_mask      Attribute mask including the various attributes
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #RESOURCE_MONITOR_ERROR_NONE                         Successful
-  /// @retval #RESOURCE_MONITOR_ERROR_PERMISSION_DENIED            Permission Denied
-  /// @retval #RESOURCE_MONITOR_ERROR_INVALID_PARAMETER            Invalid Parameter
-  /// @retval #RESOURCE_MONITOR_ERROR_NO_DATA                      Empty Data
-  /// @retval #RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY                Out of Memory
-  /// @retval #RESOURCE_MONITOR_ERROR_NOT_SUPPORTED_ATTRIBUTE      Unavailable Attribute
-  /// @see    resource_monitor_init()
-  /// @see    resource_monitor_create_resource()
-  /// @see    resource_monitor_unset_resource_attr()
+  /// Sets the resource attributes of interest for monitoring.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/systemmonitor>
+  ///
+  /// **Parameters:**
+  /// - `monitor_id` (in): Resource monitor ID which be returned by resource_monitor_init()
+  /// - `resource_id` (in): Resource ID which be returned by resource_monitor_create_resource()
+  /// - `attr_mask` (in): Attribute mask including the various attributes
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RESOURCE_MONITOR_ERROR_NONE`: Successful
+  /// - `RESOURCE_MONITOR_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `RESOURCE_MONITOR_ERROR_INVALID_PARAMETER`: Invalid Parameter
+  /// - `RESOURCE_MONITOR_ERROR_NO_DATA`: Empty Data
+  /// - `RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `RESOURCE_MONITOR_ERROR_NOT_SUPPORTED_ATTRIBUTE`: Unavailable Attribute
+  ///
+  /// **See also:**
+  /// - `resource_monitor_init()`
+  /// - `resource_monitor_create_resource()`
+  /// - `resource_monitor_unset_resource_attr()`
   int resource_monitor_set_resource_attr(
     int monitor_id,
     int resource_id,
@@ -263,23 +368,37 @@ class Tizen80CapiSystemResourceMonitor {
       _resource_monitor_set_resource_attrPtr
           .asFunction<int Function(int, int, int)>();
 
-  /// @brief Unsets the resource attributes of interest for monitoring.
-  /// @since_tizen 7.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/systemmonitor
-  /// @param[in] monitor_id     Resource monitor ID which be returned by resource_monitor_init()
-  /// @param[in] resource_id    Resource ID which be returned by resource_monitor_create_resource()
-  /// @param[in] attr_mask      Attribute mask including the various attributes
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #RESOURCE_MONITOR_ERROR_NONE                         Successful
-  /// @retval #RESOURCE_MONITOR_ERROR_PERMISSION_DENIED            Permission Denied
-  /// @retval #RESOURCE_MONITOR_ERROR_INVALID_PARAMETER            Invalid Parameter
-  /// @retval #RESOURCE_MONITOR_ERROR_NO_DATA                      Empty Data
-  /// @retval #RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY                Out of Memory
-  /// @retval #RESOURCE_MONITOR_ERROR_NOT_SUPPORTED_ATTRIBUTE      Unavailable Attribute
-  /// @see    resource_monitor_init()
-  /// @see    resource_monitor_create_resource()
-  /// @see    resource_monitor_set_resource_attr()
+  /// Unsets the resource attributes of interest for monitoring.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/systemmonitor>
+  ///
+  /// **Parameters:**
+  /// - `monitor_id` (in): Resource monitor ID which be returned by resource_monitor_init()
+  /// - `resource_id` (in): Resource ID which be returned by resource_monitor_create_resource()
+  /// - `attr_mask` (in): Attribute mask including the various attributes
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RESOURCE_MONITOR_ERROR_NONE`: Successful
+  /// - `RESOURCE_MONITOR_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `RESOURCE_MONITOR_ERROR_INVALID_PARAMETER`: Invalid Parameter
+  /// - `RESOURCE_MONITOR_ERROR_NO_DATA`: Empty Data
+  /// - `RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `RESOURCE_MONITOR_ERROR_NOT_SUPPORTED_ATTRIBUTE`: Unavailable Attribute
+  ///
+  /// **See also:**
+  /// - `resource_monitor_init()`
+  /// - `resource_monitor_create_resource()`
+  /// - `resource_monitor_set_resource_attr()`
   int resource_monitor_unset_resource_attr(
     int monitor_id,
     int resource_id,
@@ -299,23 +418,37 @@ class Tizen80CapiSystemResourceMonitor {
       _resource_monitor_unset_resource_attrPtr
           .asFunction<int Function(int, int, int)>();
 
-  /// @brief Checks whether a resource attribute is supported or not.
-  /// @since_tizen 7.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/systemmonitor
-  /// @param[in] monitor_id     Resource monitor ID which be returned by resource_monitor_init()
-  /// @param[in] resource_id    Resource ID which be returned by resource_monitor_create_resource()
-  /// @param[in] attr_id        Resource attribute ID
-  /// @param[out] supported     Resource attributes is either supported or not (@c true  == supported, @c false = not supported)
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #RESOURCE_MONITOR_ERROR_NONE                         Successful
-  /// @retval #RESOURCE_MONITOR_ERROR_PERMISSION_DENIED            Permission Denied
-  /// @retval #RESOURCE_MONITOR_ERROR_INVALID_PARAMETER            Invalid Parameter
-  /// @retval #RESOURCE_MONITOR_ERROR_NO_DATA                      Empty Data
-  /// @retval #RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY                Out of Memory
-  /// @see    resource_monitor_init()
-  /// @see    resource_monitor_create_resource()
-  /// @see    resource_monitor_set_resource_attr()
+  /// Checks whether a resource attribute is supported or not.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/systemmonitor>
+  ///
+  /// **Parameters:**
+  /// - `monitor_id` (in): Resource monitor ID which be returned by resource_monitor_init()
+  /// - `resource_id` (in): Resource ID which be returned by resource_monitor_create_resource()
+  /// - `attr_id` (in): Resource attribute ID
+  /// - `supported` (out): Resource attributes is either supported or not (`true` == supported, `false` = not supported)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RESOURCE_MONITOR_ERROR_NONE`: Successful
+  /// - `RESOURCE_MONITOR_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `RESOURCE_MONITOR_ERROR_INVALID_PARAMETER`: Invalid Parameter
+  /// - `RESOURCE_MONITOR_ERROR_NO_DATA`: Empty Data
+  /// - `RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY`: Out of Memory
+  ///
+  /// **See also:**
+  /// - `resource_monitor_init()`
+  /// - `resource_monitor_create_resource()`
+  /// - `resource_monitor_set_resource_attr()`
   int resource_monitor_is_resource_attr_supported(
     int monitor_id,
     int resource_id,
@@ -339,21 +472,35 @@ class Tizen80CapiSystemResourceMonitor {
       _resource_monitor_is_resource_attr_supportedPtr
           .asFunction<int Function(int, int, int, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Updates the value of attributes of interest for all created resource.
-  /// @since_tizen 7.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/systemmonitor
-  /// @param[in] monitor_id     Resource monitor ID which be returned by resource_monitor_init()
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #RESOURCE_MONITOR_ERROR_NONE                         Successful
-  /// @retval #RESOURCE_MONITOR_ERROR_PERMISSION_DENIED            Permission Denied
-  /// @retval #RESOURCE_MONITOR_ERROR_INVALID_PARAMETER            Invalid Parameter
-  /// @retval #RESOURCE_MONITOR_ERROR_NO_DATA                      Empty Data
-  /// @retval #RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY                Out of Memory
-  /// @see    resource_monitor_init()
-  /// @see    resource_monitor_create_resource()
-  /// @see    resource_monitor_set_resource_attr()
-  /// @see    resource_monitor_set_resource_ctrl()
+  /// Updates the value of attributes of interest for all created resource.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/systemmonitor>
+  ///
+  /// **Parameters:**
+  /// - `monitor_id` (in): Resource monitor ID which be returned by resource_monitor_init()
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RESOURCE_MONITOR_ERROR_NONE`: Successful
+  /// - `RESOURCE_MONITOR_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `RESOURCE_MONITOR_ERROR_INVALID_PARAMETER`: Invalid Parameter
+  /// - `RESOURCE_MONITOR_ERROR_NO_DATA`: Empty Data
+  /// - `RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY`: Out of Memory
+  ///
+  /// **See also:**
+  /// - `resource_monitor_init()`
+  /// - `resource_monitor_create_resource()`
+  /// - `resource_monitor_set_resource_attr()`
+  /// - `resource_monitor_set_resource_ctrl()`
   int resource_monitor_update(
     int monitor_id,
   ) {
@@ -368,22 +515,36 @@ class Tizen80CapiSystemResourceMonitor {
   late final _resource_monitor_update =
       _resource_monitor_updatePtr.asFunction<int Function(int)>();
 
-  /// @brief Updates the value of attributes of interest for a resource.
-  /// @since_tizen 7.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/systemmonitor
-  /// @param[in] monitor_id     Resource monitor ID which be returned by resource_monitor_init()
-  /// @param[in] resource_id    Resource ID which be returned by resource_monitor_create_resource()
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #RESOURCE_MONITOR_ERROR_NONE                         Successful
-  /// @retval #RESOURCE_MONITOR_ERROR_PERMISSION_DENIED            Permission Denied
-  /// @retval #RESOURCE_MONITOR_ERROR_INVALID_PARAMETER            Invalid Parameter
-  /// @retval #RESOURCE_MONITOR_ERROR_NO_DATA                      Empty Data
-  /// @retval #RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY                Out of Memory
-  /// @see    resource_monitor_init()
-  /// @see    resource_monitor_create_resource()
-  /// @see    resource_monitor_set_resource_attr()
-  /// @see    resource_monitor_set_resource_ctrl()
+  /// Updates the value of attributes of interest for a resource.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/systemmonitor>
+  ///
+  /// **Parameters:**
+  /// - `monitor_id` (in): Resource monitor ID which be returned by resource_monitor_init()
+  /// - `resource_id` (in): Resource ID which be returned by resource_monitor_create_resource()
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RESOURCE_MONITOR_ERROR_NONE`: Successful
+  /// - `RESOURCE_MONITOR_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `RESOURCE_MONITOR_ERROR_INVALID_PARAMETER`: Invalid Parameter
+  /// - `RESOURCE_MONITOR_ERROR_NO_DATA`: Empty Data
+  /// - `RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY`: Out of Memory
+  ///
+  /// **See also:**
+  /// - `resource_monitor_init()`
+  /// - `resource_monitor_create_resource()`
+  /// - `resource_monitor_set_resource_attr()`
+  /// - `resource_monitor_set_resource_ctrl()`
   int resource_monitor_update_resource(
     int monitor_id,
     int resource_id,
@@ -400,27 +561,41 @@ class Tizen80CapiSystemResourceMonitor {
   late final _resource_monitor_update_resource =
       _resource_monitor_update_resourcePtr.asFunction<int Function(int, int)>();
 
-  /// @brief Gets the int value of resource attribute.
-  /// @since_tizen 7.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/systemmonitor
-  /// @param[in] monitor_id     Resource monitor ID which be returned by resource_monitor_init()
-  /// @param[in] resource_id    Resource ID which be returned by resource_monitor_create_resource()
-  /// @param[in] attr_id        Resource attribute ID
-  /// @param[out] value         Value retrieved from resource attribute
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #RESOURCE_MONITOR_ERROR_NONE                         Successful
-  /// @retval #RESOURCE_MONITOR_ERROR_PERMISSION_DENIED            Permission Denied
-  /// @retval #RESOURCE_MONITOR_ERROR_INVALID_PARAMETER            Invalid Parameter
-  /// @retval #RESOURCE_MONITOR_ERROR_NO_DATA                      Empty Data
-  /// @retval #RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY                Out of Memory
-  /// @retval #RESOURCE_MONITOR_ERROR_NOT_SUPPORTED_ATTRIBUTE      Unavailable Attribute
-  /// @see    resource_monitor_init()
-  /// @see    resource_monitor_create_resource()
-  /// @see    resource_monitor_set_resource_attr()
-  /// @see    resource_monitor_set_resource_ctrl()
-  /// @see    resource_monitor_update()
-  /// @see    resource_monitor_update_resource()
+  /// Gets the int value of resource attribute.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/systemmonitor>
+  ///
+  /// **Parameters:**
+  /// - `monitor_id` (in): Resource monitor ID which be returned by resource_monitor_init()
+  /// - `resource_id` (in): Resource ID which be returned by resource_monitor_create_resource()
+  /// - `attr_id` (in): Resource attribute ID
+  /// - `value` (out): Value retrieved from resource attribute
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RESOURCE_MONITOR_ERROR_NONE`: Successful
+  /// - `RESOURCE_MONITOR_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `RESOURCE_MONITOR_ERROR_INVALID_PARAMETER`: Invalid Parameter
+  /// - `RESOURCE_MONITOR_ERROR_NO_DATA`: Empty Data
+  /// - `RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `RESOURCE_MONITOR_ERROR_NOT_SUPPORTED_ATTRIBUTE`: Unavailable Attribute
+  ///
+  /// **See also:**
+  /// - `resource_monitor_init()`
+  /// - `resource_monitor_create_resource()`
+  /// - `resource_monitor_set_resource_attr()`
+  /// - `resource_monitor_set_resource_ctrl()`
+  /// - `resource_monitor_update()`
+  /// - `resource_monitor_update_resource()`
   int resource_monitor_get_value_int(
     int monitor_id,
     int resource_id,
@@ -443,27 +618,41 @@ class Tizen80CapiSystemResourceMonitor {
       _resource_monitor_get_value_intPtr
           .asFunction<int Function(int, int, int, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the int64 value of resource attribute.
-  /// @since_tizen 7.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/systemmonitor
-  /// @param[in] monitor_id     Resource monitor ID which be returned by resource_monitor_init()
-  /// @param[in] resource_id    Resource ID which be returned by resource_monitor_create_resource()
-  /// @param[in] attr_id        Resource attribute ID
-  /// @param[out] value         Value retrieved from resource attribute
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #RESOURCE_MONITOR_ERROR_NONE                         Successful
-  /// @retval #RESOURCE_MONITOR_ERROR_PERMISSION_DENIED            Permission Denied
-  /// @retval #RESOURCE_MONITOR_ERROR_INVALID_PARAMETER            Invalid Parameter
-  /// @retval #RESOURCE_MONITOR_ERROR_NO_DATA                      Empty Data
-  /// @retval #RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY                Out of Memory
-  /// @retval #RESOURCE_MONITOR_ERROR_NOT_SUPPORTED_ATTRIBUTE      Unavailable Attribute
-  /// @see    resource_monitor_init()
-  /// @see    resource_monitor_create_resource()
-  /// @see    resource_monitor_set_resource_attr()
-  /// @see    resource_monitor_set_resource_ctrl()
-  /// @see    resource_monitor_update()
-  /// @see    resource_monitor_update_resource()
+  /// Gets the int64 value of resource attribute.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/systemmonitor>
+  ///
+  /// **Parameters:**
+  /// - `monitor_id` (in): Resource monitor ID which be returned by resource_monitor_init()
+  /// - `resource_id` (in): Resource ID which be returned by resource_monitor_create_resource()
+  /// - `attr_id` (in): Resource attribute ID
+  /// - `value` (out): Value retrieved from resource attribute
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RESOURCE_MONITOR_ERROR_NONE`: Successful
+  /// - `RESOURCE_MONITOR_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `RESOURCE_MONITOR_ERROR_INVALID_PARAMETER`: Invalid Parameter
+  /// - `RESOURCE_MONITOR_ERROR_NO_DATA`: Empty Data
+  /// - `RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `RESOURCE_MONITOR_ERROR_NOT_SUPPORTED_ATTRIBUTE`: Unavailable Attribute
+  ///
+  /// **See also:**
+  /// - `resource_monitor_init()`
+  /// - `resource_monitor_create_resource()`
+  /// - `resource_monitor_set_resource_attr()`
+  /// - `resource_monitor_set_resource_ctrl()`
+  /// - `resource_monitor_update()`
+  /// - `resource_monitor_update_resource()`
   int resource_monitor_get_value_int64(
     int monitor_id,
     int resource_id,
@@ -486,27 +675,41 @@ class Tizen80CapiSystemResourceMonitor {
       _resource_monitor_get_value_int64Ptr
           .asFunction<int Function(int, int, int, ffi.Pointer<ffi.Int64>)>();
 
-  /// @brief Gets the uint32 value of resource attribute.
-  /// @since_tizen 7.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/systemmonitor
-  /// @param[in] monitor_id     Resource monitor ID which be returned by resource_monitor_init()
-  /// @param[in] resource_id    Resource ID which be returned by resource_monitor_create_resource()
-  /// @param[in] attr_id        Resource attribute ID
-  /// @param[out] value         Value retrieved from resource attribute
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #RESOURCE_MONITOR_ERROR_NONE                         Successful
-  /// @retval #RESOURCE_MONITOR_ERROR_PERMISSION_DENIED            Permission Denied
-  /// @retval #RESOURCE_MONITOR_ERROR_INVALID_PARAMETER            Invalid Parameter
-  /// @retval #RESOURCE_MONITOR_ERROR_NO_DATA                      Empty Data
-  /// @retval #RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY                Out of Memory
-  /// @retval #RESOURCE_MONITOR_ERROR_NOT_SUPPORTED_ATTRIBUTE      Unavailable Attribute
-  /// @see    resource_monitor_init()
-  /// @see    resource_monitor_create_resource()
-  /// @see    resource_monitor_set_resource_attr()
-  /// @see    resource_monitor_set_resource_ctrl()
-  /// @see    resource_monitor_update()
-  /// @see    resource_monitor_update_resource()
+  /// Gets the uint32 value of resource attribute.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/systemmonitor>
+  ///
+  /// **Parameters:**
+  /// - `monitor_id` (in): Resource monitor ID which be returned by resource_monitor_init()
+  /// - `resource_id` (in): Resource ID which be returned by resource_monitor_create_resource()
+  /// - `attr_id` (in): Resource attribute ID
+  /// - `value` (out): Value retrieved from resource attribute
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RESOURCE_MONITOR_ERROR_NONE`: Successful
+  /// - `RESOURCE_MONITOR_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `RESOURCE_MONITOR_ERROR_INVALID_PARAMETER`: Invalid Parameter
+  /// - `RESOURCE_MONITOR_ERROR_NO_DATA`: Empty Data
+  /// - `RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `RESOURCE_MONITOR_ERROR_NOT_SUPPORTED_ATTRIBUTE`: Unavailable Attribute
+  ///
+  /// **See also:**
+  /// - `resource_monitor_init()`
+  /// - `resource_monitor_create_resource()`
+  /// - `resource_monitor_set_resource_attr()`
+  /// - `resource_monitor_set_resource_ctrl()`
+  /// - `resource_monitor_update()`
+  /// - `resource_monitor_update_resource()`
   int resource_monitor_get_value_uint32(
     int monitor_id,
     int resource_id,
@@ -529,27 +732,41 @@ class Tizen80CapiSystemResourceMonitor {
       _resource_monitor_get_value_uint32Ptr
           .asFunction<int Function(int, int, int, ffi.Pointer<u_int32_t>)>();
 
-  /// @brief Gets the uint64 value of resource attribute.
-  /// @since_tizen 7.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/systemmonitor
-  /// @param[in] monitor_id     Resource monitor ID which be returned by resource_monitor_init()
-  /// @param[in] resource_id    Resource ID which be returned by resource_monitor_create_resource()
-  /// @param[in] attr_id        Resource attribute ID
-  /// @param[out] value         Value retrieved from resource attribute
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #RESOURCE_MONITOR_ERROR_NONE                         Successful
-  /// @retval #RESOURCE_MONITOR_ERROR_PERMISSION_DENIED            Permission Denied
-  /// @retval #RESOURCE_MONITOR_ERROR_INVALID_PARAMETER            Invalid Parameter
-  /// @retval #RESOURCE_MONITOR_ERROR_NO_DATA                      Empty Data
-  /// @retval #RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY                Out of Memory
-  /// @retval #RESOURCE_MONITOR_ERROR_NOT_SUPPORTED_ATTRIBUTE      Unavailable Attribute
-  /// @see    resource_monitor_init()
-  /// @see    resource_monitor_create_resource()
-  /// @see    resource_monitor_set_resource_attr()
-  /// @see    resource_monitor_set_resource_ctrl()
-  /// @see    resource_monitor_update()
-  /// @see    resource_monitor_update_resource()
+  /// Gets the uint64 value of resource attribute.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/systemmonitor>
+  ///
+  /// **Parameters:**
+  /// - `monitor_id` (in): Resource monitor ID which be returned by resource_monitor_init()
+  /// - `resource_id` (in): Resource ID which be returned by resource_monitor_create_resource()
+  /// - `attr_id` (in): Resource attribute ID
+  /// - `value` (out): Value retrieved from resource attribute
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RESOURCE_MONITOR_ERROR_NONE`: Successful
+  /// - `RESOURCE_MONITOR_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `RESOURCE_MONITOR_ERROR_INVALID_PARAMETER`: Invalid Parameter
+  /// - `RESOURCE_MONITOR_ERROR_NO_DATA`: Empty Data
+  /// - `RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `RESOURCE_MONITOR_ERROR_NOT_SUPPORTED_ATTRIBUTE`: Unavailable Attribute
+  ///
+  /// **See also:**
+  /// - `resource_monitor_init()`
+  /// - `resource_monitor_create_resource()`
+  /// - `resource_monitor_set_resource_attr()`
+  /// - `resource_monitor_set_resource_ctrl()`
+  /// - `resource_monitor_update()`
+  /// - `resource_monitor_update_resource()`
   int resource_monitor_get_value_uint64(
     int monitor_id,
     int resource_id,
@@ -572,27 +789,41 @@ class Tizen80CapiSystemResourceMonitor {
       _resource_monitor_get_value_uint64Ptr
           .asFunction<int Function(int, int, int, ffi.Pointer<u_int64_t>)>();
 
-  /// @brief Gets the double value of resource attribute.
-  /// @since_tizen 7.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/systemmonitor
-  /// @param[in] monitor_id     Resource monitor ID which be returned by resource_monitor_init()
-  /// @param[in] resource_id    Resource ID which be returned by resource_monitor_create_resource()
-  /// @param[in] attr_id        Resource attribute ID
-  /// @param[out] value         Value retrieved from resource attribute
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #RESOURCE_MONITOR_ERROR_NONE                         Successful
-  /// @retval #RESOURCE_MONITOR_ERROR_PERMISSION_DENIED            Permission Denied
-  /// @retval #RESOURCE_MONITOR_ERROR_INVALID_PARAMETER            Invalid Parameter
-  /// @retval #RESOURCE_MONITOR_ERROR_NO_DATA                      Empty Data
-  /// @retval #RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY                Out of Memory
-  /// @retval #RESOURCE_MONITOR_ERROR_NOT_SUPPORTED_ATTRIBUTE      Unavailable Attribute
-  /// @see    resource_monitor_init()
-  /// @see    resource_monitor_create_resource()
-  /// @see    resource_monitor_set_resource_attr()
-  /// @see    resource_monitor_set_resource_ctrl()
-  /// @see    resource_monitor_update()
-  /// @see    resource_monitor_update_resource()
+  /// Gets the double value of resource attribute.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/systemmonitor>
+  ///
+  /// **Parameters:**
+  /// - `monitor_id` (in): Resource monitor ID which be returned by resource_monitor_init()
+  /// - `resource_id` (in): Resource ID which be returned by resource_monitor_create_resource()
+  /// - `attr_id` (in): Resource attribute ID
+  /// - `value` (out): Value retrieved from resource attribute
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RESOURCE_MONITOR_ERROR_NONE`: Successful
+  /// - `RESOURCE_MONITOR_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `RESOURCE_MONITOR_ERROR_INVALID_PARAMETER`: Invalid Parameter
+  /// - `RESOURCE_MONITOR_ERROR_NO_DATA`: Empty Data
+  /// - `RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `RESOURCE_MONITOR_ERROR_NOT_SUPPORTED_ATTRIBUTE`: Unavailable Attribute
+  ///
+  /// **See also:**
+  /// - `resource_monitor_init()`
+  /// - `resource_monitor_create_resource()`
+  /// - `resource_monitor_set_resource_attr()`
+  /// - `resource_monitor_set_resource_ctrl()`
+  /// - `resource_monitor_update()`
+  /// - `resource_monitor_update_resource()`
   int resource_monitor_get_value_double(
     int monitor_id,
     int resource_id,
@@ -615,28 +846,44 @@ class Tizen80CapiSystemResourceMonitor {
       _resource_monitor_get_value_doublePtr
           .asFunction<int Function(int, int, int, ffi.Pointer<ffi.Double>)>();
 
-  /// @brief Gets the string value of resource attribute.
-  /// @since_tizen 7.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/systemmonitor
-  /// @remarks The @a value should be released using free().
-  /// @param[in] monitor_id     Resource monitor ID which be returned by resource_monitor_init()
-  /// @param[in] resource_id    Resource ID which be returned by resource_monitor_create_resource()
-  /// @param[in] attr_id        Resource attribute ID
-  /// @param[out] value         Value retrieved from resource attribute
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #RESOURCE_MONITOR_ERROR_NONE                         Successful
-  /// @retval #RESOURCE_MONITOR_ERROR_PERMISSION_DENIED            Permission Denied
-  /// @retval #RESOURCE_MONITOR_ERROR_INVALID_PARAMETER            Invalid Parameter
-  /// @retval #RESOURCE_MONITOR_ERROR_NO_DATA                      Empty Data
-  /// @retval #RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY                Out of Memory
-  /// @retval #RESOURCE_MONITOR_ERROR_NOT_SUPPORTED_ATTRIBUTE      Unavailable Attribute
-  /// @see    resource_monitor_init()
-  /// @see    resource_monitor_create_resource()
-  /// @see    resource_monitor_set_resource_attr()
-  /// @see    resource_monitor_set_resource_ctrl()
-  /// @see    resource_monitor_update()
-  /// @see    resource_monitor_update_resource()
+  /// Gets the string value of resource attribute.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/systemmonitor>
+  ///
+  /// **Remarks:**
+  /// - The `value` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `monitor_id` (in): Resource monitor ID which be returned by resource_monitor_init()
+  /// - `resource_id` (in): Resource ID which be returned by resource_monitor_create_resource()
+  /// - `attr_id` (in): Resource attribute ID
+  /// - `value` (out): Value retrieved from resource attribute
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RESOURCE_MONITOR_ERROR_NONE`: Successful
+  /// - `RESOURCE_MONITOR_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `RESOURCE_MONITOR_ERROR_INVALID_PARAMETER`: Invalid Parameter
+  /// - `RESOURCE_MONITOR_ERROR_NO_DATA`: Empty Data
+  /// - `RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `RESOURCE_MONITOR_ERROR_NOT_SUPPORTED_ATTRIBUTE`: Unavailable Attribute
+  ///
+  /// **See also:**
+  /// - `resource_monitor_init()`
+  /// - `resource_monitor_create_resource()`
+  /// - `resource_monitor_set_resource_attr()`
+  /// - `resource_monitor_set_resource_ctrl()`
+  /// - `resource_monitor_update()`
+  /// - `resource_monitor_update_resource()`
   int resource_monitor_get_value_string(
     int monitor_id,
     int resource_id,
@@ -660,29 +907,45 @@ class Tizen80CapiSystemResourceMonitor {
       _resource_monitor_get_value_stringPtr.asFunction<
           int Function(int, int, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the int array of resource attribute.
-  /// @since_tizen 7.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/systemmonitor
-  /// @remarks The @a array should be released using free().
-  /// @param[in] monitor_id     Resource monitor ID which be returned by resource_monitor_init()
-  /// @param[in] resource_id    Resource ID which be returned by resource_monitor_create_resource()
-  /// @param[in] attr_id        Resource attribute ID
-  /// @param[out] array         Array retrieved from resource attribute
-  /// @param[out] length        Length of array
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #RESOURCE_MONITOR_ERROR_NONE                         Successful
-  /// @retval #RESOURCE_MONITOR_ERROR_PERMISSION_DENIED            Permission Denied
-  /// @retval #RESOURCE_MONITOR_ERROR_INVALID_PARAMETER            Invalid Parameter
-  /// @retval #RESOURCE_MONITOR_ERROR_NO_DATA                      Empty Data
-  /// @retval #RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY                Out of Memory
-  /// @retval #RESOURCE_MONITOR_ERROR_NOT_SUPPORTED_ATTRIBUTE      Unavailable Attribute
-  /// @see    resource_monitor_init()
-  /// @see    resource_monitor_create_resource()
-  /// @see    resource_monitor_set_resource_attr()
-  /// @see    resource_monitor_set_resource_ctrl()
-  /// @see    resource_monitor_update()
-  /// @see    resource_monitor_update_resource()
+  /// Gets the int array of resource attribute.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/systemmonitor>
+  ///
+  /// **Remarks:**
+  /// - The `array` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `monitor_id` (in): Resource monitor ID which be returned by resource_monitor_init()
+  /// - `resource_id` (in): Resource ID which be returned by resource_monitor_create_resource()
+  /// - `attr_id` (in): Resource attribute ID
+  /// - `array` (out): Array retrieved from resource attribute
+  /// - `length` (out): Length of array
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RESOURCE_MONITOR_ERROR_NONE`: Successful
+  /// - `RESOURCE_MONITOR_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `RESOURCE_MONITOR_ERROR_INVALID_PARAMETER`: Invalid Parameter
+  /// - `RESOURCE_MONITOR_ERROR_NO_DATA`: Empty Data
+  /// - `RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `RESOURCE_MONITOR_ERROR_NOT_SUPPORTED_ATTRIBUTE`: Unavailable Attribute
+  ///
+  /// **See also:**
+  /// - `resource_monitor_init()`
+  /// - `resource_monitor_create_resource()`
+  /// - `resource_monitor_set_resource_attr()`
+  /// - `resource_monitor_set_resource_ctrl()`
+  /// - `resource_monitor_update()`
+  /// - `resource_monitor_update_resource()`
   int resource_monitor_get_array_int(
     int monitor_id,
     int resource_id,
@@ -712,29 +975,45 @@ class Tizen80CapiSystemResourceMonitor {
           int Function(int, int, int, ffi.Pointer<ffi.Pointer<ffi.Int32>>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the int64 array of resource attribute.
-  /// @since_tizen 7.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/systemmonitor
-  /// @remarks The @a array should be released using free().
-  /// @param[in] monitor_id     Resource monitor ID which be returned by resource_monitor_init()
-  /// @param[in] resource_id    Resource ID which be returned by resource_monitor_create_resource()
-  /// @param[in] attr_id        Resource attribute ID
-  /// @param[out] array         Array retrieved from resource attribute
-  /// @param[out] length        Length of array
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #RESOURCE_MONITOR_ERROR_NONE                         Successful
-  /// @retval #RESOURCE_MONITOR_ERROR_PERMISSION_DENIED            Permission Denied
-  /// @retval #RESOURCE_MONITOR_ERROR_INVALID_PARAMETER            Invalid Parameter
-  /// @retval #RESOURCE_MONITOR_ERROR_NO_DATA                      Empty Data
-  /// @retval #RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY                Out of Memory
-  /// @retval #RESOURCE_MONITOR_ERROR_NOT_SUPPORTED_ATTRIBUTE      Unavailable Attribute
-  /// @see    resource_monitor_init()
-  /// @see    resource_monitor_create_resource()
-  /// @see    resource_monitor_set_resource_attr()
-  /// @see    resource_monitor_set_resource_ctrl()
-  /// @see    resource_monitor_update()
-  /// @see    resource_monitor_update_resource()
+  /// Gets the int64 array of resource attribute.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/systemmonitor>
+  ///
+  /// **Remarks:**
+  /// - The `array` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `monitor_id` (in): Resource monitor ID which be returned by resource_monitor_init()
+  /// - `resource_id` (in): Resource ID which be returned by resource_monitor_create_resource()
+  /// - `attr_id` (in): Resource attribute ID
+  /// - `array` (out): Array retrieved from resource attribute
+  /// - `length` (out): Length of array
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RESOURCE_MONITOR_ERROR_NONE`: Successful
+  /// - `RESOURCE_MONITOR_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `RESOURCE_MONITOR_ERROR_INVALID_PARAMETER`: Invalid Parameter
+  /// - `RESOURCE_MONITOR_ERROR_NO_DATA`: Empty Data
+  /// - `RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `RESOURCE_MONITOR_ERROR_NOT_SUPPORTED_ATTRIBUTE`: Unavailable Attribute
+  ///
+  /// **See also:**
+  /// - `resource_monitor_init()`
+  /// - `resource_monitor_create_resource()`
+  /// - `resource_monitor_set_resource_attr()`
+  /// - `resource_monitor_set_resource_ctrl()`
+  /// - `resource_monitor_update()`
+  /// - `resource_monitor_update_resource()`
   int resource_monitor_get_array_int64(
     int monitor_id,
     int resource_id,
@@ -764,29 +1043,45 @@ class Tizen80CapiSystemResourceMonitor {
           int Function(int, int, int, ffi.Pointer<ffi.Pointer<ffi.Int64>>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the uint32 array of resource attribute.
-  /// @since_tizen 7.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/systemmonitor
-  /// @remarks The @a array should be released using free().
-  /// @param[in] monitor_id     Resource monitor ID which be returned by resource_monitor_init()
-  /// @param[in] resource_id    Resource ID which be returned by resource_monitor_create_resource()
-  /// @param[in] attr_id        Resource attribute ID
-  /// @param[out] array         Array retrieved from resource attribute
-  /// @param[out] length        Length of array
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #RESOURCE_MONITOR_ERROR_NONE                         Successful
-  /// @retval #RESOURCE_MONITOR_ERROR_PERMISSION_DENIED            Permission Denied
-  /// @retval #RESOURCE_MONITOR_ERROR_INVALID_PARAMETER            Invalid Parameter
-  /// @retval #RESOURCE_MONITOR_ERROR_NO_DATA                      Empty Data
-  /// @retval #RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY                Out of Memory
-  /// @retval #RESOURCE_MONITOR_ERROR_NOT_SUPPORTED_ATTRIBUTE      Unavailable Attribute
-  /// @see    resource_monitor_init()
-  /// @see    resource_monitor_create_resource()
-  /// @see    resource_monitor_set_resource_attr()
-  /// @see    resource_monitor_set_resource_ctrl()
-  /// @see    resource_monitor_update()
-  /// @see    resource_monitor_update_resource()
+  /// Gets the uint32 array of resource attribute.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/systemmonitor>
+  ///
+  /// **Remarks:**
+  /// - The `array` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `monitor_id` (in): Resource monitor ID which be returned by resource_monitor_init()
+  /// - `resource_id` (in): Resource ID which be returned by resource_monitor_create_resource()
+  /// - `attr_id` (in): Resource attribute ID
+  /// - `array` (out): Array retrieved from resource attribute
+  /// - `length` (out): Length of array
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RESOURCE_MONITOR_ERROR_NONE`: Successful
+  /// - `RESOURCE_MONITOR_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `RESOURCE_MONITOR_ERROR_INVALID_PARAMETER`: Invalid Parameter
+  /// - `RESOURCE_MONITOR_ERROR_NO_DATA`: Empty Data
+  /// - `RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `RESOURCE_MONITOR_ERROR_NOT_SUPPORTED_ATTRIBUTE`: Unavailable Attribute
+  ///
+  /// **See also:**
+  /// - `resource_monitor_init()`
+  /// - `resource_monitor_create_resource()`
+  /// - `resource_monitor_set_resource_attr()`
+  /// - `resource_monitor_set_resource_ctrl()`
+  /// - `resource_monitor_update()`
+  /// - `resource_monitor_update_resource()`
   int resource_monitor_get_array_uint32(
     int monitor_id,
     int resource_id,
@@ -816,29 +1111,45 @@ class Tizen80CapiSystemResourceMonitor {
           int Function(int, int, int, ffi.Pointer<ffi.Pointer<u_int32_t>>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the uint64 array of resource attribute.
-  /// @since_tizen 7.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/systemmonitor
-  /// @remarks The @a array should be released using free().
-  /// @param[in] monitor_id     Resource monitor ID which be returned by resource_monitor_init()
-  /// @param[in] resource_id    Resource ID which be returned by resource_monitor_create_resource()
-  /// @param[in] attr_id        Resource attribute ID
-  /// @param[out] array         Array retrieved from resource attribute
-  /// @param[out] length        Length of array
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #RESOURCE_MONITOR_ERROR_NONE                         Successful
-  /// @retval #RESOURCE_MONITOR_ERROR_PERMISSION_DENIED            Permission Denied
-  /// @retval #RESOURCE_MONITOR_ERROR_INVALID_PARAMETER            Invalid Parameter
-  /// @retval #RESOURCE_MONITOR_ERROR_NO_DATA                      Empty Data
-  /// @retval #RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY                Out of Memory
-  /// @retval #RESOURCE_MONITOR_ERROR_NOT_SUPPORTED_ATTRIBUTE      Unavailable Attribute
-  /// @see    resource_monitor_init()
-  /// @see    resource_monitor_create_resource()
-  /// @see    resource_monitor_set_resource_attr()
-  /// @see    resource_monitor_set_resource_ctrl()
-  /// @see    resource_monitor_update()
-  /// @see    resource_monitor_update_resource()
+  /// Gets the uint64 array of resource attribute.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/systemmonitor>
+  ///
+  /// **Remarks:**
+  /// - The `array` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `monitor_id` (in): Resource monitor ID which be returned by resource_monitor_init()
+  /// - `resource_id` (in): Resource ID which be returned by resource_monitor_create_resource()
+  /// - `attr_id` (in): Resource attribute ID
+  /// - `array` (out): Array retrieved from resource attribute
+  /// - `length` (out): Length of array
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RESOURCE_MONITOR_ERROR_NONE`: Successful
+  /// - `RESOURCE_MONITOR_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `RESOURCE_MONITOR_ERROR_INVALID_PARAMETER`: Invalid Parameter
+  /// - `RESOURCE_MONITOR_ERROR_NO_DATA`: Empty Data
+  /// - `RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `RESOURCE_MONITOR_ERROR_NOT_SUPPORTED_ATTRIBUTE`: Unavailable Attribute
+  ///
+  /// **See also:**
+  /// - `resource_monitor_init()`
+  /// - `resource_monitor_create_resource()`
+  /// - `resource_monitor_set_resource_attr()`
+  /// - `resource_monitor_set_resource_ctrl()`
+  /// - `resource_monitor_update()`
+  /// - `resource_monitor_update_resource()`
   int resource_monitor_get_array_uint64(
     int monitor_id,
     int resource_id,
@@ -868,29 +1179,45 @@ class Tizen80CapiSystemResourceMonitor {
           int Function(int, int, int, ffi.Pointer<ffi.Pointer<u_int64_t>>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the double array of resource attribute.
-  /// @since_tizen 7.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/systemmonitor
-  /// @remarks The @a array should be released using free().
-  /// @param[in] monitor_id     Resource monitor ID which be returned by resource_monitor_init()
-  /// @param[in] resource_id    Resource ID which be returned by resource_monitor_create_resource()
-  /// @param[in] attr_id        Resource attribute ID
-  /// @param[out] array         Array retrieved from resource attribute
-  /// @param[out] length        Length of array
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #RESOURCE_MONITOR_ERROR_NONE                         Successful
-  /// @retval #RESOURCE_MONITOR_ERROR_PERMISSION_DENIED            Permission Denied
-  /// @retval #RESOURCE_MONITOR_ERROR_INVALID_PARAMETER            Invalid Parameter
-  /// @retval #RESOURCE_MONITOR_ERROR_NO_DATA                      Empty Data
-  /// @retval #RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY                Out of Memory
-  /// @retval #RESOURCE_MONITOR_ERROR_NOT_SUPPORTED_ATTRIBUTE      Unavailable Attribute
-  /// @see    resource_monitor_init()
-  /// @see    resource_monitor_create_resource()
-  /// @see    resource_monitor_set_resource_attr()
-  /// @see    resource_monitor_set_resource_ctrl()
-  /// @see    resource_monitor_update()
-  /// @see    resource_monitor_update_resource()
+  /// Gets the double array of resource attribute.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/systemmonitor>
+  ///
+  /// **Remarks:**
+  /// - The `array` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `monitor_id` (in): Resource monitor ID which be returned by resource_monitor_init()
+  /// - `resource_id` (in): Resource ID which be returned by resource_monitor_create_resource()
+  /// - `attr_id` (in): Resource attribute ID
+  /// - `array` (out): Array retrieved from resource attribute
+  /// - `length` (out): Length of array
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RESOURCE_MONITOR_ERROR_NONE`: Successful
+  /// - `RESOURCE_MONITOR_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `RESOURCE_MONITOR_ERROR_INVALID_PARAMETER`: Invalid Parameter
+  /// - `RESOURCE_MONITOR_ERROR_NO_DATA`: Empty Data
+  /// - `RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `RESOURCE_MONITOR_ERROR_NOT_SUPPORTED_ATTRIBUTE`: Unavailable Attribute
+  ///
+  /// **See also:**
+  /// - `resource_monitor_init()`
+  /// - `resource_monitor_create_resource()`
+  /// - `resource_monitor_set_resource_attr()`
+  /// - `resource_monitor_set_resource_ctrl()`
+  /// - `resource_monitor_update()`
+  /// - `resource_monitor_update_resource()`
   int resource_monitor_get_array_double(
     int monitor_id,
     int resource_id,
@@ -920,29 +1247,45 @@ class Tizen80CapiSystemResourceMonitor {
           int Function(int, int, int, ffi.Pointer<ffi.Pointer<ffi.Double>>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the string array of resource attribute.
-  /// @since_tizen 7.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/systemmonitor
-  /// @remarks The @a array and each data in the array should be released using free().
-  /// @param[in] monitor_id     Resource monitor ID which be returned by resource_monitor_init()
-  /// @param[in] resource_id    Resource ID which be returned by resource_monitor_create_resource()
-  /// @param[in] attr_id        Resource attribute ID
-  /// @param[out] array         Array retrieved from resource attribute
-  /// @param[out] length        Length of array
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #RESOURCE_MONITOR_ERROR_NONE                         Successful
-  /// @retval #RESOURCE_MONITOR_ERROR_PERMISSION_DENIED            Permission Denied
-  /// @retval #RESOURCE_MONITOR_ERROR_INVALID_PARAMETER            Invalid Parameter
-  /// @retval #RESOURCE_MONITOR_ERROR_NO_DATA                      Empty Data
-  /// @retval #RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY                Out of Memory
-  /// @retval #RESOURCE_MONITOR_ERROR_NOT_SUPPORTED_ATTRIBUTE      Unavailable Attribute
-  /// @see    resource_monitor_init()
-  /// @see    resource_monitor_create_resource()
-  /// @see    resource_monitor_set_resource_attr()
-  /// @see    resource_monitor_set_resource_ctrl()
-  /// @see    resource_monitor_update()
-  /// @see    resource_monitor_update_resource()
+  /// Gets the string array of resource attribute.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/systemmonitor>
+  ///
+  /// **Remarks:**
+  /// - The `array` and each data in the array should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `monitor_id` (in): Resource monitor ID which be returned by resource_monitor_init()
+  /// - `resource_id` (in): Resource ID which be returned by resource_monitor_create_resource()
+  /// - `attr_id` (in): Resource attribute ID
+  /// - `array` (out): Array retrieved from resource attribute
+  /// - `length` (out): Length of array
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RESOURCE_MONITOR_ERROR_NONE`: Successful
+  /// - `RESOURCE_MONITOR_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `RESOURCE_MONITOR_ERROR_INVALID_PARAMETER`: Invalid Parameter
+  /// - `RESOURCE_MONITOR_ERROR_NO_DATA`: Empty Data
+  /// - `RESOURCE_MONITOR_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `RESOURCE_MONITOR_ERROR_NOT_SUPPORTED_ATTRIBUTE`: Unavailable Attribute
+  ///
+  /// **See also:**
+  /// - `resource_monitor_init()`
+  /// - `resource_monitor_create_resource()`
+  /// - `resource_monitor_set_resource_attr()`
+  /// - `resource_monitor_set_resource_ctrl()`
+  /// - `resource_monitor_update()`
+  /// - `resource_monitor_update_resource()`
   int resource_monitor_get_array_string(
     int monitor_id,
     int resource_id,
@@ -977,8 +1320,11 @@ class Tizen80CapiSystemResourceMonitor {
               ffi.Pointer<ffi.Int>)>();
 }
 
-/// @brief Enumeration for resource monitor error value.
-/// @since_tizen 7.0
+/// Enumeration for resource monitor error value.
+///
+/// **Since Tizen:**
+/// - 7.0
+/// @nodoc
 abstract class resource_monitor_error_e {
   /// < Successful
   static const int RESOURCE_MONITOR_ERROR_NONE = 0;
@@ -1002,8 +1348,11 @@ abstract class resource_monitor_error_e {
   static const int RESOURCE_MONITOR_ERROR_NOT_SUPPORTED_ATTRIBUTE = -51249150;
 }
 
-/// @brief Enumeration for resource type.
-/// @since_tizen 7.0
+/// Enumeration for resource type.
+///
+/// **Since Tizen:**
+/// - 7.0
+/// @nodoc
 abstract class resource_monitor_type_e {
   /// < Unknown Resource Type
   static const int RESOURCE_MONITOR_TYPE_UNKNOWN = 0;
@@ -1033,8 +1382,11 @@ abstract class resource_monitor_type_e {
   static const int RESOURCE_MONITOR_TYPE_DISK = 10;
 }
 
-/// @brief Enumeration for resource attribute ID.
-/// @since_tizen 7.0
+/// Enumeration for resource attribute ID.
+///
+/// **Since Tizen:**
+/// - 7.0
+/// @nodoc
 abstract class resource_monitor_attr_id_e {
   /// < Current CPU frequency (data type: DATA_TYPE_INT, unit: kHz)
   static const int RESOURCE_MONITOR_CPU_ATTR_CUR_FREQ = 1;
@@ -1193,8 +1545,11 @@ abstract class resource_monitor_attr_id_e {
   static const int RESOURCE_MONITOR_DISK_ATTR_WRITE_TOTAL = 16;
 }
 
-/// @brief Enumeration for resource control ID.
-/// @since_tizen 7.0
+/// Enumeration for resource control ID.
+///
+/// **Since Tizen:**
+/// - 7.0
+/// @nodoc
 abstract class resource_monitor_ctrl_id_e {
   /// < CPU cluster resource control ID
   static const int RESOURCE_MONITOR_CPU_CTRL_CLUSTER_ID = 1;
@@ -1212,9 +1567,15 @@ abstract class resource_monitor_ctrl_id_e {
   static const int RESOURCE_MONITOR_DISK_CTRL_DEVICE_ID = 1;
 }
 
+/// @nodoc
 typedef u_int32_t = __uint32_t;
+/// @nodoc
 typedef __uint32_t = ffi.UnsignedInt;
+/// @nodoc
 typedef Dart__uint32_t = int;
+/// @nodoc
 typedef u_int64_t = __uint64_t;
+/// @nodoc
 typedef __uint64_t = ffi.UnsignedLongLong;
+/// @nodoc
 typedef Dart__uint64_t = int;

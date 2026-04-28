@@ -1,3 +1,6 @@
+/// {@category 10.0/tizen}
+library tizen_interop_10_0.capi_ml_service;
+
 // Copyright 2026 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'generated_bindings_capi_ml_common.dart' as ml_common;
 
 /// Dart bindings for Tizen capi-ml-service APIs.
+/// {@category 10.0/tizen}
 class Tizen100CapiMlService {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,24 +29,33 @@ class Tizen100CapiMlService {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates a handle for machine learning service using a configuration file.
-  /// @since_tizen 9.0
-  /// @remarks %http://tizen.org/privilege/mediastorage is needed if the configuration is relevant to media storage.
-  /// @remarks %http://tizen.org/privilege/externalstorage is needed if the configuration is relevant to external storage.
-  /// @remarks The @a handle should be released using ml_service_destroy().
-  /// @param[in] config The absolute path to configuration file.
-  /// @param[out] handle The handle of ml-service.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_PERMISSION_DENIED The application does not have the privilege to access to the media storage or external storage.
-  /// @retval #ML_ERROR_INVALID_PARAMETER The parameter is invalid.
-  /// @retval #ML_ERROR_IO_ERROR Failed to parse the configuration file.
-  /// @retval #ML_ERROR_STREAMS_PIPE Failed to open the model.
-  /// @retval #ML_ERROR_OUT_OF_MEMORY Failed to allocate required memory.
+  /// Creates a handle for machine learning service using a configuration file.
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/mediastorage is needed if the configuration is relevant to media storage.>
+  /// - <http://tizen.org/privilege/externalstorage is needed if the configuration is relevant to external storage.>
+  /// - The `handle` should be released using ml_service_destroy().
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The absolute path to configuration file.
+  /// - `handle` (out): The handle of ml-service.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_PERMISSION_DENIED`: The application does not have the privilege to access to the media storage or external storage.
+  /// - `ML_ERROR_INVALID_PARAMETER`: The parameter is invalid.
+  /// - `ML_ERROR_IO_ERROR`: Failed to parse the configuration file.
+  /// - `ML_ERROR_STREAMS_PIPE`: Failed to open the model.
+  /// - `ML_ERROR_OUT_OF_MEMORY`: Failed to allocate required memory. Here is an example of the usage:
+  ///
+  /// ```
   ///
   /// // Callback function for the event from machine learning service.
   /// // Note that the handle of event data will be deallocated after the return and this is synchronously called.
@@ -100,7 +113,7 @@ class Tizen100CapiMlService {
   /// ml_service_destroy (handle);
   /// free (input_buffer);
   ///
-  /// @endcode
+  /// ```
   int ml_service_new(
     ffi.Pointer<ffi.Char> config,
     ffi.Pointer<ml_service_h> handle,
@@ -118,15 +131,23 @@ class Tizen100CapiMlService {
   late final _ml_service_new = _ml_service_newPtr.asFunction<
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ml_service_h>)>();
 
-  /// @brief Sets the callback which will be invoked when a new event occurs from machine learning service.
-  /// @since_tizen 9.0
-  /// @param[in] handle The handle of ml-service.
-  /// @param[in] cb The callback to handle the event from ml-service.
-  /// @param[in] user_data Private data for the callback. This value is passed to the callback when it's invoked.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
+  /// Sets the callback which will be invoked when a new event occurs from machine learning service.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The handle of ml-service.
+  /// - `cb` (in): The callback to handle the event from ml-service.
+  /// - `user_data` (in): Private data for the callback. This value is passed to the callback when it's invoked.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
   int ml_service_set_event_cb(
     ml_service_h handle,
     ml_service_event_cb cb,
@@ -146,14 +167,22 @@ class Tizen100CapiMlService {
   late final _ml_service_set_event_cb = _ml_service_set_event_cbPtr.asFunction<
       int Function(ml_service_h, ml_service_event_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Starts the process of machine learning service.
-  /// @since_tizen 7.0
-  /// @param[in] handle The handle of ml-service.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
-  /// @retval #ML_ERROR_STREAMS_PIPE Failed to start the process.
+  /// Starts the process of machine learning service.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The handle of ml-service.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
+  /// - `ML_ERROR_STREAMS_PIPE`: Failed to start the process.
   int ml_service_start(
     ml_service_h handle,
   ) {
@@ -168,14 +197,22 @@ class Tizen100CapiMlService {
   late final _ml_service_start =
       _ml_service_startPtr.asFunction<int Function(ml_service_h)>();
 
-  /// @brief Stops the process of machine learning service.
-  /// @since_tizen 7.0
-  /// @param[in] handle The handle of ml-service.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
-  /// @retval #ML_ERROR_STREAMS_PIPE Failed to stop the process.
+  /// Stops the process of machine learning service.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The handle of ml-service.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
+  /// - `ML_ERROR_STREAMS_PIPE`: Failed to stop the process.
   int ml_service_stop(
     ml_service_h handle,
   ) {
@@ -190,17 +227,28 @@ class Tizen100CapiMlService {
   late final _ml_service_stop =
       _ml_service_stopPtr.asFunction<int Function(ml_service_h)>();
 
-  /// @brief Gets the information of required input data.
-  /// @details Note that a model may not have such information if its input type is not determined statically.
-  /// @since_tizen 9.0
-  /// @remarks The @a info should be released using ml_tensors_info_destroy().
-  /// @param[in] handle The handle of ml-service.
-  /// @param[in] name The name of input node in the pipeline. You can set NULL if ml-service is constructed from model configuration.
-  /// @param[out] info The handle of input tensors information.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER The parameter is invalid.
+  /// Gets the information of required input data.
+  ///
+  /// Note that a model may not have such information if its input type is not determined statically.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Remarks:**
+  /// - The `info` should be released using ml_tensors_info_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The handle of ml-service.
+  /// - `name` (in): The name of input node in the pipeline. You can set NULL if ml-service is constructed from model configuration.
+  /// - `info` (out): The handle of input tensors information.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: The parameter is invalid.
   int ml_service_get_input_information(
     ml_service_h handle,
     ffi.Pointer<ffi.Char> name,
@@ -223,17 +271,28 @@ class Tizen100CapiMlService {
           int Function(ml_service_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ml_common.ml_tensors_info_h>)>();
 
-  /// @brief Gets the information of output data.
-  /// @details Note that a model may not have such information if its output is not determined statically.
-  /// @since_tizen 9.0
-  /// @remarks The @a info should be released using ml_tensors_info_destroy().
-  /// @param[in] handle The handle of ml-service.
-  /// @param[in] name The name of output node in the pipeline. You can set NULL if ml-service is constructed from model configuration.
-  /// @param[out] info The handle of output tensors information.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER The parameter is invalid.
+  /// Gets the information of output data.
+  ///
+  /// Note that a model may not have such information if its output is not determined statically.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Remarks:**
+  /// - The `info` should be released using ml_tensors_info_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The handle of ml-service.
+  /// - `name` (in): The name of output node in the pipeline. You can set NULL if ml-service is constructed from model configuration.
+  /// - `info` (out): The handle of output tensors information.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: The parameter is invalid.
   int ml_service_get_output_information(
     ml_service_h handle,
     ffi.Pointer<ffi.Char> name,
@@ -256,15 +315,23 @@ class Tizen100CapiMlService {
           int Function(ml_service_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ml_common.ml_tensors_info_h>)>();
 
-  /// @brief Sets the information for machine learning service.
-  /// @since_tizen 9.0
-  /// @param[in] handle The handle of ml-service.
-  /// @param[in] name The name to set the corresponding value.
-  /// @param[in] value The value of the name.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER The parameter is invalid.
+  /// Sets the information for machine learning service.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The handle of ml-service.
+  /// - `name` (in): The name to set the corresponding value.
+  /// - `value` (in): The value of the name.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: The parameter is invalid.
   int ml_service_set_information(
     ml_service_h handle,
     ffi.Pointer<ffi.Char> name,
@@ -286,17 +353,28 @@ class Tizen100CapiMlService {
           int Function(
               ml_service_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the information from machine learning service.
-  /// @details Note that a configuration file may not have such information field.
-  /// @since_tizen 9.0
-  /// @remarks The @a value should be released using free().
-  /// @param[in] handle The handle of ml-service.
-  /// @param[in] name The name to get the corresponding value.
-  /// @param[out] value The value of the name.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER The parameter is invalid.
+  /// Gets the information from machine learning service.
+  ///
+  /// Note that a configuration file may not have such information field.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Remarks:**
+  /// - The `value` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The handle of ml-service.
+  /// - `name` (in): The name to get the corresponding value.
+  /// - `value` (out): The value of the name.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: The parameter is invalid.
   int ml_service_get_information(
     ml_service_h handle,
     ffi.Pointer<ffi.Char> name,
@@ -319,17 +397,25 @@ class Tizen100CapiMlService {
           int Function(ml_service_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Adds an input data to process the model in machine learning service.
-  /// @since_tizen 9.0
-  /// @param[in] handle The handle of ml-service.
-  /// @param[in] name The name of input node in the pipeline. You can set NULL if ml-service is constructed from model configuration.
-  /// @param[in] data The handle of tensors data to be processed.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER The parameter is invalid.
-  /// @retval #ML_ERROR_STREAMS_PIPE Failed to process the input data.
-  /// @retval #ML_ERROR_OUT_OF_MEMORY Failed to allocate required memory.
+  /// Adds an input data to process the model in machine learning service.
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The handle of ml-service.
+  /// - `name` (in): The name of input node in the pipeline. You can set NULL if ml-service is constructed from model configuration.
+  /// - `data` (in): The handle of tensors data to be processed.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: The parameter is invalid.
+  /// - `ML_ERROR_STREAMS_PIPE`: Failed to process the input data.
+  /// - `ML_ERROR_OUT_OF_MEMORY`: Failed to allocate required memory.
   int ml_service_request(
     ml_service_h handle,
     ffi.Pointer<ffi.Char> name,
@@ -350,15 +436,24 @@ class Tizen100CapiMlService {
       int Function(
           ml_service_h, ffi.Pointer<ffi.Char>, ml_common.ml_tensors_data_h)>();
 
-  /// @brief Destroys the handle for machine learning service.
-  /// @details If given service handle is created by ml_service_pipeline_launch(), this requests machine learning agent to destroy the pipeline.
-  /// @since_tizen 7.0
-  /// @param[in] handle The handle of ml-service.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER The parameter is invalid.
-  /// @retval #ML_ERROR_STREAMS_PIPE Failed to stop the process.
+  /// Destroys the handle for machine learning service.
+  ///
+  /// If given service handle is created by ml_service_pipeline_launch(), this requests machine learning agent to destroy the pipeline.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The handle of ml-service.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: The parameter is invalid.
+  /// - `ML_ERROR_STREAMS_PIPE`: Failed to stop the process.
   int ml_service_destroy(
     ml_service_h handle,
   ) {
@@ -373,22 +468,30 @@ class Tizen100CapiMlService {
   late final _ml_service_destroy =
       _ml_service_destroyPtr.asFunction<int Function(ml_service_h)>();
 
-  /// API for AI pipeline                            **
-  /// /
-  /// /**
-  /// @brief Sets the pipeline description with a given name.
-  /// @since_tizen 7.0
-  /// @remarks If the name already exists, the pipeline description is overwritten. Overwriting an existing description is restricted to APP/service that set it. However, users should keep their @a name unexposed to prevent unexpected overwriting.
-  /// @param[in] name Unique name to retrieve the associated pipeline description.
-  /// @param[in] pipeline_desc The pipeline description to be stored.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Fail. The parameter is invalid.
-  /// @retval #ML_ERROR_IO_ERROR The operation of DB or filesystem has failed.
+  /// API for AI pipeline ** / /**
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// Sets the pipeline description with a given name.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Remarks:**
+  /// - If the name already exists, the pipeline description is overwritten. Overwriting an existing description is restricted to APP/service that set it. However, users should keep their `name` unexposed to prevent unexpected overwriting.
+  ///
+  /// **Parameters:**
+  /// - `name` (in): Unique name to retrieve the associated pipeline description.
+  /// - `pipeline_desc` (in): The pipeline description to be stored.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Fail. The parameter is invalid.
+  /// - `ML_ERROR_IO_ERROR`: The operation of DB or filesystem has failed. Here is an example of the usage:
+  ///
+  /// ```
   /// const gchar my_pipeline[] = "videotestsrc is-live=true ! videoconvert ! tensor_converter ! tensor_sink async=false";
   /// gchar *pipeline;
   /// int status;
@@ -420,7 +523,7 @@ class Tizen100CapiMlService {
   /// error:
   /// ml_pipeline_destroy (handle);
   /// g_free (pipeline);
-  /// @endcode
+  /// ```
   int ml_service_pipeline_set(
     ffi.Pointer<ffi.Char> name,
     ffi.Pointer<ffi.Char> pipeline_desc,
@@ -438,16 +541,26 @@ class Tizen100CapiMlService {
   late final _ml_service_pipeline_set = _ml_service_pipeline_setPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the pipeline description with a given name.
-  /// @since_tizen 7.0
-  /// @remarks If the function succeeds, @a pipeline_desc must be released using free().
-  /// @param[in] name The unique name to retrieve.
-  /// @param[out] pipeline_desc The pipeline corresponding with the given name.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Fail. The parameter is invalid.
-  /// @retval #ML_ERROR_IO_ERROR The operation of DB or filesystem has failed.
+  /// Gets the pipeline description with a given name.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, `pipeline_desc` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `name` (in): The unique name to retrieve.
+  /// - `pipeline_desc` (out): The pipeline corresponding with the given name.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Fail. The parameter is invalid.
+  /// - `ML_ERROR_IO_ERROR`: The operation of DB or filesystem has failed.
   int ml_service_pipeline_get(
     ffi.Pointer<ffi.Char> name,
     ffi.Pointer<ffi.Pointer<ffi.Char>> pipeline_desc,
@@ -466,15 +579,25 @@ class Tizen100CapiMlService {
       int Function(
           ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Deletes the pipeline description with a given name.
-  /// @since_tizen 7.0
-  /// @param[in] name The unique name to delete.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @note If the name does not exist in the database, this function returns ML_ERROR_NONE without any errors.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Fail. The parameter is invalid.
-  /// @retval #ML_ERROR_IO_ERROR The operation of DB or filesystem has failed.
+  /// Deletes the pipeline description with a given name.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `name` (in): The unique name to delete.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Fail. The parameter is invalid.
+  /// - `ML_ERROR_IO_ERROR`: The operation of DB or filesystem has failed.
+  ///
+  /// **Notes:**
+  /// - If the name does not exist in the database, this function returns ML_ERROR_NONE without any errors.
   int ml_service_pipeline_delete(
     ffi.Pointer<ffi.Char> name,
   ) {
@@ -489,19 +612,30 @@ class Tizen100CapiMlService {
   late final _ml_service_pipeline_delete = _ml_service_pipeline_deletePtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Launches the pipeline of given service and gets the service handle.
-  /// @details This requests machine learning agent daemon to launch a new pipeline of given service. The pipeline of service @a name should be set.
-  /// @since_tizen 7.0
-  /// @remarks The @a handle should be destroyed using ml_service_destroy().
-  /// @param[in] name The service name.
-  /// @param[out] handle Newly created service handle is returned.
-  /// @return @c 0 on Success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Fail. The parameter is invalid.
-  /// @retval #ML_ERROR_OUT_OF_MEMORY Failed to allocate required memory.
-  /// @retval #ML_ERROR_IO_ERROR The operation of DB or filesystem has failed.
-  /// @retval #ML_ERROR_STREAMS_PIPE Failed to launch the pipeline.
+  /// Launches the pipeline of given service and gets the service handle.
+  ///
+  /// This requests machine learning agent daemon to launch a new pipeline of given service. The pipeline of service `name` should be set.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Remarks:**
+  /// - The `handle` should be destroyed using ml_service_destroy().
+  ///
+  /// **Parameters:**
+  /// - `name` (in): The service name.
+  /// - `handle` (out): Newly created service handle is returned.
+  ///
+  /// **Returns:**
+  /// - `0` on Success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Fail. The parameter is invalid.
+  /// - `ML_ERROR_OUT_OF_MEMORY`: Failed to allocate required memory.
+  /// - `ML_ERROR_IO_ERROR`: The operation of DB or filesystem has failed.
+  /// - `ML_ERROR_STREAMS_PIPE`: Failed to launch the pipeline.
   int ml_service_pipeline_launch(
     ffi.Pointer<ffi.Char> name,
     ffi.Pointer<ml_service_h> handle,
@@ -520,15 +654,23 @@ class Tizen100CapiMlService {
       _ml_service_pipeline_launchPtr.asFunction<
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ml_service_h>)>();
 
-  /// @brief Gets the state of given handle's pipeline.
-  /// @since_tizen 7.0
-  /// @param[in] handle The service handle.
-  /// @param[out] state The pipeline state.
-  /// @return @c 0 on Success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Fail. The parameter is invalid.
-  /// @retval #ML_ERROR_STREAMS_PIPE Failed to access the pipeline state.
+  /// Gets the state of given handle's pipeline.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The service handle.
+  /// - `state` (out): The pipeline state.
+  ///
+  /// **Returns:**
+  /// - `0` on Success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Fail. The parameter is invalid.
+  /// - `ML_ERROR_STREAMS_PIPE`: Failed to access the pipeline state.
   int ml_service_pipeline_get_state(
     ml_service_h handle,
     ffi.Pointer<ffi.Int32> state,
@@ -546,21 +688,30 @@ class Tizen100CapiMlService {
   late final _ml_service_pipeline_get_state = _ml_service_pipeline_get_statePtr
       .asFunction<int Function(ml_service_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// API for among-device AI service                **
-  /// /
-  /// /**
-  /// @brief Creates query service handle with given ml-option handle.
-  /// @since_tizen 7.0
-  /// @remarks The @a handle should be destroyed using ml_service_destroy().
-  /// @param[in] option The option used for creating query service.
-  /// @param[out] handle Newly created query service handle is returned.
-  /// @return @c 0 on Success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Fail. The parameter is invalid.
-  /// @retval #ML_ERROR_OUT_OF_MEMORY Failed to allocate required memory.
-  /// @retval #ML_ERROR_STREAMS_PIPE Failed to launch the pipeline.
-  /// @retval #ML_ERROR_TRY_AGAIN The pipeline is not ready yet.
+  /// API for among-device AI service ** / /**
+  ///
+  /// Creates query service handle with given ml-option handle.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Remarks:**
+  /// - The `handle` should be destroyed using ml_service_destroy().
+  ///
+  /// **Parameters:**
+  /// - `option` (in): The option used for creating query service.
+  /// - `handle` (out): Newly created query service handle is returned.
+  ///
+  /// **Returns:**
+  /// - `0` on Success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Fail. The parameter is invalid.
+  /// - `ML_ERROR_OUT_OF_MEMORY`: Failed to allocate required memory.
+  /// - `ML_ERROR_STREAMS_PIPE`: Failed to launch the pipeline.
+  /// - `ML_ERROR_TRY_AGAIN`: The pipeline is not ready yet.
   int ml_service_query_create(
     ml_common.ml_option_h option,
     ffi.Pointer<ml_service_h> handle,
@@ -578,20 +729,30 @@ class Tizen100CapiMlService {
   late final _ml_service_query_create = _ml_service_query_createPtr.asFunction<
       int Function(ml_common.ml_option_h, ffi.Pointer<ml_service_h>)>();
 
-  /// @brief Requests the query service to process the @a input and produce an @a output.
-  /// @since_tizen 7.0
-  /// @remarks If the function succeeds, the @a output should be released using ml_tensors_data_destroy().
-  /// @param[in] handle The query service handle created by ml_service_query_create().
-  /// @param[in] input The handle of input tensors.
-  /// @param[out] output The handle of output tensors.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
-  /// @retval #ML_ERROR_OUT_OF_MEMORY Failed to allocate required memory.
-  /// @retval #ML_ERROR_STREAMS_PIPE The input is incompatible with the pipeline.
-  /// @retval #ML_ERROR_TRY_AGAIN The pipeline is not ready yet.
-  /// @retval #ML_ERROR_TIMED_OUT Failed to get output from the query service.
+  /// Requests the query service to process the `input` and produce an `output`.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, the `output` should be released using ml_tensors_data_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The query service handle created by ml_service_query_create().
+  /// - `input` (in): The handle of input tensors.
+  /// - `output` (out): The handle of output tensors.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
+  /// - `ML_ERROR_OUT_OF_MEMORY`: Failed to allocate required memory.
+  /// - `ML_ERROR_STREAMS_PIPE`: The input is incompatible with the pipeline.
+  /// - `ML_ERROR_TRY_AGAIN`: The pipeline is not ready yet.
+  /// - `ML_ERROR_TIMED_OUT`: Failed to get output from the query service.
   int ml_service_query_request(
     ml_service_h handle,
     ml_common.ml_tensors_data_h input,
@@ -614,28 +775,36 @@ class Tizen100CapiMlService {
           int Function(ml_service_h, ml_common.ml_tensors_data_h,
               ffi.Pointer<ml_common.ml_tensors_data_h>)>();
 
-  /// API for managing AI models                     **
-  /// /
-  /// /**
-  /// @brief Registers new information of a neural network model.
-  /// @since_tizen 8.0
-  /// @remarks Only one model can be activated with given @a name. If same name is already registered in machine learning service, this returns no error and old model will be deactivated when the flag @a activate is true.
-  /// @remarks %http://tizen.org/privilege/mediastorage is needed if model file is relevant to media storage.
-  /// @remarks %http://tizen.org/privilege/externalstorage is needed if model file is relevant to external storage.
-  /// @param[in] name The unique name to indicate the model.
-  /// @param[in] path The path to neural network model.
-  /// @param[in] activate The flag to set the model to be activated.
-  /// @param[in] description Nullable, description for neural network model.
-  /// @param[out] version The version of registered model.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_PERMISSION_DENIED The application does not have the privilege to access to the storage.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
-  /// @retval #ML_ERROR_IO_ERROR The operation of DB or filesystem has failed.
+  /// API for managing AI models ** / /**
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// Registers new information of a neural network model.
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Remarks:**
+  /// - Only one model can be activated with given `name`. If same name is already registered in machine learning service, this returns no error and old model will be deactivated when the flag `activate` is true.
+  /// - <http://tizen.org/privilege/mediastorage is needed if model file is relevant to media storage.>
+  /// - <http://tizen.org/privilege/externalstorage is needed if model file is relevant to external storage.>
+  ///
+  /// **Parameters:**
+  /// - `name` (in): The unique name to indicate the model.
+  /// - `path` (in): The path to neural network model.
+  /// - `activate` (in): The flag to set the model to be activated.
+  /// - `description` (in): Nullable, description for neural network model.
+  /// - `version` (out): The version of registered model.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_PERMISSION_DENIED`: The application does not have the privilege to access to the storage.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
+  /// - `ML_ERROR_IO_ERROR`: The operation of DB or filesystem has failed. Here is an example of the usage:
+  ///
+  /// ```
   /// // The machine-learning service API for model provides a method to share model files those can be used for ML application.
   ///
   /// /// Model Provider APP
@@ -672,7 +841,7 @@ class Tizen100CapiMlService {
   /// ml_information_destroy (activated_model_info); // Release the information handle.
   ///
   /// // Do ML things with the variable `model_path`.
-  /// @endcode
+  /// ```
   int ml_service_model_register(
     ffi.Pointer<ffi.Char> name,
     ffi.Pointer<ffi.Char> path,
@@ -702,16 +871,24 @@ class Tizen100CapiMlService {
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, bool,
               ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Updates the description of neural network model with given @a name and @a version.
-  /// @since_tizen 8.0
-  /// @param[in] name The unique name to indicate the model.
-  /// @param[in] version The version of registered model.
-  /// @param[in] description The description for neural network model.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
-  /// @retval #ML_ERROR_IO_ERROR The operation of DB or filesystem has failed.
+  /// Updates the description of neural network model with given `name` and `version`.
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Parameters:**
+  /// - `name` (in): The unique name to indicate the model.
+  /// - `version` (in): The version of registered model.
+  /// - `description` (in): The description for neural network model.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
+  /// - `ML_ERROR_IO_ERROR`: The operation of DB or filesystem has failed.
   int ml_service_model_update_description(
     ffi.Pointer<ffi.Char> name,
     int version,
@@ -732,15 +909,23 @@ class Tizen100CapiMlService {
       _ml_service_model_update_descriptionPtr.asFunction<
           int Function(ffi.Pointer<ffi.Char>, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Activates a neural network model with given @a name and @a version.
-  /// @since_tizen 8.0
-  /// @param[in] name The unique name to indicate the model.
-  /// @param[in] version The version of registered model.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
-  /// @retval #ML_ERROR_IO_ERROR The operation of DB or filesystem has failed.
+  /// Activates a neural network model with given `name` and `version`.
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Parameters:**
+  /// - `name` (in): The unique name to indicate the model.
+  /// - `version` (in): The version of registered model.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
+  /// - `ML_ERROR_IO_ERROR`: The operation of DB or filesystem has failed.
   int ml_service_model_activate(
     ffi.Pointer<ffi.Char> name,
     int version,
@@ -758,18 +943,28 @@ class Tizen100CapiMlService {
   late final _ml_service_model_activate = _ml_service_model_activatePtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, int)>();
 
-  /// @brief Gets the information of neural network model with given @a name and @a version.
-  /// @since_tizen 8.0
-  /// @remarks If the function succeeds, the @a info should be released using ml_information_destroy().
-  /// @param[in] name The unique name to indicate the model.
-  /// @param[in] version The version of registered model.
-  /// @param[out] info The handle of model information.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
-  /// @retval #ML_ERROR_IO_ERROR The operation of DB or filesystem has failed.
-  /// @retval #ML_ERROR_OUT_OF_MEMORY Failed to allocate required memory.
+  /// Gets the information of neural network model with given `name` and `version`.
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, the `info` should be released using ml_information_destroy().
+  ///
+  /// **Parameters:**
+  /// - `name` (in): The unique name to indicate the model.
+  /// - `version` (in): The version of registered model.
+  /// - `info` (out): The handle of model information.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
+  /// - `ML_ERROR_IO_ERROR`: The operation of DB or filesystem has failed.
+  /// - `ML_ERROR_OUT_OF_MEMORY`: Failed to allocate required memory.
   int ml_service_model_get(
     ffi.Pointer<ffi.Char> name,
     int version,
@@ -791,17 +986,27 @@ class Tizen100CapiMlService {
       int Function(ffi.Pointer<ffi.Char>, int,
           ffi.Pointer<ml_common.ml_information_h>)>();
 
-  /// @brief Gets the information of activated neural network model with given @a name.
-  /// @since_tizen 8.0
-  /// @remarks If the function succeeds, the @a info should be released using ml_information_destroy().
-  /// @param[in] name The unique name to indicate the model.
-  /// @param[out] info The handle of activated model.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
-  /// @retval #ML_ERROR_IO_ERROR The operation of DB or filesystem has failed.
-  /// @retval #ML_ERROR_OUT_OF_MEMORY Failed to allocate required memory.
+  /// Gets the information of activated neural network model with given `name`.
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, the `info` should be released using ml_information_destroy().
+  ///
+  /// **Parameters:**
+  /// - `name` (in): The unique name to indicate the model.
+  /// - `info` (out): The handle of activated model.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
+  /// - `ML_ERROR_IO_ERROR`: The operation of DB or filesystem has failed.
+  /// - `ML_ERROR_OUT_OF_MEMORY`: Failed to allocate required memory.
   int ml_service_model_get_activated(
     ffi.Pointer<ffi.Char> name,
     ffi.Pointer<ml_common.ml_information_h> info,
@@ -822,17 +1027,27 @@ class Tizen100CapiMlService {
           int Function(ffi.Pointer<ffi.Char>,
               ffi.Pointer<ml_common.ml_information_h>)>();
 
-  /// @brief Gets the list of neural network model with given @a name.
-  /// @since_tizen 8.0
-  /// @remarks If the function succeeds, the @a info_list should be released using ml_information_list_destroy().
-  /// @param[in] name The unique name to indicate the model.
-  /// @param[out] info_list The handle of list of registered models.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
-  /// @retval #ML_ERROR_IO_ERROR The operation of DB or filesystem has failed.
-  /// @retval #ML_ERROR_OUT_OF_MEMORY Failed to allocate required memory.
+  /// Gets the list of neural network model with given `name`.
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, the `info_list` should be released using ml_information_list_destroy().
+  ///
+  /// **Parameters:**
+  /// - `name` (in): The unique name to indicate the model.
+  /// - `info_list` (out): The handle of list of registered models.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
+  /// - `ML_ERROR_IO_ERROR`: The operation of DB or filesystem has failed.
+  /// - `ML_ERROR_OUT_OF_MEMORY`: Failed to allocate required memory.
   int ml_service_model_get_all(
     ffi.Pointer<ffi.Char> name,
     ffi.Pointer<ml_common.ml_information_list_h> info_list,
@@ -853,16 +1068,26 @@ class Tizen100CapiMlService {
           int Function(ffi.Pointer<ffi.Char>,
               ffi.Pointer<ml_common.ml_information_list_h>)>();
 
-  /// @brief Deletes a model information with given @a name and @a version from machine learning service.
-  /// @since_tizen 8.0
-  /// @remarks This does not remove the model file from file system. If @a version is 0, machine learning service will delete all information with given @a name.
-  /// @param[in] name The unique name to indicate the model.
-  /// @param[in] version The version of registered model.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
-  /// @retval #ML_ERROR_IO_ERROR The operation of DB or filesystem has failed.
+  /// Deletes a model information with given `name` and `version` from machine learning service.
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Remarks:**
+  /// - This does not remove the model file from file system. If `version` is 0, machine learning service will delete all information with given `name`.
+  ///
+  /// **Parameters:**
+  /// - `name` (in): The unique name to indicate the model.
+  /// - `version` (in): The version of registered model.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
+  /// - `ML_ERROR_IO_ERROR`: The operation of DB or filesystem has failed.
   int ml_service_model_delete(
     ffi.Pointer<ffi.Char> name,
     int version,
@@ -880,26 +1105,34 @@ class Tizen100CapiMlService {
   late final _ml_service_model_delete = _ml_service_model_deletePtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, int)>();
 
-  /// API for managing AI data files                 **
-  /// /
-  /// /**
-  /// @brief Adds new information of machine learning resources those contain images, audio samples, binary files, and so on.
-  /// @since_tizen 8.0
-  /// @remarks If same name is already registered in machine learning service, this returns no error and the list of resource files will be updated.
-  /// @remarks %http://tizen.org/privilege/mediastorage is needed if model file is relevant to media storage.
-  /// @remarks %http://tizen.org/privilege/externalstorage is needed if model file is relevant to external storage.
-  /// @param[in] name The unique name to indicate the resources.
-  /// @param[in] path The path to machine learning resources.
-  /// @param[in] description Nullable, description for machine learning resources.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_PERMISSION_DENIED The application does not have the privilege to access to the storage.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
-  /// @retval #ML_ERROR_IO_ERROR The operation of DB or filesystem has failed.
+  /// API for managing AI data files ** / /**
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// Adds new information of machine learning resources those contain images, audio samples, binary files, and so on.
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Remarks:**
+  /// - If same name is already registered in machine learning service, this returns no error and the list of resource files will be updated.
+  /// - <http://tizen.org/privilege/mediastorage is needed if model file is relevant to media storage.>
+  /// - <http://tizen.org/privilege/externalstorage is needed if model file is relevant to external storage.>
+  ///
+  /// **Parameters:**
+  /// - `name` (in): The unique name to indicate the resources.
+  /// - `path` (in): The path to machine learning resources.
+  /// - `description` (in): Nullable, description for machine learning resources.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_PERMISSION_DENIED`: The application does not have the privilege to access to the storage.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
+  /// - `ML_ERROR_IO_ERROR`: The operation of DB or filesystem has failed. Here is an example of the usage:
+  ///
+  /// ```
   /// // The machine-learning resource API provides a method to share the data files those can be used for training or inferencing AI model.
   /// // Users may generate preprocessed data file, and add it into machine-learning service.
   /// // Then an application can fetch the data set for retraining an AI model.
@@ -939,7 +1172,7 @@ class Tizen100CapiMlService {
   ///
   /// // Release the information handle of resources.
   /// status = ml_information_list_destroy (resources);
-  /// @endcode
+  /// ```
   int ml_service_resource_add(
     ffi.Pointer<ffi.Char> name,
     ffi.Pointer<ffi.Char> path,
@@ -960,15 +1193,25 @@ class Tizen100CapiMlService {
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
           ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Deletes the information of the resources from machine learning service.
-  /// @since_tizen 8.0
-  /// @remarks This does not remove the resource files from file system.
-  /// @param[in] name The unique name to indicate the resources.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
-  /// @retval #ML_ERROR_IO_ERROR The operation of DB or filesystem has failed.
+  /// Deletes the information of the resources from machine learning service.
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Remarks:**
+  /// - This does not remove the resource files from file system.
+  ///
+  /// **Parameters:**
+  /// - `name` (in): The unique name to indicate the resources.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
+  /// - `ML_ERROR_IO_ERROR`: The operation of DB or filesystem has failed.
   int ml_service_resource_delete(
     ffi.Pointer<ffi.Char> name,
   ) {
@@ -983,17 +1226,27 @@ class Tizen100CapiMlService {
   late final _ml_service_resource_delete = _ml_service_resource_deletePtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the information of the resources from machine learning service.
-  /// @since_tizen 8.0
-  /// @remarks If the function succeeds, the @a res should be released using ml_information_list_destroy().
-  /// @param[in] name The unique name to indicate the resources.
-  /// @param[out] res The handle of the machine learning resources.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
-  /// @retval #ML_ERROR_IO_ERROR The operation of DB or filesystem has failed.
-  /// @retval #ML_ERROR_OUT_OF_MEMORY Failed to allocate required memory.
+  /// Gets the information of the resources from machine learning service.
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, the `res` should be released using ml_information_list_destroy().
+  ///
+  /// **Parameters:**
+  /// - `name` (in): The unique name to indicate the resources.
+  /// - `res` (out): The handle of the machine learning resources.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
+  /// - `ML_ERROR_IO_ERROR`: The operation of DB or filesystem has failed.
+  /// - `ML_ERROR_OUT_OF_MEMORY`: Failed to allocate required memory.
   int ml_service_resource_get(
     ffi.Pointer<ffi.Char> name,
     ffi.Pointer<ml_common.ml_information_list_h> res,
@@ -1014,8 +1267,11 @@ class Tizen100CapiMlService {
           ffi.Pointer<ml_common.ml_information_list_h>)>();
 }
 
-/// @brief Enumeration for the event types of machine learning service.
-/// @since_tizen 9.0
+/// Enumeration for the event types of machine learning service.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 abstract class ml_service_event_e {
   /// < Unknown or invalid event type.
   static const int ML_SERVICE_EVENT_UNKNOWN = 0;
@@ -1024,29 +1280,44 @@ abstract class ml_service_event_e {
   static const int ML_SERVICE_EVENT_NEW_DATA = 1;
 }
 
-/// @brief A handle for ml-service instance.
-/// @since_tizen 7.0
+/// A handle for ml-service instance.
+///
+/// **Since Tizen:**
+/// - 7.0
+/// @nodoc
 typedef ml_service_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Callback for the event from machine learning service.
-/// @details Note that the handle of event data may be deallocated after the return and this is synchronously called.
-/// Thus, if you need the event data, copy the data and return fast. Do not spend too much time in the callback.
-/// @since_tizen 9.0
-/// @remarks The @a event_data should not be released.
-/// @param[in] event The event from machine learning service.
-/// @param[in] event_data The handle of event data. If it is null, the event does not include data field.
-/// @param[in] user_data Private data for the callback.
+/// Callback for the event from machine learning service.
+///
+/// Note that the handle of event data may be deallocated after the return and this is synchronously called. Thus, if you need the event data, copy the data and return fast. Do not spend too much time in the callback.
+///
+/// **Since Tizen:**
+/// - 9.0
+///
+/// **Remarks:**
+/// - The `event_data` should not be released.
+///
+/// **Parameters:**
+/// - `event` (in): The event from machine learning service.
+/// - `event_data` (in): The handle of event data. If it is null, the event does not include data field.
+/// - `user_data` (in): Private data for the callback.
+/// @nodoc
 typedef ml_service_event_cb
     = ffi.Pointer<ffi.NativeFunction<ml_service_event_cbFunction>>;
+/// @nodoc
 typedef ml_service_event_cbFunction = ffi.Void Function(ffi.Int32 event,
     ml_common.ml_information_h event_data, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartml_service_event_cbFunction = void Function(int event,
     ml_common.ml_information_h event_data, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumeration for pipeline state.
-/// @details The pipeline state is described on @ref CAPI_ML_NNSTREAMER_PIPELINE_STATE_DIAGRAM.
-/// Refer to https://gstreamer.freedesktop.org/documentation/plugin-development/basics/states.html.
-/// @since_tizen 5.5
+/// Enumeration for pipeline state.
+///
+/// The pipeline state is described on `CAPI_ML_NNSTREAMER_PIPELINE_STATE_DIAGRAM.` Refer to https://gstreamer.freedesktop.org/documentation/plugin-development/basics/states.html.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class _ml_pipeline_state_e {
   /// < Unknown state. Maybe not constructed?
   static const int ML_PIPELINE_STATE_UNKNOWN = 0;

@@ -1,3 +1,6 @@
+/// {@category 7.0/tizen}
+library tizen_interop_7_0.dlog;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen dlog APIs.
+/// {@category 7.0/tizen}
 class Tizen70Dlog {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,21 +28,32 @@ class Tizen70Dlog {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Sends log with priority and tag.
-  /// @details for application.
-  /// @if MOBILE @since_tizen 2.3 @elseif WEARABLE @since_tizen 2.3.1 @endif
-  /// @param[in] prio priority level of type #log_priority
-  /// @param[in] tag tag - a null-terminated string
-  /// @param[in] fmt format string - same as printf
-  /// @return On success, the function returns the number of bytes written.
-  /// On error, a negative errno-style error code
-  /// @retval #DLOG_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DLOG_ERROR_NOT_PERMITTED Operation not permitted
-  /// @pre none
-  /// @post none
-  /// @see dlog_vprint
+  /// Sends log with priority and tag.
   ///
-  /// @code
+  /// for application. @if MOBILE @since_tizen 2.3 @elseif WEARABLE @since_tizen 2.3.1 @endif
+  ///
+  /// **Parameters:**
+  /// - `prio` (in): priority level of type `log_priority`
+  /// - `tag` (in): tag - a null-terminated string
+  /// - `fmt` (in): format string - same as printf
+  ///
+  /// **Returns:**
+  /// - On success, the function returns the number of bytes written. On error, a negative errno-style error code
+  ///
+  /// **Return values:**
+  /// - `DLOG_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DLOG_ERROR_NOT_PERMITTED`: Operation not permitted
+  ///
+  /// **Preconditions:**
+  /// - none
+  ///
+  /// **Postconditions:**
+  /// - none
+  ///
+  /// **See also:**
+  /// - `dlog_vprint`
+  ///
+  /// ```
   /// #include<dlog.h>
   /// int main(void)
   /// {
@@ -49,7 +64,7 @@ class Tizen70Dlog {
   /// dlog_print(DLOG_INFO, "USR_TAG", "%s, %d", string, integer);
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int dlog_print(
     int prio,
     ffi.Pointer<ffi.Char> tag,
@@ -69,22 +84,33 @@ class Tizen70Dlog {
   late final _dlog_print = _dlog_printPtr.asFunction<
       int Function(int, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sends log with priority, tag, and va_list.
-  /// @details for application.
-  /// @if MOBILE @since_tizen 2.3 @elseif WEARABLE @since_tizen 2.3.1 @endif
-  /// @param[in] prio priority level of type #log_priority
-  /// @param[in] tag tag - a null-terminated string
-  /// @param[in] fmt format string - same as printf
-  /// @param[in] ap va_list
-  /// @return On success, the function returns the number of bytes written.
-  /// On error, a negative errno-style error code
-  /// @retval #DLOG_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DLOG_ERROR_NOT_PERMITTED Operation not permitted
-  /// @pre none
-  /// @post none
-  /// @see dlog_print
+  /// Sends log with priority, tag, and va_list.
   ///
-  /// @code
+  /// for application. @if MOBILE @since_tizen 2.3 @elseif WEARABLE @since_tizen 2.3.1 @endif
+  ///
+  /// **Parameters:**
+  /// - `prio` (in): priority level of type `log_priority`
+  /// - `tag` (in): tag - a null-terminated string
+  /// - `fmt` (in): format string - same as printf
+  /// - `ap` (in): va_list
+  ///
+  /// **Returns:**
+  /// - On success, the function returns the number of bytes written. On error, a negative errno-style error code
+  ///
+  /// **Return values:**
+  /// - `DLOG_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DLOG_ERROR_NOT_PERMITTED`: Operation not permitted
+  ///
+  /// **Preconditions:**
+  /// - none
+  ///
+  /// **Postconditions:**
+  /// - none
+  ///
+  /// **See also:**
+  /// - `dlog_print`
+  ///
+  /// ```
   /// #include<dlog.h>
   /// void my_debug_print(char *format, ...)
   /// {
@@ -101,7 +127,7 @@ class Tizen70Dlog {
   /// my_debug_print("%s, %d", "test dlog", 21);
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int dlog_vprint(
     int prio,
     ffi.Pointer<ffi.Char> tag,
@@ -125,8 +151,8 @@ class Tizen70Dlog {
           int, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, va_list)>();
 }
 
-/// @brief Enumeration for Dlog Error.
-/// @if MOBILE @since_tizen 2.3 @elseif WEARABLE @since_tizen 2.3.1 @endif
+/// Enumeration for Dlog Error. @if MOBILE @since_tizen 2.3 @elseif WEARABLE @since_tizen 2.3.1 @endif
+/// @nodoc
 abstract class dlog_error_e {
   /// < Successful
   static const int DLOG_ERROR_NONE = 0;
@@ -138,8 +164,8 @@ abstract class dlog_error_e {
   static const int DLOG_ERROR_NOT_PERMITTED = -1;
 }
 
-/// @brief Enumeration for log priority values in ascending priority order.
-/// @if MOBILE @since_tizen 2.3 @elseif WEARABLE @since_tizen 2.3.1 @endif
+/// Enumeration for log priority values in ascending priority order. @if MOBILE @since_tizen 2.3 @elseif WEARABLE @since_tizen 2.3.1 @endif
+/// @nodoc
 abstract class log_priority {
   /// < Keep this always at the start
   static const int DLOG_UNKNOWN = 0;
@@ -172,7 +198,10 @@ abstract class log_priority {
   static const int DLOG_PRIO_MAX = 9;
 }
 
+/// @nodoc
 typedef va_list = __builtin_va_list;
+/// @nodoc
 typedef __builtin_va_list = ffi.Pointer<ffi.Char>;
 
+/// @nodoc
 const int LOG_TAG = 0;

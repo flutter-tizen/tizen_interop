@@ -1,3 +1,6 @@
+/// {@category 10.0/tizen}
+library tizen_interop_10_0.capi_ui_inputmethod_manager;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-ui-inputmethod-manager APIs.
+/// {@category 10.0/tizen}
 class Tizen100CapiUiInputmethodManager {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,17 +28,29 @@ class Tizen100CapiUiInputmethodManager {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Requests to open the installed IME list menu.
-  /// @details This function provides the installed IME list menu for the IME developers who might want to open it to enable their IME.
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/imemanager
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IME_MANAGER_ERROR_NONE No error
-  /// @retval #IME_MANAGER_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function
-  /// @retval #IME_MANAGER_ERROR_OPERATION_FAILED Operation failed
-  /// @see ime_manager_show_ime_selector()
+  /// Requests to open the installed IME list menu.
+  ///
+  /// This function provides the installed IME list menu for the IME developers who might want to open it to enable their IME.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/imemanager>
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IME_MANAGER_ERROR_NONE`: No error
+  /// - `IME_MANAGER_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function
+  /// - `IME_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `ime_manager_show_ime_selector()`
   int ime_manager_show_ime_list() {
     return _ime_manager_show_ime_list();
   }
@@ -45,18 +61,29 @@ class Tizen100CapiUiInputmethodManager {
   late final _ime_manager_show_ime_list =
       _ime_manager_show_ime_listPtr.asFunction<int Function()>();
 
-  /// @brief Requests to open the IME selector menu.
-  /// Disabled IMEs are not displayed in the IME Selector.
-  /// @details This function provides the IME selector menu for the IME or other application developers who might want to change the default IME.
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/imemanager
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IME_MANAGER_ERROR_NONE No error
-  /// @retval #IME_MANAGER_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function
-  /// @retval #IME_MANAGER_ERROR_OPERATION_FAILED Operation failed
-  /// @see ime_manager_show_ime_list()
+  /// Requests to open the IME selector menu. Disabled IMEs are not displayed in the IME Selector.
+  ///
+  /// This function provides the IME selector menu for the IME or other application developers who might want to change the default IME.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/imemanager>
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IME_MANAGER_ERROR_NONE`: No error
+  /// - `IME_MANAGER_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function
+  /// - `IME_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `ime_manager_show_ime_list()`
   int ime_manager_show_ime_selector() {
     return _ime_manager_show_ime_selector();
   }
@@ -67,20 +94,34 @@ class Tizen100CapiUiInputmethodManager {
   late final _ime_manager_show_ime_selector =
       _ime_manager_show_ime_selectorPtr.asFunction<int Function()>();
 
-  /// @brief Checks if the specific IME is enabled or disabled in the system keyboard setting.
-  /// @details The IME developers can use this function to check their IME is enabled or not.
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/imemanager
-  /// @param[in] app_id The application ID of the IME
-  /// @param[out] enabled The On (enabled) and Off (disabled) state of the IME
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IME_MANAGER_ERROR_NONE No error
-  /// @retval #IME_MANAGER_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function
-  /// @retval #IME_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_MANAGER_ERROR_OPERATION_FAILED Operation failed
-  /// @see ime_manager_show_ime_list()
+  /// Checks if the specific IME is enabled or disabled in the system keyboard setting.
+  ///
+  /// The IME developers can use this function to check their IME is enabled or not.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/imemanager>
+  ///
+  /// **Parameters:**
+  /// - `app_id` (in): The application ID of the IME
+  /// - `enabled` (out): The On (enabled) and Off (disabled) state of the IME
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IME_MANAGER_ERROR_NONE`: No error
+  /// - `IME_MANAGER_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function
+  /// - `IME_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `ime_manager_show_ime_list()`
   int ime_manager_is_ime_enabled(
     ffi.Pointer<ffi.Char> app_id,
     ffi.Pointer<ffi.Bool> enabled,
@@ -98,19 +139,34 @@ class Tizen100CapiUiInputmethodManager {
   late final _ime_manager_is_ime_enabled = _ime_manager_is_ime_enabledPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Checks which IME is the current activated (selected) IME.
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/imemanager
-  /// @remarks @a app_id must be released using free().
-  /// @param[out] app_id The application ID of the active IME
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IME_MANAGER_ERROR_NONE No error
-  /// @retval #IME_MANAGER_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function
-  /// @retval #IME_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_MANAGER_ERROR_OPERATION_FAILED Operation failed
-  /// @see ime_manager_show_ime_selector()
+  /// Checks which IME is the current activated (selected) IME.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/imemanager>
+  ///
+  /// **Remarks:**
+  /// - `app_id` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `app_id` (out): The application ID of the active IME
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IME_MANAGER_ERROR_NONE`: No error
+  /// - `IME_MANAGER_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function
+  /// - `IME_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `ime_manager_show_ime_selector()`
   int ime_manager_get_active_ime(
     ffi.Pointer<ffi.Pointer<ffi.Char>> app_id,
   ) {
@@ -126,19 +182,32 @@ class Tizen100CapiUiInputmethodManager {
   late final _ime_manager_get_active_ime = _ime_manager_get_active_imePtr
       .asFunction<int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the number of IMEs which are enabled (usable).
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/imemanager
-  /// @remarks The specific error code can be obtained using the get_last_result() method.
-  /// Error codes are described in Exception section.
-  /// @return The number of enabled IMEs on success,
-  /// otherwise @c 0
-  /// @exception #IME_MANAGER_ERROR_NONE Successful
-  /// @exception #IME_MANAGER_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function
-  /// @exception #IME_MANAGER_ERROR_OPERATION_FAILED Operation failed
-  /// @see ime_manager_is_ime_enabled()
-  /// @see ime_manager_show_ime_selector()
+  /// Gets the number of IMEs which are enabled (usable).
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/imemanager>
+  ///
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the get_last_result() method.
+  /// - Error codes are described in Exception section.
+  ///
+  /// **Returns:**
+  /// - The number of enabled IMEs on success, otherwise `0`
+  ///
+  /// **Exceptions:**
+  /// - `IME_MANAGER_ERROR_NONE`: Successful
+  /// - `IME_MANAGER_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function
+  /// - `IME_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `ime_manager_is_ime_enabled()`
+  /// - `ime_manager_show_ime_selector()`
   int ime_manager_get_enabled_ime_count() {
     return _ime_manager_get_enabled_ime_count();
   }
@@ -149,17 +218,26 @@ class Tizen100CapiUiInputmethodManager {
   late final _ime_manager_get_enabled_ime_count =
       _ime_manager_get_enabled_ime_countPtr.asFunction<int Function()>();
 
-  /// @brief Requests to pre-launch the IME.
-  /// Otherwise, the IME will be launched when an associated text input UI control has focus.
-  /// @details The developers can use this function to launch IME in On-demand mode.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/imemanager
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IME_MANAGER_ERROR_NONE No error
-  /// @retval #IME_MANAGER_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function
-  /// @retval #IME_MANAGER_ERROR_OPERATION_FAILED Operation failed
+  /// Requests to pre-launch the IME. Otherwise, the IME will be launched when an associated text input UI control has focus.
+  ///
+  /// The developers can use this function to launch IME in On-demand mode.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/imemanager>
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IME_MANAGER_ERROR_NONE`: No error
+  /// - `IME_MANAGER_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function
+  /// - `IME_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
   int ime_manager_prelaunch_ime() {
     return _ime_manager_prelaunch_ime();
   }
@@ -171,8 +249,11 @@ class Tizen100CapiUiInputmethodManager {
       _ime_manager_prelaunch_imePtr.asFunction<int Function()>();
 }
 
-/// @brief Enumeration for input method manager function error.
-/// @since_tizen 2.4
+/// Enumeration for input method manager function error.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class ime_manager_error_e {
   /// < Successful
   static const int IME_MANAGER_ERROR_NONE = 0;

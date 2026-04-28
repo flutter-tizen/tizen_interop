@@ -1,3 +1,6 @@
+/// {@category 7.0/tizen}
+library tizen_interop_7_0.capi_appfw_package_manager;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-appfw-package-manager APIs.
+/// {@category 7.0/tizen}
 class Tizen70CapiAppfwPackageManager {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,19 +28,30 @@ class Tizen70CapiAppfwPackageManager {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Retrieves all application IDs of each package.
-  /// @since_tizen 2.3
-  /// @param[in] package_info  The package info handle
-  /// @param[in] comp_type     The application component type
-  /// @param[in] callback      The callback function to invoke
-  /// @param[in] user_data     The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_NO_SUCH_PACKAGE   No such package
-  /// @post This function invokes package_info_app_cb() repeatedly for each package.
-  /// @see package_info_app_cb()
+  /// Retrieves all application IDs of each package.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `package_info` (in): The package info handle
+  /// - `comp_type` (in): The application component type
+  /// - `callback` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_NO_SUCH_PACKAGE`: No such package
+  ///
+  /// **Postconditions:**
+  /// - This function invokes package_info_app_cb() repeatedly for each package.
+  ///
+  /// **See also:**
+  /// - `package_info_app_cb()`
   int package_info_foreach_app_from_package(
     package_info_h package_info,
     int comp_type,
@@ -60,15 +75,24 @@ class Tizen70CapiAppfwPackageManager {
           int Function(package_info_h, int, package_info_app_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Destroys the package information handle and releases all its resources.
-  /// @since_tizen 2.3
-  /// @param[in] package_info The package information handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see package_manager_foreach_package_info()
-  /// @see package_manager_get_package_info()
+  /// Destroys the package information handle and releases all its resources.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `package_info` (in): The package information handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `package_manager_foreach_package_info()`
+  /// - `package_manager_get_package_info()`
   int package_info_destroy(
     package_info_h package_info,
   ) {
@@ -83,16 +107,25 @@ class Tizen70CapiAppfwPackageManager {
   late final _package_info_destroy =
       _package_info_destroyPtr.asFunction<int Function(package_info_h)>();
 
-  /// @brief Gets the package name.
-  /// @since_tizen 2.3
-  /// @remarks You must release @a package using free().
-  /// @param[in]  package_info The package information
-  /// @param[out] package      The package name
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
+  /// Gets the package name.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - You must release `package` using free().
+  ///
+  /// **Parameters:**
+  /// - `package_info` (in): The package information
+  /// - `package` (out): The package name
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
   int package_info_get_package(
     package_info_h package_info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> package,
@@ -111,17 +144,26 @@ class Tizen70CapiAppfwPackageManager {
       _package_info_get_packagePtr.asFunction<
           int Function(package_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the main application ID of the package.
-  /// @since_tizen 4.0
-  /// @remarks You must release @a main_app_id using free().
-  /// @param[in]  package_info     The package information
-  /// @param[out] main_app_id      The main application ID of the package
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          I/O error
+  /// Gets the main application ID of the package.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - You must release `main_app_id` using free().
+  ///
+  /// **Parameters:**
+  /// - `package_info` (in): The package information
+  /// - `main_app_id` (out): The main application ID of the package
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: I/O error
   int package_info_get_main_app_id(
     package_info_h package_info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> main_app_id,
@@ -141,17 +183,26 @@ class Tizen70CapiAppfwPackageManager {
       _package_info_get_main_app_idPtr.asFunction<
           int Function(package_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the label of the package.
-  /// @since_tizen 2.3
-  /// @remarks You must release @a label using free().
-  /// @param[in]  package_info The package information
-  /// @param[out] label        The label of the package
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          I/O error
+  /// Gets the label of the package.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - You must release `label` using free().
+  ///
+  /// **Parameters:**
+  /// - `package_info` (in): The package information
+  /// - `label` (out): The label of the package
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: I/O error
   int package_info_get_label(
     package_info_h package_info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> label,
@@ -169,17 +220,26 @@ class Tizen70CapiAppfwPackageManager {
   late final _package_info_get_label = _package_info_get_labelPtr.asFunction<
       int Function(package_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the absolute path to the icon image.
-  /// @since_tizen 2.3
-  /// @remarks You must release @a path using free().
-  /// @param[in]  package_info The package information
-  /// @param[out] path         The path of the package
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          I/O error
+  /// Gets the absolute path to the icon image.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - You must release `path` using free().
+  ///
+  /// **Parameters:**
+  /// - `package_info` (in): The package information
+  /// - `path` (out): The path of the package
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: I/O error
   int package_info_get_icon(
     package_info_h package_info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> path,
@@ -197,17 +257,26 @@ class Tizen70CapiAppfwPackageManager {
   late final _package_info_get_icon = _package_info_get_iconPtr.asFunction<
       int Function(package_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the version of the package.
-  /// @since_tizen 2.3
-  /// @remarks You must release @a version using free().
-  /// @param[in]  package_info The package information
-  /// @param[out] version      The version of the package
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          I/O error
+  /// Gets the version of the package.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - You must release `version` using free().
+  ///
+  /// **Parameters:**
+  /// - `package_info` (in): The package information
+  /// - `version` (out): The version of the package
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: I/O error
   int package_info_get_version(
     package_info_h package_info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> version,
@@ -226,17 +295,26 @@ class Tizen70CapiAppfwPackageManager {
       _package_info_get_versionPtr.asFunction<
           int Function(package_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the type of the package.
-  /// @since_tizen 2.3
-  /// @remarks You must release @a type using free().
-  /// @param[in]  package_info The package information
-  /// @param[out] type         The type of the package
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          I/O error
+  /// Gets the type of the package.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - You must release `type` using free().
+  ///
+  /// **Parameters:**
+  /// - `package_info` (in): The package information
+  /// - `type` (out): The type of the package
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: I/O error
   int package_info_get_type(
     package_info_h package_info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> type,
@@ -254,14 +332,21 @@ class Tizen70CapiAppfwPackageManager {
   late final _package_info_get_type = _package_info_get_typePtr.asFunction<
       int Function(package_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the installed storage for the given package.
-  /// @since_tizen 2.3
-  /// @param[in]  package_info The package information
-  /// @param[out] storage      The installed storage
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Gets the installed storage for the given package.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `package_info` (in): The package information
+  /// - `storage` (out): The installed storage
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
   int package_info_get_installed_storage(
     package_info_h package_info,
     ffi.Pointer<ffi.Int32> storage,
@@ -280,17 +365,26 @@ class Tizen70CapiAppfwPackageManager {
       _package_info_get_installed_storagePtr
           .asFunction<int Function(package_info_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the root path of the package.
-  /// @since_tizen 2.3
-  /// @remarks You must release @a path using free().
-  /// @param[in]  package_info The package information
-  /// @param[out] path         The root path of the package
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          I/O error
+  /// Gets the root path of the package.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - You must release `path` using free().
+  ///
+  /// **Parameters:**
+  /// - `package_info` (in): The package information
+  /// - `path` (out): The root path of the package
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: I/O error
   int package_info_get_root_path(
     package_info_h package_info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> path,
@@ -310,21 +404,36 @@ class Tizen70CapiAppfwPackageManager {
       _package_info_get_root_pathPtr.asFunction<
           int Function(package_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @platform
-  /// @brief Gets the name of the TEP (Tizen Expansion Package).
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/packagemanager.admin
-  /// @remarks Name must be released using free().
-  /// @param[in] package_info The package information
-  /// @param[out] name The name of the tep
-  /// @return 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #PACKAGE_MANAGER_ERROR_SYSTEM_ERROR Severe system error
+  /// Gets the name of the TEP (Tizen Expansion Package).
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.admin>
+  ///
+  /// **Remarks:**
+  /// - Name must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `package_info` (in): The package information
+  /// - `name` (out): The name of the tep
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PACKAGE_MANAGER_ERROR_SYSTEM_ERROR`: Severe system error
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int package_info_get_tep_name(
     package_info_h package_info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> name,
@@ -344,17 +453,26 @@ class Tizen70CapiAppfwPackageManager {
       _package_info_get_tep_namePtr.asFunction<
           int Function(package_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the resource type of the package.
-  /// @since_tizen 6.5
-  /// @remarks You must release @a res_type using free().
-  /// @param[in]  package_info The package information
-  /// @param[out] res_type     The resource type of the package
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          I/O error
+  /// Gets the resource type of the package.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - You must release `res_type` using free().
+  ///
+  /// **Parameters:**
+  /// - `package_info` (in): The package information
+  /// - `res_type` (out): The resource type of the package
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: I/O error
   int package_info_get_res_type(
     package_info_h package_info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> res_type,
@@ -374,17 +492,26 @@ class Tizen70CapiAppfwPackageManager {
       _package_info_get_res_typePtr.asFunction<
           int Function(package_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the resource version of the package.
-  /// @since_tizen 6.5
-  /// @remarks You must release @a res_version using free().
-  /// @param[in]  package_info The package information
-  /// @param[out] res_version  The resource version of the package
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          I/O error
+  /// Gets the resource version of the package.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - You must release `res_version` using free().
+  ///
+  /// **Parameters:**
+  /// - `package_info` (in): The package information
+  /// - `res_version` (out): The resource version of the package
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: I/O error
   int package_info_get_res_version(
     package_info_h package_info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> res_version,
@@ -404,17 +531,23 @@ class Tizen70CapiAppfwPackageManager {
       _package_info_get_res_versionPtr.asFunction<
           int Function(package_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Checks whether the package is system package.
-  /// @since_tizen 2.3
-  /// @param[in]  package_info The package information
-  /// @param[out] system       @c true if the package is system package,
-  /// otherwise @c false if the package is not system package
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          I/O error
+  /// Checks whether the package is system package.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `package_info` (in): The package information
+  /// - `system` (out): `true` if the package is system package, otherwise `false` if the package is not system package
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: I/O error
   int package_info_is_system_package(
     package_info_h package_info,
     ffi.Pointer<ffi.Bool> system,
@@ -433,16 +566,23 @@ class Tizen70CapiAppfwPackageManager {
       _package_info_is_system_packagePtr
           .asFunction<int Function(package_info_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Checks whether the package is removable.
-  /// @since_tizen 2.3
-  /// @param[in]  package_info The package information
-  /// @param[out] removable    The removable info of the package
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR IO error
+  /// Checks whether the package is removable.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `package_info` (in): The package information
+  /// - `removable` (out): The removable info of the package
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: IO error
   int package_info_is_removable_package(
     package_info_h package_info,
     ffi.Pointer<ffi.Bool> removable,
@@ -461,16 +601,23 @@ class Tizen70CapiAppfwPackageManager {
       _package_info_is_removable_packagePtr
           .asFunction<int Function(package_info_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Checks whether the package is preloaded.
-  /// @since_tizen 2.3
-  /// @param[in]  package_info The package information
-  /// @param[out] preload      The preload info of the package
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          I/O error
+  /// Checks whether the package is preloaded.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `package_info` (in): The package information
+  /// - `preload` (out): The preload info of the package
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: I/O error
   int package_info_is_preload_package(
     package_info_h package_info,
     ffi.Pointer<ffi.Bool> preload,
@@ -489,18 +636,24 @@ class Tizen70CapiAppfwPackageManager {
       _package_info_is_preload_packagePtr
           .asFunction<int Function(package_info_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Checks whether two package information is equal.
-  /// @since_tizen 2.3
-  /// @param[in]  lhs    The first package information to be compared
-  /// @param[in]  rhs    The second package information to be compared
-  /// @param[out] equal  @c true if the package information are equal,
-  /// otherwise @c false if package information are not equal
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          Database error occurred
+  /// Checks whether two package information is equal.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `lhs` (in): The first package information to be compared
+  /// - `rhs` (in): The second package information to be compared
+  /// - `equal` (out): `true` if the package information are equal, otherwise `false` if package information are not equal
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: Database error occurred
   int package_info_is_equal(
     package_info_h lhs,
     package_info_h rhs,
@@ -520,15 +673,21 @@ class Tizen70CapiAppfwPackageManager {
   late final _package_info_is_equal = _package_info_is_equalPtr.asFunction<
       int Function(package_info_h, package_info_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Checks whether the package info is accessible for the given package.
-  /// @since_tizen 2.3
-  /// @param[in]  package_info The package information
-  /// @param[out] accessible   @c true if the package info is accessible,
-  /// otherwise @c false if the package info is not accessible
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Checks whether the package info is accessible for the given package.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `package_info` (in): The package information
+  /// - `accessible` (out): `true` if the package info is accessible, otherwise `false` if the package info is not accessible
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
   int package_info_is_accessible(
     package_info_h package_info,
     ffi.Pointer<ffi.Bool> accessible,
@@ -546,17 +705,24 @@ class Tizen70CapiAppfwPackageManager {
   late final _package_info_is_accessible = _package_info_is_accessiblePtr
       .asFunction<int Function(package_info_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets the installed time for the given package.
-  /// @details If the package was updated, the @a installed_time represents updated time.
-  /// So, the meaning of 'installed time' corresponds with 'last modified time'.
-  /// @since_tizen 4.0
-  /// @param[in]  package_info   The package information
-  /// @param[out] installed_time The integer value of time_t type for installed time
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          Database error occurred
+  /// Gets the installed time for the given package.
+  ///
+  /// If the package was updated, the `installed_time` represents updated time. So, the meaning of 'installed time' corresponds with 'last modified time'.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `package_info` (in): The package information
+  /// - `installed_time` (out): The integer value of time_t type for installed time
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: Database error occurred
   int package_info_get_installed_time(
     package_info_h package_info,
     ffi.Pointer<ffi.Int> installed_time,
@@ -575,17 +741,26 @@ class Tizen70CapiAppfwPackageManager {
       _package_info_get_installed_timePtr
           .asFunction<int Function(package_info_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Clones the package information handle.
-  /// @since_tizen 2.3
-  /// @remarks The @a clone should be released using package_info_destroy().
-  /// @param[out] clone          The newly created package information handle
-  /// @param[in]  package_info   The package information
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_NO_SUCH_PACKAGE   The package is not installed
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
+  /// Clones the package information handle.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - The `clone` should be released using package_info_destroy().
+  ///
+  /// **Parameters:**
+  /// - `clone` (out): The newly created package information handle
+  /// - `package_info` (in): The package information
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_NO_SUCH_PACKAGE`: The package is not installed
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
   int package_info_clone(
     ffi.Pointer<package_info_h> clone,
     package_info_h package_info,
@@ -603,17 +778,26 @@ class Tizen70CapiAppfwPackageManager {
   late final _package_info_clone = _package_info_clonePtr
       .asFunction<int Function(ffi.Pointer<package_info_h>, package_info_h)>();
 
-  /// @brief Gets the package information for the given package.
-  /// @since_tizen 2.3
-  /// @remarks You must release @a package_info using package_info_destroy().
-  /// @param[in]  package      The ID of the package
-  /// @param[out] package_info The package information for the given package ID
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_NO_SUCH_PACKAGE   The package is not installed
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
+  /// Gets the package information for the given package.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - You must release `package_info` using package_info_destroy().
+  ///
+  /// **Parameters:**
+  /// - `package` (in): The ID of the package
+  /// - `package_info` (out): The package information for the given package ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_NO_SUCH_PACKAGE`: The package is not installed
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
   int package_info_create(
     ffi.Pointer<ffi.Char> package,
     ffi.Pointer<package_info_h> package_info,
@@ -631,17 +815,24 @@ class Tizen70CapiAppfwPackageManager {
   late final _package_info_create = _package_info_createPtr.asFunction<
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<package_info_h>)>();
 
-  /// @brief Retrieves certification information of the package.
-  /// @since_tizen 2.3
-  /// @param[in] package_info The package information
-  /// @param[in] callback     The iteration callback function
-  /// @param[in] user_data    The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          I/O error
+  /// Retrieves certification information of the package.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `package_info` (in): The package information
+  /// - `callback` (in): The iteration callback function
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: I/O error
   int package_info_foreach_cert_info(
     package_info_h package_info,
     package_info_cert_info_cb callback,
@@ -663,17 +854,24 @@ class Tizen70CapiAppfwPackageManager {
           int Function(package_info_h, package_info_cert_info_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Retrieves privilege information of the package.
-  /// @since_tizen 2.3
-  /// @param[in] package_info The package information
-  /// @param[in] callback     The iteration callback function
-  /// @param[in] user_data    The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          I/O error
+  /// Retrieves privilege information of the package.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `package_info` (in): The package information
+  /// - `callback` (in): The iteration callback function
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: I/O error
   int package_info_foreach_privilege_info(
     package_info_h package_info,
     package_info_privilege_info_cb callback,
@@ -695,26 +893,28 @@ class Tizen70CapiAppfwPackageManager {
           int Function(package_info_h, package_info_privilege_info_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Retrieves dependencies between packages.
-  /// @details @a callback is called whenever there is package dependency. The callback includes packages that are only directly required by the given package.
-  /// For example, if there are packages having the following relationship:
+  /// Retrieves dependencies between packages.
   ///
-  /// B --> E
-  /// A --> B --> C
-  /// D --> C
+  /// `callback` is called whenever there is package dependency. The callback includes packages that are only directly required by the given package. For example, if there are packages having the following relationship: B --> E A --> B --> C D --> C A --> B means that A depends on B. When package_info_foreach_dependency_info(A) is called, the callback results in two parameters: **from** is A and **to** is B.
   ///
-  /// A --> B means that A depends on B.
-  /// When package_info_foreach_dependency_info(A) is called, the callback results in two parameters: @b from is A and @b to is B.
-  /// @since_tizen 5.5
-  /// @remarks The function provides the results synchronously. If there are no dependencies, this function will return #PACKAGE_MANAGER_ERROR_NONE immediately and the callback will not be invoked.
-  /// @param[in] package_info The package information
-  /// @param[in] callback     The iteration callback function
-  /// @param[in] user_data    The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_SYSTEM_ERROR      Severe system error
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - The function provides the results synchronously. If there are no dependencies, this function will return `PACKAGE_MANAGER_ERROR_NONE` immediately and the callback will not be invoked.
+  ///
+  /// **Parameters:**
+  /// - `package_info` (in): The package information
+  /// - `callback` (in): The iteration callback function
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_SYSTEM_ERROR`: Severe system error
   int package_info_foreach_dependency_info(
     package_info_h package_info,
     package_info_dependency_info_cb callback,
@@ -736,26 +936,28 @@ class Tizen70CapiAppfwPackageManager {
           int Function(package_info_h, package_info_dependency_info_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Retrieves which packages depend on the given package.
-  /// @details @a callback is called whenever there is package dependency. The callback includes packages that are both directly and indirectly depend on the given package.
-  /// For example, if there are packages having the following relationship:
+  /// Retrieves which packages depend on the given package.
   ///
-  /// B --> E
-  /// A --> B --> C
-  /// D --> C
+  /// `callback` is called whenever there is package dependency. The callback includes packages that are both directly and indirectly depend on the given package. For example, if there are packages having the following relationship: B --> E A --> B --> C D --> C A --> B means that A depends on B. When package_info_foreach_dependency_info(C) is called, the callback results in two parameters: **from** is B and **to** is C, **from** is D and **to** is C, **from** is A and **to** is B.
   ///
-  /// A --> B means that A depends on B.
-  /// When package_info_foreach_dependency_info(C) is called, the callback results in two parameters: @b from is B and @b to is C, @b from is D and @b to is C, @b from is A and @b to is B.
-  /// @since_tizen 5.5
-  /// @remarks The function provides the results synchronously. If there are no dependencies, this function will return #PACKAGE_MANAGER_ERROR_NONE immediately and the callback will not be invoked.
-  /// @param[in] package_info The package information
-  /// @param[in] callback     The iteration callback function
-  /// @param[in] user_data    The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_SYSTEM_ERROR      Severe system error
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - The function provides the results synchronously. If there are no dependencies, this function will return `PACKAGE_MANAGER_ERROR_NONE` immediately and the callback will not be invoked.
+  ///
+  /// **Parameters:**
+  /// - `package_info` (in): The package information
+  /// - `callback` (in): The iteration callback function
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_SYSTEM_ERROR`: Severe system error
   int package_info_foreach_dependency_info_depends_on(
     package_info_h package_info,
     package_info_dependency_info_cb callback,
@@ -778,19 +980,26 @@ class Tizen70CapiAppfwPackageManager {
           int Function(package_info_h, package_info_dependency_info_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Retrieves allowed package information of the resource package.
-  /// @details Resource packages allow access to allowed data only for allowed packages that have specific privileges.
-  /// If not, they just allow access to global data
-  /// @since_tizen 6.5
-  /// @param[in] package_info The package information
-  /// @param[in] callback     The iteration callback function
-  /// @param[in] user_data    The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          I/O error
-  /// @retval #PACKAGE_MANAGER_ERROR_SYSTEM_ERROR      Severe system error
+  /// Retrieves allowed package information of the resource package.
+  ///
+  /// Resource packages allow access to allowed data only for allowed packages that have specific privileges. If not, they just allow access to global data
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `package_info` (in): The package information
+  /// - `callback` (in): The iteration callback function
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: I/O error
+  /// - `PACKAGE_MANAGER_ERROR_SYSTEM_ERROR`: Severe system error
   int package_info_foreach_res_allowed_package(
     package_info_h package_info,
     package_info_res_allowed_package_cb callback,
@@ -813,16 +1022,24 @@ class Tizen70CapiAppfwPackageManager {
           int Function(package_info_h, package_info_res_allowed_package_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Retrieves required privilege information of the allowed package.
-  /// @details The packages want to access in the allowed area of resource package must have all the privileges required by resource package.
-  /// @since_tizen 6.5
-  /// @param[in] priv_info    The privilege information handle
-  /// @param[in] callback     The iteration callback function
-  /// @param[in] user_data    The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Retrieves required privilege information of the allowed package.
+  ///
+  /// The packages want to access in the allowed area of resource package must have all the privileges required by resource package.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `priv_info` (in): The privilege information handle
+  /// - `callback` (in): The iteration callback function
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
   int package_info_foreach_required_privilege(
     allowed_package_required_privilege_h priv_info,
     package_info_privilege_info_cb callback,
@@ -845,19 +1062,30 @@ class Tizen70CapiAppfwPackageManager {
           int Function(allowed_package_required_privilege_h,
               package_info_privilege_info_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the package update information for the given package.
-  /// @since_tizen 4.0
-  /// @remarks You must release @a info using package_info_updateinfo_destroy().
-  /// @param[in]  pkgid       The ID of the package
-  /// @param[out] info        The package update information for the given package ID
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_NO_SUCH_PACKAGE   The package is not installed
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          Database error occurred
-  /// @see package_info_updateinfo_destroy()
+  /// Gets the package update information for the given package.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - You must release `info` using package_info_updateinfo_destroy().
+  ///
+  /// **Parameters:**
+  /// - `pkgid` (in): The ID of the package
+  /// - `info` (out): The package update information for the given package ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_NO_SUCH_PACKAGE`: The package is not installed
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: Database error occurred
+  ///
+  /// **See also:**
+  /// - `package_info_updateinfo_destroy()`
   int package_info_updateinfo_create(
     ffi.Pointer<ffi.Char> pkgid,
     ffi.Pointer<package_updateinfo_h> info,
@@ -878,17 +1106,26 @@ class Tizen70CapiAppfwPackageManager {
           int Function(
               ffi.Pointer<ffi.Char>, ffi.Pointer<package_updateinfo_h>)>();
 
-  /// @brief Gets the package name.
-  /// @since_tizen 4.0
-  /// @remarks You must release @a package using free().
-  /// @param[in]  info        The package update information
-  /// @param[out] package     The package name
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          Internal I/O error occurred
+  /// Gets the package name.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - You must release `package` using free().
+  ///
+  /// **Parameters:**
+  /// - `info` (in): The package update information
+  /// - `package` (out): The package name
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: Internal I/O error occurred
   int package_info_updateinfo_get_pkgid(
     package_updateinfo_h info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> package,
@@ -909,17 +1146,26 @@ class Tizen70CapiAppfwPackageManager {
           int Function(
               package_updateinfo_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the update version of package.
-  /// @since_tizen 4.0
-  /// @remarks You must release @a version using free().
-  /// @param[in]  info        The package update information
-  /// @param[out] version     The package update version
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          Internal I/O error occurred
+  /// Gets the update version of package.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - You must release `version` using free().
+  ///
+  /// **Parameters:**
+  /// - `info` (in): The package update information
+  /// - `version` (out): The package update version
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: Internal I/O error occurred
   int package_info_updateinfo_get_version(
     package_updateinfo_h info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> version,
@@ -940,15 +1186,22 @@ class Tizen70CapiAppfwPackageManager {
           int Function(
               package_updateinfo_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the update type of package.
-  /// @since_tizen 4.0
-  /// @param[in]  info        The package update information
-  /// @param[out] type        The package update type
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          Internal I/O error occurred
+  /// Gets the update type of package.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `info` (in): The package update information
+  /// - `type` (out): The package update type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: Internal I/O error occurred
   int package_info_updateinfo_get_type(
     package_updateinfo_h info,
     ffi.Pointer<ffi.Int32> type,
@@ -967,14 +1220,23 @@ class Tizen70CapiAppfwPackageManager {
       _package_info_updateinfo_get_typePtr.asFunction<
           int Function(package_updateinfo_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Destroys the package update information handle and releases all its resources.
-  /// @since_tizen 4.0
-  /// @param[in] info         The package update information handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see package_info_updateinfo_create()
+  /// Destroys the package update information handle and releases all its resources.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `info` (in): The package update information handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `package_info_updateinfo_create()`
   int package_info_updateinfo_destroy(
     package_updateinfo_h info,
   ) {
@@ -990,15 +1252,22 @@ class Tizen70CapiAppfwPackageManager {
       _package_info_updateinfo_destroyPtr
           .asFunction<int Function(package_updateinfo_h)>();
 
-  /// @brief Retrieves update information of all packages and invoke callback for each of it.
-  /// @since_tizen 4.0
-  /// @param[in] callback     The iteration callback function
-  /// @param[in] user_data    The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          I/O error
+  /// Retrieves update information of all packages and invoke callback for each of it.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The iteration callback function
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: I/O error
   int package_info_updateinfo_foreach_info(
     package_info_updateinfo_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -1017,24 +1286,34 @@ class Tizen70CapiAppfwPackageManager {
       _package_info_updateinfo_foreach_infoPtr.asFunction<
           int Function(package_info_updateinfo_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Creates the package archive information for the given package.
-  /// @since_tizen 4.0
-  /// @remarks If the given path is relevant to media storage, the privilege
-  /// %http://tizen.org/privilege/mediastorage is needed.
-  /// @remarks If the given path is relevant to external storage, the privilege
-  /// %http://tizen.org/privilege/externalstorage is needed.
-  /// @remarks You must release @a archive_info
-  /// using package_archive_info_destroy().
-  /// @param[in]  path         The path of the package
-  /// @param[out] archive_info The package archive information for
-  /// the given package
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          Internal I/O error
-  /// @see package_archive_info_destroy()
+  /// Creates the package archive information for the given package.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - If the given path is relevant to media storage, the privilege
+  /// - <http://tizen.org/privilege/mediastorage is needed.>
+  /// - If the given path is relevant to external storage, the privilege
+  /// - <http://tizen.org/privilege/externalstorage is needed.>
+  /// - You must release `archive_info`
+  /// - using package_archive_info_destroy().
+  ///
+  /// **Parameters:**
+  /// - `path` (in): The path of the package
+  /// - `archive_info` (out): The package archive information for the given package
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: Internal I/O error
+  ///
+  /// **See also:**
+  /// - `package_archive_info_destroy()`
   int package_archive_info_create(
     ffi.Pointer<ffi.Char> path,
     ffi.Pointer<package_archive_info_h> archive_info,
@@ -1055,14 +1334,23 @@ class Tizen70CapiAppfwPackageManager {
           int Function(
               ffi.Pointer<ffi.Char>, ffi.Pointer<package_archive_info_h>)>();
 
-  /// @brief Destroys the package archive information handle.
-  /// @since_tizen 4.0
-  /// @param[in] archive_info The package archive information handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see package_archive_info_create()
+  /// Destroys the package archive information handle.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `archive_info` (in): The package archive information handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `package_archive_info_create()`
   int package_archive_info_destroy(
     package_archive_info_h archive_info,
   ) {
@@ -1077,16 +1365,25 @@ class Tizen70CapiAppfwPackageManager {
   late final _package_archive_info_destroy = _package_archive_info_destroyPtr
       .asFunction<int Function(package_archive_info_h)>();
 
-  /// @brief Gets the package name.
-  /// @since_tizen 4.0
-  /// @remarks You must release @a package using free().
-  /// @param[in]  archive_info The package archive information
-  /// @param[out] package      The package name
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
+  /// Gets the package name.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - You must release `package` using free().
+  ///
+  /// **Parameters:**
+  /// - `archive_info` (in): The package archive information
+  /// - `package` (out): The package name
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
   int package_archive_info_get_package(
     package_archive_info_h archive_info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> package,
@@ -1107,16 +1404,25 @@ class Tizen70CapiAppfwPackageManager {
           int Function(
               package_archive_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the type of the package.
-  /// @since_tizen 4.0
-  /// @remarks You must release @a type using free().
-  /// @param[in]  archive_info The package archive information
-  /// @param[out] type         The type of the package
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
+  /// Gets the type of the package.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - You must release `type` using free().
+  ///
+  /// **Parameters:**
+  /// - `archive_info` (in): The package archive information
+  /// - `type` (out): The type of the package
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
   int package_archive_info_get_type(
     package_archive_info_h archive_info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> type,
@@ -1137,16 +1443,25 @@ class Tizen70CapiAppfwPackageManager {
           int Function(
               package_archive_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the version of the package.
-  /// @since_tizen 4.0
-  /// @remarks You must release @a version using free().
-  /// @param[in]  archive_info The package archive information
-  /// @param[out] version      The version of the package
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
+  /// Gets the version of the package.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - You must release `version` using free().
+  ///
+  /// **Parameters:**
+  /// - `archive_info` (in): The package archive information
+  /// - `version` (out): The version of the package
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
   int package_archive_info_get_version(
     package_archive_info_h archive_info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> version,
@@ -1167,16 +1482,25 @@ class Tizen70CapiAppfwPackageManager {
           int Function(
               package_archive_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the API version of the package.
-  /// @since_tizen 4.0
-  /// @remarks You must release @a api_version using free().
-  /// @param[in]  archive_info The package archive information
-  /// @param[out] api_version  The API version of the package
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
+  /// Gets the API version of the package.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - You must release `api_version` using free().
+  ///
+  /// **Parameters:**
+  /// - `archive_info` (in): The package archive information
+  /// - `api_version` (out): The API version of the package
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
   int package_archive_info_get_api_version(
     package_archive_info_h archive_info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> api_version,
@@ -1197,17 +1521,26 @@ class Tizen70CapiAppfwPackageManager {
           int Function(
               package_archive_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the description of the package.
-  /// @since_tizen 4.0
-  /// @remarks You must release @a description using free().
-  /// @param[in]  archive_info The package archive information
-  /// @param[out] description  The description of the package
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          I/O error
+  /// Gets the description of the package.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - You must release `description` using free().
+  ///
+  /// **Parameters:**
+  /// - `archive_info` (in): The package archive information
+  /// - `description` (out): The description of the package
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: I/O error
   int package_archive_info_get_description(
     package_archive_info_h archive_info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> description,
@@ -1228,17 +1561,26 @@ class Tizen70CapiAppfwPackageManager {
           int Function(
               package_archive_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the label of the package.
-  /// @since_tizen 4.0
-  /// @remarks You must release @a label using free().
-  /// @param[in]  archive_info The package archive information
-  /// @param[out] label        The label of the package
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          I/O error
+  /// Gets the label of the package.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - You must release `label` using free().
+  ///
+  /// **Parameters:**
+  /// - `archive_info` (in): The package archive information
+  /// - `label` (out): The label of the package
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: I/O error
   int package_archive_info_get_label(
     package_archive_info_h archive_info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> label,
@@ -1259,17 +1601,26 @@ class Tizen70CapiAppfwPackageManager {
           int Function(
               package_archive_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the author of the package.
-  /// @since_tizen 4.0
-  /// @remarks You must release @a author using free().
-  /// @param[in]  archive_info The package archive information
-  /// @param[out] author       The author of the package
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          I/O error
+  /// Gets the author of the package.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - You must release `author` using free().
+  ///
+  /// **Parameters:**
+  /// - `archive_info` (in): The package archive information
+  /// - `author` (out): The author of the package
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: I/O error
   int package_archive_info_get_author(
     package_archive_info_h archive_info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> author,
@@ -1290,18 +1641,27 @@ class Tizen70CapiAppfwPackageManager {
           int Function(
               package_archive_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the raw icon of the package.
-  /// @since_tizen 4.0
-  /// @remarks You must release @a icon using free().
-  /// @param[in]  archive_info The package archive information
-  /// @param[out] icon         The raw icon of the package
-  /// @param[out] icon_size    The size of the icon
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          I/O error
+  /// Gets the raw icon of the package.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - You must release `icon` using free().
+  ///
+  /// **Parameters:**
+  /// - `archive_info` (in): The package archive information
+  /// - `icon` (out): The raw icon of the package
+  /// - `icon_size` (out): The size of the icon
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: I/O error
   int package_archive_info_get_icon(
     package_archive_info_h archive_info,
     ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>> icon,
@@ -1327,28 +1687,28 @@ class Tizen70CapiAppfwPackageManager {
               ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>>,
               ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Retrieves direct dependencies of the given package.
-  /// @details package_info_dependency_info_cb() is called for each direct dependency of the given package.
-  /// For example, if there are packages having the following relationship:
+  /// Retrieves direct dependencies of the given package.
   ///
-  /// <pre>
-  /// B --> E
-  /// A --> B --> C
-  /// D --> C
-  /// </pre>
-  /// A --> B means that A depends on B.
+  /// package_info_dependency_info_cb() is called for each direct dependency of the given package. For example, if there are packages having the following relationship: <pre> B --> E A --> B --> C D --> C </pre> A --> B means that A depends on B. If package_archive_info_foreach_direct_dependency(A) is called, the callback will be called once with the following argument values: *from* = A, *to* = B.
   ///
-  /// If package_archive_info_foreach_direct_dependency(A) is called, the callback will be called once with the following argument values: @e from = A, @e to = B.
-  /// @since_tizen 5.5
-  /// @remarks The function provides the results synchronously. If there are no dependencies, this function will return #PACKAGE_MANAGER_ERROR_NONE immediately and the callback will not be invoked.
-  /// @param[in] archive_info The package archive information
-  /// @param[in] callback     The iteration callback function
-  /// @param[in] user_data    The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_SYSTEM_ERROR      Severe system error
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - The function provides the results synchronously. If there are no dependencies, this function will return `PACKAGE_MANAGER_ERROR_NONE` immediately and the callback will not be invoked.
+  ///
+  /// **Parameters:**
+  /// - `archive_info` (in): The package archive information
+  /// - `callback` (in): The iteration callback function
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_SYSTEM_ERROR`: Severe system error
   int package_archive_info_foreach_direct_dependency(
     package_archive_info_h archive_info,
     package_info_dependency_info_cb callback,
@@ -1371,20 +1731,35 @@ class Tizen70CapiAppfwPackageManager {
           int Function(package_archive_info_h, package_info_dependency_info_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Creates a package manager handle.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/packagemanager.info
-  /// @remarks You must release @a manager using package_manager_destroy().
-  /// @param[out] manager The package manager handle that is newly created on success
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          Internal I/O error
-  /// @see package_manager_destroy()
+  /// Creates a package manager handle.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.info>
+  ///
+  /// **Remarks:**
+  /// - You must release `manager` using package_manager_destroy().
+  ///
+  /// **Parameters:**
+  /// - `manager` (out): The package manager handle that is newly created on success
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: Internal I/O error
+  ///
+  /// **See also:**
+  /// - `package_manager_destroy()`
   int package_manager_create(
     ffi.Pointer<package_manager_h> manager,
   ) {
@@ -1399,14 +1774,23 @@ class Tizen70CapiAppfwPackageManager {
   late final _package_manager_create = _package_manager_createPtr
       .asFunction<int Function(ffi.Pointer<package_manager_h>)>();
 
-  /// @brief Destroys the package manager handle.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] manager The package manager handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see package_manager_create()
+  /// Destroys the package manager handle.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The package manager handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `package_manager_create()`
   int package_manager_destroy(
     package_manager_h manager,
   ) {
@@ -1421,18 +1805,28 @@ class Tizen70CapiAppfwPackageManager {
   late final _package_manager_destroy =
       _package_manager_destroyPtr.asFunction<int Function(package_manager_h)>();
 
-  /// @brief Sets the event status of the package when the package is installed, uninstalled, or updated.
-  /// @details You can combine multiple status using OR operation which you want to listen.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] manager     The package manager handle
-  /// @param[in] status_type The status of the package
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          Internal I/O error
-  /// @see package_manager_status_type_e
-  /// @see package_manager_set_event_cb()
+  /// Sets the event status of the package when the package is installed, uninstalled, or updated.
+  ///
+  /// You can combine multiple status using OR operation which you want to listen.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The package manager handle
+  /// - `status_type` (in): The status of the package
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: Internal I/O error
+  ///
+  /// **See also:**
+  /// - `package_manager_status_type_e`
+  /// - `package_manager_set_event_cb()`
   int package_manager_set_event_status(
     package_manager_h manager,
     int status_type,
@@ -1450,22 +1844,37 @@ class Tizen70CapiAppfwPackageManager {
       _package_manager_set_event_statusPtr
           .asFunction<int Function(package_manager_h, int)>();
 
-  /// @brief Registers a callback function to be invoked when the package is installed, uninstalled, or updated.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/packagemanager.info
-  /// @param[in] manager    The package manager handle
-  /// @param[in] callback   The callback function to be registered
-  /// @param[in] user_data  The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @post package_manager_event_cb() will be invoked.
-  /// @see package_manager_set_event_status()
-  /// @see package_manager_event_cb()
-  /// @see package_manager_unset_event_cb()
+  /// Registers a callback function to be invoked when the package is installed, uninstalled, or updated.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.info>
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The package manager handle
+  /// - `callback` (in): The callback function to be registered
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Postconditions:**
+  /// - package_manager_event_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `package_manager_set_event_status()`
+  /// - `package_manager_event_cb()`
+  /// - `package_manager_unset_event_cb()`
   int package_manager_set_event_cb(
     package_manager_h manager,
     package_manager_event_cb callback,
@@ -1487,23 +1896,40 @@ class Tizen70CapiAppfwPackageManager {
           int Function(package_manager_h, package_manager_event_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @platform
-  /// @brief Registers a callback function to be invoked when the progress of the request to the package resource share changes.
-  /// @since_tizen 6.5
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/packagemanager.admin
-  /// @param[in] manager    The package manager handle
-  /// @param[in] callback   The callback function to be registered
-  /// @param[in] user_data  The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @post package_manager_res_event_cb() will be invoked.
-  /// @see package_manager_set_event_status()
-  /// @see package_manager_res_event_cb()
-  /// @see package_manager_unset_event_cb()
+  /// Registers a callback function to be invoked when the progress of the request to the package resource share changes.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.admin>
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The package manager handle
+  /// - `callback` (in): The callback function to be registered
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Postconditions:**
+  /// - package_manager_res_event_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `package_manager_set_event_status()`
+  /// - `package_manager_res_event_cb()`
+  /// - `package_manager_unset_event_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int package_manager_set_res_event_cb(
     package_manager_h manager,
     package_manager_res_event_cb callback,
@@ -1525,15 +1951,24 @@ class Tizen70CapiAppfwPackageManager {
           int Function(package_manager_h, package_manager_res_event_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback function.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] manager The package manager handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see package_manager_event_cb()
-  /// @see package_manager_set_event_cb()
+  /// Unregisters the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The package manager handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `package_manager_event_cb()`
+  /// - `package_manager_set_event_cb()`
   int package_manager_unset_event_cb(
     package_manager_h manager,
   ) {
@@ -1549,19 +1984,34 @@ class Tizen70CapiAppfwPackageManager {
       _package_manager_unset_event_cbPtr
           .asFunction<int Function(package_manager_h)>();
 
-  /// @brief Retrieves all package information of installed packages.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/packagemanager.info
-  /// @param[in] callback  The callback function to be invoked
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @post This function invokes package_manager_package_info_cb() repeatedly for each package information.
-  /// @see package_manager_package_info_cb()
+  /// Retrieves all package information of installed packages.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.info>
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Postconditions:**
+  /// - This function invokes package_manager_package_info_cb() repeatedly for each package information.
+  ///
+  /// **See also:**
+  /// - `package_manager_package_info_cb()`
   int package_manager_foreach_package_info(
     package_manager_package_info_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -1581,19 +2031,32 @@ class Tizen70CapiAppfwPackageManager {
           int Function(
               package_manager_package_info_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the package ID for the given app ID.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/packagemanager.info
-  /// @remarks The @a package_id should be released using free().
-  /// @param[in]  app_id     The ID of the application
-  /// @param[out] package_id The ID of the package
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
+  /// Gets the package ID for the given app ID.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.info>
+  ///
+  /// **Remarks:**
+  /// - The `package_id` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `app_id` (in): The ID of the application
+  /// - `package_id` (out): The ID of the package
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
   int package_manager_get_package_id_by_app_id(
     ffi.Pointer<ffi.Char> app_id,
     ffi.Pointer<ffi.Pointer<ffi.Char>> package_id,
@@ -1614,20 +2077,33 @@ class Tizen70CapiAppfwPackageManager {
           int Function(
               ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the package information for the given package.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/packagemanager.info
-  /// @remarks You must release @a package_info using package_info_destroy().
-  /// @param[in]  package_id   The ID of the package
-  /// @param[out] package_info The package information for the given package ID
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR Database error occurred
+  /// Gets the package information for the given package.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.info>
+  ///
+  /// **Remarks:**
+  /// - You must release `package_info` using package_info_destroy().
+  ///
+  /// **Parameters:**
+  /// - `package_id` (in): The ID of the package
+  /// - `package_info` (out): The package information for the given package ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: Database error occurred
   int package_manager_get_package_info(
     ffi.Pointer<ffi.Char> package_id,
     ffi.Pointer<package_info_h> package_info,
@@ -1647,18 +2123,24 @@ class Tizen70CapiAppfwPackageManager {
       _package_manager_get_package_infoPtr.asFunction<
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<package_info_h>)>();
 
-  /// @brief Compares whether two package certifications are matched.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in]  lhs_package_id The first package ID to compare
-  /// @param[in]  rhs_package_id The second package ID to compare
-  /// @param[out] compare_result @c 0 if the certification information are matched,
-  /// otherwise the compared result
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          Database error occurred
+  /// Compares whether two package certifications are matched.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `lhs_package_id` (in): The first package ID to compare
+  /// - `rhs_package_id` (in): The second package ID to compare
+  /// - `compare_result` (out): `0` if the certification information are matched, otherwise the compared result
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: Database error occurred
   int package_manager_compare_package_cert_info(
     ffi.Pointer<ffi.Char> lhs_package_id,
     ffi.Pointer<ffi.Char> rhs_package_id,
@@ -1681,18 +2163,24 @@ class Tizen70CapiAppfwPackageManager {
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Compares whether two app certifications are matched.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in]  lhs_app_id     The first app ID to compare
-  /// @param[in]  rhs_app_id     The second app ID to compare
-  /// @param[out] compare_result @c 0 if the certification information are matched,
-  /// otherwise the compared result
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          Database error occurred
+  /// Compares whether two app certifications are matched.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `lhs_app_id` (in): The first app ID to compare
+  /// - `rhs_app_id` (in): The second app ID to compare
+  /// - `compare_result` (out): `0` if the certification information are matched, otherwise the compared result
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: Database error occurred
   int package_manager_compare_app_cert_info(
     ffi.Pointer<ffi.Char> lhs_app_id,
     ffi.Pointer<ffi.Char> rhs_app_id,
@@ -1715,19 +2203,30 @@ class Tizen70CapiAppfwPackageManager {
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Checks whether the package is preloaded by @a app_id.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/packagemanager.info
-  /// @param[in]  app_id   The ID of the application
-  /// @param[out] preload  The preload info of the package
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          I/O error
+  /// Checks whether the package is preloaded by `app_id`.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.info>
+  ///
+  /// **Parameters:**
+  /// - `app_id` (in): The ID of the application
+  /// - `preload` (out): The preload info of the package
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: I/O error
   int package_manager_is_preload_package_by_app_id(
     ffi.Pointer<ffi.Char> app_id,
     ffi.Pointer<ffi.Bool> preload,
@@ -1746,19 +2245,30 @@ class Tizen70CapiAppfwPackageManager {
       _package_manager_is_preload_package_by_app_idPtr.asFunction<
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets the package permission type by @a app_id.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/packagemanager.info
-  /// @param[in]  app_id          The ID of the application
-  /// @param[out] permission_type The package permission type
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          I/O error
+  /// Gets the package permission type by `app_id`.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.info>
+  ///
+  /// **Parameters:**
+  /// - `app_id` (in): The ID of the application
+  /// - `permission_type` (out): The package permission type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: I/O error
   int package_manager_get_permission_type(
     ffi.Pointer<ffi.Char> app_id,
     ffi.Pointer<ffi.Int32> permission_type,
@@ -1777,21 +2287,33 @@ class Tizen70CapiAppfwPackageManager {
       _package_manager_get_permission_typePtr.asFunction<
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Clears the application's internal and external cache directory, asynchronously.
-  /// @details All files stored in the cache directory of the application specified with the package ID are removed.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/packagemanager.clearcache
-  /// @param[in] package_id  The package ID
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_NO_SUCH_PACKAGE   No such package
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          I/O error
-  /// @retval #PACKAGE_MANAGER_ERROR_SYSTEM_ERROR      Severe system error
+  /// Clears the application's internal and external cache directory, asynchronously.
+  ///
+  /// All files stored in the cache directory of the application specified with the package ID are removed.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.clearcache>
+  ///
+  /// **Parameters:**
+  /// - `package_id` (in): The package ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_NO_SUCH_PACKAGE`: No such package
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: I/O error
+  /// - `PACKAGE_MANAGER_ERROR_SYSTEM_ERROR`: Severe system error
   int package_manager_clear_cache_dir(
     ffi.Pointer<ffi.Char> package_id,
   ) {
@@ -1807,20 +2329,32 @@ class Tizen70CapiAppfwPackageManager {
       _package_manager_clear_cache_dirPtr
           .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @platform
-  /// @brief  Clears all applications' internal and external cache directory, asynchronously.
-  /// @details All files stored in the cache directory of each application are removed.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/packagemanager.admin
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PACKAGE_MANAGER_ERROR_NO_SUCH_PACKAGE   No such package
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          I/O error
-  /// @retval #PACKAGE_MANAGER_ERROR_SYSTEM_ERROR      Severe system error
+  /// Clears all applications' internal and external cache directory, asynchronously.
+  ///
+  /// All files stored in the cache directory of each application are removed.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.admin>
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PACKAGE_MANAGER_ERROR_NO_SUCH_PACKAGE`: No such package
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: I/O error
+  /// - `PACKAGE_MANAGER_ERROR_SYSTEM_ERROR`: Severe system error
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int package_manager_clear_all_cache_dir() {
     return _package_manager_clear_all_cache_dir();
   }
@@ -1831,22 +2365,36 @@ class Tizen70CapiAppfwPackageManager {
   late final _package_manager_clear_all_cache_dir =
       _package_manager_clear_all_cache_dirPtr.asFunction<int Function()>();
 
-  /// @platform
-  /// @brief Clears internal and external data directories used by applications in the given package.
-  /// @details All files stored in data directories used by applications in the package specified with the @a package_id are removed.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/packagemanager.admin
-  /// @param[in] package_id  The package ID
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_NO_SUCH_PACKAGE   No such package
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          I/O error
-  /// @retval #PACKAGE_MANAGER_ERROR_SYSTEM_ERROR      Severe system error
+  /// Clears internal and external data directories used by applications in the given package.
+  ///
+  /// All files stored in data directories used by applications in the package specified with the `package_id` are removed.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.admin>
+  ///
+  /// **Parameters:**
+  /// - `package_id` (in): The package ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_NO_SUCH_PACKAGE`: No such package
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: I/O error
+  /// - `PACKAGE_MANAGER_ERROR_SYSTEM_ERROR`: Severe system error
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int package_manager_clear_data_dir(
     ffi.Pointer<ffi.Char> package_id,
   ) {
@@ -1862,23 +2410,35 @@ class Tizen70CapiAppfwPackageManager {
       _package_manager_clear_data_dirPtr
           .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the package size information, asynchronously.
-  /// @details The package size info is asynchronously obtained by the callback function.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/packagemanager.info
-  /// @param[in] package_id  The package ID
-  /// @param[in] callback    The asynchronous callback function to get the package size information
-  /// @param[in] user_data   The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_NO_SUCH_PACKAGE   No such package
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          I/O error
-  /// @retval #PACKAGE_MANAGER_ERROR_SYSTEM_ERROR      Severe system error
+  /// Gets the package size information, asynchronously.
+  ///
+  /// The package size info is asynchronously obtained by the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.info>
+  ///
+  /// **Parameters:**
+  /// - `package_id` (in): The package ID
+  /// - `callback` (in): The asynchronous callback function to get the package size information
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_NO_SUCH_PACKAGE`: No such package
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: I/O error
+  /// - `PACKAGE_MANAGER_ERROR_SYSTEM_ERROR`: Severe system error
   int package_manager_get_package_size_info(
     ffi.Pointer<ffi.Char> package_id,
     package_manager_size_info_receive_cb callback,
@@ -1902,22 +2462,34 @@ class Tizen70CapiAppfwPackageManager {
           int Function(ffi.Pointer<ffi.Char>,
               package_manager_size_info_receive_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the total package size information, asynchronously.
-  /// @details The total package size info is asynchronously obtained by the callback function.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/packagemanager.info
-  /// @param[in] callback  The asynchronous callback function to get the total package size information
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_NO_SUCH_PACKAGE   No such package
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          I/O error
-  /// @retval #PACKAGE_MANAGER_ERROR_SYSTEM_ERROR      Severe system error
+  /// Gets the total package size information, asynchronously.
+  ///
+  /// The total package size info is asynchronously obtained by the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.info>
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The asynchronous callback function to get the total package size information
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_NO_SUCH_PACKAGE`: No such package
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: I/O error
+  /// - `PACKAGE_MANAGER_ERROR_SYSTEM_ERROR`: Severe system error
   int package_manager_get_total_package_size_info(
     package_manager_total_size_info_receive_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -1938,21 +2510,39 @@ class Tizen70CapiAppfwPackageManager {
           int Function(package_manager_total_size_info_receive_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Creates the package information filter handle from db.
-  /// @details The filtered result will be based on AND operation of all added filter properties.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/packagemanager.info
-  /// @remarks The @a handle should be released using package_manager_filter_destroy().
-  /// @param[out] handle Pointer to the package info filter handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR I/O error
-  /// @post package_manager_filter_destroy()
-  /// @see package_manager_filter_add_bool()
-  /// @see package_manager_filter_foreach_package_info()
+  /// Creates the package information filter handle from db.
+  ///
+  /// The filtered result will be based on AND operation of all added filter properties.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.info>
+  ///
+  /// **Remarks:**
+  /// - The `handle` should be released using package_manager_filter_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (out): Pointer to the package info filter handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: I/O error
+  ///
+  /// **Postconditions:**
+  /// - package_manager_filter_destroy()
+  ///
+  /// **See also:**
+  /// - `package_manager_filter_add_bool()`
+  /// - `package_manager_filter_foreach_package_info()`
   int package_manager_filter_create(
     ffi.Pointer<package_manager_filter_h> handle,
   ) {
@@ -1968,17 +2558,28 @@ class Tizen70CapiAppfwPackageManager {
   late final _package_manager_filter_create = _package_manager_filter_createPtr
       .asFunction<int Function(ffi.Pointer<package_manager_filter_h>)>();
 
-  /// @brief Destroys the package information filter handle freeing up all the resources.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] handle Pointer to the package info filter handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR I/O error
-  /// @pre package_manager_filter_create()
-  /// @see package_manager_filter_count()
-  /// @see package_manager_filter_foreach_package_info()
+  /// Destroys the package information filter handle freeing up all the resources.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Pointer to the package info filter handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: I/O error
+  ///
+  /// **Preconditions:**
+  /// - package_manager_filter_create()
+  ///
+  /// **See also:**
+  /// - `package_manager_filter_count()`
+  /// - `package_manager_filter_foreach_package_info()`
   int package_manager_filter_destroy(
     package_manager_filter_h handle,
   ) {
@@ -1994,20 +2595,33 @@ class Tizen70CapiAppfwPackageManager {
       _package_manager_filter_destroyPtr
           .asFunction<int Function(package_manager_filter_h)>();
 
-  /// @brief Adds a boolean filter property to the filter handle.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] handle Pointer to the package info filter handle
-  /// @param[in] property boolean property name
-  /// @param[in] value value corresponding to the property
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR I/O error
-  /// @pre package_manager_filter_create()
-  /// @post package_manager_filter_destroy()
-  /// @see package_manager_filter_count()
-  /// @see package_manager_filter_foreach_package_info()
+  /// Adds a boolean filter property to the filter handle.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Pointer to the package info filter handle
+  /// - `property` (in): boolean property name
+  /// - `value` (in): value corresponding to the property
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: I/O error
+  ///
+  /// **Preconditions:**
+  /// - package_manager_filter_create()
+  ///
+  /// **Postconditions:**
+  /// - package_manager_filter_destroy()
+  ///
+  /// **See also:**
+  /// - `package_manager_filter_count()`
+  /// - `package_manager_filter_foreach_package_info()`
   int package_manager_filter_add_bool(
     package_manager_filter_h handle,
     ffi.Pointer<ffi.Char> property,
@@ -2029,20 +2643,33 @@ class Tizen70CapiAppfwPackageManager {
           int Function(
               package_manager_filter_h, ffi.Pointer<ffi.Char>, bool)>();
 
-  /// @brief Adds a string filter property to the filter handle.
-  /// @since_tizen 6.5
-  /// @param[in] handle pointer to the package info filter handle
-  /// @param[in] property string property name
-  /// @param[in] value value corresponding to the property
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR I/O error
-  /// @pre package_manager_filter_create()
-  /// @post package_manager_filter_destroy()
-  /// @see package_manager_filter_count()
-  /// @see package_manager_filter_foreach_package_info()
+  /// Adds a string filter property to the filter handle.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): pointer to the package info filter handle
+  /// - `property` (in): string property name
+  /// - `value` (in): value corresponding to the property
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: I/O error
+  ///
+  /// **Preconditions:**
+  /// - package_manager_filter_create()
+  ///
+  /// **Postconditions:**
+  /// - package_manager_filter_destroy()
+  ///
+  /// **See also:**
+  /// - `package_manager_filter_count()`
+  /// - `package_manager_filter_foreach_package_info()`
   int package_manager_filter_add_string(
     package_manager_filter_h handle,
     ffi.Pointer<ffi.Char> property,
@@ -2064,20 +2691,37 @@ class Tizen70CapiAppfwPackageManager {
           int Function(package_manager_filter_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Counts the package that satisfy the filter conditions.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/packagemanager.info
-  /// @param[in] handle Pointer to the package info filter handle
-  /// @param[out] count Pointer to store the count value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR I/O error
-  /// @pre package_manager_filter_create()
-  /// @post package_manager_filter_destroy()
-  /// @see package_manager_filter_foreach_package_info()
+  /// Counts the package that satisfy the filter conditions.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.info>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Pointer to the package info filter handle
+  /// - `count` (out): Pointer to store the count value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: I/O error
+  ///
+  /// **Preconditions:**
+  /// - package_manager_filter_create()
+  ///
+  /// **Postconditions:**
+  /// - package_manager_filter_destroy()
+  ///
+  /// **See also:**
+  /// - `package_manager_filter_foreach_package_info()`
   int package_manager_filter_count(
     package_manager_filter_h handle,
     ffi.Pointer<ffi.Int> count,
@@ -2096,23 +2740,40 @@ class Tizen70CapiAppfwPackageManager {
       _package_manager_filter_countPtr.asFunction<
           int Function(package_manager_filter_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Executes the user supplied callback function for each package that satisfy the filter conditions.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/packagemanager.info
-  /// @param[in] handle Pointer to the package info filter handle
-  /// @param[in] callback callback function
-  /// @param[in] user_data user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR I/O error
-  /// @pre package_manager_filter_create()
-  /// @post package_manager_filter_destroy()
-  /// @post This function invokes package_manager_package_info_cb() repeatedly for each package information.
-  /// @see package_manager_package_info_cb()
-  /// @see package_manager_filter_count()
+  /// Executes the user supplied callback function for each package that satisfy the filter conditions.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.info>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Pointer to the package info filter handle
+  /// - `callback` (in): callback function
+  /// - `user_data` (in): user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: I/O error
+  ///
+  /// **Preconditions:**
+  /// - package_manager_filter_create()
+  ///
+  /// **Postconditions:**
+  /// - package_manager_filter_destroy()
+  /// - This function invokes package_manager_package_info_cb() repeatedly for each package information.
+  ///
+  /// **See also:**
+  /// - `package_manager_package_info_cb()`
+  /// - `package_manager_filter_count()`
   int package_manager_filter_foreach_package_info(
     package_manager_filter_h handle,
     package_manager_package_info_cb callback,
@@ -2135,23 +2796,40 @@ class Tizen70CapiAppfwPackageManager {
           int Function(package_manager_filter_h,
               package_manager_package_info_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @platform
-  /// @brief Generates request for getting License, asynchronously.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/packagemanager.admin
-  /// @remarks You must release @a req_data and @a license_url by yourself.
-  /// @param[in] resp_data The response data string of the purchase request
-  /// @param[out] req_data	License request data
-  /// @param[out] license_url License acquisition url data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR Internal I/O error
-  /// @post package_manager_drm_register_license()
+  /// Generates request for getting License, asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.admin>
+  ///
+  /// **Remarks:**
+  /// - You must release `req_data` and `license_url` by yourself.
+  ///
+  /// **Parameters:**
+  /// - `resp_data` (in): The response data string of the purchase request
+  /// - `req_data` (out): License request data
+  /// - `license_url` (out): License acquisition url data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: Internal I/O error
+  ///
+  /// **Postconditions:**
+  /// - package_manager_drm_register_license()
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int package_manager_drm_generate_license_request(
     ffi.Pointer<ffi.Char> resp_data,
     ffi.Pointer<ffi.Pointer<ffi.Char>> req_data,
@@ -2178,19 +2856,34 @@ class Tizen70CapiAppfwPackageManager {
               ffi.Pointer<ffi.Pointer<ffi.Char>>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @platform
-  /// @brief Registers encrypted license, asynchronously.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/packagemanager.admin
-  /// @param[in] resp_data The response data string of the rights request
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR Internal I/O error
-  /// @pre package_manager_drm_generate_license_request()
+  /// Registers encrypted license, asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.admin>
+  ///
+  /// **Parameters:**
+  /// - `resp_data` (in): The response data string of the rights request
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: Internal I/O error
+  ///
+  /// **Preconditions:**
+  /// - package_manager_drm_generate_license_request()
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int package_manager_drm_register_license(
     ffi.Pointer<ffi.Char> resp_data,
   ) {
@@ -2206,19 +2899,32 @@ class Tizen70CapiAppfwPackageManager {
       _package_manager_drm_register_licensePtr
           .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @platform
-  /// @brief Decrypts contents which is encrypted, asynchronously.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/packagemanager.admin
-  /// @param[in] drm_file_path DRM file path
-  /// @param[in] decrypted_file_path Decrypted file path
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR Internal I/O error
+  /// Decrypts contents which is encrypted, asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.admin>
+  ///
+  /// **Parameters:**
+  /// - `drm_file_path` (in): DRM file path
+  /// - `decrypted_file_path` (in): Decrypted file path
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: Internal I/O error
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int package_manager_drm_decrypt_package(
     ffi.Pointer<ffi.Char> drm_file_path,
     ffi.Pointer<ffi.Char> decrypted_file_path,
@@ -2237,14 +2943,21 @@ class Tizen70CapiAppfwPackageManager {
       _package_manager_drm_decrypt_packagePtr.asFunction<
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Retrieves data size from given handle.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in] handle Package size info handle
-  /// @param[out] data_size Data size will be returned
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Retrieves data size from given handle.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Package size info handle
+  /// - `data_size` (out): Data size will be returned
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
   int package_size_info_get_data_size(
     package_size_info_h handle,
     ffi.Pointer<ffi.LongLong> data_size,
@@ -2263,14 +2976,21 @@ class Tizen70CapiAppfwPackageManager {
       _package_size_info_get_data_sizePtr.asFunction<
           int Function(package_size_info_h, ffi.Pointer<ffi.LongLong>)>();
 
-  /// @brief Retrieves cache size from given handle.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in] handle  Package size info handle
-  /// @param[out] cache_size Cache size will be returned
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Retrieves cache size from given handle.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Package size info handle
+  /// - `cache_size` (out): Cache size will be returned
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
   int package_size_info_get_cache_size(
     package_size_info_h handle,
     ffi.Pointer<ffi.LongLong> cache_size,
@@ -2289,14 +3009,21 @@ class Tizen70CapiAppfwPackageManager {
       _package_size_info_get_cache_sizePtr.asFunction<
           int Function(package_size_info_h, ffi.Pointer<ffi.LongLong>)>();
 
-  /// @brief Retrieves application size from given handle.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in] handle Package size info handle
-  /// @param[out] app_size App size will be returned
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Retrieves application size from given handle.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Package size info handle
+  /// - `app_size` (out): App size will be returned
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
   int package_size_info_get_app_size(
     package_size_info_h handle,
     ffi.Pointer<ffi.LongLong> app_size,
@@ -2315,14 +3042,21 @@ class Tizen70CapiAppfwPackageManager {
       _package_size_info_get_app_sizePtr.asFunction<
           int Function(package_size_info_h, ffi.Pointer<ffi.LongLong>)>();
 
-  /// @brief Retrieves external data size from given handle.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in] handle  Package size info handle
-  /// @param[out] ext_data_size External data size will be returned
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Retrieves external data size from given handle.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Package size info handle
+  /// - `ext_data_size` (out): External data size will be returned
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
   int package_size_info_get_external_data_size(
     package_size_info_h handle,
     ffi.Pointer<ffi.LongLong> ext_data_size,
@@ -2342,14 +3076,21 @@ class Tizen70CapiAppfwPackageManager {
       _package_size_info_get_external_data_sizePtr.asFunction<
           int Function(package_size_info_h, ffi.Pointer<ffi.LongLong>)>();
 
-  /// @brief Retrieves external cache size from given handle.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in] handle Package size info handle
-  /// @param[out] ext_cache_size External cache size will be returned
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Retrieves external cache size from given handle.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Package size info handle
+  /// - `ext_cache_size` (out): External cache size will be returned
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
   int package_size_info_get_external_cache_size(
     package_size_info_h handle,
     ffi.Pointer<ffi.LongLong> ext_cache_size,
@@ -2369,14 +3110,21 @@ class Tizen70CapiAppfwPackageManager {
       _package_size_info_get_external_cache_sizePtr.asFunction<
           int Function(package_size_info_h, ffi.Pointer<ffi.LongLong>)>();
 
-  /// @brief Retrieves external application size from given handle.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in] handle Package size info handle
-  /// @param[out] ext_app_size External app size will be returned
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Retrieves external application size from given handle.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Package size info handle
+  /// - `ext_app_size` (out): External app size will be returned
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
   int package_size_info_get_external_app_size(
     package_size_info_h handle,
     ffi.Pointer<ffi.LongLong> ext_app_size,
@@ -2396,18 +3144,31 @@ class Tizen70CapiAppfwPackageManager {
       _package_size_info_get_external_app_sizePtr.asFunction<
           int Function(package_size_info_h, ffi.Pointer<ffi.LongLong>)>();
 
-  /// @platform
-  /// @brief Creates a request handle to the package manager.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks You must release @a request using package_manager_request_destroy().
-  /// @param[out] request The request handle that is newly created on success
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          Internal I/O error
-  /// @see package_manager_request_destroy()
+  /// Creates a request handle to the package manager.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release `request` using package_manager_request_destroy().
+  ///
+  /// **Parameters:**
+  /// - `request` (out): The request handle that is newly created on success
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: Internal I/O error
+  ///
+  /// **See also:**
+  /// - `package_manager_request_destroy()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int package_manager_request_create(
     ffi.Pointer<package_manager_request_h> request,
   ) {
@@ -2424,15 +3185,26 @@ class Tizen70CapiAppfwPackageManager {
       _package_manager_request_createPtr
           .asFunction<int Function(ffi.Pointer<package_manager_request_h>)>();
 
-  /// @platform
-  /// @brief Destroys the request handle to the package manager.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] request The request handle to the package manager
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see package_manager_request_create()
+  /// Destroys the request handle to the package manager.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `request` (in): The request handle to the package manager
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `package_manager_request_create()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int package_manager_request_destroy(
     package_manager_request_h request,
   ) {
@@ -2448,22 +3220,39 @@ class Tizen70CapiAppfwPackageManager {
       _package_manager_request_destroyPtr
           .asFunction<int Function(package_manager_request_h)>();
 
-  /// @platform
-  /// @brief Registers a callback function to be invoked when the progress of the request changes.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/packagemanager.info
-  /// @param[in] request The request handle
-  /// @param[in] callback The callback function to be registered
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @post package_manager_request_event_cb() will be invoked.
-  /// @see package_manager_request_event_cb()
-  /// @see package_manager_request_unset_event_cb()
+  /// Registers a callback function to be invoked when the progress of the request changes.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.info>
+  ///
+  /// **Parameters:**
+  /// - `request` (in): The request handle
+  /// - `callback` (in): The callback function to be registered
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Postconditions:**
+  /// - package_manager_request_event_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `package_manager_request_event_cb()`
+  /// - `package_manager_request_unset_event_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int package_manager_request_set_event_cb(
     package_manager_request_h request,
     package_manager_request_event_cb callback,
@@ -2487,16 +3276,27 @@ class Tizen70CapiAppfwPackageManager {
           int Function(package_manager_request_h,
               package_manager_request_event_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @platform
-  /// @brief Unregisters the callback function.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] request The request handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see package_manager_request_event_cb()
-  /// @see package_manager_request_set_event_cb()
+  /// Unregisters the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `request` (in): The request handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `package_manager_request_event_cb()`
+  /// - `package_manager_request_set_event_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int package_manager_request_unset_event_cb(
     package_manager_request_h request,
   ) {
@@ -2512,15 +3312,24 @@ class Tizen70CapiAppfwPackageManager {
       _package_manager_request_unset_event_cbPtr
           .asFunction<int Function(package_manager_request_h)>();
 
-  /// @platform
-  /// @brief Sets the type of the package to install, uninstall, or update.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] request The request handle
-  /// @param[in] type    The type of the package
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Sets the type of the package to install, uninstall, or update.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `request` (in): The request handle
+  /// - `type` (in): The type of the package
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int package_manager_request_set_type(
     package_manager_request_h request,
     ffi.Pointer<ffi.Char> type,
@@ -2539,15 +3348,24 @@ class Tizen70CapiAppfwPackageManager {
       _package_manager_request_set_typePtr.asFunction<
           int Function(package_manager_request_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @platform
-  /// @brief Sets the mode of the request.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] request The request handle
-  /// @param[in] mode    The mode of the request
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Sets the mode of the request.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `request` (in): The request handle
+  /// - `mode` (in): The mode of the request
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int package_manager_request_set_mode(
     package_manager_request_h request,
     int mode,
@@ -2566,19 +3384,32 @@ class Tizen70CapiAppfwPackageManager {
       _package_manager_request_set_modePtr
           .asFunction<int Function(package_manager_request_h, int)>();
 
-  /// @platform
-  /// @brief Sets the path of TEP file to the request. The TEP file that is set will be installed when the package is installed.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/packagemanager.admin
-  /// @param[in] request The request handle
-  /// @param[in] tep_path The TEP path to set. If this is NULL on update, installed TEP will be removed.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_SYSTEM_ERROR		 Severe system error
+  /// Sets the path of TEP file to the request. The TEP file that is set will be installed when the package is installed.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.admin>
+  ///
+  /// **Parameters:**
+  /// - `request` (in): The request handle
+  /// - `tep_path` (in): The TEP path to set. If this is NULL on update, installed TEP will be removed.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_SYSTEM_ERROR`: Severe system error
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int package_manager_request_set_tep(
     package_manager_request_h request,
     ffi.Pointer<ffi.Char> tep_path,
@@ -2597,20 +3428,35 @@ class Tizen70CapiAppfwPackageManager {
       _package_manager_request_set_tepPtr.asFunction<
           int Function(package_manager_request_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @platform
-  /// @brief Installs the package located at the given path, asynchronously.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/packagemanager.admin
-  /// @param[in]  request The request handle
-  /// @param[in]  path    The absolute path to the package to be installed
-  /// @param[out] id      The ID of the request to the package manager
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see package_manager_request_uninstall()
+  /// Installs the package located at the given path, asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.admin>
+  ///
+  /// **Parameters:**
+  /// - `request` (in): The request handle
+  /// - `path` (in): The absolute path to the package to be installed
+  /// - `id` (out): The ID of the request to the package manager
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `package_manager_request_uninstall()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int package_manager_request_install(
     package_manager_request_h request,
     ffi.Pointer<ffi.Char> path,
@@ -2632,25 +3478,36 @@ class Tizen70CapiAppfwPackageManager {
           int Function(package_manager_request_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @platform
-  /// @brief Installs the package located at the given path, asynchronously.
-  /// @details The progress of the request is asynchronously received by the callback function.
-  /// The @a callback is the individual callback only called for the current API call.
-  /// The @a callback is the only callback called, even if another callback was set for this request
-  /// with package_manager_request_set_event_cb().
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/packagemanager.admin
-  /// @param[in]  request   The request handle
-  /// @param[in]  path      The absolute path to the package to be installed
-  /// @param[in]  callback  The callback function to be invoked
-  /// @param[in]  user_data The user data to be passed to the callback function
-  /// @param[out] id        The ID of the request to the package manager
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Installs the package located at the given path, asynchronously.
+  ///
+  /// The progress of the request is asynchronously received by the callback function. The `callback` is the individual callback only called for the current API call. The `callback` is the only callback called, even if another callback was set for this request with package_manager_request_set_event_cb().
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.admin>
+  ///
+  /// **Parameters:**
+  /// - `request` (in): The request handle
+  /// - `path` (in): The absolute path to the package to be installed
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  /// - `id` (out): The ID of the request to the package manager
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int package_manager_request_install_with_cb(
     package_manager_request_h request,
     ffi.Pointer<ffi.Char> path,
@@ -2685,24 +3542,37 @@ class Tizen70CapiAppfwPackageManager {
               ffi.Pointer<ffi.Void>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @platform
-  /// @brief Installs the packages located at the given paths, asynchronously.
-  /// @since_tizen 6.0
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/packagemanager.admin
-  /// @param[in]  request The request handle
-  /// @param[in]  paths       The array of absolute paths to the packages to be installed
-  /// @param[in]  paths_count The number of paths in array
-  /// @param[out] id          The ID of the request to the package manager
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_NO_SUCH_PACKAGE   No such package
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          I/O error
-  /// @retval #PACKAGE_MANAGER_ERROR_SYSTEM_ERROR      Severe system error
+  /// Installs the packages located at the given paths, asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.admin>
+  ///
+  /// **Parameters:**
+  /// - `request` (in): The request handle
+  /// - `paths` (in): The array of absolute paths to the packages to be installed
+  /// - `paths_count` (in): The number of paths in array
+  /// - `id` (out): The ID of the request to the package manager
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_NO_SUCH_PACKAGE`: No such package
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: I/O error
+  /// - `PACKAGE_MANAGER_ERROR_SYSTEM_ERROR`: Severe system error
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int package_manager_request_install_packages(
     package_manager_request_h request,
     ffi.Pointer<ffi.Pointer<ffi.Char>> paths,
@@ -2730,30 +3600,41 @@ class Tizen70CapiAppfwPackageManager {
           int Function(package_manager_request_h,
               ffi.Pointer<ffi.Pointer<ffi.Char>>, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @platform
-  /// @brief Installs the packages located at the given paths, asynchronously.
-  /// @details The progress of the request is asynchronously received by the callback function.
-  /// The @a callback is the individual callback only called for the current API call.
-  /// The @a callback is the only callback called, even if another callback was set for this request
-  /// with package_manager_request_set_event_cb().
-  /// @since_tizen 6.0
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/packagemanager.admin
-  /// @param[in]  request       The request handle
-  /// @param[in]  paths         The array of absolute paths to the packages to be installed
-  /// @param[in]  paths_count   The number of paths in array
-  /// @param[in]  callback      The callback function to be invoked
-  /// @param[in]  user_data     The user data to be passed to the callback function
-  /// @param[out] id            The ID of the request to the package manager
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_NO_SUCH_PACKAGE   No such package
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          I/O error
-  /// @retval #PACKAGE_MANAGER_ERROR_SYSTEM_ERROR      Severe system error
+  /// Installs the packages located at the given paths, asynchronously.
+  ///
+  /// The progress of the request is asynchronously received by the callback function. The `callback` is the individual callback only called for the current API call. The `callback` is the only callback called, even if another callback was set for this request with package_manager_request_set_event_cb().
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.admin>
+  ///
+  /// **Parameters:**
+  /// - `request` (in): The request handle
+  /// - `paths` (in): The array of absolute paths to the packages to be installed
+  /// - `paths_count` (in): The number of paths in array
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  /// - `id` (out): The ID of the request to the package manager
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_NO_SUCH_PACKAGE`: No such package
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: I/O error
+  /// - `PACKAGE_MANAGER_ERROR_SYSTEM_ERROR`: Severe system error
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int package_manager_request_install_packages_with_cb(
     package_manager_request_h request,
     ffi.Pointer<ffi.Pointer<ffi.Char>> paths,
@@ -2792,19 +3673,32 @@ class Tizen70CapiAppfwPackageManager {
               ffi.Pointer<ffi.Void>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @platform
-  /// @brief Uninstalls the package with the given name, asynchronously.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/packagemanager.admin
-  /// @param[in]  request The request handle
-  /// @param[in]  name    The name of the package to be uninstalled
-  /// @param[out] id      The ID of the request to the package manager
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Uninstalls the package with the given name, asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.admin>
+  ///
+  /// **Parameters:**
+  /// - `request` (in): The request handle
+  /// - `name` (in): The name of the package to be uninstalled
+  /// - `id` (out): The ID of the request to the package manager
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int package_manager_request_uninstall(
     package_manager_request_h request,
     ffi.Pointer<ffi.Char> name,
@@ -2826,25 +3720,36 @@ class Tizen70CapiAppfwPackageManager {
           int Function(package_manager_request_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @platform
-  /// @brief Uninstalls the package with the given name, asynchronously.
-  /// @details The progress of the request is asynchronously received by the callback function.
-  /// The @a callback is the individual callback only called for the current API call.
-  /// The @a callback is the only callback called, even if another callback was set for this request
-  /// with package_manager_request_set_event_cb().
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/packagemanager.admin
-  /// @param[in]  request   The request handle
-  /// @param[in]  name      The name of the package to be uninstalled
-  /// @param[in]  callback  The callback function to be invoked
-  /// @param[in]  user_data The user data to be passed to the callback function
-  /// @param[out] id        The ID of the request to the package manager
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Uninstalls the package with the given name, asynchronously.
+  ///
+  /// The progress of the request is asynchronously received by the callback function. The `callback` is the individual callback only called for the current API call. The `callback` is the only callback called, even if another callback was set for this request with package_manager_request_set_event_cb().
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.admin>
+  ///
+  /// **Parameters:**
+  /// - `request` (in): The request handle
+  /// - `name` (in): The name of the package to be uninstalled
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  /// - `id` (out): The ID of the request to the package manager
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int package_manager_request_uninstall_with_cb(
     package_manager_request_h request,
     ffi.Pointer<ffi.Char> name,
@@ -2879,19 +3784,32 @@ class Tizen70CapiAppfwPackageManager {
               ffi.Pointer<ffi.Void>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @platform
-  /// @brief Moves the package from SD card to the internal memory and vice versa, asynchronously.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/packagemanager.admin
-  /// @param[in] request   The request handle
-  /// @param[in] name      The name of the package to be moved
-  /// @param[in] move_type The move type [#package_manager_move_type_e], [external to internal/internal to external]
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Moves the package from SD card to the internal memory and vice versa, asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.admin>
+  ///
+  /// **Parameters:**
+  /// - `request` (in): The request handle
+  /// - `name` (in): The name of the package to be moved
+  /// - `move_type` (in): The move type `[`package_manager_move_type_e`]`, `[external to internal/internal to external]`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int package_manager_request_move(
     package_manager_request_h request,
     ffi.Pointer<ffi.Char> name,
@@ -2913,26 +3831,37 @@ class Tizen70CapiAppfwPackageManager {
           int Function(
               package_manager_request_h, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @platform
-  /// @brief Moves the package from SD card to the internal memory and vice versa, asynchronously.
-  /// @details The progress of the request is asynchronously received by the callback function.
-  /// The @a callback is the individual callback only called for the current API call.
-  /// The @a callback is the only callback called, even if another callback was set for this request
-  /// with package_manager_request_set_event_cb().
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/packagemanager.admin
-  /// @param[in]  request   The request handle
-  /// @param[in]  name      The name of the package to be moved
-  /// @param[in]  move_type The move type [#package_manager_move_type_e], [external to internal/internal to external]
-  /// @param[in]  callback  The callback function to be invoked
-  /// @param[in]  user_data The user data to be passed to the callback function
-  /// @param[out] id        The ID of the request to the package manager
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Moves the package from SD card to the internal memory and vice versa, asynchronously.
+  ///
+  /// The progress of the request is asynchronously received by the callback function. The `callback` is the individual callback only called for the current API call. The `callback` is the only callback called, even if another callback was set for this request with package_manager_request_set_event_cb().
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.admin>
+  ///
+  /// **Parameters:**
+  /// - `request` (in): The request handle
+  /// - `name` (in): The name of the package to be moved
+  /// - `move_type` (in): The move type `[`package_manager_move_type_e`]`, `[external to internal/internal to external]`
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  /// - `id` (out): The ID of the request to the package manager
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int package_manager_request_move_with_cb(
     package_manager_request_h request,
     ffi.Pointer<ffi.Char> name,
@@ -2970,20 +3899,37 @@ class Tizen70CapiAppfwPackageManager {
               ffi.Pointer<ffi.Void>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @platform
-  /// @brief Creates a package update info request.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/packagemanager.admin
-  /// @remarks You must release @a pkg_updateinfo_req using package_manager_updateinfo_request_destroy().
-  /// @param[out] pkg_updateinfo_req The package update info request handle that is newly created on success
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @see package_manager_updateinfo_request_destroy()
+  /// Creates a package update info request.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.admin>
+  ///
+  /// **Remarks:**
+  /// - You must release `pkg_updateinfo_req` using package_manager_updateinfo_request_destroy().
+  ///
+  /// **Parameters:**
+  /// - `pkg_updateinfo_req` (out): The package update info request handle that is newly created on success
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `package_manager_updateinfo_request_destroy()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int package_manager_updateinfo_request_create(
     ffi.Pointer<package_updateinfo_request_h> pkg_updateinfo_req,
   ) {
@@ -3000,16 +3946,25 @@ class Tizen70CapiAppfwPackageManager {
       _package_manager_updateinfo_request_createPtr.asFunction<
           int Function(ffi.Pointer<package_updateinfo_request_h>)>();
 
-  /// @brief Sets the package ID to the package update info request.
-  /// @since_tizen 4.0
-  /// @param[in] pkg_updateinfo_req   The update info request handle
-  /// @param[in] pkgid                The package ID
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @see package_manager_updateinfo_request_create()
+  /// Sets the package ID to the package update info request.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `pkg_updateinfo_req` (in): The update info request handle
+  /// - `pkgid` (in): The package ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `package_manager_updateinfo_request_create()`
   int package_manager_updateinfo_set_pkgid(
     package_updateinfo_request_h pkg_updateinfo_req,
     ffi.Pointer<ffi.Char> pkgid,
@@ -3028,16 +3983,25 @@ class Tizen70CapiAppfwPackageManager {
       _package_manager_updateinfo_set_pkgidPtr.asFunction<
           int Function(package_updateinfo_request_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the package version to the package update info request.
-  /// @since_tizen 4.0
-  /// @param[in] pkg_updateinfo_req   The update info request handle
-  /// @param[in] version              The package version
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @see package_manager_updateinfo_request_create()
+  /// Sets the package version to the package update info request.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `pkg_updateinfo_req` (in): The update info request handle
+  /// - `version` (in): The package version
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `package_manager_updateinfo_request_create()`
   int package_manager_updateinfo_set_version(
     package_updateinfo_request_h pkg_updateinfo_req,
     ffi.Pointer<ffi.Char> version,
@@ -3057,16 +4021,25 @@ class Tizen70CapiAppfwPackageManager {
       _package_manager_updateinfo_set_versionPtr.asFunction<
           int Function(package_updateinfo_request_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the package update type to the package update info request.
-  /// @since_tizen 4.0
-  /// @param[in] pkg_updateinfo_req   The update info request handle
-  /// @param[in] type                 The package update type
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see package_manager_updateinfo_request_create()
-  /// @see package_updateinfo_type_e
+  /// Sets the package update type to the package update info request.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `pkg_updateinfo_req` (in): The update info request handle
+  /// - `type` (in): The package update type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `package_manager_updateinfo_request_create()`
+  /// - `package_updateinfo_type_e`
   int package_manager_updateinfo_set_type(
     package_updateinfo_request_h pkg_updateinfo_req,
     int type,
@@ -3085,17 +4058,26 @@ class Tizen70CapiAppfwPackageManager {
       _package_manager_updateinfo_set_typePtr
           .asFunction<int Function(package_updateinfo_request_h, int)>();
 
-  /// @brief Requests to register package update info in platform.
-  /// @since_tizen 4.0
-  /// @param[in] pkg_updateinfo_req    The update info request handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          I/O error
-  /// @retval #PACKAGE_MANAGER_ERROR_SYSTEM_ERROR      Severe system error
-  /// @see package_manager_updateinfo_request_create()
-  /// @see package_manager_updateinfo_request_destroy()
+  /// Requests to register package update info in platform.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `pkg_updateinfo_req` (in): The update info request handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: I/O error
+  /// - `PACKAGE_MANAGER_ERROR_SYSTEM_ERROR`: Severe system error
+  ///
+  /// **See also:**
+  /// - `package_manager_updateinfo_request_create()`
+  /// - `package_manager_updateinfo_request_destroy()`
   int package_manager_updateinfo_request_register(
     package_updateinfo_request_h pkg_updateinfo_req,
   ) {
@@ -3111,14 +4093,23 @@ class Tizen70CapiAppfwPackageManager {
       _package_manager_updateinfo_request_registerPtr
           .asFunction<int Function(package_updateinfo_request_h)>();
 
-  /// @brief Destroys the package update info request.
-  /// @since_tizen 4.0
-  /// @param[in] pkg_updateinfo_req    The update info request handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see package_manager_updateinfo_request_create()
+  /// Destroys the package update info request.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `pkg_updateinfo_req` (in): The update info request handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `package_manager_updateinfo_request_create()`
   int package_manager_updateinfo_request_destroy(
     package_updateinfo_request_h pkg_updateinfo_req,
   ) {
@@ -3134,16 +4125,23 @@ class Tizen70CapiAppfwPackageManager {
       _package_manager_updateinfo_request_destroyPtr
           .asFunction<int Function(package_updateinfo_request_h)>();
 
-  /// @brief Requests to unregister update info in platform for given package id.
-  /// @since_tizen 4.0
-  /// @param[in] pkg_updateinfo_req   The update info request handle
-  /// @param[in] pkgid                The package id to request unregister update info
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          I/O error
-  /// @retval #PACKAGE_MANAGER_ERROR_SYSTEM_ERROR      Severe system error
+  /// Requests to unregister update info in platform for given package id.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `pkg_updateinfo_req` (in): The update info request handle
+  /// - `pkgid` (in): The package id to request unregister update info
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: I/O error
+  /// - `PACKAGE_MANAGER_ERROR_SYSTEM_ERROR`: Severe system error
   int package_manager_updateinfo_request_unregister(
     package_updateinfo_request_h pkg_updateinfo_req,
     ffi.Pointer<ffi.Char> pkgid,
@@ -3163,15 +4161,22 @@ class Tizen70CapiAppfwPackageManager {
       _package_manager_updateinfo_request_unregisterPtr.asFunction<
           int Function(package_updateinfo_request_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Request to unregister update info of all packages in platform.
-  /// @since_tizen 4.0
-  /// @param[in] pkg_updateinfo_req    The update info request handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          I/O error
-  /// @retval #PACKAGE_MANAGER_ERROR_SYSTEM_ERROR      Severe system error
+  /// Request to unregister update info of all packages in platform.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `pkg_updateinfo_req` (in): The update info request handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: I/O error
+  /// - `PACKAGE_MANAGER_ERROR_SYSTEM_ERROR`: Severe system error
   int package_manager_updateinfo_request_unregister_all(
     package_updateinfo_request_h pkg_updateinfo_req,
   ) {
@@ -3187,22 +4192,38 @@ class Tizen70CapiAppfwPackageManager {
       _package_manager_updateinfo_request_unregister_allPtr
           .asFunction<int Function(package_updateinfo_request_h)>();
 
-  /// @platform
-  /// @brief  Adds resource source and destination path into handle.
-  /// @details Adds resource source path and destination path to be copied into handle
-  /// @since_tizen 6.5
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/packagemanager.admin
-  /// @param[in] request      The package manager request handle
-  /// @param[in] src_path     The relative path of resource file or directory to be copied
-  /// @param[in] dest_path    The relative path of destination
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_SYSTEM_ERROR      Severe system error
-  /// @see package_manager_request_res_copy_with_cb()
+  /// Adds resource source and destination path into handle.
+  ///
+  /// Adds resource source path and destination path to be copied into handle
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.admin>
+  ///
+  /// **Parameters:**
+  /// - `request` (in): The package manager request handle
+  /// - `src_path` (in): The relative path of resource file or directory to be copied
+  /// - `dest_path` (in): The relative path of destination
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_SYSTEM_ERROR`: Severe system error
+  ///
+  /// **See also:**
+  /// - `package_manager_request_res_copy_with_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int package_manager_request_add_res_copy_path(
     package_manager_request_h request,
     ffi.Pointer<ffi.Char> src_path,
@@ -3225,25 +4246,41 @@ class Tizen70CapiAppfwPackageManager {
           int Function(package_manager_request_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>)>();
 
-  /// @platform
-  /// @brief  Copies resources into target directory, asynchronously.
-  /// @details Copies resources into directory, which could be access via privileged applications only.
-  /// @since_tizen 6.5
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/packagemanager.admin
-  /// @param[in] request      The package manager request handle
-  /// @param[in] callback     The callback function to be invoked
-  /// @param[in] user_data    The user data to be passed to the callback function
-  /// @param[out] id        The ID of the request to the package manager
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #PACKAGE_MANAGER_ERROR_IO_ERROR          I/O error
-  /// @retval #PACKAGE_MANAGER_ERROR_SYSTEM_ERROR      Severe system error
-  /// @see package_manager_request_add_res_copy_path()
+  /// Copies resources into target directory, asynchronously.
+  ///
+  /// Copies resources into directory, which could be access via privileged applications only.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.admin>
+  ///
+  /// **Parameters:**
+  /// - `request` (in): The package manager request handle
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  /// - `id` (out): The ID of the request to the package manager
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PACKAGE_MANAGER_ERROR_IO_ERROR`: I/O error
+  /// - `PACKAGE_MANAGER_ERROR_SYSTEM_ERROR`: Severe system error
+  ///
+  /// **See also:**
+  /// - `package_manager_request_add_res_copy_path()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int package_manager_request_res_copy_with_cb(
     package_manager_request_h request,
     package_manager_request_res_event_cb callback,
@@ -3274,21 +4311,37 @@ class Tizen70CapiAppfwPackageManager {
               ffi.Pointer<ffi.Void>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @platform
-  /// @brief  Add directory path to be created at privileged shared directory into handle.
-  /// @details Added directory path will be created into directory existed for sharing resources via privileged applications
-  /// @since_tizen 6.5
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/packagemanager.admin
-  /// @param[in] request      The package manager request handle
-  /// @param[in] dir_path     The relative path of directories to be created under shared resource path
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_SYSTEM_ERROR      Severe system error
-  /// @see package_manager_request_res_create_dir_with_cb()
+  /// Add directory path to be created at privileged shared directory into handle.
+  ///
+  /// Added directory path will be created into directory existed for sharing resources via privileged applications
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.admin>
+  ///
+  /// **Parameters:**
+  /// - `request` (in): The package manager request handle
+  /// - `dir_path` (in): The relative path of directories to be created under shared resource path
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_SYSTEM_ERROR`: Severe system error
+  ///
+  /// **See also:**
+  /// - `package_manager_request_res_create_dir_with_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int package_manager_request_add_res_create_dir_path(
     package_manager_request_h request,
     ffi.Pointer<ffi.Char> dir_path,
@@ -3308,23 +4361,39 @@ class Tizen70CapiAppfwPackageManager {
       _package_manager_request_add_res_create_dir_pathPtr.asFunction<
           int Function(package_manager_request_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @platform
-  /// @brief  Create directories into directory for sharing resources via privileged application, asynchronously.
-  /// @details Create directories into certain directory which could be access via privileged applications only.
-  /// @since_tizen 6.5
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/packagemanager.admin
-  /// @param[in] request      The package manager request handle
-  /// @param[in] callback     The callback function to be invoked
-  /// @param[in] user_data    The user data to be passed to the callback function
-  /// @param[out] id        The ID of the request to the package manager
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @see package_manager_request_add_res_create_dir_path()
+  /// Create directories into directory for sharing resources via privileged application, asynchronously.
+  ///
+  /// Create directories into certain directory which could be access via privileged applications only.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.admin>
+  ///
+  /// **Parameters:**
+  /// - `request` (in): The package manager request handle
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  /// - `id` (out): The ID of the request to the package manager
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `package_manager_request_add_res_create_dir_path()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int package_manager_request_res_create_dir_with_cb(
     package_manager_request_h request,
     package_manager_request_res_event_cb callback,
@@ -3355,21 +4424,37 @@ class Tizen70CapiAppfwPackageManager {
               ffi.Pointer<ffi.Void>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @platform
-  /// @brief  Adds file or directory path to be removed located at privileged shared directory into handle.
-  /// @details Added path will be removed from directory existed for sharing resources via privileged applications
-  /// @since_tizen 6.5
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/packagemanager.admin
-  /// @param[in] request      The package manager request handle
-  /// @param[in] res_path     The relative path of resources to be removed from privileged shared resource directory
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_SYSTEM_ERROR      Severe system error
-  /// @see package_manager_request_res_remove_with_cb()
+  /// Adds file or directory path to be removed located at privileged shared directory into handle.
+  ///
+  /// Added path will be removed from directory existed for sharing resources via privileged applications
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.admin>
+  ///
+  /// **Parameters:**
+  /// - `request` (in): The package manager request handle
+  /// - `res_path` (in): The relative path of resources to be removed from privileged shared resource directory
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_SYSTEM_ERROR`: Severe system error
+  ///
+  /// **See also:**
+  /// - `package_manager_request_res_remove_with_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int package_manager_request_add_res_remove_path(
     package_manager_request_h request,
     ffi.Pointer<ffi.Char> res_path,
@@ -3389,23 +4474,39 @@ class Tizen70CapiAppfwPackageManager {
       _package_manager_request_add_res_remove_pathPtr.asFunction<
           int Function(package_manager_request_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @platform
-  /// @brief  Removes resources from for sharing resources via privileged application, asynchronously.
-  /// @details Removes resources added at handle from certain directory which could be access via privileged applications only.
-  /// @since_tizen 6.5
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/packagemanager.admin
-  /// @param[in] request      The package manager request handle
-  /// @param[in] callback     The callback function to be invoked
-  /// @param[in] user_data    The user data to be passed to the callback function
-  /// @param[out] id        The ID of the request to the package manager
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @see package_manager_request_add_res_remove_path()
+  /// Removes resources from for sharing resources via privileged application, asynchronously.
+  ///
+  /// Removes resources added at handle from certain directory which could be access via privileged applications only.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.admin>
+  ///
+  /// **Parameters:**
+  /// - `request` (in): The package manager request handle
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  /// - `id` (out): The ID of the request to the package manager
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `package_manager_request_add_res_remove_path()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int package_manager_request_res_remove_with_cb(
     package_manager_request_h request,
     package_manager_request_res_event_cb callback,
@@ -3436,18 +4537,31 @@ class Tizen70CapiAppfwPackageManager {
               ffi.Pointer<ffi.Void>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @platform
-  /// @brief Gets the error code from given resource event handle.
-  /// @since_tizen 6.5
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/packagemanager.admin
-  /// @param[in] handle       Resource event info handle
-  /// @param[out] error       Error will be returned
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Gets the error code from given resource event handle.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.admin>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Resource event info handle
+  /// - `error` (out): Error will be returned
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int package_manager_res_event_info_get_error_code(
     package_manager_res_event_info_h handle,
     ffi.Pointer<ffi.Int32> error,
@@ -3468,21 +4582,38 @@ class Tizen70CapiAppfwPackageManager {
           int Function(
               package_manager_res_event_info_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @platform
-  /// @brief Retrieves all package information of installed packages.
-  /// @since_tizen 6.5
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/packagemanager.admin
-  /// @param[in] handle    Resource event info handle
-  /// @param[in] callback  The callback function to be invoked
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @post This function invokes package_manager_res_event_path_cb() repeatedly for each path state handled by resource event.
-  /// @see package_manager_res_event_path_cb()
+  /// Retrieves all package information of installed packages.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.admin>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Resource event info handle
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Postconditions:**
+  /// - This function invokes package_manager_res_event_path_cb() repeatedly for each path state handled by resource event.
+  ///
+  /// **See also:**
+  /// - `package_manager_res_event_path_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int package_manager_res_event_info_foreach_path(
     package_manager_res_event_info_h handle,
     package_manager_res_event_path_cb callback,
@@ -3505,20 +4636,35 @@ class Tizen70CapiAppfwPackageManager {
           int Function(package_manager_res_event_info_h,
               package_manager_res_event_path_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @platform
-  /// @brief Gets the privileged shared resource path for the given package ID.
-  /// @since_tizen 6.5
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/packagemanager.admin
-  /// @remarks You must release @a path using free().
-  /// @param[in]  package_id	The ID of the package
-  /// @param[out] path			The path of privileged shared resource path of the package
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PACKAGE_MANAGER_ERROR_NONE              Successful
-  /// @retval #PACKAGE_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PACKAGE_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY     Out of memory
+  /// Gets the privileged shared resource path for the given package ID.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/packagemanager.admin>
+  ///
+  /// **Remarks:**
+  /// - You must release `path` using free().
+  ///
+  /// **Parameters:**
+  /// - `package_id` (in): The ID of the package
+  /// - `path` (out): The path of privileged shared resource path of the package
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PACKAGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PACKAGE_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PACKAGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PACKAGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int package_manager_get_priv_shared_res_path(
     ffi.Pointer<ffi.Char> package_id,
     ffi.Pointer<ffi.Pointer<ffi.Char>> path,
@@ -3540,14 +4686,20 @@ class Tizen70CapiAppfwPackageManager {
               ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 }
 
+/// @nodoc
 final class package_info_s extends ffi.Opaque {}
 
+/// @nodoc
 final class package_updateinfo_s extends ffi.Opaque {}
 
+/// @nodoc
 final class allowed_package_required_privilege_s extends ffi.Opaque {}
 
-/// @brief Enumeration for storage type.
-/// @since_tizen 2.3
+/// Enumeration for storage type.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class package_info_installed_storage_type_e {
   /// < Internal storage
   static const int PACKAGE_INFO_INTERNAL_STORAGE = 0;
@@ -3559,8 +4711,11 @@ abstract class package_info_installed_storage_type_e {
   static const int PACKAGE_INFO_EXTENDED_STORAGE = 2;
 }
 
-/// @brief Enumeration for app component type.
-/// @since_tizen 2.3
+/// Enumeration for app component type.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class package_info_app_component_type_e {
   /// < All applications
   /// (Deprecated since 5.5, use #PACKAGE_INFO_APP_COMPONENT_TYPE_ALL instead)
@@ -3601,8 +4756,11 @@ abstract class package_info_app_component_type_e {
   static const int PACKAGE_INFO_APP_COMPONENT_TYPE_COMPONENT_BASED = 5;
 }
 
-/// @brief Enumeration for certification type.
-/// @since_tizen 2.3
+/// Enumeration for certification type.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class package_cert_type_e {
   /// < Author Root Certificate
   static const int PACKAGE_INFO_AUTHOR_ROOT_CERT = 0;
@@ -3632,8 +4790,11 @@ abstract class package_cert_type_e {
   static const int PACKAGE_INFO_DISTRIBUTOR2_SIGNER_CERT = 8;
 }
 
-/// @brief Enumeration for package update info type.
-/// @since_tizen 4.0
+/// Enumeration for package update info type.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class package_updateinfo_type_e {
   /// < None type
   static const int PACKAGE_UPDATEINFO_TYPE_NONE = 0;
@@ -3645,87 +4806,139 @@ abstract class package_updateinfo_type_e {
   static const int PACKAGE_UPDATEINFO_TYPE_OPTIONAL = 2;
 }
 
-/// @brief The package information handle.
-/// @since_tizen 2.3
+/// The package information handle.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 typedef package_info_h = ffi.Pointer<package_info_s>;
 
-/// @brief Called to get the application ID once for each installed package.
-/// @since_tizen 2.3
-/// @param[in] comp_type The application component type
-/// @param[in] app_id    The application ID.
-/// @param[in] user_data The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
-/// @pre package_info_foreach_app_from_package() will invoke this callback.
-/// @see package_info_foreach_app_from_package()
+/// Called to get the application ID once for each installed package.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `comp_type` (in): The application component type
+/// - `app_id` (in): The application ID.
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - package_info_foreach_app_from_package() will invoke this callback.
+///
+/// **See also:**
+/// - `package_info_foreach_app_from_package()`
+/// @nodoc
 typedef package_info_app_cb
     = ffi.Pointer<ffi.NativeFunction<package_info_app_cbFunction>>;
+/// @nodoc
 typedef package_info_app_cbFunction = ffi.Bool Function(ffi.Int32 comp_type,
     ffi.Pointer<ffi.Char> app_id, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartpackage_info_app_cbFunction = bool Function(int comp_type,
     ffi.Pointer<ffi.Char> app_id, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called to get the certification information.
-/// @since_tizen 2.3
-/// @param[in] handle       The package info handle
-/// @param[in] cert_type    The certificate type
-/// @param[in] cert_value   The certificate value of corresponding certificate key \n
-/// This value is base64 encoded data.
-/// @param[in] user_data    The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
-/// @pre package_info_foreach_cert_info() will invoke this callback.
-/// @see package_info_foreach_cert_info()
+/// Called to get the certification information.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `handle` (in): The package info handle
+/// - `cert_type` (in): The certificate type
+/// - `cert_value` (in): The certificate value of corresponding certificate key This value is base64 encoded data.
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - package_info_foreach_cert_info() will invoke this callback.
+///
+/// **See also:**
+/// - `package_info_foreach_cert_info()`
+/// @nodoc
 typedef package_info_cert_info_cb
     = ffi.Pointer<ffi.NativeFunction<package_info_cert_info_cbFunction>>;
+/// @nodoc
 typedef package_info_cert_info_cbFunction = ffi.Bool Function(
     package_info_h handle,
     ffi.Int32 cert_type,
     ffi.Pointer<ffi.Char> cert_value,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartpackage_info_cert_info_cbFunction = bool Function(
     package_info_h handle,
     int cert_type,
     ffi.Pointer<ffi.Char> cert_value,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called to get the privilege information.
-/// @since_tizen 2.3
-/// @param[in] privilege_name the name of the privilege
-/// @param[in] user_data    The user data passed from the foreach function
-/// @return  @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
-/// @pre package_info_foreach_privilege_info() will invoke this callback.
-/// @see package_info_foreach_privilege_info()
+/// Called to get the privilege information.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `privilege_name` (in): the name of the privilege
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - package_info_foreach_privilege_info() will invoke this callback.
+///
+/// **See also:**
+/// - `package_info_foreach_privilege_info()`
+/// @nodoc
 typedef package_info_privilege_info_cb
     = ffi.Pointer<ffi.NativeFunction<package_info_privilege_info_cbFunction>>;
+/// @nodoc
 typedef package_info_privilege_info_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> privilege_name, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartpackage_info_privilege_info_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> privilege_name, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when dependency information between packages is retrieved.
-/// @since_tizen 5.5
-/// @remarks @a from, @a to, @a type and @a required_version are managed by the platform and will be released after the callback exits.
-/// @param[in] from             The ID of package that depends on another
-/// @param[in] to               The ID of package that is required by another
-/// @param[in] type             The type of dependency
-/// @param[in] required_version The required version
-/// @param[in] user_data        The user data passed from the foreach function
-/// @return  @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
-/// @pre package_info_foreach_dependency_info() will invoke this callback.
-/// @pre package_info_foreach_dependency_info_depends_on() will invoke this callback.
-/// @see package_info_foreach_dependency_info()
-/// @see package_info_foreach_dependency_info_depends_on()
+/// Called when dependency information between packages is retrieved.
+///
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **Remarks:**
+/// - `from`, `to`, `type` and `required_version` are managed by the platform and will be released after the callback exits.
+///
+/// **Parameters:**
+/// - `from` (in): The ID of package that depends on another
+/// - `to` (in): The ID of package that is required by another
+/// - `type` (in): The type of dependency
+/// - `required_version` (in): The required version
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - package_info_foreach_dependency_info() will invoke this callback.
+/// - package_info_foreach_dependency_info_depends_on() will invoke this callback.
+///
+/// **See also:**
+/// - `package_info_foreach_dependency_info()`
+/// - `package_info_foreach_dependency_info_depends_on()`
+/// @nodoc
 typedef package_info_dependency_info_cb
     = ffi.Pointer<ffi.NativeFunction<package_info_dependency_info_cbFunction>>;
+/// @nodoc
 typedef package_info_dependency_info_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> from,
     ffi.Pointer<ffi.Char> to,
     ffi.Pointer<ffi.Char> type,
     ffi.Pointer<ffi.Char> required_version,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartpackage_info_dependency_info_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> from,
     ffi.Pointer<ffi.Char> to,
@@ -3733,61 +4946,104 @@ typedef Dartpackage_info_dependency_info_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> required_version,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called to get the allowed package information of resource package.
-/// @since_tizen 6.5
-/// @remarks @a allowed_package, @a privilege_handle are managed by the platform and will be released after the callback exits.
-/// @param[in] allowed_package  The ID of allowed package
-/// @param[in] privilege_handle The privilege handle required by resource package
-/// @param[in] user_data        The user data passed from the foreach function
-/// @return  @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
-/// @pre package_info_foreach_res_allowed_package() will invoke this callback.
-/// @see package_info_foreach_res_allowed_package()
+/// Called to get the allowed package information of resource package.
+///
+/// **Since Tizen:**
+/// - 6.5
+///
+/// **Remarks:**
+/// - `allowed_package`, `privilege_handle` are managed by the platform and will be released after the callback exits.
+///
+/// **Parameters:**
+/// - `allowed_package` (in): The ID of allowed package
+/// - `privilege_handle` (in): The privilege handle required by resource package
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - package_info_foreach_res_allowed_package() will invoke this callback.
+///
+/// **See also:**
+/// - `package_info_foreach_res_allowed_package()`
+/// @nodoc
 typedef package_info_res_allowed_package_cb = ffi
     .Pointer<ffi.NativeFunction<package_info_res_allowed_package_cbFunction>>;
+/// @nodoc
 typedef package_info_res_allowed_package_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> allowed_package,
     allowed_package_required_privilege_h privilege_handle,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartpackage_info_res_allowed_package_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> allowed_package,
     allowed_package_required_privilege_h privilege_handle,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The required privilege handle.
-/// @since_tizen 6.5
-/// @see package_info_foreach_required_privilege()
+/// The required privilege handle.
+///
+/// **Since Tizen:**
+/// - 6.5
+///
+/// **See also:**
+/// - `package_info_foreach_required_privilege()`
+/// @nodoc
 typedef allowed_package_required_privilege_h
     = ffi.Pointer<allowed_package_required_privilege_s>;
 
-/// @brief The package update information handle.
-/// @since_tizen 4.0
+/// The package update information handle.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 typedef package_updateinfo_h = ffi.Pointer<package_updateinfo_s>;
 
-/// @brief Called for each update information of all packages.
-/// @since_tizen 4.0
-/// @remarks @a info should not be freed and can be used only in the callback.
-/// @param[in] info       The package update information handle
-/// @param[in] user_data  The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
-/// @pre package_info_updateinfo_foreach_info() will invoke this callback.
-/// @see package_info_updateinfo_foreach_info()
+/// Called for each update information of all packages.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Remarks:**
+/// - `info` should not be freed and can be used only in the callback.
+///
+/// **Parameters:**
+/// - `info` (in): The package update information handle
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - package_info_updateinfo_foreach_info() will invoke this callback.
+///
+/// **See also:**
+/// - `package_info_updateinfo_foreach_info()`
+/// @nodoc
 typedef package_info_updateinfo_cb
     = ffi.Pointer<ffi.NativeFunction<package_info_updateinfo_cbFunction>>;
+/// @nodoc
 typedef package_info_updateinfo_cbFunction = ffi.Bool Function(
     package_updateinfo_h info, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartpackage_info_updateinfo_cbFunction = bool Function(
     package_updateinfo_h info, ffi.Pointer<ffi.Void> user_data);
 
+/// @nodoc
 final class package_archive_info_s extends ffi.Opaque {}
 
-/// @brief The package archive information handle.
-/// @since_tizen 4.0
+/// The package archive information handle.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 typedef package_archive_info_h = ffi.Pointer<package_archive_info_s>;
 
-/// @brief Enumeration for error code.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for error code.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class package_manager_error_e {
   /// < Successful
   static const int PACKAGE_MANAGER_ERROR_NONE = 0;
@@ -3811,8 +5067,11 @@ abstract class package_manager_error_e {
   static const int PACKAGE_MANAGER_ERROR_PERMISSION_DENIED = -13;
 }
 
-/// @brief Enumeration for event type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for event type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class package_manager_event_type_e {
   /// < Install event type
   static const int PACKAGE_MANAGER_EVENT_TYPE_INSTALL = 0;
@@ -3842,8 +5101,11 @@ abstract class package_manager_event_type_e {
   static const int PACKAGE_MANAGER_EVENT_TYPE_RES_UNINSTALL = 8;
 }
 
-/// @brief Enumeration for event state.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for event state.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class package_manager_event_state_e {
   /// < Started event state
   static const int PACKAGE_MANAGER_EVENT_STATE_STARTED = 0;
@@ -3858,8 +5120,11 @@ abstract class package_manager_event_state_e {
   static const int PACKAGE_MANAGER_EVENT_STATE_FAILED = 3;
 }
 
-/// @brief Enumeration for move type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for move type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class package_manager_move_type_e {
   /// < Internal type
   static const int PACKAGE_MANAGER_REQUEST_MOVE_TO_INTERNAL = 0;
@@ -3871,8 +5136,11 @@ abstract class package_manager_move_type_e {
   static const int PACKAGE_MANAGER_REQUEST_MOVE_TO_EXTENDED = 2;
 }
 
-/// @brief Enumeration for certification compare type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for certification compare type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class package_manager_compare_result_type_e {
   /// < Matching certification
   static const int PACKAGE_MANAGER_COMPARE_MATCH = 0;
@@ -3890,8 +5158,11 @@ abstract class package_manager_compare_result_type_e {
   static const int PACKAGE_MANAGER_COMPARE_BOTH_NO_CERT = 4;
 }
 
-/// @brief Enumeration for permission type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for permission type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class package_manager_permission_type_e {
   /// < Normal permission
   static const int PACKAGE_MANAGER_PERMISSION_NORMAL = 0;
@@ -3903,8 +5174,11 @@ abstract class package_manager_permission_type_e {
   static const int PACKAGE_MANAGER_PERMISSION_PRIVILEGE = 2;
 }
 
-/// @brief Enumeration for status type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for status type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class package_manager_status_type_e {
   /// < All status
   static const int PACKAGE_MANAGER_STATUS_TYPE_ALL = 0;
@@ -3943,8 +5217,11 @@ abstract class package_manager_status_type_e {
   static const int PACKAGE_MANAGER_STATUS_TYPE_RES_UNINSTALL = 1024;
 }
 
-/// @brief Enumeration for resource event path state.
-/// @since_tizen 6.5
+/// Enumeration for resource event path state.
+///
+/// **Since Tizen:**
+/// - 6.5
+/// @nodoc
 abstract class package_manager_res_event_path_state_e {
   /// < State that operation do nothing about the path
   static const int PACKAGE_MANAGER_RES_EVENT_PATH_STATE_NONE = 0;
@@ -3956,32 +5233,46 @@ abstract class package_manager_res_event_path_state_e {
   static const int PACKAGE_MANAGER_RES_EVENT_PATH_STATE_FAILED = 2;
 }
 
+/// @nodoc
 final class package_updateinfo_request_s extends ffi.Opaque {}
 
+/// @nodoc
 final class package_manager_s extends ffi.Opaque {}
 
+/// @nodoc
 final class package_manager_filter_s extends ffi.Opaque {}
 
+/// @nodoc
 final class package_manager_res_event_info_s extends ffi.Opaque {}
 
-/// @brief The Package manager handle.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// The Package manager handle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 typedef package_manager_h = ffi.Pointer<package_manager_s>;
 
-/// @brief Called when the package is installed, uninstalled, or updated, and the progress of the request to the package manager changes.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] type The type of the package to be installed, uninstalled, or updated
-/// @param[in] package The name of the package to be installed, uninstalled, or updated
-/// @param[in] event_type The type of the request to the package manager
-/// @param[in] event_state The current state of the request to the package manager
-/// @param[in] progress    The progress for the request that is being processed by the package manager \n
-/// The range of progress is from @c 0 to @c 100
-/// @param[in] error       The error code when the package manager failed to process the request
-/// @param[in] user_data   The user data passed from package_manager_set_event_cb()
-/// @see package_manager_set_event_cb()
-/// @see package_manager_unset_event_cb()
+/// Called when the package is installed, uninstalled, or updated, and the progress of the request to the package manager changes.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `type` (in): The type of the package to be installed, uninstalled, or updated
+/// - `package` (in): The name of the package to be installed, uninstalled, or updated
+/// - `event_type` (in): The type of the request to the package manager
+/// - `event_state` (in): The current state of the request to the package manager
+/// - `progress` (in): The progress for the request that is being processed by the package manager The range of progress is from `0` to `100`
+/// - `error` (in): The error code when the package manager failed to process the request
+/// - `user_data` (in): The user data passed from package_manager_set_event_cb()
+///
+/// **See also:**
+/// - `package_manager_set_event_cb()`
+/// - `package_manager_unset_event_cb()`
+/// @nodoc
 typedef package_manager_event_cb
     = ffi.Pointer<ffi.NativeFunction<package_manager_event_cbFunction>>;
+/// @nodoc
 typedef package_manager_event_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> type,
     ffi.Pointer<ffi.Char> package,
@@ -3990,6 +5281,7 @@ typedef package_manager_event_cbFunction = ffi.Void Function(
     ffi.Int progress,
     ffi.Int32 error,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartpackage_manager_event_cbFunction = void Function(
     ffi.Pointer<ffi.Char> type,
     ffi.Pointer<ffi.Char> package,
@@ -3999,25 +5291,36 @@ typedef Dartpackage_manager_event_cbFunction = void Function(
     int error,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the progress of the request to the package resource share changes.
-/// @since_tizen 6.5
-/// @remarks The @a pkgid should not be released. The @a pkgid can be used only in the callback.
-/// @remarks The @a handle should not be released. The @a handle can be used only in the callback.
-/// @param[in] pkgid The package ID of resource owner
-/// @param[in] event_type The type of resource event
-/// @param[in] event_state The state of resource event
-/// @param[in] handle    The handle which contains additional information of event
-/// @param[in] user_data   The user data passed from package_manager_set_res_event_cb()
-/// @see package_manager_set_res_event_cb()
-/// @see package_manager_unset_event_cb()
+/// Called when the progress of the request to the package resource share changes.
+///
+/// **Since Tizen:**
+/// - 6.5
+///
+/// **Remarks:**
+/// - The `pkgid` should not be released. The `pkgid` can be used only in the callback.
+/// - The `handle` should not be released. The `handle` can be used only in the callback.
+///
+/// **Parameters:**
+/// - `pkgid` (in): The package ID of resource owner
+/// - `event_type` (in): The type of resource event
+/// - `event_state` (in): The state of resource event
+/// - `handle` (in): The handle which contains additional information of event
+/// - `user_data` (in): The user data passed from package_manager_set_res_event_cb()
+///
+/// **See also:**
+/// - `package_manager_set_res_event_cb()`
+/// - `package_manager_unset_event_cb()`
+/// @nodoc
 typedef package_manager_res_event_cb
     = ffi.Pointer<ffi.NativeFunction<package_manager_res_event_cbFunction>>;
+/// @nodoc
 typedef package_manager_res_event_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> pkgid,
     ffi.Int32 event_type,
     ffi.Int32 event_state,
     package_manager_res_event_info_h handle,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartpackage_manager_res_event_cbFunction = void Function(
     ffi.Pointer<ffi.Char> pkgid,
     int event_type,
@@ -4025,66 +5328,107 @@ typedef Dartpackage_manager_res_event_cbFunction = void Function(
     package_manager_res_event_info_h handle,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Resource share event handle.
-/// @since_tizen 6.5
+/// Resource share event handle.
+///
+/// **Since Tizen:**
+/// - 6.5
+/// @nodoc
 typedef package_manager_res_event_info_h
     = ffi.Pointer<package_manager_res_event_info_s>;
 
-/// @brief Called to retrieve all packages.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] package_info The package information
-/// @param[in] user_data    The user data passed from the foreach function
-/// @return  @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
-/// @see package_manager_foreach_package_info()
+/// Called to retrieve all packages.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `package_info` (in): The package information
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **See also:**
+/// - `package_manager_foreach_package_info()`
+/// @nodoc
 typedef package_manager_package_info_cb
     = ffi.Pointer<ffi.NativeFunction<package_manager_package_info_cbFunction>>;
+/// @nodoc
 typedef package_manager_package_info_cbFunction = ffi.Bool Function(
     package_info_h package_info, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartpackage_manager_package_info_cbFunction = bool Function(
     package_info_h package_info, ffi.Pointer<ffi.Void> user_data);
 
+/// @nodoc
 final class package_size_info extends ffi.Opaque {}
 
-/// @brief Called when the package size information is obtained.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-/// @param[in] package_id  The package ID
-/// @param[in] size_info   The pointer to the structure including the package size information
-/// @param[in] user_data   The user data to be passed to the callback function
+/// Called when the package size information is obtained.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+///
+/// **Parameters:**
+/// - `package_id` (in): The package ID
+/// - `size_info` (in): The pointer to the structure including the package size information
+/// - `user_data` (in): The user data to be passed to the callback function
+/// @nodoc
 typedef package_manager_size_info_receive_cb = ffi
     .Pointer<ffi.NativeFunction<package_manager_size_info_receive_cbFunction>>;
+/// @nodoc
 typedef package_manager_size_info_receive_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> package_id,
     package_size_info_h size_info,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartpackage_manager_size_info_receive_cbFunction = void Function(
     ffi.Pointer<ffi.Char> package_id,
     package_size_info_h size_info,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The package size information handle.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// The package size information handle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+/// @nodoc
 typedef package_size_info_h = ffi.Pointer<package_size_info>;
 
-/// @platform
-/// @brief Called when the total package size information is obtained.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] size_info  The pointer to the structure including the package size information
-/// @param[in] user_data  The user data to be passed to the callback function
+/// Called when the total package size information is obtained.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `size_info` (in): The pointer to the structure including the package size information
+/// - `user_data` (in): The user data to be passed to the callback function
+///
+/// **Platform:**
+/// - Platform API.
+/// @nodoc
 typedef package_manager_total_size_info_receive_cb = ffi.Pointer<
     ffi.NativeFunction<package_manager_total_size_info_receive_cbFunction>>;
+/// @nodoc
 typedef package_manager_total_size_info_receive_cbFunction = ffi.Void Function(
     package_size_info_h size_info, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartpackage_manager_total_size_info_receive_cbFunction = void Function(
     package_size_info_h size_info, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Package manager filter handle.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Package manager filter handle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 typedef package_manager_filter_h = ffi.Pointer<package_manager_filter_s>;
 
-/// @platform
-/// @brief Enumeration for request mode.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for request mode.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Platform:**
+/// - Platform API.
+/// @nodoc
 abstract class package_manager_request_mode_e {
   /// < @platform Default request mode
   static const int PACKAGE_MANAGER_REQUEST_MODE_DEFAULT = 0;
@@ -4093,29 +5437,44 @@ abstract class package_manager_request_mode_e {
   static const int PACKAGE_MANAGER_REQUEST_MODE_QUIET = 1;
 }
 
+/// @nodoc
 final class package_manager_request_s extends ffi.Opaque {}
 
-/// @platform
-/// @brief The Package manager request handle.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// The Package manager request handle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Platform:**
+/// - Platform API.
+/// @nodoc
 typedef package_manager_request_h = ffi.Pointer<package_manager_request_s>;
 
-/// @platform
-/// @brief Called when the progress of the request to the package manager changes.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] id          The ID of the request to the package manager
-/// @param[in] type        The type of the package to install, uninstall or update
-/// @param[in] package     The name of the package to install, uninstall or update
-/// @param[in] event_type  The type of the request to the package manager
-/// @param[in] event_state The current state of the request to the package manager
-/// @param[in] progress    The progress for the request that is being processed by the package manager \n
-/// The range of progress is from @c 0 to @c 100.
-/// @param[in] error       The error code when the package manager failed to process the request
-/// @param[in] user_data   The user data passed from package_manager_request_set_event_cb()
-/// @see package_manager_request_set_event_cb()
-/// @see package_manager_request_unset_event_cb()
+/// Called when the progress of the request to the package manager changes.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `id` (in): The ID of the request to the package manager
+/// - `type` (in): The type of the package to install, uninstall or update
+/// - `package` (in): The name of the package to install, uninstall or update
+/// - `event_type` (in): The type of the request to the package manager
+/// - `event_state` (in): The current state of the request to the package manager
+/// - `progress` (in): The progress for the request that is being processed by the package manager The range of progress is from `0` to `100`.
+/// - `error` (in): The error code when the package manager failed to process the request
+/// - `user_data` (in): The user data passed from package_manager_request_set_event_cb()
+///
+/// **See also:**
+/// - `package_manager_request_set_event_cb()`
+/// - `package_manager_request_unset_event_cb()`
+///
+/// **Platform:**
+/// - Platform API.
+/// @nodoc
 typedef package_manager_request_event_cb
     = ffi.Pointer<ffi.NativeFunction<package_manager_request_event_cbFunction>>;
+/// @nodoc
 typedef package_manager_request_event_cbFunction = ffi.Void Function(
     ffi.Int id,
     ffi.Pointer<ffi.Char> type,
@@ -4125,6 +5484,7 @@ typedef package_manager_request_event_cbFunction = ffi.Void Function(
     ffi.Int progress,
     ffi.Int32 error,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartpackage_manager_request_event_cbFunction = void Function(
     int id,
     ffi.Pointer<ffi.Char> type,
@@ -4135,27 +5495,42 @@ typedef Dartpackage_manager_request_event_cbFunction = void Function(
     int error,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The Package manager update info request handle.
-/// @since_tizen 4.0
+/// The Package manager update info request handle.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 typedef package_updateinfo_request_h
     = ffi.Pointer<package_updateinfo_request_s>;
 
-/// @platform
-/// @brief Called when the progress of the request to the package resource share changes.
-/// @since_tizen 6.5
-/// @remarks The @a pkgid should not be released. The @a pkgid can be used only in the callback.
-/// @remarks The @a handle should not be released. The @a handle can be used only in the callback.
-/// @param[in] req_id      The ID of the request to the package manager
-/// @param[in] pkgid       The package ID of resource owner
-/// @param[in] event_type  The type of resource event
-/// @param[in] event_state The state of resource event
-/// @param[in] handle      The handle which contains additional information of event
-/// @param[in] user_data   The user data passed from package_manager_request_res_copy_with_cb(), package_manager_request_res_create_dir_with_cb(), package_manager_request_res_remove_with_cb()
-/// @see package_manager_request_res_copy_with_cb()
-/// @see package_manager_request_res_create_dir_with_cb()
-/// @see package_manager_request_res_remove_with_cb()
+/// Called when the progress of the request to the package resource share changes.
+///
+/// **Since Tizen:**
+/// - 6.5
+///
+/// **Remarks:**
+/// - The `pkgid` should not be released. The `pkgid` can be used only in the callback.
+/// - The `handle` should not be released. The `handle` can be used only in the callback.
+///
+/// **Parameters:**
+/// - `req_id` (in): The ID of the request to the package manager
+/// - `pkgid` (in): The package ID of resource owner
+/// - `event_type` (in): The type of resource event
+/// - `event_state` (in): The state of resource event
+/// - `handle` (in): The handle which contains additional information of event
+/// - `user_data` (in): The user data passed from package_manager_request_res_copy_with_cb(), package_manager_request_res_create_dir_with_cb(), package_manager_request_res_remove_with_cb()
+///
+/// **See also:**
+/// - `package_manager_request_res_copy_with_cb()`
+/// - `package_manager_request_res_create_dir_with_cb()`
+/// - `package_manager_request_res_remove_with_cb()`
+///
+/// **Platform:**
+/// - Platform API.
+/// @nodoc
 typedef package_manager_request_res_event_cb = ffi
     .Pointer<ffi.NativeFunction<package_manager_request_res_event_cbFunction>>;
+/// @nodoc
 typedef package_manager_request_res_event_cbFunction = ffi.Void Function(
     ffi.Int req_id,
     ffi.Pointer<ffi.Char> pkgid,
@@ -4163,6 +5538,7 @@ typedef package_manager_request_res_event_cbFunction = ffi.Void Function(
     ffi.Int32 event_state,
     package_manager_res_event_info_h handle,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartpackage_manager_request_res_event_cbFunction = void Function(
     int req_id,
     ffi.Pointer<ffi.Char> pkgid,
@@ -4171,41 +5547,60 @@ typedef Dartpackage_manager_request_res_event_cbFunction = void Function(
     package_manager_res_event_info_h handle,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called to retrieve all path state about resource event.
-/// @since_tizen 6.5
-/// @remarks The @a path should not be released. The @a path can be used only in the callback.
-/// @param[in] path         The path handled by a resource event
-/// @param[in] state        The state of the path
-/// @param[in] user_data    The user data passed from the foreach function
-/// @return  @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
-/// @see package_manager_res_event_info_foreach_path()
+/// Called to retrieve all path state about resource event.
+///
+/// **Since Tizen:**
+/// - 6.5
+///
+/// **Remarks:**
+/// - The `path` should not be released. The `path` can be used only in the callback.
+///
+/// **Parameters:**
+/// - `path` (in): The path handled by a resource event
+/// - `state` (in): The state of the path
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **See also:**
+/// - `package_manager_res_event_info_foreach_path()`
+/// @nodoc
 typedef package_manager_res_event_path_cb = ffi
     .Pointer<ffi.NativeFunction<package_manager_res_event_path_cbFunction>>;
+/// @nodoc
 typedef package_manager_res_event_path_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> path,
     ffi.Int32 state,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartpackage_manager_res_event_path_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> path, int state, ffi.Pointer<ffi.Void> user_data);
 
+/// @nodoc
 const String PACKAGE_MANAGER_PKGINFO_PROP_REMOVABLE =
     'PMINFO_PKGINFO_PROP_PACKAGE_REMOVABLE';
 
+/// @nodoc
 const String PACKAGE_MANAGER_PKGINFO_PROP_READONLY =
     'PMINFO_PKGINFO_PROP_PACKAGE_READONLY';
 
+/// @nodoc
 const String PACKAGE_MANAGER_PKGINFO_PROP_SUPPORT_DISABLE =
     'PMINFO_PKGINFO_PROP_PACKAGE_SUPPORT_DISABLE';
 
+/// @nodoc
 const String PACKAGE_MANAGER_PKGINFO_PROP_DISABLE =
     'PMINFO_PKGINFO_PROP_PACKAGE_DISABLE';
 
+/// @nodoc
 const String PACKAGE_MANAGER_PKGINFO_PROP_PRELOAD =
     'PMINFO_PKGINFO_PROP_PACKAGE_PRELOAD';
 
+/// @nodoc
 const String PACKAGE_MANAGER_PKGINFO_PROP_RES_TYPE =
     'PMINFO_PKGINFO_PROP_PACKAGE_RES_TYPE';
 
+/// @nodoc
 const String PACKAGE_MANAGER_PKGINFO_PROP_TYPE =
     'PMINFO_PKGINFO_PROP_PACKAGE_TYPE';

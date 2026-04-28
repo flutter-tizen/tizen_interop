@@ -1,3 +1,6 @@
+/// {@category 9.0/tizen}
+library tizen_interop_9_0.capi_context;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'generated_bindings_capi_appfw_app_control.dart' as app_control;
 
 /// Dart bindings for Tizen capi-context APIs.
+/// {@category 9.0/tizen}
 class Tizen90CapiContext {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,19 +29,28 @@ class Tizen90CapiContext {
           lookup)
       : _lookup = lookup;
 
-  /// @brief		Creates a context history handle.
-  /// @since_tizen 2.4
-  /// @remarks		The @c handle must be released using context_history_destroy().
+  /// Creates a context history handle.
   ///
-  /// @param[out] handle    Handle to be initialized
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_HISTORY_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_HISTORY_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_HISTORY_ERROR_NOT_SUPPORTED		Not supported
-  /// @retval		#CONTEXT_HISTORY_ERROR_OUT_OF_MEMORY		Out of memory
+  /// **Remarks:**
+  /// - The `handle` must be released using context_history_destroy().
   ///
-  /// @see context_history_destroy()
+  /// **Parameters:**
+  /// - `handle` (out): Handle to be initialized
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_HISTORY_ERROR_NONE`: Successful
+  /// - `CONTEXT_HISTORY_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_HISTORY_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTEXT_HISTORY_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `context_history_destroy()`
   int context_history_create(
     ffi.Pointer<context_history_h> handle,
   ) {
@@ -52,19 +65,26 @@ class Tizen90CapiContext {
   late final _context_history_create = _context_history_createPtr
       .asFunction<int Function(ffi.Pointer<context_history_h>)>();
 
-  /// @brief		Releases the resources occupied by a handle.
-  /// @details		This releases the memory allocated for the @c handle.
+  /// Releases the resources occupied by a handle.
   ///
-  /// @since_tizen 2.4
+  /// This releases the memory allocated for the `handle`.
   ///
-  /// @param[in]  handle   Handle to be released
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_HISTORY_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_HISTORY_ERROR_NOT_SUPPORTED		Not supported
-  /// @retval		#CONTEXT_HISTORY_ERROR_INVALID_PARAMETER	Invalid parameter
+  /// **Parameters:**
+  /// - `handle` (in): Handle to be released
   ///
-  /// @pre	context_history_create()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_HISTORY_ERROR_NONE`: Successful
+  /// - `CONTEXT_HISTORY_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTEXT_HISTORY_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - context_history_create()
   int context_history_destroy(
     context_history_h handle,
   ) {
@@ -79,19 +99,28 @@ class Tizen90CapiContext {
   late final _context_history_destroy =
       _context_history_destroyPtr.asFunction<int Function(context_history_h)>();
 
-  /// @brief		Creates a history filter.
-  /// @since_tizen 2.4
-  /// @remarks		The @c filter must be released using context_history_filter_destroy().
+  /// Creates a history filter.
   ///
-  /// @param[out]	filter		Filter handle to be initialized
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_HISTORY_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_HISTORY_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_HISTORY_ERROR_NOT_SUPPORTED		Not supported
-  /// @retval		#CONTEXT_HISTORY_ERROR_OUT_OF_MEMORY		Memory allocation failed
+  /// **Remarks:**
+  /// - The `filter` must be released using context_history_filter_destroy().
   ///
-  /// @see		context_history_filter_destroy()
+  /// **Parameters:**
+  /// - `filter` (out): Filter handle to be initialized
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_HISTORY_ERROR_NONE`: Successful
+  /// - `CONTEXT_HISTORY_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_HISTORY_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTEXT_HISTORY_ERROR_OUT_OF_MEMORY`: Memory allocation failed
+  ///
+  /// **See also:**
+  /// - `context_history_filter_destroy()`
   int context_history_filter_create(
     ffi.Pointer<context_history_filter_h> filter,
   ) {
@@ -107,18 +136,26 @@ class Tizen90CapiContext {
   late final _context_history_filter_create = _context_history_filter_createPtr
       .asFunction<int Function(ffi.Pointer<context_history_filter_h>)>();
 
-  /// @brief		Releases the resources occupied by a filter.
-  /// @details		This releases the memory allocated for the @c filter.
-  /// @since_tizen 2.4
+  /// Releases the resources occupied by a filter.
   ///
-  /// @param[in]	filter		Filter handle to be released
+  /// This releases the memory allocated for the `filter`.
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_HISTORY_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_HISTORY_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_HISTORY_ERROR_NOT_SUPPORTED		Not supported
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @pre		context_history_filter_create()
+  /// **Parameters:**
+  /// - `filter` (in): Filter handle to be released
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_HISTORY_ERROR_NONE`: Successful
+  /// - `CONTEXT_HISTORY_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_HISTORY_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - context_history_filter_create()
   int context_history_filter_destroy(
     context_history_filter_h filter,
   ) {
@@ -134,20 +171,28 @@ class Tizen90CapiContext {
       _context_history_filter_destroyPtr
           .asFunction<int Function(context_history_filter_h)>();
 
-  /// @brief		Sets an integer value to a filter.
-  /// @details		This sets the value to a filter.
-  /// @since_tizen 2.4
+  /// Sets an integer value to a filter.
   ///
-  /// @param[in]	filter		The filter handle
-  /// @param[in]	filter_type	The filter type to set
-  /// @param[in]	value		The value to be set
+  /// This sets the value to a filter.
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_HISTORY_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_HISTORY_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_HISTORY_ERROR_NOT_SUPPORTED		Not supported
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @pre		context_history_filter_create()
+  /// **Parameters:**
+  /// - `filter` (in): The filter handle
+  /// - `filter_type` (in): The filter type to set
+  /// - `value` (in): The value to be set
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_HISTORY_ERROR_NONE`: Successful
+  /// - `CONTEXT_HISTORY_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_HISTORY_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - context_history_filter_create()
   int context_history_filter_set_int(
     context_history_filter_h filter,
     int filter_type,
@@ -168,22 +213,33 @@ class Tizen90CapiContext {
       _context_history_filter_set_intPtr
           .asFunction<int Function(context_history_filter_h, int, int)>();
 
-  /// @deprecated	Deprecated since 4.0.
-  /// @brief		Sets a string to a filter.
-  /// @details		This sets the value to a filter.
-  /// @since_tizen 2.4
+  /// **Deprecated:** Deprecated since 4.0.
   ///
-  /// @param[in]	filter		The filter handle
-  /// @param[in]	filter_type	The filter type to set
-  /// @param[in]	value		The value to be set
+  /// Sets a string to a filter.
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_HISTORY_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_HISTORY_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_HISTORY_ERROR_NOT_SUPPORTED		Not supported
+  /// This sets the value to a filter.
   ///
-  /// @pre		context_history_filter_create()
-  /// @see		context_history_filter_set_int()
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Parameters:**
+  /// - `filter` (in): The filter handle
+  /// - `filter_type` (in): The filter type to set
+  /// - `value` (in): The value to be set
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_HISTORY_ERROR_NONE`: Successful
+  /// - `CONTEXT_HISTORY_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_HISTORY_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - context_history_filter_create()
+  ///
+  /// **See also:**
+  /// - `context_history_filter_set_int()`
   int context_history_filter_set_string(
     context_history_filter_h filter,
     int filter_type,
@@ -204,17 +260,23 @@ class Tizen90CapiContext {
       _context_history_filter_set_stringPtr.asFunction<
           int Function(context_history_filter_h, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief		Checks whether a history data type is supported in the current device.
-  /// @since_tizen 4.0
+  /// Checks whether a history data type is supported in the current device.
   ///
-  /// @param[in]	data_type		Type of history data
-  /// @param[out]	supported		If supported, @c true, otherwise @c false
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_HISTORY_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_HISTORY_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_HISTORY_ERROR_NOT_SUPPORTED		Not supported
-  /// @retval		#CONTEXT_HISTORY_ERROR_OPERATION_FAILED		Operation failed
+  /// **Parameters:**
+  /// - `data_type` (in): Type of history data
+  /// - `supported` (out): If supported, `true`, otherwise `false`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_HISTORY_ERROR_NONE`: Successful
+  /// - `CONTEXT_HISTORY_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_HISTORY_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTEXT_HISTORY_ERROR_OPERATION_FAILED`: Operation failed
   int context_history_is_supported(
     int data_type,
     ffi.Pointer<ffi.Bool> supported,
@@ -232,32 +294,41 @@ class Tizen90CapiContext {
   late final _context_history_is_supported = _context_history_is_supportedPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief		Reads context statistics or patterns.
-  /// @details		Retrieves a given type of context statistics or patterns list.
-  /// See the programming guide to find available filter type #context_history_filter_e@n
-  /// for each context data type #context_history_data_e.
-  /// @since_tizen 2.4
+  /// Reads context statistics or patterns.
   ///
-  /// @remarks		The @c list must be released using context_history_list_destroy(). \n
-  /// %http://tizen.org/privilege/apphistory.read or %http://tizen.org/privilege/mediahistory.read
-  /// is needed to retrieve data. It depends on context data type #context_history_data_e.
+  /// Retrieves a given type of context statistics or patterns list. See the programming guide to find available filter type `context_history_filter_e`@n for each context data type `context_history_data_e`.
   ///
-  /// @param[in]	handle      Handle for controlling the context history data requests
-  /// @param[in]	data_type	Type of the history data
-  /// @param[in]	filter		Filter to be used to compute statistics or patterns. This can not be @c NULL
-  /// @param[out]	list   History data retrieved. This should be freed after use
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_HISTORY_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_HISTORY_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_HISTORY_ERROR_PERMISSION_DENIED	Permission denied
-  /// @retval		#CONTEXT_HISTORY_ERROR_NOT_SUPPORTED		Not supported
-  /// @retval		#CONTEXT_HISTORY_ERROR_OPERATION_FAILED		Operation failed
-  /// @retval		#CONTEXT_HISTORY_ERROR_OUT_OF_MEMORY		Out of memory
-  /// @retval		#CONTEXT_HISTORY_ERROR_NO_DATA				Requested data does not exist
+  /// **Remarks:**
+  /// - The `list` must be released using context_history_list_destroy().
+  /// - <http://tizen.org/privilege/apphistory.read or http://tizen.org/privilege/mediahistory.read>
+  /// - is needed to retrieve data. It depends on context data type `context_history_data_e`.
   ///
-  /// @pre context_history_create()
-  /// @post context_history_list_destroy()
+  /// **Parameters:**
+  /// - `handle` (in): Handle for controlling the context history data requests
+  /// - `data_type` (in): Type of the history data
+  /// - `filter` (in): Filter to be used to compute statistics or patterns. This can not be `NULL`
+  /// - `list` (out): History data retrieved. This should be freed after use
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_HISTORY_ERROR_NONE`: Successful
+  /// - `CONTEXT_HISTORY_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_HISTORY_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CONTEXT_HISTORY_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTEXT_HISTORY_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONTEXT_HISTORY_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTEXT_HISTORY_ERROR_NO_DATA`: Requested data does not exist
+  ///
+  /// **Preconditions:**
+  /// - context_history_create()
+  ///
+  /// **Postconditions:**
+  /// - context_history_list_destroy()
   int context_history_get_list(
     context_history_h handle,
     int data_type,
@@ -285,21 +356,30 @@ class Tizen90CapiContext {
           int Function(context_history_h, int, context_history_filter_h,
               ffi.Pointer<context_history_list_h>)>();
 
-  /// @brief		Retrieves the number of records in a list.
-  /// @since_tizen 2.4
+  /// Retrieves the number of records in a list.
   ///
-  /// @param[in]	list    The history data list handle
-  /// @param[out]	count   The count of the data list
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_HISTORY_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_HISTORY_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_HISTORY_ERROR_NOT_SUPPORTED		Not supported
-  /// @retval		#CONTEXT_HISTORY_ERROR_OPERATION_FAILED		Operation failed
+  /// **Parameters:**
+  /// - `list` (in): The history data list handle
+  /// - `count` (out): The count of the data list
   ///
-  /// @pre context_history_get_list()
-  /// @see context_history_list_move_first()
-  /// @see context_history_list_move_next()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_HISTORY_ERROR_NONE`: Successful
+  /// - `CONTEXT_HISTORY_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_HISTORY_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTEXT_HISTORY_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **Preconditions:**
+  /// - context_history_get_list()
+  ///
+  /// **See also:**
+  /// - `context_history_list_move_first()`
+  /// - `context_history_list_move_next()`
   int context_history_list_get_count(
     context_history_list_h list,
     ffi.Pointer<ffi.Int> count,
@@ -318,23 +398,35 @@ class Tizen90CapiContext {
       _context_history_list_get_countPtr.asFunction<
           int Function(context_history_list_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief		Retrieves the current record from the history list.
-  /// @details		The default current record is the first record.
-  /// @since_tizen 2.4
-  /// @remarks		The @c record must be released using context_history_record_destroy().
+  /// Retrieves the current record from the history list.
   ///
-  /// @param[in]	list      The context history list handle
-  /// @param[out]	record   History data record retrieved
+  /// The default current record is the first record.
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_HISTORY_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_HISTORY_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_HISTORY_ERROR_NOT_SUPPORTED		Not supported
-  /// @retval		#CONTEXT_HISTORY_ERROR_OPERATION_FAILED		Operation failed
-  /// @retval		#CONTEXT_HISTORY_ERROR_OUT_OF_MEMORY		Out of memory
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @pre context_history_get_list()
-  /// @post context_history_record_destroy()
+  /// **Remarks:**
+  /// - The `record` must be released using context_history_record_destroy().
+  ///
+  /// **Parameters:**
+  /// - `list` (in): The context history list handle
+  /// - `record` (out): History data record retrieved
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_HISTORY_ERROR_NONE`: Successful
+  /// - `CONTEXT_HISTORY_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_HISTORY_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTEXT_HISTORY_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONTEXT_HISTORY_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - context_history_get_list()
+  ///
+  /// **Postconditions:**
+  /// - context_history_record_destroy()
   int context_history_list_get_current(
     context_history_list_h list,
     ffi.Pointer<context_history_record_h> record,
@@ -355,19 +447,28 @@ class Tizen90CapiContext {
           int Function(
               context_history_list_h, ffi.Pointer<context_history_record_h>)>();
 
-  /// @brief		Moves a history data list to the first position.
-  /// @since_tizen 2.4
+  /// Moves a history data list to the first position.
   ///
-  /// @param[in]	list    The context history list handle
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_HISTORY_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_HISTORY_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_HISTORY_ERROR_NOT_SUPPORTED		Not supported
+  /// **Parameters:**
+  /// - `list` (in): The context history list handle
   ///
-  /// @pre context_history_get_list()
-  /// @see context_history_list_get_count()
-  /// @see context_history_list_move_next()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_HISTORY_ERROR_NONE`: Successful
+  /// - `CONTEXT_HISTORY_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_HISTORY_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - context_history_get_list()
+  ///
+  /// **See also:**
+  /// - `context_history_list_get_count()`
+  /// - `context_history_list_move_next()`
   int context_history_list_move_first(
     context_history_list_h list,
   ) {
@@ -383,20 +484,29 @@ class Tizen90CapiContext {
       _context_history_list_move_firstPtr
           .asFunction<int Function(context_history_list_h)>();
 
-  /// @brief		Moves a history data list to the next position.
-  /// @since_tizen 2.4
+  /// Moves a history data list to the next position.
   ///
-  /// @param[in]	list    The context history list handle
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_HISTORY_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_HISTORY_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_HISTORY_ERROR_NOT_SUPPORTED		Not supported
-  /// @retval		#CONTEXT_HISTORY_ERROR_NO_DATA				Requested data does not exist
+  /// **Parameters:**
+  /// - `list` (in): The context history list handle
   ///
-  /// @pre context_history_get_list()
-  /// @see context_history_list_get_count()
-  /// @see context_history_list_move_first()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_HISTORY_ERROR_NONE`: Successful
+  /// - `CONTEXT_HISTORY_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_HISTORY_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTEXT_HISTORY_ERROR_NO_DATA`: Requested data does not exist
+  ///
+  /// **Preconditions:**
+  /// - context_history_get_list()
+  ///
+  /// **See also:**
+  /// - `context_history_list_get_count()`
+  /// - `context_history_list_move_first()`
   int context_history_list_move_next(
     context_history_list_h list,
   ) {
@@ -412,17 +522,24 @@ class Tizen90CapiContext {
       _context_history_list_move_nextPtr
           .asFunction<int Function(context_history_list_h)>();
 
-  /// @brief		Destroys a history list handle and release all its resources.
-  /// @since_tizen 2.4
+  /// Destroys a history list handle and release all its resources.
   ///
-  /// @param[in]	list    The context history data handle
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_HISTORY_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_HISTORY_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_HISTORY_ERROR_NOT_SUPPORTED		Not supported
+  /// **Parameters:**
+  /// - `list` (in): The context history data handle
   ///
-  /// @pre context_history_get_list()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_HISTORY_ERROR_NONE`: Successful
+  /// - `CONTEXT_HISTORY_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_HISTORY_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - context_history_get_list()
   int context_history_list_destroy(
     context_history_list_h list,
   ) {
@@ -437,23 +554,32 @@ class Tizen90CapiContext {
   late final _context_history_list_destroy = _context_history_list_destroyPtr
       .asFunction<int Function(context_history_list_h)>();
 
-  /// @brief		Gets an integer value from a record.
-  /// @details		See the programming guide to find available attribute keys@n
-  /// for each context data #context_history_data_e.
-  /// @since_tizen 2.4
+  /// Gets an integer value from a record.
   ///
-  /// @param[in]	record		The record handle
-  /// @param[in]	key			The key of attribute to get
-  /// @param[out]	value		The result value
+  /// See the programming guide to find available attribute keys@n for each context data `context_history_data_e`.
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_HISTORY_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_HISTORY_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_HISTORY_ERROR_NOT_SUPPORTED		Not supported
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @pre		context_history_list_get_current()
-  /// @see		context_history_record_get_double()
-  /// @see		context_history_record_get_string()
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  /// - `key` (in): The key of attribute to get
+  /// - `value` (out): The result value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_HISTORY_ERROR_NONE`: Successful
+  /// - `CONTEXT_HISTORY_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_HISTORY_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - context_history_list_get_current()
+  ///
+  /// **See also:**
+  /// - `context_history_record_get_double()`
+  /// - `context_history_record_get_string()`
   int context_history_record_get_int(
     context_history_record_h record,
     ffi.Pointer<ffi.Char> key,
@@ -475,24 +601,35 @@ class Tizen90CapiContext {
           int Function(context_history_record_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief		Gets a string from a record.
-  /// @details		See the programming guide to find available attribute keys@n
-  /// for each context data #context_history_data_e.
-  /// @since_tizen 2.4
-  /// @remarks		@c value must be released using free().
+  /// Gets a string from a record.
   ///
-  /// @param[in]	record		The record handle
-  /// @param[in]	key			The key of attribute to get
-  /// @param[out]	value		The result value
+  /// See the programming guide to find available attribute keys@n for each context data `context_history_data_e`.
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_HISTORY_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_HISTORY_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_HISTORY_ERROR_NOT_SUPPORTED		Not supported
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @pre		context_history_list_get_current()
-  /// @see		context_history_record_get_int()
-  /// @see		context_history_record_get_double()
+  /// **Remarks:**
+  /// - `value` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  /// - `key` (in): The key of attribute to get
+  /// - `value` (out): The result value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_HISTORY_ERROR_NONE`: Successful
+  /// - `CONTEXT_HISTORY_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_HISTORY_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - context_history_list_get_current()
+  ///
+  /// **See also:**
+  /// - `context_history_record_get_int()`
+  /// - `context_history_record_get_double()`
   int context_history_record_get_string(
     context_history_record_h record,
     ffi.Pointer<ffi.Char> key,
@@ -515,23 +652,32 @@ class Tizen90CapiContext {
           int Function(context_history_record_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief		Gets a double-precision value from a record.
-  /// @details		See the programming guide to find available attribute keys@n
-  /// for each context data #context_history_data_e.
-  /// @since_tizen 3.0
+  /// Gets a double-precision value from a record.
   ///
-  /// @param[in]	record		The record handle
-  /// @param[in]	key			The key of the attribute to get
-  /// @param[out]	value		The result value
+  /// See the programming guide to find available attribute keys@n for each context data `context_history_data_e`.
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_HISTORY_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_HISTORY_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_HISTORY_ERROR_NOT_SUPPORTED		Not supported
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @pre		context_history_list_get_current()
-  /// @see		context_history_record_get_int()
-  /// @see		context_history_record_get_string()
+  /// **Parameters:**
+  /// - `record` (in): The record handle
+  /// - `key` (in): The key of the attribute to get
+  /// - `value` (out): The result value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_HISTORY_ERROR_NONE`: Successful
+  /// - `CONTEXT_HISTORY_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_HISTORY_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - context_history_list_get_current()
+  ///
+  /// **See also:**
+  /// - `context_history_record_get_int()`
+  /// - `context_history_record_get_string()`
   int context_history_record_get_double(
     context_history_record_h record,
     ffi.Pointer<ffi.Char> key,
@@ -553,17 +699,24 @@ class Tizen90CapiContext {
           int Function(context_history_record_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Double>)>();
 
-  /// @brief		Destroys a record handle and releases all its resources.
-  /// @since_tizen 2.4
+  /// Destroys a record handle and releases all its resources.
   ///
-  /// @param[in]	record		The record handle
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_HISTORY_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_HISTORY_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_HISTORY_ERROR_NOT_SUPPORTED		Not supported
+  /// **Parameters:**
+  /// - `record` (in): The record handle
   ///
-  /// @pre		context_history_list_get_current()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_HISTORY_ERROR_NONE`: Successful
+  /// - `CONTEXT_HISTORY_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_HISTORY_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - context_history_list_get_current()
   int context_history_record_destroy(
     context_history_record_h record,
   ) {
@@ -579,28 +732,36 @@ class Tizen90CapiContext {
       _context_history_record_destroyPtr
           .asFunction<int Function(context_history_record_h)>();
 
-  /// @brief		Registers a rule.
-  /// @details		Using this, applications can register a rule and get the ID of the registered rule.@n
-  /// A rule can only be enabled, disabled, or removed by the application that has registered the rule.
-  /// @since_tizen 2.4
+  /// Registers a rule.
   ///
-  /// @remarks		When registering a new rule, regarding the event and condition items used to compose the rule,
-  /// the application may require one or more privileges.
-  /// For details, see context_trigger_rule_event_create() and context_trigger_rule_condition_create().
+  /// Using this, applications can register a rule and get the ID of the registered rule. A rule can only be enabled, disabled, or removed by the application that has registered the rule.
   ///
-  /// @param[in]	rule		The rule to register
-  /// @param[out]	rule_id		The ID assigned to the @a rule
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_TRIGGER_ERROR_PERMISSION_DENIED	Permission denied
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED		Not supported
-  /// @retval		#CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY		Out of memory
-  /// @retval		#CONTEXT_TRIGGER_ERROR_OPERATION_FAILED		Operation failed
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_RULE			Invalid rule
+  /// **Remarks:**
+  /// - When registering a new rule, regarding the event and condition items used to compose the rule,
+  /// - the application may require one or more privileges.
+  /// - For details, see context_trigger_rule_event_create() and context_trigger_rule_condition_create().
   ///
-  /// @see			context_trigger_remove_rule()
+  /// **Parameters:**
+  /// - `rule` (in): The rule to register
+  /// - `rule_id` (out): The ID assigned to the `rule`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_TRIGGER_ERROR_NONE`: Successful
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_TRIGGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTEXT_TRIGGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_RULE`: Invalid rule
+  ///
+  /// **See also:**
+  /// - `context_trigger_remove_rule()`
   int context_trigger_add_rule(
     context_trigger_rule_h rule,
     ffi.Pointer<ffi.Int> rule_id,
@@ -618,23 +779,32 @@ class Tizen90CapiContext {
   late final _context_trigger_add_rule = _context_trigger_add_rulePtr
       .asFunction<int Function(context_trigger_rule_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief		Removes a rule.
-  /// @details		This removes the rule designated by the @a rule_id, which is owned by the application.
-  /// @since_tizen 2.4
+  /// Removes a rule.
   ///
-  /// @remarks		If the rule has been activated, it should be disabled through context_trigger_disable_rule() in advance.
+  /// This removes the rule designated by the `rule_id`, which is owned by the application.
   ///
-  /// @param[in]	rule_id		The ID of the rule to be removed
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY		Out of memory
-  /// @retval		#CONTEXT_TRIGGER_ERROR_OPERATION_FAILED		Operation failed
-  /// @retval		#CONTEXT_TRIGGER_ERROR_RULE_ENABLED			Rule is enabled already
-  /// @retval		#CONTEXT_TRIGGER_ERROR_RULE_NOT_EXIST		Rule does not exist
+  /// **Remarks:**
+  /// - If the rule has been activated, it should be disabled through context_trigger_disable_rule() in advance.
   ///
-  /// @see			context_trigger_add_rule()
+  /// **Parameters:**
+  /// - `rule_id` (in): The ID of the rule to be removed
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_TRIGGER_ERROR_NONE`: Successful
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTEXT_TRIGGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONTEXT_TRIGGER_ERROR_RULE_ENABLED`: Rule is enabled already
+  /// - `CONTEXT_TRIGGER_ERROR_RULE_NOT_EXIST`: Rule does not exist
+  ///
+  /// **See also:**
+  /// - `context_trigger_add_rule()`
   int context_trigger_remove_rule(
     int rule_id,
   ) {
@@ -649,22 +819,30 @@ class Tizen90CapiContext {
   late final _context_trigger_remove_rule =
       _context_trigger_remove_rulePtr.asFunction<int Function(int)>();
 
-  /// @brief		Enables a rule.
-  /// @details		This activates the rule designated by the @a rule_id, which is owned by the application.
-  /// @since_tizen 2.4
+  /// Enables a rule.
   ///
-  /// @param[in]	rule_id		The ID of the rule to be enabled
+  /// This activates the rule designated by the `rule_id`, which is owned by the application.
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED		Not supported
-  /// @retval		#CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY		Out of memory
-  /// @retval		#CONTEXT_TRIGGER_ERROR_OPERATION_FAILED		Operation failed
-  /// @retval		#CONTEXT_TRIGGER_ERROR_RULE_ENABLED			Rule is enabled already
-  /// @retval		#CONTEXT_TRIGGER_ERROR_RULE_NOT_EXIST		Rule does not exist
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @see			context_trigger_disable_rule()
+  /// **Parameters:**
+  /// - `rule_id` (in): The ID of the rule to be enabled
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_TRIGGER_ERROR_NONE`: Successful
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTEXT_TRIGGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONTEXT_TRIGGER_ERROR_RULE_ENABLED`: Rule is enabled already
+  /// - `CONTEXT_TRIGGER_ERROR_RULE_NOT_EXIST`: Rule does not exist
+  ///
+  /// **See also:**
+  /// - `context_trigger_disable_rule()`
   int context_trigger_enable_rule(
     int rule_id,
   ) {
@@ -679,22 +857,30 @@ class Tizen90CapiContext {
   late final _context_trigger_enable_rule =
       _context_trigger_enable_rulePtr.asFunction<int Function(int)>();
 
-  /// @brief		Disables a rule.
-  /// @details		This deactivates the rule designated by the @a rule_id, which is owned by the application.
-  /// @since_tizen 2.4
+  /// Disables a rule.
   ///
-  /// @param[in]	rule_id		The ID of the rule to be disabled
+  /// This deactivates the rule designated by the `rule_id`, which is owned by the application.
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY		Out of memory
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED		Not supported
-  /// @retval		#CONTEXT_TRIGGER_ERROR_OPERATION_FAILED		Operation failed
-  /// @retval		#CONTEXT_TRIGGER_ERROR_RULE_NOT_ENABLED		Rule is not enabled
-  /// @retval		#CONTEXT_TRIGGER_ERROR_RULE_NOT_EXIST		Rule does not exist
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @see			context_trigger_enable_rule()
+  /// **Parameters:**
+  /// - `rule_id` (in): The ID of the rule to be disabled
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_TRIGGER_ERROR_NONE`: Successful
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTEXT_TRIGGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONTEXT_TRIGGER_ERROR_RULE_NOT_ENABLED`: Rule is not enabled
+  /// - `CONTEXT_TRIGGER_ERROR_RULE_NOT_EXIST`: Rule does not exist
+  ///
+  /// **See also:**
+  /// - `context_trigger_enable_rule()`
   int context_trigger_disable_rule(
     int rule_id,
   ) {
@@ -709,22 +895,29 @@ class Tizen90CapiContext {
   late final _context_trigger_disable_rule =
       _context_trigger_disable_rulePtr.asFunction<int Function(int)>();
 
-  /// @brief		Gets the IDs of the rules owned by the current application.
-  /// @since_tizen 2.4
+  /// Gets the IDs of the rules owned by the current application.
   ///
-  /// @remarks		The arrays @a enabled_rule_ids and @a disabled_rule_ids must be released using @c free().
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @param[out]	enabled_rule_ids	The IDs of the active rules
-  /// @param[out]	enabled_rule_count	The number of the active rules
-  /// @param[out]	disabled_rule_ids	The IDs of the inactive rules
-  /// @param[out]	disabled_rule_count	The number of the inactive rules
+  /// **Remarks:**
+  /// - The arrays `enabled_rule_ids` and `disabled_rule_ids` must be released using `free(`).
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY		Out of memory
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED		Not supported
-  /// @retval		#CONTEXT_TRIGGER_ERROR_OPERATION_FAILED		Operation failed
+  /// **Parameters:**
+  /// - `enabled_rule_ids` (out): The IDs of the active rules
+  /// - `enabled_rule_count` (out): The number of the active rules
+  /// - `disabled_rule_ids` (out): The IDs of the inactive rules
+  /// - `disabled_rule_count` (out): The number of the inactive rules
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_TRIGGER_ERROR_NONE`: Successful
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTEXT_TRIGGER_ERROR_OPERATION_FAILED`: Operation failed
   int context_trigger_get_own_rule_ids(
     ffi.Pointer<ffi.Pointer<ffi.Int>> enabled_rule_ids,
     ffi.Pointer<ffi.Int> enabled_rule_count,
@@ -751,21 +944,28 @@ class Tizen90CapiContext {
           int Function(ffi.Pointer<ffi.Pointer<ffi.Int>>, ffi.Pointer<ffi.Int>,
               ffi.Pointer<ffi.Pointer<ffi.Int>>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief		Gets a rule stored in the system by rule ID.
-  /// @since_tizen 2.4
+  /// Gets a rule stored in the system by rule ID.
   ///
-  /// @remarks		The @a rule must be released using context_trigger_rule_destroy().
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @param[in]	rule_id		The ID of the rule to be retrieved
-  /// @param[out]	rule		The rule retrieved
+  /// **Remarks:**
+  /// - The `rule` must be released using context_trigger_rule_destroy().
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY		Out of memory
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED		Not supported
-  /// @retval		#CONTEXT_TRIGGER_ERROR_OPERATION_FAILED		Operation failed
-  /// @retval		#CONTEXT_TRIGGER_ERROR_RULE_NOT_EXIST		Rule does not exist
+  /// **Parameters:**
+  /// - `rule_id` (in): The ID of the rule to be retrieved
+  /// - `rule` (out): The rule retrieved
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_TRIGGER_ERROR_NONE`: Successful
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTEXT_TRIGGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONTEXT_TRIGGER_ERROR_RULE_NOT_EXIST`: Rule does not exist
   int context_trigger_get_rule_by_id(
     int rule_id,
     ffi.Pointer<context_trigger_rule_h> rule,
@@ -784,27 +984,31 @@ class Tizen90CapiContext {
       _context_trigger_get_rule_by_idPtr
           .asFunction<int Function(int, ffi.Pointer<context_trigger_rule_h>)>();
 
-  /// @brief		Creates an empty rule.
-  /// @details		An empty rule container is created. When using this,
-  /// a logical operator, one of #context_trigger_logical_type_e, needs to be designated.@n
-  /// In case of #CONTEXT_TRIGGER_LOGICAL_CONJUNCTION,
-  /// the rule can be satisfied only if all conditions are true.
-  /// Otherwise, in case of #CONTEXT_TRIGGER_LOGICAL_DISJUNCTION,
-  /// the rule can be satisfied if at least one is true.
-  /// @since_tizen 2.4
+  /// Creates an empty rule.
   ///
-  /// @remarks		The @a rule must be released using context_trigger_rule_destroy().
+  /// An empty rule container is created. When using this, a logical operator, one of `context_trigger_logical_type_e`, needs to be designated. In case of `CONTEXT_TRIGGER_LOGICAL_CONJUNCTION`, the rule can be satisfied only if all conditions are true. Otherwise, in case of `CONTEXT_TRIGGER_LOGICAL_DISJUNCTION`, the rule can be satisfied if at least one is true.
   ///
-  /// @param[in]	logical_type	The logical operator
-  /// @param[out]	rule			The rule handle to be initialized
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY		Memory allocation failed
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED		Not supported
+  /// **Remarks:**
+  /// - The `rule` must be released using context_trigger_rule_destroy().
   ///
-  /// @see			context_trigger_rule_destroy()
+  /// **Parameters:**
+  /// - `logical_type` (in): The logical operator
+  /// - `rule` (out): The rule handle to be initialized
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_TRIGGER_ERROR_NONE`: Successful
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY`: Memory allocation failed
+  /// - `CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `context_trigger_rule_destroy()`
   int context_trigger_rule_create(
     int logical_type,
     ffi.Pointer<context_trigger_rule_h> rule,
@@ -823,18 +1027,27 @@ class Tizen90CapiContext {
   late final _context_trigger_rule_create = _context_trigger_rule_createPtr
       .asFunction<int Function(int, ffi.Pointer<context_trigger_rule_h>)>();
 
-  /// @brief		Releases the resources occupied by a rule handle.
-  /// @since_tizen 2.4
+  /// Releases the resources occupied by a rule handle.
   ///
-  /// @param[in]	rule		The rule handle to be released
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED		Not supported
+  /// **Parameters:**
+  /// - `rule` (in): The rule handle to be released
   ///
-  /// @pre			context_trigger_rule_create()
-  /// @see			context_trigger_get_rule_by_id()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_TRIGGER_ERROR_NONE`: Successful
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - context_trigger_rule_create()
+  ///
+  /// **See also:**
+  /// - `context_trigger_get_rule_by_id()`
   int context_trigger_rule_destroy(
     context_trigger_rule_h rule,
   ) {
@@ -849,19 +1062,25 @@ class Tizen90CapiContext {
   late final _context_trigger_rule_destroy = _context_trigger_rule_destroyPtr
       .asFunction<int Function(context_trigger_rule_h)>();
 
-  /// @brief		Adds an event or a condition to a rule.
-  /// @since_tizen 2.4
+  /// Adds an event or a condition to a rule.
   ///
-  /// @param[in]	rule		The rule
-  /// @param[in]	entry		The event or condition entry to be added to the rule
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY		Out of memory
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED		Not supported
-  /// @retval		#CONTEXT_TRIGGER_ERROR_OPERATION_FAILED		Operation failed
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_RULE			Invalid rule
+  /// **Parameters:**
+  /// - `rule` (in): The rule
+  /// - `entry` (in): The event or condition entry to be added to the rule
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_TRIGGER_ERROR_NONE`: Successful
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTEXT_TRIGGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_RULE`: Invalid rule
   int context_trigger_rule_add_entry(
     context_trigger_rule_h rule,
     context_trigger_rule_entry_h entry,
@@ -880,32 +1099,42 @@ class Tizen90CapiContext {
       _context_trigger_rule_add_entryPtr.asFunction<
           int Function(context_trigger_rule_h, context_trigger_rule_entry_h)>();
 
-  /// @brief		Sets a app launching request as the action of a rule.
-  /// @details		Contextual Trigger accepts an App Control as the action of a rule,
-  /// an application thus can be launched when the rule is satisfied.@n
-  /// @since_tizen 2.4
+  /// Sets a app launching request as the action of a rule.
   ///
-  /// @privlevel	public
-  /// @privilege	http://tizen.org/privilege/appmanager.launch
+  /// Contextual Trigger accepts an App Control as the action of a rule, an application thus can be launched when the rule is satisfied.
   ///
-  /// @remarks		In addition to the privilege <a href="http://tizen.org/privilege/appmanager.launch">http://tizen.org/privilege/appmanager.launch</a>,
-  /// if it is an App Control that makes a call to someone,
-  /// the privilege http://tizen.org/privilege/call is also required.
-  /// @remarks		The launch request of the service application is restricted.
-  /// The function will return #CONTEXT_TRIGGER_ERROR_INVALID_RULE,
-  /// if the launch request is for the service application.
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @param[in]	rule			The rule
-  /// @param[in]	app_control		The App Control, which will be used to launch an application
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_TRIGGER_ERROR_PERMISSION_DENIED	Permission denied
-  /// @retval		#CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY		Out of memory
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED		Not supported
-  /// @retval		#CONTEXT_TRIGGER_ERROR_OPERATION_FAILED		Operation failed
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_RULE			Invalid rule
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/appmanager.launch>
+  ///
+  /// **Remarks:**
+  /// - In addition to the privilege <a href="http://tizen.org/privilege/appmanager.launch">http://tizen.org/privilege/appmanager.launch</a>,
+  /// - if it is an App Control that makes a call to someone,
+  /// - the privilege http://tizen.org/privilege/call is also required.
+  /// - The launch request of the service application is restricted.
+  /// - The function will return `CONTEXT_TRIGGER_ERROR_INVALID_RULE`,
+  /// - if the launch request is for the service application.
+  ///
+  /// **Parameters:**
+  /// - `rule` (in): The rule
+  /// - `app_control` (in): The App Control, which will be used to launch an application
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_TRIGGER_ERROR_NONE`: Successful
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_TRIGGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTEXT_TRIGGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_RULE`: Invalid rule
   int context_trigger_rule_set_action_app_control(
     context_trigger_rule_h rule,
     app_control.app_control_h app_control,
@@ -925,30 +1154,40 @@ class Tizen90CapiContext {
       _context_trigger_rule_set_action_app_controlPtr.asFunction<
           int Function(context_trigger_rule_h, app_control.app_control_h)>();
 
-  /// @brief		Sets a notification posting request as the action of a rule.
-  /// @details		A basic notification can be posted when the rule is satisfied,
-  /// which consists of the title, a content body text, an icon, and an App Control.
-  /// @since_tizen 2.4
+  /// Sets a notification posting request as the action of a rule.
   ///
-  /// @privlevel	public
-  /// @privilege	http://tizen.org/privilege/notification
+  /// A basic notification can be posted when the rule is satisfied, which consists of the title, a content body text, an icon, and an App Control.
   ///
-  /// @remarks		The @a app_control can be @c NULL. In that case, no application will be launched via the notification.
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @param[in]	rule			The rule
-  /// @param[in]	title			The title text
-  /// @param[in]	content			The content body text
-  /// @param[in]	icon_path		The icon file path
-  /// @param[in]	app_control		The app control
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_TRIGGER_ERROR_PERMISSION_DENIED	Permission denied
-  /// @retval		#CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY		Out of memory
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED		Not supported
-  /// @retval		#CONTEXT_TRIGGER_ERROR_OPERATION_FAILED		Operation failed
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_RULE			Invalid rule
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/notification>
+  ///
+  /// **Remarks:**
+  /// - The `app_control` can be `NULL`. In that case, no application will be launched via the notification.
+  ///
+  /// **Parameters:**
+  /// - `rule` (in): The rule
+  /// - `title` (in): The title text
+  /// - `content` (in): The content body text
+  /// - `icon_path` (in): The icon file path
+  /// - `app_control` (in): The app control
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_TRIGGER_ERROR_NONE`: Successful
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_TRIGGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTEXT_TRIGGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_RULE`: Invalid rule
   int context_trigger_rule_set_action_notification(
     context_trigger_rule_h rule,
     ffi.Pointer<ffi.Char> title,
@@ -983,20 +1222,27 @@ class Tizen90CapiContext {
               ffi.Pointer<ffi.Char>,
               app_control.app_control_h)>();
 
-  /// @brief		Sets the description of a rule.
-  /// @since_tizen 2.4
+  /// Sets the description of a rule.
   ///
-  /// @param[in]	rule			The rule
-  /// @param[in]	description		The description to be set
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY		Out of memory
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED		Not supported
-  /// @retval		#CONTEXT_TRIGGER_ERROR_OPERATION_FAILED		Operation failed
+  /// **Parameters:**
+  /// - `rule` (in): The rule
+  /// - `description` (in): The description to be set
   ///
-  /// @see			context_trigger_rule_get_description()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_TRIGGER_ERROR_NONE`: Successful
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTEXT_TRIGGER_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `context_trigger_rule_get_description()`
   int context_trigger_rule_set_description(
     context_trigger_rule_h rule,
     ffi.Pointer<ffi.Char> description,
@@ -1015,22 +1261,30 @@ class Tizen90CapiContext {
       _context_trigger_rule_set_descriptionPtr.asFunction<
           int Function(context_trigger_rule_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief		Gets the description of a rule.
-  /// @since_tizen 2.4
+  /// Gets the description of a rule.
   ///
-  /// @remarks		The @a description must be released using @c free().
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @param[in]	rule			The rule
-  /// @param[out]	description		The description of the rule
+  /// **Remarks:**
+  /// - The `description` must be released using `free(`).
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY		Out of memory
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED		Not supported
-  /// @retval		#CONTEXT_TRIGGER_ERROR_OPERATION_FAILED		Operation failed
+  /// **Parameters:**
+  /// - `rule` (in): The rule
+  /// - `description` (out): The description of the rule
   ///
-  /// @see			context_trigger_rule_set_description()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_TRIGGER_ERROR_NONE`: Successful
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTEXT_TRIGGER_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `context_trigger_rule_set_description()`
   int context_trigger_rule_get_description(
     context_trigger_rule_h rule,
     ffi.Pointer<ffi.Pointer<ffi.Char>> description,
@@ -1051,33 +1305,42 @@ class Tizen90CapiContext {
           int Function(
               context_trigger_rule_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief		Creates an event entry.
-  /// @details		An event of a contextual event item, which will be monitored by the system, is created.
-  /// @since_tizen 2.4
+  /// Creates an event entry.
   ///
-  /// @remarks		Regarding the @a event_item, the application may require one of the following privileges:@n
-  /// http://tizen.org/privilege/alarm.set @n
-  /// http://tizen.org/privilege/network.get @n
-  /// http://tizen.org/privilege/telephony @n
-  /// http://tizen.org/privilege/message.read @n
-  /// http://tizen.org/privilege/contact.read @n
-  /// http://tizen.org/privilege/location @n
-  /// If the application does not have necessary privilege, when registering the corresponding rule,
-  /// context_trigger_add_rule() will return #CONTEXT_TRIGGER_ERROR_PERMISSION_DENIED.
-  /// See #context_trigger_event_e to find the corresponding privilege of each event item.@n
-  /// The @a entry must be released using context_trigger_rule_entry_destroy().
+  /// An event of a contextual event item, which will be monitored by the system, is created.
   ///
-  /// @param[in]	event_item		The contextual event item
-  /// @param[in]	logical_type	The logical operator
-  /// @param[out]	entry			The event entry to be initialized
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY		Memory allocation failed
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED		Not supported
+  /// **Remarks:**
+  /// - Regarding the `event_item`, the application may require one of the following privileges:
+  /// - <http://tizen.org/privilege/alarm.set>
+  /// - <http://tizen.org/privilege/network.get>
+  /// - <http://tizen.org/privilege/telephony>
+  /// - <http://tizen.org/privilege/message.read>
+  /// - <http://tizen.org/privilege/contact.read>
+  /// - <http://tizen.org/privilege/location>
+  /// - If the application does not have necessary privilege, when registering the corresponding rule,
+  /// - context_trigger_add_rule() will return `CONTEXT_TRIGGER_ERROR_PERMISSION_DENIED`.
+  /// - See `context_trigger_event_e` to find the corresponding privilege of each event item.
+  /// - The `entry` must be released using context_trigger_rule_entry_destroy().
   ///
-  /// @see			context_trigger_rule_entry_destroy()
+  /// **Parameters:**
+  /// - `event_item` (in): The contextual event item
+  /// - `logical_type` (in): The logical operator
+  /// - `entry` (out): The event entry to be initialized
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_TRIGGER_ERROR_NONE`: Successful
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY`: Memory allocation failed
+  /// - `CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `context_trigger_rule_entry_destroy()`
   int context_trigger_rule_event_create(
     int event_item,
     int logical_type,
@@ -1099,17 +1362,23 @@ class Tizen90CapiContext {
       _context_trigger_rule_event_createPtr.asFunction<
           int Function(int, int, ffi.Pointer<context_trigger_rule_entry_h>)>();
 
-  /// @brief		Checks whether a contextual event is supported in the current device.
-  /// @since_tizen 2.4
+  /// Checks whether a contextual event is supported in the current device.
   ///
-  /// @param[in]	event_item		The contextual event item
-  /// @param[out]	supported		If supported, @c true, otherwise @c false
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_TRIGGER_ERROR_OPERATION_FAILED		Operation failed
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED		Not supported
+  /// **Parameters:**
+  /// - `event_item` (in): The contextual event item
+  /// - `supported` (out): If supported, `true`, otherwise `false`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_TRIGGER_ERROR_NONE`: Successful
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_TRIGGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED`: Not supported
   int context_trigger_rule_event_is_supported(
     int event_item,
     ffi.Pointer<ffi.Bool> supported,
@@ -1128,32 +1397,41 @@ class Tizen90CapiContext {
       _context_trigger_rule_event_is_supportedPtr
           .asFunction<int Function(int, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief		Creates a condition entry.
-  /// @details		A condition of a contextual condition item is created.
-  /// @since_tizen 2.4
+  /// Creates a condition entry.
   ///
-  /// @remarks		Regarding the @a condition_item, the application may require one of the following privileges:@n
-  /// http://tizen.org/privilege/network.get @n
-  /// http://tizen.org/privilege/telephony @n
-  /// http://tizen.org/privilege/apphistory.read @n
-  /// http://tizen.org/privilege/callhistory.read @n
-  /// http://tizen.org/privilege/mediahistory.read @n
-  /// If the application does not have necessary privilege, when registering the corresponding rule,
-  /// context_trigger_add_rule() will return #CONTEXT_TRIGGER_ERROR_PERMISSION_DENIED.
-  /// See #context_trigger_condition_e to find the corresponding privilege of each condition item.@n
-  /// The @a entry must be released using context_trigger_rule_entry_destroy().
+  /// A condition of a contextual condition item is created.
   ///
-  /// @param[in]	condition_item	The contextual condition item
-  /// @param[in]	logical_type	The logical operator
-  /// @param[out]	entry			The condition entry to be initialized
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY		Memory allocation failed
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED		Not supported
+  /// **Remarks:**
+  /// - Regarding the `condition_item`, the application may require one of the following privileges:
+  /// - <http://tizen.org/privilege/network.get>
+  /// - <http://tizen.org/privilege/telephony>
+  /// - <http://tizen.org/privilege/apphistory.read>
+  /// - <http://tizen.org/privilege/callhistory.read>
+  /// - <http://tizen.org/privilege/mediahistory.read>
+  /// - If the application does not have necessary privilege, when registering the corresponding rule,
+  /// - context_trigger_add_rule() will return `CONTEXT_TRIGGER_ERROR_PERMISSION_DENIED`.
+  /// - See `context_trigger_condition_e` to find the corresponding privilege of each condition item.
+  /// - The `entry` must be released using context_trigger_rule_entry_destroy().
   ///
-  /// @see			context_trigger_rule_entry_destroy()
+  /// **Parameters:**
+  /// - `condition_item` (in): The contextual condition item
+  /// - `logical_type` (in): The logical operator
+  /// - `entry` (out): The condition entry to be initialized
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_TRIGGER_ERROR_NONE`: Successful
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY`: Memory allocation failed
+  /// - `CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `context_trigger_rule_entry_destroy()`
   int context_trigger_rule_condition_create(
     int condition_item,
     int logical_type,
@@ -1175,17 +1453,23 @@ class Tizen90CapiContext {
       _context_trigger_rule_condition_createPtr.asFunction<
           int Function(int, int, ffi.Pointer<context_trigger_rule_entry_h>)>();
 
-  /// @brief		Checks whether a contextual condition is supported in the current device.
-  /// @since_tizen 2.4
+  /// Checks whether a contextual condition is supported in the current device.
   ///
-  /// @param[in]	condition_item	The contextual condition item
-  /// @param[out]	supported		If supported, @c true, otherwise @c false
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_TRIGGER_ERROR_OPERATION_FAILED		Operation failed
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED		Not supported
+  /// **Parameters:**
+  /// - `condition_item` (in): The contextual condition item
+  /// - `supported` (out): If supported, `true`, otherwise `false`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_TRIGGER_ERROR_NONE`: Successful
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_TRIGGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED`: Not supported
   int context_trigger_rule_condition_is_supported(
     int condition_item,
     ffi.Pointer<ffi.Bool> supported,
@@ -1204,18 +1488,25 @@ class Tizen90CapiContext {
       _context_trigger_rule_condition_is_supportedPtr
           .asFunction<int Function(int, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief		Releases the resource occupied by an entry.
-  /// @since_tizen 2.4
+  /// Releases the resource occupied by an entry.
   ///
-  /// @param[in]	entry		The event or condition entry
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED		Not supported
+  /// **Parameters:**
+  /// - `entry` (in): The event or condition entry
   ///
-  /// @pre			context_trigger_rule_event_create()
-  /// @pre			context_trigger_rule_condition_create()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_TRIGGER_ERROR_NONE`: Successful
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - context_trigger_rule_event_create()
+  /// - context_trigger_rule_condition_create()
   int context_trigger_rule_entry_destroy(
     context_trigger_rule_entry_h entry,
   ) {
@@ -1231,20 +1522,27 @@ class Tizen90CapiContext {
       _context_trigger_rule_entry_destroyPtr
           .asFunction<int Function(context_trigger_rule_entry_h)>();
 
-  /// @brief		Sets an integer type option to an event or condition entry.
-  /// @details		See the programming guide to find available option keys for each event/condition item.
-  /// @since_tizen 2.4
+  /// Sets an integer type option to an event or condition entry.
   ///
-  /// @param[in]	entry			The event or condition entry
-  /// @param[in]	option_key		The option key
-  /// @param[in]	value			The option value
+  /// See the programming guide to find available option keys for each event/condition item.
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY		Out of memory
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED		Not supported
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_RULE			Invalid rule
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Parameters:**
+  /// - `entry` (in): The event or condition entry
+  /// - `option_key` (in): The option key
+  /// - `value` (in): The option value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_TRIGGER_ERROR_NONE`: Successful
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_RULE`: Invalid rule
   int context_trigger_rule_entry_add_option_int(
     context_trigger_rule_entry_h entry,
     ffi.Pointer<ffi.Char> option_key,
@@ -1266,23 +1564,32 @@ class Tizen90CapiContext {
           int Function(
               context_trigger_rule_entry_h, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @deprecated	Deprecated since 4.0.
-  /// @brief		Sets a string type option to an event or condition entry.
-  /// @details		See the programming guide to find available option keys for each event/condition item.
-  /// @since_tizen 2.4
+  /// **Deprecated:** Deprecated since 4.0.
   ///
-  /// @param[in]	entry			The event or condition entry
-  /// @param[in]	option_key		The option key
-  /// @param[in]	value			The option value
+  /// Sets a string type option to an event or condition entry.
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY		Out of memory
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED		Not supported
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_RULE			Invalid rule
+  /// See the programming guide to find available option keys for each event/condition item.
   ///
-  /// @see			context_trigger_rule_entry_add_option_int()
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Parameters:**
+  /// - `entry` (in): The event or condition entry
+  /// - `option_key` (in): The option key
+  /// - `value` (in): The option value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_TRIGGER_ERROR_NONE`: Successful
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_RULE`: Invalid rule
+  ///
+  /// **See also:**
+  /// - `context_trigger_rule_entry_add_option_int()`
   int context_trigger_rule_entry_add_option_string(
     context_trigger_rule_entry_h entry,
     ffi.Pointer<ffi.Char> option_key,
@@ -1305,23 +1612,32 @@ class Tizen90CapiContext {
           int Function(context_trigger_rule_entry_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>)>();
 
-  /// @deprecated	Deprecated since 4.0.
-  /// @brief		Sets an option to a condition entry, which references an attribute that will be extracted from the event.
-  /// @details		See the programming guide to find available option keys for each condition item.
-  /// @since_tizen 2.4
+  /// **Deprecated:** Deprecated since 4.0.
   ///
-  /// @param[in]	entry			The condition entry
-  /// @param[in]	option_key		The option key
-  /// @param[in]	event_data_key	The event data key of which the corresponding data value will be used as the option parameter
+  /// Sets an option to a condition entry, which references an attribute that will be extracted from the event.
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY		Out of memory
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED		Not supported
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_RULE			Invalid rule
+  /// See the programming guide to find available option keys for each condition item.
   ///
-  /// @see			context_trigger_rule_entry_add_option_int()
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Parameters:**
+  /// - `entry` (in): The condition entry
+  /// - `option_key` (in): The option key
+  /// - `event_data_key` (in): The event data key of which the corresponding data value will be used as the option parameter
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_TRIGGER_ERROR_NONE`: Successful
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_RULE`: Invalid rule
+  ///
+  /// **See also:**
+  /// - `context_trigger_rule_entry_add_option_int()`
   int context_trigger_rule_entry_add_option(
     context_trigger_rule_entry_h entry,
     ffi.Pointer<ffi.Char> option_key,
@@ -1343,24 +1659,31 @@ class Tizen90CapiContext {
           int Function(context_trigger_rule_entry_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>)>();
 
-  /// @brief		Adds an attribute key to an entry.
-  /// @details		The key will be used as the left operand of comparisons.
-  /// See the programming guide to find available attribute keys for each event/condition item.
-  /// @since_tizen 2.4
+  /// Adds an attribute key to an entry.
   ///
-  /// @param[in]	entry			The event or condition entry
-  /// @param[in]	logical_type	The logical operator
-  /// @param[in]	key				The attribute key
+  /// The key will be used as the left operand of comparisons. See the programming guide to find available attribute keys for each event/condition item.
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY		Out of memory
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED		Not supported
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_RULE			Invalid rule
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @post		context_trigger_rule_entry_add_comparison_int()
-  /// @post		context_trigger_rule_entry_add_comparison_string()
+  /// **Parameters:**
+  /// - `entry` (in): The event or condition entry
+  /// - `logical_type` (in): The logical operator
+  /// - `key` (in): The attribute key
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_TRIGGER_ERROR_NONE`: Successful
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_RULE`: Invalid rule
+  ///
+  /// **Postconditions:**
+  /// - context_trigger_rule_entry_add_comparison_int()
+  /// - context_trigger_rule_entry_add_comparison_string()
   int context_trigger_rule_entry_add_key(
     context_trigger_rule_entry_h entry,
     int logical_type,
@@ -1382,29 +1705,35 @@ class Tizen90CapiContext {
           int Function(
               context_trigger_rule_entry_h, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief		Adds a comparison between an attribute key and an integer.
-  /// @details		The key needs to be registered in advance, via context_trigger_rule_entry_add_key().
-  /// As the comparison operator, one of the following operators is allowed:
-  /// #CONTEXT_TRIGGER_EQUAL_TO, #CONTEXT_TRIGGER_NOT_EQUAL_TO, #CONTEXT_TRIGGER_LESS_THAN,
-  /// #CONTEXT_TRIGGER_GREATER_THAN, #CONTEXT_TRIGGER_LESS_THAN_OR_EQUAL_TO
-  /// and #CONTEXT_TRIGGER_GREATER_THAN_OR_EQUAL_TO.
-  /// @since_tizen 2.4
+  /// Adds a comparison between an attribute key and an integer.
   ///
-  /// @param[in]	entry			The event or condition entry
-  /// @param[in]	key				The attribute key, which will be used as the left operand
-  /// @param[in]	comp_operator	The comparison operator
-  /// @param[in]	value			The right operand value
+  /// The key needs to be registered in advance, via context_trigger_rule_entry_add_key(). As the comparison operator, one of the following operators is allowed: `CONTEXT_TRIGGER_EQUAL_TO`, `CONTEXT_TRIGGER_NOT_EQUAL_TO`, `CONTEXT_TRIGGER_LESS_THAN`, `CONTEXT_TRIGGER_GREATER_THAN`, `CONTEXT_TRIGGER_LESS_THAN_OR_EQUAL_TO` and `CONTEXT_TRIGGER_GREATER_THAN_OR_EQUAL_TO`.
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY		Out of memory
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED		Not supported
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NO_DATA				The key was not added in the entry
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_RULE			Invalid rule
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @pre			context_trigger_rule_entry_add_key()
-  /// @see			context_trigger_rule_entry_add_comparison_string()
+  /// **Parameters:**
+  /// - `entry` (in): The event or condition entry
+  /// - `key` (in): The attribute key, which will be used as the left operand
+  /// - `comp_operator` (in): The comparison operator
+  /// - `value` (in): The right operand value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_TRIGGER_ERROR_NONE`: Successful
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTEXT_TRIGGER_ERROR_NO_DATA`: The key was not added in the entry
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_RULE`: Invalid rule
+  ///
+  /// **Preconditions:**
+  /// - context_trigger_rule_entry_add_key()
+  ///
+  /// **See also:**
+  /// - `context_trigger_rule_entry_add_comparison_string()`
   int context_trigger_rule_entry_add_comparison_int(
     context_trigger_rule_entry_h entry,
     ffi.Pointer<ffi.Char> key,
@@ -1431,27 +1760,35 @@ class Tizen90CapiContext {
           int Function(context_trigger_rule_entry_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>, int)>();
 
-  /// @brief		Adds a comparison between an attribute key and a string.
-  /// @details		The key needs to be registered in advance, via context_trigger_rule_entry_add_key().
-  /// As the comparison operator, one of the following operators is allowed:
-  /// #CONTEXT_TRIGGER_EQUAL_TO and #CONTEXT_TRIGGER_NOT_EQUAL_TO.
-  /// @since_tizen 2.4
+  /// Adds a comparison between an attribute key and a string.
   ///
-  /// @param[in]	entry			The event or condition entry
-  /// @param[in]	key				The attribute key, which will be used as the left operand
-  /// @param[in]	comp_operator	The comparison operator
-  /// @param[in]	value			The right operand value
+  /// The key needs to be registered in advance, via context_trigger_rule_entry_add_key(). As the comparison operator, one of the following operators is allowed: `CONTEXT_TRIGGER_EQUAL_TO` and `CONTEXT_TRIGGER_NOT_EQUAL_TO`.
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY		Out of memory
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED		Not supported
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NO_DATA				The key was not added in the entry
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_RULE			Invalid rule
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @pre			context_trigger_rule_entry_add_key()
-  /// @see			context_trigger_rule_entry_add_comparison_int()
+  /// **Parameters:**
+  /// - `entry` (in): The event or condition entry
+  /// - `key` (in): The attribute key, which will be used as the left operand
+  /// - `comp_operator` (in): The comparison operator
+  /// - `value` (in): The right operand value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_TRIGGER_ERROR_NONE`: Successful
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTEXT_TRIGGER_ERROR_NO_DATA`: The key was not added in the entry
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_RULE`: Invalid rule
+  ///
+  /// **Preconditions:**
+  /// - context_trigger_rule_entry_add_key()
+  ///
+  /// **See also:**
+  /// - `context_trigger_rule_entry_add_comparison_int()`
   int context_trigger_rule_entry_add_comparison_string(
     context_trigger_rule_entry_h entry,
     ffi.Pointer<ffi.Char> key,
@@ -1479,27 +1816,38 @@ class Tizen90CapiContext {
           int Function(context_trigger_rule_entry_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @deprecated	Deprecated since 4.0.
-  /// @brief		Adds a comparison between an attribute of a condition and an attribute extracted from the event.
-  /// @details		The key needs to be registered in advance, via context_trigger_rule_entry_add_key().
-  /// @since_tizen 2.4
+  /// **Deprecated:** Deprecated since 4.0.
   ///
-  /// @param[in]	entry			The condition entry
-  /// @param[in]	key				The attribute key of the condition, which will be used as the left operand
-  /// @param[in]	comp_operator	The comparison operator
-  /// @param[in]	event_data_key	The event data key of which the corresponding data value will be used as the right operand
+  /// Adds a comparison between an attribute of a condition and an attribute extracted from the event.
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY		Out of memory
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED		Not supported
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NO_DATA				The key was not added in the entry
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_RULE			Invalid rule
+  /// The key needs to be registered in advance, via context_trigger_rule_entry_add_key().
   ///
-  /// @pre			context_trigger_rule_entry_add_key()
-  /// @see			context_trigger_rule_entry_add_comparison_int()
-  /// @see			context_trigger_rule_entry_add_comparison_string()
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Parameters:**
+  /// - `entry` (in): The condition entry
+  /// - `key` (in): The attribute key of the condition, which will be used as the left operand
+  /// - `comp_operator` (in): The comparison operator
+  /// - `event_data_key` (in): The event data key of which the corresponding data value will be used as the right operand
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_TRIGGER_ERROR_NONE`: Successful
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTEXT_TRIGGER_ERROR_NO_DATA`: The key was not added in the entry
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_RULE`: Invalid rule
+  ///
+  /// **Preconditions:**
+  /// - context_trigger_rule_entry_add_key()
+  ///
+  /// **See also:**
+  /// - `context_trigger_rule_entry_add_comparison_int()`
+  /// - `context_trigger_rule_entry_add_comparison_string()`
   int context_trigger_rule_entry_add_comparison(
     context_trigger_rule_entry_h entry,
     ffi.Pointer<ffi.Char> key,
@@ -1527,25 +1875,31 @@ class Tizen90CapiContext {
           int Function(context_trigger_rule_entry_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief		Defines a custom contextual data item with its template.
-  /// @details		A contextual data item can be used as an event or a condition of other applications' trigger rules,
-  /// in addition to predefined #context_trigger_event_e and #context_trigger_condition_e.
-  /// See the programming guide to find the JSON format for the @a attr_template.
-  /// @since_tizen 3.0
+  /// Defines a custom contextual data item with its template.
   ///
-  /// @param[in]	name			The name of a custom contextual data item
-  /// @param[in]	attr_template	The attribute template which explains contextual data schema in JSON format
+  /// A contextual data item can be used as an event or a condition of other applications' trigger rules, in addition to predefined `context_trigger_event_e` and `context_trigger_condition_e`. See the programming guide to find the JSON format for the `attr_template`.
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY		Out of memory
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED		Not supported
-  /// @retval		#CONTEXT_TRIGGER_ERROR_OPERATION_FAILED		Operation failed
-  /// @retval		#CONTEXT_TRIGGER_ERROR_DATA_EXIST			Data exist
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_DATA			Invalid data
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @see			context_trigger_custom_unregister()
+  /// **Parameters:**
+  /// - `name` (in): The name of a custom contextual data item
+  /// - `attr_template` (in): The attribute template which explains contextual data schema in JSON format
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_TRIGGER_ERROR_NONE`: Successful
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTEXT_TRIGGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONTEXT_TRIGGER_ERROR_DATA_EXIST`: Data exist
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_DATA`: Invalid data
+  ///
+  /// **See also:**
+  /// - `context_trigger_custom_unregister()`
   int context_trigger_custom_register(
     ffi.Pointer<ffi.Char> name,
     ffi.Pointer<ffi.Char> attr_template,
@@ -1564,20 +1918,28 @@ class Tizen90CapiContext {
       _context_trigger_custom_registerPtr.asFunction<
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief		Removes a defined custom contextual data item.
-  /// @since_tizen 3.0
+  /// Removes a defined custom contextual data item.
   ///
-  /// @remarks		A custom event/condition data item can only be removed by the application that registered it.
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in]	name			The name of a custom contextual data item
+  /// **Remarks:**
+  /// - A custom event/condition data item can only be removed by the application that registered it.
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_TRIGGER_ERROR_OPERATION_FAILED		Operation failed
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED		Not supported
+  /// **Parameters:**
+  /// - `name` (in): The name of a custom contextual data item
   ///
-  /// @see			context_trigger_custom_register()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_TRIGGER_ERROR_NONE`: Successful
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_TRIGGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `context_trigger_custom_register()`
   int context_trigger_custom_unregister(
     ffi.Pointer<ffi.Char> name,
   ) {
@@ -1593,23 +1955,28 @@ class Tizen90CapiContext {
       _context_trigger_custom_unregisterPtr
           .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @brief		Publishes an instance of a defined custom contextual data.
-  /// @details		Using this, an application can publish the latest value of a custom data defined by the same application.
-  /// The published data instance triggers the evaluation process of the trigger rules that use the data in their event part.
-  /// If a rule uses the custom data as a condition, the last known value is referenced.
-  /// See the programming guide to find the JSON format for the @a fact.
-  /// @since_tizen 3.0
+  /// Publishes an instance of a defined custom contextual data.
   ///
-  /// @remarks		Corresponding contextual data can only be published by the application that registered it.
+  /// Using this, an application can publish the latest value of a custom data defined by the same application. The published data instance triggers the evaluation process of the trigger rules that use the data in their event part. If a rule uses the custom data as a condition, the last known value is referenced. See the programming guide to find the JSON format for the `fact`.
   ///
-  /// @param[in]	name			The name of custom contextual data item
-  /// @param[in]	fact			The contextual data to be provided in JSON format
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED		Not supported
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_DATA			Invalid data
+  /// **Remarks:**
+  /// - Corresponding contextual data can only be published by the application that registered it.
+  ///
+  /// **Parameters:**
+  /// - `name` (in): The name of custom contextual data item
+  /// - `fact` (in): The contextual data to be provided in JSON format
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_TRIGGER_ERROR_NONE`: Successful
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_DATA`: Invalid data
   int context_trigger_custom_publish(
     ffi.Pointer<ffi.Char> name,
     ffi.Pointer<ffi.Char> fact,
@@ -1628,25 +1995,34 @@ class Tizen90CapiContext {
       _context_trigger_custom_publishPtr.asFunction<
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief		Creates an event entry with custom event, instead of predefined event item #context_trigger_event_e.
-  /// @details		An event of a custom contextual event item, which is registered and will be provided by an application/system, is created.
-  /// @since_tizen 3.0
+  /// Creates an event entry with custom event, instead of predefined event item `context_trigger_event_e`.
   ///
-  /// @remarks		The @a entry must be released using context_trigger_rule_entry_destroy().
+  /// An event of a custom contextual event item, which is registered and will be provided by an application/system, is created.
   ///
-  /// @param[in]	event_item		The custom contextual event item
-  /// @param[in]	provider		The id of the package which provides the event item
-  /// @param[in]	logical_type	The logical operator
-  /// @param[out]	entry			The event entry to be initialized
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY		Memory allocation failed
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED		Not supported
+  /// **Remarks:**
+  /// - The `entry` must be released using context_trigger_rule_entry_destroy().
   ///
-  /// @see			context_trigger_rule_event_create()
-  /// @see			context_trigger_rule_entry_destroy()
+  /// **Parameters:**
+  /// - `event_item` (in): The custom contextual event item
+  /// - `provider` (in): The id of the package which provides the event item
+  /// - `logical_type` (in): The logical operator
+  /// - `entry` (out): The event entry to be initialized
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_TRIGGER_ERROR_NONE`: Successful
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY`: Memory allocation failed
+  /// - `CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `context_trigger_rule_event_create()`
+  /// - `context_trigger_rule_entry_destroy()`
   int context_trigger_rule_custom_event_create(
     ffi.Pointer<ffi.Char> event_item,
     ffi.Pointer<ffi.Char> provider,
@@ -1671,25 +2047,34 @@ class Tizen90CapiContext {
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, int,
               ffi.Pointer<context_trigger_rule_entry_h>)>();
 
-  /// @brief		Creates a condition entry with custom condition, instead of predefined condition item #context_trigger_condition_e.
-  /// @details		A condition of a custom contextual condition item, which is registered and will be provided by provider application/system, is created.
-  /// @since_tizen 3.0
+  /// Creates a condition entry with custom condition, instead of predefined condition item `context_trigger_condition_e`.
   ///
-  /// @remarks		The @a entry must be released using context_trigger_rule_entry_destroy().
+  /// A condition of a custom contextual condition item, which is registered and will be provided by provider application/system, is created.
   ///
-  /// @param[in]	condition_item	The custom contextual condition item
-  /// @param[in]	provider		The id of the package which provides the condition item
-  /// @param[in]	logical_type	The logical operator
-  /// @param[out]	entry			The condition entry to be initialized
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return		@c 0 on success, otherwise a negative error value
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NONE					Successful
-  /// @retval		#CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval		#CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY		Memory allocation failed
-  /// @retval		#CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED		Not supported
+  /// **Remarks:**
+  /// - The `entry` must be released using context_trigger_rule_entry_destroy().
   ///
-  /// @see			context_trigger_rule_condition_create()
-  /// @see			context_trigger_rule_entry_destroy()
+  /// **Parameters:**
+  /// - `condition_item` (in): The custom contextual condition item
+  /// - `provider` (in): The id of the package which provides the condition item
+  /// - `logical_type` (in): The logical operator
+  /// - `entry` (out): The condition entry to be initialized
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CONTEXT_TRIGGER_ERROR_NONE`: Successful
+  /// - `CONTEXT_TRIGGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CONTEXT_TRIGGER_ERROR_OUT_OF_MEMORY`: Memory allocation failed
+  /// - `CONTEXT_TRIGGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `context_trigger_rule_condition_create()`
+  /// - `context_trigger_rule_entry_destroy()`
   int context_trigger_rule_custom_condition_create(
     ffi.Pointer<ffi.Char> condition_item,
     ffi.Pointer<ffi.Char> provider,
@@ -1715,8 +2100,11 @@ class Tizen90CapiContext {
               ffi.Pointer<context_trigger_rule_entry_h>)>();
 }
 
-/// @brief		Enumeration for errors.
-/// @since_tizen 2.4
+/// Enumeration for errors.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class context_history_error_e {
   /// < Successful
   static const int CONTEXT_HISTORY_ERROR_NONE = 0;
@@ -1743,8 +2131,11 @@ abstract class context_history_error_e {
   static const int CONTEXT_HISTORY_ERROR_OPERATION_FAILED = -38273020;
 }
 
-/// @brief		Enumeration for data types of statistics and patterns.
-/// @since_tizen 2.4
+/// Enumeration for data types of statistics and patterns.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class context_history_data_e {
   /// < Recently used application @n Privilege : http://tizen.org/privilege/apphistory.read
   static const int CONTEXT_HISTORY_RECENTLY_USED_APP = 1;
@@ -1793,8 +2184,11 @@ abstract class context_history_data_e {
   static const int CONTEXT_HISTORY_RECENT_BATTERY_USAGE = 12;
 }
 
-/// @brief		Enumeration for filters of statistics and patterns.
-/// @since_tizen 2.4
+/// Enumeration for filters of statistics and patterns.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class context_history_filter_e {
   /// < Time span of data in days
   static const int CONTEXT_HISTORY_FILTER_TIME_SPAN = 1;
@@ -1824,9 +2218,13 @@ abstract class context_history_filter_e {
   static const int CONTEXT_HISTORY_FILTER_COMMUNICATION_TYPE = 9;
 }
 
-/// @deprecated	Deprecated since 4.0.
-/// @brief		Enumeration for day of week filter.
-/// @since_tizen 2.4
+/// **Deprecated:** Deprecated since 4.0.
+///
+/// Enumeration for day of week filter.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class context_history_filter_day_of_week_e {
   /// < Includes only weekdays
   static const int CONTEXT_HISTORY_FILTER_DAY_OF_WEEK_WEEKDAYS = 1;
@@ -1838,8 +2236,11 @@ abstract class context_history_filter_day_of_week_e {
   static const int CONTEXT_HISTORY_FILTER_DAY_OF_WEEK_ALL = 3;
 }
 
-/// @brief		Enumeration for audio jack filter.
-/// @since_tizen 2.4
+/// Enumeration for audio jack filter.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class context_history_filter_audio_jack_e {
   /// < Audio jack is not connected
   static const int CONTEXT_HISTORY_FILTER_AUDIO_JACK_NOT_CONNECTED = 0;
@@ -1848,9 +2249,13 @@ abstract class context_history_filter_audio_jack_e {
   static const int CONTEXT_HISTORY_FILTER_AUDIO_JACK_CONNECTED = 1;
 }
 
-/// @deprecated	Deprecated since 4.0.
-/// @brief		Enumeration for log type filter.
-/// @since_tizen 2.4
+/// **Deprecated:** Deprecated since 4.0.
+///
+/// Enumeration for log type filter.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class context_history_filter_communication_type_e {
   /// < Includes only call logs
   static const int CONTEXT_HISTORY_FILTER_COMMUNICATION_TYPE_CALL = 1;
@@ -1862,34 +2267,53 @@ abstract class context_history_filter_communication_type_e {
   static const int CONTEXT_HISTORY_FILTER_COMMUNICATION_TYPE_ALL = 3;
 }
 
+/// @nodoc
 final class _context_history_handle_s extends ffi.Opaque {}
 
+/// @nodoc
 final class _context_history_filter_handle_s extends ffi.Opaque {}
 
+/// @nodoc
 final class _context_history_list_handle_s extends ffi.Opaque {}
 
+/// @nodoc
 final class _context_history_record_handle_s extends ffi.Opaque {}
 
-/// @brief Retrieving statistics and patterns using context history handle.
-/// @since_tizen 2.4
+/// Retrieving statistics and patterns using context history handle.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 typedef context_history_h = ffi.Pointer<_context_history_handle_s>;
 
-/// @brief Computing statistics and patterns using history filter handle.
-/// @since_tizen 2.4
+/// Computing statistics and patterns using history filter handle.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 typedef context_history_filter_h
     = ffi.Pointer<_context_history_filter_handle_s>;
 
-/// @brief One or multiple records contained in history list handle.
-/// @since_tizen 2.4
+/// One or multiple records contained in history list handle.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 typedef context_history_list_h = ffi.Pointer<_context_history_list_handle_s>;
 
-/// @brief One or multiple attributes contained in history list handle.
-/// @since_tizen 2.4
+/// One or multiple attributes contained in history list handle.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 typedef context_history_record_h
     = ffi.Pointer<_context_history_record_handle_s>;
 
-/// @brief	Enumeration for context trigger API of error codes.
-/// @since_tizen 2.4
+/// Enumeration for context trigger API of error codes.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class context_trigger_error_e {
   /// < Successful
   static const int CONTEXT_TRIGGER_ERROR_NONE = 0;
@@ -1931,8 +2355,11 @@ abstract class context_trigger_error_e {
   static const int CONTEXT_TRIGGER_ERROR_INVALID_DATA = -38273014;
 }
 
-/// @brief		Enumeration for event types.
-/// @since_tizen 2.4
+/// Enumeration for event types.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class context_trigger_event_e {
   /// < At certain times of day and days of week (Deprecated since 4.0)
   /// @n Privilege: http://tizen.org/privilege/alarm.set
@@ -1987,8 +2414,11 @@ abstract class context_trigger_event_e {
   static const int CONTEXT_TRIGGER_EVENT_PLACE = 66816;
 }
 
-/// @brief		Enumeration for condition types.
-/// @since_tizen 2.4
+/// Enumeration for condition types.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class context_trigger_condition_e {
   /// < Time of day
   static const int CONTEXT_TRIGGER_CONDITION_TIME = 131073;
@@ -2034,8 +2464,11 @@ abstract class context_trigger_condition_e {
   static const int CONTEXT_TRIGGER_CONDITION_VIDEO_PLAYBACK_FREQUENCY = 132611;
 }
 
-/// @brief		Enumeration for logical operation types.
-/// @since_tizen 2.4
+/// Enumeration for logical operation types.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class context_trigger_logical_type_e {
   /// < Logical conjunction
   static const int CONTEXT_TRIGGER_LOGICAL_CONJUNCTION = 1;
@@ -2044,157 +2477,236 @@ abstract class context_trigger_logical_type_e {
   static const int CONTEXT_TRIGGER_LOGICAL_DISJUNCTION = 2;
 }
 
+/// @nodoc
 final class _context_trigger_rule_s extends ffi.Opaque {}
 
+/// @nodoc
 final class _context_trigger_rule_entry_s extends ffi.Opaque {}
 
-/// @brief		Trigger rule editing handle.
-/// @since_tizen 2.4
+/// Trigger rule editing handle.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 typedef context_trigger_rule_h = ffi.Pointer<_context_trigger_rule_s>;
 
-/// @brief		Editing an event or a condition, which is added to a rule using handle.
-/// @since_tizen 2.4
+/// Editing an event or a condition, which is added to a rule using handle.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 typedef context_trigger_rule_entry_h
     = ffi.Pointer<_context_trigger_rule_entry_s>;
 
+/// @nodoc
 const String CONTEXT_HISTORY_APP_ID = 'AppId';
 
+/// @nodoc
 const String CONTEXT_HISTORY_TOTAL_COUNT = 'TotalCount';
 
+/// @nodoc
 const String CONTEXT_HISTORY_TOTAL_AMOUNT = 'TotalAmount';
 
+/// @nodoc
 const String CONTEXT_HISTORY_TOTAL_DURATION = 'TotalDuration';
 
+/// @nodoc
 const String CONTEXT_HISTORY_LAST_TIME = 'LastTime';
 
+/// @nodoc
 const String CONTEXT_HISTORY_HOUR_OF_DAY = 'HourOfDay';
 
+/// @nodoc
 const String CONTEXT_HISTORY_AUDIO_JACK = 'AudioJack';
 
+/// @nodoc
 const String CONTEXT_HISTORY_SYSTEM_VOLUME = 'SystemVolume';
 
+/// @nodoc
 const String CONTEXT_HISTORY_MEDIA_VOLUME = 'MediaVolume';
 
+/// @nodoc
 const String CONTEXT_HISTORY_ADDRESS = 'Address';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_EQUAL_TO = '==';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_NOT_EQUAL_TO = '!=';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_GREATER_THAN = '>';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_GREATER_THAN_OR_EQUAL_TO = '>=';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_LESS_THAN = '<';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_LESS_THAN_OR_EQUAL_TO = '<=';
 
+/// @nodoc
 const int CONTEXT_TRIGGER_TRUE = 1;
 
+/// @nodoc
 const int CONTEXT_TRIGGER_FALSE = 0;
 
+/// @nodoc
 const String CONTEXT_TRIGGER_TIME_OF_DAY = 'TimeOfDay';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_DAY_OF_WEEK = 'DayOfWeek';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_DAY_OF_MONTH = 'DayOfMonth';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_IS_CONNECTED = 'IsConnected';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_IS_CHARGING = 'IsCharging';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_IS_ENABLED = 'IsEnabled';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_LEVEL = 'Level';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_STATE = 'State';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_BSSID = 'BSSID';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_TYPE = 'Type';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_EVENT = 'Event';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_ACCURACY = 'Accuracy';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_MEDIUM = 'Medium';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_PLACE_ID = 'PlaceId';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_APP_ID = 'AppId';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_ADDRESS = 'Address';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_RANK = 'Rank';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_TOTAL_COUNT = 'TotalCount';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_MON = 'Mon';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_TUE = 'Tue';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_WED = 'Wed';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_THU = 'Thu';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_FRI = 'Fri';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_SAT = 'Sat';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_SUN = 'Sun';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_WEEKDAY = 'Weekday';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_WEEKEND = 'Weekend';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_EMPTY = 'Empty';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_CRITICAL = 'Critical';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_LOW = 'Low';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_NORMAL = 'Normal';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_HIGH = 'High';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_FULL = 'Full';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_DISABLED = 'Disabled';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_SEARCHING = 'Searching';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_CONNECTING = 'Connecting';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_CONNECTED = 'Connected';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_UNCONNECTED = 'Unconnected';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_IDLE = 'Idle';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_VOICE = 'Voice';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_VIDEO = 'Video';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_HEADSET = 'Headset';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_BLUETOOTH = 'Bluetooth';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_RECEIVED = 'Received';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_SENT = 'Sent';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_SMS = 'SMS';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_MMS = 'MMS';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_MY_PROFILE = 'MyProfile';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_PERSON = 'Person';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_CHANGED = 'Changed';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_DETECTED = 'Detected';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_IN = 'In';
 
+/// @nodoc
 const String CONTEXT_TRIGGER_OUT = 'Out';

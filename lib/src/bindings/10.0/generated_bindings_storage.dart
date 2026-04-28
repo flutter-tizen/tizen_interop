@@ -1,3 +1,6 @@
+/// {@category 10.0/tizen}
+library tizen_interop_10_0.storage;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen storage APIs.
+/// {@category 10.0/tizen}
 class Tizen100Storage {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,27 +28,41 @@ class Tizen100Storage {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Retrieves all the storage in a device using a callback function.
-  /// @details Invokes the callback function once for each storage in a device. \n
-  /// If storage_device_supported_cb() returns @c false, then the iteration will be finished.
-  /// @since_tizen 2.3
-  /// @remarks A callback function should be defined by this function caller.
-  /// @param[in] callback The iteration callback function
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STORAGE_ERROR_NONE Successful
-  /// @retval #STORAGE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @post Invokes storage_device_supported_cb() repeatedly for each supported device.
-  /// @see storage_device_supported_cb()
-  /// @code
+  /// Retrieves all the storage in a device using a callback function.
+  ///
+  /// Invokes the callback function once for each storage in a device. If storage_device_supported_cb() returns `false`, then the iteration will be finished.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - A callback function should be defined by this function caller.
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The iteration callback function
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STORAGE_ERROR_NONE`: Successful
+  /// - `STORAGE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Postconditions:**
+  /// - Invokes storage_device_supported_cb() repeatedly for each supported device.
+  ///
+  /// **See also:**
+  /// - `storage_device_supported_cb()`
+  ///
+  /// ```
   /// my_storage_device_supported_cb(int storage_id, storage_type_e type,
   /// storage_state_e state, const char *path, void *user_data) {
   /// return true;
   /// }
   ///
   /// storage_foreach_device_supported(my_storage_device_supported_cb, NULL);
-  /// @endcode
+  /// ```
   int storage_foreach_device_supported(
     storage_device_supported_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -63,31 +81,44 @@ class Tizen100Storage {
       _storage_foreach_device_supportedPtr.asFunction<
           int Function(storage_device_supported_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the absolute path to the root directory of the given storage.
-  /// @details Determines root directory of internal or external storage using storage_id.
-  /// @since_tizen 2.3
-  /// @remarks Files saved on the internal/external storage are readable or writable by all applications.\n
-  /// When an application is uninstalled, the files written by that application are not removed from the internal/external storage.\n
-  /// If you want to access files or directories in internal storage, you must declare %http://tizen.org/privilege/mediastorage.\n
-  /// If you want to access files or directories in external storage, you must declare %http://tizen.org/privilege/externalstorage.\n
-  /// Refer to <a href="https://docs.tizen.org/application/native/guides/security/privacy-related-permissions"><b>Privacy-related Permissions</b></a>.\n
-  /// You must release @a path using free().
-  /// @param[in] storage_id The storage device
-  /// @param[out] path The absolute path to the storage directory
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STORAGE_ERROR_NONE Successful
-  /// @retval #STORAGE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STORAGE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #STORAGE_ERROR_NOT_SUPPORTED Storage not supported
-  /// @retval #STORAGE_ERROR_OPERATION_FAILED Operation failed
-  /// @see storage_get_state()
-  /// @code
+  /// Gets the absolute path to the root directory of the given storage.
+  ///
+  /// Determines root directory of internal or external storage using storage_id.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - Files saved on the internal/external storage are readable or writable by all applications.
+  /// - When an application is uninstalled, the files written by that application are not removed from the internal/external storage.
+  /// - If you want to access files or directories in internal storage, you must declare http://tizen.org/privilege/mediastorage.
+  /// - If you want to access files or directories in external storage, you must declare http://tizen.org/privilege/externalstorage.
+  /// - Refer to <a href="https://docs.tizen.org/application/native/guides/security/privacy-related-permissions"><b>Privacy-related Permissions</b></a>.
+  /// - You must release `path` using free().
+  ///
+  /// **Parameters:**
+  /// - `storage_id` (in): The storage device
+  /// - `path` (out): The absolute path to the storage directory
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STORAGE_ERROR_NONE`: Successful
+  /// - `STORAGE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STORAGE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `STORAGE_ERROR_NOT_SUPPORTED`: Storage not supported
+  /// - `STORAGE_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `storage_get_state()`
+  ///
+  /// ```
   /// int storage_id = 0;
   /// char path[100];
   ///
   /// storage_get_root_directory(storage_id, &path)
-  /// @endcode
+  /// ```
   int storage_get_root_directory(
     int storage_id,
     ffi.Pointer<ffi.Pointer<ffi.Char>> path,
@@ -105,33 +136,46 @@ class Tizen100Storage {
   late final _storage_get_root_directory = _storage_get_root_directoryPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the absolute path to the each directory of the given storage.
-  /// @details Gets absolute path among several directories defined in the #storage_directory_e.
-  /// @since_tizen 2.3
-  /// @remarks Files saved on the internal/external storage are readable or writable by all applications.\n
-  /// When an application is uninstalled, the files written by that application are not removed from the internal/external storage.\n
-  /// The directory path may not exist, so you must make sure that it exists before using it.\n
-  /// If you want to access files or directories in internal storage, you must declare %http://tizen.org/privilege/mediastorage.\n
-  /// If you want to access files or directories in external storage, you must declare %http://tizen.org/privilege/externalstorage.\n
-  /// Refer to <a href="https://docs.tizen.org/application/native/guides/security/privacy-related-permissions"><b>Privacy-related Permissions</b></a>.\n
-  /// You must release @a path using free().
-  /// @param[in] storage_id The storage device
-  /// @param[in] type The directory type
-  /// @param[out] path The absolute path to the directory type
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STORAGE_ERROR_NONE Successful
-  /// @retval #STORAGE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STORAGE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #STORAGE_ERROR_NOT_SUPPORTED Storage not supported
-  /// @retval #STORAGE_ERROR_OPERATION_FAILED Operation failed
-  /// @see storage_get_state()
-  /// @code
+  /// Gets the absolute path to the each directory of the given storage.
+  ///
+  /// Gets absolute path among several directories defined in the `storage_directory_e`.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - Files saved on the internal/external storage are readable or writable by all applications.
+  /// - When an application is uninstalled, the files written by that application are not removed from the internal/external storage.
+  /// - The directory path may not exist, so you must make sure that it exists before using it.
+  /// - If you want to access files or directories in internal storage, you must declare http://tizen.org/privilege/mediastorage.
+  /// - If you want to access files or directories in external storage, you must declare http://tizen.org/privilege/externalstorage.
+  /// - Refer to <a href="https://docs.tizen.org/application/native/guides/security/privacy-related-permissions"><b>Privacy-related Permissions</b></a>.
+  /// - You must release `path` using free().
+  ///
+  /// **Parameters:**
+  /// - `storage_id` (in): The storage device
+  /// - `type` (in): The directory type
+  /// - `path` (out): The absolute path to the directory type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STORAGE_ERROR_NONE`: Successful
+  /// - `STORAGE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STORAGE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `STORAGE_ERROR_NOT_SUPPORTED`: Storage not supported
+  /// - `STORAGE_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `storage_get_state()`
+  ///
+  /// ```
   /// int storage_id = 0;
   /// char path[100];
   ///
   /// storage_get_directory(storage_id, STORAGE_DIRECTORY_IMAGES, &path)
-  /// @endcode
+  /// ```
   int storage_get_directory(
     int storage_id,
     int type,
@@ -151,26 +195,36 @@ class Tizen100Storage {
   late final _storage_get_directory = _storage_get_directoryPtr
       .asFunction<int Function(int, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the type (such as internal or external) of the given storage.
-  /// @details Gets the storage type among defined in the #storage_type_e using storage_id.
-  /// @since_tizen 2.3
-  /// @remarks Determines whether it is an internal or external storage using the input storage_id.
-  /// @param[in] storage_id The storage device
-  /// @param[out] type The type of the storage
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STORAGE_ERROR_NONE Successful
-  /// @retval #STORAGE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STORAGE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #STORAGE_ERROR_NOT_SUPPORTED Storage not supported
-  /// @retval #STORAGE_ERROR_OPERATION_FAILED Operation failed
+  /// Gets the type (such as internal or external) of the given storage.
   ///
-  /// @code
+  /// Gets the storage type among defined in the `storage_type_e` using storage_id.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - Determines whether it is an internal or external storage using the input storage_id.
+  ///
+  /// **Parameters:**
+  /// - `storage_id` (in): The storage device
+  /// - `type` (out): The type of the storage
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STORAGE_ERROR_NONE`: Successful
+  /// - `STORAGE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STORAGE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `STORAGE_ERROR_NOT_SUPPORTED`: Storage not supported
+  /// - `STORAGE_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// ```
   /// int storage_id = 0;
   /// storage_type_e type;
   ///
   /// storage_get_type(storage_id, &type);
-  /// @endcode
+  /// ```
   int storage_get_type(
     int storage_id,
     ffi.Pointer<ffi.Int32> type,
@@ -188,28 +242,41 @@ class Tizen100Storage {
   late final _storage_get_type = _storage_get_typePtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the current mounted state of storage corresponding to the specified id.
-  /// @details Gets the storage mounted state among defined in the #storage_state_e using storage_id.
-  /// @since_tizen 2.3
-  /// @remarks Determines whether it is an internal or external storage using the input storage_id.
-  /// @param[in] storage_id The storage device
-  /// @param[out] state The current state of the storage
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STORAGE_ERROR_NONE Successful
-  /// @retval #STORAGE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STORAGE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #STORAGE_ERROR_NOT_SUPPORTED Storage not supported
-  /// @retval #STORAGE_ERROR_OPERATION_FAILED Operation failed
-  /// @see storage_get_root_directory()
-  /// @see storage_get_total_space()
-  /// @see storage_get_available_space()
-  /// @code
+  /// Gets the current mounted state of storage corresponding to the specified id.
+  ///
+  /// Gets the storage mounted state among defined in the `storage_state_e` using storage_id.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - Determines whether it is an internal or external storage using the input storage_id.
+  ///
+  /// **Parameters:**
+  /// - `storage_id` (in): The storage device
+  /// - `state` (out): The current state of the storage
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STORAGE_ERROR_NONE`: Successful
+  /// - `STORAGE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STORAGE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `STORAGE_ERROR_NOT_SUPPORTED`: Storage not supported
+  /// - `STORAGE_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `storage_get_root_directory()`
+  /// - `storage_get_total_space()`
+  /// - `storage_get_available_space()`
+  ///
+  /// ```
   /// int storage_id = 0;
   /// storage_state_e state;
   ///
   /// storage_get_state(storage_id, &state);
-  /// @endcode
+  /// ```
   int storage_get_state(
     int storage_id,
     ffi.Pointer<ffi.Int32> state,
@@ -227,28 +294,43 @@ class Tizen100Storage {
   late final _storage_get_state = _storage_get_statePtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Registers a callback function to be invoked when the state of the specific storage changes.
-  /// @details Invokes the callback function each time for a specific storage whose state changes.
-  /// @since_tizen 2.3
-  /// @remarks A callback function should be defined by this function caller.
-  /// @param[in] storage_id The storage device
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STORAGE_ERROR_NONE Successful
-  /// @retval #STORAGE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STORAGE_ERROR_NOT_SUPPORTED Storage not supported
-  /// @retval #STORAGE_ERROR_OPERATION_FAILED Operation failed
-  /// @post storage_state_changed_cb() will be invoked if the state of the registered storage changes.
-  /// @see storage_state_changed_cb()
-  /// @see storage_unset_state_changed_cb()
-  /// @code
+  /// Registers a callback function to be invoked when the state of the specific storage changes.
+  ///
+  /// Invokes the callback function each time for a specific storage whose state changes.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - A callback function should be defined by this function caller.
+  ///
+  /// **Parameters:**
+  /// - `storage_id` (in): The storage device
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STORAGE_ERROR_NONE`: Successful
+  /// - `STORAGE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STORAGE_ERROR_NOT_SUPPORTED`: Storage not supported
+  /// - `STORAGE_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **Postconditions:**
+  /// - storage_state_changed_cb() will be invoked if the state of the registered storage changes.
+  ///
+  /// **See also:**
+  /// - `storage_state_changed_cb()`
+  /// - `storage_unset_state_changed_cb()`
+  ///
+  /// ```
   /// my_storage_state_changed_cb(int storage_id, storage_state_e state, void *user_data) {
   /// }
   ///
   /// storage_set_state_changed_cb(0, my_storage_state_changed_cb, NULL);
-  /// @endcode
+  /// ```
   int storage_set_state_changed_cb(
     int storage_id,
     storage_state_changed_cb callback,
@@ -269,27 +351,40 @@ class Tizen100Storage {
       _storage_set_state_changed_cbPtr.asFunction<
           int Function(int, storage_state_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback function to stop calling the callback.
-  /// @details Prevents the callback function from being called any further.
-  /// @since_tizen 2.3
-  /// @remarks A callback function should be defined by this function caller.
-  /// @param[in] storage_id The storage device to monitor
-  /// @param[in] callback The callback function to register
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STORAGE_ERROR_NONE Successful
-  /// @retval #STORAGE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STORAGE_ERROR_NOT_SUPPORTED Storage not supported
-  /// @retval #STORAGE_ERROR_OPERATION_FAILED Operation failed
-  /// @see storage_state_changed_cb()
-  /// @see storage_set_state_changed_cb()
-  /// @code
+  /// Unregisters the callback function to stop calling the callback.
+  ///
+  /// Prevents the callback function from being called any further.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - A callback function should be defined by this function caller.
+  ///
+  /// **Parameters:**
+  /// - `storage_id` (in): The storage device to monitor
+  /// - `callback` (in): The callback function to register
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STORAGE_ERROR_NONE`: Successful
+  /// - `STORAGE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STORAGE_ERROR_NOT_SUPPORTED`: Storage not supported
+  /// - `STORAGE_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `storage_state_changed_cb()`
+  /// - `storage_set_state_changed_cb()`
+  ///
+  /// ```
   /// my_storage_state_changed_cb(int storage_id, storage_state_e state, void *user_data) {
   /// }
   ///
   /// storage_set_state_changed_cb(0, my_storage_state_changed_cb, NULL);
   /// storage_unset_state_changed_cb(0, my_storage_state_changed_cb);
-  /// @endcode
+  /// ```
   int storage_unset_state_changed_cb(
     int storage_id,
     storage_state_changed_cb callback,
@@ -308,30 +403,45 @@ class Tizen100Storage {
       _storage_unset_state_changed_cbPtr
           .asFunction<int Function(int, storage_state_changed_cb)>();
 
-  /// @brief Registers a callback function to be invoked when the state of the specified storage device type changes.
-  /// @details Invokes the callback function each time for specific storage type whose state changes.
-  /// @since_tizen 3.0
-  /// @remarks A callback function should be defined by this function caller.
-  /// @param[in] type The type of the storage device
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STORAGE_ERROR_NONE Successful
-  /// @retval #STORAGE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STORAGE_ERROR_NOT_SUPPORTED Storage not supported
-  /// @retval #STORAGE_ERROR_OPERATION_FAILED Operation failed
-  /// @post storage_changed_cb() will be invoked if the state of the registered storage type changes.
-  /// @see storage_changed_cb()
-  /// @see storage_unset_changed_cb()
-  /// @code
+  /// Registers a callback function to be invoked when the state of the specified storage device type changes.
+  ///
+  /// Invokes the callback function each time for specific storage type whose state changes.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - A callback function should be defined by this function caller.
+  ///
+  /// **Parameters:**
+  /// - `type` (in): The type of the storage device
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STORAGE_ERROR_NONE`: Successful
+  /// - `STORAGE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STORAGE_ERROR_NOT_SUPPORTED`: Storage not supported
+  /// - `STORAGE_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **Postconditions:**
+  /// - storage_changed_cb() will be invoked if the state of the registered storage type changes.
+  ///
+  /// **See also:**
+  /// - `storage_changed_cb()`
+  /// - `storage_unset_changed_cb()`
+  ///
+  /// ```
   /// my_storage_changed_cb(int storage_id, storage_dev_e dev, storage_state_e state,
   /// const char *fstype, const char *fsuuid, const char *mountpath,
   /// bool primary, int flags, void *user_data) {
   /// }
   ///
   /// storage_set_changed_cb(STORAGE_TYPE_EXTERNAL, my_storage_changed_cb, NULL);
-  /// @endcode
+  /// ```
   int storage_set_changed_cb(
     int type,
     storage_changed_cb callback,
@@ -351,21 +461,34 @@ class Tizen100Storage {
   late final _storage_set_changed_cb = _storage_set_changed_cbPtr.asFunction<
       int Function(int, storage_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback function for storage type state changes.
-  /// @details Prevents the callback function from being called any further.
-  /// @since_tizen 3.0
-  /// @remarks A callback function should be defined by this function caller.
-  /// @param[in] type The type of the the storage device
-  /// @param[in] callback The callback function to unregister
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STORAGE_ERROR_NONE Successful
-  /// @retval #STORAGE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STORAGE_ERROR_NOT_SUPPORTED Storage not supported
-  /// @retval #STORAGE_ERROR_OPERATION_FAILED Operation failed
-  /// @see storage_changed_cb()
-  /// @see storage_set_changed_cb()
-  /// @code
+  /// Unregisters the callback function for storage type state changes.
+  ///
+  /// Prevents the callback function from being called any further.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - A callback function should be defined by this function caller.
+  ///
+  /// **Parameters:**
+  /// - `type` (in): The type of the the storage device
+  /// - `callback` (in): The callback function to unregister
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STORAGE_ERROR_NONE`: Successful
+  /// - `STORAGE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STORAGE_ERROR_NOT_SUPPORTED`: Storage not supported
+  /// - `STORAGE_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `storage_changed_cb()`
+  /// - `storage_set_changed_cb()`
+  ///
+  /// ```
   /// my_storage_changed_cb(int storage_id, storage_dev_e dev, storage_state_e state,
   /// const char *fstype, const char *fsuuid, const char *mountpath,
   /// bool primary, int flags, void *user_data) {
@@ -373,7 +496,7 @@ class Tizen100Storage {
   ///
   /// storage_set_changed_cb(STORAGE_TYPE_EXTERNAL, my_storage_changed_cb, NULL);
   /// storage_unset_changed_cb(STORAGE_TYPE_EXTERNAL, my_storage_changed_cb);
-  /// @endcode
+  /// ```
   int storage_unset_changed_cb(
     int type,
     storage_changed_cb callback,
@@ -390,27 +513,40 @@ class Tizen100Storage {
   late final _storage_unset_changed_cb = _storage_unset_changed_cbPtr
       .asFunction<int Function(int, storage_changed_cb)>();
 
-  /// @brief Gets the total space of the given storage in bytes using id.
-  /// @details Finds target storage using storage_id and gets the total space of a storage in bytes.
-  /// @since_tizen 2.3
-  /// @remarks Determines whether it is an internal or external storage using the input storage_id.
-  /// @param[in] storage_id The storage device
-  /// @param[out] bytes The total space size of the storage (bytes)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STORAGE_ERROR_NONE Successful
-  /// @retval #STORAGE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STORAGE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #STORAGE_ERROR_NOT_SUPPORTED Storage not supported
-  /// @retval #STORAGE_ERROR_OPERATION_FAILED Operation failed
-  /// @see storage_get_state()
-  /// @see storage_get_available_space()
-  /// @code
+  /// Gets the total space of the given storage in bytes using id.
+  ///
+  /// Finds target storage using storage_id and gets the total space of a storage in bytes.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - Determines whether it is an internal or external storage using the input storage_id.
+  ///
+  /// **Parameters:**
+  /// - `storage_id` (in): The storage device
+  /// - `bytes` (out): The total space size of the storage (bytes)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STORAGE_ERROR_NONE`: Successful
+  /// - `STORAGE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STORAGE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `STORAGE_ERROR_NOT_SUPPORTED`: Storage not supported
+  /// - `STORAGE_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `storage_get_state()`
+  /// - `storage_get_available_space()`
+  ///
+  /// ```
   /// int storage_id = 0;
   /// unsigned long long bytes;
   ///
   /// storage_get_total_space(storage_id, &bytes);
-  /// @endcode
+  /// ```
   int storage_get_total_space(
     int storage_id,
     ffi.Pointer<ffi.UnsignedLongLong> bytes,
@@ -428,27 +564,40 @@ class Tizen100Storage {
   late final _storage_get_total_space = _storage_get_total_spacePtr
       .asFunction<int Function(int, ffi.Pointer<ffi.UnsignedLongLong>)>();
 
-  /// @brief Gets the available space size of the given storage in bytes.
-  /// @details Gets the available space of a storage in bytes using storage_id.
-  /// @since_tizen 2.3
-  /// @remarks Determines whether it is an internal or external storage using the input storage_id.
-  /// @param[in] storage_id The storage device
-  /// @param[out] bytes The available space size of the storage (bytes)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STORAGE_ERROR_NONE Successful
-  /// @retval #STORAGE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STORAGE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #STORAGE_ERROR_NOT_SUPPORTED Storage not supported
-  /// @retval #STORAGE_ERROR_OPERATION_FAILED Operation failed
-  /// @see storage_get_state()
-  /// @see storage_get_total_space()
-  /// @code
+  /// Gets the available space size of the given storage in bytes.
+  ///
+  /// Gets the available space of a storage in bytes using storage_id.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - Determines whether it is an internal or external storage using the input storage_id.
+  ///
+  /// **Parameters:**
+  /// - `storage_id` (in): The storage device
+  /// - `bytes` (out): The available space size of the storage (bytes)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STORAGE_ERROR_NONE`: Successful
+  /// - `STORAGE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STORAGE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `STORAGE_ERROR_NOT_SUPPORTED`: Storage not supported
+  /// - `STORAGE_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `storage_get_state()`
+  /// - `storage_get_total_space()`
+  ///
+  /// ```
   /// int storage_id = 0;
   /// unsigned long long bytes;
   ///
   /// storage_get_available_space(storage_id, &bytes);
-  /// @endcode
+  /// ```
   int storage_get_available_space(
     int storage_id,
     ffi.Pointer<ffi.UnsignedLongLong> bytes,
@@ -466,33 +615,39 @@ class Tizen100Storage {
   late final _storage_get_available_space = _storage_get_available_spacePtr
       .asFunction<int Function(int, ffi.Pointer<ffi.UnsignedLongLong>)>();
 
-  /// @brief Gets the type and the kind of external device for the given storage id.
-  /// @details Gets the external storage type defined in #storage_type_e and kind
-  /// defined in #storage_dev_e using storage_id.
-  /// @since_tizen 5.0
-  /// @remarks Works solely on external storages, not internal storages.
-  /// If @a type is #STORAGE_TYPE_INTERNAL, this function returns #STORAGE_ERROR_INVALID_PARAMETER and @a dev is unchanged.
+  /// Gets the type and the kind of external device for the given storage id.
   ///
-  /// @param[in] storage_id The storage id
-  /// @param[out] type The storage @a type (internal or external). If @a type is #STORAGE_TYPE_INTERNAL, this function returns #STORAGE_ERROR_INVALID_PARAMETER and @a dev is unchanged.
-  /// @param[out] dev The storage device for external storage.
+  /// Gets the external storage type defined in `storage_type_e` and kind defined in `storage_dev_e` using storage_id.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @retval #STORAGE_ERROR_NONE               Successful
-  /// @retval #STORAGE_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #STORAGE_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #STORAGE_ERROR_NOT_SUPPORTED      Storage not supported
-  /// @retval #STORAGE_ERROR_OPERATION_FAILED   Operation failed
+  /// **Remarks:**
+  /// - Works solely on external storages, not internal storages.
+  /// - If `type` is `STORAGE_TYPE_INTERNAL`, this function returns `STORAGE_ERROR_INVALID_PARAMETER` and `dev` is unchanged.
   ///
-  /// @code
+  /// **Parameters:**
+  /// - `storage_id` (in): The storage id
+  /// - `type` (out): The storage `type` (internal or external). If `type` is `STORAGE_TYPE_INTERNAL`, this function returns `STORAGE_ERROR_INVALID_PARAMETER` and `dev` is unchanged.
+  /// - `dev` (out): The storage device for external storage.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STORAGE_ERROR_NONE`: Successful
+  /// - `STORAGE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STORAGE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `STORAGE_ERROR_NOT_SUPPORTED`: Storage not supported
+  /// - `STORAGE_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// ```
   /// int storage_id = 0;
   /// storage_type_e type;
   /// storage_dev_e dev;
   ///
   /// storage_get_type_dev(storage_id, &type, &dev);
-  /// @endcode
+  /// ```
   int storage_get_type_dev(
     int storage_id,
     ffi.Pointer<ffi.Int32> type,
@@ -573,8 +728,11 @@ class Tizen100Storage {
           .asFunction<int Function(ffi.Pointer<statvfs>)>();
 }
 
-/// @brief Enumeration for Storage of error codes.
-/// @since_tizen 2.3
+/// Enumeration for Storage of error codes.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class storage_error_e {
   /// < Successful
   static const int STORAGE_ERROR_NONE = 0;
@@ -592,8 +750,11 @@ abstract class storage_error_e {
   static const int STORAGE_ERROR_OPERATION_FAILED = -131054;
 }
 
-/// @brief Enumeration for the storage types.
-/// @since_tizen 2.3
+/// Enumeration for the storage types.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class storage_type_e {
   /// < Internal device storage (built-in storage in a device, non-removable)
   static const int STORAGE_TYPE_INTERNAL = 0;
@@ -605,8 +766,11 @@ abstract class storage_type_e {
   static const int STORAGE_TYPE_EXTENDED_INTERNAL = 2;
 }
 
-/// @brief Enumeration for storage devices state.
-/// @since_tizen 2.3
+/// Enumeration for storage devices state.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class storage_state_e {
   /// < Storage is present but cannot be mounted. Typically it happens if the file system of the storage is corrupted
   static const int STORAGE_STATE_UNMOUNTABLE = -2;
@@ -621,35 +785,51 @@ abstract class storage_state_e {
   static const int STORAGE_STATE_MOUNTED_READ_ONLY = 1;
 }
 
-/// @brief Called to get information once for each supported storage.
-/// @details Called up to the maximum number of supported storages to get information.
-/// @since_tizen 2.3
-/// @remarks Defined by the storage_foreach_device_supported() caller.
-/// @param[in] storage_id The unique storage ID
-/// @param[in] type The type of the storage
-/// @param[in] state The current state of the storage
-/// @param[in] path The absolute path to the root directory of the storage
-/// @param[in] user_data The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop, \n
-/// otherwise @c false to break out of the loop
-/// @pre	storage_foreach_device_supported() will invoke this callback function.
-/// @see	storage_foreach_device_supported()
-/// @code
+/// Called to get information once for each supported storage.
+///
+/// Called up to the maximum number of supported storages to get information.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Remarks:**
+/// - Defined by the storage_foreach_device_supported() caller.
+///
+/// **Parameters:**
+/// - `storage_id` (in): The unique storage ID
+/// - `type` (in): The type of the storage
+/// - `state` (in): The current state of the storage
+/// - `path` (in): The absolute path to the root directory of the storage
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - storage_foreach_device_supported() will invoke this callback function.
+///
+/// **See also:**
+/// - `storage_foreach_device_supported()`
+///
+/// ```
 /// my_storage_device_supported_cb(int storage_id, storage_type_e type,
 /// storage_state_e state, const char *path, void *user_data) {
 /// return true;
 /// }
 ///
 /// storage_foreach_device_supported(my_storage_device_supported_cb, NULL);
-/// @endcode
+/// ```
+/// @nodoc
 typedef storage_device_supported_cb
     = ffi.Pointer<ffi.NativeFunction<storage_device_supported_cbFunction>>;
+/// @nodoc
 typedef storage_device_supported_cbFunction = ffi.Bool Function(
     ffi.Int storage_id,
     ffi.Int32 type,
     ffi.Int32 state,
     ffi.Pointer<ffi.Char> path,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartstorage_device_supported_cbFunction = bool Function(
     int storage_id,
     int type,
@@ -657,8 +837,11 @@ typedef Dartstorage_device_supported_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> path,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumeration for the storage directory types.
-/// @since_tizen 2.3
+/// Enumeration for the storage directory types.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class storage_directory_e {
   /// < Image directory
   static const int STORAGE_DIRECTORY_IMAGES = 0;
@@ -689,33 +872,50 @@ abstract class storage_directory_e {
   static const int STORAGE_DIRECTORY_MAX = 9;
 }
 
-/// @brief Called every time when the state of specific storage changes.
-/// @details Called every time the state of a specific storage changes,
-/// and when it is called, it retrieves the id and state of the storage.
-/// @since_tizen 2.3
-/// @remarks Defined by the storage_set_state_changed_cb() and
-/// storage_unset_state_changed_cb() caller.
-/// @param[in] storage_id The unique storage ID
-/// @param[in] state The current state of the storage
-/// @param[in] user_data The user data passed from the foreach function
-/// @pre	storage_set_state_changed_cb() will invoke this callback function.
-/// @see	storage_set_state_changed_cb()
-/// @see	storage_unset_state_changed_cb()
-/// @code
+/// Called every time when the state of specific storage changes.
+///
+/// Called every time the state of a specific storage changes, and when it is called, it retrieves the id and state of the storage.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Remarks:**
+/// - Defined by the storage_set_state_changed_cb() and
+/// - storage_unset_state_changed_cb() caller.
+///
+/// **Parameters:**
+/// - `storage_id` (in): The unique storage ID
+/// - `state` (in): The current state of the storage
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Preconditions:**
+/// - storage_set_state_changed_cb() will invoke this callback function.
+///
+/// **See also:**
+/// - `storage_set_state_changed_cb()`
+/// - `storage_unset_state_changed_cb()`
+///
+/// ```
 /// my_storage_state_changed_cb(int storage_id, storage_state_e state, void *user_data) {
 /// }
 ///
 /// storage_set_state_changed_cb(0, my_storage_state_changed_cb, NULL);
-/// @endcode
+/// ```
+/// @nodoc
 typedef storage_state_changed_cb
     = ffi.Pointer<ffi.NativeFunction<storage_state_changed_cbFunction>>;
+/// @nodoc
 typedef storage_state_changed_cbFunction = ffi.Void Function(
     ffi.Int storage_id, ffi.Int32 state, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartstorage_state_changed_cbFunction = void Function(
     int storage_id, int state, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumeration for storage device types.
-/// @since_tizen 3.0
+/// Enumeration for storage device types.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class storage_dev_e {
   /// < SD card device (external storage)
   static const int STORAGE_DEV_EXT_SDCARD = 1001;
@@ -727,33 +927,47 @@ abstract class storage_dev_e {
   static const int STORAGE_DEV_EXTENDED_INTERNAL = 1003;
 }
 
-/// @brief Called each time when the state of a specific storage type changes.
-/// @details Called every time the state of specific storage type changes.
-/// @since_tizen 3.0
-/// @remarks Defined by the storage_set_changed_cb() and
-/// storage_unset_changed_cb() caller.
-/// @param[in] storage_id The unique storage ID
-/// @param[in] dev The type of the external storage device
-/// @param[in] state The state of the storage
-/// @param[in] fstype The type of the file system
-/// @param[in] fsuuid The uuid of the file system
-/// @param[in] mountpath The mount path of the file system
-/// @param[in] primary The primary partition
-/// @param[in] flags The flags for the storage status
-/// @param[in] user_data The user data
-/// @pre	storage_set_changed_cb() will invoke this callback function.
-/// @see	storage_set_changed_cb()
-/// @see	storage_unset_changed_cb()
-/// @code
+/// Called each time when the state of a specific storage type changes.
+///
+/// Called every time the state of specific storage type changes.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - Defined by the storage_set_changed_cb() and
+/// - storage_unset_changed_cb() caller.
+///
+/// **Parameters:**
+/// - `storage_id` (in): The unique storage ID
+/// - `dev` (in): The type of the external storage device
+/// - `state` (in): The state of the storage
+/// - `fstype` (in): The type of the file system
+/// - `fsuuid` (in): The uuid of the file system
+/// - `mountpath` (in): The mount path of the file system
+/// - `primary` (in): The primary partition
+/// - `flags` (in): The flags for the storage status
+/// - `user_data` (in): The user data
+///
+/// **Preconditions:**
+/// - storage_set_changed_cb() will invoke this callback function.
+///
+/// **See also:**
+/// - `storage_set_changed_cb()`
+/// - `storage_unset_changed_cb()`
+///
+/// ```
 /// my_storage_changed_cb(int storage_id, storage_dev_e dev, storage_state_e state,
 /// const char *fstype, const char *fsuuid, const char *mountpath,
 /// bool primary, int flags, void *user_data) {
 /// }
 ///
 /// storage_set_changed_cb(STORAGE_TYPE_EXTERNAL, my_storage_changed_cb, NULL);
-/// @endcode
+/// ```
+/// @nodoc
 typedef storage_changed_cb
     = ffi.Pointer<ffi.NativeFunction<storage_changed_cbFunction>>;
+/// @nodoc
 typedef storage_changed_cbFunction = ffi.Void Function(
     ffi.Int storage_id,
     ffi.Int32 dev,
@@ -764,6 +978,7 @@ typedef storage_changed_cbFunction = ffi.Void Function(
     ffi.Bool primary,
     ffi.Int flags,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartstorage_changed_cbFunction = void Function(
     int storage_id,
     int dev,
@@ -775,6 +990,7 @@ typedef Dartstorage_changed_cbFunction = void Function(
     int flags,
     ffi.Pointer<ffi.Void> user_data);
 
+/// @nodoc
 final class statvfs extends ffi.Struct {
   @ffi.UnsignedLong()
   external int f_bsize;
@@ -819,7 +1035,11 @@ final class statvfs extends ffi.Struct {
   external ffi.Array<ffi.Int> __f_spare;
 }
 
+/// @nodoc
 typedef __fsblkcnt_t = ffi.UnsignedLong;
+/// @nodoc
 typedef Dart__fsblkcnt_t = int;
+/// @nodoc
 typedef __fsfilcnt_t = ffi.UnsignedLong;
+/// @nodoc
 typedef Dart__fsfilcnt_t = int;

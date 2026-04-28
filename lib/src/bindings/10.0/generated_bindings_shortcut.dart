@@ -1,3 +1,6 @@
+/// {@category 10.0/tizen}
+library tizen_interop_10_0.shortcut;
+
 // Copyright 2026 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen shortcut APIs.
+/// {@category 10.0/tizen}
 class Tizen100Shortcut {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,41 +28,62 @@ class Tizen100Shortcut {
           lookup)
       : _lookup = lookup;
 
-  /// @deprecated Deprecated since 9.0
-  /// @brief Adds a shortcut to home, asynchronously.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/shortcut
-  /// @remarks If a homescreen does not support this feature, you will get a proper error code.\n
-  /// Application must check the return value of this function.\n
-  /// Application must check the return status from the callback function.\n
-  /// Application should set the callback function to get the result of this request.
-  /// @param[in] name The name of the created shortcut icon
-  /// @param[in] type The type of shortcuts
-  /// @param[in] uri The specific information for delivering to the viewer for creating a shortcut
-  /// @param[in] icon The absolute path of an icon file
-  /// @param[in] allow_duplicate @c 1 if it accepts the duplicated shortcut,
-  /// otherwise @c 0
-  /// @param[in] cb The address of the callback function that is called when the result comes back from the viewer
-  /// @param[in] data The callback data that is used in the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SHORTCUT_ERROR_NONE Successful
-  /// @retval #SHORTCUT_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #SHORTCUT_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #SHORTCUT_ERROR_INVALID_PARAMETER Invalid function parameter
-  /// @retval #SHORTCUT_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #SHORTCUT_ERROR_IO_ERROR I/O Error
-  /// @retval #SHORTCUT_ERROR_RESOURCE_BUSY Device or resource busy
-  /// @retval #SHORTCUT_ERROR_NO_SPACE There is no space to add a new shortcut
-  /// @retval #SHORTCUT_ERROR_EXIST Shortcut is already exist
-  /// @retval #SHORTCUT_ERROR_FAULT Unrecoverable error
-  /// @retval #SHORTCUT_ERROR_COMM Connection not established or communication problem
-  /// @pre You have to prepare the callback function.
-  /// @post You have to check the return status from the callback function which is passed by the argument.
-  /// @see result_cb()
-  /// @par Example
-  /// @code
+  /// **Deprecated:** Deprecated since 9.0
+  ///
+  /// Adds a shortcut to home, asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/shortcut>
+  ///
+  /// **Remarks:**
+  /// - If a homescreen does not support this feature, you will get a proper error code.
+  /// - Application must check the return value of this function.
+  /// - Application must check the return status from the callback function.
+  /// - Application should set the callback function to get the result of this request.
+  ///
+  /// **Parameters:**
+  /// - `name` (in): The name of the created shortcut icon
+  /// - `type` (in): The type of shortcuts
+  /// - `uri` (in): The specific information for delivering to the viewer for creating a shortcut
+  /// - `icon` (in): The absolute path of an icon file
+  /// - `allow_duplicate` (in): `1` if it accepts the duplicated shortcut, otherwise `0`
+  /// - `cb` (in): The address of the callback function that is called when the result comes back from the viewer
+  /// - `data` (in): The callback data that is used in the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SHORTCUT_ERROR_NONE`: Successful
+  /// - `SHORTCUT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SHORTCUT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `SHORTCUT_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `SHORTCUT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SHORTCUT_ERROR_IO_ERROR`: I/O Error
+  /// - `SHORTCUT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  /// - `SHORTCUT_ERROR_NO_SPACE`: There is no space to add a new shortcut
+  /// - `SHORTCUT_ERROR_EXIST`: Shortcut is already exist
+  /// - `SHORTCUT_ERROR_FAULT`: Unrecoverable error
+  /// - `SHORTCUT_ERROR_COMM`: Connection not established or communication problem
+  ///
+  /// **Preconditions:**
+  /// - You have to prepare the callback function.
+  ///
+  /// **Postconditions:**
+  /// - You have to check the return status from the callback function which is passed by the argument.
+  ///
+  /// **See also:**
+  /// - `result_cb()`
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <shortcut_manager.h>
   /// static int _result_cb(int ret, int pid, void *data)
@@ -84,7 +109,7 @@ class Tizen100Shortcut {
   ///
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int shortcut_add_to_home(
     ffi.Pointer<ffi.Char> name,
     int type,
@@ -119,40 +144,61 @@ class Tizen100Shortcut {
       int Function(ffi.Pointer<ffi.Char>, int, ffi.Pointer<ffi.Char>,
           ffi.Pointer<ffi.Char>, int, result_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @deprecated Deprecated since 9.0
-  /// @brief Adds a widget to home, asynchronously.
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/shortcut
-  /// @remarks If a homescreen does not support this feature, you will get a proper error code.\n
-  /// Application must check the return value of this function.\n
-  /// Application must check the return status from the callback function.\n
-  /// Application should set the callback function to get the result of this request.
-  /// @param[in] name The name of the created widget which will be shown when the widget is not prepared
-  /// @param[in] size The size of widget
-  /// @param[in] widget_id Widget ID
-  /// @param[in] icon The absolute path of an icon file which will be shown when the widget is not prepared
-  /// @param[in] period The Update period in seconds
-  /// @param[in] allow_duplicate @c 1 if it accepts the duplicated widget,
-  /// otherwise @c 0
-  /// @param[in] cb The address of the callback function that is called when the result comes back from the viewer
-  /// @param[in] data The callback data that is used in the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SHORTCUT_ERROR_NONE Successful
-  /// @retval #SHORTCUT_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #SHORTCUT_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #SHORTCUT_ERROR_INVALID_PARAMETER Invalid function parameter
-  /// @retval #SHORTCUT_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #SHORTCUT_ERROR_IO_ERROR I/O Error
-  /// @retval #SHORTCUT_ERROR_FAULT Unrecoverable error
-  /// @retval #SHORTCUT_ERROR_COMM Connection not established or communication problem
-  /// @pre You have to prepare the callback function.
-  /// @post You have to check the return status from the callback function which is passed by the argument.
-  /// @see result_cb()
-  /// @see shortcut_widget_size_e
-  /// @par Example
-  /// @code
+  /// **Deprecated:** Deprecated since 9.0
+  ///
+  /// Adds a widget to home, asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/shortcut>
+  ///
+  /// **Remarks:**
+  /// - If a homescreen does not support this feature, you will get a proper error code.
+  /// - Application must check the return value of this function.
+  /// - Application must check the return status from the callback function.
+  /// - Application should set the callback function to get the result of this request.
+  ///
+  /// **Parameters:**
+  /// - `name` (in): The name of the created widget which will be shown when the widget is not prepared
+  /// - `size` (in): The size of widget
+  /// - `widget_id` (in): Widget ID
+  /// - `icon` (in): The absolute path of an icon file which will be shown when the widget is not prepared
+  /// - `period` (in): The Update period in seconds
+  /// - `allow_duplicate` (in): `1` if it accepts the duplicated widget, otherwise `0`
+  /// - `cb` (in): The address of the callback function that is called when the result comes back from the viewer
+  /// - `data` (in): The callback data that is used in the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SHORTCUT_ERROR_NONE`: Successful
+  /// - `SHORTCUT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SHORTCUT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `SHORTCUT_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `SHORTCUT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SHORTCUT_ERROR_IO_ERROR`: I/O Error
+  /// - `SHORTCUT_ERROR_FAULT`: Unrecoverable error
+  /// - `SHORTCUT_ERROR_COMM`: Connection not established or communication problem
+  ///
+  /// **Preconditions:**
+  /// - You have to prepare the callback function.
+  ///
+  /// **Postconditions:**
+  /// - You have to check the return status from the callback function which is passed by the argument.
+  ///
+  /// **See also:**
+  /// - `result_cb()`
+  /// - `shortcut_widget_size_e`
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <shortcut.h>
   /// #include <storage.h>
@@ -181,7 +227,7 @@ class Tizen100Shortcut {
   ///
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int shortcut_add_to_home_widget(
     ffi.Pointer<ffi.Char> name,
     int size,
@@ -227,28 +273,50 @@ class Tizen100Shortcut {
               result_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @deprecated Deprecated since 9.0
-  /// @brief Removes a shortcut from home, asynchronously.
-  /// @details If the callback function registered for a widget, the shortcut deletion is possible.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/shortcut
-  /// @param[in] name The name of the created shortcut icon
-  /// @param[in] cb The address of the callback function that is called when the result comes back from the viewer
-  /// @param[in] user_data The callback data that is used in the callback function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #SHORTCUT_ERROR_NONE Successful
-  /// @retval #SHORTCUT_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #SHORTCUT_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #SHORTCUT_ERROR_INVALID_PARAMETER Invalid function parameter
-  /// @retval #SHORTCUT_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #SHORTCUT_ERROR_IO_ERROR I/O Error
-  /// @retval #SHORTCUT_ERROR_COMM Connection not established or communication problem
-  /// @pre You have to prepare the callback function.
-  /// @post You have to check the return status from the callback function which is passed by the argument.
-  /// @see result_cb()
-  /// @par Example
-  /// @code
+  /// **Deprecated:** Deprecated since 9.0
+  ///
+  /// Removes a shortcut from home, asynchronously.
+  ///
+  /// If the callback function registered for a widget, the shortcut deletion is possible.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/shortcut>
+  ///
+  /// **Parameters:**
+  /// - `name` (in): The name of the created shortcut icon
+  /// - `cb` (in): The address of the callback function that is called when the result comes back from the viewer
+  /// - `user_data` (in): The callback data that is used in the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SHORTCUT_ERROR_NONE`: Successful
+  /// - `SHORTCUT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SHORTCUT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `SHORTCUT_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `SHORTCUT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SHORTCUT_ERROR_IO_ERROR`: I/O Error
+  /// - `SHORTCUT_ERROR_COMM`: Connection not established or communication problem
+  ///
+  /// **Preconditions:**
+  /// - You have to prepare the callback function.
+  ///
+  /// **Postconditions:**
+  /// - You have to check the return status from the callback function which is passed by the argument.
+  ///
+  /// **See also:**
+  /// - `result_cb()`
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <shortcut_manager.h>
   ///
   /// int _result_cb(int ret, void *data)
@@ -269,7 +337,7 @@ class Tizen100Shortcut {
   /// }
   /// }
   ///
-  /// @endcode
+  /// ```
   int shortcut_remove_from_home(
     ffi.Pointer<ffi.Char> name,
     result_cb cb,
@@ -291,29 +359,47 @@ class Tizen100Shortcut {
           int Function(
               ffi.Pointer<ffi.Char>, result_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets the preset list of shortcut template from the installed package, synchronously.
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/shortcut
-  /// @remarks If a homescreen does not support this feature, you will get a proper error code.\n
-  /// Application must check the return value of this function.\n
-  /// Application must check the return status from the callback function.\n
-  /// Application should set the callback function to get the result of this request.
-  /// @param[in] package_name The package name
-  /// @param[in] list_cb The callback function to get the shortcut item information
-  /// @param[in] data The callback data that is used in the callback function
-  /// @return @c N Number of items (call count of the callback function),
-  /// otherwise a negative error value
-  /// @retval #SHORTCUT_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #SHORTCUT_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #SHORTCUT_ERROR_INVALID_PARAMETER Invalid function parameter
-  /// @retval #SHORTCUT_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #SHORTCUT_ERROR_IO_ERROR I/O Error
-  /// @retval #SHORTCUT_ERROR_FAULT Unrecoverable error
-  /// @retval #SHORTCUT_ERROR_COMM Connection not established or communication problem
-  /// @pre You have to prepare the callback function.
-  /// @post You have to check the return status from the callback function which is passed by the argument.
+  /// **Deprecated:** Deprecated since 9.0
+  ///
+  /// Gets the preset list of shortcut template from the installed package, synchronously.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/shortcut>
+  ///
+  /// **Remarks:**
+  /// - If a homescreen does not support this feature, you will get a proper error code.
+  /// - Application must check the return value of this function.
+  /// - Application must check the return status from the callback function.
+  /// - Application should set the callback function to get the result of this request.
+  ///
+  /// **Parameters:**
+  /// - `package_name` (in): The package name
+  /// - `list_cb` (in): The callback function to get the shortcut item information
+  /// - `data` (in): The callback data that is used in the callback function
+  ///
+  /// **Returns:**
+  /// - `N` Number of items (call count of the callback function), otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SHORTCUT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SHORTCUT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `SHORTCUT_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `SHORTCUT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SHORTCUT_ERROR_IO_ERROR`: I/O Error
+  /// - `SHORTCUT_ERROR_FAULT`: Unrecoverable error
+  /// - `SHORTCUT_ERROR_COMM`: Connection not established or communication problem
+  ///
+  /// **Preconditions:**
+  /// - You have to prepare the callback function.
+  ///
+  /// **Postconditions:**
+  /// - You have to check the return status from the callback function which is passed by the argument.
   int shortcut_get_list(
     ffi.Pointer<ffi.Char> package_name,
     shortcut_list_cb list_cb,
@@ -334,28 +420,49 @@ class Tizen100Shortcut {
       int Function(
           ffi.Pointer<ffi.Char>, shortcut_list_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @deprecated Deprecated since 9.0
-  /// @brief Sets a callback function to listen requests from applications.
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/shortcut
-  /// @remarks Should be used in the homescreen.\n
-  /// Should check the return value of this function.
-  /// Prospective Clients: Homescreen.
-  /// @param[in] request_cb The callback function pointer that is invoked when add_to_home is requested
-  /// @param[in] data The callback data to deliver to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #SHORTCUT_ERROR_NONE Successful
-  /// @retval #SHORTCUT_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #SHORTCUT_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #SHORTCUT_ERROR_INVALID_PARAMETER Invalid function parameter
-  /// @retval #SHORTCUT_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #SHORTCUT_ERROR_IO_ERROR I/O Error
-  /// @retval #SHORTCUT_ERROR_COMM Connection not established or communication problem
-  /// @pre You have to prepare a callback function.
-  /// @post If a request is sent from the application, the registered callback will be invoked.
-  /// @see shortcut_request_cb()
-  /// @see shortcut_error_e
+  /// **Deprecated:** Deprecated since 9.0
+  ///
+  /// Sets a callback function to listen requests from applications.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/shortcut>
+  ///
+  /// **Remarks:**
+  /// - Should be used in the homescreen.
+  /// - Should check the return value of this function.
+  /// - Prospective Clients: Homescreen.
+  ///
+  /// **Parameters:**
+  /// - `request_cb` (in): The callback function pointer that is invoked when add_to_home is requested
+  /// - `data` (in): The callback data to deliver to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SHORTCUT_ERROR_NONE`: Successful
+  /// - `SHORTCUT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SHORTCUT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `SHORTCUT_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `SHORTCUT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SHORTCUT_ERROR_IO_ERROR`: I/O Error
+  /// - `SHORTCUT_ERROR_COMM`: Connection not established or communication problem
+  ///
+  /// **Preconditions:**
+  /// - You have to prepare a callback function.
+  ///
+  /// **Postconditions:**
+  /// - If a request is sent from the application, the registered callback will be invoked.
+  ///
+  /// **See also:**
+  /// - `shortcut_request_cb()`
+  /// - `shortcut_error_e`
   int shortcut_set_request_cb(
     shortcut_request_cb request_cb,
     ffi.Pointer<ffi.Void> data,
@@ -373,18 +480,33 @@ class Tizen100Shortcut {
   late final _shortcut_set_request_cb = _shortcut_set_request_cbPtr
       .asFunction<int Function(shortcut_request_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @deprecated Deprecated since 9.0
-  /// @brief Unsets a callback for the shortcut request.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/shortcut
-  /// @remarks The specific error code can be obtained using the gat_last_result() method. Error codes are described in Exception section.
-  /// @return None
-  /// @exception #SHORTCUT_ERROR_NONE Successful
-  /// @exception #SHORTCUT_ERROR_NOT_SUPPORTED Not supported
-  /// @exception #SHORTCUT_ERROR_PERMISSION_DENIED Permission denied
-  /// @see shortcut_set_request_cb()
-  /// @see get_last_result()
+  /// **Deprecated:** Deprecated since 9.0
+  ///
+  /// Unsets a callback for the shortcut request.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/shortcut>
+  ///
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the gat_last_result() method. Error codes are described in Exception section.
+  ///
+  /// **Returns:**
+  /// - None
+  ///
+  /// **Exceptions:**
+  /// - `SHORTCUT_ERROR_NONE`: Successful
+  /// - `SHORTCUT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SHORTCUT_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `shortcut_set_request_cb()`
+  /// - `get_last_result()`
   void shortcut_unset_request_cb() {
     return _shortcut_unset_request_cb();
   }
@@ -395,28 +517,49 @@ class Tizen100Shortcut {
   late final _shortcut_unset_request_cb =
       _shortcut_unset_request_cbPtr.asFunction<void Function()>();
 
-  /// @deprecated Deprecated since 9.0
-  /// @brief Sets the callback function to listen the remove requests from applications.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/shortcut
-  /// @remarks Should be used in the homescreen.\n
-  /// Should check the return value of this function.
-  /// Prospective Clients: Homescreen.
-  /// @param[in] remove_cb The callback function pointer that is invoked when remove_from_home is requested
-  /// @param[in] data The callback data to deliver to the callback function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #SHORTCUT_ERROR_NONE Successful
-  /// @retval #SHORTCUT_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #SHORTCUT_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #SHORTCUT_ERROR_INVALID_PARAMETER Invalid function parameter
-  /// @retval #SHORTCUT_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #SHORTCUT_ERROR_IO_ERROR I/O Error
-  /// @retval #SHORTCUT_ERROR_COMM Connection not established or communication problem
-  /// @pre You have to prepare a callback function.
-  /// @post If a request is sent from the application, the registered callback will be invoked.
-  /// @see shortcut_remove_cb()
-  /// @see shortcut_error_e
+  /// **Deprecated:** Deprecated since 9.0
+  ///
+  /// Sets the callback function to listen the remove requests from applications.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/shortcut>
+  ///
+  /// **Remarks:**
+  /// - Should be used in the homescreen.
+  /// - Should check the return value of this function.
+  /// - Prospective Clients: Homescreen.
+  ///
+  /// **Parameters:**
+  /// - `remove_cb` (in): The callback function pointer that is invoked when remove_from_home is requested
+  /// - `data` (in): The callback data to deliver to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SHORTCUT_ERROR_NONE`: Successful
+  /// - `SHORTCUT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SHORTCUT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `SHORTCUT_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `SHORTCUT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SHORTCUT_ERROR_IO_ERROR`: I/O Error
+  /// - `SHORTCUT_ERROR_COMM`: Connection not established or communication problem
+  ///
+  /// **Preconditions:**
+  /// - You have to prepare a callback function.
+  ///
+  /// **Postconditions:**
+  /// - If a request is sent from the application, the registered callback will be invoked.
+  ///
+  /// **See also:**
+  /// - `shortcut_remove_cb()`
+  /// - `shortcut_error_e`
   int shortcut_set_remove_cb(
     shortcut_remove_cb remove_cb,
     ffi.Pointer<ffi.Void> data,
@@ -434,18 +577,33 @@ class Tizen100Shortcut {
   late final _shortcut_set_remove_cb = _shortcut_set_remove_cbPtr
       .asFunction<int Function(shortcut_remove_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @deprecated Deprecated since 9.0
-  /// @brief Unsets a callback for the shortcut remove.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/shortcut
-  /// @remarks The specific error code can be obtained using the gat_last_result() method. Error codes are described in Exception section.
-  /// @return None
-  /// @exception #SHORTCUT_ERROR_NONE Successful
-  /// @exception #SHORTCUT_ERROR_NOT_SUPPORTED Not supported
-  /// @exception #SHORTCUT_ERROR_PERMISSION_DENIED Permission denied
-  /// @see shortcut_set_remove_cb()
-  /// @see get_last_result()
+  /// **Deprecated:** Deprecated since 9.0
+  ///
+  /// Unsets a callback for the shortcut remove.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/shortcut>
+  ///
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the gat_last_result() method. Error codes are described in Exception section.
+  ///
+  /// **Returns:**
+  /// - None
+  ///
+  /// **Exceptions:**
+  /// - `SHORTCUT_ERROR_NONE`: Successful
+  /// - `SHORTCUT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SHORTCUT_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `shortcut_set_remove_cb()`
+  /// - `get_last_result()`
   void shortcut_unset_remove_cb() {
     return _shortcut_unset_remove_cb();
   }
@@ -457,9 +615,13 @@ class Tizen100Shortcut {
       _shortcut_unset_remove_cbPtr.asFunction<void Function()>();
 }
 
-/// @deprecated Deprecated since 9.0
-/// @brief Enumeration for values of shortcut response types.
-/// @since_tizen 2.3
+/// **Deprecated:** Deprecated since 9.0
+///
+/// Enumeration for values of shortcut response types.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class shortcut_error_e {
   /// < Successful
   static const int SHORTCUT_ERROR_NONE = 0;
@@ -491,21 +653,22 @@ abstract class shortcut_error_e {
   /// < Unrecoverable error
   static const int SHORTCUT_ERROR_FAULT = -18219004;
 
-  /// < Not exist shortcut(@b Since: 3.0)
+  /// < Not exist shortcut(**Since**: 3.0)
   static const int SHORTCUT_ERROR_NOT_EXIST = -18219000;
 
   /// < Connection not established or communication problem
   static const int SHORTCUT_ERROR_COMM = -18218944;
 }
 
-/// @deprecated Deprecated since 9.0
-/// @brief Enumeration for shortcut types.
-/// @details Basically, two types of shortcuts are defined.
-/// Every homescreen developer should support these types of shortcuts.
-/// Or return, a proper errno to figure out why the application failed to add a shortcut.
-/// #LAUNCH_BY_APP is used for adding a package itself as a shortcut.
-/// #LAUNCH_BY_URI is used for adding a shortcut for "uri" data.
-/// @since_tizen 2.3
+/// **Deprecated:** Deprecated since 9.0
+///
+/// Enumeration for shortcut types.
+///
+/// Basically, two types of shortcuts are defined. Every homescreen developer should support these types of shortcuts. Or return, a proper errno to figure out why the application failed to add a shortcut. `LAUNCH_BY_APP` is used for adding a package itself as a shortcut. `LAUNCH_BY_URI` is used for adding a shortcut for "uri" data.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class shortcut_type {
   /// < Launch the application itself
   static const int LAUNCH_BY_APP = 0;
@@ -514,9 +677,13 @@ abstract class shortcut_type {
   static const int LAUNCH_BY_URI = 1;
 }
 
-/// @deprecated Deprecated since 9.0
-/// @brief Enumeration for sizes of shortcut widget.
-/// @since_tizen 2.4
+/// **Deprecated:** Deprecated since 9.0
+///
+/// Enumeration for sizes of shortcut widget.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class shortcut_widget_size {
   /// < Type mask for the normal mode widget , don't use this value for specific size.
   static const int WIDGET_SIZE_DEFAULT = 268435456;
@@ -561,34 +728,55 @@ abstract class shortcut_widget_size {
   static const int WIDGET_SIZE_EASY_3x3 = 805568512;
 }
 
-/// @deprecated Deprecated since 9.0
-/// @brief Called to receive the result of shortcut_add_to_home().
-/// @since_tizen 2.3
-/// @param[in] ret The result value, it could be @c 0 if it succeeds to add a shortcut,
-/// otherwise it returns an errno
-/// @param[in] user_data The callback data
-/// @return int @c 0 if there is no error,
-/// otherwise errno
-/// @see shortcut_add_to_home()
+/// **Deprecated:** Deprecated since 9.0
+///
+/// Called to receive the result of shortcut_add_to_home().
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `ret` (in): The result value, it could be `0` if it succeeds to add a shortcut, otherwise it returns an errno
+/// - `user_data` (in): The callback data
+///
+/// **Returns:**
+/// - int `0` if there is no error, otherwise errno
+///
+/// **See also:**
+/// - `shortcut_add_to_home()`
+/// @nodoc
 typedef result_cb = ffi.Pointer<ffi.NativeFunction<result_cbFunction>>;
+/// @nodoc
 typedef result_cbFunction = ffi.Int Function(
     ffi.Int ret, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartresult_cbFunction = int Function(
     int ret, ffi.Pointer<ffi.Void> user_data);
 
-/// @deprecated Deprecated since 9.0
-/// @brief Called to receive the result of shortcut_get_list().
-/// @since_tizen 2.4
-/// @param[in] package_name The name of package
-/// @param[in] icon The absolute path of an icon file for this shortcut
-/// @param[in] name The name of the created shortcut icon
-/// @param[in] extra_key The user data. A property of shortcut element in manifest file
-/// @param[in] extra_data The user data. A property of shortcut element in manifest file
-/// @param[in] user_data The callback user data
-/// @return SHORTCUT_ERROR_NONE to continue with the next iteration of the loop, other error values to break out of the loop
-/// @see shortcut_get_list()
+/// **Deprecated:** Deprecated since 9.0
+///
+/// Called to receive the result of shortcut_get_list().
+///
+/// **Since Tizen:**
+/// - 2.4
+///
+/// **Parameters:**
+/// - `package_name` (in): The name of package
+/// - `icon` (in): The absolute path of an icon file for this shortcut
+/// - `name` (in): The name of the created shortcut icon
+/// - `extra_key` (in): The user data. A property of shortcut element in manifest file
+/// - `extra_data` (in): The user data. A property of shortcut element in manifest file
+/// - `user_data` (in): The callback user data
+///
+/// **Returns:**
+/// - SHORTCUT_ERROR_NONE to continue with the next iteration of the loop, other error values to break out of the loop
+///
+/// **See also:**
+/// - `shortcut_get_list()`
+/// @nodoc
 typedef shortcut_list_cb
     = ffi.Pointer<ffi.NativeFunction<shortcut_list_cbFunction>>;
+/// @nodoc
 typedef shortcut_list_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Char> package_name,
     ffi.Pointer<ffi.Char> icon,
@@ -596,6 +784,7 @@ typedef shortcut_list_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Char> extra_key,
     ffi.Pointer<ffi.Char> extra_data,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartshortcut_list_cbFunction = int Function(
     ffi.Pointer<ffi.Char> package_name,
     ffi.Pointer<ffi.Char> icon,
@@ -604,27 +793,35 @@ typedef Dartshortcut_list_cbFunction = int Function(
     ffi.Pointer<ffi.Char> extra_data,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @deprecated Deprecated since 9.0
-/// @brief Called to the add_to_home request.
-/// @details The homescreen should define a callback as this type and implement the service code
-/// for adding a new application shortcut.
-/// @since_tizen 2.4
-/// @param[in] package_name The name of package
-/// @param[in] name The name of the created shortcut icon
-/// @param[in] type One of the three defined types
-/// @param[in] content_info The specific information for creating a new shortcut
-/// @param[in] icon The absolute path of an icon file for this shortcut
-/// @param[in] pid The process ID of who request add_to_home
-/// @param[in] period The Update period in seconds
-/// @param[in] allow_duplicate @c 1 if the shortcut can be duplicated,
-/// otherwise a shortcut should exist only once
-/// @param[in] user_data The callback data
-/// @return The result of handling a shortcut creation request\n
-/// This returns @c 0 if the add_to_home request is handled successfully,
-/// otherwise it returns a proper errno
-/// @see shortcut_set_request_cb()
+/// **Deprecated:** Deprecated since 9.0
+///
+/// Called to the add_to_home request.
+///
+/// The homescreen should define a callback as this type and implement the service code for adding a new application shortcut.
+///
+/// **Since Tizen:**
+/// - 2.4
+///
+/// **Parameters:**
+/// - `package_name` (in): The name of package
+/// - `name` (in): The name of the created shortcut icon
+/// - `type` (in): One of the three defined types
+/// - `content_info` (in): The specific information for creating a new shortcut
+/// - `icon` (in): The absolute path of an icon file for this shortcut
+/// - `pid` (in): The process ID of who request add_to_home
+/// - `period` (in): The Update period in seconds
+/// - `allow_duplicate` (in): `1` if the shortcut can be duplicated, otherwise a shortcut should exist only once
+/// - `user_data` (in): The callback data
+///
+/// **Returns:**
+/// - The result of handling a shortcut creation request This returns `0` if the add_to_home request is handled successfully, otherwise it returns a proper errno
+///
+/// **See also:**
+/// - `shortcut_set_request_cb()`
+/// @nodoc
 typedef shortcut_request_cb
     = ffi.Pointer<ffi.NativeFunction<shortcut_request_cbFunction>>;
+/// @nodoc
 typedef shortcut_request_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Char> package_name,
     ffi.Pointer<ffi.Char> name,
@@ -635,6 +832,7 @@ typedef shortcut_request_cbFunction = ffi.Int Function(
     ffi.Double period,
     ffi.Int allow_duplicate,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartshortcut_request_cbFunction = int Function(
     ffi.Pointer<ffi.Char> package_name,
     ffi.Pointer<ffi.Char> name,
@@ -646,24 +844,34 @@ typedef Dartshortcut_request_cbFunction = int Function(
     int allow_duplicate,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @deprecated Deprecated since 9.0
-/// @brief Called to the shortcut_remove_from_home() request.
-/// @since_tizen 3.0
-/// @param[in] package_name The name of package
-/// @param[in] name The name of the created shortcut icon
-/// @param[in] sender_pid The process ID of who request shortcut_remove_from_home()
-/// @param[in] user_data  The user data passed from the callback register function
-/// @return The result of handling a shortcut remove request\n
-/// This returns @c 0 if the remove_from_home request is handled successfully,
-/// otherwise it returns a proper errno.
-/// @see shortcut_set_remove_cb()
+/// **Deprecated:** Deprecated since 9.0
+///
+/// Called to the shortcut_remove_from_home() request.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `package_name` (in): The name of package
+/// - `name` (in): The name of the created shortcut icon
+/// - `sender_pid` (in): The process ID of who request shortcut_remove_from_home()
+/// - `user_data` (in): The user data passed from the callback register function
+///
+/// **Returns:**
+/// - The result of handling a shortcut remove request This returns `0` if the remove_from_home request is handled successfully, otherwise it returns a proper errno.
+///
+/// **See also:**
+/// - `shortcut_set_remove_cb()`
+/// @nodoc
 typedef shortcut_remove_cb
     = ffi.Pointer<ffi.NativeFunction<shortcut_remove_cbFunction>>;
+/// @nodoc
 typedef shortcut_remove_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Char> package_name,
     ffi.Pointer<ffi.Char> name,
     ffi.Int sender_pid,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartshortcut_remove_cbFunction = int Function(
     ffi.Pointer<ffi.Char> package_name,
     ffi.Pointer<ffi.Char> name,

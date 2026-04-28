@@ -1,3 +1,6 @@
+/// {@category 8.0/tizen}
+library tizen_interop_8_0.mv_face_recognition;
+
 // Copyright 2026 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'generated_bindings_mv_common.dart' as mv_common;
 
 /// Dart bindings for Tizen mv_face_recognition APIs.
+/// {@category 8.0/tizen}
 class Tizen80MvFaceRecognition {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,23 +29,29 @@ class Tizen80MvFaceRecognition {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates face recognition handle.
-  /// @details Use this function to create a face recognition handle. After the creation
-  /// the handle has to be prepared with mv_face_recognition_prepare() function to prepare
-  /// face recognition resources.
+  /// Creates face recognition handle.
   ///
-  /// @since_tizen 7.0
+  /// Use this function to create a face recognition handle. After the creation the handle has to be prepared with mv_face_recognition_prepare() function to prepare face recognition resources.
   ///
-  /// @remarks The @a handle should be released using mv_face_recognition_destroy().
+  /// **Since Tizen:**
+  /// - 7.0
   ///
-  /// @param[out] handle    The handle to the face recognition to be created
+  /// **Remarks:**
+  /// - The `handle` should be released using mv_face_recognition_destroy().
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Parameters:**
+  /// - `handle` (out): The handle to the face recognition to be created
   ///
-  /// @see mv_face_recognition_destroy()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `mv_face_recognition_destroy()`
   int mv_face_recognition_create(
     ffi.Pointer<mv_face_recognition_h> handle,
   ) {
@@ -57,19 +67,26 @@ class Tizen80MvFaceRecognition {
   late final _mv_face_recognition_create = _mv_face_recognition_createPtr
       .asFunction<int Function(ffi.Pointer<mv_face_recognition_h>)>();
 
-  /// @brief Destroys face recognition handle and release all its resources.
+  /// Destroys face recognition handle and release all its resources.
   ///
-  /// @since_tizen 7.0
+  /// **Since Tizen:**
+  /// - 7.0
   ///
-  /// @param[in] handle    The handle to the face recognition object to be destroyed
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the face recognition object to be destroyed
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre Create face recognition handle by using mv_face_recognition_create()
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
   ///
-  /// @see mv_face_recognition_create()
+  /// **Preconditions:**
+  /// - Create face recognition handle by using mv_face_recognition_create()
+  ///
+  /// **See also:**
+  /// - `mv_face_recognition_create()`
   int mv_face_recognition_destroy(
     mv_face_recognition_h handle,
   ) {
@@ -84,22 +101,29 @@ class Tizen80MvFaceRecognition {
   late final _mv_face_recognition_destroy = _mv_face_recognition_destroyPtr
       .asFunction<int Function(mv_face_recognition_h)>();
 
-  /// @brief Prepares the resources for face recognition.
-  /// @details Use this function to prepare the resources for face recognition.
+  /// Prepares the resources for face recognition.
   ///
-  /// @since_tizen 7.0
+  /// Use this function to prepare the resources for face recognition.
   ///
-  /// @param[in] handle        The handle to the face recognition object.
+  /// **Since Tizen:**
+  /// - 7.0
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_VISION_ERROR_KEY_NOT_AVAILABLE Attribute key isn't available
-  /// @retval #MEDIA_VISION_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the face recognition object.
   ///
-  /// @pre Create face recognition handle by using mv_face_recognition_create()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_VISION_ERROR_KEY_NOT_AVAILABLE`: Attribute key isn't available
+  /// - `MEDIA_VISION_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create face recognition handle by using mv_face_recognition_create()
   int mv_face_recognition_prepare(
     mv_face_recognition_h handle,
   ) {
@@ -114,27 +138,31 @@ class Tizen80MvFaceRecognition {
   late final _mv_face_recognition_prepare = _mv_face_recognition_preparePtr
       .asFunction<int Function(mv_face_recognition_h)>();
 
-  /// @brief Registers a new face on the @a source.
-  /// @details Use this function to register a new face.
-  /// Each time when this function is called, a new face on the media source
-  /// will be registered to internal database.
+  /// Registers a new face on the `source`.
   ///
-  /// @since_tizen 7.0
+  /// Use this function to register a new face. Each time when this function is called, a new face on the media source will be registered to internal database.
   ///
-  /// @param[in] handle         The handle to the face recognition object.
-  /// @param[in] source         The handle to the source of the media.
-  /// @param[in] label          The label to be registered.
+  /// **Since Tizen:**
+  /// - 7.0
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT Source colorspace
-  /// isn't supported
-  /// @retval #MEDIA_VISION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIA_VISION_ERROR_INTERNAL Internal error
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the face recognition object.
+  /// - `source` (in): The handle to the source of the media.
+  /// - `label` (in): The label to be registered.
   ///
-  /// @pre Prepare an face recognition by calling @ref mv_face_recognition_prepare()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT`: Source colorspace isn't supported
+  /// - `MEDIA_VISION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_VISION_ERROR_INTERNAL`: Internal error
+  ///
+  /// **Preconditions:**
+  /// - Prepare an face recognition by calling `mv_face_recognition_prepare()`
   int mv_face_recognition_register(
     mv_face_recognition_h handle,
     mv_common.mv_source_h source,
@@ -156,23 +184,28 @@ class Tizen80MvFaceRecognition {
           int Function(mv_face_recognition_h, mv_common.mv_source_h,
               ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Unregisters face data on the @a label.
-  /// @details Use this function to unregister a given label.
-  /// Each time when this function is called, all data related to the label
-  /// will be removed from internal database.
+  /// Unregisters face data on the `label`.
   ///
-  /// @since_tizen 7.0
+  /// Use this function to unregister a given label. Each time when this function is called, all data related to the label will be removed from internal database.
   ///
-  /// @param[in] handle         The handle to the face recognition object.
-  /// @param[in] label          The label to be unregistered.
+  /// **Since Tizen:**
+  /// - 7.0
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_VISION_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the face recognition object.
+  /// - `label` (in): The label to be unregistered.
   ///
-  /// @pre Register an new face by calling @ref mv_face_recognition_register()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_VISION_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Register an new face by calling `mv_face_recognition_register()`
   int mv_face_recognition_unregister(
     mv_face_recognition_h handle,
     ffi.Pointer<ffi.Char> label,
@@ -191,28 +224,33 @@ class Tizen80MvFaceRecognition {
       _mv_face_recognition_unregisterPtr.asFunction<
           int Function(mv_face_recognition_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Inferences with a given face on the @a source.
-  /// @details Use this function to inference with a given source.
-  /// This function returns n proper label string to a give source.
+  /// Inferences with a given face on the `source`.
   ///
-  /// @since_tizen 7.0
+  /// Use this function to inference with a given source. This function returns n proper label string to a give source.
   ///
-  /// @param[in] handle         The handle to the face recognition object.
-  /// @param[in] source         The handle to the source of the media.
+  /// **Since Tizen:**
+  /// - 7.0
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PATH Invalid path
-  /// @retval #MEDIA_VISION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIA_VISION_ERROR_INTERNAL Internal error
-  /// @retval #MEDIA_VISION_ERROR_NO_DATA No data
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT Source colorspace
-  /// isn't supported
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the face recognition object.
+  /// - `source` (in): The handle to the source of the media.
   ///
-  /// @pre Prepare an face recognition by calling @ref mv_face_recognition_prepare()
-  /// @pre Register a new face by calling @ref mv_face_recognition_register()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_VISION_ERROR_INVALID_PATH`: Invalid path
+  /// - `MEDIA_VISION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_VISION_ERROR_INTERNAL`: Internal error
+  /// - `MEDIA_VISION_ERROR_NO_DATA`: No data
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT`: Source colorspace isn't supported
+  ///
+  /// **Preconditions:**
+  /// - Prepare an face recognition by calling `mv_face_recognition_prepare()`
+  /// - Register a new face by calling `mv_face_recognition_register()`
   int mv_face_recognition_inference(
     mv_face_recognition_h handle,
     mv_common.mv_source_h source,
@@ -230,24 +268,30 @@ class Tizen80MvFaceRecognition {
   late final _mv_face_recognition_inference = _mv_face_recognition_inferencePtr
       .asFunction<int Function(mv_face_recognition_h, mv_common.mv_source_h)>();
 
-  /// @brief Gets the recognized face label name.
-  /// @details Use this function to get the recognized label name after calling @ref mv_face_recognition_inference().
+  /// Gets the recognized face label name.
   ///
-  /// @since_tizen 7.0
+  /// Use this function to get the recognized label name after calling `mv_face_recognition_inference().`
   ///
-  /// @remarks The @a out_label must NOT be released using free()
+  /// **Since Tizen:**
+  /// - 7.0
   ///
-  /// @param[in] handle         The handle to the face recognition object.
-  /// @param[out] out_label     The array pointer for the label name to be stored.
-  /// This function returns memory pointer containing actual label string to @a out_label.
-  /// So do not free @a out_label. And please note that @a out_label is valid only while handle is alive.
+  /// **Remarks:**
+  /// - The `out_label` must NOT be released using free()
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_INVALID_OPERATION Invalid operation
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the face recognition object.
+  /// - `out_label` (out): The array pointer for the label name to be stored. This function returns memory pointer containing actual label string to `out_label`. So do not free `out_label`. And please note that `out_label` is valid only while handle is alive.
   ///
-  /// @pre Request an inference by calling @ref mv_face_recognition_inference()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Request an inference by calling `mv_face_recognition_inference()`
   int mv_face_recognition_get_label(
     mv_face_recognition_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> out_label,
@@ -269,7 +313,9 @@ class Tizen80MvFaceRecognition {
               mv_face_recognition_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 }
 
-/// @brief The face recognition object handle.
+/// The face recognition object handle.
 ///
-/// @since_tizen 7.0
+/// **Since Tizen:**
+/// - 7.0
+/// @nodoc
 typedef mv_face_recognition_h = ffi.Pointer<ffi.Void>;

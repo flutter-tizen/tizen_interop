@@ -1,3 +1,6 @@
+/// {@category 7.0/tizen}
+library tizen_interop_7_0.capi_nntrainer;
+
 // Copyright 2026 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'generated_bindings_capi_ml_common.dart' as ml_common;
 
 /// Dart bindings for Tizen capi-nntrainer APIs.
+/// {@category 7.0/tizen}
 class Tizen70CapiNntrainer {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,25 +29,33 @@ class Tizen70CapiNntrainer {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Constructs the neural network model.
-  /// @details Use this function to create neural network model.
-  /// Privilege is needed if @a model contains @c save_path pointing to either
-  /// media storage or external storage.
-  /// @since_tizen 6.0
-  /// @remarks If the function succeeds, @a model must be released using
-  /// ml_train_model_destroy().
-  /// @remarks If you want to access only internal storage by using this function,
-  /// you should add privilege %http://tizen.org/privilege/mediastorage. Or, if you
-  /// want to access only external storage by using this function, you should add
-  /// privilege %http://tizen.org/privilege/externalstorage. If you want to access
-  /// both storage, you must add all the privileges.
+  /// Constructs the neural network model.
   ///
-  /// @param[out] model The NNTrainer model handle from the given description.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_PERMISSION_DENIED Permission denied.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Invalid parameter.
+  /// Use this function to create neural network model. Privilege is needed if `model` contains `save_path` pointing to either media storage or external storage.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, `model` must be released using
+  /// - ml_train_model_destroy().
+  /// - If you want to access only internal storage by using this function,
+  /// - you should add privilege http://tizen.org/privilege/mediastorage. Or, if you
+  /// - want to access only external storage by using this function, you should add
+  /// - privilege http://tizen.org/privilege/externalstorage. If you want to access
+  /// - both storage, you must add all the privileges.
+  ///
+  /// **Parameters:**
+  /// - `model` (out): The NNTrainer model handle from the given description.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_PERMISSION_DENIED`: Permission denied.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Invalid parameter.
   int ml_train_model_construct(
     ffi.Pointer<ml_train_model_h> model,
   ) {
@@ -58,18 +70,28 @@ class Tizen70CapiNntrainer {
   late final _ml_train_model_construct = _ml_train_model_constructPtr
       .asFunction<int Function(ffi.Pointer<ml_train_model_h>)>();
 
-  /// @brief Constructs the neural network model with the given configuration file.
-  /// @details Use this function to create neural network model with the given
-  /// configuration file.
-  /// @since_tizen 6.0
-  /// @remarks If the function succeeds, @a model must be released using
-  /// ml_train_model_destroy().
-  /// @param[in] model_conf The nntrainer model configuration file.
-  /// @param[out] model The NNTrainer model handle from the given description.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Invalid parameter.
+  /// Constructs the neural network model with the given configuration file.
+  ///
+  /// Use this function to create neural network model with the given configuration file.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, `model` must be released using
+  /// - ml_train_model_destroy().
+  ///
+  /// **Parameters:**
+  /// - `model_conf` (in): The nntrainer model configuration file.
+  /// - `model` (out): The NNTrainer model handle from the given description.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Invalid parameter.
   int ml_train_model_construct_with_conf(
     ffi.Pointer<ffi.Char> model_conf,
     ffi.Pointer<ml_train_model_h> model,
@@ -89,19 +111,24 @@ class Tizen70CapiNntrainer {
       _ml_train_model_construct_with_confPtr.asFunction<
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ml_train_model_h>)>();
 
-  /// @brief Compiles and finalizes the neural network model with the given loss.
-  /// @details Use this function to initialize neural network model. Various
-  /// hyperparameter before compile the model can be set. Once compiled,
-  /// any modification to the properties of model or layers/dataset/optimizer in
-  /// the model will be restricted. Further, addition of layers or changing the
-  /// optimizer/dataset of the model will not be permitted.
-  /// @since_tizen 6.0
-  /// @param[in] model The NNTrainer model handle.
-  /// @param[in] ... hyperparameters for compiling the model
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Invalid parameter.
+  /// Compiles and finalizes the neural network model with the given loss.
+  ///
+  /// Use this function to initialize neural network model. Various hyperparameter before compile the model can be set. Once compiled, any modification to the properties of model or layers/dataset/optimizer in the model will be restricted. Further, addition of layers or changing the optimizer/dataset of the model will not be permitted.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Parameters:**
+  /// - `model` (in): The NNTrainer model handle.
+  /// - `...` (in): hyperparameters for compiling the model
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Invalid parameter.
   int ml_train_model_compile(
     ml_train_model_h model,
   ) {
@@ -116,17 +143,24 @@ class Tizen70CapiNntrainer {
   late final _ml_train_model_compile =
       _ml_train_model_compilePtr.asFunction<int Function(ml_train_model_h)>();
 
-  /// @brief Trains the neural network model.
-  /// @details Use this function to train the compiled neural network model with
-  /// the passed training hyperparameters. This function will return once the
-  /// training, along with requested validation and testing, is completed.
-  /// @since_tizen 6.0
-  /// @param[in] model The NNTrainer model handle.
-  /// @param[in] ...  Hyperparameters for train model.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Invalid parameter.
+  /// Trains the neural network model.
+  ///
+  /// Use this function to train the compiled neural network model with the passed training hyperparameters. This function will return once the training, along with requested validation and testing, is completed.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Parameters:**
+  /// - `model` (in): The NNTrainer model handle.
+  /// - `...` (in): Hyperparameters for train model.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Invalid parameter.
   int ml_train_model_run(
     ml_train_model_h model,
   ) {
@@ -141,14 +175,23 @@ class Tizen70CapiNntrainer {
   late final _ml_train_model_run =
       _ml_train_model_runPtr.asFunction<int Function(ml_train_model_h)>();
 
-  /// @brief Destructs the neural network model.
-  /// @details Use this function to destroy neural network model.
-  /// @since_tizen 6.0
-  /// @param[in] model The NNTrainer model handle from the given description.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Invalid parameter.
+  /// Destructs the neural network model.
+  ///
+  /// Use this function to destroy neural network model.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Parameters:**
+  /// - `model` (in): The NNTrainer model handle from the given description.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Invalid parameter.
   int ml_train_model_destroy(
     ml_train_model_h model,
   ) {
@@ -163,19 +206,29 @@ class Tizen70CapiNntrainer {
   late final _ml_train_model_destroy =
       _ml_train_model_destroyPtr.asFunction<int Function(ml_train_model_h)>();
 
-  /// @brief Gets the summary of the neural network model.
-  /// @details Use this function to get the summary of the neural network model.
-  /// @since_tizen 6.0
-  /// @remarks If the function succeeds, @a summary should be released using
-  /// free().
-  /// @param[in] model The NNTrainer model handle to get summary.
-  /// @param[in] verbosity Verbose level of the summary
-  /// @param[out] summary The summary of the current model. Avoid logic to parse
-  /// and exploit @a summary if possible.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Invalid parameter.
+  /// Gets the summary of the neural network model.
+  ///
+  /// Use this function to get the summary of the neural network model.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, `summary` should be released using
+  /// - free().
+  ///
+  /// **Parameters:**
+  /// - `model` (in): The NNTrainer model handle to get summary.
+  /// - `verbosity` (in): Verbose level of the summary
+  /// - `summary` (out): The summary of the current model. Avoid logic to parse and exploit `summary` if possible.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Invalid parameter.
   int ml_train_model_get_summary(
     ml_train_model_h model,
     int verbosity,
@@ -198,18 +251,24 @@ class Tizen70CapiNntrainer {
           int Function(
               ml_train_model_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Adds layer in neural network model.
-  /// @details Use this function to add a layer to the model. The layer is added to
-  /// the end of the existing layers in the model. This transfers the
-  /// ownership of the layer to the network. No need to destroy the layer once it
-  /// is added to a model.
-  /// @since_tizen 6.0
-  /// @param[in] model The NNTrainer model handle.
-  /// @param[in] layer The NNTrainer layer handle.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Invalid parameter.
+  /// Adds layer in neural network model.
+  ///
+  /// Use this function to add a layer to the model. The layer is added to the end of the existing layers in the model. This transfers the ownership of the layer to the network. No need to destroy the layer once it is added to a model.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Parameters:**
+  /// - `model` (in): The NNTrainer model handle.
+  /// - `layer` (in): The NNTrainer layer handle.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Invalid parameter.
   int ml_train_model_add_layer(
     ml_train_model_h model,
     ml_train_layer_h layer,
@@ -227,19 +286,28 @@ class Tizen70CapiNntrainer {
   late final _ml_train_model_add_layer = _ml_train_model_add_layerPtr
       .asFunction<int Function(ml_train_model_h, ml_train_layer_h)>();
 
-  /// @brief Sets the optimizer for the neural network model.
-  /// @details Use this function to set neural network optimizer. This transfers
-  /// the ownership of the optimizer to the network. No need to destroy the
-  /// optimizer if it is to a model.
-  /// @since_tizen 6.0
-  /// @remarks Unsets the previously set optimizer, if any. The previously set
-  /// optimizer must be freed using ml_train_optimizer_destroy().
-  /// @param[in] model The NNTrainer model handle.
-  /// @param[in] optimizer The NNTrainer optimizer handle.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Invalid parameter.
+  /// Sets the optimizer for the neural network model.
+  ///
+  /// Use this function to set neural network optimizer. This transfers the ownership of the optimizer to the network. No need to destroy the optimizer if it is to a model.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Remarks:**
+  /// - Unsets the previously set optimizer, if any. The previously set
+  /// - optimizer must be freed using ml_train_optimizer_destroy().
+  ///
+  /// **Parameters:**
+  /// - `model` (in): The NNTrainer model handle.
+  /// - `optimizer` (in): The NNTrainer optimizer handle.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Invalid parameter.
   int ml_train_model_set_optimizer(
     ml_train_model_h model,
     ml_train_optimizer_h optimizer,
@@ -257,20 +325,28 @@ class Tizen70CapiNntrainer {
   late final _ml_train_model_set_optimizer = _ml_train_model_set_optimizerPtr
       .asFunction<int Function(ml_train_model_h, ml_train_optimizer_h)>();
 
-  /// @brief Sets the dataset (data provider) for the neural network model.
-  /// @details Use this function to set dataset for running the model. The dataset
-  /// will provide training, validation and test data for the model. This transfers
-  /// the ownership of the dataset to the network. No need to destroy the dataset
-  /// once it is set to a model.
-  /// @since_tizen 6.0
-  /// @remarks Unsets the previously set dataset, if any. The previously set
-  /// dataset must be freed using ml_train_dataset_destroy().
-  /// @param[in] model The NNTrainer model handle.
-  /// @param[in] dataset The NNTrainer dataset handle.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Invalid parameter.
+  /// Sets the dataset (data provider) for the neural network model.
+  ///
+  /// Use this function to set dataset for running the model. The dataset will provide training, validation and test data for the model. This transfers the ownership of the dataset to the network. No need to destroy the dataset once it is set to a model.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Remarks:**
+  /// - Unsets the previously set dataset, if any. The previously set
+  /// - dataset must be freed using ml_train_dataset_destroy().
+  ///
+  /// **Parameters:**
+  /// - `model` (in): The NNTrainer model handle.
+  /// - `dataset` (in): The NNTrainer dataset handle.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Invalid parameter.
   int ml_train_model_set_dataset(
     ml_train_model_h model,
     ml_train_dataset_h dataset,
@@ -288,23 +364,32 @@ class Tizen70CapiNntrainer {
   late final _ml_train_model_set_dataset = _ml_train_model_set_datasetPtr
       .asFunction<int Function(ml_train_model_h, ml_train_dataset_h)>();
 
-  /// @brief Gets input tensors information of the model.
-  /// @details Use this function to get input tensors information of the model.
-  /// destroy @a info with ml_tensors_info_destroy() after use.
-  /// @since_tizen 6.5
-  /// @remarks @a model must be compiled before calling this function.
-  /// @remarks The returned @a info is newly created so it does not reflect future
-  /// changes in the model.
-  /// @remarks On returning error, info must not be destroyed with
-  /// ml_tensors_info_destory()
+  /// Gets input tensors information of the model.
   ///
-  /// @param[in] model The NNTrainer model handle.
-  /// @param[out] info The tensors information handle.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Invalid parameter.
-  /// @retval #ML_ERROR_OUT_OF_MEMORY Failed to allocate required memory.
+  /// Use this function to get input tensors information of the model. destroy `info` with ml_tensors_info_destroy() after use.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - `model` must be compiled before calling this function.
+  /// - The returned `info` is newly created so it does not reflect future
+  /// - changes in the model.
+  /// - On returning error, info must not be destroyed with
+  /// - ml_tensors_info_destory()
+  ///
+  /// **Parameters:**
+  /// - `model` (in): The NNTrainer model handle.
+  /// - `info` (out): The tensors information handle.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Invalid parameter.
+  /// - `ML_ERROR_OUT_OF_MEMORY`: Failed to allocate required memory.
   int ml_train_model_get_input_tensors_info(
     ml_train_model_h model,
     ffi.Pointer<ml_common.ml_tensors_info_h> info,
@@ -325,23 +410,32 @@ class Tizen70CapiNntrainer {
           int Function(
               ml_train_model_h, ffi.Pointer<ml_common.ml_tensors_info_h>)>();
 
-  /// @brief Gets output tensors information of the model.
-  /// @details Use this function to get output tensors information of the model.
-  /// destroy @a info with @c ml_tensors_info_destroy() after use.
-  /// @since_tizen 6.5
-  /// @remarks @a model must be compiled before calling this function.
-  /// @remarks the returned @a info is newly created so it does not reflect future
-  /// changes in the model
-  /// @remarks On returning error, info must not be destroyed with
-  /// ml_tensors_info_destory()
+  /// Gets output tensors information of the model.
   ///
-  /// @param[in] model The NNTrainer model handle.
-  /// @param[out] info The tensors information handle.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Invalid parameter.
-  /// @retval #ML_ERROR_OUT_OF_MEMORY Failed to allocate required memory.
+  /// Use this function to get output tensors information of the model. destroy `info` with `ml_tensors_info_destroy(`) after use.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - `model` must be compiled before calling this function.
+  /// - the returned `info` is newly created so it does not reflect future
+  /// - changes in the model
+  /// - On returning error, info must not be destroyed with
+  /// - ml_tensors_info_destory()
+  ///
+  /// **Parameters:**
+  /// - `model` (in): The NNTrainer model handle.
+  /// - `info` (out): The tensors information handle.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Invalid parameter.
+  /// - `ML_ERROR_OUT_OF_MEMORY`: Failed to allocate required memory.
   int ml_train_model_get_output_tensors_info(
     ml_train_model_h model,
     ffi.Pointer<ml_common.ml_tensors_info_h> info,
@@ -362,18 +456,29 @@ class Tizen70CapiNntrainer {
           int Function(
               ml_train_model_h, ffi.Pointer<ml_common.ml_tensors_info_h>)>();
 
-  /// @brief Creates a neural network layer.
-  /// @details Use this function to create neural network layer.
-  /// @since_tizen 6.0
-  /// @remarks If the function succeeds, @a layer must be released using
-  /// ml_train_layer_destroy(), if not added to a model. If added to a model, @a
-  /// layer is available until the model is released.
-  /// @param[out] layer The NNTrainer layer handle from the given description.
-  /// @param[in]  type The NNTrainer layer type
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Invalid parameter.
+  /// Creates a neural network layer.
+  ///
+  /// Use this function to create neural network layer.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, `layer` must be released using
+  /// - ml_train_layer_destroy(), if not added to a model. If added to a model, @a
+  /// - layer is available until the model is released.
+  ///
+  /// **Parameters:**
+  /// - `layer` (out): The NNTrainer layer handle from the given description.
+  /// - `type` (in): The NNTrainer layer type
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Invalid parameter.
   int ml_train_layer_create(
     ffi.Pointer<ml_train_layer_h> layer,
     int type,
@@ -391,15 +496,23 @@ class Tizen70CapiNntrainer {
   late final _ml_train_layer_create = _ml_train_layer_createPtr
       .asFunction<int Function(ffi.Pointer<ml_train_layer_h>, int)>();
 
-  /// @brief Frees the neural network layer.
-  /// @details Use this function to destroy neural network layer. Fails if layer is
-  /// owned by a model.
-  /// @since_tizen 6.0
-  /// @param[in] layer The NNTrainer layer handle.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Invalid parameter.
+  /// Frees the neural network layer.
+  ///
+  /// Use this function to destroy neural network layer. Fails if layer is owned by a model.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Parameters:**
+  /// - `layer` (in): The NNTrainer layer handle.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Invalid parameter.
   int ml_train_layer_destroy(
     ml_train_layer_h layer,
   ) {
@@ -414,18 +527,26 @@ class Tizen70CapiNntrainer {
   late final _ml_train_layer_destroy =
       _ml_train_layer_destroyPtr.asFunction<int Function(ml_train_layer_h)>();
 
-  /// @brief Sets the neural network layer Property.
-  /// @details Use this function to set neural network layer Property.
-  /// @since_tizen 6.0
-  /// @param[in] layer The NNTrainer layer handle.
-  /// @param[in]  ... Property values with NULL for termination.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Invalid parameter.
+  /// Sets the neural network layer Property.
   ///
-  /// Here is an example of the usage of this function:
-  /// @code
+  /// Use this function to set neural network layer Property.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Parameters:**
+  /// - `layer` (in): The NNTrainer layer handle.
+  /// - `...` (in): Property values with NULL for termination.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Invalid parameter. Here is an example of the usage of this function:
+  ///
+  /// ```
   /// int status;
   /// ml_train_layer_h handle;
   ///
@@ -450,7 +571,7 @@ class Tizen70CapiNntrainer {
   /// // Handle error case
   /// return status;
   /// }
-  /// @endcode
+  /// ```
   int ml_train_layer_set_property(
     ml_train_layer_h layer,
   ) {
@@ -465,20 +586,29 @@ class Tizen70CapiNntrainer {
   late final _ml_train_layer_set_property = _ml_train_layer_set_propertyPtr
       .asFunction<int Function(ml_train_layer_h)>();
 
-  /// @brief Creates a neural network optimizer.
-  /// @details Use this function to create neural network optimizer. If not set to
-  /// a model, @a optimizer should be released using ml_train_optimizer_destroy().
-  /// If set to a model, @a optimizer is available until model is released.
-  /// @since_tizen 6.0
-  /// @remarks If the function succeeds, @a optimizer must be released using
-  /// ml_train_optimizer_destroy(), if not set to a model. If set to a model, @a
-  /// optimizer is available until the model is released.
-  /// @param[out] optimizer The NNTrainer optimizer handle.
-  /// @param[in] type The NNTrainer optimizer type.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Invalid parameter.
+  /// Creates a neural network optimizer.
+  ///
+  /// Use this function to create neural network optimizer. If not set to a model, `optimizer` should be released using ml_train_optimizer_destroy(). If set to a model, `optimizer` is available until model is released.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, `optimizer` must be released using
+  /// - ml_train_optimizer_destroy(), if not set to a model. If set to a model, @a
+  /// - optimizer is available until the model is released.
+  ///
+  /// **Parameters:**
+  /// - `optimizer` (out): The NNTrainer optimizer handle.
+  /// - `type` (in): The NNTrainer optimizer type.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Invalid parameter.
   int ml_train_optimizer_create(
     ffi.Pointer<ml_train_optimizer_h> optimizer,
     int type,
@@ -496,15 +626,23 @@ class Tizen70CapiNntrainer {
   late final _ml_train_optimizer_create = _ml_train_optimizer_createPtr
       .asFunction<int Function(ffi.Pointer<ml_train_optimizer_h>, int)>();
 
-  /// @brief Frees the neural network optimizer.
-  /// @details Use this function to destroy neural network optimizer. Fails if
-  /// optimizer is owned by a model.
-  /// @since_tizen 6.0
-  /// @param[in] optimizer The NNTrainer optimizer handle.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Invalid parameter.
+  /// Frees the neural network optimizer.
+  ///
+  /// Use this function to destroy neural network optimizer. Fails if optimizer is owned by a model.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Parameters:**
+  /// - `optimizer` (in): The NNTrainer optimizer handle.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Invalid parameter.
   int ml_train_optimizer_destroy(
     ml_train_optimizer_h optimizer,
   ) {
@@ -519,15 +657,24 @@ class Tizen70CapiNntrainer {
   late final _ml_train_optimizer_destroy = _ml_train_optimizer_destroyPtr
       .asFunction<int Function(ml_train_optimizer_h)>();
 
-  /// @brief Sets the neural network optimizer property.
-  /// @details Use this function to set neural network optimizer property.
-  /// @since_tizen 6.0
-  /// @param[in] optimizer The NNTrainer optimizer handle.
-  /// @param[in]  ... Property values with NULL for termination.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Invalid parameter.
+  /// Sets the neural network optimizer property.
+  ///
+  /// Use this function to set neural network optimizer property.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Parameters:**
+  /// - `optimizer` (in): The NNTrainer optimizer handle.
+  /// - `...` (in): Property values with NULL for termination.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Invalid parameter.
   int ml_train_optimizer_set_property(
     ml_train_optimizer_h optimizer,
   ) {
@@ -543,28 +690,33 @@ class Tizen70CapiNntrainer {
       _ml_train_optimizer_set_propertyPtr
           .asFunction<int Function(ml_train_optimizer_h)>();
 
-  /// @deprecated Deprecated since 6.5. Use ml_train_dataset_create() instead.
-  /// @brief Creates a dataset with generators to feed to a neural network.
-  /// @details Use this function to create a neural network dataset using
-  /// generators. The generators will provide data representing a single input
-  /// element. When setting this dataset to a model, the data generated by the
-  /// generators should match the input and the label shape for the model.
-  /// @since_tizen 6.0
-  /// @remarks If the function succeeds, @a dataset must be released using
-  /// ml_train_dataset_destroy(), if not set to a model. If set to a model, @a
-  /// dataset is available until the model is released.
+  /// **Deprecated:** Deprecated since 6.5. Use ml_train_dataset_create() instead.
   ///
-  /// @param[out] dataset The NNTrainer dataset handle from the given description.
-  /// If not set to a model, @a dataset should be released using
-  /// ml_train_dataset_destroy(). If set to a model, @a dataset is available until
-  /// model is released.
-  /// @param[in] train_cb The dataset generator for training.
-  /// @param[in] valid_cb The dataset generator for validating. Can be null.
-  /// @param[in] test_cb The dataset generator for testing. Can be null.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Invalid parameter.
+  /// Creates a dataset with generators to feed to a neural network.
+  ///
+  /// Use this function to create a neural network dataset using generators. The generators will provide data representing a single input element. When setting this dataset to a model, the data generated by the generators should match the input and the label shape for the model.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, `dataset` must be released using
+  /// - ml_train_dataset_destroy(), if not set to a model. If set to a model, @a
+  /// - dataset is available until the model is released.
+  ///
+  /// **Parameters:**
+  /// - `dataset` (out): The NNTrainer dataset handle from the given description. If not set to a model, `dataset` should be released using ml_train_dataset_destroy(). If set to a model, `dataset` is available until model is released.
+  /// - `train_cb` (in): The dataset generator for training.
+  /// - `valid_cb` (in): The dataset generator for validating. Can be null.
+  /// - `test_cb` (in): The dataset generator for testing. Can be null.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Invalid parameter.
   int ml_train_dataset_create_with_generator(
     ffi.Pointer<ml_train_dataset_h> dataset,
     ml_train_datagen_cb train_cb,
@@ -591,17 +743,28 @@ class Tizen70CapiNntrainer {
           int Function(ffi.Pointer<ml_train_dataset_h>, ml_train_datagen_cb,
               ml_train_datagen_cb, ml_train_datagen_cb)>();
 
-  /// @brief Constructs the dataset.
-  /// @details Use this function to create a dataset.
-  /// @since_tizen 6.5
-  /// @remarks If the function succeeds, @a dataset must be released using
-  /// ml_train_dataset_destroy(), if not added to a model. If added to a model, @a
-  /// dataset is available until the model is released.
-  /// @param[out] dataset The NNTrainer dataset handle.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Invalid parameter.
+  /// Constructs the dataset.
+  ///
+  /// Use this function to create a dataset.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, `dataset` must be released using
+  /// - ml_train_dataset_destroy(), if not added to a model. If added to a model, @a
+  /// - dataset is available until the model is released.
+  ///
+  /// **Parameters:**
+  /// - `dataset` (out): The NNTrainer dataset handle.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Invalid parameter.
   int ml_train_dataset_create(
     ffi.Pointer<ml_train_dataset_h> dataset,
   ) {
@@ -617,18 +780,26 @@ class Tizen70CapiNntrainer {
   late final _ml_train_dataset_create = _ml_train_dataset_createPtr
       .asFunction<int Function(ffi.Pointer<ml_train_dataset_h>)>();
 
-  /// @brief Adds data generator callback to @a dataset.
-  /// @details Use this function to add a data generator callback which generates a
-  /// single element per call to the dataset.
-  /// @since_tizen 6.5
-  /// @param[in] dataset The NNTrainer dataset handle.
-  /// @param[in] mode The phase where this generator should be used.
-  /// @param[in] cb Callback to be used for the generator.
-  /// @param[in] user_data user_data to be fed when @a cb is being called.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Invalid parameter.
+  /// Adds data generator callback to `dataset`.
+  ///
+  /// Use this function to add a data generator callback which generates a single element per call to the dataset.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `dataset` (in): The NNTrainer dataset handle.
+  /// - `mode` (in): The phase where this generator should be used.
+  /// - `cb` (in): Callback to be used for the generator.
+  /// - `user_data` (in): user_data to be fed when `cb` is being called.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Invalid parameter.
   int ml_train_dataset_add_generator(
     ml_train_dataset_h dataset,
     int mode,
@@ -652,23 +823,33 @@ class Tizen70CapiNntrainer {
           int Function(ml_train_dataset_h, int, ml_train_datagen_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Adds data file to @a dataset.
-  /// @details Use this function to add a data file from where data is retrieved.
-  /// @since_tizen 6.5
-  /// @remarks If you want to access only internal storage by using this function,
-  /// you should add privilege %http://tizen.org/privilege/mediastorage. Or, if you
-  /// want to access only external storage by using this function, you should add
-  /// privilege %http://tizen.org/privilege/externalstorage. If you can access both
-  /// storage, you must add all privilege
+  /// Adds data file to `dataset`.
   ///
-  /// @param[in] dataset The NNTrainer dataset handle.
-  /// @param[in] mode The phase where this file should be used.
-  /// @param[in] file file path.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_PERMISSION_DENIED Permission denied.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Invalid parameter.
+  /// Use this function to add a data file from where data is retrieved.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - If you want to access only internal storage by using this function,
+  /// - you should add privilege http://tizen.org/privilege/mediastorage. Or, if you
+  /// - want to access only external storage by using this function, you should add
+  /// - privilege http://tizen.org/privilege/externalstorage. If you can access both
+  /// - storage, you must add all privilege
+  ///
+  /// **Parameters:**
+  /// - `dataset` (in): The NNTrainer dataset handle.
+  /// - `mode` (in): The phase where this file should be used.
+  /// - `file` (in): file path.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_PERMISSION_DENIED`: Permission denied.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Invalid parameter.
   int ml_train_dataset_add_file(
     ml_train_dataset_h dataset,
     int mode,
@@ -689,22 +870,28 @@ class Tizen70CapiNntrainer {
       _ml_train_dataset_add_filePtr.asFunction<
           int Function(ml_train_dataset_h, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @deprecated Deprecated since 6.5. Use ml_train_dataset_create() instead.
-  /// @brief Creates a dataset with files to feed to a neural network.
-  /// @details Use this function to create a neural network dataset using
-  /// files.
-  /// @since_tizen 6.0
-  /// @param[out] dataset The NNTrainer dataset handle from the given description.
-  /// If not set to a model, @a dataset should be released using
-  /// ml_train_dataset_destroy(). If set to a model, @a dataset is available until
-  /// model is released.
-  /// @param[in] train_file The dataset file for training.
-  /// @param[in] valid_file The dataset file for validating. Can be null.
-  /// @param[in] test_file The dataset file for testing. Can be null.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Invalid parameter.
+  /// **Deprecated:** Deprecated since 6.5. Use ml_train_dataset_create() instead.
+  ///
+  /// Creates a dataset with files to feed to a neural network.
+  ///
+  /// Use this function to create a neural network dataset using files.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Parameters:**
+  /// - `dataset` (out): The NNTrainer dataset handle from the given description. If not set to a model, `dataset` should be released using ml_train_dataset_destroy(). If set to a model, `dataset` is available until model is released.
+  /// - `train_file` (in): The dataset file for training.
+  /// - `valid_file` (in): The dataset file for validating. Can be null.
+  /// - `test_file` (in): The dataset file for testing. Can be null.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Invalid parameter.
   int ml_train_dataset_create_with_file(
     ffi.Pointer<ml_train_dataset_h> dataset,
     ffi.Pointer<ffi.Char> train_file,
@@ -731,15 +918,23 @@ class Tizen70CapiNntrainer {
           int Function(ffi.Pointer<ml_train_dataset_h>, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Frees the neural network dataset.
-  /// @details Use this function to destroy dataset. Fails if dataset is owned by a
-  /// model.
-  /// @since_tizen 6.0
-  /// @param[in] dataset The NNTrainer dataset handle.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Invalid parameter.
+  /// Frees the neural network dataset.
+  ///
+  /// Use this function to destroy dataset. Fails if dataset is owned by a model.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Parameters:**
+  /// - `dataset` (in): The NNTrainer dataset handle.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Invalid parameter.
   int ml_train_dataset_destroy(
     ml_train_dataset_h dataset,
   ) {
@@ -754,20 +949,31 @@ class Tizen70CapiNntrainer {
   late final _ml_train_dataset_destroy = _ml_train_dataset_destroyPtr
       .asFunction<int Function(ml_train_dataset_h)>();
 
-  /// @deprecated Deprecated since 6.5. Use
-  /// ml_train_dataset_set_property_for_mode() instead.
-  /// @brief Sets the neural network dataset property.
-  /// @details Use this function to set dataset property.
-  /// @since_tizen 6.0
-  /// @remarks the same property is applied over train, valid, testsets that are
-  /// added to the @a dataset, it is recommended to use
-  /// ml_train_dataset_set_property_for_mode() instead.
-  /// @param[in] dataset The NNTrainer dataset handle.
-  /// @param[in]  ... Property values with NULL for termination.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Invalid parameter.
+  /// **Deprecated:** Deprecated since 6.5. Use ml_train_dataset_set_property_for_mode() instead.
+  ///
+  /// Sets the neural network dataset property.
+  ///
+  /// Use this function to set dataset property.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Remarks:**
+  /// - the same property is applied over train, valid, testsets that are
+  /// - added to the `dataset`, it is recommended to use
+  /// - ml_train_dataset_set_property_for_mode() instead.
+  ///
+  /// **Parameters:**
+  /// - `dataset` (in): The NNTrainer dataset handle.
+  /// - `...` (in): Property values with NULL for termination.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Invalid parameter.
   int ml_train_dataset_set_property(
     ml_train_dataset_h dataset,
   ) {
@@ -782,16 +988,25 @@ class Tizen70CapiNntrainer {
   late final _ml_train_dataset_set_property = _ml_train_dataset_set_propertyPtr
       .asFunction<int Function(ml_train_dataset_h)>();
 
-  /// @brief Sets the neural network dataset property.
-  /// @details Use this function to set dataset property for a specific mode.
-  /// @since_tizen 6.5
-  /// @param[in] dataset The NNTrainer dataset handle.
-  /// @param[in] mode The mode to set the property.
-  /// @param[in]  ... Property values with NULL for termination.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Invalid parameter.
+  /// Sets the neural network dataset property.
+  ///
+  /// Use this function to set dataset property for a specific mode.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `dataset` (in): The NNTrainer dataset handle.
+  /// - `mode` (in): The mode to set the property.
+  /// - `...` (in): Property values with NULL for termination.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Invalid parameter.
   int ml_train_dataset_set_property_for_mode(
     ml_train_dataset_h dataset,
     int mode,
@@ -809,34 +1024,38 @@ class Tizen70CapiNntrainer {
       _ml_train_dataset_set_property_for_modePtr
           .asFunction<int Function(ml_train_dataset_h, int)>();
 
-  /// @brief Saves the model.
-  /// @details Use this function to save the current model. @a format
-  /// describes various formats in which various selections of the
-  /// parameters of the models can be saved. Some formats may save
-  /// parameters required for training. Some other formats may save model
-  /// configurations. Unless stated otherwise, ml_train_model_compile() has to
-  /// be called upon the @a model before calling this function.
-  /// @since_tizen 6.5
-  /// @remarks Saved ini, if any, is not guaranteed to be identical to the original
-  /// ini that maybe used to load the model.
-  /// @remarks If you want to access only internal storage by using this function,
-  /// you should add privilege %http://tizen.org/privilege/mediastorage. Or, if you
-  /// want to access only external storage by using this function, you should add
-  /// privilege %http://tizen.org/privilege/externalstorage. If you want to access
-  /// both storage, you must add all the privileges.
+  /// Saves the model.
   ///
-  /// @param[in] model The NNTrainer model handle to save.
-  /// @param[in] file_path File path to save the file.
-  /// @param[in] format Format flag to determine which format should be used to
-  /// save.
-  /// @return @c 0 on success, Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_PERMISSION_DENIED Permission denied.
-  /// @retval #ML_ERROR_INVALID_PARAMETER The given @a file_path is
-  /// invalid or taken, or @a model is not compiled.
-  /// @see #ml_train_model_format_e to check which part of the model is
-  /// saved.
+  /// Use this function to save the current model. `format` describes various formats in which various selections of the parameters of the models can be saved. Some formats may save parameters required for training. Some other formats may save model configurations. Unless stated otherwise, ml_train_model_compile() has to be called upon the `model` before calling this function.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - Saved ini, if any, is not guaranteed to be identical to the original
+  /// - ini that maybe used to load the model.
+  /// - If you want to access only internal storage by using this function,
+  /// - you should add privilege http://tizen.org/privilege/mediastorage. Or, if you
+  /// - want to access only external storage by using this function, you should add
+  /// - privilege http://tizen.org/privilege/externalstorage. If you want to access
+  /// - both storage, you must add all the privileges.
+  ///
+  /// **Parameters:**
+  /// - `model` (in): The NNTrainer model handle to save.
+  /// - `file_path` (in): File path to save the file.
+  /// - `format` (in): Format flag to determine which format should be used to save.
+  ///
+  /// **Returns:**
+  /// - `0` on success, Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_PERMISSION_DENIED`: Permission denied.
+  /// - `ML_ERROR_INVALID_PARAMETER`: The given `file_path` is invalid or taken, or `model` is not compiled.
+  ///
+  /// **See also:**
+  /// - `ml_train_model_format_e` to check which part of the model is saved.
   int ml_train_model_save(
     ml_train_model_h model,
     ffi.Pointer<ffi.Char> file_path,
@@ -856,35 +1075,36 @@ class Tizen70CapiNntrainer {
   late final _ml_train_model_save = _ml_train_model_savePtr
       .asFunction<int Function(ml_train_model_h, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @brief Loads the model.
-  /// @details Use this function to load the current model. @a format
-  /// describes various formats in which various selections of the
-  /// parameters of the models can be loaded. Some formats may load
-  /// parameters required for training. Some other formats may load model
-  /// configurations. Unless stated otherwise, loading model configuration requires
-  /// a freshly constructed model with ml_train_model_construct() without
-  /// ml_train_model_compile(), loading model parameter requires
-  /// ml_train_model_compile() to be called upon the @a model before calling this
-  /// function.
-  /// @since_tizen 6.5
-  /// @remarks If you want to access only internal storage by using this function,
-  /// you should add privilege %http://tizen.org/privilege/mediastorage. Or, if you
-  /// want to access only external storage by using this function, you should add
-  /// privilege %http://tizen.org/privilege/externalstorage. If you want to access
-  /// both storage, you must add all the privileges.
+  /// Loads the model.
   ///
-  /// @param[in] model The NNTrainer model handle to load.
-  /// @param[in] file_path File path to load the file.
-  /// @param[in] format Format flag to determine which format should be used to
-  /// load.
-  /// @return @c 0 on success, Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_PERMISSION_DENIED Permission denied.
-  /// @retval #ML_ERROR_INVALID_PARAMETER The given @a file_path is
-  /// invalid or @a model is not in valid state to load.
-  /// @see #ml_train_model_format_e to check which part of the model is
-  /// loaded.
+  /// Use this function to load the current model. `format` describes various formats in which various selections of the parameters of the models can be loaded. Some formats may load parameters required for training. Some other formats may load model configurations. Unless stated otherwise, loading model configuration requires a freshly constructed model with ml_train_model_construct() without ml_train_model_compile(), loading model parameter requires ml_train_model_compile() to be called upon the `model` before calling this function.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - If you want to access only internal storage by using this function,
+  /// - you should add privilege http://tizen.org/privilege/mediastorage. Or, if you
+  /// - want to access only external storage by using this function, you should add
+  /// - privilege http://tizen.org/privilege/externalstorage. If you want to access
+  /// - both storage, you must add all the privileges.
+  ///
+  /// **Parameters:**
+  /// - `model` (in): The NNTrainer model handle to load.
+  /// - `file_path` (in): File path to load the file.
+  /// - `format` (in): Format flag to determine which format should be used to load.
+  ///
+  /// **Returns:**
+  /// - `0` on success, Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_PERMISSION_DENIED`: Permission denied.
+  /// - `ML_ERROR_INVALID_PARAMETER`: The given `file_path` is invalid or `model` is not in valid state to load.
+  ///
+  /// **See also:**
+  /// - `ml_train_model_format_e` to check which part of the model is loaded.
   int ml_train_model_load(
     ml_train_model_h model,
     ffi.Pointer<ffi.Char> file_path,
@@ -904,20 +1124,30 @@ class Tizen70CapiNntrainer {
   late final _ml_train_model_load = _ml_train_model_loadPtr
       .asFunction<int Function(ml_train_model_h, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @brief Gets neural network layer from the model with the given name.
-  /// @details Use this function to get already created Neural Network Layer. The
-  /// returned layer must not be deleted as it is owned by the model.
-  /// @since_tizen 7.0
-  /// @remarks The modification through ml_trin_layer_set_property() after
-  /// compiling the model by calling `ml_train_model_compile()` strictly
-  /// restricted.
-  /// @param[in] model The NNTrainer model handler from the given description.
-  /// @param[in] layer_name Name of the already created layer.
-  /// @param[out] layer The NNTrainer Layer handler from the given description.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Invalid parameter.
+  /// Gets neural network layer from the model with the given name.
+  ///
+  /// Use this function to get already created Neural Network Layer. The returned layer must not be deleted as it is owned by the model.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Remarks:**
+  /// - The modification through ml_trin_layer_set_property() after
+  /// - compiling the model by calling `ml_train_model_compile()` strictly
+  /// - restricted.
+  ///
+  /// **Parameters:**
+  /// - `model` (in): The NNTrainer model handler from the given description.
+  /// - `layer_name` (in): Name of the already created layer.
+  /// - `layer` (out): The NNTrainer Layer handler from the given description.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Invalid parameter.
   int ml_train_model_get_layer(
     ml_train_model_h model,
     ffi.Pointer<ffi.Char> layer_name,
@@ -940,8 +1170,11 @@ class Tizen70CapiNntrainer {
               ffi.Pointer<ml_train_layer_h>)>();
 }
 
-/// @brief Enumeration for the neural network layer type of NNTrainer.
-/// @since_tizen 6.0
+/// Enumeration for the neural network layer type of NNTrainer.
+///
+/// **Since Tizen:**
+/// - 6.0
+/// @nodoc
 abstract class ml_train_layer_type_e {
   /// < Input Layer
   static const int ML_TRAIN_LAYER_TYPE_INPUT = 0;
@@ -1037,8 +1270,11 @@ abstract class ml_train_layer_type_e {
   static const int ML_TRAIN_LAYER_TYPE_UNKNOWN = 999;
 }
 
-/// @brief Enumeration for the neural network optimizer type of NNTrainer.
-/// @since_tizen 6.0
+/// Enumeration for the neural network optimizer type of NNTrainer.
+///
+/// **Since Tizen:**
+/// - 6.0
+/// @nodoc
 abstract class ml_train_optimizer_type_e {
   /// < Adam Optimizer
   static const int ML_TRAIN_OPTIMIZER_TYPE_ADAM = 0;
@@ -1050,16 +1286,22 @@ abstract class ml_train_optimizer_type_e {
   static const int ML_TRAIN_OPTIMIZER_TYPE_UNKNOWN = 999;
 }
 
-/// @brief Enumeration for the dataset data type of NNTrainer.
-/// @since_tizen 6.5
+/// Enumeration for the dataset data type of NNTrainer.
+///
+/// **Since Tizen:**
+/// - 6.5
+/// @nodoc
 abstract class ml_train_dataset_mode_e {
   static const int ML_TRAIN_DATASET_MODE_TRAIN = 0;
   static const int ML_TRAIN_DATASET_MODE_VALID = 1;
   static const int ML_TRAIN_DATASET_MODE_TEST = 2;
 }
 
-/// @brief Enumeration for the neural network summary verbosity of NNTrainer.
-/// @since_tizen 6.0
+/// Enumeration for the neural network summary verbosity of NNTrainer.
+///
+/// **Since Tizen:**
+/// - 6.0
+/// @nodoc
 abstract class ml_train_summary_type_e {
   /// < Overview of model
   /// summary with one-line layer information
@@ -1071,76 +1313,72 @@ abstract class ml_train_summary_type_e {
   static const int ML_TRAIN_SUMMARY_TENSOR = 2;
 }
 
-/// @brief Enumeration for the neural network.
-/// @since_tizen 6.5
+/// Enumeration for the neural network.
+///
+/// **Since Tizen:**
+/// - 6.5
+/// @nodoc
 abstract class ml_train_model_format_e {
   static const int ML_TRAIN_MODEL_FORMAT_BIN = 0;
   static const int ML_TRAIN_MODEL_FORMAT_INI = 1;
   static const int ML_TRAIN_MODEL_FORMAT_INI_WITH_BIN = 2;
 }
 
-/// @brief A handle of an NNTrainer model.
-/// @since_tizen 6.0
+/// A handle of an NNTrainer model.
+///
+/// **Since Tizen:**
+/// - 6.0
+/// @nodoc
 typedef ml_train_model_h = ffi.Pointer<ffi.Void>;
 
-/// @brief A handle of an NNTrainer layer.
-/// @since_tizen 6.0
+/// A handle of an NNTrainer layer.
+///
+/// **Since Tizen:**
+/// - 6.0
+/// @nodoc
 typedef ml_train_layer_h = ffi.Pointer<ffi.Void>;
 
-/// @brief A handle of an NNTrainer optimizer.
-/// @since_tizen 6.0
+/// A handle of an NNTrainer optimizer.
+///
+/// **Since Tizen:**
+/// - 6.0
+/// @nodoc
 typedef ml_train_optimizer_h = ffi.Pointer<ffi.Void>;
 
-/// @brief A handle of an NNTrainer dataset.
-/// @since_tizen 6.0
+/// A handle of an NNTrainer dataset.
+///
+/// **Since Tizen:**
+/// - 6.0
+/// @nodoc
 typedef ml_train_dataset_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Dataset generator callback function for train/valid/test data.
+/// Dataset generator callback function for train/valid/test data.
 ///
-/// @details The user of the API must provide this callback function to supply
-/// data to the model and register the callback with
-/// ml_train_dataset_add_generator(). The model will call this callback
-/// whenever it needs more data. This function should provide a single element of
-/// input and label data in the passed containers. The containers passed by the
-/// caller will already be allocated with sufficient space to contain the data.
-/// This function callback should fill the data row-wise in the containers
-/// provided. The containers represent array of memory to hold inputs for the
-/// model. If the model contains two inputs, then input[0] will hold the first
-/// input, and input[1] will hold the second input. The same applies for labels
-/// as well. The number of inputs and labels, and the size of each input and
-/// label should match with the shape of each input and label set in the model.
-/// The order of the inputs/labels, in case of multiple of inputs/labels, will be
-/// determined based on the sequence of addition of the input layers to the
-/// model.
-/// @since_tizen 6.0
-/// @note This function can be called multiple times in parallel when total
-/// number of samples are set as a property for this dataset. In this case, last
-/// is only used for verification purposes. If total number of samples for the
-/// dataset is unknown, this function will be called in sequence.
-/// @note @a last has to be set true when filling the last @a input, @a label.
-/// @param[out] input Container to hold all the input data. Should not be freed
-/// by the user.
-/// @param[out] label Container to hold corresponding label data. Should not be
-/// freed by the user.
-/// @param[out] last Container to notify if data is finished. Set true if no more
-/// data to provide, else set false. Should not be freed by the user.
-/// @param[in] user_data User application's private data passed along with
-/// ml_train_dataset_add_generator().
-/// @return @c 0 on success. Otherwise a negative error value.
-/// @retval #ML_ERROR_NONE Successful.
-/// @retval #ML_ERROR_INVALID_PARAMETER Invalid parameter.
+/// The user of the API must provide this callback function to supply data to the model and register the callback with ml_train_dataset_add_generator(). The model will call this callback whenever it needs more data. This function should provide a single element of input and label data in the passed containers. The containers passed by the caller will already be allocated with sufficient space to contain the data. This function callback should fill the data row-wise in the containers provided. The containers represent array of memory to hold inputs for the model. If the model contains two inputs, then input`[0]` will hold the first input, and input`[1]` will hold the second input. The same applies for labels as well. The number of inputs and labels, and the size of each input and label should match with the shape of each input and label set in the model. The order of the inputs/labels, in case of multiple of inputs/labels, will be determined based on the sequence of addition of the input layers to the model.
 ///
-/// A sample implementation of this function is below:
-/// Note : input data information available from outside this function.
-/// num_samples : total number of data samples in the dataset.
-/// count : number of samples already given.
-/// num_inputs : number of inputs.
-/// num_labels : number of labels.
-/// input_length[num_inputs] : length of the input. With (batch, c, h, w) as
-/// input shape, the length will be c * h * w.
-/// label_length[num_labels] : length of the label. With (batch, l) as label
-/// shape, then length will be l.
-/// @code
+/// Below is an example of the usage of this sample:
+///
+/// **Since Tizen:**
+/// - 6.0
+///
+/// **Parameters:**
+/// - `input` (out): Container to hold all the input data. Should not be freed by the user.
+/// - `label` (out): Container to hold corresponding label data. Should not be freed by the user.
+/// - `last` (out): Container to notify if data is finished. Set true if no more data to provide, else set false. Should not be freed by the user.
+/// - `user_data` (in): User application's private data passed along with ml_train_dataset_add_generator().
+///
+/// **Returns:**
+/// - `0` on success. Otherwise a negative error value.
+///
+/// **Return values:**
+/// - `ML_ERROR_NONE`: Successful.
+/// - `ML_ERROR_INVALID_PARAMETER`: Invalid parameter. A sample implementation of this function is below: Note : input data information available from outside this function. num_samples : total number of data samples in the dataset. count : number of samples already given. num_inputs : number of inputs. num_labels : number of labels. input_length`[num_inputs]` : length of the input. With (batch, c, h, w) as input shape, the length will be c * h * w. label_length`[num_labels]` : length of the label. With (batch, l) as label shape, then length will be l.
+///
+/// **Notes:**
+/// - This function can be called multiple times in parallel when total number of samples are set as a property for this dataset. In this case, last is only used for verification purposes. If total number of samples for the dataset is unknown, this function will be called in sequence.
+/// - `last` has to be set true when filling the last `input`, `label`.
+///
+/// ```
 /// // function signature :
 /// // int rand_dataset_generator (float **input, float **label, bool *last,
 /// // void *user_data).
@@ -1172,11 +1410,9 @@ typedef ml_train_dataset_h = ffi.Pointer<ffi.Void>;
 /// count += 1;
 ///
 /// return ML_ERROR_NONE;
-/// @endcode
+/// ```
 ///
-///
-/// Below is an example of the usage of this sample:
-/// @code
+/// ```
 /// int status;
 /// void * user_data;
 /// ml_train_dataset_h handle;
@@ -1199,14 +1435,17 @@ typedef ml_train_dataset_h = ffi.Pointer<ffi.Void>;
 /// // handle error case
 /// return status;
 /// }
-/// @endcode
+/// ```
+/// @nodoc
 typedef ml_train_datagen_cb
     = ffi.Pointer<ffi.NativeFunction<ml_train_datagen_cbFunction>>;
+/// @nodoc
 typedef ml_train_datagen_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Pointer<ffi.Float>> input,
     ffi.Pointer<ffi.Pointer<ffi.Float>> label,
     ffi.Pointer<ffi.Bool> last,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartml_train_datagen_cbFunction = int Function(
     ffi.Pointer<ffi.Pointer<ffi.Float>> input,
     ffi.Pointer<ffi.Pointer<ffi.Float>> label,

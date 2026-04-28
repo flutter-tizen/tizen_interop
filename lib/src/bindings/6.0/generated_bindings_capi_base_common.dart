@@ -1,3 +1,6 @@
+/// {@category 6.0/tizen}
+library tizen_interop_6_0.capi_base_common;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-base-common APIs.
+/// {@category 6.0/tizen}
 class Tizen60CapiBaseCommon {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,12 +28,19 @@ class Tizen60CapiBaseCommon {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Gets the last error code in the thread.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @details This function retrieves the last error code which is set by set_last_result()
-  /// @return One of #tizen_error_e
-  /// @see #tizen_error_e
-  /// @see set_last_result()
+  /// Gets the last error code in the thread.
+  ///
+  /// This function retrieves the last error code which is set by set_last_result()
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Returns:**
+  /// - One of `tizen_error_e`
+  ///
+  /// **See also:**
+  /// - `tizen_error_e`
+  /// - `set_last_result()`
   int get_last_result() {
     return _get_last_result();
   }
@@ -39,11 +50,17 @@ class Tizen60CapiBaseCommon {
   late final _get_last_result =
       _get_last_resultPtr.asFunction<int Function()>();
 
-  /// @brief Sets the last error code to be returned in the thread.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] err The error code to be returned
-  /// @see #tizen_error_e
-  /// @see get_last_result()
+  /// Sets the last error code to be returned in the thread.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `err` (in): The error code to be returned
+  ///
+  /// **See also:**
+  /// - `tizen_error_e`
+  /// - `get_last_result()`
   void set_last_result(
     int err,
   ) {
@@ -58,14 +75,24 @@ class Tizen60CapiBaseCommon {
   late final _set_last_result =
       _set_last_resultPtr.asFunction<void Function(int)>();
 
-  /// @brief Gets the message for given the error code.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remark This function returns a static pointer; subsequent calls will overwrite it.
-  /// @param[in] err The error value to be returned
-  /// @return The error's message
-  /// @see #tizen_error_e
+  /// Gets the message for given the error code.
   ///
-  /// @code
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - This function returns a static pointer; subsequent calls will overwrite it.
+  ///
+  /// **Parameters:**
+  /// - `err` (in): The error value to be returned
+  ///
+  /// **Returns:**
+  /// - The error's message
+  ///
+  /// **See also:**
+  /// - `tizen_error_e`
+  ///
+  /// ```
   /// char* errMsg;
   /// location_manager_h location_handle;
   /// int result = location_manager_create(LOCATION_METHOD_GPS, &location_handle);
@@ -74,7 +101,7 @@ class Tizen60CapiBaseCommon {
   /// errMsg = get_error_message(result);
   /// dlog_print(DLOG_INFO, "MyTag", "%s", errMsg);
   /// }
-  /// @endcode
+  /// ```
   ffi.Pointer<ffi.Char> get_error_message(
     int err,
   ) {
@@ -90,8 +117,11 @@ class Tizen60CapiBaseCommon {
       _get_error_messagePtr.asFunction<ffi.Pointer<ffi.Char> Function(int)>();
 }
 
-/// @brief Enumeration for tizen errors.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for tizen errors.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class tizen_error_e {
   /// < Successful
   static const int TIZEN_ERROR_NONE = 0;
@@ -386,274 +416,410 @@ abstract class tizen_error_e {
   static const int TIZEN_ERROR_END_OF_COLLECTION = -1073741819;
 }
 
+/// @nodoc
 const int NULL = 0;
 
+/// @nodoc
 const int TIZEN_ERROR_MAX_PLATFORM_ERROR = 0;
 
+/// @nodoc
 const int TIZEN_ERROR_MIN_PLATFORM_ERROR = -1073741824;
 
+/// @nodoc
 const int TIZEN_ERROR_MIN_MODULE_ERROR = -2147483648;
 
+/// @nodoc
 const int TIZEN_ERROR_MAX_MODULE_ERROR = -1073741825;
 
+/// @nodoc
 const int TIZEN_ERROR_APPLICATION_CLASS = -512;
 
+/// @nodoc
 const int TIZEN_ERROR_BASE_CLASS = -1024;
 
+/// @nodoc
 const int TIZEN_ERROR_CONTENT_CLASS = -2048;
 
+/// @nodoc
 const int TIZEN_ERROR_LOCATION_CLASS = -4096;
 
+/// @nodoc
 const int TIZEN_ERROR_MULTIMEDIA_CLASS = -8192;
 
+/// @nodoc
 const int TIZEN_ERROR_MESSAGING_CLASS = -16384;
 
+/// @nodoc
 const int TIZEN_ERROR_NETWORK_CLASS = -32768;
 
+/// @nodoc
 const int TIZEN_ERROR_SOCIAL_CLASS = -65536;
 
+/// @nodoc
 const int TIZEN_ERROR_SYSTEM_CLASS = -131072;
 
+/// @nodoc
 const int TIZEN_ERROR_TELEPHONY_CLASS = -262144;
 
+/// @nodoc
 const int TIZEN_ERROR_UI_CLASS = -524288;
 
+/// @nodoc
 const int TIZEN_ERROR_UIX_CLASS = -1048576;
 
+/// @nodoc
 const int TIZEN_ERROR_AD_CLASS = -2097152;
 
+/// @nodoc
 const int TIZEN_ERROR_WEB_CLASS = -4194304;
 
+/// @nodoc
 const int TIZEN_ERROR_DRM_CLASS = -8388608;
 
+/// @nodoc
 const int TIZEN_ERROR_ACCOUNT_CLASS = -16777216;
 
+/// @nodoc
 const int TIZEN_ERROR_ACCOUNT = -16777216;
 
+/// @nodoc
 const int TIZEN_ERROR_ACCOUNT_OAUTH = -16842752;
 
+/// @nodoc
 const int TIZEN_ERROR_SYNC_MANAGER = -16908288;
 
+/// @nodoc
 const int TIZEN_ERROR_FIDO = -16973824;
 
+/// @nodoc
 const int TIZEN_ERROR_APPLICATION = -17825792;
 
+/// @nodoc
 const int TIZEN_ERROR_APPLICATION_MANAGER = -17891328;
 
+/// @nodoc
 const int TIZEN_ERROR_BADGE = -17956864;
 
+/// @nodoc
 const int TIZEN_ERROR_MESSAGE_PORT = -18022400;
 
+/// @nodoc
 const int TIZEN_ERROR_NOTIFICATION = -18087936;
 
+/// @nodoc
 const int TIZEN_ERROR_PACKAGE_MANAGER = -18153472;
 
+/// @nodoc
 const int TIZEN_ERROR_SHORTCUT = -18219008;
 
+/// @nodoc
 const int TIZEN_ERROR_BUNDLE = -18350080;
 
+/// @nodoc
 const int TIZEN_ERROR_DATA_CONTROL = -18415616;
 
+/// @nodoc
 const int TIZEN_ERROR_SERVICE_APPLICATION = -18874368;
 
+/// @nodoc
 const int TIZEN_ERROR_MINICONTROL = -18939904;
 
+/// @nodoc
 const int TIZEN_ERROR_UTILITY_ICU = -22020096;
 
+/// @nodoc
 const int TIZEN_ERROR_MIME_TYPE = -23068672;
 
+/// @nodoc
 const int TIZEN_ERROR_MEDIA_CONTENT = -23134208;
 
+/// @nodoc
 const int TIZEN_ERROR_EMAIL_SERVICE = -24117248;
 
+/// @nodoc
 const int TIZEN_ERROR_MESSAGING_SERVICE = -24182784;
 
+/// @nodoc
 const int TIZEN_ERROR_PUSH = -24248320;
 
+/// @nodoc
 const int TIZEN_ERROR_AUDIO_IO = -26214400;
 
+/// @nodoc
 const int TIZEN_ERROR_CAMERA = -26279936;
 
+/// @nodoc
 const int TIZEN_ERROR_IMAGE_UTIL = -26345472;
 
+/// @nodoc
 const int TIZEN_ERROR_METADATA_EXTRACTOR = -26411008;
 
+/// @nodoc
 const int TIZEN_ERROR_PLAYER = -26476544;
 
+/// @nodoc
 const int TIZEN_ERROR_RECORDER = -26542080;
 
+/// @nodoc
 const int TIZEN_ERROR_SOUND_MANAGER = -26607616;
 
+/// @nodoc
 const int TIZEN_ERROR_TONE_PLAYER = -26673152;
 
+/// @nodoc
 const int TIZEN_ERROR_VIDEO_UTIL = -26738688;
 
+/// @nodoc
 const int TIZEN_ERROR_WAV_PLAYER = -26804224;
 
+/// @nodoc
 const int TIZEN_ERROR_RADIO = -26869760;
 
+/// @nodoc
 const int TIZEN_ERROR_MEDIACODEC = -26935296;
 
+/// @nodoc
 const int TIZEN_ERROR_METADATA_EDITOR = -27000832;
 
+/// @nodoc
 const int TIZEN_ERROR_MEDIA_VISION = -27066368;
 
+/// @nodoc
 const int TIZEN_ERROR_MEDIA_DEMUXER = -27131904;
 
+/// @nodoc
 const int TIZEN_ERROR_MEDIA_MUXER = -27197440;
 
+/// @nodoc
 const int TIZEN_ERROR_MEDIA_STREAMER = -27262976;
 
+/// @nodoc
 const int TIZEN_ERROR_STREAMRECORDER = -27328512;
 
+/// @nodoc
 const int TIZEN_ERROR_MEDIA_TOOL = -27394048;
 
+/// @nodoc
 const int TIZEN_ERROR_BLUETOOTH = -29360128;
 
+/// @nodoc
 const int TIZEN_ERROR_CONNECTION = -29425664;
 
+/// @nodoc
 const int TIZEN_ERROR_NFC = -29491200;
 
+/// @nodoc
 const int TIZEN_ERROR_SERIAL = -29556736;
 
+/// @nodoc
 const int TIZEN_ERROR_TETHERING = -29622272;
 
+/// @nodoc
 const int TIZEN_ERROR_WIFI = -29687808;
 
+/// @nodoc
 const int TIZEN_ERROR_WIFI_DIRECT = -29753344;
 
+/// @nodoc
 const int TIZEN_ERROR_SMARTCARD = -29818880;
 
+/// @nodoc
 const int TIZEN_ERROR_IOTCON = -29884416;
 
+/// @nodoc
 const int TIZEN_ERROR_SSDP = -29949952;
 
+/// @nodoc
 const int TIZEN_ERROR_DNSSD = -30015488;
 
+/// @nodoc
 const int TIZEN_ERROR_VPNSVC = -30081024;
 
+/// @nodoc
 const int TIZEN_ERROR_MTP = -30146560;
 
+/// @nodoc
 const int TIZEN_ERROR_HTTP = -30212096;
 
+/// @nodoc
 const int TIZEN_ERROR_WIFI_MANAGER = -30277632;
 
+/// @nodoc
 const int TIZEN_ERROR_PRIVACY_MANAGER = -31457280;
 
+/// @nodoc
 const int TIZEN_ERROR_KEY_MANAGER = -31522816;
 
+/// @nodoc
 const int TIZEN_ERROR_PRIVILEGE_INFORMATION = -31588352;
 
+/// @nodoc
 const int TIZEN_ERROR_CSR = -31653888;
 
+/// @nodoc
 const int TIZEN_ERROR_CALENDAR = -33554432;
 
+/// @nodoc
 const int TIZEN_ERROR_CONTACTS = -33619968;
 
+/// @nodoc
 const int TIZEN_ERROR_PHONENUMBER_UTILS = -33685504;
 
+/// @nodoc
 const int TIZEN_ERROR_STORAGE = -35651584;
 
+/// @nodoc
 const int TIZEN_ERROR_VCONF = -35717120;
 
+/// @nodoc
 const int TIZEN_ERROR_DEVICE = -37748736;
 
+/// @nodoc
 const int TIZEN_ERROR_DLOG = -37814272;
 
+/// @nodoc
 const int TIZEN_ERROR_MEDIA_KEY = -37879808;
 
+/// @nodoc
 const int TIZEN_ERROR_RUNTIME_INFORMATION = -37945344;
 
+/// @nodoc
 const int TIZEN_ERROR_SENSOR = -38010880;
 
+/// @nodoc
 const int TIZEN_ERROR_SYSTEM_INFORMATION = -38076416;
 
+/// @nodoc
 const int TIZEN_ERROR_SYSTEM_SETTING = -38141952;
 
+/// @nodoc
 const int TIZEN_ERROR_SYSTEM_RESOURCE = -38207488;
 
+/// @nodoc
 const int TIZEN_ERROR_CONTEXT = -38273024;
 
+/// @nodoc
 const int TIZEN_ERROR_HEALTH = -38338560;
 
+/// @nodoc
 const int TIZEN_ERROR_FEEDBACK = -38404096;
 
+/// @nodoc
 const int TIZEN_ERROR_USB_HOST = -38469632;
 
+/// @nodoc
 const int TIZEN_ERROR_TELEPHONY = -39845888;
 
+/// @nodoc
 const int TIZEN_ERROR_EFL_UTIL = -41943040;
 
+/// @nodoc
 const int TIZEN_ERROR_UTILX = -42008576;
 
+/// @nodoc
 const int TIZEN_ERROR_NATIVE_BUFFER = -42074112;
 
+/// @nodoc
 const int TIZEN_ERROR_TBM = -42139648;
 
+/// @nodoc
 const int TIZEN_ERROR_EOM = -42205184;
 
+/// @nodoc
 const int TIZEN_ERROR_PANEL = -42270720;
 
+/// @nodoc
 const int TIZEN_ERROR_TZSH = -42336256;
 
+/// @nodoc
 const int TIZEN_ERROR_DOWNLOAD = -44040192;
 
+/// @nodoc
 const int TIZEN_ERROR_WEBVIEW = -44105728;
 
+/// @nodoc
 const int TIZEN_ERROR_LOCATION_MANAGER = -46137344;
 
+/// @nodoc
 const int TIZEN_ERROR_GEOFENCE_MANAGER = -46202880;
 
+/// @nodoc
 const int TIZEN_ERROR_MAPS_SERVICE = -46268416;
 
+/// @nodoc
 const int TIZEN_ERROR_STT = -49283072;
 
+/// @nodoc
 const int TIZEN_ERROR_TTS = -49348608;
 
+/// @nodoc
 const int TIZEN_ERROR_IME = -49414144;
 
+/// @nodoc
 const int TIZEN_ERROR_SERVICE_ADAPTOR = -49479680;
 
+/// @nodoc
 const int TIZEN_ERROR_WIDGET = -49545216;
 
+/// @nodoc
 const int TIZEN_ERROR_VOICE_CONTROL = -49610752;
 
+/// @nodoc
 const int TIZEN_ERROR_ASP = -49676288;
 
+/// @nodoc
 const int TIZEN_ERROR_ZIGBEE = -49741824;
 
+/// @nodoc
 const int TIZEN_ERROR_STC = -49807360;
 
+/// @nodoc
 const int TIZEN_ERROR_THUMBNAIL_UTIL = -49872896;
 
+/// @nodoc
 const int TIZEN_ERROR_JOB_SCHEDULER = -49938432;
 
+/// @nodoc
 const int TIZEN_ERROR_SOFTAP = -50003968;
 
+/// @nodoc
 const int TIZEN_ERROR_COMPLICATION = -50069504;
 
+/// @nodoc
 const int TIZEN_ERROR_DEVICE_CERTIFICATE_MANAGER = -50135040;
 
+/// @nodoc
 const int TIZEN_ERROR_INM = -50200576;
 
+/// @nodoc
 const int TIZEN_ERROR_UPDATE_CONTROL = -50266112;
 
+/// @nodoc
 const int TIZEN_ERROR_MULTI_ASSISTANT = -50331648;
 
+/// @nodoc
 const int TIZEN_ERROR_AUTOFILL = -50397184;
 
+/// @nodoc
 const int TIZEN_ERROR_MEDIA_CONTROLLER = -50462720;
 
+/// @nodoc
 const int TIZEN_ERROR_COMPONENT = -50528256;
 
+/// @nodoc
 const int TIZEN_ERROR_COMPONENT_MANAGER = -50593792;
 
+/// @nodoc
 const int TIZEN_ERROR_STICKER = -50659328;
 
+/// @nodoc
 const int TIZEN_ERROR_BATTERY_MONITOR = -50724864;
 
+/// @nodoc
 const int TIZEN_ERROR_GENERIC_TEXT_CLASSIFIER = -50790400;
 
+/// @nodoc
 const int TIZEN_ERROR_DIAGNOSTICS = -50855936;
 
+/// @nodoc
 const int TIZEN_ERROR_GESTURE = -50921472;

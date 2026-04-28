@@ -1,3 +1,6 @@
+/// {@category 7.0/tizen}
+library tizen_interop_7_0.capi_ui_inputmethod;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-ui-inputmethod APIs.
+/// {@category 7.0/tizen}
 class Tizen70CapiUiInputmethod {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,33 +28,43 @@ class Tizen70CapiUiInputmethod {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Sets @c process_input_device_event event callback function.
+  /// Sets `process_input_device_event` event callback function.
   ///
-  /// @since_tizen @if WEARABLE 3.0 @endif
+  /// **Since Tizen:**
+  /// - Wearable 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @remarks The ime_process_input_device_event_cb() callback function is called when the event
-  /// is received from unconventional input devices that needs to be handled by IMEs.
+  /// **Remarks:**
+  /// - The ime_process_input_device_event_cb() callback function is called when the event
+  /// - is received from unconventional input devices that needs to be handled by IMEs.
   ///
-  /// @param[in] callback_func @c inputmethod_process_input_device_event_cb callback function
-  /// @param[in] user_data User data to be passed to the callback function
+  /// **Parameters:**
+  /// - `callback_func` (in): `inputmethod_process_input_device_event_cb` callback function
+  /// - `user_data` (in): User data to be passed to the callback function
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_OPERATION_FAILED Operation failed
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post The ime_run() function should be called to start to run IME application's main loop.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_OPERATION_FAILED`: Operation failed
   ///
-  /// @see ime_process_input_device_event_cb()
-  /// @see ime_event_unset_process_input_device_event_cb()
-  /// @see ime_run()
+  /// **Postconditions:**
+  /// - The ime_run() function should be called to start to run IME application's main loop.
   ///
-  /// @code
+  /// **See also:**
+  /// - `ime_process_input_device_event_cb()`
+  /// - `ime_event_unset_process_input_device_event_cb()`
+  /// - `ime_run()`
+  ///
+  /// ```
   /// static void inputmethod_create_cb(void *user_data);
   /// static void inputmethod_terminate_cb(void *user_data);
   /// static void inputmethod_show_cb(int context_id, ime_context_h context, void *user_data);
@@ -76,7 +90,7 @@ class Tizen70CapiUiInputmethod {
   ///
   /// ime_run(&basic_callback, NULL);
   /// }
-  /// @endcode
+  /// ```
   int ime_event_set_process_input_device_event_cb(
     ime_process_input_device_event_cb callback_func,
     ffi.Pointer<ffi.Void> user_data,
@@ -97,24 +111,32 @@ class Tizen70CapiUiInputmethod {
           int Function(
               ime_process_input_device_event_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets @c process_input_device_event event callback function.
+  /// Unsets `process_input_device_event` event callback function.
   ///
-  /// @since_tizen @if WEARABLE 3.0 @endif
+  /// **Since Tizen:**
+  /// - Wearable 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @remarks The ime_process_input_device_event_cb() callback function is called when the event
-  /// is received from unconventional input devices that needs to be handled by IMEs.
+  /// **Remarks:**
+  /// - The ime_process_input_device_event_cb() callback function is called when the event
+  /// - is received from unconventional input devices that needs to be handled by IMEs.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function
-  /// @retval #IME_ERROR_OPERATION_FAILED Operation failed
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @see ime_process_input_device_event_cb()
-  /// @see ime_event_set_process_input_device_event_cb()
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function
+  /// - `IME_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `ime_process_input_device_event_cb()`
+  /// - `ime_event_set_process_input_device_event_cb()`
   int ime_event_unset_process_input_device_event_cb() {
     return _ime_event_unset_process_input_device_event_cb();
   }
@@ -126,31 +148,35 @@ class Tizen70CapiUiInputmethod {
       _ime_event_unset_process_input_device_event_cbPtr
           .asFunction<int Function()>();
 
-  /// @brief Gets the direction of the rotary input device event
+  /// Gets the direction of the rotary input device event If the device_type parameter of the ime_process_input_device_event_cb() function indicates the current input device type is `IME_INPUT_DEVICE_TYPE_ROTARY`, then the device_event parameter can be used to retrieve rotary device specific parameters, such as direction, as shown in the sample code.
   ///
-  /// If the device_type parameter of the ime_process_input_device_event_cb() function indicates
-  /// the current input device type is #IME_INPUT_DEVICE_TYPE_ROTARY, then the device_event parameter
-  /// can be used to retrieve rotary device specific parameters, such as direction, as shown in the sample code.
+  /// **Since Tizen:**
+  /// - Wearable 3.0
   ///
-  /// @since_tizen @if WEARABLE 3.0 @endif
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privlevel public
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Parameters:**
+  /// - `event_handle` (in): The input device event handle
+  /// - `direction` (out): The direction that the rotary input device was rotated to
   ///
-  /// @param[in] event_handle The input device event handle
-  /// @param[out] direction The direction that the rotary input device was rotated to
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_NOT_RUNNING IME main loop isn't started yet
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_NOT_RUNNING`: IME main loop isn't started yet
   ///
-  /// @see ime_input_device_rotary_direction_e
-  /// @see ime_process_input_device_event_cb()
+  /// **See also:**
+  /// - `ime_input_device_rotary_direction_e`
+  /// - `ime_process_input_device_event_cb()`
   ///
-  /// @code
+  /// ```
   /// static void inputmethod_process_input_device_event_cb(ime_input_device_type_e device_type, ime_input_device_event_h device_event)
   /// {
   /// if (device_type == IME_INPUT_DEVICE_TYPE_ROTARY) {
@@ -160,7 +186,7 @@ class Tizen70CapiUiInputmethod {
   /// }
   /// }
   /// }
-  /// @endcode
+  /// ```
   int ime_input_device_rotary_get_direction(
     ime_input_device_event_h event_handle,
     ffi.Pointer<ffi.Int32> direction,
@@ -180,57 +206,65 @@ class Tizen70CapiUiInputmethod {
       _ime_input_device_rotary_get_directionPtr.asFunction<
           int Function(ime_input_device_event_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Runs the main loop of IME application.
+  /// Runs the main loop of IME application.
   ///
-  /// @details This function starts to run IME application's main loop. The ime_create_cb()
-  /// callback function is called to initialize IME application before the main loop starts up. And
-  /// the ime_terminate_cb() callback function is called when IME application is terminated.
+  /// This function starts to run IME application's main loop. The ime_create_cb() callback function is called to initialize IME application before the main loop starts up. And the ime_terminate_cb() callback function is called when IME application is terminated.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @remarks IME application MUST implement ime_app_main() function which is the main
-  /// entry point of IME application. In ime_app_main() function, the ime_run()
-  /// function MUST be called with the necessary callback functions; ime_create_cb(),
-  /// ime_terminate_cb(), ime_show_cb(), and ime_hide_cb() callback functions
-  /// are mandatory for IME application.
+  /// **Remarks:**
+  /// - IME application MUST implement ime_app_main() function which is the main
+  /// - entry point of IME application. In ime_app_main() function, the ime_run()
+  /// - function MUST be called with the necessary callback functions; ime_create_cb(),
+  /// - ime_terminate_cb(), ime_show_cb(), and ime_hide_cb() callback functions
+  /// - are mandatory for IME application.
   ///
-  /// @param[in] basic_cb The structure pointer of the essential callback functions
-  /// @param[in] user_data User data to be passed to the callback functions
+  /// **Parameters:**
+  /// - `basic_cb` (in): The structure pointer of the essential callback functions
+  /// - `user_data` (in): User data to be passed to the callback functions
   ///
-  /// @return 0 if IME application ends successfully, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_NO_CALLBACK_FUNCTION Necessary callback function is not set
-  /// @retval #IME_ERROR_OPERATION_FAILED Operation failed
+  /// **Returns:**
+  /// - 0 if IME application ends successfully, otherwise a negative error value
   ///
-  /// @pre The ime_event_set_***() functions can be called to set the event handling callback functions.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_NO_CALLBACK_FUNCTION`: Necessary callback function is not set
+  /// - `IME_ERROR_OPERATION_FAILED`: Operation failed
   ///
-  /// @see #ime_callback_s
-  /// @see ime_event_set_focus_in_cb()
-  /// @see ime_event_set_focus_out_cb()
-  /// @see ime_event_set_surrounding_text_updated_cb()
-  /// @see ime_event_set_input_context_reset_cb()
-  /// @see ime_event_set_cursor_position_updated_cb()
-  /// @see ime_event_set_language_requested_cb()
-  /// @see ime_event_set_language_set_cb()
-  /// @see ime_event_set_imdata_set_cb()
-  /// @see ime_event_set_layout_set_cb()
-  /// @see ime_event_set_return_key_type_set_cb()
-  /// @see ime_event_set_return_key_state_set_cb()
-  /// @see ime_event_set_geometry_requested_cb()
-  /// @see ime_event_set_display_language_changed_cb()
-  /// @see ime_event_set_rotation_degree_changed_cb()
-  /// @see ime_event_set_accessibility_state_changed_cb()
-  /// @see ime_event_set_option_window_created_cb()
-  /// @see ime_event_set_option_window_destroyed_cb()
-  /// @see ime_event_set_prediction_hint_set_cb()
+  /// **Preconditions:**
+  /// - The ime_event_set_***() functions can be called to set the event handling callback functions.
   ///
-  /// @code
+  /// **See also:**
+  /// - `ime_callback_s`
+  /// - `ime_event_set_focus_in_cb()`
+  /// - `ime_event_set_focus_out_cb()`
+  /// - `ime_event_set_surrounding_text_updated_cb()`
+  /// - `ime_event_set_input_context_reset_cb()`
+  /// - `ime_event_set_cursor_position_updated_cb()`
+  /// - `ime_event_set_language_requested_cb()`
+  /// - `ime_event_set_language_set_cb()`
+  /// - `ime_event_set_imdata_set_cb()`
+  /// - `ime_event_set_layout_set_cb()`
+  /// - `ime_event_set_return_key_type_set_cb()`
+  /// - `ime_event_set_return_key_state_set_cb()`
+  /// - `ime_event_set_geometry_requested_cb()`
+  /// - `ime_event_set_display_language_changed_cb()`
+  /// - `ime_event_set_rotation_degree_changed_cb()`
+  /// - `ime_event_set_accessibility_state_changed_cb()`
+  /// - `ime_event_set_option_window_created_cb()`
+  /// - `ime_event_set_option_window_destroyed_cb()`
+  /// - `ime_event_set_prediction_hint_set_cb()`
+  ///
+  /// ```
   /// static void inputmethod_create_cb(void *user_data);
   /// static void inputmethod_terminate_cb(void *user_data);
   /// static void inputmethod_show_cb(int context_id, ime_context_h context, void *user_data);
@@ -290,7 +324,7 @@ class Tizen70CapiUiInputmethod {
   ///
   /// ime_run(&basic_callback, NULL);
   /// }
-  /// @endcode
+  /// ```
   int ime_run(
     ffi.Pointer<ime_callback_s> basic_cb,
     ffi.Pointer<ffi.Void> user_data,
@@ -308,30 +342,40 @@ class Tizen70CapiUiInputmethod {
   late final _ime_run = _ime_runPtr.asFunction<
       int Function(ffi.Pointer<ime_callback_s>, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets @c focus_in event callback function.
+  /// Sets `focus_in` event callback function.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @remarks The ime_focus_in_cb() callback function is called when an associated text input
-  /// UI control has focus.
+  /// **Remarks:**
+  /// - The ime_focus_in_cb() callback function is called when an associated text input
+  /// - UI control has focus.
   ///
-  /// @param[in] callback_func @c focus_in event callback function
-  /// @param[in] user_data User data to be passed to the callback function
+  /// **Parameters:**
+  /// - `callback_func` (in): `focus_in` event callback function
+  /// - `user_data` (in): User data to be passed to the callback function
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_OPERATION_FAILED Operation failed
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post The ime_run() function should be called to start the IME application's main loop.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_OPERATION_FAILED`: Operation failed
   ///
-  /// @see ime_focus_in_cb()
-  /// @see ime_run()
+  /// **Postconditions:**
+  /// - The ime_run() function should be called to start the IME application's main loop.
+  ///
+  /// **See also:**
+  /// - `ime_focus_in_cb()`
+  /// - `ime_run()`
   int ime_event_set_focus_in_cb(
     ime_focus_in_cb callback_func,
     ffi.Pointer<ffi.Void> user_data,
@@ -349,30 +393,40 @@ class Tizen70CapiUiInputmethod {
   late final _ime_event_set_focus_in_cb = _ime_event_set_focus_in_cbPtr
       .asFunction<int Function(ime_focus_in_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets @c focus_out event callback function.
+  /// Sets `focus_out` event callback function.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @remarks The ime_focus_out_cb() callback function is called when an associated text input
-  /// UI control loses focus.
+  /// **Remarks:**
+  /// - The ime_focus_out_cb() callback function is called when an associated text input
+  /// - UI control loses focus.
   ///
-  /// @param[in] callback_func @c focus_out event callback function
-  /// @param[in] user_data User data to be passed to the callback function
+  /// **Parameters:**
+  /// - `callback_func` (in): `focus_out` event callback function
+  /// - `user_data` (in): User data to be passed to the callback function
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_OPERATION_FAILED Operation failed
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post The ime_run() function should be called to start the IME application's main loop.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_OPERATION_FAILED`: Operation failed
   ///
-  /// @see ime_focus_out_cb()
-  /// @see ime_run()
+  /// **Postconditions:**
+  /// - The ime_run() function should be called to start the IME application's main loop.
+  ///
+  /// **See also:**
+  /// - `ime_focus_out_cb()`
+  /// - `ime_run()`
   int ime_event_set_focus_out_cb(
     ime_focus_out_cb callback_func,
     ffi.Pointer<ffi.Void> user_data,
@@ -390,30 +444,40 @@ class Tizen70CapiUiInputmethod {
   late final _ime_event_set_focus_out_cb = _ime_event_set_focus_out_cbPtr
       .asFunction<int Function(ime_focus_out_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets @c surrounding_text_updated event callback function.
+  /// Sets `surrounding_text_updated` event callback function.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @remarks The ime_surrounding_text_updated_cb() callback function is called when an
-  /// associated text input UI control responds to a request with the surrounding text.
+  /// **Remarks:**
+  /// - The ime_surrounding_text_updated_cb() callback function is called when an
+  /// - associated text input UI control responds to a request with the surrounding text.
   ///
-  /// @param[in] callback_func @c surrounding_text_updated event callback function
-  /// @param[in] user_data User data to be passed to the callback function
+  /// **Parameters:**
+  /// - `callback_func` (in): `surrounding_text_updated` event callback function
+  /// - `user_data` (in): User data to be passed to the callback function
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_OPERATION_FAILED Operation failed
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post The ime_run() function should be called to start the IME application's main loop.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_OPERATION_FAILED`: Operation failed
   ///
-  /// @see ime_surrounding_text_updated_cb()
-  /// @see ime_run()
+  /// **Postconditions:**
+  /// - The ime_run() function should be called to start the IME application's main loop.
+  ///
+  /// **See also:**
+  /// - `ime_surrounding_text_updated_cb()`
+  /// - `ime_run()`
   int ime_event_set_surrounding_text_updated_cb(
     ime_surrounding_text_updated_cb callback_func,
     ffi.Pointer<ffi.Void> user_data,
@@ -434,30 +498,40 @@ class Tizen70CapiUiInputmethod {
           int Function(
               ime_surrounding_text_updated_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets @c input_context_reset event callback function.
+  /// Sets `input_context_reset` event callback function.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @remarks The ime_input_context_reset_cb() callback function is called to reset the input
-  /// context of an associated text input UI control.
+  /// **Remarks:**
+  /// - The ime_input_context_reset_cb() callback function is called to reset the input
+  /// - context of an associated text input UI control.
   ///
-  /// @param[in] callback_func @c input_context_reset event callback function
-  /// @param[in] user_data User data to be passed to the callback function
+  /// **Parameters:**
+  /// - `callback_func` (in): `input_context_reset` event callback function
+  /// - `user_data` (in): User data to be passed to the callback function
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_OPERATION_FAILED Operation failed
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post The ime_run() function should be called to start the IME application's main loop.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_OPERATION_FAILED`: Operation failed
   ///
-  /// @see ime_input_context_reset_cb()
-  /// @see ime_run()
+  /// **Postconditions:**
+  /// - The ime_run() function should be called to start the IME application's main loop.
+  ///
+  /// **See also:**
+  /// - `ime_input_context_reset_cb()`
+  /// - `ime_run()`
   int ime_event_set_input_context_reset_cb(
     ime_input_context_reset_cb callback_func,
     ffi.Pointer<ffi.Void> user_data,
@@ -476,30 +550,40 @@ class Tizen70CapiUiInputmethod {
       _ime_event_set_input_context_reset_cbPtr.asFunction<
           int Function(ime_input_context_reset_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets @c cursor_position_updated event callback function.
+  /// Sets `cursor_position_updated` event callback function.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @remarks The ime_cursor_position_updated_cb() callback function is called when the position
-  /// of the cursor in an associated text input UI control changes.
+  /// **Remarks:**
+  /// - The ime_cursor_position_updated_cb() callback function is called when the position
+  /// - of the cursor in an associated text input UI control changes.
   ///
-  /// @param[in] callback_func @c cursor_position_updated event callback function
-  /// @param[in] user_data User data to be passed to the callback function
+  /// **Parameters:**
+  /// - `callback_func` (in): `cursor_position_updated` event callback function
+  /// - `user_data` (in): User data to be passed to the callback function
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_OPERATION_FAILED Operation failed
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post The ime_run() function should be called to start the IME application's main loop.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_OPERATION_FAILED`: Operation failed
   ///
-  /// @see ime_cursor_position_updated_cb()
-  /// @see ime_run()
+  /// **Postconditions:**
+  /// - The ime_run() function should be called to start the IME application's main loop.
+  ///
+  /// **See also:**
+  /// - `ime_cursor_position_updated_cb()`
+  /// - `ime_run()`
   int ime_event_set_cursor_position_updated_cb(
     ime_cursor_position_updated_cb callback_func,
     ffi.Pointer<ffi.Void> user_data,
@@ -520,30 +604,40 @@ class Tizen70CapiUiInputmethod {
           int Function(
               ime_cursor_position_updated_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets @c language_requested event callback function.
+  /// Sets `language_requested` event callback function.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @remarks The ime_language_requested_cb() callback function is called when an associated
-  /// text input UI control requests the language from the input panel.
+  /// **Remarks:**
+  /// - The ime_language_requested_cb() callback function is called when an associated
+  /// - text input UI control requests the language from the input panel.
   ///
-  /// @param[in] callback_func @c language_requested event callback function
-  /// @param[in] user_data User data to be passed to the callback function
+  /// **Parameters:**
+  /// - `callback_func` (in): `language_requested` event callback function
+  /// - `user_data` (in): User data to be passed to the callback function
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_OPERATION_FAILED Operation failed
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post The ime_run() function should be called to start the IME application's main loop.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_OPERATION_FAILED`: Operation failed
   ///
-  /// @see ime_language_requested_cb()
-  /// @see ime_run()
+  /// **Postconditions:**
+  /// - The ime_run() function should be called to start the IME application's main loop.
+  ///
+  /// **See also:**
+  /// - `ime_language_requested_cb()`
+  /// - `ime_run()`
   int ime_event_set_language_requested_cb(
     ime_language_requested_cb callback_func,
     ffi.Pointer<ffi.Void> user_data,
@@ -562,30 +656,40 @@ class Tizen70CapiUiInputmethod {
       _ime_event_set_language_requested_cbPtr.asFunction<
           int Function(ime_language_requested_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets @c language_set event callback function.
+  /// Sets `language_set` event callback function.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @remarks The ime_language_set_cb() callback function is called to set the preferred
-  /// language to the input panel.
+  /// **Remarks:**
+  /// - The ime_language_set_cb() callback function is called to set the preferred
+  /// - language to the input panel.
   ///
-  /// @param[in] callback_func @c language_set event callback function
-  /// @param[in] user_data User data to be passed to the callback function
+  /// **Parameters:**
+  /// - `callback_func` (in): `language_set` event callback function
+  /// - `user_data` (in): User data to be passed to the callback function
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_OPERATION_FAILED Operation failed
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post The ime_run() function should be called to start the IME application's main loop.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_OPERATION_FAILED`: Operation failed
   ///
-  /// @see ime_language_set_cb()
-  /// @see ime_run()
+  /// **Postconditions:**
+  /// - The ime_run() function should be called to start the IME application's main loop.
+  ///
+  /// **See also:**
+  /// - `ime_language_set_cb()`
+  /// - `ime_run()`
   int ime_event_set_language_set_cb(
     ime_language_set_cb callback_func,
     ffi.Pointer<ffi.Void> user_data,
@@ -603,31 +707,41 @@ class Tizen70CapiUiInputmethod {
   late final _ime_event_set_language_set_cb = _ime_event_set_language_set_cbPtr
       .asFunction<int Function(ime_language_set_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets @c imdata_set event callback function.
+  /// Sets `imdata_set` event callback function.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @remarks The ime_imdata_set_cb() callback function is called to set the application
-  /// specific data to deliver to the input panel.
+  /// **Remarks:**
+  /// - The ime_imdata_set_cb() callback function is called to set the application
+  /// - specific data to deliver to the input panel.
   ///
-  /// @param[in] callback_func @c imdata_set event callback function
-  /// @param[in] user_data User data to be passed to the callback function
+  /// **Parameters:**
+  /// - `callback_func` (in): `imdata_set` event callback function
+  /// - `user_data` (in): User data to be passed to the callback function
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_OPERATION_FAILED Operation failed
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post The ime_run() function should be called to start the IME application's main loop.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_OPERATION_FAILED`: Operation failed
   ///
-  /// @see ime_imdata_set_cb()
-  /// @see ime_event_set_imdata_requested_cb()
-  /// @see ime_run()
+  /// **Postconditions:**
+  /// - The ime_run() function should be called to start the IME application's main loop.
+  ///
+  /// **See also:**
+  /// - `ime_imdata_set_cb()`
+  /// - `ime_event_set_imdata_requested_cb()`
+  /// - `ime_run()`
   int ime_event_set_imdata_set_cb(
     ime_imdata_set_cb callback_func,
     ffi.Pointer<ffi.Void> user_data,
@@ -645,31 +759,41 @@ class Tizen70CapiUiInputmethod {
   late final _ime_event_set_imdata_set_cb = _ime_event_set_imdata_set_cbPtr
       .asFunction<int Function(ime_imdata_set_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets @c imdata_requested event callback function.
+  /// Sets `imdata_requested` event callback function.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @remarks The ime_imdata_requested_cb() callback function is called when an associated
-  /// text input UI control requests the application specific data from the input panel.
+  /// **Remarks:**
+  /// - The ime_imdata_requested_cb() callback function is called when an associated
+  /// - text input UI control requests the application specific data from the input panel.
   ///
-  /// @param[in] callback_func @c imdata_requested event callback function
-  /// @param[in] user_data User data to be passed to the callback function
+  /// **Parameters:**
+  /// - `callback_func` (in): `imdata_requested` event callback function
+  /// - `user_data` (in): User data to be passed to the callback function
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_OPERATION_FAILED Operation failed
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post The ime_run() function should be called to start the IME application's main loop.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_OPERATION_FAILED`: Operation failed
   ///
-  /// @see ime_imdata_requested_cb()
-  /// @see ime_event_set_imdata_set_cb()
-  /// @see ime_run()
+  /// **Postconditions:**
+  /// - The ime_run() function should be called to start the IME application's main loop.
+  ///
+  /// **See also:**
+  /// - `ime_imdata_requested_cb()`
+  /// - `ime_event_set_imdata_set_cb()`
+  /// - `ime_run()`
   int ime_event_set_imdata_requested_cb(
     ime_imdata_requested_cb callback_func,
     ffi.Pointer<ffi.Void> user_data,
@@ -688,30 +812,40 @@ class Tizen70CapiUiInputmethod {
       _ime_event_set_imdata_requested_cbPtr.asFunction<
           int Function(ime_imdata_requested_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets @c layout_set event callback function.
+  /// Sets `layout_set` event callback function.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @remarks The ime_layout_set_cb() callback function is called when an associated text input
-  /// UI control requests the input panel to set its layout.
+  /// **Remarks:**
+  /// - The ime_layout_set_cb() callback function is called when an associated text input
+  /// - UI control requests the input panel to set its layout.
   ///
-  /// @param[in] callback_func @c layout_set event callback function
-  /// @param[in] user_data User data to be passed to the callback function
+  /// **Parameters:**
+  /// - `callback_func` (in): `layout_set` event callback function
+  /// - `user_data` (in): User data to be passed to the callback function
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_OPERATION_FAILED Operation failed
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post The ime_run() function should be called to start the IME application's main loop.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_OPERATION_FAILED`: Operation failed
   ///
-  /// @see ime_layout_set_cb()
-  /// @see ime_run()
+  /// **Postconditions:**
+  /// - The ime_run() function should be called to start the IME application's main loop.
+  ///
+  /// **See also:**
+  /// - `ime_layout_set_cb()`
+  /// - `ime_run()`
   int ime_event_set_layout_set_cb(
     ime_layout_set_cb callback_func,
     ffi.Pointer<ffi.Void> user_data,
@@ -729,30 +863,40 @@ class Tizen70CapiUiInputmethod {
   late final _ime_event_set_layout_set_cb = _ime_event_set_layout_set_cbPtr
       .asFunction<int Function(ime_layout_set_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets @c return_key_type_set event callback function.
+  /// Sets `return_key_type_set` event callback function.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @remarks The ime_return_key_type_set_cb() callback function is called when an associated
-  /// text input UI control requests the input panel to set the @c Return key label.
+  /// **Remarks:**
+  /// - The ime_return_key_type_set_cb() callback function is called when an associated
+  /// - text input UI control requests the input panel to set the `Return` key label.
   ///
-  /// @param[in] callback_func @c return_key_type_set event callback function
-  /// @param[in] user_data User data to be passed to the callback function
+  /// **Parameters:**
+  /// - `callback_func` (in): `return_key_type_set` event callback function
+  /// - `user_data` (in): User data to be passed to the callback function
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_OPERATION_FAILED Operation failed
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post The ime_run() function should be called to start the IME application's main loop.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_OPERATION_FAILED`: Operation failed
   ///
-  /// @see ime_return_key_type_set_cb()
-  /// @see ime_run()
+  /// **Postconditions:**
+  /// - The ime_run() function should be called to start the IME application's main loop.
+  ///
+  /// **See also:**
+  /// - `ime_return_key_type_set_cb()`
+  /// - `ime_run()`
   int ime_event_set_return_key_type_set_cb(
     ime_return_key_type_set_cb callback_func,
     ffi.Pointer<ffi.Void> user_data,
@@ -771,30 +915,40 @@ class Tizen70CapiUiInputmethod {
       _ime_event_set_return_key_type_set_cbPtr.asFunction<
           int Function(ime_return_key_type_set_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets @c return_key_state_set event callback function.
+  /// Sets `return_key_state_set` event callback function.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @remarks The ime_return_key_state_set_cb() callback function is called when an associated
-  /// text input UI control requests the input panel to enable or disable the @c Return key state.
+  /// **Remarks:**
+  /// - The ime_return_key_state_set_cb() callback function is called when an associated
+  /// - text input UI control requests the input panel to enable or disable the `Return` key state.
   ///
-  /// @param[in] callback_func @c return_key_state_set event callback function
-  /// @param[in] user_data User data to be passed to the callback function
+  /// **Parameters:**
+  /// - `callback_func` (in): `return_key_state_set` event callback function
+  /// - `user_data` (in): User data to be passed to the callback function
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_OPERATION_FAILED Operation failed
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post The ime_run() function should be called to start the IME application's main loop.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_OPERATION_FAILED`: Operation failed
   ///
-  /// @see ime_return_key_state_set_cb()
-  /// @see ime_run()
+  /// **Postconditions:**
+  /// - The ime_run() function should be called to start the IME application's main loop.
+  ///
+  /// **See also:**
+  /// - `ime_return_key_state_set_cb()`
+  /// - `ime_run()`
   int ime_event_set_return_key_state_set_cb(
     ime_return_key_state_set_cb callback_func,
     ffi.Pointer<ffi.Void> user_data,
@@ -813,30 +967,40 @@ class Tizen70CapiUiInputmethod {
       _ime_event_set_return_key_state_set_cbPtr.asFunction<
           int Function(ime_return_key_state_set_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets @c geometry_requested event callback function.
+  /// Sets `geometry_requested` event callback function.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @remarks The ime_geometry_requested_cb() callback function is called when an associated
-  /// text input UI control requests the position and size from the input panel.
+  /// **Remarks:**
+  /// - The ime_geometry_requested_cb() callback function is called when an associated
+  /// - text input UI control requests the position and size from the input panel.
   ///
-  /// @param[in] callback_func @c geometry_requested event callback function
-  /// @param[in] user_data User data to be passed to the callback function
+  /// **Parameters:**
+  /// - `callback_func` (in): `geometry_requested` event callback function
+  /// - `user_data` (in): User data to be passed to the callback function
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_OPERATION_FAILED Operation failed
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post The ime_run() function should be called to start the IME application's main loop.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_OPERATION_FAILED`: Operation failed
   ///
-  /// @see ime_geometry_requested_cb()
-  /// @see ime_run()
+  /// **Postconditions:**
+  /// - The ime_run() function should be called to start the IME application's main loop.
+  ///
+  /// **See also:**
+  /// - `ime_geometry_requested_cb()`
+  /// - `ime_run()`
   int ime_event_set_geometry_requested_cb(
     ime_geometry_requested_cb callback_func,
     ffi.Pointer<ffi.Void> user_data,
@@ -855,32 +1019,42 @@ class Tizen70CapiUiInputmethod {
       _ime_event_set_geometry_requested_cbPtr.asFunction<
           int Function(ime_geometry_requested_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets @c process_key_event event callback function.
+  /// Sets `process_key_event` event callback function.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @remarks The ime_process_key_event_cb() callback function is called when the key event
-  /// is received from the external keyboard devices or ime_send_key_event() function.
+  /// **Remarks:**
+  /// - The ime_process_key_event_cb() callback function is called when the key event
+  /// - is received from the external keyboard devices or ime_send_key_event() function.
   ///
-  /// @param[in] callback_func @c process_key_event event callback function
-  /// @param[in] user_data User data to be passed to the callback function
+  /// **Parameters:**
+  /// - `callback_func` (in): `process_key_event` event callback function
+  /// - `user_data` (in): User data to be passed to the callback function
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_OPERATION_FAILED Operation failed
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post The ime_run() function should be called to start the IME application's main loop.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_OPERATION_FAILED`: Operation failed
   ///
-  /// @see ime_process_key_event_cb()
-  /// @see ime_run()
+  /// **Postconditions:**
+  /// - The ime_run() function should be called to start the IME application's main loop.
   ///
-  /// @code
+  /// **See also:**
+  /// - `ime_process_key_event_cb()`
+  /// - `ime_run()`
+  ///
+  /// ```
   /// static void inputmethod_create_cb(void *user_data);
   /// static void inputmethod_terminate_cb(void *user_data);
   /// static void inputmethod_show_cb(int context_id, ime_context_h context, void *user_data);
@@ -922,7 +1096,7 @@ class Tizen70CapiUiInputmethod {
   ///
   /// ime_run(&basic_callback, NULL);
   /// }
-  /// @endcode
+  /// ```
   int ime_event_set_process_key_event_cb(
     ime_process_key_event_cb callback_func,
     ffi.Pointer<ffi.Void> user_data,
@@ -941,30 +1115,40 @@ class Tizen70CapiUiInputmethod {
       _ime_event_set_process_key_event_cbPtr.asFunction<
           int Function(ime_process_key_event_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets @c process_key_event_with_keycode callback function to handle the key event with a keycode.
+  /// Sets `process_key_event_with_keycode` callback function to handle the key event with a keycode.
   ///
-  /// @since_tizen 5.5
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @remarks The ime_process_key_event_with_keycode_cb() callback function is called when the key event
-  /// is received from external keyboard devices or ime_send_key_event().
+  /// **Remarks:**
+  /// - The ime_process_key_event_with_keycode_cb() callback function is called when the key event
+  /// - is received from external keyboard devices or ime_send_key_event().
   ///
-  /// @param[in] callback_func @c process_key_event_with_keycode() event callback function
-  /// @param[in] user_data User data to be passed to the callback function
+  /// **Parameters:**
+  /// - `callback_func` (in): `process_key_event_with_keycode(`) event callback function
+  /// - `user_data` (in): User data to be passed to the callback function
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_OPERATION_FAILED Operation failed
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post The ime_run() function should be called to start the IME application's main loop.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_OPERATION_FAILED`: Operation failed
   ///
-  /// @see ime_process_key_event_with_keycode_cb()
-  /// @see ime_run()
+  /// **Postconditions:**
+  /// - The ime_run() function should be called to start the IME application's main loop.
+  ///
+  /// **See also:**
+  /// - `ime_process_key_event_with_keycode_cb()`
+  /// - `ime_run()`
   int ime_event_set_process_key_event_with_keycode_cb(
     ime_process_key_event_with_keycode_cb callback_func,
     ffi.Pointer<ffi.Void> user_data,
@@ -985,30 +1169,40 @@ class Tizen70CapiUiInputmethod {
           int Function(
               ime_process_key_event_with_keycode_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets @c display_language_changed event callback function.
+  /// Sets `display_language_changed` event callback function.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @remarks The ime_display_language_changed_cb() callback function is called when the system
-  /// display language is changed.
+  /// **Remarks:**
+  /// - The ime_display_language_changed_cb() callback function is called when the system
+  /// - display language is changed.
   ///
-  /// @param[in] callback_func @c display_language_changed event callback function
-  /// @param[in] user_data User data to be passed to the callback function
+  /// **Parameters:**
+  /// - `callback_func` (in): `display_language_changed` event callback function
+  /// - `user_data` (in): User data to be passed to the callback function
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_OPERATION_FAILED Operation failed
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post The ime_run() function should be called to start the IME application's main loop.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_OPERATION_FAILED`: Operation failed
   ///
-  /// @see ime_display_language_changed_cb()
-  /// @see ime_run()
+  /// **Postconditions:**
+  /// - The ime_run() function should be called to start the IME application's main loop.
+  ///
+  /// **See also:**
+  /// - `ime_display_language_changed_cb()`
+  /// - `ime_run()`
   int ime_event_set_display_language_changed_cb(
     ime_display_language_changed_cb callback_func,
     ffi.Pointer<ffi.Void> user_data,
@@ -1029,30 +1223,40 @@ class Tizen70CapiUiInputmethod {
           int Function(
               ime_display_language_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets @c rotation_degree_changed event callback function.
+  /// Sets `rotation_degree_changed` event callback function.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @remarks The ime_rotation_degree_changed_cb() callback function is called when the device
-  /// is rotated.
+  /// **Remarks:**
+  /// - The ime_rotation_degree_changed_cb() callback function is called when the device
+  /// - is rotated.
   ///
-  /// @param[in] callback_func @c rotation_degree_changed event callback function
-  /// @param[in] user_data User data to be passed to the callback function
+  /// **Parameters:**
+  /// - `callback_func` (in): `rotation_degree_changed` event callback function
+  /// - `user_data` (in): User data to be passed to the callback function
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_OPERATION_FAILED Operation failed
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post The ime_run() function should be called to start the IME application's main loop.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_OPERATION_FAILED`: Operation failed
   ///
-  /// @see ime_rotation_degree_changed_cb()
-  /// @see ime_run()
+  /// **Postconditions:**
+  /// - The ime_run() function should be called to start the IME application's main loop.
+  ///
+  /// **See also:**
+  /// - `ime_rotation_degree_changed_cb()`
+  /// - `ime_run()`
   int ime_event_set_rotation_degree_changed_cb(
     ime_rotation_degree_changed_cb callback_func,
     ffi.Pointer<ffi.Void> user_data,
@@ -1073,30 +1277,40 @@ class Tizen70CapiUiInputmethod {
           int Function(
               ime_rotation_degree_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets @c accessibility_state_changed event callback function.
+  /// Sets `accessibility_state_changed` event callback function.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @remarks The ime_accessibility_state_changed_cb() callback function is called when
-  /// Accessibility in Settings application is on or off.
+  /// **Remarks:**
+  /// - The ime_accessibility_state_changed_cb() callback function is called when
+  /// - Accessibility in Settings application is on or off.
   ///
-  /// @param[in] callback_func @c accessibility_state_changed event callback function
-  /// @param[in] user_data User data to be passed to the callback function
+  /// **Parameters:**
+  /// - `callback_func` (in): `accessibility_state_changed` event callback function
+  /// - `user_data` (in): User data to be passed to the callback function
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_OPERATION_FAILED Operation failed
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post The ime_run() function should be called to start the IME application's main loop.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_OPERATION_FAILED`: Operation failed
   ///
-  /// @see ime_accessibility_state_changed_cb()
-  /// @see ime_run()
+  /// **Postconditions:**
+  /// - The ime_run() function should be called to start the IME application's main loop.
+  ///
+  /// **See also:**
+  /// - `ime_accessibility_state_changed_cb()`
+  /// - `ime_run()`
   int ime_event_set_accessibility_state_changed_cb(
     ime_accessibility_state_changed_cb callback_func,
     ffi.Pointer<ffi.Void> user_data,
@@ -1117,29 +1331,39 @@ class Tizen70CapiUiInputmethod {
           int Function(
               ime_accessibility_state_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets @c option_window_created event callback function.
+  /// Sets `option_window_created` event callback function.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @remarks The ime_option_window_created_cb() callback function is called to create the option window.
+  /// **Remarks:**
+  /// - The ime_option_window_created_cb() callback function is called to create the option window.
   ///
-  /// @param[in] callback_func @c option_window_created event callback function
-  /// @param[in] user_data User data to be passed to the callback function
+  /// **Parameters:**
+  /// - `callback_func` (in): `option_window_created` event callback function
+  /// - `user_data` (in): User data to be passed to the callback function
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_OPERATION_FAILED Operation failed
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post The ime_run() function should be called to start the IME application's main loop.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_OPERATION_FAILED`: Operation failed
   ///
-  /// @see ime_option_window_created_cb()
-  /// @see ime_run()
+  /// **Postconditions:**
+  /// - The ime_run() function should be called to start the IME application's main loop.
+  ///
+  /// **See also:**
+  /// - `ime_option_window_created_cb()`
+  /// - `ime_run()`
   int ime_event_set_option_window_created_cb(
     ime_option_window_created_cb callback_func,
     ffi.Pointer<ffi.Void> user_data,
@@ -1159,29 +1383,39 @@ class Tizen70CapiUiInputmethod {
       _ime_event_set_option_window_created_cbPtr.asFunction<
           int Function(ime_option_window_created_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets @c option_window_destroyed event callback function.
+  /// Sets `option_window_destroyed` event callback function.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @remarks The ime_option_window_destroyed_cb() callback function is called to destroy the option window.
+  /// **Remarks:**
+  /// - The ime_option_window_destroyed_cb() callback function is called to destroy the option window.
   ///
-  /// @param[in] callback_func @c option_window_destroyed event callback function
-  /// @param[in] user_data User data to be passed to the callback function
+  /// **Parameters:**
+  /// - `callback_func` (in): `option_window_destroyed` event callback function
+  /// - `user_data` (in): User data to be passed to the callback function
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_OPERATION_FAILED Operation failed
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post The ime_run() function should be called to start the IME application's main loop.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_OPERATION_FAILED`: Operation failed
   ///
-  /// @see ime_option_window_destroyed_cb()
-  /// @see ime_run()
+  /// **Postconditions:**
+  /// - The ime_run() function should be called to start the IME application's main loop.
+  ///
+  /// **See also:**
+  /// - `ime_option_window_destroyed_cb()`
+  /// - `ime_run()`
   int ime_event_set_option_window_destroyed_cb(
     ime_option_window_destroyed_cb callback_func,
     ffi.Pointer<ffi.Void> user_data,
@@ -1202,32 +1436,39 @@ class Tizen70CapiUiInputmethod {
           int Function(
               ime_option_window_destroyed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sends a key event to the associated text input UI control.
+  /// Sends a key event to the associated text input UI control.
   ///
-  /// @details This function sends key down or up event with key mask to the client application.
-  /// If @a forward_key is @c true, this key event goes to the edit field directly. And if @a forward_key
-  /// is @c false, the ime_process_key_event_cb() callback function receives the key event before the edit field.
+  /// This function sends key down or up event with key mask to the client application. If `forward_key` is `true`, this key event goes to the edit field directly. And if `forward_key` is `false`, the ime_process_key_event_cb() callback function receives the key event before the edit field.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @param[in] keycode The key code to be sent
-  /// @param[in] keymask The modifier key mask
-  /// @param[in] forward_key The flag to send the key event directly to the edit field
+  /// **Parameters:**
+  /// - `keycode` (in): The key code to be sent
+  /// - `keymask` (in): The modifier key mask
+  /// - `forward_key` (in): The flag to send the key event directly to the edit field
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_NOT_RUNNING IME main loop is not started yet
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post If @a forward_key is @c false, the ime_process_key_event_cb() callback function can compose the text with the key events.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_NOT_RUNNING`: IME main loop is not started yet
   ///
-  /// @see ime_key_code_e
-  /// @see ime_key_mask_e
-  /// @see ime_process_key_event_cb()
+  /// **Postconditions:**
+  /// - If `forward_key` is `false`, the ime_process_key_event_cb() callback function can compose the text with the key events.
+  ///
+  /// **See also:**
+  /// - `ime_key_code_e`
+  /// - `ime_key_mask_e`
+  /// - `ime_process_key_event_cb()`
   int ime_send_key_event(
     int keycode,
     int keymask,
@@ -1246,25 +1487,33 @@ class Tizen70CapiUiInputmethod {
   late final _ime_send_key_event =
       _ime_send_key_eventPtr.asFunction<int Function(int, int, bool)>();
 
-  /// @brief Sends the text to the associated text input UI control.
+  /// Sends the text to the associated text input UI control.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @param[in] str The UTF-8 string to be committed
+  /// **Parameters:**
+  /// - `str` (in): The UTF-8 string to be committed
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_NOT_RUNNING IME main loop is not started yet
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @see ime_show_preedit_string()
-  /// @see ime_hide_preedit_string()
-  /// @see ime_update_preedit_string()
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_NOT_RUNNING`: IME main loop is not started yet
+  ///
+  /// **See also:**
+  /// - `ime_show_preedit_string()`
+  /// - `ime_hide_preedit_string()`
+  /// - `ime_update_preedit_string()`
   int ime_commit_string(
     ffi.Pointer<ffi.Char> str,
   ) {
@@ -1279,22 +1528,29 @@ class Tizen70CapiUiInputmethod {
   late final _ime_commit_string =
       _ime_commit_stringPtr.asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Requests to show preedit string.
+  /// Requests to show preedit string.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_NOT_RUNNING IME main loop is not started yet
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @see ime_commit_string()
-  /// @see ime_hide_preedit_string()
-  /// @see ime_update_preedit_string()
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_NOT_RUNNING`: IME main loop is not started yet
+  ///
+  /// **See also:**
+  /// - `ime_commit_string()`
+  /// - `ime_hide_preedit_string()`
+  /// - `ime_update_preedit_string()`
   int ime_show_preedit_string() {
     return _ime_show_preedit_string();
   }
@@ -1305,22 +1561,29 @@ class Tizen70CapiUiInputmethod {
   late final _ime_show_preedit_string =
       _ime_show_preedit_stringPtr.asFunction<int Function()>();
 
-  /// @brief Requests to hide preedit string.
+  /// Requests to hide preedit string.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_NOT_RUNNING IME main loop is not started yet
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @see ime_commit_string()
-  /// @see ime_show_preedit_string()
-  /// @see ime_update_preedit_string()
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_NOT_RUNNING`: IME main loop is not started yet
+  ///
+  /// **See also:**
+  /// - `ime_commit_string()`
+  /// - `ime_show_preedit_string()`
+  /// - `ime_update_preedit_string()`
   int ime_hide_preedit_string() {
     return _ime_hide_preedit_string();
   }
@@ -1331,34 +1594,41 @@ class Tizen70CapiUiInputmethod {
   late final _ime_hide_preedit_string =
       _ime_hide_preedit_stringPtr.asFunction<int Function()>();
 
-  /// @brief Updates a new preedit string.
+  /// Updates a new preedit string.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @param[in] str The UTF-8 string to be updated in preedit
-  /// @param[in] attrs The Eina_List which has #ime_preedit_attribute lists; @a str can be composed of multiple
-  /// string attributes: underline, highlight color and reversal color. The @a attrs will be released internally
-  /// on success and it can be NULL if no attributes to set
+  /// **Parameters:**
+  /// - `str` (in): The UTF-8 string to be updated in preedit
+  /// - `attrs` (in): The Eina_List which has `ime_preedit_attribute` lists; `str` can be composed of multiple string attributes: underline, highlight color and reversal color. The `attrs` will be released internally on success and it can be NULL if no attributes to set
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_NOT_RUNNING IME main loop is not started yet
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post This function is supposed to be followed by the ime_show_preedit_string() function.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_NOT_RUNNING`: IME main loop is not started yet
   ///
-  /// @see #ime_preedit_attribute
-  /// @see ime_commit_string()
-  /// @see ime_show_preedit_string()
-  /// @see ime_hide_preedit_string()
-  /// @see ime_update_preedit_cursor()
+  /// **Postconditions:**
+  /// - This function is supposed to be followed by the ime_show_preedit_string() function.
   ///
-  /// @code
+  /// **See also:**
+  /// - `ime_preedit_attribute`
+  /// - `ime_commit_string()`
+  /// - `ime_show_preedit_string()`
+  /// - `ime_hide_preedit_string()`
+  /// - `ime_update_preedit_cursor()`
+  ///
+  /// ```
   /// {
   /// int ret;
   /// Eina_List *list = NULL;
@@ -1390,7 +1660,7 @@ class Tizen70CapiUiInputmethod {
   /// free(attr);
   /// }
   /// }
-  /// @endcode
+  /// ```
   int ime_update_preedit_string(
     ffi.Pointer<ffi.Char> str,
     ffi.Pointer<Eina_List> attrs,
@@ -1409,28 +1679,37 @@ class Tizen70CapiUiInputmethod {
       _ime_update_preedit_stringPtr.asFunction<
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<Eina_List>)>();
 
-  /// @brief Updates the cursor position in the preedit string.
+  /// Updates the cursor position in the preedit string.
   ///
-  /// @since_tizen 6.5
+  /// **Since Tizen:**
+  /// - 6.5
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @param[in] pos The cursor position in the preedit string
+  /// **Parameters:**
+  /// - `pos` (in): The cursor position in the preedit string
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_NOT_RUNNING IME main loop is not started yet
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post This function is supposed to be followed by the ime_update_preedit_string() function.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_NOT_RUNNING`: IME main loop is not started yet
   ///
-  /// @see ime_show_preedit_string()
-  /// @see ime_hide_preedit_string()
-  /// @see ime_update_preedit_string()
+  /// **Postconditions:**
+  /// - This function is supposed to be followed by the ime_update_preedit_string() function.
   ///
-  /// @code
+  /// **See also:**
+  /// - `ime_show_preedit_string()`
+  /// - `ime_hide_preedit_string()`
+  /// - `ime_update_preedit_string()`
+  ///
+  /// ```
   /// {
   /// int ret;
   /// Eina_List *list = NULL;
@@ -1456,7 +1735,7 @@ class Tizen70CapiUiInputmethod {
   /// }
   /// ret = ime_update_preedit_cursor(1);
   /// }
-  /// @endcode
+  /// ```
   int ime_update_preedit_cursor(
     int pos,
   ) {
@@ -1471,30 +1750,40 @@ class Tizen70CapiUiInputmethod {
   late final _ime_update_preedit_cursor =
       _ime_update_preedit_cursorPtr.asFunction<int Function(int)>();
 
-  /// @brief Requests the surrounding text from the position of the cursor, asynchronously.
+  /// Requests the surrounding text from the position of the cursor, asynchronously.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @param[in] maxlen_before The maximum length of string to be retrieved before the cursor; -1 means unlimited
-  /// @param[in] maxlen_after The maximum length of string to be retrieved after the cursor; -1 means unlimited
+  /// **Parameters:**
+  /// - `maxlen_before` (in): The maximum length of string to be retrieved before the cursor; -1 means unlimited
+  /// - `maxlen_after` (in): The maximum length of string to be retrieved after the cursor; -1 means unlimited
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_NO_CALLBACK_FUNCTION Necessary callback function is not set
-  /// @retval #IME_ERROR_NOT_RUNNING IME main loop is not started yet
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @pre The ime_surrounding_text_updated_cb() callback function MUST be set by ime_event_set_surrounding_text_updated_cb().
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_NO_CALLBACK_FUNCTION`: Necessary callback function is not set
+  /// - `IME_ERROR_NOT_RUNNING`: IME main loop is not started yet
   ///
-  /// @post The requested surrounding text can be received using the ime_surrounding_text_updated_cb() callback function.
+  /// **Preconditions:**
+  /// - The ime_surrounding_text_updated_cb() callback function MUST be set by ime_event_set_surrounding_text_updated_cb().
   ///
-  /// @see ime_delete_surrounding_text()
-  /// @see ime_event_set_surrounding_text_updated_cb()
-  /// @see ime_surrounding_text_updated_cb()
+  /// **Postconditions:**
+  /// - The requested surrounding text can be received using the ime_surrounding_text_updated_cb() callback function.
+  ///
+  /// **See also:**
+  /// - `ime_delete_surrounding_text()`
+  /// - `ime_event_set_surrounding_text_updated_cb()`
+  /// - `ime_surrounding_text_updated_cb()`
   int ime_request_surrounding_text(
     int maxlen_before,
     int maxlen_after,
@@ -1511,24 +1800,32 @@ class Tizen70CapiUiInputmethod {
   late final _ime_request_surrounding_text =
       _ime_request_surrounding_textPtr.asFunction<int Function(int, int)>();
 
-  /// @brief Requests to delete surrounding text.
+  /// Requests to delete surrounding text.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @param[in] offset The offset value from the cursor position
-  /// @param[in] len The length of the text to delete
+  /// **Parameters:**
+  /// - `offset` (in): The offset value from the cursor position
+  /// - `len` (in): The length of the text to delete
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_NOT_RUNNING IME main loop is not started yet
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @see ime_request_surrounding_text()
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_NOT_RUNNING`: IME main loop is not started yet
+  ///
+  /// **See also:**
+  /// - `ime_request_surrounding_text()`
   int ime_delete_surrounding_text(
     int offset,
     int len,
@@ -1545,29 +1842,38 @@ class Tizen70CapiUiInputmethod {
   late final _ime_delete_surrounding_text =
       _ime_delete_surrounding_textPtr.asFunction<int Function(int, int)>();
 
-  /// @brief Gets the surrounding text from the position of the cursor, synchronously.
+  /// Gets the surrounding text from the position of the cursor, synchronously.
   ///
-  /// @since_tizen 3.0
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @remarks @a text must be released using free().
+  /// **Remarks:**
+  /// - `text` must be released using free().
   ///
-  /// @param[in] maxlen_before The maximum length of string to be retrieved before the cursor; -1 means unlimited
-  /// @param[in] maxlen_after The maximum length of string to be retrieved after the cursor; -1 means unlimited
-  /// @param[out] text The surrounding text
-  /// @param[out] cursor_pos The cursor position
+  /// **Parameters:**
+  /// - `maxlen_before` (in): The maximum length of string to be retrieved before the cursor; -1 means unlimited
+  /// - `maxlen_after` (in): The maximum length of string to be retrieved after the cursor; -1 means unlimited
+  /// - `text` (out): The surrounding text
+  /// - `cursor_pos` (out): The cursor position
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_NOT_RUNNING IME main loop is not started yet
-  /// @retval #IME_ERROR_OUT_OF_MEMORY Failed to obtain text due to out of memory
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @see ime_delete_surrounding_text()
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_NOT_RUNNING`: IME main loop is not started yet
+  /// - `IME_ERROR_OUT_OF_MEMORY`: Failed to obtain text due to out of memory
+  ///
+  /// **See also:**
+  /// - `ime_delete_surrounding_text()`
   int ime_get_surrounding_text(
     int maxlen_before,
     int maxlen_after,
@@ -1591,22 +1897,29 @@ class Tizen70CapiUiInputmethod {
           int Function(int, int, ffi.Pointer<ffi.Pointer<ffi.Char>>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Requests to set selection.
+  /// Requests to set selection.
   ///
-  /// @since_tizen 3.0
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @param[in] start The start cursor position in text (in characters not bytes)
-  /// @param[in] end The end cursor position in text (in characters not bytes)
+  /// **Parameters:**
+  /// - `start` (in): The start cursor position in text (in characters not bytes)
+  /// - `end` (in): The end cursor position in text (in characters not bytes)
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_NOT_RUNNING IME main loop is not started yet
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_NOT_RUNNING`: IME main loop is not started yet
   int ime_set_selection(
     int start,
     int end,
@@ -1623,26 +1936,33 @@ class Tizen70CapiUiInputmethod {
   late final _ime_set_selection =
       _ime_set_selectionPtr.asFunction<int Function(int, int)>();
 
-  /// @brief Gets the selected text synchronously.
+  /// Gets the selected text synchronously.
   ///
-  /// @details If multi-line text is selected, the result will contain '\n' for each newline character.
-  /// And if the selected text is empty, the result will be an empty string.
+  /// If multi-line text is selected, the result will contain ' ' for each newline character. And if the selected text is empty, the result will be an empty string.
   ///
-  /// @since_tizen 4.0
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @remarks @a text must be released using free().
+  /// **Remarks:**
+  /// - `text` must be released using free().
   ///
-  /// @param[out] text The selected text
+  /// **Parameters:**
+  /// - `text` (out): The selected text
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_NOT_RUNNING IME main loop is not started yet
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_NOT_RUNNING`: IME main loop is not started yet
   int ime_get_selected_text(
     ffi.Pointer<ffi.Pointer<ffi.Char>> text,
   ) {
@@ -1658,29 +1978,36 @@ class Tizen70CapiUiInputmethod {
   late final _ime_get_selected_text = _ime_get_selected_textPtr
       .asFunction<int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the pointer of input panel main window.
+  /// Gets the pointer of input panel main window.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @remarks The specific error code can be obtained using the get_last_result() method if this function returns NULL.
-  /// @remarks The returned value should not be released. The returned value is managed by the platform and will be released when terminating this process.
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the get_last_result() method if this function returns NULL.
+  /// - The returned value should not be released. The returned value is managed by the platform and will be released when terminating this process.
   ///
-  /// @return The input panel main window object on success, otherwise NULL
+  /// **Returns:**
+  /// - The input panel main window object on success, otherwise NULL
   ///
-  /// @exception #IME_ERROR_NONE Successful
-  /// @exception #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @exception #IME_ERROR_NOT_RUNNING IME main loop is not started yet
-  /// @exception #IME_ERROR_OPERATION_FAILED Operation failed
+  /// **Exceptions:**
+  /// - `IME_ERROR_NONE`: Successful
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_NOT_RUNNING`: IME main loop is not started yet
+  /// - `IME_ERROR_OPERATION_FAILED`: Operation failed
   ///
-  /// @see get_last_result()
-  /// @see ime_create_cb()
-  /// @see ime_terminate_cb()
-  /// @see ime_show_cb()
-  /// @see ime_hide_cb()
+  /// **See also:**
+  /// - `get_last_result()`
+  /// - `ime_create_cb()`
+  /// - `ime_terminate_cb()`
+  /// - `ime_show_cb()`
+  /// - `ime_hide_cb()`
   ffi.Pointer<Evas_Object> ime_get_main_window() {
     return _ime_get_main_window();
   }
@@ -1691,26 +2018,34 @@ class Tizen70CapiUiInputmethod {
   late final _ime_get_main_window =
       _ime_get_main_windowPtr.asFunction<ffi.Pointer<Evas_Object> Function()>();
 
-  /// @brief Updates the input panel window's size information.
+  /// Updates the input panel window's size information.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @param[in] portrait_width The width in portrait mode
-  /// @param[in] portrait_height The height in portrait mode
-  /// @param[in] landscape_width The width in landscape mode
-  /// @param[in] landscape_height The height in landscape mode
+  /// **Parameters:**
+  /// - `portrait_width` (in): The width in portrait mode
+  /// - `portrait_height` (in): The height in portrait mode
+  /// - `landscape_width` (in): The width in landscape mode
+  /// - `landscape_height` (in): The height in landscape mode
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_NOT_RUNNING IME main loop is not started yet
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @see ime_create_cb()
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_NOT_RUNNING`: IME main loop is not started yet
+  ///
+  /// **See also:**
+  /// - `ime_create_cb()`
   int ime_set_size(
     int portrait_width,
     int portrait_height,
@@ -1732,36 +2067,39 @@ class Tizen70CapiUiInputmethod {
   late final _ime_set_size =
       _ime_set_sizePtr.asFunction<int Function(int, int, int, int)>();
 
-  /// @brief Requests to create an option window from the input panel.
+  /// Requests to create an option window from the input panel.
   ///
-  /// @details The input panel can call this function to open the option window. This
-  /// function calls ime_option_window_created_cb() callback function with
-  /// #IME_OPTION_WINDOW_TYPE_KEYBOARD parameter.
+  /// The input panel can call this function to open the option window. This function calls ime_option_window_created_cb() callback function with `IME_OPTION_WINDOW_TYPE_KEYBOARD` parameter.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_NO_CALLBACK_FUNCTION Necessary callback function is not set
-  /// @retval #IME_ERROR_NOT_RUNNING IME main loop is not started yet
-  /// @retval #IME_ERROR_OPERATION_FAILED Operation failed
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @pre The ime_option_window_created_cb() and ime_option_window_destroyed_cb()
-  /// callback functions MUST be set by ime_event_set_option_window_created_cb() and
-  /// ime_event_set_option_window_destroyed_cb() respectively.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_NO_CALLBACK_FUNCTION`: Necessary callback function is not set
+  /// - `IME_ERROR_NOT_RUNNING`: IME main loop is not started yet
+  /// - `IME_ERROR_OPERATION_FAILED`: Operation failed
   ///
-  /// @post This function calls ime_option_window_created_cb() callback function to
-  /// create the option window. And ime_destroy_option_window() function can be called
-  /// to close the option window.
+  /// **Preconditions:**
+  /// - The ime_option_window_created_cb() and ime_option_window_destroyed_cb() callback functions MUST be set by ime_event_set_option_window_created_cb() and ime_event_set_option_window_destroyed_cb() respectively.
   ///
-  /// @see ime_event_set_option_window_created_cb()
-  /// @see ime_option_window_created_cb()
-  /// @see ime_destroy_option_window()
+  /// **Postconditions:**
+  /// - This function calls ime_option_window_created_cb() callback function to create the option window. And ime_destroy_option_window() function can be called to close the option window.
+  ///
+  /// **See also:**
+  /// - `ime_event_set_option_window_created_cb()`
+  /// - `ime_option_window_created_cb()`
+  /// - `ime_destroy_option_window()`
   int ime_create_option_window() {
     return _ime_create_option_window();
   }
@@ -1772,36 +2110,42 @@ class Tizen70CapiUiInputmethod {
   late final _ime_create_option_window =
       _ime_create_option_windowPtr.asFunction<int Function()>();
 
-  /// @brief Requests to destroy an option window.
+  /// Requests to destroy an option window.
   ///
-  /// @details The input panel can call this function to close the option window which
-  /// is created from either the input panel or Settings application.
+  /// The input panel can call this function to close the option window which is created from either the input panel or Settings application.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @param[in] window The option window to destroy
+  /// **Parameters:**
+  /// - `window` (in): The option window to destroy
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_NO_CALLBACK_FUNCTION Necessary callback function is not set
-  /// @retval #IME_ERROR_NOT_RUNNING IME main loop is not started yet
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @pre The ime_option_window_created_cb() and ime_option_window_destroyed_cb()
-  /// callback functions MUST be set by ime_event_set_option_window_created_cb() and
-  /// ime_event_set_option_window_destroyed_cb() respectively.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_NO_CALLBACK_FUNCTION`: Necessary callback function is not set
+  /// - `IME_ERROR_NOT_RUNNING`: IME main loop is not started yet
   ///
-  /// @post This function calls ime_option_window_destroyed_cb() callback function
-  /// to destroy the option window.
+  /// **Preconditions:**
+  /// - The ime_option_window_created_cb() and ime_option_window_destroyed_cb() callback functions MUST be set by ime_event_set_option_window_created_cb() and ime_event_set_option_window_destroyed_cb() respectively.
   ///
-  /// @see ime_event_set_option_window_destroyed_cb()
-  /// @see ime_option_window_destroyed_cb()
-  /// @see ime_create_option_window()
+  /// **Postconditions:**
+  /// - This function calls ime_option_window_destroyed_cb() callback function to destroy the option window.
+  ///
+  /// **See also:**
+  /// - `ime_event_set_option_window_destroyed_cb()`
+  /// - `ime_option_window_destroyed_cb()`
+  /// - `ime_create_option_window()`
   int ime_destroy_option_window(
     ffi.Pointer<Evas_Object> window,
   ) {
@@ -1816,30 +2160,38 @@ class Tizen70CapiUiInputmethod {
   late final _ime_destroy_option_window = _ime_destroy_option_windowPtr
       .asFunction<int Function(ffi.Pointer<Evas_Object>)>();
 
-  /// @brief Gets the layout information from the given input context.
+  /// Gets the layout information from the given input context.
   ///
-  /// @details Each edit field has various attributes for input panel. This function can be
-  /// called to get the layout information in ime_show_cb() callback function.
+  /// Each edit field has various attributes for input panel. This function can be called to get the layout information in ime_show_cb() callback function.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @param[in] context The input context information of an associated text input UI control
-  /// @param[out] layout Layout information
+  /// **Parameters:**
+  /// - `context` (in): The input context information of an associated text input UI control
+  /// - `layout` (out): Layout information
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_NOT_RUNNING IME main loop is not started yet
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post Input panel UI should be drawn or operated by this information accordingly.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_NOT_RUNNING`: IME main loop is not started yet
   ///
-  /// @see ime_show_cb()
-  /// @see ime_layout_set_cb()
+  /// **Postconditions:**
+  /// - Input panel UI should be drawn or operated by this information accordingly.
+  ///
+  /// **See also:**
+  /// - `ime_show_cb()`
+  /// - `ime_layout_set_cb()`
   int ime_context_get_layout(
     ime_context_h context,
     ffi.Pointer<ffi.Int32> layout,
@@ -1857,30 +2209,38 @@ class Tizen70CapiUiInputmethod {
   late final _ime_context_get_layout = _ime_context_get_layoutPtr
       .asFunction<int Function(ime_context_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the layout variation information from the given input context.
+  /// Gets the layout variation information from the given input context.
   ///
-  /// @details Each edit field has various attributes for input panel. This function can be
-  /// called to get the layout variation information in ime_show_cb() callback function.
+  /// Each edit field has various attributes for input panel. This function can be called to get the layout variation information in ime_show_cb() callback function.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @param[in] context The input context information of an associated text input UI control
-  /// @param[out] layout_variation Layout variation information
+  /// **Parameters:**
+  /// - `context` (in): The input context information of an associated text input UI control
+  /// - `layout_variation` (out): Layout variation information
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_NOT_RUNNING IME main loop is not started yet
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post Input panel UI should be drawn or operated by this information accordingly.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_NOT_RUNNING`: IME main loop is not started yet
   ///
-  /// @see ime_show_cb()
-  /// @see #ime_layout_variation_e
+  /// **Postconditions:**
+  /// - Input panel UI should be drawn or operated by this information accordingly.
+  ///
+  /// **See also:**
+  /// - `ime_show_cb()`
+  /// - `ime_layout_variation_e`
   int ime_context_get_layout_variation(
     ime_context_h context,
     ffi.Pointer<ffi.Int32> layout_variation,
@@ -1899,30 +2259,38 @@ class Tizen70CapiUiInputmethod {
       _ime_context_get_layout_variationPtr
           .asFunction<int Function(ime_context_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the cursor position information from the given input context.
+  /// Gets the cursor position information from the given input context.
   ///
-  /// @details Each edit field has various attributes for input panel. This function can be
-  /// called to get the cursor position information in ime_show_cb() callback function.
+  /// Each edit field has various attributes for input panel. This function can be called to get the cursor position information in ime_show_cb() callback function.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @param[in] context The input context information of an associated text input UI control
-  /// @param[out] cursor_pos Cursor position information
+  /// **Parameters:**
+  /// - `context` (in): The input context information of an associated text input UI control
+  /// - `cursor_pos` (out): Cursor position information
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_NOT_RUNNING IME main loop is not started yet
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post Input panel UI should be drawn or operated by this information accordingly.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_NOT_RUNNING`: IME main loop is not started yet
   ///
-  /// @see ime_show_cb()
-  /// @see ime_cursor_position_updated_cb()
+  /// **Postconditions:**
+  /// - Input panel UI should be drawn or operated by this information accordingly.
+  ///
+  /// **See also:**
+  /// - `ime_show_cb()`
+  /// - `ime_cursor_position_updated_cb()`
   int ime_context_get_cursor_position(
     ime_context_h context,
     ffi.Pointer<ffi.Int> cursor_pos,
@@ -1941,29 +2309,37 @@ class Tizen70CapiUiInputmethod {
       _ime_context_get_cursor_positionPtr
           .asFunction<int Function(ime_context_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the autocapital type information from the given input context.
+  /// Gets the autocapital type information from the given input context.
   ///
-  /// @details Each edit field has various attributes for input panel. This function can be
-  /// called to get the autocapital type information in ime_show_cb() callback function.
+  /// Each edit field has various attributes for input panel. This function can be called to get the autocapital type information in ime_show_cb() callback function.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @param[in] context The input context information of an associated text input UI control
-  /// @param[out] autocapital_type Autocapital type information
+  /// **Parameters:**
+  /// - `context` (in): The input context information of an associated text input UI control
+  /// - `autocapital_type` (out): Autocapital type information
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_NOT_RUNNING IME main loop is not started yet
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post Input panel UI should be drawn or operated by this information accordingly.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_NOT_RUNNING`: IME main loop is not started yet
   ///
-  /// @see ime_show_cb()
+  /// **Postconditions:**
+  /// - Input panel UI should be drawn or operated by this information accordingly.
+  ///
+  /// **See also:**
+  /// - `ime_show_cb()`
   int ime_context_get_autocapital_type(
     ime_context_h context,
     ffi.Pointer<ffi.Int32> autocapital_type,
@@ -1982,30 +2358,38 @@ class Tizen70CapiUiInputmethod {
       _ime_context_get_autocapital_typePtr
           .asFunction<int Function(ime_context_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the @c Return key label type information from the given input context.
+  /// Gets the `Return` key label type information from the given input context.
   ///
-  /// @details Each edit field has various attributes for input panel. This function can be
-  /// called to get the @c Return key label type information in ime_show_cb() callback function.
+  /// Each edit field has various attributes for input panel. This function can be called to get the `Return` key label type information in ime_show_cb() callback function.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @param[in] context The input context information of an associated text input UI control
-  /// @param[out] return_key_type The @c Return key label type information
+  /// **Parameters:**
+  /// - `context` (in): The input context information of an associated text input UI control
+  /// - `return_key_type` (out): The `Return` key label type information
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_NOT_RUNNING IME main loop is not started yet
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post Input panel UI should be drawn or operated by this information accordingly.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_NOT_RUNNING`: IME main loop is not started yet
   ///
-  /// @see ime_show_cb()
-  /// @see ime_return_key_type_set_cb()
+  /// **Postconditions:**
+  /// - Input panel UI should be drawn or operated by this information accordingly.
+  ///
+  /// **See also:**
+  /// - `ime_show_cb()`
+  /// - `ime_return_key_type_set_cb()`
   int ime_context_get_return_key_type(
     ime_context_h context,
     ffi.Pointer<ffi.Int32> return_key_type,
@@ -2024,31 +2408,38 @@ class Tizen70CapiUiInputmethod {
       _ime_context_get_return_key_typePtr
           .asFunction<int Function(ime_context_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the @c Return key state information from the given input context.
+  /// Gets the `Return` key state information from the given input context.
   ///
-  /// @details Each edit field has various attributes for input panel. This function can be
-  /// called to get the @c Return key state information in ime_show_cb() callback function.
+  /// Each edit field has various attributes for input panel. This function can be called to get the `Return` key state information in ime_show_cb() callback function.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @param[in] context The input context information of an associated text input UI control
-  /// @param[out] return_key_state The @c Return key state information \n @c true to enable @c Return key
-  /// button, @c false to disable @c Return key button
+  /// **Parameters:**
+  /// - `context` (in): The input context information of an associated text input UI control
+  /// - `return_key_state` (out): The `Return` key state information `true` to enable `Return` key button, `false` to disable `Return` key button
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_NOT_RUNNING IME main loop is not started yet
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post Input panel UI should be drawn or operated by this information accordingly.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_NOT_RUNNING`: IME main loop is not started yet
   ///
-  /// @see ime_show_cb()
-  /// @see ime_return_key_state_set_cb()
+  /// **Postconditions:**
+  /// - Input panel UI should be drawn or operated by this information accordingly.
+  ///
+  /// **See also:**
+  /// - `ime_show_cb()`
+  /// - `ime_return_key_state_set_cb()`
   int ime_context_get_return_key_state(
     ime_context_h context,
     ffi.Pointer<ffi.Bool> return_key_state,
@@ -2067,30 +2458,37 @@ class Tizen70CapiUiInputmethod {
       _ime_context_get_return_key_statePtr
           .asFunction<int Function(ime_context_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets the prediction mode information from the given input context.
+  /// Gets the prediction mode information from the given input context.
   ///
-  /// @details Each edit field has various attributes for input panel. This function can be
-  /// called to get the prediction mode information in ime_show_cb() callback function.
+  /// Each edit field has various attributes for input panel. This function can be called to get the prediction mode information in ime_show_cb() callback function.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @param[in] context The input context information of an associated text input UI control
-  /// @param[out] prediction_mode Prediction mode information \n @c true to allow the predictive
-  /// text feature if available, @c false to disable the predictive text feature
+  /// **Parameters:**
+  /// - `context` (in): The input context information of an associated text input UI control
+  /// - `prediction_mode` (out): Prediction mode information `true` to allow the predictive text feature if available, `false` to disable the predictive text feature
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_NOT_RUNNING IME main loop is not started yet
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post Input panel UI should be drawn or operated by this information accordingly.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_NOT_RUNNING`: IME main loop is not started yet
   ///
-  /// @see ime_show_cb()
+  /// **Postconditions:**
+  /// - Input panel UI should be drawn or operated by this information accordingly.
+  ///
+  /// **See also:**
+  /// - `ime_show_cb()`
   int ime_context_get_prediction_mode(
     ime_context_h context,
     ffi.Pointer<ffi.Bool> prediction_mode,
@@ -2109,32 +2507,40 @@ class Tizen70CapiUiInputmethod {
       _ime_context_get_prediction_modePtr
           .asFunction<int Function(ime_context_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets the password mode information from the given input context.
+  /// Gets the password mode information from the given input context.
   ///
-  /// @details Each edit field has various attributes for input panel. This function can be
-  /// called to get the password mode information in ime_show_cb() callback function.
+  /// Each edit field has various attributes for input panel. This function can be called to get the password mode information in ime_show_cb() callback function.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @remarks If @a password_mode is @c true, the input panel is advised not to support the predictive text.
+  /// **Remarks:**
+  /// - If `password_mode` is `true`, the input panel is advised not to support the predictive text.
   ///
-  /// @param[in] context The input context information of an associated text input UI control
-  /// @param[out] password_mode Password mode information \n @c true to indicate that a password being inputted,
-  /// @c false to indicate non-password edit field.
+  /// **Parameters:**
+  /// - `context` (in): The input context information of an associated text input UI control
+  /// - `password_mode` (out): Password mode information `true` to indicate that a password being inputted, `false` to indicate non-password edit field.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_NOT_RUNNING IME main loop is not started yet
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post Input panel UI should be drawn or operated by this information accordingly.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_NOT_RUNNING`: IME main loop is not started yet
   ///
-  /// @see ime_show_cb()
+  /// **Postconditions:**
+  /// - Input panel UI should be drawn or operated by this information accordingly.
+  ///
+  /// **See also:**
+  /// - `ime_show_cb()`
   int ime_context_get_password_mode(
     ime_context_h context,
     ffi.Pointer<ffi.Bool> password_mode,
@@ -2152,32 +2558,41 @@ class Tizen70CapiUiInputmethod {
   late final _ime_context_get_password_mode = _ime_context_get_password_modePtr
       .asFunction<int Function(ime_context_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets the input hint information from the given input context.
+  /// Gets the input hint information from the given input context.
   ///
-  /// @details Each edit field has various attributes for input panel. This function can be
-  /// called to get the input hint information in ime_show_cb() callback function.
+  /// Each edit field has various attributes for input panel. This function can be called to get the input hint information in ime_show_cb() callback function.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @remarks @a input_hint is a bit-wise value which recommends the input panel provide
-  /// an auto completion and so on if it is capable of supporting such features.
+  /// **Remarks:**
+  /// - `input_hint` is a bit-wise value which recommends the input panel provide
+  /// - an auto completion and so on if it is capable of supporting such features.
   ///
-  /// @param[in] context The input context information of an associated text input UI control
-  /// @param[out] input_hint Input hint information
+  /// **Parameters:**
+  /// - `context` (in): The input context information of an associated text input UI control
+  /// - `input_hint` (out): Input hint information
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_NOT_RUNNING IME main loop is not started yet
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post Input panel UI should be drawn or operated by this information accordingly.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_NOT_RUNNING`: IME main loop is not started yet
   ///
-  /// @see ime_show_cb()
+  /// **Postconditions:**
+  /// - Input panel UI should be drawn or operated by this information accordingly.
+  ///
+  /// **See also:**
+  /// - `ime_show_cb()`
   int ime_context_get_input_hint(
     ime_context_h context,
     ffi.Pointer<ffi.Int32> input_hint,
@@ -2195,29 +2610,37 @@ class Tizen70CapiUiInputmethod {
   late final _ime_context_get_input_hint = _ime_context_get_input_hintPtr
       .asFunction<int Function(ime_context_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the text bidirectional information from the given input context.
+  /// Gets the text bidirectional information from the given input context.
   ///
-  /// @details Each edit field has various attributes for input panel. This function can be
-  /// called to get the bidirectional information in ime_show_cb() callback function.
+  /// Each edit field has various attributes for input panel. This function can be called to get the bidirectional information in ime_show_cb() callback function.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @param[in] context The input context information of an associated text input UI control
-  /// @param[out] bidi Text bidirectional information
+  /// **Parameters:**
+  /// - `context` (in): The input context information of an associated text input UI control
+  /// - `bidi` (out): Text bidirectional information
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_NOT_RUNNING IME main loop is not started yet
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post Input panel UI should be drawn or operated by this information accordingly.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_NOT_RUNNING`: IME main loop is not started yet
   ///
-  /// @see ime_show_cb()
+  /// **Postconditions:**
+  /// - Input panel UI should be drawn or operated by this information accordingly.
+  ///
+  /// **See also:**
+  /// - `ime_show_cb()`
   int ime_context_get_bidi_direction(
     ime_context_h context,
     ffi.Pointer<ffi.Int32> bidi,
@@ -2236,29 +2659,37 @@ class Tizen70CapiUiInputmethod {
       _ime_context_get_bidi_directionPtr
           .asFunction<int Function(ime_context_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the preferred language information from the given input context.
+  /// Gets the preferred language information from the given input context.
   ///
-  /// @details Each edit field has various attributes for input panel. This function can be
-  /// called to get the preferred language information in ime_show_cb() callback function.
+  /// Each edit field has various attributes for input panel. This function can be called to get the preferred language information in ime_show_cb() callback function.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @param[in] context The input context information of an associated text input UI control
-  /// @param[out] language Preferred language information
+  /// **Parameters:**
+  /// - `context` (in): The input context information of an associated text input UI control
+  /// - `language` (out): Preferred language information
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_NOT_RUNNING IME main loop is not started yet
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post Input panel UI should be drawn or operated by this information accordingly.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_NOT_RUNNING`: IME main loop is not started yet
   ///
-  /// @see ime_show_cb()
+  /// **Postconditions:**
+  /// - Input panel UI should be drawn or operated by this information accordingly.
+  ///
+  /// **See also:**
+  /// - `ime_show_cb()`
   int ime_context_get_language(
     ime_context_h context,
     ffi.Pointer<ffi.Int32> language,
@@ -2276,28 +2707,37 @@ class Tizen70CapiUiInputmethod {
   late final _ime_context_get_language = _ime_context_get_languagePtr
       .asFunction<int Function(ime_context_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the device name of the key event.
+  /// Gets the device name of the key event.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @remarks @a dev_name must be released using free().
+  /// **Remarks:**
+  /// - `dev_name` must be released using free().
   ///
-  /// @param[in] dev_info The device information from the key event
-  /// @param[out] dev_name The name of key input device. This can be an empty string if the device name is not available
+  /// **Parameters:**
+  /// - `dev_info` (in): The device information from the key event
+  /// - `dev_name` (out): The name of key input device. This can be an empty string if the device name is not available
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_NOT_RUNNING IME main loop is not started yet
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @see ime_process_key_event_cb()
-  /// @see ime_device_info_get_class()
-  /// @see ime_device_info_get_subclass()
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_NOT_RUNNING`: IME main loop is not started yet
+  ///
+  /// **See also:**
+  /// - `ime_process_key_event_cb()`
+  /// - `ime_device_info_get_class()`
+  /// - `ime_device_info_get_subclass()`
   int ime_device_info_get_name(
     ime_device_info_h dev_info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> dev_name,
@@ -2317,26 +2757,34 @@ class Tizen70CapiUiInputmethod {
           int Function(
               ime_device_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the device class of the key event.
+  /// Gets the device class of the key event.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @param[in] dev_info The device information from the key event
-  /// @param[out] dev_class The class of key input device. This can be #ECORE_IMF_DEVICE_CLASS_NONE if the device class is not available
+  /// **Parameters:**
+  /// - `dev_info` (in): The device information from the key event
+  /// - `dev_class` (out): The class of key input device. This can be `ECORE_IMF_DEVICE_CLASS_NONE` if the device class is not available
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_NOT_RUNNING IME main loop is not started yet
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @see ime_process_key_event_cb()
-  /// @see ime_device_info_get_name()
-  /// @see ime_device_info_get_subclass()
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_NOT_RUNNING`: IME main loop is not started yet
+  ///
+  /// **See also:**
+  /// - `ime_process_key_event_cb()`
+  /// - `ime_device_info_get_name()`
+  /// - `ime_device_info_get_subclass()`
   int ime_device_info_get_class(
     ime_device_info_h dev_info,
     ffi.Pointer<ffi.Int32> dev_class,
@@ -2354,26 +2802,34 @@ class Tizen70CapiUiInputmethod {
   late final _ime_device_info_get_class = _ime_device_info_get_classPtr
       .asFunction<int Function(ime_device_info_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the device subclass of the key event.
+  /// Gets the device subclass of the key event.
   ///
-  /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Otherwise 3.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @param[in] dev_info The device information from the key event
-  /// @param[out] dev_subclass The subclass of key input device. This can be #ECORE_IMF_DEVICE_SUBCLASS_NONE if the device subclass is not available
+  /// **Parameters:**
+  /// - `dev_info` (in): The device information from the key event
+  /// - `dev_subclass` (out): The subclass of key input device. This can be `ECORE_IMF_DEVICE_SUBCLASS_NONE` if the device subclass is not available
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_NOT_RUNNING IME main loop is not started yet
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @see ime_process_key_event_cb()
-  /// @see ime_device_info_get_name()
-  /// @see ime_device_info_get_class()
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_NOT_RUNNING`: IME main loop is not started yet
+  ///
+  /// **See also:**
+  /// - `ime_process_key_event_cb()`
+  /// - `ime_device_info_get_name()`
+  /// - `ime_device_info_get_class()`
   int ime_device_info_get_subclass(
     ime_device_info_h dev_info,
     ffi.Pointer<ffi.Int32> dev_subclass,
@@ -2391,29 +2847,39 @@ class Tizen70CapiUiInputmethod {
   late final _ime_device_info_get_subclass = _ime_device_info_get_subclassPtr
       .asFunction<int Function(ime_device_info_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets prediction hint event callback function.
+  /// Sets prediction hint event callback function.
   ///
-  /// @since_tizen 4.0
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @remarks The ime_prediction_hint_set_cb() callback function is called to set the prediction
-  /// hint string to deliver to the input panel.
+  /// **Remarks:**
+  /// - The ime_prediction_hint_set_cb() callback function is called to set the prediction
+  /// - hint string to deliver to the input panel.
   ///
-  /// @param[in] callback_func The prediction hint event callback function
-  /// @param[in] user_data User data to be passed to the callback function
+  /// **Parameters:**
+  /// - `callback_func` (in): The prediction hint event callback function
+  /// - `user_data` (in): User data to be passed to the callback function
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post The ime_run() function should be called to start the IME application's main loop.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
   ///
-  /// @see ime_prediction_hint_set_cb()
-  /// @see ime_run()
+  /// **Postconditions:**
+  /// - The ime_run() function should be called to start the IME application's main loop.
+  ///
+  /// **See also:**
+  /// - `ime_prediction_hint_set_cb()`
+  /// - `ime_run()`
   int ime_event_set_prediction_hint_set_cb(
     ime_prediction_hint_set_cb callback_func,
     ffi.Pointer<ffi.Void> user_data,
@@ -2432,29 +2898,39 @@ class Tizen70CapiUiInputmethod {
       _ime_event_set_prediction_hint_set_cbPtr.asFunction<
           int Function(ime_prediction_hint_set_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets MIME type event callback function.
+  /// Sets MIME type event callback function.
   ///
-  /// @since_tizen 4.0
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @remarks The ime_mime_type_set_request_cb() callback function is called when an associated text input
-  /// UI control requests the text entry to set the MIME type.
+  /// **Remarks:**
+  /// - The ime_mime_type_set_request_cb() callback function is called when an associated text input
+  /// - UI control requests the text entry to set the MIME type.
   ///
-  /// @param[in] callback_func MIME type event callback function
-  /// @param[in] user_data User data to be passed to the callback function
+  /// **Parameters:**
+  /// - `callback_func` (in): MIME type event callback function
+  /// - `user_data` (in): User data to be passed to the callback function
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post The ime_run() function should be called to start the IME application's main loop.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
   ///
-  /// @see ime_mime_type_set_request_cb()
-  /// @see ime_run()
+  /// **Postconditions:**
+  /// - The ime_run() function should be called to start the IME application's main loop.
+  ///
+  /// **See also:**
+  /// - `ime_mime_type_set_request_cb()`
+  /// - `ime_run()`
   int ime_event_set_mime_type_set_request_cb(
     ime_mime_type_set_request_cb callback_func,
     ffi.Pointer<ffi.Void> user_data,
@@ -2474,24 +2950,30 @@ class Tizen70CapiUiInputmethod {
       _ime_event_set_mime_type_set_request_cbPtr.asFunction<
           int Function(ime_mime_type_set_request_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sends a private command to the associated text input UI control.
+  /// Sends a private command to the associated text input UI control.
   ///
-  /// @details This can be used by IME to deliver specific data to an application.
-  /// The data format MUST be negotiated by both application and IME.
+  /// This can be used by IME to deliver specific data to an application. The data format MUST be negotiated by both application and IME.
   ///
-  /// @since_tizen 4.0
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @param[in] command The UTF-8 string to be sent
+  /// **Parameters:**
+  /// - `command` (in): The UTF-8 string to be sent
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_NOT_RUNNING IME main loop is not started yet
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_NOT_RUNNING`: IME main loop is not started yet
   int ime_send_private_command(
     ffi.Pointer<ffi.Char> command,
   ) {
@@ -2506,26 +2988,34 @@ class Tizen70CapiUiInputmethod {
   late final _ime_send_private_command = _ime_send_private_commandPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Commits contents such as image to the associated text input UI control.
+  /// Commits contents such as image to the associated text input UI control.
   ///
-  /// @since_tizen 4.0
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @param[in] content The content URI to be sent
-  /// @param[in] description The content description
-  /// @param[in] mime_type The MIME type received from the ime_mime_type_set_request_cb()
+  /// **Parameters:**
+  /// - `content` (in): The content URI to be sent
+  /// - `description` (in): The content description
+  /// - `mime_type` (in): The MIME type received from the ime_mime_type_set_request_cb()
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_NOT_RUNNING IME main loop is not started yet
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @see ime_mime_type_set_request_cb()
-  /// @see ime_event_set_mime_type_set_request_cb()
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_NOT_RUNNING`: IME main loop is not started yet
+  ///
+  /// **See also:**
+  /// - `ime_mime_type_set_request_cb()`
+  /// - `ime_event_set_mime_type_set_request_cb()`
   int ime_commit_content(
     ffi.Pointer<ffi.Char> content,
     ffi.Pointer<ffi.Char> description,
@@ -2546,23 +3036,31 @@ class Tizen70CapiUiInputmethod {
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
           ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the floating mode or not.
+  /// Sets the floating mode or not.
   ///
-  /// @since_tizen 4.0
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @param[in] floating_mode @c true - floating mode on, @c false - floating mode off
+  /// **Parameters:**
+  /// - `floating_mode` (in): `true` - floating mode on, `false` - floating mode off
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_NOT_RUNNING IME main loop is not started yet
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @see ime_set_floating_drag_start()
-  /// @see ime_set_floating_drag_end()
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_NOT_RUNNING`: IME main loop is not started yet
+  ///
+  /// **See also:**
+  /// - `ime_set_floating_drag_start()`
+  /// - `ime_set_floating_drag_end()`
   int ime_set_floating_mode(
     bool floating_mode,
   ) {
@@ -2577,25 +3075,34 @@ class Tizen70CapiUiInputmethod {
   late final _ime_set_floating_mode =
       _ime_set_floating_modePtr.asFunction<int Function(bool)>();
 
-  /// @brief Allows the floating input panel window to move along with the mouse pointer when the mouse is pressed.
+  /// Allows the floating input panel window to move along with the mouse pointer when the mouse is pressed.
   ///
-  /// @since_tizen 4.0
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @remarks This function can be used in floating mode. If the floating mode is deactivated, calling this function has no effect.
+  /// **Remarks:**
+  /// - This function can be used in floating mode. If the floating mode is deactivated, calling this function has no effect.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_NOT_RUNNING IME main loop is not started yet
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @pre The floating mode was turned on with ime_set_floating_mode().
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_NOT_RUNNING`: IME main loop is not started yet
   ///
-  /// @see ime_set_floating_mode()
-  /// @see ime_set_floating_drag_end()
+  /// **Preconditions:**
+  /// - The floating mode was turned on with ime_set_floating_mode().
+  ///
+  /// **See also:**
+  /// - `ime_set_floating_mode()`
+  /// - `ime_set_floating_drag_end()`
   int ime_set_floating_drag_start() {
     return _ime_set_floating_drag_start();
   }
@@ -2606,28 +3113,37 @@ class Tizen70CapiUiInputmethod {
   late final _ime_set_floating_drag_start =
       _ime_set_floating_drag_startPtr.asFunction<int Function()>();
 
-  /// @brief Disallows the movement of the floating input panel window with the mouse pointer when the mouse is pressed.
+  /// Disallows the movement of the floating input panel window with the mouse pointer when the mouse is pressed.
   ///
-  /// @details This function must be called after invoking ime_set_floating_drag_start(). Otherwise the call is ignored.
+  /// This function must be called after invoking ime_set_floating_drag_start(). Otherwise the call is ignored.
   ///
-  /// @since_tizen 4.0
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @remarks This function can be used in floating mode. If the floating mode is deactivated, calling this function has no effect.
+  /// **Remarks:**
+  /// - This function can be used in floating mode. If the floating mode is deactivated, calling this function has no effect.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_NOT_RUNNING IME main loop is not started yet
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @pre The floating mode was turned on with ime_set_floating_mode().
-  /// @pre ime_set_floating_drag_start() was called before.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_NOT_RUNNING`: IME main loop is not started yet
   ///
-  /// @see ime_set_floating_mode()
-  /// @see ime_set_floating_drag_start()
+  /// **Preconditions:**
+  /// - The floating mode was turned on with ime_set_floating_mode().
+  /// - ime_set_floating_drag_start() was called before.
+  ///
+  /// **See also:**
+  /// - `ime_set_floating_mode()`
+  /// - `ime_set_floating_drag_start()`
   int ime_set_floating_drag_end() {
     return _ime_set_floating_drag_end();
   }
@@ -2638,29 +3154,39 @@ class Tizen70CapiUiInputmethod {
   late final _ime_set_floating_drag_end =
       _ime_set_floating_drag_endPtr.asFunction<int Function()>();
 
-  /// @brief Sets a callback function to give a hint about predicted words.
+  /// Sets a callback function to give a hint about predicted words.
   ///
-  /// @since_tizen 5.0
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @remarks The ime_prediction_hint_data_set_cb() callback function is called to provide the prediction
-  /// hint key and value which can be delivered to the input panel.
+  /// **Remarks:**
+  /// - The ime_prediction_hint_data_set_cb() callback function is called to provide the prediction
+  /// - hint key and value which can be delivered to the input panel.
   ///
-  /// @param[in] callback_func The callback function to give hints
-  /// @param[in] user_data User data to be passed to the callback function
+  /// **Parameters:**
+  /// - `callback_func` (in): The callback function to give hints
+  /// - `user_data` (in): User data to be passed to the callback function
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post The ime_run() function should be called to start the IME application's main loop.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
   ///
-  /// @see ime_prediction_hint_data_set_cb()
-  /// @see ime_run()
+  /// **Postconditions:**
+  /// - The ime_run() function should be called to start the IME application's main loop.
+  ///
+  /// **See also:**
+  /// - `ime_prediction_hint_data_set_cb()`
+  /// - `ime_run()`
   int ime_event_set_prediction_hint_data_set_cb(
     ime_prediction_hint_data_set_cb callback_func,
     ffi.Pointer<ffi.Void> user_data,
@@ -2681,18 +3207,24 @@ class Tizen70CapiUiInputmethod {
           int Function(
               ime_prediction_hint_data_set_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sends the request to hide IME.
+  /// Sends the request to hide IME.
   ///
-  /// @since_tizen 5.0
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_NOT_RUNNING IME main loop is not started yet
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_NOT_RUNNING`: IME main loop is not started yet
   int ime_request_hide() {
     return _ime_request_hide();
   }
@@ -2702,24 +3234,32 @@ class Tizen70CapiUiInputmethod {
   late final _ime_request_hide =
       _ime_request_hidePtr.asFunction<int Function()>();
 
-  /// @brief Updates the state of input panel event.
+  /// Updates the state of input panel event.
   ///
-  /// @since_tizen 5.5
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @param[in] type The input panel event type
-  /// @param[in] value The value of event type
+  /// **Parameters:**
+  /// - `type` (in): The input panel event type
+  /// - `value` (in): The value of event type
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_NOT_RUNNING IME main loop is not started yet
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @see #ime_event_type_e
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_NOT_RUNNING`: IME main loop is not started yet
+  ///
+  /// **See also:**
+  /// - `ime_event_type_e`
   int ime_update_input_panel_event(
     int type,
     int value,
@@ -2736,20 +3276,27 @@ class Tizen70CapiUiInputmethod {
   late final _ime_update_input_panel_event =
       _ime_update_input_panel_eventPtr.asFunction<int Function(int, int)>();
 
-  /// @brief Enables whether candidate strings show or not.
+  /// Enables whether candidate strings show or not.
   ///
-  /// @since_tizen 5.5
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @param[in] visible @c true if candidate strings show, @c false otherwise.
+  /// **Parameters:**
+  /// - `visible` (in): `true` if candidate strings show, `false` otherwise.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_NOT_RUNNING IME main loop is not started yet
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_NOT_RUNNING`: IME main loop is not started yet
   int ime_set_candidate_visibility_state(
     bool visible,
   ) {
@@ -2764,30 +3311,40 @@ class Tizen70CapiUiInputmethod {
   late final _ime_set_candidate_visibility_state =
       _ime_set_candidate_visibility_statePtr.asFunction<int Function(bool)>();
 
-  /// @brief Sets @c input_hint_set event callback function.
+  /// Sets `input_hint_set` event callback function.
   ///
-  /// @since_tizen 6.5
+  /// **Since Tizen:**
+  /// - 6.5
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @remarks The ime_input_hint_set_cb() callback function is called to set the input hint
-  /// to deliver to the input panel.
+  /// **Remarks:**
+  /// - The ime_input_hint_set_cb() callback function is called to set the input hint
+  /// - to deliver to the input panel.
   ///
-  /// @param[in] callback_func @c input_hint_set event callback function
-  /// @param[in] user_data User data to be passed to the callback function
+  /// **Parameters:**
+  /// - `callback_func` (in): `input_hint_set` event callback function
+  /// - `user_data` (in): User data to be passed to the callback function
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function.
-  /// @retval #IME_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IME_ERROR_OPERATION_FAILED Operation failed
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post The ime_run() function should be called to start the IME application's main loop.
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function.
+  /// - `IME_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IME_ERROR_OPERATION_FAILED`: Operation failed
   ///
-  /// @see ime_input_hint_set_cb()
-  /// @see ime_run()
+  /// **Postconditions:**
+  /// - The ime_run() function should be called to start the IME application's main loop.
+  ///
+  /// **See also:**
+  /// - `ime_input_hint_set_cb()`
+  /// - `ime_run()`
   int ime_event_set_input_hint_set_cb(
     ime_input_hint_set_cb callback_func,
     ffi.Pointer<ffi.Void> user_data,
@@ -2806,23 +3363,31 @@ class Tizen70CapiUiInputmethod {
       _ime_event_set_input_hint_set_cbPtr.asFunction<
           int Function(ime_input_hint_set_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets @c input_hint_set event callback function.
+  /// Unsets `input_hint_set` event callback function.
   ///
-  /// @since_tizen 6.5
+  /// **Since Tizen:**
+  /// - 6.5
   ///
-  /// @privlevel public
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @privilege %http://tizen.org/privilege/ime
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/ime>
   ///
-  /// @remarks The ime_input_hint_set_cb() callback function is called to set the input hint
-  /// to deliver to the input panel.
+  /// **Remarks:**
+  /// - The ime_input_hint_set_cb() callback function is called to set the input hint
+  /// - to deliver to the input panel.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #IME_ERROR_NONE No error
-  /// @retval #IME_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @see ime_input_hint_set_cb()
-  /// @see ime_event_set_input_hint_set_cb()
+  /// **Return values:**
+  /// - `IME_ERROR_NONE`: No error
+  /// - `IME_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function
+  ///
+  /// **See also:**
+  /// - `ime_input_hint_set_cb()`
+  /// - `ime_event_set_input_hint_set_cb()`
   int ime_event_unset_input_hint_set_cb() {
     return _ime_event_unset_input_hint_set_cb();
   }
@@ -2834,12 +3399,13 @@ class Tizen70CapiUiInputmethod {
       _ime_event_unset_input_hint_set_cbPtr.asFunction<int Function()>();
 }
 
-/// @brief Enumeration for the key codes.
-/// If keycode & 0xff000000 == 0x01000000 then this key code is directly encoded 24-bit UCS character.
-/// The UCS value is keycode & 0x00ffffff.
-/// @details Defines the list of keys supported by the system.
-/// Note that certain keys may not be available on all devices.
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// Enumeration for the key codes. If keycode & 0xff000000 == 0x01000000 then this key code is directly encoded 24-bit UCS character. The UCS value is keycode & 0x00ffffff.
+///
+/// Defines the list of keys supported by the system. Note that certain keys may not be available on all devices.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
+/// @nodoc
 abstract class ime_key_code_e {
   /// < The backspace key
   static const int IME_KEY_BackSpace = 65288;
@@ -3487,10 +4053,11 @@ abstract class ime_key_code_e {
   static const int IME_KEY_asciitilde = 126;
 }
 
-/// @brief Enumeration for the key masks.
-/// The key masks indicate which modifier keys is pressed down during the keyboard hit.
-/// The special #IME_KEY_MASK_RELEASED indicates the key release event.
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// Enumeration for the key masks. The key masks indicate which modifier keys is pressed down during the keyboard hit. The special `IME_KEY_MASK_RELEASED` indicates the key release event.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
+/// @nodoc
 abstract class ime_key_mask_e {
   /// < Key press event without modifier key
   static const int IME_KEY_MASK_PRESSED = 0;
@@ -3523,11 +4090,14 @@ abstract class ime_key_mask_e {
   static const int IME_KEY_MASK_RELEASED = 32768;
 }
 
-/// @brief Enumeration of unconventional input devices.
+/// Enumeration of unconventional input devices.
 ///
-/// @since_tizen @if WEARABLE 3.0 @endif
+/// **Since Tizen:**
+/// - Wearable 3.0
 ///
-/// @see ime_event_set_process_input_device_event_cb()
+/// **See also:**
+/// - `ime_event_set_process_input_device_event_cb()`
+/// @nodoc
 abstract class ime_input_device_type_e {
   /// < Undefined unconventional input device
   static const int IME_INPUT_DEVICE_TYPE_UNKNOWN = 0;
@@ -3536,11 +4106,14 @@ abstract class ime_input_device_type_e {
   static const int IME_INPUT_DEVICE_TYPE_ROTARY = 1;
 }
 
-/// @brief Enumeration of directions for rotary input device's rotation event.
+/// Enumeration of directions for rotary input device's rotation event.
 ///
-/// @since_tizen @if WEARABLE 3.0 @endif
+/// **Since Tizen:**
+/// - Wearable 3.0
 ///
-/// @see ime_input_device_rotary_get_direction()
+/// **See also:**
+/// - `ime_input_device_rotary_get_direction()`
+/// @nodoc
 abstract class ime_input_device_rotary_direction_e {
   /// < Rotary is rotated clockwise direction
   static const int IME_INPUT_DEVICE_ROTARY_DIRECTION_CLOCKWISE = 0;
@@ -3549,44 +4122,57 @@ abstract class ime_input_device_rotary_direction_e {
   static const int IME_INPUT_DEVICE_ROTARY_DIRECTION_COUNTER_CLOCKWISE = 1;
 }
 
-/// @brief Called when the input event is received from an unconventional input device that does not generate key events.
+/// Called when the input event is received from an unconventional input device that does not generate key events.
 ///
-/// @details This function processes the input event before an associated text input UI control does.
+/// This function processes the input event before an associated text input UI control does.
 ///
-/// @since_tizen @if WEARABLE 3.0 @endif
+/// **Since Tizen:**
+/// - Wearable 3.0
 ///
-/// @remarks @a device_type contains the information what kind of unconventional input device generated the given event,
-/// and the handle @a device_event is used for obtaining device-specific input device event data.
-/// @a device_event should not be released.
+/// **Remarks:**
+/// - `device_type` contains the information what kind of unconventional input device generated the given event,
+/// - and the handle `device_event` is used for obtaining device-specific input device event data.
+/// - `device_event` should not be released.
 ///
-/// @param[in] device_type The unconventional input device type
-/// @param[in] device_event The handle for device_type specific input device event
-/// @param[in] user_data User data to be passed to the callback function
+/// **Parameters:**
+/// - `device_type` (in): The unconventional input device type
+/// - `device_event` (in): The handle for device_type specific input device event
+/// - `user_data` (in): User data to be passed to the callback function
 ///
-/// @pre The callback can be registered using ime_event_set_input_device_event_cb() function.
+/// **Preconditions:**
+/// - The callback can be registered using ime_event_set_input_device_event_cb() function.
 ///
-/// @see ime_event_set_process_input_device_event_cb()
+/// **See also:**
+/// - `ime_event_set_process_input_device_event_cb()`
+/// @nodoc
 typedef ime_process_input_device_event_cb = ffi
     .Pointer<ffi.NativeFunction<ime_process_input_device_event_cbFunction>>;
+/// @nodoc
 typedef ime_process_input_device_event_cbFunction = ffi.Void Function(
     ffi.Int32 device_type,
     ime_input_device_event_h device_event,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartime_process_input_device_event_cbFunction = void Function(
     int device_type,
     ime_input_device_event_h device_event,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The handle to retrieve unconventional input device specific event data.
+/// The handle to retrieve unconventional input device specific event data.
 ///
-/// @since_tizen @if WEARABLE 3.0 @endif
+/// **Since Tizen:**
+/// - Wearable 3.0
 ///
-/// @see ime_event_set_process_input_device_event_cb()
+/// **See also:**
+/// - `ime_event_set_process_input_device_event_cb()`
+/// @nodoc
 typedef ime_input_device_event_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Enumeration for input method function error.
+/// Enumeration for input method function error.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
+/// @nodoc
 abstract class ime_error_e {
   /// < Successful
   static const int IME_ERROR_NONE = 0;
@@ -3610,11 +4196,14 @@ abstract class ime_error_e {
   static const int IME_ERROR_OUT_OF_MEMORY = -12;
 }
 
-/// @brief Enumeration of the option window type.
+/// Enumeration of the option window type.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
 ///
-/// @see ime_option_window_created_cb()
+/// **See also:**
+/// - `ime_option_window_created_cb()`
+/// @nodoc
 abstract class ime_option_window_type_e {
   /// < Open from Keyboard
   static const int IME_OPTION_WINDOW_TYPE_KEYBOARD = 0;
@@ -3623,11 +4212,14 @@ abstract class ime_option_window_type_e {
   static const int IME_OPTION_WINDOW_TYPE_SETTING_APPLICATION = 1;
 }
 
-/// @brief Enumeration of layout variation.
+/// Enumeration of layout variation.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
 ///
-/// @see ime_context_get_layout_variation()
+/// **See also:**
+/// - `ime_context_get_layout_variation()`
+/// @nodoc
 abstract class ime_layout_variation_e {
   /// < The plain normal layout
   static const int IME_LAYOUT_NORMAL_VARIATION_NORMAL = 0;
@@ -3657,14 +4249,18 @@ abstract class ime_layout_variation_e {
   static const int IME_LAYOUT_PASSWORD_VARIATION_NUMBERONLY = 1;
 }
 
-/// @brief Enumeration of string attribute type.
+/// Enumeration of string attribute type.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
 ///
-/// @remarks Currently, a font style is available to use.
+/// **Remarks:**
+/// - Currently, a font style is available to use.
 ///
-/// @see #ime_preedit_attribute
-/// @see ime_update_preedit_string()
+/// **See also:**
+/// - `ime_preedit_attribute`
+/// - `ime_update_preedit_string()`
+/// @nodoc
 abstract class ime_attribute_type {
   /// < No attribute
   static const int IME_ATTR_NONE = 0;
@@ -3673,11 +4269,14 @@ abstract class ime_attribute_type {
   static const int IME_ATTR_FONTSTYLE = 1;
 }
 
-/// @brief Enumeration containing input panel events.
+/// Enumeration containing input panel events.
 ///
-/// @since_tizen 5.5
+/// **Since Tizen:**
+/// - 5.5
 ///
-/// @see ime_update_input_panel_event()
+/// **See also:**
+/// - `ime_update_input_panel_event()`
+/// @nodoc
 abstract class ime_event_type_e {
   /// < The language of the input panel
   static const int IME_EVENT_TYPE_LANGUAGE = 1;
@@ -3689,14 +4288,18 @@ abstract class ime_event_type_e {
   static const int IME_EVENT_TYPE_GEOMETRY = 3;
 }
 
-/// @brief The structure type to contain the attributes for preedit string.
+/// The structure type to contain the attributes for preedit string.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
 ///
-/// @remarks A preedit string may have one or more different attributes. This structure describes each attribute of the string.
+/// **Remarks:**
+/// - A preedit string may have one or more different attributes. This structure describes each attribute of the string.
 ///
-/// @see ime_update_preedit_string()
-/// @see #ime_attribute_type
+/// **See also:**
+/// - `ime_update_preedit_string()`
+/// - `ime_attribute_type`
+/// @nodoc
 final class ime_preedit_attribute extends ffi.Struct {
   /// < The start position in the string of this attribute
   @ffi.UnsignedInt()
@@ -3715,17 +4318,23 @@ final class ime_preedit_attribute extends ffi.Struct {
   external int value;
 }
 
+/// @nodoc
 final class _ime_context extends ffi.Opaque {}
 
+/// @nodoc
 final class _ime_device_info extends ffi.Opaque {}
 
-/// @brief The structure type to contain the set of the essential callback functions for IME application lifecycle and appearance.
+/// The structure type to contain the set of the essential callback functions for IME application lifecycle and appearance.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
 ///
-/// @remarks These four callback functions are mandatory for IME application.
+/// **Remarks:**
+/// - These four callback functions are mandatory for IME application.
 ///
-/// @see ime_run()
+/// **See also:**
+/// - `ime_run()`
+/// @nodoc
 final class ime_callback_s extends ffi.Struct {
   /// < Called when the input panel is created
   external ime_create_cb create;
@@ -3740,301 +4349,407 @@ final class ime_callback_s extends ffi.Struct {
   external ime_hide_cb hide1;
 }
 
-/// @brief Called when the input panel is created.
+/// Called when the input panel is created.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
 ///
-/// @privlevel public
+/// **Privilege level:**
+/// - public
 ///
-/// @privilege %http://tizen.org/privilege/ime
+/// **Privileges:**
+/// - <http://tizen.org/privilege/ime>
 ///
-/// @remarks This callback function is mandatory and must be registered using ime_run(). The
-/// ime_get_main_window() can be used to get the created input panel window.
+/// **Remarks:**
+/// - This callback function is mandatory and must be registered using ime_run(). The
+/// - ime_get_main_window() can be used to get the created input panel window.
 ///
-/// @param[in] user_data User data to be passed from the callback registration function
+/// **Parameters:**
+/// - `user_data` (in): User data to be passed from the callback registration function
 ///
-/// @pre The ime_run() function calls this callback function.
+/// **Preconditions:**
+/// - The ime_run() function calls this callback function.
 ///
-/// @see ime_run()
-/// @see ime_set_size()
-/// @see ime_get_main_window()
+/// **See also:**
+/// - `ime_run()`
+/// - `ime_set_size()`
+/// - `ime_get_main_window()`
+/// @nodoc
 typedef ime_create_cb = ffi.Pointer<ffi.NativeFunction<ime_create_cbFunction>>;
+/// @nodoc
 typedef ime_create_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartime_create_cbFunction = void Function(
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the input panel is terminated.
+/// Called when the input panel is terminated.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
 ///
-/// @privlevel public
+/// **Privilege level:**
+/// - public
 ///
-/// @privilege %http://tizen.org/privilege/ime
+/// **Privileges:**
+/// - <http://tizen.org/privilege/ime>
 ///
-/// @remarks This callback function is mandatory and must be registered using ime_run(). The
-/// ime_get_main_window() can be used to get the created input panel window.
+/// **Remarks:**
+/// - This callback function is mandatory and must be registered using ime_run(). The
+/// - ime_get_main_window() can be used to get the created input panel window.
 ///
-/// @param[in] user_data User data to be passed from the callback registration function
+/// **Parameters:**
+/// - `user_data` (in): User data to be passed from the callback registration function
 ///
-/// @see ime_run()
-/// @see ime_get_main_window()
+/// **See also:**
+/// - `ime_run()`
+/// - `ime_get_main_window()`
+/// @nodoc
 typedef ime_terminate_cb
     = ffi.Pointer<ffi.NativeFunction<ime_terminate_cbFunction>>;
+/// @nodoc
 typedef ime_terminate_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartime_terminate_cbFunction = void Function(
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when an associated text input UI control requests the input panel to show itself.
+/// Called when an associated text input UI control requests the input panel to show itself.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
 ///
-/// @privlevel public
+/// **Privilege level:**
+/// - public
 ///
-/// @privilege %http://tizen.org/privilege/ime
+/// **Privileges:**
+/// - <http://tizen.org/privilege/ime>
 ///
-/// @remarks This callback function is mandatory and must be registered using ime_run().
-/// IME application should configure its input panel with #ime_context_h structure information.
-/// The ime_get_main_window() can be used to get the created input panel window.
-/// @a context should not be released.
+/// **Remarks:**
+/// - This callback function is mandatory and must be registered using ime_run().
+/// - IME application should configure its input panel with `ime_context_h` structure information.
+/// - The ime_get_main_window() can be used to get the created input panel window.
+/// - `context` should not be released.
 ///
-/// @param[in] context_id The input context identification value of an associated text input UI control
-/// @param[in] context The input context information handle
-/// @param[in] user_data User data to be passed from the callback registration function
+/// **Parameters:**
+/// - `context_id` (in): The input context identification value of an associated text input UI control
+/// - `context` (in): The input context information handle
+/// - `user_data` (in): User data to be passed from the callback registration function
 ///
-/// @see ime_run()
-/// @see ime_get_main_window()
-/// @see ime_context_get_layout()
-/// @see ime_context_get_layout_variation()
-/// @see ime_context_get_cursor_position()
-/// @see ime_context_get_autocapital_type()
-/// @see ime_context_get_return_key_type()
-/// @see ime_context_get_return_key_state()
-/// @see ime_context_get_prediction_mode()
-/// @see ime_context_get_password_mode()
-/// @see ime_context_get_input_hint()
-/// @see ime_context_get_bidi_direction()
-/// @see ime_context_get_language()
+/// **See also:**
+/// - `ime_run()`
+/// - `ime_get_main_window()`
+/// - `ime_context_get_layout()`
+/// - `ime_context_get_layout_variation()`
+/// - `ime_context_get_cursor_position()`
+/// - `ime_context_get_autocapital_type()`
+/// - `ime_context_get_return_key_type()`
+/// - `ime_context_get_return_key_state()`
+/// - `ime_context_get_prediction_mode()`
+/// - `ime_context_get_password_mode()`
+/// - `ime_context_get_input_hint()`
+/// - `ime_context_get_bidi_direction()`
+/// - `ime_context_get_language()`
+/// @nodoc
 typedef ime_show_cb = ffi.Pointer<ffi.NativeFunction<ime_show_cbFunction>>;
+/// @nodoc
 typedef ime_show_cbFunction = ffi.Void Function(
     ffi.Int context_id, ime_context_h context, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartime_show_cbFunction = void Function(
     int context_id, ime_context_h context, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Handle of an associated text input UI control's input context.
+/// Handle of an associated text input UI control's input context.
 ///
-/// @details This is one of parameters of ime_show_cb() callback function. IME application
-/// should configure its input panel with this structure information.
+/// This is one of parameters of ime_show_cb() callback function. IME application should configure its input panel with this structure information.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
 ///
-/// @see ime_context_get_layout()
-/// @see ime_context_get_layout_variation()
-/// @see ime_context_get_cursor_position()
-/// @see ime_context_get_autocapital_type()
-/// @see ime_context_get_return_key_type()
-/// @see ime_context_get_return_key_state()
-/// @see ime_context_get_prediction_mode()
-/// @see ime_context_get_password_mode()
-/// @see ime_context_get_input_hint()
-/// @see ime_context_get_bidi_direction()
-/// @see ime_context_get_language()
+/// **See also:**
+/// - `ime_context_get_layout()`
+/// - `ime_context_get_layout_variation()`
+/// - `ime_context_get_cursor_position()`
+/// - `ime_context_get_autocapital_type()`
+/// - `ime_context_get_return_key_type()`
+/// - `ime_context_get_return_key_state()`
+/// - `ime_context_get_prediction_mode()`
+/// - `ime_context_get_password_mode()`
+/// - `ime_context_get_input_hint()`
+/// - `ime_context_get_bidi_direction()`
+/// - `ime_context_get_language()`
+/// @nodoc
 typedef ime_context_h = ffi.Pointer<_ime_context>;
 
-/// @brief Called when an associated text input UI control requests the input panel to hide itself.
+/// Called when an associated text input UI control requests the input panel to hide itself.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
 ///
-/// @privlevel public
+/// **Privilege level:**
+/// - public
 ///
-/// @privilege %http://tizen.org/privilege/ime
+/// **Privileges:**
+/// - <http://tizen.org/privilege/ime>
 ///
-/// @remarks This callback function is mandatory and must be registered using ime_run(). The
-/// ime_get_main_window() can be used to get the created input panel window.
+/// **Remarks:**
+/// - This callback function is mandatory and must be registered using ime_run(). The
+/// - ime_get_main_window() can be used to get the created input panel window.
 ///
-/// @param[in] context_id The input context identification value of an associated text input UI control
-/// @param[in] user_data User data to be passed from the callback registration function
+/// **Parameters:**
+/// - `context_id` (in): The input context identification value of an associated text input UI control
+/// - `user_data` (in): User data to be passed from the callback registration function
 ///
-/// @see ime_run()
-/// @see ime_get_main_window()
+/// **See also:**
+/// - `ime_run()`
+/// - `ime_get_main_window()`
+/// @nodoc
 typedef ime_hide_cb = ffi.Pointer<ffi.NativeFunction<ime_hide_cbFunction>>;
+/// @nodoc
 typedef ime_hide_cbFunction = ffi.Void Function(
     ffi.Int context_id, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartime_hide_cbFunction = void Function(
     int context_id, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when an associated text input UI control has focus.
+/// Called when an associated text input UI control has focus.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
 ///
-/// @privlevel public
+/// **Privilege level:**
+/// - public
 ///
-/// @privilege %http://tizen.org/privilege/ime
+/// **Privileges:**
+/// - <http://tizen.org/privilege/ime>
 ///
-/// @param[in] context_id The input context identification value of an associated text input UI control
-/// @param[in] user_data User data to be passed from the callback registration function
+/// **Parameters:**
+/// - `context_id` (in): The input context identification value of an associated text input UI control
+/// - `user_data` (in): User data to be passed from the callback registration function
 ///
-/// @pre The callback can be registered using ime_event_set_focus_in_cb() function.
+/// **Preconditions:**
+/// - The callback can be registered using ime_event_set_focus_in_cb() function.
 ///
-/// @see ime_event_set_focus_in_cb()
+/// **See also:**
+/// - `ime_event_set_focus_in_cb()`
+/// @nodoc
 typedef ime_focus_in_cb
     = ffi.Pointer<ffi.NativeFunction<ime_focus_in_cbFunction>>;
+/// @nodoc
 typedef ime_focus_in_cbFunction = ffi.Void Function(
     ffi.Int context_id, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartime_focus_in_cbFunction = void Function(
     int context_id, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when an associated text input UI control loses focus.
+/// Called when an associated text input UI control loses focus.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
 ///
-/// @privlevel public
+/// **Privilege level:**
+/// - public
 ///
-/// @privilege %http://tizen.org/privilege/ime
+/// **Privileges:**
+/// - <http://tizen.org/privilege/ime>
 ///
-/// @param[in] context_id The input context identification value of an associated text input UI control
-/// @param[in] user_data User data to be passed from the callback registration function
+/// **Parameters:**
+/// - `context_id` (in): The input context identification value of an associated text input UI control
+/// - `user_data` (in): User data to be passed from the callback registration function
 ///
-/// @pre The callback can be registered using ime_event_set_focus_out_cb() function.
+/// **Preconditions:**
+/// - The callback can be registered using ime_event_set_focus_out_cb() function.
 ///
-/// @see ime_event_set_focus_out_cb()
+/// **See also:**
+/// - `ime_event_set_focus_out_cb()`
+/// @nodoc
 typedef ime_focus_out_cb
     = ffi.Pointer<ffi.NativeFunction<ime_focus_out_cbFunction>>;
+/// @nodoc
 typedef ime_focus_out_cbFunction = ffi.Void Function(
     ffi.Int context_id, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartime_focus_out_cbFunction = void Function(
     int context_id, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when an associated text input UI control responds to a request with the surrounding text.
+/// Called when an associated text input UI control responds to a request with the surrounding text.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
 ///
-/// @privlevel public
+/// **Privilege level:**
+/// - public
 ///
-/// @privilege %http://tizen.org/privilege/ime
+/// **Privileges:**
+/// - <http://tizen.org/privilege/ime>
 ///
-/// @remarks The ime_request_surrounding_text() must be called to invoke this callback function, asynchronously.
-/// @remarks @a text can be used only in the callback. To use outside, make a copy.
+/// **Remarks:**
+/// - The ime_request_surrounding_text() must be called to invoke this callback function, asynchronously.
+/// - `text` can be used only in the callback. To use outside, make a copy.
 ///
-/// @param[in] context_id The input context identification value of an associated text input UI control
-/// @param[in] text The UTF-8 string requested
-/// @param[in] cursor_pos The cursor position
-/// @param[in] user_data User data to be passed from the callback registration function
+/// **Parameters:**
+/// - `context_id` (in): The input context identification value of an associated text input UI control
+/// - `text` (in): The UTF-8 string requested
+/// - `cursor_pos` (in): The cursor position
+/// - `user_data` (in): User data to be passed from the callback registration function
 ///
-/// @pre The callback can be registered using ime_event_set_surrounding_text_updated_cb() function.
+/// **Preconditions:**
+/// - The callback can be registered using ime_event_set_surrounding_text_updated_cb() function.
 ///
-/// @see ime_event_set_surrounding_text_updated_cb()
-/// @see ime_request_surrounding_text()
+/// **See also:**
+/// - `ime_event_set_surrounding_text_updated_cb()`
+/// - `ime_request_surrounding_text()`
+/// @nodoc
 typedef ime_surrounding_text_updated_cb
     = ffi.Pointer<ffi.NativeFunction<ime_surrounding_text_updated_cbFunction>>;
+/// @nodoc
 typedef ime_surrounding_text_updated_cbFunction = ffi.Void Function(
     ffi.Int context_id,
     ffi.Pointer<ffi.Char> text,
     ffi.Int cursor_pos,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartime_surrounding_text_updated_cbFunction = void Function(
     int context_id,
     ffi.Pointer<ffi.Char> text,
     int cursor_pos,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called to reset the input context of an associated text input UI control.
+/// Called to reset the input context of an associated text input UI control.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
 ///
-/// @privlevel public
+/// **Privilege level:**
+/// - public
 ///
-/// @privilege %http://tizen.org/privilege/ime
+/// **Privileges:**
+/// - <http://tizen.org/privilege/ime>
 ///
-/// @param[in] user_data User data to be passed from the callback registration function
+/// **Parameters:**
+/// - `user_data` (in): User data to be passed from the callback registration function
 ///
-/// @pre The callback can be registered using ime_event_set_input_context_reset_cb() function.
+/// **Preconditions:**
+/// - The callback can be registered using ime_event_set_input_context_reset_cb() function.
 ///
-/// @see ime_event_set_input_context_reset_cb()
+/// **See also:**
+/// - `ime_event_set_input_context_reset_cb()`
+/// @nodoc
 typedef ime_input_context_reset_cb
     = ffi.Pointer<ffi.NativeFunction<ime_input_context_reset_cbFunction>>;
+/// @nodoc
 typedef ime_input_context_reset_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartime_input_context_reset_cbFunction = void Function(
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the position of the cursor in an associated text input UI control changes.
+/// Called when the position of the cursor in an associated text input UI control changes.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
 ///
-/// @privlevel public
+/// **Privilege level:**
+/// - public
 ///
-/// @privilege %http://tizen.org/privilege/ime
+/// **Privileges:**
+/// - <http://tizen.org/privilege/ime>
 ///
-/// @param[in] cursor_pos The cursor position
-/// @param[in] user_data User data to be passed from the callback registration function
+/// **Parameters:**
+/// - `cursor_pos` (in): The cursor position
+/// - `user_data` (in): User data to be passed from the callback registration function
 ///
-/// @pre The callback can be registered using ime_event_set_cursor_position_updated_cb() function.
+/// **Preconditions:**
+/// - The callback can be registered using ime_event_set_cursor_position_updated_cb() function.
 ///
-/// @see ime_event_set_cursor_position_updated_cb()
+/// **See also:**
+/// - `ime_event_set_cursor_position_updated_cb()`
+/// @nodoc
 typedef ime_cursor_position_updated_cb
     = ffi.Pointer<ffi.NativeFunction<ime_cursor_position_updated_cbFunction>>;
+/// @nodoc
 typedef ime_cursor_position_updated_cbFunction = ffi.Void Function(
     ffi.Int cursor_pos, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartime_cursor_position_updated_cbFunction = void Function(
     int cursor_pos, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when an associated text input UI control requests the language from the input panel.
+/// Called when an associated text input UI control requests the language from the input panel.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
 ///
-/// @privlevel public
+/// **Privilege level:**
+/// - public
 ///
-/// @privilege %http://tizen.org/privilege/ime
+/// **Privileges:**
+/// - <http://tizen.org/privilege/ime>
 ///
-/// @remarks The allocated @a lang_code will be released internally.
+/// **Remarks:**
+/// - The allocated `lang_code` will be released internally.
 ///
-/// @param[in] user_data User data to be passed from the callback registration function
-/// @param[out] lang_code Input panel's current input language code (e.g., &quot;en_US&quot;)
+/// **Parameters:**
+/// - `user_data` (in): User data to be passed from the callback registration function
+/// - `lang_code` (out): Input panel's current input language code (e.g., &quot;en_US&quot;)
 ///
-/// @pre The callback can be registered using ime_event_set_language_requested_cb() function.
+/// **Preconditions:**
+/// - The callback can be registered using ime_event_set_language_requested_cb() function.
 ///
-/// @see ime_event_set_language_requested_cb()
+/// **See also:**
+/// - `ime_event_set_language_requested_cb()`
+/// @nodoc
 typedef ime_language_requested_cb
     = ffi.Pointer<ffi.NativeFunction<ime_language_requested_cbFunction>>;
+/// @nodoc
 typedef ime_language_requested_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Void> user_data,
     ffi.Pointer<ffi.Pointer<ffi.Char>> lang_code);
+/// @nodoc
 typedef Dartime_language_requested_cbFunction = void Function(
     ffi.Pointer<ffi.Void> user_data,
     ffi.Pointer<ffi.Pointer<ffi.Char>> lang_code);
 
-/// @brief Called to set the preferred language to the input panel.
+/// Called to set the preferred language to the input panel.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
 ///
-/// @privlevel public
+/// **Privilege level:**
+/// - public
 ///
-/// @privilege %http://tizen.org/privilege/ime
+/// **Privileges:**
+/// - <http://tizen.org/privilege/ime>
 ///
-/// @remarks @a language information is already set to the input panel when it is shown
-/// through #ime_context_h. This callback function will be only called when the client
-/// application changes the edit field's language attribute after the input panel is shown.
+/// **Remarks:**
+/// - `language` information is already set to the input panel when it is shown
+/// - through `ime_context_h`. This callback function will be only called when the client
+/// - application changes the edit field's language attribute after the input panel is shown.
 ///
-/// @param[in] language The preferred language that the client application wants
-/// @param[in] user_data User data to be passed from the callback registration function
+/// **Parameters:**
+/// - `language` (in): The preferred language that the client application wants
+/// - `user_data` (in): User data to be passed from the callback registration function
 ///
-/// @pre The callback can be registered using ime_event_set_language_set_cb() function.
+/// **Preconditions:**
+/// - The callback can be registered using ime_event_set_language_set_cb() function.
 ///
-/// @see ime_event_set_language_set_cb()
+/// **See also:**
+/// - `ime_event_set_language_set_cb()`
+/// @nodoc
 typedef ime_language_set_cb
     = ffi.Pointer<ffi.NativeFunction<ime_language_set_cbFunction>>;
+/// @nodoc
 typedef ime_language_set_cbFunction = ffi.Void Function(
     ffi.Int32 language, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartime_language_set_cbFunction = void Function(
     int language, ffi.Pointer<ffi.Void> user_data);
 
-/// @typedef Ecore_IMF_Input_Panel_Lang
+/// **See also:**
+/// - `ecore_imf_context_input_panel_language_set()`
 ///
-/// Input panel (virtual keyboard) language modes.
-///
-/// @see ecore_imf_context_input_panel_language_set()
+/// **Typedef:**
+/// - Ecore_IMF_Input_Panel_Lang Input panel (virtual keyboard) language modes.
+/// @nodoc
 abstract class Ecore_IMF_Input_Panel_Lang {
   /// < Automatic @since 1.2
   static const int ECORE_IMF_INPUT_PANEL_LANG_AUTOMATIC = 0;
@@ -4043,98 +4758,127 @@ abstract class Ecore_IMF_Input_Panel_Lang {
   static const int ECORE_IMF_INPUT_PANEL_LANG_ALPHABET = 1;
 }
 
-/// @brief Called to set the application specific data to deliver to the input panel.
+/// Called to set the application specific data to deliver to the input panel.
 ///
-/// @details This function is used by the applications to deliver the specific data to the input panel.
-/// The data format MUST be negotiated by both application and input panel.
+/// This function is used by the applications to deliver the specific data to the input panel. The data format MUST be negotiated by both application and input panel.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
 ///
-/// @privlevel public
+/// **Privilege level:**
+/// - public
 ///
-/// @privilege %http://tizen.org/privilege/ime
+/// **Privileges:**
+/// - <http://tizen.org/privilege/ime>
 ///
-/// @remarks @a data should not be released.
+/// **Remarks:**
+/// - `data` should not be released.
 ///
-/// @param[in] data The specific data to be set to the input panel
-/// @param[in] data_length The length of data, in bytes, to send to the input panel
-/// @param[in] user_data User data to be passed from the callback registration function
+/// **Parameters:**
+/// - `data` (in): The specific data to be set to the input panel
+/// - `data_length` (in): The length of data, in bytes, to send to the input panel
+/// - `user_data` (in): User data to be passed from the callback registration function
 ///
-/// @pre The callback can be registered using ime_event_set_imdata_set_cb() function.
+/// **Preconditions:**
+/// - The callback can be registered using ime_event_set_imdata_set_cb() function.
 ///
-/// @see ime_event_set_imdata_set_cb()
+/// **See also:**
+/// - `ime_event_set_imdata_set_cb()`
+/// @nodoc
 typedef ime_imdata_set_cb
     = ffi.Pointer<ffi.NativeFunction<ime_imdata_set_cbFunction>>;
+/// @nodoc
 typedef ime_imdata_set_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Void> data,
     ffi.UnsignedInt data_length,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartime_imdata_set_cbFunction = void Function(
     ffi.Pointer<ffi.Void> data,
     int data_length,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when an associated text input UI control requests the application specific data from the input panel.
+/// Called when an associated text input UI control requests the application specific data from the input panel.
 ///
-/// @details This function is used by the applications to request the specific data from the input panel.
-/// The data format MUST be negotiated by both application and input panel.
+/// This function is used by the applications to request the specific data from the input panel. The data format MUST be negotiated by both application and input panel.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
 ///
-/// @privlevel public
+/// **Privilege level:**
+/// - public
 ///
-/// @privilege %http://tizen.org/privilege/ime
+/// **Privileges:**
+/// - <http://tizen.org/privilege/ime>
 ///
-/// @remarks The allocated @a data and @a data_length will be released internally.
+/// **Remarks:**
+/// - The allocated `data` and `data_length` will be released internally.
 ///
-/// @param[in] user_data User data to be passed from the callback registration function
-/// @param[out] data Input panel's data to be set to the application
-/// @param[out] data_length The length of data, in bytes, to send to the application
+/// **Parameters:**
+/// - `user_data` (in): User data to be passed from the callback registration function
+/// - `data` (out): Input panel's data to be set to the application
+/// - `data_length` (out): The length of data, in bytes, to send to the application
 ///
-/// @pre The callback can be registered using ime_event_set_imdata_requested_cb() function.
+/// **Preconditions:**
+/// - The callback can be registered using ime_event_set_imdata_requested_cb() function.
 ///
-/// @see ime_event_set_imdata_requested_cb()
+/// **See also:**
+/// - `ime_event_set_imdata_requested_cb()`
+/// @nodoc
 typedef ime_imdata_requested_cb
     = ffi.Pointer<ffi.NativeFunction<ime_imdata_requested_cbFunction>>;
+/// @nodoc
 typedef ime_imdata_requested_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Void> user_data,
     ffi.Pointer<ffi.Pointer<ffi.Void>> data,
     ffi.Pointer<ffi.UnsignedInt> data_length);
+/// @nodoc
 typedef Dartime_imdata_requested_cbFunction = void Function(
     ffi.Pointer<ffi.Void> user_data,
     ffi.Pointer<ffi.Pointer<ffi.Void>> data,
     ffi.Pointer<ffi.UnsignedInt> data_length);
 
-/// @brief Called when an associated text input UI control requests the input panel to set its layout.
+/// Called when an associated text input UI control requests the input panel to set its layout.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
 ///
-/// @privlevel public
+/// **Privilege level:**
+/// - public
 ///
-/// @privilege %http://tizen.org/privilege/ime
+/// **Privileges:**
+/// - <http://tizen.org/privilege/ime>
 ///
-/// @remarks @a layout information is already set to the input panel when it is shown
-/// through #ime_context_h. This callback function will be only called when the client
-/// application changes the edit field's layout attribute after the input panel is shown.
+/// **Remarks:**
+/// - `layout` information is already set to the input panel when it is shown
+/// - through `ime_context_h`. This callback function will be only called when the client
+/// - application changes the edit field's layout attribute after the input panel is shown.
 ///
-/// @param[in] layout The input panel layout
-/// @param[in] user_data User data to be passed from the callback registration function
+/// **Parameters:**
+/// - `layout` (in): The input panel layout
+/// - `user_data` (in): User data to be passed from the callback registration function
 ///
-/// @pre The callback can be registered using ime_event_set_layout_set_cb() function.
+/// **Preconditions:**
+/// - The callback can be registered using ime_event_set_layout_set_cb() function.
 ///
-/// @see ime_event_set_layout_set_cb()
+/// **See also:**
+/// - `ime_event_set_layout_set_cb()`
+/// @nodoc
 typedef ime_layout_set_cb
     = ffi.Pointer<ffi.NativeFunction<ime_layout_set_cbFunction>>;
+/// @nodoc
 typedef ime_layout_set_cbFunction = ffi.Void Function(
     ffi.Int32 layout, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartime_layout_set_cbFunction = void Function(
     int layout, ffi.Pointer<ffi.Void> user_data);
 
-/// @typedef Ecore_IMF_Input_Panel_Layout
+/// **See also:**
+/// - `ecore_imf_context_input_panel_layout_set()`
 ///
-/// Input panel (virtual keyboard) layout types.
-///
-/// @see ecore_imf_context_input_panel_layout_set()
+/// **Typedef:**
+/// - Ecore_IMF_Input_Panel_Layout Input panel (virtual keyboard) layout types.
+/// @nodoc
 abstract class Ecore_IMF_Input_Panel_Layout {
   /// < Default layout
   static const int ECORE_IMF_INPUT_PANEL_LAYOUT_NORMAL = 0;
@@ -4182,38 +4926,48 @@ abstract class Ecore_IMF_Input_Panel_Layout {
   static const int ECORE_IMF_INPUT_PANEL_LAYOUT_VOICE = 14;
 }
 
-/// @brief Called when an associated text input UI control requests the input panel to set the @c Return key label.
-/// The input panel can show text or image on the @c Return button according to the @c Return key action.
+/// Called when an associated text input UI control requests the input panel to set the `Return` key label. The input panel can show text or image on the `Return` button according to the `Return` key action.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
 ///
-/// @privlevel public
+/// **Privilege level:**
+/// - public
 ///
-/// @privilege %http://tizen.org/privilege/ime
+/// **Privileges:**
+/// - <http://tizen.org/privilege/ime>
 ///
-/// @remarks @a type information is already set to the input panel when it is shown
-/// through #ime_context_h. This callback function will be only called when the client
-/// application changes the edit field's @c Return key type attribute after the input panel
-/// is shown.
+/// **Remarks:**
+/// - `type` information is already set to the input panel when it is shown
+/// - through `ime_context_h`. This callback function will be only called when the client
+/// - application changes the edit field's `Return` key type attribute after the input panel
+/// - is shown.
 ///
-/// @param[in] type The type of @c Return key on the input panel
-/// @param[in] user_data User data to be passed from the callback registration function
+/// **Parameters:**
+/// - `type` (in): The type of `Return` key on the input panel
+/// - `user_data` (in): User data to be passed from the callback registration function
 ///
-/// @pre The callback can be registered using ime_event_set_return_key_type_set_cb() function.
+/// **Preconditions:**
+/// - The callback can be registered using ime_event_set_return_key_type_set_cb() function.
 ///
-/// @see ime_event_set_return_key_type_set_cb()
+/// **See also:**
+/// - `ime_event_set_return_key_type_set_cb()`
+/// @nodoc
 typedef ime_return_key_type_set_cb
     = ffi.Pointer<ffi.NativeFunction<ime_return_key_type_set_cbFunction>>;
+/// @nodoc
 typedef ime_return_key_type_set_cbFunction = ffi.Void Function(
     ffi.Int32 type, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartime_return_key_type_set_cbFunction = void Function(
     int type, ffi.Pointer<ffi.Void> user_data);
 
-/// @typedef Ecore_IMF_Input_Panel_Return_Key_Type
+/// **See also:**
+/// - `ecore_imf_context_input_panel_return_key_type_set()`
 ///
-/// "Return" Key types on the input panel (virtual keyboard).
-///
-/// @see ecore_imf_context_input_panel_return_key_type_set()
+/// **Typedef:**
+/// - Ecore_IMF_Input_Panel_Return_Key_Type "Return" Key types on the input panel (virtual keyboard).
+/// @nodoc
 abstract class Ecore_IMF_Input_Panel_Return_Key_Type {
   /// < Default @since 1.2
   static const int ECORE_IMF_INPUT_PANEL_RETURN_KEY_TYPE_DEFAULT = 0;
@@ -4243,60 +4997,79 @@ abstract class Ecore_IMF_Input_Panel_Return_Key_Type {
   static const int ECORE_IMF_INPUT_PANEL_RETURN_KEY_TYPE_SIGNIN = 8;
 }
 
-/// @brief Called when an associated text input UI control requests the input panel to enable
-/// or disable the @c Return key state.
+/// Called when an associated text input UI control requests the input panel to enable or disable the `Return` key state.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
 ///
-/// @privlevel public
+/// **Privilege level:**
+/// - public
 ///
-/// @privilege %http://tizen.org/privilege/ime
+/// **Privileges:**
+/// - <http://tizen.org/privilege/ime>
 ///
-/// @remarks @a disabled information is already set to the input panel when it is shown
-/// through #ime_context_h. This callback function will be only called when the client
-/// application changes the edit field's @c Return key disable attribute after the input panel
-/// is shown.
+/// **Remarks:**
+/// - `disabled` information is already set to the input panel when it is shown
+/// - through `ime_context_h`. This callback function will be only called when the client
+/// - application changes the edit field's `Return` key disable attribute after the input panel
+/// - is shown.
 ///
-/// @param[in] disabled The Boolean state to disable @c Return key. The @c Return key is enabled by default
-/// @param[in] user_data User data to be passed from the callback registration function
+/// **Parameters:**
+/// - `disabled` (in): The Boolean state to disable `Return` key. The `Return` key is enabled by default
+/// - `user_data` (in): User data to be passed from the callback registration function
 ///
-/// @pre The callback can be registered using ime_event_set_return_key_state_set_cb() function.
+/// **Preconditions:**
+/// - The callback can be registered using ime_event_set_return_key_state_set_cb() function.
 ///
-/// @see ime_event_set_return_key_state_set_cb()
+/// **See also:**
+/// - `ime_event_set_return_key_state_set_cb()`
+/// @nodoc
 typedef ime_return_key_state_set_cb
     = ffi.Pointer<ffi.NativeFunction<ime_return_key_state_set_cbFunction>>;
+/// @nodoc
 typedef ime_return_key_state_set_cbFunction = ffi.Void Function(
     ffi.Bool disabled, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartime_return_key_state_set_cbFunction = void Function(
     bool disabled, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when an associated text input UI control requests the position and size from the input panel.
+/// Called when an associated text input UI control requests the position and size from the input panel.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
 ///
-/// @privlevel public
+/// **Privilege level:**
+/// - public
 ///
-/// @privilege %http://tizen.org/privilege/ime
+/// **Privileges:**
+/// - <http://tizen.org/privilege/ime>
 ///
-/// @remarks @a x, @a y, @a w, and @a h should not be released.
+/// **Remarks:**
+/// - `x`, `y`, `w`, and `h` should not be released.
 ///
-/// @param[in] user_data User data to be passed from the callback registration function
-/// @param[out] x The x position in screen
-/// @param[out] y The y position in screen
-/// @param[out] w The window width
-/// @param[out] h The window height
+/// **Parameters:**
+/// - `user_data` (in): User data to be passed from the callback registration function
+/// - `x` (out): The x position in screen
+/// - `y` (out): The y position in screen
+/// - `w` (out): The window width
+/// - `h` (out): The window height
 ///
-/// @pre The callback can be registered using ime_event_set_geometry_requested_cb() function.
+/// **Preconditions:**
+/// - The callback can be registered using ime_event_set_geometry_requested_cb() function.
 ///
-/// @see ime_event_set_geometry_requested_cb()
+/// **See also:**
+/// - `ime_event_set_geometry_requested_cb()`
+/// @nodoc
 typedef ime_geometry_requested_cb
     = ffi.Pointer<ffi.NativeFunction<ime_geometry_requested_cbFunction>>;
+/// @nodoc
 typedef ime_geometry_requested_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Void> user_data,
     ffi.Pointer<ffi.Int> x,
     ffi.Pointer<ffi.Int> y,
     ffi.Pointer<ffi.Int> w,
     ffi.Pointer<ffi.Int> h);
+/// @nodoc
 typedef Dartime_geometry_requested_cbFunction = void Function(
     ffi.Pointer<ffi.Void> user_data,
     ffi.Pointer<ffi.Int> x,
@@ -4304,100 +5077,124 @@ typedef Dartime_geometry_requested_cbFunction = void Function(
     ffi.Pointer<ffi.Int> w,
     ffi.Pointer<ffi.Int> h);
 
-/// @brief Called when a key event is received from external devices or ime_send_key_event().
+/// Called when a key event is received from external devices or ime_send_key_event().
 ///
-/// @details This function processes the key event before an associated text input UI control does.
+/// This function processes the key event before an associated text input UI control does.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
 ///
-/// @privlevel public
+/// **Privilege level:**
+/// - public
 ///
-/// @privilege %http://tizen.org/privilege/ime
+/// **Privileges:**
+/// - <http://tizen.org/privilege/ime>
 ///
-/// @remarks If the key event is from the external device, @a dev_info will have its name, class and subclass information.
-/// @a dev_info should not be released by the application. The platform manages the handle; the handle is released when ime_process_key_event_cb() exits.
+/// **Remarks:**
+/// - If the key event is from the external device, `dev_info` will have its name, class and subclass information.
+/// - `dev_info` should not be released by the application. The platform manages the handle; the handle is released when ime_process_key_event_cb() exits.
 ///
-/// @param[in] key_code The key code to be sent
-/// @param[in] key_mask The modifier key mask
-/// @param[in] dev_info The device information handle
-/// @param[in] user_data User data to be passed from the callback registration function
+/// **Parameters:**
+/// - `key_code` (in): The key code to be sent
+/// - `key_mask` (in): The modifier key mask
+/// - `dev_info` (in): The device information handle
+/// - `user_data` (in): User data to be passed from the callback registration function
 ///
-/// @return @c true if the event was processed, otherwise the event was not processed and was forwarded to the client application.
+/// **Returns:**
+/// - `true` if the event was processed, otherwise the event was not processed and was forwarded to the client application.
 ///
-/// @pre The callback should be registered using ime_event_set_process_key_event_cb() function.
+/// **Preconditions:**
+/// - The callback should be registered using ime_event_set_process_key_event_cb() function.
 ///
-/// @see ime_event_set_process_key_event_cb()
-/// @see ime_device_info_get_name()
-/// @see ime_device_info_get_class()
-/// @see ime_device_info_get_subclass()
-/// @see ime_send_key_event()
-/// @see ime_commit_string()
-/// @see ime_show_preedit_string()
-/// @see ime_hide_preedit_string()
-/// @see ime_update_preedit_string()
+/// **See also:**
+/// - `ime_event_set_process_key_event_cb()`
+/// - `ime_device_info_get_name()`
+/// - `ime_device_info_get_class()`
+/// - `ime_device_info_get_subclass()`
+/// - `ime_send_key_event()`
+/// - `ime_commit_string()`
+/// - `ime_show_preedit_string()`
+/// - `ime_hide_preedit_string()`
+/// - `ime_update_preedit_string()`
+/// @nodoc
 typedef ime_process_key_event_cb
     = ffi.Pointer<ffi.NativeFunction<ime_process_key_event_cbFunction>>;
+/// @nodoc
 typedef ime_process_key_event_cbFunction = ffi.Bool Function(
     ffi.Int32 key_code,
     ffi.Int32 key_mask,
     ime_device_info_h dev_info,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartime_process_key_event_cbFunction = bool Function(int key_code,
     int key_mask, ime_device_info_h dev_info, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Handle of the device information of the key event.
+/// Handle of the device information of the key event.
 ///
-/// @details This is one of parameters of ime_process_key_event_cb() callback function. IME application
-/// may distinguish the key event by using this if necessary.
+/// This is one of parameters of ime_process_key_event_cb() callback function. IME application may distinguish the key event by using this if necessary.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
 ///
-/// @see ime_process_key_event_cb()
-/// @see ime_device_info_get_name()
-/// @see ime_device_info_get_class()
-/// @see ime_device_info_get_subclass()
+/// **See also:**
+/// - `ime_process_key_event_cb()`
+/// - `ime_device_info_get_name()`
+/// - `ime_device_info_get_class()`
+/// - `ime_device_info_get_subclass()`
+/// @nodoc
 typedef ime_device_info_h = ffi.Pointer<_ime_device_info>;
 
-/// @brief Called when a key event is received with a keycode from external devices or ime_send_key_event().
+/// Called when a key event is received with a keycode from external devices or ime_send_key_event().
 ///
-/// @details This function processes a key event with a keycode before an associated UI control for the text input deals with the key event.
+/// This function processes a key event with a keycode before an associated UI control for the text input deals with the key event.
 ///
-/// @since_tizen 5.5
+/// **Since Tizen:**
+/// - 5.5
 ///
-/// @privlevel public
+/// **Privilege level:**
+/// - public
 ///
-/// @privilege %http://tizen.org/privilege/ime
+/// **Privileges:**
+/// - <http://tizen.org/privilege/ime>
 ///
-/// @remarks If the key event is from the external device, @a dev_info will have its name, class and subclass information.
-/// @a dev_info should not be released by the application. The platform manages the handle; the handle is released when ime_process_key_event_with_keycode_cb() exits.
+/// **Remarks:**
+/// - If the key event is from the external device, `dev_info` will have its name, class and subclass information.
+/// - `dev_info` should not be released by the application. The platform manages the handle; the handle is released when ime_process_key_event_with_keycode_cb() exits.
 ///
-/// @param[in] key_code The X11 key code to be sent
-/// @param[in] key_sym The key symbol to be sent
-/// @param[in] key_mask The modifier key mask
-/// @param[in] dev_info The device information handle
-/// @param[in] user_data User data to be passed from the callback registration function
+/// **Parameters:**
+/// - `key_code` (in): The X11 key code to be sent
+/// - `key_sym` (in): The key symbol to be sent
+/// - `key_mask` (in): The modifier key mask
+/// - `dev_info` (in): The device information handle
+/// - `user_data` (in): User data to be passed from the callback registration function
 ///
-/// @return @c true if the event was processed, otherwise @c false. When @c false returns, the event was not processed and was forwarded to the client application.
+/// **Returns:**
+/// - `true` if the event was processed, otherwise `false`. When `false` returns, the event was not processed and was forwarded to the client application.
 ///
-/// @pre The callback should be registered using ime_event_set_process_key_event_with_keycode_cb() function.
+/// **Preconditions:**
+/// - The callback should be registered using ime_event_set_process_key_event_with_keycode_cb() function.
 ///
-/// @see ime_event_set_process_key_event_with_keycode_cb()
-/// @see ime_device_info_get_name()
-/// @see ime_device_info_get_class()
-/// @see ime_device_info_get_subclass()
-/// @see ime_send_key_event()
-/// @see ime_commit_string()
-/// @see ime_show_preedit_string()
-/// @see ime_hide_preedit_string()
-/// @see ime_update_preedit_string()
+/// **See also:**
+/// - `ime_event_set_process_key_event_with_keycode_cb()`
+/// - `ime_device_info_get_name()`
+/// - `ime_device_info_get_class()`
+/// - `ime_device_info_get_subclass()`
+/// - `ime_send_key_event()`
+/// - `ime_commit_string()`
+/// - `ime_show_preedit_string()`
+/// - `ime_hide_preedit_string()`
+/// - `ime_update_preedit_string()`
+/// @nodoc
 typedef ime_process_key_event_with_keycode_cb = ffi
     .Pointer<ffi.NativeFunction<ime_process_key_event_with_keycode_cbFunction>>;
+/// @nodoc
 typedef ime_process_key_event_with_keycode_cbFunction = ffi.Bool Function(
     ffi.UnsignedInt key_code,
     ffi.Int32 key_sym,
     ffi.Int32 key_mask,
     ime_device_info_h dev_info,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartime_process_key_event_with_keycode_cbFunction = bool Function(
     int key_code,
     int key_sym,
@@ -4405,146 +5202,203 @@ typedef Dartime_process_key_event_with_keycode_cbFunction = bool Function(
     ime_device_info_h dev_info,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the system display language is changed.
+/// Called when the system display language is changed.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
 ///
-/// @privlevel public
+/// **Privilege level:**
+/// - public
 ///
-/// @privilege %http://tizen.org/privilege/ime
+/// **Privileges:**
+/// - <http://tizen.org/privilege/ime>
 ///
-/// @param[in] language The language code
-/// @param[in] user_data User data to be passed from the callback registration function
+/// **Parameters:**
+/// - `language` (in): The language code
+/// - `user_data` (in): User data to be passed from the callback registration function
 ///
-/// @pre The callback can be registered using ime_event_set_display_language_changed_cb() function.
+/// **Preconditions:**
+/// - The callback can be registered using ime_event_set_display_language_changed_cb() function.
 ///
-/// @see ime_event_set_display_language_changed_cb()
+/// **See also:**
+/// - `ime_event_set_display_language_changed_cb()`
+/// @nodoc
 typedef ime_display_language_changed_cb
     = ffi.Pointer<ffi.NativeFunction<ime_display_language_changed_cbFunction>>;
+/// @nodoc
 typedef ime_display_language_changed_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> language, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartime_display_language_changed_cbFunction = void Function(
     ffi.Pointer<ffi.Char> language, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the device is rotated.
+/// Called when the device is rotated.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
 ///
-/// @privlevel public
+/// **Privilege level:**
+/// - public
 ///
-/// @privilege %http://tizen.org/privilege/ime
+/// **Privileges:**
+/// - <http://tizen.org/privilege/ime>
 ///
-/// @param[in] degree The rotation degree
-/// @param[in] user_data User data to be passed from the callback registration function
+/// **Parameters:**
+/// - `degree` (in): The rotation degree
+/// - `user_data` (in): User data to be passed from the callback registration function
 ///
-/// @pre The callback can be registered using ime_event_set_rotation_degree_changed_cb() function.
+/// **Preconditions:**
+/// - The callback can be registered using ime_event_set_rotation_degree_changed_cb() function.
 ///
-/// @see ime_event_set_rotation_degree_changed_cb()
+/// **See also:**
+/// - `ime_event_set_rotation_degree_changed_cb()`
+/// @nodoc
 typedef ime_rotation_degree_changed_cb
     = ffi.Pointer<ffi.NativeFunction<ime_rotation_degree_changed_cbFunction>>;
+/// @nodoc
 typedef ime_rotation_degree_changed_cbFunction = ffi.Void Function(
     ffi.Int degree, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartime_rotation_degree_changed_cbFunction = void Function(
     int degree, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when Accessibility in Settings application is on or off.
+/// Called when Accessibility in Settings application is on or off.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
 ///
-/// @privlevel public
+/// **Privilege level:**
+/// - public
 ///
-/// @privilege %http://tizen.org/privilege/ime
+/// **Privileges:**
+/// - <http://tizen.org/privilege/ime>
 ///
-/// @param[in] state Accessibility option state
-/// @param[in] user_data User data to be passed from the callback registration function
+/// **Parameters:**
+/// - `state` (in): Accessibility option state
+/// - `user_data` (in): User data to be passed from the callback registration function
 ///
-/// @pre The callback can be registered using ime_event_set_accessibility_state_changed_cb() function.
+/// **Preconditions:**
+/// - The callback can be registered using ime_event_set_accessibility_state_changed_cb() function.
 ///
-/// @see ime_event_set_accessibility_state_changed_cb()
+/// **See also:**
+/// - `ime_event_set_accessibility_state_changed_cb()`
+/// @nodoc
 typedef ime_accessibility_state_changed_cb = ffi
     .Pointer<ffi.NativeFunction<ime_accessibility_state_changed_cbFunction>>;
+/// @nodoc
 typedef ime_accessibility_state_changed_cbFunction = ffi.Void Function(
     ffi.Bool state, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartime_accessibility_state_changed_cbFunction = void Function(
     bool state, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called to create the option window.
+/// Called to create the option window.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
 ///
-/// @privlevel public
+/// **Privilege level:**
+/// - public
 ///
-/// @privilege %http://tizen.org/privilege/ime
+/// **Privileges:**
+/// - <http://tizen.org/privilege/ime>
 ///
-/// @remarks if Input panel requests to open the option window, @a type will be #IME_OPTION_WINDOW_TYPE_KEYBOARD.
-/// And if Settings application requests to open it, @a type will be #IME_OPTION_WINDOW_TYPE_SETTING_APPLICATION.
-/// The @a window should not be released. The @a window can be used until ime_option_window_destroyed_cb() will be called.
+/// **Remarks:**
+/// - if Input panel requests to open the option window, `type` will be `IME_OPTION_WINDOW_TYPE_KEYBOARD`.
+/// - And if Settings application requests to open it, `type` will be `IME_OPTION_WINDOW_TYPE_SETTING_APPLICATION`.
+/// - The `window` should not be released. The `window` can be used until ime_option_window_destroyed_cb() will be called.
 ///
-/// @param[in] window The created window object
-/// @param[in] type The type of option window
-/// @param[in] user_data User data to be passed from the callback registration function
+/// **Parameters:**
+/// - `window` (in): The created window object
+/// - `type` (in): The type of option window
+/// - `user_data` (in): User data to be passed from the callback registration function
 ///
-/// @pre The callback can be registered using ime_event_set_option_window_created_cb() function. The
-/// ime_create_option_window() calls this callback function or Settings application can call this callback function.
+/// **Preconditions:**
+/// - The callback can be registered using ime_event_set_option_window_created_cb() function. The ime_create_option_window() calls this callback function or Settings application can call this callback function.
 ///
-/// @see ime_event_set_option_window_created_cb()
-/// @see ime_create_option_window()
+/// **See also:**
+/// - `ime_event_set_option_window_created_cb()`
+/// - `ime_create_option_window()`
+/// @nodoc
 typedef ime_option_window_created_cb
     = ffi.Pointer<ffi.NativeFunction<ime_option_window_created_cbFunction>>;
+/// @nodoc
 typedef ime_option_window_created_cbFunction = ffi.Void Function(
     ffi.Pointer<Evas_Object> window,
     ffi.Int32 type,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartime_option_window_created_cbFunction = void Function(
     ffi.Pointer<Evas_Object> window, int type, ffi.Pointer<ffi.Void> user_data);
 
-/// @typedef Evas_Object
-/// An Evas Object handle.
-/// @ingroup Evas_Object_Group
+/// **Typedef:**
+/// - Evas_Object An Evas Object handle.
+///
+/// **Group:**
+/// - Evas_Object_Group
+/// @nodoc
 typedef Evas_Object = Efl_Canvas_Object;
 
-/// @typedef Efl_Canvas_Object
-/// An Evas Object handle
-/// @see Evas_Object
-/// @ingroup Evas_Object_Group
+/// **See also:**
+/// - `Evas_Object`
+///
+/// **Typedef:**
+/// - Efl_Canvas_Object An Evas Object handle
+///
+/// **Group:**
+/// - Evas_Object_Group
+/// @nodoc
 typedef Efl_Canvas_Object = Eo;
 
-/// @typedef Eo
-/// The basic Object type.
+/// **Typedef:**
+/// - Eo The basic Object type.
+/// @nodoc
 typedef Eo = _Eo_Opaque;
 
+/// @nodoc
 final class _Eo_Opaque extends ffi.Opaque {}
 
-/// @brief Called to destroy the option window.
+/// Called to destroy the option window.
 ///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// **Since Tizen:**
+/// - Mobile 2.4; Otherwise 3.0
 ///
-/// @privlevel public
+/// **Privilege level:**
+/// - public
 ///
-/// @privilege %http://tizen.org/privilege/ime
+/// **Privileges:**
+/// - <http://tizen.org/privilege/ime>
 ///
-/// @remarks The @a window should be released using evas_object_del().
+/// **Remarks:**
+/// - The `window` should be released using evas_object_del().
 ///
-/// @param[in] window The window object to destroy
-/// @param[in] user_data User data to be passed to the callback function
+/// **Parameters:**
+/// - `window` (in): The window object to destroy
+/// - `user_data` (in): User data to be passed to the callback function
 ///
-/// @pre The callback can be registered using ime_event_set_option_window_destroyed_cb() function.
-/// ime_destroy_option_window() calls this callback function.
+/// **Preconditions:**
+/// - The callback can be registered using ime_event_set_option_window_destroyed_cb() function. ime_destroy_option_window() calls this callback function.
 ///
-/// @see ime_event_set_option_window_destroyed_cb()
+/// **See also:**
+/// - `ime_event_set_option_window_destroyed_cb()`
+/// @nodoc
 typedef ime_option_window_destroyed_cb
     = ffi.Pointer<ffi.NativeFunction<ime_option_window_destroyed_cbFunction>>;
+/// @nodoc
 typedef ime_option_window_destroyed_cbFunction = ffi.Void Function(
     ffi.Pointer<Evas_Object> window, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartime_option_window_destroyed_cbFunction = void Function(
     ffi.Pointer<Evas_Object> window, ffi.Pointer<ffi.Void> user_data);
 
-/// @typedef Eina_List
-/// Type for a generic double linked list.
+/// **Typedef:**
+/// - Eina_List Type for a generic double linked list.
+/// @nodoc
 typedef Eina_List = _Eina_List;
 
-/// @struct _Eina_List
-/// Type for a generic double linked list.
+/// **Struct:**
+/// - _Eina_List Type for a generic double linked list.
+/// @nodoc
 final class _Eina_List extends ffi.Struct {
   /// < Pointer to list element payload
   external ffi.Pointer<ffi.Void> data;
@@ -4562,19 +5416,19 @@ final class _Eina_List extends ffi.Struct {
   external int __magic;
 }
 
-/// @typedef Eina_List
-/// Type for a generic double linked list.
+/// **Typedef:**
+/// - Eina_List Type for a generic double linked list.
+/// @nodoc
 typedef Eina_List1 = _Eina_List;
 
-/// @typedef Eina_List_Accounting
-/// Cache used to store the last element of a list and the number of
-/// elements, for fast access.
+/// **Typedef:**
+/// - Eina_List_Accounting Cache used to store the last element of a list and the number of elements, for fast access.
+/// @nodoc
 typedef Eina_List_Accounting = _Eina_List_Accounting;
 
-/// @struct _Eina_List_Accounting
-/// Cache used to store the last element of a list and the number of
-/// elements, for fast access. It is for private use and must not be
-/// touched.
+/// **Struct:**
+/// - _Eina_List_Accounting Cache used to store the last element of a list and the number of elements, for fast access. It is for private use and must not be touched.
+/// @nodoc
 final class _Eina_List_Accounting extends ffi.Struct {
   /// < Pointer to the last element of the list - don't touch
   external ffi.Pointer<Eina_List1> last;
@@ -4587,15 +5441,18 @@ final class _Eina_List_Accounting extends ffi.Struct {
   external int __magic;
 }
 
-/// @brief An abstract type for a magic number.
+/// An abstract type for a magic number.
+/// @nodoc
 typedef Eina_Magic = ffi.UnsignedInt;
+/// @nodoc
 typedef DartEina_Magic = int;
 
-/// @typedef Ecore_IMF_Autocapital_Type
+/// **See also:**
+/// - `ecore_imf_context_autocapital_type_set()`
 ///
-/// Autocapitalization Types.
-///
-/// @see ecore_imf_context_autocapital_type_set()
+/// **Typedef:**
+/// - Ecore_IMF_Autocapital_Type Autocapitalization Types.
+/// @nodoc
 abstract class Ecore_IMF_Autocapital_Type {
   /// < No auto-capitalization when typing @since 1.1
   static const int ECORE_IMF_AUTOCAPITAL_TYPE_NONE = 0;
@@ -4610,9 +5467,14 @@ abstract class Ecore_IMF_Autocapital_Type {
   static const int ECORE_IMF_AUTOCAPITAL_TYPE_ALLCHARACTER = 3;
 }
 
-/// @typedef Ecore_IMF_Input_Hints
-/// @brief Enumeration for defining the types of Ecore_IMF Input Hints.
-/// @since 1.12
+/// Enumeration for defining the types of Ecore_IMF Input Hints.
+///
+/// **Since Tizen:**
+/// - 1.12
+///
+/// **Typedef:**
+/// - Ecore_IMF_Input_Hints
+/// @nodoc
 abstract class Ecore_IMF_Input_Hints {
   /// < No active hints @since 1.12
   static const int ECORE_IMF_INPUT_HINT_NONE = 0;
@@ -4664,9 +5526,14 @@ abstract class Ecore_IMF_Input_Hints {
   static const int ECORE_IMF_INPUT_HINT_AUTOFILL_ID = 2816;
 }
 
-/// @typedef Ecore_IMF_BiDi_Direction
-/// @brief Enumeration for defining the types of Ecore_IMF bidirectionality.
-/// @since 1.12
+/// Enumeration for defining the types of Ecore_IMF bidirectionality.
+///
+/// **Since Tizen:**
+/// - 1.12
+///
+/// **Typedef:**
+/// - Ecore_IMF_BiDi_Direction
+/// @nodoc
 abstract class Ecore_IMF_BiDi_Direction {
   /// < The Neutral mode @since 1.12
   static const int ECORE_IMF_BIDI_DIRECTION_NEUTRAL = 0;
@@ -4678,9 +5545,14 @@ abstract class Ecore_IMF_BiDi_Direction {
   static const int ECORE_IMF_BIDI_DIRECTION_RTL = 2;
 }
 
-/// @enum _Ecore_IMF_Device_Class
-/// @brief Enumeration for defining the types of Ecore_IMF_Device_Class
-/// @since 1.14
+/// Enumeration for defining the types of Ecore_IMF_Device_Class
+///
+/// **Since Tizen:**
+/// - 1.14
+///
+/// **Enum:**
+/// - _Ecore_IMF_Device_Class
+/// @nodoc
 abstract class Ecore_IMF_Device_Class {
   /// < Not a device @since 1.14
   static const int ECORE_IMF_DEVICE_CLASS_NONE = 0;
@@ -4707,9 +5579,14 @@ abstract class Ecore_IMF_Device_Class {
   static const int ECORE_IMF_DEVICE_CLASS_GAMEPAD = 7;
 }
 
-/// @enum _Ecore_IMF_Device_Subclass
-/// @brief Enumeration for defining the types of Ecore_IMF_Device_Subclass
-/// @since 1.14
+/// Enumeration for defining the types of Ecore_IMF_Device_Subclass
+///
+/// **Since Tizen:**
+/// - 1.14
+///
+/// **Enum:**
+/// - _Ecore_IMF_Device_Subclass
+/// @nodoc
 abstract class Ecore_IMF_Device_Subclass {
   /// < Not a device @since 1.14
   static const int ECORE_IMF_DEVICE_SUBCLASS_NONE = 0;
@@ -4751,110 +5628,153 @@ abstract class Ecore_IMF_Device_Subclass {
   static const int ECORE_IMF_DEVICE_SUBCLASS_VIRTUAL_KEYBOARD = 12;
 }
 
-/// @brief Called to set the prediction hint string to deliver to the input panel.
+/// Called to set the prediction hint string to deliver to the input panel.
 ///
-/// @since_tizen 4.0
+/// **Since Tizen:**
+/// - 4.0
 ///
-/// @privlevel public
+/// **Privilege level:**
+/// - public
 ///
-/// @privilege %http://tizen.org/privilege/ime
+/// **Privileges:**
+/// - <http://tizen.org/privilege/ime>
 ///
-/// @remarks @a prediction_hint is valid only in the callback. To use outside the callback, make a copy.
-/// This function is used by the applications to deliver the prediction hint message to the input panel.
+/// **Remarks:**
+/// - `prediction_hint` is valid only in the callback. To use outside the callback, make a copy.
+/// - This function is used by the applications to deliver the prediction hint message to the input panel.
 ///
-/// @param[in] prediction_hint The prediction hint to be set to the input panel
-/// @param[in] user_data User data to be passed to the callback function
+/// **Parameters:**
+/// - `prediction_hint` (in): The prediction hint to be set to the input panel
+/// - `user_data` (in): User data to be passed to the callback function
 ///
-/// @pre The callback can be registered using ime_event_set_prediction_hint_set_cb() function.
+/// **Preconditions:**
+/// - The callback can be registered using ime_event_set_prediction_hint_set_cb() function.
 ///
-/// @see ime_event_set_prediction_hint_set_cb()
+/// **See also:**
+/// - `ime_event_set_prediction_hint_set_cb()`
+/// @nodoc
 typedef ime_prediction_hint_set_cb
     = ffi.Pointer<ffi.NativeFunction<ime_prediction_hint_set_cbFunction>>;
+/// @nodoc
 typedef ime_prediction_hint_set_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> prediction_hint, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartime_prediction_hint_set_cbFunction = void Function(
     ffi.Pointer<ffi.Char> prediction_hint, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when an associated text input UI control requests the text entry to set the MIME type.
+/// Called when an associated text input UI control requests the text entry to set the MIME type.
 ///
-/// @since_tizen 4.0
+/// **Since Tizen:**
+/// - 4.0
 ///
-/// @privlevel public
+/// **Privilege level:**
+/// - public
 ///
-/// @privilege %http://tizen.org/privilege/ime
+/// **Privileges:**
+/// - <http://tizen.org/privilege/ime>
 ///
-/// @remarks @a mime_type is valid only in the callback. To use outside the callback, make a copy.
-/// This function is used by the applications to deliver the MIME type to the input panel.
+/// **Remarks:**
+/// - `mime_type` is valid only in the callback. To use outside the callback, make a copy.
+/// - This function is used by the applications to deliver the MIME type to the input panel.
 ///
-/// @param[in] mime_type The MIME type to be set to the input panel
-/// @param[in] user_data User data to be passed to the callback function
+/// **Parameters:**
+/// - `mime_type` (in): The MIME type to be set to the input panel
+/// - `user_data` (in): User data to be passed to the callback function
 ///
-/// @pre The callback can be registered using ime_event_set_mime_type_set_request_cb() function.
+/// **Preconditions:**
+/// - The callback can be registered using ime_event_set_mime_type_set_request_cb() function.
 ///
-/// @see ime_event_set_mime_type_set_request_cb()
+/// **See also:**
+/// - `ime_event_set_mime_type_set_request_cb()`
+/// @nodoc
 typedef ime_mime_type_set_request_cb
     = ffi.Pointer<ffi.NativeFunction<ime_mime_type_set_request_cbFunction>>;
+/// @nodoc
 typedef ime_mime_type_set_request_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> mime_type, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartime_mime_type_set_request_cbFunction = void Function(
     ffi.Pointer<ffi.Char> mime_type, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called to set key-value pairs of predicting messages to deliver to the input panel.
+/// Called to set key-value pairs of predicting messages to deliver to the input panel.
 ///
-/// @since_tizen 5.0
+/// **Since Tizen:**
+/// - 5.0
 ///
-/// @privlevel public
+/// **Privilege level:**
+/// - public
 ///
-/// @privilege %http://tizen.org/privilege/ime
+/// **Privileges:**
+/// - <http://tizen.org/privilege/ime>
 ///
-/// @remarks @a key and @a value is valid only in the callback. To use outside the callback, make a copy.
-/// This function is used by applications to deliver predicted hint messages to the input panel.
+/// **Remarks:**
+/// - `key` and `value` is valid only in the callback. To use outside the callback, make a copy.
+/// - This function is used by applications to deliver predicted hint messages to the input panel.
 ///
-/// @param[in] key The prediction hint key to be set to the input panel
-/// @param[in] value The prediction hint value to be set to the input panel
-/// @param[in] user_data User data to be passed to the callback function
+/// **Parameters:**
+/// - `key` (in): The prediction hint key to be set to the input panel
+/// - `value` (in): The prediction hint value to be set to the input panel
+/// - `user_data` (in): User data to be passed to the callback function
 ///
-/// @pre The callback can be registered using ime_event_set_prediction_hint_data_set_cb() function.
+/// **Preconditions:**
+/// - The callback can be registered using ime_event_set_prediction_hint_data_set_cb() function.
 ///
-/// @see ime_event_set_prediction_hint_data_set_cb()
+/// **See also:**
+/// - `ime_event_set_prediction_hint_data_set_cb()`
+/// @nodoc
 typedef ime_prediction_hint_data_set_cb
     = ffi.Pointer<ffi.NativeFunction<ime_prediction_hint_data_set_cbFunction>>;
+/// @nodoc
 typedef ime_prediction_hint_data_set_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> key,
     ffi.Pointer<ffi.Char> value,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartime_prediction_hint_data_set_cbFunction = void Function(
     ffi.Pointer<ffi.Char> key,
     ffi.Pointer<ffi.Char> value,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when an associated text input UI control requests the input panel to set input hint.
+/// Called when an associated text input UI control requests the input panel to set input hint.
 ///
-/// @since_tizen 6.5
+/// **Since Tizen:**
+/// - 6.5
 ///
-/// @privlevel public
+/// **Privilege level:**
+/// - public
 ///
-/// @privilege %http://tizen.org/privilege/ime
+/// **Privileges:**
+/// - <http://tizen.org/privilege/ime>
 ///
-/// @remarks @a input_hint information is already set to the input panel when it is shown
-/// through #ime_context_h. This callback function will be only called when the client
-/// application changes the edit field's input hint attribute after the input panel is shown.
+/// **Remarks:**
+/// - `input_hint` information is already set to the input panel when it is shown
+/// - through `ime_context_h`. This callback function will be only called when the client
+/// - application changes the edit field's input hint attribute after the input panel is shown.
 ///
-/// @param[in] input_hint The input hint
-/// @param[in] user_data User data to be passed from the callback registration function
+/// **Parameters:**
+/// - `input_hint` (in): The input hint
+/// - `user_data` (in): User data to be passed from the callback registration function
 ///
-/// @pre The callback can be registered using ime_event_set_input_hint_set_cb() function.
+/// **Preconditions:**
+/// - The callback can be registered using ime_event_set_input_hint_set_cb() function.
 ///
-/// @see ime_event_set_input_hint_set_cb()
+/// **See also:**
+/// - `ime_event_set_input_hint_set_cb()`
+/// @nodoc
 typedef ime_input_hint_set_cb
     = ffi.Pointer<ffi.NativeFunction<ime_input_hint_set_cbFunction>>;
+/// @nodoc
 typedef ime_input_hint_set_cbFunction = ffi.Void Function(
     ffi.Int32 input_hint, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartime_input_hint_set_cbFunction = void Function(
     int input_hint, ffi.Pointer<ffi.Void> user_data);
 
+/// @nodoc
 const int IME_ATTR_FONTSTYLE_UNDERLINE = 1;
 
+/// @nodoc
 const int IME_ATTR_FONTSTYLE_HIGHLIGHT = 2;
 
+/// @nodoc
 const int IME_ATTR_FONTSTYLE_REVERSAL = 4;

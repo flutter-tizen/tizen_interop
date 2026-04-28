@@ -1,3 +1,6 @@
+/// {@category 8.0/tizen}
+library tizen_interop_8_0.nsd_ssdp;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen nsd-ssdp APIs.
+/// {@category 8.0/tizen}
 class Tizen80NsdSsdp {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,13 +28,18 @@ class Tizen80NsdSsdp {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Initializes SSDP.
-  /// @since_tizen 3.0
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #SSDP_ERROR_NONE Successful
-  /// @retval #SSDP_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #SSDP_ERROR_NOT_SUPPORTED Not supported
+  /// Initializes SSDP.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SSDP_ERROR_NONE`: Successful
+  /// - `SSDP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `SSDP_ERROR_NOT_SUPPORTED`: Not supported
   int ssdp_initialize() {
     return _ssdp_initialize();
   }
@@ -40,12 +49,17 @@ class Tizen80NsdSsdp {
   late final _ssdp_initialize =
       _ssdp_initializePtr.asFunction<int Function()>();
 
-  /// @brief Deinitializes SSDP.
-  /// @since_tizen 3.0
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #SSDP_ERROR_NONE Successful
-  /// @retval #SSDP_ERROR_NOT_SUPPORTED Not supported
+  /// Deinitializes SSDP.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SSDP_ERROR_NONE`: Successful
+  /// - `SSDP_ERROR_NOT_SUPPORTED`: Not supported
   int ssdp_deinitialize() {
     return _ssdp_deinitialize();
   }
@@ -55,20 +69,33 @@ class Tizen80NsdSsdp {
   late final _ssdp_deinitialize =
       _ssdp_deinitializePtr.asFunction<int Function()>();
 
-  /// @brief Creates a SSDP local service handle.
-  /// @since_tizen 3.0
-  /// @remarks You must release @a local_service using ssdp_destroy_local_service().
-  /// @param[in] target The SSDP local service's target. It may be a device type or a service type specified in UPnP forum (http://upnp.org)
-  /// @param[out] local_service The SSDP local service handle
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #SSDP_ERROR_NONE Successful
-  /// @retval #SSDP_ERROR_NOT_INITIALIZED Not initialized
-  /// @retval #SSDP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SSDP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #SSDP_ERROR_NOT_SUPPORTED Not supported
-  /// @see ssdp_destroy_local_service()
-  /// @pre This API needs ssdp_initialize() before use.
+  /// Creates a SSDP local service handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `local_service` using ssdp_destroy_local_service().
+  ///
+  /// **Parameters:**
+  /// - `target` (in): The SSDP local service's target. It may be a device type or a service type specified in UPnP forum (http://upnp.org)
+  /// - `local_service` (out): The SSDP local service handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SSDP_ERROR_NONE`: Successful
+  /// - `SSDP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `SSDP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SSDP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SSDP_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - This API needs ssdp_initialize() before use.
+  ///
+  /// **See also:**
+  /// - `ssdp_destroy_local_service()`
   int ssdp_create_local_service(
     ffi.Pointer<ffi.Char> target,
     ffi.Pointer<ssdp_service_h> local_service,
@@ -87,18 +114,28 @@ class Tizen80NsdSsdp {
       _ssdp_create_local_servicePtr.asFunction<
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ssdp_service_h>)>();
 
-  /// @brief Destroys the SSDP local service handle.
-  /// @details You must call ssdp_deregister_local_service() before destroying the local service.
-  /// @since_tizen 3.0
-  /// @param[in] local_service The SSDP local service handle
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #SSDP_ERROR_NONE Successful
-  /// @retval #SSDP_ERROR_NOT_INITIALIZED Not initialized
-  /// @retval #SSDP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SSDP_ERROR_SERVICE_NOT_FOUND Service not found
-  /// @retval #SSDP_ERROR_NOT_SUPPORTED Not supported
-  /// @see ssdp_create_local_service()
+  /// Destroys the SSDP local service handle.
+  ///
+  /// You must call ssdp_deregister_local_service() before destroying the local service.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `local_service` (in): The SSDP local service handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SSDP_ERROR_NONE`: Successful
+  /// - `SSDP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `SSDP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SSDP_ERROR_SERVICE_NOT_FOUND`: Service not found
+  /// - `SSDP_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `ssdp_create_local_service()`
   int ssdp_destroy_local_service(
     int local_service,
   ) {
@@ -113,20 +150,29 @@ class Tizen80NsdSsdp {
   late final _ssdp_destroy_local_service =
       _ssdp_destroy_local_servicePtr.asFunction<int Function(int)>();
 
-  /// @brief Sets the USN (Unique Service Name) of SSDP local service. The USN format is specified in UPnP forum (http://upnp.org).
-  /// @since_tizen 3.0
-  /// @remarks You must pass only unregistered @a local_service created using ssdp_create_local_service().
-  /// If @a local_service is already registered, you cannot set @a usn.
-  /// @param[in] local_service The SSDP local service handle
-  /// @param[in] usn The USN of SSDP local service
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #SSDP_ERROR_NONE Successful
-  /// @retval #SSDP_ERROR_NOT_INITIALIZED Not initialized
-  /// @retval #SSDP_ERROR_SERVICE_NOT_FOUND Service not found
-  /// @retval #SSDP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SSDP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #SSDP_ERROR_NOT_SUPPORTED Not supported
+  /// Sets the USN (Unique Service Name) of SSDP local service. The USN format is specified in UPnP forum (http://upnp.org).
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must pass only unregistered `local_service` created using ssdp_create_local_service().
+  /// - If `local_service` is already registered, you cannot set `usn`.
+  ///
+  /// **Parameters:**
+  /// - `local_service` (in): The SSDP local service handle
+  /// - `usn` (in): The USN of SSDP local service
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SSDP_ERROR_NONE`: Successful
+  /// - `SSDP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `SSDP_ERROR_SERVICE_NOT_FOUND`: Service not found
+  /// - `SSDP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SSDP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SSDP_ERROR_NOT_SUPPORTED`: Not supported
   int ssdp_service_set_usn(
     int local_service,
     ffi.Pointer<ffi.Char> usn,
@@ -144,20 +190,29 @@ class Tizen80NsdSsdp {
   late final _ssdp_service_set_usn = _ssdp_service_set_usnPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the URL (Uniform Resource Locator) for description of SSDP local service. See RFC 3986.
-  /// @since_tizen 3.0
-  /// @remarks You must pass only unregistered @a local_service created using ssdp_create_local_service().
-  /// If @a local_service is already registered, you cannot set @a url.
-  /// @param[in] local_service The SSDP local service handle
-  /// @param[in] url The URL of SSDP local service
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #SSDP_ERROR_NONE Successful
-  /// @retval #SSDP_ERROR_NOT_INITIALIZED Not initialized
-  /// @retval #SSDP_ERROR_SERVICE_NOT_FOUND Service not found
-  /// @retval #SSDP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SSDP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #SSDP_ERROR_NOT_SUPPORTED Not supported
+  /// Sets the URL (Uniform Resource Locator) for description of SSDP local service. See RFC 3986.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must pass only unregistered `local_service` created using ssdp_create_local_service().
+  /// - If `local_service` is already registered, you cannot set `url`.
+  ///
+  /// **Parameters:**
+  /// - `local_service` (in): The SSDP local service handle
+  /// - `url` (in): The URL of SSDP local service
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SSDP_ERROR_NONE`: Successful
+  /// - `SSDP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `SSDP_ERROR_SERVICE_NOT_FOUND`: Service not found
+  /// - `SSDP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SSDP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SSDP_ERROR_NOT_SUPPORTED`: Not supported
   int ssdp_service_set_url(
     int local_service,
     ffi.Pointer<ffi.Char> url,
@@ -175,19 +230,28 @@ class Tizen80NsdSsdp {
   late final _ssdp_service_set_url = _ssdp_service_set_urlPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the target of SSDP service.
-  /// @since_tizen 3.0
-  /// @remarks You must release @a target using free().
-  /// @param[in] service The SSDP service handle
-  /// @param[out] target The target of SSDP service
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #SSDP_ERROR_NONE Successful
-  /// @retval #SSDP_ERROR_NOT_INITIALIZED Not initialized
-  /// @retval #SSDP_ERROR_SERVICE_NOT_FOUND Service not found
-  /// @retval #SSDP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SSDP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #SSDP_ERROR_NOT_SUPPORTED Not supported
+  /// Gets the target of SSDP service.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `target` using free().
+  ///
+  /// **Parameters:**
+  /// - `service` (in): The SSDP service handle
+  /// - `target` (out): The target of SSDP service
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SSDP_ERROR_NONE`: Successful
+  /// - `SSDP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `SSDP_ERROR_SERVICE_NOT_FOUND`: Service not found
+  /// - `SSDP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SSDP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SSDP_ERROR_NOT_SUPPORTED`: Not supported
   int ssdp_service_get_target(
     int service,
     ffi.Pointer<ffi.Pointer<ffi.Char>> target,
@@ -205,19 +269,28 @@ class Tizen80NsdSsdp {
   late final _ssdp_service_get_target = _ssdp_service_get_targetPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the USN of SSDP service.
-  /// @since_tizen 3.0
-  /// @remarks You must release @a usn using free().
-  /// @param[in] service The SSDP service handle
-  /// @param[out] usn The USN of SSDP service
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #SSDP_ERROR_NONE Successful
-  /// @retval #SSDP_ERROR_NOT_INITIALIZED Not initialized
-  /// @retval #SSDP_ERROR_SERVICE_NOT_FOUND Service not found
-  /// @retval #SSDP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SSDP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #SSDP_ERROR_NOT_SUPPORTED Not supported
+  /// Gets the USN of SSDP service.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `usn` using free().
+  ///
+  /// **Parameters:**
+  /// - `service` (in): The SSDP service handle
+  /// - `usn` (out): The USN of SSDP service
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SSDP_ERROR_NONE`: Successful
+  /// - `SSDP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `SSDP_ERROR_SERVICE_NOT_FOUND`: Service not found
+  /// - `SSDP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SSDP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SSDP_ERROR_NOT_SUPPORTED`: Not supported
   int ssdp_service_get_usn(
     int service,
     ffi.Pointer<ffi.Pointer<ffi.Char>> usn,
@@ -235,19 +308,28 @@ class Tizen80NsdSsdp {
   late final _ssdp_service_get_usn = _ssdp_service_get_usnPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the URL of SSDP service.
-  /// @since_tizen 3.0
-  /// @remarks You must release @a url using free().
-  /// @param[in] service The SSDP service handle
-  /// @param[out] url The URL of SSDP service
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #SSDP_ERROR_NONE Successful
-  /// @retval #SSDP_ERROR_NOT_INITIALIZED Not initialized
-  /// @retval #SSDP_ERROR_SERVICE_NOT_FOUND Service not found
-  /// @retval #SSDP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SSDP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #SSDP_ERROR_NOT_SUPPORTED Not supported
+  /// Gets the URL of SSDP service.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `url` using free().
+  ///
+  /// **Parameters:**
+  /// - `service` (in): The SSDP service handle
+  /// - `url` (out): The URL of SSDP service
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SSDP_ERROR_NONE`: Successful
+  /// - `SSDP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `SSDP_ERROR_SERVICE_NOT_FOUND`: Service not found
+  /// - `SSDP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SSDP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SSDP_ERROR_NOT_SUPPORTED`: Not supported
   int ssdp_service_get_url(
     int service,
     ffi.Pointer<ffi.Pointer<ffi.Char>> url,
@@ -265,26 +347,42 @@ class Tizen80NsdSsdp {
   late final _ssdp_service_get_url = _ssdp_service_get_urlPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Registers the SSDP local service for publishing.
-  /// @details You must set a USN and a URL of the local service before ssdp_register_local_service() is called.
-  /// @since_tizen 3.0
-  /// @remarks You must pass only local_service created using ssdp_create_local_service().
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @param[in] local_service The SSDP local service handle
-  /// @param[in] registered_cb The callback function to be called
-  /// @param[in] user_data The user data passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #SSDP_ERROR_NONE Successful
-  /// @retval #SSDP_ERROR_NOT_INITIALIZED Not initialized
-  /// @retval #SSDP_ERROR_SERVICE_NOT_FOUND Service not found
-  /// @retval #SSDP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SSDP_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #SSDP_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #SSDP_ERROR_SERVICE_ALREADY_REGISTERED Service already registered
-  /// @retval #SSDP_ERROR_PERMISSION_DENIED Permission Denied
-  /// @pre This API needs ssdp_service_set_usn() and ssdp_service_set_url() before use.
+  /// Registers the SSDP local service for publishing.
+  ///
+  /// You must set a USN and a URL of the local service before ssdp_register_local_service() is called.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Remarks:**
+  /// - You must pass only local_service created using ssdp_create_local_service().
+  ///
+  /// **Parameters:**
+  /// - `local_service` (in): The SSDP local service handle
+  /// - `registered_cb` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SSDP_ERROR_NONE`: Successful
+  /// - `SSDP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `SSDP_ERROR_SERVICE_NOT_FOUND`: Service not found
+  /// - `SSDP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SSDP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `SSDP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SSDP_ERROR_SERVICE_ALREADY_REGISTERED`: Service already registered
+  /// - `SSDP_ERROR_PERMISSION_DENIED`: Permission Denied
+  ///
+  /// **Preconditions:**
+  /// - This API needs ssdp_service_set_usn() and ssdp_service_set_url() before use.
   int ssdp_register_local_service(
     int local_service,
     ssdp_registered_cb registered_cb,
@@ -305,17 +403,26 @@ class Tizen80NsdSsdp {
       _ssdp_register_local_servicePtr.asFunction<
           int Function(int, ssdp_registered_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Deregisters the SSDP local service.
-  /// @since_tizen 3.0
-  /// @remarks You must pass only local_service created using ssdp_create_local_service().
-  /// @param[in] local_service The SSDP local service handle
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #SSDP_ERROR_NONE Successful
-  /// @retval #SSDP_ERROR_NOT_INITIALIZED Not initialized
-  /// @retval #SSDP_ERROR_SERVICE_NOT_FOUND Service not found
-  /// @retval #SSDP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SSDP_ERROR_NOT_SUPPORTED Not supported
+  /// Deregisters the SSDP local service.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must pass only local_service created using ssdp_create_local_service().
+  ///
+  /// **Parameters:**
+  /// - `local_service` (in): The SSDP local service handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SSDP_ERROR_NONE`: Successful
+  /// - `SSDP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `SSDP_ERROR_SERVICE_NOT_FOUND`: Service not found
+  /// - `SSDP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SSDP_ERROR_NOT_SUPPORTED`: Not supported
   int ssdp_deregister_local_service(
     int local_service,
   ) {
@@ -330,25 +437,37 @@ class Tizen80NsdSsdp {
   late final _ssdp_deregister_local_service =
       _ssdp_deregister_local_servicePtr.asFunction<int Function(int)>();
 
-  /// @brief Starts browsing the SSDP remote service.
-  /// @details ssdp_start_browsing_service() keeps browsing services until calling ssdp_stop_browsing_service().
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @param[in] target The target to browse
-  /// @param[out] ssdp_browser The SSDP browser handle
-  /// @param[in] found_cb The callback function to be called
-  /// @param[in] user_data The user data passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #SSDP_ERROR_NONE Successful
-  /// @retval #SSDP_ERROR_NOT_INITIALIZED Not initialized
-  /// @retval #SSDP_ERROR_SERVICE_NOT_FOUND Service not found
-  /// @retval #SSDP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SSDP_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #SSDP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #SSDP_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #SSDP_ERROR_PERMISSION_DENIED Permission Denied
+  /// Starts browsing the SSDP remote service.
+  ///
+  /// ssdp_start_browsing_service() keeps browsing services until calling ssdp_stop_browsing_service().
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Parameters:**
+  /// - `target` (in): The target to browse
+  /// - `ssdp_browser` (out): The SSDP browser handle
+  /// - `found_cb` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SSDP_ERROR_NONE`: Successful
+  /// - `SSDP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `SSDP_ERROR_SERVICE_NOT_FOUND`: Service not found
+  /// - `SSDP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SSDP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `SSDP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SSDP_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SSDP_ERROR_PERMISSION_DENIED`: Permission Denied
   int ssdp_start_browsing_service(
     ffi.Pointer<ffi.Char> target,
     ffi.Pointer<ssdp_browser_h> ssdp_browser,
@@ -375,16 +494,23 @@ class Tizen80NsdSsdp {
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ssdp_browser_h>,
               ssdp_found_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Stops browsing the SSDP remote service.
-  /// @since_tizen 3.0
-  /// @param[in] ssdp_browser The SSDP browser handle
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #SSDP_ERROR_NONE Successful
-  /// @retval #SSDP_ERROR_NOT_INITIALIZED Not initialized
-  /// @retval #SSDP_ERROR_SERVICE_NOT_FOUND Service not found
-  /// @retval #SSDP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SSDP_ERROR_NOT_SUPPORTED Not supported
+  /// Stops browsing the SSDP remote service.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ssdp_browser` (in): The SSDP browser handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SSDP_ERROR_NONE`: Successful
+  /// - `SSDP_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `SSDP_ERROR_SERVICE_NOT_FOUND`: Service not found
+  /// - `SSDP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SSDP_ERROR_NOT_SUPPORTED`: Not supported
   int ssdp_stop_browsing_service(
     int ssdp_browser,
   ) {
@@ -400,8 +526,11 @@ class Tizen80NsdSsdp {
       _ssdp_stop_browsing_servicePtr.asFunction<int Function(int)>();
 }
 
-/// @brief Enumeration for Network Service Discovery SSDP error code.
-/// @since_tizen 3.0
+/// Enumeration for Network Service Discovery SSDP error code.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class ssdp_error_e {
   /// < Successful
   static const int SSDP_ERROR_NONE = 0;
@@ -431,8 +560,11 @@ abstract class ssdp_error_e {
   static const int SSDP_ERROR_SERVICE_ALREADY_REGISTERED = -29949946;
 }
 
-/// @brief Enumeration for Network Service Discovery SSDP service browse state.
-/// @since_tizen 3.0
+/// Enumeration for Network Service Discovery SSDP service browse state.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class ssdp_service_state_e {
   /// < A new service is available
   static const int SSDP_SERVICE_STATE_AVAILABLE = 0;
@@ -441,37 +573,63 @@ abstract class ssdp_service_state_e {
   static const int SSDP_SERVICE_STATE_UNAVAILABLE = 1;
 }
 
-/// @brief The SSDP service handle.
-/// @since_tizen 3.0
+/// The SSDP service handle.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef ssdp_service_h = ffi.UnsignedInt;
+/// @nodoc
 typedef Dartssdp_service_h = int;
 
-/// @brief Called when the registration of SSDP service is finished.
-/// @since_tizen 3.0
-/// @param[in] result The result of registration
-/// @param[in] ssdp_local_service The SSDP local service handle
-/// @param[in] user_data The user data passed from the request function
-/// @see ssdp_register_local_service()
+/// Called when the registration of SSDP service is finished.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `result` (in): The result of registration
+/// - `ssdp_local_service` (in): The SSDP local service handle
+/// - `user_data` (in): The user data passed from the request function
+///
+/// **See also:**
+/// - `ssdp_register_local_service()`
+/// @nodoc
 typedef ssdp_registered_cb
     = ffi.Pointer<ffi.NativeFunction<ssdp_registered_cbFunction>>;
+/// @nodoc
 typedef ssdp_registered_cbFunction = ffi.Void Function(ffi.Int32 result,
     ssdp_service_h ssdp_local_service, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartssdp_registered_cbFunction = void Function(int result,
     Dartssdp_service_h ssdp_local_service, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The SSDP browser handle.
-/// @since_tizen 3.0
+/// The SSDP browser handle.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef ssdp_browser_h = ffi.UnsignedInt;
+/// @nodoc
 typedef Dartssdp_browser_h = int;
 
-/// @brief Called when a service has become available or unavailable.
-/// @since_tizen 3.0
-/// @param[in] state The state of found service
-/// @param[in] ssdp_service The SSDP remote service handle
-/// @param[in] user_data The user data passed from the request function
-/// @see ssdp_start_browsing_service()
+/// Called when a service has become available or unavailable.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `state` (in): The state of found service
+/// - `ssdp_service` (in): The SSDP remote service handle
+/// - `user_data` (in): The user data passed from the request function
+///
+/// **See also:**
+/// - `ssdp_start_browsing_service()`
+/// @nodoc
 typedef ssdp_found_cb = ffi.Pointer<ffi.NativeFunction<ssdp_found_cbFunction>>;
+/// @nodoc
 typedef ssdp_found_cbFunction = ffi.Void Function(ffi.Int32 state,
     ssdp_service_h ssdp_remote_service, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartssdp_found_cbFunction = void Function(int state,
     Dartssdp_service_h ssdp_remote_service, ffi.Pointer<ffi.Void> user_data);

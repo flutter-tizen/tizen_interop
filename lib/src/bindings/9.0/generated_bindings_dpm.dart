@@ -1,3 +1,6 @@
+/// {@category 9.0/tizen}
+library tizen_interop_9_0.dpm;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen dpm APIs.
+/// {@category 9.0/tizen}
 class Tizen90Dpm {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,23 +28,32 @@ class Tizen90Dpm {
           lookup)
       : _lookup = lookup;
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief       Creates the device policy manager handle.
-  /// @details     This API creates device policy manager handle required to
-  /// the device policy APIs.
-  /// This API is also used to verify whether caller is authorized
-  /// or not.
-  /// @since_tizen 3.0
-  /// @return      Device policy manager handle on success, otherwise NULL
-  /// @remarks      The specific error code can be obtained by using the
-  /// get_last_result() method. Error codes are described in
-  /// exception section.
-  /// The returned handle should be released using dpm_manager_destroy().
-  /// @exception   #DPM_ERROR_NONE No error
-  /// @exception   #DPM_ERROR_CONNECTION_REFUSED Connection refused
-  /// @exception   #DPM_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see         dpm_manager_destroy()
-  /// @see         get_last_result()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Creates the device policy manager handle.
+  ///
+  /// This API creates device policy manager handle required to the device policy APIs. This API is also used to verify whether caller is authorized or not.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The specific error code can be obtained by using the
+  /// - get_last_result() method. Error codes are described in
+  /// - exception section.
+  /// - The returned handle should be released using dpm_manager_destroy().
+  ///
+  /// **Returns:**
+  /// - Device policy manager handle on success, otherwise NULL
+  ///
+  /// **Exceptions:**
+  /// - `DPM_ERROR_NONE`: No error
+  /// - `DPM_ERROR_CONNECTION_REFUSED`: Connection refused
+  /// - `DPM_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `dpm_manager_destroy()`
+  /// - `get_last_result()`
   device_policy_manager_h dpm_manager_create() {
     return _dpm_manager_create();
   }
@@ -51,17 +64,30 @@ class Tizen90Dpm {
   late final _dpm_manager_create =
       _dpm_manager_createPtr.asFunction<device_policy_manager_h Function()>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief       Releases the device policy manager handle.
-  /// @details     This API must be called if interaction with the device
-  /// policy manager is no longer required.
-  /// @since_tizen 3.0
-  /// @param[in]   handle Device policy manager handle
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Releases the device policy manager handle.
+  ///
+  /// This API must be called if interaction with the device policy manager is no longer required.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
   int dpm_manager_destroy(
     device_policy_manager_h handle,
   ) {
@@ -76,26 +102,39 @@ class Tizen90Dpm {
   late final _dpm_manager_destroy = _dpm_manager_destroyPtr
       .asFunction<int Function(device_policy_manager_h)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief       Adds policy change callback to the device policy
-  /// manager.
-  /// @details     This API can be used to subscribe policy change callback.
-  /// The callback specified to this API is asynchronously called when
-  /// policy is changed on runtime.
-  /// @since_tizen 3.0
-  /// @param[in]   handle Device policy manager handle
-  /// @param[in]   name Policy name to subscribe(see @ref CAPI_SECURITY_DPM_MODULE_POLICY)
-  /// @param[in]   callback The callback when policy is changed
-  /// @param[in]   user_data User specified data passed to the callback
-  /// @param[out]  id Policy change callback identifier
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @remarks     See @ref CAPI_SECURITY_DPM_MODULE_POLICY section for available policy name
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
-  /// @see         dpm_remove_policy_changed_cb()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Adds policy change callback to the device policy manager.
+  ///
+  /// This API can be used to subscribe policy change callback. The callback specified to this API is asynchronously called when policy is changed on runtime.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - See `CAPI_SECURITY_DPM_MODULE_POLICY` section for available policy name
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `name` (in): Policy name to subscribe(see `CAPI_SECURITY_DPM_MODULE_POLICY)`
+  /// - `callback` (in): The callback when policy is changed
+  /// - `user_data` (in): User specified data passed to the callback
+  /// - `id` (out): Policy change callback identifier
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  /// - `dpm_remove_policy_changed_cb()`
   int dpm_add_policy_changed_cb(
     device_policy_manager_h handle,
     ffi.Pointer<ffi.Char> name,
@@ -129,22 +168,34 @@ class Tizen90Dpm {
               ffi.Pointer<ffi.Void>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief       Removes policy change callback from the device policy
-  /// manager.
-  /// @details     This API should be called if policy change subscription is no longer
-  /// required.
-  /// @since_tizen 3.0
-  /// @param[in]   handle Device policy manager handle
-  /// @param[in]   id Policy change callback identifier
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @pre         The callback identifier must be created by dpm_add_policy_changed_cb().
-  /// @see         dpm_manager_create()
-  /// @see         dpm_add_policy_changed_cb()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Removes policy change callback from the device policy manager.
+  ///
+  /// This API should be called if policy change subscription is no longer required.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `id` (in): Policy change callback identifier
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  /// - The callback identifier must be created by dpm_add_policy_changed_cb().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  /// - `dpm_add_policy_changed_cb()`
   int dpm_remove_policy_changed_cb(
     device_policy_manager_h handle,
     int id,
@@ -162,26 +213,40 @@ class Tizen90Dpm {
   late final _dpm_remove_policy_changed_cb = _dpm_remove_policy_changed_cbPtr
       .asFunction<int Function(device_policy_manager_h, int)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief       Adds signal callback.
-  /// @details     This API can be used to receive signals raised by the device policy manager.
-  /// The callback specified to this function is automatically called when
-  /// the device policy manager raises signal.
-  /// @since_tizen 3.0
-  /// @param[in]   handle Device policy manager handle
-  /// @param[in]   signal The signal name to receive(see @ref CAPI_DPM_SECURITY_MODULE_SIGNAL)
-  /// @param[in]   callback The signal callback
-  /// @param[in]   user_data The user data passed to the callback function
-  /// @param[out]  id Signal identifier
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @remarks     See @ref CAPI_DPM_SECURITY_MODULE_SIGNAL section for signals
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
-  /// @see         dpm_manager_destroy()
-  /// @see         dpm_remove_signal_cb()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Adds signal callback.
+  ///
+  /// This API can be used to receive signals raised by the device policy manager. The callback specified to this function is automatically called when the device policy manager raises signal.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - See `CAPI_DPM_SECURITY_MODULE_SIGNAL` section for signals
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `signal` (in): The signal name to receive(see `CAPI_DPM_SECURITY_MODULE_SIGNAL)`
+  /// - `callback` (in): The signal callback
+  /// - `user_data` (in): The user data passed to the callback function
+  /// - `id` (out): Signal identifier
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  /// - `dpm_manager_destroy()`
+  /// - `dpm_remove_signal_cb()`
   int dpm_add_signal_cb(
     device_policy_manager_h handle,
     ffi.Pointer<ffi.Char> signal,
@@ -210,20 +275,34 @@ class Tizen90Dpm {
       int Function(device_policy_manager_h, ffi.Pointer<ffi.Char>,
           dpm_signal_cb, ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief       Removes signal callback.
-  /// @details     This API removes signal callback.
-  /// @since_tizen 3.0
-  /// @param[in]   handle Device policy manager handle
-  /// @param[in]   id Signal identifier
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @pre         The context must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
-  /// @see         dpm_manager_destroy()
-  /// @see         dpm_add_signal_cb()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Removes signal callback.
+  ///
+  /// This API removes signal callback.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `id` (in): Signal identifier
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  ///
+  /// **Preconditions:**
+  /// - The context must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  /// - `dpm_manager_destroy()`
+  /// - `dpm_add_signal_cb()`
   int dpm_remove_signal_cb(
     device_policy_manager_h handle,
     int id,
@@ -241,25 +320,42 @@ class Tizen90Dpm {
   late final _dpm_remove_signal_cb = _dpm_remove_signal_cbPtr
       .asFunction<int Function(device_policy_manager_h, int)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Sets password quality.
-  /// @details     An administrator can set the password restrictions it is imposing.
-  /// After setting this, the user will not be able to
-  /// enter a new password that is not at least as restrictive as what has been set.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.password
-  /// @param[in]   handle Device policy manager handle
-  /// @param[in]   quality Password quality type, values of #dpm_password_quality_e combined with bitwise 'or'
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Sets password quality.
+  ///
+  /// An administrator can set the password restrictions it is imposing. After setting this, the user will not be able to enter a new password that is not at least as restrictive as what has been set.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.password>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `quality` (in): Password quality type, values of `dpm_password_quality_e` combined with bitwise 'or'
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_password_set_quality(
     device_policy_manager_h handle,
     int quality,
@@ -277,23 +373,42 @@ class Tizen90Dpm {
   late final _dpm_password_set_quality = _dpm_password_set_qualityPtr
       .asFunction<int Function(device_policy_manager_h, int)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Gets password quality.
-  /// @details     An administrator can get the password restrictions it is imposing.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.password
-  /// @param[in]   handle Device policy manager handle
-  /// @param[out]   quality Password quality type, values of #dpm_password_quality_e combined with bitwise 'or'
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Gets password quality.
+  ///
+  /// An administrator can get the password restrictions it is imposing.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.password>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `quality` (out): Password quality type, values of `dpm_password_quality_e` combined with bitwise 'or'
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_password_get_quality(
     device_policy_manager_h handle,
     ffi.Pointer<ffi.Int> quality,
@@ -312,25 +427,42 @@ class Tizen90Dpm {
       _dpm_password_get_qualityPtr.asFunction<
           int Function(device_policy_manager_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Sets password minimum length.
-  /// @details     Sets the minimum allowed password length. After setting this,
-  /// the user will not be able to enter a new password that is
-  /// shorter than the setting length.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.password
-  /// @param[in]   handle Device policy manager handle
-  /// @param[in]   value Allowed minimum password length
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Sets password minimum length.
+  ///
+  /// Sets the minimum allowed password length. After setting this, the user will not be able to enter a new password that is shorter than the setting length.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.password>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `value` (in): Allowed minimum password length
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_password_set_minimum_length(
     device_policy_manager_h handle,
     int value,
@@ -349,23 +481,42 @@ class Tizen90Dpm {
       _dpm_password_set_minimum_lengthPtr
           .asFunction<int Function(device_policy_manager_h, int)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Gets password minimum length.
-  /// @details     Gets the minimum allowed password length.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.password
-  /// @param[in]   handle Device policy manager handle
-  /// @param[out]   value Allowed minimum password length
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Gets password minimum length.
+  ///
+  /// Gets the minimum allowed password length.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.password>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `value` (out): Allowed minimum password length
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_password_get_minimum_length(
     device_policy_manager_h handle,
     ffi.Pointer<ffi.Int> value,
@@ -384,25 +535,42 @@ class Tizen90Dpm {
       _dpm_password_get_minimum_lengthPtr.asFunction<
           int Function(device_policy_manager_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Sets minimum complex char in password.
-  /// @details     Complex characters are all non-alphabetic characters;
-  /// that is, numbers and symbols. Admin can configure this
-  /// setting and make the password more secure.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.password
-  /// @param[in]   handle Device policy manager handle
-  /// @param[in]   value Number of minimum complex char in password.
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Sets minimum complex char in password.
+  ///
+  /// Complex characters are all non-alphabetic characters; that is, numbers and symbols. Admin can configure this setting and make the password more secure.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.password>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `value` (in): Number of minimum complex char in password.
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_password_set_min_complex_chars(
     device_policy_manager_h handle,
     int value,
@@ -421,24 +589,42 @@ class Tizen90Dpm {
       _dpm_password_set_min_complex_charsPtr
           .asFunction<int Function(device_policy_manager_h, int)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Gets minimum complex char in password.
-  /// @details     Complex characters are all non-alphabetic characters;
-  /// that is, numbers and symbols.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.password
-  /// @param[in]   handle Device policy manager handle
-  /// @param[out]   value Number of minimum complex char in password.
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Gets minimum complex char in password.
+  ///
+  /// Complex characters are all non-alphabetic characters; that is, numbers and symbols.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.password>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `value` (out): Number of minimum complex char in password.
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_password_get_min_complex_chars(
     device_policy_manager_h handle,
     ffi.Pointer<ffi.Int> value,
@@ -457,23 +643,42 @@ class Tizen90Dpm {
       _dpm_password_get_min_complex_charsPtr.asFunction<
           int Function(device_policy_manager_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Sets maximum number of failed attempts before device is wiped.
-  /// @details     If user fails the last attempt, device will be wiped.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.password
-  /// @param[in]   handle Device policy manager handle
-  /// @param[in]   value Maximum count for failed passwords.
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Sets maximum number of failed attempts before device is wiped.
+  ///
+  /// If user fails the last attempt, device will be wiped.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.password>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `value` (in): Maximum count for failed passwords.
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_password_set_maximum_failed_attempts_for_wipe(
     device_policy_manager_h handle,
     int value,
@@ -492,23 +697,42 @@ class Tizen90Dpm {
       _dpm_password_set_maximum_failed_attempts_for_wipePtr
           .asFunction<int Function(device_policy_manager_h, int)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Gets maximum number of failed attempts before device is wiped.
-  /// @details     If user fails the last attempt, device will be wiped.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.password
-  /// @param[in]   handle Device policy manager handle
-  /// @param[out]   value Maximum count for failed passwords.
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Gets maximum number of failed attempts before device is wiped.
+  ///
+  /// If user fails the last attempt, device will be wiped.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.password>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `value` (out): Maximum count for failed passwords.
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_password_get_maximum_failed_attempts_for_wipe(
     device_policy_manager_h handle,
     ffi.Pointer<ffi.Int> value,
@@ -527,24 +751,42 @@ class Tizen90Dpm {
       _dpm_password_get_maximum_failed_attempts_for_wipePtr.asFunction<
           int Function(device_policy_manager_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Sets the number of days password expires.
-  /// @details     An administrator can configure the password age to force
-  /// the user to enter a new password after every expiration period.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.password
-  /// @param[in]   handle Device policy manager handle
-  /// @param[in]   value Number of days after which the password expires.
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Sets the number of days password expires.
+  ///
+  /// An administrator can configure the password age to force the user to enter a new password after every expiration period.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.password>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `value` (in): Number of days after which the password expires.
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_password_set_expires(
     device_policy_manager_h handle,
     int value,
@@ -562,24 +804,42 @@ class Tizen90Dpm {
   late final _dpm_password_set_expires = _dpm_password_set_expiresPtr
       .asFunction<int Function(device_policy_manager_h, int)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Gets the number of days password expires.
-  /// @details     An administrator can get the password age to force
-  /// the user to enter a new password after every expiration period.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.password
-  /// @param[in]   handle Device policy manager handle
-  /// @param[out]   value Number of days after which the password expires.
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Gets the number of days password expires.
+  ///
+  /// An administrator can get the password age to force the user to enter a new password after every expiration period.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.password>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `value` (out): Number of days after which the password expires.
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_password_get_expires(
     device_policy_manager_h handle,
     ffi.Pointer<ffi.Int> value,
@@ -598,25 +858,42 @@ class Tizen90Dpm {
       _dpm_password_get_expiresPtr.asFunction<
           int Function(device_policy_manager_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Sets the number of min password history to avoid previous password.
-  /// @details     An administrator can configure the number of previous
-  /// passwords which cannot be used when entering a new password.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.password
-  /// @param[in]   handle Device policy manager handle
-  /// @param[in]   value Number of previous passwords which cannot be used when
-  /// settings a new password.
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Sets the number of min password history to avoid previous password.
+  ///
+  /// An administrator can configure the number of previous passwords which cannot be used when entering a new password.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.password>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `value` (in): Number of previous passwords which cannot be used when settings a new password.
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_password_set_history(
     device_policy_manager_h handle,
     int value,
@@ -634,25 +911,42 @@ class Tizen90Dpm {
   late final _dpm_password_set_history = _dpm_password_set_historyPtr
       .asFunction<int Function(device_policy_manager_h, int)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Gets the number of min password history to avoid previous password.
-  /// @details     An administrator can get the number of previous
-  /// passwords which cannot be used when entering a new password.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.password
-  /// @param[in]   handle Device policy manager handle
-  /// @param[out]   value Number of previous passwords which cannot be used when
-  /// settings a new password.
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Gets the number of min password history to avoid previous password.
+  ///
+  /// An administrator can get the number of previous passwords which cannot be used when entering a new password.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.password>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `value` (out): Number of previous passwords which cannot be used when settings a new password.
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_password_get_history(
     device_policy_manager_h handle,
     ffi.Pointer<ffi.Int> value,
@@ -671,28 +965,42 @@ class Tizen90Dpm {
       _dpm_password_get_historyPtr.asFunction<
           int Function(device_policy_manager_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Sets the required password pattern.
-  /// @details     An administrator can force User to enter password based on
-  /// a regular expression.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.password
-  /// @param[in]   handle Device policy manager handle
-  /// @param[in]   pattern Password pattern. If regular expression is
-  /// [a-zA-Z]{4}[0-9]{4}, we can force user to enter a 8 character
-  /// password with first 4 alphabetic characters and next 4
-  /// numeric characters. An administrator must take care when
-  /// setting this pattern.
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Sets the required password pattern.
+  ///
+  /// An administrator can force User to enter password based on a regular expression.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.password>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `pattern` (in): Password pattern. If regular expression is `[a-zA-Z]`{4}`[0-9]`{4}, we can force user to enter a 8 character password with first 4 alphabetic characters and next 4 numeric characters. An administrator must take care when setting this pattern.
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_password_set_pattern(
     device_policy_manager_h handle,
     ffi.Pointer<ffi.Char> pattern,
@@ -711,23 +1019,42 @@ class Tizen90Dpm {
       _dpm_password_set_patternPtr.asFunction<
           int Function(device_policy_manager_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Resets password.
-  /// @details     This takes effect immediately to the device password.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.password
-  /// @param[in]   handle Device policy manager handle
-  /// @param[in]   password New password
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Resets password.
+  ///
+  /// This takes effect immediately to the device password.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.password>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `password` (in): New password
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_password_reset(
     device_policy_manager_h handle,
     ffi.Pointer<ffi.Char> password,
@@ -745,23 +1072,41 @@ class Tizen90Dpm {
   late final _dpm_password_reset = _dpm_password_resetPtr.asFunction<
       int Function(device_policy_manager_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Enforces password change.
-  /// @details     An administrator can enforce password change. PasswordPolicy
-  /// change setting is launched.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.password
-  /// @param[in]   handle Device policy manager handle
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Enforces password change.
+  ///
+  /// An administrator can enforce password change. PasswordPolicy change setting is launched.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.password>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_password_enforce_change(
     device_policy_manager_h handle,
   ) {
@@ -776,28 +1121,42 @@ class Tizen90Dpm {
   late final _dpm_password_enforce_change = _dpm_password_enforce_changePtr
       .asFunction<int Function(device_policy_manager_h)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Sets the maximum number of seconds of inactivity time
-  /// before the screen timeout occurs.
-  /// @details     An administrator sets the maximum number of seconds of inactivity
-  /// time before the screen timeout occurs and a device user must
-  /// type the password to unlock the device.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.password
-  /// @param[in]   handle Device policy manager handle
-  /// @param[in]   value Maximum inactivity time for device lock. Specifies how soon
-  /// the device can be unlocked again after use, without reprompting for
-  /// the passcode.
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Sets the maximum number of seconds of inactivity time before the screen timeout occurs.
+  ///
+  /// An administrator sets the maximum number of seconds of inactivity time before the screen timeout occurs and a device user must type the password to unlock the device.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.password>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `value` (in): Maximum inactivity time for device lock. Specifies how soon the device can be unlocked again after use, without reprompting for the passcode.
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_password_set_max_inactivity_time_device_lock(
     device_policy_manager_h handle,
     int value,
@@ -816,25 +1175,42 @@ class Tizen90Dpm {
       _dpm_password_set_max_inactivity_time_device_lockPtr
           .asFunction<int Function(device_policy_manager_h, int)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Gets the maximum number of seconds of inactivity time
-  /// before the screen timeout occurs.
-  /// @details     Called by an application that is managing the device to get
-  /// the value of timeout period.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.password
-  /// @param[in]   handle Device policy manager handle
-  /// @param[out]  value Pointer of Maximum inactivity time for device lock.
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Gets the maximum number of seconds of inactivity time before the screen timeout occurs.
+  ///
+  /// Called by an application that is managing the device to get the value of timeout period.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.password>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `value` (out): Pointer of Maximum inactivity time for device lock.
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_password_get_max_inactivity_time_device_lock(
     device_policy_manager_h handle,
     ffi.Pointer<ffi.Int> value,
@@ -853,23 +1229,42 @@ class Tizen90Dpm {
       _dpm_password_get_max_inactivity_time_device_lockPtr.asFunction<
           int Function(device_policy_manager_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Sets password status
-  /// @details     An administrator can know password status for this API.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.password
-  /// @param[in]   handle Device policy manager handle
-  /// @param[in]   status Password status
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Sets password status
+  ///
+  /// An administrator can know password status for this API.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.password>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `status` (in): Password status
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_password_set_status(
     device_policy_manager_h handle,
     int status,
@@ -887,19 +1282,35 @@ class Tizen90Dpm {
   late final _dpm_password_set_status = _dpm_password_set_statusPtr
       .asFunction<int Function(device_policy_manager_h, int)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Gets password status
-  /// @details     An administrator can know password status for this API.
-  /// @since_tizen 3.0
-  /// @param[in]   handle Device policy manager handle
-  /// @param[out]   status Password status
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Gets password status
+  ///
+  /// An administrator can know password status for this API.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `status` (out): Password status
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_password_get_status(
     device_policy_manager_h handle,
     ffi.Pointer<ffi.Int32> status,
@@ -917,22 +1328,41 @@ class Tizen90Dpm {
   late final _dpm_password_get_status = _dpm_password_get_statusPtr.asFunction<
       int Function(device_policy_manager_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Removes all password patterns.
-  /// @details     An administrator can remove all password patterns.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.password
-  /// @param[in]   handle Device policy manager handle
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Removes all password patterns.
+  ///
+  /// An administrator can remove all password patterns.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.password>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_password_delete_pattern(
     device_policy_manager_h handle,
   ) {
@@ -947,25 +1377,46 @@ class Tizen90Dpm {
   late final _dpm_password_delete_pattern = _dpm_password_delete_patternPtr
       .asFunction<int Function(device_policy_manager_h)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Gets password pattern.
-  /// @details     This API can be used for applying complexity on new password value.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.password
-  /// @remarks     The @a pattern should be freed using free().
-  /// @param[in]   handle Device policy manager handle
-  /// @param[out]  pattern Password pattern
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Gets password pattern.
+  ///
+  /// This API can be used for applying complexity on new password value.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.password>
+  ///
+  /// **Remarks:**
+  /// - The `pattern` should be freed using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `pattern` (out): Password pattern
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_password_get_pattern(
     device_policy_manager_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> pattern,
@@ -985,30 +1436,42 @@ class Tizen90Dpm {
           int Function(
               device_policy_manager_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Sets the maximum number of times a character can occur in
-  /// the device password.
-  /// @details     Called by an admin that is managing the device to specify that
-  /// any character in the device password cannot occur more than
-  /// the specified maximum number of times. Characters can be numeric
-  /// or alphabetic or symbolic. "aaabcde" has 'a' which occurs 3 times,
-  /// "1b1c1de" has '1' which occurs 3 times and "a@b@c@" has '@' which
-  /// occurs 3 times. A value of '0' specifies that no restrictions are
-  /// applied.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.password
-  /// @param[in]   handle Device policy manager handle
-  /// @param[in]   value Maximum character occurrences
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Sets the maximum number of times a character can occur in the device password.
+  ///
+  /// Called by an admin that is managing the device to specify that any character in the device password cannot occur more than the specified maximum number of times. Characters can be numeric or alphabetic or symbolic. "aaabcde" has 'a' which occurs 3 times, "1b1c1de" has '1' which occurs 3 times and "a@b@c@" has '@' which occurs 3 times. A value of '0' specifies that no restrictions are applied.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.password>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `value` (in): Maximum character occurrences
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_password_set_maximum_character_occurrences(
     device_policy_manager_h handle,
     int value,
@@ -1027,27 +1490,42 @@ class Tizen90Dpm {
       _dpm_password_set_maximum_character_occurrencesPtr
           .asFunction<int Function(device_policy_manager_h, int)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Gets the maximum number of times a character can occur in
-  /// the device password.
-  /// @details     An administrator can retrieve the maximum number of times
-  /// a character can occur in the device password. If more than
-  /// one admin has set this value then the least value will take
-  /// preference.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.password
-  /// @param[in]   handle Device policy manager handle
-  /// @param[out]   value Pointer of Maximum Character Occurrences
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Gets the maximum number of times a character can occur in the device password.
+  ///
+  /// An administrator can retrieve the maximum number of times a character can occur in the device password. If more than one admin has set this value then the least value will take preference.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.password>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `value` (out): Pointer of Maximum Character Occurrences
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_password_get_maximum_character_occurrences(
     device_policy_manager_h handle,
     ffi.Pointer<ffi.Int> value,
@@ -1066,35 +1544,42 @@ class Tizen90Dpm {
       _dpm_password_get_maximum_character_occurrencesPtr.asFunction<
           int Function(device_policy_manager_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Sets the maximum length of the numeric sequence
-  /// which is allowed in the device password.
-  /// @details     Called by an administrator that is managing the device to set
-  /// the maximum numeric sequence length. This specifies that
-  /// the device password must not contain numeric sequences greater
-  /// than the given length.
-  /// Numeric sequences can be increasing successively by one like
-  /// "12345", or decreasing successively by one like "98765", or
-  /// repeating like "55555".
-  /// These are all numeric sequences of length '5'.
-  /// If maximum value is set to '5' then "123456" or "987654" or
-  /// "555555" are not allowed.
-  /// A value of '0' specifies that no such numeric sequence
-  /// restrictions are applied.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.password
-  /// @param[in]   handle Device policy manager handle
-  /// @param[in]   value Maximum numeric sequence length
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Sets the maximum length of the numeric sequence which is allowed in the device password.
+  ///
+  /// Called by an administrator that is managing the device to set the maximum numeric sequence length. This specifies that the device password must not contain numeric sequences greater than the given length. Numeric sequences can be increasing successively by one like "12345", or decreasing successively by one like "98765", or repeating like "55555". These are all numeric sequences of length '5'. If maximum value is set to '5' then "123456" or "987654" or "555555" are not allowed. A value of '0' specifies that no such numeric sequence restrictions are applied.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.password>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `value` (in): Maximum numeric sequence length
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_password_set_maximum_numeric_sequence_length(
     device_policy_manager_h handle,
     int value,
@@ -1113,30 +1598,42 @@ class Tizen90Dpm {
       _dpm_password_set_maximum_numeric_sequence_lengthPtr
           .asFunction<int Function(device_policy_manager_h, int)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Gets the maximum numeric sequence length allowed in
-  /// the device password.
-  /// @details     An administrator can retrieve the length of numeric sequences
-  /// which are allowed in the device password.
-  /// For instance, if the return value is '3' then "123", "987",
-  /// "555" would all be numeric sequences of length '3' and will be
-  /// allowed in the device password.
-  /// If more than one admin has set this value then the least value
-  /// will take preference.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.password
-  /// @param[in]   handle Device policy manager handle
-  /// @param[out]  value Pointer of maximum numeric sequence length
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Gets the maximum numeric sequence length allowed in the device password.
+  ///
+  /// An administrator can retrieve the length of numeric sequences which are allowed in the device password. For instance, if the return value is '3' then "123", "987", "555" would all be numeric sequences of length '3' and will be allowed in the device password. If more than one admin has set this value then the least value will take preference.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.password>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `value` (out): Pointer of maximum numeric sequence length
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_password_get_maximum_numeric_sequence_length(
     device_policy_manager_h handle,
     ffi.Pointer<ffi.Int> value,
@@ -1155,31 +1652,51 @@ class Tizen90Dpm {
       _dpm_password_get_maximum_numeric_sequence_lengthPtr.asFunction<
           int Function(device_policy_manager_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Creates a password forbidden string list iterator.
-  /// @details     The password forbidden string list iterator can be used to get all forbidden strings.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.password
-  /// @param[in]   handle Device policy manager handle
-  /// @return      A password forbidden string list iterator on success, otherwise
-  /// null value
-  /// @remarks     The specific error code can be obtained by using the
-  /// get_last_result() method. Error codes are described in
-  /// exception section.
-  /// The returned iterator should be released using dpm_password_destroy_iterator().
-  /// @exception   #DPM_ERROR_NONE No error
-  /// @exception   #DPM_ERROR_OUT_OF_MEMORY Out of memory
-  /// @exception   #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @exception   #DPM_ERROR_TIMED_OUT Time out
-  /// @exception   #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
-  /// @see         dpm_password_iterator_next()
-  /// @see         dpm_password_destroy_iterator()
-  /// @see         get_last_result()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Creates a password forbidden string list iterator.
+  ///
+  /// The password forbidden string list iterator can be used to get all forbidden strings.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.password>
+  ///
+  /// **Remarks:**
+  /// - The specific error code can be obtained by using the
+  /// - get_last_result() method. Error codes are described in
+  /// - exception section.
+  /// - The returned iterator should be released using dpm_password_destroy_iterator().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  ///
+  /// **Returns:**
+  /// - A password forbidden string list iterator on success, otherwise null value
+  ///
+  /// **Exceptions:**
+  /// - `DPM_ERROR_NONE`: No error
+  /// - `DPM_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  /// - `dpm_password_iterator_next()`
+  /// - `dpm_password_destroy_iterator()`
+  /// - `get_last_result()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   dpm_password_iterator_h dpm_password_create_iterator(
     device_policy_manager_h handle,
   ) {
@@ -1195,23 +1712,39 @@ class Tizen90Dpm {
   late final _dpm_password_create_iterator = _dpm_password_create_iteratorPtr
       .asFunction<dpm_password_iterator_h Function(device_policy_manager_h)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Fetches a password forbidden string and forwards the iterator.
-  /// @details     This API returns a password forbidden string indicated by the iterator, and then
-  /// the iterator is moved to the next position. If the iterator reaches
-  /// the end of the list, null value will be returned.
-  /// @since_tizen 3.0
-  /// @param[in]   iter The iterator to be controlled
-  /// @param[out]  forbidden_string The forbidden string got from the iterator
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @remarks     The @a forbidden_string should not be freed using free().
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @pre         The iter must be created by dpm_password_create_iterator().
-  /// @see         dpm_password_create_iterator()
-  /// @see         dpm_password_destroy_iterator()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Fetches a password forbidden string and forwards the iterator.
+  ///
+  /// This API returns a password forbidden string indicated by the iterator, and then the iterator is moved to the next position. If the iterator reaches the end of the list, null value will be returned.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `forbidden_string` should not be freed using free().
+  ///
+  /// **Parameters:**
+  /// - `iter` (in): The iterator to be controlled
+  /// - `forbidden_string` (out): The forbidden string got from the iterator
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  ///
+  /// **Preconditions:**
+  /// - The iter must be created by dpm_password_create_iterator().
+  ///
+  /// **See also:**
+  /// - `dpm_password_create_iterator()`
+  /// - `dpm_password_destroy_iterator()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_password_iterator_next(
     dpm_password_iterator_h iter,
     ffi.Pointer<ffi.Pointer<ffi.Char>> forbidden_string,
@@ -1232,24 +1765,42 @@ class Tizen90Dpm {
           int Function(
               dpm_password_iterator_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Frees the password forbidden string iterator.
-  /// @details     This API frees the password forbidden string iterator. This API must be called
-  /// if the iterator no longer used.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.password
-  /// @param[in]   iter The iterator to be removed
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The iter must be created by dpm_password_create_iterator()
-  /// @see         dpm_password_create_iterator()
-  /// @see         dpm_password_iterator_next()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Frees the password forbidden string iterator.
+  ///
+  /// This API frees the password forbidden string iterator. This API must be called if the iterator no longer used.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.password>
+  ///
+  /// **Parameters:**
+  /// - `iter` (in): The iterator to be removed
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The iter must be created by dpm_password_create_iterator()
+  ///
+  /// **See also:**
+  /// - `dpm_password_create_iterator()`
+  /// - `dpm_password_iterator_next()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_password_destroy_iterator(
     dpm_password_iterator_h iter,
   ) {
@@ -1264,26 +1815,43 @@ class Tizen90Dpm {
   late final _dpm_password_destroy_iterator = _dpm_password_destroy_iteratorPtr
       .asFunction<int Function(dpm_password_iterator_h)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Sets strings which are forbidden in the device password.
-  /// @details     Called by an admin that is managing the device to set strings that are forbidden to be used in the device password.
-  /// This specifies any strings which must not be present in the device password such as personal data (variations on the user's name, email address or X400 address), or any other strings.
-  /// If the parameter list has only one blank string(""), then the stored strings are cleared.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.password
-  /// @param[in]   handle Device policy manager handle
-  /// @param[in]   strings The forbidden strings
-  /// @param[in]   length The length of the strings
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Sets strings which are forbidden in the device password.
+  ///
+  /// Called by an admin that is managing the device to set strings that are forbidden to be used in the device password. This specifies any strings which must not be present in the device password such as personal data (variations on the user's name, email address or X400 address), or any other strings. If the parameter list has only one blank string(""), then the stored strings are cleared.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.password>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `strings` (in): The forbidden strings
+  /// - `length` (in): The length of the strings
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_password_set_forbidden_strings(
     device_policy_manager_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> strings,
@@ -1307,25 +1875,43 @@ class Tizen90Dpm {
           int Function(device_policy_manager_h,
               ffi.Pointer<ffi.Pointer<ffi.Char>>, int)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Allows or disallows the use of camera.
-  /// @details     An administrator can use this API to set whether the use of camera
-  /// is allowed or not.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.camera
-  /// @param[in]   handle Device policy manager handle
-  /// @param[in]   allow If true, allow the use of camera, if false, disallow the use of camera
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
-  /// @see         dpm_restriction_get_camera_state()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Allows or disallows the use of camera.
+  ///
+  /// An administrator can use this API to set whether the use of camera is allowed or not.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.camera>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `allow` (in): If true, allow the use of camera, if false, disallow the use of camera
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  /// - `dpm_restriction_get_camera_state()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_restriction_set_camera_state(
     device_policy_manager_h handle,
     int allow,
@@ -1344,20 +1930,33 @@ class Tizen90Dpm {
       _dpm_restriction_set_camera_statePtr
           .asFunction<int Function(device_policy_manager_h, int)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief       Check whether the use of camera is allowed or not.
-  /// @details     An administrator can use this API to check whether the use of camera
-  /// is allowed or not.
-  /// @since_tizen 3.0
-  /// @param[in]   handle Device policy manager handle
-  /// @param[out]  is_allowed true if the use of camera is allowed, false otherwise.
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
-  /// @see         dpm_restriction_set_camera_state()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Check whether the use of camera is allowed or not.
+  ///
+  /// An administrator can use this API to check whether the use of camera is allowed or not.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `is_allowed` (out): true if the use of camera is allowed, false otherwise.
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  /// - `dpm_restriction_set_camera_state()`
   int dpm_restriction_get_camera_state(
     device_policy_manager_h handle,
     ffi.Pointer<ffi.Int> is_allowed,
@@ -1376,26 +1975,43 @@ class Tizen90Dpm {
       _dpm_restriction_get_camera_statePtr.asFunction<
           int Function(device_policy_manager_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Allows or disallows the use of microphone.
-  /// @details     An administrator can use this API to set whether the use of microphone
-  /// is allowed or not.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.microphone
-  /// @param[in]   handle Device policy manager handle
-  /// @param[in]   allow If true, allow the use of microphone,
-  /// if false, disallow the use of microphone
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
-  /// @see         dpm_restriction_get_microphone_state()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Allows or disallows the use of microphone.
+  ///
+  /// An administrator can use this API to set whether the use of microphone is allowed or not.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.microphone>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `allow` (in): If true, allow the use of microphone, if false, disallow the use of microphone
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  /// - `dpm_restriction_get_microphone_state()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_restriction_set_microphone_state(
     device_policy_manager_h handle,
     int allow,
@@ -1414,20 +2030,33 @@ class Tizen90Dpm {
       _dpm_restriction_set_microphone_statePtr
           .asFunction<int Function(device_policy_manager_h, int)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief       Checks whether the use of microphone is allowed or not.
-  /// @details     An administrator can use this API to check whether the use of microphone
-  /// is allowed of not.
-  /// @since_tizen 3.0
-  /// @param[in]   handle Device policy manager handle
-  /// @param[out]  is_allowed true if the use of microphone is allowed, false otherwise.
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
-  /// @see         dpm_restriction_set_microphone_state()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Checks whether the use of microphone is allowed or not.
+  ///
+  /// An administrator can use this API to check whether the use of microphone is allowed of not.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `is_allowed` (out): true if the use of microphone is allowed, false otherwise.
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  /// - `dpm_restriction_set_microphone_state()`
   int dpm_restriction_get_microphone_state(
     device_policy_manager_h handle,
     ffi.Pointer<ffi.Int> is_allowed,
@@ -1446,25 +2075,43 @@ class Tizen90Dpm {
       _dpm_restriction_get_microphone_statePtr.asFunction<
           int Function(device_policy_manager_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Allows or disallows user to change the location state.
-  /// @details     An administrator can use this API to allow or disallow user to change
-  /// the location state.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.location
-  /// @param[in]   handle Device policy manager handle
-  /// @param[in]   allow If true, allow user to change the location state, if false, disallow
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
-  /// @see         dpm_restriction_get_location_state()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Allows or disallows user to change the location state.
+  ///
+  /// An administrator can use this API to allow or disallow user to change the location state.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.location>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `allow` (in): If true, allow user to change the location state, if false, disallow
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  /// - `dpm_restriction_get_location_state()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_restriction_set_location_state(
     device_policy_manager_h handle,
     int allow,
@@ -1483,20 +2130,33 @@ class Tizen90Dpm {
       _dpm_restriction_set_location_statePtr
           .asFunction<int Function(device_policy_manager_h, int)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief       Check whether user is allowed to change location state or not.
-  /// @details     An administrator can use this API to check whether user is allowed to change
-  /// the location state or not.
-  /// @since_tizen 3.0
-  /// @param[in]   handle Device policy manager handle
-  /// @param[out]  is_allowed true if the location state change is allowed, false otherwise.
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
-  /// @see         dpm_restriction_set_location_state()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Check whether user is allowed to change location state or not.
+  ///
+  /// An administrator can use this API to check whether user is allowed to change the location state or not.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `is_allowed` (out): true if the location state change is allowed, false otherwise.
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  /// - `dpm_restriction_set_location_state()`
   int dpm_restriction_get_location_state(
     device_policy_manager_h handle,
     ffi.Pointer<ffi.Int> is_allowed,
@@ -1515,26 +2175,43 @@ class Tizen90Dpm {
       _dpm_restriction_get_location_statePtr.asFunction<
           int Function(device_policy_manager_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Allows or disallows user to use usb mass storage.
-  /// @details     An administrator can use this API to set whether the usb mass
-  /// storage is allowed or not.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.storage
-  /// @param[in]   handle Device policy manager handle
-  /// @param[in]   allow If true, allow user to use the external storages, if false, disallow
-  /// the external storage
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
-  /// @see         dpm_restriction_get_external_storage_state()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Allows or disallows user to use usb mass storage.
+  ///
+  /// An administrator can use this API to set whether the usb mass storage is allowed or not.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.storage>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `allow` (in): If true, allow user to use the external storages, if false, disallow the external storage
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  /// - `dpm_restriction_get_external_storage_state()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_restriction_set_external_storage_state(
     device_policy_manager_h handle,
     int allow,
@@ -1553,20 +2230,33 @@ class Tizen90Dpm {
       _dpm_restriction_set_external_storage_statePtr
           .asFunction<int Function(device_policy_manager_h, int)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief       Checks whether the use of external storage is allowed or not.
-  /// @details     An administrator can use this API to check whether the use of external storage is
-  /// allowed or not.
-  /// @since_tizen 3.0
-  /// @param[in]   handle Device policy manager handle
-  /// @param[out]  is_allowed true if the use of external storage is allowed, false otherwise.
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
-  /// @see         dpm_restriction_set_external_storage_state()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Checks whether the use of external storage is allowed or not.
+  ///
+  /// An administrator can use this API to check whether the use of external storage is allowed or not.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `is_allowed` (out): true if the use of external storage is allowed, false otherwise.
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  /// - `dpm_restriction_set_external_storage_state()`
   int dpm_restriction_get_external_storage_state(
     device_policy_manager_h handle,
     ffi.Pointer<ffi.Int> is_allowed,
@@ -1585,25 +2275,43 @@ class Tizen90Dpm {
       _dpm_restriction_get_external_storage_statePtr.asFunction<
           int Function(device_policy_manager_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Allows or disallows user to access the clipboard.
-  /// @details     An administrator can use this API to set whether the clipboard access.
-  /// is allowed or not
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.clipboard
-  /// @param[in]   handle Device policy manager handle
-  /// @param[in]   allow If true, allow the clipboard access, if false, disallow the clipboard access.
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
-  /// @see         dpm_restriction_get_clipboard_state()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Allows or disallows user to access the clipboard.
+  ///
+  /// An administrator can use this API to set whether the clipboard access. is allowed or not
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.clipboard>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `allow` (in): If true, allow the clipboard access, if false, disallow the clipboard access.
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  /// - `dpm_restriction_get_clipboard_state()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_restriction_set_clipboard_state(
     device_policy_manager_h handle,
     int allow,
@@ -1622,20 +2330,33 @@ class Tizen90Dpm {
       _dpm_restriction_set_clipboard_statePtr
           .asFunction<int Function(device_policy_manager_h, int)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief       Checks whether the clipboard access is allowed or not.
-  /// @details     An administrator can use this API to check whether the clipboard access
-  /// is allowed or not.
-  /// @since_tizen 3.0
-  /// @param[in]   handle Device policy manager handle
-  /// @param[out]  is_allowed true if the access is allowed, false otherwise.
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
-  /// @see         dpm_restriction_set_clipboard_state()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Checks whether the clipboard access is allowed or not.
+  ///
+  /// An administrator can use this API to check whether the clipboard access is allowed or not.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `is_allowed` (out): true if the access is allowed, false otherwise.
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  /// - `dpm_restriction_set_clipboard_state()`
   int dpm_restriction_get_clipboard_state(
     device_policy_manager_h handle,
     ffi.Pointer<ffi.Int> is_allowed,
@@ -1654,26 +2375,43 @@ class Tizen90Dpm {
       _dpm_restriction_get_clipboard_statePtr.asFunction<
           int Function(device_policy_manager_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Allows or disallows the usb debugging.
-  /// @details     An administrator can use this API to set whether the usb debugging
-  /// is allowed or not.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.debugging
-  /// @param[in]   handle Device policy manager handle
-  /// @param[in]   allow If true, allow the usb debugging, if false, disallow the usb
-  /// debugging
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
-  /// @see         dpm_restriction_get_usb_debugging_state()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Allows or disallows the usb debugging.
+  ///
+  /// An administrator can use this API to set whether the usb debugging is allowed or not.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.debugging>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `allow` (in): If true, allow the usb debugging, if false, disallow the usb debugging
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  /// - `dpm_restriction_get_usb_debugging_state()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_restriction_set_usb_debugging_state(
     device_policy_manager_h handle,
     int allow,
@@ -1692,20 +2430,33 @@ class Tizen90Dpm {
       _dpm_restriction_set_usb_debugging_statePtr
           .asFunction<int Function(device_policy_manager_h, int)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief       Checks whether the usb debugging is allowed or not.
-  /// @details     An administrator can use this API to check whether the usb debugging
-  /// is allowed or not.
-  /// @since_tizen 3.0
-  /// @param[in]   handle Device policy manager handle
-  /// @param[out]   is_allowed true if the usb debugging is allowed, false otherwise.
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
-  /// @see         dpm_restriction_set_usb_debugging_state()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Checks whether the usb debugging is allowed or not.
+  ///
+  /// An administrator can use this API to check whether the usb debugging is allowed or not.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `is_allowed` (out): true if the usb debugging is allowed, false otherwise.
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  /// - `dpm_restriction_set_usb_debugging_state()`
   int dpm_restriction_get_usb_debugging_state(
     device_policy_manager_h handle,
     ffi.Pointer<ffi.Int> is_allowed,
@@ -1724,27 +2475,43 @@ class Tizen90Dpm {
       _dpm_restriction_get_usb_debugging_statePtr.asFunction<
           int Function(device_policy_manager_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Allows or disallows user to change the Wi-Fi state.
-  /// @details     An administrator can use this API to allow or disallow user to
-  /// change the Wi-Fi state. If it is disallowed, user does not have UI
-  /// access to change the state.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.wifi
-  /// @param[in]   handle Device policy manager handle
-  /// @param[in]   allow If true, allow user to change Wi-Fi state,
-  /// if false, disallow user to change Wi-Fi state.
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
-  /// @see         dpm_restriction_get_wifi_state()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Allows or disallows user to change the Wi-Fi state.
+  ///
+  /// An administrator can use this API to allow or disallow user to change the Wi-Fi state. If it is disallowed, user does not have UI access to change the state.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.wifi>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `allow` (in): If true, allow user to change Wi-Fi state, if false, disallow user to change Wi-Fi state.
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  /// - `dpm_restriction_get_wifi_state()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_restriction_set_wifi_state(
     device_policy_manager_h handle,
     int allow,
@@ -1763,20 +2530,33 @@ class Tizen90Dpm {
       _dpm_restriction_set_wifi_statePtr
           .asFunction<int Function(device_policy_manager_h, int)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief       Checks whether the Wi-Fi state change is allowed or not.
-  /// @details     An administrator can use this API to check whether user is
-  /// allowed to change Wi-Fi state or not.
-  /// @since_tizen 3.0
-  /// @param[in]   handle Device policy manager handle
-  /// @param[out]  is_allowed true if the change is allowed, false otherwise.
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
-  /// @see         dpm_restriction_set_wifi_state()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Checks whether the Wi-Fi state change is allowed or not.
+  ///
+  /// An administrator can use this API to check whether user is allowed to change Wi-Fi state or not.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `is_allowed` (out): true if the change is allowed, false otherwise.
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  /// - `dpm_restriction_set_wifi_state()`
   int dpm_restriction_get_wifi_state(
     device_policy_manager_h handle,
     ffi.Pointer<ffi.Int> is_allowed,
@@ -1795,27 +2575,43 @@ class Tizen90Dpm {
       _dpm_restriction_get_wifi_statePtr.asFunction<
           int Function(device_policy_manager_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Allows or disallows user to change Wi-Fi hotspot state change.
-  /// @details     An administrator can use this API to allow or disallow user to change Wi-Fi
-  /// hotspot state. When it is disallowed, the UI is grayed out so user cannot
-  /// change Wi-Fi hotspot state.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.wifi
-  /// @param[in]   handle Device policy manager handle
-  /// @param[in]   allow If true, allow user to change Wi-Fi hotspot state,
-  /// if false, disallow user to change Wi-Fi hotspot state.
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
-  /// @see         dpm_restriction_get_wifi_hotspot_state()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Allows or disallows user to change Wi-Fi hotspot state change.
+  ///
+  /// An administrator can use this API to allow or disallow user to change Wi-Fi hotspot state. When it is disallowed, the UI is grayed out so user cannot change Wi-Fi hotspot state.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.wifi>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `allow` (in): If true, allow user to change Wi-Fi hotspot state, if false, disallow user to change Wi-Fi hotspot state.
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  /// - `dpm_restriction_get_wifi_hotspot_state()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_restriction_set_wifi_hotspot_state(
     device_policy_manager_h handle,
     int allow,
@@ -1834,22 +2630,33 @@ class Tizen90Dpm {
       _dpm_restriction_set_wifi_hotspot_statePtr
           .asFunction<int Function(device_policy_manager_h, int)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief       Checks whether the the Wi-Fi hotspot state change is allowed or not.
-  /// @details     An administrator can use this API to check whether user is allowed to change
-  /// Wi-Fi hotspot state or not.
-  /// If the Wi-Fi hotspot state change is disallowed, the UI is grayed out so user can not
-  /// change its state.
-  /// @since_tizen 3.0
-  /// @param[in]   handle Device policy manager handle
-  /// @param[out]  is_allowed true if the state change is allowed, false otherwise.
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
-  /// @see         dpm_restriction_set_wifi_hotspot_state()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Checks whether the the Wi-Fi hotspot state change is allowed or not.
+  ///
+  /// An administrator can use this API to check whether user is allowed to change Wi-Fi hotspot state or not. If the Wi-Fi hotspot state change is disallowed, the UI is grayed out so user can not change its state.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `is_allowed` (out): true if the state change is allowed, false otherwise.
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  /// - `dpm_restriction_set_wifi_hotspot_state()`
   int dpm_restriction_get_wifi_hotspot_state(
     device_policy_manager_h handle,
     ffi.Pointer<ffi.Int> is_allowed,
@@ -1868,27 +2675,43 @@ class Tizen90Dpm {
       _dpm_restriction_get_wifi_hotspot_statePtr.asFunction<
           int Function(device_policy_manager_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Allows or disallows user to change the bluetooth tethering state.
-  /// @details     An administrator can use this API to allow of disallow user
-  /// to change the bluetooth tethering state.
-  /// When disallowed, the UI is grayed out so user cannot change the state.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.bluetooth
-  /// @param[in]   handle Device policy manager handle
-  /// @param[in]   allow If true, allow user to change the bluetooth tethering state,
-  /// if false, disallow user to change the bluetooth tethering state.
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
-  /// @see         dpm_restriction_get_bluetooth_tethering_state()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Allows or disallows user to change the bluetooth tethering state.
+  ///
+  /// An administrator can use this API to allow of disallow user to change the bluetooth tethering state. When disallowed, the UI is grayed out so user cannot change the state.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `allow` (in): If true, allow user to change the bluetooth tethering state, if false, disallow user to change the bluetooth tethering state.
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  /// - `dpm_restriction_get_bluetooth_tethering_state()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_restriction_set_bluetooth_tethering_state(
     device_policy_manager_h handle,
     int allow,
@@ -1907,23 +2730,33 @@ class Tizen90Dpm {
       _dpm_restriction_set_bluetooth_tethering_statePtr
           .asFunction<int Function(device_policy_manager_h, int)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief       Checks whether the bluetooth tethering state change is allowed.
-  /// @details     An administrator can use this API to check whether user is allowed
-  /// to change bluetooth tethering state.
-  /// is allowed or not.
-  /// If the bluetooth tethering state change is disallowed, the UI is grayed out
-  /// so user can not change its state.
-  /// @since_tizen 3.0
-  /// @param[in]   handle Device policy manager handle
-  /// @param[out]  is_allowed true if the change is allowed, false otherwise.
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
-  /// @see         dpm_restriction_set_bluetooth_tethering_state()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Checks whether the bluetooth tethering state change is allowed.
+  ///
+  /// An administrator can use this API to check whether user is allowed to change bluetooth tethering state. is allowed or not. If the bluetooth tethering state change is disallowed, the UI is grayed out so user can not change its state.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `is_allowed` (out): true if the change is allowed, false otherwise.
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  /// - `dpm_restriction_set_bluetooth_tethering_state()`
   int dpm_restriction_get_bluetooth_tethering_state(
     device_policy_manager_h handle,
     ffi.Pointer<ffi.Int> is_allowed,
@@ -1942,27 +2775,43 @@ class Tizen90Dpm {
       _dpm_restriction_get_bluetooth_tethering_statePtr.asFunction<
           int Function(device_policy_manager_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Allows or disallows user to change USB tethering settings.
-  /// @details     An administrator can use this API to allow or disallow user
-  /// to change USB tethering settings.
-  /// When disallowed, the UI is grayed out so user cannot change the state.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.usb
-  /// @param[in]   handle Device policy manager handle
-  /// @param[in]   allow If true, allow USB tethering state change,
-  /// if false, disallow USB tethering state change.
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
-  /// @see         dpm_restriction_get_usb_tethering_state()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Allows or disallows user to change USB tethering settings.
+  ///
+  /// An administrator can use this API to allow or disallow user to change USB tethering settings. When disallowed, the UI is grayed out so user cannot change the state.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.usb>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `allow` (in): If true, allow USB tethering state change, if false, disallow USB tethering state change.
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  /// - `dpm_restriction_get_usb_tethering_state()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_restriction_set_usb_tethering_state(
     device_policy_manager_h handle,
     int allow,
@@ -1981,22 +2830,33 @@ class Tizen90Dpm {
       _dpm_restriction_set_usb_tethering_statePtr
           .asFunction<int Function(device_policy_manager_h, int)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief       Checks whether the USB tethering state change is allowed.
-  /// @details     An administrator can use this API to check whether the USB tethering state change
-  /// is allowed or not.
-  /// If the USB tethering state change is disallowed, the UI is grayed out
-  /// so user can not change its state.
-  /// @since_tizen 3.0
-  /// @param[in]   handle Device policy manager handle
-  /// @param[out]  is_allowed true if the change is allowed, false otherwise.
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
-  /// @see         dpm_restriction_set_usb_tethering_state()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Checks whether the USB tethering state change is allowed.
+  ///
+  /// An administrator can use this API to check whether the USB tethering state change is allowed or not. If the USB tethering state change is disallowed, the UI is grayed out so user can not change its state.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `is_allowed` (out): true if the change is allowed, false otherwise.
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  /// - `dpm_restriction_set_usb_tethering_state()`
   int dpm_restriction_get_usb_tethering_state(
     device_policy_manager_h handle,
     ffi.Pointer<ffi.Int> is_allowed,
@@ -2015,27 +2875,43 @@ class Tizen90Dpm {
       _dpm_restriction_get_usb_tethering_statePtr.asFunction<
           int Function(device_policy_manager_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Allows or disallows user to change the bluetooth state.
-  /// @details     An administrator can use this API to allow or disallow user
-  /// to change the bluetooth state.
-  /// When disallowed, the UI is grayed out so user cannot change the state.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.bluetooth
-  /// @param[in]   handle Device policy manager handle
-  /// @param[in]   allow If true, allow user to change bluetooth state,
-  /// if false, disallow user to change bluetooth state.
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
-  /// @see         dpm_restriction_get_bluetooth_mode_change_state()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Allows or disallows user to change the bluetooth state.
+  ///
+  /// An administrator can use this API to allow or disallow user to change the bluetooth state. When disallowed, the UI is grayed out so user cannot change the state.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `allow` (in): If true, allow user to change bluetooth state, if false, disallow user to change bluetooth state.
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  /// - `dpm_restriction_get_bluetooth_mode_change_state()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_restriction_set_bluetooth_mode_change_state(
     device_policy_manager_h handle,
     int allow,
@@ -2054,22 +2930,33 @@ class Tizen90Dpm {
       _dpm_restriction_set_bluetooth_mode_change_statePtr
           .asFunction<int Function(device_policy_manager_h, int)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief       Checks whether the the bluetooth state change is allowed of not.
-  /// @details     An administrator can use this API to check whether the bluetooth state change
-  /// is allowed or not.
-  /// If the bluetooth state change is disallowed, the UI is grayed out
-  /// so user can not change its state.
-  /// @since_tizen 3.0
-  /// @param[in]   handle Device policy manager handle
-  /// @param[out]  is_allowed true if the change is allowed, false otherwise.
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
-  /// @see         dpm_restriction_set_bluetooth_mode_change_state()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Checks whether the the bluetooth state change is allowed of not.
+  ///
+  /// An administrator can use this API to check whether the bluetooth state change is allowed or not. If the bluetooth state change is disallowed, the UI is grayed out so user can not change its state.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `is_allowed` (out): true if the change is allowed, false otherwise.
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  /// - `dpm_restriction_set_bluetooth_mode_change_state()`
   int dpm_restriction_get_bluetooth_mode_change_state(
     device_policy_manager_h handle,
     ffi.Pointer<ffi.Int> is_allowed,
@@ -2088,29 +2975,43 @@ class Tizen90Dpm {
       _dpm_restriction_get_bluetooth_mode_change_statePtr.asFunction<
           int Function(device_policy_manager_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Allows or disallows the bluetooth desktop connectivity.
-  /// @details     An administrator can use this API to allow or disallow the bluetooth
-  /// desktop connectivity.
-  /// If the bluetooth desktop connectivity is disallowed, the UI is grayed out
-  /// so user can not
-  /// change its state.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.bluetooth
-  /// @param[in]   handle Device policy manager handle
-  /// @param[out]  allow If true, allow the bluetooth desktop connectivity,
-  /// if false, disallow the bluetooth desktop connectivity
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
-  /// @see         dpm_restriction_get_bluetooth_desktop_connectivity_state()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Allows or disallows the bluetooth desktop connectivity.
+  ///
+  /// An administrator can use this API to allow or disallow the bluetooth desktop connectivity. If the bluetooth desktop connectivity is disallowed, the UI is grayed out so user can not change its state.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `allow` (out): If true, allow the bluetooth desktop connectivity, if false, disallow the bluetooth desktop connectivity
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  /// - `dpm_restriction_get_bluetooth_desktop_connectivity_state()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_restriction_set_bluetooth_desktop_connectivity_state(
     device_policy_manager_h handle,
     int allow,
@@ -2130,22 +3031,33 @@ class Tizen90Dpm {
       _dpm_restriction_set_bluetooth_desktop_connectivity_statePtr
           .asFunction<int Function(device_policy_manager_h, int)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief       Checks whether the the Bluetooth desktop connectivity is allowed or not.
-  /// @details     An administrator can use this API to check whether the Bluetooth desktop
-  /// connectivity is allowed or not.
-  /// If the Bluetooth desktop connectivity is disallowed, the UI is grayed out
-  /// so user can not change its state.
-  /// @since_tizen 3.0
-  /// @param[in]   handle Device policy manager handle
-  /// @param[out]  is_allowed true if the connectivity is allowed, false otherwise.
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
-  /// @see         dpm_restriction_set_bluetooth_desktop_connectivity_state()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Checks whether the the Bluetooth desktop connectivity is allowed or not.
+  ///
+  /// An administrator can use this API to check whether the Bluetooth desktop connectivity is allowed or not. If the Bluetooth desktop connectivity is disallowed, the UI is grayed out so user can not change its state.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `is_allowed` (out): true if the connectivity is allowed, false otherwise.
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  /// - `dpm_restriction_set_bluetooth_desktop_connectivity_state()`
   int dpm_restriction_get_bluetooth_desktop_connectivity_state(
     device_policy_manager_h handle,
     ffi.Pointer<ffi.Int> is_allowed,
@@ -2166,26 +3078,43 @@ class Tizen90Dpm {
       _dpm_restriction_get_bluetooth_desktop_connectivity_statePtr.asFunction<
           int Function(device_policy_manager_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Allows or disallows user to change the bluetooth pairing.
-  /// @details     An administrator can use this API to allow or disallow the bluetooth pairing.
-  /// If the bluetooth pairing is disallowed, the UI is grayed out
-  /// so user can not change its state.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.bluetooth
-  /// @param[in]   handle Device policy manager handle
-  /// @param[out]  allow If true, allow the bluetooth pairing, if false, disallow the bluetooth pairing.
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
-  /// @see         dpm_restriction_get_bluetooth_pairing_state()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Allows or disallows user to change the bluetooth pairing.
+  ///
+  /// An administrator can use this API to allow or disallow the bluetooth pairing. If the bluetooth pairing is disallowed, the UI is grayed out so user can not change its state.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `allow` (out): If true, allow the bluetooth pairing, if false, disallow the bluetooth pairing.
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  /// - `dpm_restriction_get_bluetooth_pairing_state()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_restriction_set_bluetooth_pairing_state(
     device_policy_manager_h handle,
     int allow,
@@ -2204,22 +3133,33 @@ class Tizen90Dpm {
       _dpm_restriction_set_bluetooth_pairing_statePtr
           .asFunction<int Function(device_policy_manager_h, int)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief       Checks whether the the bluetooth pairing is allowed or not.
-  /// @details     An administrator can use this API to check whether the bluetooth
-  /// pairing is allowed or not.
-  /// If the bluetooth pairing is disallowed, the UI is grayed out
-  /// so user can not change its state.
-  /// @since_tizen 3.0
-  /// @param[in]   handle Device policy manager handle
-  /// @param[out]  is_allowed true if the pairing is allowed, false otherwise.
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
-  /// @see         dpm_restriction_set_bluetooth_pairing_state()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Checks whether the the bluetooth pairing is allowed or not.
+  ///
+  /// An administrator can use this API to check whether the bluetooth pairing is allowed or not. If the bluetooth pairing is disallowed, the UI is grayed out so user can not change its state.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `is_allowed` (out): true if the pairing is allowed, false otherwise.
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  /// - `dpm_restriction_set_bluetooth_pairing_state()`
   int dpm_restriction_get_bluetooth_pairing_state(
     device_policy_manager_h handle,
     ffi.Pointer<ffi.Int> is_allowed,
@@ -2238,26 +3178,43 @@ class Tizen90Dpm {
       _dpm_restriction_get_bluetooth_pairing_statePtr.asFunction<
           int Function(device_policy_manager_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Allows or disallows user to use of SMS or text messaging.
-  /// @details     An administrator can disable the text messaging capability
-  /// without any user interaction
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.message
-  /// @param[in]   handle Device policy manager handle
-  /// @param[in]   sim_id SIM identifier
-  /// @param[in]   allow If true, allow the use of SMS or text messaging,
-  /// if false, disallow the use of SMS or text messaging.
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_restriction_get_messaging_state()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Allows or disallows user to use of SMS or text messaging.
+  ///
+  /// An administrator can disable the text messaging capability without any user interaction
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.message>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `sim_id` (in): SIM identifier
+  /// - `allow` (in): If true, allow the use of SMS or text messaging, if false, disallow the use of SMS or text messaging.
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_restriction_get_messaging_state()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_restriction_set_messaging_state(
     device_policy_manager_h handle,
     ffi.Pointer<ffi.Char> sim_id,
@@ -2278,20 +3235,33 @@ class Tizen90Dpm {
       _dpm_restriction_set_messaging_statePtr.asFunction<
           int Function(device_policy_manager_h, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief       Checks whether the text messaging is allowed or not.
-  /// @details     An administrator can use this API to check whether text messaging capability
-  /// is enabled or not.
-  /// @since_tizen 3.0
-  /// @param[in]   handle Device policy manager handle
-  /// @param[in]   sim_id SIM identifier
-  /// @param[out]  is_allowed true if the messaging is allowed, false otherwise.
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_restriction_set_messaging_state()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Checks whether the text messaging is allowed or not.
+  ///
+  /// An administrator can use this API to check whether text messaging capability is enabled or not.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `sim_id` (in): SIM identifier
+  /// - `is_allowed` (out): true if the messaging is allowed, false otherwise.
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_restriction_set_messaging_state()`
   int dpm_restriction_get_messaging_state(
     device_policy_manager_h handle,
     ffi.Pointer<ffi.Char> sim_id,
@@ -2313,23 +3283,42 @@ class Tizen90Dpm {
           int Function(device_policy_manager_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Allows or disallows the access to POP or IMAP email.
-  /// @details     An administrator can disable the email capability without any user interaction
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.email
-  /// @param[in]   handle Device policy manager handle
-  /// @param[in]   allow If true, allow POP or IMAP email, if false, disallow POP or IMAP email.
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_restriction_get_popimap_email_state()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Allows or disallows the access to POP or IMAP email.
+  ///
+  /// An administrator can disable the email capability without any user interaction
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.email>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `allow` (in): If true, allow POP or IMAP email, if false, disallow POP or IMAP email.
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_restriction_get_popimap_email_state()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_restriction_set_popimap_email_state(
     device_policy_manager_h handle,
     int allow,
@@ -2348,19 +3337,32 @@ class Tizen90Dpm {
       _dpm_restriction_set_popimap_email_statePtr
           .asFunction<int Function(device_policy_manager_h, int)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief       Checks whether the access to POP or IMAP email is allowed or not.
-  /// @details     An administrator can use this API to check the access to POP or IMAP email
-  /// is allowed or not.
-  /// @since_tizen 3.0
-  /// @param[in]   handle Device policy manager handle
-  /// @param[out]  is_allowed true if the POP or IMAP email is allowed, false otherwise.
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_restriction_set_popimap_email_state()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Checks whether the access to POP or IMAP email is allowed or not.
+  ///
+  /// An administrator can use this API to check the access to POP or IMAP email is allowed or not.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `is_allowed` (out): true if the POP or IMAP email is allowed, false otherwise.
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_restriction_set_popimap_email_state()`
   int dpm_restriction_get_popimap_email_state(
     device_policy_manager_h handle,
     ffi.Pointer<ffi.Int> is_allowed,
@@ -2379,25 +3381,42 @@ class Tizen90Dpm {
       _dpm_restriction_get_popimap_email_statePtr.asFunction<
           int Function(device_policy_manager_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Allows or disallows the use of web browser.
-  /// @details     An administrator can allows or disallow the use of web browser without
-  /// any user interaction
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.browser
-  /// @param[in]   handle Device policy manager handle
-  /// @param[in]   allow If true, allow the use of web browser,
-  /// if false, disallow the use of web browser.
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_restriction_get_browser_state()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Allows or disallows the use of web browser.
+  ///
+  /// An administrator can allows or disallow the use of web browser without any user interaction
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.browser>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `allow` (in): If true, allow the use of web browser, if false, disallow the use of web browser.
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_restriction_get_browser_state()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_restriction_set_browser_state(
     device_policy_manager_h handle,
     int allow,
@@ -2416,19 +3435,32 @@ class Tizen90Dpm {
       _dpm_restriction_set_browser_statePtr
           .asFunction<int Function(device_policy_manager_h, int)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief       Checks whether the use of web browser is allowed or not.
-  /// @details     An administrator can use this API to check whether the use of web browser
-  /// is allowed or not.
-  /// @since_tizen 3.0
-  /// @param[in]   handle Device policy manager handle
-  /// @param[out]  is_allowed true if the use of web browser is allowed, false otherwise.
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_restriction_set_browser_state()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Checks whether the use of web browser is allowed or not.
+  ///
+  /// An administrator can use this API to check whether the use of web browser is allowed or not.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `is_allowed` (out): true if the use of web browser is allowed, false otherwise.
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_restriction_set_browser_state()`
   int dpm_restriction_get_browser_state(
     device_policy_manager_h handle,
     ffi.Pointer<ffi.Int> is_allowed,
@@ -2447,22 +3479,40 @@ class Tizen90Dpm {
       _dpm_restriction_get_browser_statePtr.asFunction<
           int Function(device_policy_manager_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Locks device screen immediately.
-  /// @details     An administrator can use this API to lock the device screen
-  /// immediately
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.lock
-  /// @param[in]   handle Device policy manager handle
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Locks device screen immediately.
+  ///
+  /// An administrator can use this API to lock the device screen immediately
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.lock>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_security_lockout_screen(
     device_policy_manager_h handle,
   ) {
@@ -2477,29 +3527,42 @@ class Tizen90Dpm {
   late final _dpm_security_lockout_screen = _dpm_security_lockout_screenPtr
       .asFunction<int Function(device_policy_manager_h)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Encrypts or decrypts internal storage.
-  /// @details     An administrator can use this API to enable full device
-  /// encryption, which includes device memory and internal SD card.
-  /// Before calling this API, administrator must ensure that
-  /// the device password is set to alphanumeric quality.
-  /// The administrator can set an alphanumeric password by using
-  /// dpm_set_password_quality() API
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.security
-  /// @param[in]   handle Device policy manager handle
-  /// @param[in]   encrypt true if encryption is required, false if decryption is
-  /// required
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
-  /// @see         dpm_security_is_internal_storage_encrypted()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Encrypts or decrypts internal storage.
+  ///
+  /// An administrator can use this API to enable full device encryption, which includes device memory and internal SD card. Before calling this API, administrator must ensure that the device password is set to alphanumeric quality. The administrator can set an alphanumeric password by using dpm_set_password_quality() API
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.security>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `encrypt` (in): true if encryption is required, false if decryption is required
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  /// - `dpm_security_is_internal_storage_encrypted()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_security_set_internal_storage_encryption(
     device_policy_manager_h handle,
     int encrypt,
@@ -2518,21 +3581,33 @@ class Tizen90Dpm {
       _dpm_security_set_internal_storage_encryptionPtr
           .asFunction<int Function(device_policy_manager_h, int)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief       Checks the internal storage encryption state.
-  /// @details     An administrator can use this API to check whether internal
-  /// storage encryption is enabled.
-  /// @since_tizen 3.0
-  /// @param[in]   handle Device policy manager handle
-  /// @param[out]  is_encrypted true if internal storage is encrypted or being encrypted,
-  /// else false.
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
-  /// @see         dpm_security_set_internal_storage_encryption()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Checks the internal storage encryption state.
+  ///
+  /// An administrator can use this API to check whether internal storage encryption is enabled.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `is_encrypted` (out): true if internal storage is encrypted or being encrypted, else false.
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  /// - `dpm_security_set_internal_storage_encryption()`
   int dpm_security_is_internal_storage_encrypted(
     device_policy_manager_h handle,
     ffi.Pointer<ffi.Int> is_encrypted,
@@ -2551,28 +3626,42 @@ class Tizen90Dpm {
       _dpm_security_is_internal_storage_encryptedPtr.asFunction<
           int Function(device_policy_manager_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Encrypts or decrypts external storage.
-  /// @details     An administrator can use this API to enable external SD card
-  /// encryption. Before calling this API, administrator must
-  /// ensure that the device password is set to alphanumeric quality.
-  /// The administrator can set an alphanumeric password by using
-  /// dpm_set_password_quality() API
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.security
-  /// @param[in]   handle Device policy manager handle
-  /// @param[in]   encrypt true if encryption is required, false if decryption is
-  /// required
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
-  /// @see         dpm_security_is_external_storage_encrypted()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Encrypts or decrypts external storage.
+  ///
+  /// An administrator can use this API to enable external SD card encryption. Before calling this API, administrator must ensure that the device password is set to alphanumeric quality. The administrator can set an alphanumeric password by using dpm_set_password_quality() API
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.security>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `encrypt` (in): true if encryption is required, false if decryption is required
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  /// - `dpm_security_is_external_storage_encrypted()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_security_set_external_storage_encryption(
     device_policy_manager_h handle,
     int encrypt,
@@ -2591,21 +3680,33 @@ class Tizen90Dpm {
       _dpm_security_set_external_storage_encryptionPtr
           .asFunction<int Function(device_policy_manager_h, int)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief       Checks the external storage encryption state.
-  /// @details     An administrator can use this API to check whether external
-  /// storage encryption is enabled.
-  /// @since_tizen 3.0
-  /// @param[in]   handle Device policy manager handle
-  /// @param[out]   is_encrypted true if external storage is encrypted or being encrypted,
-  /// else false
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
-  /// @see         dpm_security_set_external_storage_encryption()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Checks the external storage encryption state.
+  ///
+  /// An administrator can use this API to check whether external storage encryption is enabled.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `is_encrypted` (out): true if external storage is encrypted or being encrypted, else false
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  /// - `dpm_security_set_external_storage_encryption()`
   int dpm_security_is_external_storage_encrypted(
     device_policy_manager_h handle,
     ffi.Pointer<ffi.Int> is_encrypted,
@@ -2624,24 +3725,41 @@ class Tizen90Dpm {
       _dpm_security_is_external_storage_encryptedPtr.asFunction<
           int Function(device_policy_manager_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Wipes external memory, internal memory, or both selectively.
-  /// @details     Device Admin can use this API to wipe both SD card data
-  /// and application data.
-  /// Calling this API may require rebooting the device.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.wipe
-  /// @param[in]   handle Device policy manager handle
-  /// @param[in]   type The target storage for wipe
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Wipes external memory, internal memory, or both selectively.
+  ///
+  /// Device Admin can use this API to wipe both SD card data and application data. Calling this API may require rebooting the device.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.wipe>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `type` (in): The target storage for wipe
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_security_wipe_data(
     device_policy_manager_h handle,
     int type,
@@ -2659,29 +3777,45 @@ class Tizen90Dpm {
   late final _dpm_security_wipe_data = _dpm_security_wipe_dataPtr
       .asFunction<int Function(device_policy_manager_h, int)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Creates a new zone.
-  /// @details     An administrator can use this API to create a container. Once the container
-  /// is created, the admin package given to the parameter will be installed inside
-  /// the container. Then ownership of the container gets transferred to the admin
-  /// package from the client which triggered the container creation process.
-  /// @since_tizen 3.0
-  /// @privlevel   partner
-  /// @privilege   %http://tizen.org/privilege/dpm.zone
-  /// @param[in]   handle Device policy manager handle
-  /// @param[in]   name The zone name to be created
-  /// @param[in]   pkgname Admin package container ownership will be transferred
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_NOT_PERMITTED Operation not permitted
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
-  /// @see         dpm_zone_destroy()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Creates a new zone.
+  ///
+  /// An administrator can use this API to create a container. Once the container is created, the admin package given to the parameter will be installed inside the container. Then ownership of the container gets transferred to the admin package from the client which triggered the container creation process.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.zone>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `name` (in): The zone name to be created
+  /// - `pkgname` (in): Admin package container ownership will be transferred
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  /// - `dpm_zone_destroy()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_zone_create(
     device_policy_manager_h handle,
     ffi.Pointer<ffi.Char> name,
@@ -2702,28 +3836,44 @@ class Tizen90Dpm {
       int Function(device_policy_manager_h, ffi.Pointer<ffi.Char>,
           ffi.Pointer<ffi.Char>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @partner
-  /// @brief       Removes existing zone.
-  /// @details     Administrator can use this API to remove zone. All file system objects
-  /// created for the zone will be also erased.
-  /// @since_tizen 3.0
-  /// @privlevel	partner
-  /// @privilege	%http://tizen.org/privilege/dpm.zone
-  /// @param[in]   handle Device policy manager handle
-  /// @param[in]   name The zone name to be removed
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_PERMISSION_DENIED The application does not have
-  /// the privilege to call this API or the caller is not the owner
-  /// of the zone
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @pre         The zone corresponding to the given name must be
-  /// created before use of this API.
-  /// @see         dpm_manager_create()
-  /// @see         dpm_zone_create()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Removes existing zone.
+  ///
+  /// Administrator can use this API to remove zone. All file system objects created for the zone will be also erased.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/dpm.zone>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `name` (in): The zone name to be removed
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this API or the caller is not the owner of the zone
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  /// - The zone corresponding to the given name must be created before use of this API.
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  /// - `dpm_zone_create()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int dpm_zone_destroy(
     device_policy_manager_h handle,
     ffi.Pointer<ffi.Char> name,
@@ -2741,23 +3891,36 @@ class Tizen90Dpm {
   late final _dpm_zone_destroy = _dpm_zone_destroyPtr.asFunction<
       int Function(device_policy_manager_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief       Gets the zone state.
-  /// @details     This API can be used to get the state of the zone. The zone can
-  /// have one of the three states(running, locked).
-  /// @since_tizen 3.0
-  /// @param[in]   handle Device policy manager handle
-  /// @param[in]   name The zone name
-  /// @param[out]  state The zone state
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_NO_DATA No such zone to get state
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
-  /// @see         dpm_zone_create()
-  /// @see         dpm_zone_destroy()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Gets the zone state.
+  ///
+  /// This API can be used to get the state of the zone. The zone can have one of the three states(running, locked).
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `name` (in): The zone name
+  /// - `state` (out): The zone state
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_NO_DATA`: No such zone to get state
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  /// - `dpm_zone_create()`
+  /// - `dpm_zone_destroy()`
   int dpm_zone_get_state(
     device_policy_manager_h handle,
     ffi.Pointer<ffi.Char> name,
@@ -2778,23 +3941,36 @@ class Tizen90Dpm {
       int Function(device_policy_manager_h, ffi.Pointer<ffi.Char>,
           ffi.Pointer<ffi.Int32>)>();
 
-  /// @deprecated Deprecated since 8.0.
-  /// @brief       Retrieves all the name of created zones
-  /// @details     This API calls dpm_zone_foreach_cb() once for each zone name
-  /// with traversing the created zones list.
-  /// @since_tizen 3.0
-  /// @param[in]   handle Device policy manager handle
-  /// @param[in]   state a combination of the zone state to look
-  /// @param[in]   callback The iteration callback function
-  /// @param[in]   user_data The user data passed to the callback function
-  /// @return      #DPM_ERROR_NONE on success, otherwise a negative value
-  /// @retval      #DPM_ERROR_NONE Successful
-  /// @retval      #DPM_ERROR_TIMED_OUT Time out
-  /// @retval      #DPM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre         The handle must be created by dpm_manager_create().
-  /// @see         dpm_manager_create()
-  /// @see         dpm_zone_create()
-  /// @see         dpm_zone_destroy()
+  /// **Deprecated:** Deprecated since 8.0.
+  ///
+  /// Retrieves all the name of created zones
+  ///
+  /// This API calls dpm_zone_foreach_cb() once for each zone name with traversing the created zones list.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Device policy manager handle
+  /// - `state` (in): a combination of the zone state to look
+  /// - `callback` (in): The iteration callback function
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `DPM_ERROR_NONE` on success, otherwise a negative value
+  ///
+  /// **Return values:**
+  /// - `DPM_ERROR_NONE`: Successful
+  /// - `DPM_ERROR_TIMED_OUT`: Time out
+  /// - `DPM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - The handle must be created by dpm_manager_create().
+  ///
+  /// **See also:**
+  /// - `dpm_manager_create()`
+  /// - `dpm_zone_create()`
+  /// - `dpm_zone_destroy()`
   int dpm_zone_foreach_name(
     device_policy_manager_h handle,
     int state,
@@ -2821,9 +3997,13 @@ class Tizen90Dpm {
           ffi.Pointer<ffi.Void>)>();
 }
 
-/// @deprecated Deprecated since 8.0.
-/// @brief       Enumeration of device policy API errors
-/// @since_tizen 3.0
+/// **Deprecated:** Deprecated since 8.0.
+///
+/// Enumeration of device policy API errors
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class dpm_error_type_e {
   /// < The operation was successful
   static const int DPM_ERROR_NONE = 0;
@@ -2853,57 +4033,81 @@ abstract class dpm_error_type_e {
   static const int DPM_ERROR_NO_DATA = -61;
 }
 
-/// @deprecated Deprecated since 8.0.
-/// @brief       The device policy manager handle
-/// @details     The device policy manager handle is an abstraction of the
-/// logical connection between the device policy manager and
-/// it's client. The device policy manager handle must be
-/// created by using dpm_manager_create() before attempting to
-/// use almost any of the device policy APIs, and it should
-/// be freed when interaction with the device policy manager
-/// is no longer required.
-/// To release the handle, use dpm_manager_destroy().
-/// @since_tizen 3.0
-/// @see         dpm_manager_create()
-/// @see         dpm_manager_destroy()
+/// **Deprecated:** Deprecated since 8.0.
+///
+/// The device policy manager handle
+///
+/// The device policy manager handle is an abstraction of the logical connection between the device policy manager and it's client. The device policy manager handle must be created by using dpm_manager_create() before attempting to use almost any of the device policy APIs, and it should be freed when interaction with the device policy manager is no longer required. To release the handle, use dpm_manager_destroy().
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **See also:**
+/// - `dpm_manager_create()`
+/// - `dpm_manager_destroy()`
+/// @nodoc
 typedef device_policy_manager_h = ffi.Pointer<ffi.Void>;
 
-/// @deprecated Deprecated since 8.0.
-/// @brief       Called when a policy is changed.
-/// @since_tizen 3.0
-/// @param[in]   name The name of the policy
-/// @param[in]   state The current state of the policy
-/// @param[in]   user_data The user data passed from dpm_add_policy_changed_cb
-/// @see         dpm_add_policy_changed_cb()
-/// @see         dpm_remove_policy_changed_cb()
+/// **Deprecated:** Deprecated since 8.0.
+///
+/// Called when a policy is changed.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `name` (in): The name of the policy
+/// - `state` (in): The current state of the policy
+/// - `user_data` (in): The user data passed from dpm_add_policy_changed_cb
+///
+/// **See also:**
+/// - `dpm_add_policy_changed_cb()`
+/// - `dpm_remove_policy_changed_cb()`
+/// @nodoc
 typedef dpm_policy_changed_cb
     = ffi.Pointer<ffi.NativeFunction<dpm_policy_changed_cbFunction>>;
+/// @nodoc
 typedef dpm_policy_changed_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> name,
     ffi.Pointer<ffi.Char> state,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartdpm_policy_changed_cbFunction = void Function(
     ffi.Pointer<ffi.Char> name,
     ffi.Pointer<ffi.Char> state,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @deprecated Deprecated since 8.0.
-/// @brief       Called when a zone raises a signal.
-/// @since_tizen 3.0
-/// @param[in]   name The zone name
-/// @param[in]   object The object name triggered the signal
-/// @param[in]   user_data The user data passed from dpm_add_signal_cb
-/// @see         dpm_add_signal_cb()
-/// @see         dpm_remove_signal_cb()
+/// **Deprecated:** Deprecated since 8.0.
+///
+/// Called when a zone raises a signal.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `name` (in): The zone name
+/// - `object` (in): The object name triggered the signal
+/// - `user_data` (in): The user data passed from dpm_add_signal_cb
+///
+/// **See also:**
+/// - `dpm_add_signal_cb()`
+/// - `dpm_remove_signal_cb()`
+/// @nodoc
 typedef dpm_signal_cb = ffi.Pointer<ffi.NativeFunction<dpm_signal_cbFunction>>;
+/// @nodoc
 typedef dpm_signal_cbFunction = ffi.Void Function(ffi.Pointer<ffi.Char> name,
     ffi.Pointer<ffi.Char> object, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartdpm_signal_cbFunction = void Function(ffi.Pointer<ffi.Char> name,
     ffi.Pointer<ffi.Char> object, ffi.Pointer<ffi.Void> user_data);
 
-/// @deprecated Deprecated since 8.0.
-/// @brief       Enumeration for dpm password quality type
-/// @since_tizen 3.0
+/// **Deprecated:** Deprecated since 8.0.
+///
+/// Enumeration for dpm password quality type
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class dpm_password_quality_e {
   /// < No requirements for password.
   static const int DPM_PASSWORD_QUALITY_UNSPECIFIED = 0;
@@ -2924,9 +4128,13 @@ abstract class dpm_password_quality_e {
   static const int DPM_PASSWORD_QUALITY_ALPHANUMERIC = 128;
 }
 
-/// @deprecated Deprecated since 8.0.
-/// @brief       Enumeration for dpm password status type
-/// @since_tizen 3.0
+/// **Deprecated:** Deprecated since 8.0.
+///
+/// Enumeration for dpm password status type
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class dpm_password_status_e {
   /// < Password normal status
   static const int DPM_PASSWORD_STATUS_NORMAL = 0;
@@ -2965,17 +4173,27 @@ abstract class dpm_password_status_e {
   static const int DPM_PASSWORD_STATUS_PATTERN_CHANGED = 11;
 }
 
-/// @deprecated Deprecated since 8.0.
-/// @brief       The password forbidden string list iterator handle
-/// @since_tizen 3.0
-/// @see         dpm_password_create_iterator()
-/// @see         dpm_password_iterator_next()
-/// @see         dpm_password_destroy_iterator()
+/// **Deprecated:** Deprecated since 8.0.
+///
+/// The password forbidden string list iterator handle
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **See also:**
+/// - `dpm_password_create_iterator()`
+/// - `dpm_password_iterator_next()`
+/// - `dpm_password_destroy_iterator()`
+/// @nodoc
 typedef dpm_password_iterator_h = ffi.Pointer<ffi.Void>;
 
-/// @deprecated Deprecated since 8.0.
-/// @brief       Enumeration for device wipe type.
-/// @since_tizen 3.0
+/// **Deprecated:** Deprecated since 8.0.
+///
+/// Enumeration for device wipe type.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class dpm_security_wipe_type_e {
   /// < Wipe internal memory
   static const int DPM_SECURITY_WIPE_INTERNAL_STORAGE = 1;
@@ -2984,8 +4202,11 @@ abstract class dpm_security_wipe_type_e {
   static const int DPM_SECURITY_WIPE_EXTERNAL_STORAGE = 2;
 }
 
-/// @brief       Enumeration for zone state
-/// @since_tizen 3.0
+/// Enumeration for zone state
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class dpm_zone_state_e {
   /// < Zone has been defined, but it can not start.
   static const int DPM_ZONE_STATE_LOCKED = 1;
@@ -2997,16 +4218,28 @@ abstract class dpm_zone_state_e {
   static const int DPM_ZONE_STATE_ALL = 255;
 }
 
-/// @deprecated Deprecated since 8.0.
-/// @brief       Called to get all the name of created zones.
-/// @since_tizen 3.0
-/// @param[in]   name The zone name
-/// @param[in]   user_data The user data passed from dpm_zone_foreach_name()
-/// @return      true to continue with the next iteration of the loop, otherwise false to break out out the loop
-/// @see         dpm_zone_foreach_name()
+/// **Deprecated:** Deprecated since 8.0.
+///
+/// Called to get all the name of created zones.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `name` (in): The zone name
+/// - `user_data` (in): The user data passed from dpm_zone_foreach_name()
+///
+/// **Returns:**
+/// - true to continue with the next iteration of the loop, otherwise false to break out out the loop
+///
+/// **See also:**
+/// - `dpm_zone_foreach_name()`
+/// @nodoc
 typedef dpm_zone_foreach_name_cb
     = ffi.Pointer<ffi.NativeFunction<dpm_zone_foreach_name_cbFunction>>;
+/// @nodoc
 typedef dpm_zone_foreach_name_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> name, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartdpm_zone_foreach_name_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> name, ffi.Pointer<ffi.Void> user_data);
