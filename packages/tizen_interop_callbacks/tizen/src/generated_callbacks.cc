@@ -1593,10 +1593,10 @@ PROXY_GROUP_NON_BLOCKING(ime_option_window_destroyed_cb, void* window, void* use
 PROXY_GROUP_BLOCKING(ime_option_window_destroyed_cb, void* window, void* user_data)
 #undef CB_PARAMS_NAMES
 
-typedef void (*ime_position_align_set_cb)(int x, int y, Ecore_IMF_Input_Panel_Align align, void* user_data);
+typedef void (*ime_position_align_set_cb)(int x, int y, some_enum align, void* user_data);
 #define CB_PARAMS_NAMES x, y, align, user_data
-PROXY_GROUP_NON_BLOCKING(ime_position_align_set_cb, int x, int y, Ecore_IMF_Input_Panel_Align align, void* user_data)
-PROXY_GROUP_BLOCKING(ime_position_align_set_cb, int x, int y, Ecore_IMF_Input_Panel_Align align, void* user_data)
+PROXY_GROUP_NON_BLOCKING(ime_position_align_set_cb, int x, int y, some_enum align, void* user_data)
+PROXY_GROUP_BLOCKING(ime_position_align_set_cb, int x, int y, some_enum align, void* user_data)
 #undef CB_PARAMS_NAMES
 
 typedef void (*ime_prediction_hint_data_set_cb)(const char* key, const char* value, void* user_data);
