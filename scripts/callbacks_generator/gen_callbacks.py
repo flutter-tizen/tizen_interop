@@ -108,6 +108,7 @@ SPECIAL_TYPES = {
     'Ecore_IMF_Input_Panel_Lang': 'some_enum',
     'Ecore_IMF_Input_Panel_Layout': 'some_enum',
     'Ecore_IMF_Input_Panel_Return_Key_Type': 'some_enum',
+    'Ecore_IMF_Input_Panel_Align': 'some_enum',
     'eom_output_id': 'unsigned int',
     'location_coords_s': 'location_coords_s_copy',
     'mv_rectangle_s': 'mv_rectangle_s_copy',
