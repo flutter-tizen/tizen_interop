@@ -27,7 +27,8 @@
 version: "10.0"                               # 필수: Tizen 버전
 llvm_path: /usr/lib/llvm-12                   # 필수
 rootstrap_prefix: rootstraps/10.0             # 필수: '-I./<prefix>/...'에 쓰임
-preamble_copyright_year: 2026                 # 필수: preamble 연도. 혼재 상태를 이 값으로 통일
+preamble_copyright_year: 2026                 # 필수: ffigen preamble 연도. 혼재 상태를 이 값으로 통일
+symgen_copyright_year: 2026                   # 선택: symgen preamble 연도. 생략 시 preamble_copyright_year 사용
 
 description_template?: "Dart bindings for Tizen {dashed} APIs."
 # 기본 "Dart bindings for Tizen {dashed} APIs."

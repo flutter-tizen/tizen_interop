@@ -2,6 +2,7 @@ version: '7.0'
 llvm_path: /usr/lib/llvm-12
 rootstrap_prefix: rootstraps/7.0
 preamble_copyright_year: 2021
+symgen_copyright_year: 2023
 description_template: Dart bindings for Tizen {dashed} APIs.
 common_compiler_opts:
 - -m32

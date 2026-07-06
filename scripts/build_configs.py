@@ -53,9 +53,10 @@ def sq(s: str) -> str:
 def render_symgen(cfg: dict) -> str:
     version = cfg['version']
     vnd = version.replace('.', '')
+    year = cfg.get('symgen_copyright_year') or cfg.get('preamble_copyright_year', 2026)
     lines = []
     lines.append('preamble: |')
-    lines.append('  // Copyright 2025 Samsung Electronics Co., Ltd. All rights reserved.')
+    lines.append(f'  // Copyright {year} Samsung Electronics Co., Ltd. All rights reserved.')
     lines.append('  // Use of this source code is governed by a BSD-style license that can be')
     lines.append('  // found in the LICENSE file.')
     lines.append('')
@@ -253,7 +254,7 @@ def _macros_section(module: dict) -> list[str]:
     return lines
 
 
-def render_ffigen_yaml(cfg: dict, module: dict) -> str:
+def render_ffigen_yaml(cfg: dict, module: dict, output_prefix: str) -> str:
     version = cfg['version']
     vnd = version.replace('.', '')
     name = module['name']
@@ -269,7 +270,7 @@ def render_ffigen_yaml(cfg: dict, module: dict) -> str:
     lines.append('')
     lines.append(f"name: {sq(cls)}")
     lines.append(f"description: {sq(desc)}")
-    lines.append(f"output: {sq(f'../../lib/src/bindings/{version}/generated_bindings_{name}.dart')}")
+    lines.append(f"output: {sq(f'{output_prefix}/generated_bindings_{name}.dart')}")
     lines.append('')
     lines.append('llvm-path:')
     lines.append(f"  - {sq(cfg.get('llvm_path', '/usr/lib/llvm-12'))}")
@@ -325,7 +326,7 @@ def main():
         description='Build symgen.yaml + entrypoints.h + ffigen_*.yaml from modules.yaml')
     ap.add_argument('version')
     ap.add_argument('--out-dir', default=None,
-                    help='Output dir. Default: configs/<version>/')
+                    help='Output dir. Default: build/configs/<version>/')
     ap.add_argument('--dry-run', action='store_true',
                     help='Print file names without writing')
     args = ap.parse_args()
@@ -344,7 +345,10 @@ def main():
     if cfg['version'] != version:
         sys.exit(f"version mismatch in modules.yaml ({cfg['version']}) vs arg ({version})")
 
-    out_dir = args.out_dir or cfg_dir
+    out_dir = args.out_dir or os.path.join(root, 'build', 'configs', version)
+    # ffigen resolves the 'output' path relative to the config file location.
+    output_prefix = os.path.relpath(
+        os.path.join(root, 'lib', 'src', 'bindings', version), out_dir)
 
     def write(name, content):
         path = os.path.join(out_dir, name)
@@ -363,7 +367,7 @@ def main():
 
     # module ffigen yamls + dummy entrypoints
     for m in cfg['modules']:
-        write(f"ffigen_{m['name']}.yaml", render_ffigen_yaml(cfg, m))
+        write(f"ffigen_{m['name']}.yaml", render_ffigen_yaml(cfg, m, output_prefix))
         ep = render_module_entrypoint(m)
         if ep:
             write(f"entrypoints_{m['name']}.h", ep)

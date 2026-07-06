@@ -1,0 +1,78 @@
+#!/usr/bin/env python3
+# Check that configs/<version>/modules.yaml and the committed generated files
+# under lib/ agree with each other. Intended for CI (does not require
+# rootstraps or regeneration).
+#
+# Checks per version:
+#   1. Every module in modules.yaml has lib/src/bindings/<version>/
+#      generated_bindings_<name>.dart, and vice versa.
+#   2. lib/<version>/tizen.dart imports/exports exactly the binding files.
+
+from __future__ import annotations
+
+import os
+import re
+import sys
+
+import yaml
+
+ROOT = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+
+
+def check_version(version: str) -> list[str]:
+    errors = []
+    cfg_path = os.path.join(ROOT, 'configs', version, 'modules.yaml')
+    bindings_dir = os.path.join(ROOT, 'lib', 'src', 'bindings', version)
+    tizen_dart = os.path.join(ROOT, 'lib', version, 'tizen.dart')
+
+    with open(cfg_path) as f:
+        cfg = yaml.safe_load(f)
+    module_names = {m['name'] for m in cfg['modules']}
+
+    # 1. modules.yaml <-> generated_bindings_*.dart
+    binding_names = set()
+    for fname in os.listdir(bindings_dir):
+        m = re.fullmatch(r'generated_bindings_(\w+)\.dart', fname)
+        if m:
+            binding_names.add(m.group(1))
+    for name in sorted(module_names - binding_names):
+        errors.append(f'{version}: module "{name}" in modules.yaml has no '
+                      f'generated_bindings_{name}.dart')
+    for name in sorted(binding_names - module_names):
+        errors.append(f'{version}: generated_bindings_{name}.dart has no '
+                      f'module entry in modules.yaml')
+
+    # 2. tizen.dart imports exactly the binding files
+    with open(tizen_dart) as f:
+        tz = f.read()
+    imported = set(re.findall(r"generated_bindings_(\w+)\.dart", tz))
+    for name in sorted(binding_names - imported):
+        errors.append(f'{version}: lib/{version}/tizen.dart does not reference '
+                      f'generated_bindings_{name}.dart')
+    for name in sorted(imported - binding_names):
+        errors.append(f'{version}: lib/{version}/tizen.dart references missing '
+                      f'generated_bindings_{name}.dart')
+
+    return errors
+
+
+def main():
+    versions = sys.argv[1:]
+    if not versions:
+        configs_dir = os.path.join(ROOT, 'configs')
+        versions = sorted(
+            v for v in os.listdir(configs_dir)
+            if os.path.exists(os.path.join(configs_dir, v, 'modules.yaml')))
+    all_errors = []
+    for v in versions:
+        all_errors.extend(check_version(v))
+    for e in all_errors:
+        print(f'ERROR: {e}')
+    if all_errors:
+        sys.exit(1)
+    print(f'OK: {len(versions)} version(s) consistent '
+          f'({", ".join(versions)})')
+
+
+if __name__ == '__main__':
+    main()

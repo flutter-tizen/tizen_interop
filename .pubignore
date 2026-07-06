@@ -1,0 +1,23 @@
+# When .pubignore exists, pub ignores .gitignore entirely, so the relevant
+# .gitignore rules are repeated here.
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+build/
+rootstraps/
+*.log
+*.pyc
+*.swp
+.DS_Store
+.idea/
+.vscode/
+
+# Build-time-only files that package consumers do not need.
+configs/
+scripts/
+doc/
+.github/
+.gemini/
+.clang-format
+analysis_options.yaml
