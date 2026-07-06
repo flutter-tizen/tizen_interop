@@ -58,31 +58,46 @@ def main():
         
     # 2. Parse generated_bindings_*.dart files
     bindings = []
-    
+    extra_exports = []  # files without a symbol map (no getter), exported last
+    unnamed_decls = {}  # filename -> [UnnamedUnion1, UnnamedStruct1, ...]
+
     for filename in sorted(os.listdir(bindings_dir)):
         if filename.startswith('generated_bindings_') and filename.endswith('.dart'):
             filepath = os.path.join(bindings_dir, filename)
             with open(filepath, 'r') as f:
                 content = f.read()
-            
+
+            # Collect top-level UnnamedUnionN/UnnamedStructN declarations.
+            # ffigen assigns these names to unnamed C unions/structs, so the
+            # same name may be declared by multiple modules and must be hidden
+            # from all but one export to avoid ambiguous_export errors.
+            decls = re.findall(
+                r'^(?:final\s+)?class\s+(Unnamed(?:Union|Struct)\d+)\b',
+                content, re.MULTILINE)
+            if decls:
+                # Union names first, then struct names (matches existing style)
+                unnamed_decls[filename] = sorted(
+                    set(decls), key=lambda n: (not n.startswith('UnnamedUnion'), n))
+
             # Find class name
             class_match = re.search(r'class\s+Tizen' + version_nodot + r'([A-Za-z0-9_]+)\s*\{', content)
             if not class_match:
+                extra_exports.append(filename)
                 continue
-                
+
             class_suffix = class_match.group(1)
             class_name = f"Tizen{version_nodot}{class_suffix}"
-            
-            
+
+
             # Match with symbol map
             symbol_map_name = symbol_maps.get(class_suffix)
             if not symbol_map_name:
-                print(f"Warning: Could not find symbol map for class {class_name} (expected {class_suffix})")
+                extra_exports.append(filename)
                 continue
-                
+
             # e.g., accountsSvc
             var_base = class_suffix[0].lower() + class_suffix[1:]
-            
+
             bindings.append({
                 'filename': filename,
                 'class_name': class_name,
@@ -93,6 +108,24 @@ def main():
 
     # Sort bindings by filename
     bindings.sort(key=lambda x: x['filename'])
+
+    # For each Unnamed* name declared by multiple files, keep it exported from
+    # the first file (sorted order) and hide it from the others.
+    owner = {}
+    for filename in sorted(unnamed_decls):
+        for name in unnamed_decls[filename]:
+            owner.setdefault(name, filename)
+    hides = {}
+    for filename, names in unnamed_decls.items():
+        hidden = [n for n in names if owner[n] != filename]
+        if hidden:
+            hides[filename] = hidden
+
+    def export_line(filename):
+        path = f"../../src/bindings/{version}/{filename}"
+        if filename in hides:
+            return f"export '{path}' hide {', '.join(hides[filename])};"
+        return f"export '{path}';"
 
 
     # 3. Generate tizen.dart
@@ -113,8 +146,9 @@ def main():
     lines.append("export '../../src/extensions.dart';")
     
     for b in bindings:
-        lines.append(f"export '../../src/bindings/{version}/{b['filename']}';")
-    lines.append(f"export '../../src/bindings/{version}/generated_bindings_time.dart' hide UnnamedUnion1, UnnamedStruct1;")
+        lines.append(export_line(b['filename']))
+    for filename in extra_exports:
+        lines.append(export_line(filename))
 
     lines.append("")
     lines.append("final _lookupProvider = LookupProvider();")
