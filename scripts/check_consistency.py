@@ -7,6 +7,7 @@
 #   1. Every module in modules.yaml has lib/src/bindings/<version>/
 #      generated_bindings_<name>.dart, and vice versa.
 #   2. lib/<version>/tizen.dart imports/exports exactly the binding files.
+#   3. modules.yaml survives the shared load/dump round trip byte-for-byte.
 
 from __future__ import annotations
 
@@ -14,6 +15,7 @@ import os
 import re
 import sys
 
+import modules_yaml
 import yaml
 
 ROOT = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
@@ -24,6 +26,10 @@ def check_version(version: str) -> list[str]:
     cfg_path = os.path.join(ROOT, 'configs', version, 'modules.yaml')
     bindings_dir = os.path.join(ROOT, 'lib', 'src', 'bindings', version)
     tizen_dart = os.path.join(ROOT, 'lib', version, 'tizen.dart')
+
+    if not modules_yaml.roundtrip_check(cfg_path):
+        errors.append(f'{version}: modules.yaml does not round-trip through '
+                      'scripts/modules_yaml.py')
 
     with open(cfg_path) as f:
         cfg = yaml.safe_load(f)
