@@ -113,19 +113,19 @@ def carry_module(m, index, report):
 
 def strip_dead_imports(modules, removed_names, report):
     for m in modules:
-        imports = m.get('imports')
-        if not imports:
+        deps = m.get('deps')
+        if not deps:
             continue
-        kept = [imp for imp in imports if imp.get('from') not in removed_names]
-        if len(kept) != len(imports):
-            gone = [imp['from'] for imp in imports if imp.get('from') in removed_names]
-            report.add('WARN', f"module {m['name']}: dropped imports from removed "
+        kept = [d for d in deps if d not in removed_names]
+        if len(kept) != len(deps):
+            gone = [d for d in deps if d in removed_names]
+            report.add('WARN', f"module {m['name']}: dropped deps on removed "
                                f"module(s) {gone} — types may re-duplicate; "
                                f"resolve_type_dups.py will re-derive")
             if kept:
-                m['imports'] = kept
+                m['deps'] = kept
             else:
-                del m['imports']
+                del m['deps']
 
 
 # -- candidate synthesis --------------------------------------------------------

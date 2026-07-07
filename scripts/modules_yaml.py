@@ -144,27 +144,3 @@ def soname_of(base: str, files: list[str]) -> str:
     return in_major[0][1]
 
 
-_DOMAIN_TOKENS = ('appfw_', 'media_', 'ui_', 'network_', 'system_',
-                  'messaging_', 'content_', 'web_')
-
-
-def alias_for(from_module: str, cfg) -> str | None:
-    """Choose the library-imports alias for a new import from `from_module`.
-
-    Reuses an alias already used for this module anywhere in cfg; otherwise
-    strips the 'capi_' prefix and one domain token when the remainder is
-    still >= 2 tokens (capi_appfw_app_control -> app_control). Returns None
-    when the alias would equal the module name (no `as:` needed).
-    """
-    for m in cfg['modules']:
-        for imp in m.get('imports') or []:
-            if imp.get('from') == from_module and imp.get('as'):
-                return imp['as']
-    name = from_module
-    if name.startswith('capi_'):
-        name = name[len('capi_'):]
-    for tok in _DOMAIN_TOKENS:
-        if name.startswith(tok) and name.count('_') >= 2:
-            name = name[len(tok):]
-            break
-    return name if name != from_module else None

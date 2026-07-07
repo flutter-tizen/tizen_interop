@@ -372,30 +372,18 @@ modules:
   headers:
   - sync_manager.h
   - sync_adapter.h
-  imports:
-  - from: accounts_svc
-    as: account
-    typedefs:
-    - account_h
-  - from: bundle
-    typedefs:
-    - bundle
+  deps:
+  - accounts_svc
+  - bundle
 - name: capi_appfw_application
   library: libcapi-appfw-application.so.0
   _category: Applicatoin Framework / Application (include i18n)
   headers:
   - app.h
   - app_i18n.h
-  imports:
-  - from: capi_appfw_app_control
-    as: app_control
-    typedefs:
-    - app_control_h
-  - from: capi_appfw_app_common
-    as: app_common
-    typedefs:
-    - app_event_handler_h
-    - app_event_cb
+  deps:
+  - capi_appfw_app_control
+  - capi_appfw_app_common
   enum_renames:
     app_device_orientation_e: _app_device_orientation_e
     app_event_type_e: _app_event_type_e
@@ -404,17 +392,10 @@ modules:
   _category: Application Framework / Application / Alarm
   headers:
   - app_alarm.h
-  imports:
-  - from: capi_appfw_app_control
-    as: app_control
-    typedefs:
-    - app_control_h
-  - from: notification
-    typedefs:
-    - notification_h
-  - from: time
-    structs:
-    - tm
+  deps:
+  - capi_appfw_app_control
+  - notification
+  - time
 - name: capi_appfw_app_common
   library: libcapi-appfw-app-common.so.0
   _category: Application Framework / Application / App Common, Resource Manager
@@ -434,11 +415,8 @@ modules:
   _category: Application Framework / Application / App Control
   headers:
   - app_control.h
-  imports:
-  - from: capi_appfw_app_control_uri
-    as: control_uri
-    typedefs:
-    - app_control_uri_h
+  deps:
+  - capi_appfw_app_control_uri
 - name: capi_appfw_app_control_uri
   library: libcapi-appfw-app-control-uri.so.0
   _category: Application Framework / Application / App Control URI
@@ -450,10 +428,8 @@ modules:
   _category: Application Framework / Application / Event
   headers:
   - app_event.h
-  imports:
-  - from: bundle
-    typedefs:
-    - bundle
+  deps:
+  - bundle
 - name: capi_appfw_job_scheduler
   library: libcapi-appfw-job-scheduler.so.0
   _category: Application Framework / Application / Job scheduler
@@ -500,19 +476,15 @@ modules:
   - data_control_noti.h
   - data_control_bulk.h
   - data_control_sql_cursor.h
-  imports:
-  - from: bundle
-    typedefs:
-    - bundle
+  deps:
+  - bundle
 - name: message_port
   library: libmessage-port.so.1
   _category: Application Framework / Message Port
   headers:
   - message_port.h
-  imports:
-  - from: bundle
-    typedefs:
-    - bundle
+  deps:
+  - bundle
 - name: notification
   library: libnotification.so.0
   _category: Application Framework / Notification
@@ -521,11 +493,8 @@ modules:
   - notification_error.h
   - notification_type.h
   - notification_status.h
-  imports:
-  - from: capi_appfw_app_control
-    as: app_control
-    typedefs:
-    - app_control_h
+  deps:
+  - capi_appfw_app_control
   primitive_typedefs:
     time_t:
       c: Long
@@ -556,14 +525,9 @@ modules:
   - notification_ex_visibility_action.h
   - notification_ex_multi_language.h
   - notification_ex_item.h
-  imports:
-  - from: bundle
-    typedefs:
-    - bundle
-  - from: capi_appfw_app_control
-    as: app_control
-    typedefs:
-    - app_control_h
+  deps:
+  - bundle
+  - capi_appfw_app_control
   primitive_typedefs:
     time_t:
       c: Long
@@ -584,32 +548,17 @@ modules:
   headers:
   - rpc-port.h
   - rpc-port-parcel.h
-  imports:
-  - from: bundle
-    typedefs:
-    - bundle
-  - from: time
-    structs:
-    - timespec
+  deps:
+  - bundle
+  - time
 - name: appcore_agent
   library: libappcore-agent.so.1
   _category: Application Framework / Service Application
   headers:
   - service_app.h
-  imports:
-  - from: capi_appfw_app_control
-    as: app_control
-    typedefs:
-    - app_control_h
-  - from: capi_appfw_app_common
-    as: app_common
-    typedefs:
-    - app_event_info_h
-    - app_event_handler_h
-    - app_event_cb
-    structs:
-    - app_event_handler
-    - app_event_info
+  deps:
+  - capi_appfw_app_control
+  - capi_appfw_app_common
   enum_renames:
     app_event_type_e: _app_event_type_e
 - name: capi_base_common
@@ -627,11 +576,8 @@ modules:
   _category: Content / Download
   headers:
   - download.h
-  imports:
-  - from: capi_appfw_app_control
-    as: app_control
-    typedefs:
-    - app_control_h
+  deps:
+  - capi_appfw_app_control
 - name: capi_content_mime_type
   library: libcapi-content-mime-type.so.0
   _category: Content / Mime Type
@@ -668,11 +614,8 @@ modules:
   headers:
   - context_history.h
   - context_trigger.h
-  imports:
-  - from: capi_appfw_app_control
-    as: app_control
-    typedefs:
-    - app_control_h
+  deps:
+  - capi_appfw_app_control
 - name: capi_geofence_manager
   library: libcapi-geofence-manager.so.0
   _category: Location / Geofence Manager
@@ -706,14 +649,8 @@ modules:
   _category: Machine Learning / Pipeline
   headers:
   - nnstreamer.h
-  imports:
-  - from: capi_ml_common
-    as: ml_common
-    typedefs:
-    - ml_tensors_data_h
-    - ml_tensors_info_h
-    - ml_option_h
-    - ml_custom_easy_invoke_cb
+  deps:
+  - capi_ml_common
   enum_renames:
     ml_nnfw_type_e: _ml_nnfw_type_e
     ml_nnfw_hw_e: _ml_nnfw_hw_e
@@ -726,14 +663,8 @@ modules:
   _category: Machine Learning / Service
   headers:
   - ml-api-service.h
-  imports:
-  - from: capi_ml_common
-    as: ml_common
-    typedefs:
-    - ml_tensors_data_h
-    - ml_option_h
-    - ml_information_h
-    - ml_information_list_h
+  deps:
+  - capi_ml_common
   enum_renames:
     ml_pipeline_state_e: _ml_pipeline_state_e
   preamble_year: 2026
@@ -743,31 +674,9 @@ modules:
   headers:
   - nnstreamer-single.h
   - nnstreamer.h
-  imports:
-  - from: capi_ml_common
-    as: ml_common
-    typedefs:
-    - ml_tensors_data_h
-    - ml_tensors_info_h
-    - ml_option_h
-    - ml_custom_easy_invoke_cb
-  - from: capi_nnstreamer
-    as: nnstreamer
-    typedefs:
-    - ml_pipeline_state_cb
-    - ml_pipeline_h
-    - ml_pipeline_sink_cb
-    - ml_pipeline_sink_h
-    - ml_pipeline_src_h
-    - ml_pipeline_src_callbacks_s
-    - ml_pipeline_switch_h
-    - ml_pipeline_valve_h
-    - ml_pipeline_element_h
-    - ml_custom_easy_filter_h
-    - ml_pipeline_if_h
-    - ml_pipeline_if_custom_cb
-    structs:
-    - ml_pipeline_src_callbacks_s
+  deps:
+  - capi_ml_common
+  - capi_nnstreamer
   enum_renames:
     ml_nnfw_type_e: _ml_nnfw_type_e
     ml_nnfw_hw_e: _ml_nnfw_hw_e
@@ -780,12 +689,8 @@ modules:
   _category: Machine Learning / Trainer
   include_directives_override:
   - '**/nntrainer/*.h'
-  imports:
-  - from: capi_ml_common
-    as: ml_common
-    typedefs:
-    - ml_tensors_info_h
-    - ml_tensors_data_h
+  deps:
+  - capi_ml_common
   preamble_year: 2026
 - name: capi_messaging_email
   library: libcapi-messaging-email.so.0
@@ -797,21 +702,15 @@ modules:
   _category: Messaging / Push
   headers:
   - push-service.h
-  imports:
-  - from: capi_appfw_app_control
-    as: app_control
-    typedefs:
-    - app_control_h
+  deps:
+  - capi_appfw_app_control
 - name: capi_media_audio_io
   library: libcapi-media-audio-io.so.0
   _category: Multimedia / Audio I/O
   headers:
   - audio_io.h
-  imports:
-  - from: capi_media_sound_manager
-    as: sound_manager
-    typedefs:
-    - sound_stream_info_h
+  deps:
+  - capi_media_sound_manager
   enum_renames:
     sound_type_e: _sound_type_e
 - name: capi_media_camera
@@ -819,11 +718,8 @@ modules:
   _category: Multimedia / Camera
   headers:
   - camera.h
-  imports:
-  - from: capi_media_tool
-    as: media_tool
-    typedefs:
-    - media_packet_h
+  deps:
+  - capi_media_tool
 - name: capi_media_image_util
   library: libcapi-media-image-util.so.0
   _category: Multimedia / Image Util
@@ -832,23 +728,15 @@ modules:
   - image_util_type.h
   - image_util_decode.h
   - image_util_encode.h
-  imports:
-  - from: capi_media_tool
-    as: media_tool
-    typedefs:
-    - media_packet_h
+  deps:
+  - capi_media_tool
 - name: capi_media_codec
   library: libcapi-media-codec.so.0
   _category: Multimedia / Media Codec
   headers:
   - media_codec.h
-  imports:
-  - from: capi_media_tool
-    as: media_tool
-    typedefs:
-    - media_format_h
-    - media_packet_h
-    - media_packet_pool_h
+  deps:
+  - capi_media_tool
 - name: capi_media_controller
   library: libcapi-media-controller.so.0
   _category: Multimedia / Media Controller
@@ -858,46 +746,30 @@ modules:
   - media_controller_playlist.h
   - media_controller_server.h
   - media_controller_type.h
-  imports:
-  - from: bundle
-    typedefs:
-    - bundle
+  deps:
+  - bundle
 - name: capi_mediademuxer
   library: libcapi-mediademuxer.so.0
   _category: Multimedia / Media Demuxer
   headers:
   - mediademuxer.h
-  imports:
-  - from: capi_media_tool
-    as: media_tool
-    typedefs:
-    - media_format_h
-    - media_packet_h
+  deps:
+  - capi_media_tool
 - name: capi_mediamuxer
   library: libcapi-mediamuxer.so.0
   _category: Multimedia / Media Muxer
   headers:
   - mediamuxer.h
-  imports:
-  - from: capi_media_tool
-    as: media_tool
-    typedefs:
-    - media_format_h
-    - media_packet_h
+  deps:
+  - capi_media_tool
 - name: capi_media_streamer
   library: libcapi-media-streamer.so.0
   _category: Multimedia / Media Streamer
   headers:
   - media_streamer.h
-  imports:
-  - from: bundle
-    typedefs:
-    - bundle
-  - from: capi_media_tool
-    as: media_tool
-    typedefs:
-    - media_format_h
-    - media_packet_h
+  deps:
+  - bundle
+  - capi_media_tool
 - name: capi_media_tool
   library: libcapi-media-tool.so.0
   _category: Multimedia / Media Tool
@@ -905,22 +777,16 @@ modules:
   - media_format.h
   - media_packet.h
   - media_packet_pool.h
-  imports:
-  - from: tbm
-    as: tbm_surface
-    typedefs:
-    - tbm_surface_h
+  deps:
+  - tbm
 - name: mv_3d
   library: libmv_3d.so
   _category: Multimedia / Media Vision 3D
   headers:
   - mv_3d.h
   - mv_3d_type.h
-  imports:
-  - from: mv_common
-    typedefs:
-    - mv_source_h
-    - mv_engine_config_h
+  deps:
+  - mv_common
   preamble_year: 2026
 - name: mv_barcode_detector
   library: libmv_barcode_detector.so
@@ -928,24 +794,15 @@ modules:
   headers:
   - mv_barcode_detect.h
   - mv_barcode_type.h
-  imports:
-  - from: mv_common
-    typedefs:
-    - mv_engine_config_h
-    - mv_source_h
-    - mv_point_s
-    - mv_quadrangle_s
-    - mv_rectangle_s
+  deps:
+  - mv_common
 - name: mv_barcode_generator
   library: libmv_barcode_generator.so
   _category: Multimedia / Media Vision BarCode
   headers:
   - mv_barcode_generate.h
-  imports:
-  - from: mv_common
-    typedefs:
-    - mv_engine_config_h
-    - mv_source_h
+  deps:
+  - mv_common
   enum_renames:
     mv_barcode_type_e: _mv_barcode_type_e
     mv_barcode_qr_mode_e: _mv_barcode_qr_mode_e
@@ -956,34 +813,24 @@ modules:
   _category: Multimedia / Media Vision Common
   headers:
   - mv_common.h
-  imports:
-  - from: capi_media_tool
-    as: media_tool
-    typedefs:
-    - media_packet_h
+  deps:
+  - capi_media_tool
 - name: mv_face
   library: libmv_face.so
   _category: Multimedia / Media Vision Face
   headers:
   - mv_face.h
   - mv_face_type.h
-  imports:
-  - from: mv_common
-    typedefs:
-    - mv_engine_config_h
-    - mv_source_h
-    - mv_quadrangle_s
-    - mv_rectangle_s
+  deps:
+  - mv_common
 - name: mv_face_recognition
   library: libmv_face_recognition.so
   _category: Multimedia / Media Vision Face Recognition
   headers:
   - mv_face_recognition.h
   - mv_face_recognition_type.h
-  imports:
-  - from: mv_common
-    typedefs:
-    - mv_source_h
+  deps:
+  - mv_common
   preamble_year: 2026
 - name: mv_image
   library: libmv_image.so
@@ -991,51 +838,32 @@ modules:
   headers:
   - mv_image.h
   - mv_image_type.h
-  imports:
-  - from: mv_common
-    typedefs:
-    - mv_engine_config_h
-    - mv_source_h
-    - mv_quadrangle_s
-    - mv_rectangle_s
+  deps:
+  - mv_common
 - name: mv_inference
   library: libmv_inference.so
   _category: Multimedia / Media Vision Inference
   headers:
   - mv_inference.h
   - mv_inference_type.h
-  imports:
-  - from: mv_common
-    typedefs:
-    - mv_engine_config_h
-    - mv_source_h
-    - mv_quadrangle_s
-    - mv_rectangle_s
-    - mv_point_s
+  deps:
+  - mv_common
 - name: mv_roi_tracker
   library: libmv_roi_tracker.so
   _category: Multimedia / Media Vision Roi tracker
   headers:
   - mv_roi_tracker.h
   - mv_roi_tracker_type.h
-  imports:
-  - from: mv_common
-    typedefs:
-    - mv_source_h
-    - mv_engine_config_h
-    - mv_rectangle_s
+  deps:
+  - mv_common
   preamble_year: 2026
 - name: mv_surveillance
   library: libmv_surveillance.so
   _category: Multimedia / Media Vision Surveillance
   headers:
   - mv_surveillance.h
-  imports:
-  - from: mv_common
-    typedefs:
-    - mv_engine_config_h
-    - mv_source_h
-    - mv_point_s
+  deps:
+  - mv_common
 - name: capi_media_editor
   library: libcapi-media-editor.so.0
   _category: Multimedia / Media Editor
@@ -1059,16 +887,9 @@ modules:
   _category: Multimedia / Player
   headers:
   - player.h
-  imports:
-  - from: capi_media_tool
-    as: media_tool
-    typedefs:
-    - media_format_h
-    - media_packet_h
-  - from: capi_media_sound_manager
-    as: sound_manager
-    typedefs:
-    - sound_stream_info_h
+  deps:
+  - capi_media_tool
+  - capi_media_sound_manager
   enum_renames:
     media_format_mimetype_e: _media_format_mimetype_e
 - name: capi_media_radio
@@ -1081,17 +902,9 @@ modules:
   _category: Multimedia / Recorder
   headers:
   - recorder.h
-  imports:
-  - from: capi_media_camera
-    as: camera
-    typedefs:
-    - camera_h
-    typedef_renames:
-      recorder_video_data_s: camera_preview_data_s
-  - from: capi_media_sound_manager
-    as: sound_manager
-    typedefs:
-    - sound_stream_info_h
+  deps:
+  - capi_media_camera
+  - capi_media_sound_manager
   enum_renames:
     audio_sample_type_e: _audio_sample_type_e
 - name: capi_media_screen_mirroring
@@ -1116,11 +929,8 @@ modules:
   _category: Multimedia / StreamRecorder
   headers:
   - streamrecorder.h
-  imports:
-  - from: capi_media_tool
-    as: media_tool
-    typedefs:
-    - media_packet_h
+  deps:
+  - capi_media_tool
 - name: capi_media_thumbnail_util
   library: libcapi-media-thumbnail-util.so
   _category: Multimedia / Thumbnail Util
@@ -1132,39 +942,24 @@ modules:
   _category: Multimedia / Tone Player
   headers:
   - tone_player.h
-  imports:
-  - from: capi_media_sound_manager
-    as: sound_manager
-    typedefs:
-    - sound_stream_info_h
+  deps:
+  - capi_media_sound_manager
 - name: capi_media_wav_player
   library: libcapi-media-wav-player.so.0
   _category: Multimedia / WAV Player
   headers:
   - wav_player.h
-  imports:
-  - from: capi_media_sound_manager
-    as: sound_manager
-    typedefs:
-    - sound_stream_info_h
+  deps:
+  - capi_media_sound_manager
 - name: capi_media_webrtc
   library: libcapi-media-webrtc.so.0
   _category: Multimedia / WebRTC
   headers:
   - webrtc.h
-  imports:
-  - from: bundle
-    typedefs:
-    - bundle
-  - from: capi_media_tool
-    as: media_tool
-    typedefs:
-    - media_format_h
-    - media_packet_h
-  - from: capi_media_sound_manager
-    as: sound_manager
-    typedefs:
-    - sound_stream_info_h
+  deps:
+  - bundle
+  - capi_media_tool
+  - capi_media_sound_manager
   preamble_year: 2026
 - name: asp
   library: libasp.so.0
@@ -1379,10 +1174,8 @@ modules:
   _category: System / Diagnostics
   headers:
   - diagnostics.h
-  imports:
-  - from: bundle
-    typedefs:
-    - bundle
+  deps:
+  - bundle
 - name: dlog
   library: libdlog.so.0
   _category: System / Dlog
@@ -1462,20 +1255,15 @@ modules:
   _category: System / Update Control
   headers:
   - update_control.h
-  imports:
-  - from: time
-    structs:
-    - tm
+  deps:
+  - time
 - name: eom
   library: libeom.so.0
   _category: UI / External Output Manager
   headers:
   - eom.h
-  imports:
-  - from: capi_ui_inputmethod
-    as: ui_inputmethod
-    typedefs:
-    - Evas_Object
+  deps:
+  - capi_ui_inputmethod
 - name: tbm
   library: libtbm.so.1
   _category: UI / TBM Surface
@@ -1487,15 +1275,8 @@ modules:
   _category: UIX / Autofill
   headers:
   - autofill.h
-  imports:
-  - from: capi_ui_autofill_common
-    as: autofill_common
-    typedefs:
-    - autofill_auth_info_h
-    - autofill_view_info_h
-    - autofill_fill_response_h
-    - autofill_save_view_info_h
-    - autofill_error_info_h
+  deps:
+  - capi_ui_autofill_common
 - name: capi_ui_autofill_common
   library: libcapi-ui-autofill-common.so.0
   _category: UIX / Autofill common
@@ -1511,15 +1292,8 @@ modules:
   _category: UIX / Autofill service
   headers:
   - autofill_service.h
-  imports:
-  - from: capi_ui_autofill_common
-    as: autofill_common
-    typedefs:
-    - autofill_view_info_h
-    - autofill_auth_info_h
-    - autofill_fill_response_h
-    - autofill_save_view_info_h
-    - autofill_error_info_h
+  deps:
+  - capi_ui_autofill_common
 - name: capi_ui_inputmethod
   library: libcapi-ui-inputmethod.so.0
   _category: UIX / Input Method
@@ -1574,16 +1348,8 @@ modules:
   _category: UIX / Voice control manager
   headers:
   - voice_control_manager.h
-  imports:
-  - from: vc
-    typedefs:
-    - vc_supported_language_cb
-    - vc_cmd_list_h
-    - vc_result_cb
-    - vc_state_changed_cb
-    - vc_service_state_changed_cb
-    - vc_current_language_changed_cb
-    - vc_error_cb
+  deps:
+  - vc
   enum_renames:
     vc_state_e: _vc_state_e
     vc_service_state_e: _vc_service_state_e

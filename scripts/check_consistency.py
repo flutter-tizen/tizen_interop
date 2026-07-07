@@ -8,6 +8,8 @@
 #      generated_bindings_<name>.dart, and vice versa.
 #   2. lib/<version>/tizen.dart imports/exports exactly the binding files.
 #   3. modules.yaml survives the shared load/dump round trip byte-for-byte.
+#   4. Every deps entry names an existing module and the graph is acyclic
+#      (ffigen runs providers before consumers).
 
 from __future__ import annotations
 
@@ -58,6 +60,25 @@ def check_version(version: str) -> list[str]:
     for name in sorted(imported - binding_names):
         errors.append(f'{version}: lib/{version}/tizen.dart references missing '
                       f'generated_bindings_{name}.dart')
+
+    # 4. deps point at existing modules and form a DAG
+    deps = {m['name']: list(m.get('deps') or []) for m in cfg['modules']}
+    for name, dlist in sorted(deps.items()):
+        for d in dlist:
+            if d not in module_names:
+                errors.append(f'{version}: module "{name}" deps on unknown '
+                              f'module "{d}"')
+    done: set[str] = set()
+    remaining = {n for n, dl in deps.items()}
+    while remaining:
+        ready = {n for n in remaining
+                 if all(d in done or d not in module_names for d in deps[n])}
+        if not ready:
+            errors.append(f'{version}: dependency cycle among '
+                          f'{", ".join(sorted(remaining))}')
+            break
+        done |= ready
+        remaining -= ready
 
     return errors
 

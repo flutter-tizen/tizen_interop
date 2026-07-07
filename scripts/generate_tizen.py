@@ -11,6 +11,57 @@ def to_upper_camel_case(snake_str):
     components = snake_str.split('_')
     return ''.join(x.title() for x in components)
 
+def extract_top_level_names(content):
+    """Return {name: 'real'|'alias'} for top-level exportable declarations.
+
+    A `typedef X = impN.X;` is an alias re-exporting a symbol imported from
+    another module (ffigen's symbol-file dedup); the real declaration lives in
+    the imported module.
+    """
+    names = {}
+    for m in re.finditer(r'^(?:final |base |sealed |abstract )*class (\w+)', content, re.M):
+        names[m.group(1)] = 'real'
+    for m in re.finditer(r'^enum (\w+)', content, re.M):
+        names[m.group(1)] = 'real'
+    for m in re.finditer(r'^typedef (\w+)\s*=\s*([^;]+);', content, re.M):
+        name, rhs = m.group(1), m.group(2)
+        if re.match(r'^\s*imp\d+\.', rhs):
+            names[name] = 'alias'
+        else:
+            names.setdefault(name, 'real')
+    # Top-level constants (ffigen emits #define macros and unnamed-enum members
+    # as `const <type> NAME = ...;`). Two modules can define the same macro, so
+    # these collide on export too.
+    for m in re.finditer(r'^const\s+\S.*?\s(\w+)\s*=', content, re.M):
+        names.setdefault(m.group(1), 'real')
+    # Private identifiers (leading '_') are never exported, so they can neither
+    # clash nor be hidden.
+    return {n: k for n, k in names.items() if not n.startswith('_')}
+
+def compute_hide_map(bindings_dir, filenames):
+    """Map each binding filename -> sorted list of names to hide on export.
+
+    When the same top-level name is exported by more than one module, keep it on
+    its owning module (a real declaration; alphabetically first if several) and
+    hide it on the rest so `tizen.dart` has no ambiguous exports.
+    """
+    decls = {}  # name -> {filename: 'real'|'alias'}
+    for fn in filenames:
+        with open(os.path.join(bindings_dir, fn), 'r') as f:
+            for name, kind in extract_top_level_names(f.read()).items():
+                decls.setdefault(name, {})[fn] = kind
+
+    hide_map = {}
+    for name, files in decls.items():
+        if len(files) < 2:
+            continue
+        reals = sorted(fn for fn, kind in files.items() if kind == 'real')
+        keep = reals[0] if reals else sorted(files)[0]
+        for fn in files:
+            if fn != keep:
+                hide_map.setdefault(fn, set()).add(name)
+    return {fn: sorted(names) for fn, names in hide_map.items()}
+
 def parse_args():
     parser = argparse.ArgumentParser(description='Generate lib/<version>/tizen.dart')
     parser.add_argument('version', type=str, help='Tizen version (e.g. 6.5, 7.0)')
@@ -59,25 +110,12 @@ def main():
     # 2. Parse generated_bindings_*.dart files
     bindings = []
     extra_exports = []  # files without a symbol map (no getter), exported last
-    unnamed_decls = {}  # filename -> [UnnamedUnion1, UnnamedStruct1, ...]
 
     for filename in sorted(os.listdir(bindings_dir)):
         if filename.startswith('generated_bindings_') and filename.endswith('.dart'):
             filepath = os.path.join(bindings_dir, filename)
             with open(filepath, 'r') as f:
                 content = f.read()
-
-            # Collect top-level UnnamedUnionN/UnnamedStructN declarations.
-            # ffigen assigns these names to unnamed C unions/structs, so the
-            # same name may be declared by multiple modules and must be hidden
-            # from all but one export to avoid ambiguous_export errors.
-            decls = re.findall(
-                r'^(?:final\s+)?class\s+(Unnamed(?:Union|Struct)\d+)\b',
-                content, re.MULTILINE)
-            if decls:
-                # Union names first, then struct names (matches existing style)
-                unnamed_decls[filename] = sorted(
-                    set(decls), key=lambda n: (not n.startswith('UnnamedUnion'), n))
 
             # Find class name
             class_match = re.search(r'class\s+Tizen' + version_nodot + r'([A-Za-z0-9_]+)\s*\{', content)
@@ -109,17 +147,12 @@ def main():
     # Sort bindings by filename
     bindings.sort(key=lambda x: x['filename'])
 
-    # For each Unnamed* name declared by multiple files, keep it exported from
-    # the first file (sorted order) and hide it from the others.
-    owner = {}
-    for filename in sorted(unnamed_decls):
-        for name in unnamed_decls[filename]:
-            owner.setdefault(name, filename)
-    hides = {}
-    for filename, names in unnamed_decls.items():
-        hidden = [n for n in names if owner[n] != filename]
-        if hidden:
-            hides[filename] = hidden
+    # When a top-level name is exported by more than one module (e.g. a struct
+    # shared via symbol-file import, re-exported as a typedef alias, or a
+    # duplicated macro constant), keep it on its owner and hide it elsewhere to
+    # avoid ambiguous exports.
+    all_files = [b['filename'] for b in bindings] + extra_exports
+    hides = compute_hide_map(bindings_dir, all_files)
 
     def export_line(filename):
         path = f"../../src/bindings/{version}/{filename}"

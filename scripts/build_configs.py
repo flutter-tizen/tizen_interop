@@ -4,9 +4,13 @@
 #   - configs/<version>/entrypoints.h
 #   - configs/<version>/entrypoints_<name>.h (for modules with force_types / extern_decls)
 #   - configs/<version>/ffigen_<name>.yaml  (one per module)
+#   - configs/<version>/ffigen_order.txt    (generation order: providers first)
 #
-# The emitted ffigen YAMLs are formatted to match the project's existing
-# style closely enough that ffigen produces byte-identical Dart bindings.
+# Cross-module shared types are deduplicated with ffigen's symbol-file
+# mechanism: a module listed in another module's `deps` exports a symbol file
+# (output.symbol-file), and the depending module imports it
+# (import.symbol-files) so ffigen references the provider's declarations
+# instead of re-emitting them.
 
 from __future__ import annotations
 
@@ -168,65 +172,35 @@ def _compiler_opts(cfg: dict, module: dict) -> list[str]:
     return lines
 
 
+def _symbol_import_section(module: dict) -> list[str]:
+    """Return the import.symbol-files block for a module's deps, or []."""
+    deps = module.get('deps') or []
+    if not deps:
+        return []
+    lines = ['import:', '  symbol-files:']
+    for dep in deps:
+        lines.append(f"    - {sq(f'.symbols/{dep}.yaml')}")
+    lines.append('')
+    return lines
+
+
 def _type_map_section(module: dict) -> list[str]:
-    """Return library-imports + type-map blocks, or [] if no overrides."""
-    imports = module.get('imports') or []
+    """Return library-imports + type-map blocks for primitive_typedefs, or []."""
     prim = module.get('primitive_typedefs') or {}
-    if not imports and not prim:
+    if not prim:
         return []
 
     lines = []
-
-    # library-imports
     lines.append('library-imports:')
-    if prim:
-        lines.append("  ffi_lib: 'dart:ffi'")
-    for imp in imports:
-        mod = imp['from']
-        alias = imp.get('as') or mod
-        lines.append(f"  {alias}: {sq(f'generated_bindings_{mod}.dart')}")
+    lines.append("  ffi_lib: 'dart:ffi'")
     lines.append('')
-
-    # type-map
     lines.append('type-map:')
-
-    # collect by kind
-    typedef_entries = []   # (key, lib_alias, c_type, dart_type)
-    struct_entries = []
-    union_entries = []
-
+    lines.append('  typedefs:')
     for key, spec in prim.items():
-        typedef_entries.append((key, 'ffi_lib', spec['c'], spec['d']))
-
-    for imp in imports:
-        alias = imp.get('as') or imp['from']
-        for t in imp.get('typedefs') or []:
-            typedef_entries.append((t, alias, t, t))
-        for t in imp.get('structs') or []:
-            struct_entries.append((t, alias, t, t))
-        for t in imp.get('unions') or []:
-            union_entries.append((t, alias, t, t))
-        for k, v in (imp.get('typedef_renames') or {}).items():
-            typedef_entries.append((k, alias, v, v))
-        for k, v in (imp.get('struct_renames') or {}).items():
-            struct_entries.append((k, alias, v, v))
-        for k, v in (imp.get('union_renames') or {}).items():
-            union_entries.append((k, alias, v, v))
-
-    def render_kind(header, entries):
-        if not entries:
-            return []
-        out = [f"  {header}:"]
-        for key, alias, ct, dt in entries:
-            out.append(f"    {sq(key)}:")
-            out.append(f"      lib: {sq(alias)}")
-            out.append(f"      c-type: {sq(ct)}")
-            out.append(f"      dart-type: {sq(dt)}")
-        return out
-
-    lines.extend(render_kind('typedefs', typedef_entries))
-    lines.extend(render_kind('structs', struct_entries))
-    lines.extend(render_kind('unions', union_entries))
+        lines.append(f"    {sq(key)}:")
+        lines.append("      lib: 'ffi_lib'")
+        lines.append(f"      c-type: {sq(spec['c'])}")
+        lines.append(f"      dart-type: {sq(spec['d'])}")
     lines.append('')
     return lines
 
@@ -254,7 +228,8 @@ def _macros_section(module: dict) -> list[str]:
     return lines
 
 
-def render_ffigen_yaml(cfg: dict, module: dict, output_prefix: str) -> str:
+def render_ffigen_yaml(cfg: dict, module: dict, output_prefix: str,
+                       is_provider: bool) -> str:
     version = cfg['version']
     vnd = version.replace('.', '')
     name = module['name']
@@ -270,7 +245,17 @@ def render_ffigen_yaml(cfg: dict, module: dict, output_prefix: str) -> str:
     lines.append('')
     lines.append(f"name: {sq(cls)}")
     lines.append(f"description: {sq(desc)}")
-    lines.append(f"output: {sq(f'{output_prefix}/generated_bindings_{name}.dart')}")
+    bindings_path = f'{output_prefix}/generated_bindings_{name}.dart'
+    if is_provider:
+        # Providers export a symbol file so that dependent modules reuse their
+        # types instead of re-declaring them (ffigen symbol-file dedup).
+        lines.append('output:')
+        lines.append(f"  bindings: {sq(bindings_path)}")
+        lines.append('  symbol-file:')
+        lines.append(f"    output: {sq(f'.symbols/{name}.yaml')}")
+        lines.append(f"    import-path: {sq(f'generated_bindings_{name}.dart')}")
+    else:
+        lines.append(f"output: {sq(bindings_path)}")
     lines.append('')
     lines.append('llvm-path:')
     lines.append(f"  - {sq(cfg.get('llvm_path', '/usr/lib/llvm-12'))}")
@@ -298,7 +283,10 @@ def render_ffigen_yaml(cfg: dict, module: dict, output_prefix: str) -> str:
         lines.append(f"    - {sq(d)}")
     lines.append('')
 
-    # library-imports + type-map
+    # symbol-file imports (cross-module type dedup)
+    lines.extend(_symbol_import_section(module))
+
+    # library-imports + type-map (dart:ffi primitive typedefs only)
     tm = _type_map_section(module)
     if tm:
         lines.extend(tm)
@@ -317,6 +305,40 @@ def render_ffigen_yaml(cfg: dict, module: dict, output_prefix: str) -> str:
         lines.extend(macros)
 
     return '\n'.join(lines) + '\n'
+
+
+# -- dependency graph ----------------------------------------------------------
+
+def topo_order(cfg: dict) -> list[str]:
+    """Return module names in generation order: providers before consumers.
+
+    A module that imports another module's symbol file can only be generated
+    after that symbol file exists, so ffigen must run providers first.
+    Kahn's algorithm with alphabetical tie-break for determinism; exits on
+    unknown deps or cycles.
+    """
+    names = [m['name'] for m in cfg['modules']]
+    deps = {m['name']: list(m.get('deps') or []) for m in cfg['modules']}
+    known = set(names)
+    for name, dlist in deps.items():
+        for d in dlist:
+            if d not in known:
+                sys.exit(f"module {name}: unknown dep '{d}'")
+
+    ordered = []
+    done = set()
+    remaining = sorted(names)
+    while remaining:
+        progressed = False
+        for name in list(remaining):
+            if all(d in done for d in deps[name]):
+                ordered.append(name)
+                done.add(name)
+                remaining.remove(name)
+                progressed = True
+        if not progressed:
+            sys.exit(f"dependency cycle among: {', '.join(remaining)}")
+    return ordered
 
 
 # -- main --------------------------------------------------------------------
@@ -365,15 +387,27 @@ def main():
     # entrypoints.h
     write('entrypoints.h', render_entrypoints_h(cfg))
 
+    # Providers are the modules some other module depends on; they must emit
+    # a symbol file, and ffigen must process them before their consumers.
+    providers = {d for m in cfg['modules'] for d in (m.get('deps') or [])}
+    order = topo_order(cfg)
+
     # module ffigen yamls + dummy entrypoints
     for m in cfg['modules']:
-        write(f"ffigen_{m['name']}.yaml", render_ffigen_yaml(cfg, m, output_prefix))
+        write(f"ffigen_{m['name']}.yaml",
+              render_ffigen_yaml(cfg, m, output_prefix,
+                                 is_provider=m['name'] in providers))
         ep = render_module_entrypoint(m)
         if ep:
             write(f"entrypoints_{m['name']}.h", ep)
 
+    # generation order for generate_bindings.sh (one config filename per line)
+    write('ffigen_order.txt',
+          '\n'.join(f'ffigen_{name}.yaml' for name in order) + '\n')
+
     if not args.dry_run:
-        print(f'Wrote symgen.yaml, entrypoints.h, {len(cfg["modules"])} ffigen_*.yaml to {out_dir}')
+        print(f'Wrote symgen.yaml, entrypoints.h, ffigen_order.txt, '
+              f'{len(cfg["modules"])} ffigen_*.yaml to {out_dir}')
 
 
 if __name__ == '__main__':

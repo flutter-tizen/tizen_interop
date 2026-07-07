@@ -28,14 +28,18 @@ dart run symgen --config "$config_dir/symgen.yaml"
 echo "Running ffigen for module-specific configs..."
 count=0
 
-for config_file in "$config_dir"/ffigen_*.yaml; do
+# Modules run in dependency order (ffigen_order.txt): a module that imports
+# another module's symbol file needs that file to have been generated already.
+mkdir -p "$config_dir/.symbols"
+
+while read -r filename; do
+    config_file="$config_dir/$filename"
     [ -e "$config_file" ] || continue
 
     count=$((count + 1))
-    filename=$(basename "$config_file")
     echo "[$count] Processing $filename..."
     dart run ffigen --config "$config_file" --ignore-source-errors
-done
+done < "$config_dir/ffigen_order.txt"
 
 if [ $count -eq 0 ]; then
     echo "Error: No ffigen config files found in $config_dir"
@@ -43,6 +47,9 @@ if [ $count -eq 0 ]; then
 fi
 
 echo "Completed $count module(s)"
+
+echo "Renaming anonymous structs/unions to module-unique names..."
+python3 "$SCRIPT_DIR/rename_unnamed.py" "$version"
 
 echo "Converting doxygen descriptions..."
 dart run "$SCRIPT_DIR/convert_description.dart" "$version"

@@ -9,7 +9,9 @@
 # generate_bindings.sh on a new version.
 #
 # What it fixes automatically (dart analyze AMBIGUOUS_EXPORT):
-#   struct/union/typedef duplicates -> imports[] entry on the non-owning module
+#   struct/union/typedef duplicates -> deps entry on the non-owning module
+#                                      (the owner then exports a symbol file
+#                                      that dedupes ALL types shared by the pair)
 #   enum duplicates                 -> enum_renames: {X: _X} (privatization)
 #   macro constant duplicates       -> macro_excludes on the non-owning module
 # Everything else (e.g. primitive_typedefs cases like time_t, missing symbols
@@ -29,7 +31,7 @@ import sys
 from collections import OrderedDict
 
 import modules_yaml
-from modules_yaml import ROOT, alias_for
+from modules_yaml import ROOT
 from rootstrap_index import RootstrapIndex
 
 DUP_RE = re.compile(
@@ -100,24 +102,13 @@ class Ownership:
         self.index = index
         self.by_name = {m['name']: m for m in cfg['modules']}
         self.order = [m['name'] for m in cfg['modules']]
-        # import graph: importer -> set(from)
+        # dependency graph: consumer -> set(provider)
         self.edges = {}
         self.in_degree = {}
         for m in cfg['modules']:
-            for imp in m.get('imports') or []:
-                self.edges.setdefault(m['name'], set()).add(imp['from'])
-                self.in_degree[imp['from']] = \
-                    self.in_degree.get(imp['from'], 0) + 1
-
-    def _exports_name(self, module, name):
-        m = self.by_name.get(module)
-        for other in self.cfg['modules']:
-            for imp in other.get('imports') or []:
-                if imp.get('from') == module:
-                    for key in ('typedefs', 'structs', 'unions'):
-                        if name in (imp.get(key) or []):
-                            return True
-        return False
+            for dep in m.get('deps') or []:
+                self.edges.setdefault(m['name'], set()).add(dep)
+                self.in_degree[dep] = self.in_degree.get(dep, 0) + 1
 
     def _pc_of(self, module):
         m = self.by_name.get(module)
@@ -128,17 +119,12 @@ class Ownership:
 
     def decide(self, a, b, name):
         """Return (owner, other, signal)."""
-        # 1. someone already exports this exact name via imports[]
-        if self._exports_name(a, name):
-            return a, b, 'existing-export'
-        if self._exports_name(b, name):
-            return b, a, 'existing-export'
-        # 2. an existing edge already connects the pair
+        # 1. an existing edge already connects the pair
         if a in self.edges.get(b, ()):
             return a, b, 'existing-edge'
         if b in self.edges.get(a, ()):
             return b, a, 'existing-edge'
-        # 3. pkg-config Requires direction
+        # 2. pkg-config Requires direction
         if self.index:
             pa, pb = self._pc_of(a), self._pc_of(b)
             if pa and pb:
@@ -146,7 +132,7 @@ class Ownership:
                     return a, b, 'pc-requires'
                 if self.index.pc_requires_transitively(pa, pb):
                     return b, a, 'pc-requires'
-        # 4. header include graph
+        # 3. header include graph
         if self.index:
             ha = self.by_name.get(a, {}).get('headers') or []
             hb = self.by_name.get(b, {}).get('headers') or []
@@ -155,37 +141,34 @@ class Ownership:
                     return a, b, 'include-graph'
                 if self.index.include_graph_reaches(ha, hb):
                     return b, a, 'include-graph'
-        # 5. import-graph hub
+        # 4. dependency-graph hub
         da, db = self.in_degree.get(a, 0), self.in_degree.get(b, 0)
         if da != db:
             return (a, b, 'hub') if da > db else (b, a, 'hub')
-        # 6. file order (earlier owns), low confidence
+        # 5. file order (earlier owns), low confidence
         ia, ib = self.order.index(a), self.order.index(b)
         return (a, b, 'file-order (LOW CONFIDENCE)') if ia < ib \
             else (b, a, 'file-order (LOW CONFIDENCE)')
 
 
 def apply_fix(cfg, name, kind, owner, others):
-    """Mutate cfg; return list of modules whose ffigen config changed."""
+    """Mutate cfg; return list of modules whose ffigen config changed.
+
+    For struct/union/typedef duplicates a single deps edge suffices: the owner
+    then exports a symbol file and ffigen reuses ALL of its types in the
+    consumer, not just the one that was reported. The owner is included in the
+    returned list — it must be (re)generated before its consumers so its
+    symbol file exists.
+    """
     by_name = {m['name']: m for m in cfg['modules']}
     changed = []
     for mod in others:
         m = by_name[mod]
         if kind in ('struct', 'union', 'typedef'):
-            key = {'struct': 'structs', 'union': 'unions',
-                   'typedef': 'typedefs'}[kind]
-            imports = m.setdefault('imports', [])
-            entry = next((i for i in imports if i.get('from') == owner), None)
-            if entry is None:
-                entry = OrderedDict()
-                entry['from'] = owner
-                alias = alias_for(owner, cfg)
-                if alias:
-                    entry['as'] = alias
-                imports.append(entry)
-            lst = entry.setdefault(key, [])
-            if name not in lst:
-                lst.append(name)
+            deps = m.setdefault('deps', [])
+            if owner not in deps:
+                deps.append(owner)
+                changed.append(owner)
                 changed.append(mod)
         elif kind == 'enum':
             renames = m.setdefault('enum_renames', OrderedDict())
@@ -201,19 +184,33 @@ def apply_fix(cfg, name, kind, owner, others):
 
 
 def regenerate(version, modules):
-    """build_configs + ffigen for the given modules only."""
+    """build_configs + ffigen for the given modules only.
+
+    Modules run in the rendered dependency order (ffigen_order.txt) so that a
+    provider's symbol file exists before its consumers are generated.
+    """
     r = run([sys.executable, os.path.join(ROOT, 'scripts', 'build_configs.py'),
              version])
     if r.returncode != 0:
         sys.exit(f'build_configs.py failed:\n{r.stderr}')
-    for mod in modules:
-        cfgp = os.path.join(ROOT, 'build', 'configs', version,
-                            f'ffigen_{mod}.yaml')
+    build_dir = os.path.join(ROOT, 'build', 'configs', version)
+    os.makedirs(os.path.join(build_dir, '.symbols'), exist_ok=True)
+    with open(os.path.join(build_dir, 'ffigen_order.txt')) as f:
+        order = [line.removeprefix('ffigen_').removesuffix('.yaml')
+                 for line in f.read().split()]
+    todo = set(modules)
+    for mod in [m for m in order if m in todo]:
+        cfgp = os.path.join(build_dir, f'ffigen_{mod}.yaml')
         print(f'    ffigen {mod}...')
         r = run(['dart', 'run', 'ffigen', '--config', cfgp,
                  '--ignore-source-errors'])
         if r.returncode != 0:
             sys.exit(f'ffigen failed for {mod}:\n{r.stderr[-2000:]}')
+    # Re-apply module-unique names to anything just regenerated (idempotent).
+    r = run([sys.executable,
+             os.path.join(ROOT, 'scripts', 'rename_unnamed.py'), version])
+    if r.returncode != 0:
+        sys.exit(f'rename_unnamed.py failed:\n{r.stderr}')
 
 
 def generate_tizen(version):
