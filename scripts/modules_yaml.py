@@ -111,6 +111,16 @@ def roundtrip_check(path: str) -> bool:
 
 # -- naming helpers -----------------------------------------------------------
 
+def to_upper_camel(name: str) -> str:
+    """snake_case -> UpperCamelCase (capi_media_camera -> CapiMediaCamera).
+
+    Single source of truth for the class-name / anonymous-type-prefix
+    convention shared by build_configs.py, generate_tizen.py and
+    rename_unnamed.py.
+    """
+    return ''.join(p[:1].upper() + p[1:] for p in name.split('_') if p)
+
+
 def lib_to_module_name(libname: str) -> str:
     """libcapi-appfw-app-common.so.0 -> capi_appfw_app_common"""
     name = libname

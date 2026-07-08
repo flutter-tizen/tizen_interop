@@ -236,8 +236,8 @@ def discover_candidates(index, prev_universe, carried_bases, report):
         baseline = set()
         report.add('WARN', 'no previous rootstrap manifest — candidate list '
                            'will be noisy (availability, not curation). '
-                           'Run scan_rootstrap.py for the previous version '
-                           'while its SDK is installed.')
+                           'Pass --prev-universe with the previous version\'s '
+                           'rootstrap manifest to narrow it.')
     candidates = sorted(
         b for b in new_bases - baseline - carried_bases
         if not _IGNORE_RE.match(b))
@@ -247,15 +247,14 @@ def discover_candidates(index, prev_universe, carried_bases, report):
 # -- entrypoints ----------------------------------------------------------------
 
 
-def update_entrypoints(cfg, index, additions, report):
-    """Prune vanished includes; insert new modules' headers per section.
+def update_entrypoints(cfg, index, report):
+    """Prune entrypoint includes whose header no longer exists in the rootstrap.
 
-    Returns (pruned, inserted): pruned header names (their sidecar comments
-    must be dropped — dump() refuses to lose comments silently) and headers
-    actually inserted (only those get "# NEW - review" markers).
+    Returns the set of pruned header names (their sidecar comments must be
+    dropped, since dump() refuses to lose comments silently). New modules'
+    headers are not auto-inserted here — they are reviewed and added by hand.
     """
     pruned = set()
-    inserted = []
     for sec in cfg['entrypoints']:
         kept = []
         for it in sec['includes']:
@@ -266,29 +265,7 @@ def update_entrypoints(cfg, index, additions, report):
                 report.add('REMOVED',
                            f"entrypoints [{sec['section']}]: {it['header']}")
         sec['includes'] = kept
-    return pruned, inserted
-
-    by_section = {s['section']: s for s in cfg['entrypoints']}
-    for category, headers in additions:
-        if not headers:
-            continue
-        section = by_section.get(category)
-        if section is None:
-            section = by_section.get('Uncategorized')
-            if section is None:
-                section = OrderedDict(section='Uncategorized', includes=[])
-                cfg['entrypoints'].append(section)
-                by_section['Uncategorized'] = section
-        existing = {it['header'] for it in section['includes']}
-        for h in headers:
-            if h in existing:
-                continue
-            item = OrderedDict(header=h)
-            pos = next((i for i, it in enumerate(section['includes'])
-                        if it['header'] > h), len(section['includes']))
-            section['includes'].insert(pos, item)
-            inserted.append(h)
-            report.add('ADDED', f"entrypoints [{section['section']}]: {h}")
+    return pruned
 
 
 # -- main ------------------------------------------------------------------------
@@ -324,8 +301,8 @@ def main():
 
     rootstrap = args.rootstrap or os.path.join(ROOT, 'rootstraps', args.new_version)
     if not os.path.exists(rootstrap):
-        sys.exit(f'No rootstrap at {rootstrap}. Run scripts/copy_rootstrap.sh '
-                 f'and scripts/scan_rootstrap.py first.')
+        sys.exit(f'No rootstrap at {rootstrap}. '
+                 f'Run scripts/copy_rootstrap.sh first.')
     index = RootstrapIndex.open(args.new_version, rootstrap)
 
     prev_universe = None
@@ -369,7 +346,6 @@ def main():
 
     # candidates
     new_module_marks = []
-    ep_additions = []
     if not args.no_candidates:
         votes = learn_category_votes(cfg)
         carried_bases = {
@@ -377,9 +353,8 @@ def main():
             for m in kept_modules if not m.get('no_library')}
         for base in discover_candidates(index, prev_universe, carried_bases,
                                         report):
-            entry, category, ep_headers = synthesize_module(
+            entry, category, _ = synthesize_module(
                 base, index, votes, report)
-            cat_key = category or 'Uncategorized'
             pos = len(cfg['modules'])
             for i, m in enumerate(cfg['modules']):
                 mc = (m.get('_category') or '').split(' / ')[0]
@@ -387,11 +362,9 @@ def main():
                     pos = i + 1
             cfg['modules'].insert(pos, entry)
             new_module_marks.append(entry['name'])
-            ep_additions.append((cat_key, ep_headers))
 
     # entrypoints
-    pruned_headers, inserted_headers = update_entrypoints(
-        cfg, index, ep_additions, report)
+    pruned_headers = update_entrypoints(cfg, index, report)
     if pruned_headers:
         comments = [(k, c) for k, c in comments
                     if not any(k == f'  - header: {h}' for h in pruned_headers)]
@@ -417,8 +390,6 @@ def main():
     # attach "# NEW - review" markers via the comment sidecar
     for name in new_module_marks:
         comments.append((f'- name: {name}', '# NEW - review'))
-    for h in inserted_headers:
-        comments.append((f'  - header: {h}', '# NEW - review'))
 
     report.print()
 

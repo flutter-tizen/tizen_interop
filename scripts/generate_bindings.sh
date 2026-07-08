@@ -20,7 +20,10 @@ if [ ! -d $ROOT_DIR/rootstraps/$version ]; then
 fi
 
 # Render symgen.yaml, entrypoints*.h, and ffigen_*.yaml from modules.yaml.
+# Wipe the derived config dir first so a removed/renamed module leaves no stale
+# ffigen_*.yaml or .symbols/*.yaml behind (everything here is regenerated).
 config_dir="$ROOT_DIR/build/configs/$version"
+rm -rf "$config_dir"
 python3 "$SCRIPT_DIR/build_configs.py" "$version" --out-dir "$config_dir"
 
 dart run symgen --config "$config_dir/symgen.yaml"

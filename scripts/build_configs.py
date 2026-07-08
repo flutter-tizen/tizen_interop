@@ -20,12 +20,10 @@ import sys
 
 import yaml
 
+from modules_yaml import to_upper_camel as camel
+
 
 # -- helpers -----------------------------------------------------------------
-
-def camel(name: str) -> str:
-    return ''.join(p[:1].upper() + p[1:] for p in name.split('_') if p)
-
 
 def dashed(name: str) -> str:
     return name.replace('_', '-')
@@ -155,11 +153,17 @@ def _compiler_opts(cfg: dict, module: dict) -> list[str]:
     # include dirs (grouped with comments)
     inc = cfg.get('common_include_dirs') or {}
     prefix = cfg['rootstrap_prefix']
-    groups = [
+    # Emit known groups in their conventional order, then any other group
+    # present in modules.yaml (so a new include group is never silently
+    # dropped just because it isn't listed here).
+    known = [
         ('tizen', '# include Tizen API directories'),
         ('efl', '# include EFL directories'),
         ('glib', '# include glib directories'),
     ]
+    known_keys = {k for k, _ in known}
+    groups = known + [(k, f'# include {k} directories')
+                      for k in inc if k not in known_keys]
     for key, comment in groups:
         paths = inc.get(key) or []
         if not paths:

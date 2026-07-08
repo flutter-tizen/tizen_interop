@@ -3,13 +3,7 @@ import sys
 import re
 import argparse
 
-def to_camel_case(snake_str):
-    components = snake_str.split('_')
-    return components[0] + ''.join(x.title() for x in components[1:])
-
-def to_upper_camel_case(snake_str):
-    components = snake_str.split('_')
-    return ''.join(x.title() for x in components)
+from modules_yaml import to_upper_camel
 
 def extract_top_level_names(content):
     """Return {name: 'real'|'alias'} for top-level exportable declarations.
@@ -101,7 +95,7 @@ def main():
         # Convert to upper camel case to match class name suffix
         if '_' in base_name:
             # Handle cases like mv_barcode_detector -> MvBarcodeDetector
-            upper_camel = to_upper_camel_case(base_name)
+            upper_camel = to_upper_camel(base_name)
         else:
             # Handle cases like accountsSvc -> AccountsSvc
             upper_camel = base_name[0].upper() + base_name[1:]

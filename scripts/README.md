@@ -49,7 +49,7 @@ committed.
    python3 scripts/check_consistency.py
    ```
 
-### Inspecting or verifying the derived configs
+### Inspecting the derived configs
 
 To render the derived configs without running the generators:
 
@@ -57,18 +57,6 @@ To render the derived configs without running the generators:
 python3 scripts/build_configs.py <version>            # writes to build/configs/<version>
 python3 scripts/build_configs.py <version> --out-dir /tmp/rebuild
 ```
-
-`verify_configs.py` compares two config directories for semantic YAML equality
-(copyright years and comment spacing are normalized). It was used to prove that
-`build_configs.py` round-trips the previously committed configs, and remains
-useful when refactoring the generator:
-
-```sh
-python3 scripts/verify_configs.py <dir_a> <dir_b>
-```
-
-`import_configs.py` is the one-time migration helper that bootstrapped
-`modules.yaml` from the old hand-written configs.
 
 ## Generating documentation
 

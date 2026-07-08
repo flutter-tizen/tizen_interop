@@ -26,9 +26,7 @@ import os
 import re
 import sys
 
-
-def camel(module_id):
-    return ''.join(p.title() for p in module_id.split('_'))
+from modules_yaml import to_upper_camel as camel
 
 
 def main():
