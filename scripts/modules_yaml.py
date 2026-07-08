@@ -3,7 +3,7 @@
 #
 # Provides an ordered, trailing-comment-preserving load/dump cycle that
 # reproduces the committed files byte-for-byte, plus small naming helpers
-# shared by update_modules.py and resolve_type_dups.py.
+# used by build_configs.py, generate_tizen.py and resolve_type_dups.py.
 
 from __future__ import annotations
 
@@ -119,38 +119,5 @@ def to_upper_camel(name: str) -> str:
     rename_unnamed.py.
     """
     return ''.join(p[:1].upper() + p[1:] for p in name.split('_') if p)
-
-
-def lib_to_module_name(libname: str) -> str:
-    """libcapi-appfw-app-common.so.0 -> capi_appfw_app_common"""
-    name = libname
-    if name.startswith('lib'):
-        name = name[3:]
-    name = re.sub(r'(\.so)(\.[0-9]+)*$', '', name)
-    return name.replace('-', '_')
-
-
-def soname_of(base: str, files: list[str]) -> str:
-    """Pick the soname to record in modules.yaml for a library.
-
-    base is the unversioned name ('libfoo.so'); files are all matching
-    filenames in the rootstrap. Committed entries use the runtime soname:
-    the highest major version, in its shortest form ('libfoo.so.1' over
-    'libfoo.so.1.3.3', but 'libfoo.so.0.1' when no single-major file
-    exists). Falls back to base when only the unversioned symlink exists.
-    """
-    versioned = []
-    for f in files:
-        m = re.fullmatch(re.escape(base) + r'((?:\.\d+)+)', f)
-        if m:
-            parts = tuple(int(p) for p in m.group(1)[1:].split('.'))
-            versioned.append((parts, f))
-    if not versioned:
-        return base
-    top_major = max(v[0][0] for v in versioned)
-    in_major = [v for v in versioned if v[0][0] == top_major]
-    # shortest version tuple wins (the actual soname); tie-break on value
-    in_major.sort(key=lambda v: (len(v[0]), v[0]))
-    return in_major[0][1]
 
 

@@ -5,8 +5,8 @@
 #   python3 scripts/resolve_type_dups.py <version> [--assume-generated]
 #
 # Requires a local rootstrap, dart, and llvm (ffigen) — this is a maintainer
-# tool, not a CI check. Typical use right after update_modules.py +
-# generate_bindings.sh on a new version.
+# tool, not a CI check. Typical use right after adding a new version's
+# modules.yaml and running generate_bindings.sh.
 #
 # What it fixes automatically (dart analyze AMBIGUOUS_EXPORT):
 #   struct/union/typedef duplicates -> deps entry on the non-owning module
@@ -237,14 +237,12 @@ def main():
     cfg_path = os.path.join(ROOT, 'configs', args.version, 'modules.yaml')
     cfg, comments = modules_yaml.load(cfg_path)
 
+    # The rootstrap index sharpens ownership decisions (pkg-config Requires and
+    # include-graph direction); without it, decide() falls back to dependency
+    # in-degree and file order.
     rootstrap = os.path.join(ROOT, 'rootstraps', args.version)
-    manifest = os.path.join(ROOT, 'configs', args.version,
-                            'rootstrap_manifest.yaml')
-    index = None
-    if os.path.isdir(rootstrap):
-        index = RootstrapIndex.scan(args.version, rootstrap)
-    elif os.path.isfile(manifest):
-        index = RootstrapIndex.from_manifest(manifest)
+    index = RootstrapIndex.scan(args.version, rootstrap) \
+        if os.path.isdir(rootstrap) else None
 
     if not args.assume_generated and not args.analyze_only and not args.dry_run:
         print('Running initial full generation (generate_bindings.sh)...')

@@ -1,18 +1,16 @@
 #!/usr/bin/env python3
-# Rootstrap scanner and index used by update_modules.py / resolve_type_dups.py.
+# Rootstrap scanner used by resolve_type_dups.py to decide type ownership.
 #
 # Scans rootstraps/<version>/usr for shared libraries, headers, and pkg-config
-# files, and can persist the result as configs/<version>/rootstrap_manifest.yaml
-# so future bootstraps can diff against a version whose SDK is no longer
-# installed (rootstraps/ itself is gitignored).
+# files, and answers the two questions the duplicate-type resolver needs: does
+# one pkg-config Require another, and does one header transitively #include
+# another (include-graph reachability).
 
 from __future__ import annotations
 
 import os
 import re
 from collections import deque
-
-import yaml
 
 ROOT = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 
@@ -25,20 +23,7 @@ class PcInfo:
     def __init__(self, name):
         self.name = name
         self.libs = []          # bare -l names, e.g. 'capi-appfw-application'
-        self.includedirs = []   # relative to rootstrap root, e.g. 'usr/include/appfw'
         self.requires = []      # pc names from Requires:
-
-    def to_dict(self):
-        return {'libs': self.libs, 'includedirs': self.includedirs,
-                'requires': self.requires}
-
-    @classmethod
-    def from_dict(cls, name, d):
-        pc = cls(name)
-        pc.libs = d.get('libs') or []
-        pc.includedirs = d.get('includedirs') or []
-        pc.requires = d.get('requires') or []
-        return pc
 
 
 def _parse_pc(path: str, name: str) -> PcInfo:
@@ -66,10 +51,6 @@ def _parse_pc(path: str, name: str) -> PcInfo:
     for tok in expand(fields.get('Libs', '')).split():
         if tok.startswith('-l'):
             pc.libs.append(tok[2:])
-    for tok in expand(fields.get('Cflags', '')).split():
-        if tok.startswith('-I'):
-            d = tok[2:].lstrip('/')
-            pc.includedirs.append(d)
     for tok in re.split(r'[,\s]+', expand(fields.get('Requires', ''))):
         # skip version constraints like '>=' '1.0'
         if tok and not re.match(r'^[<>=!]|^\d', tok):
@@ -122,60 +103,7 @@ class RootstrapIndex:
                     idx.pc_by_lib.setdefault(base, name)
         return idx
 
-    def to_manifest(self, path: str):
-        data = {
-            'version': self.version,
-            'libs': {b: sorted(fs) for b, fs in sorted(self.lib_files.items())},
-            'headers': sorted(self.headers),
-            'pkgconfig': {n: pc.to_dict() for n, pc in sorted(self.pcs.items())},
-        }
-        with open(path, 'w') as f:
-            yaml.safe_dump(data, f, sort_keys=True, width=200)
-
-    @classmethod
-    def from_manifest(cls, path: str) -> 'RootstrapIndex':
-        with open(path) as f:
-            data = yaml.safe_load(f)
-        idx = cls(str(data['version']))
-        idx.lib_files = {b: list(fs) for b, fs in (data.get('libs') or {}).items()}
-        idx.headers = set(data.get('headers') or [])
-        for name, d in (data.get('pkgconfig') or {}).items():
-            idx.pcs[name] = PcInfo.from_dict(name, d)
-        for name, pc in idx.pcs.items():
-            for l in pc.libs:
-                base = f'lib{l}.so'
-                if base in idx.lib_files:
-                    idx.pc_by_lib.setdefault(base, name)
-        return idx
-
-    @classmethod
-    def open(cls, version: str, path: str) -> 'RootstrapIndex':
-        """Load from a rootstrap directory or a manifest file."""
-        if os.path.isdir(path):
-            return cls.scan(version, path)
-        return cls.from_manifest(path)
-
-    # -- queries ---------------------------------------------------------------
-
-    def header_exists(self, ref: str) -> bool:
-        """ref as written in modules.yaml (basename or subpath)."""
-        if ref in self.headers:
-            return True
-        suffix = '/' + ref
-        return any(h.endswith(suffix) for h in self.headers)
-
-    def expand_glob(self, pattern: str) -> list[str]:
-        """Expand a ffigen include-directive glob like '**/AL/*.h'."""
-        pat = pattern.lstrip('/')
-        if pat.startswith('**/'):
-            pat = pat[3:]
-        rx = re.compile(
-            '(^|/)' + re.escape(pat).replace(r'\*\*', '.*').replace(r'\*', '[^/]*') + '$')
-        return sorted(h for h in self.headers if rx.search(h))
-
-    def includedir_owners(self, d: str) -> list[str]:
-        """pc names whose Cflags mention include dir d (relative path)."""
-        return [n for n, pc in self.pcs.items() if d in pc.includedirs]
+    # -- ownership queries -----------------------------------------------------
 
     def pc_requires_transitively(self, a: str, b: str, depth: int = 2) -> bool:
         """True if pc `a` requires pc `b` within `depth` hops."""
