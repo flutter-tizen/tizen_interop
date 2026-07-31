@@ -19,29 +19,43 @@ if [ ! -d $ROOT_DIR/rootstraps/$version ]; then
   exit 1
 fi
 
-dart run symgen --config $ROOT_DIR/configs/$version/symgen.yaml
+# Render symgen.yaml, entrypoints*.h, and ffigen_*.yaml from modules.yaml.
+# Wipe the derived config dir first so a removed/renamed module leaves no stale
+# ffigen_*.yaml or .symbols/*.yaml behind (everything here is regenerated).
+config_dir="$ROOT_DIR/build/configs/$version"
+rm -rf "$config_dir"
+python3 "$SCRIPT_DIR/build_configs.py" "$version" --out-dir "$config_dir"
 
-if [ -f "$ROOT_DIR/configs/$version/ffigen.yaml" ]; then
-    echo "Running ffigen with single config file..."
-    dart run ffigen --config $ROOT_DIR/configs/$version/ffigen.yaml --ignore-source-errors
-else
-    echo "Running ffigen for module-specific configs..."
-    config_dir="$ROOT_DIR/configs/$version"
-    count=0
+dart run symgen --config "$config_dir/symgen.yaml"
 
-    for config_file in "$config_dir"/ffigen_*.yaml; do
-        [ -e "$config_file" ] || continue
+echo "Running ffigen for module-specific configs..."
+count=0
 
-        count=$((count + 1))
-        filename=$(basename "$config_file")
-        echo "[$count] Processing $filename..."
-        dart run ffigen --config "$config_file" --ignore-source-errors
-    done
+# Modules run in dependency order (ffigen_order.txt): a module that imports
+# another module's symbol file needs that file to have been generated already.
+mkdir -p "$config_dir/.symbols"
 
-    if [ $count -eq 0 ]; then
-        echo "Error: No ffigen config files found in $config_dir"
-        exit 1
-    fi
+while read -r filename; do
+    config_file="$config_dir/$filename"
+    [ -e "$config_file" ] || continue
 
-    echo "Completed $count module(s)"
+    count=$((count + 1))
+    echo "[$count] Processing $filename..."
+    dart run ffigen --config "$config_file" --ignore-source-errors
+done < "$config_dir/ffigen_order.txt"
+
+if [ $count -eq 0 ]; then
+    echo "Error: No ffigen config files found in $config_dir"
+    exit 1
 fi
+
+echo "Completed $count module(s)"
+
+echo "Renaming anonymous structs/unions to module-unique names..."
+python3 "$SCRIPT_DIR/rename_unnamed.py" "$version"
+
+echo "Converting doxygen descriptions..."
+dart run "$SCRIPT_DIR/convert_description.dart" "$version"
+
+echo "Regenerating lib/$version/tizen.dart..."
+python3 "$SCRIPT_DIR/generate_tizen.py" "$version"

@@ -162,7 +162,7 @@ export '../../src/bindings/9.0/generated_bindings_capi_geofence_manager.dart';
 export '../../src/bindings/9.0/generated_bindings_capi_location_manager.dart';
 export '../../src/bindings/9.0/generated_bindings_capi_media_audio_io.dart';
 export '../../src/bindings/9.0/generated_bindings_capi_media_camera.dart'
-    hide UnnamedUnion1, UnnamedStruct1;
+    hide UnnamedStruct1, UnnamedUnion1;
 export '../../src/bindings/9.0/generated_bindings_capi_media_codec.dart';
 export '../../src/bindings/9.0/generated_bindings_capi_media_controller.dart';
 export '../../src/bindings/9.0/generated_bindings_capi_media_editor.dart';
@@ -272,7 +272,7 @@ export '../../src/bindings/9.0/generated_bindings_webauthn_client.dart';
 export '../../src/bindings/9.0/generated_bindings_wifi_direct.dart';
 export '../../src/bindings/9.0/generated_bindings_yaca.dart';
 export '../../src/bindings/9.0/generated_bindings_time.dart'
-    hide UnnamedUnion1, UnnamedStruct1;
+    hide UnnamedStruct1, UnnamedUnion1;
 
 final _lookupProvider = LookupProvider();
 

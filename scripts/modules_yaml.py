@@ -1,0 +1,123 @@
+#!/usr/bin/env python3
+# Shared I/O layer for configs/<version>/modules.yaml.
+#
+# Provides an ordered, trailing-comment-preserving load/dump cycle that
+# reproduces the committed files byte-for-byte, plus small naming helpers
+# used by build_configs.py, generate_tizen.py and resolve_type_dups.py.
+
+from __future__ import annotations
+
+import os
+import re
+from collections import OrderedDict
+
+import yaml
+
+ROOT = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+
+# Trailing comment on a value line, e.g. "  - header: mv_face.h  # deprecated".
+# Conservative: requires whitespace before '#' and no quote characters in the
+# line (the entire measured corpus is plain "- header: x.h  # word" shapes).
+_COMMENT_RE = re.compile(r'^(?P<key>.*\S)\s+(?P<comment>#.*)$')
+
+
+class OrderedLoader(yaml.SafeLoader):
+    pass
+
+
+def _ordered_construct_mapping(loader, node):
+    loader.flatten_mapping(node)
+    return OrderedDict(loader.construct_pairs(node))
+
+
+OrderedLoader.add_constructor(
+    yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG, _ordered_construct_mapping
+)
+
+
+def _ordered_dict_representer(dumper, data):
+    return dumper.represent_mapping('tag:yaml.org,2002:map', data.items())
+
+
+yaml.add_representer(OrderedDict, _ordered_dict_representer)
+
+
+def _split_comment(line: str):
+    """Return (line_without_comment, comment) or (line, None)."""
+    if '#' not in line:
+        return line, None
+    if '"' in line or "'" in line:
+        # No quoted scalar in the corpus carries a trailing comment; refuse to
+        # guess rather than mis-split.
+        return line, None
+    m = _COMMENT_RE.match(line)
+    if not m:
+        return line, None
+    return m.group('key'), m.group('comment')
+
+
+def load(path: str):
+    """Load modules.yaml preserving key order and trailing comments.
+
+    Returns (cfg, comments) where comments is an ordered list of
+    (line_without_comment, comment) pairs, consumed in order by dump().
+    """
+    with open(path) as f:
+        text = f.read()
+    comments = []
+    for line in text.splitlines():
+        key, comment = _split_comment(line)
+        if comment is not None:
+            comments.append((key, comment))
+    cfg = yaml.load(text, Loader=OrderedLoader)
+    return cfg, comments
+
+
+def dumps(cfg, comments=None) -> str:
+    """Dump cfg in the canonical style, re-injecting trailing comments."""
+    out = yaml.dump(cfg, sort_keys=False, default_flow_style=False,
+                    allow_unicode=True, width=200)
+    if not comments:
+        return out
+    pending = list(comments)
+    lines = out.splitlines()
+    for i, line in enumerate(lines):
+        for j, (key, comment) in enumerate(pending):
+            if line == key:
+                lines[i] = f'{line}  {comment}'
+                pending.pop(j)
+                break
+    if pending:
+        lost = ', '.join(f'{c!r} on {k!r}' for k, c in pending[:5])
+        raise ValueError(
+            f'{len(pending)} trailing comment(s) could not be re-attached '
+            f'(their anchor lines no longer exist): {lost}')
+    return '\n'.join(lines) + '\n'
+
+
+def dump(cfg, comments, path: str):
+    text = dumps(cfg, comments)
+    with open(path, 'w') as f:
+        f.write(text)
+
+
+def roundtrip_check(path: str) -> bool:
+    """True if load()+dumps() reproduces the file byte-for-byte."""
+    with open(path) as f:
+        original = f.read()
+    cfg, comments = load(path)
+    return dumps(cfg, comments) == original
+
+
+# -- naming helpers -----------------------------------------------------------
+
+def to_upper_camel(name: str) -> str:
+    """snake_case -> UpperCamelCase (capi_media_camera -> CapiMediaCamera).
+
+    Single source of truth for the class-name / anonymous-type-prefix
+    convention shared by build_configs.py, generate_tizen.py and
+    rename_unnamed.py.
+    """
+    return ''.join(p[:1].upper() + p[1:] for p in name.split('_') if p)
+
+

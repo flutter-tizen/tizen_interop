@@ -1,0 +1,1312 @@
+version: '6.5'
+llvm_path: /usr/lib/llvm-12
+rootstrap_prefix: rootstraps/6.5
+preamble_copyright_year: 2021
+symgen_copyright_year: 2022
+description_template: Dart bindings for Tizen {dashed} APIs.
+common_compiler_opts:
+- -m32
+- -Wno-incomplete-setjmp-declaration
+common_include_dirs:
+  tizen:
+  - usr/include/
+  - usr/include/appcore-agent/
+  - usr/include/appfw/
+  - usr/include/asp/
+  - usr/include/badge/
+  - usr/include/calendar-service2/
+  - usr/include/cbhm/
+  - usr/include/cion/
+  - usr/include/ckm/
+  - usr/include/contacts-svc/
+  - usr/include/content/
+  - usr/include/context-service/
+  - usr/include/csr/
+  - usr/include/device-certificate-manager/
+  - usr/include/dlog/
+  - usr/include/eom/
+  - usr/include/feedback/
+  - usr/include/geofence/
+  - usr/include/iotcon/
+  - usr/include/location/
+  - usr/include/media/
+  - usr/include/media-content/
+  - usr/include/messaging/
+  - usr/include/metadata-editor/
+  - usr/include/network/
+  - usr/include/nnstreamer/
+  - usr/include/nntrainer/
+  - usr/include/notification/
+  - usr/include/notification-ex/api/
+  - usr/include/nsd/
+  - usr/include/phonenumber-utils/
+  - usr/include/privacy-privilege-manager/
+  - usr/include/rpc-port/
+  - usr/include/sensor/
+  - usr/include/shortcut/
+  - usr/include/storage/
+  - usr/include/system/
+  - usr/include/web/
+  - usr/include/wifi-direct/
+  - usr/include/yaca/
+  efl:
+  - usr/include/ecore-imf-1/
+  - usr/include/efl-1/
+  - usr/include/eina-1/
+  - usr/include/eina-1/eina/
+  - usr/include/emile-1/
+  - usr/include/eo-1/
+  - usr/include/evas-1/
+  glib:
+  - usr/include/glib-2.0/
+  - usr/lib/glib-2.0/include/
+enum_rename_default:
+  _+(.*): $1
+entrypoints:
+- section: Account
+  includes:
+  - header: account.h
+  - header: fido.h
+  - header: fido_uaf_authenticator.h
+  - header: fido_uaf_client.h
+  - header: oauth2.h
+  - header: oauth2_error.h
+  - header: oauth2_manager.h
+  - header: oauth2_request.h
+  - header: oauth2_response.h
+  - header: oauth2_types.h
+  - header: sync_adapter.h
+  - header: sync_manager.h
+- section: Application Framework
+  includes:
+  - header: app.h
+  - header: app_alarm.h
+  - header: app_common.h
+  - header: app_control.h
+  - header: app_control_uri.h
+  - header: app_event.h
+  - header: app_manager.h
+  - header: app_preference.h
+  - header: app_resource_manager.h
+  - header: badge.h
+  - header: bundle.h
+  - header: cion.h
+  - header: cion_client.h
+  - header: cion_connection_result.h
+  - header: cion_error.h
+  - header: cion_group.h
+  - header: cion_payload.h
+  - header: cion_payload_async_result.h
+  - header: cion_peer_info.h
+  - header: cion_security.h
+  - header: cion_server.h
+  - header: data_control.h
+  - header: data_control_bulk.h
+  - header: data_control_map.h
+  - header: data_control_noti.h
+  - header: data_control_provider.h
+  - header: data_control_sql.h
+  - header: data_control_sql_cursor.h
+  - header: job_scheduler.h
+  - header: message_port.h
+  - header: notification.h
+  - header: notification_error.h
+  - header: notification_ex.h
+  - header: notification_ex_app_control_action.h
+  - header: notification_ex_button.h
+  - header: notification_ex_chat_message.h
+  - header: notification_ex_checkbox.h
+  - header: notification_ex_entry.h
+  - header: notification_ex_error.h
+  - header: notification_ex_event_info.h
+  - header: notification_ex_group.h
+  - header: notification_ex_image.h
+  - header: notification_ex_input_selector.h
+  - header: notification_ex_item.h
+  - header: notification_ex_manager.h
+  - header: notification_ex_multi_language.h
+  - header: notification_ex_progress.h
+  - header: notification_ex_reporter.h
+  - header: notification_ex_text.h
+  - header: notification_ex_time.h
+  - header: notification_ex_visibility_action.h
+  - header: notification_status.h
+  - header: notification_type.h
+  - header: package_archive_info.h
+  - header: package_manager.h
+  - header: rpc-port-parcel.h
+  - header: rpc-port.h
+  - header: service_app.h
+  - header: shortcut_manager.h
+- section: Base
+  includes:
+  - header: tizen.h
+  - header: tizen_error.h
+  - header: tizen_type.h
+- section: Content
+  includes:
+  - header: download.h
+  - header: media_content.h
+  - header: mime_type.h
+- section: Context
+  includes:
+  - header: activity_recognition.h
+  - header: context_history.h
+  - header: context_trigger.h
+  - header: gesture_recognition.h
+- section: Location
+  includes:
+  - header: geofence_manager.h
+  - header: geofence_type.h
+  - header: locations.h
+- section: Machine Learning
+  includes:
+  - header: nnstreamer-single.h
+  - header: nnstreamer.h
+  - header: nntrainer.h
+- section: Messaging
+  includes:
+  - header: email.h
+  - header: push-service.h
+- section: Multimedia
+  includes:
+  - header: audio_io.h
+  - header: camera.h
+  - header: image_util.h
+  - header: media_codec.h
+  - header: media_controller_client.h
+  - header: media_controller_metadata.h
+  - header: media_controller_playlist.h
+  - header: media_controller_server.h
+  - header: media_controller_type.h
+  - header: media_format.h
+  - header: media_packet.h
+  - header: media_streamer.h
+  - header: mediademuxer.h
+  - header: mediamuxer.h
+  - header: metadata_editor.h
+  - header: metadata_editor_type.h
+  - header: metadata_extractor.h
+  - header: metadata_extractor_type.h
+  - header: mv_barcode.h
+  - header: mv_barcode_detect.h
+  - header: mv_barcode_generate.h
+  - header: mv_barcode_type.h
+  - header: mv_common.h
+  - header: mv_face.h
+  - header: mv_face_type.h
+  - header: mv_image.h
+  - header: mv_image_type.h
+  - header: mv_inference.h
+  - header: mv_inference_type.h
+  - header: mv_surveillance.h
+  - header: player.h
+  - header: radio.h
+  - header: recorder.h
+  - header: scmirroring_sink.h
+  - header: scmirroring_type.h
+  - header: sound_manager.h
+  - header: sound_pool.h
+  - header: sound_pool_type.h
+  - header: streamrecorder.h
+  - header: thumbnail_util.h
+  - header: thumbnail_util_type.h
+  - header: tone_player.h
+  - header: wav_player.h
+  - header: webrtc.h
+- section: Network
+  includes:
+  - header: asp.h
+  - header: bluetooth.h
+  - header: bluetooth_type.h
+  - header: dns-sd.h
+  - header: http.h
+  - header: inm.h
+  - header: iotcon.h
+  - header: mtp.h
+  - header: net_connection.h
+  - header: softap.h
+  - header: ssdp.h
+  - header: stc.h
+  - header: vpn_service.h
+  - header: wifi-direct.h
+  - header: wifi-manager.h
+- section: Security
+  includes:
+  - header: ckmc/ckmc-manager.h
+  - header: ckmc/ckmc-type.h
+  - header: csr-content-screening-types.h
+  - header: csr-content-screening.h
+  - header: csr-engine-manager.h
+  - header: csr-error.h
+  - header: csr-web-protection-types.h
+  - header: csr-web-protection.h
+  - header: device_certificate_manager.h
+  - header: dpm/device-policy-manager.h
+  - header: dpm/password.h
+  - header: dpm/restriction.h
+  - header: dpm/security.h
+  - header: dpm/zone.h
+  - header: privacy_privilege_manager.h
+  - header: privilege_information.h
+  - header: yaca_crypto.h
+  - header: yaca_digest.h
+  - header: yaca_encrypt.h
+  - header: yaca_error.h
+  - header: yaca_key.h
+  - header: yaca_rsa.h
+  - header: yaca_seal.h
+  - header: yaca_sign.h
+  - header: yaca_simple.h
+  - header: yaca_types.h
+- section: Social
+  includes:
+  - header: calendar.h
+  - header: calendar_db.h
+  - header: calendar_errors.h
+  - header: calendar_filter.h
+  - header: calendar_list.h
+  - header: calendar_query.h
+  - header: calendar_record.h
+  - header: calendar_reminder.h
+  - header: calendar_service.h
+  - header: calendar_vcalendar.h
+  - header: calendar_view.h
+  - header: contacts.h
+  - header: contacts_activity.h
+  - header: contacts_db.h
+  - header: contacts_db_status.h
+  - header: contacts_errors.h
+  - header: contacts_filter.h
+  - header: contacts_group.h
+  - header: contacts_list.h
+  - header: contacts_person.h
+  - header: contacts_phone_log.h
+  - header: contacts_query.h
+  - header: contacts_record.h
+  - header: contacts_service.h
+  - header: contacts_setting.h
+  - header: contacts_sim.h
+  - header: contacts_types.h
+  - header: contacts_vcard.h
+  - header: contacts_views.h
+  - header: phone_number.h
+- section: System
+  includes:
+  - header: device/battery.h
+  - header: device/callback.h
+  - header: device/display.h
+  - header: device/haptic.h
+  - header: device/ir.h
+  - header: device/led.h
+  - header: device/power.h
+  - header: device/temperature.h
+  - header: diagnostics.h
+  - header: dlog.h
+  - header: feedback.h
+  - header: media_key.h
+  - header: peripheral_io.h
+  - header: runtime_info.h
+  - header: sensor.h
+  - header: storage.h
+  - header: system_info.h
+  - header: system_info_type.h
+  - header: system_settings.h
+  - header: trace.h
+  - header: update_control.h
+  - header: usb_host.h
+- section: UI
+  includes:
+  - header: cbhm.h
+  - header: eom.h
+  - header: tbm_surface.h
+  - header: tbm_type.h
+- section: UIX
+  includes:
+  - header: autofill.h
+  - header: autofill_common.h
+  - header: autofill_manager.h
+  - header: autofill_service.h
+  - header: inputmethod.h
+  - header: inputmethod_manager.h
+  - header: multi_assistant.h
+  - header: multi_assistant_common.h
+  - header: stt.h
+  - header: stte.h
+  - header: tts.h
+  - header: ttse.h
+  - header: vce.h
+  - header: voice_control.h
+  - header: voice_control_manager.h
+modules:
+- name: accounts_svc
+  library: libaccounts-svc.so.0
+  _category: Account / Account Manager
+  headers:
+  - account.h
+- name: fido_client
+  library: libfido-client.so.0
+  _category: Account / FIDO Client
+  headers:
+  - fido.h
+  - fido_uaf_authenticator.h
+  - fido_uaf_client.h
+- name: oauth2
+  library: liboauth2.so.0
+  _category: Account / OAuth 2.0
+  headers:
+  - oauth2.h
+  - oauth2_manager.h
+  - oauth2_request.h
+  - oauth2_response.h
+  - oauth2_error.h
+  - oauth2_types.h
+- name: core_sync_client
+  library: libcore-sync-client.so.1
+  _category: Account / Sync Manager
+  headers:
+  - sync_manager.h
+  - sync_adapter.h
+  deps:
+  - accounts_svc
+  - bundle
+- name: capi_appfw_application
+  library: libcapi-appfw-application.so.0
+  _category: Applicatoin Framework / Application
+  headers:
+  - app.h
+  - app_i18n.h
+  deps:
+  - capi_appfw_app_control
+  - capi_appfw_app_common
+  enum_renames:
+    app_device_orientation_e: _app_device_orientation_e
+    app_event_type_e: _app_event_type_e
+- name: capi_appfw_alarm
+  library: libcapi-appfw-alarm.so.0
+  _category: Application Framework / Application / Alarm
+  headers:
+  - app_alarm.h
+  deps:
+  - capi_appfw_app_control
+  - notification
+  - time
+- name: capi_appfw_app_common
+  library: libcapi-appfw-app-common.so.0
+  _category: Application Framework / Application / App Common, Resource Manager
+  headers:
+  - app_common.h
+  - app_resource_manager.h
+  force_types:
+  - type: app_event_handler_h
+    name: app_event_handle_h
+    arg: handle
+  - type: app_event_cb
+    name: app_event_cb
+    arg: callback
+  dummy_title: CAPI AppFW App Common
+- name: capi_appfw_app_control
+  library: libcapi-appfw-app-control.so.0
+  _category: Application Framework / Application / App Control
+  headers:
+  - app_control.h
+  deps:
+  - capi_appfw_app_control_uri
+- name: capi_appfw_app_control_uri
+  library: libcapi-appfw-app-control-uri.so.0
+  _category: Application Framework / Application / App Control URI
+  headers:
+  - app_control_uri.h
+  preamble_year: 2026
+- name: capi_appfw_event
+  library: libcapi-appfw-event.so.0
+  _category: Application Framework / Application / Event
+  headers:
+  - app_event.h
+  deps:
+  - bundle
+- name: capi_appfw_job_scheduler
+  library: libcapi-appfw-job-scheduler.so.0
+  _category: Application Framework / Application / Job scheduler
+  headers:
+  - job_error.h
+  - job_info.h
+  - job_scheduler.h
+- name: capi_appfw_preference
+  library: libcapi-appfw-preference.so.0
+  _category: Application Framework / Application / Preference
+  headers:
+  - app_preference.h
+- name: capi_appfw_app_manager
+  library: libcapi-appfw-app-manager.so.0
+  _category: Application Framework / Application Manager
+  headers:
+  - app_context.h
+  - app_info.h
+  - app_manager.h
+- name: badge
+  library: libbadge.so.0
+  _category: Application Framework / Badge
+  headers:
+  - badge.h
+- name: bundle
+  library: libbundle.so.0
+  _category: Application Framework / Bundle
+  headers:
+  - bundle.h
+- name: cion
+  library: libcion.so.1
+  _category: Application Framework / Cion
+  include_directives_override:
+  - '**/cion/*.h'
+  preamble_year: 2026
+- name: data_control
+  library: libdata-control.so.0
+  _category: Application Framework / Data Control
+  headers:
+  - data_control.h
+  - data_control_sql.h
+  - data_control_map.h
+  - data_control_provider.h
+  - data_control_noti.h
+  - data_control_bulk.h
+  - data_control_sql_cursor.h
+  deps:
+  - bundle
+- name: message_port
+  library: libmessage-port.so.1
+  _category: Application Framework / Message Port
+  headers:
+  - message_port.h
+  deps:
+  - bundle
+- name: notification
+  library: libnotification.so.0
+  _category: Application Framework / Notification
+  headers:
+  - notification.h
+  - notification_error.h
+  - notification_type.h
+  - notification_status.h
+  deps:
+  - capi_appfw_app_control
+  primitive_typedefs:
+    time_t:
+      c: Long
+      d: int
+    __time_t:
+      c: Long
+      d: int
+- name: notification_ex
+  library: libnotification-ex.so.1
+  _category: Application Framework / Notification EX
+  headers:
+  - notification_ex.h
+  - notification_ex_app_control_action.h
+  - notification_ex_button.h
+  - notification_ex_chat_message.h
+  - notification_ex_checkbox.h
+  - notification_ex_entry.h
+  - notification_ex_error.h
+  - notification_ex_event_info.h
+  - notification_ex_group.h
+  - notification_ex_image.h
+  - notification_ex_input_selector.h
+  - notification_ex_progress.h
+  - notification_ex_manager.h
+  - notification_ex_reporter.h
+  - notification_ex_text.h
+  - notification_ex_time.h
+  - notification_ex_visibility_action.h
+  - notification_ex_multi_language.h
+  - notification_ex_item.h
+  deps:
+  - bundle
+  - capi_appfw_app_control
+  primitive_typedefs:
+    time_t:
+      c: Long
+      d: int
+    __time_t:
+      c: Long
+      d: int
+- name: capi_appfw_package_manager
+  library: libcapi-appfw-package-manager.so.0
+  _category: Application Framework / Package Manager
+  headers:
+  - package_archive_info.h
+  - package_manager.h
+  - package_info.h
+- name: rpc_port
+  library: librpc-port.so.1
+  _category: Application Framework / RPC Port
+  headers:
+  - rpc-port.h
+  - rpc-port-parcel.h
+  deps:
+  - bundle
+  - time
+- name: appcore_agent
+  library: libappcore-agent.so.1
+  _category: Application Framework / Service Application
+  headers:
+  - service_app.h
+  deps:
+  - capi_appfw_app_control
+  - capi_appfw_app_common
+  enum_renames:
+    app_event_type_e: _app_event_type_e
+- name: shortcut
+  library: libshortcut.so.0
+  _category: Application Framework / Shortcut
+  headers:
+  - shortcut_manager.h
+- name: capi_base_common
+  library: libcapi-base-common.so.0
+  _category: Base / Common Error
+  headers:
+  - tizen.h
+  - tizen_error.h
+  include_directives_override:
+  - '**/tizen.h'
+  - '**/tizen_error.h'
+  - '**tizen_type.h'
+- name: capi_web_url_download
+  library: libcapi-web-url-download.so.0
+  _category: Content / Download
+  headers:
+  - download.h
+  deps:
+  - capi_appfw_app_control
+- name: capi_content_mime_type
+  library: libcapi-content-mime-type.so.0
+  _category: Content / Mime Type
+  headers:
+  - mime_type.h
+- name: capi_content_media_content
+  library: libcapi-content-media-content.so.0
+  _category: Content / Media Content
+  headers:
+  - media_audio.h
+  - media_bookmark.h
+  - media_content.h
+  - media_content_type.h
+  - media_face.h
+  - media_filter.h
+  - media_folder.h
+  - media_group.h
+  - media_image.h
+  - media_info.h
+  - media_playlist.h
+  - media_storage.h
+  - media_tag.h
+  - media_video.h
+  primitive_typedefs:
+    time_t:
+      c: Long
+      d: int
+    __time_t:
+      c: Long
+      d: int
+- name: capi_context_motion
+  library: libcapi-context-motion.so.2
+  _category: Context / Activity Recognition, Gesture Recognition
+  headers:
+  - activity_recognition.h
+  - gesture_recognition.h
+- name: capi_context
+  library: libcapi-context.so.1
+  _category: Context / Contextual History, Contextual Trigger
+  headers:
+  - context_history.h
+  - context_trigger.h
+  deps:
+  - capi_appfw_app_control
+- name: capi_geofence_manager
+  library: libcapi-geofence-manager.so.0
+  _category: Location / Geofence Manager
+  headers:
+  - geofence_manager.h
+  - geofence_type.h
+- name: capi_location_manager
+  library: libcapi-location-manager.so.0
+  _category: Location / Location Manager
+  headers:
+  - locations.h
+  - location_bounds.h
+  primitive_typedefs:
+    time_t:
+      c: Long
+      d: int
+    __time_t:
+      c: Long
+      d: int
+- name: capi_nnstreamer
+  library: libcapi-nnstreamer.so.1
+  _category: Machine Learning
+  include_directives_override:
+  - '**/nnstreamer/*.h'
+  preamble_year: 2026
+- name: capi_nntrainer
+  library: libcapi-nntrainer.so
+  _category: Machine Learning / Trainer
+  include_directives_override:
+  - '**/nntrainer/*.h'
+  deps:
+  - capi_nnstreamer
+  preamble_year: 2026
+- name: capi_messaging_email
+  library: libcapi-messaging-email.so.0
+  _category: Messaging / Email
+  headers:
+  - email.h
+- name: push
+  library: libpush.so.0
+  _category: Messaging / Push
+  headers:
+  - push-service.h
+  deps:
+  - capi_appfw_app_control
+- name: capi_media_audio_io
+  library: libcapi-media-audio-io.so.0
+  _category: Multimedia / Audio I/O
+  headers:
+  - audio_io.h
+  deps:
+  - capi_media_sound_manager
+  enum_renames:
+    sound_type_e: _sound_type_e
+- name: capi_media_camera
+  library: libcapi-media-camera.so.0
+  _category: Multimedia / Camera
+  headers:
+  - camera.h
+  deps:
+  - capi_media_tool
+- name: capi_media_image_util
+  library: libcapi-media-image-util.so.0
+  _category: Multimedia / Image Util
+  headers:
+  - image_util.h
+  - image_util_type.h
+  - image_util_decode.h
+  - image_util_encode.h
+  deps:
+  - capi_media_tool
+- name: capi_media_codec
+  library: libcapi-media-codec.so.0
+  _category: Multimedia / Media Codec
+  headers:
+  - media_codec.h
+  deps:
+  - capi_media_tool
+- name: capi_media_controller
+  library: libcapi-media-controller.so.0
+  _category: Multimedia / Media Controller
+  headers:
+  - media_controller_client.h
+  - media_controller_metadata.h
+  - media_controller_playlist.h
+  - media_controller_server.h
+  - media_controller_type.h
+  deps:
+  - bundle
+- name: capi_mediademuxer
+  library: libcapi-mediademuxer.so.0
+  _category: Multimedia / Media Demuxer
+  headers:
+  - mediademuxer.h
+  deps:
+  - capi_media_tool
+- name: capi_mediamuxer
+  library: libcapi-mediamuxer.so.0
+  _category: Multimedia / Media Muxer
+  headers:
+  - mediamuxer.h
+  deps:
+  - capi_media_tool
+- name: capi_media_streamer
+  library: libcapi-media-streamer.so.0
+  _category: Multimedia / Media Streamer
+  headers:
+  - media_streamer.h
+  deps:
+  - bundle
+  - capi_media_tool
+- name: capi_media_tool
+  library: libcapi-media-tool.so.0
+  _category: Multimedia / Media Tool
+  headers:
+  - media_format.h
+  - media_packet.h
+  - media_packet_pool.h
+  deps:
+  - tbm
+- name: mv_barcode_detector
+  library: libmv_barcode_detector.so
+  _category: Multimedia / Media Vision BarCode
+  headers:
+  - mv_barcode_detect.h
+  - mv_barcode_type.h
+  deps:
+  - mv_common
+- name: mv_barcode_generator
+  library: libmv_barcode_generator.so
+  _category: Multimedia / Media Vision BarCode
+  headers:
+  - mv_barcode_generate.h
+  deps:
+  - mv_common
+  enum_renames:
+    mv_barcode_type_e: _mv_barcode_type_e
+    mv_barcode_qr_mode_e: _mv_barcode_qr_mode_e
+    mv_barcode_qr_ecc_e: _mv_barcode_qr_ecc_e
+    mv_barcode_image_format_e: _mv_barcode_image_format_e
+- name: mv_common
+  library: libmv_common.so
+  _category: Multimedia / Media Vision Common
+  headers:
+  - mv_common.h
+  deps:
+  - capi_media_tool
+- name: mv_face
+  library: libmv_face.so
+  _category: Multimedia / Media Vision Face
+  headers:
+  - mv_face.h
+  - mv_face_type.h
+  deps:
+  - mv_common
+- name: mv_image
+  library: libmv_image.so
+  _category: Multimedia / Media Vision Image
+  headers:
+  - mv_image.h
+  - mv_image_type.h
+  deps:
+  - mv_common
+- name: mv_inference
+  library: libmv_inference.so
+  _category: Multimedia / Media Vision Inference
+  headers:
+  - mv_inference.h
+  - mv_inference_type.h
+  deps:
+  - mv_common
+- name: mv_surveillance
+  library: libmv_surveillance.so
+  _category: Multimedia / Media Vision Surveillance
+  headers:
+  - mv_surveillance.h
+  deps:
+  - mv_common
+- name: capi_media_metadata_editor
+  library: libcapi-media-metadata-editor.so
+  _category: Multimedia / Metadata Editor
+  headers:
+  - metadata_editor.h
+  - metadata_editor_type.h
+- name: capi_media_metadata_extractor
+  library: libcapi-media-metadata-extractor.so
+  _category: Multimedia / Metadata Extractor
+  headers:
+  - metadata_extractor.h
+  - metadata_extractor_type.h
+- name: capi_media_player
+  library: libcapi-media-player.so.0
+  _category: Multimedia / Player
+  headers:
+  - player.h
+  deps:
+  - capi_media_tool
+  - capi_media_sound_manager
+  enum_renames:
+    media_format_mimetype_e: _media_format_mimetype_e
+- name: capi_media_radio
+  library: libcapi-media-radio.so.0
+  _category: Multimeida / Radio
+  headers:
+  - radio.h
+- name: capi_media_recorder
+  library: libcapi-media-recorder.so.0
+  _category: Multimedia / Recorder
+  headers:
+  - recorder.h
+  deps:
+  - capi_media_camera
+  - capi_media_sound_manager
+  enum_renames:
+    audio_sample_type_e: _audio_sample_type_e
+- name: capi_media_screen_mirroring
+  library: libcapi-media-screen-mirroring.so.0
+  _category: Multimedia / Screen Mirroring
+  headers:
+  - scmirroring_sink.h
+  - scmirroring_type.h
+- name: capi_media_sound_manager
+  library: libcapi-media-sound-manager.so.0
+  _category: Multimedia / Sound Manager
+  headers:
+  - sound_manager.h
+- name: capi_media_sound_pool
+  library: libcapi-media-sound-pool.so.0
+  _category: Multimedia / Sound Pool
+  headers:
+  - sound_pool.h
+  - sound_pool_type.h
+- name: capi_media_streamrecorder
+  library: libcapi-media-streamrecorder.so.0
+  _category: Multimedia / StreamRecorder
+  headers:
+  - streamrecorder.h
+  deps:
+  - capi_media_tool
+- name: capi_media_thumbnail_util
+  library: libcapi-media-thumbnail-util.so
+  _category: Multimedia / Thumbnail Util
+  headers:
+  - thumbnail_util.h
+  - thumbnail_util_type.h
+- name: capi_media_tone_player
+  library: libcapi-media-tone-player.so.0
+  _category: Multimedia / Tone Player
+  headers:
+  - tone_player.h
+  deps:
+  - capi_media_sound_manager
+- name: capi_media_wav_player
+  library: libcapi-media-wav-player.so.0
+  _category: Multimedia / WAV Player
+  headers:
+  - wav_player.h
+  deps:
+  - capi_media_sound_manager
+- name: capi_media_webrtc
+  library: libcapi-media-webrtc.so.0
+  _category: Multimedia / WebRTC
+  headers:
+  - webrtc.h
+  deps:
+  - bundle
+  - capi_media_tool
+  - capi_media_sound_manager
+  preamble_year: 2026
+- name: asp
+  library: libasp.so.0
+  _category: Network / Application Service Platform
+  headers:
+  - asp.h
+- name: capi_network_bluetooth
+  library: libcapi-network-bluetooth.so.0
+  _category: Network / Bluetooth
+  headers:
+  - bluetooth.h
+  - bluetooth_type.h
+- name: capi_network_connection
+  library: libcapi-network-connection.so.1
+  _category: Network / Connection
+  headers:
+  - net_connection.h
+  - connection_profile.h
+- name: nsd_dns_sd
+  library: libnsd-dns-sd.so.0
+  _category: Network / DNSSD
+  headers:
+  - dns-sd.h
+- name: capi_network_http
+  library: libcapi-network-http.so.0.1.0
+  _category: Network / HTTP
+  headers:
+  - http.h
+- name: capi_network_inm
+  library: libcapi-network-inm.so.0
+  _category: Network / Intelligent Network Monitoring
+  headers:
+  - inm.h
+- name: iotcon
+  library: libiotcon.so.0
+  _category: Network / IoTCon
+  headers:
+  - iotcon.h
+  - iotcon-types.h
+  - iotcon-errors.h
+  - iotcon-server.h
+  - iotcon-client.h
+  - iotcon-resource.h
+  - iotcon-lite-resource.h
+  - iotcon-response.h
+  - iotcon-observers.h
+  - iotcon-request.h
+  - iotcon-remote-resource.h
+  - iotcon-list.h
+  - iotcon-query.h
+  - iotcon-attributes.h
+  - iotcon-options.h
+  - iotcon-representation.h
+  - iotcon-resource-types.h
+  - iotcon-resource-interfaces.h
+- name: capi_network_mtp
+  library: libcapi-network-mtp.so.1
+  _category: Network / MTP
+  headers:
+  - mtp.h
+- name: nsd_ssdp
+  library: libnsd-ssdp.so.0
+  _category: Network / SSDP
+  headers:
+  - ssdp.h
+- name: capi_network_stc
+  library: libcapi-network-stc.so.0
+  _category: Network / Smart Traffic Control
+  headers:
+  - stc.h
+  primitive_typedefs:
+    time_t:
+      c: Long
+      d: int
+    __time_t:
+      c: Long
+      d: int
+- name: capi_network_softap
+  library: libcapi-network-softap.so.0.1.0
+  _category: Network / SoftAP
+  headers:
+  - softap.h
+  primitive_typedefs:
+    time_t:
+      c: Long
+      d: int
+    __time_t:
+      c: Long
+      d: int
+- name: capi_vpnsvc
+  library: libcapi-vpnsvc.so.1
+  _category: Network / VPN Service
+  headers:
+  - vpn_service.h
+- name: capi_network_wifi_manager
+  library: libcapi-network-wifi-manager.so.1
+  _category: Network / WI-Fi Manager
+  headers:
+  - wifi-manager.h
+- name: wifi_direct
+  library: libwifi-direct.so.1
+  _category: Network / Wi-Fi Direct
+  headers:
+  - wifi-direct.h
+- name: csr_client
+  library: libcsr-client.so.2
+  _category: Security / CSR
+  include_directives_override:
+  - '**/csr/*.h'
+  primitive_typedefs:
+    time_t:
+      c: Long
+      d: int
+    __time_t:
+      c: Long
+      d: int
+- name: device_certificate_manager
+  library: libdevice-certificate-manager.so.2.0
+  _category: Security / Device Certificate Manager
+  headers:
+  - device_certificate_manager.h
+- name: dpm
+  library: libdpm.so.0
+  _category: Security / Device Policy Manager
+  headers:
+  - device-policy-manager.h
+  - password.h
+  - restriction.h
+  - security.h
+  - zone.h
+- name: key_manager_client
+  library: libkey-manager-client.so.1
+  _category: Security / Key Manager Client
+  include_directives_override:
+  - '**/ckm/ckmc/*.h'
+- name: capi_privacy_privilege_manager
+  library: libcapi-privacy-privilege-manager.so.0
+  _category: Security / Privacy Privilege Manager
+  headers:
+  - privacy_privilege_manager.h
+- name: privilege_info
+  library: libprivilege-info.so.1
+  _category: Security / Privilege Info
+  headers:
+  - privilege_information.h
+- name: yaca
+  library: libyaca.so.0
+  _category: Security / YACA
+  headers:
+  - yaca_crypto.h
+  - yaca_digest.h
+  - yaca_encrypt.h
+  - yaca_error.h
+  - yaca_key.h
+  - yaca_rsa.h
+  - yaca_seal.h
+  - yaca_sign.h
+  - yaca_simple.h
+  - yaca_types.h
+- name: calendar_service2
+  library: libcalendar-service2.so.0
+  _category: Social / Calendar
+  headers:
+  - calendar.h
+  - calendar_errors.h
+  - calendar_view.h
+  - calendar_db.h
+  - calendar_filter.h
+  - calendar_list.h
+  - calendar_query.h
+  - calendar_record.h
+  - calendar_service.h
+  - calendar_vcalendar.h
+  - calendar_reminder.h
+- name: contacts_service2
+  library: libcontacts-service2.so.0
+  _category: Social / Contacts
+  headers:
+  - contacts.h
+  - contacts_errors.h
+  - contacts_service.h
+  - contacts_views.h
+  - contacts_types.h
+  - contacts_record.h
+  - contacts_list.h
+  - contacts_filter.h
+  - contacts_query.h
+  - contacts_db.h
+  - contacts_setting.h
+  - contacts_person.h
+  - contacts_group.h
+  - contacts_sim.h
+  - contacts_vcard.h
+  - contacts_activity.h
+  - contacts_phone_log.h
+  - contacts_db_status.h
+- name: phonenumber_utils
+  library: libphonenumber-utils.so.0
+  _category: Social / Phonenumber utils
+  headers:
+  - phone_number.h
+  - phone_number_types.h
+  - phone_number_errors.h
+  - phone_number_blocking_rule.h
+- name: capi_system_device
+  library: libcapi-system-device.so.0
+  _category: System / Device
+  include_directives_override:
+  - '**/device/*.h'
+- name: diagnostics
+  library: libdiagnostics.so.1
+  _category: System / Diagnostics
+  headers:
+  - diagnostics.h
+  deps:
+  - bundle
+- name: dlog
+  library: libdlog.so.0
+  _category: System / Dlog
+  headers:
+  - dlog.h
+- name: feedback
+  library: libfeedback.so.0
+  _category: System / Feedback
+  headers:
+  - feedback.h
+- name: capi_system_media_key
+  library: libcapi-system-media-key.so.0
+  _category: System / Media key
+  headers:
+  - media_key.h
+- name: capi_system_peripheral_io
+  library: libcapi-system-peripheral-io.so.0
+  _category: System / Peripheral IO
+  headers:
+  - peripheral_io.h
+- name: capi_system_runtime_info
+  library: libcapi-system-runtime-info.so.0
+  _category: System / Runtime information
+  headers:
+  - runtime_info.h
+- name: capi_system_sensor
+  library: libcapi-system-sensor.so.0
+  _category: System / Sensor
+  headers:
+  - sensor.h
+  primitive_typedefs:
+    time_t:
+      c: Long
+      d: int
+    __time_t:
+      c: Long
+      d: int
+- name: storage
+  library: libstorage.so.0.1
+  _category: System / Storage
+  headers:
+  - storage.h
+  - storage-expand.h
+  extern_decls:
+  - int storage_get_internal_memory_size64(struct statvfs *buf)
+  - int storage_get_external_memory_size64(struct statvfs *buf)
+  dummy_title: Storage
+- name: capi_system_info
+  library: libcapi-system-info.so.0
+  _category: System / System Information
+  headers:
+  - system_info.h
+  - system_info_type.h
+- name: capi_system_system_settings
+  library: libcapi-system-system-settings.so.0
+  _category: System / System Settings
+  headers:
+  - system_settings.h
+- name: ttrace
+  library: libttrace.so.1
+  _category: System / T-trace
+  headers:
+  - trace.h
+- name: capi_system_usbhost
+  library: libcapi-system-usbhost.so.0
+  _category: System / USB Host
+  headers:
+  - usb_host.h
+- name: update_control
+  library: libupdate-control.so.1
+  _category: System / Update Control
+  headers:
+  - update_control.h
+  deps:
+  - time
+- name: cbhm
+  library: libcbhm.so.1
+  _category: UI / Clipboard History Manager
+  headers:
+  - cbhm.h
+- name: eom
+  library: libeom.so.0
+  _category: UI / External Output Manager
+  headers:
+  - eom.h
+  deps:
+  - capi_ui_inputmethod
+- name: tbm
+  library: libtbm.so.1
+  _category: UI / TBM Surface
+  headers:
+  - tbm_surface.h
+  - tbm_type.h
+- name: capi_ui_autofill
+  library: libcapi-ui-autofill.so.0
+  _category: UIX / Autofill
+  headers:
+  - autofill.h
+  deps:
+  - capi_ui_autofill_common
+- name: capi_ui_autofill_common
+  library: libcapi-ui-autofill-common.so.0
+  _category: UIX / Autofill common
+  headers:
+  - autofill_common.h
+- name: capi_ui_autofill_manager
+  library: libcapi-ui-autofill-manager.so.0
+  _category: UIX / Autofill manager
+  headers:
+  - autofill_manager.h
+- name: capi_ui_autofill_service
+  library: libcapi-ui-autofill-service.so.0
+  _category: UIX / Autofill service
+  headers:
+  - autofill_service.h
+  deps:
+  - capi_ui_autofill_common
+- name: capi_ui_inputmethod
+  library: libcapi-ui-inputmethod.so.0
+  _category: UIX / Input Method
+  headers:
+  - inputmethod.h
+  - inputmethod_keydef.h
+  - inputmethod_device_event.h
+- name: capi_ui_inputmethod_manager
+  library: libcapi-ui-inputmethod-manager.so.0
+  _category: UIX / Input Method Manager
+  headers:
+  - inputmethod_manager.h
+- name: ma
+  library: libma.so
+  _category: UIX / Multi assistant
+  headers:
+  - multi_assistant.h
+- name: stt
+  library: libstt.so
+  _category: UIX / STT
+  headers:
+  - stt.h
+- name: stt_engine
+  library: libstt_engine.so
+  _category: UIX / STT Engine
+  headers:
+  - stte.h
+- name: tts
+  library: libtts.so
+  _category: UIX / TTS
+  headers:
+  - tts.h
+- name: tts_engine
+  library: libtts_engine.so
+  _category: UIX / TTS Engine
+  headers:
+  - ttse.h
+- name: vc
+  library: libvc.so
+  _category: UIX / Voice control
+  headers:
+  - voice_control.h
+  - voice_control_command.h
+  - voice_control_common.h
+- name: vc_engine
+  library: libvc_engine.so
+  _category: UIX / Voice control engine
+  headers:
+  - vce.h
+- name: vc_manager
+  library: libvc_manager.so
+  _category: UIX / Voice control manager
+  headers:
+  - voice_control_manager.h
+  deps:
+  - vc
+  enum_renames:
+    vc_state_e: _vc_state_e
+    vc_service_state_e: _vc_service_state_e
+    vc_result_event_e: _vc_result_event_e
+    vc_audio_channel_e: _vc_audio_channel_e
+    vc_audio_type_e: _vc_audio_type_e
+    vc_feedback_event_e: _vc_feedback_event_e
+    vc_tts_utterance_status_e: _vc_tts_utterance_status_e
+  macro_excludes:
+  - VC_COMMAND_TYPE_FOREGROUND
+  - VC_COMMAND_TYPE_BACKGROUND
+  - VC_RESULT_MESSAGE_NONE
+  - VC_RESULT_MESSAGE_ERROR_TOO_LOUD
+- name: time
+  no_library: true
+  description: Dart bindings for Tizen time header.
+  headers:
+  - time.h
+  primitive_typedefs:
+    pid_t:
+      c: Int
+      d: int
+    __pid_t:
+      c: Int
+      d: int
+    time_t:
+      c: Long
+      d: int
+    __time_t:
+      c: Long
+      d: int

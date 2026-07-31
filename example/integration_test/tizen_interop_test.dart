@@ -580,37 +580,6 @@ void main() {
       skip: deviceType == DeviceType.kIsEmulator ||
           deviceType == DeviceType.kIsTV);
 
-  testWidgets(
-      'tizenCapiUiAutofill: autofill_create, autofill_connect, autofill_destroy',
-      (WidgetTester tester) async {
-    final tizen = tizenCapiUiAutofill;
-    expect(tizen, isNotNull);
-    using((Arena arena) {
-      final handlePtr = arena<autofill_h>();
-      var result = tizen.autofill_create(handlePtr);
-      expect(result, 0);
-      result = tizen.autofill_connect(
-          handlePtr.value, Pointer.fromFunction(_autofillCallback), nullptr);
-      expect(result, 0);
-      result = tizen.autofill_destroy(handlePtr.value);
-      expect(result, 0);
-    });
-  });
-
-  testWidgets(
-      'tizenCapiUiAutofillCommon: autofill_view_info_create & autofill_view_info_destroy',
-      (WidgetTester tester) async {
-    final tizen = tizenCapiUiAutofillCommon;
-    expect(tizen, isNotNull);
-    using((Arena arena) {
-      final handlePtr = arena<autofill_view_info_h>();
-      var result = tizen.autofill_view_info_create(handlePtr);
-      expect(result, 0);
-      result = tizen.autofill_view_info_destroy(handlePtr.value);
-      expect(result, 0);
-    });
-  });
-
   testWidgets('tizenCapiVpnsvc: vpnsvc_init & vpnsvc_deinit',
       (WidgetTester tester) async {
     final tizen = tizenCapiVpnsvc;
@@ -842,5 +811,3 @@ void _soundManagerCallback(
     int soundBehavior,
     Pointer<Char> extraInfo,
     Pointer<Void> userData) {}
-
-void _autofillCallback(autofill_h ah, int status, Pointer<Void> userData) {}

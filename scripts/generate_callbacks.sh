@@ -42,21 +42,22 @@ declare -a VERIFY_RESULT
 for V_DIR in "$SCRIPT_DIR"/../configs/*; do
   [ -d "$V_DIR" ] || continue
   VERSION="${V_DIR##*/}"
+  [ -f "$V_DIR/modules.yaml" ] || continue
   echo "==== Found Tizen $VERSION config"
   D="$ROOTSTRAPS/$VERSION"
   if [ -d "$D" ]; then
+    # Render the ffigen configs from modules.yaml.
+    CONFIG_DIR="$SCRIPT_DIR/../build/configs/$VERSION"
+    python3 "$SCRIPT_DIR/build_configs.py" "$VERSION" --out-dir "$CONFIG_DIR"
+
     VERSION_ARGS=()
-    if [ -f "$V_DIR/ffigen.yaml" ]; then
-      VERSION_ARGS=("-c" "$V_DIR/ffigen.yaml" "-b" "$SCRIPT_DIR/../lib/src/bindings/$VERSION/generated_bindings.dart")
-    else
-      for config_file in "$V_DIR"/ffigen_*.yaml; do
-        [ -e "$config_file" ] || continue
-        filename=$(basename -- "$config_file")
-        module_name="${filename#ffigen_}"
-        module_name="${module_name%.yaml}"
-        VERSION_ARGS+=("-c" "$config_file" "-b" "$SCRIPT_DIR/../lib/src/bindings/$VERSION/generated_bindings_${module_name}.dart")
-      done
-    fi
+    for config_file in "$CONFIG_DIR"/ffigen_*.yaml; do
+      [ -e "$config_file" ] || continue
+      filename=$(basename -- "$config_file")
+      module_name="${filename#ffigen_}"
+      module_name="${module_name%.yaml}"
+      VERSION_ARGS+=("-c" "$config_file" "-b" "$SCRIPT_DIR/../lib/src/bindings/$VERSION/generated_bindings_${module_name}.dart")
+    done
 
     if [ ${#VERSION_ARGS[@]} -eq 0 ]; then
       echo "WARNING: No ffigen configs found for $VERSION, skipping"
